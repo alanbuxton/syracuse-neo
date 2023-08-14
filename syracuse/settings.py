@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_neomodel',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,3 +123,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Neomodel
+
+NEOMODEL_NEO4J_USERNAME = os.environ.get('NEO4J_USERNAME','neo4j')
+NEOMODEL_NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD','itsasecret')
+NEOMODEL_NEO4J_HOSTNAME = os.environ.get('NEO4J_HOSTNAME','localhost')
+NEOMODEL_NEO4J_PORT = os.environ.get('NEO4J_PORT',7687)
+NEOMODEL_NEO4J_BOLT_URL = f'bolt://{NEOMODEL_NEO4J_USERNAME}:{NEOMODEL_NEO4J_PASSWORD}@{NEOMODEL_NEO4J_HOSTNAME}:{NEOMODEL_NEO4J_PORT}'
