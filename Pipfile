@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "*"
 django-neomodel = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
