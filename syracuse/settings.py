@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'topics.apps.TopicsConfig',
     'rest_framework',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [

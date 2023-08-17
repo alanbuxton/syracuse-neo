@@ -1,0 +1,21 @@
+<html>
+<head>
+
+{% include 'main/styling.html' %}
+{% load rest_framework %}
+
+</head>
+<body>
+
+<h1>1145 Topic Identification</h1>
+
+<p>Showing 10 random examples</p>
+{% for org in organizations %}
+  <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+    {{ org.name }}</a></b> ({{ org.uri }})</p>
+{% endfor %}
+
+<p>Or, click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b></p>
+
+</body>
+</html>

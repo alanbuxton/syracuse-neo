@@ -1,0 +1,100 @@
+
+<html>
+<head>
+
+{% include 'main/styling.html' %}
+{% load rest_framework %}
+
+<style>
+
+#container {
+  display: flex;
+  width: 90%;
+  height: 600px;
+  flex-direction: row;
+}
+
+#topic_network {
+  flex: 0 0 80%;
+}
+
+#popup_event {
+  flex: 1;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>Topic Detail</h1>
+<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+<p><b>Showing graph for:</b> {{ source_node }}</p>
+
+<div id="container">
+  <div id="topic_network"></div>
+  <div id="popup_event">
+  Click a node to see more details
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+var nodes = new vis.DataSet([
+  {% for node_dict in node_data %}
+    { id: "{{ node_dict.id }}", label: "{{ node_dict.label }}", color: "{{ node_dict.color }}", shape: "{{ node_dict.shape }}", title: "{{ node_dict.title }}" },
+  {% endfor %}
+]);
+
+var edges = new vis.DataSet([
+  {% for edge_dict in edge_data %}
+    { from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label }}", color: { color: "{{ edge_dict.color }}" },},
+  {% endfor %}
+]);
+
+var container = document.getElementById("topic_network");
+var data = {
+  nodes: nodes,
+  edges: edges
+};
+var options = {
+  edges: {
+    font: {
+      size: 12,
+    },
+    widthConstraint: {
+      maximum: 200,
+    },
+  },
+  nodes: {
+    shape: "box",
+    margin: 10,
+    widthConstraint: {
+      maximum: 200,
+    },
+  },
+};
+
+var network = new vis.Network(container, data, options);
+
+const node_details_dict = {{ node_details | safe }} ;
+
+function showNodeDetails(node_uri) {
+	node_vals = Object.entries(node_details_dict[node_uri]);
+  text = ""
+  for (const [key, value] of node_vals) {
+  	text = text + "<b>" + key + "</b>: " + value + "</br>"
+  }
+	return text
+}
+
+network.on("showPopup", function(node) {
+  document.getElementById('popup_event').innerHTML = '<h4>Node details</h4>' + showNodeDetails(node);
+});
+
+</script>
+
+</body>
+</html>
