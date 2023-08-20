@@ -35,3 +35,10 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         data["source_node"] = f"{instance.name} ({instance.uri})"
         data["node_details"] = node_details
         return data
+
+
+class SearchSerializer(serializers.Serializer):
+    search_for = serializers.CharField(
+        max_length=50,
+        style={'placeholder': 'Search ...', 'autofocus': True}
+    )

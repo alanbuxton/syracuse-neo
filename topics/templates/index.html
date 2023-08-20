@@ -9,13 +9,32 @@
 
 <h1>1145 Topic Identification</h1>
 
-<p>Showing 10 random examples</p>
-{% for org in organizations %}
-  <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
-    {{ org.name }}</a></b> ({{ org.uri }})</p>
-{% endfor %}
+<p>Select an organization to display</p>
 
-<p>Or, click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b></p>
+<form class="form-inline" action="{% url 'index' %}" method="POST" novalidate>
+    {% csrf_token %}
+    {% render_form search_serializer template_pack='rest_framework/inline' %}
+    &nbsp;<input type="submit" value="Search">
+</form>
+
+{% if search_for %}
+  <p>Searched for {{ search_for }} - found {{ num_hits }} organizations:</p>
+  {% for org in organizations %}
+    <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+      {{ org.name }}</a></b> ({{ org.uri }})</p>
+  {% endfor %}
+
+{% else %}
+
+  <p>Feeling lucky? Click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b></p>
+
+  <p>Or, click below to see one of these 10 random examples</p>
+  {% for org in organizations %}
+    <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+      {{ org.name }}</a></b> ({{ org.uri }})</p>
+  {% endfor %}
+
+{% endif %}
 
 </body>
 </html>
