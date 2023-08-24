@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .graph_utils import graph_to_depth
+from .graph_utils import graph_source_activity_target
 
 class OrganizationSerializer(serializers.BaseSerializer):
 
@@ -13,7 +13,7 @@ class OrganizationSerializer(serializers.BaseSerializer):
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance):
-        node_data, edge_data, node_details = graph_to_depth(source_node=instance,max_depth=4)
+        node_data, edge_data, node_details = graph_source_activity_target(source_node=instance)
         seen_nodes = [] # list of ids
         seen_edges = [] # tuple of from, to, type
         clean_node_data = []

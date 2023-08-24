@@ -85,10 +85,28 @@ const node_details_dict = {{ node_details | safe }} ;
 
 function showNodeDetails(node_uri) {
 	node_vals = Object.entries(node_details_dict[node_uri]);
-  text = ""
+  entityType = '';
+  text = "<p>"
   for (const [key, value] of node_vals) {
-  	text = text + "<b>" + key + "</b>: " + value + "</br>"
+    if (key.endsWith("URL")) {
+      text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>"
+    } else {
+      text = text + "<b>" + key + "</b>: " + value + "</br>"
+    }
+    text = text + "</p>"
+
+    if (key == 'entityType') {
+      entityType = value
+    }
   }
+
+  if (entityType == 'Organization') {
+    path = node_uri.replace("https://","")
+    path = path.replace("http://","")
+    text = text + "<p><a href='/organization/uri/" + path + "'>New Graph centered on this organization</a></p>"
+
+  }
+
 	return text
 }
 

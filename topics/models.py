@@ -1,21 +1,34 @@
 from neomodel import StructuredNode, StringProperty, RelationshipTo, Relationship, RelationshipFrom
 from urllib.parse import urlparse
 
+
+def uri_from_related(rel):
+    if len(rel) == 0:
+        return None
+    return rel[0].uri
+
+
 class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = StringProperty()
     name = StringProperty()
     documentTitle = StringProperty()
-    documentURL = StringProperty()
+    documentURL = Relationship('Resource','documentURL')
+
+    def __hash__(self):
+        return hash(self.uri)
+
+    def __eq__(self,other):
+        return self.uri == other.uri
 
     def serialize(self):
         return {
-            "entity_type": self.__class__.__name__,
+            "entityType": self.__class__.__name__,
             "label": self.name,
             "name": self.name,
             "uri": self.uri,
             "documentTitle": self.documentTitle,
-            "documentURL": self.documentURL,
+            "documentURL": uri_from_related(self.documentURL),
         }
 
     def serialize_no_none(self):
@@ -30,10 +43,34 @@ class Resource(StructuredNode):
             "domain": parsed_uri.netloc,
             "path": splitted_uri[1],
             "doc_id": splitted_uri[2],
-            "name": splitted_uri[3]
+            "name": splitted_uri[3],
         }
 
-    def all_relationships(self):
+    def same_as(self):
+        medium_nodes = self.sameAsMedium.all()
+        high_nodes = self.sameAsHigh.all()
+        return medium_nodes + high_nodes
+
+    @staticmethod
+    def find_same_as_relationships(node_list):
+        matching_rels = set()
+        tmp_list = set(node_list)
+        while len(tmp_list) > 1:
+            node_to_check = tmp_list.pop()
+            if not hasattr(node_to_check,"sameAsMedium"):
+                return set()
+            for candidate_node in node_to_check.sameAsMedium.all():
+                if candidate_node in tmp_list:
+                    sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
+                    matching_rels.add( ("sameAsMedium", sorted_nodes[0], sorted_nodes[1]) )
+            for candidate_node in node_to_check.sameAsHigh.all():
+                if candidate_node in tmp_list:
+                    sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
+                    matching_rels.add( ("sameAsHigh", sorted_nodes[0], sorted_nodes[1])  )
+        return matching_rels
+
+
+    def all_directional_relationships(self):
         all_rels = []
         for key, rel in self.__all_relationships__:
             if isinstance(rel, RelationshipTo):
@@ -41,11 +78,12 @@ class Resource(StructuredNode):
             elif isinstance(rel, RelationshipFrom):
                 direction = "from"
             else:
-                direction = "none"
+                continue
 
             rels = [(key, direction, x) for x in self.__dict__[key].all()]
             all_rels.extend(rels)
         return all_rels
+
 
 
 class ActivityMixin:
@@ -56,11 +94,33 @@ class ActivityMixin:
 
 class BasedInGeoMixin:
     basedInHighGeoName = StringProperty()
-    basedInHighGeoNameRDF = StringProperty() #Relationship('Resource','basedInHighGeoNameRDF')
+    basedInHighGeoNameRDF = Relationship('Resource','basedInHighGeoNameRDF')
+
+    @property
+    def basedInHighGeoNameRDFURL(self):
+        return uri_from_related(self.basedInHighGeoNameRDF)
+
+    @property
+    def basedInHighGeoNameURL(self):
+        uri = uri_from_related(self.basedInHighGeoNameRDF)
+        if uri:
+            uri = uri.replace("/about.rdf","")
+        return uri
 
 class WhereGeoMixin:
     whereGeoName = StringProperty()
-    whereGeoNameRDF = StringProperty() #RelationshipTo('Resource','whereGeoNameRDF')
+    whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
+
+    @property
+    def whereGeoNameRDFURL(self):
+        return uri_from_related(self.whereGeoNameRDF)
+
+    @property
+    def whereGeoNameURL(self):
+        uri = uri_from_related(self.whereGeoNameRDF)
+        if uri:
+            uri = uri.replace("/about.rdf","")
+        return uri
 
 class Organization(Resource, BasedInGeoMixin):
     description = StringProperty()
@@ -85,7 +145,10 @@ class Organization(Resource, BasedInGeoMixin):
     def serialize(self):
         vals = super(Organization, self).serialize()
         org_vals = {"description": self.description,
-                    "industry": self.industry}
+                    "industry": self.industry,
+                    "basedInHighGeoName": self.basedInHighGeoName,
+                    "basedInHighGeoNameURL": self.basedInHighGeoNameURL,
+                    "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL}
         return {**vals,**org_vals}
 
 
@@ -98,10 +161,10 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
     target = RelationshipTo('Organization','target')
     targetName = StringProperty()
     vendor = RelationshipTo('Organization','vendor')
-    investor = RelationshipFrom('CorporateFinanceActivity','investor')
-    buyer =  RelationshipFrom('CorporateFinanceActivity', 'buyer')
-    protagonist = RelationshipFrom('CorporateFinanceActivity', 'protagonist')
-    participant = RelationshipFrom('CorporateFinanceActivity', 'participant')
+    investor = RelationshipFrom('Organization','investor')
+    buyer =  RelationshipFrom('Organization', 'buyer')
+    protagonist = RelationshipFrom('Organization', 'protagonist')
+    participant = RelationshipFrom('Organization', 'participant')
 
     def serialize(self):
         vals = super(CorporateFinanceActivity, self).serialize()
@@ -113,7 +176,11 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
                     "valueRaw": self.valueRaw,
                     "when": self.when,
                     "whenRaw": self.whenRaw,
-                    "targetName": self.targetName}
+                    "targetName": self.targetName,
+                    "whereGeoName": self.whereGeoName,
+                    "whereGeoNameURL": self.whereGeoNameURL,
+                    "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
+                    }
         return {**vals,**act_vals}
 
 class RoleActivity(Resource, ActivityMixin):

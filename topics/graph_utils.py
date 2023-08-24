@@ -1,4 +1,7 @@
 import re
+from topics.models import Resource
+from typing import List, Dict, Tuple, Set
+import html
 
 NODE_COLOR_SHAPES = {"Organization": ("#c7deff","box"),
             "Activity": ("#fade9d","diamond"),
@@ -15,62 +18,113 @@ EDGE_COLORS = { "spender": "red",
                 "target": "green"}
 
 
-def node_and_neighbors(source_node):
-    node_data = []
-    edge_data = []
-    nodes = []
-
-    val = source_node.serialize()
-    val["id"] = val["uri"]
-    (color, shape) = NODE_COLOR_SHAPES.get(val["entity_type"],("#defa9d","triangleDown"))
-    node_vals = {**val, **{"color": color, "shape": shape}}
-    node_data.append(node_vals)
-
-    rels = source_node.all_relationships()
-    for rel_type, direction, rel_node in rels:
+def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dict], Dict, Set[Resource] ]:
+    node_data = [] # list of dicts - including basic serialzied info (includes URI)
+    edge_data = [] # list of dicts
+    serialized_nodes = {} # full details for each node, keyed by URI
+    raw_nodes = set()
+    for rel_type, direction, rel_node in relationships:
         val = rel_node.serialize()
         val["id"] = val["uri"]
-        (color, shape) = NODE_COLOR_SHAPES.get(val["entity_type"],("#defa9d","triangleDown"))
+        (color, shape) = NODE_COLOR_SHAPES.get(val["entityType"],("#defa9d","triangleDown"))
         node_vals = {**val, **{"color": color, "shape": shape}}
         if direction == "to":
-            from_node = source_node
-            to_node = rel_node
+            from_node_id = source_node_id
+            to_node_id = rel_node.uri
             arrow_direction = "to"
         elif direction == "from":
-            from_node = rel_node
-            to_node = source_node
+            from_node_id = rel_node.uri
+            to_node_id = source_node_id
             arrow_direction = "to"
         else:
-            sorted_nodes = sorted([source_node,rel_node],key=lambda x: x.uri)
-            from_node = sorted_nodes[0]
-            to_node = sorted_nodes[1]
+            sorted_nodes = sorted([source_node_id,rel_node.uri],key=lambda x: x.uri)
+            from_node_id = sorted_nodes[0]
+            to_node_id = sorted_nodes[1]
             arrow_direction = "none"
         edge_color = EDGE_COLORS.get(rel_type)
-        edge_vals = {"from": from_node.uri, "to": to_node.uri, "label": rel_type_to_edge_label(rel_type), "arrows": arrow_direction, "color": edge_color}
+        edge_vals = {"from": from_node_id, "to": to_node_id, "label": rel_type_to_edge_label(rel_type), "arrows": arrow_direction, "color": edge_color}
         node_data.append(node_vals)
         edge_data.append(edge_vals)
-        nodes.append(rel_node)
+        serialized_nodes[html.escape(rel_node.uri)]=rel_node.serialize_no_none()
+        raw_nodes.add(rel_node)
+    return node_data, edge_data, serialized_nodes, raw_nodes
 
-    return node_data, edge_data, nodes
+def source_uber_node(source_node) -> Tuple[Dict,List[Resource]]:
+    nodes = source_node.same_as()
+    all_nodes = nodes + [source_node]
+    uber_node = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
+                    "basedInHighGeoNamesRDFURL":set(),"basedInHighGeoNamesURL":set(),
+                    "descriptions":set(), "industries":set()}
+    for node in all_nodes:
+        uber_node["clusteredURIs"].add(node.uri)
+        uber_node["names"].add(node.name)
+        if node.basedInHighGeoName:
+            uber_node["basedInHighGeoNames"].add(node.basedInHighGeoName)
+        if node.basedInHighGeoNameRDF:
+            uber_node["basedInHighGeoNamesRDFURL"].add(node.basedInHighGeoNameRDFURL)
+            uber_node["basedInHighGeoNamesURL"].add(node.basedInHighGeoNameURL)
+        if node.industry:
+            uber_node["industries"].add(node.industry)
+        if node.description:
+            uber_node["descriptions"].add(node.description)
+    js_friendly = {k:list(v) for k,v in uber_node.items() if len(v) > 0}
+    return js_friendly, all_nodes
 
 
-def graph_to_depth(source_node, max_depth=3):
+
+def graph_source_activity_target(source_node):
     idx = 0
     all_nodes = []
     all_edges = []
-    node_details = {source_node.uri: source_node.serialize_no_none()}
-    nodes = [source_node]
-    while idx < max_depth:
-        tmp_new_nodes = []
-        for node in nodes:
-            node_data, edge_data, new_nodes = node_and_neighbors(node)
-            all_nodes.extend(node_data)
-            all_edges.extend(edge_data)
-            tmp_new_nodes.extend(new_nodes)
-            for new_node in new_nodes:
-                node_details[new_node.uri] = new_node.serialize_no_none()
-        idx += 1
-        nodes=tmp_new_nodes
+    node_details = {}
+
+    uber_node_data, root_nodes  = source_uber_node(source_node)
+    root_uri = source_node.uri
+    uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":source_node.uri}
+    uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}
+    (color, shape) = NODE_COLOR_SHAPES.get(source_node.serialize()["entityType"],("#c7deff","box"))
+    uber_node_vals = {**{"color":color,"shape":shape},**uber_node_dict}
+
+    all_activity_nodes = set()
+    for root_node in root_nodes:
+        rels = root_node.all_directional_relationships()
+        new_nodes, new_edges, new_node_data, activity_nodes = get_nodes_edges(root_uri,rels)
+        for new_node in new_nodes:
+            if new_node not in all_nodes:
+                all_nodes.append(new_node)
+        for new_edge in new_edges:
+            if new_edge not in all_edges:
+                all_edges.append(new_edge)
+        node_details = {**node_details,**new_node_data}
+        all_activity_nodes.update(activity_nodes)
+
+    all_outer_org_nodes = set()
+    for node in all_activity_nodes:
+        rels = node.all_directional_relationships()
+        new_nodes, new_edges, new_node_data, outer_org_nodes = get_nodes_edges(node.uri,rels)
+        for new_node in new_nodes:
+            if new_node not in all_nodes:
+                if new_node["id"] not in uber_node_data["clusteredURIs"]:
+                    all_nodes.append(new_node)
+        for new_edge in new_edges:
+            if new_edge["to"] in uber_node_data["clusteredURIs"]:
+                new_edge["to"] = 'root'
+            if new_edge["from"] in uber_node_data["clusteredURIs"]:
+                new_edge["from"] = 'root'
+            if new_edge not in all_edges:
+                all_edges.append(new_edge)
+        node_details = {**node_details,**new_node_data}
+        all_outer_org_nodes.update(outer_org_nodes)
+
+    outer_same_as = Resource.find_same_as_relationships(all_outer_org_nodes)
+    for rel_type, node1, node2 in outer_same_as:
+        edge_color = EDGE_COLORS.get(rel_type)
+        edge_vals = {"from": node1.uri, "to": node2.uri, "label": rel_type_to_edge_label(rel_type), "arrows": "none", "color": edge_color}
+        all_edges.append(edge_vals)
+
+    all_nodes.append(uber_node_vals)
+    node_details[root_uri] = uber_node_dict
+
     return all_nodes, all_edges, node_details
 
 
