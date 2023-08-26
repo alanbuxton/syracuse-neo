@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ffa58560080dab7a32832219ff561e9c174e500df0c69b35755e39a42f667985"
+            "sha256": "2d7065af59809bd57aae989b70199afdf5f60af708248a996ad8a613ece91075"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -29,7 +29,7 @@
                 "sha256:492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da",
                 "sha256:bd2520ca0d9d7d12694a53d44ac482d181b4ec1888909b035a3dbf40d0f57d4a"
             ],
-            "markers": "python_version >= '3.6'",
+            "markers": "python_full_version >= '3.6.0'",
             "version": "==4.12.2"
         },
         "django": {
@@ -38,6 +38,7 @@
                 "sha256:860ae6a138a238fc4f22c99b52f3ead982bb4b1aad8c0122bcd8c8a3a02e409d"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==4.2.4"
         },
         "django-bootstrap-v5": {
@@ -46,15 +47,17 @@
                 "sha256:a207aa804938164c8450bbbef4faaba6d2093b3236000557a50f3bd44b53d268"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.6' and python_version < '4.0'",
             "version": "==1.0.11"
         },
         "django-neomodel": {
             "hashes": [
-                "sha256:3007811435ae5f5ac4562603f1b5bb3d0519941bb302c8072429da36d592eb7d",
-                "sha256:91b6514aec6bbe9a6cdab8666ec190ebc66bebb9e4a0ab27cc9e6c40c203c9d5"
+                "sha256:9d05af4c099c10231acec7d7d2fd076318dca4d2402a71a7203347bffbe14b56",
+                "sha256:ca3ea5cfedfa4394df4644ec52360052d497ca5d3efc6d86d584b0af19bb4a83"
             ],
             "index": "pypi",
-            "version": "==0.0.7"
+            "markers": "python_version >= '3.7'",
+            "version": "==0.1.1"
         },
         "djangorestframework": {
             "hashes": [
@@ -62,14 +65,24 @@
                 "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.6'",
             "version": "==3.14.0"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0",
+                "sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.5'",
+            "version": "==21.2.0"
         },
         "neo4j": {
             "hashes": [
-                "sha256:90616b2de1dc5a5e0ab17b72f0762f3496ac9f21c58bc0067f44d40c41db6a4e"
+                "sha256:81d425ef9a53279c6909ec8d33e7dc913acc840292f0f3a047f3c3c5b74bccb5"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==5.10.0"
+            "version": "==5.11.0"
         },
         "neobolt": {
             "hashes": [
@@ -79,11 +92,19 @@
         },
         "neomodel": {
             "hashes": [
-                "sha256:6efa544516b1244807d01f00a09ae9dc9b9983b78f4d11ace41678fc05bccc2f",
-                "sha256:76c7a06d4f4850895eac5a407f16df832af1e2aba67ef703410697b0b4f71289"
+                "sha256:984d97faccc59b4e233d9fb54208943e6b0e46a0ec88a077fbc80af9e6f2d45b",
+                "sha256:e23a9e57e9c7447f9836b561610a99279703312e97f218fa20744b92074c79bb"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==5.1.0"
+            "version": "==5.1.1"
+        },
+        "packaging": {
+            "hashes": [
+                "sha256:994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61",
+                "sha256:a392980d2b6cffa644431898be54b0045151319d1e7ec34f0cfed48767dd334f"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==23.1"
         },
         "pytz": {
             "hashes": [

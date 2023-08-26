@@ -8,6 +8,7 @@ django = "*"
 django-neomodel = "*"
 djangorestframework = "*"
 django-bootstrap-v5 = "*"
+gunicorn = "*"
 
 [dev-packages]
 
