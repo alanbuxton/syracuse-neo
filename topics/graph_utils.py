@@ -49,8 +49,10 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
         raw_nodes.add(rel_node)
     return node_data, edge_data, serialized_nodes, raw_nodes
 
-def source_uber_node(source_node) -> Tuple[Dict,List[Resource]]:
+def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | None:
     nodes = source_node.same_as()
+    if len(nodes) > limit:
+        return None
     all_nodes = nodes + [source_node]
     uber_node = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
                     "basedInHighGeoNamesRDFURL":set(),"basedInHighGeoNamesURL":set(),
@@ -78,7 +80,12 @@ def graph_source_activity_target(source_node):
     all_edges = []
     node_details = {}
 
-    uber_node_data, root_nodes  = source_uber_node(source_node)
+    root_node_data  = source_uber_node(source_node)
+    if root_node_data is None:
+        return None
+
+    uber_node_data, root_nodes = root_node_data
+
     root_uri = source_node.uri
     uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":source_node.uri}
     uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}

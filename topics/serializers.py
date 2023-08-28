@@ -13,7 +13,15 @@ class OrganizationSerializer(serializers.BaseSerializer):
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance):
-        node_data, edge_data, node_details = graph_source_activity_target(source_node=instance)
+        graph_data = graph_source_activity_target(source_node=instance)
+        data = {}
+        data["source_node"] = f"{instance.name} ({instance.uri})"
+        if graph_data is None:
+            data["node_data"] = []
+            data["edge_data"] = []
+            data["too_many_nodes"] = True
+            return data
+        node_data, edge_data, node_details = graph_data
         seen_nodes = [] # list of ids
         seen_edges = [] # tuple of from, to, type
         clean_node_data = []
@@ -29,10 +37,8 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
                 continue
             seen_edges.append(tup)
             clean_edge_data.append(edge)
-        data = {}
         data["node_data"] = clean_node_data
         data["edge_data"] = clean_edge_data
-        data["source_node"] = f"{instance.name} ({instance.uri})"
         data["node_details"] = node_details
         return data
 
