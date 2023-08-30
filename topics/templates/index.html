@@ -11,10 +11,10 @@
 
 <p>Select an organization to display</p>
 
-<form class="form-inline" action="{% url 'index' %}" method="POST" novalidate>
+<form class="narrow_form" action="{% url 'index' %}" method="POST" novalidate>
     {% csrf_token %}
     {% render_form search_serializer template_pack='rest_framework/inline' %}
-    &nbsp;<input type="submit" value="Search">
+    <br/><input type="submit" value="Search">
 </form>
 
 {% if search_for %}
@@ -26,15 +26,16 @@
 
 {% else %}
 
-  <p>Feeling lucky? Click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b></p>
-
-  <p>Or, click below to see one of these 10 random examples</p>
+  <br/>
+  <p>Feeling lucky? Click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b>, or select from one of these 10 random examples</p>
   {% for org in organizations %}
     <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
       {{ org.name }}</a></b> ({{ org.uri }})</p>
   {% endfor %}
 
 {% endif %}
+
+<p><a href="/">Refresh home page</a></p>
 
 </body>
 </html>

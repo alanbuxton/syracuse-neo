@@ -1,5 +1,8 @@
-from neomodel import StructuredNode, StringProperty, RelationshipTo, Relationship, RelationshipFrom
+from neomodel import (StructuredNode, StringProperty,
+    RelationshipTo, Relationship, RelationshipFrom,
+    DateProperty, db)
 from urllib.parse import urlparse
+import datetime
 
 
 def uri_from_related(rel):
@@ -70,7 +73,9 @@ class Resource(StructuredNode):
         return matching_rels
 
 
-    def all_directional_relationships(self):
+    def all_directional_relationships(self, **kwargs):
+        from_date = kwargs.get('from_date')
+        to_date = kwargs.get('to_date')
         all_rels = []
         for key, rel in self.__all_relationships__:
             if isinstance(rel, RelationshipTo):
@@ -80,7 +85,10 @@ class Resource(StructuredNode):
             else:
                 continue
 
-            rels = [(key, direction, x) for x in self.__dict__[key].all()]
+            if from_date and to_date:
+                rels = [(key, direction, x) for x in self.__dict__[key].all() if x.in_date_range(from_date,to_date)]
+            else:
+                rels = [(key, direction, x) for x in self.__dict__[key].all()]
             all_rels.extend(rels)
         return all_rels
 
@@ -88,9 +96,40 @@ class Resource(StructuredNode):
 
 class ActivityMixin:
     activityType = StringProperty()
-    documentDate = StringProperty()
+    documentDate = DateProperty()
     documentExtract = StringProperty()
+    when = DateProperty()
+    whenRaw = StringProperty()
 
+    @staticmethod
+    def by_date(a_date):
+        date_plus_one = a_date + datetime.timedelta(days=1)
+        cq = f"match (n) where {date_for_cypher(date_plus_one)}) > n.documentDate >= {date_for_cypher(a_date)}) return n"
+        res, _ = db.cypher_query(cq, resolve_objects=True)
+        flattened = [x for sublist in res for x in sublist]
+        return flattened
+
+
+    def in_date_range(self, from_date, to_date):
+        if from_date is None:
+            from_date = datetime.date(1,1,1)
+        if to_date is None:
+            to_date = datetime.date(2999,12,31)
+        to_date_plus_one = to_date + datetime.timedelta(days=1)
+        constant = datetime.timedelta(days=180)
+        to_date_plus_constant = to_date + constant + datetime.timedelta(days=1)
+        from_date_minus_constant = from_date - constant
+
+        if self.when and (self.when < to_date_plus_one or self.when >= from_date):
+            return True
+        elif self.status and self.status == 'has not happened' and (self.documentDate >= from_date_minus_constant and self.documentDate < to_date_plus_one):
+            return True
+        elif self.status and self.status != 'has not happened' and (self.documentDate >= from_date and self.documentDate < to_date_plus_constant):
+            return True
+        return False
+
+def date_for_cypher(a_date):
+    return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
 
 class BasedInGeoMixin:
     basedInHighGeoName = StringProperty()
@@ -156,8 +195,6 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
     status = StringProperty()
     targetDetails = StringProperty()
     valueRaw = StringProperty()
-    when = StringProperty()
-    whenRaw = StringProperty()
     target = RelationshipTo('Organization','target')
     targetName = StringProperty()
     vendor = RelationshipTo('Organization','vendor')
@@ -182,6 +219,7 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
                     "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
                     }
         return {**vals,**act_vals}
+
 
 class RoleActivity(Resource, ActivityMixin):
     orgFoundName = StringProperty()

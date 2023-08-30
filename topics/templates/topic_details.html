@@ -7,20 +7,56 @@
 
 <style>
 
-#container {
+#main_container {
   display: flex;
   width: 90%;
   height: 600px;
   flex-direction: row;
 }
 
+p, form, div, input {
+  font-size: 11px;
+}
+
+.form-inline input {
+  font-size: 11px;
+}
+
 #topic_network {
-  flex: 0 0 80%;
+  flex: 0 0 70%;
 }
 
 #popup_event {
   flex: 1;
 }
+
+#wide_form {
+  flex: 1;
+}
+
+#legend {
+  flex: 1;
+}
+
+#organization {
+  background-color: #c7deff;
+}
+
+#person {
+  background-color: #fdcfff;
+}
+
+#activity_with_when {
+  background-color: #f6c655;
+}
+
+#activity_not_happened {
+  background-color: #ffe6ff;
+}
+
+#activity_has_happened {
+  background-color: #b3ffff;
+  }
 
 </style>
 
@@ -30,32 +66,52 @@
 <h1>Topic Detail</h1>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
-<p><b>Showing graph for:</b> {{ source_node }}</p>
+<p><b>Showing graph for:</b> {{ data_serializer.source_node }}</p>
 
-{% if too_many_nodes is True %}
-  <p>Graph size exceeds limits for unauthenticated users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20{{ source_node }}">contact us</a> for a registered account.</p>
-{% endif %}
-
-<p>Back to <a href="/">Home page</a></p>
-
-<div id="container">
-  <div id="topic_network"></div>
-  <div id="popup_event">
-  Click a node to see more details
-  </div>
+<div id="main_container">
+  {% if too_many_nodes is True %}
+    <p>Graph size exceeds limits for unauthenticated users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20{{ source_node }}">contact us</a> for a registered account.</p>
+  {% else %}
+      <div id="topic_network"></div>
+      <div id="right_panel">
+        <div id="popup_event">
+          <p><strong>Click a node to see more details</strong></p>
+        </div>
+        <div id="wide_form">
+          <form class="form-inline" action="{% url 'organization-uri' org_data.domain org_data.path org_data.doc_id org_data.name %}" method="POST" novalidate>
+              {% csrf_token %}
+              <p><strong>Filter activities</strong>  </p>
+              {% render_form filter_serializer template_pack='rest_framework/inline' %}
+              <br/><input type="submit" value="Filter results">
+              <br/><em>(Where there is no explicit date found, effective date is assumed to be +/- 6 months from the published date of the document)</em>
+          </form>
+        </div>
+        <div id="legend".>
+          <div id="legend_details"/>
+          <p><strong>Legend</strong></p>
+          <div id="organization">Organization</div>
+          <div id="person">Person</div>
+          <div id="activity_with_when">Activity with Date</div>
+          <div id="activity_not_happened">Activity with Relative Date after Doc Published Date</div>
+          <div id="activity_has_happened">Activity With Relative Date before Doc Published Date</div>
+       </div>
+     </div>
+  {% endif %}
+  <br/>
+  <p>Back to <a href="/">Home page</a></p>
 </div>
 
 
 <script type="text/javascript">
 
 var nodes = new vis.DataSet([
-  {% for node_dict in node_data %}
+  {% for node_dict in data_serializer.node_data %}
     { id: "{{ node_dict.id }}", label: "{{ node_dict.label }}", color: "{{ node_dict.color }}", shape: "{{ node_dict.shape }}", title: "{{ node_dict.title }}" },
   {% endfor %}
 ]);
 
 var edges = new vis.DataSet([
-  {% for edge_dict in edge_data %}
+  {% for edge_dict in data_serializer.edge_data %}
     { from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label }}", color: { color: "{{ edge_dict.color }}" },},
   {% endfor %}
 ]);
@@ -85,30 +141,33 @@ var options = {
 
 var network = new vis.Network(container, data, options);
 
-const node_details_dict = {{ node_details | safe }} ;
+const node_details_dict = {{ data_serializer.node_details | safe }} ;
 
 function showNodeDetails(node_uri) {
 	node_vals = Object.entries(node_details_dict[node_uri]);
   entityType = '';
-  text = "<p>"
+  text = ""
   for (const [key, value] of node_vals) {
     if (key.endsWith("URL")) {
       text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>"
     } else {
       text = text + "<b>" + key + "</b>: " + value + "</br>"
     }
-    text = text + "</p>"
+    // text = text + "</p>"
 
     if (key == 'entityType') {
       entityType = value
     }
   }
 
+  text = text + "<br/>"
+
   if (entityType == 'Organization') {
     path = node_uri.replace("https://","")
     path = path.replace("http://","")
     text = text + "<p><a href='/organization/uri/" + path + "'>New Graph centered on this organization</a></p>"
-
+  } else if (entityType == 'Cluster') {
+    text = text + "<p>This is the central organization for this graph</p>";
   }
 
 	return text

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .graph_utils import graph_source_activity_target
+from .converters import CustomSerializer
 
 class OrganizationSerializer(serializers.BaseSerializer):
 
@@ -12,8 +13,8 @@ class OrganizationSerializer(serializers.BaseSerializer):
 
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 
-    def to_representation(self, instance):
-        graph_data = graph_source_activity_target(source_node=instance)
+    def to_representation(self, instance, **kwargs):
+        graph_data = graph_source_activity_target(source_node=instance,**self.context)
         data = {}
         data["source_node"] = f"{instance.name} ({instance.uri})"
         if graph_data is None:
@@ -39,12 +40,16 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
             clean_edge_data.append(edge)
         data["node_data"] = clean_node_data
         data["edge_data"] = clean_edge_data
-        data["node_details"] = node_details
+        data["node_details"] = CustomSerializer(node_details)
         return data
 
 
 class SearchSerializer(serializers.Serializer):
     search_for = serializers.CharField(
-        max_length=50,
+        max_length=20,
         style={'placeholder': 'Search ...', 'autofocus': True}
     )
+
+class DateRangeSerializer(serializers.Serializer):
+    from_date = serializers.DateField()
+    to_date = serializers.DateField()

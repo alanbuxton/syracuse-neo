@@ -1,12 +1,7 @@
 import re
-from topics.models import Resource
+from topics.models import Organization, Person, ActivityMixin, Resource
 from typing import List, Dict, Tuple, Set
 import html
-
-NODE_COLOR_SHAPES = {"Organization": ("#c7deff","box"),
-            "Activity": ("#fade9d","diamond"),
-            "Person": ("#fdcfff","ellipse"),
-            }
 
 EDGE_COLORS = { "spender": "red",
                 "buyer": "red",
@@ -18,6 +13,20 @@ EDGE_COLORS = { "spender": "red",
                 "target": "green"}
 
 
+def node_color_shape(node):
+    if isinstance(node, Organization):
+        return ("#c7deff","box")
+    elif isinstance(node, Person):
+        return ("#fdcfff","ellipse")
+    elif issubclass(node.__class__, ActivityMixin):
+        if node.when is not None:
+            return ("#f6c655","diamond")
+        elif node.status == "has not happened":
+            return ("#ffe6ff","diamond")
+        else:
+            return ("#b3ffff","diamond")
+    return ("#defa9d","triangleDown")
+
 def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dict], Dict, Set[Resource] ]:
     node_data = [] # list of dicts - including basic serialzied info (includes URI)
     edge_data = [] # list of dicts
@@ -26,7 +35,7 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
     for rel_type, direction, rel_node in relationships:
         val = rel_node.serialize()
         val["id"] = val["uri"]
-        (color, shape) = NODE_COLOR_SHAPES.get(val["entityType"],("#defa9d","triangleDown"))
+        (color, shape) = node_color_shape(rel_node)
         node_vals = {**val, **{"color": color, "shape": shape}}
         if direction == "to":
             from_node_id = source_node_id
@@ -73,8 +82,7 @@ def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | Non
     return js_friendly, all_nodes
 
 
-
-def graph_source_activity_target(source_node):
+def graph_source_activity_target(source_node, **kwargs):
     idx = 0
     all_nodes = []
     all_edges = []
@@ -89,12 +97,12 @@ def graph_source_activity_target(source_node):
     root_uri = source_node.uri
     uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":source_node.uri}
     uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}
-    (color, shape) = NODE_COLOR_SHAPES.get(source_node.serialize()["entityType"],("#c7deff","box"))
+    (color, shape) = node_color_shape(source_node)
     uber_node_vals = {**{"color":color,"shape":shape},**uber_node_dict}
 
     all_activity_nodes = set()
     for root_node in root_nodes:
-        rels = root_node.all_directional_relationships()
+        rels = root_node.all_directional_relationships(**kwargs)
         new_nodes, new_edges, new_node_data, activity_nodes = get_nodes_edges(root_uri,rels)
         for new_node in new_nodes:
             if new_node not in all_nodes:

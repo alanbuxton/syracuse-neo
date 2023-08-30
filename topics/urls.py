@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, register_converter
 from topics import views
+from .converters import DateConverter
+
+register_converter(DateConverter, 'date')
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
