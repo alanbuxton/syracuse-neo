@@ -127,8 +127,29 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Neomodel
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'INFO',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'syracuse': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
 
+# Neomodel
 
 NEOMODEL_NEO4J_SCHEME = os.environ.get('NEO4J_SCHEME','bolt')
 NEOMODEL_NEO4J_USERNAME = os.environ.get('NEO4J_USERNAME','neo4j')

@@ -2,6 +2,9 @@ import re
 from topics.models import Organization, Person, ActivityMixin, Resource
 from typing import List, Dict, Tuple, Set
 import html
+import logging
+
+logger = logging.getLogger("syracuse")
 
 EDGE_COLORS = { "spender": "red",
                 "buyer": "red",
@@ -61,6 +64,7 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
 def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | None:
     nodes = source_node.same_as()
     if len(nodes) > limit:
+        logger.warning(f"Found {len(nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
         return None
     all_nodes = nodes + [source_node]
     uber_node = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),

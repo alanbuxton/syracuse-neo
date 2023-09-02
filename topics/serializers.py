@@ -15,8 +15,8 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
         graph_data = graph_source_activity_target(source_node=instance,**self.context)
-        data = {}
-        data["source_node"] = f"{instance.name} ({instance.uri})"
+        data = {"source_node": f"{instance.name} ({instance.uri})",
+                "too_many_nodes":False}
         if graph_data is None:
             data["node_data"] = []
             data["edge_data"] = []

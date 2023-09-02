@@ -69,7 +69,7 @@ p, form, div, input {
 <p><b>Showing graph for:</b> {{ data_serializer.source_node }}</p>
 
 <div id="main_container">
-  {% if too_many_nodes is True %}
+  {% if data_serializer.too_many_nodes is True %}
     <p>Graph size exceeds limits for unauthenticated users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20{{ source_node }}">contact us</a> for a registered account.</p>
   {% else %}
       <div id="topic_network"></div>
