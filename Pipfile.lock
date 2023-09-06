@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9efc823e152b688c5c6b84d9d51fe85658859879d0062f457cf45303c78e2c9a"
+            "sha256": "eafc04047780cbc79f4d13d619979e2408b3a1e3d334dda1924883c58df55b57"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,11 +26,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:7e4225ec065e0f354ccf7349a22d209de09cc1c074832be9eb84c51c1799c432",
-                "sha256:860ae6a138a238fc4f22c99b52f3ead982bb4b1aad8c0122bcd8c8a3a02e409d"
+                "sha256:5e5c1c9548ffb7796b4a8a4782e9a2e5a3df3615259fc1bfd3ebc73b646146c1",
+                "sha256:b6b2b5cae821077f137dc4dade696a1c2aa292f892eca28fa8d7bfdf2608ddd4"
             ],
             "index": "pypi",
-            "version": "==4.2.4"
+            "version": "==4.2.5"
         },
         "django-bootstrap5": {
             "hashes": [
@@ -41,12 +41,12 @@
             "version": "==23.3"
         },
         "django-neomodel": {
+            "git": "https://github.com/alanbuxton/django-neomodel.git",
             "hashes": [
                 "sha256:9d05af4c099c10231acec7d7d2fd076318dca4d2402a71a7203347bffbe14b56",
                 "sha256:ca3ea5cfedfa4394df4644ec52360052d497ca5d3efc6d86d584b0af19bb4a83"
             ],
-            "index": "pypi",
-            "version": "==0.1.1"
+            "ref": "d524f028dcb84b779d35f9ea0ba405b55e756764"
         },
         "djangorestframework": {
             "hashes": [
@@ -66,10 +66,10 @@
         },
         "neo4j": {
             "hashes": [
-                "sha256:81d425ef9a53279c6909ec8d33e7dc913acc840292f0f3a047f3c3c5b74bccb5"
+                "sha256:90616b2de1dc5a5e0ab17b72f0762f3496ac9f21c58bc0067f44d40c41db6a4e"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==5.11.0"
+            "version": "==5.10.0"
         },
         "neobolt": {
             "hashes": [
@@ -78,12 +78,9 @@
             "version": "==1.7.17"
         },
         "neomodel": {
-            "hashes": [
-                "sha256:984d97faccc59b4e233d9fb54208943e6b0e46a0ec88a077fbc80af9e6f2d45b",
-                "sha256:e23a9e57e9c7447f9836b561610a99279703312e97f218fa20744b92074c79bb"
-            ],
+            "git": "https://github.com/alanbuxton/neomodel",
             "markers": "python_version >= '3.7'",
-            "version": "==5.1.1"
+            "ref": "cb51ba01cf81b32ed220991cd886ab0ffa65c29e"
         },
         "packaging": {
             "hashes": [
@@ -95,10 +92,10 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:1d8ce29db189191fb55338ee6d0387d82ab59f3d00eac103412d64e0ebd0c588",
-                "sha256:a151b3abb88eda1d4e34a9814df37de2a80e301e68ba0fd856fb9b46bfbbbffb"
+                "sha256:7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b",
+                "sha256:ce42d816b81b68506614c11e8937d3aa9e41007ceb50bfdcb0749b921bf646c7"
             ],
-            "version": "==2023.3"
+            "version": "==2023.3.post1"
         },
         "six": {
             "hashes": [

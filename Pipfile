@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
-django-neomodel = "*"
+django-neomodel = {ref = "forked_neomodel", git = "https://github.com/alanbuxton/django-neomodel.git"}
 djangorestframework = "*"
 django-bootstrap5 = "*"
 gunicorn = "*"
