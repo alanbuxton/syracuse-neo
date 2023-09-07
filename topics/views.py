@@ -3,34 +3,53 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization
-from .serializers import OrganizationGraphSerializer, OrganizationSerializer, SearchSerializer, DateRangeSerializer
+from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
+    NameSearchSerializer, DateRangeSerializer, GeoSerializer)
 from rest_framework import status
 from datetime import date
+from .geo_constants import COUNTRY_NAMES, COUNTRY_CODES
 
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'index.html'
 
     def get(self,request):
-        orgs = Organization.nodes.order_by('?')[:10]
-        serializer = OrganizationSerializer(orgs, many=True)
-        search_serializer = SearchSerializer()
-        resp = Response({"organizations":serializer.data,
-                        "search_serializer": search_serializer,
-                        "search_for": ''}, status=status.HTTP_200_OK)
-        return resp
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        search_for = data.get('search_for')
-        orgs = Organization.nodes.filter(name__icontains=search_for)
-        serializer = OrganizationSerializer(orgs, many=True)
-        search_serializer = SearchSerializer({"search_for":search_for})
-        number_of_hits = len(orgs)
-        resp = Response({"organizations":serializer.data,
-                        "search_serializer": search_serializer,
-                        "search_for": search_for,
-                        "num_hits": number_of_hits}, status=status.HTTP_200_OK)
+        params = request.query_params
+        org_name = params.get("name")
+        country = params.get("selected_country")
+        if org_name:
+            orgs = Organization.nodes.filter(name__icontains=org_name)
+            org_list = OrganizationSerializer(orgs, many=True)
+            org_search = NameSearchSerializer({"name":org_name})
+            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            search_type = 'org_name'
+            num_hits = len(orgs)
+            search_term = org_name
+        elif country:
+            orgs = Organization.based_in_country(country)
+            org_list = OrganizationSerializer(orgs, many=True)
+            org_search = NameSearchSerializer({"name":""})
+            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            search_type = 'country'
+            search_term = COUNTRY_CODES[country]
+            num_hits = len(orgs)
+        else:
+            orgs = Organization.nodes.order_by('?')[:10]
+            org_list = OrganizationSerializer(orgs, many=True)
+            org_search = NameSearchSerializer({"name":org_name})
+            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            search_type = 'random'
+            search_term = None
+            num_hits = 0
+        orgs_to_show = org_list.data
+        if len(orgs_to_show) > 20:
+            orgs_to_show = orgs_to_show[:20]
+        resp = Response({"organizations":orgs_to_show,
+                        "search_serializer": org_search,
+                        "selected_country": geo_serializer,
+                        "search_term": search_term,
+                        "num_hits": num_hits,
+                        "search_type": search_type}, status=status.HTTP_200_OK)
         return resp
 
 

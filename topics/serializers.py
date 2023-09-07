@@ -44,11 +44,23 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         return data
 
 
-class SearchSerializer(serializers.Serializer):
-    search_for = serializers.CharField(
+class NameSearchSerializer(serializers.Serializer):
+    name = serializers.CharField(
         max_length=20,
         style={'placeholder': 'Search ...', 'autofocus': True}
     )
+
+class GeoSerializer(serializers.Serializer):
+    selected_country = serializers.ChoiceField(choices=[])
+
+    def __init__(self, *args, **kwargs):
+        orig_choices = kwargs.pop('choices',[])
+        choices = sorted([(v,k) for k,v in orig_choices.items()], key=lambda x: x[1])
+        super().__init__(*args, **kwargs)
+        self.fields['selected_country'].choices = choices
+        self.fields['selected_country'].default = 'United States'
+        self.fields['selected_country'].initial = 'United States'
+
 
 class DateRangeSerializer(serializers.Serializer):
     from_date = serializers.DateField()

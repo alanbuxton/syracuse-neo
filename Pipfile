@@ -9,6 +9,7 @@ django-neomodel = {ref = "forked_neomodel", git = "https://github.com/alanbuxton
 djangorestframework = "*"
 django-bootstrap5 = "*"
 gunicorn = "*"
+pycountry = "*"
 
 [dev-packages]
 

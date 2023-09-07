@@ -4,11 +4,16 @@ from neomodel import (StructuredNode, StringProperty,
 from urllib.parse import urlparse
 import datetime
 
-
 def uri_from_related(rel):
     if len(rel) == 0:
         return None
     return rel[0].uri
+
+def geonames_uris():
+    qry = "match (n) where n.uri contains ('sws.geonames.org') return n.uri"
+    res,_ = db.cypher_query(qry)
+    flattened = [x for sublist in res for x in sublist]
+    return flattened
 
 
 class Resource(StructuredNode):
@@ -131,6 +136,7 @@ class ActivityMixin:
 def date_for_cypher(a_date):
     return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
 
+
 class BasedInGeoMixin:
     basedInHighGeoName = StringProperty()
     basedInHighGeoNameRDF = Relationship('Resource','basedInHighGeoNameRDF')
@@ -145,6 +151,14 @@ class BasedInGeoMixin:
         if uri:
             uri = uri.replace("/about.rdf","")
         return uri
+
+    @staticmethod
+    def based_in_country(country_code):
+        from .geo_constants import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
+        orgs, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n: Organization) where loc.uri in {uris} return n",resolve_objects=True)
+        flattened = [x for sublist in orgs for x in sublist]
+        return flattened
 
 class WhereGeoMixin:
     whereGeoName = StringProperty()
