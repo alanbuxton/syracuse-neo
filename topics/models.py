@@ -156,8 +156,8 @@ class BasedInGeoMixin:
     def based_in_country(country_code):
         from .geo_constants import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
-        orgs, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n: Organization) where loc.uri in {uris} return n",resolve_objects=True)
-        flattened = [x for sublist in orgs for x in sublist]
+        resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
+        flattened = [x for sublist in resources for x in sublist]
         return flattened
 
 class WhereGeoMixin:
@@ -174,6 +174,25 @@ class WhereGeoMixin:
         if uri:
             uri = uri.replace("/about.rdf","")
         return uri
+
+    @staticmethod
+    def by_country(country_code):
+        from .geo_constants import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
+        resources, _ = db.cypher_query(f"Match (loc)-[:whereGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
+        flattened = [x for sublist in resources for x in sublist]
+        return flattened
+
+    @staticmethod
+    def orgs_by_activity_where(country_code,limit=None):
+        activities = WhereGeoMixin.by_country(country_code)
+        act_uris = [x.uri for x in activities]
+        query=f"Match (n: Organization)-[]-(a) where a.uri in {act_uris} return n"
+        if limit is not None:
+            query = f"{query} limit {limit}"
+        orgs, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in orgs for x in sublist]
+        return flattened
 
 class Organization(Resource, BasedInGeoMixin):
     description = StringProperty()
@@ -259,3 +278,11 @@ class Person(Resource, BasedInGeoMixin):
 
 class Role(Resource):
     orgFoundName = StringProperty()
+
+class OrganizationSite(Organization, Site):
+    __class_name_is_label__ = False
+
+class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivity):
+    __class_name_is_label__ = False
+
+    

@@ -20,7 +20,7 @@ def node_color_shape(node):
     if isinstance(node, Organization):
         return ("#c7deff","box")
     elif isinstance(node, Person):
-        return ("#fdcfff","ellipse")
+        return ("#f5e342","ellipse")
     elif issubclass(node.__class__, ActivityMixin):
         if node.when is not None:
             return ("#f6c655","diamond")
@@ -82,7 +82,7 @@ def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | Non
             uber_node["industries"].add(node.industry)
         if node.description:
             uber_node["descriptions"].add(node.description)
-    js_friendly = {k:list(v) for k,v in uber_node.items() if len(v) > 0}
+    js_friendly = {k:" ".join(v) for k,v in uber_node.items() if len(v) > 0}
     return js_friendly, all_nodes
 
 
