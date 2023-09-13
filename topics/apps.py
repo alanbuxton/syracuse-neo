@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from .geo_constants import load_geo_data
+from .geo_utils import load_geo_data
 
 
 class TopicsConfig(AppConfig):

@@ -7,7 +7,7 @@ from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, DateRangeSerializer, GeoSerializer)
 from rest_framework import status
 from datetime import date
-from .geo_constants import COUNTRY_NAMES, COUNTRY_CODES
+from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
 
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]

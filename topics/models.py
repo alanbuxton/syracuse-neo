@@ -63,7 +63,7 @@ class Resource(StructuredNode):
     def find_same_as_relationships(node_list):
         matching_rels = set()
         tmp_list = set(node_list)
-        while len(tmp_list) > 1:
+        while len(tmp_list) >= 1:
             node_to_check = tmp_list.pop()
             if not hasattr(node_to_check,"sameAsMedium"):
                 return set()
@@ -154,7 +154,7 @@ class BasedInGeoMixin:
 
     @staticmethod
     def based_in_country(country_code):
-        from .geo_constants import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
         resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
@@ -177,7 +177,7 @@ class WhereGeoMixin:
 
     @staticmethod
     def by_country(country_code):
-        from .geo_constants import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
         resources, _ = db.cypher_query(f"Match (loc)-[:whereGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
@@ -284,5 +284,3 @@ class OrganizationSite(Organization, Site):
 
 class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivity):
     __class_name_is_label__ = False
-
-    

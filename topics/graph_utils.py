@@ -15,6 +15,7 @@ EDGE_COLORS = { "spender": "red",
                 "protagonist": "yellow",
                 "target": "green"}
 
+LOCATION_NODE_COLOR = "#cddb9a"
 
 def node_color_shape(node):
     if isinstance(node, Organization):
@@ -99,7 +100,7 @@ def graph_source_activity_target(source_node, **kwargs):
     uber_node_data, root_nodes = root_node_data
 
     root_uri = source_node.uri
-    uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":source_node.uri}
+    uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":root_uri}
     uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}
     (color, shape) = node_color_shape(source_node)
     uber_node_vals = {**{"color":color,"shape":shape},**uber_node_dict}
@@ -140,6 +141,27 @@ def graph_source_activity_target(source_node, **kwargs):
         edge_color = EDGE_COLORS.get(rel_type)
         edge_vals = {"from": node1.uri, "to": node2.uri, "label": rel_type_to_edge_label(rel_type), "arrows": "none", "color": edge_color}
         all_edges.append(edge_vals)
+
+    for node in set(root_nodes + list(all_outer_org_nodes)):
+        loc_uri = node.basedInHighGeoNameURL
+        if loc_uri is None:
+            continue
+        loc_node = {"id":loc_uri,"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
+        if loc_node not in all_nodes:
+            all_nodes.append(loc_node)
+        loc_edge = {"from": node.uri, "to": loc_uri, "label": "BASED_IN", "arrows": "to", "color": "black"}
+        all_edges.append(loc_edge)
+
+    for node in all_activity_nodes:
+        loc_uri = node.whereGeoNameURL
+        if loc_uri is None:
+            continue
+        loc_node = {"id":loc_uri,"label":node.whereGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
+        if loc_node not in all_nodes:
+            all_nodes.append(loc_node)
+        loc_edge = {"from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
+        all_edges.append(loc_edge)
+
 
     all_nodes.append(uber_node_vals)
     node_details[root_uri] = uber_node_dict

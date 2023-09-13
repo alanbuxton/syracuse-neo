@@ -1,11 +1,40 @@
-import csv
-from .models import Resource, geonames_uris
+import os
+import pickle
 import logging
+from .models import Resource, geonames_uris
 import pycountry
-
+import csv
 logger = logging.getLogger("syracuse")
 
+COUNTRY_NAMES = None
+COUNTRY_MAPPING = None
+COUNTRY_CODES = None
 POLITICAL_ENTITY_FEATURE_CODES = set(["PCL","PCLD","PCLF","PCLH","PCLI","PCLIX","PCLS"])
+
+def load_geo_data():
+    global COUNTRY_NAMES
+    global COUNTRY_MAPPING
+    global COUNTRY_CODES
+    cache_file = "tmp/geo_cache.pickle"
+    if os.path.isfile(cache_file):
+        COUNTRY_NAMES, COUNTRY_MAPPING = load_from_cache(cache_file)
+    else:
+        COUNTRY_NAMES, COUNTRY_MAPPING = load_country_mapping()
+        save_to_cache(cache_file, COUNTRY_NAMES, COUNTRY_MAPPING)
+    COUNTRY_CODES = {v:k for k,v in COUNTRY_NAMES.items()}
+
+def load_from_cache(fpath):
+    logger.debug(f"Loading country names/mapping from cache file {fpath}")
+    with open(fpath, 'rb') as handle:
+        d = pickle.load(handle)
+        return d["country_names"], d["country_mapping"]
+
+def save_to_cache(fpath,country_names, country_mapping):
+    logger.debug(f"Saving country names/mapping to cache file {fpath}")
+    d = {"country_names":country_names, "country_mapping":country_mapping}
+    with open(fpath, 'wb') as handle:
+        pickle.dump(d, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
 
 def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geonames_ids=set()):
     country_mapping = {}
@@ -28,6 +57,8 @@ def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geoname
     return country_mapping
 
 def load_country_mapping(fpath="dump/relevant_geo.csv"):
+    if not os.path.isfile(fpath):
+        raise ValueError(f"{fpath} not found, please check https://github.com/alanbuxton/syracuse-neo/blob/main/dump/README.md")
     existing_geonames_ids = geonames_uris()
     country_mapping = load_filtered_country_mapping(fpath, set(existing_geonames_ids))
     country_names = {}
