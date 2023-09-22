@@ -65,16 +65,16 @@ class Resource(StructuredNode):
         tmp_list = set(node_list)
         while len(tmp_list) >= 1:
             node_to_check = tmp_list.pop()
-            if not hasattr(node_to_check,"sameAsMedium"):
-                return set()
-            for candidate_node in node_to_check.sameAsMedium.all():
-                if candidate_node in tmp_list:
-                    sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
-                    matching_rels.add( ("sameAsMedium", sorted_nodes[0], sorted_nodes[1]) )
-            for candidate_node in node_to_check.sameAsHigh.all():
-                if candidate_node in tmp_list:
-                    sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
-                    matching_rels.add( ("sameAsHigh", sorted_nodes[0], sorted_nodes[1])  )
+            if hasattr(node_to_check,"sameAsMedium"):
+                for candidate_node in node_to_check.sameAsMedium.all():
+                    if candidate_node in tmp_list:
+                        sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
+                        matching_rels.add( ("sameAsMedium", sorted_nodes[0], sorted_nodes[1]) )
+            if hasattr(node_to_check,"sameAsHigh"):
+                for candidate_node in node_to_check.sameAsHigh.all():
+                    if candidate_node in tmp_list:
+                        sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
+                        matching_rels.add( ("sameAsHigh", sorted_nodes[0], sorted_nodes[1])  )
         return matching_rels
 
 
@@ -205,6 +205,11 @@ class Organization(Resource, BasedInGeoMixin):
     participant = RelationshipTo('CorporateFinanceActivity', 'participant')
     vendor = RelationshipFrom('CorporateFinanceActivity', 'vendor')
     target = RelationshipFrom('CorporateFinanceActivity', 'target')
+    hasRole = RelationshipTo('Role','hasRole')
+    orgSiteLocationAdded = RelationshipTo('SiteAddedActivity','locationAdded')
+    orgSiteLocationRemoved = RelationshipTo('SiteRemovedActivity','locationRemoved')
+    orgProductAdded = RelationshipTo('ProductAddedActivity','locationAdded')
+
 
     @staticmethod
     def get_random():
@@ -256,31 +261,102 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
 
 class RoleActivity(Resource, ActivityMixin):
     orgFoundName = StringProperty()
-    role = RelationshipTo('Role','role')
+    ofRole = RelationshipTo('Role','role')
     roleFoundName = StringProperty()
     roleHolderFoundName = StringProperty()
+    activityToRole = RelationshipFrom('Person','roleActivity')
 
+    def serialize(self):
+        vals = super(RoleActivity, self).serialize()
+        act_vals = {
+                    "documentDate": self.documentDate,
+                    "documentExtract": self.documentExtract,
+                    }
+        return {**vals,**act_vals}
 
 class SiteAddedActivity(Resource, ActivityMixin):
-    pass
+    actionFoundName = StringProperty()
+    locationFoundName = StringProperty()
+    locationPurpose = StringProperty()
+    orgFoundName = StringProperty()
+    siteLocationAdded = RelationshipTo('Site','location')
+    orgSiteLocationAdded = RelationshipFrom('Organization','locationAdded')
+
+    def serialize(self):
+        vals = super(SiteAddedActivity, self).serialize()
+        act_vals = {
+                    "actionFoundName": self.actionFoundName,
+                    "locationPurpose": self.locationPurpose,
+                    "documentDate": self.documentDate,
+                    "documentExtract": self.documentExtract,
+                    }
+        return {**vals,**act_vals}
 
 class SiteRemovedActivity(Resource, ActivityMixin):
-    pass
+    actionFoundName = StringProperty()
+    locationFoundName = StringProperty()
+    locationPurpose = StringProperty()
+    orgFoundName = StringProperty()
+    siteLocationRemoved = RelationshipTo('Site','location')
+    orgSiteLocationRemoved = RelationshipFrom('Organization','locationRemoved')
+
+    def serialize(self):
+        vals = super(SiteRemovedActivity, self).serialize()
+        act_vals = {
+                    "actionFoundName": self.actionFoundName,
+                    "locationPurpose": self.locationPurpose,
+                    "documentDate": self.documentDate,
+                    "documentExtract": self.documentExtract,
+                    }
+        return {**vals,**act_vals}
 
 class ProductAddedActivity(Resource, ActivityMixin):
-    pass
+    actionFoundName = StringProperty()
+    locationFoundName = StringProperty()
+    productLocationAdded = RelationshipTo('Site','location')
+    orgProductLocationAdded = RelationshipFrom('Organization','productAdded')
+
+    def serialize(self):
+        vals = super(ProductAddedActivity, self).serialize()
+        act_vals = {
+                    "actionFoundName": self.actionFoundName,
+                    "documentDate": self.documentDate,
+                    "documentExtract": self.documentExtract,
+                    }
+        return {**vals,**act_vals}
 
 class Site(Resource):
-    pass
+    nameGeoName = StringProperty()
+    nameGeoNameRDF = Relationship('Resource','nameGeoNameRDF')
+    siteLocationAdded = RelationshipFrom('SiteAddedActivity','location')
+    siteLocationRemoved = RelationshipFrom('SiteRemovedActivity','location')
+    productLocationAdded = RelationshipFrom('ProductAddedActivity','location')
+
+    @property
+    def nameGeoNameRDFURL(self):
+        return uri_from_related(self.nameGeoNameRDF)
+
+    @property
+    def nameGeoNameURL(self):
+        uri = uri_from_related(self.nameGeoNameRDF)
+        if uri:
+            uri = uri.replace("/about.rdf","")
+        return uri
+
 
 class Person(Resource, BasedInGeoMixin):
-    roleActivity = RelationshipTo('Role','roleActivity')
+    activityToRole = RelationshipTo('RoleActivity','roleActivity')
 
 class Role(Resource):
     orgFoundName = StringProperty()
+    ofRole = RelationshipFrom("RoleActivity","role")
+    organization = RelationshipFrom('Organization','hasRole')
 
 class OrganizationSite(Organization, Site):
     __class_name_is_label__ = False
 
 class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivity):
+    __class_name_is_label__ = False
+
+class OrganizationPerson(Organization, Person):
     __class_name_is_label__ = False

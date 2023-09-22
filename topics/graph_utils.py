@@ -23,6 +23,8 @@ def node_color_shape(node):
     elif isinstance(node, Person):
         return ("#f5e342","ellipse")
     elif issubclass(node.__class__, ActivityMixin):
+        if not hasattr(node, "status"):
+            return ("#f6c655","diamond")
         if node.when is not None:
             return ("#f6c655","diamond")
         elif node.status == "has not happened":
@@ -88,7 +90,6 @@ def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | Non
 
 
 def graph_source_activity_target(source_node, **kwargs):
-    idx = 0
     all_nodes = []
     all_edges = []
     node_details = {}
@@ -100,12 +101,12 @@ def graph_source_activity_target(source_node, **kwargs):
     uber_node_data, root_nodes = root_node_data
 
     root_uri = source_node.uri
-    uber_node_dict_tmp = {"id":root_uri,"label":source_node.name,"entityType":"Cluster","uri":root_uri}
+    uber_node_dict_tmp = {"label":source_node.name,"entityType":"Cluster","uri":root_uri}
     uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}
     (color, shape) = node_color_shape(source_node)
-    uber_node_vals = {**{"color":color,"shape":shape},**uber_node_dict}
+    uber_node_vals = {**{"id":root_uri,"color":color,"shape":shape},**uber_node_dict}
 
-    all_activity_nodes = set()
+    l1_activity_nodes = set()
     for root_node in root_nodes:
         rels = root_node.all_directional_relationships(**kwargs)
         new_nodes, new_edges, new_node_data, activity_nodes = get_nodes_edges(root_uri,rels)
@@ -116,8 +117,69 @@ def graph_source_activity_target(source_node, **kwargs):
             if new_edge not in all_edges:
                 all_edges.append(new_edge)
         node_details = {**node_details,**new_node_data}
-        all_activity_nodes.update(activity_nodes)
+        l1_activity_nodes.update(activity_nodes)
 
+    all_outer_nodes = set()
+    new_nodes, all_nodes, node_details, all_edges = add_next_round_of_graph(l1_activity_nodes, all_nodes, uber_node_data, all_edges, node_details)
+    all_outer_nodes.update(new_nodes)
+    new_nodes, all_nodes, node_details, all_edges = add_next_round_of_graph(new_nodes, all_nodes, uber_node_data, all_edges, node_details)
+    all_outer_nodes.update(new_nodes)
+
+    outer_same_as = Resource.find_same_as_relationships(all_outer_nodes)
+    for rel_type, node1, node2 in outer_same_as:
+        edge_color = EDGE_COLORS.get(rel_type)
+        edge_vals = {"from": node1.uri, "to": node2.uri, "label": rel_type_to_edge_label(rel_type), "arrows": "none", "color": edge_color}
+        if edge_vals not in all_edges:
+            all_edges.append(edge_vals)
+
+    for node in set(root_nodes + list(all_outer_nodes)):
+        if not hasattr(node, "basedInHighGeoNameURL"):
+            continue
+        loc_uri = node.basedInHighGeoNameURL
+        if loc_uri is None:
+            continue
+        loc_node = {"id":loc_uri,"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
+        if loc_node not in all_nodes:
+            all_nodes.append(loc_node)
+            node_details[loc_uri]={"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri}
+        loc_edge = {"from": node.uri, "to": loc_uri, "label": "BASED_IN", "arrows": "to", "color": "black"}
+        if loc_edge not in all_edges:
+            all_edges.append(loc_edge)
+
+    for node in all_outer_nodes:
+        if not hasattr(node, "nameGeoNameURL"):
+            continue
+        loc_uri = node.nameGeoNameURL
+        if loc_uri is None:
+            continue
+        loc_node = {"id":loc_uri,"label":node.nameGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
+        if loc_node not in all_nodes:
+            all_nodes.append(loc_node)
+            node_details[loc_uri]={"label":node.nameGeoName,"entityType":"Location","uri":loc_uri}
+        loc_edge = {"from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
+        if loc_edge not in all_edges:
+            all_edges.append(loc_edge)
+
+    for node in l1_activity_nodes:
+        if not hasattr(node, "whereGeoNameURL"):
+            continue
+        loc_uri = node.whereGeoNameURL
+        if loc_uri is None:
+            continue
+        loc_node = {"id":loc_uri,"label":node.whereGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
+        if loc_node not in all_nodes:
+            all_nodes.append(loc_node)
+            node_details[loc_uri]={"label":node.whereGeoName,"entityType":"Location","uri":loc_uri}
+        loc_edge = {"from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
+        if loc_edge not in all_edges:
+            all_edges.append(loc_edge)
+
+    all_nodes.append(uber_node_vals)
+    node_details[root_uri] = uber_node_dict
+    return all_nodes, all_edges, node_details
+
+
+def add_next_round_of_graph(all_activity_nodes, all_nodes, uber_node_data, all_edges, node_details):
     all_outer_org_nodes = set()
     for node in all_activity_nodes:
         rels = node.all_directional_relationships()
@@ -135,39 +197,7 @@ def graph_source_activity_target(source_node, **kwargs):
                 all_edges.append(new_edge)
         node_details = {**node_details,**new_node_data}
         all_outer_org_nodes.update(outer_org_nodes)
-
-    outer_same_as = Resource.find_same_as_relationships(all_outer_org_nodes)
-    for rel_type, node1, node2 in outer_same_as:
-        edge_color = EDGE_COLORS.get(rel_type)
-        edge_vals = {"from": node1.uri, "to": node2.uri, "label": rel_type_to_edge_label(rel_type), "arrows": "none", "color": edge_color}
-        all_edges.append(edge_vals)
-
-    for node in set(root_nodes + list(all_outer_org_nodes)):
-        loc_uri = node.basedInHighGeoNameURL
-        if loc_uri is None:
-            continue
-        loc_node = {"id":loc_uri,"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
-        if loc_node not in all_nodes:
-            all_nodes.append(loc_node)
-        loc_edge = {"from": node.uri, "to": loc_uri, "label": "BASED_IN", "arrows": "to", "color": "black"}
-        all_edges.append(loc_edge)
-
-    for node in all_activity_nodes:
-        loc_uri = node.whereGeoNameURL
-        if loc_uri is None:
-            continue
-        loc_node = {"id":loc_uri,"label":node.whereGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
-        if loc_node not in all_nodes:
-            all_nodes.append(loc_node)
-        loc_edge = {"from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
-        all_edges.append(loc_edge)
-
-
-    all_nodes.append(uber_node_vals)
-    node_details[root_uri] = uber_node_dict
-
-    return all_nodes, all_edges, node_details
-
+    return all_outer_org_nodes, all_nodes, node_details, all_edges
 
 def rel_type_to_edge_label(text):
     text = re.sub(r'(?<!^)(?=[A-Z])', '_', text).upper()
