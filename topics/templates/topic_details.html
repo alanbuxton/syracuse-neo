@@ -19,7 +19,7 @@
     flex: 0 0 70%;
   }
 
-  #popup_event {
+  #object_details {
     flex: 1;
   }
 
@@ -71,13 +71,14 @@
   {% else %}
       <div id="topic_network"></div>
       <div id="right_panel">
-        <div id="popup_event">
-          <p><strong>Click a node to see more details</strong></p>
+        <div id="object_details">
+          <p><strong>Click on an organization or an activity to see more details</strong></p>
         </div>
         <div id="wide_form">
           <form class="form-inline" action="{% url 'organization-uri' org_data.domain org_data.path org_data.doc_id org_data.name %}" method="POST" novalidate>
               {% csrf_token %}
-              <p><strong>Filter activities</strong>  </p>
+              <p><strong>Filter activities</strong><br/>
+              <em>Too much data to make sense of? Narrow things down by date:</em></p>
               {% render_form filter_serializer template_pack='rest_framework/inline' %}
               <br/><input type="submit" value="Filter results">
               <br/><em>(Where there is no explicit date found, effective date is assumed to be +/- 6 months from the published date of the document)</em>
@@ -90,8 +91,8 @@
           <div class="person">Person</div>
           <div class="location">Location</div>
           <div class="activity_with_when">Activity with Date</div>
-          <div class="activity_not_happened">Activity with Relative Date after Doc Published Date</div>
-          <div class="activity_has_happened">Activity With Relative Date before Doc Published Date</div>
+          <div class="activity_has_happened">Activity which happened before publish date</div>
+          <div class="activity_not_happened">Activity which had not happened by publish date</div>
        </div>
      </div>
   {% endif %}
@@ -110,7 +111,7 @@ var nodes = new vis.DataSet([
 
 var edges = new vis.DataSet([
   {% for edge_dict in data_serializer.edge_data %}
-    { from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label }}", color: { color: "{{ edge_dict.color }}" },},
+    { id: "{{ edge_dict.from | safe }}-{{ edge_dict.to | safe}}-{{ edge_dict.label }}", from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label }}", color: { color: "{{ edge_dict.color }}" },},
   {% endfor %}
 ]);
 
@@ -120,6 +121,10 @@ var data = {
   edges: edges
 };
 var options = {
+  interaction: {
+    selectConnectedEdges: false,
+    hover: true,
+  },
   edges: {
     font: {
       size: 12,
@@ -140,40 +145,67 @@ var options = {
 var network = new vis.Network(container, data, options);
 
 const node_details_dict = {{ data_serializer.node_details | safe }} ;
+const edge_details_dict = {{ data_serializer.edge_details | safe }} ;
 
-function showNodeDetails(node_uri) {
-	node_vals = Object.entries(node_details_dict[node_uri]);
+function showEdgeDetails(edge_id) {
+  edge_vals = Object.entries(edge_details_dict[edge_id]);
+  text = "";
+  for (const [key, value] of edge_vals) {
+    text = text + "<b>" + key + "</b>: " + value + "</br>";
+  }
+  text = text + "</br>";
+
+  text = text + error_form("edge",edge_id);
+  return text;
+}
+
+function showNodeDetails(node_id) {
+	node_vals = Object.entries(node_details_dict[node_id]);
   entityType = '';
-  text = ""
+  text = "";
   for (const [key, value] of node_vals) {
     if (key.endsWith("URL")) {
-      text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>"
+      text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>";
     } else {
-      text = text + "<b>" + key + "</b>: " + value + "</br>"
+      text = text + "<b>" + key + "</b>: " + value + "</br>";
     }
-    // text = text + "</p>"
-
     if (key == 'entityType') {
-      entityType = value
+      entityType = value;
     }
   }
 
-  text = text + "<br/>"
+  text = text + "<br/>";
 
   if (entityType == 'Organization') {
-    path = node_uri.replace("https://","")
-    path = path.replace("http://","")
-    text = text + "<p><a href='/organization/uri/" + path + "'>New Graph centered on this organization</a></p>"
+    path = node_id.replace("https://","");
+    path = path.replace("http://","");
+    text = text + "<p><a href='/organization/uri/" + path + "'>Show a new visualization centered on this organization</a></p>";
   } else if (entityType == 'Cluster') {
     text = text + "<p>This is the central organization for this graph</p>";
   }
 
-	return text
+  text = text + error_form("node", node_id);
+	return text;
 }
 
-network.on("showPopup", function(node) {
-  document.getElementById('popup_event').innerHTML = '<h4>Node details</h4>' + showNodeDetails(node);
+function error_form(node_or_edge, unique_id) {
+  text = "<form method='post' action='/report_issue' class='form-inline'>";
+  text = text + "See something unexpected or wrong about this node? If so please use the form below to notify us of the issue:</p>";
+  text = text + "<input type='hidden' name='node_or_edge' value='" + node_or_edge+ "'/><input type='hidden' value='";
+  text = text + unique_id;
+  text = text + "' name='idval'/><div class='mb-3'><label for='reasonTextArea' class='form-label'><strong>Reason:</strong></label>";
+  text = text + "<textarea name='reason' id='reasonTextArea' class='form-control' rows='3'></textarea></div><input type='submit' value='Submit Suggestion'/></form>";
+  return text
+
+}
+
+network.on("selectEdge", function(obj) {
+  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showEdgeDetails(obj.edges[0]);
 });
+
+network.on("selectNode", function(obj) {
+  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showNodeDetails(obj.nodes[0]);
+})
 
 </script>
 

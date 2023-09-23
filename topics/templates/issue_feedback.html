@@ -1,0 +1,26 @@
+
+<html>
+<head>
+
+{% include 'main/styling.html' %}
+{% load rest_framework %}
+
+</head>
+<body>
+  {% if feedback_error is not None %}
+    <h1>Error submitting feedback</h1>
+    <p>The following error happened while submitting your feedback</p>
+    <p>{{ feedback_error }}</p>
+    <p>Please try again or <a href="mailto:help@1145.am?subject=Error%20submitting%20feedback">
+        send us an email</a></p>
+  {% else %}
+    <h1>Feedback received</h1>
+    <p>Thanks for your feedback</p>
+    <p><strong>Unique ID: </strong>{{ unique_id }}</p>
+    <p>{{ reason }}</p>
+    <p>Thas has been logged with id {{ feedback_id }}</p>
+  {% endif %}
+  <p><a href=" {{ source_page }}">Back to organization page</a></p>
+
+</body>
+</html>
