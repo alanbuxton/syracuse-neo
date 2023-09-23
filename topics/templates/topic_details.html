@@ -207,6 +207,25 @@ network.on("selectNode", function(obj) {
   document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showNodeDetails(obj.nodes[0]);
 })
 
+network.on("doubleClick", function(params) {
+  nodes = params.nodes
+  if ((typeof nodes === undefined) || (nodes.length == 0)) {
+    return;
+  }
+  uri = nodes[0];
+  node_vals = Object.entries(node_details_dict[uri]);
+  for (const [key, value] of node_vals) {
+    if (key == 'entityType') {
+      if (value != 'Organization') {
+        console.log("Cannot crate new graph centered on " + uri)
+        return;
+      }
+    }
+  }
+  tmp_url = new URL(uri);
+  target_url = "/organization/uri/" + tmp_url.hostname + tmp_url.pathname ;
+  window.location.replace(target_url);
+})
 </script>
 
 </body>
