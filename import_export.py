@@ -7,22 +7,35 @@ import logging
 from typing import List
 
 '''
-    Run this script at command line to import all *.ttl files from a source directory
+    Run this script at command line to import all *.ttl files from a source directory e.g.
+    `python import_export path/to/ttl/files`
 
     To export a subset of data as cypher call `export_data_subset`
+
+    Export/import requires the following to be set in `apoc.conf`:
+
+    apoc.export.file.enabled=true
+    apoc.import.file.enabled=true
+    apoc.import.file.use_neo4j_config=false
 '''
 
 config.DATABASE_URL = NEOMODEL_NEO4J_BOLT_URL
 logger = logging.getLogger("syracuse")
+log_level = os.environ.get("LOG_LEVEL","INFO")
+logger.setLevel(log_level)
+logger.addHandler(logging.StreamHandler())
 
 def load_ttl_files(dir_name):
-    for filename in os.listdir(dir_name):
-        if not filename.endswith(".ttl"):
-            continue
+    all_files = [x for x in os.listdir(dir_name) if x.endswith(".ttl")]
+    logger.info(f"Found {len(all_files)} ttl files to process")
+    if len(all_files) == 0:
+        return
+    for filename in all_files:
         load_file(f"{dir_name}/{filename}")
     apoc_del_redundant_high_med()
 
 def load_file(filepath):
+    filepath = os.path.abspath(filepath)
     command = f'call n10s.rdf.import.fetch("file://{filepath}","Turtle");'
     logger.info(f"Loading: {command}")
     db.cypher_query(command)
@@ -46,29 +59,33 @@ def output_stats(msg):
     logger.info(f"{datetime.utcnow()} {msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsMedium: {same_as_medium_count[0][0]}")
 
 
-def export_data_subset(org_limit = 100, output_dir = f"{os.getcwd()}/tmp"):
+def export_data_subset(limit = 9_000, output_dir = f"{os.getcwd()}/tmp"):
     '''
         import with
         cat /foo/bar/export.cypher | ./bin/cypher-shell -u neo4j -p <password>
     '''
-    org_uris, _ = db.cypher_query(f"MATCH (n:Organization)-[]-(:CorporateFinanceActivity) RETURN n.uri ORDER BY elementId(n) DESC LIMIT {org_limit}")
-    flattened_uris = [x for sublist in org_uris for x in sublist]
-    export_orgs_by_uri(flattened_uris, output_dir)
+    uris = get_sample_uris(limit)
+    return export_subset_by_uris(uris, output_dir)
 
 
-def export_orgs_by_uri(org_uris: List[str], output_dir: str):
-    '''
-        Given a list of org uris, export them and 2 steps away: Org - Activity - Target
-    '''
-    query = f'''MATCH path = (o1:Organization)-[r1]->(o2)-[r2]->(o3)
-        WHERE o1.uri in {org_uris}
-        WITH apoc.coll.toSet(collect(o1)+collect(o2)+collect(o3)) as export_nodes, apoc.coll.toSet(collect(r1)+collect(r2)) as export_rels
+def get_sample_uris(limit = 100):
+    role_uris, _ = db.cypher_query(f"MATCH (n: Organization)--(o: Role)--(p: RoleActivity)--(q: Person) RETURN n.uri,o.uri,p.uri,q.uri LIMIT {limit}")
+    corp_fin_uris, _ = db.cypher_query(f"MATCH (n: Organization)--(o: CorporateFinanceActivity)--(p: Organization) RETURN n.uri, o.uri, p.uri LIMIT {limit}")
+    loc_uris, _ = db.cypher_query(f"MATCH (n: Organization)--(o: LocationActivity)--(p: Site) RETURN n.uri, o.uri, p.uri LIMIT {limit}")
+    flattened = [x for sublist in role_uris + corp_fin_uris + loc_uris for x in sublist]
+    return flattened
+
+def export_subset_by_uris(uris: List[str], output_dir: str):
+    query = f'''MATCH path = (r: Resource)-[s]-(t) WHERE r.uri in {uris}
+        WITH apoc.coll.toSet(collect(r)+collect(t)) as export_nodes, apoc.coll.toSet(collect(s)) as export_rels
         CALL apoc.export.cypher.data(export_nodes,export_rels,"{output_dir}/export.cypher",{{format:'cypher-shell'}})
         YIELD file, source, format, nodes, relationships, properties, time
         RETURN nodes, relationships, time;'''
     logger.info(f"Will run: {query}")
     exported = db.cypher_query(query)
     logger.info(exported)
+    return exported
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

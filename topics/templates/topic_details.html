@@ -72,7 +72,7 @@
       <div id="topic_network"></div>
       <div id="right_panel">
         <div id="object_details">
-          <p><strong>Click on an organization or an activity to see more details</strong></p>
+          <p><strong>Click an item in the graph for more details</strong></p>
         </div>
         <div id="wide_form">
           <form class="form-inline" action="{% url 'organization-uri' org_data.domain org_data.path org_data.doc_id org_data.name %}" method="POST" novalidate>
@@ -105,13 +105,13 @@
 
 var nodes = new vis.DataSet([
   {% for node_dict in data_serializer.node_data %}
-    { id: "{{ node_dict.id }}", label: "{{ node_dict.label }}", color: "{{ node_dict.color }}", shape: "{{ node_dict.shape }}", title: "{{ node_dict.title }}" },
+    { id: "{{ node_dict.id }}", label: "{{ node_dict.label|escapejs }}", color: "{{ node_dict.color }}", shape: "{{ node_dict.shape }}", title: "{{ node_dict.title }}" },
   {% endfor %}
 ]);
 
 var edges = new vis.DataSet([
   {% for edge_dict in data_serializer.edge_data %}
-    { id: "{{ edge_dict.from | safe }}-{{ edge_dict.to | safe}}-{{ edge_dict.label }}", from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label }}", color: { color: "{{ edge_dict.color }}" },},
+    { id: "{{ edge_dict.id }}", from: "{{ edge_dict.from }}", to: "{{ edge_dict.to }}", arrows: "{{ edge_dict.arrows }}", chosen: false, length: 180, label: "{{ edge_dict.label |escapejs}}", color: { color: "{{ edge_dict.color }}" },},
   {% endfor %}
 ]);
 
@@ -164,7 +164,7 @@ function showNodeDetails(node_id) {
   entityType = '';
   text = "";
   for (const [key, value] of node_vals) {
-    if (key.endsWith("URL")) {
+    if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
       text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>";
     } else {
       text = text + "<b>" + key + "</b>: " + value + "</br>";

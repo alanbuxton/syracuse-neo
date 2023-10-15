@@ -22,22 +22,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
             data["edge_data"] = []
             data["too_many_nodes"] = True
             return data
-        node_data, edge_data, node_details, edge_details = graph_data
-        seen_nodes = [] # list of ids
-        seen_edges = [] # tuple of from, to, type
-        clean_node_data = []
-        clean_edge_data = []
-        for node in node_data:
-            if node["id"] in seen_nodes:
-                continue
-            seen_nodes.append(node["id"])
-            clean_node_data.append(node)
-        for edge in edge_data:
-            tup = (edge["from"],edge["to"],edge["label"],edge["arrows"])
-            if tup in seen_edges:
-                continue
-            seen_edges.append(tup)
-            clean_edge_data.append(edge)
+        clean_node_data, clean_edge_data, node_details, edge_details = graph_data
         data["node_data"] = clean_node_data
         data["edge_data"] = clean_edge_data
         data["node_details"] = CustomSerializer(node_details)

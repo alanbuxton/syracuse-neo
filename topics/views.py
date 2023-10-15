@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from topics.models import Organization, WhereGeoMixin
+from topics.models import Organization, ActivityMixin
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, DateRangeSerializer, GeoSerializer)
 from rest_framework import status
@@ -28,7 +28,7 @@ class Index(APIView):
             search_term = org_name
         elif country:
             orgs = Organization.based_in_country(country)
-            orgs_by_activity = WhereGeoMixin.orgs_by_activity_where(country)
+            orgs_by_activity = ActivityMixin.orgs_by_activity_where(country)
             all_orgs = set(orgs + orgs_by_activity)
             org_list = OrganizationSerializer(all_orgs, many=True)
             org_search = NameSearchSerializer({"name":""})

@@ -22,6 +22,7 @@ class Resource(StructuredNode):
     name = StringProperty()
     documentTitle = StringProperty()
     documentURL = Relationship('Resource','documentURL')
+    sourceName = StringProperty()
 
     def __hash__(self):
         return hash(self.uri)
@@ -37,6 +38,7 @@ class Resource(StructuredNode):
             "uri": self.uri,
             "documentTitle": self.documentTitle,
             "documentURL": uri_from_related(self.documentURL),
+            "sourceName": self.sourceName,
         }
 
     def serialize_no_none(self):
@@ -98,13 +100,31 @@ class Resource(StructuredNode):
         return all_rels
 
 
-
 class ActivityMixin:
     activityType = StringProperty()
     documentDate = DateProperty()
     documentExtract = StringProperty()
     when = DateProperty()
     whenRaw = StringProperty()
+    status = StringProperty()
+    whereGeoName = StringProperty()
+    whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
+
+    @property
+    def activity_fields(self):
+        return {
+            "activityType": self.activityType,
+            "documentDate": self.documentDate,
+            "documentExtract": self.documentExtract,
+            "label": f"{self.activityType.title()} ({self.sourceName} {self.documentDate})",
+            "status": self.status,
+            "when": self.when,
+            "whenRaw": self.whenRaw,
+            "whereGeoName": self.whereGeoName,
+            "whereGeoNameURL": self.whereGeoNameURL,
+            "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
+
+        }
 
     @staticmethod
     def by_date(a_date):
@@ -113,7 +133,6 @@ class ActivityMixin:
         res, _ = db.cypher_query(cq, resolve_objects=True)
         flattened = [x for sublist in res for x in sublist]
         return flattened
-
 
     def in_date_range(self, from_date, to_date):
         if from_date is None:
@@ -132,6 +151,38 @@ class ActivityMixin:
         elif self.status and self.status != 'has not happened' and (self.documentDate >= from_date and self.documentDate < to_date_plus_constant):
             return True
         return False
+
+
+    @property
+    def whereGeoNameRDFURL(self):
+        return uri_from_related(self.whereGeoNameRDF)
+
+    @property
+    def whereGeoNameURL(self):
+        uri = uri_from_related(self.whereGeoNameRDF)
+        if uri:
+            uri = uri.replace("/about.rdf","")
+        return uri
+
+    @staticmethod
+    def by_country(country_code):
+        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
+        resources, _ = db.cypher_query(f"Match (loc)-[:whereGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
+        flattened = [x for sublist in resources for x in sublist]
+        return flattened
+
+    @staticmethod
+    def orgs_by_activity_where(country_code,limit=None):
+        activities = ActivityMixin.by_country(country_code)
+        act_uris = [x.uri for x in activities]
+        query=f"Match (n: Organization)-[]-(a) where a.uri in {act_uris} return n"
+        if limit is not None:
+            query = f"{query} limit {limit}"
+        orgs, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in orgs for x in sublist]
+        return flattened
+
 
 def date_for_cypher(a_date):
     return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
@@ -160,39 +211,12 @@ class BasedInGeoMixin:
         flattened = [x for sublist in resources for x in sublist]
         return flattened
 
-class WhereGeoMixin:
-    whereGeoName = StringProperty()
-    whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
-
     @property
-    def whereGeoNameRDFURL(self):
-        return uri_from_related(self.whereGeoNameRDF)
+    def based_in_fields(self):
+        return {"basedInHighGeoName": self.basedInHighGeoName,
+                "basedInHighGeoNameURL": self.basedInHighGeoNameURL,
+                "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL}
 
-    @property
-    def whereGeoNameURL(self):
-        uri = uri_from_related(self.whereGeoNameRDF)
-        if uri:
-            uri = uri.replace("/about.rdf","")
-        return uri
-
-    @staticmethod
-    def by_country(country_code):
-        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
-        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
-        resources, _ = db.cypher_query(f"Match (loc)-[:whereGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
-        flattened = [x for sublist in resources for x in sublist]
-        return flattened
-
-    @staticmethod
-    def orgs_by_activity_where(country_code,limit=None):
-        activities = WhereGeoMixin.by_country(country_code)
-        act_uris = [x.uri for x in activities]
-        query=f"Match (n: Organization)-[]-(a) where a.uri in {act_uris} return n"
-        if limit is not None:
-            query = f"{query} limit {limit}"
-        orgs, _ = db.cypher_query(query,resolve_objects=True)
-        flattened = [x for sublist in orgs for x in sublist]
-        return flattened
 
 class Organization(Resource, BasedInGeoMixin):
     description = StringProperty()
@@ -206,9 +230,8 @@ class Organization(Resource, BasedInGeoMixin):
     vendor = RelationshipFrom('CorporateFinanceActivity', 'vendor')
     target = RelationshipFrom('CorporateFinanceActivity', 'target')
     hasRole = RelationshipTo('Role','hasRole')
-    orgSiteLocationAdded = RelationshipTo('SiteAddedActivity','locationAdded')
-    orgSiteLocationRemoved = RelationshipTo('SiteRemovedActivity','locationRemoved')
-    orgProductAdded = RelationshipTo('ProductAddedActivity','locationAdded')
+    locationAdded = RelationshipTo('LocationActivity','locationAdded')
+    locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
 
 
     @staticmethod
@@ -221,16 +244,13 @@ class Organization(Resource, BasedInGeoMixin):
 
     def serialize(self):
         vals = super(Organization, self).serialize()
+        based_in_fields = self.based_in_fields
         org_vals = {"description": self.description,
-                    "industry": self.industry,
-                    "basedInHighGeoName": self.basedInHighGeoName,
-                    "basedInHighGeoNameURL": self.basedInHighGeoNameURL,
-                    "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL}
-        return {**vals,**org_vals}
+                    "industry": self.industry}
+        return {**vals,**org_vals,**based_in_fields}
 
 
-class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
-    status = StringProperty()
+class CorporateFinanceActivity(Resource, ActivityMixin):
     targetDetails = StringProperty()
     valueRaw = StringProperty()
     target = RelationshipTo('Organization','target')
@@ -243,94 +263,56 @@ class CorporateFinanceActivity(Resource, ActivityMixin, WhereGeoMixin):
 
     def serialize(self):
         vals = super(CorporateFinanceActivity, self).serialize()
-        act_vals = {"activityType":self.activityType,
-                    "documentDate": self.documentDate,
-                    "documentExtract": self.documentExtract,
-                    "status": self.status,
+        activity_mixin_vals = self.activity_fields
+        act_vals = {
                     "targetDetails": self.targetDetails,
                     "valueRaw": self.valueRaw,
-                    "when": self.when,
-                    "whenRaw": self.whenRaw,
                     "targetName": self.targetName,
-                    "whereGeoName": self.whereGeoName,
-                    "whereGeoNameURL": self.whereGeoNameURL,
-                    "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
                     }
-        return {**vals,**act_vals}
+        return {**vals,**act_vals,**activity_mixin_vals}
 
 
 class RoleActivity(Resource, ActivityMixin):
     orgFoundName = StringProperty()
-    ofRole = RelationshipTo('Role','role')
+    role = RelationshipTo('Role','role')
     roleFoundName = StringProperty()
     roleHolderFoundName = StringProperty()
-    activityToRole = RelationshipFrom('Person','roleActivity')
+    roleHolder = RelationshipFrom('Person','roleActivity')
 
     def serialize(self):
         vals = super(RoleActivity, self).serialize()
+        activity_mixin_vals = self.activity_fields
         act_vals = {
-                    "documentDate": self.documentDate,
-                    "documentExtract": self.documentExtract,
+                    "orgFoundName": self.orgFoundName,
+                    "roleFoundName": self.roleFoundName,
+                    "roleHolderFoundName": self.roleHolderFoundName,
                     }
-        return {**vals,**act_vals}
+        return {**vals,**act_vals,**activity_mixin_vals}
 
-class SiteAddedActivity(Resource, ActivityMixin):
+class LocationActivity(Resource, ActivityMixin):
     actionFoundName = StringProperty()
     locationFoundName = StringProperty()
     locationPurpose = StringProperty()
+    locationType = StringProperty()
     orgFoundName = StringProperty()
-    siteLocationAdded = RelationshipTo('Site','location')
-    orgSiteLocationAdded = RelationshipFrom('Organization','locationAdded')
+    locationAdded = RelationshipFrom('Organization','locationAdded')
+    locationRemoved = RelationshipFrom('Organization','locationRemoved')
+    location = RelationshipTo('Site', 'location')
 
     def serialize(self):
-        vals = super(SiteAddedActivity, self).serialize()
+        vals = super(LocationActivity, self).serialize()
+        activity_fields = self.activity_fields
         act_vals = {
                     "actionFoundName": self.actionFoundName,
                     "locationPurpose": self.locationPurpose,
-                    "documentDate": self.documentDate,
-                    "documentExtract": self.documentExtract,
+                    "locationType": self.locationType,
                     }
-        return {**vals,**act_vals}
-
-class SiteRemovedActivity(Resource, ActivityMixin):
-    actionFoundName = StringProperty()
-    locationFoundName = StringProperty()
-    locationPurpose = StringProperty()
-    orgFoundName = StringProperty()
-    siteLocationRemoved = RelationshipTo('Site','location')
-    orgSiteLocationRemoved = RelationshipFrom('Organization','locationRemoved')
-
-    def serialize(self):
-        vals = super(SiteRemovedActivity, self).serialize()
-        act_vals = {
-                    "actionFoundName": self.actionFoundName,
-                    "locationPurpose": self.locationPurpose,
-                    "documentDate": self.documentDate,
-                    "documentExtract": self.documentExtract,
-                    }
-        return {**vals,**act_vals}
-
-class ProductAddedActivity(Resource, ActivityMixin):
-    actionFoundName = StringProperty()
-    locationFoundName = StringProperty()
-    productLocationAdded = RelationshipTo('Site','location')
-    orgProductLocationAdded = RelationshipFrom('Organization','productAdded')
-
-    def serialize(self):
-        vals = super(ProductAddedActivity, self).serialize()
-        act_vals = {
-                    "actionFoundName": self.actionFoundName,
-                    "documentDate": self.documentDate,
-                    "documentExtract": self.documentExtract,
-                    }
-        return {**vals,**act_vals}
+        return {**vals,**act_vals,**activity_fields}
 
 class Site(Resource):
     nameGeoName = StringProperty()
     nameGeoNameRDF = Relationship('Resource','nameGeoNameRDF')
-    siteLocationAdded = RelationshipFrom('SiteAddedActivity','location')
-    siteLocationRemoved = RelationshipFrom('SiteRemovedActivity','location')
-    productLocationAdded = RelationshipFrom('ProductAddedActivity','location')
+    location = RelationshipFrom('LocationActivity','location')
 
     @property
     def nameGeoNameRDFURL(self):
@@ -345,12 +327,17 @@ class Site(Resource):
 
 
 class Person(Resource, BasedInGeoMixin):
-    activityToRole = RelationshipTo('RoleActivity','roleActivity')
+    roleHolder = RelationshipTo('RoleActivity','roleActivity')
+
+    def serialize(self):
+        vals = super(Person, self).serialize()
+        based_in_fields = self.based_in_fields
+        return {**vals,**based_in_fields}
 
 class Role(Resource):
     orgFoundName = StringProperty()
-    ofRole = RelationshipFrom("RoleActivity","role")
-    organization = RelationshipFrom('Organization','hasRole')
+    rel_role = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
+    hasRole = RelationshipFrom('Organization','hasRole')
 
 class OrganizationSite(Organization, Site):
     __class_name_is_label__ = False

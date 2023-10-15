@@ -1,5 +1,5 @@
 import re
-from topics.models import Organization, Person, ActivityMixin, Resource
+from topics.models import Organization, Person, ActivityMixin, Resource, Role
 from typing import List, Dict, Tuple, Set
 import logging
 
@@ -35,7 +35,7 @@ def node_color_shape(node):
 def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dict], Dict, Set[Resource] ]:
     node_data = [] # list of dicts - including basic serialzied info (includes URI)
     edge_data = [] # list of dicts
-    serialized_nodes = {} # full details for each node, keyed by URI
+    serialized_nodes = {} # full details for each node, keyed by URI, for detailed node display
     raw_nodes = set()
     serialized_edges = {}
     for rel_type, direction, rel_node in relationships:
@@ -66,151 +66,145 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
         raw_nodes.add(rel_node)
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
 
-def source_uber_node(source_node, limit=100) -> Tuple[Dict,List[Resource]] | None:
+def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource]] | None:
     nodes = source_node.same_as()
     if len(nodes) > limit:
         logger.warning(f"Found {len(nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
         return None
     all_nodes = nodes + [source_node]
-    uber_node = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
-                    "basedInHighGeoNamesRDFURL":set(),"basedInHighGeoNamesURL":set(),
+    uri_mapping = {}
+    node_cluster = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
+                    "basedInHighGeoNamesRDFURLs":set(),"basedInHighGeoNamesURLs":set(),
                     "descriptions":set(), "industries":set()}
     for node in all_nodes:
-        uber_node["clusteredURIs"].add(node.uri)
-        uber_node["names"].add(node.name)
+        if node.uri != source_node.uri:
+            uri_mapping[node.uri] = source_node.uri
+        node_cluster["clusteredURIs"].add(node.uri)
+        node_cluster["names"].add(node.name)
         if node.basedInHighGeoName:
-            uber_node["basedInHighGeoNames"].add(node.basedInHighGeoName)
+            node_cluster["basedInHighGeoNames"].add(node.basedInHighGeoName)
         if node.basedInHighGeoNameRDF:
-            uber_node["basedInHighGeoNamesRDFURL"].add(node.basedInHighGeoNameRDFURL)
-            uber_node["basedInHighGeoNamesURL"].add(node.basedInHighGeoNameURL)
+            node_cluster["basedInHighGeoNamesRDFURLs"].add(node.basedInHighGeoNameRDFURL)
+            node_cluster["basedInHighGeoNamesURLs"].add(node.basedInHighGeoNameURL)
         if node.industry:
-            uber_node["industries"].add(node.industry)
+            node_cluster["industries"].add(node.industry)
         if node.description:
-            uber_node["descriptions"].add(node.description)
-    js_friendly = {k:" ".join(v) for k,v in uber_node.items() if len(v) > 0}
-    return js_friendly, all_nodes
+            node_cluster["descriptions"].add(node.description)
+    data_for_display = {k:"; ".join(v) for k,v in node_cluster.items() if len(v) > 0}
+    return data_for_display, all_nodes, uri_mapping
 
 
 def graph_source_activity_target(source_node, **kwargs):
-    all_nodes = []
-    all_edges = []
-    node_details = {}
-    edge_details = {}
-
-    root_node_data  = source_uber_node(source_node)
+    root_node_data = get_node_cluster(source_node)
     if root_node_data is None:
         return None
 
-    uber_node_data, root_nodes = root_node_data
-
+    root_node_cluster = get_node_cluster(source_node)
+    root_node_display_data, root_nodes, uri_mapping = root_node_cluster
     root_uri = source_node.uri
-    uber_node_dict_tmp = {"label":source_node.name,"entityType":"Cluster","uri":root_uri}
-    uber_node_dict = {**uber_node_data,**uber_node_dict_tmp}
+    root_node_dict_tmp = {"label":source_node.name,"entityType":"Cluster","uri":root_uri}
+    root_node_dict = {**root_node_display_data,**root_node_dict_tmp}
     (color, shape) = node_color_shape(source_node)
-    uber_node_vals = {**{"id":root_uri,"color":color,"shape":shape},**uber_node_dict}
+    root_node_data = {**{"id":root_uri,"color":color,"shape":shape},**root_node_dict}
+    all_nodes = [root_node_data]
+    node_details= {root_uri: root_node_dict}
+    future_round_raw_nodes = root_nodes.copy()
+    seen_raw_nodes = future_round_raw_nodes.copy()
+    all_edges = []
+    edge_details = {}
 
-    l1_activity_nodes = set()
-    for root_node in root_nodes:
-        rels = root_node.all_directional_relationships(**kwargs)
-        new_nodes, new_edges, new_node_data, activity_nodes, new_edge_data = get_nodes_edges(root_uri,rels)
-        for new_node in new_nodes:
-            if new_node not in all_nodes:
-                all_nodes.append(new_node)
-        for new_edge in new_edges:
-            if new_edge not in all_edges:
-                all_edges.append(new_edge)
-        node_details = {**node_details,**new_node_data}
-        edge_details = {**edge_details, **new_edge_data}
-        l1_activity_nodes.update(activity_nodes)
+    while len(future_round_raw_nodes) > 0:
+        future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details = add_next_round_of_graph(
+            future_round_raw_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details, uri_mapping)
+        future_round_raw_nodes = [x for x in future_round_raw_nodes if
+                        isinstance(x,ActivityMixin) or isinstance(x,Role)]
 
-    all_outer_nodes = set()
-    new_nodes, all_nodes, node_details, all_edges, edge_details = add_next_round_of_graph(l1_activity_nodes, all_nodes, uber_node_data, all_edges, node_details, edge_details)
-    all_outer_nodes.update(new_nodes)
-    new_nodes, all_nodes, node_details, all_edges, edge_details = add_next_round_of_graph(new_nodes, all_nodes, uber_node_data, all_edges, node_details, edge_details)
-    all_outer_nodes.update(new_nodes)
+    for node in seen_raw_nodes:
+        for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
+            res = get_loc_node_if_exists(node, a,b)
+            if res is None:
+                continue
+            node_js_data, node_display_data, edge_js_data, edge_display_data = res
+            if node_js_data not in all_nodes:
+                all_nodes.append(node_js_data)
+                node_details[node_js_data['uri']] = node_display_data
+            if edge_js_data not in all_edges:
+                edge_js_data["to"] = uri_mapping.get(edge_js_data["to"],edge_js_data["to"])
+                edge_js_data["from"] = uri_mapping.get(edge_js_data["from"],edge_js_data["from"])
+                all_edges.append(edge_js_data)
+                edge_details[edge_js_data["id"]] = edge_display_data
 
-    outer_same_as = Resource.find_same_as_relationships(all_outer_nodes)
-    for rel_type, node1, node2 in outer_same_as:
+    same_as_rels = Resource.find_same_as_relationships(set(seen_raw_nodes) - set(root_nodes))
+    for rel_type, node1, node2 in same_as_rels:
         edge_color = EDGE_COLORS.get(rel_type)
         edge_label = rel_type_to_edge_label(rel_type)
-        edge_vals = {"id": f"{node1.uri}-{node2.uri}-{edge_label}","from": node1.uri, "to": node2.uri, "label": edge_label, "arrows": "none", "color": edge_color}
+        edge_vals = {"id": f"{node1.uri}-{node2.uri}-{rel_type}","from": node1.uri, "to": node2.uri, "label": edge_label, "arrows": "none", "color": edge_color}
         if edge_vals not in all_edges:
             all_edges.append(edge_vals)
         edge_details[edge_vals["id"]] = {"from":node1.uri,"to":node2.uri,"relationship":rel_type}
 
-    for node in set(root_nodes + list(all_outer_nodes)):
-        if not hasattr(node, "basedInHighGeoNameURL"):
-            continue
-        loc_uri = node.basedInHighGeoNameURL
-        if loc_uri is None:
-            continue
-        loc_node = {"id":loc_uri,"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
-        if loc_node not in all_nodes:
-            all_nodes.append(loc_node)
-            node_details[loc_uri]={"label":node.basedInHighGeoName,"entityType":"Location","uri":loc_uri}
-        loc_edge = {"id": f"{node.uri}-{loc_uri}-BASED_IN","from": node.uri, "to": loc_uri, "label": "BASED_IN", "arrows": "to", "color": "black"}
-        if loc_edge not in all_edges:
-            all_edges.append(loc_edge)
-        edge_details[loc_edge["id"]] = {"from":node.uri,"to":loc_uri,"relationship":"basedIn"}
+    cleaned_nodes, cleaned_edges = clean_graph_data(all_nodes, all_edges)
 
-    for node in all_outer_nodes:
-        if not hasattr(node, "nameGeoNameURL"):
-            continue
-        loc_uri = node.nameGeoNameURL
-        if loc_uri is None:
-            continue
-        loc_node = {"id":loc_uri,"label":node.nameGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
-        if loc_node not in all_nodes:
-            all_nodes.append(loc_node)
-            node_details[loc_uri]={"label":node.nameGeoName,"entityType":"Location","uri":loc_uri}
-        loc_edge = {"id": f"{node.uri}-{loc_uri}-WHERE","from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
-        if loc_edge not in all_edges:
-            all_edges.append(loc_edge)
-        edge_details[loc_edge["id"]] = {"from":node.uri,"to":loc_uri,"relationship":"where"}
-
-    for node in l1_activity_nodes:
-        if not hasattr(node, "whereGeoNameURL"):
-            continue
-        loc_uri = node.whereGeoNameURL
-        if loc_uri is None:
-            continue
-        loc_node = {"id":loc_uri,"label":node.whereGeoName,"entityType":"Location","uri":loc_uri,"color": LOCATION_NODE_COLOR}
-        if loc_node not in all_nodes:
-            all_nodes.append(loc_node)
-            node_details[loc_uri]={"label":node.whereGeoName,"entityType":"Location","uri":loc_uri}
-        loc_edge = {"id": f"{node.uri}-{loc_uri}-WHERE","from": node.uri, "to": loc_uri, "label": "WHERE", "arrows": "to", "color": "black"}
-        if loc_edge not in all_edges:
-            all_edges.append(loc_edge)
-        edge_details[loc_edge["id"]] = {"from":node.uri,"to":loc_uri,"relationship":"where"}
-
-    all_nodes.append(uber_node_vals)
-    node_details[root_uri] = uber_node_dict
-    return all_nodes, all_edges, node_details, edge_details
+    return cleaned_nodes, cleaned_edges, node_details, edge_details
 
 
-def add_next_round_of_graph(all_activity_nodes, all_nodes, uber_node_data, all_edges, node_details, edge_details):
-    all_outer_org_nodes = set()
-    for node in all_activity_nodes:
+def get_loc_node_if_exists(node, field, edge_name, location_node_color=LOCATION_NODE_COLOR):
+    url_field = field + "URL"
+    if not hasattr(node, url_field):
+        return None
+    loc_uri = getattr(node,url_field)
+    if loc_uri is None:
+        return None
+    node_display_details = {"label":getattr(node, field), "entityType":"Location","uri":loc_uri}
+    node_extra_js_data = {"id": loc_uri, "color": location_node_color}
+    edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
+    edge_upper = rel_type_to_edge_label(edge_name)
+    edge_extra_js_data = {"id": f"{node.uri}-{loc_uri}-{edge_upper}","label": edge_upper, "arrows": "to", "color": "black"}
+    return {**node_display_details,**node_extra_js_data}, node_display_details, {**edge_display_details,**edge_extra_js_data}, edge_display_details
+
+
+def add_next_round_of_graph(next_round_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details, uri_mapping):
+    future_round_raw_nodes = []
+    for node in next_round_nodes:
         rels = node.all_directional_relationships()
-        new_nodes, new_edges, new_node_data, outer_org_nodes, new_edge_data = get_nodes_edges(node.uri,rels)
-        for new_node in new_nodes:
-            if new_node not in all_nodes:
-                if new_node["id"] not in uber_node_data["clusteredURIs"]:
-                    all_nodes.append(new_node)
-        for new_edge in new_edges:
-            if new_edge["to"] in uber_node_data["clusteredURIs"]:
-                new_edge["to"] = 'root'
-            if new_edge["from"] in uber_node_data["clusteredURIs"]:
-                new_edge["from"] = 'root'
+        new_node_data, new_edge_data, serialized_nodes, raw_nodes, serialized_edges = get_nodes_edges(node.uri,rels)
+        for new_node in new_node_data:
+            if new_node not in all_nodes and new_node['uri'] not in uri_mapping.keys() :
+                all_nodes.append(new_node)
+        for new_edge in new_edge_data:
+            new_edge["to"] = uri_mapping.get(new_edge["to"],new_edge["to"])
+            new_edge["from"] = uri_mapping.get(new_edge["from"],new_edge["from"])
             if new_edge not in all_edges:
                 all_edges.append(new_edge)
-        node_details = {**node_details,**new_node_data}
-        edge_details = {**edge_details, **new_edge_data}
-        all_outer_org_nodes.update(outer_org_nodes)
-    return all_outer_org_nodes, all_nodes, node_details, all_edges, edge_details
+        for raw_node in raw_nodes:
+            if raw_node not in seen_raw_nodes:
+                future_round_raw_nodes.append(raw_node)
+                seen_raw_nodes.append(raw_node)
+        node_details = {**serialized_nodes,**node_details} # Don't overwrite existing node details with new ones
+        edge_details = {**serialized_edges,**edge_details}
+    return future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details
 
 def rel_type_to_edge_label(text):
     text = re.sub(r'(?<!^)(?=[A-Z])', '_', text).upper()
+    text = re.sub(r'^REL_','',text)
     text = re.sub("_GEO_NAME_","_GEONAME_",text)
     text = re.sub("R_D_F","RDF",text)
     return text
+
+def clean_graph_data(node_data, edge_data):
+    seen_nodes = [] # list of ids
+    seen_edges = [] # tuple of from, to, type
+    clean_node_data = []
+    clean_edge_data = []
+    for node in node_data:
+        if node["id"] in seen_nodes:
+            continue
+        seen_nodes.append(node["id"])
+        clean_node_data.append(node)
+    for edge in edge_data:
+        tup = (edge["from"],edge["to"],edge["label"],edge["arrows"])
+        if tup in seen_edges:
+            continue
+        seen_edges.append(tup)
+        clean_edge_data.append(edge)
+    return clean_node_data, clean_edge_data
