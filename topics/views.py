@@ -9,6 +9,7 @@ from rest_framework import status
 from datetime import date
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
 from .feedback_controller import store_feedback
+from urllib.parse import urlparse
 
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -62,7 +63,8 @@ class RandomOrganization(APIView):
 
     def get(self, request):
         o = Organization.get_random()
-        return org_and_related_nodes(o)
+        vals = elements_from_uri(o.uri)
+        return org_and_related_nodes(o,vals)
 
 
 class ReportIssue(APIView):
@@ -89,11 +91,7 @@ class OrganizationByUri(APIView):
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
-        org_serializer = OrganizationGraphSerializer(o)
-        filter_serializer = DateRangeSerializer()
-        resp = Response({"data_serializer": org_serializer.data, "filter_serializer": filter_serializer,
-                            "org_data":kwargs}, status=status.HTTP_200_OK)
-        return resp
+        return org_and_related_nodes(o,kwargs)
 
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -112,8 +110,22 @@ class OrganizationByUri(APIView):
         return resp
 
 
-
-def org_and_related_nodes(org,**kwargs):
-    serializer = OrganizationGraphSerializer(org,**kwargs)
-    resp = Response({"data":serializer.data}, status=status.HTTP_200_OK)
+def org_and_related_nodes(org,org_data):
+    org_serializer = OrganizationGraphSerializer(org)
+    filter_serializer = DateRangeSerializer()
+    resp = Response({"data_serializer": org_serializer.data, "filter_serializer": filter_serializer,
+                        "org_data":org_data}, status=status.HTTP_200_OK)
     return resp
+
+def elements_from_uri(uri):
+    parsed = urlparse(uri)
+    part_pieces = parsed.path.split("/")
+    path = part_pieces[1]
+    doc_id = part_pieces[2]
+    org_name = "/".join(part_pieces[3:])
+    return {
+        "domain": parsed.netloc,
+        "path": path,
+        "doc_id": doc_id,
+        "name": org_name,
+    }

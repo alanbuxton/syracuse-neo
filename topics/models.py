@@ -112,11 +112,16 @@ class ActivityMixin:
 
     @property
     def activity_fields(self):
+        if self.activityType is None:
+            activityType_title = "Activity"
+        else:
+            activityType_title = self.activityType.title()
+
         return {
             "activityType": self.activityType,
             "documentDate": self.documentDate,
             "documentExtract": self.documentExtract,
-            "label": f"{self.activityType.title()} ({self.sourceName} {self.documentDate})",
+            "label": f"{activityType_title} ({self.sourceName} {self.documentDate})",
             "status": self.status,
             "when": self.when,
             "whenRaw": self.whenRaw,
@@ -274,10 +279,10 @@ class CorporateFinanceActivity(Resource, ActivityMixin):
 
 class RoleActivity(Resource, ActivityMixin):
     orgFoundName = StringProperty()
-    role = RelationshipTo('Role','role')
+    withRole = RelationshipTo('Role','role')
     roleFoundName = StringProperty()
     roleHolderFoundName = StringProperty()
-    roleHolder = RelationshipFrom('Person','roleActivity')
+    roleActivity = RelationshipFrom('Person','roleActivity')
 
     def serialize(self):
         vals = super(RoleActivity, self).serialize()
@@ -327,7 +332,7 @@ class Site(Resource):
 
 
 class Person(Resource, BasedInGeoMixin):
-    roleHolder = RelationshipTo('RoleActivity','roleActivity')
+    roleActivity = RelationshipTo('RoleActivity','roleActivity')
 
     def serialize(self):
         vals = super(Person, self).serialize()
@@ -336,7 +341,7 @@ class Person(Resource, BasedInGeoMixin):
 
 class Role(Resource):
     orgFoundName = StringProperty()
-    rel_role = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
+    withRole = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
     hasRole = RelationshipFrom('Organization','hasRole')
 
 class OrganizationSite(Organization, Site):
