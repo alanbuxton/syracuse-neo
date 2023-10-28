@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
-    NameSearchSerializer, DateRangeSerializer, GeoSerializer)
+    NameSearchSerializer, DateRangeSerializer, GeoSerializer, TimelineSerializer,
+    IndustrySearchSerializer)
 from rest_framework import status
 from datetime import date
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
@@ -33,7 +34,7 @@ class Index(APIView):
             all_orgs = set(orgs + orgs_by_activity)
             org_list = OrganizationSerializer(all_orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
-            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES,initial=country)
             search_type = 'country'
             search_term = COUNTRY_CODES[country]
             num_hits = len(all_orgs)
@@ -48,14 +49,26 @@ class Index(APIView):
         orgs_to_show = org_list.data
         if len(orgs_to_show) > 20:
             orgs_to_show = orgs_to_show[:20]
+        industry_serializer = IndustrySearchSerializer()
         resp = Response({"organizations":orgs_to_show,
                         "search_serializer": org_search,
                         "selected_country": geo_serializer,
                         "search_term": search_term,
                         "num_hits": num_hits,
+                        "industry_serializer": industry_serializer,
                         "search_type": search_type}, status=status.HTTP_200_OK)
         return resp
 
+class TopicsTimeline(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'topics_timeline.html'
+
+    def get(self, request):
+        params = request.query_params
+        industry = params["industry_name"]
+        orgs = Organization.find_by_industry(industry)
+        timeline_serializer = TimelineSerializer(orgs)
+        return Response({"industry_name":industry,"timeline_serializer": timeline_serializer.data}, status=status.HTTP_200_OK)
 
 class RandomOrganization(APIView):
     renderer_classes = [TemplateHTMLRenderer]

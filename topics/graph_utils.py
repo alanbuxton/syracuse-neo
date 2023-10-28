@@ -66,11 +66,12 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
         raw_nodes.add(rel_node)
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
 
-def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource]] | None:
+def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,List] | Set:
     nodes = source_node.same_as()
     if len(nodes) > limit:
         logger.warning(f"Found {len(nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
-        return None
+        errors = { "error_names": set( [ x.name for x in nodes] ), "error_orgs": nodes }
+        return errors
     all_nodes = nodes + [source_node]
     uri_mapping = {}
     node_cluster = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
@@ -96,9 +97,8 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource]] | Non
 
 def graph_source_activity_target(source_node, **kwargs):
     root_node_data = get_node_cluster(source_node)
-    if root_node_data is None:
+    if isinstance(root_node_data, dict) and root_node_data.get("error_names") is not None:
         return None
-
     root_node_cluster = get_node_cluster(source_node)
     root_node_display_data, root_nodes, uri_mapping = root_node_cluster
     root_uri = source_node.uri

@@ -1,0 +1,105 @@
+
+<html>
+<head>
+
+{% include 'main/styling.html' %}
+{% load rest_framework %}
+<title>Timeline</title>
+<script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+
+<style>
+.vis-panel {
+  font-size: 11px;
+}
+
+.vis-item.activity_with_when {
+  background-color: #f6c655;
+}
+
+.vis-item.activity_not_happened {
+  background-color: #ffe6ff;
+}
+
+.vis-item.activity_has_happened {
+  background-color: #b3ffff;
+  }
+
+</style>
+</head>
+
+<body>
+  <h1>Timeline for organizations matching: {{ industry_name }} </h1>
+  <div id="visualization"></div>
+
+  <p><em>{{ timeline_serializer.limit_msg }}</em></p>
+  <div id="item_details">
+    <p><strong>Click an item in the timeline for more details</strong></p>
+  </div>
+  <br/>
+  <div id="legend".>
+    <div id="legend_details"/>
+    <p><strong>Legend</strong></p>
+    <div class="activity_with_when">Activity with Date</div>
+    <div class="activity_has_happened">Activity which happened before publish date</div>
+    <div class="activity_not_happened">Activity which had not happened by publish date</div>
+ </div>
+  <p>Back to <a href="/">Home page</a></p>
+  {% if timeline_serializer.errors|length > 0 %}
+  <p><em>The following orgs were not shown for unauthenticated users due to size:
+    {{ timeline_serializer.errors }}
+  </em></p>
+  {% endif %}
+
+  <script type="text/javascript">
+    // create groups to highlight groupUpdate
+    var groups = new vis.DataSet([
+      {% for group in timeline_serializer.groups %}
+        { id: "{{ group.id }}", content: "{{ group.content }}" },
+      {% endfor %}
+    ]);
+    // create a DataSet with items
+    var items = new vis.DataSet([
+      {% for item in timeline_serializer.items %}
+        { id: "{{ item.id }}", start: "{{ item.start }}", group: "{{ item.group }}", content: "{{ item.label }}", className: "{{ item.className }}"},
+      {% endfor %}
+    ]);
+
+    var container = document.getElementById("visualization");
+    var options = {
+      editable: false, // default for all items
+    };
+
+    var timeline = new vis.Timeline(container, items, groups, options);
+
+    const item_display_dict = {{ timeline_serializer.item_display_details | safe }} ;
+    const org_display_dict = {{ timeline_serializer.org_display_details | safe }} ;
+
+    timeline.on('click', function (properties) {
+      console.log(properties);
+      if (properties.item) {
+        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict);
+      } else if (properties.what == 'group-label') {
+        document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict);
+      }
+    });
+
+    function showItemDetails(item_id, lookup_dict) {
+      vals = Object.entries(lookup_dict[item_id])
+      text = "";
+      for (const [key, value] of vals) {
+        if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
+          text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>";
+        } else {
+          text = text + "<b>" + key + "</b>: " + value + "</br>";
+        }
+      }
+      text = text + "</br>";
+      return text;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

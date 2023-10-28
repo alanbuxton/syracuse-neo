@@ -238,6 +238,9 @@ class Organization(Resource, BasedInGeoMixin):
     locationAdded = RelationshipTo('LocationActivity','locationAdded')
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
 
+    @staticmethod
+    def find_by_industry(industry):
+        return Organization.nodes.filter(industry__regex=rf"(?i).*\b{industry}.*").all()
 
     @staticmethod
     def get_random():

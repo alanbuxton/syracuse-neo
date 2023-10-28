@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .graph_utils import graph_source_activity_target
 from .converters import CustomSerializer
+from .timeline_utils import get_timeline_data
 
 class OrganizationSerializer(serializers.BaseSerializer):
 
@@ -36,17 +37,48 @@ class NameSearchSerializer(serializers.Serializer):
         style={'placeholder': 'Search ...', 'autofocus': True}
     )
 
+class IndustrySearchSerializer(serializers.Serializer):
+    industry_name = serializers.CharField(
+        max_length=20,
+        style={'placeholder': 'Search ...', 'autofocus': True}
+    )
+
+
 class GeoSerializer(serializers.Serializer):
     selected_country = serializers.ChoiceField(choices=[])
 
     def __init__(self, *args, **kwargs):
         orig_choices = kwargs.pop('choices',[])
+        if "initial" in kwargs:
+            selected_country = kwargs.pop("initial")
+        else:
+            selected_country = None
         choices = sorted([(v,k) for k,v in orig_choices.items()], key=lambda x: x[1])
         super().__init__(*args, **kwargs)
         self.fields['selected_country'].choices = choices
-        self.fields['selected_country'].default = 'United States'
-        self.fields['selected_country'].initial = 'United States'
+        if selected_country is not None:
+            self.fields['selected_country'].initial = selected_country
 
+class TimelineSerializer(serializers.Serializer):
+    def to_representation(self, instance, **kwargs):
+        limit = 10
+        groups, items, item_display_details, org_display_details, errors = get_timeline_data(instance, limit)
+        errors = sorted(errors)
+        if len(errors) > 50:
+            errors = "; ".join(errors[:50]) + f" plus {len(errors) - 50} other organizations"
+        else:
+            errors = "; ".join(errors)
+        if len(groups) + len(errors) > limit:
+            limit_message = f"Max {limit} organizations shown for unauthenticated users"
+        else:
+            limit_message = ""
+        resp = {"groups": groups, "items":items,
+            "item_display_details":CustomSerializer(item_display_details),
+            "org_display_details": CustomSerializer(org_display_details),
+            "errors": errors,
+            "limit_msg": limit_message,
+            }
+        return resp
 
 class DateRangeSerializer(serializers.Serializer):
     from_date = serializers.DateField()
