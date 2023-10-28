@@ -257,6 +257,13 @@ class Organization(Resource, BasedInGeoMixin):
                     "industry": self.industry}
         return {**vals,**org_vals,**based_in_fields}
 
+    def get_role_activities(self):
+        role_activities = []
+        for role in self.hasRole:
+            acts = role.withRole.all()
+            role_activities.extend([(role,act) for act in acts])
+        return role_activities
+
 
 class CorporateFinanceActivity(Resource, ActivityMixin):
     targetDetails = StringProperty()

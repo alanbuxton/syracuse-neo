@@ -24,25 +24,40 @@
   background-color: #b3ffff;
   }
 
+#main_container {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+  }
+
+#visualization {
+    flex: 0 0 80%;
+}
+
+
 </style>
 </head>
 
 <body>
   <h1>Timeline for organizations matching: {{ industry_name }} </h1>
-  <div id="visualization"></div>
-
   <p><em>{{ timeline_serializer.limit_msg }}</em></p>
-  <div id="item_details">
-    <p><strong>Click an item in the timeline for more details</strong></p>
-  </div>
-  <br/>
-  <div id="legend".>
-    <div id="legend_details"/>
-    <p><strong>Legend</strong></p>
-    <div class="activity_with_when">Activity with Date</div>
-    <div class="activity_has_happened">Activity which happened before publish date</div>
-    <div class="activity_not_happened">Activity which had not happened by publish date</div>
- </div>
+  <div id="main_container">
+    <div id="visualization"></div>
+    <div id="right_panel">
+      <div id="item_details">
+        <p>Click an organization name or an item in the timeline for more details</p>
+      </div>
+      <br/>
+      <div id="legend">
+        <div id="legend_details"/>
+        <p><strong>Legend</strong></p>
+        <div class="activity_with_when">Activity with Date</div>
+        <div class="activity_has_happened">Activity which happened before publish date</div>
+        <div class="activity_not_happened">Activity which had not happened by publish date</div>
+     </div>
+   </div>
+</div>
+</div>
   <p>Back to <a href="/">Home page</a></p>
   {% if timeline_serializer.errors|length > 0 %}
   <p><em>The following orgs were not shown for unauthenticated users due to size:
@@ -50,11 +65,16 @@
   </em></p>
   {% endif %}
 
+
   <script type="text/javascript">
     // create groups to highlight groupUpdate
     var groups = new vis.DataSet([
       {% for group in timeline_serializer.groups %}
-        { id: "{{ group.id }}", content: "{{ group.content }}" },
+        { id: "{{ group.id }}", content: "{{ group.content }}", treeLevel: "{{ group.treeLevel }}",
+        {% if group.treeLevel == 1 %}
+          nestedGroups: {{ group.nestedGroups | safe}}
+        {% endif %}
+      },
       {% endfor %}
     ]);
     // create a DataSet with items
