@@ -62,7 +62,10 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
         node_data.append(node_vals)
         edge_data.append(edge_vals)
         serialized_nodes[rel_node.uri]=rel_node.serialize_no_none()
-        serialized_edges[edge_vals["id"]]={"from":from_node_id,"to":to_node_id,"relationship":rel_type}
+        edge_display_data = {"from":from_node_id,"to":to_node_id,"relationship":rel_type,"documentURL":node_vals["documentURL"],"documentTitle":node_vals["documentTitle"]}
+        if node_vals.get("documentExtract"):
+            edge_display_data["documentExtract"] = node_vals["documentExtract"]
+        serialized_edges[edge_vals["id"]]=edge_display_data
         raw_nodes.add(rel_node)
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
 
@@ -121,7 +124,7 @@ def graph_source_activity_target(source_node, **kwargs):
 
     for node in seen_raw_nodes:
         for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
-            res = get_loc_node_if_exists(node, a,b)
+            res = get_loc_node_if_exists(node, a,b, node_details)
             if res is None:
                 continue
             node_js_data, node_display_data, edge_js_data, edge_display_data = res
@@ -148,7 +151,7 @@ def graph_source_activity_target(source_node, **kwargs):
     return cleaned_nodes, cleaned_edges, node_details, edge_details
 
 
-def get_loc_node_if_exists(node, field, edge_name, location_node_color=LOCATION_NODE_COLOR):
+def get_loc_node_if_exists(node, field, edge_name, node_details, location_node_color=LOCATION_NODE_COLOR):
     url_field = field + "URL"
     if not hasattr(node, url_field):
         return None
@@ -157,7 +160,10 @@ def get_loc_node_if_exists(node, field, edge_name, location_node_color=LOCATION_
         return None
     node_display_details = {"label":getattr(node, field), "entityType":"Location","uri":loc_uri}
     node_extra_js_data = {"id": loc_uri, "color": location_node_color}
-    edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
+    related_node = node_details[node.uri]
+    edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name,"documentTitle":related_node["documentTitle"],"documentURL":related_node["documentURL"]}
+    if related_node.get("documentExtract"):
+        edge_display_details["documentExtract"] = related_node["documentExtract"]
     edge_upper = rel_type_to_edge_label(edge_name)
     edge_extra_js_data = {"id": f"{node.uri}-{loc_uri}-{edge_upper}","label": edge_upper, "arrows": "to", "color": "black"}
     return {**node_display_details,**node_extra_js_data}, node_display_details, {**edge_display_details,**edge_extra_js_data}, edge_display_details
