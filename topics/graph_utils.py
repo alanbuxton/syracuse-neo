@@ -161,7 +161,11 @@ def get_loc_node_if_exists(node, field, edge_name, node_details, location_node_c
     node_display_details = {"label":getattr(node, field), "entityType":"Location","uri":loc_uri}
     node_extra_js_data = {"id": loc_uri, "color": location_node_color}
     related_node = node_details[node.uri]
-    edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name,"documentTitle":related_node["documentTitle"],"documentURL":related_node["documentURL"]}
+    edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
+    if related_node.get("documentTitle"):
+        edge_display_details["documentTitle"]=related_node["documentTitle"]
+    if related_node.get("documentURL"):
+        edge_display_details["documentURL"]=related_node["documentURL"]
     if related_node.get("documentExtract"):
         edge_display_details["documentExtract"] = related_node["documentExtract"]
     edge_upper = rel_type_to_edge_label(edge_name)
