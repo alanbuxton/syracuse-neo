@@ -9,7 +9,6 @@ from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
 from rest_framework import status
 from datetime import date
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
-from .feedback_controller import store_feedback
 from urllib.parse import urlparse
 
 class Index(APIView):
@@ -79,23 +78,6 @@ class RandomOrganization(APIView):
         vals = elements_from_uri(o.uri)
         return org_and_related_nodes(o,vals)
 
-
-class ReportIssue(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'issue_feedback.html'
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        node_or_edge = data.get('node_or_edge')
-        unique_id = data.get('idval')
-        reason = data.get('reason')
-        source_page = request.headers['Referer']
-        feedback_id, feedback_error = store_feedback(node_or_edge, unique_id, reason)
-        resp = Response({"node_or_edge": node_or_edge, "unique_id": unique_id,
-                        "feedback_id": feedback_id,
-                        "feedback_error": feedback_error,
-                        "reason": reason, "source_page": source_page}, status=status.HTTP_200_OK)
-        return resp
 
 class OrganizationByUri(APIView):
     renderer_classes = [TemplateHTMLRenderer]

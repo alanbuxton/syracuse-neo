@@ -1,0 +1,30 @@
+
+<html>
+<head>
+
+{% include 'main/styling.html' %}
+{% load rest_framework %}
+
+</head>
+<body>
+    <h1>Feedback submitted</h1>
+    <p>
+
+    {% if errors %}
+      Feedback could not be saved because of the following issues: <br/>
+      {% for field, error in errors.items %}
+        <strong>Field:</strong> {{ field }} <br/>
+        <strong>Error:</strong> {{ error}}  <br/>
+      {% endfor %}
+    {% else %}
+      {% for k,v in feedback.items %}
+        <strong>{{ k }}:</strong> {{ v }}<br/>
+      {% endfor %}
+    {% endif %}
+    </p>
+
+  <p><a href=" {{ source_page }}">Back to organization page</a>
+  | <a href="/">Back to homepage</a></p>
+
+</body>
+</html>

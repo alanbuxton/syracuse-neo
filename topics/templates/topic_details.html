@@ -23,6 +23,7 @@
 <body>
 
 <h1>Topic Detail</h1>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
 <p><b>Showing graph for:</b> {{ data_serializer.source_node }}</p>
@@ -139,8 +140,9 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
 }
 
 function error_form(node_or_edge, unique_id) {
-  text = "<form method='post' action='/report_issue' class='form-inline'>";
+  text = "<form method='post' action='/feedbacks/create' class='form-inline'>";
   text = text + "See something unexpected or wrong about this item? If so please use the form below to notify us of the issue:</p>";
+  text = text + "<input type='hidden' name='csrfmiddlewaretoken' value='" + Cookies.get('csrftoken') + "'>"
   text = text + "<input type='hidden' name='node_or_edge' value='" + node_or_edge+ "'/><input type='hidden' value='";
   text = text + unique_id;
   text = text + "' name='idval'/><div class='mb-3'><label for='reasonTextArea' class='form-label'><strong>Reason:</strong></label>";
