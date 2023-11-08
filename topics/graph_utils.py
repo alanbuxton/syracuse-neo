@@ -141,7 +141,7 @@ def graph_source_activity_target(source_node, **kwargs):
     for rel_type, node1, node2 in same_as_rels:
         edge_color = EDGE_COLORS.get(rel_type)
         edge_label = rel_type_to_edge_label(rel_type)
-        edge_vals = {"id": f"{node1.uri}-{node2.uri}-{rel_type}","from": node1.uri, "to": node2.uri, "label": edge_label, "arrows": "none", "color": edge_color}
+        edge_vals = {"id": f"{node1.uri}-{node2.uri}-{edge_label}","from": node1.uri, "to": node2.uri, "label": edge_label, "arrows": "none", "color": edge_color}
         if edge_vals not in all_edges:
             all_edges.append(edge_vals)
         edge_details[edge_vals["id"]] = {"from":node1.uri,"to":node2.uri,"relationship":rel_type}
