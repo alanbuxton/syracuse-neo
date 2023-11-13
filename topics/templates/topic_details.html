@@ -2,7 +2,7 @@
 <html>
 <head>
 
-{% include 'main/styling.html' %}
+{% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 
 <style>
@@ -23,6 +23,8 @@
 <body>
 
 <h1>Topic Detail</h1>
+{% include 'layouts/login-header.html' %}
+
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 

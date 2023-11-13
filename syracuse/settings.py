@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
     'topics.apps.TopicsConfig',
     'feedbacks.apps.FeedbacksConfig',
     'rest_framework',
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'syracuse.urls'
@@ -61,7 +66,8 @@ ROOT_URLCONF = 'syracuse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,"templates"), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,9 +75,17 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'syracuse.wsgi.application'
@@ -163,3 +177,9 @@ NEOMODEL_NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD','itsasecret')
 NEOMODEL_NEO4J_HOSTNAME = os.environ.get('NEO4J_HOSTNAME','localhost')
 NEOMODEL_NEO4J_PORT = os.environ.get('NEO4J_PORT',7687)
 NEOMODEL_NEO4J_BOLT_URL = f'{NEOMODEL_NEO4J_SCHEME}://{NEOMODEL_NEO4J_USERNAME}:{NEOMODEL_NEO4J_PASSWORD}@{NEOMODEL_NEO4J_HOSTNAME}:{NEOMODEL_NEO4J_PORT}'
+
+# all-auth
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_ON_GET = True

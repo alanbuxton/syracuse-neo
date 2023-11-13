@@ -2,7 +2,7 @@
 <html>
 <head>
 
-{% include 'main/styling.html' %}
+{% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 <title>Timeline</title>
 <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
@@ -40,6 +40,7 @@
 
 <body>
   <h1>Timeline for organizations matching: {{ industry_name }} </h1>
+  {% include 'layouts/login-header.html' %}
   <p><em>{{ timeline_serializer.limit_msg }}</em></p>
   <div id="main_container">
     <div id="visualization"></div>
@@ -58,7 +59,7 @@
    </div>
 </div>
 </div>
-  <p>Back to <a href="/">Home page</a></p>
+
   {% if timeline_serializer.errors|length > 0 %}
   <p><em>The following orgs were not shown for unauthenticated users due to size:
     {{ timeline_serializer.errors }}

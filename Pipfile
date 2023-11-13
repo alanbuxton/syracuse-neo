@@ -11,6 +11,7 @@ django-bootstrap5 = "*"
 gunicorn = "*"
 pycountry = "*"
 psycopg = "*" # Not required for neo4j app
+django-allauth = "*"
 
 [dev-packages]
 
