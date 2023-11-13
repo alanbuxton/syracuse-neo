@@ -3,3 +3,5 @@ db.sqlite3
 **/__pycache__
 dump/relevant_geo.csv
 .env
+static
+
