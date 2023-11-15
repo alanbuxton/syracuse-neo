@@ -40,8 +40,7 @@
 
 <body>
   <h1>Timeline for organizations matching: {{ industry_name }} </h1>
-  {% include 'layouts/login-header.html' %}
-  <p><em>{{ timeline_serializer.limit_msg }}</em></p>
+  <p><em>{{ timeline_serializer.limit_msg | safe }}</em></p>
   <div id="main_container">
     <div id="visualization"></div>
     <div id="right_panel">

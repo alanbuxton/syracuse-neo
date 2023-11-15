@@ -69,7 +69,7 @@ class TimelineSerializer(serializers.Serializer):
         else:
             errors = "; ".join(errors)
         if len(groups) + len(errors) > limit:
-            limit_message = f"Max {limit} organizations shown for unauthenticated users"
+            limit_message = f'Max {limit} organizations shown for unauthenticated users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20timeline%20data.">contact us</a> for API or bulk data.'
         else:
             limit_message = ""
         resp = {"groups": groups, "items":items,

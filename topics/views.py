@@ -10,6 +10,15 @@ from rest_framework import status
 from datetime import date
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
 from urllib.parse import urlparse
+from syracuse.settings import MOTD, REQUIRE_END_USER_LOGIN
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+
+
+class AuthAPIView(APIView):
+    if REQUIRE_END_USER_LOGIN:
+        permission_classes = [IsAuthenticated]
+        authentication_classes = [SessionAuthentication, TokenAuthentication]
 
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -49,16 +58,24 @@ class Index(APIView):
         if len(orgs_to_show) > 20:
             orgs_to_show = orgs_to_show[:20]
         industry_serializer = IndustrySearchSerializer()
+
+        show_lists = False
+        if (not REQUIRE_END_USER_LOGIN) or request.user.is_authenticated:
+            show_lists = True
+
         resp = Response({"organizations":orgs_to_show,
                         "search_serializer": org_search,
                         "selected_country": geo_serializer,
                         "search_term": search_term,
                         "num_hits": num_hits,
                         "industry_serializer": industry_serializer,
-                        "search_type": search_type}, status=status.HTTP_200_OK)
+                        "search_type": search_type,
+                        "motd": MOTD,
+                        "show_lists": show_lists,
+                        "show_login": REQUIRE_END_USER_LOGIN}, status=status.HTTP_200_OK)
         return resp
 
-class TopicsTimeline(APIView):
+class TopicsTimeline(AuthAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'topics_timeline.html'
 
@@ -79,9 +96,13 @@ class RandomOrganization(APIView):
         return org_and_related_nodes(o,vals)
 
 
-class OrganizationByUri(APIView):
+class OrganizationByUri(AuthAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'topic_details.html'
+
+    if REQUIRE_END_USER_LOGIN:
+        permission_classes = [IsAuthenticated]
+        authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"

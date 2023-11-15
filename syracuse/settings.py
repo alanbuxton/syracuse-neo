@@ -25,6 +25,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY",'django-insecure-=vq-#5ghwtp7_()k7xi$go
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG",'True').lower() == 'true'
+# Only for end users; auth is always needed for
+REQUIRE_END_USER_LOGIN = os.environ.get("SYRACUSE_REQUIRE_END_USER_LOGIN","true").lower() != "false"
+MOTD = os.environ.get("SYRACUSE_MOTD","<h4>Welcome to Syracuse, your database of key events in company lifecycles, updated daily.</h4>")
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","localhost,127.0.0.1").split(",")
 
