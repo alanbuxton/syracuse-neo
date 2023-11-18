@@ -5,6 +5,7 @@ from neomodel import db, config
 from datetime import datetime
 import logging
 from typing import List
+import re
 
 '''
     Run this script at command line to import all *.ttl files from a source directory e.g.
@@ -26,13 +27,31 @@ logger.setLevel(log_level)
 logger.addHandler(logging.StreamHandler())
 
 def load_ttl_files(dir_name):
+    delete_dir = f"{dir_name}/deletions"
+    if os.path.isdir(delete_dir):
+        delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
+        logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
+        for filename in delete_files:
+            load_deletion_file(f"{delete_dir}/{filename}")
+    logger.info(f"After running deletion files there are {count_nodes()} nodes")
     all_files = [x for x in os.listdir(dir_name) if x.endswith(".ttl")]
     logger.info(f"Found {len(all_files)} ttl files to process")
     if len(all_files) == 0:
+        logger.info("No insertion files to load, quitting")
         return
     for filename in all_files:
         load_file(f"{dir_name}/{filename}")
+    logger.info(f"After running insertion files there are {count_nodes()} nodes")
     apoc_del_redundant_high_med()
+
+def load_deletion_file(filepath):
+    filepath = os.path.abspath(filepath)
+    with open(filepath) as f:
+        uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
+    command = f"match (n) where n.uri in {uris} detach delete n"
+    logger.info(f"Deleting {len(uris)} nodes")
+#    command = f'call n10s.rdf.delete.fetch("file://{filepath}","Turtle");' # This fails for me, but not clear why
+    db.cypher_query(command)
 
 def load_file(filepath):
     filepath = os.path.abspath(filepath)
@@ -58,6 +77,9 @@ def output_stats(msg):
     same_as_medium_count,_ = db.cypher_query(medium + " RETURN COUNT(r)")
     logger.info(f"{datetime.utcnow()} {msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsMedium: {same_as_medium_count[0][0]}")
 
+def count_nodes():
+    val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")
+    return val[0][0]
 
 def export_data_subset(limit = 9_000, output_dir = f"{os.getcwd()}/tmp"):
     '''
@@ -67,6 +89,12 @@ def export_data_subset(limit = 9_000, output_dir = f"{os.getcwd()}/tmp"):
     uris = get_sample_uris(limit)
     return export_subset_by_uris(uris, output_dir)
 
+def get_node_name_from_rdf_row(row):
+    res = re.findall(r"^<(https://\S.+)> a", row)
+    if len(res) > 0:
+        return res[0]
+    else:
+        return None
 
 def get_sample_uris(limit = 100):
     role_uris, _ = db.cypher_query(f"MATCH (n: Organization)--(o: Role)--(p: RoleActivity)--(q: Person) RETURN n.uri,o.uri,p.uri,q.uri LIMIT {limit}")
@@ -85,6 +113,8 @@ def export_subset_by_uris(uris: List[str], output_dir: str):
     exported = db.cypher_query(query)
     logger.info(exported)
     return exported
+
+
 
 
 if __name__ == '__main__':

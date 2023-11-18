@@ -24,7 +24,7 @@ If you don't trust a binary file, here is the [cypher export](https://drive.goog
 
 ### RDF
 
-`full_dump_XXX.ttl` dumpfiles are a tiny sample of the available data. They are far smaller than the Neo4j dump and are intended as a quick start for loading RDF into your local installation.
+`full_dump_XXXX.ttl` dumpfiles are a tiny sample of the available data. They are far smaller than the Neo4j dump and are intended as a quick start for loading RDF into your local installation.
 
 Assuming you have an empty [Neo4J v5 database set up for neosemantics](https://alanbuxton.wordpress.com/2023/04/21/getting-started-with-neo4j-and-neosemantics/) you can import this file with:
 
