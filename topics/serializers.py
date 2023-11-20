@@ -16,7 +16,8 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
         graph_data = graph_source_activity_target(source_node=instance,**self.context)
-        data = {"source_node": f"{instance.name} ({instance.uri})",
+        data = {"source_node": instance.uri,
+                "source_node_name": instance.name,
                 "too_many_nodes":False}
         if graph_data is None:
             data["node_data"] = []
@@ -29,7 +30,6 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         data["node_details"] = CustomSerializer(node_details)
         data["edge_details"] = CustomSerializer(edge_details)
         return data
-
 
 class NameSearchSerializer(serializers.Serializer):
     name = serializers.CharField(
@@ -69,7 +69,7 @@ class TimelineSerializer(serializers.Serializer):
         else:
             errors = "; ".join(errors)
         if len(groups) + len(errors) > limit:
-            limit_message = f'Max {limit} organizations shown for unauthenticated users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20timeline%20data.">contact us</a> for API or bulk data.'
+            limit_message = f'Max {limit} organizations shown for web users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20timeline%20data.">contact us</a> for API or bulk data.'
         else:
             limit_message = ""
         resp = {"groups": groups, "items":items,
@@ -79,6 +79,25 @@ class TimelineSerializer(serializers.Serializer):
             "limit_msg": limit_message,
             }
         return resp
+
+class OrganizationTimelineSerializer(serializers.BaseSerializer):
+
+    def to_representation(self, instance, **kwargs):
+        groups, items, item_display_details, org_display_details, errors = get_timeline_data([instance], None)
+        errors = sorted(errors)
+        if len(errors) > 50:
+            errors = "; ".join(errors[:50]) + f" plus {len(errors) - 50} other organizations"
+        else:
+            errors = "; ".join(errors)
+        resp = {"groups": groups, "items":items,
+            "item_display_details":CustomSerializer(item_display_details),
+            "org_name": instance.name,
+            "org_node": instance.uri,
+            "org_display_details": CustomSerializer(org_display_details),
+            "errors": errors,
+            }
+        return resp
+
 
 class DateRangeSerializer(serializers.Serializer):
     from_date = serializers.DateField()

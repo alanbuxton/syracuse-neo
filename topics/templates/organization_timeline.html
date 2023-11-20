@@ -4,7 +4,7 @@
 
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
-<title>Timeline</title>
+<title>{{ timeline_serializer.org_name }} (Timeline)</title>
 <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 
 <style>
@@ -39,8 +39,12 @@
 </head>
 
 <body>
-  <h1>Timeline for organizations matching: {{ industry_name }} </h1>
-  <p><em>{{ timeline_serializer.limit_msg | safe }}</em></p>
+  <h1>{{ timeline_serializer.org_name }} - Timeline</h1>
+  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}
+    | <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+      Show Linkages</a>
+    | Back to <a href="/">Home page</a>
+  </p>
   <div id="main_container">
     <div id="visualization"></div>
     <div id="right_panel">
@@ -58,14 +62,15 @@
      </div>
    </div>
 </div>
-
+<div>
   {% if timeline_serializer.errors|length > 0 %}
   <p><em>The following orgs were not shown for web users due to size:
     {{ timeline_serializer.errors }}
   </em></p>
   {% endif %}
 
-  {% include 'layouts/footer.html' %}
+{% include 'layouts/footer.html' %}
+</div>
   <script type="text/javascript">
     // create groups to highlight groupUpdate
     var groups = new vis.DataSet([

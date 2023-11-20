@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, DateRangeSerializer, GeoSerializer, TimelineSerializer,
-    IndustrySearchSerializer)
+    IndustrySearchSerializer,OrganizationTimelineSerializer)
 from rest_framework import status
 from datetime import date
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
@@ -86,9 +86,22 @@ class TopicsTimeline(AuthAPIView):
         timeline_serializer = TimelineSerializer(orgs)
         return Response({"industry_name":industry,"timeline_serializer": timeline_serializer.data}, status=status.HTTP_200_OK)
 
+class OrganizationTimeline(AuthAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'organization_timeline.html'
+
+    def get(self, request, *args, **kwargs):
+        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        o = Organization.nodes.get(uri=uri)
+        org_serializer = OrganizationTimelineSerializer(o)
+        resp = Response({"timeline_serializer": org_serializer.data,
+                            "org_data":kwargs}, status=status.HTTP_200_OK)
+        return resp
+
+
 class RandomOrganization(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'topic_details.html'
+    template_name = 'organization_linkages.html'
 
     def get(self, request):
         o = Organization.get_random()
@@ -98,7 +111,7 @@ class RandomOrganization(APIView):
 
 class OrganizationByUri(AuthAPIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'topic_details.html'
+    template_name = 'organization_linkages.html'
 
     if REQUIRE_END_USER_LOGIN:
         permission_classes = [IsAuthenticated]

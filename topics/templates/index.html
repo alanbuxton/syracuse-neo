@@ -88,11 +88,11 @@
       <div id="result_list">
         <p>Searched for {{ search_term }} - found {{ num_hits }} organizations
           {% if num_hits > 20 %}
-            (Max 20 shown for unauthenticated users)
+            (Max 20 shown for web users)
           {% endif %}
           :</p>
         {% for org in organizations %}
-          <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+          <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
             {{ org.name }}</a></b> ({{ org.uri }})</p>
        {% endfor %}
       </div>
@@ -107,7 +107,7 @@
       {% if show_lists and search_type != 'org_name' and search_type != 'country' %}
         , or select from one of these 10 random examples</p>
         {% for org in organizations %}
-          <p><b><a href="{% url 'organization-uri' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+          <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
             {{ org.name }}</a></b> ({{ org.uri }})</p>
         {% endfor %}
       {% endif %}
@@ -117,6 +117,7 @@
 
 
 <p><a href="/">Refresh home page</a></p>
+{% include 'layouts/footer.html' %}
 
 </body>
 </html>
