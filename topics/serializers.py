@@ -97,8 +97,3 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
             "errors": errors,
             }
         return resp
-
-
-class DateRangeSerializer(serializers.Serializer):
-    from_date = serializers.DateField()
-    to_date = serializers.DateField()

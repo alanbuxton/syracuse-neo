@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
-    NameSearchSerializer, DateRangeSerializer, GeoSerializer, TimelineSerializer,
+    NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySearchSerializer,OrganizationTimelineSerializer)
 from rest_framework import status
 from datetime import date
@@ -121,28 +121,11 @@ class OrganizationByUri(AuthAPIView):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
         return org_and_related_nodes(o,kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        from_date = data.get('from_date')
-        if from_date:
-            from_date = date.fromisoformat(from_date)
-        to_date = data.get('to_date')
-        if to_date:
-            to_date = date.fromisoformat(to_date)
-        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        o = Organization.nodes.get(uri=uri)
-        org_serializer = OrganizationGraphSerializer(o,context={"from_date":from_date,"to_date":to_date})
-        filter_serializer = DateRangeSerializer({"from_date":from_date,"to_date":to_date})
-        resp = Response({"data_serializer": org_serializer.data, "filter_serializer": filter_serializer,
-                            "org_data":kwargs}, status=status.HTTP_200_OK)
-        return resp
-
+        
 
 def org_and_related_nodes(org,org_data):
     org_serializer = OrganizationGraphSerializer(org)
-    filter_serializer = DateRangeSerializer()
-    resp = Response({"data_serializer": org_serializer.data, "filter_serializer": filter_serializer,
+    resp = Response({"data_serializer": org_serializer.data, #"filter_serializer": filter_serializer,
                         "org_data":org_data}, status=status.HTTP_200_OK)
     return resp
 

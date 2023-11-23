@@ -5,6 +5,7 @@
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 <title>{{ timeline_serializer.org_name }} (Timeline)</title>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 
 <style>
@@ -102,13 +103,13 @@
     timeline.on('click', function (properties) {
       console.log(properties);
       if (properties.item) {
-        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict);
+        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict, 'edge');
       } else if (properties.what == 'group-label') {
-        document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict);
+        document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict, 'node');
       }
     });
 
-    function showItemDetails(item_id, lookup_dict) {
+    function showItemDetails(item_id, lookup_dict, node_or_edge) {
       vals = Object.entries(lookup_dict[item_id])
       text = "";
       documentURL = "";
@@ -141,11 +142,22 @@
         text = text + "<b>archive.org List URL (experimental)</b>: <a href='" + archive_list + "' target='_blank'>" + archive_list + "</a></br>";
       }
       text = text + "</br>";
-
-
+      text = text + error_form(node_or_edge, item_id );
       return text;
     }
 
+
+    function error_form(node_or_edge, unique_id) {
+      text = "<form method='post' action='/feedbacks/create' class='form-inline'>";
+      text = text + "See something unexpected or wrong about this item? If so please use the form below to notify us of the issue:</p>";
+      text = text + "<input type='hidden' name='csrfmiddlewaretoken' value='" + Cookies.get('csrftoken') + "'>"
+      text = text + "<input type='hidden' name='node_or_edge' value='" + node_or_edge+ "'/><input type='hidden' value='";
+      text = text + unique_id;
+      text = text + "' name='idval'/><div class='mb-3'><label for='reasonTextArea' class='form-label'><strong>Reason:</strong></label>";
+      text = text + "<textarea name='reason' id='reasonTextArea' class='form-control' rows='3'></textarea></div><input type='submit' value='Submit Suggestion'/></form>";
+      return text
+
+    }
 
   </script>
 

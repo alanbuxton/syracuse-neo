@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'topics.apps.TopicsConfig',
     'feedbacks.apps.FeedbacksConfig',
     'rest_framework',
-    'bootstrap5',
+    'django_bootstrap5',
     'rest_framework.authtoken',
 ]
 

@@ -10,7 +10,7 @@
 #main_container {
   display: flex;
   width: 90%;
-  height: 600px;
+  height: 800px;
   flex-direction: row;
 }
 
@@ -54,16 +54,6 @@
           </div>
        </div>
        <br/>
-       <div id="wide_form">
-         <form class="form-inline" action="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}" method="POST" novalidate>
-             {% csrf_token %}
-             <p><strong>Filter activities</strong><br/>
-             <em>Too much data to make sense of? Narrow things down by date:</em></p>
-             {% render_form filter_serializer template_pack='rest_framework/inline' %}
-             <br/><input type="submit" value="Filter results">
-             <br/><em>(Where there is no explicit date found, effective date is assumed to be +/- 6 months from the published date of the document)</em>
-         </form>
-       </div>
      </div>
   {% endif %}
 </div>
