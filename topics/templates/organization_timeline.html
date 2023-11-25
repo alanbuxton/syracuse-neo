@@ -103,11 +103,21 @@
     timeline.on('click', function (properties) {
       console.log(properties);
       if (properties.item) {
-        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict, 'edge');
+        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict, 'node');
       } else if (properties.what == 'group-label') {
         document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict, 'node');
       }
     });
+
+    function convert_uri(value) {
+      if (value.startsWith("https://1145.am")) {
+        var regex = /^https:\/\/1145.am/i ;
+        val = value.replace(regex, location.protocol + "//" + location.host + "/1145.am");
+        return val;
+      } else {
+        return value;
+      }
+    }
 
     function showItemDetails(item_id, lookup_dict, node_or_edge) {
       vals = Object.entries(lookup_dict[item_id])
@@ -116,7 +126,7 @@
       archive_date = "";
       for (const [key, value] of vals) {
         if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
-          text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>";
+          text = text + "<b>" + key + "</b>: <a href='" + convert_uri(value) + "' target='_blank'>" + value + "</a></br>";
         } else {
           text = text + "<b>" + key + "</b>: " + value + "</br>";
         }

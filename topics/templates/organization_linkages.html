@@ -106,6 +106,16 @@ var network = new vis.Network(container, data, options);
 const node_details_dict = {{ data_serializer.node_details | safe }} ;
 const edge_details_dict = {{ data_serializer.edge_details | safe }} ;
 
+function convert_uri(value) {
+  if (value.startsWith("https://1145.am")) {
+    var regex = /^https:\/\/1145.am/i ;
+    val = value.replace(regex, location.protocol + "//" + location.host + "/1145.am");
+    return val;
+  } else {
+    return value;
+  }
+}
+
 function showItemDetails(item_id, lookup_dict, node_or_edge) {
 	item_vals = Object.entries(lookup_dict[item_id]);
   entityType = '';
@@ -114,7 +124,8 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
   archive_date = "";
   for (const [key, value] of item_vals) {
     if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
-      text = text + "<b>" + key + "</b>: <a href='" + value + "' target='_blank'>" + value + "</a></br>";
+      uri_target = convert_uri(value)
+      text = text + "<b>" + key + "</b>: <a href='" + uri_target + "' target='_blank'>" + value + "</a></br>";
     } else {
       text = text + "<b>" + key + "</b>: " + value + "</br>";
     }
@@ -122,15 +133,12 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
       entityType = value;
     }
     if (key === 'documentURL') {
-      console.log(value)
       documentURL = value;
     }
     if (key === 'retrievedAt') {
-      console.log(value)
       archive_date = value;
     }
     if (key === 'documentDate' & archive_date === "") {
-      console.log(value)
       archive_date = value;
     }
   }

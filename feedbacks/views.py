@@ -67,8 +67,11 @@ def make_feedback_data(node_or_edge, unique_id, reason):
 
 def parts_from_edge_unique_id(unique_id):
     parts = re.findall(r"(http.+?)-(http.+?)-([A-Z_]+?)$",unique_id)
-    parts = parts[0]
-    return parts
+    if len(parts) == 0:
+        return unique_id, None, None
+    else:
+        parts = parts[0]
+        return parts
 
 def doc_id_from_uri(uri):
     parts = urlparse(uri)
