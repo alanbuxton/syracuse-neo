@@ -6,6 +6,7 @@ from datetime import datetime
 import logging
 from typing import List
 import re
+import time
 
 '''
     Run this script at command line to import all *.ttl files from a source directory e.g.
@@ -58,6 +59,7 @@ def load_file(filepath):
     command = f'call n10s.rdf.import.fetch("file://{filepath}","Turtle");'
     logger.info(f"Loading: {command}")
     db.cypher_query(command)
+    time.sleep(3)
 
 
 def apoc_del_redundant_high_med():
