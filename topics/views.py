@@ -106,7 +106,10 @@ class RandomOrganization(APIView):
     def get(self, request):
         o = Organization.get_random()
         vals = elements_from_uri(o.uri)
-        return org_and_related_nodes(o,vals)
+        org_serializer = OrganizationGraphSerializer(o)
+        resp = Response({"data_serializer": org_serializer.data,
+                            "org_data":vals}, status=status.HTTP_200_OK)
+        return resp
 
 
 class OrganizationByUri(AuthAPIView):
@@ -120,14 +123,13 @@ class OrganizationByUri(AuthAPIView):
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
-        return org_and_related_nodes(o,kwargs)
-        
+        include_where = request.GET.get("include_where","false").lower() == "true"
+        org_serializer = OrganizationGraphSerializer(o, context={"include_where":include_where})
+        resp = Response({"data_serializer": org_serializer.data,
+                            "org_data":kwargs,
+                            "where_is_included": include_where}, status=status.HTTP_200_OK)
+        return resp
 
-def org_and_related_nodes(org,org_data):
-    org_serializer = OrganizationGraphSerializer(org)
-    resp = Response({"data_serializer": org_serializer.data, #"filter_serializer": filter_serializer,
-                        "org_data":org_data}, status=status.HTTP_200_OK)
-    return resp
 
 def elements_from_uri(uri):
     parsed = urlparse(uri)

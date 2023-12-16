@@ -30,6 +30,11 @@
 <p><b>Showing linkages for:</b> {{ data_serializer.source_node }}
 | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
    Show Timeline</a>
+{% if where_is_included == False %}
+| <a href="{{ request.path }}?include_where=True">Show Where</a>
+{% elif where_is_included == True %}
+| <a href="{{ request.path }}?include_where=False">Hide Where</a>
+{% endif %}
 | Back to <a href="/">Home page</a>
 </p>
 

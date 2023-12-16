@@ -99,6 +99,11 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,L
 
 
 def graph_source_activity_target(source_node, **kwargs):
+    '''
+        kwargs can contain
+
+        "include_where" => include location data
+    '''
     root_node_data = get_node_cluster(source_node)
     if isinstance(root_node_data, dict) and root_node_data.get("error_names") is not None:
         return None
@@ -122,20 +127,22 @@ def graph_source_activity_target(source_node, **kwargs):
         future_round_raw_nodes = [x for x in future_round_raw_nodes if
                         isinstance(x,ActivityMixin) or isinstance(x,Role)]
 
-    for node in seen_raw_nodes:
-        for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
-            res = get_loc_node_if_exists(node, a,b, node_details)
-            if res is None:
-                continue
-            node_js_data, node_display_data, edge_js_data, edge_display_data = res
-            if node_js_data not in all_nodes:
-                all_nodes.append(node_js_data)
-                node_details[node_js_data['uri']] = node_display_data
-            if edge_js_data not in all_edges:
-                edge_js_data["to"] = uri_mapping.get(edge_js_data["to"],edge_js_data["to"])
-                edge_js_data["from"] = uri_mapping.get(edge_js_data["from"],edge_js_data["from"])
-                all_edges.append(edge_js_data)
-                edge_details[edge_js_data["id"]] = edge_display_data
+    include_where = kwargs.get("include_where",False)
+    if include_where == True:
+        for node in seen_raw_nodes:
+            for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
+                res = get_loc_node_if_exists(node, a,b, node_details)
+                if res is None:
+                    continue
+                node_js_data, node_display_data, edge_js_data, edge_display_data = res
+                if node_js_data not in all_nodes:
+                    all_nodes.append(node_js_data)
+                    node_details[node_js_data['uri']] = node_display_data
+                if edge_js_data not in all_edges:
+                    edge_js_data["to"] = uri_mapping.get(edge_js_data["to"],edge_js_data["to"])
+                    edge_js_data["from"] = uri_mapping.get(edge_js_data["from"],edge_js_data["from"])
+                    all_edges.append(edge_js_data)
+                    edge_details[edge_js_data["id"]] = edge_display_data
 
     same_as_rels = Resource.find_same_as_relationships(set(seen_raw_nodes) - set(root_nodes))
     for rel_type, node1, node2 in same_as_rels:
