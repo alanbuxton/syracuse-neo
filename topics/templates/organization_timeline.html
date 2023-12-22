@@ -45,6 +45,7 @@
     | <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
       Show Linkages</a>
     | Back to <a href="/">Home page</a>
+    <br/><em>Shown by document published date</em>
   </p>
   <div id="main_container">
     <div id="visualization"></div>
@@ -126,7 +127,15 @@
       archive_date = "";
       for (const [key, value] of vals) {
         if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
-          text = text + "<b>" + key + "</b>: <a href='" + convert_uri(value) + "' target='_blank'>" + value + "</a></br>";
+          if (Array.isArray(value) ) {
+            val_as_arr = value
+          } else {
+            val_as_arr = [value]
+          }
+          for (val_id in val_as_arr) {
+            val = val_as_arr[val_id]
+            text = text + "<b>" + key + "</b>: <a href='" + convert_uri(val) + "' target='_blank'>" + val + "</a></br>";
+          }
         } else {
           text = text + "<b>" + key + "</b>: " + value + "</br>";
         }

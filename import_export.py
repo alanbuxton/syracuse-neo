@@ -27,7 +27,25 @@ log_level = os.environ.get("LOG_LEVEL","INFO")
 logger.setLevel(log_level)
 logger.addHandler(logging.StreamHandler())
 
+def setup_db_if_necessary():
+    db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
+    v, _ = db.cypher_query("call n10s.graphconfig.show")
+    if len(v) == 0:
+        multivals = ["actionFoundName","activityType","basedInHighGeoName",
+                    "basedInHighRaw","basedInLowRaw",
+                    "description","foundName","industry",
+                    "locationFoundName",
+                    "locationPurpose","locationType","name","orgFoundName",
+                    "roleFoundName","roleHolderFoundName",
+                    "status","targetDetails","targetName","valueRaw",
+                    "when","whenRaw","whereGeoName","whereRaw"]
+        proplist = [f"https://1145.am/db/{x}" for x in multivals]
+        query = 'CALL n10s.graphconfig.init({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]})';
+        print(query)
+        db.cypher_query(query)
+
 def load_ttl_files(dir_name):
+    setup_db_if_necessary()
     delete_dir = f"{dir_name}/deletions"
     if os.path.isdir(delete_dir):
         delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
@@ -78,6 +96,7 @@ def output_stats(msg):
     same_as_high_count,_ = db.cypher_query(high + " RETURN COUNT(r)")
     same_as_medium_count,_ = db.cypher_query(medium + " RETURN COUNT(r)")
     logger.info(f"{datetime.utcnow()} {msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsMedium: {same_as_medium_count[0][0]}")
+
 
 def count_nodes():
     val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")

@@ -29,7 +29,7 @@ class Index(APIView):
         org_name = params.get("name")
         country = params.get("selected_country")
         if org_name:
-            orgs = Organization.nodes.filter(name__icontains=org_name)
+            orgs = Organization.find_by_name(org_name)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
             geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)

@@ -93,7 +93,7 @@
           :</p>
         {% for org in organizations %}
           <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
-            {{ org.name }}</a></b> ({{ org.uri }})</p>
+            {{ org.label }} </a></b> ({{ org.uri }})</p>
        {% endfor %}
       </div>
       {% endif %}
@@ -108,7 +108,7 @@
         , or select from one of these 10 random examples</p>
         {% for org in organizations %}
           <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
-            {{ org.name }}</a></b> ({{ org.uri }})</p>
+            {{ org.label }}</a></b> ({{ org.uri }})</p>
         {% endfor %}
       {% endif %}
     </div>

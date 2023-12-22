@@ -129,8 +129,16 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
   archive_date = "";
   for (const [key, value] of item_vals) {
     if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
-      uri_target = convert_uri(value)
-      text = text + "<b>" + key + "</b>: <a href='" + uri_target + "' target='_blank'>" + value + "</a></br>";
+      if (Array.isArray(value)) {
+        val_as_arr = value
+      } else {
+        val_as_arr = [value]
+      }
+      for (val_id in val_as_arr) {
+          val = val_as_arr[val_id] 
+          uri_target = convert_uri(val)
+          text = text + "<b>" + key + "</b>: <a href='" + uri_target + "' target='_blank'>" + val + "</a></br>";
+      }
     } else {
       text = text + "<b>" + key + "</b>: " + value + "</br>";
     }

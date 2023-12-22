@@ -17,7 +17,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
     def to_representation(self, instance, **kwargs):
         graph_data = graph_source_activity_target(source_node=instance,**self.context)
         data = {"source_node": instance.uri,
-                "source_node_name": instance.name,
+                "source_node_name": instance.longest_name,
                 "too_many_nodes":False}
         if graph_data is None:
             data["node_data"] = []
@@ -91,7 +91,7 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
             errors = "; ".join(errors)
         resp = {"groups": groups, "items":items,
             "item_display_details":CustomSerializer(item_display_details),
-            "org_name": instance.name,
+            "org_name": instance.longest_name,
             "org_node": instance.uri,
             "org_display_details": CustomSerializer(org_display_details),
             "errors": errors,

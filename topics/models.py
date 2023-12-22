@@ -1,6 +1,6 @@
 from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom,
-    DateProperty, db)
+    DateProperty, db, ArrayProperty)
 from urllib.parse import urlparse
 import datetime
 
@@ -15,14 +15,30 @@ def geonames_uris():
     flattened = [x for sublist in res for x in sublist]
     return flattened
 
+def longest(arr):
+    if arr is None:
+        return None
+    elif isinstance(arr, str):
+        return arr # Don't sort if it's just a string
+    return sorted(arr,key=len)[-1]
 
 class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
-    foundName = StringProperty()
-    name = StringProperty()
+    foundName = ArrayProperty(StringProperty())
+    name = ArrayProperty(StringProperty())
     documentTitle = StringProperty()
     documentURL = Relationship('Resource','documentURL')
     sourceName = StringProperty()
+
+    @classmethod
+    def find_by_name(cls, name):
+        query = f'match (n: {cls.__name__}) where any (item in n.name where item =~ "(?i).*{name}.*") return *'
+        results, columns = db.cypher_query(query)
+        return [cls.inflate(row[0]) for row in results]
+
+    @property
+    def longest_name(self):
+        return longest(self.name)
 
     def __hash__(self):
         return hash(self.uri)
@@ -33,7 +49,7 @@ class Resource(StructuredNode):
     def serialize(self):
         return {
             "entityType": self.__class__.__name__,
-            "label": self.name,
+            "label": self.longest_name,
             "name": self.name,
             "uri": self.uri,
             "documentTitle": self.documentTitle,
@@ -101,24 +117,31 @@ class Resource(StructuredNode):
 
 
 class ActivityMixin:
-    activityType = StringProperty()
+    activityType = ArrayProperty(StringProperty())
     documentDate = DateProperty()
     documentExtract = StringProperty()
-    when = DateProperty()
-    whenRaw = StringProperty()
-    status = StringProperty()
-    whereGeoName = StringProperty()
+    when = ArrayProperty(DateProperty())
+    whenRaw = ArrayProperty(StringProperty())
+    status = ArrayProperty(StringProperty())
+    whereGeoName = ArrayProperty(StringProperty())
     whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
+
+    @property
+    def longest_activityType(self):
+        return longest(self.activityType)
+
+    @property
+    def status_as_string(self):
+        return "; ".join(sorted(self.status))
 
     @property
     def activity_fields(self):
         if self.activityType is None:
             activityType_title = "Activity"
         else:
-            activityType_title = self.activityType.title()
-
+            activityType_title = self.longest_activityType.title()
         return {
-            "activityType": self.activityType,
+            "activityType": "; ".join(sorted(self.activityType)),
             "documentDate": self.documentDate,
             "documentExtract": self.documentExtract,
             "label": f"{activityType_title} ({self.sourceName} {self.documentDate})",
@@ -128,7 +151,6 @@ class ActivityMixin:
             "whereGeoName": self.whereGeoName,
             "whereGeoNameURL": self.whereGeoNameURL,
             "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
-
         }
 
     @staticmethod
@@ -160,14 +182,15 @@ class ActivityMixin:
 
     @property
     def whereGeoNameRDFURL(self):
-        return uri_from_related(self.whereGeoNameRDF)
+        return [x.uri for x in self.whereGeoNameRDF]
 
     @property
     def whereGeoNameURL(self):
-        uri = uri_from_related(self.whereGeoNameRDF)
-        if uri:
-            uri = uri.replace("/about.rdf","")
-        return uri
+        uris = []
+        for x in self.whereGeoNameRDF:
+            uri = x.uri.replace("/about.rdf","")
+            uris.append(uri)
+        return uris
 
     @staticmethod
     def by_country(country_code):
@@ -194,7 +217,7 @@ def date_for_cypher(a_date):
 
 
 class BasedInGeoMixin:
-    basedInHighGeoName = StringProperty()
+    basedInHighGeoName = ArrayProperty(StringProperty())
     basedInHighGeoNameRDF = Relationship('Resource','basedInHighGeoNameRDF')
 
     @property
@@ -224,8 +247,8 @@ class BasedInGeoMixin:
 
 
 class Organization(Resource, BasedInGeoMixin):
-    description = StringProperty()
-    industry = StringProperty()
+    description = ArrayProperty(StringProperty())
+    industry = ArrayProperty(StringProperty())
     investor = RelationshipTo('CorporateFinanceActivity','investor')
     buyer =  RelationshipTo('CorporateFinanceActivity', 'buyer')
     sameAsMedium = Relationship('Organization','sameAsMedium')
@@ -238,9 +261,11 @@ class Organization(Resource, BasedInGeoMixin):
     locationAdded = RelationshipTo('LocationActivity','locationAdded')
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
 
-    @staticmethod
-    def find_by_industry(industry):
-        return Organization.nodes.filter(industry__regex=rf"(?i).*\b{industry}.*").all()
+    @classmethod
+    def find_by_industry(cls, industry):
+        query = f'match (n: {cls.__name__}) where any (item in n.industry where item =~ "(?i).*{industry}.*") return *'
+        results, columns = db.cypher_query(query)
+        return [cls.inflate(row[0]) for row in results]
 
     @staticmethod
     def get_random():
@@ -266,15 +291,23 @@ class Organization(Resource, BasedInGeoMixin):
 
 
 class CorporateFinanceActivity(Resource, ActivityMixin):
-    targetDetails = StringProperty()
-    valueRaw = StringProperty()
+    targetDetails = ArrayProperty(StringProperty())
+    valueRaw = ArrayProperty(StringProperty())
     target = RelationshipTo('Organization','target')
-    targetName = StringProperty()
+    targetName = ArrayProperty(StringProperty())
     vendor = RelationshipTo('Organization','vendor')
     investor = RelationshipFrom('Organization','investor')
     buyer =  RelationshipFrom('Organization', 'buyer')
     protagonist = RelationshipFrom('Organization', 'protagonist')
     participant = RelationshipFrom('Organization', 'participant')
+
+    @property
+    def longest_targetName(self):
+        return longest(self.targetName)
+
+    @property
+    def longest_targetDetails(self):
+        return longest(self.targetDetails)
 
     def serialize(self):
         vals = super(CorporateFinanceActivity, self).serialize()
@@ -288,11 +321,15 @@ class CorporateFinanceActivity(Resource, ActivityMixin):
 
 
 class RoleActivity(Resource, ActivityMixin):
-    orgFoundName = StringProperty()
+    orgFoundName = ArrayProperty(StringProperty())
     withRole = RelationshipTo('Role','role')
-    roleFoundName = StringProperty()
-    roleHolderFoundName = StringProperty()
+    roleFoundName = ArrayProperty(StringProperty())
+    roleHolderFoundName = ArrayProperty(StringProperty())
     roleActivity = RelationshipFrom('Person','roleActivity')
+
+    @property
+    def longest_roleFoundName(self):
+        return longest(self.roleFoundName)
 
     def serialize(self):
         vals = super(RoleActivity, self).serialize()
@@ -305,14 +342,18 @@ class RoleActivity(Resource, ActivityMixin):
         return {**vals,**act_vals,**activity_mixin_vals}
 
 class LocationActivity(Resource, ActivityMixin):
-    actionFoundName = StringProperty()
-    locationFoundName = StringProperty()
-    locationPurpose = StringProperty()
-    locationType = StringProperty()
-    orgFoundName = StringProperty()
+    actionFoundName = ArrayProperty(StringProperty())
+    locationFoundName = ArrayProperty(StringProperty())
+    locationPurpose = ArrayProperty(StringProperty())
+    locationType = ArrayProperty(StringProperty())
+    orgFoundName = ArrayProperty(StringProperty())
     locationAdded = RelationshipFrom('Organization','locationAdded')
     locationRemoved = RelationshipFrom('Organization','locationRemoved')
     location = RelationshipTo('Site', 'location')
+
+    @property
+    def longest_locationPurpose(self):
+        return longest(self.locationPurpose)
 
     def serialize(self):
         vals = super(LocationActivity, self).serialize()
@@ -350,7 +391,7 @@ class Person(Resource, BasedInGeoMixin):
         return {**vals,**based_in_fields}
 
 class Role(Resource):
-    orgFoundName = StringProperty()
+    orgFoundName = ArrayProperty(StringProperty())
     withRole = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
     hasRole = RelationshipFrom('Organization','hasRole')
 

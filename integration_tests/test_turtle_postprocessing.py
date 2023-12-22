@@ -1,9 +1,9 @@
-from django.test import  TestCase
+from django.test import  SimpleTestCase
 from neomodel import db
 import time
 from import_export import apoc_del_redundant_high_med
 
-class TurtlePostProcessingTestCase(TestCase):
+class TurtlePostProcessingTestCase(SimpleTestCase):
     def setUp(self):
         ts = time.time()
         uri1 = f"http://{ts}/foo"

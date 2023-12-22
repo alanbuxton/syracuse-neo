@@ -21,7 +21,7 @@ def get_timeline_data(orgs, limit=None):
             continue
         org_count += 1
         display_data,node_cluster,_ = res
-        display_data['label'] = org.name
+        display_data['label'] = org.longest_name
         display_data['uri'] = org.uri
         seen_orgs.update(node_cluster)
         org_cluster_display.append(display_data)
@@ -34,15 +34,17 @@ def get_timeline_data(orgs, limit=None):
         role_activity = []
         location_added = []
         location_removed = []
-        for org in node_cluster:
-            vendor.extend(org.vendor.all())
-            participant.extend(org.participant.all())
+        target = []
+        for org_in_cluster in node_cluster:
+            vendor.extend(org_in_cluster.vendor.all())
+            participant.extend(org_in_cluster.participant.all())
 #            protagonist.extend(org.protagonist.all())
-            buyer.extend(org.buyer.all())
-            investor.extend(org.investor.all())
-            location_added.extend(org.locationAdded.all())
-            location_removed.extend(org.locationRemoved.all())
-            role_activity.extend(org.get_role_activities()) # it's a tuple
+            buyer.extend(org_in_cluster.buyer.all())
+            investor.extend(org_in_cluster.investor.all())
+            location_added.extend(org_in_cluster.locationAdded.all())
+            location_removed.extend(org_in_cluster.locationRemoved.all())
+            role_activity.extend(org_in_cluster.get_role_activities()) # it's a tuple
+            target.extend(org_in_cluster.target.all())
         activities.append(
             {"vendor": set(vendor),
              "investor": set(investor),
@@ -52,6 +54,7 @@ def get_timeline_data(orgs, limit=None):
              "location_added": set(location_added),
              "location_removed": set(location_removed),
              "role_activity": set(role_activity),
+             "target": set(target),
              })
 
     groups = []
@@ -65,6 +68,7 @@ def get_timeline_data(orgs, limit=None):
         "location_added": "location",
         "location_removed": "location",
         "role_activity": "role",
+        "target": "corporate_finance",
     }
     item_display_details = {}
     items = []
@@ -91,7 +95,7 @@ def get_timeline_data(orgs, limit=None):
                 l2_id = f"{idx}-{activity_to_subgroup[activity_type]}"
                 items.append(
                     {"group": l2_id,
-                    "label": labelize(v,activity_type),
+                    "label": labelize(current_item,activity_type),
                     "start": current_item.documentDate,
                     "id": current_item.uri,
                     "className": class_name_for(current_item),
@@ -102,23 +106,21 @@ def get_timeline_data(orgs, limit=None):
     return groups, items, item_display_details, org_display_details, errors
 
 
-def labelize(activity,activity_type ):
-
-    if isinstance(activity, tuple) and activity[1].__class__.__name__ == 'RoleActivity':
-        role, role_act = activity
-        if role_act.activityType is None:
-            label = role_act.name.title()
+def labelize(activity,activity_type):
+    if activity.__class__.__name__ == 'RoleActivity':
+        if activity.longest_activityType is None:
+            label = activity.longest_name.title()
         else:
-            label = role_act.activityType.title()
-        label = f"{label} - {role.name} - {role_act.status}"
+            label = activity.longest_activityType.title()
+        label = f"{label} - {activity.longest_roleFoundName} - {activity.status_as_string}"
     elif activity.__class__.__name__ == 'LocationActivity':
-        label = activity.activityType.title()
-        fields = ' '.join(filter(None, (activity.name, activity.locationPurpose)))
-        label = f"{label} - {fields} - {activity.status}"
+        label = activity.longest_activityType.title()
+        fields = ' '.join(filter(None, (activity.longest_name, activity.longest_locationPurpose)))
+        label = f"{label} - {fields} - {activity.status_as_string}"
     else:
-        label = activity.activityType.title()
-        fields = ' '.join(filter(None, (activity.targetName,activity.targetDetails)))
-        label = f"{activity_type.title()} - {fields} - {activity.status} ({label})"
+        label = activity.longest_activityType.title()
+        fields = ' '.join(filter(None, (activity.longest_targetName,activity.longest_targetDetails)))
+        label = f"{activity_type.title()} - {fields} - {activity.status_as_string} ({label})"
     return label
 
 def class_name_for(activity):
