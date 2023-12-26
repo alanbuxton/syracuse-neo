@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 from syracuse.settings import MOTD, REQUIRE_END_USER_LOGIN
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-
+import json
 
 class AuthAPIView(APIView):
     if REQUIRE_END_USER_LOGIN:
@@ -94,8 +94,9 @@ class OrganizationTimeline(AuthAPIView):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
         org_serializer = OrganizationTimelineSerializer(o)
+        org_data = {**kwargs, **{"org_names":json.dumps(o.name),"source_node_name":o.longest_name}}
         resp = Response({"timeline_serializer": org_serializer.data,
-                            "org_data":kwargs}, status=status.HTTP_200_OK)
+                            "org_data":org_data}, status=status.HTTP_200_OK)
         return resp
 
 
@@ -125,8 +126,9 @@ class OrganizationByUri(AuthAPIView):
         o = Organization.nodes.get(uri=uri)
         include_where = request.GET.get("include_where","false").lower() == "true"
         org_serializer = OrganizationGraphSerializer(o, context={"include_where":include_where})
+        org_data = {**kwargs, **{"org_names":json.dumps(o.name),"source_node_name":o.longest_name}}
         resp = Response({"data_serializer": org_serializer.data,
-                            "org_data":kwargs,
+                            "org_data":org_data,
                             "where_is_included": include_where}, status=status.HTTP_200_OK)
         return resp
 

@@ -36,6 +36,8 @@
 | <a href="{{ request.path }}?include_where=False">Hide Where</a>
 {% endif %}
 | Back to <a href="/">Home page</a>
+| <a href="/profile/tracked_organizations">Tracked Organizations</a>
+{% include "track_org_snippet.html" %}
 </p>
 
 <div id="main_container">
@@ -135,7 +137,7 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
         val_as_arr = [value]
       }
       for (val_id in val_as_arr) {
-          val = val_as_arr[val_id] 
+          val = val_as_arr[val_id]
           uri_target = convert_uri(val)
           text = text + "<b>" + key + "</b>: <a href='" + uri_target + "' target='_blank'>" + val + "</a></br>";
       }
