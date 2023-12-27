@@ -24,10 +24,17 @@ If you don't trust a binary file, here is the [cypher export](https://drive.goog
 
 ### RDF
 
-`full_dump_XXXX.ttl` dumpfiles are a tiny sample of the available data. They are far smaller than the Neo4j dump and are intended as a quick start for loading RDF into your local installation.
+`*.ttl` dumpfiles within the timestamped subdirectory are a tiny sample of the available data. They are far smaller than the Neo4j dump and are intended as a quick start for loading RDF into your local installation.
 
-Assuming you have an empty [Neo4J v5 database set up for neosemantics](https://alanbuxton.wordpress.com/2023/04/21/getting-started-with-neo4j-and-neosemantics/) you can import this file with:
+Assuming you have an empty Neo4J v5 database with APOC and neosemantics plugins installed you can import this file with:
 
-`python import_export.py dump`
+`python manage.py import_ttl -d dump`
 
-(You need to run this from the project root directory)
+If you find that this command tells you "No new TTL files to import" and you want to reload these files, you will need to:
+
+1. Clean your neo4j database - in a cypher shell: "Match (n) detach delete n"
+2. Delete the DataImport object(s) from your postgres - in a django shell:
+  ```
+  from integration.models import DataImport
+  DataImport.objects.all().delete()
+  ```
