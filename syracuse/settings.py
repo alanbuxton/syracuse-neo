@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.snapchat',
     'topics.apps.TopicsConfig',
     'feedbacks.apps.FeedbacksConfig',
-    'userprofile.apps.UserprofileConfig',
+    'trackeditems.apps.TrackeditemsConfig',
     'integration.apps.IntegrationConfig',
     'rest_framework',
     'django_bootstrap5',

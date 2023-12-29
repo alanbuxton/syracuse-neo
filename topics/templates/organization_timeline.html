@@ -45,7 +45,7 @@
     | <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
       Show Linkages</a>
     | Back to <a href="/">Home page</a>
-    | <a href="/profile/tracked_organizations">Tracked Organizations</a>
+    | <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
     {% include "track_org_snippet.html" %}
     <br/><em>Shown by document published date</em>
   </p>

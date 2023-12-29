@@ -36,7 +36,7 @@
 | <a href="{{ request.path }}?include_where=False">Hide Where</a>
 {% endif %}
 | Back to <a href="/">Home page</a>
-| <a href="/profile/tracked_organizations">Tracked Organizations</a>
+| <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
 {% include "track_org_snippet.html" %}
 </p>
 

@@ -8,7 +8,7 @@ class TrackedOrganization(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint("user", Lower("organization_name").asc(), name="unique_user_organization_name")
+            models.UniqueConstraint("user", Lower("organization_name").asc(), name="trackeditems_unique_user_organization_name")
         ]
         ordering = ['organization_name']
 
@@ -19,3 +19,8 @@ class TrackedOrganization(models.Model):
             return None
         else:
             return res[0]
+
+    @staticmethod
+    def by_user(user):
+        objs = TrackedOrganization.objects.filter(user=user)
+        return [x.organization_name for x in objs]

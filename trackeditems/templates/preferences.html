@@ -1,0 +1,30 @@
+
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+<title>Syracuse - Tracked Organization Preferences</title>
+</head>
+<body>
+    <h1>Set up Tracked Organizations</h1>
+  <p>  {{ user.username }}, you're logged in, great stuff. </p>
+  <p>
+    <a href=" {{ source_page }}">Back to previous page</a> |
+    <a href="/">Back to homepage</a></p>
+
+  <p>You can track up to 20 organizations for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">contact us</a> if you need more.</p>
+  <p>Updates will be emailed to <b>{{ user.email }}</b>. If your email address is blank, or if you would like to change your email address, <a href="{% url 'account_email' %}">please use this link</a>. </p>
+
+  <p>You are currently tracking the following {{ tracked_orgs | length }} organizations:</p>
+
+  <ul>
+    {% for org in tracked_orgs %}
+      <li>{{ org.organization_name }}</li>
+    {% endfor %}
+  </ul>
+
+  {% include 'layouts/footer.html' %}
+
+</body>
+</html>

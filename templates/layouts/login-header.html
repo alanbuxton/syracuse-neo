@@ -1,7 +1,0 @@
-{% if user.is_authenticated %}
-  <p>{{ user.username }}, you're logged in, great stuff.
-  <a href="/accounts/logout">(Log out)</a></p>
-
-{% else %}
-  <p><a href="/accounts/login">Log in or Sign Up for full access</a></p>
-{% endif %}

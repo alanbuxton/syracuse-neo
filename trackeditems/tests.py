@@ -1,8 +1,8 @@
 from django.test import TestCase
 import time
 from django.contrib.auth import get_user_model
-from userprofile.serializers import TrackedOrganizationSerializer
-from userprofile.models import TrackedOrganization
+from .serializers import TrackedOrganizationSerializer
+from .models import TrackedOrganization
 from django.db.utils import IntegrityError
 
 class TrackedOrganizationSerializerTestCase(TestCase):

@@ -1,0 +1,11 @@
+<p>
+{% if user.is_authenticated %}
+  {{ user.username }}, you're logged in, great stuff.
+   <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
+|  <a href="{% url 'recent-activities' %}">Recent Tracked Activities</a>
+|  <a href="/accounts/logout">Log out</a>.
+{% else %}
+  <a href="/accounts/login">Log in or Sign Up for full access</a>
+{% endif %}
+
+<p>

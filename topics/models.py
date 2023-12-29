@@ -1,8 +1,8 @@
 from neomodel import (StructuredNode, StringProperty,
-    RelationshipTo, Relationship, RelationshipFrom,
-    DateProperty, db, ArrayProperty)
+    RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty)
 from urllib.parse import urlparse
 import datetime
+from syracuse.neomodel_utils import NativeDateTimeProperty
 
 def uri_from_related(rel):
     if len(rel) == 0:
@@ -118,9 +118,9 @@ class Resource(StructuredNode):
 
 class ActivityMixin:
     activityType = ArrayProperty(StringProperty())
-    documentDate = DateProperty()
+    documentDate = NativeDateTimeProperty()
     documentExtract = StringProperty()
-    when = ArrayProperty(DateProperty())
+    when = ArrayProperty(NativeDateTimeProperty())
     whenRaw = ArrayProperty(StringProperty())
     status = ArrayProperty(StringProperty())
     whereGeoName = ArrayProperty(StringProperty())
@@ -141,7 +141,7 @@ class ActivityMixin:
         else:
             activityType_title = self.longest_activityType.title()
         return {
-            "activityType": "; ".join(sorted(self.activityType)),
+            "activityType": activityType_title,
             "documentDate": self.documentDate,
             "documentExtract": self.documentExtract,
             "label": f"{activityType_title} ({self.sourceName} {self.documentDate})",
