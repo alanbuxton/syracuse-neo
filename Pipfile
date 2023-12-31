@@ -11,7 +11,8 @@ django-bootstrap5 = "*"
 gunicorn = "*"
 pycountry = "*"
 psycopg = "*" # Not required for neo4j app
-django-allauth = "*"
+django-allauth = "=0.58.2" # v0.59 doesn't load linkedin
+cleanco = "*"
 
 [dev-packages]
 

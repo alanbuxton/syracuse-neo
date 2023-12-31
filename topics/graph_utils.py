@@ -70,12 +70,12 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
 
 def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,List] | Set:
-    nodes = source_node.same_as()
-    if len(nodes) > limit:
-        logger.warning(f"Found {len(nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
-        errors = { "error_names": set( [ x.longest_name for x in nodes] ), "error_orgs": nodes }
+    all_nodes = source_node.same_as()
+    if len(all_nodes) > limit:
+        logger.warning(f"Found {len(all_nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
+        errors = { "error_names": set( [ x.longest_name for x in all_nodes] ), "error_orgs": nodes }
         return errors
-    all_nodes = nodes + [source_node]
+    all_nodes.add(source_node)
     uri_mapping = {}
     node_cluster = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
                     "basedInHighGeoNamesRDFURLs":set(),"basedInHighGeoNamesURLs":set(),
@@ -144,7 +144,7 @@ def graph_source_activity_target(source_node, **kwargs):
                         all_edges.append(edge_js_data)
                         edge_details[edge_js_data["id"]] = edge_display_data
 
-    same_as_rels = Resource.find_same_as_relationships(set(seen_raw_nodes) - set(root_nodes))
+    same_as_rels = Organization.find_same_as_relationships(set(seen_raw_nodes) - set(root_nodes))
     for rel_type, node1, node2 in same_as_rels:
         edge_color = EDGE_COLORS.get(rel_type)
         edge_label = rel_type_to_edge_label(rel_type)
@@ -204,7 +204,7 @@ def add_next_round_of_graph(next_round_nodes, seen_raw_nodes, all_nodes, all_edg
         for raw_node in raw_nodes:
             if raw_node not in seen_raw_nodes:
                 future_round_raw_nodes.append(raw_node)
-                seen_raw_nodes.append(raw_node)
+                seen_raw_nodes.add(raw_node)
         node_details = {**serialized_nodes,**node_details} # Don't overwrite existing node details with new ones
         edge_details = {**serialized_edges,**edge_details}
     return future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details

@@ -4,7 +4,7 @@ import logging
 from .models import Resource, geonames_uris
 import pycountry
 import csv
-logger = logging.getLogger("syracuse")
+logger = logging.getLogger(__name__)
 
 COUNTRY_NAMES = None
 COUNTRY_MAPPING = None

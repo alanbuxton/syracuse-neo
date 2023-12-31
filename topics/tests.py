@@ -30,17 +30,16 @@ class TestUtilsWithDumpData(TestCase):
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
         assert len(clean_node_data) == 20
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch 2023-09-21)',
-                'Beenext', 'Investment (TechCrunch 2023-07-20)',
-                'Joint Venture (Reuters 2023-07-07)', 'Kinesys', 'Lightspeed Venture',
+                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)',
+                'Beenext', 'Investment (TechCrunch: Jul 2023)',
+                'Joint Venture (Reuters: Jul 2023)', 'Kinesys', 'Lightspeed Venture',
                 'M Venture Partners', 'Maka Motors', 'Northstar Group', 'Peak XV Partners',
                 'Pocket Aces', 'Pratyush Kumar', 'Provident', 'Saregama', 'Sarvam',
                 'Shinhan Venture Investment', 'Skystar Capital', 'Vivek Raghavan']
         )
-        assert len(clean_edge_data) == 22
-        assert set([x['label'] for x in clean_edge_data]) == set(
-                ['INVESTOR', 'VENDOR', 'TARGET', 'BUYER', 'PROTAGONIST']
-        )
+        assert len(clean_edge_data) == 24 # # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
+        assert set([x['label'] for x in clean_edge_data]) == {'BUYER', 'VENDOR', 'TARGET', 'SAME_AS_MEDIUM',
+                                            'SAME_AS_HIGH', 'INVESTOR', 'PROTAGONIST'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -50,18 +49,17 @@ class TestUtilsWithDumpData(TestCase):
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
         assert len(clean_node_data) == 23
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch 2023-09-21)', 'Beenext',
-                'Investment (TechCrunch 2023-07-20)', 'Joint Venture (Reuters 2023-07-07)',
+                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)', 'Beenext',
+                'Investment (TechCrunch: Jul 2023)', 'Joint Venture (Reuters: Jul 2023)',
                 'Kinesys', 'Lightspeed Venture', 'M Venture Partners', 'Maka Motors',
                 'Northstar Group', 'Peak XV Partners', 'Pocket Aces', 'Pratyush Kumar',
                 'Provident', 'Saregama', 'Sarvam', 'Shinhan Venture Investment',
                 'Skystar Capital', 'Vivek Raghavan', 'https://sws.geonames.org/1269750',
                 'https://sws.geonames.org/1275004', 'https://sws.geonames.org/1643084']
         )
-        assert len(clean_edge_data) == 31
-        assert set([x['label'] for x in clean_edge_data]) == set(
-                ['INVESTOR', 'BASED_IN', 'VENDOR', 'WHERE', 'TARGET', 'BUYER', 'PROTAGONIST']
-        )
+        assert len(clean_edge_data) == 33 # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
+        assert set([x['label'] for x in clean_edge_data]) == {'WHERE', 'BUYER', 'VENDOR', 'BASED_IN', 'TARGET',
+                                            'SAME_AS_MEDIUM', 'SAME_AS_HIGH', 'INVESTOR', 'PROTAGONIST'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 

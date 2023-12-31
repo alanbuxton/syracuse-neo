@@ -3,6 +3,9 @@ from neomodel import (StructuredNode, StringProperty,
 from urllib.parse import urlparse
 import datetime
 from syracuse.neomodel_utils import NativeDateTimeProperty
+import cleanco
+import logging
+logger = logging.getLogger(__name__)
 
 def uri_from_related(rel):
     if len(rel) == 0:
@@ -22,6 +25,14 @@ def longest(arr):
         return arr # Don't sort if it's just a string
     return sorted(arr,key=len)[-1]
 
+def shortest(arr):
+    if arr is None:
+        return None
+    elif isinstance(arr, str):
+        return arr # Don't sort if it's just a string
+    return sorted(arr,key=len)[0]
+
+
 class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
@@ -39,6 +50,10 @@ class Resource(StructuredNode):
     @property
     def longest_name(self):
         return longest(self.name)
+
+    @property
+    def shortest_name(self):
+        return shortest(self.name)
 
     def __hash__(self):
         return hash(self.uri)
@@ -71,30 +86,6 @@ class Resource(StructuredNode):
             "doc_id": splitted_uri[2],
             "name": splitted_uri[3],
         }
-
-    def same_as(self):
-        medium_nodes = self.sameAsMedium.all()
-        high_nodes = self.sameAsHigh.all()
-        return medium_nodes + high_nodes
-
-    @staticmethod
-    def find_same_as_relationships(node_list):
-        matching_rels = set()
-        tmp_list = set(node_list)
-        while len(tmp_list) >= 1:
-            node_to_check = tmp_list.pop()
-            if hasattr(node_to_check,"sameAsMedium"):
-                for candidate_node in node_to_check.sameAsMedium.all():
-                    if candidate_node in tmp_list:
-                        sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
-                        matching_rels.add( ("sameAsMedium", sorted_nodes[0], sorted_nodes[1]) )
-            if hasattr(node_to_check,"sameAsHigh"):
-                for candidate_node in node_to_check.sameAsHigh.all():
-                    if candidate_node in tmp_list:
-                        sorted_nodes = sorted([node_to_check, candidate_node], key=lambda x: x.uri)
-                        matching_rels.add( ("sameAsHigh", sorted_nodes[0], sorted_nodes[1])  )
-        return matching_rels
-
 
     def all_directional_relationships(self, **kwargs):
         from_date = kwargs.get('from_date')
@@ -144,7 +135,7 @@ class ActivityMixin:
             "activityType": activityType_title,
             "documentDate": self.documentDate,
             "documentExtract": self.documentExtract,
-            "label": f"{activityType_title} ({self.sourceName} {self.documentDate})",
+            "label": f"{activityType_title} ({self.sourceName}: {self.documentDate.strftime('%b %Y')})",
             "status": self.status,
             "when": self.when,
             "whenRaw": self.whenRaw,
@@ -275,6 +266,13 @@ class Organization(Resource, BasedInGeoMixin):
     def get_by_uri(uri):
         return Organization.nodes.get(uri)
 
+    @property
+    def shortest_name_length(self):
+        words = shortest(self.name)
+        if words is None:
+            return 0
+        return len(cleanco.basename(words).split())
+
     def serialize(self):
         vals = super(Organization, self).serialize()
         based_in_fields = self.based_in_fields
@@ -288,6 +286,63 @@ class Organization(Resource, BasedInGeoMixin):
             acts = role.withRole.all()
             role_activities.extend([(role,act) for act in acts])
         return role_activities
+
+    def same_as(self,min_name_length=2):
+        high_matches = set(self.same_as_highs())
+        med_matches = set()
+        if (self.name is not None and not isinstance(self.name, str) and
+                all([len(x.split()) >= min_name_length for x in self.name])):
+            med_matches = self.same_as_mediums(min_name_length)
+        return high_matches.union(med_matches)
+
+    @staticmethod
+    def find_same_as_relationships(node_list, min_name_length=2):
+        matching_rels = set()
+        for node in node_list:
+            if not isinstance(node, Organization):
+                logger.debug(f"Can't do sameAs for {node}")
+                continue
+            matches = node.same_as_highs()
+            for match in matches:
+                matching_rels.add( ("sameAsHigh", node, match) )
+            if (node.name is not None and not isinstance(node.name, str) and
+                    all([len(x.split()) >= min_name_length for x in node.name])):
+                med_matches = node.same_as_mediums(min_name_length=min_name_length)
+                for med_match in med_matches:
+                    matching_rels.add( ("sameAsMedium", node, med_match) )
+        return matching_rels
+
+    def same_as_highs(self):
+        return self.related_by("sameAsHigh")
+
+    def related_by(self,relationship):
+        query = f'''
+            match (n: {self.__class__.__name__} {{ uri:"{self.uri}"}})
+            CALL apoc.path.subgraphNodes(n, {{
+            	relationshipFilter: "{relationship}",
+                labelFilter: "{self.__class__.__name__}",
+                minLevel: 1,
+                maxLevel: 5
+            }})
+            YIELD node
+            RETURN node;
+        '''
+        nodes, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in nodes for x in sublist]
+        return flattened
+
+    def same_as_mediums(self, min_name_length, max_iterations=5):
+        found_nodes = set()
+        new_nodes = [self]
+        for r in range(0,max_iterations):
+            new_nodes = self.same_as_mediums_by_length(min_name_length)
+            new_nodes = [n for n in new_nodes if n not in found_nodes]
+            found_nodes.update(new_nodes)
+        return found_nodes
+
+    def same_as_mediums_by_length(self, min_name_length):
+        new_nodes = [node for node in self.sameAsMedium if node.shortest_name_length >= min_name_length]
+        return new_nodes
 
 
 class CorporateFinanceActivity(Resource, ActivityMixin):
