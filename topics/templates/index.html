@@ -51,18 +51,19 @@
 {% endif %}
 
 {% if show_lists %}
-  <div class="search_section">
-    <div>
-      <p><strong>Enter an industry name to show a timeline by industry</strong></p>
-      <form class="narrow_form" action="{% url 'timeline' %}" method="GET" novalidate>
-          {% render_form industry_serializer template_pack='rest_framework/inline' %}
-          <br/><input type="submit" value="Search">
-      </form>
+  {% if alpha_flag %}
+    <div class="search_section">
+      <div>
+        <p><strong>Enter an industry name to show a timeline by industry</strong></p>
+        <form class="narrow_form" action="{% url 'timeline' %}" method="GET" novalidate>
+            {% render_form industry_serializer template_pack='rest_framework/inline' %}
+            <br/><input type="submit" value="Search">
+        </form>
+      </div>
     </div>
-  </div>
 
-  <div><br/><p>OR</p></div>
-
+    <div><br/><p>OR</p></div>
+  {% endif %}
   <div class="search_section">
     <div class="wide_bar">
       <p><strong>Search for a specific organization to display</strong></p>

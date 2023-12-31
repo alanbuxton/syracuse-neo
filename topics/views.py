@@ -63,6 +63,8 @@ class Index(APIView):
         if (not REQUIRE_END_USER_LOGIN) or request.user.is_authenticated:
             show_lists = True
 
+        alpha_flag = request.GET.get("alpha_flag")
+
         resp = Response({"organizations":orgs_to_show,
                         "search_serializer": org_search,
                         "selected_country": geo_serializer,
@@ -72,6 +74,7 @@ class Index(APIView):
                         "search_type": search_type,
                         "motd": MOTD,
                         "show_lists": show_lists,
+                        "alpha_flag": alpha_flag,
                         "show_login": REQUIRE_END_USER_LOGIN}, status=status.HTTP_200_OK)
         return resp
 
