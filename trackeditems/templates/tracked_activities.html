@@ -19,7 +19,7 @@
   {% for row in activities %}
   <p>
     <b>Document Date: </b>{{ row.document_date | iso_format_to_date | localize }} / <b>Organization:</b> <a href="{{ row.organization_uri }}">{{row.organization_longest_name }}</a> /
-    <b>Activity Class: </b>{{ row.activity_class }} /
+    <b>Activity Class: </b>{{ row.activity_class }} 
     <br/><a href="{{ row.document_url }}">{{ row.document_title }}</a></b>
     <br/>
     <b>Type: </b>{{ row.activity_longest_type }} /

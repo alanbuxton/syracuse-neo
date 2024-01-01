@@ -1,12 +1,14 @@
 from neomodel import db
 from .models import Organization, ActivityMixin
 from datetime import datetime, timezone
-from typing import List
+from typing import List, Union
 
-def get_activities_by_date_range_for_api(min_date, name_list: List[str], max_date = datetime.now(tz=timezone.utc)):
+def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str]],
+                                            max_date = datetime.now(tz=timezone.utc)):
     assert min_date is not None, "Must have min date"
-    assert name_list is not None and len(name_list) > 0, "Must have non-blank, non-empty name/name list"
-    objs = get_activities_by_date_range(min_date, max_date, name_list)
+    if uri_or_list is None or len(uri_or_list) == 0 or set(uri_or_list) == {None}:
+        return []
+    objs = get_activities_by_date_range(min_date, max_date, uri_or_list)
     api_results = []
     for row in objs:
         activity = row[0]
@@ -31,16 +33,21 @@ def get_activities_by_date_range_for_api(min_date, name_list: List[str], max_dat
         api_results.append(api_row)
     return api_results
 
-def get_activities_by_date_range(min_date, max_date, name_or_name_list: list):
-    if isinstance(name_or_name_list, str):
-        name_list = [name_or_name_list]
+def get_activities_by_date_range(min_date, max_date, uri_or_uri_list: Union[str,List]):
+    if isinstance(uri_or_uri_list, str):
+        uri_list = [uri_or_uri_list]
     else:
-        name_list = name_or_name_list
+        uri_list = uri_or_uri_list
+    orgs = Organization.nodes.filter(uri__in=uri_list)
+    uris_to_check = set(uri_list)
+    for org in orgs:
+        new_uris = [x.uri for x in org.same_as()]
+        uris_to_check.update(new_uris)
     query = f"""
         match (n:CorporateFinanceActivity|RoleActivity|LocationActivity)--(o: Organization)
         where n.documentDate > datetime('{date_to_cypher_friendly(min_date)}')
         and n.documentDate < datetime('{date_to_cypher_friendly(max_date)}')
-        and any(x in o.name where x in {name_list})
+        and o.uri in {list(uris_to_check)}
         return *
     """
     objs, _ = db.cypher_query(query, resolve_objects=True)

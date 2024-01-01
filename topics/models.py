@@ -252,6 +252,18 @@ class Organization(Resource, BasedInGeoMixin):
     locationAdded = RelationshipTo('LocationActivity','locationAdded')
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
 
+    @staticmethod
+    def get_longest_name_by_uri(uri):
+        org = Organization.nodes.get_or_none(uri=uri)
+        if org is not None:
+            return org.longest_name
+        else:
+            return None
+
+    @staticmethod
+    def by_uris(uris):
+        return Organization.nodes.filter(uri__in=uris)
+
     @classmethod
     def find_by_industry(cls, industry):
         query = f'match (n: {cls.__name__}) where any (item in n.industry where item =~ "(?i).*{industry}.*") return *'

@@ -1,5 +1,5 @@
 <form action="{% url 'tracked-organizations' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" id="tracked_organization_names" type="text" name="tracked_organization_names" value="{{ org_data.org_names }}">
+    <input type="hidden" id="tracked_organization_uri" type="text" name="tracked_organization_uri" value="{{ org_data.uri }}">
     <input type="submit" value="Track {{ org_data.source_node_name  }}">
 </form>

@@ -21,7 +21,8 @@
 
   <ul>
     {% for org in tracked_orgs %}
-      <li>{{ org.organization_name }}</li>
+      <li>{{ org.organization_name }} (<a href="{{ org.organization_uri }}">{{ org.organization_uri }}</a>)
+      </li>
     {% endfor %}
   </ul>
 

@@ -7,7 +7,8 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from .models import TrackedOrganization
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from .serializers import TrackedOrganizationSerializer, ActivitySerializer
+from .serializers import (TrackedOrganizationSerializer,
+    TrackedOrganizationModelSerializer, ActivitySerializer)
 import json
 from topics.model_queries import get_activities_by_date_range_for_api
 from .helpers import days_ago
@@ -23,22 +24,20 @@ class TrackedOrganizationView(APIView):
         return TrackedOrganization.objects.filter(user=self.request.user)
 
     def post(self, request, **kwargs):
-        new_orgs_as_string = request.data['tracked_organization_names']
-        new_org_list = json.loads(new_orgs_as_string)
-        existing_orgs = TrackedOrganization.by_user(request.user)
+        uri = request.data['tracked_organization_uri']
+        existing_orgs = TrackedOrganization.uris_by_user(request.user)
         orgs_so_far = len(existing_orgs)
-        for new_org in new_org_list:
-            if orgs_so_far <= 20:
-                validated_data = {"organization_name":new_org, "user":request.user}
-                _ = TrackedOrganizationSerializer().upsert(validated_data)
-                orgs_so_far += 1
+        if orgs_so_far <= 20 and uri not in existing_orgs:
+            data = {"organization_uri":uri, "user":request.user}
+            _ = TrackedOrganizationModelSerializer().create(data)
         return redirect('tracked-organizations')
 
     def get(self, request):
         tracked_orgs = self.get_queryset()
         tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
         source_page = request.headers.get("Referer")
-        return Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page},status=status.HTTP_200_OK)
+        resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page},status=status.HTTP_200_OK)
+        return resp
 
 class ActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -52,8 +51,8 @@ class ActivitiesView(APIView):
             min_date = datetime.fromisoformat(min_date)
         max_date = request.GET.get("max_date",datetime.now(tz=timezone.utc))
         user = request.user
-        keywords = TrackedOrganization.by_user(user)
-        matching_activity_orgs = get_activities_by_date_range_for_api(min_date, keywords, max_date)
+        orgs = TrackedOrganization.uris_by_user(user)
+        matching_activity_orgs = get_activities_by_date_range_for_api(min_date, orgs, max_date)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date}, status=status.HTTP_200_OK)
         return resp
@@ -64,7 +63,7 @@ class ActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ActivitySerializer
 
     def get_queryset(self):
-        name_list = self.request.GET.get('name_list')
+        uri = self.request.GET.get('uri')
         min_date = self.request.GET.get('min_date')
-        results = get_activities_by_date_range_for_api(min_date,[name_list])
+        results = get_activities_by_date_range_for_api(min_date,[uri])
         return results
