@@ -1,0 +1,17 @@
+{% load l10n %}
+
+<p>Dear {{ user.username }}</p>
+
+<p>Here are the latest updates for your tracked organizations for the past {{ day_count }} days from {{ min_date | localize }} to {{ max_date | localize }}.</p>
+
+{% include 'activity_list.html' %}
+
+<p>We are tracking the following organizations for you:</p>
+
+<ul>
+  {% for org in tracked_orgs %}
+    <li>{{ org.organization_name }}</li>
+  {% endfor %}
+</ul>
+
+<p>If you have any queries, please reply to this mail and someone will help you, or visit <a href="https://syracuse.1145.am">Syracuse by 1145</a></p>.

@@ -11,7 +11,7 @@ from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer)
 import json
 from topics.model_queries import get_activities_by_date_range_for_api
-from .helpers import days_ago
+from .date_helpers import days_ago
 from datetime import datetime, timezone
 
 class TrackedOrganizationView(APIView):

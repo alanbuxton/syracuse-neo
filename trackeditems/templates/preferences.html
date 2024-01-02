@@ -17,7 +17,7 @@
   <p>You can track up to 20 organizations for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">contact us</a> if you need more.</p>
   <p>Updates will be emailed to <b>{{ user.email }}</b>. If your email address is blank, or if you would like to change your email address, <a href="{% url 'account_email' %}">please use this link</a>. </p>
 
-  <p>You are currently tracking the following {{ tracked_orgs | length }} organizations:</p>
+  <p>We are tracking the following {{ tracked_orgs | length }} organizations for you:</p>
 
   <ul>
     {% for org in tracked_orgs %}

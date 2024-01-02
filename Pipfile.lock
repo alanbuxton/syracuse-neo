@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a406380eeca57b9f1a9892f8f563b7c1e1684c087c74c0dba82482a53dddb0ab"
+            "sha256": "6dbaa5aff0ac3599022957b69bad0e29971fda06ecf1e47545cc8cd099c37802"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -357,6 +357,14 @@
             "markers": "python_version >= '3.7'",
             "version": "==2.8.0"
         },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
+                "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.8.2"
+        },
         "python3-openid": {
             "hashes": [
                 "sha256:33fbf6928f401e0b790151ed2b5290b02545e8775f982485205a066f874aaeaf",
@@ -386,6 +394,10 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.3.1"
+        },
+        "sib-api-v3-sdk": {
+            "git": "git+https://github.com/sendinblue/APIv3-python-library.git",
+            "ref": "9a5807c149db7855eca346b1d7829a96481f495c"
         },
         "six": {
             "hashes": [

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Lower
 from topics.models import Organization
+import logging
+logger = logging.getLogger(__name__)
 
 class TrackedOrganization(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -26,3 +28,11 @@ class TrackedOrganization(models.Model):
     def orgs_by_user(user):
         uris = TrackedOrganization.by_user(user)
         return Organization.by_uris(uris)
+
+
+def get_notifiable_users():
+    '''
+        Returns a distinct list of trackable organizations
+    '''
+    distinct_tracked_orgs = TrackedOrganization.objects.order_by("user").distinct("user")
+    return distinct_tracked_orgs

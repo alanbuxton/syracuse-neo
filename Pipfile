@@ -13,6 +13,7 @@ pycountry = "*"
 psycopg = "*" # Not required for neo4j app
 django-allauth = "=0.58.2" # v0.59 doesn't load linkedin
 cleanco = "*"
+sib-api-v3-sdk = {git = "git+https://github.com/sendinblue/APIv3-python-library.git"}
 
 [dev-packages]
 

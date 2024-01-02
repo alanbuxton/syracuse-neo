@@ -1,0 +1,14 @@
+{% load trackeditems_extras %}
+{% load l10n %}
+{% for row in activities %}
+<p>
+  <b>Document Date: </b>{{ row.document_date | iso_format_to_date | localize }} / <b>Organization:</b> <a href="{{ row.organization_uri }}">{{row.organization_longest_name }}</a> /
+  <b>Activity Class: </b>{{ row.activity_class }}
+  <br/><a href="{{ row.document_url }}">{{ row.document_title }}</a>
+  <br/>
+  <b>Type: </b>{{ row.activity_longest_type }} /
+  <b>Status (at time of doc date): </b> {{ row.activity_status_as_string }} /
+  <b>Source: </b>{{ row.source_name }}
+  <br/>{{ row.document_extract }}
+</p>
+{% endfor %}
