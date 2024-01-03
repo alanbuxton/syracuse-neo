@@ -3,6 +3,7 @@ import logging
 import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 from syracuse.settings import BREVO_API_KEY
+from syracuse.settings import TRACKED_ORG_ACTIVITIES_DAYS
 from trackeditems.notification_helpers import create_email_notifications
 
 logger = logging.getLogger(__name__)
@@ -16,7 +17,7 @@ class Command(BaseCommand):
         subject = "[Tracked Organizations] Latest Updates from Syracuse by 1145"
         sender = {"name":"Syracuse by 1145","email":"syracuse+mailer@1145.am"}
         reply_to = {"name":"Syracuse by 1145","email":"syracuse+mailer@1145.am"}
-        email_contents = create_email_notifications(7)
+        email_contents = create_email_notifications(TRACKED_ORG_ACTIVITIES_DAYS)
         for user,html_content in email_contents:
             to = [{"email":user.email,"name":user.username}]
             send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(to=to, reply_to=reply_to, html_content=html_content, sender=sender, subject=subject)

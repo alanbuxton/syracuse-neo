@@ -44,11 +44,12 @@ def get_activities_by_date_range(min_date, max_date, uri_or_uri_list: Union[str,
         new_uris = [x.uri for x in org.same_as()]
         uris_to_check.update(new_uris)
     query = f"""
-        match (n:CorporateFinanceActivity|RoleActivity|LocationActivity)--(o: Organization)
-        where n.documentDate > datetime('{date_to_cypher_friendly(min_date)}')
-        and n.documentDate < datetime('{date_to_cypher_friendly(max_date)}')
-        and o.uri in {list(uris_to_check)}
-        return *
+        MATCH (n:CorporateFinanceActivity|RoleActivity|LocationActivity)--(o: Organization)
+        WHERE n.documentDate > datetime('{date_to_cypher_friendly(min_date)}')
+        AND n.documentDate < datetime('{date_to_cypher_friendly(max_date)}')
+        AND o.uri IN {list(uris_to_check)}
+        RETURN *
+        ORDER BY n.documentDate DESC
     """
     objs, _ = db.cypher_query(query, resolve_objects=True)
     return objs # Each row is tuple of activity, organization

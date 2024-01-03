@@ -13,7 +13,8 @@ def prepare_recent_changes_email_notification(user, num_days):
     if len(matching_activity_orgs) == 0:
         return None
     serializer = ActivitySerializer(matching_activity_orgs, many=True)
-    merge_data = {"activities":serializer.data,"min_date":min_date,"day_count":num_days,"max_date":max_date,"user":user}
+    merge_data = {"activities":serializer.data,"min_date":min_date,"day_count":num_days,
+                    "max_date":max_date,"user":user,"tracked_orgs":orgs}
     html_body = render_to_string("activity_email_notif.html", merge_data)
     return html_body
 

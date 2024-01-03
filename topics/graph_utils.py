@@ -73,7 +73,7 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,L
     all_nodes = source_node.same_as()
     if len(all_nodes) > limit:
         logger.warning(f"Found {len(all_nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
-        errors = { "error_names": set( [ x.longest_name for x in all_nodes] ), "error_orgs": nodes }
+        errors = { "source_node": source_node, "error_names": set( [ x.longest_name for x in all_nodes] ), "error_orgs": all_nodes }
         return errors
     all_nodes.add(source_node)
     uri_mapping = {}
