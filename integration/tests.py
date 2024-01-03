@@ -10,9 +10,9 @@ from topics.models import Organization
 '''
     Care these tests will delete
 '''
-env_var="DELETE_DB"
+env_var="DELETE_NEO"
 if os.environ.get(env_var) != "Y":
-    print(f"Set env var {env_var}=Y to confirm you want to drop database")
+    print(f"Set env var {env_var}=Y to confirm you want to drop Neo4j database")
     exit(0)
 
 def count_relevant_nodes():
@@ -23,7 +23,7 @@ def count_relevant_nodes():
 class TurtleLoadingTestCase(TestCase):
 
     def test_load_ttl_files(self):
-        db.cypher_query("MATCH (n) DETACH DELETE n;")
+        db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
         assert DataImport.latest_import() == None # Empty DB
         import_ttl.Command().handle(dirname="integration/test_dump/dump-1",force=True)
         node_count = count_relevant_nodes()

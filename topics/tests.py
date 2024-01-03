@@ -10,16 +10,16 @@ from neomodel import db
 '''
     Care these tests will delete
 '''
-env_var="DELETE_DB"
+env_var="DELETE_NEO"
 if os.environ.get(env_var) != "Y":
-    print(f"Set env var {env_var}=Y to confirm you want to drop database")
+    print(f"Set env var {env_var}=Y to confirm you want to drop Neo4j database")
     exit(0)
 
 class TestUtilsWithDumpData(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        db.cypher_query("MATCH (n) DETACH DELETE n;")
+        db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
         import_ttl.Command().handle(dirname="dump",force=True)

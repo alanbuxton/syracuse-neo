@@ -9,8 +9,9 @@ from integration.management.commands._neo4j_utils import (
 import time
 import logging
 from neomodel import db
-logger = logging.getLogger(__name__)
+from trackeditems.management.commands.send_recent_activities_email import do_send_recent_activities_email
 
+logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
 SLEEP_TIME=0
 DUMP_DIR="tmp/dump"
@@ -74,7 +75,7 @@ def load_deletion_file(filepath):
 #    command = f'call n10s.rdf.delete.fetch("file://{filepath}","Turtle");' # This fails for me, but not clear why
     with open(filepath) as f:
         uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
-    command = f"match (n) where n.uri in {uris} detach delete n"
+    command = f"MATCH (n) WHERE n.uri in {uris} CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
     logger.info(f"Deleting {len(uris)} nodes")
     db.cypher_query(command)
     return len(uris)
@@ -105,30 +106,49 @@ class Command(BaseCommand):
                 default=False,
                 action="store_true",
                 help="Set this if you want to ignore any pre-existing pidfile")
+        parser.add_argument("-n","--send_notifications",
+                default=False,
+                action="store_true",
+                help="Send notification emails after successful import")
 
     def handle(self, *args, **options):
-        pidfile = options.get("pidfile",PIDFILE)
-        sleep_time = options.get("sleep_time",0)
-        dirname = options.get("dirname",DUMP_DIR)
-        force = options.get("force",False)
-        if force:
-            cleanup(pidfile)
-        if not is_allowed_to_start(pidfile):
-            logger.info("Already running, or previous run did not shut down cleanly, not spawning new run")
-            return None
-        export_dirs = new_exports_to_import(dirname)
-        if len(export_dirs) == 0:
-            logger.info("No new TTL files to import")
-            return None
-        setup_db_if_necessary()
-        for export_dir in export_dirs:
-            count_of_creations, count_of_deletions = load_ttl_files(
-                                                        export_dir,sleep_time)
-            di = DataImport(
-                run_at = datetime.now(tz=timezone.utc),
-                import_ts = os.path.basename(export_dir),
-                deletions = count_of_deletions,
-                creations = count_of_creations,
-            )
-            di.save()
+        do_import_ttl(options)
+
+def do_import_ttl(options):
+    logger.info("Started import_ttl")
+    pidfile = options.get("pidfile",PIDFILE)
+    sleep_time = options.get("sleep_time",0)
+    dirname = options.get("dirname",DUMP_DIR)
+    force = options.get("force",False)
+    send_notifications = options.get("send_notifications",False)
+    if force:
         cleanup(pidfile)
+    if not is_allowed_to_start(pidfile):
+        logger.info("Already running, or previous run did not shut down cleanly, not spawning new run")
+        return None
+    export_dirs = new_exports_to_import(dirname)
+    if len(export_dirs) == 0:
+        logger.info("No new TTL files to import")
+        cleanup(pidfile)
+        return None
+    setup_db_if_necessary()
+    total_creations = 0
+    total_deletions = 0
+    for export_dir in export_dirs:
+        count_of_creations, count_of_deletions = load_ttl_files(
+                                                    export_dir,sleep_time)
+        di = DataImport(
+            run_at = datetime.now(tz=timezone.utc),
+            import_ts = os.path.basename(export_dir),
+            deletions = count_of_deletions,
+            creations = count_of_creations,
+        )
+        total_creations += count_of_creations
+        total_deletions += count_of_deletions
+        di.save()
+    cleanup(pidfile)
+    logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
+    if send_notifications is True and total_creations > 0:
+        do_send_recent_activities_email()
+    else:
+        logger.info("No email sending this time")
