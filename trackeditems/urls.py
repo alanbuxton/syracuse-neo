@@ -11,4 +11,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('tracked_organizations', views.TrackedOrganizationView.as_view(), name='tracked-organizations'),
     path('recent_activities', views.ActivitiesView.as_view(), name='recent-activities'),
+    path('latest_general_items', views.GeneralActivitiesView.as_view(), name='latest-general-items'),
+    path('activity_stats', views.ActivityStats.as_view(), name="activity-stats")
 ]

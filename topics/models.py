@@ -4,8 +4,11 @@ from urllib.parse import urlparse
 import datetime
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
+from django.core.cache import cache
 import logging
+from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 logger = logging.getLogger(__name__)
+
 
 def uri_from_related(rel):
     if len(rel) == 0:
@@ -32,7 +35,6 @@ def shortest(arr):
         return arr # Don't sort if it's just a string
     return sorted(arr,key=len)[0]
 
-
 class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
@@ -40,6 +42,11 @@ class Resource(StructuredNode):
     documentTitle = StringProperty()
     documentURL = Relationship('Resource','documentURL')
     sourceName = StringProperty()
+
+    def ensure_connection(self):
+        if self.element_id_property is not None and db.database_version is None:
+            # Sometimes seeing "_new_traversal() attempted on unsaved node" even though node is saved
+            db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
 
     @classmethod
     def find_by_name(cls, name):
@@ -62,6 +69,7 @@ class Resource(StructuredNode):
         return self.uri == other.uri
 
     def serialize(self):
+        self.ensure_connection()
         return {
             "entityType": self.__class__.__name__,
             "label": self.longest_name,
@@ -186,20 +194,34 @@ class ActivityMixin:
     @staticmethod
     def by_country(country_code):
         from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        cache_key = f"activity_mixin_by_country_{country_code}"
+        res = cache.get(cache_key)
+        if res:
+            logger.debug(f"{cache_key} cache hit")
+            return res
+        logger.debug(f"{cache_key} cache miss")
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
-        resources, _ = db.cypher_query(f"Match (loc)-[:whereGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
+        resources, _ = db.cypher_query(f"MATCH (loc)-[:whereGeoNameRDF]-(n) WHERE loc.uri IN {uris} RETURN n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
+        cache.set(cache_key, flattened)
         return flattened
 
     @staticmethod
     def orgs_by_activity_where(country_code,limit=None):
+        cache_key = f"activity_mixin_orgs_by_activity_where_{country_code}"
+        relevant_items = cache.get(cache_key)
+        if relevant_items and limit is None:
+            logger.debug(f"{cache_key} cache hit")
+            return relevant_items
+        logger.debug(f"{cache_key} cache miss")
         activities = ActivityMixin.by_country(country_code)
         act_uris = [x.uri for x in activities]
-        query=f"Match (n: Organization)-[]-(a) where a.uri in {act_uris} return n"
+        query=f"MATCH (n: Organization)-[]-(a) WHERE a.uri IN {act_uris} RETURN n"
         if limit is not None:
-            query = f"{query} limit {limit}"
+            query = f"{query} LIMIT {limit}"
         orgs, _ = db.cypher_query(query,resolve_objects=True)
         flattened = [x for sublist in orgs for x in sublist]
+        cache.set(cache_key, flattened)
         return flattened
 
 
@@ -225,9 +247,16 @@ class BasedInGeoMixin:
     @staticmethod
     def based_in_country(country_code):
         from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
+        cache_key = f"based_in_geo_mixin_based_in_country_{country_code}"
+        res = cache.get(cache_key)
+        if res:
+            logger.debug(f"{cache_key} cache hit")
+            return res
+        logger.debug(f"{cache_key} cache miss")
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
         resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
+        cache.set(cache_key, flattened)
         return flattened
 
     @property

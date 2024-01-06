@@ -10,6 +10,7 @@ import time
 import logging
 from neomodel import db
 from trackeditems.management.commands.send_recent_activities_email import do_send_recent_activities_email
+from topics.cache_helpers import clear_all_geo_caches, warm_up_cache
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
@@ -148,6 +149,9 @@ def do_import_ttl(options):
         di.save()
     cleanup(pidfile)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
+    logger.info("re-set cache")
+    clear_all_geo_caches()
+    warm_up_cache()
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:

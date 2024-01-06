@@ -1,7 +1,7 @@
 import os
 import pickle
 import logging
-from .models import Resource, geonames_uris
+from .models import Resource, geonames_uris, Organization, ActivityMixin
 import pycountry
 import csv
 logger = logging.getLogger(__name__)
@@ -15,26 +15,31 @@ def load_geo_data(force_refresh=False):
     global COUNTRY_NAMES
     global COUNTRY_MAPPING
     global COUNTRY_CODES
-    cache_file = "tmp/geo_cache.pickle"
-    if force_refresh is False and os.path.isfile(cache_file):
-        COUNTRY_NAMES, COUNTRY_MAPPING = load_from_cache(cache_file)
+    geo_cache_file = "tmp/geo_cache.pickle"
+    if force_refresh is False and os.path.isfile(geo_cache_file):
+        res = load_from_cache(geo_cache_file)
+        COUNTRY_NAMES = res["country_names"]
+        COUNTRY_MAPPING = res["country_mapping"]
     else:
         COUNTRY_NAMES, COUNTRY_MAPPING = load_country_mapping()
-        save_to_cache(cache_file, COUNTRY_NAMES, COUNTRY_MAPPING)
+        save_to_cache(geo_cache_file, {"country_names":COUNTRY_NAMES, "country_mapping":COUNTRY_MAPPING})
     COUNTRY_CODES = {v:k for k,v in COUNTRY_NAMES.items()}
 
+def load_orgs_activities():
+    global ORGS_BY_COUNTRY
+    global ACTIVITIES_BY_COUNTRY
+    orgs_activities_cache_file = "tmp/orgs_activities_by_geo_cache.pickle"
 
 def load_from_cache(fpath):
-    logger.debug(f"Loading country names/mapping from cache file {fpath}")
+    logger.debug(f"Loading from cache file {fpath}")
     with open(fpath, 'rb') as handle:
         d = pickle.load(handle)
-        return d["country_names"], d["country_mapping"]
+        return d
 
-def save_to_cache(fpath,country_names, country_mapping):
-    logger.debug(f"Saving country names/mapping to cache file {fpath}")
-    d = {"country_names":country_names, "country_mapping":country_mapping}
+def save_to_cache(fpath,content):
+    logger.debug(f"Saving to cache file {fpath}")
     with open(fpath, 'wb') as handle:
-        pickle.dump(d, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(content, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geonames_ids=set()):

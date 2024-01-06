@@ -7,13 +7,16 @@ from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySearchSerializer,OrganizationTimelineSerializer)
 from rest_framework import status
-from datetime import date
+from datetime import date, datetime
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
+from .model_queries import get_relevant_orgs_for_country
 from urllib.parse import urlparse
 from syracuse.settings import MOTD, REQUIRE_END_USER_LOGIN
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 import json
+import logging
+logger = logging.getLogger(__name__)
 
 class AuthAPIView(APIView):
     if REQUIRE_END_USER_LOGIN:
@@ -37,9 +40,7 @@ class Index(APIView):
             num_hits = len(orgs)
             search_term = org_name
         elif country:
-            orgs = Organization.based_in_country(country)
-            orgs_by_activity = ActivityMixin.orgs_by_activity_where(country)
-            all_orgs = set(orgs + orgs_by_activity)
+            all_orgs = get_relevant_orgs_for_country(country)
             org_list = OrganizationSerializer(all_orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
             geo_serializer = GeoSerializer(choices=COUNTRY_NAMES,initial=country)

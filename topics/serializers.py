@@ -3,6 +3,7 @@ from .graph_utils import graph_source_activity_target
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 
+
 class OrganizationSerializer(serializers.BaseSerializer):
 
     def to_representation(self,instance):

@@ -1,0 +1,66 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load l10n %}
+
+<title>Syracuse - Stats</title>
+
+<style>
+
+  table, th, td {
+    font-size: 12px;
+    padding: 2px;
+  }
+</style>
+</head>
+<body>
+  <h1>Stats</h1>
+
+  <p><em>The numbers below refer to nodes. If a topic has 2 investors and one target then this topic will have 4 nodes:
+    One for each for the investors, one for the target and one CorporateFinanceActivity node to represent the investment.</em></p>
+
+  <p>Showing updates as at {{ max_date | localize }}</p>
+
+  <h2>Updates by Country</h2>
+  <p>
+  <table>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Country Name</th>
+      <th>ISO Code</th>
+      <th>7 days</th>
+      <th>30 days</th>
+      <th>90 days</th>
+    </tr>
+    {% for recent in recents %}
+      <tr>
+        <td>{{ recent.flag }}</td>
+        <td><a href='latest_general_items?country_code={{ recent.country_code }}'>{{ recent.country_name }}</a></td>
+        <td>{{ recent.country_code }}</td>
+        <td align="right">{{ recent.count7 | localize }}</td>
+        <td align="right">{{ recent.count30 | localize }}</td>
+        <td align="right">{{ recent.count90 | localize }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  </p>
+
+  <br/>
+  <h2>All-Time Node Counts</h2>
+  <p>
+    <table>
+      {% for count in counts %}
+      <tr>
+          <td>{{ count.node_type }}</td>
+          <td align="right">{{ count.count | localize }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </p>
+  {% include 'layouts/footer.html' %}
+
+
+</body>
+</html>

@@ -146,6 +146,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -164,20 +165,19 @@ LOGGING = {
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'level': 'INFO',
+            'level': os.environ.get("DJANGO_LOG_LEVEL","INFO"),
+            'formatter': 'default',
         },
     },
     'root': {
         'handlers': ['console'],
-        'level': 'DEBUG',
+        'level': os.environ.get("DJANGO_LOG_LEVEL","INFO"),
     },
-    'loggers': {
-        'syracuse': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        }
+    }
 }
 
 # Neomodel
@@ -197,3 +197,12 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
+        "TIMEOUT": None,
+        "OPTIONS": {"MAX_ENTRIES": 1000},
+    }
+}
