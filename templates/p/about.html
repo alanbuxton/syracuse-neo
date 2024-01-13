@@ -1,0 +1,18 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+
+<title>Syracuse from 1145</title></head>
+<body>
+
+<h1>Frequently (and Not-So-Frequently) Asked Questions</h1>
+
+{% include 'layouts/nav-header.html' %}
+<br/><br/>
+{% for question, answer in faqs.items %}
+<p><b>{{ question }}</b><br/>{{ answer | safe}}</p>
+{% endfor %}
+
+{% include 'layouts/footer.html' %}

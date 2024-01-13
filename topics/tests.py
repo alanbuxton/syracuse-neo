@@ -1,11 +1,14 @@
 from django.test import TestCase
 from topics.models import *
+from topics.model_queries import *
 from topics.graph_utils import graph_source_activity_target
 from topics.timeline_utils import get_timeline_data
 import os
-import integration.management.commands.import_ttl as import_ttl
+from integration.management.commands.import_ttl import do_import_ttl
 from integration.models import DataImport
 from neomodel import db
+from datetime import date
+from topics.cache_helpers import nuke_cache
 
 '''
     Care these tests will delete
@@ -22,7 +25,8 @@ class TestUtilsWithDumpData(TestCase):
         db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
-        import_ttl.Command().handle(dirname="dump",force=True)
+        nuke_cache()
+        do_import_ttl(dirname="dump",force=True,do_archiving=False)
 
     def test_corp_fin_graph_nodes_without_where(self):
         source_uri = "https://1145.am/db/2064074/Peak_Xv_Partners"
@@ -130,3 +134,35 @@ class TestUtilsWithDumpData(TestCase):
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
         assert errors == set()
+
+    def test_stats(self):
+        max_date = date.fromisoformat("2023-10-10")
+        counts, recents = get_stats(max_date)
+        assert set(counts) == {('CorporateFinanceActivity', 363), ('Organization', 1390), ('RoleActivity', 173), ('Person', 163), ('LocationActivity', 257)}
+        assert len(recents) == 40
+        assert sorted(recents) == [('AR', 'Argentina', 0, 0, 4), ('AU', 'Australia', 2, 4, 7),
+                    ('BE', 'Belgium', 0, 1, 4), ('BF', 'Burkina Faso', 1, 1, 1),
+                    ('BM', 'Bermuda', 0, 1, 1), ('BR', 'Brazil', 0, 0, 2), ('CA', 'Canada', 4, 6, 11),
+                    ('CH', 'Switzerland', 0, 3, 4), ('CL', 'Chile', 0, 0, 1), ('CN', 'China', 1, 4, 8),
+                    ('CR', 'Costa Rica', 0, 1, 1), ('CY', 'Cyprus', 0, 0, 1), ('CZ', 'Czechia', 0, 0, 1),
+                    ('DE', 'Germany', 0, 3, 6), ('DK', 'Denmark', 1, 1, 1), ('FR', 'France', 1, 5, 10),
+                    ('GB', 'United Kingdom', 1, 1, 6), ('GH', 'Ghana', 0, 0, 1), ('HK', 'Hong Kong', 0, 0, 1),
+                    ('HU', 'Hungary', 0, 1, 1), ('ID', 'Indonesia', 0, 0, 1), ('IE', 'Ireland', 1, 1, 1),
+                    ('IL', 'Israel', 0, 0, 1), ('IN', 'India', 0, 3, 10), ('IS', 'Iceland', 0, 0, 1),
+                    ('IT', 'Italy', 0, 3, 9), ('JP', 'Japan', 0, 2, 3), ('KR', 'Korea, Republic of', 0, 1, 1),
+                    ('MX', 'Mexico', 0, 1, 1), ('NL', 'Netherlands', 0, 0, 3), ('NO', 'Norway', 0, 0, 1),
+                    ('NP', 'Nepal', 0, 0, 1), ('RU', 'Russian Federation', 0, 0, 3), ('SA', 'Saudi Arabia', 0, 1, 2),
+                    ('SE', 'Sweden', 0, 0, 1), ('SG', 'Singapore', 0, 3, 3), ('SN', 'Senegal', 1, 1, 1),
+                    ('TW', 'Taiwan, Province of China', 0, 0, 3), ('US', 'United States', 18, 34, 60),
+                    ('ZA', 'South Africa', 1, 1, 1)]
+
+    def test_recent_activities_by_country(self):
+        max_date = date.fromisoformat("2023-10-10")
+        min_date = date.fromisoformat("2023-10-03")
+        country_code = "AU"
+        matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
+        assert len(matching_activity_orgs) == 2
+        assert matching_activity_orgs[0]['participants'].get("investor") is not None
+        assert matching_activity_orgs[0]['participants'].get("buyer") is not None
+        assert len(matching_activity_orgs[0]['participants']) == 2
+        assert len(matching_activity_orgs[1]['participants']) == 1

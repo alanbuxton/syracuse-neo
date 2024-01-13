@@ -7,15 +7,21 @@
 <title>Syracuse - Tracked Organization Preferences</title>
 </head>
 <body>
-    <h1>Set up Tracked Organizations</h1>
-  <p>  {{ user.username }}, you're logged in, great stuff. </p>
+    <h1>Tracked Organizations</h1>
   <p>
-    <a href=" {{ source_page }}">Back to previous page</a> |
-    <a href="{% url 'recent-activities' %}">Recent Tracked Activities</a> |
-    <a href="/">Back to homepage</a></p>
+    {% include 'layouts/nav-header.html' %}
 
-  <p>You can track up to 20 organizations for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">contact us</a> if you need more.</p>
-  <p>Updates will be emailed to <b>{{ user.email }}</b>. If your email address is blank, or if you would like to change your email address, <a href="{% url 'account_email' %}">please use this link</a>. </p>
+  | <a href=" {{ source_page }}">Back to previous page</a>
+  </p>
+
+  <p>You can track up to 20 organizations for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">send an email</a> if you need more.</p>
+  <p>Updates will be emailed to
+      {% if user.email %}
+        <b>{{ user.email }}</b>.
+      {% else %}
+        <b>&lt;blank&gt;</b>
+      {% endif %}
+    If your email address is blank, or if you would like to update your email address, <a href="{% url 'account_email' %}">please use this link</a>. </p>
 
   <p>We are tracking the following {{ tracked_orgs | length }} organizations for you:</p>
 

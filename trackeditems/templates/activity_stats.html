@@ -17,9 +17,7 @@
 </head>
 <body>
   <h1>Stats</h1>
-
-  <p><em>The numbers below refer to nodes. If a topic has 2 investors and one target then this topic will have 4 nodes:
-    One for each for the investors, one for the target and one CorporateFinanceActivity node to represent the investment.</em></p>
+  {% include 'layouts/nav-header.html' %}
 
   <p>Showing updates as at {{ max_date | localize }}</p>
 
@@ -37,7 +35,7 @@
     {% for recent in recents %}
       <tr>
         <td>{{ recent.flag }}</td>
-        <td><a href='latest_general_items?country_code={{ recent.country_code }}'>{{ recent.country_name }}</a></td>
+        <td><a href='country_activities?country_code={{ recent.country_code }}'>{{ recent.country_name }}</a></td>
         <td>{{ recent.country_code }}</td>
         <td align="right">{{ recent.count7 | localize }}</td>
         <td align="right">{{ recent.count30 | localize }}</td>
@@ -49,6 +47,8 @@
 
   <br/>
   <h2>All-Time Node Counts</h2>
+  <p><em>The numbers below refer to nodes. If a topic has 2 investors and one target then this topic will have 4 nodes:
+    One for each for the investors, one for the target and one CorporateFinanceActivity node to represent the investment.</em></p>
   <p>
     <table>
       {% for count in counts %}
@@ -60,7 +60,6 @@
     </table>
   </p>
   {% include 'layouts/footer.html' %}
-
 
 </body>
 </html>

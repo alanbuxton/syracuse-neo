@@ -10,4 +10,5 @@ urlpatterns = [
     path('organization/linkages/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationByUri.as_view(), name='organization-linkages'),
     path('organization/timeline/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationTimeline.as_view(), name='organization-timeline'),
     path('timeline', views.TopicsTimeline.as_view(), name="timeline"),
+    path('about', views.About.as_view(), name="about"),
 ]

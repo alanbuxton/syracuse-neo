@@ -18,9 +18,9 @@ def do_send_recent_activities_email():
     configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key['api-key'] = BREVO_API_KEY
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
-    subject = "[Tracked Organizations] Latest Updates from Syracuse by 1145"
-    sender = {"name":"Syracuse by 1145","email":"syracuse+mailer@1145.am"}
-    reply_to = {"name":"Syracuse by 1145","email":"syracuse+mailer@1145.am"}
+    subject = "[Syracuse Updates] Latest Tracked Organization Updates"
+    sender = {"name":"Syracuse from 1145","email":"syracuse+mailer@1145.am"}
+    reply_to = {"name":"Syracuse from 1145","email":"syracuse+mailer@1145.am"}
     email_contents = create_email_notifications(TRACKED_ORG_ACTIVITIES_DAYS)
     email_count = 0
     for user,html_content in email_contents:

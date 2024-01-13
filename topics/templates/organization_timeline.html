@@ -41,11 +41,12 @@
 
 <body>
   <h1>{{ timeline_serializer.org_name }} - Timeline</h1>
-  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}
-    | <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}</p>
+  <p>
+    {% include 'layouts/nav-header.html' %}
+  |  <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
       Show Linkages</a>
-    | Back to <a href="/">Home page</a>
-    | <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
+  </p>
     {% include "track_org_snippet.html" %}
     <br/><em>Shown by document published date</em>
   </p>

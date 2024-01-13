@@ -27,7 +27,9 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
-<p><b>Showing linkages for:</b> {{ data_serializer.source_node }}
+<p><b>Showing linkages for:</b> {{ data_serializer.source_node }}</p>
+<p>
+{% include 'layouts/nav-header.html' %}
 | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
    Show Timeline</a>
 {% if where_is_included == False %}
@@ -35,10 +37,10 @@
 {% elif where_is_included == True %}
 | <a href="{{ request.path }}?include_where=False">Hide Where</a>
 {% endif %}
-| Back to <a href="/">Home page</a>
-| <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
-{% include "track_org_snippet.html" %}
 </p>
+
+{% include "track_org_snippet.html" %}
+
 
 <div id="main_container">
   {% if data_serializer.too_many_nodes is True %}

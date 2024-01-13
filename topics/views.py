@@ -11,17 +11,22 @@ from datetime import date, datetime
 from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
 from .model_queries import get_relevant_orgs_for_country
 from urllib.parse import urlparse
-from syracuse.settings import MOTD, REQUIRE_END_USER_LOGIN
+from syracuse.settings import MOTD
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 import json
+from integration.models import DataImport
+from topics.faq import FAQ
 import logging
 logger = logging.getLogger(__name__)
 
-class AuthAPIView(APIView):
-    if REQUIRE_END_USER_LOGIN:
-        permission_classes = [IsAuthenticated]
-        authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+class About(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "p/about.html"
+
+    def get(self,request):
+        return Response({"faqs": FAQ}, status=status.HTTP_200_OK)
 
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -59,10 +64,7 @@ class Index(APIView):
         if len(orgs_to_show) > 20:
             orgs_to_show = orgs_to_show[:20]
         industry_serializer = IndustrySearchSerializer()
-
-        show_lists = False
-        if (not REQUIRE_END_USER_LOGIN) or request.user.is_authenticated:
-            show_lists = True
+        last_updated = DataImport.latest_import_ts()
 
         alpha_flag = request.GET.get("alpha_flag")
 
@@ -74,12 +76,12 @@ class Index(APIView):
                         "industry_serializer": industry_serializer,
                         "search_type": search_type,
                         "motd": MOTD,
-                        "show_lists": show_lists,
                         "alpha_flag": alpha_flag,
-                        "show_login": REQUIRE_END_USER_LOGIN}, status=status.HTTP_200_OK)
+                        "last_updated": last_updated,
+                        }, status=status.HTTP_200_OK)
         return resp
 
-class TopicsTimeline(AuthAPIView):
+class TopicsTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'topics_timeline.html'
 
@@ -90,7 +92,7 @@ class TopicsTimeline(AuthAPIView):
         timeline_serializer = TimelineSerializer(orgs)
         return Response({"industry_name":industry,"timeline_serializer": timeline_serializer.data}, status=status.HTTP_200_OK)
 
-class OrganizationTimeline(AuthAPIView):
+class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_timeline.html'
 
@@ -117,13 +119,9 @@ class RandomOrganization(APIView):
         return resp
 
 
-class OrganizationByUri(AuthAPIView):
+class OrganizationByUri(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_linkages.html'
-
-    if REQUIRE_END_USER_LOGIN:
-        permission_classes = [IsAuthenticated]
-        authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"

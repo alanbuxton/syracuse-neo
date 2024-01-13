@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, timezone
 
 class DataImport(models.Model):
 
@@ -20,3 +21,10 @@ class DataImport(models.Model):
             return None
         ts = res[0].import_ts
         return int(ts)
+
+    @staticmethod
+    def latest_import_ts():
+        ts = DataImport.latest_import()
+        fmt = "%Y%m%d%H%M%S"
+        d = datetime.strptime(str(ts),fmt)
+        return d.astimezone(timezone.utc)    

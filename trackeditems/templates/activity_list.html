@@ -1,14 +1,29 @@
 {% load trackeditems_extras %}
 {% load l10n %}
+
+<p>Click on a document title to see the original source.
+  Click on the name of a participant to see more organization linkages and timelines.</p>
+
 {% for row in activities %}
-<p>
-  <b>Document Date: </b>{{ row.document_date | iso_format_to_date | localize }} / <b>Organization:</b> <a href="{{ row.organization_uri }}">{{row.organization_longest_name }}</a> /
-  <b>Activity Class: </b>{{ row.activity_class }}
-  <br/><a href="{{ row.document_url }}">{{ row.document_title }}</a>
-  <br/>
-  <b>Type: </b>{{ row.activity_longest_type }} /
-  <b>Status (at time of doc date): </b> {{ row.activity_status_as_string }} /
-  <b>Source: </b>{{ row.source_name }}
-  <br/>{{ row.document_extract }}
-</p>
+  <p>
+    <b>Document Date: </b>{{ row.document_date | iso_format_to_date | localize }} / <b>Activity Class: </b>{{ row.activity_class }}
+    <br/><a href="{{ row.document_url }}">{{ row.document_title }}</a>
+    <br/>
+    <b>Type: </b>{{ row.activity_longest_type | title }} /
+    <b>Status (at time of doc date): </b> {{ row.activity_status_as_string | title }} /
+    <b>Source: </b>{{ row.source_name }}
+    {% if row.participants.items|length > 0 %}
+      {% for role,org_list in row.participants.items %}
+        <br/>
+        {% if org_list|length > 0 %}
+            <b>{{ role | title}}</b>:
+            {% for organization in org_list %}
+              <a href="{{ organization.uri }}">{{organization.longest_name }}</a>&nbsp;&nbsp;
+            {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <br/>{{ row.document_extract }}
+  </p>
 {% endfor %}

@@ -4,7 +4,7 @@ import time
 import os
 from integration.models import DataImport
 from integration.management.commands._neo4j_utils import apoc_del_redundant_high_med
-import integration.management.commands.import_ttl as import_ttl
+from integration.management.commands.import_ttl import do_import_ttl
 from topics.models import Organization
 
 '''
@@ -25,7 +25,7 @@ class TurtleLoadingTestCase(TestCase):
     def test_load_ttl_files(self):
         db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
         assert DataImport.latest_import() == None # Empty DB
-        import_ttl.Command().handle(dirname="integration/test_dump/dump-1",force=True)
+        do_import_ttl(dirname="integration/test_dump/dump-1",force=True,do_archiving=False)
         node_count = count_relevant_nodes()
         latest_import = DataImport.objects.all()[0]
         assert latest_import.deletions == 0
@@ -38,7 +38,7 @@ class TurtleLoadingTestCase(TestCase):
         assert Organization.nodes.get_or_none(uri=node_will_be_deleted) is not None
         assert DataImport.latest_import() == 20231216081557
 
-        import_ttl.Command().handle(dirname="integration/test_dump/dump-2")
+        do_import_ttl(dirname="integration/test_dump/dump-2",do_archiving=False)
         assert count_relevant_nodes() > node_count # More nodes than we started with
 
         assert Organization.nodes.get_or_none(uri=node_will_be_deleted_and_reinstated) is not None

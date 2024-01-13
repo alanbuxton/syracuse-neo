@@ -1,6 +1,6 @@
 # Syracuse
 
-Hosted at http://syracuse.1145.am/ with sample data (see `README.md` in the [`dump`](./dump/README.md) directory for details)
+Hosted at http://syracuse.1145.am/
 
 ## Tech details
 
@@ -8,7 +8,8 @@ Django app with Neo4j backend using neomodel
 
 ## Installation
 
-There are some relevant data files saved on [Google Drive](https://drive.google.com/drive/folders/11Iec_wFKkEvRrbmZjUkWNfrZdzqguMBe?usp=sharing) due to their size.
+There are some relevant data files saved on [Google Drive](https://drive.google.com/drive/folders/11Iec_wFKkEvRrbmZjUkWNfrZdzqguMBe?usp=sharing) due to their size. see `README.md` in the [`dump`](./dump/README.md) directory for details.
+
 
 1. Install dependencies: `pipenv install`
 2. Copy `relevant_geonames.csv` from Google drive to `dump` folder

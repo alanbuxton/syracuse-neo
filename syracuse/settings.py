@@ -25,9 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY",'django-insecure-=vq-#5ghwtp7_()k7xi$go
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG",'True').lower() == 'true'
-# Only for end users; auth is always needed for
-REQUIRE_END_USER_LOGIN = os.environ.get("SYRACUSE_REQUIRE_END_USER_LOGIN","true").lower() != "false"
-MOTD = os.environ.get("SYRACUSE_MOTD","<h4>Welcome to Syracuse, your database of key events in company lifecycles, updated daily.</h4>")
+MOTD = os.environ.get("SYRACUSE_MOTD","")
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","localhost,127.0.0.1").split(",")
 
@@ -153,7 +151,7 @@ USE_THOUSAND_SEPARATOR = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates'),]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -206,3 +204,8 @@ CACHES = {
         "OPTIONS": {"MAX_ENTRIES": 1000},
     }
 }
+
+# TTL integration
+RDF_SLEEP_TIME=int(os.environ.get("RDF_SLEEP_TIME","0"))
+RDF_DUMP_DIR=os.environ.get("RDF_DUMP_DIR","tmp/dump")
+RDF_ARCHIVE_DIR=os.environ.get("RDF_ARCHIVE_DIR","tmp/archive")

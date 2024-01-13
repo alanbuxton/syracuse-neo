@@ -192,7 +192,7 @@ class ActivityMixin:
         return uris
 
     @staticmethod
-    def by_country(country_code):
+    def by_country(country_code,allowed_to_set_cache=False):
         from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
         cache_key = f"activity_mixin_by_country_{country_code}"
         res = cache.get(cache_key)
@@ -203,25 +203,31 @@ class ActivityMixin:
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
         resources, _ = db.cypher_query(f"MATCH (loc)-[:whereGeoNameRDF]-(n) WHERE loc.uri IN {uris} RETURN n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
-        cache.set(cache_key, flattened)
+        if allowed_to_set_cache is True:
+            cache.set(cache_key, flattened)
+        else:
+            logger.debug("Not allowed to set cache")
         return flattened
 
     @staticmethod
-    def orgs_by_activity_where(country_code,limit=None):
+    def orgs_by_activity_where(country_code,limit=None,allowed_to_set_cache=False):
         cache_key = f"activity_mixin_orgs_by_activity_where_{country_code}"
         relevant_items = cache.get(cache_key)
         if relevant_items and limit is None:
             logger.debug(f"{cache_key} cache hit")
             return relevant_items
         logger.debug(f"{cache_key} cache miss")
-        activities = ActivityMixin.by_country(country_code)
+        activities = ActivityMixin.by_country(country_code,allowed_to_set_cache=allowed_to_set_cache)
         act_uris = [x.uri for x in activities]
         query=f"MATCH (n: Organization)-[]-(a) WHERE a.uri IN {act_uris} RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"
         orgs, _ = db.cypher_query(query,resolve_objects=True)
         flattened = [x for sublist in orgs for x in sublist]
-        cache.set(cache_key, flattened)
+        if allowed_to_set_cache is True:
+            cache.set(cache_key, flattened)
+        else:
+            logger.debug("Not allowed to set cache")
         return flattened
 
 
@@ -245,7 +251,7 @@ class BasedInGeoMixin:
         return uri
 
     @staticmethod
-    def based_in_country(country_code):
+    def based_in_country(country_code,allowed_to_set_cache=False):
         from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
         cache_key = f"based_in_geo_mixin_based_in_country_{country_code}"
         res = cache.get(cache_key)
@@ -256,7 +262,10 @@ class BasedInGeoMixin:
         uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
         resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
-        cache.set(cache_key, flattened)
+        if allowed_to_set_cache is True:
+            cache.set(cache_key, flattened)
+        else:
+            logger.debug("Not allowed to update cache")
         return flattened
 
     @property
@@ -398,6 +407,16 @@ class CorporateFinanceActivity(Resource, ActivityMixin):
     participant = RelationshipFrom('Organization', 'participant')
 
     @property
+    def all_participants(self):
+        return {
+            "vendor": self.vendor.all(),
+            "investor": self.investor.all(),
+            "buyer": self.buyer.all(),
+            "protagonist": self.protagonist.all(),
+            "participant": self.participant.all(),
+        }
+
+    @property
     def longest_targetName(self):
         return longest(self.targetName)
 
@@ -424,6 +443,13 @@ class RoleActivity(Resource, ActivityMixin):
     roleActivity = RelationshipFrom('Person','roleActivity')
 
     @property
+    def all_participants(self):
+        return {
+        "role": self.withRole.all(),
+        "person": self.roleActivity.all()
+        }
+
+    @property
     def longest_roleFoundName(self):
         return longest(self.roleFoundName)
 
@@ -446,6 +472,13 @@ class LocationActivity(Resource, ActivityMixin):
     locationAdded = RelationshipFrom('Organization','locationAdded')
     locationRemoved = RelationshipFrom('Organization','locationRemoved')
     location = RelationshipTo('Site', 'location')
+
+    def all_participants(self):
+        return {
+            "location_added_by": self.locationAdded.all(),
+            "location_removed_by": self.locationRemoved.all(),
+            "location": self.location.all(),
+        }
 
     @property
     def longest_locationPurpose(self):
