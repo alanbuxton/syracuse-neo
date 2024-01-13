@@ -85,6 +85,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'syracuse.context_processors.set_constants',
             ],
         },
     },
@@ -209,3 +210,5 @@ CACHES = {
 RDF_SLEEP_TIME=int(os.environ.get("RDF_SLEEP_TIME","0"))
 RDF_DUMP_DIR=os.environ.get("RDF_DUMP_DIR","tmp/dump")
 RDF_ARCHIVE_DIR=os.environ.get("RDF_ARCHIVE_DIR","tmp/archive")
+
+USE_GOOGLE_ANALYTICS=os.environ.get("USE_GOOGLE_ANALYTICS","False").lower() == 'true'
