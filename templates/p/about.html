@@ -12,7 +12,7 @@
 {% include 'layouts/nav-header.html' %}
 <br/><br/>
 {% for question, answer in faqs.items %}
-<p><b>{{ question }}</b><br/>{{ answer | safe}}</p>
+<p><b>{{ question | safe }}</b><br/>{{ answer | safe}}</p>
 {% endfor %}
 
 {% include 'layouts/footer.html' %}
