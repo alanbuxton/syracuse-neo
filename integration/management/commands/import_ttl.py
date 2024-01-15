@@ -113,7 +113,7 @@ class Command(BaseCommand):
                 help="Send notification emails after successful import")
 
     def handle(self, *args, **options):
-        do_import_ttl(options)
+        do_import_ttl(**options)
 
 def do_import_ttl(**options):
     logger.info("Started import_ttl")

@@ -17,6 +17,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 import json
 from integration.models import DataImport
 from topics.faq import FAQ
+from itertools import islice
 import logging
 logger = logging.getLogger(__name__)
 
@@ -38,20 +39,24 @@ class Index(APIView):
         country = params.get("selected_country")
         if org_name:
             orgs = Organization.find_by_name(org_name)
+            num_hits = len(orgs)
+            if len(orgs) > 20:
+                orgs = islice(orgs,20)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
             geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
             search_type = 'org_name'
-            num_hits = len(orgs)
             search_term = org_name
         elif country:
-            all_orgs = get_relevant_orgs_for_country(country)
-            org_list = OrganizationSerializer(all_orgs, many=True)
+            orgs = get_relevant_orgs_for_country(country)
+            num_hits = len(orgs)
+            if len(orgs) > 20:
+                orgs = islice(orgs,20)
+            org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
             geo_serializer = GeoSerializer(choices=COUNTRY_NAMES,initial=country)
             search_type = 'country'
             search_term = COUNTRY_CODES[country]
-            num_hits = len(all_orgs)
         else:
             orgs = Organization.nodes.order_by('?')[:10]
             org_list = OrganizationSerializer(orgs, many=True)
@@ -60,15 +65,12 @@ class Index(APIView):
             search_type = 'random'
             search_term = None
             num_hits = 0
-        orgs_to_show = org_list.data
-        if len(orgs_to_show) > 20:
-            orgs_to_show = orgs_to_show[:20]
         industry_serializer = IndustrySearchSerializer()
         last_updated = DataImport.latest_import_ts()
 
         alpha_flag = request.GET.get("alpha_flag")
 
-        resp = Response({"organizations":orgs_to_show,
+        resp = Response({"organizations":org_list.data,
                         "search_serializer": org_search,
                         "selected_country": geo_serializer,
                         "search_term": search_term,
