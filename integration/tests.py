@@ -23,7 +23,7 @@ def count_relevant_nodes():
 class TurtleLoadingTestCase(TestCase):
 
     def test_load_ttl_files(self):
-        db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
+        db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         assert DataImport.latest_import() == None # Empty DB
         do_import_ttl(dirname="integration/test_dump/dump-1",force=True,do_archiving=False)
         node_count = count_relevant_nodes()

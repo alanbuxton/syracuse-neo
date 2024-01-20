@@ -2,7 +2,7 @@ FAQ = {
 
     "Who are you and what is this?": "I'm <a href=\"https://alanbuxton.wordpress.com/\">Alan Buxton</a> and this is my open-ish data project.",
 
-    "What sort of open-ish data?": "Syracuse takes raw data from various text documents (currently news articles, but it could be any text document) and uses machine learning to structure the relevant content into linkages and timelines.",
+    "What sort of open-ish data?": "Syracuse takes raw data from various text documents (currently news articles, but it could be any text document) and uses machine learning to structure the relevant content into linkages and timelines. You can see the latest sources on the <a href='/tracked/activity_stats'>Stats page</a>. Currently it's only English-language sources.",
 
     "Why would I use it?": "Two main purposes: [a] getting alerts about company events and [b] researching company activities in a region. In this context a 'company event' is something like a new senior hire, or launching in a region, or taking on investment. Both these use cases could be useful in Know Your Customer / Know Your Supplier processes.",
 
@@ -36,7 +36,7 @@ FAQ = {
 
     "How will you seek my consent or let me know?": "If you've given your email address so you can get tracked organization updates then I will use this to notify you of anything that needs your consent. If you have not given your email address then I won't be able to contact you directly, so I'll flag important notices on this website to give you plenty of time to let me know of any concerns, but if I hear nothing then I will need to interpret that as you giving me consent. I hope this is all common sense and not contentious at all, but if I'm missing something major then please don't use the site, or by all means find another channel to reach out to me to help me understand the issue.",
 
-    "How frequently asked are these questions?": "Not at all, to be honest. This page is me writing down an imaginary conversation between me and someone who I'm trying to explain the website to.",
+    "How frequently-asked are these questions?": "Not at all, to be honest. This page is me writing down an imaginary conversation between me and someone who I'm trying to explain the website to.",
 
     "Website looks a bit rubbish, mate.": "Yep, I'm not going to disagree on that front. Front-end web design really is not my bag - just have a look at the quality of the favicon. But, to be honest, this 1995-era aesthetic seems to go pretty well with a site that's all about the data so I'm not too worried.",
 

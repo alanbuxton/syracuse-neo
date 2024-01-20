@@ -22,7 +22,7 @@ class TestUtilsWithDumpData(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        db.cypher_query("MATCH (n) CALL apoc.nodes.delete(n, 10000) YIELD value RETURN value;")
+        db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
         nuke_cache()
@@ -137,7 +137,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_stats(self):
         max_date = date.fromisoformat("2023-10-10")
-        counts, recents = get_stats(max_date)
+        counts, recents, recents_by_source = get_stats(max_date)
         assert set(counts) == {('CorporateFinanceActivity', 363), ('Organization', 1390), ('RoleActivity', 173), ('Person', 163), ('LocationActivity', 257)}
         assert len(recents) == 40
         assert sorted(recents) == [('AR', 'Argentina', 0, 0, 4), ('AU', 'Australia', 2, 4, 7),
@@ -155,12 +155,15 @@ class TestUtilsWithDumpData(TestCase):
                     ('SE', 'Sweden', 0, 0, 1), ('SG', 'Singapore', 0, 3, 3), ('SN', 'Senegal', 1, 1, 1),
                     ('TW', 'Taiwan, Province of China', 0, 0, 3), ('US', 'United States', 18, 34, 60),
                     ('ZA', 'South Africa', 1, 1, 1)]
+        assert sorted(recents_by_source) == [('Associated Press', 5, 6, 6), ('Business Wire', 171, 181, 205),
+                    ('PR Web', 0, 0, 1), ('Reuters', 18, 36, 79),
+                    ('TechCrunch', 2, 7, 27), ('prweb', 11, 14, 16)]
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2023-10-10")
         min_date = date.fromisoformat("2023-10-03")
         country_code = "AU"
-        matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
         assert len(matching_activity_orgs) == 2
         assert matching_activity_orgs[0]['participants'].get("investor") is not None
         assert matching_activity_orgs[0]['participants'].get("buyer") is not None

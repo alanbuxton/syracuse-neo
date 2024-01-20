@@ -9,7 +9,7 @@ def prepare_recent_changes_email_notification(user, num_days):
     min_date = days_ago(num_days)
     max_date = datetime.now(tz=timezone.utc)
     orgs = TrackedOrganization.uris_by_user(user)
-    matching_activity_orgs = get_activities_by_date_range_for_api(min_date, orgs, max_date)
+    matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=orgs, max_date=max_date)
     if len(matching_activity_orgs) == 0:
         return None
     serializer = ActivitySerializer(matching_activity_orgs, many=True)

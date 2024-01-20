@@ -4,7 +4,7 @@ from topics.models import Organization
 from django.contrib.auth.models import  User
 import pycountry
 
-class RecentsSerializer(serializers.Serializer):
+class RecentsByCountrySerializer(serializers.Serializer):
     def to_representation(self, instance):
         country_code = instance[0]
         repres = {
@@ -17,6 +17,16 @@ class RecentsSerializer(serializers.Serializer):
         pyc = pycountry.countries.get(alpha_2=country_code)
         if pyc and pyc.flag:
             repres["flag"] = pyc.flag
+        return repres
+
+class RecentsBySourceSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        repres = {
+            "source_name": instance[0],
+            "count7": instance[1],
+            "count30": instance[2],
+            "count90": instance[3],
+        }
         return repres
 
 class CountsSerializer(serializers.Serializer):

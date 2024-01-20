@@ -32,7 +32,7 @@
       <th>30 days</th>
       <th>90 days</th>
     </tr>
-    {% for recent in recents %}
+    {% for recent in recents_by_country %}
       <tr>
         <td>{{ recent.flag }}</td>
         <td><a href='country_activities?country_code={{ recent.country_code }}'>{{ recent.country_name }}</a></td>
@@ -44,6 +44,27 @@
     {% endfor %}
   </table>
   </p>
+
+  <h2>Updates by Source</h2>
+  <p>
+  <table>
+    <tr>
+      <th>Source Name</th>
+      <th>7 days</th>
+      <th>30 days</th>
+      <th>90 days</th>
+    </tr>
+    {% for recent in recents_by_source %}
+      <tr>
+        <td><a href='source_activities?source_name={{ recent.source_name }}'>{{ recent.source_name }}</a></td>
+        <td align="right">{{ recent.count7 | localize }}</td>
+        <td align="right">{{ recent.count30 | localize }}</td>
+        <td align="right">{{ recent.count90 | localize }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  </p>
+
 
   <br/>
   <h2>All-Time Node Counts</h2>

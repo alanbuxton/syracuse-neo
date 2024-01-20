@@ -9,10 +9,10 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer,
-    RecentsSerializer, CountsSerializer)
+    RecentsByCountrySerializer, RecentsBySourceSerializer, CountsSerializer)
 import json
 from .date_helpers import days_ago
-from topics.model_queries import get_activities_by_country_and_date_range, get_stats, get_activities_by_date_range_for_api
+from topics.model_queries import get_activities_for_serializer_by_country_and_date_range, get_stats, get_activities_by_date_range_for_api, get_activities_for_serializer_by_source_and_date_range
 from datetime import datetime, timezone, date, timedelta
 from topics.geo_utils import COUNTRY_CODES
 
@@ -48,11 +48,24 @@ class CountryActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         country_code = request.GET.get("country_code")
-        matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
         country_name = COUNTRY_CODES.get(country_code)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                             "country_name": country_name }, status=status.HTTP_200_OK)
+        return resp
+
+class SourceActivitiesView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tracked_activities.html'
+
+    def get(self, request):
+        min_date, max_date = min_and_max_date(request.GET)
+        source_name = request.GET.get("source_name")
+        matching_activity_orgs =  get_activities_for_serializer_by_source_and_date_range(source_name, min_date, max_date, limit=20)
+        serializer = ActivitySerializer(matching_activity_orgs, many=True)
+        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "source_name": source_name }, status=status.HTTP_200_OK)
         return resp
 
 class CountryActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -65,8 +78,21 @@ class CountryActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
         min_date, max_date = min_and_max_date(self.request.GET)
         country_code = self.request.GET.get("country_code")
         limit = self.request.GET.get("limit",20)
-        matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
         return matching_activity_orgs
+
+class SourceActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = ActivitySerializer
+
+    def get_queryset(self):
+        source_name = self.request.GET.get('source_name')
+        min_date, max_date = min_and_max_date(self.request.GET)
+        limit = self.request.GET.get("limit",20)
+        matching_activity_orgs = get_activities_for_serializer_by_source_name_and_date_range(source_name,min_date,max_date,limit=20,include_same_as=False)
+        return matching_activity_orgs
+
 
 class ActivityStats(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -76,10 +102,12 @@ class ActivityStats(APIView):
         max_date = request.GET.get("max_date",date.today())
         if isinstance(max_date, str):
             max_date = date.fromisoformat(max_date)
-        counts, recents = get_stats(max_date)
-        recents_serializer = RecentsSerializer(recents, many=True)
+        counts, recents_by_country, recents_by_source = get_stats(max_date)
+        recents_by_country_serializer = RecentsByCountrySerializer(recents_by_country, many=True)
+        recents_by_source_serializer = RecentsBySourceSerializer(recents_by_source, many=True)
         counts_serializer = CountsSerializer(counts, many=True)
-        resp = Response({"recents":recents_serializer.data,"counts":counts_serializer.data,
+        resp = Response({"recents_by_country":recents_by_country_serializer.data,"counts":counts_serializer.data,
+                        "recents_by_source":recents_by_source_serializer.data,
                             "max_date":max_date}, status=status.HTTP_200_OK)
         return resp
 
@@ -94,7 +122,7 @@ class ActivitiesView(APIView):
         min_date, max_date = min_and_max_date(request.GET)
         user = request.user
         orgs = TrackedOrganization.uris_by_user(user)
-        matching_activity_orgs = get_activities_by_date_range_for_api(min_date, orgs, max_date, include_same_as=True)
+        matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=orgs, max_date=max_date, include_same_as=True)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date}, status=status.HTTP_200_OK)
         return resp
@@ -107,7 +135,7 @@ class ActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         uri = self.request.GET.get('uri')
         min_date = self.request.GET.get('min_date')
-        results = get_activities_by_date_range_for_api(min_date,[uri])
+        results = get_activities_by_date_range_for_api(min_date,uri_or_list=[uri])
         return results
 
 

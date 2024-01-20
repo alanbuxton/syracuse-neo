@@ -16,6 +16,8 @@
   <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
   {% if country_name is not None %}
     in {{ country_name }}.
+  {% elif source_name is not None %}
+    from {{ source_name }}.
   {% endif %}
   </p>
 

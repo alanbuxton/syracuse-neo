@@ -29,11 +29,11 @@ def clear_stats_cache(days_ago = 1):
 def nuke_cache():
     cache.clear()
 
-def warm_up_cache():
+def warm_up_cache(max_date=date.today()):
     from .geo_utils import COUNTRY_CODES
     for country_code in COUNTRY_CODES.keys():
         logger.info(f"Warming up {country_code}")
         BasedInGeoMixin.based_in_country(country_code,allowed_to_set_cache=True)
         ActivityMixin.orgs_by_activity_where(country_code,allowed_to_set_cache=True)
     logger.info("Warming up stats")
-    get_stats(date.today(),allowed_to_set_cache=True)
+    get_stats(max_date,allowed_to_set_cache=True)
