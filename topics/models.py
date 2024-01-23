@@ -2,6 +2,7 @@ from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty)
 from urllib.parse import urlparse
 import datetime
+from topics.geo_utils import get_geoname_uris_for_country_region
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
 from django.core.cache import cache
@@ -15,11 +16,6 @@ def uri_from_related(rel):
         return None
     return rel[0].uri
 
-def geonames_uris():
-    qry = "match (n) where n.uri contains ('sws.geonames.org') return n.uri"
-    res,_ = db.cypher_query(qry)
-    flattened = [x for sublist in res for x in sublist]
-    return flattened
 
 def longest(arr):
     if arr is None:
@@ -42,6 +38,10 @@ class Resource(StructuredNode):
     documentTitle = StringProperty()
     documentURL = Relationship('Resource','documentURL')
     sourceName = StringProperty()
+
+    @property
+    def sourceDocumentURL(self):
+        return uri_from_related(self.documentURL)
 
     def ensure_connection(self):
         if self.element_id_property is not None and db.database_version is None:
@@ -192,15 +192,14 @@ class ActivityMixin:
         return uris
 
     @staticmethod
-    def by_country(country_code,allowed_to_set_cache=False):
-        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
-        cache_key = f"activity_mixin_by_country_{country_code}"
+    def by_country_or_region(geo_code,allowed_to_set_cache=False):
+        cache_key = f"activity_mixin_by_country_{geo_code}"
         res = cache.get(cache_key)
         if res:
             logger.debug(f"{cache_key} cache hit")
             return res
         logger.debug(f"{cache_key} cache miss")
-        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
+        uris = get_geoname_uris_for_country_region(geo_code)
         resources, _ = db.cypher_query(f"MATCH (loc)-[:whereGeoNameRDF]-(n) WHERE loc.uri IN {uris} RETURN n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
         if allowed_to_set_cache is True:
@@ -210,14 +209,14 @@ class ActivityMixin:
         return flattened
 
     @staticmethod
-    def orgs_by_activity_where(country_code,limit=None,allowed_to_set_cache=False):
-        cache_key = f"activity_mixin_orgs_by_activity_where_{country_code}"
+    def orgs_by_activity_where(geo_code,limit=None,allowed_to_set_cache=False):
+        cache_key = f"activity_mixin_orgs_by_activity_where_{geo_code}"
         relevant_items = cache.get(cache_key)
         if relevant_items and limit is None:
             logger.debug(f"{cache_key} cache hit")
             return relevant_items
         logger.debug(f"{cache_key} cache miss")
-        activities = ActivityMixin.by_country(country_code,allowed_to_set_cache=allowed_to_set_cache)
+        activities = ActivityMixin.by_country_or_region(geo_code,allowed_to_set_cache=allowed_to_set_cache)
         act_uris = [x.uri for x in activities]
         query=f"MATCH (n: Organization)-[]-(a) WHERE a.uri IN {act_uris} RETURN n"
         if limit is not None:
@@ -251,15 +250,14 @@ class BasedInGeoMixin:
         return uri
 
     @staticmethod
-    def based_in_country(country_code,allowed_to_set_cache=False):
-        from .geo_utils import COUNTRY_MAPPING, COUNTRY_CODES # Is 'None' if imported at top of file
-        cache_key = f"based_in_geo_mixin_based_in_country_{country_code}"
+    def based_in_country_region(geo_code,allowed_to_set_cache=False):
+        cache_key = f"based_in_geo_mixin_based_in_country_or_region_{geo_code}"
         res = cache.get(cache_key)
         if res:
             logger.debug(f"{cache_key} cache hit")
             return res
         logger.debug(f"{cache_key} cache miss")
-        uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in COUNTRY_MAPPING[country_code]]
+        uris = get_geoname_uris_for_country_region(geo_code)
         resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
         if allowed_to_set_cache is True:

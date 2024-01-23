@@ -4,15 +4,16 @@ from topics.models import Organization
 from django.contrib.auth.models import  User
 import pycountry
 
-class RecentsByCountrySerializer(serializers.Serializer):
+class RecentsByGeoSerializer(serializers.Serializer):
     def to_representation(self, instance):
         country_code = instance[0]
         repres = {
-            "country_name": instance[1],
+            "geo_name": instance[2],
             "country_code": country_code,
-            "count7": instance[2],
-            "count30": instance[3],
-            "count90": instance[4],
+            "geo_code": instance[1],
+            "count7": instance[3],
+            "count30": instance[4],
+            "count90": instance[5],
         }
         pyc = pycountry.countries.get(alpha_2=country_code)
         if pyc and pyc.flag:

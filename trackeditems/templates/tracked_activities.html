@@ -14,8 +14,8 @@
     {% include 'layouts/nav-header.html' %}
   </p>
   <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
-  {% if country_name is not None %}
-    in {{ country_name }}.
+  {% if geo_name is not None %}
+    in {{ geo_name }}.
   {% elif source_name is not None %}
     from {{ source_name }}.
   {% endif %}

@@ -137,24 +137,32 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_stats(self):
         max_date = date.fromisoformat("2023-10-10")
-        counts, recents, recents_by_source = get_stats(max_date)
+        counts, recents_by_geo, recents_by_source = get_stats(max_date)
         assert set(counts) == {('CorporateFinanceActivity', 363), ('Organization', 1390), ('RoleActivity', 173), ('Person', 163), ('LocationActivity', 257)}
-        assert len(recents) == 40
-        assert sorted(recents) == [('AR', 'Argentina', 0, 0, 4), ('AU', 'Australia', 2, 4, 7),
-                    ('BE', 'Belgium', 0, 1, 4), ('BF', 'Burkina Faso', 1, 1, 1),
-                    ('BM', 'Bermuda', 0, 1, 1), ('BR', 'Brazil', 0, 0, 2), ('CA', 'Canada', 4, 6, 11),
-                    ('CH', 'Switzerland', 0, 3, 4), ('CL', 'Chile', 0, 0, 1), ('CN', 'China', 1, 4, 8),
-                    ('CR', 'Costa Rica', 0, 1, 1), ('CY', 'Cyprus', 0, 0, 1), ('CZ', 'Czechia', 0, 0, 1),
-                    ('DE', 'Germany', 0, 3, 6), ('DK', 'Denmark', 1, 1, 1), ('FR', 'France', 1, 5, 10),
-                    ('GB', 'United Kingdom', 1, 1, 6), ('GH', 'Ghana', 0, 0, 1), ('HK', 'Hong Kong', 0, 0, 1),
-                    ('HU', 'Hungary', 0, 1, 1), ('ID', 'Indonesia', 0, 0, 1), ('IE', 'Ireland', 1, 1, 1),
-                    ('IL', 'Israel', 0, 0, 1), ('IN', 'India', 0, 3, 10), ('IS', 'Iceland', 0, 0, 1),
-                    ('IT', 'Italy', 0, 3, 9), ('JP', 'Japan', 0, 2, 3), ('KR', 'Korea, Republic of', 0, 1, 1),
-                    ('MX', 'Mexico', 0, 1, 1), ('NL', 'Netherlands', 0, 0, 3), ('NO', 'Norway', 0, 0, 1),
-                    ('NP', 'Nepal', 0, 0, 1), ('RU', 'Russian Federation', 0, 0, 3), ('SA', 'Saudi Arabia', 0, 1, 2),
-                    ('SE', 'Sweden', 0, 0, 1), ('SG', 'Singapore', 0, 3, 3), ('SN', 'Senegal', 1, 1, 1),
-                    ('TW', 'Taiwan, Province of China', 0, 0, 3), ('US', 'United States', 18, 34, 60),
-                    ('ZA', 'South Africa', 1, 1, 1)]
+        assert len(recents_by_geo) == 58
+        assert sorted(recents_by_geo) == [('AR', 'AR', 'Argentina', 0, 0, 4), ('AU', 'AU', 'Australia', 2, 4, 7),
+                ('BE', 'BE', 'Belgium', 0, 1, 4), ('BF', 'BF', 'Burkina Faso', 1, 1, 1), ('BM', 'BM', 'Bermuda', 0, 1, 1),
+                ('BR', 'BR', 'Brazil', 0, 0, 2), ('CA', 'CA', 'Canada', 4, 6, 11),
+                ('CA', 'CA-02', '- British Columbia', 1, 1, 3), ('CA', 'CA-08', '- Ontario', 1, 1, 2),
+                ('CH', 'CH', 'Switzerland', 0, 3, 4), ('CL', 'CL', 'Chile', 0, 0, 1),
+                ('CN', 'CN', 'China', 1, 4, 8), ('CN', 'CN-09', '- Henan Sheng', 0, 1, 1),
+                ('CN', 'CN-22', '- Beijing Shi', 0, 0, 1), ('CN', 'CN-23', '- Shanghai Shi', 0, 2, 2),
+                ('CR', 'CR', 'Costa Rica', 0, 1, 1), ('CY', 'CY', 'Cyprus', 0, 0, 1), ('CZ', 'CZ', 'Czechia', 0, 0, 1),
+                ('DE', 'DE', 'Germany', 0, 3, 6), ('DK', 'DK', 'Denmark', 1, 1, 1), ('FR', 'FR', 'France', 1, 5, 10),
+                ('GB', 'GB', 'United Kingdom', 1, 1, 6), ('GH', 'GH', 'Ghana', 0, 0, 1), ('HK', 'HK', 'Hong Kong', 0, 0, 1),
+                ('HU', 'HU', 'Hungary', 0, 1, 1), ('ID', 'ID', 'Indonesia', 0, 0, 1), ('IE', 'IE', 'Ireland', 1, 1, 1),
+                ('IL', 'IL', 'Israel', 0, 0, 1), ('IN', 'IN', 'India', 0, 3, 10), ('IS', 'IS', 'Iceland', 0, 0, 1),
+                ('IT', 'IT', 'Italy', 0, 3, 9), ('JP', 'JP', 'Japan', 0, 2, 3), ('KR', 'KR', 'Korea, Republic of', 0, 1, 1),
+                ('MX', 'MX', 'Mexico', 0, 1, 1), ('NL', 'NL', 'Netherlands', 0, 0, 3), ('NO', 'NO', 'Norway', 0, 0, 1),
+                ('NP', 'NP', 'Nepal', 0, 0, 1), ('RU', 'RU', 'Russian Federation', 0, 0, 3), ('SA', 'SA', 'Saudi Arabia', 0, 1, 2),
+                ('SE', 'SE', 'Sweden', 0, 0, 1), ('SG', 'SG', 'Singapore', 0, 3, 3), ('SN', 'SN', 'Senegal', 1, 1, 1),
+                ('TW', 'TW', 'Taiwan, Province of China', 0, 0, 3), ('US', 'US', 'United States', 18, 34, 60),
+                ('US', 'US-AR', '- Arkansas', 1, 1, 1), ('US', 'US-CA', '- California', 2, 6, 13),
+                ('US', 'US-DC', '- District of Columbia', 0, 1, 1), ('US', 'US-FL', '- Florida', 1, 2, 3),
+                ('US', 'US-LA', '- Louisiana', 7, 7, 7), ('US', 'US-MA', '- Massachusetts', 0, 0, 1),
+                ('US', 'US-MO', '- Missouri', 0, 0, 1), ('US', 'US-NY', '- New York', 1, 2, 3), ('US', 'US-OH', '- Ohio', 0, 0, 1),
+                ('US', 'US-TX', '- Texas', 1, 2, 4), ('US', 'US-UT', '- Utah', 2, 3, 4), ('US', 'US-WA', '- Washington', 0, 0, 1),
+                ('US', 'US-WV', '- West Virginia', 0, 0, 2), ('ZA', 'ZA', 'South Africa', 1, 1, 1)]
         assert sorted(recents_by_source) == [('Associated Press', 5, 6, 6), ('Business Wire', 171, 181, 205),
                     ('PR Web', 0, 0, 1), ('Reuters', 18, 36, 79),
                     ('TechCrunch', 2, 7, 27), ('prweb', 11, 14, 16)]

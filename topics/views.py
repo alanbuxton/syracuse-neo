@@ -8,8 +8,8 @@ from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     IndustrySearchSerializer,OrganizationTimelineSerializer)
 from rest_framework import status
 from datetime import date, datetime
-from .geo_utils import COUNTRY_NAMES, COUNTRY_CODES
-from .model_queries import get_relevant_orgs_for_country
+from .geo_utils import geo_code_to_name
+from .model_queries import get_relevant_orgs_for_country_region
 from urllib.parse import urlparse
 from syracuse.settings import MOTD
 from rest_framework.permissions import IsAuthenticated
@@ -36,7 +36,8 @@ class Index(APIView):
     def get(self,request):
         params = request.query_params
         org_name = params.get("name")
-        country = params.get("selected_country")
+        selected_geo = params.get("country_or_region")
+        # choices, country_admin1_code_to_name = geo_select_list_plus_reverse_lookup()
         if org_name:
             orgs = Organization.find_by_name(org_name)
             num_hits = len(orgs)
@@ -44,24 +45,24 @@ class Index(APIView):
                 orgs = islice(orgs,20)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            geo_serializer = GeoSerializer() #choices=choices)
             search_type = 'org_name'
             search_term = org_name
-        elif country:
-            orgs = get_relevant_orgs_for_country(country)
+        elif selected_geo:
+            orgs = get_relevant_orgs_for_country_region(selected_geo)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
-            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES,initial=country)
-            search_type = 'country'
-            search_term = COUNTRY_CODES[country]
+            geo_serializer = GeoSerializer() #choices=choices,initial=selected_geo)
+            search_type = 'selected_geo'
+            search_term = geo_code_to_name(selected_geo)
         else:
             orgs = Organization.nodes.order_by('?')[:10]
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_serializer = GeoSerializer(choices=COUNTRY_NAMES)
+            geo_serializer = GeoSerializer() #choices=choices)
             search_type = 'random'
             search_term = None
             num_hits = 0

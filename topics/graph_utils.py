@@ -79,7 +79,7 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,L
     uri_mapping = {}
     node_cluster = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
                     "basedInHighGeoNamesRDFURLs":set(),"basedInHighGeoNamesURLs":set(),
-                    "descriptions":set(), "industries":set()}
+                    "descriptions":set(), "industries":set(), "documentURLs": set(),}
     for node in all_nodes:
         if node.uri != source_node.uri:
             uri_mapping[node.uri] = source_node.uri
@@ -94,6 +94,8 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,L
             node_cluster["industries"].update(node.industry)
         if node.description:
             node_cluster["descriptions"].update(node.description)
+        if node.documentURL:
+            node_cluster["documentURLs"].update(node.sourceDocumentURL)
     data_for_display = {k:"; ".join(v) for k,v in node_cluster.items() if len(v) > 0}
     return data_for_display, all_nodes, uri_mapping
 

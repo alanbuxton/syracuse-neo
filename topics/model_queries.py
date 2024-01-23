@@ -4,11 +4,12 @@ from datetime import datetime, timezone, timedelta
 from typing import List, Union
 import logging
 from django.core.cache import cache
+from topics.geo_utils import geo_select_list
 
 logger = logging.getLogger(__name__)
 
-def get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=True):
-    relevant_orgs = get_relevant_orgs_for_country(country_code)
+def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=True):
+    relevant_orgs = get_relevant_orgs_for_country_region(geo_code)
     relevant_uris = [x.uri for x in relevant_orgs]
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=relevant_uris,
                                 max_date=max_date, limit=limit, include_same_as=include_same_as)
@@ -20,18 +21,16 @@ def get_activities_for_serializer_by_source_and_date_range(source_name, min_date
     return matching_activity_orgs
 
 
-
-def get_relevant_orgs_for_country(country_code):
-    from .geo_utils import COUNTRY_CODES
-    if country_code is None or country_code not in COUNTRY_CODES.keys():
-        logger.debug(f"{country_code} is not a known country_code")
+def get_relevant_orgs_for_country_region(geo_code):
+    if geo_code is None or geo_code.strip() == "":
+        logger.debug(f"Can't process blank geo_code")
         return set()
     ts1 = datetime.utcnow()
-    orgs = Organization.based_in_country(country_code)
+    orgs = Organization.based_in_country_region(geo_code)
     ts2 = datetime.utcnow()
-    orgs_by_activity = ActivityMixin.orgs_by_activity_where(country_code)
+    orgs_by_activity = ActivityMixin.orgs_by_activity_where(geo_code)
     ts3 = datetime.utcnow()
-    logger.info(f"{country_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
+    logger.info(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
     all_orgs = set(orgs + orgs_by_activity)
     return all_orgs
 
@@ -139,19 +138,21 @@ def get_stats(max_date,allowed_to_set_cache=False):
     res = cache.get(cache_key)
     if res is not None:
         return res
-    from .geo_utils import COUNTRY_NAMES
     counts = []
     for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity"]:
         res, _ = db.cypher_query(f"MATCH (n:{x}) RETURN COUNT(n)")
         counts.append( (x , res[0][0]) )
-    recents_by_country = []
+    recents_by_country_region = []
     ts1 = datetime.utcnow()
-    for k,v in sorted(COUNTRY_NAMES.items()):
-        cnt7 = counts_by_timedelta(7,max_date,country_code=v)
-        cnt30 = counts_by_timedelta(30,max_date,country_code=v)
-        cnt90 = counts_by_timedelta(90,max_date,country_code=v)
+    for k,v in geo_select_list():
+        if k.strip() == '':
+            continue
+        cnt7 = counts_by_timedelta(7,max_date,geo_code=k)
+        cnt30 = counts_by_timedelta(30,max_date,geo_code=k)
+        cnt90 = counts_by_timedelta(90,max_date,geo_code=k)
         if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
-            recents_by_country.append( (v,k,cnt7,cnt30,cnt90) )
+            country_code = k[:2]
+            recents_by_country_region.append( (country_code,k,v,cnt7,cnt30,cnt90) )
     recents_by_source = []
     for source_name in sorted(get_all_source_names()):
         cnt7 = counts_by_timedelta(7,max_date,source_name=source_name)
@@ -162,27 +163,27 @@ def get_stats(max_date,allowed_to_set_cache=False):
     ts2 = datetime.utcnow()
     logger.debug(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
     if allowed_to_set_cache is True:
-        cache.set( cache_key, (counts, recents_by_country, recents_by_source) , timeout=60*60*48)
+        cache.set( cache_key, (counts, recents_by_country_region, recents_by_source) )
     else:
         logger.debug("Not allowed to set cache")
-    return counts, recents_by_country, recents_by_source
+    return counts, recents_by_country_region, recents_by_source
 
-def counts_by_timedelta(days_ago, max_date, country_code=None,source_name=None):
+def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None):
     min_date = max_date - timedelta(days=days_ago)
-    if country_code is not None:
-        res = get_country_counts(country_code,min_date,max_date)
+    if geo_code is not None:
+        res = get_country_region_counts(geo_code,min_date,max_date)
     elif source_name is not None:
         res = get_source_counts(source_name,min_date,max_date)
     else:
-        raise ValueError(f"counts_by_timedelta must supplier country_code or source_name")
+        raise ValueError(f"counts_by_timedelta must supplier geo_code or source_name")
     return res
 
 def get_source_counts(source_name, min_date,max_date):
     counts = get_activities_by_source_and_date_range(source_name,min_date,max_date,counts_only=True)
     return counts[0]
 
-def get_country_counts(country_code,min_date,max_date):
-    relevant_uris = get_relevant_orgs_for_country(country_code)
+def get_country_region_counts(geo_code,min_date,max_date):
+    relevant_uris = get_relevant_orgs_for_country_region(geo_code)
     uris = [x.uri for x in relevant_uris]
     counts = get_activities_by_org_uri_and_date_range(uris,min_date,max_date,include_same_as=False,counts_only=True)
     return counts[0]

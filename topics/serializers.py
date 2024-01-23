@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .graph_utils import graph_source_activity_target
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
-
+from .geo_utils import geo_select_list
 
 class OrganizationSerializer(serializers.BaseSerializer):
 
@@ -46,19 +46,20 @@ class IndustrySearchSerializer(serializers.Serializer):
 
 
 class GeoSerializer(serializers.Serializer):
-    selected_country = serializers.ChoiceField(choices=[])
 
-    def __init__(self, *args, **kwargs):
-        orig_choices = kwargs.pop('choices',[])
-        if "initial" in kwargs:
-            selected_country = kwargs.pop("initial")
-        else:
-            selected_country = None
-        choices = sorted([(v,k) for k,v in orig_choices.items()], key=lambda x: x[1])
-        super().__init__(*args, **kwargs)
-        self.fields['selected_country'].choices = choices
-        if selected_country is not None:
-            self.fields['selected_country'].initial = selected_country
+    country_or_region = serializers.ChoiceField(choices=geo_select_list())
+
+    # def __init__(self, *args, **kwargs):
+    #     choices = kwargs.pop('choices',[])
+    #     choices = {**{"":""},**choices}
+    #     if "initial" in kwargs:
+    #         selected_geo = kwargs.pop("initial")
+    #     else:
+    #         selected_geo = None
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['selected_geo'].choices = choices
+    #     if selected_geo is not None:
+    #         self.fields['selected_geo'].initial = selected_geo
 
 class TimelineSerializer(serializers.Serializer):
     def to_representation(self, instance, **kwargs):
