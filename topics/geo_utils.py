@@ -144,6 +144,9 @@ def load_country_mapping(fpath="dump/relevant_geo.csv"):
         elif country_code == 'YU':
             # historic Yugoslavia
             continue
+        elif country_code == 'CS':
+            # deleted Serbia Montenegro
+            continue
         else:
             country = pycountry.countries.get(alpha_2=country_code)
             if country is None:

@@ -95,7 +95,7 @@ def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,L
         if node.description:
             node_cluster["descriptions"].update(node.description)
         if node.documentURL:
-            node_cluster["documentURLs"].update(node.sourceDocumentURL)
+            node_cluster["documentURLs"].add(node.sourceDocumentURL)
     data_for_display = {k:"; ".join(v) for k,v in node_cluster.items() if len(v) > 0}
     return data_for_display, all_nodes, uri_mapping
 
