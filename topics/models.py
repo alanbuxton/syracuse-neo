@@ -249,16 +249,17 @@ class BasedInGeoMixin:
             uri = uri.replace("/about.rdf","")
         return uri
 
-    @staticmethod
-    def based_in_country_region(geo_code,allowed_to_set_cache=False):
-        cache_key = f"based_in_geo_mixin_based_in_country_or_region_{geo_code}"
+    @classmethod
+    def based_in_country_region(cls,geo_code,allowed_to_set_cache=False):
+        label = cls.__name__
+        cache_key = f"{label}_based_in_country_or_region_{geo_code}"
         res = cache.get(cache_key)
         if res:
             logger.debug(f"{cache_key} cache hit")
             return res
         logger.debug(f"{cache_key} cache miss")
         uris = get_geoname_uris_for_country_region(geo_code)
-        resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n) where loc.uri in {uris} return n",resolve_objects=True)
+        resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n: {label}) where loc.uri in {uris} return n",resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
         if allowed_to_set_cache is True:
             cache.set(cache_key, flattened)
