@@ -1,0 +1,470 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/industry/-1_organization_management_investments_investment> a ns1:IndustryCluster ;
+    ns1:name "-1_organization_management_investments_investment" ;
+    ns1:representation "industry",
+        "insurance",
+        "investment",
+        "investments",
+        "involved",
+        "logistics",
+        "management",
+        "marketing",
+        "organization",
+        "organizers" ;
+    ns1:representativeDoc "a person or organization that is typically involved in",
+        "a person or organization that is typically involved in:",
+        "life science investment and management" ;
+    ns1:topic_id -1 .
+
+<https://1145.am/db/industry/38_investment_technology_development_research_investing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/36_hotel_hotels_hospitality_hotelier_resorts> ;
+    ns1:childRight <https://1145.am/db/industry/37_investment_investing_investor_investors_equity> ;
+    ns1:name "38_investment_technology_development_research_investing" ;
+    ns1:topic_id 38 .
+
+<https://1145.am/db/industry/0_investor_investment_equity_investing> a ns1:IndustryCluster ;
+    ns1:name "0_investor_investment_equity_investing" ;
+    ns1:representation "equity",
+        "finance",
+        "financial",
+        "financing",
+        "investing",
+        "investment",
+        "investor",
+        "investors",
+        "securities",
+        "shareholder" ;
+    ns1:representativeDoc "private equity investment firm",
+        "private investment",
+        "real estate private credit and equity" ;
+    ns1:topic_id 0 .
+
+<https://1145.am/db/industry/10_venture_ventures_corp_llc> a ns1:IndustryCluster ;
+    ns1:name "10_venture_ventures_corp_llc" ;
+    ns1:representation "acquisitions",
+        "capital",
+        "corp",
+        "entrepreneur",
+        "inc",
+        "llc",
+        "merger",
+        "subsidiaries",
+        "venture",
+        "ventures" ;
+    ns1:representativeDoc "Venture Capital",
+        "Venture capital",
+        "venture capital" ;
+    ns1:topic_id 10 .
+
+<https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> a ns1:IndustryCluster ;
+    ns1:name "11_retailer_retail_supermarket_shopping" ;
+    ns1:representation "chains",
+        "logistics",
+        "marketplace",
+        "retail",
+        "retailer",
+        "sales",
+        "shopping",
+        "store",
+        "stores",
+        "supermarket" ;
+    ns1:representativeDoc "B2B payments, supply chain procurement and B2B marketplace services",
+        "clothing store chains",
+        "retailer" ;
+    ns1:topic_id 11 .
+
+<https://1145.am/db/industry/12_provider_internet_telecom_isp> a ns1:IndustryCluster ;
+    ns1:name "12_provider_internet_telecom_isp" ;
+    ns1:representation "internet",
+        "iot",
+        "isp",
+        "network",
+        "provider",
+        "service",
+        "services",
+        "telecom",
+        "telecommunications",
+        "telecoms" ;
+    ns1:representativeDoc "Internet service",
+        "Internet service provider",
+        "high-performance semiconductor, IoT systems, and cloud connectivity service provider" ;
+    ns1:topic_id 12 .
+
+<https://1145.am/db/industry/13_health_healthcare_wellness_care> a ns1:IndustryCluster ;
+    ns1:name "13_health_healthcare_wellness_care" ;
+    ns1:representation "care",
+        "community",
+        "health",
+        "healthcare",
+        "home",
+        "maintenance",
+        "safety",
+        "skincare",
+        "sustainability",
+        "wellness" ;
+    ns1:representativeDoc "Home health",
+        "health",
+        "home health" ;
+    ns1:topic_id 13 .
+
+<https://1145.am/db/industry/14_renewable_energy_heating_power> a ns1:IndustryCluster ;
+    ns1:name "14_renewable_energy_heating_power" ;
+    ns1:representation "electronics",
+        "electronicstopower",
+        "energy",
+        "generation",
+        "heating",
+        "investing",
+        "power",
+        "renewable",
+        "storage",
+        "systems" ;
+    ns1:representativeDoc "heating and power",
+        "power and heating",
+        "renewable energy storage" ;
+    ns1:topic_id 14 .
+
+<https://1145.am/db/industry/15_angel_gold_mothers_angels> a ns1:IndustryCluster ;
+    ns1:name "15_angel_gold_mothers_angels" ;
+    ns1:representation "",
+        "angel",
+        "angels",
+        "expectant",
+        "gold",
+        "mom",
+        "mothers",
+        "tim" ;
+    ns1:representativeDoc "Angel",
+        "Atomico Angel program",
+        "New and expectant mothers" ;
+    ns1:topic_id 15 .
+
+<https://1145.am/db/industry/16_research_clinical_science_medical> a ns1:IndustryCluster ;
+    ns1:name "16_research_clinical_science_medical" ;
+    ns1:representation "agingrelated",
+        "clinical",
+        "development",
+        "measuring",
+        "medical",
+        "organization",
+        "programs",
+        "research",
+        "science",
+        "testing" ;
+    ns1:representativeDoc "Research",
+        "aging-related research",
+        "research" ;
+    ns1:topic_id 16 .
+
+<https://1145.am/db/industry/17_ai_generative_models_speech> a ns1:IndustryCluster ;
+    ns1:name "17_ai_generative_models_speech" ;
+    ns1:representation "ai",
+        "ai4bharat",
+        "artificial",
+        "generative",
+        "intelligence",
+        "language",
+        "models",
+        "recognition",
+        "speech",
+        "translation" ;
+    ns1:representativeDoc "AI models for speech recognition and translation",
+        "AI models for speech recognition and translation at AI4Bharat",
+        "open source generative AI" ;
+    ns1:topic_id 17 .
+
+<https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> a ns1:IndustryCluster ;
+    ns1:name "18_materials_electronics_hardware_microelectronics" ;
+    ns1:representation "electronic",
+        "electronics",
+        "equipment",
+        "hardware",
+        "materials",
+        "metals",
+        "microelectronics",
+        "semiconductor",
+        "silicononinsulator",
+        "wafers" ;
+    ns1:representativeDoc "battery materials",
+        "electronic materials",
+        "materials used to make chips for the automotive industry" ;
+    ns1:topic_id 18 .
+
+<https://1145.am/db/industry/19_software_developer_development_softwareconnected> a ns1:IndustryCluster ;
+    ns1:name "19_software_developer_development_softwareconnected" ;
+    ns1:representation "analytics",
+        "automated",
+        "developer",
+        "development",
+        "engineering",
+        "platform",
+        "product",
+        "software",
+        "softwareconnected",
+        "systems" ;
+    ns1:representativeDoc "software",
+        "software development" ;
+    ns1:topic_id 19 .
+
+<https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> a ns1:IndustryCluster ;
+    ns1:name "1_pharmaceutical_drug_pharmaceuticals_medicines" ;
+    ns1:representation "biopharma",
+        "biopharmaceutical",
+        "drug",
+        "drugmakers",
+        "drugs",
+        "medications",
+        "medicines",
+        "pharma",
+        "pharmaceutical",
+        "pharmaceuticals" ;
+    ns1:representativeDoc "drug",
+        "drug development",
+        "herbal extracts and natural active substances" ;
+    ns1:topic_id 1 .
+
+<https://1145.am/db/industry/20_biopharma_therapeutics_medicines_pharmaceuticals_therapies> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
+    ns1:childRight <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
+    ns1:name "20_biopharma_therapeutics_medicines_pharmaceuticals_therapies" ;
+    ns1:topic_id 20 .
+
+<https://1145.am/db/industry/21_medical_medtech_medicine_technology_med> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
+    ns1:childRight <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
+    ns1:name "21_medical_medtech_medicine_technology_med" ;
+    ns1:topic_id 21 .
+
+<https://1145.am/db/industry/22_investor_investment_equity_investing_investors> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
+    ns1:childRight <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
+    ns1:name "22_investor_investment_equity_investing_investors" ;
+    ns1:topic_id 22 .
+
+<https://1145.am/db/industry/23_hotel_hotels_lodging_hotelier_hospitality> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
+    ns1:childRight <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
+    ns1:name "23_hotel_hotels_lodging_hotelier_hospitality" ;
+    ns1:topic_id 23 .
+
+<https://1145.am/db/industry/24_research_development_innovation_science_design> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
+    ns1:childRight <https://1145.am/db/industry/16_research_clinical_science_medical> ;
+    ns1:name "24_research_development_innovation_science_design" ;
+    ns1:topic_id 24 .
+
+<https://1145.am/db/industry/25_ai_generative_models_ai4bharat_recognition> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/17_ai_generative_models_speech> ;
+    ns1:childRight <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
+    ns1:name "25_ai_generative_models_ai4bharat_recognition" ;
+    ns1:topic_id 25 .
+
+<https://1145.am/db/industry/26_renewable_energy_heating_power_mining> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
+    ns1:childRight <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
+    ns1:name "26_renewable_energy_heating_power_mining" ;
+    ns1:topic_id 26 .
+
+<https://1145.am/db/industry/27_provider_service_services_telecom_isp> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
+    ns1:childRight <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
+    ns1:name "27_provider_service_services_telecom_isp" ;
+    ns1:topic_id 27 .
+
+<https://1145.am/db/industry/28_investor_investment_equity_investing_investors> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/22_investor_investment_equity_investing_investors> ;
+    ns1:childRight <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
+    ns1:name "28_investor_investment_equity_investing_investors" ;
+    ns1:topic_id 28 .
+
+<https://1145.am/db/industry/29_medical_medtech_medicine_technology_healthcare> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
+    ns1:childRight <https://1145.am/db/industry/21_medical_medtech_medicine_technology_med> ;
+    ns1:name "29_medical_medtech_medicine_technology_healthcare" ;
+    ns1:topic_id 29 .
+
+<https://1145.am/db/industry/2_audio_acoustical_digital_music> a ns1:IndustryCluster ;
+    ns1:name "2_audio_acoustical_digital_music" ;
+    ns1:representation "acoustical",
+        "audio",
+        "design",
+        "digital",
+        "gaming",
+        "media",
+        "music",
+        "rock",
+        "sound",
+        "videogame" ;
+    ns1:representativeDoc "acoustical, audio, and video design",
+        "digital entertainment",
+        "innovation, research, development and operation of premium card and Mahjong casual games" ;
+    ns1:topic_id 2 .
+
+<https://1145.am/db/industry/30_hotel_hotels_lodging_hotelier_hospitality> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/23_hotel_hotels_lodging_hotelier_hospitality> ;
+    ns1:childRight <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
+    ns1:name "30_hotel_hotels_lodging_hotelier_hospitality" ;
+    ns1:topic_id 30 .
+
+<https://1145.am/db/industry/31_research_development_innovation_science_design> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/24_research_development_innovation_science_design> ;
+    ns1:childRight <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
+    ns1:name "31_research_development_innovation_science_design" ;
+    ns1:topic_id 31 .
+
+<https://1145.am/db/industry/32_research_development_pharmaceuticals_pharmaceutical_therapeutics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/20_biopharma_therapeutics_medicines_pharmaceuticals_therapies> ;
+    ns1:childRight <https://1145.am/db/industry/31_research_development_innovation_science_design> ;
+    ns1:name "32_research_development_pharmaceuticals_pharmaceutical_therapeutics" ;
+    ns1:topic_id 32 .
+
+<https://1145.am/db/industry/33_hotel_hotels_hospitality_hotelier_resorts> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/27_provider_service_services_telecom_isp> ;
+    ns1:childRight <https://1145.am/db/industry/30_hotel_hotels_lodging_hotelier_hospitality> ;
+    ns1:name "33_hotel_hotels_hospitality_hotelier_resorts" ;
+    ns1:topic_id 33 .
+
+<https://1145.am/db/industry/34_investor_investment_equity_investing_investors> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/28_investor_investment_equity_investing_investors> ;
+    ns1:childRight <https://1145.am/db/industry/25_ai_generative_models_ai4bharat_recognition> ;
+    ns1:name "34_investor_investment_equity_investing_investors" ;
+    ns1:topic_id 34 .
+
+<https://1145.am/db/industry/35_investment_investing_investor_investors_equity> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/29_medical_medtech_medicine_technology_healthcare> ;
+    ns1:childRight <https://1145.am/db/industry/34_investor_investment_equity_investing_investors> ;
+    ns1:name "35_investment_investing_investor_investors_equity" ;
+    ns1:topic_id 35 .
+
+<https://1145.am/db/industry/36_hotel_hotels_hospitality_hotelier_resorts> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/33_hotel_hotels_hospitality_hotelier_resorts> ;
+    ns1:childRight <https://1145.am/db/industry/26_renewable_energy_heating_power_mining> ;
+    ns1:name "36_hotel_hotels_hospitality_hotelier_resorts" ;
+    ns1:topic_id 36 .
+
+<https://1145.am/db/industry/37_investment_investing_investor_investors_equity> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/35_investment_investing_investor_investors_equity> ;
+    ns1:childRight <https://1145.am/db/industry/32_research_development_pharmaceuticals_pharmaceutical_therapeutics> ;
+    ns1:name "37_investment_investing_investor_investors_equity" ;
+    ns1:topic_id 37 .
+
+<https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> a ns1:IndustryCluster ;
+    ns1:name "3_hotel_hotels_lodging_hotelier" ;
+    ns1:representation "accommodation",
+        "hospitality",
+        "hotel",
+        "hotelier",
+        "hotels",
+        "lodging",
+        "resort",
+        "resorts",
+        "rooms",
+        "villas" ;
+    ns1:representativeDoc "Hotel",
+        "Luxury hotel group",
+        "luxury hotel" ;
+    ns1:topic_id 3 .
+
+<https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> a ns1:IndustryCluster ;
+    ns1:name "4_therapeutics_medicines_therapies_treatments" ;
+    ns1:representation "cancer",
+        "medicine",
+        "medicines",
+        "oncology",
+        "products",
+        "therapeutics",
+        "therapies",
+        "treatment",
+        "treatments",
+        "veterinary" ;
+    ns1:representativeDoc "provides product labeling information and safety data sheets covering more than 14,000 products for animals",
+        "providing product labeling information and safety data sheets covering more than 14,000 products for animals",
+        "therapies for cancer and metabolic diseases" ;
+    ns1:topic_id 4 .
+
+<https://1145.am/db/industry/5_medical_medtech_medicine_technology> a ns1:IndustryCluster ;
+    ns1:name "5_medical_medtech_medicine_technology" ;
+    ns1:representation "health",
+        "healthcare",
+        "med",
+        "medical",
+        "medicine",
+        "medtech",
+        "orthopaedics",
+        "patient",
+        "tech",
+        "technology" ;
+    ns1:representativeDoc "Medical device and technology",
+        "Medical technology",
+        "medical technology" ;
+    ns1:topic_id 5 .
+
+<https://1145.am/db/industry/6_construction_building_tech_contractors> a ns1:IndustryCluster ;
+    ns1:name "6_construction_building_tech_contractors" ;
+    ns1:representation "building",
+        "construction",
+        "contractors",
+        "engineering",
+        "engineers",
+        "industrial",
+        "industry",
+        "manufacturing",
+        "tech",
+        "technology" ;
+    ns1:representativeDoc "construction tech",
+        "early-stage construction tech investor",
+        "tech" ;
+    ns1:topic_id 6 .
+
+<https://1145.am/db/industry/7_wastewater_recycling_water_treatment> a ns1:IndustryCluster ;
+    ns1:name "7_wastewater_recycling_water_treatment" ;
+    ns1:representation "chemicals",
+        "environmental",
+        "petrochemical",
+        "petrochemicals",
+        "plumbing",
+        "recycling",
+        "treatment",
+        "waste",
+        "wastewater",
+        "water" ;
+    ns1:representativeDoc "Water treatment",
+        "recycling and waste management",
+        "water treatment and delivery systems" ;
+    ns1:topic_id 7 .
+
+<https://1145.am/db/industry/8_travel_travelers_destinations_tourism> a ns1:IndustryCluster ;
+    ns1:name "8_travel_travelers_destinations_tourism" ;
+    ns1:representation "airline",
+        "aviation",
+        "destinations",
+        "hospitality",
+        "tourism",
+        "transport",
+        "transportation",
+        "travel",
+        "travelers",
+        "vacation" ;
+    ns1:representativeDoc "Travel",
+        "travel",
+        "travel and tourism" ;
+    ns1:topic_id 8 .
+
+<https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> a ns1:IndustryCluster ;
+    ns1:name "9_biotechnology_biotech_biology_synthetic" ;
+    ns1:representation "biology",
+        "biomanufacturing",
+        "bioprocess",
+        "biotech",
+        "biotechnology",
+        "biotools",
+        "dna",
+        "enzymatic",
+        "synthetic",
+        "technologies" ;
+    ns1:representativeDoc "Biotechnology",
+        "a biotechnology",
+        "biotechnology" ;
+    ns1:topic_id 9 .

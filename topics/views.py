@@ -5,11 +5,10 @@ from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
-    IndustrySearchSerializer,OrganizationTimelineSerializer)
+    IndustrySerializer,OrganizationTimelineSerializer)
 from rest_framework import status
 from datetime import date, datetime
-from .geo_utils import geo_code_to_name
-from .model_queries import get_relevant_orgs_for_country_region
+from .model_queries import get_relevant_orgs_for_country_region_industry
 from urllib.parse import urlparse
 from syracuse.settings import MOTD
 from rest_framework.permissions import IsAuthenticated
@@ -18,6 +17,8 @@ import json
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
+from dal import autocomplete
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -36,8 +37,10 @@ class Index(APIView):
     def get(self,request):
         params = request.query_params
         org_name = params.get("name")
-        selected_geo = params.get("country_or_region")
-        # choices, country_admin1_code_to_name = geo_select_list_plus_reverse_lookup()
+        selected_geo_name = params.get("country_or_region")
+        industry_name = params.get("industry")
+        selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
+        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         if org_name:
             orgs = Organization.find_by_name(org_name)
             num_hits = len(orgs)
@@ -45,38 +48,44 @@ class Index(APIView):
                 orgs = islice(orgs,20)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_serializer = GeoSerializer() #choices=choices)
+            geo_search = GeoSerializer()
             search_type = 'org_name'
             search_term = org_name
-        elif selected_geo:
-            orgs = get_relevant_orgs_for_country_region(selected_geo)
+        elif selected_geo or industry:
+            orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
-            geo_serializer = GeoSerializer() #choices=choices,initial=selected_geo)
-            search_type = 'selected_geo'
-            search_term = geo_code_to_name(selected_geo)
+            geo_search = GeoSerializer()
+            search_type = 'combined_search'
+            if industry is not None:
+                search_term = f"{industry_name}"
+            else:
+                search_term = ""
+            if selected_geo is not None:
+                if industry is not None:
+                    search_term = f"{search_term} / {selected_geo_name}"
+                else:
+                    search_term = f"{selected_geo_name}"
         else:
             orgs = Organization.nodes.order_by('?')[:10]
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_serializer = GeoSerializer() #choices=choices)
+            geo_search = GeoSerializer()
             search_type = 'random'
             search_term = None
             num_hits = 0
-        industry_serializer = IndustrySearchSerializer()
+        industry_serializer = IndustrySerializer()
         last_updated = DataImport.latest_import_ts()
-
         alpha_flag = request.GET.get("alpha_flag")
-
         resp = Response({"organizations":org_list.data,
                         "search_serializer": org_search,
-                        "selected_country": geo_serializer,
                         "search_term": search_term,
                         "num_hits": num_hits,
-                        "industry_serializer": industry_serializer,
+                        "industry_search": industry_serializer,
+                        "geo_search": geo_search,
                         "search_type": search_type,
                         "motd": MOTD,
                         "alpha_flag": alpha_flag,

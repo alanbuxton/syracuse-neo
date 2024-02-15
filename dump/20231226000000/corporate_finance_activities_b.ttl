@@ -57,6 +57,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/09/uveyes-mri-for-cars-system-lands-startup-100m-from-gm-carmax/> ;
     ns1:foundName "Hanaco VC" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/1999214/Series_D_Investment_Carmax_Wr_Berkley_Corporation_Fit_Carmax_Wr_Berkley_Corporation_Fit_Gm_Ventures_Hanaco_Vc_Uveye_Ventures_Lp_Wr_Berkley_Corporation_Completed> ;
     ns1:name "Hanaco VC" ;
     ns1:sameAsHigh <https://1145.am/db/1050600/Hanaco_Ventures>,
@@ -119,6 +120,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Alexander Hoffmann",
         "Hoffmann" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Alexander Hoffmann" ;
     ns1:sourceName "TechCrunch" .
@@ -131,6 +133,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Christian Stiebner",
         "Stiebner" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Christian Stiebner" ;
     ns1:sourceName "TechCrunch" .
@@ -141,6 +144,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "HackCapital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "HackCapital" ;
     ns1:sourceName "TechCrunch" .
@@ -151,6 +155,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Jenny Saft" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Jenny Saft" ;
     ns1:sourceName "TechCrunch" .
@@ -172,6 +177,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Nucleus Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Nucleus Capital" ;
     ns1:sameAsMedium <https://1145.am/db/1238486/Nucleus_Capital>,
@@ -190,6 +196,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Possible Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Possible Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2075625/Possible_Ventures>,
@@ -211,6 +218,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Revent" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Revent" ;
     ns1:sameAsHigh <https://1145.am/db/1754585/Revent> ;
@@ -235,6 +243,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "Ron Shigeta",
         "Ron Shigeta, Martin Weber, Rick Bernstein, Nadine Geiser, Joy Faucher, Michele Tarawneh, Alexander Hoffmann" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "Ron Shigeta",
         "Ron Shigeta, Martin Weber, Rick Bernstein, Nadine Geiser," ;
@@ -257,6 +266,7 @@
     ns1:documentTitle "With its planet-friendly protein, Farmless wants to dramatically outperform animal agriculture" ;
     ns1:documentURL <https://techcrunch.com/2023/05/10/farmless-seed-funding/> ;
     ns1:foundName "TET Ventures" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2000764/Pre-Seed_Investment_Alexander_Hoffmann_Christian_Stiebner_Farmless_Hackcapital_Jenny_Saft_Michele_Tarawneh_Nucleus_Capital_Possible_Ventures_Revent_Rick_Bernstein_Ron_Shigeta_Martin_Weber_Rick_Bernstein_Nadine_Geiser_Tet_Ventures_Voyagers_Climate-Tech_Fund_Completed> ;
     ns1:name "TET Ventures" ;
     ns1:sourceName "TechCrunch" .
@@ -280,6 +290,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230511005010/en/NYBC-Ventures-Launches-50M-Fund-to-Accelerate-Innovations-in-Blood-and-Cellular-Therapies> ;
     ns1:foundName "New York Blood Center, Inc" ;
     ns1:industry "life sciences" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2003034/Investment_Nybc_Ventures_New_York_Blood_Center_Has_Not_Happened> ;
     ns1:name "New York Blood Center" ;
     ns1:sameAsHigh <https://1145.am/db/1219282/New_York_Blood_Center>,
@@ -298,6 +309,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/12/indian-edtech-giant-byjus-raises-250-million-on-track-to-close-another-700-million/> ;
     ns1:foundName "Davidson Kempner" ;
     ns1:industry "investment firm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2005101/Investment_Byjus_Completed> ;
     ns1:name "Davidson Kempner" ;
     ns1:sameAsHigh <https://1145.am/db/1962257/Davidson_Kempner>,
@@ -313,6 +325,7 @@
     ns1:documentTitle "Dolomite Closes $2.5 Million Funding Round to Revolutionize Decentralized Money Markets and Hedging" ;
     ns1:documentURL <https://www.prweb.com/releases/dolomite_closes_2_5_million_funding_round_to_revolutionize_decentralized_money_markets_and_hedging/prweb19334537.htm> ;
     ns1:foundName "6th Man Ventures (6MV)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2005131/Investment_6th_Man_Ventures_Coinbase_Ventures_Draper_Goren_Holm_Leavitt_Innovations_Ngc_Wwventures_Completed> ;
     ns1:name "6th Man Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1232436/6th_Man_Ventures>,
@@ -336,6 +349,7 @@
     ns1:documentTitle "Dolomite Closes $2.5 Million Funding Round to Revolutionize Decentralized Money Markets and Hedging" ;
     ns1:documentURL <https://www.prweb.com/releases/dolomite_closes_2_5_million_funding_round_to_revolutionize_decentralized_money_markets_and_hedging/prweb19334537.htm> ;
     ns1:foundName "Coinbase Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2005131/Investment_6th_Man_Ventures_Coinbase_Ventures_Draper_Goren_Holm_Leavitt_Innovations_Ngc_Wwventures_Completed> ;
     ns1:name "Coinbase Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1011118/Coinbase_Ventures>,
@@ -407,6 +421,7 @@
     ns1:documentTitle "Dolomite Closes $2.5 Million Funding Round to Revolutionize Decentralized Money Markets and Hedging" ;
     ns1:documentURL <https://www.prweb.com/releases/dolomite_closes_2_5_million_funding_round_to_revolutionize_decentralized_money_markets_and_hedging/prweb19334537.htm> ;
     ns1:foundName "Draper Goren Holm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2005131/Investment_6th_Man_Ventures_Coinbase_Ventures_Draper_Goren_Holm_Leavitt_Innovations_Ngc_Wwventures_Completed> ;
     ns1:name "Draper Goren Holm" ;
     ns1:sameAsHigh <https://1145.am/db/1053871/Draper_Goren_Holm>,
@@ -431,6 +446,7 @@
     ns1:documentTitle "Dolomite Closes $2.5 Million Funding Round to Revolutionize Decentralized Money Markets and Hedging" ;
     ns1:documentURL <https://www.prweb.com/releases/dolomite_closes_2_5_million_funding_round_to_revolutionize_decentralized_money_markets_and_hedging/prweb19334537.htm> ;
     ns1:foundName "WWVentures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2005131/Investment_6th_Man_Ventures_Coinbase_Ventures_Draper_Goren_Holm_Leavitt_Innovations_Ngc_Wwventures_Completed> ;
     ns1:name "WWVentures" ;
     ns1:sourceName "PR Web" .
@@ -441,6 +457,7 @@
     ns1:documentTitle "Together raises $20M to build open source generative AI models" ;
     ns1:documentURL <https://techcrunch.com/2023/05/15/together-raises-20m-to-build-open-source-generative-ai-models/> ;
     ns1:foundName "Cadenza Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:investor <https://1145.am/db/2006781/Seed_Investment_Cadenza_Ventures_Case_In_Point_Together_Definition_Capital_Factory_First_Round_Capital_Long_Journey_Ventures_Lux_Capital_Robot_Ventures_Scb_10x_Sv_Angel_Susa_Ventures_Completed> ;
     ns1:name "Cadenza Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1098800/Cadenza_Ventures> ;
@@ -454,6 +471,7 @@
     ns1:documentTitle "Together raises $20M to build open source generative AI models" ;
     ns1:documentURL <https://techcrunch.com/2023/05/15/together-raises-20m-to-build-open-source-generative-ai-models/> ;
     ns1:foundName "Definition Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2006781/Seed_Investment_Cadenza_Ventures_Case_In_Point_Together_Definition_Capital_Factory_First_Round_Capital_Long_Journey_Ventures_Lux_Capital_Robot_Ventures_Scb_10x_Sv_Angel_Susa_Ventures_Completed> ;
     ns1:name "Definition Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1376203/Definition_Capital>,
@@ -469,6 +487,7 @@
     ns1:documentTitle "Together raises $20M to build open source generative AI models" ;
     ns1:documentURL <https://techcrunch.com/2023/05/15/together-raises-20m-to-build-open-source-generative-ai-models/> ;
     ns1:foundName "Factory" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:investor <https://1145.am/db/2006781/Seed_Investment_Cadenza_Ventures_Case_In_Point_Together_Definition_Capital_Factory_First_Round_Capital_Long_Journey_Ventures_Lux_Capital_Robot_Ventures_Scb_10x_Sv_Angel_Susa_Ventures_Completed> ;
     ns1:name "Factory" ;
     ns1:sameAsMedium <https://1145.am/db/2096258/Factory>,
@@ -728,6 +747,7 @@
     ns1:documentTitle "Together raises $20M to build open source generative AI models" ;
     ns1:documentURL <https://techcrunch.com/2023/05/15/together-raises-20m-to-build-open-source-generative-ai-models/> ;
     ns1:foundName "Robot Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2006781/Seed_Investment_Cadenza_Ventures_Case_In_Point_Together_Definition_Capital_Factory_First_Round_Capital_Long_Journey_Ventures_Lux_Capital_Robot_Ventures_Scb_10x_Sv_Angel_Susa_Ventures_Completed> ;
     ns1:name "Robot Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1362651/Robot_Ventures>,
@@ -886,6 +906,7 @@
     ns1:documentURL <https://www.reuters.com/technology/rakuten-shares-slump-51-early-trading-2023-05-16/> ;
     ns1:foundName "CyberAgent Inc" ;
     ns1:industry "asset management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2008420/Investment_Cyberagent_Inc_Rakuten_Group_Inc_Tokyu_Corp_Has_Not_Happened> ;
     ns1:name "CyberAgent Inc" ;
     ns1:sameAsHigh <https://1145.am/db/2017906/Cyberagent_Inc> ;
@@ -900,6 +921,7 @@
     ns1:documentTitle "Loss-making Rakuten announces $2.5 bln share issue to bolster finances" ;
     ns1:documentURL <https://www.reuters.com/technology/rakuten-shares-slump-51-early-trading-2023-05-16/> ;
     ns1:foundName "Tokyu Corp" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2008420/Investment_Cyberagent_Inc_Rakuten_Group_Inc_Tokyu_Corp_Has_Not_Happened> ;
     ns1:name "Tokyu Corp" ;
     ns1:sameAsHigh <https://1145.am/db/2017906/Tokyu_Corp> ;
@@ -912,6 +934,7 @@
     ns1:documentURL <https://www.reuters.com/technology/silicon-valley-automotive-ethernet-chip-startup-ethernovia-raises-64-mln-2023-05-15/> ;
     ns1:foundName "Porsche Automobil Holding SE" ;
     ns1:industry "automotive" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:investor <https://1145.am/db/2008446/Series_A_Investment_Ethernovia_Inc_Porsche_Automobil_Holding_Se_Qualcomm_Ventures_Venturetech_Alliance_Completed> ;
     ns1:name "Porsche Automobil Holding SE" ;
     ns1:sameAsHigh <https://1145.am/db/2051518/Porsche_Automobil_Holding_Se>,
@@ -1134,6 +1157,7 @@
     ns1:documentTitle "Tangible wants to scale up construction decarbonization" ;
     ns1:documentURL <https://techcrunch.com/2023/05/16/tangible-seed-round/> ;
     ns1:foundName "Deco Ventures" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2008492/Seed_Investment_Asymmetric_Deco_Ventures_Fifty_Years_Foundamental_Pi_Labs_Redstone_Built_World_Fund_Tangible_Completed> ;
     ns1:name "Deco Ventures" ;
     ns1:sourceName "TechCrunch" .
@@ -1144,6 +1168,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/16/tangible-seed-round/> ;
     ns1:foundName "Fifty Years" ;
     ns1:industry "construction tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2008492/Seed_Investment_Asymmetric_Deco_Ventures_Fifty_Years_Foundamental_Pi_Labs_Redstone_Built_World_Fund_Tangible_Completed> ;
     ns1:name "Fifty Years" ;
     ns1:sameAsMedium <https://1145.am/db/1105217/Fifty_Years>,
@@ -1172,6 +1197,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/16/tangible-seed-round/> ;
     ns1:foundName "Foundamental" ;
     ns1:industry "construction tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2008492/Seed_Investment_Asymmetric_Deco_Ventures_Fifty_Years_Foundamental_Pi_Labs_Redstone_Built_World_Fund_Tangible_Completed> ;
     ns1:name "Foundamental" ;
     ns1:sameAsHigh <https://1145.am/db/173436/Foundamental> ;
@@ -1213,6 +1239,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/pfizer-plans-raise-31-bln-debt-offering-finance-seagen-takeover-2023-05-16/> ;
     ns1:foundName "Pfizer Inc" ;
     ns1:industry "drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Pfizer Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1018723/Pfizer_Inc>,
         <https://1145.am/db/1042002/Pfizer_Inc>,
@@ -1628,6 +1655,8 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/pfizer-plans-raise-31-bln-debt-offering-finance-seagen-takeover-2023-05-16/> ;
     ns1:foundName "Rival Abbvie Inc" ;
     ns1:industry "drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Rival Abbvie Inc" ;
     ns1:sourceName "Reuters" .
 
@@ -1640,6 +1669,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230517005078/en/Pepper-Advantage-Acquires-Indian-AI-driven-Credit-Management-Platform-Rieom.ai> ;
     ns1:foundName "Pepper Advantage" ;
     ns1:industry "credit intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Pepper Advantage" ;
     ns1:sameAsHigh <https://1145.am/db/2718601/Pepper_Advantage> ;
     ns1:sourceName "Business Wire" .
@@ -1652,6 +1682,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230517005122/en/Eagle-Eye-Networks-and-Brivo-Announce-192M-Investment-%E2%80%93-One-of-the-Largest-Ever-in-Cloud-Physical-Security> ;
     ns1:foundName "SECOM CO., LTD" ;
     ns1:industry "security integration" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:investor <https://1145.am/db/2010051/Primary_Equity_Investment_Brivo_Eagle_Eye_Networks_Secom_Completed> ;
     ns1:name "SECOM" ;
     ns1:sameAsHigh <https://1145.am/db/2009594/Secom> ;
@@ -1672,6 +1703,7 @@
     ns1:documentTitle "Ensoma Closes Series B Extension, Bringing Total Round to $135 Million" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005275/en/Ensoma-Closes-Series-B-Extension-Bringing-Total-Round-to-135-Million> ;
     ns1:foundName "Delos Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011273/Series_B_Investment_Bioluminescence_Ventures_Delos_Capital_Ensoma_Kite_Symbiosis_Completed> ;
     ns1:name "Delos Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1224103/Delos_Capital>,
@@ -1691,6 +1723,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005275/en/Ensoma-Closes-Series-B-Extension-Bringing-Total-Round-to-135-Million> ;
     ns1:foundName "Kite" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:investor <https://1145.am/db/2011273/Series_B_Investment_Bioluminescence_Ventures_Delos_Capital_Ensoma_Kite_Symbiosis_Completed> ;
     ns1:name "Kite" ;
     ns1:sameAsHigh <https://1145.am/db/2551158/Kite_Pharma>,
@@ -1714,6 +1748,7 @@
     ns1:documentTitle "Ensoma Closes Series B Extension, Bringing Total Round to $135 Million" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005275/en/Ensoma-Closes-Series-B-Extension-Bringing-Total-Round-to-135-Million> ;
     ns1:foundName "SymBiosis" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011273/Series_B_Investment_Bioluminescence_Ventures_Delos_Capital_Ensoma_Kite_Symbiosis_Completed> ;
     ns1:name "SymBiosis" ;
     ns1:sameAsHigh <https://1145.am/db/1212919/Symbiosis>,
@@ -1730,6 +1765,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "American Heart Association" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "American Heart Association" ;
     ns1:sameAsHigh <https://1145.am/db/2187773/American_Heart_Association> ;
@@ -1743,6 +1779,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Atento Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Atento Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1758985/Atento_Capital> ;
@@ -1773,6 +1810,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Incisive Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Incisive Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2061278/Incisive_Ventures> ;
@@ -1786,6 +1824,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Lair East Labs" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Lair East Labs" ;
     ns1:sourceName "Business Wire" .
@@ -1797,6 +1836,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Mucker Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Mucker Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1124269/Mucker_Capital>,
@@ -1839,6 +1879,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Open Venture Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Open Venture Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1762654/Open> ;
@@ -1872,6 +1913,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Sweater Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Sweater Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1131653/Sweater>,
@@ -1965,6 +2007,7 @@
     ns1:documentTitle "Pear Suite Empowers Community Health Workers to Improve Health in Asian American and Pacific Islander Communities" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Third Act Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2011571/Seed_Investment_American_Heart_Association_Atento_Capital_Impact_Engine_Incisive_Ventures_Lair_East_Labs_Mucker_Capital_Open_Venture_Capital_Pear_Suite_Startup_Health_Sweater_Ventures_Techstars_Third_Act_Ventures_Completed> ;
     ns1:name "Third Act Ventures" ;
     ns1:sourceName "Business Wire" .
@@ -2395,6 +2438,8 @@
     ns1:documentURL <https://www.reuters.com/business/swiss-entrepreneur-presents-alternative-liontrust-bid-gam-2023-05-19/> ;
     ns1:foundName "Marco Garzetti" ;
     ns1:industry "investment" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2013695/Gam_Acquisition> ;
     ns1:name "Marco Garzetti" ;
     ns1:sameAsHigh <https://1145.am/db/2016960/Marco_Garzetti> ;
@@ -2407,6 +2452,7 @@
     ns1:documentTitle "Cloud-based Restaurant365 hits unicorn status after $135 mln funding round" ;
     ns1:documentURL <https://www.reuters.com/markets/deals/cloud-based-restaurant365-hits-unicorn-status-after-135-mln-funding-round-2023-05-19/> ;
     ns1:foundName "Besemer Venture Parteners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2014104/Investment_Besemer_Venture_Parteners_Iconiq_Growth_L_Catterton_Restaurant365_Completed> ;
     ns1:name "Besemer Venture Parteners" ;
     ns1:sourceName "Reuters" .
@@ -2455,6 +2501,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/cpfl-equatorial-eye-acquisition-enel-owned-power-distributor-brazil-2023-05-23/> ;
     ns1:foundName "CPFL Energia SA" ;
     ns1:industry "energy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "CPFL Energia SA" ;
     ns1:sourceName "Reuters" .
 
@@ -2484,6 +2531,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/cpfl-equatorial-eye-acquisition-enel-owned-power-distributor-brazil-2023-05-23/> ;
     ns1:foundName "Equatorial Energia SA" ;
     ns1:industry "energy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:investor <https://1145.am/db/2016968/Enel_Ceara_Acquisition> ;
     ns1:name "Equatorial Energia SA" ;
     ns1:sameAsMedium <https://1145.am/db/1275016/Equatorial_Energia_Sa>,
@@ -2496,6 +2544,7 @@
     ns1:documentTitle "What's getting funded in climate tech: Managing ESG data, supplying fusion startups and removing carbon" ;
     ns1:documentURL <https://techcrunch.com/2023/05/24/climate-tech-funding-esg-carbon-removal-fusion/> ;
     ns1:foundName "Diagram Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2017173/Series_B_Investment_Diagram_Ventures_Inovia_Capital_Novisto_Portage_Scor_Ventures_White_Star_Capital_Completed> ;
     ns1:name "Diagram Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2004046/Diagram_Ventures>,
@@ -2618,6 +2667,7 @@
     ns1:documentTitle "What's getting funded in climate tech: Managing ESG data, supplying fusion startups and removing carbon" ;
     ns1:documentURL <https://techcrunch.com/2023/05/24/climate-tech-funding-esg-carbon-removal-fusion/> ;
     ns1:foundName "White Star Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2017173/Series_B_Investment_Diagram_Ventures_Inovia_Capital_Novisto_Portage_Scor_Ventures_White_Star_Capital_Completed> ;
     ns1:name "White Star Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1087544/White_Star_Capital>,
@@ -2662,6 +2712,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230523006078/en/East-West-Bank-Appoints-Dr.-Jason-Hsu-of-Rayliant-Global-Advisors-as-Chief-Economist> ;
     ns1:foundName "East West Bancorp",
         "East West Bancorp, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2017234/Rayliant_Global_Advisors_Interest_Acquisition> ;
     ns1:name "East West Bancorp" ;
     ns1:sameAsHigh <https://1145.am/db/1345060/East_West_Bank>,
@@ -2713,6 +2764,7 @@
     ns1:foundName "BDT Capital",
         "BDT Capital Partners" ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2020796/Investment_Bdt_Capital_Partners_Shari_Redstones_National_Amusements_Inc_Has_Not_Happened> ;
     ns1:name "BDT Capital Partners" ;
     ns1:sameAsHigh <https://1145.am/db/1508068/Bdt_Capital_Partners_Llc>,
@@ -2741,6 +2793,7 @@
     ns1:documentTitle "Singaporean fund GIC takes minority stake in German gas specialist Messer" ;
     ns1:documentURL <https://www.reuters.com/markets/deals/singaporean-fund-gic-takes-minority-stake-german-gas-specialist-messer-2023-05-30/> ;
     ns1:foundName "GIC" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2023304/Stake_Investment_Gic_Messer_Completed> ;
     ns1:name "GIC" ;
     ns1:sameAsHigh <https://1145.am/db/1315488/Gic>,
@@ -2877,6 +2930,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Building Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Building Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1318657/Building_Ventures>,
@@ -2937,6 +2991,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Concrete Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Concrete Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1756864/Concrete_Vc>,
@@ -2955,6 +3010,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Constellation Technology Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Constellation Technology Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1773807/Constellation_Technology_Ventures> ;
@@ -3029,6 +3085,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Lincoln Property Company" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Lincoln Property Company" ;
     ns1:sameAsHigh <https://1145.am/db/1149397/Lincoln_Property_Company>,
@@ -3051,6 +3108,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Moderne Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Moderne Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1560704/Moderne_Ventures>,
@@ -3072,6 +3130,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "RET Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "RET Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1120665/Ret_Ventures>,
@@ -3101,6 +3160,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Salesforce Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Salesforce Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1007639/Salesforce_Ventures>,
@@ -3302,6 +3362,7 @@
     ns1:documentTitle "Measurabl, an ESG platform for real estate, raises $93M" ;
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Suffolk Construction" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2023596/Series_D_Investment_Broadscale_Building_Ventures_Camber_Creek_Colliers_Concrete_Ventures_Constellation_Technology_Ventures_Energy_Impact_Partners_Lincoln_Property_Company_Measurabl_Moderne_Ventures_Ret_Ventures_Salesforce_Ventures_Suffolk_Construction_Wvv_Completed> ;
     ns1:name "Suffolk Construction" ;
     ns1:sameAsMedium <https://1145.am/db/1722920/Suffolk_Construction> ;
@@ -3344,6 +3405,7 @@
     ns1:documentURL <https://www.prweb.com/releases/2023/5/prweb19355613.htm> ;
     ns1:foundName "Genentech" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2023773/Investment_Equify_Health_Genentech_Has_Not_Happened> ;
     ns1:name "Genentech" ;
     ns1:sameAsHigh <https://1145.am/db/1696213/Genentech>,
@@ -3418,6 +3480,7 @@
     ns1:documentURL <https://www.reuters.com/business/energy/jera-says-track-meet-2025-renewable-energy-goal-2023-05-31/> ;
     ns1:foundName "JERA" ;
     ns1:industry "power generation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:investor <https://1145.am/db/2024464/Green_Power_Investment_Acquisition>,
         <https://1145.am/db/2024464/Investment_Jera_Completed> ;
     ns1:name "JERA" ;
@@ -3446,6 +3509,7 @@
     ns1:documentTitle "JERA says on track to meet 2025 renewable energy goal" ;
     ns1:documentURL <https://www.reuters.com/business/energy/jera-says-track-meet-2025-renewable-energy-goal-2023-05-31/> ;
     ns1:foundName "Nippon Telegraph and Telephone (NTT)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:investor <https://1145.am/db/2024464/Green_Power_Investment_Acquisition> ;
     ns1:name "Nippon Telegraph and Telephone" ;
     ns1:sameAsHigh <https://1145.am/db/162392/Nippon_Telegraph_And_Telephone_Corp>,
@@ -3462,6 +3526,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/dufry-reaches-more-than-94-autogrill-after-bid-2023-06-01/> ;
     ns1:foundName "Dufry" ;
     ns1:industry "duty-free retailer" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Dufry" ;
     ns1:sameAsHigh <https://1145.am/db/1093113/Dufry>,
         <https://1145.am/db/1168200/Dufry>,
@@ -3484,6 +3549,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/04/inside-stripes-latest-moves/> ;
     ns1:foundName "Stripe" ;
     ns1:industry "fintech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2025977/Okay_Acquisition> ;
     ns1:name "Stripe" ;
     ns1:sameAsHigh <https://1145.am/db/157905/Stripe>,
@@ -3551,6 +3617,7 @@
     ns1:foundName "Lufthansa",
         "Lufthansa's" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:investor <https://1145.am/db/2026512/Ita_Airways_Stake_Investment>,
         <https://1145.am/db/2026512/Tap_Acquisition> ;
     ns1:name "Lufthansa" ;
@@ -4250,6 +4317,7 @@
     ns1:documentTitle "Ferretly Raises $1.5M in Seed Funding to Expand Global Reach and Strengthen R&D" ;
     ns1:documentURL <https://www.prweb.com/releases/2023/6/prweb19370347.htm> ;
     ns1:foundName "Bull City Venture Partners" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2027750/Investment_Bull_City_Venture_Partners_Ferretly_Seed_Round_Capital_Seed_Round_Capital_Completed> ;
     ns1:name "Bull City Venture Partners" ;
     ns1:sameAsMedium <https://1145.am/db/1419578/Bull_City_Venture_Partners>,
@@ -4265,6 +4333,7 @@
     ns1:documentURL <https://www.prweb.com/releases/2023/6/prweb19370347.htm> ;
     ns1:foundName "SEED",
         "Seed Round Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2027750/Investment_Bull_City_Venture_Partners_Ferretly_Seed_Round_Capital_Seed_Round_Capital_Completed> ;
     ns1:name "Seed Round Capital" ;
     ns1:sourceName "PR Web" .
@@ -4278,6 +4347,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230605005794/en/Worldwide-Webb-Acquisition-Corp.-Announces-5-Million-PIPE-Subscription-Agreement-Executed> ;
     ns1:foundName "WWAC",
         "Worldwide Webb Acquisition Corp." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2027854/Aeries_Technology_Acquisition> ;
     ns1:name "Worldwide Webb Acquisition Corp",
         "Worldwide Webb Acquisition Corp." ;
@@ -4306,6 +4376,7 @@
     ns1:documentTitle "Metals Acquisition Corp Shareholders Approve Proposed Business Combination to Acquire the CSA Mine and Proposed Merger With Metals Acquisition Limited" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230605005839/en/Metals-Acquisition-Corp-Shareholders-Approve-Proposed-Business-Combination-to-Acquire-the-CSA-Mine-and-Proposed-Merger-With-Metals-Acquisition-Limited> ;
     ns1:foundName "Glencore Operations Australia Pty Limited" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Glencore Operations Australia Pty Limited" ;
     ns1:protagonist <https://1145.am/db/2027866/Cornish_Scottish_And_Australian_Acquisition> ;
     ns1:sourceName "Business Wire" .
@@ -4316,6 +4387,7 @@
     ns1:documentTitle "Mosaic raises $26M to help inform companies' financial decisions" ;
     ns1:documentURL <https://techcrunch.com/2023/06/07/mosaic-raises-26m-to-help-companies-make-financial-decisions/> ;
     ns1:foundName "Founders Fund" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2029836/Series_C_Investment_Founders_Fund_Friends_And_Family_Capital_General_Catalyst_Mosaic_Omers_Ventures_Completed> ;
     ns1:name "Founders Fund" ;
     ns1:sameAsHigh <https://1145.am/db/1488858/Founders_Fund>,
@@ -4447,6 +4519,7 @@
     ns1:documentTitle "Mosaic raises $26M to help inform companies' financial decisions" ;
     ns1:documentURL <https://techcrunch.com/2023/06/07/mosaic-raises-26m-to-help-companies-make-financial-decisions/> ;
     ns1:foundName "Friends and Family Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2029836/Series_C_Investment_Founders_Fund_Friends_And_Family_Capital_General_Catalyst_Mosaic_Omers_Ventures_Completed> ;
     ns1:name "Friends and Family Capital" ;
     ns1:sourceName "TechCrunch" .
@@ -4943,6 +5016,7 @@
     ns1:foundName "ONEOK",
         "ONEOK Inc'" ;
     ns1:industry "pipeline operator" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "ONEOK",
         "ONEOK Inc" ;
     ns1:sameAsHigh <https://1145.am/db/2068780/Oneok_Inc> ;
@@ -4963,6 +5037,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/trio-french-businessmen-plan-counter-offer-casino-2023-06-08/> ;
     ns1:foundName "Matthieu Pigasse" ;
     ns1:industry "investment banker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2031929/Casino_Investment> ;
     ns1:name "Matthieu Pigasse" ;
     ns1:sameAsHigh <https://1145.am/db/159497/Matthieu_Pigasse>,
@@ -4978,6 +5053,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/trio-french-businessmen-plan-counter-offer-casino-2023-06-08/> ;
     ns1:foundName "Moez-Alexandre Zouari" ;
     ns1:industry "entrepreneur" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2031929/Casino_Investment> ;
     ns1:name "Moez-Alexandre Zouari" ;
     ns1:sameAsHigh <https://1145.am/db/2059471/Moez-Alexandre_Zouari>,
@@ -4992,6 +5068,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/trio-french-businessmen-plan-counter-offer-casino-2023-06-08/> ;
     ns1:foundName "Teract" ;
     ns1:industry "retail" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Teract" ;
     ns1:protagonist <https://1145.am/db/2031929/Casino_Investment> ;
     ns1:sameAsHigh <https://1145.am/db/1978613/Teract>,
@@ -5012,6 +5089,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/trio-french-businessmen-plan-counter-offer-casino-2023-06-08/> ;
     ns1:foundName "Xavier Niel" ;
     ns1:industry "telecoms" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:investor <https://1145.am/db/2031929/Casino_Investment> ;
     ns1:name "Xavier Niel" ;
     ns1:sameAsHigh <https://1145.am/db/1073821/Xavier_Niel>,
@@ -5114,6 +5192,7 @@
     ns1:documentTitle "Cloud cost management startup CloudZero lands $32M investment" ;
     ns1:documentURL <https://techcrunch.com/2023/06/12/cloud-cost-management-startup-cloudzero-lands-32m-investment/> ;
     ns1:foundName "Innovius Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2033822/Series_B_Investment_Cloudzero_Innovius_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Innovius Capital" ;
     ns1:sameAsMedium <https://1145.am/db/1075909/Innovius_Capital> ;
@@ -5159,6 +5238,7 @@
     ns1:documentURL <https://apnews.com/article/credit-suisse-ubs-takeover-banks-74a2bf7d924eb9e4ac9071a4459143b1> ;
     ns1:foundName "UBS" ;
     ns1:industry "bank" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "UBS" ;
     ns1:sameAsHigh <https://1145.am/db/1168276/Ubs>,
         <https://1145.am/db/1202604/Ubs>,
@@ -5274,6 +5354,7 @@
     ns1:documentURL <https://www.reuters.com/business/aerospace-defense/ryanair-eyes-slots-iag-may-hand-over-remedies-air-europa-purchase-report-2023-06-12/> ;
     ns1:foundName "International Consolidated Airlines Group" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "International Consolidated Airlines Group" ;
     ns1:sameAsHigh <https://1145.am/db/173893/International_Consolidated_Airlines_Group>,
         <https://1145.am/db/2489252/International_Consolidated_Airlines_Group>,
@@ -5288,6 +5369,7 @@
     ns1:documentTitle "Backed by Google's Gradient, Versed wants to help storytellers create video games using generative AI" ;
     ns1:documentURL <https://techcrunch.com/2023/06/14/backed-by-googles-gradient-versed-wants-to-help-storytellers-create-video-games-using-generative-ai/> ;
     ns1:foundName "Gradient Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:investor <https://1145.am/db/2035247/Seed_Investment_Gradient_Ventures_Versed_Has_Not_Happened> ;
     ns1:name "Gradient Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1747048/Gradient_Ventures>,
@@ -5382,6 +5464,7 @@
     ns1:documentURL <https://www.reuters.com/technology/ai-startup-synthesia-gains-unicorn-status-after-nvidia-backed-fundraise-2023-06-13/> ;
     ns1:foundName "Accel" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2037006/Investment_Accel_Nventures_Nvidia_Synthesia_Completed> ;
     ns1:name "Accel" ;
     ns1:sameAsHigh <https://1145.am/db/1050532/Accel>,
@@ -5687,6 +5770,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/britains-itv-confirms-it-is-looking-buy-all3media-2023-06-16/> ;
     ns1:foundName "ITV" ;
     ns1:industry "broadcaster" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "ITV" ;
     ns1:sameAsHigh <https://1145.am/db/1423977/Itv_Studios>,
         <https://1145.am/db/2087843/Itv>,
@@ -5715,6 +5799,7 @@
     ns1:documentTitle "Canadian pensions manager invests $400 million in Swedish battery maker Northvolt" ;
     ns1:documentURL <https://www.reuters.com/business/autos-transportation/canadian-pension-fund-invests-400-mln-swedish-battery-maker-northvolt-2023-06-20/> ;
     ns1:foundName "IMCO" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2042556/Investment_Investment_Management_Corporation_Of_Ontario_Northvolt_Has_Not_Happened> ;
     ns1:name "IMCO" ;
     ns1:sameAsMedium <https://1145.am/db/2589461/Imco> ;
@@ -5729,6 +5814,7 @@
     ns1:documentTitle "Canadian pensions manager invests $400 million in Swedish battery maker Northvolt" ;
     ns1:documentURL <https://www.reuters.com/business/autos-transportation/canadian-pension-fund-invests-400-mln-swedish-battery-maker-northvolt-2023-06-20/> ;
     ns1:foundName "Investment Management Corporation of Ontario" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2042556/Investment_Investment_Management_Corporation_Of_Ontario_Northvolt_Has_Not_Happened> ;
     ns1:name "Investment Management Corporation of Ontario" ;
     ns1:sameAsHigh <https://1145.am/db/2080018/Investment_Management_Corporation_Of_Ontario> ;
@@ -5741,6 +5827,7 @@
     ns1:documentTitle "Parrot Unveils Proprietary AI-Powered Platform for Multi-Billion Court Reporting Market, Raises $11M in Series A Funding" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230613995018/en/Parrot-Unveils-Proprietary-AI-Powered-Platform-for-Multi-Billion-Court-Reporting-Market-Raises-11M-in-Series-A-Funding> ;
     ns1:foundName "Amplify Partners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2043146/Series_A_Investment_Amplify_Partners_Parrot_Xyz_Venture_Capital_Completed> ;
     ns1:name "Amplify Partners" ;
     ns1:sameAsHigh <https://1145.am/db/1120191/Amplify_Partners>,
@@ -5814,6 +5901,7 @@
     ns1:documentTitle "Parrot Unveils Proprietary AI-Powered Platform for Multi-Billion Court Reporting Market, Raises $11M in Series A Funding" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230613995018/en/Parrot-Unveils-Proprietary-AI-Powered-Platform-for-Multi-Billion-Court-Reporting-Market-Raises-11M-in-Series-A-Funding> ;
     ns1:foundName "XYZ Venture Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2043146/Series_A_Investment_Amplify_Partners_Parrot_Xyz_Venture_Capital_Completed> ;
     ns1:name "XYZ Venture Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1140226/Xyz_Venture_Capital>,
@@ -5940,6 +6028,7 @@
     ns1:documentTitle "Acryl Data raises $21M to grow its enterprise data catalog platform" ;
     ns1:documentURL <https://techcrunch.com/2023/06/22/acryl-data-raises-21m-to-grow-its-enterprise-data-catalog-platform/> ;
     ns1:foundName "Guillermo Rauch" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2046197/Series_A_Investment_8vc_Acryl_Data_Guillermo_Rauch_Sherpalo_Ventures_Vercel_Completed> ;
     ns1:name "Guillermo Rauch" ;
     ns1:sameAsMedium <https://1145.am/db/1712326/Guillermo_Rauch>,
@@ -6052,6 +6141,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/26/as-the-generative-ai-craze-rages-on-fintech-ramp-acquires-ai-powered-customer-support-startup-cohere-io/> ;
     ns1:foundName "Ramp" ;
     ns1:industry "Finance" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Ramp" ;
     ns1:sameAsHigh <https://1145.am/db/1756230/Ramp>,
         <https://1145.am/db/1759938/Ramp>,
@@ -6222,6 +6312,7 @@
     ns1:documentTitle "Augmedics raises $82.5 million to accelerate adoption of augmented reality spine surgery" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627471926/en/Augmedics-raises-82.5-million-to-accelerate-adoption-of-augmented-reality-spine-surgery> ;
     ns1:foundName "Almeda Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2050282/Series_D_Investment_Almeda_Ventures_Augmedics_Cpmg_Evidity_Health_Capital_Hig_Capital_Revival_Healthcare_Capital_Completed> ;
     ns1:name "Almeda Ventures" ;
     ns1:sourceName "Business Wire" .
@@ -6235,6 +6326,7 @@
     ns1:documentTitle "Augmedics raises $82.5 million to accelerate adoption of augmented reality spine surgery" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627471926/en/Augmedics-raises-82.5-million-to-accelerate-adoption-of-augmented-reality-spine-surgery> ;
     ns1:foundName "CPMG" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2050282/Series_D_Investment_Almeda_Ventures_Augmedics_Cpmg_Evidity_Health_Capital_Hig_Capital_Revival_Healthcare_Capital_Completed> ;
     ns1:name "CPMG" ;
     ns1:sameAsMedium <https://1145.am/db/2068430/CPMG>,
@@ -6250,6 +6342,7 @@
     ns1:documentTitle "Augmedics raises $82.5 million to accelerate adoption of augmented reality spine surgery" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627471926/en/Augmedics-raises-82.5-million-to-accelerate-adoption-of-augmented-reality-spine-surgery> ;
     ns1:foundName "Evidity Health Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:investor <https://1145.am/db/2050282/Series_D_Investment_Almeda_Ventures_Augmedics_Cpmg_Evidity_Health_Capital_Hig_Capital_Revival_Healthcare_Capital_Completed> ;
     ns1:name "Evidity Health Capital" ;
     ns1:sameAsMedium <https://1145.am/db/838323/Evidity_Health_Capital> ;
@@ -6457,6 +6550,7 @@
     ns1:documentTitle "Augmedics raises $82.5 million to accelerate adoption of augmented reality spine surgery" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627471926/en/Augmedics-raises-82.5-million-to-accelerate-adoption-of-augmented-reality-spine-surgery> ;
     ns1:foundName "Revival Healthcare Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2050282/Series_D_Investment_Almeda_Ventures_Augmedics_Cpmg_Evidity_Health_Capital_Hig_Capital_Revival_Healthcare_Capital_Completed> ;
     ns1:name "Revival Healthcare Capital" ;
     ns1:sameAsHigh <https://1145.am/db/783381/Revival_Healthcare_Capital> ;
@@ -6469,6 +6563,7 @@
     ns1:documentTitle "Honey Homes Raises $9 Million in Series A Funding To Reimagine Home Upkeep and Maintenance" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627073229/en/Honey-Homes-Raises-9-Million-in-Series-A-Funding-To-Reimagine-Home-Upkeep-and-Maintenance> ;
     ns1:foundName "Akhund" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:investor <https://1145.am/db/2050566/Investment_Akhund_Doordash_Honey_Homes_Mercury_Moving_Capital_Opendoor_Pear_Vc_Teambuilder_Ventures_Completed> ;
     ns1:name "Akhund" ;
     ns1:sourceName "Business Wire" .
@@ -6883,6 +6978,7 @@
     ns1:documentTitle "Yara Makes Strategic Investment in Industrial AI Company Intelecy" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627066496/en/Yara-Makes-Strategic-Investment-in-Industrial-AI-Company-Intelecy> ;
     ns1:foundName "GC Rieber" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2051536/Investment_Aidiom_Gc_Rieber_Intelecy_Investinor_Completed> ;
     ns1:name "GC Rieber" ;
     ns1:sourceName "Business Wire" .
@@ -6924,6 +7020,7 @@
     ns1:foundName "Keysight",
         "Keysight Technologies" ;
     ns1:industry "Electronic equipment" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "Keysight Technologies" ;
     ns1:sameAsHigh <https://1145.am/db/1681512/Keysight_Technologies>,
         <https://1145.am/db/2618731/Keysight_Technologies>,
@@ -7420,6 +7517,7 @@
     ns1:documentTitle "SMAIO Obtains €2.5m in Non-dilutive Financing" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230629290094/en/SMAIO-Obtains-%E2%82%AC2.5m-in-Non-dilutive-Financing> ;
     ns1:foundName "Bpifrance" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:investor <https://1145.am/db/2053176/Innovation_Research_And_Development_Investment> ;
     ns1:name "Bpifrance" ;
     ns1:sameAsMedium <https://1145.am/db/1156244/Bpifrance>,
@@ -7497,6 +7595,7 @@
     ns1:documentTitle "CORRECTING and REPLACING Cart.com Announces $60 Million Series C Funding Round at $1.2 Billion Valuation" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230626049409/en/CORRECTING-and-REPLACING-Cart.com-Announces-60-Million-Series-C-Funding-Round-at-1.2-Billion-Valuation> ;
     ns1:foundName "B. Riley Venture Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2053315/Equity_Investment_B_Riley_Venture_Capital_Cartcom_Kingfisher_Investment_Advisors_Legacy_Knight_Prosperity7_Ventures_Snowflake_Ventures_Completed> ;
     ns1:name "B. Riley Venture Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1230234/B_Riley_Venture_Capital>,
@@ -7511,6 +7610,7 @@
     ns1:documentTitle "CORRECTING and REPLACING Cart.com Announces $60 Million Series C Funding Round at $1.2 Billion Valuation" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230626049409/en/CORRECTING-and-REPLACING-Cart.com-Announces-60-Million-Series-C-Funding-Round-at-1.2-Billion-Valuation> ;
     ns1:foundName "Kingfisher Investment Advisors" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2053315/Equity_Investment_B_Riley_Venture_Capital_Cartcom_Kingfisher_Investment_Advisors_Legacy_Knight_Prosperity7_Ventures_Snowflake_Ventures_Completed> ;
     ns1:name "Kingfisher Investment Advisors" ;
     ns1:sameAsHigh <https://1145.am/db/2050309/Kingfisher_Investment_Advisors> ;
@@ -7525,6 +7625,7 @@
     ns1:documentTitle "CORRECTING and REPLACING Cart.com Announces $60 Million Series C Funding Round at $1.2 Billion Valuation" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230626049409/en/CORRECTING-and-REPLACING-Cart.com-Announces-60-Million-Series-C-Funding-Round-at-1.2-Billion-Valuation> ;
     ns1:foundName "Legacy Knight" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2053315/Equity_Investment_B_Riley_Venture_Capital_Cartcom_Kingfisher_Investment_Advisors_Legacy_Knight_Prosperity7_Ventures_Snowflake_Ventures_Completed> ;
     ns1:name "Legacy Knight" ;
     ns1:sameAsHigh <https://1145.am/db/2050309/Legacy_Knight> ;
@@ -7536,6 +7637,7 @@
     ns1:documentTitle "CORRECTING and REPLACING Cart.com Announces $60 Million Series C Funding Round at $1.2 Billion Valuation" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230626049409/en/CORRECTING-and-REPLACING-Cart.com-Announces-60-Million-Series-C-Funding-Round-at-1.2-Billion-Valuation> ;
     ns1:foundName "Prosperity7 Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2053315/Equity_Investment_B_Riley_Venture_Capital_Cartcom_Kingfisher_Investment_Advisors_Legacy_Knight_Prosperity7_Ventures_Snowflake_Ventures_Completed> ;
     ns1:name "Prosperity7 Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1561127/Prosperity7_Ventures>,
@@ -7553,6 +7655,7 @@
     ns1:documentTitle "CORRECTING and REPLACING Cart.com Announces $60 Million Series C Funding Round at $1.2 Billion Valuation" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230626049409/en/CORRECTING-and-REPLACING-Cart.com-Announces-60-Million-Series-C-Funding-Round-at-1.2-Billion-Valuation> ;
     ns1:foundName "Snowflake Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2053315/Equity_Investment_B_Riley_Venture_Capital_Cartcom_Kingfisher_Investment_Advisors_Legacy_Knight_Prosperity7_Ventures_Snowflake_Ventures_Completed> ;
     ns1:name "Snowflake Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1119640/Snowflake_Ventures>,
@@ -7594,6 +7697,7 @@
     ns1:documentTitle "NI Stockholders Approve Transaction with Emerson" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230629201570/en/NI-Stockholders-Approve-Transaction-with-Emerson> ;
     ns1:foundName "Emerson" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "Emerson" ;
     ns1:sameAsMedium <https://1145.am/db/1102228/Emerson>,
         <https://1145.am/db/1174989/Emerson>,
@@ -7629,6 +7733,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/hotelbeds-shareholders-hire-morgan-stanley-evercore-ready-ipo-expansion-says-2023-06-30/> ;
     ns1:foundName "Cinven" ;
     ns1:industry "Buyout fund" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2053902/Hotelbeds_Investment> ;
     ns1:name "Cinven" ;
     ns1:sameAsHigh <https://1145.am/db/1358758/Cinven>,
@@ -7702,6 +7807,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/elite-italian-bicycle-maker-pinarello-changes-hands-2023-06-30/> ;
     ns1:foundName "Ivan Glasenberg",
         "billionaire Ivan Glasenberg" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2054160/Pinarello_Stake_Investment>,
         <https://1145.am/db/2054160/Stake_Investment_Ivan_Glasenberg_Has_Not_Happened> ;
     ns1:name "Ivan Glasenberg" ;
@@ -7715,6 +7821,7 @@
     ns1:documentURL <https://www.reuters.com/business/finance/italys-top-insurers-banks-strike-eurovita-rescue-deal-2023-07-01/> ;
     ns1:foundName "Allianz" ;
     ns1:industry "life insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Allianz" ;
     ns1:protagonist <https://1145.am/db/2054640/Merger_Allianz_Insurers_Generali_Intesa_Sanpaolo_Vita_Unipolsai_Has_Not_Happened> ;
     ns1:sameAsHigh <https://1145.am/db/1068229/Allianz>,
@@ -7763,6 +7870,7 @@
     ns1:documentURL <https://www.reuters.com/business/finance/italys-top-insurers-banks-strike-eurovita-rescue-deal-2023-07-01/> ;
     ns1:foundName "Insurers Generali" ;
     ns1:industry "insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Insurers Generali" ;
     ns1:protagonist <https://1145.am/db/2054640/Eurovita_Investment>,
         <https://1145.am/db/2054640/Merger_Allianz_Insurers_Generali_Intesa_Sanpaolo_Vita_Unipolsai_Has_Not_Happened> ;
@@ -7778,6 +7886,7 @@
     ns1:documentURL <https://www.reuters.com/business/finance/italys-top-insurers-banks-strike-eurovita-rescue-deal-2023-07-01/> ;
     ns1:foundName "Intesa Sanpaolo Vita" ;
     ns1:industry "insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Intesa Sanpaolo Vita" ;
     ns1:protagonist <https://1145.am/db/2054640/Eurovita_Investment>,
         <https://1145.am/db/2054640/Merger_Allianz_Insurers_Generali_Intesa_Sanpaolo_Vita_Unipolsai_Has_Not_Happened> ;
@@ -7795,6 +7904,7 @@
     ns1:foundName ", UnipolSAI",
         "UnipolSAI" ;
     ns1:industry "insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "UnipolSAI" ;
     ns1:protagonist <https://1145.am/db/2054640/Eurovita_Investment>,
         <https://1145.am/db/2054640/Merger_Allianz_Insurers_Generali_Intesa_Sanpaolo_Vita_Unipolsai_Has_Not_Happened> ;
@@ -7943,6 +8053,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/06/softbank-backs-japanese-robotics-startup-telexistence-in-170m-funding-round/> ;
     ns1:foundName "SoftBank" ;
     ns1:industry "tech giant" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2056248/Series_B_Investment_Airbus_Ventures_Globis_Capital_Partners_Kddi_Open_Innovation_Fund_Monoful_Partners_Softbank_Telexistence_Completed> ;
     ns1:name "SoftBank" ;
     ns1:sameAsHigh <https://1145.am/db/1215073/Softbank>,
@@ -8198,6 +8309,7 @@
     ns1:documentTitle "AiM Future Successfully Closes Series A Round of Investment" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230710712257/en/AiM-Future-Successfully-Closes-Series-A-Round-of-Investment> ;
     ns1:foundName "Daedeok Venture Partners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2056931/Series_A_Investment_Aim_Future_Daedeok_Venture_Partners_Hi_Investment_Partners_Kb_Investments_L___S_Venture_Capital_We_Ventures_Completed> ;
     ns1:name "Daedeok Venture Partners" ;
     ns1:sourceName "Business Wire" .
@@ -8219,6 +8331,7 @@
     ns1:documentTitle "AiM Future Successfully Closes Series A Round of Investment" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230710712257/en/AiM-Future-Successfully-Closes-Series-A-Round-of-Investment> ;
     ns1:foundName "KB Investments" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2056931/Series_A_Investment_Aim_Future_Daedeok_Venture_Partners_Hi_Investment_Partners_Kb_Investments_L___S_Venture_Capital_We_Ventures_Completed> ;
     ns1:name "KB Investments" ;
     ns1:sameAsMedium <https://1145.am/db/705195/Kb_Investments> ;
@@ -8231,6 +8344,7 @@
     ns1:documentTitle "AiM Future Successfully Closes Series A Round of Investment" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230710712257/en/AiM-Future-Successfully-Closes-Series-A-Round-of-Investment> ;
     ns1:foundName "L & S Venture Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2056931/Series_A_Investment_Aim_Future_Daedeok_Venture_Partners_Hi_Investment_Partners_Kb_Investments_L___S_Venture_Capital_We_Ventures_Completed> ;
     ns1:name "L & S Venture Capital" ;
     ns1:sameAsMedium <https://1145.am/db/1890288/L___S_Ventures> ;
@@ -8242,6 +8356,7 @@
     ns1:documentTitle "AiM Future Successfully Closes Series A Round of Investment" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230710712257/en/AiM-Future-Successfully-Closes-Series-A-Round-of-Investment> ;
     ns1:foundName "We Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2056931/Series_A_Investment_Aim_Future_Daedeok_Venture_Partners_Hi_Investment_Partners_Kb_Investments_L___S_Venture_Capital_We_Ventures_Completed> ;
     ns1:name "We Ventures" ;
     ns1:sameAsMedium <https://1145.am/db/1747116/We>,
@@ -8259,6 +8374,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/uks-alfa-financial-tumbles-eqt-drops-buyout-pursuit-2023-07-07/> ;
     ns1:foundName "EQT" ;
     ns1:industry "Investment" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2056992/Alfa_Financial_Software_Acquisition> ;
     ns1:name "EQT" ;
     ns1:sameAsHigh <https://1145.am/db/112816/Eqt_Ab>,
@@ -8358,6 +8474,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "Lightspeed Venture" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2057242/Sarvam_Joint_Venture> ;
     ns1:name "Lightspeed Venture" ;
     ns1:sourceName "Reuters" .
@@ -8369,6 +8486,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "Peak XV" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2057242/Sarvam_Joint_Venture> ;
     ns1:name "Peak XV" ;
     ns1:sameAsHigh <https://1145.am/db/2062785/Peak_Xv>,
@@ -8388,6 +8506,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "Pratyush Kumar" ;
     ns1:industry "artificial intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Pratyush Kumar" ;
     ns1:protagonist <https://1145.am/db/2057242/Joint_Venture_Pratyush_Kumar_Sarvam_Vivek_Raghavan_Has_Not_Happened>,
         <https://1145.am/db/2057242/Sarvam_Joint_Venture> ;
@@ -8403,6 +8522,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "Vivek Raghavan" ;
     ns1:industry "artificial intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Vivek Raghavan" ;
     ns1:protagonist <https://1145.am/db/2057242/Joint_Venture_Pratyush_Kumar_Sarvam_Vivek_Raghavan_Has_Not_Happened>,
         <https://1145.am/db/2057242/Sarvam_Joint_Venture> ;
@@ -8418,6 +8538,7 @@
     ns1:foundName "Booking",
         "Booking Holdings" ;
     ns1:industry "Online travel agency" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Booking Holdings" ;
     ns1:sameAsHigh <https://1145.am/db/1493521/Booking_Holdings_Inc>,
         <https://1145.am/db/2019473/Booking_Holdings_Inc>,
@@ -8464,6 +8585,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230710034342/en/Houlihan-Lokey-to-Acquire-7-Mile-Advisors> ;
     ns1:foundName "EPAM Systems" ;
     ns1:industry "IT services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "EPAM" ;
     ns1:sourceName "Business Wire" .
 
@@ -8475,6 +8598,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230710034342/en/Houlihan-Lokey-to-Acquire-7-Mile-Advisors> ;
     ns1:foundName "Globant" ;
     ns1:industry "IT services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Globant" ;
     ns1:sameAsHigh <https://1145.am/db/1742133/Globant>,
         <https://1145.am/db/1861038/Globant>,
@@ -8498,6 +8622,7 @@
     ns1:foundName "Houlihan Lokey",
         "Houlihan Lokey, Inc" ;
     ns1:industry "investment bank" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Houlihan Lokey" ;
     ns1:sameAsHigh <https://1145.am/db/1014460/Houlihan_Lokey>,
         <https://1145.am/db/1101869/Houlihan_Lokey>,
@@ -8574,6 +8699,7 @@
     ns1:documentTitle "Houlihan Lokey to Acquire 7 Mile Advisors" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230710034342/en/Houlihan-Lokey-to-Acquire-7-Mile-Advisors> ;
     ns1:foundName "Rockwell Automation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Rockwell Automation" ;
     ns1:sameAsMedium <https://1145.am/db/1112120/Rockwell_Automation>,
         <https://1145.am/db/1112485/Rockwell_Automation>,
@@ -8617,6 +8743,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/bain-capital-talks-buy-indian-ice-cream-maker-vadilal-cnbc-tv18-2023-07-10/> ;
     ns1:foundName "Bain Capital" ;
     ns1:industry "private investment firm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Bain Capital" ;
     ns1:sameAsHigh <https://1145.am/db/107233/Bain_Capital>,
         <https://1145.am/db/107823/Bain_Capital>,
@@ -8753,6 +8880,7 @@
     ns1:documentTitle "Raft, which services freight forwarders, closes $30M Series B led by Eight Roads VC" ;
     ns1:documentURL <https://techcrunch.com/2023/07/11/raft-which-services-freight-forwarders-closes-30m-series-b-led-by-eight-roads-vc/> ;
     ns1:foundName "Dynamo Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2059038/Series_B_Investment_Bessemer_Venture_Partners_Dynamo_Ventures_Eight_Roads_Vc_Episode_1_Moguntia_Capital_Raft_Completed> ;
     ns1:name "Dynamo Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1397021/Dynamo_Ventures> ;
@@ -8868,6 +8996,7 @@
     ns1:documentTitle "Raft, which services freight forwarders, closes $30M Series B led by Eight Roads VC" ;
     ns1:documentURL <https://techcrunch.com/2023/07/11/raft-which-services-freight-forwarders-closes-30m-series-b-led-by-eight-roads-vc/> ;
     ns1:foundName "Moguntia Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2059038/Series_B_Investment_Bessemer_Venture_Partners_Dynamo_Ventures_Eight_Roads_Vc_Episode_1_Moguntia_Capital_Raft_Completed> ;
     ns1:name "Moguntia Capital" ;
     ns1:sourceName "TechCrunch" .
@@ -8889,6 +9018,8 @@
         "Marposs Group" ;
     ns1:industry "electronics",
         "measurement and process monitoring technologies" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical>,
+        <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "Marposs",
         "Marposs Group" ;
     ns1:sourceName "PR Web" .
@@ -8902,6 +9033,7 @@
     ns1:documentTitle "China's Qingdao sets up firm to bail out its local government financing arms" ;
     ns1:documentURL <https://www.reuters.com/business/finance/chinas-qingdao-sets-up-firm-bail-out-its-local-govt-financing-arms-sources-2023-07-13/> ;
     ns1:foundName "Dongdin Industrial Group" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060100/Vehicles_Investment_Dongdin_Industrial_Group_Qingdao_Has_Not_Happened> ;
     ns1:name "Dongdin Industrial Group" ;
     ns1:sourceName "Reuters" .
@@ -8913,6 +9045,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "EBRD" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "EBRD" ;
     ns1:sameAsMedium <https://1145.am/db/1334108/Ebrd>,
@@ -8927,6 +9060,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "Index Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "Index Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1151328/Index_Ventures>,
@@ -9225,6 +9359,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "Marathon Venture Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "Marathon Venture Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1759759/Marathon_Venture_Capital>,
@@ -9241,6 +9376,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "Pentech Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "Pentech Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1824653/Pentech_Ventures> ;
@@ -9269,6 +9405,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "Visionaries Club" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "Visionaries Club" ;
     ns1:sameAsHigh <https://1145.am/db/1761247/Visionaries_Club> ;
@@ -9290,6 +9427,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230712698516/en/Bobbie-Acquires-Nature%E2%80%99s-One-with-the-Most-Innovative-Infant-Formula-Manufacturing-Facility-in-the-U.S.-to-Fast-Track-the-Future-of-Formula> ;
     ns1:foundName "Bobbie" ;
     ns1:industry "infant formula" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2060504/Natures_One_Series_C_Investment> ;
     ns1:name "Bobbie" ;
     ns1:sameAsHigh <https://1145.am/db/2059949/Bobbie> ;
@@ -9324,6 +9463,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230713281212/en/SpeedyBrand-Secures-2.5M-in-Funding-Led-by-Google-Ventures-and-Y-Combinator-Introduces-Its-AI-Driven-SEO-Content-Marketing-Solution-for-SMBs> ;
     ns1:foundName "GV",
         "GV (Google Ventures)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2062655/Investment_Gv_(google_Ventures)_Speedybrand_Y_Combinator_Completed> ;
     ns1:name "GV",
         "GV (Google Ventures)" ;
@@ -9413,6 +9554,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230713281212/en/SpeedyBrand-Secures-2.5M-in-Funding-Led-by-Google-Ventures-and-Y-Combinator-Introduces-Its-AI-Driven-SEO-Content-Marketing-Solution-for-SMBs> ;
     ns1:foundName "Combinator",
         "Y Combinator" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2062655/Investment_Gv_(google_Ventures)_Speedybrand_Y_Combinator_Completed> ;
     ns1:name "Combinator",
         "Y Combinator" ;
@@ -9584,6 +9726,7 @@
     ns1:documentTitle "Intercontinental Exchange and Black Knight Announce Agreement to Sell Black Knight's Optimal Blue Business to Constellation Software Inc." ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230717666703/en/Intercontinental-Exchange-and-Black-Knight-Announce-Agreement-to-Sell-Black-Knight%E2%80%99s-Optimal-Blue-Business-to-Constellation-Software-Inc.> ;
     ns1:foundName "Constellation Software Inc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Constellation Software Inc" ;
     ns1:participant <https://1145.am/db/2062712/Black_Knight_Business_Divestment> ;
     ns1:sameAsHigh <https://1145.am/db/1655475/Constellation_Software_Inc>,
@@ -9609,6 +9752,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230717666703/en/Intercontinental-Exchange-and-Black-Knight-Announce-Agreement-to-Sell-Black-Knight%E2%80%99s-Optimal-Blue-Business-to-Constellation-Software-Inc.> ;
     ns1:foundName "ICE",
         "Intercontinental Exchange, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "Intercontinental Exchange",
         "Intercontinental Exchange, Inc." ;
     ns1:sameAsMedium <https://1145.am/db/1031575/Intercontinental_Exchange_Inc>,
@@ -9669,6 +9813,8 @@
     ns1:documentURL <https://techcrunch.com/2023/07/17/furlenco-sheela-foam-sleepwell/> ;
     ns1:foundName "Sheela Foam" ;
     ns1:industry "mattress" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping>,
+        <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:investor <https://1145.am/db/2062732/Furlenco_Stake_Acquisition>,
         <https://1145.am/db/2062732/Kurlon_Enterprises_Stake_Investment> ;
     ns1:name "Sheela Foam" ;
@@ -9688,6 +9834,7 @@
     ns1:foundName "3D Systems",
         "3D Systems Corporation" ;
     ns1:industry "3D printing" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "3D Systems" ;
     ns1:sameAsHigh <https://1145.am/db/1004905/3d_Systems>,
         <https://1145.am/db/1266053/3d_Systems>,
@@ -9733,6 +9880,7 @@
     ns1:foundName "Daniel Kretinsky",
         "Kretinsky" ;
     ns1:industry "retail" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:investor <https://1145.am/db/2063929/Casino_Acquisition> ;
     ns1:name "Daniel Kretinsky",
         "Kretinsky" ;
@@ -9777,6 +9925,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230719608998/en/Heritage-Crystal-Clean-Inc.-to-be-Acquired-by-J.F.-Lehman-Company-for-1.2-Billion> ;
     ns1:foundName "J.F" ;
     ns1:industry "private equity investment firm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "J.F" ;
     ns1:participant <https://1145.am/db/2064327/Heritage-Crystal_Clean_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1542950/Jf>,
@@ -9795,6 +9944,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230719608998/en/Heritage-Crystal-Clean-Inc.-to-be-Acquired-by-J.F.-Lehman-Company-for-1.2-Billion> ;
     ns1:foundName "Lehman & Company" ;
     ns1:industry "private equity investment firm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Lehman & Company" ;
     ns1:sameAsHigh <https://1145.am/db/1153047/Lehman___Company>,
         <https://1145.am/db/1254626/Lehman___Company>,
@@ -9837,6 +9987,8 @@
     ns1:foundName "The company",
         "UVeye" ;
     ns1:industry "automotive" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "UVeye" ;
     ns1:sameAsHigh <https://1145.am/db/1798166/Uveye> ;
     ns1:sameAsMedium <https://1145.am/db/1154172/Uveye>,
@@ -9881,6 +10033,7 @@
     ns1:documentTitle "NYBC Ventures Launches $50M Fund to Accelerate Innovations in Blood and Cellular Therapies" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230511005010/en/NYBC-Ventures-Launches-50M-Fund-to-Accelerate-Innovations-in-Blood-and-Cellular-Therapies> ;
     ns1:foundName "NYBC Ventures" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "NYBC Ventures" ;
     ns1:sameAsMedium <https://1145.am/db/1691061/Nybc_Ventures>,
         <https://1145.am/db/2556678/Nybc> ;
@@ -9928,6 +10081,7 @@
     ns1:documentTitle "Dolomite Closes $2.5 Million Funding Round to Revolutionize Decentralized Money Markets and Hedging" ;
     ns1:documentURL <https://www.prweb.com/releases/dolomite_closes_2_5_million_funding_round_to_revolutionize_decentralized_money_markets_and_hedging/prweb19334537.htm> ;
     ns1:foundName "Leavitt Innovations" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Leavitt Innovations" ;
     ns1:sourceName "PR Web" .
 
@@ -9938,6 +10092,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/15/together-raises-20m-to-build-open-source-generative-ai-models/> ;
     ns1:foundName "Case in point, Together",
         "Together" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Case in point, Together",
         "Together" ;
     ns1:sameAsMedium <https://1145.am/db/2822898/Together> ;
@@ -9981,6 +10136,8 @@
     ns1:documentURL <https://techcrunch.com/2023/05/16/tangible-seed-round/> ;
     ns1:foundName "Tangible" ;
     ns1:industry "construction tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors>,
+        <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Tangible" ;
     ns1:sourceName "TechCrunch" .
 
@@ -9992,6 +10149,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/software-ag-minority-investor-groups-oppose-silver-lake-delisting-2023-05-16/> ;
     ns1:foundName "Silver Lake" ;
     ns1:industry "Private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Silver Lake" ;
     ns1:sameAsHigh <https://1145.am/db/1153944/Silver_Lake>,
         <https://1145.am/db/1659272/Silver_Lake>,
@@ -10121,6 +10279,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/pfizer-plans-raise-31-bln-debt-offering-finance-seagen-takeover-2023-05-16/> ;
     ns1:foundName "Allergan" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Allergan" ;
     ns1:sameAsHigh <https://1145.am/db/2154415/Allergan>,
         <https://1145.am/db/2289903/Allergan>,
@@ -10307,6 +10466,8 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/pfizer-plans-raise-31-bln-debt-offering-finance-seagen-takeover-2023-05-16/> ;
     ns1:foundName "Seagen Inc" ;
     ns1:industry "drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Seagen Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1145060/Seagen_Inc>,
         <https://1145.am/db/1490473/Seagen_Inc>,
@@ -10347,6 +10508,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230517005078/en/Pepper-Advantage-Acquires-Indian-AI-driven-Credit-Management-Platform-Rieom.ai> ;
     ns1:foundName "Rieom.ai" ;
     ns1:industry "financial services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Rieom.ai" ;
     ns1:sourceName "Business Wire" .
 
@@ -10377,6 +10539,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230517005122/en/Eagle-Eye-Networks-and-Brivo-Announce-192M-Investment-%E2%80%93-One-of-the-Largest-Ever-in-Cloud-Physical-Security> ;
     ns1:foundName "Brivo" ;
     ns1:industry "security integration" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Brivo" ;
     ns1:sameAsHigh <https://1145.am/db/803145/Brivo> ;
     ns1:sameAsMedium <https://1145.am/db/1051762/Brivo>,
@@ -10392,6 +10555,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230517005122/en/Eagle-Eye-Networks-and-Brivo-Announce-192M-Investment-%E2%80%93-One-of-the-Largest-Ever-in-Cloud-Physical-Security> ;
     ns1:foundName "Eagle Eye Networks" ;
     ns1:industry "security integration" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Eagle Eye Networks" ;
     ns1:sameAsHigh <https://1145.am/db/513050/Eagle_Eye_Networks> ;
     ns1:sourceName "Business Wire" .
@@ -10423,6 +10588,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005275/en/Ensoma-Closes-Series-B-Extension-Bringing-Total-Round-to-135-Million> ;
     ns1:foundName "Ensoma" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Ensoma" ;
     ns1:sameAsMedium <https://1145.am/db/1619124/Ensoma>,
         <https://1145.am/db/1620434/Ensoma>,
@@ -10439,6 +10605,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230516005710/en/Pear-Suite-Empowers-Community-Health-Workers-to-Improve-Health-in-Asian-American-and-Pacific-Islander-Communities> ;
     ns1:foundName "Pear Suite" ;
     ns1:industry "digital health" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Pear Suite" ;
     ns1:sourceName "Business Wire" .
 
@@ -10448,6 +10616,7 @@
     ns1:documentTitle "Restaurant365 gobbles up $135M to supersize its software for the food service industry" ;
     ns1:documentURL <https://techcrunch.com/2023/05/19/restaurant365-gobbles-up-135m-to-supersize-its-software-for-the-food-service-industry/> ;
     ns1:foundName "Bessemer Venture Partners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2013193/Investment_Bessemer_Venture_Partners_Iconic_Growth_Kkr_L_Catterton_Restaurant365_Completed> ;
     ns1:name "Bessemer Venture Partners" ;
     ns1:sameAsHigh <https://1145.am/db/1140521/Bessemer_Venture_Partners>,
@@ -10678,6 +10847,7 @@
     ns1:foundName "GAM",
         "GAM Holding" ;
     ns1:industry "asset manager" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "GAM" ;
     ns1:sameAsHigh <https://1145.am/db/1661393/Gam>,
         <https://1145.am/db/1978116/Gam>,
@@ -10698,6 +10868,7 @@
     ns1:foundName "Liontrust",
         "Liontrust Asset Management plc" ;
     ns1:industry "Asset Management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2013695/Gam_Acquisition> ;
     ns1:name "Liontrust" ;
     ns1:sameAsHigh <https://1145.am/db/2037011/Liontrust_Asset_Management>,
@@ -10760,6 +10931,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/cloud-based-restaurant365-hits-unicorn-status-after-135-mln-funding-round-2023-05-19/> ;
     ns1:foundName "SageSure" ;
     ns1:industry "property insurer" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "SageSure" ;
     ns1:sameAsHigh <https://1145.am/db/1300420/Sagesure>,
         <https://1145.am/db/1679438/Sagesure>,
@@ -10783,6 +10955,7 @@
     ns1:documentTitle "RenaissanceRe Announces Public Offering of 6,300,000 Common Shares" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230522005640/en/RenaissanceRe-Announces-Public-Offering-of-6300000-Common-Shares> ;
     ns1:foundName "RenaissanceRe Holdings Ltd." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "RenaissanceRe Holdings Ltd." ;
     ns1:sameAsMedium <https://1145.am/db/1489099/Renaissancere_Holdings_Ltd>,
         <https://1145.am/db/2015934/Renaissancere_Holdings_Ltd>,
@@ -10802,6 +10975,7 @@
     ns1:documentTitle "RenaissanceRe Announces Public Offering of 6,300,000 Common Shares" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230522005640/en/RenaissanceRe-Announces-Public-Offering-of-6300000-Common-Shares> ;
     ns1:foundName "Validus Holdings, Ltd." ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Validus Holdings, Ltd." ;
     ns1:sameAsHigh <https://1145.am/db/2089987/Validus_Holdings> ;
     ns1:sourceName "Business Wire" .
@@ -10816,6 +10990,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/cpfl-equatorial-eye-acquisition-enel-owned-power-distributor-brazil-2023-05-23/> ;
     ns1:foundName "Enel Ceara" ;
     ns1:industry "power distribution" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "Enel Ceara" ;
     ns1:sourceName "Reuters" .
 
@@ -10826,6 +11001,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/24/climate-tech-funding-esg-carbon-removal-fusion/> ;
     ns1:foundName "Novisto" ;
     ns1:industry "ESG data management" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Novisto" ;
     ns1:sourceName "TechCrunch" .
 
@@ -10839,6 +11015,7 @@
     ns1:foundName "Rayliant",
         "Rayliant Global Advisors" ;
     ns1:industry "wealth management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Rayliant",
         "Rayliant Global Advisors" ;
     ns1:sameAsMedium <https://1145.am/db/199771/Rayliant_Global_Advisors> ;
@@ -10854,6 +11031,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230524005970/en/Institutional-Property-Advisors-Closes-61.6-Million-Sale-and-Arranges-Financing-for-Suburban-Seattle-Multifamily-Asset> ;
     ns1:foundName "Artesia" ;
     ns1:industry "Apartment" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Artesia" ;
     ns1:sourceName "Business Wire" .
 
@@ -10865,6 +11044,7 @@
     ns1:documentTitle "Institutional Property Advisors Closes $61.6 Million Sale and Arranges Financing for Suburban Seattle Multifamily Asset" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230524005970/en/Institutional-Property-Advisors-Closes-61.6-Million-Sale-and-Arranges-Financing-for-Suburban-Seattle-Multifamily-Asset> ;
     ns1:foundName "Institutional Property Advisors" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2018610/Artesia_Acquisition> ;
     ns1:name "Institutional Property Advisors" ;
     ns1:sameAsHigh <https://1145.am/db/1051029/Institutional_Property_Advisors>,
@@ -10912,6 +11092,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230524005970/en/Institutional-Property-Advisors-Closes-61.6-Million-Sale-and-Arranges-Financing-for-Suburban-Seattle-Multifamily-Asset> ;
     ns1:foundName "Marcus & Millichap" ;
     ns1:industry "Real estate" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Marcus & Millichap" ;
     ns1:participant <https://1145.am/db/2018610/Artesia_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1051029/Marcus___Millichap>,
@@ -11039,6 +11220,7 @@
     ns1:documentURL <https://www.reuters.com/business/media-telecom/paramount-global-shares-rise-major-shareholder-gets-125-mln-investment-deal-2023-05-26/> ;
     ns1:foundName "Paramount Global" ;
     ns1:industry "movie theater operator" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Paramount Global" ;
     ns1:sameAsMedium <https://1145.am/db/1055921/Paramount_Global>,
         <https://1145.am/db/1243556/Paramount_Global>,
@@ -11071,6 +11253,7 @@
     ns1:documentURL <https://www.reuters.com/business/media-telecom/paramount-global-shares-rise-major-shareholder-gets-125-mln-investment-deal-2023-05-26/> ;
     ns1:foundName "National Amusements",
         "Shari Redstone's National Amusements Inc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:investor <https://1145.am/db/2020796/Investment_Bdt_Capital_Partners_Shari_Redstones_National_Amusements_Inc_Has_Not_Happened> ;
     ns1:name "National Amusements Inc",
         "Shari Redstone's National Amusements Inc" ;
@@ -11086,6 +11269,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/singaporean-fund-gic-takes-minority-stake-german-gas-specialist-messer-2023-05-30/> ;
     ns1:foundName "Messer" ;
     ns1:industry "industrial gases" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Messer" ;
     ns1:sameAsHigh <https://1145.am/db/1655948/Messer> ;
     ns1:sourceName "Reuters" .
@@ -11121,6 +11305,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/31/measurabl-an-esg-platform-for-real-estate-raises-93m/> ;
     ns1:foundName "Measurabl" ;
     ns1:industry "real estate" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Measurabl" ;
     ns1:sameAsHigh <https://1145.am/db/1312079/Measurabl>,
         <https://1145.am/db/471494/Measurabl>,
@@ -11135,6 +11320,8 @@
     ns1:documentURL <https://www.prweb.com/releases/2023/5/prweb19355613.htm> ;
     ns1:foundName "Equify Health" ;
     ns1:industry "health care" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Equify Health" ;
     ns1:sourceName "PR Web" .
 
@@ -11164,6 +11351,7 @@
     ns1:documentTitle "SIP Global Partners Co-Leads $154M Series C Funding Round for Lightmatter, World Leader in Photonics for AI Computing" ;
     ns1:documentURL <https://www.prweb.com/releases/2023/5/prweb19365751.htm> ;
     ns1:foundName "Lightmatter" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Lightmatter" ;
     ns1:sameAsHigh <https://1145.am/db/440070/Lightmatter>,
         <https://1145.am/db/440910/Lightmatter> ;
@@ -11182,6 +11370,7 @@
     ns1:documentURL <https://www.reuters.com/business/energy/jera-says-track-meet-2025-renewable-energy-goal-2023-05-31/> ;
     ns1:foundName "Green Power Investment" ;
     ns1:industry "renewable energy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "Green Power Investment" ;
     ns1:sourceName "Reuters" .
 
@@ -11209,6 +11398,7 @@
     ns1:documentURL <https://www.reuters.com/business/energy/jera-says-track-meet-2025-renewable-energy-goal-2023-05-31/> ;
     ns1:foundName "Parkwind" ;
     ns1:industry "renewable energy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "Parkwind" ;
     ns1:sameAsHigh <https://1145.am/db/1943563/Parkwind> ;
     ns1:sourceName "Reuters" .
@@ -11315,6 +11505,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/04/inside-stripes-latest-moves/> ;
     ns1:foundName "Okay" ;
     ns1:industry "analytics software" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Okay" ;
     ns1:sameAsMedium <https://1145.am/db/1763845/Okay>,
         <https://1145.am/db/2023554/Okay> ;
@@ -11342,6 +11533,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/lufthansa-ceo-says-premature-discuss-possible-interest-taking-over-portugals-tap-2023-06-04/> ;
     ns1:foundName "ITA Airways" ;
     ns1:industry "aviation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "ITA Airways" ;
     ns1:sameAsHigh <https://1145.am/db/1035306/Ita_Airways>,
         <https://1145.am/db/1047599/Ita_Airways>,
@@ -11451,6 +11643,7 @@
     ns1:foundName "Separately, Shein",
         "Shein" ;
     ns1:industry "fashion" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:investor <https://1145.am/db/2026695/Investment_Shein_Has_Not_Happened> ;
     ns1:name "Shein" ;
     ns1:sameAsHigh <https://1145.am/db/1652849/Shein>,
@@ -11480,6 +11673,7 @@
     ns1:documentTitle "Raphael Della Ratta, C'92, Funds the Climb the Mount Initiative" ;
     ns1:documentURL <https://www.prweb.com/releases/raphael_della_ratta_c92_funds_the_climb_the_mount_initiative/prweb19372896.htm> ;
     ns1:foundName "Climb the Mount" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Climb the Mount" ;
     ns1:sourceName "PR Web" .
 
@@ -11492,6 +11686,7 @@
     ns1:foundName "Ph.D.",
         "Raphael Della Ratta, C'92",
         "Raphael Della Ratta, C'92," ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:investor <https://1145.am/db/2027230/Investment_Raphael_Della_Ratta_Raphael_Della_Ratta_Completed> ;
     ns1:name "Raphael Della Ratta" ;
     ns1:participant <https://1145.am/db/2027230/Investment_Raphael_Della_Ratta_Raphael_Della_Ratta_Completed> ;
@@ -11505,6 +11700,8 @@
     ns1:documentURL <https://www.prweb.com/releases/2023/6/prweb19370347.htm> ;
     ns1:foundName "Ferretly" ;
     ns1:industry "SaaS" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Ferretly" ;
     ns1:sourceName "PR Web" .
 
@@ -11535,6 +11732,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230605005839/en/Metals-Acquisition-Corp-Shareholders-Approve-Proposed-Business-Combination-to-Acquire-the-CSA-Mine-and-Proposed-Merger-With-Metals-Acquisition-Limited> ;
     ns1:foundName "Cornish, Scottish and Australian" ;
     ns1:industry "Metals Acquisition Corp" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/10_venture_ventures_corp_llc>,
+        <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Cornish, Scottish and Australian" ;
     ns1:sourceName "Business Wire" .
 
@@ -11561,6 +11760,7 @@
     ns1:documentTitle "Metals Acquisition Corp Shareholders Approve Proposed Business Combination to Acquire the CSA Mine and Proposed Merger With Metals Acquisition Limited" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230605005839/en/Metals-Acquisition-Corp-Shareholders-Approve-Proposed-Business-Combination-to-Acquire-the-CSA-Mine-and-Proposed-Merger-With-Metals-Acquisition-Limited> ;
     ns1:foundName "Metals Acquisition Corp" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Metals Acquisition Corp" ;
     ns1:protagonist <https://1145.am/db/2027866/Cornish_Scottish_And_Australian_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/2004339/Metals_Acquisition_Corp>,
@@ -11587,6 +11787,7 @@
     ns1:documentTitle "Metals Acquisition Corp Shareholders Approve Proposed Business Combination to Acquire the CSA Mine and Proposed Merger With Metals Acquisition Limited" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230605005839/en/Metals-Acquisition-Corp-Shareholders-Approve-Proposed-Business-Combination-to-Acquire-the-CSA-Mine-and-Proposed-Merger-With-Metals-Acquisition-Limited> ;
     ns1:foundName "Metals Acquisition Limited" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Metals Acquisition Limited" ;
     ns1:protagonist <https://1145.am/db/2027866/Cornish_Scottish_And_Australian_Acquisition>,
         <https://1145.am/db/2027866/Merger_Metals_Acquisition_Limited_Has_Not_Happened> ;
@@ -11614,6 +11815,7 @@
     ns1:documentTitle "Mosaic raises $26M to help inform companies' financial decisions" ;
     ns1:documentURL <https://techcrunch.com/2023/06/07/mosaic-raises-26m-to-help-companies-make-financial-decisions/> ;
     ns1:foundName "Mosaic" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Mosaic" ;
     ns1:sameAsHigh <https://1145.am/db/1748969/Mosaic>,
         <https://1145.am/db/936038/Mosaic>,
@@ -11638,6 +11840,7 @@
     ns1:documentTitle "Lab-grown meat maker Uncommon raises $30 million from OpenAI's Sam Altman and others" ;
     ns1:documentURL <https://www.reuters.com/business/lab-grown-meat-maker-uncommon-raises-30-mln-openais-sam-altman-others-2023-06-09/> ;
     ns1:foundName "Uncommon" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Uncommon" ;
     ns1:sameAsHigh <https://1145.am/db/2030855/Uncommon>,
         <https://1145.am/db/2078115/Uncommon> ;
@@ -11650,6 +11853,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/energy-income-partners-vote-against-188-bln-oneok-magellan-deal-2023-06-08/> ;
     ns1:foundName "Magellan" ;
     ns1:industry "pipeline operator" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Magellan Midstream Partners" ;
     ns1:sameAsHigh <https://1145.am/db/2006630/Magellan_Midstream_Partners>,
         <https://1145.am/db/2068780/Magellan_Midstream_Partners> ;
@@ -11689,6 +11893,7 @@
     ns1:documentURL <https://www.reuters.com/business/aerospace-defense/european-airlines-funds-eye-privatisation-azorean-carrier-sata-ceo-says-2023-06-09/> ;
     ns1:foundName "SATA Internacional" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "SATA Internacional" ;
     ns1:sourceName "Reuters" .
 
@@ -11708,6 +11913,7 @@
     ns1:documentTitle "Dubai transport authority seeks adviser for asset review" ;
     ns1:documentURL <https://www.reuters.com/world/middle-east/dubai-transport-authority-seeks-adviser-asset-review-sources-2023-06-09/> ;
     ns1:foundName "Roads and Transport Authority" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Dubai" ;
     ns1:sameAsHigh <https://1145.am/db/2065402/Dubai> ;
     ns1:sameAsMedium <https://1145.am/db/1040116/Dubai>,
@@ -11731,6 +11937,7 @@
     ns1:documentURL <https://www.reuters.com/world/middle-east/dubai-transport-authority-seeks-adviser-asset-review-sources-2023-06-09/> ;
     ns1:foundName "Salik" ;
     ns1:industry "toll-road" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Salik" ;
     ns1:sameAsHigh <https://1145.am/db/1315861/Salik>,
         <https://1145.am/db/1339747/Salik>,
@@ -11749,6 +11956,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/12/cloud-cost-management-startup-cloudzero-lands-32m-investment/> ;
     ns1:foundName "CloudZero" ;
     ns1:industry "cloud cost management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "CloudZero" ;
     ns1:sourceName "TechCrunch" .
 
@@ -11762,6 +11970,7 @@
     ns1:documentURL <https://apnews.com/article/credit-suisse-ubs-takeover-banks-74a2bf7d924eb9e4ac9071a4459143b1> ;
     ns1:foundName "Credit Suisse" ;
     ns1:industry "bank" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Credit Suisse" ;
     ns1:sameAsHigh <https://1145.am/db/1000139/Credit_Suisse>,
         <https://1145.am/db/1007381/Credit_Suisse>,
@@ -11955,6 +12164,7 @@
     ns1:documentURL <https://www.reuters.com/business/aerospace-defense/ryanair-eyes-slots-iag-may-hand-over-remedies-air-europa-purchase-report-2023-06-12/> ;
     ns1:foundName "IAG" ;
     ns1:industry "airline" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "IAG" ;
     ns1:sameAsHigh <https://1145.am/db/173893/Iag>,
         <https://1145.am/db/178413/Iag>,
@@ -11989,6 +12199,7 @@
     ns1:documentURL <https://www.reuters.com/business/aerospace-defense/ryanair-eyes-slots-iag-may-hand-over-remedies-air-europa-purchase-report-2023-06-12/> ;
     ns1:foundName "Ryanair" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Ryanair" ;
     ns1:sameAsHigh <https://1145.am/db/2049589/Ryanair>,
         <https://1145.am/db/2495594/Ryanair>,
@@ -12029,6 +12240,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/14/lee-fixel-addition-fund/> ;
     ns1:foundName "Addition" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "Addition" ;
     ns1:sameAsHigh <https://1145.am/db/1378679/Addition>,
         <https://1145.am/db/1480152/Addition>,
@@ -12091,6 +12303,7 @@
     ns1:foundName "Lee Fixel",
         "Lee Fixel'" ;
     ns1:industry "venture capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "Lee Fixel" ;
     ns1:sameAsHigh <https://1145.am/db/1753402/Lee_Fixel> ;
     ns1:sameAsMedium <https://1145.am/db/1744560/Lee_Fixel>,
@@ -12107,6 +12320,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/macquarie-picks-up-majority-stake-coastal-waste-recycling-2023-06-13/> ;
     ns1:foundName "Coastal Waste & Recycling" ;
     ns1:industry "waste management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Coastal Waste & Recycling" ;
     ns1:sameAsMedium <https://1145.am/db/426762/Coastal_Waste___Recycling> ;
     ns1:sourceName "Reuters" .
@@ -12118,6 +12332,7 @@
     ns1:documentTitle "AI startup Synthesia gains unicorn status after Nvidia-backed fundraise" ;
     ns1:documentURL <https://www.reuters.com/technology/ai-startup-synthesia-gains-unicorn-status-after-nvidia-backed-fundraise-2023-06-13/> ;
     ns1:foundName "Nvidia - owned" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2037006/Investment_Accel_Nventures_Nvidia_Synthesia_Completed> ;
     ns1:name "Nvidia" ;
     ns1:sameAsMedium <https://1145.am/db/1006163/Nvidia>,
@@ -12219,6 +12434,7 @@
     ns1:documentURL <https://www.reuters.com/technology/ai-startup-synthesia-gains-unicorn-status-after-nvidia-backed-fundraise-2023-06-13/> ;
     ns1:foundName "Synthesia" ;
     ns1:industry "artificial intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Synthesia" ;
     ns1:sameAsHigh <https://1145.am/db/684669/Synthesia> ;
     ns1:sameAsMedium <https://1145.am/db/1755646/Synthesia>,
@@ -12238,6 +12454,7 @@
     ns1:foundName "GAM Holding AG",
         "GAM Holding'" ;
     ns1:industry "asset manager" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "GAM Holding",
         "GAM Holding AG" ;
     ns1:sameAsHigh <https://1145.am/db/1973472/Gam_Holding_Ag>,
@@ -12265,6 +12482,7 @@
     ns1:foundName "Liontrust",
         "Liontrust Asset Management" ;
     ns1:industry "asset manager" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2037011/Gam_Holding_Ag_Stake_Acquisition> ;
     ns1:name "Liontrust",
         "Liontrust Asset Management" ;
@@ -12287,6 +12505,7 @@
     ns1:documentURL <https://www.reuters.com/technology/wyre-winding-down-crypto-winter-bites-2023-06-16/> ;
     ns1:foundName "Wyre" ;
     ns1:industry "Cryptocurrency infrastructure" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Wyre" ;
     ns1:sameAsHigh <https://1145.am/db/1334044/Wyre>,
         <https://1145.am/db/1334732/Wyre>,
@@ -12323,6 +12542,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/britains-itv-confirms-it-is-looking-buy-all3media-2023-06-16/> ;
     ns1:foundName "All3Media" ;
     ns1:industry "production company" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "All3Media" ;
     ns1:sameAsHigh <https://1145.am/db/2024381/All3media>,
         <https://1145.am/db/2039070/All3media>,
@@ -12360,6 +12580,7 @@
     ns1:documentURL <https://www.reuters.com/business/autos-transportation/canadian-pension-fund-invests-400-mln-swedish-battery-maker-northvolt-2023-06-20/> ;
     ns1:foundName "Northvolt" ;
     ns1:industry "battery" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "Northvolt" ;
     ns1:sameAsHigh <https://1145.am/db/1182849/Northvolt>,
         <https://1145.am/db/1635275/Northvolt>,
@@ -12383,6 +12604,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230613995018/en/Parrot-Unveils-Proprietary-AI-Powered-Platform-for-Multi-Billion-Court-Reporting-Market-Raises-11M-in-Series-A-Funding> ;
     ns1:foundName "Parrot" ;
     ns1:industry "court reporting" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Parrot" ;
     ns1:sameAsHigh <https://1145.am/db/2042626/Parrot> ;
     ns1:sameAsMedium <https://1145.am/db/1822325/Parrot> ;
@@ -12468,6 +12691,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230615595844/en/Terreno-Realty-Corporation-Announces-Lease-in-San-Jose-CA> ;
     ns1:foundName "Terreno Realty Corporation" ;
     ns1:industry "industrial real estate" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2045298/Investment_Terreno_Realty_Corporation_Terreno_Realty_Corporation_Has_Not_Happened> ;
     ns1:name "Terreno Realty Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1023456/Terreno_Realty_Corporation>,
@@ -12570,6 +12794,7 @@
     ns1:documentTitle "Acryl Data raises $21M to grow its enterprise data catalog platform" ;
     ns1:documentURL <https://techcrunch.com/2023/06/22/acryl-data-raises-21m-to-grow-its-enterprise-data-catalog-platform/> ;
     ns1:foundName "Acryl" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Acryl Data" ;
     ns1:sourceName "TechCrunch" .
 
@@ -12580,6 +12805,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/nasdaq-sell-debt-worth-5-bln-fund-adenza-deal-2023-06-23/> ;
     ns1:foundName "Adenza" ;
     ns1:industry "software" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Adenza" ;
     ns1:sameAsHigh <https://1145.am/db/2034204/Adenza>,
         <https://1145.am/db/2034831/Adenza>,
@@ -12599,6 +12825,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/25/utu/> ;
     ns1:foundName "CardsPal" ;
     ns1:industry "fintech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "CardsPal" ;
     ns1:sourceName "TechCrunch" .
 
@@ -12611,6 +12838,7 @@
     ns1:documentTitle "As the generative AI craze rages on, Ramp acquires customer support startup Cohere.io" ;
     ns1:documentURL <https://techcrunch.com/2023/06/26/as-the-generative-ai-craze-rages-on-fintech-ramp-acquires-ai-powered-customer-support-startup-cohere-io/> ;
     ns1:foundName "Cohere.io" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Cohere" ;
     ns1:sameAsMedium <https://1145.am/db/1663728/Cohere>,
         <https://1145.am/db/2030768/Cohere>,
@@ -12648,6 +12876,8 @@
     ns1:documentURL <https://techcrunch.com/2023/06/26/depoly/> ;
     ns1:foundName "DePoly" ;
     ns1:industry "recycling" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels>,
+        <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "DePoly" ;
     ns1:sourceName "TechCrunch" .
 
@@ -12658,6 +12888,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/iags-interest-portugals-tap-depends-privatisation-conditions-ceo-2023-06-26/> ;
     ns1:foundName "Gallego" ;
     ns1:industry "airline" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Gallego" ;
     ns1:sourceName "Reuters" .
 
@@ -12672,6 +12903,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/iags-interest-portugals-tap-depends-privatisation-conditions-ceo-2023-06-26/> ;
     ns1:foundName "Ryanair" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:investor <https://1145.am/db/2049589/Air_Europa_Slots_Acquisition> ;
     ns1:name "Ryanair" ;
     ns1:sameAsHigh <https://1145.am/db/2034901/Ryanair>,
@@ -12755,6 +12987,7 @@
     ns1:documentTitle "Augmedics raises $82.5 million to accelerate adoption of augmented reality spine surgery" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627471926/en/Augmedics-raises-82.5-million-to-accelerate-adoption-of-augmented-reality-spine-surgery> ;
     ns1:foundName "Augmedics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Augmedics" ;
     ns1:sameAsMedium <https://1145.am/db/2133771/Augmedics>,
         <https://1145.am/db/2285092/Augmedics>,
@@ -12771,6 +13004,7 @@
     ns1:documentTitle "Honey Homes Raises $9 Million in Series A Funding To Reimagine Home Upkeep and Maintenance" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627073229/en/Honey-Homes-Raises-9-Million-in-Series-A-Funding-To-Reimagine-Home-Upkeep-and-Maintenance> ;
     ns1:foundName "Honey Homes" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Honey Homes" ;
     ns1:sourceName "Business Wire" .
 
@@ -12784,6 +13018,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230627886854/en/Institutional-Property-Advisors-Brokers-Sale-and-Arranges-Financing-for-Eastside-Seattle-Multifamily-Asset> ;
     ns1:foundName "Aria" ;
     ns1:industry "real estate" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Aria" ;
     ns1:sourceName "Business Wire" .
 
@@ -12796,6 +13031,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230627886854/en/Institutional-Property-Advisors-Brokers-Sale-and-Arranges-Financing-for-Eastside-Seattle-Multifamily-Asset> ;
     ns1:foundName "Institutional Property Advisors" ;
     ns1:industry "real estate" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2051174/Aria_Acquisition> ;
     ns1:name "Institutional Property Advisors" ;
     ns1:sameAsHigh <https://1145.am/db/1051029/Institutional_Property_Advisors>,
@@ -12843,6 +13079,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230627886854/en/Institutional-Property-Advisors-Brokers-Sale-and-Arranges-Financing-for-Eastside-Seattle-Multifamily-Asset> ;
     ns1:foundName "Marcus & Millichap" ;
     ns1:industry "real estate" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Marcus & Millichap" ;
     ns1:participant <https://1145.am/db/2051174/Aria_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1051029/Marcus___Millichap>,
@@ -12928,6 +13165,7 @@
     ns1:documentTitle "Yara Makes Strategic Investment in Industrial AI Company Intelecy" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230627066496/en/Yara-Makes-Strategic-Investment-in-Industrial-AI-Company-Intelecy> ;
     ns1:foundName "Intelecy" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Intelecy" ;
     ns1:sourceName "Business Wire" .
 
@@ -12942,6 +13180,7 @@
     ns1:foundName "ESI",
         "ESI Group" ;
     ns1:industry "software" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "ESI Group" ;
     ns1:sameAsHigh <https://1145.am/db/2052138/Esi_Group>,
         <https://1145.am/db/2052139/Esi_Group>,
@@ -13000,6 +13239,7 @@
     ns1:documentTitle "Inflection AI Announces $1.3 Billion of Funding Led by Current Investors, Microsoft, and NVIDIA" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230629810313/en/Inflection-AI-Announces-1.3-Billion-of-Funding-Led-by-Current-Investors-Microsoft-and-NVIDIA> ;
     ns1:foundName "NVIDIA" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:investor <https://1145.am/db/2053053/Investment_Inflection_Ai_Microsoft_Nvidia_Completed> ;
     ns1:name "NVIDIA" ;
     ns1:sameAsHigh <https://1145.am/db/1736629/Nvidia>,
@@ -13098,6 +13338,7 @@
     ns1:documentTitle "SMAIO Obtains €2.5m in Non-dilutive Financing" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230629290094/en/SMAIO-Obtains-%E2%82%AC2.5m-in-Non-dilutive-Financing> ;
     ns1:foundName "Innovation Research and Development (R & D)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Innovation Research and Development" ;
     ns1:sourceName "Business Wire" .
 
@@ -13134,6 +13375,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230629290094/en/SMAIO-Obtains-%E2%82%AC2.5m-in-Non-dilutive-Financing> ;
     ns1:foundName "SMAIO" ;
     ns1:industry "Orthopaedics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "SMAIO" ;
     ns1:sourceName "Business Wire" .
 
@@ -13165,6 +13408,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/silver-lake-secures-63-stake-software-ag-after-months-long-pursuit-2023-06-29/> ;
     ns1:foundName "Silver Lake" ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2053232/Software_Ag_Acquisition> ;
     ns1:name "Silver Lake" ;
     ns1:sameAsHigh <https://1145.am/db/1153944/Silver_Lake>,
@@ -13273,6 +13517,7 @@
     ns1:foundName "CART.COM",
         "Cart.com" ;
     ns1:industry "commerce and logistics" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Cart.com" ;
     ns1:sameAsHigh <https://1145.am/db/1322374/Cartcom>,
         <https://1145.am/db/1322920/Cartcom>,
@@ -13295,6 +13540,7 @@
     ns1:documentTitle "NI Stockholders Approve Transaction with Emerson" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230629201570/en/NI-Stockholders-Approve-Transaction-with-Emerson> ;
     ns1:foundName "NI" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "NI" ;
     ns1:sameAsHigh <https://1145.am/db/1926617/Ni>,
         <https://1145.am/db/578180/Ni>,
@@ -13337,6 +13583,8 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/hotelbeds-shareholders-hire-morgan-stanley-evercore-ready-ipo-expansion-says-2023-06-30/> ;
     ns1:foundName "Hotelbeds" ;
     ns1:industry "tourism" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier>,
+        <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Hotelbeds" ;
     ns1:sameAsHigh <https://1145.am/db/2496684/Hotelbeds> ;
     ns1:sourceName "Reuters" .
@@ -13351,6 +13599,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/elite-italian-bicycle-maker-pinarello-changes-hands-2023-06-30/> ;
     ns1:foundName "Pinarello" ;
     ns1:industry "bicycle" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Pinarello" ;
     ns1:sourceName "Reuters" .
 
@@ -13406,6 +13655,7 @@
     ns1:documentURL <https://www.reuters.com/business/finance/italys-top-insurers-banks-strike-eurovita-rescue-deal-2023-07-01/> ;
     ns1:foundName "Eurovita" ;
     ns1:industry "insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Eurovita" ;
     ns1:sameAsHigh <https://1145.am/db/1358758/Eurovita>,
         <https://1145.am/db/1680141/Eurovita>,
@@ -13441,6 +13691,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/06/softbank-backs-japanese-robotics-startup-telexistence-in-170m-funding-round/> ;
     ns1:foundName "Telexistence" ;
     ns1:industry "robotics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Telexistence" ;
     ns1:sourceName "TechCrunch" .
 
@@ -13461,6 +13712,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/uks-alfa-financial-tumbles-eqt-drops-buyout-pursuit-2023-07-07/> ;
     ns1:foundName "Alfa Financial Software" ;
     ns1:industry "asset finance" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Alfa Financial Software" ;
     ns1:sameAsHigh <https://1145.am/db/2032729/Alfa_Financial_Software> ;
     ns1:sourceName "Reuters" .
@@ -13475,6 +13727,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "Sarvam" ;
     ns1:industry "artificial intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Sarvam" ;
     ns1:protagonist <https://1145.am/db/2057242/Joint_Venture_Pratyush_Kumar_Sarvam_Vivek_Raghavan_Has_Not_Happened> ;
     ns1:sourceName "Reuters" .
@@ -13493,6 +13746,7 @@
         "Etraveli Group" ;
     ns1:industry "travel",
         "travel services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Etraveli",
         "Etraveli Group" ;
     ns1:sameAsHigh <https://1145.am/db/1493521/Etraveli_Group>,
@@ -13545,6 +13799,7 @@
     ns1:documentTitle "FC Barcelona plans to list digital unit on Nasdaq via SPAC, Expansion reports" ;
     ns1:documentURL <https://www.reuters.com/sports/soccer/fc-barcelona-plans-list-digital-unit-nasdaq-via-spac-expansion-2023-07-07/> ;
     ns1:foundName "Barca Media" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Barca Media" ;
     ns1:sourceName "Reuters" .
 
@@ -13582,6 +13837,7 @@
     ns1:documentURL <https://www.reuters.com/sports/soccer/fc-barcelona-plans-list-digital-unit-nasdaq-via-spac-expansion-2023-07-07/> ;
     ns1:foundName "FC Barcelona" ;
     ns1:industry "soccer club" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "FC Barcelona" ;
     ns1:sameAsHigh <https://1145.am/db/1979292/Fc_Barcelona> ;
     ns1:sourceName "Reuters" .
@@ -13593,6 +13849,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230710034342/en/Houlihan-Lokey-to-Acquire-7-Mile-Advisors> ;
     ns1:foundName "7 Mile Advisors" ;
     ns1:industry "investment banking" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "7 Mile Advisors" ;
     ns1:sourceName "Business Wire" .
 
@@ -13616,6 +13873,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230710034342/en/Houlihan-Lokey-to-Acquire-7-Mile-Advisors> ;
     ns1:foundName "Kalypso" ;
     ns1:industry "IT services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Kalypso" ;
     ns1:sourceName "Business Wire" .
 
@@ -13654,6 +13913,8 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/bain-capital-talks-buy-indian-ice-cream-maker-vadilal-cnbc-tv18-2023-07-10/> ;
     ns1:foundName "Vadilal" ;
     ns1:industry "ice cream" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Vadilal" ;
     ns1:sourceName "Reuters" .
 
@@ -13689,6 +13950,7 @@
     ns1:documentURL <https://www.reuters.com/business/finance/hdfc-bank-sell-2-stake-nsdl-ipo-2023-07-09/> ;
     ns1:foundName "HDFC Bank" ;
     ns1:industry "lender" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "HDFC Bank" ;
     ns1:sameAsHigh <https://1145.am/db/1306825/Hdfc_Bank>,
         <https://1145.am/db/1547728/Hdfc_Bank>,
@@ -13718,6 +13980,7 @@
     ns1:documentTitle "HDFC Bank to sell 2% stake in NSDL IPO" ;
     ns1:documentURL <https://www.reuters.com/business/finance/hdfc-bank-sell-2-stake-nsdl-ipo-2023-07-09/> ;
     ns1:foundName "National Securities Depository" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "National Securities Depository" ;
     ns1:sourceName "Reuters" .
 
@@ -13727,6 +13990,7 @@
     ns1:documentTitle "Raft, which services freight forwarders, closes $30M Series B led by Eight Roads VC" ;
     ns1:documentURL <https://techcrunch.com/2023/07/11/raft-which-services-freight-forwarders-closes-30m-series-b-led-by-eight-roads-vc/> ;
     ns1:foundName "Bessemer Venture Partners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2059038/Series_B_Investment_Bessemer_Venture_Partners_Dynamo_Ventures_Eight_Roads_Vc_Episode_1_Moguntia_Capital_Raft_Completed> ;
     ns1:name "Bessemer Venture Partners" ;
     ns1:sameAsHigh <https://1145.am/db/1150887/Bessemer_Venture_Partners>,
@@ -13954,6 +14218,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/11/raft-which-services-freight-forwarders-closes-30m-series-b-led-by-eight-roads-vc/> ;
     ns1:foundName "Raft" ;
     ns1:industry "logistics" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Raft" ;
     ns1:sourceName "TechCrunch" .
 
@@ -13968,6 +14233,7 @@
     ns1:foundName "Solarius",
         "Solarius Development" ;
     ns1:industry "electronics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Solarius" ;
     ns1:sourceName "PR Web" .
 
@@ -14035,6 +14301,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "Causaly" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Causaly" ;
     ns1:sourceName "TechCrunch" .
 
@@ -14045,6 +14312,7 @@
     ns1:documentTitle "Causaly, an AI platform for drug discovery and biomedical research, raises $60M" ;
     ns1:documentURL <https://techcrunch.com/2023/07/13/causaly-an-ai-platform-for-drug-discovery-and-biomedical-research-raises-60m/> ;
     ns1:foundName "ICONIQ Growth" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2060465/Series_B_Investment_Causaly_Ebrd_Iconiq_Growth_Index_Ventures_Marathon_Venture_Capital_Pentech_Ventures_Visionaries_Club_Completed> ;
     ns1:name "ICONIQ Growth" ;
     ns1:sameAsHigh <https://1145.am/db/299738/Iconiq_Growth>,
@@ -14095,6 +14363,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230712698516/en/Bobbie-Acquires-Nature%E2%80%99s-One-with-the-Most-Innovative-Infant-Formula-Manufacturing-Facility-in-the-U.S.-to-Fast-Track-the-Future-of-Formula> ;
     ns1:foundName "Nature's One" ;
     ns1:industry "pediatric nutrition" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Nature's One" ;
     ns1:sameAsHigh <https://1145.am/db/2059949/Natures_One> ;
     ns1:sourceName "Business Wire" .
@@ -14108,6 +14377,7 @@
     ns1:documentTitle "SpeedyBrand Secures $2.5M in Funding Led by Google Ventures and Y Combinator, Introduces Its AI-Driven SEO Content Marketing Solution for SMBs" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20230713281212/en/SpeedyBrand-Secures-2.5M-in-Funding-Led-by-Google-Ventures-and-Y-Combinator-Introduces-Its-AI-Driven-SEO-Content-Marketing-Solution-for-SMBs> ;
     ns1:foundName "SpeedyBrand" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:name "SpeedyBrand" ;
     ns1:sourceName "Business Wire" .
 
@@ -14121,6 +14391,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/17/furlenco-sheela-foam-sleepwell/> ;
     ns1:foundName "Furlenco" ;
     ns1:industry "furniture" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Furlenco" ;
     ns1:sameAsHigh <https://1145.am/db/1668793/Furlenco>,
         <https://1145.am/db/1744935/Furlenco>,
@@ -14135,6 +14406,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/17/furlenco-sheela-foam-sleepwell/> ;
     ns1:foundName "Kurlon Enterprises" ;
     ns1:industry "mattress seller" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Kurlon Enterprises" ;
     ns1:sourceName "TechCrunch" .
 
@@ -14178,6 +14450,8 @@
     ns1:foundName "Stratasys",
         "Stratasys Ltd." ;
     ns1:industry "3D printing" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Stratasys" ;
     ns1:sameAsHigh <https://1145.am/db/1050528/Stratasys_Ltd>,
         <https://1145.am/db/1051109/Stratasys_Ltd>,
@@ -14251,6 +14525,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20230719608998/en/Heritage-Crystal-Clean-Inc.-to-be-Acquired-by-J.F.-Lehman-Company-for-1.2-Billion> ;
     ns1:foundName "Crystal Clean",
         "Heritage-Crystal Clean, Inc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Crystal Clean",
         "Heritage-Crystal Clean" ;
     ns1:sameAsHigh <https://1145.am/db/1174301/Heritage-Crystal_Clean>,
@@ -14278,6 +14553,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/12/indian-edtech-giant-byjus-raises-250-million-on-track-to-close-another-700-million/> ;
     ns1:foundName "Aakash" ;
     ns1:industry "edtech" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Aakash" ;
     ns1:sameAsHigh <https://1145.am/db/1695203/Aakash>,
         <https://1145.am/db/1721541/Aakash>,
@@ -14321,6 +14597,7 @@
     ns1:documentURL <https://techcrunch.com/2023/05/12/indian-edtech-giant-byjus-raises-250-million-on-track-to-close-another-700-million/> ;
     ns1:foundName "Byju's" ;
     ns1:industry "edtech" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Byju's" ;
     ns1:sameAsHigh <https://1145.am/db/1698454/Byjus>,
         <https://1145.am/db/1703533/Byjus>,
@@ -14414,6 +14691,7 @@
     ns1:documentURL <https://www.reuters.com/technology/rakuten-shares-slump-51-early-trading-2023-05-16/> ;
     ns1:foundName "Rakuten Group Inc" ;
     ns1:industry "e-commerce and fintech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Rakuten Group Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1397346/Rakuten_Group>,
         <https://1145.am/db/152934/Rakuten>,
@@ -14496,6 +14774,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/software-ag-minority-investor-groups-oppose-silver-lake-delisting-2023-05-16/> ;
     ns1:foundName "Software AG" ;
     ns1:industry "software developer" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Software AG" ;
     ns1:sameAsHigh <https://1145.am/db/1207270/Software_Ag>,
         <https://1145.am/db/1207856/Software_Ag>,
@@ -14547,6 +14826,7 @@
     ns1:documentTitle "Restaurant365 gobbles up $135M to supersize its software for the food service industry" ;
     ns1:documentURL <https://techcrunch.com/2023/05/19/restaurant365-gobbles-up-135m-to-supersize-its-software-for-the-food-service-industry/> ;
     ns1:foundName "L Catterton" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2013193/Investment_Bessemer_Venture_Partners_Iconic_Growth_Kkr_L_Catterton_Restaurant365_Completed> ;
     ns1:name "L Catterton" ;
     ns1:sameAsHigh <https://1145.am/db/1016038/L_Catterton>,
@@ -14619,6 +14899,8 @@
     ns1:documentURL <https://techcrunch.com/2023/05/19/restaurant365-gobbles-up-135m-to-supersize-its-software-for-the-food-service-industry/> ;
     ns1:foundName "Restaurant365" ;
     ns1:industry "restaurant management software" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Restaurant365" ;
     ns1:sameAsHigh <https://1145.am/db/2014104/Restaurant365> ;
     ns1:sourceName "TechCrunch" .
@@ -14703,6 +14985,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/cloud-based-restaurant365-hits-unicorn-status-after-135-mln-funding-round-2023-05-19/> ;
     ns1:foundName "Restaurant365" ;
     ns1:industry "restaurant" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Restaurant365" ;
     ns1:sameAsHigh <https://1145.am/db/2013193/Restaurant365> ;
     ns1:sourceName "Reuters" .
@@ -14775,6 +15058,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/lufthansa-ceo-says-premature-discuss-possible-interest-taking-over-portugals-tap-2023-06-04/> ;
     ns1:foundName "TAP" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "TAP" ;
     ns1:sameAsHigh <https://1145.am/db/1664537/Tap>,
         <https://1145.am/db/1968493/Tap>,
@@ -14841,6 +15125,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/trio-french-businessmen-plan-counter-offer-casino-2023-06-08/> ;
     ns1:foundName "Casino" ;
     ns1:industry "supermarket" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Casino" ;
     ns1:sameAsHigh <https://1145.am/db/1059005/Casino>,
         <https://1145.am/db/1059684/Casino>,
@@ -14912,6 +15197,7 @@
     ns1:documentURL <https://www.reuters.com/business/aerospace-defense/ryanair-eyes-slots-iag-may-hand-over-remedies-air-europa-purchase-report-2023-06-12/> ;
     ns1:foundName "Air Europa" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Air Europa" ;
     ns1:sameAsHigh <https://1145.am/db/1681762/Air_Europa>,
         <https://1145.am/db/173893/Air_Europa>,
@@ -15024,6 +15310,7 @@
     ns1:documentURL <https://techcrunch.com/2023/06/25/utu/> ;
     ns1:foundName "Utu" ;
     ns1:industry "travel tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Utu" ;
     ns1:sourceName "TechCrunch" .
 
@@ -15037,6 +15324,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/iags-interest-portugals-tap-depends-privatisation-conditions-ceo-2023-06-26/> ;
     ns1:foundName "Air Europa" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Air Europa" ;
     ns1:sameAsHigh <https://1145.am/db/1681762/Air_Europa>,
         <https://1145.am/db/173893/Air_Europa>,
@@ -15066,6 +15354,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/iags-interest-portugals-tap-depends-privatisation-conditions-ceo-2023-06-26/> ;
     ns1:foundName "TAP" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "TAP" ;
     ns1:sameAsHigh <https://1145.am/db/1664537/Tap>,
         <https://1145.am/db/1968493/Tap>,
@@ -15096,6 +15385,7 @@
     ns1:documentURL <https://www.reuters.com/sports/motor-sports/hitech-seek-enter-f1-2026-with-kazakh-backing-2023-06-26/> ;
     ns1:foundName "Hitech Global Holdings" ;
     ns1:industry "Formula One" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Hitech Global Holdings" ;
     ns1:sourceName "Reuters" .
 
@@ -15126,6 +15416,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/silver-lake-secures-63-stake-software-ag-after-months-long-pursuit-2023-06-29/> ;
     ns1:foundName "Software AG" ;
     ns1:industry "business software developer" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Software AG" ;
     ns1:sameAsHigh <https://1145.am/db/1977365/Software_Ag>,
         <https://1145.am/db/1979751/Software_Ag>,
@@ -15207,6 +15498,7 @@
     ns1:documentURL <https://techcrunch.com/2023/07/05/pharmeasy-valuation-cut/> ;
     ns1:foundName "PharmEasy" ;
     ns1:industry "pharmacy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2055701/Investment_Pharmeasy_Stopped> ;
     ns1:name "PharmEasy" ;
     ns1:sameAsHigh <https://1145.am/db/1218589/Pharmeasy>,
@@ -15246,6 +15538,7 @@
     ns1:documentURL <https://www.reuters.com/technology/microsoft-backed-ai4bharat-set-raise-12-mln-funding-peak-xv-lightspeed-sources-2023-07-07/> ;
     ns1:foundName "AI4Bharat" ;
     ns1:industry "artificial intelligence" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "AI4Bharat" ;
     ns1:sourceName "Reuters" .
 
@@ -15276,6 +15569,8 @@
     ns1:foundName "Black",
         "Black Knight",
         "Black Knight, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Black",
         "Black Knight" ;
     ns1:sameAsHigh <https://1145.am/db/1031575/Black_Knight>,
@@ -15356,6 +15651,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/3f-holding-not-continuing-bid-take-over-french-retailer-casino-2023-07-16/> ;
     ns1:foundName "Casino" ;
     ns1:industry "retail" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Casino" ;
     ns1:sameAsHigh <https://1145.am/db/1059005/Casino>,
         <https://1145.am/db/1059684/Casino>,
@@ -15515,6 +15811,7 @@
     ns1:foundName "Citi",
         "Citigroup" ;
     ns1:industry "bank" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Citi",
         "Citigroup" ;
     ns1:sameAsHigh <https://1145.am/db/101941/Citigroup>,
@@ -15755,6 +16052,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/nasdaq-sell-debt-worth-5-bln-fund-adenza-deal-2023-06-23/> ;
     ns1:foundName "Nasdaq" ;
     ns1:industry "financial technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Nasdaq" ;
     ns1:sameAsHigh <https://1145.am/db/1591088/Nasdaq_Inc>,
         <https://1145.am/db/1977245/Nasdaq_Inc>,
@@ -15782,6 +16080,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/iags-interest-portugals-tap-depends-privatisation-conditions-ceo-2023-06-26/> ;
     ns1:foundName "IAG" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:investor <https://1145.am/db/2049589/Air_Europa_Slots_Acquisition> ;
     ns1:name "IAG" ;
     ns1:sameAsHigh <https://1145.am/db/173893/Iag>,
@@ -15833,6 +16132,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/elite-italian-bicycle-maker-pinarello-changes-hands-2023-06-30/> ;
     ns1:foundName "L Catterton" ;
     ns1:industry "Private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "L Catterton" ;
     ns1:sameAsHigh <https://1145.am/db/1016038/L_Catterton>,
         <https://1145.am/db/1065753/L_Catterton>,
@@ -16131,6 +16431,7 @@
         "GGA Software Services",
         "acquisition" ;
     ns1:industry "IT services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Belatrix Software",
         "acquisition" ;
     ns1:sourceName "Business Wire" ;

@@ -22,6 +22,7 @@
     ns1:foundName "Sonder Holdings Inc" ;
     ns1:hasRole <https://1145.am/db/2133503/Sonder_Holdings_Inc-Chief_Accounting_Officer> ;
     ns1:industry "hospitality" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Sonder Holdings Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1249391/Sonder_Holdings_Inc>,
         <https://1145.am/db/1249460/Sonder_Holdings_Inc>,
@@ -55,6 +56,7 @@
     ns1:foundName "Private Equity Women Investor Network (\"PEWIN\")" ;
     ns1:hasRole <https://1145.am/db/2133547/Private_Equity_Women_Investor_Network-Executive_Director> ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Private Equity Women Investor Network" ;
     ns1:sourceName "Business Wire" .
 
@@ -85,6 +87,8 @@
     ns1:hasRole <https://1145.am/db/2133575/Komodo_Health-General_Manager_Of_Mapenhance>,
         <https://1145.am/db/2133575/Komodo_Health-Senior_Vice_President_Of_Marketing> ;
     ns1:industry "healthcare technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Komodo Health" ;
     ns1:sameAsHigh <https://1145.am/db/1373330/Komodo_Health>,
         <https://1145.am/db/1379255/Komodo_Health>,
@@ -118,6 +122,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231003145959/en/Twist-Bioscience-Appoints-Mark-Buck-as-Senior-Vice-President-Operations> ;
     ns1:foundName "Twist Bioscience Corporation (NASDAQ: TWST)" ;
     ns1:hasRole <https://1145.am/db/2133580/Twist_Bioscience_Corporation-Senior_Vice_President_Operations> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Twist Bioscience Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/2042851/Twist_Bioscience_Corporation>,
         <https://1145.am/db/2328076/Twist_Bioscience>,
@@ -147,6 +152,7 @@
     ns1:foundName "Atomwise" ;
     ns1:hasRole <https://1145.am/db/2133600/Atomwise-Chief_Medical_Officer> ;
     ns1:industry "drug discovery" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Atomwise" ;
     ns1:sameAsHigh <https://1145.am/db/1340469/Atomwise>,
         <https://1145.am/db/1785622/Atomwise>,
@@ -190,6 +196,7 @@
     ns1:hasRole <https://1145.am/db/2133604/Hermd-Chief_Medical_Officer>,
         <https://1145.am/db/2133604/Hermd-Vice_President_Of_Medical_Affairs_And_Mental_Health_Services> ;
     ns1:industry "Healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "HerMD" ;
     ns1:sourceName "prweb" .
 
@@ -216,6 +223,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231003481161/en/Robert-Cowan-Joins-Alliant-Insurance-Services-in-Louisiana> ;
     ns1:foundName "Alliant Insurance Services" ;
     ns1:hasRole <https://1145.am/db/2133617/Alliant_Insurance_Services-Vice_President> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Alliant Insurance Services" ;
     ns1:sameAsHigh <https://1145.am/db/1041631/Alliant_Insurance_Services>,
         <https://1145.am/db/1043521/Alliant_Insurance_Services>,
@@ -389,6 +397,7 @@
     ns1:foundName "PGIM Investments" ;
     ns1:hasRole <https://1145.am/db/2133648/Pgim-Global_Head_Of_Alternative_Investments> ;
     ns1:industry "investment management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "PGIM" ;
     ns1:sameAsHigh <https://1145.am/db/1105044/Pgim>,
         <https://1145.am/db/1106462/Pgim>,
@@ -419,6 +428,7 @@
     ns1:foundName "GoTo" ;
     ns1:hasRole <https://1145.am/db/2133681/Goto-Chief_Product_Officer_(cpo)>,
         <https://1145.am/db/2133681/Goto-Vice_President_User_Experience_(ux)> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "GoTo" ;
     ns1:sameAsHigh <https://1145.am/db/1185642/Goto>,
         <https://1145.am/db/1186631/Goto>,
@@ -457,6 +467,8 @@
     ns1:foundName "InterAx Biotech AG" ;
     ns1:hasRole <https://1145.am/db/2133694/Interax_Biotech-Board_Of_Directors> ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "InterAx Biotech" ;
     ns1:sourceName "Business Wire" .
 
@@ -479,6 +491,8 @@
     ns1:hasRole <https://1145.am/db/2133696/Baxter_International_Inc-Executive_Vice_President_And_Chief_Financial_Officer_(cfo)>,
         <https://1145.am/db/2133696/Baxter_International_Inc-Senior_Vice_President_Chief_Accounting_Officer_And_Controller> ;
     ns1:industry "medtech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology>,
+        <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Baxter International Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1625722/Baxter_International_Inc>,
         <https://1145.am/db/166496/Baxter_International_Inc>,
@@ -601,6 +615,7 @@
     ns1:foundName "401GO" ;
     ns1:hasRole <https://1145.am/db/2133701/401go-Chief_Revenue_Officer> ;
     ns1:industry "fintech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "401GO" ;
     ns1:sameAsHigh <https://1145.am/db/1065402/401go> ;
     ns1:sourceName "prweb" .
@@ -625,6 +640,7 @@
     ns1:hasRole <https://1145.am/db/2133703/Cbb_Bancorp_Inc-Cfo>,
         <https://1145.am/db/2133703/Cbb_Bancorp_Inc-Executive_Vice_President_And_Chief_Financial_Officer> ;
     ns1:industry "banking" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "CBB Bancorp, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1609793/Cbb_Bancorp_Inc>,
         <https://1145.am/db/211637/Cbb_Bancorp>,
@@ -681,6 +697,7 @@
     ns1:foundName "Savvy Advisors Inc. (\"Savvy\")" ;
     ns1:hasRole <https://1145.am/db/2133763/Savvy_Advisors_Inc-Principal_Wealth_Managers> ;
     ns1:industry "investment advisor" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Savvy Advisors Inc." ;
     ns1:sameAsHigh <https://1145.am/db/2110394/National_Ria_Savvy_Advisors_Inc>,
         <https://1145.am/db/2718780/Savvy_Advisors_Inc>,
@@ -698,6 +715,7 @@
     ns1:foundName "Alexander McQueen" ;
     ns1:hasRole <https://1145.am/db/2133765/Alexander_Mcqueen-Creative_Director> ;
     ns1:industry "luxury goods" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Alexander McQueen" ;
     ns1:sameAsHigh <https://1145.am/db/918265/Alexander_Mcqueen> ;
     ns1:sourceName "Reuters" .
@@ -713,6 +731,7 @@
     ns1:foundName "Kering",
         "Kering (PRTP.PA)" ;
     ns1:industry "luxury goods" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Kering" ;
     ns1:sameAsHigh <https://1145.am/db/1473346/Kering>,
         <https://1145.am/db/1475421/Kering>,
@@ -776,6 +795,7 @@
     ns1:foundName "Axtella" ;
     ns1:hasRole <https://1145.am/db/2133767/Axtella-Chief_Revenue_Officer_(cro)> ;
     ns1:industry "Financial services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Axtella" ;
     ns1:sourceName "Business Wire" .
 
@@ -796,6 +816,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231003053387/en/Augmedics-adds-Medtronic-AI-expert-as-VP-RD> ;
     ns1:foundName "Augmedics" ;
     ns1:hasRole <https://1145.am/db/2133771/Augmedics-Vice_President_Research___Development> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Augmedics" ;
     ns1:sameAsHigh <https://1145.am/db/904175/Augmedics> ;
     ns1:sameAsMedium <https://1145.am/db/2050282/Augmedics>,
@@ -824,6 +845,7 @@
     ns1:foundName "Aperio Clinical Outcomes" ;
     ns1:hasRole <https://1145.am/db/2133827/Aperio_Clinical_Outcomes-Chief_Commercial_Officer> ;
     ns1:industry "life sciences" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Aperio Clinical Outcomes" ;
     ns1:sameAsHigh <https://1145.am/db/604580/Aperio_Clinical_Outcomes>,
         <https://1145.am/db/605375/Aperio_Clinical_Outcomes> ;
@@ -876,6 +898,7 @@
     ns1:hasRole <https://1145.am/db/2133836/Quantive-Chief_Executive_Officer_(ceo)>,
         <https://1145.am/db/2133836/Quantive-Chief_Product_Officer_(cpo)>,
         <https://1145.am/db/2133836/Quantive-Chief_Revenue_Officer> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Quantive" ;
     ns1:sourceName "Business Wire" .
 
@@ -898,6 +921,7 @@
     ns1:foundName "NSF" ;
     ns1:hasRole <https://1145.am/db/2133896/NSF-Board_Of_Directors> ;
     ns1:industry "public health and safety" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "NSF" ;
     ns1:sameAsHigh <https://1145.am/db/1217211/NSF>,
         <https://1145.am/db/1971892/NSF>,
@@ -932,6 +956,7 @@
     ns1:foundName "United Way of Greater Kansas City" ;
     ns1:hasRole <https://1145.am/db/2133897/United_Way-Governing_Board_Of_Trustees> ;
     ns1:industry "charitable aggregator" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "United Way" ;
     ns1:sourceName "Business Wire" .
 
@@ -964,6 +989,7 @@
     ns1:hasRole <https://1145.am/db/2133899/Saghmos_Therapeutics_Inc-Chairman_Of_The_Board_Of_Directors> ;
     ns1:industry "biopharmaceutical",
         "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "(Saghmos)",
         "Saghmos Therapeutics",
         "Saghmos Therapeutics, Inc",
@@ -989,6 +1015,8 @@
     ns1:foundName "Project Healthy Minds" ;
     ns1:hasRole <https://1145.am/db/2133940/Project_Healthy_Minds-Board_Of_Directors> ;
     ns1:industry "tech" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Project Healthy Minds" ;
     ns1:sameAsHigh <https://1145.am/db/1946361/Project_Healthy_Minds> ;
     ns1:sameAsMedium <https://1145.am/db/1959293/Project_Healthy_Minds> ;
@@ -1003,6 +1031,7 @@
     ns1:foundName "Liquid Death" ;
     ns1:hasRole <https://1145.am/db/2133977/Liquid_Death-Chief_Commercial_Officer> ;
     ns1:industry "beverage" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Liquid Death" ;
     ns1:sameAsMedium <https://1145.am/db/1743404/Liquid_Death> ;
     ns1:sourceName "Business Wire" .
@@ -1025,6 +1054,8 @@
         "Beaconcure'" ;
     ns1:hasRole <https://1145.am/db/2133980/Beaconcure-Strategic_Advisory_Board> ;
     ns1:industry "biotech and pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Beaconcure" ;
     ns1:sameAsMedium <https://1145.am/db/2035784/Beaconcure> ;
     ns1:sourceName "Business Wire" .
@@ -1062,6 +1093,7 @@
     ns1:foundName "Haag-Streit USA" ;
     ns1:hasRole <https://1145.am/db/2134003/Haag-Streit_Group-Ceo> ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Haag-Streit Group" ;
     ns1:sourceName "prweb" .
 
@@ -1095,6 +1127,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231003254702/en/Chairman-of-Oranos-Board-of-Directors-Claude-Imauven-appointed-as-interim-Chief-Executive-Officer> ;
     ns1:foundName "Orano'" ;
     ns1:hasRole <https://1145.am/db/2134154/Orano-Chief_Executive_Officer> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Orano" ;
     ns1:sameAsHigh <https://1145.am/db/1054582/Orano> ;
     ns1:sameAsMedium <https://1145.am/db/1014744/Orano>,
@@ -1144,6 +1177,7 @@
     ns1:hasRole <https://1145.am/db/2134248/Sonos-Chief_Commercial_Officer>,
         <https://1145.am/db/2134248/Sonos-Chief_Product_Officer>,
         <https://1145.am/db/2134248/Sonos-Chief_Revenue_Officer> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Sonos" ;
     ns1:sameAsMedium <https://1145.am/db/1266429/Sonos>,
         <https://1145.am/db/1267008/Sonos>,
@@ -1162,6 +1196,7 @@
     ns1:foundName "Gossamer Bio, Inc" ;
     ns1:hasRole <https://1145.am/db/2134261/Gossamer_Bio-Vice_President_Of_Medical_Affairs> ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Gossamer Bio" ;
     ns1:sameAsHigh <https://1145.am/db/1201359/Gossamer_Bio>,
         <https://1145.am/db/1202971/Gossamer_Bio>,
@@ -1201,6 +1236,7 @@
     ns1:foundName "BTI360" ;
     ns1:hasRole <https://1145.am/db/2134293/Bti360-Chief_Growth_Officer> ;
     ns1:industry "software development" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "BTI360" ;
     ns1:sameAsHigh <https://1145.am/db/504546/Bti360>,
         <https://1145.am/db/506558/Bti360> ;
@@ -1225,6 +1261,7 @@
     ns1:documentURL <https://www.reuters.com/sports/soccer/van-gaal-returns-struggling-ajax-adviser-2023-10-03/> ;
     ns1:foundName "Ajax Amsterdam" ;
     ns1:hasRole <https://1145.am/db/2134296/Ajax_Amsterdam-Adviser> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Ajax Amsterdam" ;
     ns1:sameAsHigh <https://1145.am/db/2036817/Ajax_Amsterdam>,
         <https://1145.am/db/2787259/Ajax_Amsterdam> ;
@@ -1259,6 +1296,7 @@
     ns1:foundName "The Union Protein Project" ;
     ns1:hasRole <https://1145.am/db/2134307/The_Union_Protein_Project-Executive_Director> ;
     ns1:industry "non-profit sector" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "The Union Protein Project" ;
     ns1:sourceName "Business Wire" .
 
@@ -1274,6 +1312,7 @@
         "Brown Brothers Harriman & Co. (BBH)" ;
     ns1:hasRole <https://1145.am/db/2134325/Brown_Brothers_Harriman___Co-Head> ;
     ns1:industry "Banking" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Brown Brothers Harriman & Co",
         "Brown Brothers Harriman & Co." ;
     ns1:sameAsHigh <https://1145.am/db/1134469/Brown_Brothers_Harriman___Co>,
@@ -1332,6 +1371,7 @@
     ns1:hasRole <https://1145.am/db/2134360/Virocell_Biologics-Senior_Business_Development_Director>,
         <https://1145.am/db/2134360/Virocell_Biologics-Vice_President_(vp)_Of_Business_Development> ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "ViroCell Biologics" ;
     ns1:sameAsHigh <https://1145.am/db/2068721/Virocell_Biologics> ;
     ns1:sourceName "Business Wire" .
@@ -1396,6 +1436,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004432631/en/Ana-Paula-Assis-of-IBM-Joins-the-Trane-Technologies-Board-of-Directors> ;
     ns1:foundName "Trane Technologies (NYSE: TT)" ;
     ns1:hasRole <https://1145.am/db/2135113/Trane_Technologies-Board_Of_Directors> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Trane Technologies" ;
     ns1:sameAsHigh <https://1145.am/db/1156379/Trane_Technologies>,
         <https://1145.am/db/1416748/Trane_Technologies>,
@@ -1421,6 +1462,7 @@
     ns1:foundName "P & B" ;
     ns1:hasRole <https://1145.am/db/2135136/P___b-Creative_Director> ;
     ns1:industry "Advertising" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "P & B" ;
     ns1:sourceName "prweb" .
 
@@ -1470,6 +1512,8 @@
         <https://1145.am/db/2135171/Rome_Therapeutics-Distinguished_Fellow>,
         <https://1145.am/db/2135171/Rome_Therapeutics-Scientific_Advisory_Board_(sab)> ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "ROME",
         "ROME Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/1006211/Rome_Therapeutics>,
@@ -1494,6 +1538,7 @@
     ns1:foundName "Pavilion Payments" ;
     ns1:hasRole <https://1145.am/db/2135180/Pavilion_Payments-Chief_Revenue_Officer> ;
     ns1:industry "gaming" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Pavilion Payments" ;
     ns1:sameAsHigh <https://1145.am/db/1957406/Pavilion_Payments> ;
     ns1:sourceName "Business Wire" .
@@ -1524,6 +1569,7 @@
     ns1:foundName "Outpost24" ;
     ns1:hasRole <https://1145.am/db/2135199/Outpost24-Chief_Revenue_Officer_(cro)> ;
     ns1:industry "cyber risk management" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Outpost24" ;
     ns1:sameAsHigh <https://1145.am/db/1978876/Outpost24>,
         <https://1145.am/db/593865/Outpost24> ;
@@ -1546,6 +1592,7 @@
     ns1:foundName "Shippeo" ;
     ns1:hasRole <https://1145.am/db/2135206/Shippeo-Senior_Vice_President_Of_People> ;
     ns1:industry "supply chain visibility platform" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Shippeo" ;
     ns1:sameAsHigh <https://1145.am/db/1440411/Shippeo> ;
     ns1:sameAsMedium <https://1145.am/db/1406502/Shippeo>,
@@ -1563,6 +1610,8 @@
     ns1:hasRole <https://1145.am/db/2135216/Cardurion_Pharmaceuticals_Inc-Audit_Chair>,
         <https://1145.am/db/2135216/Cardurion_Pharmaceuticals_Inc-Independent_Board_Director> ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Cardurion Pharmaceuticals, Inc" ;
     ns1:sameAsHigh <https://1145.am/db/1653505/Cardurion_Pharmaceuticals_Inc>,
         <https://1145.am/db/1974221/Cardurion_Pharmaceuticals_Inc>,
@@ -1590,6 +1639,8 @@
     ns1:foundName "(the \"Company\" or \"Bowman\") (NASDAQ: BWMN)" ;
     ns1:hasRole <https://1145.am/db/2135228/Bowman_Consulting_Group_Ltd-Chief_Revenue_Officer_(cro)> ;
     ns1:industry "engineering services" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Bowman Consulting Group Ltd." ;
     ns1:sameAsHigh <https://1145.am/db/1031622/Bowman_Consulting_Group_Ltd>,
         <https://1145.am/db/1032045/Bowman_Consulting_Group_Ltd>,
@@ -1676,6 +1727,7 @@
     ns1:foundName "Odyssey Therapeutics, Inc." ;
     ns1:hasRole <https://1145.am/db/2135232/Odyssey_Therapeutics-Chief_Medical_Officer> ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Odyssey Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/1081365/Odyssey_Therapeutics> ;
     ns1:sameAsMedium <https://1145.am/db/2831709/Odyssey_Therapeutics> ;
@@ -1689,6 +1741,8 @@
     ns1:foundName "Alpine Immune Sciences, Inc" ;
     ns1:hasRole <https://1145.am/db/2135250/Alpine_Immune_Sciences-Chief_Medical_Officer> ;
     ns1:industry "drug developer" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Alpine Immune Sciences" ;
     ns1:sameAsHigh <https://1145.am/db/1115167/Alpine_Immune_Sciences>,
         <https://1145.am/db/1213075/Alpine_Immune_Sciences>,
@@ -1721,6 +1775,7 @@
     ns1:foundName "Concertium" ;
     ns1:hasRole <https://1145.am/db/2135259/Concertium-Chief_Executive_Officer> ;
     ns1:industry "cybersecurity and IT services" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Concertium" ;
     ns1:sourceName "Business Wire" .
 
@@ -1742,6 +1797,7 @@
     ns1:foundName "AI Proteins, Inc." ;
     ns1:hasRole <https://1145.am/db/2135262/Ai_Proteins-Scientific_Advisory_Board> ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "AI Proteins" ;
     ns1:sameAsHigh <https://1145.am/db/1578140/Ai_Proteins>,
         <https://1145.am/db/2079360/Ai_Proteins> ;
@@ -1779,6 +1835,8 @@
     ns1:foundName "SigmaSense®" ;
     ns1:hasRole <https://1145.am/db/2135271/Sigmasense-Chief_Executive_Officer> ;
     ns1:industry "semiconductor" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics>,
+        <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "SigmaSense" ;
     ns1:sameAsHigh <https://1145.am/db/528991/Sigmasense> ;
     ns1:sourceName "Business Wire" .
@@ -1792,6 +1850,7 @@
     ns1:foundName "AqueoUS Vets (the \"Company\")" ;
     ns1:hasRole <https://1145.am/db/2135287/Aqueous_Vets-President_And_Chief_Executive_Officer> ;
     ns1:industry "water industry" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "AqueoUS Vets" ;
     ns1:sourceName "Business Wire" .
 
@@ -1824,6 +1883,7 @@
     ns1:foundName "Lamps Plus" ;
     ns1:hasRole <https://1145.am/db/2135303/Lamps_Plus-Chief_Executive_Officer> ;
     ns1:industry "lighting" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "Lamps Plus" ;
     ns1:sameAsHigh <https://1145.am/db/1200728/Lamps_Plus>,
         <https://1145.am/db/1665326/Lamps_Plus> ;
@@ -1839,6 +1899,7 @@
     ns1:hasRole <https://1145.am/db/2135318/Axine_Water_Technologies-Chief_Technology_Officer>,
         <https://1145.am/db/2135318/Axine_Water_Technologies-Vice_President_Of_Sales> ;
     ns1:industry "wastewater treatment" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Axine Water Technologies" ;
     ns1:sameAsMedium <https://1145.am/db/1505936/Axine_Water_Technologies> ;
     ns1:sourceName "Business Wire" .
@@ -1883,6 +1944,7 @@
     ns1:foundName "Lazurite®" ;
     ns1:hasRole <https://1145.am/db/2135330/Lazurite-Medical_Advisory_Board> ;
     ns1:industry "Medical device and technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Lazurite" ;
     ns1:sameAsHigh <https://1145.am/db/2110592/Lazurite> ;
     ns1:sameAsMedium <https://1145.am/db/702276/Lazurite> ;
@@ -1895,6 +1957,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004016961/en/Digimarc-Appoints-Tom-Benton-as-Chief-Revenue-Officer> ;
     ns1:foundName "Digimarc Corporation (Nasdaq: DMRC)" ;
     ns1:hasRole <https://1145.am/db/2135373/Digimarc_Corporation-Chief_Revenue_Officer> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Digimarc Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/959941/Digimarc_Corporation> ;
     ns1:sameAsMedium <https://1145.am/db/732513/Digimarc_Corporation>,
@@ -1931,6 +1994,7 @@
     ns1:foundName "UBS" ;
     ns1:hasRole <https://1145.am/db/2135416/Ubs-Private_Wealth_Advisor> ;
     ns1:industry "Private Wealth Advisor" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "UBS" ;
     ns1:sameAsHigh <https://1145.am/db/1192335/Ubs_Ag_Hong_Kong_Branch>,
         <https://1145.am/db/1202604/Ubs>,
@@ -2056,6 +2120,7 @@
     ns1:foundName "Elara Caring" ;
     ns1:hasRole <https://1145.am/db/2135427/Elara_Caring-Chief_Development_Officer> ;
     ns1:industry "home health" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Elara Caring" ;
     ns1:sameAsHigh <https://1145.am/db/1632424/Elara_Caring>,
         <https://1145.am/db/1632869/Elara_Caring>,
@@ -2075,6 +2140,7 @@
     ns1:foundName "Ecolomondo Corporation (TSXV: ECM) (OTC: ECLMF) (the \"Company\" or \"Ecolomondo\")" ;
     ns1:hasRole <https://1145.am/db/2135467/Ecolomondo_Corporation-Facility_General_Manager> ;
     ns1:industry "cleantech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Ecolomondo Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1652665/Ecolomondo>,
         <https://1145.am/db/2070261/Ecolomondo>,
@@ -2101,6 +2167,8 @@
     ns1:foundName "1859" ;
     ns1:hasRole <https://1145.am/db/2135495/1859-Scientific_Advisory_Board> ;
     ns1:industry "drug discovery" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "1859" ;
     ns1:sameAsHigh <https://1145.am/db/2045409/1859>,
         <https://1145.am/db/2717651/1859>,
@@ -2232,6 +2300,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004561038/en/Monument-Re-Limited-Announces-Key-Staffing-Changes> ;
     ns1:foundName "Monument Re Limited (\"Monument Re\")" ;
     ns1:hasRole <https://1145.am/db/2135529/Monument_Re-Group_Ceo> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Monument Re" ;
     ns1:sameAsMedium <https://1145.am/db/1022265/Monument_Re>,
         <https://1145.am/db/1025379/Monument_Re>,
@@ -2258,6 +2327,7 @@
     ns1:foundName "APR Consulting, Inc." ;
     ns1:hasRole <https://1145.am/db/2135569/Apr_Consulting-Head_Of_Global_Strategy> ;
     ns1:industry "Staffing" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "APR Consulting" ;
     ns1:sourceName "Business Wire" .
 
@@ -2280,6 +2350,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004636878/en/AGI-Announces-Kate-Glasser-as-EVP-Global-Operations> ;
     ns1:foundName "Ag Growth International (TSX: AFN) (\"AGI\", the \"Company\", \"we\" or \"our\")" ;
     ns1:hasRole <https://1145.am/db/2135587/Ag_Growth_International-Executive_Vice_President_Global_Operations> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Ag Growth International" ;
     ns1:sameAsMedium <https://1145.am/db/1363674/Ag_Growth_International_Inc>,
         <https://1145.am/db/1365122/Ag_Growth_International_Inc>,
@@ -2314,6 +2385,8 @@
         <https://1145.am/db/2135595/Alterra_Mountain_Company-Evp_Hospitality>,
         <https://1145.am/db/2135595/Alterra_Mountain_Company-Executive_Vice_President_(evp)_Hospitality> ;
     ns1:industry "Hospitality" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music>,
+        <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Alterra",
         "Alterra Mountain Company" ;
     ns1:sameAsHigh <https://1145.am/db/2094716/Alterra_Mountain_Company>,
@@ -2376,6 +2449,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004080109/en/American-Health-Care-Association-AHCA-Elects-PointClickCare%E2%80%99s-Bill-Charnetski-to-Board-of-Governors-as-Associate-Business-Member-President> ;
     ns1:foundName "American Health Care Association's (AHCA) Board of Governors" ;
     ns1:hasRole <https://1145.am/db/2135654/American_Health_Care_Associations-Associate_Business_Member_(abm)_President> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "American Health Care Association's" ;
     ns1:sourceName "Business Wire" .
 
@@ -2407,6 +2481,7 @@
     ns1:foundName "(NASDAQ: KRMD) (\"KORU Medical\" or the \"Company\")" ;
     ns1:hasRole <https://1145.am/db/2135699/Koru_Medical_Systems-Board_Of_Directors> ;
     ns1:industry "medical technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "KORU Medical Systems" ;
     ns1:sameAsHigh <https://1145.am/db/2050192/Koru_Medical_Systems> ;
     ns1:sourceName "Business Wire" .
@@ -2428,6 +2503,7 @@
     ns1:foundName "Semtech Corporation (Nasdaq: SMTC)" ;
     ns1:hasRole <https://1145.am/db/2135715/Semtech_Corporation-Executive_Vice_President_And_Chief_Financial_Officer> ;
     ns1:industry "semiconductor" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Semtech Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1028168/Semtech_Corporation>,
         <https://1145.am/db/1029216/Semtech_Corporation>,
@@ -2460,6 +2536,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005523068/en/ITT-Announces-New-Board-of-Directors-Appointments-and-1-Billion-Share-Repurchase-Authorization> ;
     ns1:foundName "(NYSE: ITT)" ;
     ns1:hasRole <https://1145.am/db/2135728/Itt_Inc-Board_Of_Directors> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "ITT Inc." ;
     ns1:sameAsHigh <https://1145.am/db/968798/Itt_Inc> ;
     ns1:sameAsMedium <https://1145.am/db/1133175/Itt_Inc>,
@@ -2521,6 +2598,7 @@
     ns1:foundName "Metropolitan Bank Holding Corp. (NYSE: MCB) (the \"Company\")" ;
     ns1:hasRole <https://1145.am/db/2135735/Metropolitan_Bank_Holding_Corp-Executive_Vice_President_And_General_Counsel> ;
     ns1:industry "banking" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Metropolitan Bank Holding Corp" ;
     ns1:sameAsHigh <https://1145.am/db/475902/Metropolitan_Bank_Holding_Corp>,
         <https://1145.am/db/476917/Metropolitan_Bank_Holding_Corp>,
@@ -2539,6 +2617,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004615102/en/Byline-Bancorp-Inc.-Announces-the-Appointment-of-Carlos-Ruiz-Sacrist%C3%A1n-to-its-Board-of-Directors> ;
     ns1:foundName "Byline Bancorp" ;
     ns1:hasRole <https://1145.am/db/2135739/Byline_Bancorp-Boards_Of_Directors> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Byline Bancorp" ;
     ns1:sameAsMedium <https://1145.am/db/1234480/Byline_Bancorp>,
         <https://1145.am/db/1234480/Byline_Bank>,
@@ -2579,6 +2658,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004789728/en/Nardello-Co.-Continues-Expansion-With-Addition-of-LA-based-Cybersecurity-Expert-James-M.-Aquilina-to-Advisory-Board> ;
     ns1:foundName "Nardello & Co." ;
     ns1:hasRole <https://1145.am/db/2135742/Nardello___Co-Advisory_Board> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Nardello & Co." ;
     ns1:sameAsHigh <https://1145.am/db/2113521/Nardello___Co> ;
     ns1:sameAsMedium <https://1145.am/db/1022438/Nardello___Co>,
@@ -2610,6 +2690,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231004354527/en/Otter-Tail-Corporation-CFO-and-SVP-Moug-to-Retire-Wahlund-Named-Successor> ;
     ns1:foundName "Otter Tail Corporation (Nasdaq: OTTR)" ;
     ns1:hasRole <https://1145.am/db/2135758/Otter_Tail_Corporation-Vice_President_And_Chief_Financial_Officer> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Otter Tail Corporation" ;
     ns1:sameAsMedium <https://1145.am/db/1599719/Otter_Tail>,
         <https://1145.am/db/1600087/Otter_Tail_Corporation>,
@@ -2649,6 +2730,7 @@
     ns1:foundName "Sila" ;
     ns1:hasRole <https://1145.am/db/2135780/Sila-Plant_Manager> ;
     ns1:industry "battery materials" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "Sila" ;
     ns1:sameAsHigh <https://1145.am/db/1023420/Sila>,
         <https://1145.am/db/1024832/Sila>,
@@ -2669,6 +2751,7 @@
     ns1:foundName "Ivanti" ;
     ns1:hasRole <https://1145.am/db/2135812/Ivanti-Chief_Technology_Officer_Transformation> ;
     ns1:industry "cybersecurity" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Ivanti" ;
     ns1:sameAsHigh <https://1145.am/db/1756812/Ivanti> ;
     ns1:sameAsMedium <https://1145.am/db/1009081/Ivanti>,
@@ -2725,6 +2808,8 @@
     ns1:foundName "StoneEagle" ;
     ns1:hasRole <https://1145.am/db/2135903/Stoneeagle-Chief_Technology_Officer_(cto)> ;
     ns1:industry "automotive" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "StoneEagle" ;
     ns1:sameAsHigh <https://1145.am/db/745762/Stoneeagle>,
         <https://1145.am/db/761014/Stoneeagle> ;
@@ -2753,6 +2838,7 @@
     ns1:foundName "Greenberg Traurig, LLP" ;
     ns1:hasRole <https://1145.am/db/2135941/Greenberg_Traurig_Llp-Corporate_Practice_Shareholder> ;
     ns1:industry "law firm" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Greenberg Traurig, LLP" ;
     ns1:sameAsHigh <https://1145.am/db/1003397/Greenberg_Traurig>,
         <https://1145.am/db/1008817/Greenberg_Traurig_Llp>,
@@ -2878,6 +2964,7 @@
     ns1:documentURL <https://apnews.com/article/dalton-state-college-president-john-fuchko-1032e3c4c6867c51be6a13b7395cc9cf> ;
     ns1:foundName "Dalton State College, Georgia" ;
     ns1:hasRole <https://1145.am/db/2136158/Dalton_State_College-President> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Dalton State College" ;
     ns1:sourceName "Associated Press" .
 
@@ -2904,6 +2991,7 @@
     ns1:foundName "Atos (ATOS.PA)" ;
     ns1:hasRole <https://1145.am/db/2136369/Atos-Chief_Executive_Officer> ;
     ns1:industry "IT" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:name "Atos" ;
     ns1:sameAsHigh <https://1145.am/db/1133000/Atos>,
         <https://1145.am/db/1145675/Atos>,
@@ -2980,6 +3068,7 @@
     ns1:foundName "Phoenix Group (PHNX.L)" ;
     ns1:hasRole <https://1145.am/db/2136429/Phoenix_Group-Chair> ;
     ns1:industry "insurance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Phoenix Group" ;
     ns1:sameAsHigh <https://1145.am/db/1256529/Phoenix>,
         <https://1145.am/db/1337105/Phoenix>,
@@ -3014,6 +3103,7 @@
     ns1:foundName "Eli Lilly and Co" ;
     ns1:hasRole <https://1145.am/db/2136466/Eli_Lilly_And_Co-Head> ;
     ns1:industry "drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Eli Lilly and Co" ;
     ns1:sameAsHigh <https://1145.am/db/174741/Eli_Lilly_And_Co>,
         <https://1145.am/db/2043001/Eli_Lilly_And_Co>,
@@ -3070,6 +3160,7 @@
     ns1:foundName "Onfleet" ;
     ns1:hasRole <https://1145.am/db/2136706/Onfleet-Chief_Product_Officer> ;
     ns1:industry "last mile delivery management" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Onfleet" ;
     ns1:sameAsHigh <https://1145.am/db/1116170/Onfleet>,
         <https://1145.am/db/1267408/Onfleet>,
@@ -3109,6 +3200,7 @@
     ns1:foundName "(UTG.L)" ;
     ns1:hasRole <https://1145.am/db/2137019/Unite_Group-Finance_Chief> ;
     ns1:industry "student accommodation provider" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "Unite Group" ;
     ns1:sameAsHigh <https://1145.am/db/356165/Unite_Group> ;
     ns1:sourceName "Reuters" .
@@ -3131,6 +3223,7 @@
     ns1:foundName "(NASDAQ: PGY) (the \"Company\" or \"Pagaya\")" ;
     ns1:hasRole <https://1145.am/db/2137531/Pagaya_Technologies_Ltd-President> ;
     ns1:industry "technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:name "Pagaya Technologies Ltd." ;
     ns1:sameAsHigh <https://1145.am/db/1144502/Pagaya_Technologies_Ltd>,
         <https://1145.am/db/1153677/Pagaya_Technologies_Ltd>,
@@ -3170,6 +3263,7 @@
     ns1:foundName "ReliaQuest" ;
     ns1:hasRole <https://1145.am/db/2137536/Reliaquest-Board_Of_Directors> ;
     ns1:industry "cybersecurity" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "ReliaQuest" ;
     ns1:sameAsHigh <https://1145.am/db/1595232/Reliaquest>,
         <https://1145.am/db/662350/Reliaquest> ;
@@ -3194,6 +3288,7 @@
     ns1:foundName "(Nasdaq: CASH)" ;
     ns1:hasRole <https://1145.am/db/2137553/Pathward_Financial_Inc-Executive_Vice_President_(evp)_Chief_Financial_Officer_(cfo)_-_Designee> ;
     ns1:industry "banking" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Pathward Financial, Inc." ;
     ns1:sameAsMedium <https://1145.am/db/1370337/Pathward_Financial>,
         <https://1145.am/db/1371101/Pathward_Financial>,
@@ -3220,6 +3315,7 @@
     ns1:foundName "Apex Fintech Solutions" ;
     ns1:hasRole <https://1145.am/db/2137592/Apex_Fintech_Solutions-Chief_Financial_Officer> ;
     ns1:industry "financial industry" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Apex Fintech Solutions" ;
     ns1:sameAsHigh <https://1145.am/db/1405270/Apex_Fintech_Solutions>,
         <https://1145.am/db/1409857/Apex_Fintech_Solutions> ;
@@ -3258,6 +3354,7 @@
     ns1:hasRole <https://1145.am/db/2137594/Kenco-Group_Vice_President_Operations_Life_Sciences>,
         <https://1145.am/db/2137594/Kenco-Manager_Of_Life_Science_Network_Quality> ;
     ns1:industry "logistics" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "Kenco" ;
     ns1:sourceName "Business Wire" .
 
@@ -3292,6 +3389,7 @@
     ns1:foundName "Prime Capital Investment Advisors (PCIA)" ;
     ns1:hasRole <https://1145.am/db/2137598/Prime_Capital_Investment_Advisors-Advisor> ;
     ns1:industry "financial industry" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Prime Capital Investment Advisors" ;
     ns1:sameAsHigh <https://1145.am/db/1043390/Prime_Capital_Investment_Advisors>,
         <https://1145.am/db/1045678/Prime_Capital_Investment_Advisors>,
@@ -3322,6 +3420,7 @@
     ns1:hasRole <https://1145.am/db/2137610/Laudio-Chief_Marketing_Officer>,
         <https://1145.am/db/2137610/Laudio-Executive_Vice_President_Of_Sales> ;
     ns1:industry "Healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Laudio" ;
     ns1:sourceName "Business Wire" .
 
@@ -3364,6 +3463,7 @@
     ns1:hasRole <https://1145.am/db/2137630/Orca_Security-Chief_Financial_Officer>,
         <https://1145.am/db/2137630/Orca_Security-Chief_Product_Officer> ;
     ns1:industry "cloud security" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Orca Security" ;
     ns1:sameAsHigh <https://1145.am/db/1736136/Orca_Security>,
         <https://1145.am/db/1736147/Orca_Security>,
@@ -3383,6 +3483,7 @@
     ns1:foundName "1440" ;
     ns1:hasRole <https://1145.am/db/2137631/1440-Vice_President_Of_Enterprise_Sales> ;
     ns1:industry "media" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "1440" ;
     ns1:sourceName "Business Wire" .
 
@@ -3407,6 +3508,7 @@
     ns1:foundName "Milk Specialties Global (\"Milk Specialties\" or the \"Company\")" ;
     ns1:hasRole <https://1145.am/db/2137636/Milk_Specialties_Global-Board_Of_Directors> ;
     ns1:industry "ingredients industry" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Milk Specialties Global" ;
     ns1:sameAsMedium <https://1145.am/db/1601074/Milk_Specialties_Global>,
         <https://1145.am/db/1601535/Milk_Specialties_Global> ;
@@ -3430,6 +3532,7 @@
     ns1:foundName "EPSG" ;
     ns1:hasRole <https://1145.am/db/2137745/Epsg-Chief_Financial_Officer_(cfo)> ;
     ns1:industry "payment solutions" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "EPSG" ;
     ns1:sameAsHigh <https://1145.am/db/409805/Epsg>,
         <https://1145.am/db/410982/Epsg> ;
@@ -3462,6 +3565,7 @@
     ns1:foundName "(NYSE: QUAD) (\"Quad\" or the \"company\")" ;
     ns1:hasRole <https://1145.am/db/2137799/Quad_Graphics_Inc-Independent_Member> ;
     ns1:industry "marketing" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Quad/Graphics, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1014319/Quad_Graphics_Inc>,
         <https://1145.am/db/486164/Quad_Graphics_Inc>,
@@ -3481,6 +3585,8 @@
         "Arch MI" ;
     ns1:hasRole <https://1145.am/db/2137845/Arch_Capital_Group_Ltd-Ceo_International_Mortgage>,
         <https://1145.am/db/2137845/Arch_Capital_Group_Ltd-Executive> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Arch Capital Group Ltd",
         "Arch Capital Group Ltd." ;
     ns1:sameAsHigh <https://1145.am/db/437817/Arch_Capital_Group_Ltd>,
@@ -3518,6 +3624,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005988335/en/The-American-Flag-Football-League-Names-Travis-Watkins-VP-Ticket-Sales-Operations> ;
     ns1:foundName "The American Flag Football League (AFFL)" ;
     ns1:hasRole <https://1145.am/db/2137848/The_American_Flag_Football_League-Vp_Ticket_Sales___Operations> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "The American Flag Football League" ;
     ns1:sameAsMedium <https://1145.am/db/2118359/The_American_Flag_Football_League> ;
     ns1:sourceName "Business Wire" .
@@ -3549,6 +3656,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005092895/en/The-Multiple-Myeloma-Research-Foundation-MMRF-Names-Stephanie-Oestreich-Ph.D.-MPA-as-Managing-Director-of-the-Myeloma-Investment-Fund-MIF> ;
     ns1:foundName "The Multiple Myeloma Research Foundation (MMRF)" ;
     ns1:hasRole <https://1145.am/db/2137864/The_Multiple_Myeloma_Research_Foundation-Managing_Director> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "The Multiple Myeloma Research Foundation" ;
     ns1:sameAsMedium <https://1145.am/db/2346585/The_Multiple_Myeloma_Research_Foundation>,
         <https://1145.am/db/2347005/The_Multiple_Myeloma_Research_Foundation>,
@@ -3599,6 +3707,7 @@
         <https://1145.am/db/2137933/Secuvy-Chief_Revenue_Officer>,
         <https://1145.am/db/2137933/Secuvy-Executive_Chairman> ;
     ns1:industry "cybersecurity" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Secuvy" ;
     ns1:sameAsMedium <https://1145.am/db/1940086/Secuvy> ;
     ns1:sourceName "Business Wire" .
@@ -3747,6 +3856,7 @@
         "monday.com Ltd. (NASDAQ: MNDY) (\"monday.com\")" ;
     ns1:hasRole <https://1145.am/db/2133602/Mondaycom-Gm>,
         <https://1145.am/db/2133602/Mondaycom-Senior_Vice_President_Of_Sales> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "monday.com" ;
     ns1:sameAsHigh <https://1145.am/db/1355392/Mondaycom>,
         <https://1145.am/db/1355682/Mondaycom>,
@@ -4378,6 +4488,8 @@
     ns1:foundName "Insulet Corporation (NASDAQ: PODD) (Insulet or the Company)" ;
     ns1:hasRole <https://1145.am/db/2134266/Insulet_Corporation-Executive_Vice_President_Chief_Financial_Officer_And_Treasurer> ;
     ns1:industry "Health Care" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Insulet Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1035074/Insulet_Corporation>,
         <https://1145.am/db/1037500/Insulet_Corporation>,
@@ -4514,6 +4626,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231003982192/en/monday.com-Announces-Appointment-of-General-Manager-of-APJ-and-Hybrid-Regional-Structure> ;
     ns1:foundName "monday.com Ltd. (NASDAQ: MNDY) (\"monday.com\")" ;
     ns1:hasRole <https://1145.am/db/2134329/Mondaycom-General_Manager> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "monday.com" ;
     ns1:sameAsHigh <https://1145.am/db/1355392/Mondaycom>,
         <https://1145.am/db/1355682/Mondaycom>,
@@ -4580,6 +4693,7 @@
     ns1:hasRole <https://1145.am/db/2134381/Insulet_Corp-Chief_Financial_Officer>,
         <https://1145.am/db/2134381/Insulet_Corp-Interim_Cfo> ;
     ns1:industry "medical device" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Insulet",
         "Insulet Corp" ;
     ns1:sameAsHigh <https://1145.am/db/2297382/Insulet>,

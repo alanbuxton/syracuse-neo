@@ -16,8 +16,14 @@ def setup_db_if_necessary():
                     "locationPurpose","locationType","name","orgFoundName",
                     "roleFoundName","roleHolderFoundName",
                     "status","targetDetails","targetName","valueRaw",
-                    "when","whenRaw","whereGeoName","whereRaw"]
+                    "when","whenRaw","whereGeoName","whereRaw",
+                    # IndustryCluster
+                    "representation","representativeDoc",
+                    ]
         proplist = [f"https://1145.am/db/{x}" for x in multivals]
+        '''
+            query = 'CALL n10s.graphconfig.set({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"], force: True})';
+        '''
         query = 'CALL n10s.graphconfig.init({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]})';
         logger.info(query)
         db.cypher_query(query)

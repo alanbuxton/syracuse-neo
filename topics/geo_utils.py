@@ -6,14 +6,8 @@ from django.core.cache import cache
 from neomodel import db
 logger = logging.getLogger(__name__)
 
-# POLITICAL_ENTITY_FEATURE_CODES = set(["PCL","PCLD","PCLF","PCLH","PCLI","PCLIX","PCLS"])
-
 GEO_CACHE_KEY="geo_data"
-COUNTRIES_WITH_REGIONS = ["AE","US","CA","CN"] # Countries to be broken down to component parts
-
-def geo_code_to_name(geo_code):
-    _,_,country_admin1_code_to_name = get_geo_data()
-    return country_admin1_code_to_name[geo_code]
+COUNTRIES_WITH_REGIONS = ["AE","US","CA","CN","IN"] # Countries to be broken down to state/province
 
 def country_and_region_code_to_name(geo_code):
     _,_,country_admin1_code_to_name = get_geo_data()
@@ -24,6 +18,8 @@ def country_and_region_code_to_name(geo_code):
     return f"{region} ({country})"
 
 def geoname_ids_for_country_region(geo_code):
+    if geo_code is None or geo_code.strip() == '':
+        return []
     geo_mapping, _, _ = get_geo_data()
     if "-" not in geo_code:
         relevant_ids = geo_mapping[geo_code]
@@ -62,16 +58,17 @@ def get_geo_data(force_refresh=False):
                                     })
     return country_admin1_geoname_mapping, country_admin1_name_to_code, country_admin1_code_to_name
 
-def geo_select_list():
+def geo_select_list(include_alt_names=False):
     _,rows,_ = get_geo_data()
     select_list = [ ["",""] ]
     for country_name,admin1_name,geo_code in rows:
         if admin1_name == '':
             select_list.append( [geo_code , country_name] )
         else:
-            select_list.append( [geo_code, f"- {admin1_name}" ])
-    return select_list
-
+            select_list.append( [geo_code, f"{country_name} - {admin1_name}" ])
+    if include_alt_names is True:
+        select_list.append( ["GB","Great Britain and Northern Ireland"])
+    return sorted(select_list, key = lambda x: x[1])
 
 def sorted_country_admin1_list(country_names_to_id,admin1_names_to_id):
     combined_sorted_list = [] # country name, admin1_name, country_or_admin_code
@@ -79,9 +76,8 @@ def sorted_country_admin1_list(country_names_to_id,admin1_names_to_id):
         combined_sorted_list.append( (country_name,'',country_code) )
         if country_code in COUNTRIES_WITH_REGIONS:
             for admin1_name,admin1_code in sorted(admin1_names_to_id[country_code].items()):
-                combined_sorted_list.append( ('', admin1_name, f"{country_code}-{admin1_code}"))
+                combined_sorted_list.append( (country_name, admin1_name, f"{country_code}-{admin1_code}"))
     return combined_sorted_list
-
 
 def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geonames_ids=set()):
     country_admin1_mapping = {} # country_code => {set of geonames or {admin1_code => set of geonames}}

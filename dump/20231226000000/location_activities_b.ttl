@@ -12,6 +12,7 @@
     ns1:documentURL <https://techcrunch.com/2008/07/17/norwegian-company-builds-worlds-largest-solar-plant-in-singapore/> ;
     ns1:foundName "Renewable Energy Corp" ;
     ns1:industry "Renewable Energy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:locationAdded <https://1145.am/db/1709296/Renewable_Energy_Corp-Singapore-Added> ;
     ns1:name "Renewable Energy Corp" ;
     ns1:sourceName "TechCrunch" .
@@ -25,6 +26,7 @@
     ns1:documentTitle "TeachStreet Expands To San Francisco: Find That Perfect Cooking Class. Or Whatever." ;
     ns1:documentURL <https://techcrunch.com/2008/11/19/teachstreet-expands-to-san-francisco-find-that-perfect-cooking-class-or-whatever/> ;
     ns1:foundName "TeachStreet" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:locationAdded <https://1145.am/db/1719107/Teachstreet-San_Francisco_And_Silicon_Valley-Added> ;
     ns1:name "TeachStreet" ;
     ns1:sourceName "TechCrunch" .
@@ -50,6 +52,7 @@
     ns1:documentURL <https://techcrunch.com/2008/09/18/onkyo-japan-to-release-inexpensive-sotec-branded-notebook/> ;
     ns1:foundName "Onkyo" ;
     ns1:industry "electronics" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:locationAdded <https://1145.am/db/1732041/Onkyo-Japan-Added> ;
     ns1:name "Onkyo" ;
     ns1:sameAsHigh <https://1145.am/db/1904030/Onkyo> ;
@@ -64,6 +67,8 @@
     ns1:documentURL <https://techcrunch.com/2008/08/26/xiha-life-a-social-network-for-multilinguists/> ;
     ns1:foundName "XIHA Life" ;
     ns1:industry "social network" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp>,
+        <https://1145.am/db/industry/17_ai_generative_models_speech> ;
     ns1:locationAdded <https://1145.am/db/1907246/Xiha_Life-United_States-Added> ;
     ns1:name "XIHA Life" ;
     ns1:sourceName "TechCrunch" .
@@ -76,6 +81,7 @@
     ns1:documentURL <https://techcrunch.com/2009/05/27/msi-x340-ultraportable-now-available-in-the-us-for-799/> ;
     ns1:foundName "MSI US" ;
     ns1:industry "computer hardware" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:name "MSI Computer" ;
     ns1:sourceName "TechCrunch" .
 
@@ -86,6 +92,7 @@
     ns1:documentURL <https://techcrunch.com/2009/08/31/ntt-americas-new-data-center-aims-to-harpoon-twitters-fail-whale/> ;
     ns1:foundName "NTT America" ;
     ns1:industry "network provider" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:locationAdded <https://1145.am/db/1926120/Ntt_America-Santa_Clara_Ca-Added> ;
     ns1:name "NTT America" ;
     ns1:sameAsHigh <https://1145.am/db/2604359/Ntt_America> ;
@@ -102,6 +109,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/osi-pharmaceuticals-announces-consolidation-of-u-s-operations> ;
     ns1:foundName "OSI Pharmaceuticals, Inc" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2301798/Osi_Pharmaceuticals-Ardsley-Added> ;
     ns1:name "OSI Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/2315693/Osi_Pharmaceuticals>,
@@ -133,6 +141,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/cambridge-major-laboratories-dedicates-new-large-scale-active-pharmaceutical-ingredient-api> ;
     ns1:foundName "Cambridge Major Laboratories" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:locationAdded <https://1145.am/db/2303690/Cambridge_Major_Laboratories-Germantown_Wi_Usa-Added> ;
     ns1:name "Cambridge Major Laboratories" ;
     ns1:sameAsHigh <https://1145.am/db/2362605/Cambridge_Major_Laboratories>,
@@ -156,6 +166,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/sanofi-won-t-expand-pa-s-lehigh-valley> ;
     ns1:foundName "Sanofi Pasteur" ;
     ns1:industry "Vaccine" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:locationAdded <https://1145.am/db/2304690/Sanofi_Pasteur-Pennsylvania-Added> ;
     ns1:name "Sanofi Pasteur" ;
     ns1:sameAsHigh <https://1145.am/db/2311084/Sanofi_Pasteur>,
@@ -176,6 +187,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/ppd-recruits-for-ireland-research-lab> ;
     ns1:foundName "PPD" ;
     ns1:industry "CRO" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2305238/PPD-Athlone_Ireland-Added> ;
     ns1:name "PPD" ;
     ns1:sameAsHigh <https://1145.am/db/2289163/PPD>,
@@ -226,6 +238,7 @@
     ns1:documentTitle "PPD recruits for Ireland research lab" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/ppd-recruits-for-ireland-research-lab> ;
     ns1:foundName "The CRO" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2305238/The_Cro-Athlone_Ireland-Added>,
         <https://1145.am/db/2305238/The_Cro-Garrycastle_Business_And_Technology_Park-Added> ;
     ns1:name "The CRO" ;
@@ -240,6 +253,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/research/lifecell-opens-new-r-d-lab-india-tem-cells-used-to-repair-stroke-damage> ;
     ns1:foundName "LifeCell International" ;
     ns1:industry "stem cell technologies" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:locationAdded <https://1145.am/db/2309469/Lifecell_International-India-Added> ;
     ns1:name "LifeCell International" ;
     ns1:sourceName "Fierce Biotech" .
@@ -268,6 +282,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/research/takeda-to-move-r-d-hq-to-chicago-region> ;
     ns1:foundName "Takeda Pharmaceutical" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationRemoved <https://1145.am/db/2310517/Takeda-Japan-Removed> ;
     ns1:name "Takeda" ;
     ns1:sameAsHigh <https://1145.am/db/1150157/Takeda>,
@@ -389,6 +404,7 @@
     ns1:foundName "Sanofi-Aventis U.S.",
         "Sanofi-aventis U.S." ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationRemoved <https://1145.am/db/2311677/Sanofi-Aventis_Us-Kansas_City_Mo-Removed> ;
     ns1:name "Sanofi-Aventis U.S.",
         "Sanofi-aventis U.S." ;
@@ -407,6 +423,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/novo-to-open-development-ops-seattle> ;
     ns1:foundName "Novo Nordisk" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2313311/Novo_Nordisk-Seattle-Added> ;
     ns1:name "Novo Nordisk" ;
     ns1:sameAsHigh <https://1145.am/db/106844/Novo_Nordisk>,
@@ -524,6 +541,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/sanofi-aventis-builds-new-manufacturing-base-hangzhou> ;
     ns1:foundName "Sanofi-aventis" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2315315/Sanofi-Aventis-Binjiang_New_Development_Zone-Added> ;
     ns1:locationRemoved <https://1145.am/db/2315315/Sanofi-Aventis-Hangzhou-Removed> ;
     ns1:name "Sanofi-aventis" ;
@@ -619,6 +637,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/alseres-pharmaceuticals-consolidates-its-offices-and-moves-into-new-headquarters> ;
     ns1:foundName "Alseres Pharmaceuticals, Inc" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2315490/Alseres_Pharmaceuticals-Hopkinton_Massachusetts-Added> ;
     ns1:name "Alseres Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/2302625/Alseres_Pharmaceuticals_Inc>,
@@ -679,6 +698,7 @@
     ns1:foundName "- Pharmos Corporation",
         "Pharmos Corporation" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationRemoved <https://1145.am/db/2318743/Pharmos_Corporation-Iselin-Removed>,
         <https://1145.am/db/2318743/Pharmos_Corporation-Israel-Removed>,
         <https://1145.am/db/2318743/Pharmos_Corporation-Rehovot-Removed> ;
@@ -703,6 +723,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/tris-pharma-completes-its-facilities-expansion-receives-fda-clearance> ;
     ns1:foundName "Tris Pharma" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2324203/Tris_Pharma-South_Brunswick-Added> ;
     ns1:name "Tris Pharma" ;
     ns1:sameAsHigh <https://1145.am/db/1991109/Tris_Pharma>,
@@ -725,6 +746,7 @@
         "Millipore Corporation" ;
     ns1:industry "Bioprocess Manufacturing",
         "life science" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:locationAdded <https://1145.am/db/2328383/Millipore_Corporation-Danvers-Added>,
         <https://1145.am/db/2328383/Millipore_Corporation-Massachusetts-Added> ;
     ns1:name "Millipore",
@@ -809,6 +831,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/synteract-plans-central-eastern-european-cro-office-to-open-august-2009> ;
     ns1:foundName "Synteract, Inc." ;
     ns1:industry "contract research organization" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2329529/Synteract_Inc-Prague-Added> ;
     ns1:name "Synteract, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/2286916/Synteract>,
@@ -829,6 +852,8 @@
     ns1:documentURL <https://www.livedesignonline.com/venues/wind-swept> ;
     ns1:foundName "Mohegan Sun" ;
     ns1:industry "casino" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:locationAdded <https://1145.am/db/2409785/Mohegan_Sun-Casino_Of_The_Wind-Added> ;
     ns1:name "Mohegan Sun" ;
     ns1:sameAsHigh <https://1145.am/db/2390475/Mohegan_Sun> ;
@@ -844,6 +869,7 @@
     ns1:documentURL <https://www.livedesignonline.com/jaffeholden-launches-chicago-office> ;
     ns1:foundName "JaffeHolden" ;
     ns1:industry "Acoustical Design" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:locationAdded <https://1145.am/db/2421211/Jaffeholden-Alice_Tully_Hall-Added>,
         <https://1145.am/db/2421211/Jaffeholden-Chicago-Added> ;
     ns1:name "JaffeHolden" ;
@@ -859,6 +885,7 @@
     ns1:documentURL <https://www.livedesignonline.com/milos-america-move> ;
     ns1:foundName "MILOS America" ;
     ns1:industry "trussing manufacturer" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:locationAdded <https://1145.am/db/2425800/Milos_America-Ashland_Virginia-Added> ;
     ns1:name "MILOS America" ;
     ns1:sourceName "Live Design Online" .
@@ -872,6 +899,7 @@
     ns1:documentTitle "COX Instruments Announces Flowmeter Calibration Center" ;
     ns1:documentURL <https://www.fierceelectronics.com/components/cox-instruments-announces-flowmeter-calibration-center> ;
     ns1:foundName "COX Instruments" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:locationAdded <https://1145.am/db/2434728/Cox-Asia_Pacific-Added> ;
     ns1:name "COX" ;
     ns1:sameAsHigh <https://1145.am/db/2615058/Cox> ;
@@ -895,6 +923,7 @@
     ns1:documentURL <https://www.fierceelectronics.com/components/soitec-inaugurates-singapore-manufacturing-plant> ;
     ns1:foundName "Soitec (Euronext Paris)" ;
     ns1:industry "microelectronics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/18_materials_electronics_hardware_microelectronics> ;
     ns1:locationAdded <https://1145.am/db/2439463/Soitec-Pasir_Ris_Wafer_Fab_Park-Added>,
         <https://1145.am/db/2439463/Soitec-Singapore-Added> ;
     ns1:name "Soitec" ;
@@ -925,6 +954,7 @@
     ns1:documentTitle "First UK-Based Six Senses Spa to Open" ;
     ns1:documentURL <https://www.travelagentcentral.com/hotels/first-uk-based-six-senses-spa-to-open> ;
     ns1:foundName "Six Senses Spa" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:locationAdded <https://1145.am/db/2504933/Six_Senses_Spa-Canary_Wharf-Added>,
         <https://1145.am/db/2504933/Six_Senses_Spa-London-Added> ;
     ns1:name "Six Senses Spa" ;
@@ -943,6 +973,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/mandarin-oriental-setting-flag-moscow> ;
     ns1:foundName "Mandarin Oriental Hotel Group" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2505243/Mandarin_Oriental_Hotel_Group-Moscow-Added> ;
     ns1:name "Mandarin Oriental Hotel Group" ;
     ns1:sameAsHigh <https://1145.am/db/2156161/Mandarin_Oriental_Hotel>,
@@ -973,6 +1004,7 @@
     ns1:documentTitle "Starwood Vacation Ownership Announces Plans for Third Maui Resort" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/starwood-vacation-ownership-announces-plans-for-third-maui-resort-0> ;
     ns1:foundName "­­Starwood Vacation Ownership" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2505257/Starwood_Vacation_Ownership-Hawaii-Added>,
         <https://1145.am/db/2505257/Starwood_Vacation_Ownership-Maui-Added> ;
     ns1:name "Starwood Vacation Ownership" ;
@@ -987,6 +1019,8 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/osprey-at-beaver-creek-opens-amidst-cheaper-lift-tickets> ;
     ns1:foundName "Vail Resorts, Inc." ;
     ns1:industry "lodging" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music>,
+        <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2505372/Vail_Resorts_Inc-The_Osprey-Added> ;
     ns1:name "Vail Resorts, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1252608/Vail_Resorts>,
@@ -1020,6 +1054,8 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/movenpick-hotels-resorts-opens-hanoi-hotel> ;
     ns1:foundName "Mövenpick Hotels & Resorts" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier>,
+        <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2506712/Mövenpick_Hotels___Resorts-Hanoi-Added>,
         <https://1145.am/db/2506712/Mövenpick_Hotels___Resorts-Vietnam-Added> ;
     ns1:name "Mövenpick Hotels & Resorts" ;
@@ -1052,6 +1088,7 @@
     ns1:documentTitle "Two Luxury Resorts Open Under Zoёtry Umbrella" ;
     ns1:documentURL <https://www.travelagentcentral.com/hotels/two-luxury-resorts-open-under-zoetry-umbrella> ;
     ns1:foundName "Zoetry Wellness & Spa Resorts" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2507983/Zoetry_Wellness___Spa_Resorts-Dominican_Republic-Added> ;
     ns1:name "Zoetry Wellness & Spa Resorts" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1066,6 +1103,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/access-china-tours-expands-operations> ;
     ns1:foundName "Access China Tours" ;
     ns1:industry "travel and hospitality" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2508127/Access_China_Tours-Denver-Added> ;
     ns1:name "Access China Tours" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1091,6 +1129,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/transportation/jetblue-expands-jamaica-flights-resumes-nantucket-summer-serivce> ;
     ns1:foundName "JetBlue Airways" ;
     ns1:industry "airline" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2509632/Jetblue_Airways-Kingston-Added>,
         <https://1145.am/db/2509632/Jetblue_Airways-Montego_Bay-Added> ;
     ns1:name "JetBlue Airways" ;
@@ -1143,6 +1182,8 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/awasi-to-expand-chile-argentina> ;
     ns1:foundName "Awasi" ;
     ns1:industry "Hotels" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier>,
+        <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2510829/Awasi-Argentina-Added>,
         <https://1145.am/db/2510829/Awasi-Iguazu_Falls-Added>,
         <https://1145.am/db/2510829/Awasi-Torres_Del_Paine-Added> ;
@@ -1178,6 +1219,7 @@
     ns1:documentTitle "Banyan Tree Mayakoba" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/banyan-tree-mayakoba> ;
     ns1:foundName "Banyan Tree Hotels and Resorts" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2514807/Banyan_Tree_Hotels_And_Resorts-Mexico-Added>,
         <https://1145.am/db/2514807/Banyan_Tree_Hotels_And_Resorts-Riviera_Maya-Added> ;
     ns1:name "Banyan Tree Hotels and Resorts" ;
@@ -1194,6 +1236,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/two-new-hotels-set-to-open-dubai> ;
     ns1:foundName "The Address Dubai Marina" ;
     ns1:industry "hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2516336/The_Address_Dubai_Marina-Marina_District-Added> ;
     ns1:name "The Address Dubai Marina" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1208,6 +1251,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/island-outpost-breaks-ground-at-goldeneye-jamaica> ;
     ns1:foundName "Island Outpost" ;
     ns1:industry "Hotels and villas" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2516367/Island_Outpost-Jamaican-Added> ;
     ns1:name "Island Outpost" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1222,6 +1266,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/azure-restaurant-opens-at-royal-hawaiian> ;
     ns1:foundName "The Royal Hawaiian" ;
     ns1:industry "restaurant" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:locationAdded <https://1145.am/db/2518748/Azure-Waikiki-Added> ;
     ns1:name "Azure" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1236,6 +1281,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/tours/eco-friendly-hotel-arista-debuts-chicago-suburb> ;
     ns1:foundName "Hotel Arista" ;
     ns1:industry "hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2518774/Hotel_Arista-Naperville-Added> ;
     ns1:name "Hotel Arista" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1272,6 +1318,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/continental-delta-expand-europe-vacation-options> ;
     ns1:foundName "Continental Airlines Vacations" ;
     ns1:industry "Travel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2520249/Continental_Airlines_Vacations-Hamburg-Added> ;
     ns1:name "Continental Airlines Vacations" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1286,6 +1333,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/banyan-tree-moves-into-philippines-a-big-way> ;
     ns1:foundName "Salvador Zamora II" ;
     ns1:industry "mining and real-estate" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:locationAdded <https://1145.am/db/2520726/Salvador_Zamora_Ii-Palawan-Added> ;
     ns1:name "Salvador Zamora II" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1300,6 +1348,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/nyc-company-opens-new-office-india> ;
     ns1:foundName "NYC & Company" ;
     ns1:industry "travel and tourism" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2521119/Nyc___Company-India-Added> ;
     ns1:name "NYC & Company" ;
     ns1:sameAsHigh <https://1145.am/db/2475707/Nyc___Company>,
@@ -1315,6 +1364,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/ramada-develops-two-hotels-china> ;
     ns1:foundName "Ramada Worldwide" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2522271/Ramada_Worldwide-China-Added> ;
     ns1:name "Ramada Worldwide" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1326,6 +1376,7 @@
     ns1:documentTitle "Alrov to Open New Luxury Hotel in Jerusalem" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/alrov-to-open-new-luxury-hotel-jerusalem> ;
     ns1:foundName "Alrov Luxury Hotels" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2522332/Alrov_Luxury_Hotels-Jerusalem-Added> ;
     ns1:name "Alrov Luxury Hotels" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1351,6 +1402,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/amanresorts-opens-amantaka-luang-prabang> ;
     ns1:foundName "Amanresorts" ;
     ns1:industry "luxury" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2525307/Amanresorts-Luang_Prabang-Added> ;
     ns1:name "Amanresorts" ;
     ns1:sameAsHigh <https://1145.am/db/2456464/Amanresorts>,
@@ -1365,6 +1417,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/hard-rock-to-open-casino-hungary> ;
     ns1:foundName "Hard Rock International" ;
     ns1:industry "gambling" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:locationAdded <https://1145.am/db/2526246/Hard_Rock_International-Bezenye-Added>,
         <https://1145.am/db/2526246/Hard_Rock_International-Hungary-Added> ;
     ns1:name "Hard Rock International" ;
@@ -1399,6 +1452,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/modern-palace-fit-for-a-maharaja-opening> ;
     ns1:foundName "Leela Hotels, Palaces & Resorts" ;
     ns1:industry "Luxury hotel group" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2530087/Leela_Hotels_Palaces___Resorts-Udaipur-Added> ;
     ns1:name "Leela Hotels, Palaces & Resorts" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1411,6 +1465,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/more-canadian-locations-for-intercontinental-s-hotel-indigo> ;
     ns1:foundName "InterContinental Hotel Group" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2530919/Intercontinental_Hotel_Group-Vancouver-Added> ;
     ns1:name "InterContinental Hotel Group" ;
     ns1:sameAsMedium <https://1145.am/db/2469369/Intercontinental_Hotel> ;
@@ -1424,6 +1479,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/kempinski-hotels-opens-latest-sea-side-venture-aqaba> ;
     ns1:foundName "Kempinksi Hotels" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2530920/Kempinksi_Hotels-Aqaba-Added> ;
     ns1:name "Kempinksi Hotels" ;
     ns1:sourceName "Travel Agent Central" .
@@ -1435,6 +1491,7 @@
     ns1:documentTitle "Raffles Expands Into Greece" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/raffles-expands-into-greece> ;
     ns1:foundName "Raffles Hotels & Resorts" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2530923/Raffles_Hotels___Resorts-Greece-Added> ;
     ns1:name "Raffles Hotels & Resorts" ;
     ns1:sameAsMedium <https://1145.am/db/2459985/Raffles_Hotels___Resorts>,
@@ -1452,6 +1509,7 @@
     ns1:documentTitle "Wyndham Hotel and Resorts opens Wyndham Dallas Love Field" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/wyndham-hotel-and-resorts-opens-wyndham-dallas-love-field> ;
     ns1:foundName "Wyndham Hotels and Resorts" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2531275/Wyndham_Hotels_And_Resorts-Dallas-Added> ;
     ns1:name "Wyndham Hotels and Resorts" ;
     ns1:sameAsHigh <https://1145.am/db/2149317/Wyndham_Hotels___Resorts>,
@@ -1494,6 +1552,7 @@
     ns1:documentTitle "Los Cabos' Luxe Plans" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/los-cabos-luxe-plans> ;
     ns1:foundName "Capella Pedregal" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2532474/Capella_Pedregal-Cabo_San_Lucas_Marina-Added> ;
     ns1:name "Capella Pedregal" ;
     ns1:sameAsMedium <https://1145.am/db/2459874/Capella_Pedregal> ;
@@ -1506,6 +1565,7 @@
     ns1:documentTitle "Design Hotels Poised to Open Bali Property" ;
     ns1:documentURL <https://www.travelagentcentral.com/destinations/design-hotels-poised-to-open-bali-property> ;
     ns1:foundName "Design Hotels" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:locationAdded <https://1145.am/db/2532982/Design_Hotels-Alila_Villas_Uluwatu-Added>,
         <https://1145.am/db/2532982/Design_Hotels-Bali-Added> ;
     ns1:name "Design Hotels" ;
@@ -1525,6 +1585,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma/overseas-push-fda-opens-costa-rica-office-u-s-flu-strain-broadly-resistant-to-tamiflu> ;
     ns1:foundName "Daiichi Sankyo" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2544559/Daiichi_Sankyo-Puerto_Rico-Added>,
         <https://1145.am/db/2544559/Daiichi_Sankyo-San_Juan-Added> ;
     ns1:name "Daiichi Sankyo" ;
@@ -1603,6 +1664,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/pharma-dominates-climate-scorecard-fda-hears-need-for-opioid-rems> ;
     ns1:foundName "CoreRx" ;
     ns1:industry "pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2553641/Corerx-Florida-Added> ;
     ns1:name "CoreRx" ;
     ns1:sameAsHigh <https://1145.am/db/2337231/Corerx> ;
@@ -1619,6 +1681,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/nycomed-to-build-api-plant-russia> ;
     ns1:foundName "Nycomed" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2554677/Nycomed-Russia-Added> ;
     ns1:name "Nycomed" ;
     ns1:sameAsHigh <https://1145.am/db/2303763/Nycomed>,
@@ -1692,6 +1755,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/schott-optimistic-for-syringe-fill-line> ;
     ns1:foundName "Schott Pharmaceuticals" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2555796/Schott_Pharmaceuticals-South_Lebanon_Township_Pa-Added> ;
     ns1:name "Schott Pharmaceuticals" ;
     ns1:sourceName "Fierce Pharma" .
@@ -1736,6 +1800,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma/pharmakon-moves-to-cali-salix-seeks-funds> ;
     ns1:foundName "Pharmakon" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2563049/Pharmakon-Carmel-Added> ;
     ns1:name "Pharmakon" ;
     ns1:sameAsMedium <https://1145.am/db/1962637/Pharmakon> ;
@@ -1752,6 +1817,7 @@
     ns1:documentTitle "New on the Scene (Oct. 14, 2009)" ;
     ns1:documentURL <https://www.barandrestaurant.com/operations/new-scene-oct-14-2009> ;
     ns1:foundName "SEVENS" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:locationAdded <https://1145.am/db/2712229/Sevens-East_St_Louis-Added> ;
     ns1:name "SEVENS" ;
     ns1:sourceName "Bar & Restaurant" .
@@ -2016,6 +2082,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/pra-international-expands-presence-asia> ;
     ns1:foundName "PRA International" ;
     ns1:industry "Clinical Research" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2302049/Pra_International-South_Korea-Added> ;
     ns1:name "PRA International" ;
     ns1:sameAsHigh <https://1145.am/db/2314081/Pra_International>,
@@ -2332,6 +2399,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/medimmune-big-biotechs-plot-major-2009-expansion> ;
     ns1:foundName "MedImmune" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:locationAdded <https://1145.am/db/2311024/Medimmune-Gaithersburg_Md-Added> ;
     ns1:name "MedImmune" ;
     ns1:sameAsHigh <https://1145.am/db/2298103/Medimmune>,
@@ -2466,6 +2534,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/neuroscience-pharmaceuticals-launches-research-triangle-park-0> ;
     ns1:foundName "NeuroScience Pharmaceuticals" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2314313/Neuroscience_Pharmaceuticals-Research_Triangle_Park-Added> ;
     ns1:name "NeuroScience Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/2315317/Neuroscience_Pharmaceuticals_Inc> ;
@@ -2579,6 +2648,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/neuroscience-pharmaceuticals-launches-research-triangle-park> ;
     ns1:foundName "NeuroScience Pharmaceuticals Inc" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:locationAdded <https://1145.am/db/2315317/Neuroscience_Pharmaceuticals_Inc-Research_Triangle_Park-Added> ;
     ns1:name "NeuroScience Pharmaceuticals Inc" ;
     ns1:sameAsHigh <https://1145.am/db/2314313/Neuroscience_Pharmaceuticals> ;
@@ -2786,6 +2857,7 @@
     ns1:documentTitle "Genzyme Corporation (GENZ) Marks Grand Opening of $125 Million Science Center; Among the First Research Laboratories to Earn Gol" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/genzyme-corporation-genz-marks-grand-opening-of-125-million-science-center-among-first> ;
     ns1:foundName "Genzyme Corp" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2323164/Genzyme_Corp-Framingham_Mass-Added> ;
     ns1:name "Genzyme Corp" ;
     ns1:sameAsHigh <https://1145.am/db/2324202/Genzyme_Corp> ;
@@ -2892,6 +2964,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/genzyme-marks-grand-opening-of-new-science-center-among-first-research-laboratories-to-earn> ;
     ns1:foundName "Genzyme Corp",
         "Genzyme Corp." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2324202/Genzyme_Corp-Framingham_Mass-Added> ;
     ns1:name "Genzyme Corp",
         "Genzyme Corp." ;
@@ -3177,6 +3250,7 @@
     ns1:documentTitle "MedImmune Expands R&D Capacity with New Research Facility in Cambridge, U.K." ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/medimmune-expands-r-d-capacity-new-research-facility-cambridge-u-k> ;
     ns1:foundName "MedImmune" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:locationAdded <https://1145.am/db/2331864/Medimmune-Cambridge-Added> ;
     ns1:name "MedImmune" ;
     ns1:sameAsHigh <https://1145.am/db/2317886/Medimmune>,
@@ -3942,6 +4016,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/mandarin-oriental-unveils-plans-for-russia-hotel> ;
     ns1:foundName "Mandarin Oriental Hotel" ;
     ns1:industry "Hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2511380/Mandarin_Oriental_Hotel-Moscow-Added> ;
     ns1:name "Mandarin Oriental Hotel" ;
     ns1:sameAsHigh <https://1145.am/db/2156161/Mandarin_Oriental_Hotel> ;
@@ -4847,6 +4922,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/fairmont-hotels-resorts-announces-second-india-hotel> ;
     ns1:foundName "Fairmont Hotels & Resorts" ;
     ns1:industry "luxury hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2529598/Fairmont_Hotels___Resorts-India-Added> ;
     ns1:name "Fairmont Hotels & Resorts" ;
     ns1:sameAsHigh <https://1145.am/db/1239765/Fairmont_Hotels___Resorts>,
@@ -5173,6 +5249,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma/novartis-to-ship-100-jobs-to-india-fda-highlights-wrinkle-filler-side-effects> ;
     ns1:foundName "Novartis" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2541511/Novartis-Hyderabad-Added> ;
     ns1:name "Novartis" ;
     ns1:sameAsHigh <https://1145.am/db/1176158/Novartis>,
@@ -5873,6 +5950,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma/novartis-to-shutter-two-french-sites-some-docs-call-epilepsy-drug-warning-overreaction> ;
     ns1:foundName "Novartis" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationRemoved <https://1145.am/db/2559802/Novartis-Orleans-La-Source-Removed>,
         <https://1145.am/db/2559802/Novartis-Rueil-Malmaison-Removed> ;
     ns1:name "Novartis" ;
@@ -6429,6 +6507,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/research/glaxo-to-double-r-d-staff-china> ;
     ns1:foundName "GlaxoSmithKline" ;
     ns1:industry "pharma" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2306213/Glaxosmithkline-China-Added> ;
     ns1:name "GlaxoSmithKline" ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Glaxosmithkline_Plc>,
@@ -6796,6 +6875,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/glaxo-to-double-china-r-d> ;
     ns1:foundName "GlaxoSmithKline" ;
     ns1:industry "pharma" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2306799/Glaxosmithkline-China-Added> ;
     ns1:name "GlaxoSmithKline" ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Glaxosmithkline_Plc>,
@@ -7176,6 +7257,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/jw-marriott-miami-marquis-to-open-2010> ;
     ns1:foundName "Marriott International, Inc." ;
     ns1:industry "hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2513413/Marriott_International_Inc-Miami-Added> ;
     ns1:name "Marriott International, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1353727/Marriott_International>,
@@ -7292,6 +7374,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/new-radisson-blu-to-open-moscow> ;
     ns1:foundName "The Rezidor Hotel Group" ;
     ns1:industry "hotel management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:name "The Rezidor Hotel Group" ;
     ns1:sameAsHigh <https://1145.am/db/2456909/The_Rezidor_Hotel_Group>,
         <https://1145.am/db/2458212/The_Rezidor_Hotel_Group>,
@@ -7310,6 +7393,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/first-hispanic-owned-hotel-opens-washington-d-c> ;
     ns1:foundName "Marriott International, Inc." ;
     ns1:industry "hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2516812/Marriott_International_Inc-Washington_Dc-Added> ;
     ns1:name "Marriott International, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1353727/Marriott_International>,
@@ -7531,6 +7615,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/marriott-courtyard-to-open-romania> ;
     ns1:foundName "Marriott International" ;
     ns1:industry "hotel" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2522317/Marriott_International-Romania-Added> ;
     ns1:name "Marriott International" ;
     ns1:sameAsHigh <https://1145.am/db/1353727/Marriott_International>,
@@ -7647,6 +7732,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/hotels/hotel-missoni-to-open-south-africa-oman> ;
     ns1:foundName "The Rezidor Hotel Group" ;
     ns1:industry "hospitality" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2529177/The_Rezidor_Hotel_Group-Jebel_Sifah-Added> ;
     ns1:name "The Rezidor Hotel Group" ;
     ns1:sameAsHigh <https://1145.am/db/2456909/The_Rezidor_Hotel_Group>,
@@ -7669,6 +7755,7 @@
     ns1:documentURL <https://www.travelagentcentral.com/destinations/hotel-missoni-edinburgh-opens-scotland> ;
     ns1:foundName "The Rezidor Hotel Group" ;
     ns1:industry "hospitality" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/3_hotel_hotels_lodging_hotelier> ;
     ns1:locationAdded <https://1145.am/db/2530917/The_Rezidor_Hotel_Group-Edinburgh-Added> ;
     ns1:name "The Rezidor Hotel Group" ;
     ns1:sameAsHigh <https://1145.am/db/2456909/The_Rezidor_Hotel_Group>,
@@ -7690,6 +7777,7 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/glaxosmithkline-unveils-600m-vaccine-plant> ;
     ns1:foundName "GlaxoSmithKline" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:locationAdded <https://1145.am/db/2556628/Glaxosmithkline-Singapore-Added> ;
     ns1:name "GlaxoSmithKline" ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Glaxosmithkline_Plc>,

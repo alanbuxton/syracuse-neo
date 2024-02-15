@@ -1,5 +1,5 @@
 from neomodel import db
-from .models import Organization, ActivityMixin
+from .models import Organization, ActivityMixin, IndustryCluster
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
 import logging
@@ -9,7 +9,7 @@ from topics.geo_utils import geo_select_list
 logger = logging.getLogger(__name__)
 
 def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=True):
-    relevant_orgs = get_relevant_orgs_for_country_region(geo_code)
+    relevant_orgs = get_relevant_orgs_for_country_region_industry(geo_code)
     relevant_uris = [x.uri for x in relevant_orgs]
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=relevant_uris,
                                 max_date=max_date, limit=limit, include_same_as=include_same_as)
@@ -20,15 +20,12 @@ def get_activities_for_serializer_by_source_and_date_range(source_name, min_date
                                 max_date=max_date, limit=limit, include_same_as=False)
     return matching_activity_orgs
 
-
-def get_relevant_orgs_for_country_region(geo_code):
-    if geo_code is None or geo_code.strip() == "":
-        logger.debug(f"Can't process blank geo_code")
-        return set()
+def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limit=20):
+    industry_uris = IndustryCluster.with_descendants(industry_id)
     ts1 = datetime.utcnow()
-    orgs = Organization.based_in_country_region(geo_code)
+    orgs = Organization.by_country_region_industry(geo_code,industry_uris,limit=limit)
     ts2 = datetime.utcnow()
-    orgs_by_activity = ActivityMixin.orgs_by_activity_where(geo_code)
+    orgs_by_activity = ActivityMixin.orgs_by_activity_where_industry(geo_code,industry_uris,limit=limit)
     ts3 = datetime.utcnow()
     logger.info(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
     all_orgs = set(orgs + orgs_by_activity)
@@ -183,7 +180,7 @@ def get_source_counts(source_name, min_date,max_date):
     return counts[0]
 
 def get_country_region_counts(geo_code,min_date,max_date):
-    relevant_uris = get_relevant_orgs_for_country_region(geo_code)
+    relevant_uris = get_relevant_orgs_for_country_region_industry(geo_code)
     uris = [x.uri for x in relevant_uris]
     counts = get_activities_by_org_uri_and_date_range(uris,min_date,max_date,include_same_as=False,counts_only=True)
     return counts[0]

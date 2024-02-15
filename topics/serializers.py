@@ -3,6 +3,7 @@ from .graph_utils import graph_source_activity_target
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
+from .industry_utils import industry_select_list
 
 class OrganizationSerializer(serializers.BaseSerializer):
 
@@ -38,28 +39,33 @@ class NameSearchSerializer(serializers.Serializer):
         style={'placeholder': 'Search ...', 'autofocus': True}
     )
 
-class IndustrySearchSerializer(serializers.Serializer):
-    industry_name = serializers.CharField(
-        max_length=20,
-        style={'placeholder': 'Search ...', 'autofocus': True}
-    )
+class DataListChoiceField(serializers.ChoiceField):
 
+    def __init__(self, choices, **kwargs):
+        super().__init__(choices, **kwargs)
+        self.choices = [x for _,x in choices]
+        self.style = {"base_template": "datalist-select.html"}
+        self.text_to_id = {v:k for k,v in choices}
+
+    def to_internal_value(self, data):
+        ''' data list allows for any text to be entered,
+            so provided text won't always match '''
+        res = self.text_to_id.get(data,None)
+        return res
+
+class IndustrySerializer(serializers.Serializer):
+    industry =  DataListChoiceField(choices=industry_select_list())
+
+    def get_industry_id(self):
+        self.is_valid()
+        return self['industry'].value
 
 class GeoSerializer(serializers.Serializer):
+    country_or_region = DataListChoiceField(choices=geo_select_list(include_alt_names=True))
 
-    country_or_region = serializers.ChoiceField(choices=geo_select_list())
-
-    # def __init__(self, *args, **kwargs):
-    #     choices = kwargs.pop('choices',[])
-    #     choices = {**{"":""},**choices}
-    #     if "initial" in kwargs:
-    #         selected_geo = kwargs.pop("initial")
-    #     else:
-    #         selected_geo = None
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['selected_geo'].choices = choices
-    #     if selected_geo is not None:
-    #         self.fields['selected_geo'].initial = selected_geo
+    def get_country_or_region_id(self):
+        self.is_valid()
+        return self['country_or_region'].value
 
 class TimelineSerializer(serializers.Serializer):
     def to_representation(self, instance, **kwargs):

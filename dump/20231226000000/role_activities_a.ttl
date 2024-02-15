@@ -20,6 +20,7 @@
     ns1:documentURL <https://www.prweb.com/releases/newly-launched-peo-for-the-cannabis-industry-paylient-hr-solutions-announces-daniela-lewis-as-chief-growth-officer-301948715.html> ;
     ns1:foundName "Paylient HR Solutions" ;
     ns1:hasRole <https://1145.am/db/2136759/Paylient_Hr_Solutions-Chief_Growth_Officer> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Paylient HR Solutions" ;
     ns1:sourceName "prweb" .
 
@@ -70,6 +71,7 @@
     ns1:foundName "Skydance Sports" ;
     ns1:hasRole <https://1145.am/db/2137137/Skydance_Sports-Head> ;
     ns1:industry "entertainment" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Skydance Sports" ;
     ns1:sourceName "Reuters" .
 
@@ -93,6 +95,7 @@
     ns1:documentURL <https://www.prweb.com/releases/windsor-group-llc-takes-strategic-step-with-inaugural-vice-president-hire-301949321.html> ;
     ns1:foundName "Windsor Group LLC" ;
     ns1:hasRole <https://1145.am/db/2137716/Windsor_Group_Llc-Vice_President> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Windsor Group LLC" ;
     ns1:sourceName "prweb" .
 
@@ -106,6 +109,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005201760/en/New-Directors-Join-Bioenterprise-Canada-Board> ;
     ns1:foundName "Bioenterprise Canada" ;
     ns1:hasRole <https://1145.am/db/2138009/Bioenterprise_Canada-Board> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Bioenterprise Canada" ;
     ns1:sourceName "Business Wire" .
 
@@ -165,6 +169,7 @@
     ns1:foundName "The Humane Society of Southern Arizona" ;
     ns1:hasRole <https://1145.am/db/2138261/Humane_Society_Of_Southern_Arizona-Ceo> ;
     ns1:industry "animal welfare" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Humane Society of Southern Arizona" ;
     ns1:sourceName "Associated Press" .
 
@@ -191,6 +196,7 @@
     ns1:foundName "Canada Pension Plan Investment Board (CPP Investments)" ;
     ns1:hasRole <https://1145.am/db/2138407/Canada_Pension_Plan_Investment_Board-Chairperson> ;
     ns1:industry "financial services and executive consulting industry" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Canada Pension Plan Investment Board" ;
     ns1:sameAsHigh <https://1145.am/db/824503/Canada_Pension_Plan_Investment_Board> ;
     ns1:sameAsMedium <https://1145.am/db/1120274/Canada_Pension_Plan_Investment_Board>,
@@ -276,6 +282,7 @@
     ns1:foundName "Sigma Lithium (SGML.V)" ;
     ns1:hasRole <https://1145.am/db/2138509/Sigma_Lithium-Chief_Operating_Officer> ;
     ns1:industry "mining" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Sigma Lithium" ;
     ns1:sameAsHigh <https://1145.am/db/1675418/Sigma_Lithium>,
         <https://1145.am/db/2071292/Sigma_Lithium>,
@@ -317,6 +324,8 @@
     ns1:foundName "Aquila Air Capital (\"Aquila\")" ;
     ns1:hasRole <https://1145.am/db/2138682/Aquila_Air_Capital-Vice_President_Of_Originations> ;
     ns1:industry "aviation finance" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/8_travel_travelers_destinations_tourism> ;
     ns1:name "Aquila Air Capital" ;
     ns1:sameAsMedium <https://1145.am/db/2797503/Aquila_Air_Capital> ;
     ns1:sourceName "Business Wire" .
@@ -344,6 +353,7 @@
     ns1:foundName "Asceneuron SA" ;
     ns1:hasRole <https://1145.am/db/2138687/Asceneuron-Chief_Executive_Officer_(ceo)>,
         <https://1145.am/db/2138687/Asceneuron-Chief_Scientific_Advisor> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Asceneuron" ;
     ns1:sameAsMedium <https://1145.am/db/2337045/Asceneuron>,
         <https://1145.am/db/2370680/Asceneurons_Alzheimers_R___D> ;
@@ -396,6 +406,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006054641/en/Thompson-Street-Capital-Partners-Portfolio-Company-PestCo-Holdings-Expands-Texas-Footprint-with-Acquisitions-of-Live-Oak-and-PestBan> ;
     ns1:foundName "PestCo Holdings, LLC" ;
     ns1:industry "pest control" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment>,
+        <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "PestCo Holdings, LLC" ;
     ns1:sameAsHigh <https://1145.am/db/1079016/Pestco_Holdings_Llc>,
         <https://1145.am/db/1079209/Pestco_Holdings_Llc>,
@@ -420,6 +432,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006054641/en/Thompson-Street-Capital-Partners-Portfolio-Company-PestCo-Holdings-Expands-Texas-Footprint-with-Acquisitions-of-Live-Oak-and-PestBan> ;
     ns1:foundName "Thompson Street Capital Partners" ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Thompson Street Capital Partners" ;
     ns1:participant <https://1145.am/db/2138702/Live_Oak_Pest_Control_Assets_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1016038/Thompson_Street_Capital_Partners>,
@@ -501,6 +514,7 @@
         <https://1145.am/db/2138719/Akili-Board_Of_Directors>,
         <https://1145.am/db/2138719/Akili-President_And_Ceo> ;
     ns1:industry "digital medicine" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Akili" ;
     ns1:sameAsHigh <https://1145.am/db/1291212/Akili_Inc>,
         <https://1145.am/db/1292268/Akili_Inc>,
@@ -549,6 +563,7 @@
     ns1:documentTitle "LICT Corporation Announces Acquisition of Manti Telephone Company" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006214654/en/LICT-Corporation-Announces-Acquisition-of-Manti-Telephone-Company> ;
     ns1:foundName "LICT Corporation'" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "LICT Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/797724/Lict_Corporation> ;
     ns1:sameAsMedium <https://1145.am/db/2007988/Lict_Corporation>,
@@ -566,6 +581,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006749534/en/Evergreen-Announces-Strategic-Investment-in-Alliance-Solutions-Group> ;
     ns1:foundName "Evergreen" ;
     ns1:industry "IT services and software" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:investor <https://1145.am/db/2138739/Alliance_Solutions_Group_Investment> ;
     ns1:name "Evergreen" ;
     ns1:sameAsHigh <https://1145.am/db/2060078/Evergreen> ;
@@ -591,6 +607,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006043651/en/IEEE-EMBS-Welcomes-Professor-He-Helen-Huang-as-Editor-in-Chief-of-TNSRE-Journal> ;
     ns1:foundName "IEEE" ;
     ns1:hasRole <https://1145.am/db/2138744/Ieee-Editor-in-Chief> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "IEEE" ;
     ns1:sourceName "Business Wire" .
 
@@ -602,6 +619,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005983565/en/Keter-Environmental-Services-and-Waste-Harmonics-Complete-Previously-Announced-Merger> ;
     ns1:foundName "Keter Environmental Services" ;
     ns1:industry "recycling and waste management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Keter Environmental Services" ;
     ns1:protagonist <https://1145.am/db/2138750/Merger_Keter_Environmental_Services_Waste_Harmonics_Completed> ;
     ns1:sameAsHigh <https://1145.am/db/1962847/Keter_Environmental_Services>,
@@ -621,6 +639,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005983565/en/Keter-Environmental-Services-and-Waste-Harmonics-Complete-Previously-Announced-Merger> ;
     ns1:foundName "Waste Harmonics" ;
     ns1:industry "Waste management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Waste Harmonics" ;
     ns1:protagonist <https://1145.am/db/2138750/Merger_Keter_Environmental_Services_Waste_Harmonics_Completed> ;
     ns1:sameAsHigh <https://1145.am/db/2040193/Waste_Harmonics> ;
@@ -652,6 +671,7 @@
     ns1:foundName "CAI International, Inc" ;
     ns1:hasRole <https://1145.am/db/2138763/Cai_International_Inc-President_And_Chief_Executive_Officer_(ceo)> ;
     ns1:industry "container leasing and sales" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/11_retailer_retail_supermarket_shopping> ;
     ns1:name "CAI International, Inc" ;
     ns1:sameAsMedium <https://1145.am/db/1428382/Cai_International_Inc>,
         <https://1145.am/db/1429056/Cai_International_Inc>,
@@ -678,6 +698,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006301443/en/FOXO-Technologies%E2%84%A2-Interim-CEO-Mark-White-Provides-Letter-to-Shareholders-Outlining-New-AI-Enabled-Direct-to-Consumer-Strategy-and-Immediate-Expense-Reductions> ;
     ns1:foundName "(NYSE American: FOXO) (\"FOXO\" or the \"Company\")" ;
     ns1:hasRole <https://1145.am/db/2138769/Foxo_Technologies_Inc-Interim> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "FOXO Technologies Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1328716/Foxo_Technologies>,
         <https://1145.am/db/1661913/Foxo_Technologies_Inc> ;
@@ -708,6 +729,7 @@
     ns1:documentTitle "Rule 17(e) Announcement - Horizon Therapeutics plc" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006256107/en/Rule-17-e-Announcement---Horizon-Therapeutics-plc> ;
     ns1:foundName "Pillartree Limited" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Pillartree Limited" ;
     ns1:sameAsMedium <https://1145.am/db/1571070/Pillartree_Limited>,
         <https://1145.am/db/1683147/Pillartree_Limited>,
@@ -745,6 +767,7 @@
     ns1:hasRole <https://1145.am/db/2138786/Livanova_Plc-Board>,
         <https://1145.am/db/2138786/Livanova_Plc-Director> ;
     ns1:industry "medical technology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "LivaNova",
         "LivaNova PLC" ;
     ns1:sameAsHigh <https://1145.am/db/1134326/Livanova_Plc>,
@@ -769,6 +792,7 @@
     ns1:foundName "Altasciences" ;
     ns1:hasRole <https://1145.am/db/2138834/Altasciences-General_Manager_Contract_Development_And_Manufacturing_Organization_(cdmo)_Services> ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Altasciences" ;
     ns1:sameAsHigh <https://1145.am/db/1417723/Altasciences>,
         <https://1145.am/db/2152410/Altasciences>,
@@ -803,6 +827,7 @@
     ns1:foundName "Harry Davis & Company" ;
     ns1:hasRole <https://1145.am/db/2138840/Harry_Davis___Company-Director_Of_Business_Operations> ;
     ns1:industry "food and beverage market makers" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Harry Davis & Company" ;
     ns1:sourceName "Business Wire" .
 
@@ -839,6 +864,7 @@
     ns1:foundName "UBS Wealth Management USA" ;
     ns1:hasRole <https://1145.am/db/2138841/Ubs_Wealth_Management_Usa-Managing_Director_And_Financial_Advisor> ;
     ns1:industry "Wealth Management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "UBS Wealth Management USA" ;
     ns1:sameAsHigh <https://1145.am/db/1382119/Ubs_Wealth_Management_Usa>,
         <https://1145.am/db/1383345/Ubs_Wealth_Management_Usa>,
@@ -916,6 +942,7 @@
     ns1:documentTitle "DENBURY INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Denbury Inc. - DEN" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006732559/en/DENBURY-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Denbury-Inc.---DEN> ;
     ns1:foundName "Exxon Mobil Corporation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Exxon Mobil Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1024566/Exxon_Mobil_Corp>,
         <https://1145.am/db/107339/Exxon_Mobil>,
@@ -1026,6 +1053,8 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006066184/en/BR%E2%80%99s-Plumbing-Heating-Announces-Transaction-with-G.C.-Lounsbury> ;
     ns1:foundName "BR's Plumbing & Heating" ;
     ns1:industry "plumbing" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power>,
+        <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "BR's" ;
     ns1:sourceName "Business Wire" .
 
@@ -1038,6 +1067,7 @@
     ns1:documentTitle "BR's Plumbing & Heating Announces Transaction with G.C. Lounsbury" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006066184/en/BR%E2%80%99s-Plumbing-Heating-Announces-Transaction-with-G.C.-Lounsbury> ;
     ns1:foundName "MechCan Inc." ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "MechCan Inc." ;
     ns1:participant <https://1145.am/db/2138989/Gc_Lounsbury_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/2828617/Mechcan_Inc> ;
@@ -1051,6 +1081,7 @@
     ns1:documentTitle "AMERICAN NATIONAL BANKSHARES INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of American National Bankshares Inc. - AMNB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006084150/en/AMERICAN-NATIONAL-BANKSHARES-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-American-National-Bankshares-Inc.---AMNB> ;
     ns1:foundName "Atlantic Union Bankshares Corporation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Atlantic Union Bankshares Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1119176/Atlantic_Union_Bankshares_Corporation>,
         <https://1145.am/db/1119727/Atlantic_Union_Bankshares_Corporation> ;
@@ -1068,6 +1099,7 @@
     ns1:documentTitle "EQRX INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of EQRx, Inc. - EQRX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006020567/en/EQRX-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-EQRx-Inc.---EQRX> ;
     ns1:foundName "Revolution Medicines, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Revolution Medicines" ;
     ns1:sameAsHigh <https://1145.am/db/2074739/Revolution_Medicines>,
         <https://1145.am/db/2152198/Revolution_Medicines>,
@@ -1132,6 +1164,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006429040/en/STANDARD-BIOTOOLS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Standard-BioTools-Inc.---LAB> ;
     ns1:foundName "Standard BioTools",
         "Standard BioTools Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Standard BioTools Inc." ;
     ns1:sameAsMedium <https://1145.am/db/1614842/Standard_Biotools_Inc>,
         <https://1145.am/db/953800/Standard_Biotools_Inc> ;
@@ -1189,6 +1222,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006940851/en/Chase-Corporation-Announces-October-6-2023-Special-Meeting-Results> ;
     ns1:foundName "Chase Corporation",
         "Chase, Formulations Parent Corporation" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Chase",
         "Chase Corporation" ;
     ns1:protagonist <https://1145.am/db/2139022/Merger_Chase_Corporation_Chase_Corporation_Formulations_Merger_Sub_Corporation_Has_Not_Happened> ;
@@ -1213,6 +1247,7 @@
     ns1:documentTitle "Chase Corporation Announces October 6, 2023 Special Meeting Results" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006940851/en/Chase-Corporation-Announces-October-6-2023-Special-Meeting-Results> ;
     ns1:foundName "Formulations Merger Sub Corporation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:name "Formulations Merger Sub Corporation" ;
     ns1:protagonist <https://1145.am/db/2139022/Merger_Chase_Corporation_Chase_Corporation_Formulations_Merger_Sub_Corporation_Has_Not_Happened> ;
     ns1:sourceName "Business Wire" .
@@ -1225,6 +1260,7 @@
     ns1:documentTitle "MFS High Yield Municipal Trust Commences Tender Offer" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006577826/en/MFS-High-Yield-Municipal-Trust-Commences-Tender-Offer> ;
     ns1:foundName "MFS® High Yield Municipal Trust" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "MFS® High Yield Municipal Trust" ;
     ns1:sourceName "Business Wire" .
 
@@ -1247,6 +1283,7 @@
     ns1:foundName "Cutera" ;
     ns1:hasRole <https://1145.am/db/2139036/Cutera-President_International> ;
     ns1:industry "dermatology" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Cutera" ;
     ns1:sameAsHigh <https://1145.am/db/1081685/Cutera>,
         <https://1145.am/db/1082690/Cutera>,
@@ -1277,6 +1314,7 @@
         "Green Dot Corporation (NYSE: GDOT)" ;
     ns1:hasRole <https://1145.am/db/2139039/Green_Dot_Corporation-Board_Of_Directors> ;
     ns1:industry "financial technology platform company" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Green Dot",
         "Green Dot Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/1333845/Green_Dot_Corporation>,
@@ -1345,6 +1383,7 @@
     ns1:documentURL <https://apnews.com/article/washington-athletic-director-dannen-tulane-d66613ffd8a9d94a9c91f4af9b258662> ;
     ns1:foundName "Washington" ;
     ns1:hasRole <https://1145.am/db/2139086/Washington-Ad> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Washington" ;
     ns1:sameAsMedium <https://1145.am/db/2332456/Washington> ;
     ns1:sourceName "Associated Press" .
@@ -1359,6 +1398,7 @@
     ns1:documentURL <https://www.reuters.com/world/europe/denmark-re-start-ammunition-production-repurchased-arms-plant-2023-10-07/> ;
     ns1:foundName "The ministry" ;
     ns1:industry "arms" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:name "The ministry" ;
     ns1:sourceName "Reuters" .
 
@@ -1373,6 +1413,7 @@
     ns1:documentURL <https://www.reuters.com/markets/deals/metro-bank-rejected-takeover-approaches-shawbrook-sky-news-reporter-2023-10-07/> ;
     ns1:foundName "Shawbrook" ;
     ns1:industry "business lender" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Shawbrook" ;
     ns1:sameAsHigh <https://1145.am/db/2139753/Shawbrook> ;
     ns1:sameAsMedium <https://1145.am/db/1779013/Shawbrook> ;
@@ -1401,6 +1442,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "Dick Clark Productions" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:investor <https://1145.am/db/2162866/Series_A_Investment_Comcast_Ventures_Dick_Clark_Productions_Madison_Square_Garden_Company_Nextvr_Rse_Ventures_Completed> ;
     ns1:name "Dick Clark Productions" ;
     ns1:sameAsHigh <https://1145.am/db/2034848/Dick_Clark_Productions>,
@@ -1415,6 +1457,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "Madison Square Garden Company" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:investor <https://1145.am/db/2162866/Series_A_Investment_Comcast_Ventures_Dick_Clark_Productions_Madison_Square_Garden_Company_Nextvr_Rse_Ventures_Completed> ;
     ns1:name "Madison Square Garden Company" ;
     ns1:sameAsMedium <https://1145.am/db/2159287/Madison_Square_Garden_Co>,
@@ -1430,6 +1473,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "RSE Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:investor <https://1145.am/db/2162866/Series_A_Investment_Comcast_Ventures_Dick_Clark_Productions_Madison_Square_Garden_Company_Nextvr_Rse_Ventures_Completed> ;
     ns1:name "RSE Ventures" ;
     ns1:sameAsMedium <https://1145.am/db/1081175/Rse_Ventures>,
@@ -1446,6 +1490,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "Time Warner" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2162866/Series_A_Investment_Comcast_Ventures_Dick_Clark_Productions_Madison_Square_Garden_Company_Nextvr_Rse_Ventures_Completed> ;
     ns1:name "Time Warner" ;
     ns1:sameAsMedium <https://1145.am/db/1697885/Time_Warner>,
@@ -1566,6 +1611,7 @@
     ns1:documentTitle "IBM acquires Clearleap; Harmonic to buy Thomson Video Networks for $90 million" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/ibm-acquires-clearleap-harmonic-to-buy-thomson-video-networks-for-90-million> ;
     ns1:foundName "Amazon" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Amazon" ;
     ns1:sameAsHigh <https://1145.am/db/2157570/Amazon>,
         <https://1145.am/db/2160261/Amazon> ;
@@ -2046,6 +2092,7 @@
     ns1:documentTitle "IBM acquires Clearleap; Harmonic to buy Thomson Video Networks for $90 million" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/ibm-acquires-clearleap-harmonic-to-buy-thomson-video-networks-for-90-million> ;
     ns1:foundName "Harmonic" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Harmonic" ;
     ns1:sameAsHigh <https://1145.am/db/1907590/Harmonic>,
         <https://1145.am/db/2156880/Harmonic>,
@@ -2067,6 +2114,7 @@
     ns1:documentTitle "IBM acquires Clearleap; Harmonic to buy Thomson Video Networks for $90 million" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/ibm-acquires-clearleap-harmonic-to-buy-thomson-video-networks-for-90-million> ;
     ns1:foundName "IBM" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "IBM" ;
     ns1:sameAsHigh <https://1145.am/db/1187106/Ibm>,
         <https://1145.am/db/1364021/Ibm>,
@@ -2225,6 +2273,7 @@
     ns1:foundName "John Malone",
         "John Malone and Liberty Global",
         "Liberty Global" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "John Malone",
         "John Malone and Liberty Global",
         "Liberty Global" ;
@@ -2329,6 +2378,7 @@
     ns1:documentTitle "JW Player gets $20M funding boost to expand its online video platform" ;
     ns1:documentURL <https://www.streamtvinsider.com/online-video/jw-player-gets-20m-funding-boost-to-expand-its-online-video-platform> ;
     ns1:foundName "Cueball Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2170734/Series_D_Investment_Cueball_Capital_Greenspring_Associates_Greycroft_Growth_Jw_Player_Eventures_Completed> ;
     ns1:name "Cueball Capital" ;
     ns1:sameAsMedium <https://1145.am/db/1747899/Cueball_Capital>,
@@ -2342,6 +2392,7 @@
     ns1:documentTitle "JW Player gets $20M funding boost to expand its online video platform" ;
     ns1:documentURL <https://www.streamtvinsider.com/online-video/jw-player-gets-20m-funding-boost-to-expand-its-online-video-platform> ;
     ns1:foundName "e.ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2170734/Series_D_Investment_Cueball_Capital_Greenspring_Associates_Greycroft_Growth_Jw_Player_Eventures_Completed> ;
     ns1:name "e.ventures" ;
     ns1:sameAsHigh <https://1145.am/db/133157/Eventures>,
@@ -2390,6 +2441,7 @@
     ns1:documentTitle "JW Player gets $20M funding boost to expand its online video platform" ;
     ns1:documentURL <https://www.streamtvinsider.com/online-video/jw-player-gets-20m-funding-boost-to-expand-its-online-video-platform> ;
     ns1:foundName "Greenspring Associates" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2170734/Series_D_Investment_Cueball_Capital_Greenspring_Associates_Greycroft_Growth_Jw_Player_Eventures_Completed> ;
     ns1:name "Greenspring Associates" ;
     ns1:sameAsHigh <https://1145.am/db/1744228/Greenspring_Associates>,
@@ -2429,6 +2481,7 @@
     ns1:documentTitle "JW Player gets $20M funding boost to expand its online video platform" ;
     ns1:documentURL <https://www.streamtvinsider.com/online-video/jw-player-gets-20m-funding-boost-to-expand-its-online-video-platform> ;
     ns1:foundName "Greycroft Growth" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2170734/Series_D_Investment_Cueball_Capital_Greenspring_Associates_Greycroft_Growth_Jw_Player_Eventures_Completed> ;
     ns1:name "Greycroft Growth" ;
     ns1:sameAsMedium <https://1145.am/db/1792426/Greycroft_Growth> ;
@@ -2444,6 +2497,7 @@
     ns1:documentTitle "Spotlight On... Recipharm looks to close a $105M deal; Analyst says biotech slump won't affect CROs; and much more..." ;
     ns1:documentURL <https://www.fiercebiotech.com/cro/spotlight-on-recipharm-looks-to-close-a-105m-deal-analyst-says-biotech-slump-won-t-affect-cros> ;
     ns1:foundName "French CDMO Amatsigroup" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "French CDMO Amatsigroup" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -2598,6 +2652,7 @@
     ns1:documentTitle "Verge Genomics Completes Initial Financing to Discover and Develop Treatments for Neurodegenerative Diseases Using Genomic Data" ;
     ns1:documentURL <https://www.fiercebiotech.com/it/verge-genomics-completes-initial-financing-to-discover-and-develop-treatments-for> ;
     ns1:foundName "Slow Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2328288/Seed_Investment_Draper_Associates_Great_Oaks_Vc_Ia_Ventures_Karlin_Ventures_San_Francisco-Verge_Genomics_Inc_Slow_Ventures_Two_Sigma_Ventures_Completed>,
         <https://1145.am/db/2328288/Seed_Investment_Draper_Associates_Great_Oaks_Vc_Ia_Ventures_Karlin_Ventures_Slow_Ventures_Two_Sigma_Ventures_Verge_Genomics_Completed> ;
     ns1:name "Slow Ventures" ;
@@ -2702,6 +2757,7 @@
     ns1:documentTitle "Desktop Genetics Receives Strategic Investment from Illumina to Advance Genome Editing Software Platform" ;
     ns1:documentURL <https://www.fiercebiotech.com/it/desktop-genetics-receives-strategic-investment-from-illumina-to-advance-genome-editing-software> ;
     ns1:foundName "Illumina, Inc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2329404/Investment_Desktop_Genetics_Ltd_Illumina_Has_Not_Happened> ;
     ns1:name "Illumina" ;
     ns1:sameAsHigh <https://1145.am/db/1339613/Illumina>,
@@ -2860,6 +2916,7 @@
         "Johnson & Johnson'",
         "Johnson & Johnson's" ;
     ns1:industry "med tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Biosense Webster" ;
     ns1:sameAsHigh <https://1145.am/db/2334508/Biosense_Webster> ;
     ns1:sourceName "Fierce Biotech" .
@@ -2874,6 +2931,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/j-j-enters-market-for-implants-to-prevent-stroke-via-acquisition-coherex-medical> ;
     ns1:foundName "Coherex Medical" ;
     ns1:industry "Medical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Coherex WaveCrest Left Atrial Appendage Occlusion System" ;
     ns1:sameAsHigh <https://1145.am/db/2334508/Coherex_Wavecrest_Left_Atrial_Appendage_Occlusion_System> ;
     ns1:sourceName "Fierce Biotech" .
@@ -2899,6 +2958,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/edwards-grabs-option-to-acquire-transcatheter-mitral-valve-repair-startup> ;
     ns1:foundName "Edwards Lifesciences",
         "Edwards Lifesciences ($ EW)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:investor <https://1145.am/db/2332441/Harpoon_Medical_Acquisition> ;
     ns1:name "Edwards Lifesciences" ;
     ns1:sameAsMedium <https://1145.am/db/2284047/Edwards_Lifesciences>,
@@ -2973,6 +3033,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/german-radiosurgery-player-brainlab-invests-7m-jan-medical-for-portable-concussion> ;
     ns1:foundName "Brainlab" ;
     ns1:industry "radiotherapy" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:investor <https://1145.am/db/2334948/Series_C_Investment_Brainlab_Jan_Medical_Has_Not_Happened> ;
     ns1:name "Brainlab" ;
     ns1:sameAsMedium <https://1145.am/db/1050862/Brainlab>,
@@ -3048,6 +3109,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/nuritas-sets-irish-record-3-2m-first-round-financing-led-by-new-protein-capital> ;
     ns1:foundName "Ali Partovi" ;
     ns1:industry "Silicon Valley" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2367519/Investment_Ali_Partovi_New_Protein_Capital_Nuritas_Completed> ;
     ns1:name "Ali Partovi" ;
     ns1:sourceName "Fierce Biotech" .
@@ -3061,6 +3123,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/nuritas-sets-irish-record-3-2m-first-round-financing-led-by-new-protein-capital> ;
     ns1:foundName "New Protein Capital (NPC)" ;
     ns1:industry "food and agro-tech investment firm" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2367519/Investment_Ali_Partovi_New_Protein_Capital_Nuritas_Completed> ;
     ns1:name "New Protein Capital" ;
     ns1:sourceName "Fierce Biotech" .
@@ -3074,6 +3137,7 @@
     ns1:documentTitle "MiRagen Therapeutics raises $41 mln" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/miragen-therapeutics-raises-41-mln> ;
     ns1:foundName "Amgen Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2367740/Series_C_Investment_Amgen_Ventures_Atlas_Venture_Boulder_Ventures_Brace_Pharma_Capital_Jafco_Co_Ltd_Mp_Healthcare_Venture_Management_Mrl_Ventures_Remeditex_Ventures_Miragen_Therapeutics_Completed> ;
     ns1:name "Amgen Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1065608/Amgen_Ventures>,
@@ -3391,6 +3455,7 @@
     ns1:documentTitle "MiRagen Therapeutics raises $41 mln" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/miragen-therapeutics-raises-41-mln> ;
     ns1:foundName "Atlas Venture" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2367740/Series_C_Investment_Amgen_Ventures_Atlas_Venture_Boulder_Ventures_Brace_Pharma_Capital_Jafco_Co_Ltd_Mp_Healthcare_Venture_Management_Mrl_Ventures_Remeditex_Ventures_Miragen_Therapeutics_Completed> ;
     ns1:name "Atlas Venture" ;
     ns1:sameAsHigh <https://1145.am/db/1608803/Atlas_Venture>,
@@ -3511,6 +3576,7 @@
     ns1:documentTitle "MiRagen Therapeutics raises $41 mln" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/miragen-therapeutics-raises-41-mln> ;
     ns1:foundName "Boulder Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2367740/Series_C_Investment_Amgen_Ventures_Atlas_Venture_Boulder_Ventures_Brace_Pharma_Capital_Jafco_Co_Ltd_Mp_Healthcare_Venture_Management_Mrl_Ventures_Remeditex_Ventures_Miragen_Therapeutics_Completed> ;
     ns1:name "Boulder Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2152752/Boulder_Ventures>,
@@ -3678,6 +3744,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/crossject-secures-%E2%82%AC6-7-million-funding-for-development-of-three-new-drugs> ;
     ns1:foundName "Industrial",
         "Industrial Projects of the Future (Projets Industriels d'Avenir or PIAVE)" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2367846/Investment_Bpifrance_Crossject_Industrial_Projects_Of_The_Future_Has_Not_Happened> ;
     ns1:name "Industrial Projects of the Future" ;
     ns1:sourceName "Fierce Biotech" .
@@ -3692,6 +3759,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/pharma-industry-veterans-launch-vertice-pharma-partnership-warburg-pincus-announce> ;
     ns1:foundName "Andrew Saik" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Andrew Saik" ;
     ns1:protagonist <https://1145.am/db/2367969/Investment_Andrew_Saik_Warburg_Pincus_Completed> ;
     ns1:sourceName "Fierce Biotech" .
@@ -3704,6 +3773,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/pharma-industry-veterans-launch-vertice-pharma-partnership-warburg-pincus-announce> ;
     ns1:foundName "Vertice Pharma" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Vertice Pharma" ;
     ns1:sameAsHigh <https://1145.am/db/2367976/Vertice_Pharma>,
         <https://1145.am/db/2369661/Vertice_Pharma>,
@@ -3720,6 +3790,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/pharma-industry-veterans-launch-vertice-pharma-partnership-warburg-pincus-announce> ;
     ns1:foundName "Warburg Pincus" ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Warburg Pincus" ;
     ns1:protagonist <https://1145.am/db/2367969/Investment_Andrew_Saik_Warburg_Pincus_Completed> ;
     ns1:sameAsHigh <https://1145.am/db/107233/Warburg_Pincus>,
@@ -3874,6 +3945,7 @@
     ns1:documentTitle "Constellation Pharmaceuticals, Inc. Raises $55 Million in Mezzanine Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/constellation-pharmaceuticals-inc-raises-55-million-mezzanine-financing> ;
     ns1:foundName "SR One" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368501/Investment_Constellation_Pharmaceuticals_Sr_One_The_Column_Group_Third_Rock_Ventures_Topspin_Partners_Venrock_Completed> ;
     ns1:name "SR One" ;
     ns1:sameAsHigh <https://1145.am/db/1949427/Sr_One>,
@@ -3941,6 +4013,7 @@
     ns1:documentTitle "Constellation Pharmaceuticals, Inc. Raises $55 Million in Mezzanine Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/constellation-pharmaceuticals-inc-raises-55-million-mezzanine-financing> ;
     ns1:foundName "Third Rock Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368501/Investment_Constellation_Pharmaceuticals_Sr_One_The_Column_Group_Third_Rock_Ventures_Topspin_Partners_Venrock_Completed> ;
     ns1:name "Third Rock Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1503058/Third_Rock_Ventures>,
@@ -4094,6 +4167,7 @@
     ns1:documentTitle "Constellation Pharmaceuticals, Inc. Raises $55 Million in Mezzanine Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/constellation-pharmaceuticals-inc-raises-55-million-mezzanine-financing> ;
     ns1:foundName "Venrock" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368501/Investment_Constellation_Pharmaceuticals_Sr_One_The_Column_Group_Third_Rock_Ventures_Topspin_Partners_Venrock_Completed> ;
     ns1:name "Venrock" ;
     ns1:sameAsHigh <https://1145.am/db/1263825/Venrock>,
@@ -4190,6 +4264,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "AbbVie" ;
     ns1:industry "life science" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "AbbVie" ;
     ns1:sameAsHigh <https://1145.am/db/1433467/Abbvie>,
@@ -4303,6 +4378,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Accelerator Corporation" ;
     ns1:industry "life science" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Accelerator Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/2306713/Accelerator_Corporation>,
@@ -4356,6 +4433,7 @@
     ns1:documentTitle "Accelerator Corporation Launches First Startup in New York City Portfolio" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Pfizer Venture Investments" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Pfizer Venture Investments" ;
     ns1:sameAsHigh <https://1145.am/db/2318310/Pfizer_Venture_Investments>,
@@ -4394,6 +4472,7 @@
     ns1:documentTitle "Accelerator Corporation Launches First Startup in New York City Portfolio" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "The Partnership Fund for New York City" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "The Partnership Fund for New York City" ;
     ns1:sourceName "Fierce Biotech" .
@@ -4405,6 +4484,7 @@
     ns1:documentTitle "Accelerator Corporation Launches First Startup in New York City Portfolio" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Watson Fund" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Watson Fund" ;
     ns1:sameAsMedium <https://1145.am/db/2296113/Watson_Fund> ;
@@ -4419,6 +4499,7 @@
     ns1:documentTitle "Accelerator Corporation Launches First Startup in New York City Portfolio" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Weill Cornell Medicine" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Weill Cornell Medicine" ;
     ns1:sameAsMedium <https://1145.am/db/1238375/Weill_Cornell_Medicine>,
@@ -4432,6 +4513,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "WuXi PharmaTech" ;
     ns1:industry "life science" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "WuXi PharmaTech" ;
     ns1:sameAsHigh <https://1145.am/db/2341599/Wuxi_Pharmatech>,
@@ -4851,6 +4933,7 @@
     ns1:documentTitle "Adicet Bio Announces Closing of $51 Million Series A Financing and Acquisition of Applied Immune Technologies" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/adicet-bio-announces-closing-of-51-million-series-a-financing-and-acquisition-of-applied> ;
     ns1:foundName "Novartis Venture Fund" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Novartis Venture Fund" ;
     ns1:sameAsHigh <https://1145.am/db/2310907/Novartis_Venture_Fund>,
         <https://1145.am/db/2313438/Novartis_Venture_Fund>,
@@ -5027,6 +5110,7 @@
     ns1:documentTitle "Adicet Bio Announces Closing of $51 Million Series A Financing and Acquisition of Applied Immune Technologies" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/adicet-bio-announces-closing-of-51-million-series-a-financing-and-acquisition-of-applied> ;
     ns1:foundName "Pontifax" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Pontifax" ;
     ns1:sameAsHigh <https://1145.am/db/146274/Pontifax>,
         <https://1145.am/db/2089412/Pontifax>,
@@ -5061,6 +5145,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/biotech-billionaire-soon-shiong-strikes-50m-deal-for-control-of-cancer-vaccines> ;
     ns1:foundName "NantWorks" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2371301/Precision_Biologics_Interest_Investment> ;
     ns1:name "NantWorks" ;
     ns1:sameAsHigh <https://1145.am/db/2354367/Nantworks>,
@@ -5106,6 +5191,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/launch-of-dementia-discovery-fund-new-fund-raises-100-million-to-deliver-novel-approaches> ;
     ns1:foundName "Takeda" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2371333/Investment_Alzheimers_Research_Uk_Takeda_The_Dementia_Discovery_Fund_Uk_Governments_Department_Of_Health_Completed> ;
     ns1:name "Takeda" ;
     ns1:sameAsHigh <https://1145.am/db/1150157/Takeda>,
@@ -5238,6 +5324,7 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/indian-drugmakers-on-hunt-for-money-and-growth> ;
     ns1:foundName "Alkem Laboratories" ;
     ns1:industry "drugmakers" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Alkem" ;
     ns1:sameAsHigh <https://1145.am/db/2538392/Alkem> ;
     ns1:sourceName "Fierce Pharma" .
@@ -5254,6 +5341,8 @@
     ns1:foundName "Ipca",
         "Ipca Laboratories" ;
     ns1:industry "drugmakers" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2543345/Investment_Ipca_Laboratories_Ipca_Laboratories_Has_Not_Happened>,
         <https://1145.am/db/2543345/Krebs_Biochemicals_Stake_Investment> ;
     ns1:name "Ipca",
@@ -5273,6 +5362,7 @@
     ns1:documentTitle "Meda divests manufacturing unit Euromed in Spain" ;
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/meda-divests-manufacturing-unit-euromed-spain> ;
     ns1:foundName "The Riverside Company" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "The Riverside Company" ;
     ns1:sameAsHigh <https://1145.am/db/2585674/The_Riverside_Company> ;
     ns1:sameAsMedium <https://1145.am/db/1050858/The_Riverside_Company>,
@@ -5317,6 +5407,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/novartis-selling-french-alcon-plant-to-recipharm> ;
     ns1:foundName "It" ;
     ns1:industry "drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "It" ;
     ns1:sameAsHigh <https://1145.am/db/2556430/It>,
         <https://1145.am/db/2560472/It>,
@@ -5406,6 +5497,8 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/china-connection-aids-280m-new-funding-for-pharmaron> ;
     ns1:foundName "Accuron" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2546405/Series_C_Investment_Aslan_Pharmaceuticals_Accuron_Ascletis_Goldman_Sachs_Mabspace_Completed> ;
     ns1:name "Accuron" ;
     ns1:sourceName "Fierce Pharma" .
@@ -5418,6 +5511,7 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/china-connection-aids-280m-new-funding-for-pharmaron> ;
     ns1:foundName "Ascletis" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2546405/Series_C_Investment_Aslan_Pharmaceuticals_Accuron_Ascletis_Goldman_Sachs_Mabspace_Completed> ;
     ns1:name "Ascletis" ;
     ns1:sameAsHigh <https://1145.am/db/2301611/Ascletis>,
@@ -5612,6 +5706,7 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/china-connection-aids-280m-new-funding-for-pharmaron> ;
     ns1:foundName "MabSpace" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2546405/Series_C_Investment_Aslan_Pharmaceuticals_Accuron_Ascletis_Goldman_Sachs_Mabspace_Completed> ;
     ns1:name "MabSpace" ;
     ns1:sameAsHigh <https://1145.am/db/2154451/Mabspace> ;
@@ -5629,6 +5724,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma-asia/golden-meditech-enters-into-agreements-nanjing-xinjiekou-to-sell-china-cord-blood> ;
     ns1:foundName "Nanjing Xinjiekou",
         "Nanjing Xinjiekou Department Store Co., Ltd" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:investor <https://1145.am/db/2548449/China_Cord_Blood_Corporation_Equity_Interest_Investment> ;
     ns1:name "Nanjing Xinjiekou Department Store Co., Ltd" ;
     ns1:sourceName "Fierce Pharma" .
@@ -5640,6 +5736,7 @@
     ns1:documentTitle "Cash flows for China biotech, healthcare plays show pace" ;
     ns1:documentURL <https://www.fiercepharma.com/financials/cash-flows-for-china-biotech-healthcare-plays-show-pace> ;
     ns1:foundName "Eight Roads Ventures China" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2549505/Series_B_Investment_Adagene_Eight_Roads_Ventures_China_Fidelity_Biosciences_Gp_Healthcare_Capital_New_World_Tmt_Wuxi_Corporate_Venture_Fund_Completed> ;
     ns1:name "Eight Roads Ventures China" ;
     ns1:sameAsHigh <https://1145.am/db/2369644/Eight_Roads_Ventures_China>,
@@ -5818,6 +5915,7 @@
     ns1:documentTitle "Gritstone Oncology Announces $102 Million Series A Financing to Support Discovery and Development of Personalized Cancer Immunotherapies" ;
     ns1:documentURL <https://www.fiercepharma.com/vaccines/gritstone-oncology-announces-102-million-series-a-financing-to-support-discovery-and> ;
     ns1:foundName "Clarus Ventures" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2584561/Series_A_Investment_Casdin_Capital_Clarus_Ventures_Frazier_Healthcare_Partners_Gritstone_Oncology_Redmile_Group_The_Column_Group_Transformational_Healthcare_Opportunity_Versant_Ventures_Completed> ;
     ns1:name "Clarus Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2303581/Clarus_Ventures>,
@@ -6030,6 +6128,7 @@
     ns1:documentTitle "Gritstone Oncology Announces $102 Million Series A Financing to Support Discovery and Development of Personalized Cancer Immunotherapies" ;
     ns1:documentURL <https://www.fiercepharma.com/vaccines/gritstone-oncology-announces-102-million-series-a-financing-to-support-discovery-and> ;
     ns1:foundName "Transformational Healthcare Opportunity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2584561/Series_A_Investment_Casdin_Capital_Clarus_Ventures_Frazier_Healthcare_Partners_Gritstone_Oncology_Redmile_Group_The_Column_Group_Transformational_Healthcare_Opportunity_Versant_Ventures_Completed> ;
     ns1:name "Transformational Healthcare Opportunity" ;
     ns1:sourceName "Fierce Pharma" .
@@ -6044,6 +6143,7 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/gritstone-oncology-announces-102-million-series-a-financing-to-support-discovery-and> ;
     ns1:foundName "Versant Ventures" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2584561/Series_A_Investment_Casdin_Capital_Clarus_Ventures_Frazier_Healthcare_Partners_Gritstone_Oncology_Redmile_Group_The_Column_Group_Transformational_Healthcare_Opportunity_Versant_Ventures_Completed> ;
     ns1:name "Versant Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1928388/Versant_Ventures>,
@@ -6158,6 +6258,7 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/aelix-therapeutics-completes-series-a-funding-of-%E2%82%AC11-5m-12-7m-for-therapeutic-hiv-vaccine> ;
     ns1:foundName "'la Caixa'",
         "Caixa Capital Risc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2586501/Series_A_Investment_Aelix_Therapeutics_Caixa_Capital_Risc_Caixa_Capital_Risc_Johnson___Johnson_Innovation_Johnson___Johnson_Innovation_Ysios_Capital_Completed> ;
     ns1:name "Caixa Capital Risc" ;
     ns1:sameAsMedium <https://1145.am/db/1780120/Caixa_Capital_Risc>,
@@ -6174,6 +6275,7 @@
     ns1:documentTitle "Aelix Therapeutics completes Series A funding of €11.5M ($12.7M) for therapeutic HIV vaccine" ;
     ns1:documentURL <https://www.fiercepharma.com/vaccines/aelix-therapeutics-completes-series-a-funding-of-%E2%82%AC11-5m-12-7m-for-therapeutic-hiv-vaccine> ;
     ns1:foundName "Ysios Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2586501/Series_A_Investment_Aelix_Therapeutics_Caixa_Capital_Risc_Caixa_Capital_Risc_Johnson___Johnson_Innovation_Johnson___Johnson_Innovation_Ysios_Capital_Completed> ;
     ns1:name "Ysios Capital" ;
     ns1:sameAsMedium <https://1145.am/db/1340128/Ysios_Capital>,
@@ -6207,6 +6309,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/gho-capital-announces-acquisition-of-dna-diagnostics-center> ;
     ns1:foundName "GHO Capital" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:investor <https://1145.am/db/2587565/Dna_Diagnostics_Center_Acquisition> ;
     ns1:name "GHO Capital" ;
     ns1:sameAsHigh <https://1145.am/db/2285911/Gho_Capital>,
@@ -6233,6 +6336,7 @@
     ns1:foundName "Cortec Group",
         "Cortec Group Fund V, L.P." ;
     ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2588562/Community_Veterinary_Partners_Acquisition> ;
     ns1:name "Cortec Group",
         "Cortec Group Fund V, L.P." ;
@@ -6266,6 +6370,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "Institute for Infectious Diseases",
         "for Infectious Diseases" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:investor <https://1145.am/db/2588578/Investment_Institute_For_Infectious_Diseases_Science_And_Technology_Directorate_Texas_A___M_College_Of_Veterinary_Medicine___Biomedical_Sciences_Has_Not_Happened> ;
     ns1:name "Institute",
         "Institute for Infectious Diseases" ;
@@ -6279,6 +6384,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "Science and Technology Directorate",
         "and Technology Directorate" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:investor <https://1145.am/db/2588578/Investment_Institute_For_Infectious_Diseases_Science_And_Technology_Directorate_Texas_A___M_College_Of_Veterinary_Medicine___Biomedical_Sciences_Has_Not_Happened> ;
     ns1:name "Science",
         "Science and Technology Directorate" ;
@@ -6311,6 +6417,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "Sequent Scientific" ;
     ns1:industry "pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Sequent Scientific" ;
     ns1:sameAsHigh <https://1145.am/db/2552735/Sequent_Scientific> ;
     ns1:sameAsMedium <https://1145.am/db/2553755/Sequent_Scientific> ;
@@ -6327,6 +6434,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "Tangerine Group" ;
     ns1:industry "veterinary drugmaker" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Tangerine Group" ;
     ns1:sameAsMedium <https://1145.am/db/589829/Tangerine> ;
     ns1:sourceName "Fierce Pharma" .
@@ -6357,6 +6465,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-animalytix-expands-to-canada-acquisition-of-animal-health-data-service> ;
     ns1:foundName "Animalytix" ;
     ns1:industry "Animal Health" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Animalytix" ;
     ns1:sameAsHigh <https://1145.am/db/2588580/Animalytix> ;
     ns1:sourceName "Fierce Pharma" .
@@ -6367,6 +6476,7 @@
     ns1:documentTitle "Spotlight On... Animalytix expands to Canada with acquisition of animal-health data service; Schein authorizes $400M share buyback; Jaguar launches drug study in horses with colitis; IAH tests oral fly repellent in beef cows; and more..." ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-animalytix-expands-to-canada-acquisition-of-animal-health-data-service> ;
     ns1:foundName "CDT Veterinary Therapeutics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "CDT Veterinary Therapeutics" ;
     ns1:protagonist <https://1145.am/db/2588584/Merger_Cdt_Veterinary_Therapeutics_Completed> ;
     ns1:sameAsMedium <https://1145.am/db/2588590/Cdt_Veterinary_Therapeutics> ;
@@ -6404,6 +6514,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "Huvepharma" ;
     ns1:industry "Animal health" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Huvepharma" ;
     ns1:sameAsHigh <https://1145.am/db/2546156/Huvepharma>,
         <https://1145.am/db/2570042/Huvepharma>,
@@ -6461,6 +6572,7 @@
     ns1:documentTitle "Jolla plans debt restructuring and lays off staff; Vodacom wants to rework Neotel deal" ;
     ns1:documentURL <https://www.fiercewireless.com/europe/jolla-plans-debt-restructuring-and-lays-off-staff-vodacom-wants-to-rework-neotel-deal> ;
     ns1:foundName "Vodacom" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Vodacom" ;
     ns1:sameAsHigh <https://1145.am/db/1489536/Vodacom>,
         <https://1145.am/db/2655001/Vodacom>,
@@ -6747,6 +6859,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231007056973/en/Qihui-%E2%80%9CJim%E2%80%9D-Zhai-MD-FCAP-elected-President-Elect-of-the-College-of-American-Pathologists> ;
     ns1:foundName "College of American Pathologists (CAP)" ;
     ns1:hasRole <https://1145.am/db/2138603/College_Of_American_Pathologists-President-Elect> ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "College of American Pathologists" ;
     ns1:sameAsHigh <https://1145.am/db/962007/College_Of_American_Pathologists>,
         <https://1145.am/db/963667/College_Of_American_Pathologists> ;
@@ -6780,6 +6893,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231007070448/en/Donald-S.-Karcher-MD-FCAP-elected-38th-President-of-the-College-of-American-Pathologists> ;
     ns1:foundName "College of American Pathologists (CAP)" ;
     ns1:hasRole <https://1145.am/db/2138631/College_Of_American_Pathologists-President> ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "College of American Pathologists" ;
     ns1:sameAsMedium <https://1145.am/db/2138603/College_Of_American_Pathologists>,
         <https://1145.am/db/500743/College_Of_American_Pathologists>,
@@ -6863,6 +6977,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231005466162/en/Tiny-Closes-Previously-Announced-Private-Placement-with-Letterboxd-Founders> ;
     ns1:foundName "Tiny Ltd." ;
     ns1:industry "technology" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Tiny Ltd." ;
     ns1:sameAsHigh <https://1145.am/db/1740388/Tiny>,
         <https://1145.am/db/2054770/Tiny>,
@@ -6884,6 +6999,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006054641/en/Thompson-Street-Capital-Partners-Portfolio-Company-PestCo-Holdings-Expands-Texas-Footprint-with-Acquisitions-of-Live-Oak-and-PestBan> ;
     ns1:foundName "Live Oak Pest Control, Inc" ;
     ns1:industry "pest control" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Live Oak Pest Control" ;
     ns1:sourceName "Business Wire" .
 
@@ -6896,6 +7012,7 @@
     ns1:documentTitle "Legible Announces $1 Million Unit Offering Private Placement" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006385094/en/Legible-Announces-1-Million-Unit-Offering-Private-Placement> ;
     ns1:foundName "Legible Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Legible Inc." ;
     ns1:sameAsMedium <https://1145.am/db/1114602/Legible_Inc>,
         <https://1145.am/db/1234190/Legible>,
@@ -7022,6 +7139,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006749534/en/Evergreen-Announces-Strategic-Investment-in-Alliance-Solutions-Group> ;
     ns1:foundName "Alliance Solutions Group" ;
     ns1:industry "IT services and software" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Alliance Solutions Group" ;
     ns1:sourceName "Business Wire" .
 
@@ -7065,6 +7183,7 @@
     ns1:documentURL <https://www.businesswire.com/news/home/20231006399910/en/ShiftPixy-Inc.-Announces-2.5-Million-Registered-Direct-Offering-and-Concurrent-Private-Placement> ;
     ns1:foundName "ShiftPixy, Inc" ;
     ns1:industry "staffing" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "ShiftPixy" ;
     ns1:sameAsHigh <https://1145.am/db/1359010/Shiftpixy>,
         <https://1145.am/db/1359354/Shiftpixy>,
@@ -7237,6 +7356,7 @@
     ns1:documentTitle "CRESTWOOD EQUITY INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Crestwood Equity Partners LP - CEQP" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006531359/en/CRESTWOOD-EQUITY-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Crestwood-Equity-Partners-LP---CEQP> ;
     ns1:foundName "Crestwood Equity Partners LP" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "Crestwood Equity Partners LP" ;
     ns1:sameAsHigh <https://1145.am/db/1088289/Crestwood_Equity_Partners_Lp>,
         <https://1145.am/db/1089802/Crestwood_Equity_Partners_Lp>,
@@ -7271,6 +7391,7 @@
     ns1:documentTitle "ORCHARD THERAPEUTICS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Orchard Therapeutics plc - ORTX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006816649/en/ORCHARD-THERAPEUTICS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Orchard-Therapeutics-plc---ORTX> ;
     ns1:foundName "Orchard Therapeutics plc" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Orchard Therapeutics plc" ;
     ns1:sameAsHigh <https://1145.am/db/2137293/Orchard_Therapeutics>,
         <https://1145.am/db/2295592/Orchard_Therapeutics> ;
@@ -7290,6 +7411,7 @@
     ns1:documentTitle "DENBURY INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Denbury Inc. - DEN" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006732559/en/DENBURY-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Denbury-Inc.---DEN> ;
     ns1:foundName "Denbury Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/7_wastewater_recycling_water_treatment> ;
     ns1:name "Denbury Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1285538/Denbury_Inc>,
         <https://1145.am/db/2065862/Denbury_Inc> ;
@@ -7310,6 +7432,7 @@
     ns1:documentTitle "FREQUENCY THERAPEUTICS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Frequency Therapeutics, Inc. - FREQ" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006816814/en/FREQUENCY-THERAPEUTICS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Frequency-Therapeutics-Inc.---FREQ> ;
     ns1:foundName "Frequency Therapeutics, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Frequency Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/2065864/Frequency_Therapeutics> ;
     ns1:sameAsMedium <https://1145.am/db/199414/Frequency_Therapeutics>,
@@ -7337,6 +7460,7 @@
     ns1:documentTitle "AMERICAN NATIONAL BANKSHARES INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of American National Bankshares Inc. - AMNB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006084150/en/AMERICAN-NATIONAL-BANKSHARES-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-American-National-Bankshares-Inc.---AMNB> ;
     ns1:foundName "American National Bankshares Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "American National Bankshares Inc." ;
     ns1:sameAsHigh <https://1145.am/db/2068027/American_National_Bankshares_Inc>,
         <https://1145.am/db/528324/American_National_Bankshares_Inc> ;
@@ -7350,6 +7474,7 @@
     ns1:documentTitle "EQRX INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of EQRx, Inc. - EQRX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006020567/en/EQRX-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-EQRx-Inc.---EQRX> ;
     ns1:foundName "EQRx, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "EQRx" ;
     ns1:sameAsHigh <https://1145.am/db/2074739/Eqrx>,
         <https://1145.am/db/502641/Eqrx>,
@@ -7367,6 +7492,7 @@
     ns1:documentTitle "SP PLUS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of SP Plus Corporation - SP" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006389282/en/SP-PLUS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-SP-Plus-Corporation---SP> ;
     ns1:foundName "SP Plus Corporation" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "SP Plus Corporation" ;
     ns1:sameAsMedium <https://1145.am/db/1492356/Sp_Plus_Corporation>,
         <https://1145.am/db/2136662/Sp_Plus>,
@@ -7381,6 +7507,7 @@
     ns1:documentTitle "TABULA RASA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Tabula Rasa HealthCare, Inc. - TRHC" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006930704/en/TABULA-RASA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Tabula-Rasa-HealthCare-Inc.---TRHC> ;
     ns1:foundName "Tabula Rasa HealthCare, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Tabula Rasa HealthCare" ;
     ns1:sameAsHigh <https://1145.am/db/1244673/Tabula_Rasa_Healthcare>,
         <https://1145.am/db/1245251/Tabula_Rasa_Healthcare>,
@@ -7399,6 +7526,7 @@
     ns1:documentTitle "STANDARD BIOTOOLS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Standard BioTools Inc. - LAB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006429040/en/STANDARD-BIOTOOLS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Standard-BioTools-Inc.---LAB> ;
     ns1:foundName "SomaLogic, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "SomaLogic" ;
     ns1:sameAsHigh <https://1145.am/db/1431169/Somalogic>,
         <https://1145.am/db/2301448/Somalogic>,
@@ -7417,6 +7545,7 @@
     ns1:foundName "Anebulo'" ;
     ns1:hasRole <https://1145.am/db/2139013/Anebulo_Pharmaceuticals-Chief_Executive_Officer> ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Anebulo Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/1083299/Anebulo_Pharmaceuticals>,
         <https://1145.am/db/1086143/Anebulo_Pharmaceuticals>,
@@ -7475,6 +7604,7 @@
     ns1:foundName "(Nasdaq: ANEB)" ;
     ns1:hasRole <https://1145.am/db/2139014/Anebulo_Pharmaceuticals_Inc-Board_Of_Directors> ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Anebulo Pharmaceuticals, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1083299/Anebulo_Pharmaceuticals>,
         <https://1145.am/db/1086143/Anebulo_Pharmaceuticals>,
@@ -7511,6 +7641,7 @@
     ns1:documentTitle "POINT BIOPHARMA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of POINT Biopharma Global, Inc. - PNT" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006167425/en/POINT-BIOPHARMA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-POINT-Biopharma-Global-Inc.---PNT> ;
     ns1:foundName "POINT Biopharma Global, Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "POINT Biopharma Global, Inc." ;
     ns1:sameAsMedium <https://1145.am/db/1149274/Point_Biopharma_Global_Inc>,
         <https://1145.am/db/1338887/Point_Biopharma_Global_Inc>,
@@ -7605,6 +7736,7 @@
     ns1:documentTitle "Almonty Placement of Common Share Units and CDI's raises C$500,000, US$733,333 and A$550,000" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006348452/en/Almonty-Placement-of-Common-Share-Units-and-CDI%E2%80%99s-raises-C500000-US733333-and-A550000> ;
     ns1:foundName "Almonty Industries Inc" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Almonty" ;
     ns1:sameAsMedium <https://1145.am/db/1049314/Almonty>,
         <https://1145.am/db/1232643/Almonty>,
@@ -7666,6 +7798,7 @@
     ns1:documentTitle "UK's Metro Bank rejected takeover approaches from Shawbrook, in talks for debt restructuring, equity injection - media" ;
     ns1:documentURL <https://www.reuters.com/markets/deals/metro-bank-rejected-takeover-approaches-shawbrook-sky-news-reporter-2023-10-07/> ;
     ns1:foundName "Metro Bank" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Metro Bank" ;
     ns1:sameAsHigh <https://1145.am/db/1207820/Metro_Bank>,
         <https://1145.am/db/2139753/Metro_Bank> ;
@@ -7699,6 +7832,7 @@
     ns1:documentURL <https://www.reuters.com/markets/asia/shanghai-stock-exchange-probes-zhejiang-king-after-its-public-listing-halt-2023-10-08/> ;
     ns1:foundName "Zhejiang King Co Ltd" ;
     ns1:industry "air conditioners" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/14_renewable_energy_heating_power> ;
     ns1:name "Zhejiang King" ;
     ns1:sourceName "Reuters" .
 
@@ -7709,6 +7843,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "Comcast" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc> ;
     ns1:investor <https://1145.am/db/2162866/Series_A_Investment_Comcast_Ventures_Dick_Clark_Productions_Madison_Square_Garden_Company_Nextvr_Rse_Ventures_Completed> ;
     ns1:name "Comcast Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1299924/Comcast_Ventures>,
@@ -7892,6 +8027,7 @@
     ns1:documentTitle "Comcast, Time Warner Inc. venture arms invest in virtual reality start-up NextVR" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/comcast-time-warner-inc-venture-arms-invest-virtual-reality-start-up-nextvr> ;
     ns1:foundName "NextVR" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "NextVR" ;
     ns1:sameAsHigh <https://1145.am/db/1758374/Nextvr>,
         <https://1145.am/db/1794288/Nextvr>,
@@ -8098,6 +8234,7 @@
     ns1:documentTitle "Arris gets regulatory sign-off from Brazil; Comcast Ventures backs another VR start-up" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/arris-gets-regulatory-sign-off-from-brazil-comcast-ventures-backs-another-vr-start-up> ;
     ns1:foundName "Comporium" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Comporium" ;
     ns1:sameAsHigh <https://1145.am/db/1537326/Comporium>,
         <https://1145.am/db/1538669/Comporium> ;
@@ -8239,6 +8376,7 @@
     ns1:documentTitle "IBM acquires Clearleap; Harmonic to buy Thomson Video Networks for $90 million" ;
     ns1:documentURL <https://www.streamtvinsider.com/cable/ibm-acquires-clearleap-harmonic-to-buy-thomson-video-networks-for-90-million> ;
     ns1:foundName "Clearleap" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Clearleap" ;
     ns1:sameAsHigh <https://1145.am/db/1793057/Clearleap>,
         <https://1145.am/db/2170718/Clearleap>,
@@ -8267,6 +8405,7 @@
     ns1:documentURL <https://www.streamtvinsider.com/cable/ibm-acquires-clearleap-harmonic-to-buy-thomson-video-networks-for-90-million> ;
     ns1:foundName "Envivio" ;
     ns1:industry "video infrastructure" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Envivio" ;
     ns1:sameAsHigh <https://1145.am/db/2159270/Envivio>,
         <https://1145.am/db/2178135/Envivio>,
@@ -8304,6 +8443,8 @@
     ns1:foundName "Thomson",
         "Thomson Video Networks" ;
     ns1:industry "pay-TV video services" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Thomson",
         "Thomson Video Networks" ;
     ns1:sameAsHigh <https://1145.am/db/2170718/Thomson_Video_Networks>,
@@ -8378,6 +8519,7 @@
     ns1:documentURL <https://www.streamtvinsider.com/cable/aereo-founder-kanojia-set-to-take-cable-wi-fi-google-paid-apple-1b-2014-to-stay-ios-search> ;
     ns1:foundName "Telenet" ;
     ns1:industry "wireless operator" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "Telenet" ;
     ns1:sameAsHigh <https://1145.am/db/2654021/Telenet>,
         <https://1145.am/db/2664159/Telenet>,
@@ -8412,6 +8554,7 @@
     ns1:documentTitle "JW Player gets $20M funding boost to expand its online video platform" ;
     ns1:documentURL <https://www.streamtvinsider.com/online-video/jw-player-gets-20m-funding-boost-to-expand-its-online-video-platform> ;
     ns1:foundName "JW Player" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "JW Player" ;
     ns1:sameAsHigh <https://1145.am/db/1649072/Jw_Player>,
         <https://1145.am/db/1649209/Jw_Player>,
@@ -8461,6 +8604,7 @@
     ns1:foundName "Quotient",
         "U.K. CRO Quotient Clinical" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Quotient" ;
     ns1:sameAsHigh <https://1145.am/db/2343204/Quotient_Biodiagnostics> ;
     ns1:sameAsMedium <https://1145.am/db/1007344/Quotient_Limited>,
@@ -8525,6 +8669,7 @@
     ns1:documentTitle "Spotlight On... Recipharm looks to close a $105M deal; Analyst says biotech slump won't affect CROs; and much more..." ;
     ns1:documentURL <https://www.fiercebiotech.com/cro/spotlight-on-recipharm-looks-to-close-a-105m-deal-analyst-says-biotech-slump-won-t-affect-cros> ;
     ns1:foundName "Q-Biologicals" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/2_audio_acoustical_digital_music> ;
     ns1:name "Q-Biologicals" ;
     ns1:sameAsMedium <https://1145.am/db/2306946/Q-Biologicals>,
         <https://1145.am/db/2573050/Q-Biologicals>,
@@ -8559,6 +8704,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/cro/spotlight-on-recipharm-looks-to-close-a-105m-deal-analyst-says-biotech-slump-won-t-affect-cros> ;
     ns1:foundName "Recipharm" ;
     ns1:industry "contract drugmaker" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2306945/Nitin_Lifesciences_Stake_Acquisition> ;
     ns1:name "Recipharm" ;
     ns1:sameAsHigh <https://1145.am/db/172278/Recipharm>,
@@ -8620,6 +8766,7 @@
     ns1:foundName "SAN FRANCISCO-Verge Genomics, Inc",
         "SAN FRANCISCO-Verge Genomics, Inc." ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "SAN FRANCISCO-Verge Genomics, Inc",
         "SAN FRANCISCO-Verge Genomics, Inc." ;
     ns1:sourceName "Fierce Biotech" .
@@ -8632,6 +8779,7 @@
     ns1:foundName "Verge Genomics",
         "Verge Genomics, Inc." ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Verge Genomics" ;
     ns1:sameAsHigh <https://1145.am/db/1422547/Verge_Genomics>,
         <https://1145.am/db/1423293/Verge_Genomics>,
@@ -8655,6 +8803,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/it/desktop-genetics-receives-strategic-investment-from-illumina-to-advance-genome-editing-software> ;
     ns1:foundName "Desktop Genetics Ltd" ;
     ns1:industry "software" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/19_software_developer_development_softwareconnected> ;
     ns1:name "Desktop Genetics Ltd" ;
     ns1:sameAsMedium <https://1145.am/db/2305441/Desktop_Genetics_Ltd>,
         <https://1145.am/db/2329403/Desktop_Genetics> ;
@@ -8704,6 +8853,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/molecular-health-ropes-eu25m-for-big-data-platforms> ;
     ns1:foundName "Molecular Health" ;
     ns1:industry "Healthcare IT" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Molecular Health" ;
     ns1:sameAsHigh <https://1145.am/db/2329372/Molecular_Health> ;
     ns1:sameAsMedium <https://1145.am/db/2329371/Molecular_Health> ;
@@ -8718,6 +8868,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/j-j-enters-market-for-implants-to-prevent-stroke-via-acquisition-coherex-medical> ;
     ns1:foundName "Salt Lake City's Coherex Medical" ;
     ns1:industry "med tech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Coherex Medical" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -8750,6 +8901,7 @@
     ns1:documentTitle "CardioDiagnostics gets in on patient monitoring with plans for $7M fundraise" ;
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/cardiodiagnostics-gets-patient-monitoring-plans-for-7m-fundraise> ;
     ns1:foundName "CardioDiagnostics" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "CardioDiagnostics" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -8784,6 +8936,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/edwards-grabs-option-to-acquire-transcatheter-mitral-valve-repair-startup> ;
     ns1:foundName "Baltimore's Harpoon Medical",
         "Harpoon Medical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/15_angel_gold_mothers_angels> ;
     ns1:name "Harpoon Medical" ;
     ns1:sameAsMedium <https://1145.am/db/2290338/Harpoon_Medical>,
         <https://1145.am/db/2332447/Harpoon_Medical> ;
@@ -8815,6 +8968,7 @@
     ns1:documentTitle "Spotlight On... Struggling Toshiba considers selling stake in its device unit; Mount Sinai gets $500K grant for venous thromboembolism; SI-Bone secures some Medicare coverage; and more..." ;
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/spotlight-struggling-toshiba-considers-selling-stake-its-device-unit-mount-sinai> ;
     ns1:foundName "The Department of Medicine at the Icahn School of Medicine at Mount Sinai" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "The Department of Medicine at the Icahn School of Medicine at Mount Sinai" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -8828,6 +8982,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/spotlight-struggling-toshiba-considers-selling-stake-its-device-unit-mount-sinai> ;
     ns1:foundName "Toshiba" ;
     ns1:industry "medical equipment" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Toshiba" ;
     ns1:sameAsHigh <https://1145.am/db/2290211/Toshiba>,
         <https://1145.am/db/2299389/Toshiba>,
@@ -8912,6 +9068,7 @@
     ns1:documentTitle "VertiFlex raises $27M on heels of PMA approval, reimbursement breakthroughs in 2015" ;
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/vertiflex-raises-27m-heels-pma-approval-reimbursement-breakthroughs-2015> ;
     ns1:foundName "VertiFlex" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "VertiFlex" ;
     ns1:sameAsHigh <https://1145.am/db/2297720/Vertiflex> ;
     ns1:sameAsMedium <https://1145.am/db/2152834/Vertiflex>,
@@ -8958,6 +9115,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/vascular-flow-technologies-raises-14m-for-its-prosthetic-vascular-graft> ;
     ns1:foundName "Aptus Endosystems" ;
     ns1:industry "endovascular stent graft market" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Aptus Endosystems" ;
     ns1:sameAsHigh <https://1145.am/db/2287981/Aptus_Endosystems> ;
     ns1:sameAsMedium <https://1145.am/db/2288251/Aptus_Endosystems>,
@@ -8974,6 +9132,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/medical-devices/vascular-flow-technologies-raises-14m-for-its-prosthetic-vascular-graft> ;
     ns1:foundName "Arsenal AAA" ;
     ns1:industry "endovascular stent graft market" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Arsenal AAA" ;
     ns1:sameAsHigh <https://1145.am/db/2314036/Arsenal_Aaa>,
         <https://1145.am/db/2322757/Arsenal_Aaa> ;
@@ -8990,6 +9149,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/nuritas-sets-irish-record-3-2m-first-round-financing-led-by-new-protein-capital> ;
     ns1:foundName "Nuritas" ;
     ns1:industry "health and wellness" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Nuritas" ;
     ns1:sameAsMedium <https://1145.am/db/1061627/Nuritas> ;
     ns1:sourceName "Fierce Biotech" .
@@ -9020,6 +9180,8 @@
     ns1:foundName "MiRagen Therapeutics",
         "miRagen Therapeutics" ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "MiRagen Therapeutics",
         "miRagen Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/2330852/Miragen_Therapeutics>,
@@ -9037,6 +9199,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/crossject-secures-%E2%82%AC6-7-million-funding-for-development-of-three-new-drugs> ;
     ns1:foundName "CROSSJECT" ;
     ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/6_construction_building_tech_contractors> ;
     ns1:name "CROSSJECT" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -9047,6 +9211,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/pharma-industry-veterans-launch-vertice-pharma-partnership-warburg-pincus-announce> ;
     ns1:foundName "VistaPharm" ;
     ns1:industry "Pharma" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "VistaPharm" ;
     ns1:sameAsHigh <https://1145.am/db/2568151/Vistapharm> ;
     ns1:sourceName "Fierce Biotech" .
@@ -9079,6 +9244,7 @@
     ns1:foundName "Flagship",
         "Flagship Ventures" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:investor <https://1145.am/db/2368493/Rubius_Therapeutics_Joint_Venture> ;
     ns1:name "Flagship Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/2321150/Flagship_Ventures>,
@@ -9137,6 +9303,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/flagship-ventures-launches-rubius-to-develop-red-cell-therapeutics%E2%84%A2> ;
     ns1:foundName "Rubius Therapeutics" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Rubius Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/1206026/Rubius_Therapeutics> ;
     ns1:sameAsMedium <https://1145.am/db/2284905/Rubius_Therapeutics>,
@@ -9152,6 +9319,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/constellation-pharmaceuticals-inc-raises-55-million-mezzanine-financing> ;
     ns1:foundName "Constellation Pharmaceuticals, Inc." ;
     ns1:industry "pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Constellation Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/2283028/Constellation_Pharmaceuticals>,
         <https://1145.am/db/2307336/Constellation_Pharmaceuticals_Inc>,
@@ -9178,6 +9346,7 @@
     ns1:documentTitle "Constellation Pharmaceuticals, Inc. Raises $55 Million in Mezzanine Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/constellation-pharmaceuticals-inc-raises-55-million-mezzanine-financing> ;
     ns1:foundName "The Column Group" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368501/Investment_Constellation_Pharmaceuticals_Sr_One_The_Column_Group_Third_Rock_Ventures_Topspin_Partners_Venrock_Completed> ;
     ns1:name "The Column Group" ;
     ns1:sameAsHigh <https://1145.am/db/1503058/The_Column_Group>,
@@ -9230,6 +9399,7 @@
     ns1:documentTitle "Scholar Rock Announces $36 Million Series B Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/scholar-rock-announces-36-million-series-b-financing> ;
     ns1:foundName "EcoR1 Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368912/Series_B_Investment_Arch_Venture_Partners_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Company_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Completed> ;
     ns1:name "EcoR1 Capital" ;
     ns1:sameAsHigh <https://1145.am/db/2114372/Ecor1>,
@@ -9262,6 +9432,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/scholar-rock-announces-36-million-series-b-financing> ;
     ns1:foundName "Polaris",
         "Polaris Partners" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:investor <https://1145.am/db/2368912/Series_B_Investment_Arch_Venture_Partners_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Company_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Completed> ;
     ns1:name "Polaris Partners" ;
     ns1:sameAsHigh <https://1145.am/db/2152422/Polaris>,
@@ -9350,6 +9521,7 @@
     ns1:documentTitle "Scholar Rock Announces $36 Million Series B Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/scholar-rock-announces-36-million-series-b-financing> ;
     ns1:foundName "The Kraft Group" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368912/Series_B_Investment_Arch_Venture_Partners_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Company_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Completed> ;
     ns1:name "The Kraft Group" ;
     ns1:sameAsHigh <https://1145.am/db/1173387/The_Kraft_Group>,
@@ -9373,6 +9545,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/scholar-rock-announces-36-million-series-b-financing> ;
     ns1:foundName "Timothy Springer" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2368912/Series_B_Investment_Arch_Venture_Partners_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Company_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Completed> ;
     ns1:name "Timothy Springer" ;
     ns1:sameAsHigh <https://1145.am/db/2364332/Timothy_Springer>,
@@ -9386,6 +9559,7 @@
     ns1:documentTitle "Scholar Rock bags $36M to fuel muscle-wasting drug program, first clinical study" ;
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "EcoR1 Capital" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368913/B_Investment_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Has_Not_Happened> ;
     ns1:name "EcoR1 Capital" ;
     ns1:sameAsHigh <https://1145.am/db/2114372/Ecor1>,
@@ -9418,6 +9592,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "Polaris Partners" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2368913/B_Investment_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Has_Not_Happened> ;
     ns1:name "Polaris Partners" ;
     ns1:sameAsHigh <https://1145.am/db/1163164/Polaris_Partners>,
@@ -9509,6 +9685,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "The Kraft Group" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2368913/B_Investment_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Has_Not_Happened> ;
     ns1:name "The Kraft Group" ;
     ns1:sameAsHigh <https://1145.am/db/1173387/The_Kraft_Group>,
@@ -9533,6 +9711,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "Timothy Springer" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/10_venture_ventures_corp_llc>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2368913/B_Investment_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Has_Not_Happened> ;
     ns1:name "Timothy Springer" ;
     ns1:sameAsHigh <https://1145.am/db/2364332/Timothy_Springer>,
@@ -9547,6 +9727,7 @@
     ns1:documentTitle "Accelerator Corporation Launches First Startup in New York City Portfolio" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Alexandria Venture Investments" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Alexandria Venture Investments" ;
     ns1:sameAsHigh <https://1145.am/db/1087327/Alexandria_Venture_Investments>,
@@ -9664,6 +9845,8 @@
     ns1:foundName "Petra Pharma",
         "Petra Pharma Corporation" ;
     ns1:industry "BioPharma" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Petra Pharma" ;
     ns1:sameAsHigh <https://1145.am/db/1072187/Petra_Pharma_Corporation>,
         <https://1145.am/db/2368999/Petra_Pharma> ;
@@ -9693,6 +9876,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/zymeworks-bags-a-61-5m-round-a-merger-on-tap-and-an-ipo-view> ;
     ns1:foundName "Kairos Therapeutics" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Kairos Therapeutics" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -9705,6 +9889,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/r-d/iconic-therapeutics-snags-40m-for-eye-disease-r-d> ;
     ns1:foundName "Iconic Therapeutics" ;
     ns1:industry "life science" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Iconic Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/2354368/Iconic_Therapeutics>,
         <https://1145.am/db/2369165/Iconic_Therapeutics> ;
@@ -9718,6 +9903,7 @@
     ns1:documentTitle "UCL launches £50 million technology investment fund" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/ucl-launches-%C2%A350-million-technology-investment-fund> ;
     ns1:foundName "UCL" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "UCL" ;
     ns1:sameAsMedium <https://1145.am/db/1788547/Ucl> ;
     ns1:sourceName "Fierce Biotech" .
@@ -9730,6 +9916,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/eurobiotech-more-articles-of-note-10> ;
     ns1:foundName "> Mucosis",
         "Mucosis" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Mucosis" ;
     ns1:sameAsHigh <https://1145.am/db/2346807/Mucosis>,
         <https://1145.am/db/2346822/Mucosis>,
@@ -9749,6 +9936,7 @@
     ns1:documentTitle "EuroBiotech: More Articles of Note" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/eurobiotech-more-articles-of-note-10> ;
     ns1:foundName "SynGEM" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "SynGEM" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -9758,6 +9946,7 @@
     ns1:documentTitle "EuroBiotech: More Articles of Note" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/eurobiotech-more-articles-of-note-10> ;
     ns1:foundName "Wellcome Trust" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "Wellcome Trust" ;
     ns1:sameAsHigh <https://1145.am/db/2312120/Wellcome_Trust>,
         <https://1145.am/db/2338829/Wellcome_Trust>,
@@ -9795,6 +9984,7 @@
         "Adicet Bio",
         "Adicet Bio, Inc." ;
     ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2369548/Applied_Immune_Technologies_Series_A_Investment>,
         <https://1145.am/db/2369548/Series_A_Investment_Adicet_Bio_Completed> ;
     ns1:name "Adicet",
@@ -9813,6 +10003,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/adicet-bio-announces-closing-of-51-million-series-a-financing-and-acquisition-of-applied> ;
     ns1:foundName "Applied Immune Technologies",
         "Applied Immune Technologies, Ltd" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Applied Immune Technologies" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -9913,6 +10104,7 @@
     ns1:documentTitle "Codiak BioSciences Closes $61 Million Series B Financing" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/codiak-biosciences-closes-61-million-series-b-financing> ;
     ns1:foundName "Codiak BioSciences Inc." ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Codiak BioSciences Inc." ;
     ns1:sameAsHigh <https://1145.am/db/1338044/Codiak_Biosciences>,
         <https://1145.am/db/2290402/Codiak_Biosciences> ;
@@ -9996,6 +10188,7 @@
     ns1:documentTitle "Biotech billionaire Soon-Shiong strikes $50M deal for control of cancer vaccines" ;
     ns1:documentURL <https://www.fiercebiotech.com/biotech/biotech-billionaire-soon-shiong-strikes-50m-deal-for-control-of-cancer-vaccines> ;
     ns1:foundName "Conkwest" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Conkwest" ;
     ns1:sameAsMedium <https://1145.am/db/2367773/Conkwest>,
         <https://1145.am/db/2367788/Conkwest>,
@@ -10033,6 +10226,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/biotech-billionaire-soon-shiong-strikes-50m-deal-for-control-of-cancer-vaccines> ;
     ns1:foundName "Precision Biologics" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Precision Biologics" ;
     ns1:sameAsHigh <https://1145.am/db/2584573/Precision_Biologics>,
         <https://1145.am/db/2584574/Precision_Biologics> ;
@@ -10066,6 +10261,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/launch-of-dementia-discovery-fund-new-fund-raises-100-million-to-deliver-novel-approaches> ;
     ns1:foundName "The Dementia Discovery Fund" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "The Dementia Discovery Fund" ;
     ns1:sourceName "Fierce Biotech" .
 
@@ -10093,6 +10289,8 @@
     ns1:foundName "Krebs",
         "Krebs Biochemicals" ;
     ns1:industry "drugmakers" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Krebs",
         "Krebs Biochemicals" ;
     ns1:sourceName "Fierce Pharma" .
@@ -10108,6 +10306,7 @@
     ns1:foundName "Euromed",
         "Euromed S.A." ;
     ns1:industry "herbal extracts and natural active substances" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Euromed" ;
     ns1:sameAsHigh <https://1145.am/db/2545140/Euromed> ;
     ns1:sourceName "Fierce Pharma" .
@@ -10187,6 +10386,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/novartis-selling-french-alcon-plant-to-recipharm> ;
     ns1:foundName "Kaysersberg Pharmaceuticals" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Kaysersberg Pharmaceuticals" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10243,6 +10443,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/novartis-selling-french-alcon-plant-to-recipharm> ;
     ns1:foundName "Recipharm" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Recipharm" ;
     ns1:sameAsHigh <https://1145.am/db/172278/Recipharm>,
         <https://1145.am/db/213083/Recipharm>,
@@ -10299,6 +10500,7 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/china-connection-aids-280m-new-funding-for-pharmaron> ;
     ns1:foundName "ASLAN Pharmaceuticals" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "ASLAN Pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/2287489/Aslan_Pharmaceuticals>,
         <https://1145.am/db/2358412/Aslan_Pharmaceuticals>,
@@ -10318,6 +10520,7 @@
     ns1:foundName ". CRO Pharmaron",
         "Beijing-U.S. CRO Pharmaron" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Pharmaron" ;
     ns1:sameAsHigh <https://1145.am/db/2286801/Pharmaron>,
         <https://1145.am/db/2301346/Pharmaron>,
@@ -10338,6 +10541,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma-asia/golden-meditech-enters-into-agreements-nanjing-xinjiekou-to-sell-china-cord-blood> ;
     ns1:foundName "China Cord Blood Corporation" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "China Cord Blood Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/2312926/China_Cord_Blood_Corporation>,
         <https://1145.am/db/2539088/China_Cord_Blood_Corporation> ;
@@ -10355,6 +10559,7 @@
     ns1:documentURL <https://www.fiercepharma.com/financials/cash-flows-for-china-biotech-healthcare-plays-show-pace> ;
     ns1:foundName "Adagene" ;
     ns1:industry "Healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Adagene" ;
     ns1:sameAsHigh <https://1145.am/db/1521661/Adagene_Inc>,
         <https://1145.am/db/2154416/Adagene>,
@@ -10371,6 +10576,8 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/gritstone-oncology-announces-102-million-series-a-financing-to-support-discovery-and> ;
     ns1:foundName "Gritstone Oncology" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Gritstone Oncology" ;
     ns1:sameAsHigh <https://1145.am/db/2291879/Gritstone_Oncology>,
         <https://1145.am/db/2294202/Gritstone_Oncology> ;
@@ -10383,6 +10590,7 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/gritstone-oncology-announces-102-million-series-a-financing-to-support-discovery-and> ;
     ns1:foundName "The Column Group" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:investor <https://1145.am/db/2584561/Series_A_Investment_Casdin_Capital_Clarus_Ventures_Frazier_Healthcare_Partners_Gritstone_Oncology_Redmile_Group_The_Column_Group_Transformational_Healthcare_Opportunity_Versant_Ventures_Completed> ;
     ns1:name "The Column Group" ;
     ns1:sameAsHigh <https://1145.am/db/2362565/The_Column_Group> ;
@@ -10438,6 +10646,7 @@
     ns1:documentURL <https://www.fiercepharma.com/vaccines/aelix-therapeutics-completes-series-a-funding-of-%E2%82%AC11-5m-12-7m-for-therapeutic-hiv-vaccine> ;
     ns1:foundName "I Aelix Therapeutics" ;
     ns1:industry "drug development" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Aelix Therapeutics" ;
     ns1:sameAsHigh <https://1145.am/db/2369157/Aelix_Therapeutics> ;
     ns1:sameAsMedium <https://1145.am/db/2586502/Aelix_Therapeutics> ;
@@ -10492,6 +10701,7 @@
     ns1:foundName "Community Veterinary Partners LLC",
         "Community Veterinary Partners, LLC" ;
     ns1:industry "Veterinary" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Community Veterinary Partners" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10530,6 +10740,7 @@
     ns1:documentTitle "Zoetis and Voyce launch pain study in dogs; Sequent picks up Topkim for $7.1M; U.S. partners with Ireland on animal-health research;" ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "The Texas A & M College of Veterinary Medicine & Biomedical Sciences" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Texas A & M College of Veterinary Medicine & Biomedical Sciences" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10543,6 +10754,8 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/zoetis-and-voyce-launch-pain-study-dogs-sequent-picks-up-topkim-for-7-1m-u-s-partners> ;
     ns1:foundName "Topkim" ;
     ns1:industry "pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Topkim" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10571,6 +10784,7 @@
     ns1:documentTitle "Spotlight On... Animalytix expands to Canada with acquisition of animal-health data service; Schein authorizes $400M share buyback; Jaguar launches drug study in horses with colitis; IAH tests oral fly repellent in beef cows; and more..." ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-animalytix-expands-to-canada-acquisition-of-animal-health-data-service> ;
     ns1:foundName "the Compendium of Veterinary Products" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "Compendium of Veterinary Products" ;
     ns1:sameAsHigh <https://1145.am/db/2588580/Compendium_Of_Veterinary_Products> ;
     ns1:sourceName "Fierce Pharma" .
@@ -10670,6 +10884,7 @@
     ns1:foundName "Jaguar",
         "Jaguar Animal Health" ;
     ns1:industry "Animal Health" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2588584/Investment_Henry_Schein_Has_Not_Happened>,
         <https://1145.am/db/2588584/Investment_Jaguar_Animal_Health_Completed> ;
     ns1:name "Jaguar Animal Health" ;
@@ -10714,6 +10929,7 @@
     ns1:documentTitle "Spotlight On... Animalytix expands to Canada with acquisition of animal-health data service; Schein authorizes $400M share buyback; Jaguar launches drug study in horses with colitis; IAH tests oral fly repellent in beef cows; and more..." ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-animalytix-expands-to-canada-acquisition-of-animal-health-data-service> ;
     ns1:foundName "North American Compendiums of Ontario" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/4_therapeutics_medicines_therapies_treatments> ;
     ns1:name "North American Compendiums" ;
     ns1:sameAsHigh <https://1145.am/db/2588580/North_American_Compendiums> ;
     ns1:sourceName "Fierce Pharma" .
@@ -10726,6 +10942,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "Animal health giant" ;
     ns1:industry "Animal health" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Animal health giant" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10740,6 +10957,7 @@
     ns1:foundName "Elanco India",
         "India" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Elanco India",
         "India" ;
     ns1:sameAsHigh <https://1145.am/db/2296463/India>,
@@ -10829,6 +11047,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "Jaguar",
         "Jaguar Animal Health" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Jaguar Animal Health" ;
     ns1:sameAsHigh <https://1145.am/db/2537939/Jaguar_Animal_Health>,
         <https://1145.am/db/2577852/Jaguar_Animal_Health>,
@@ -10857,6 +11076,7 @@
     ns1:documentTitle "Spotlight On... Zoetis offloads three manufacturing plants to Huvepharma for $40M; Novartis India completes animal health sale to Lilly; Jaguar launches pivotal trial of lead dog drug; UC Davis scores federal animal health grant; and more..." ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "The California Animal Health and Food Safety Laboratory System" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "The California Animal Health and Food Safety Laboratory System" ;
     ns1:sourceName "Fierce Pharma" .
 
@@ -10881,6 +11101,7 @@
     ns1:documentTitle "Jolla plans debt restructuring and lays off staff; Vodacom wants to rework Neotel deal" ;
     ns1:documentURL <https://www.fiercewireless.com/europe/jolla-plans-debt-restructuring-and-lays-off-staff-vodacom-wants-to-rework-neotel-deal> ;
     ns1:foundName "the ISP" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/12_provider_internet_telecom_isp> ;
     ns1:name "ISP" ;
     ns1:sourceName "Fierce Wireless" .
 
@@ -10907,6 +11128,7 @@
     ns1:documentTitle "Jolla plans debt restructuring and lays off staff; Vodacom wants to rework Neotel deal" ;
     ns1:documentURL <https://www.fiercewireless.com/europe/jolla-plans-debt-restructuring-and-lays-off-staff-vodacom-wants-to-rework-neotel-deal> ;
     ns1:foundName "Jolla" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Jolla" ;
     ns1:sameAsHigh <https://1145.am/db/2674684/Jolla> ;
     ns1:sameAsMedium <https://1145.am/db/1799581/Jolla>,
@@ -10940,6 +11162,7 @@
     ns1:documentTitle "Xavier Niel: Leaving no stone unturned" ;
     ns1:documentURL <https://www.fiercewireless.com/europe/xavier-niel-leaving-no-stone-unturned> ;
     ns1:foundName "O2 UK" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "O2 UK" ;
     ns1:sameAsMedium <https://1145.am/db/1797744/O2>,
         <https://1145.am/db/1800033/O2>,
@@ -11324,6 +11547,7 @@
     ns1:documentTitle "POINT BIOPHARMA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of POINT Biopharma Global, Inc. - PNT" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006167425/en/POINT-BIOPHARMA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-POINT-Biopharma-Global-Inc.---PNT> ;
     ns1:foundName "Eli Lilly and Company" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Eli Lilly and Company" ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
         <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
@@ -11607,6 +11831,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/deals/quotient-clinical-snapped-up-by-gillings-founded-buyout-firm> ;
     ns1:foundName "DNA Diagnostics Center" ;
     ns1:industry "testing" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/16_research_clinical_science_medical> ;
     ns1:name "DNA Diagnostics Center" ;
     ns1:sameAsMedium <https://1145.am/db/2346331/Dna_Diagnostics_Center>,
         <https://1145.am/db/2587565/Dna_Diagnostics_Center> ;
@@ -11619,6 +11844,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/cro/spotlight-on-recipharm-looks-to-close-a-105m-deal-analyst-says-biotech-slump-won-t-affect-cros> ;
     ns1:foundName "Nitin Lifesciences" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Nitin Lifesciences" ;
     ns1:sameAsHigh <https://1145.am/db/2540508/Nitin_Lifesciences>,
         <https://1145.am/db/2546157/Nitin_Lifesciences> ;
@@ -11967,6 +12193,8 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/scholar-rock-announces-36-million-series-b-financing> ;
     ns1:foundName "Scholar Rock" ;
     ns1:industry "biotechnology" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines>,
+        <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Scholar Rock" ;
     ns1:sameAsHigh <https://1145.am/db/1139562/Scholar_Rock>,
         <https://1145.am/db/1143776/Scholar_Rock>,
@@ -11995,6 +12223,7 @@
     ns1:documentTitle "Scholar Rock bags $36M to fuel muscle-wasting drug program, first clinical study" ;
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "Cormorant Asset Management" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:investor <https://1145.am/db/2368913/B_Investment_Cormorant_Asset_Management_Ecor1_Capital_Fidelity_Management_And_Research_Polaris_Partners_Scholar_Rock_The_Kraft_Group_Timothy_Springer_Has_Not_Happened> ;
     ns1:name "Cormorant Asset Management" ;
     ns1:sameAsHigh <https://1145.am/db/1448487/Cormorant_Asset_Management>,
@@ -12124,6 +12353,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/venture-capital/scholar-rock-bags-36m-to-fuel-muscle-wasting-drug-program-first-clinical-study> ;
     ns1:foundName "Scholar Rock" ;
     ns1:industry "biotech" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/9_biotechnology_biotech_biology_synthetic> ;
     ns1:name "Scholar Rock" ;
     ns1:sameAsHigh <https://1145.am/db/1139562/Scholar_Rock>,
         <https://1145.am/db/1143776/Scholar_Rock>,
@@ -12244,6 +12474,7 @@
     ns1:documentURL <https://www.fiercebiotech.com/biotech/accelerator-corporation-launches-first-startup-new-york-city-portfolio> ;
     ns1:foundName "Eli Lilly and Company" ;
     ns1:industry "pharmaceutical" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:investor <https://1145.am/db/2369000/Series_A_Investment_Arch_Venture_Partners_Abbvie_Accelerator_Corporation_Alexandria_Venture_Investments_Eli_Lilly_And_Company_Harris___Harris_Group_Innovate_Ny_Fund_Johnson___Johnson_Innovation_-_Jjdc_Inc_Petra_Pharma_Petra_Pharma_Pfizer_Venture_Investments_The_Partnership_Fund_For_New_York_City_Watson_Fund_Weill_Cornell_Medicine_Wuxi_Pharmatech_Completed> ;
     ns1:name "Eli Lilly and Company" ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
@@ -12506,6 +12737,7 @@
     ns1:foundName "Cormorant Asset Management",
         "HBM Healthcare Investments",
         "HBM Healthcare Investments, Cormorant Asset Management" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:investor <https://1145.am/db/2369169/Series_C_Investment_Hbm_Healthcare_Investments_Cormorant_Asset_Management_Hbm_Healthcare_Investments_Cormorant_Asset_Management_Iconic_Therapeutics_Osage_University_Partners_Completed> ;
     ns1:name "Cormorant Asset Management",
         "HBM Healthcare Investments",
@@ -12776,6 +13008,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/novartis-selling-french-alcon-plant-to-recipharm> ;
     ns1:foundName "Nitin Lifesciences" ;
     ns1:industry "Lifesciences" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Nitin Lifesciences" ;
     ns1:sameAsHigh <https://1145.am/db/2306945/Nitin_Lifesciences>,
         <https://1145.am/db/2540508/Nitin_Lifesciences> ;
@@ -12797,6 +13030,7 @@
     ns1:documentURL <https://www.fiercepharma.com/manufacturing/novartis-selling-french-alcon-plant-to-recipharm> ;
     ns1:foundName "Novartis" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Novartis" ;
     ns1:sameAsHigh <https://1145.am/db/1176158/Novartis>,
         <https://1145.am/db/1177562/Novartis>,
@@ -13199,6 +13433,7 @@
     ns1:documentURL <https://www.fiercepharma.com/pharma-asia/golden-meditech-enters-into-agreements-nanjing-xinjiekou-to-sell-china-cord-blood> ;
     ns1:foundName "Golden Meditech Holdings Limited" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "Golden Meditech Holdings Limited" ;
     ns1:sameAsHigh <https://1145.am/db/2539088/Golden_Meditech_Holdings_Limited>,
         <https://1145.am/db/2572395/Golden_Meditech_Holdings_Limited> ;
@@ -13211,6 +13446,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/gho-capital-announces-acquisition-of-dna-diagnostics-center> ;
     ns1:foundName "DNA Diagnostics Center" ;
     ns1:industry "healthcare" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/13_health_healthcare_wellness_care> ;
     ns1:name "DNA Diagnostics Center" ;
     ns1:sameAsHigh <https://1145.am/db/2346331/Dna_Diagnostics_Center> ;
     ns1:sameAsMedium <https://1145.am/db/2304997/Dna_Diagnostics_Center> ;
@@ -13337,6 +13573,7 @@
     ns1:documentTitle "Spotlight On... Zoetis offloads three manufacturing plants to Huvepharma for $40M; Novartis India completes animal health sale to Lilly; Jaguar launches pivotal trial of lead dog drug; UC Davis scores federal animal health grant; and more..." ;
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "Eli Lilly" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Eli Lilly" ;
     ns1:participant <https://1145.am/db/2589535/Assets_Acquisition_Elanco_India_Eli_Lilly_Novartis_Completed> ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
@@ -13707,6 +13944,7 @@
     ns1:foundName "Vascular Flow",
         "Vascular Flow Technologies" ;
     ns1:industry "Medical Devices" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/5_medical_medtech_medicine_technology> ;
     ns1:name "Vascular Flow",
         "Vascular Flow Technologies" ;
     ns1:sourceName "Fierce Biotech" .
@@ -14046,6 +14284,7 @@
     ns1:documentURL <https://www.fiercepharma.com/animal-health/spotlight-on-zoetis-offloads-three-manufacturing-plants-to-huvepharma-for-40m> ;
     ns1:foundName "Novartis" ;
     ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/1_pharmaceutical_drug_pharmaceuticals_medicines> ;
     ns1:name "Novartis" ;
     ns1:sameAsHigh <https://1145.am/db/1176158/Novartis>,
         <https://1145.am/db/1177562/Novartis>,
@@ -14576,6 +14815,7 @@
     ns1:documentTitle "FREQUENCY THERAPEUTICS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Frequency Therapeutics, Inc. - FREQ" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006816814/en/FREQUENCY-THERAPEUTICS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Frequency-Therapeutics-Inc.---FREQ> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2138987/Frequency_Therapeutics_Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -15135,6 +15375,7 @@
     ns1:documentTitle "AMERICAN NATIONAL BANKSHARES INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of American National Bankshares Inc. - AMNB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006084150/en/AMERICAN-NATIONAL-BANKSHARES-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-American-National-Bankshares-Inc.---AMNB> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2138993/American_National_Bankshares_Inc_Ipo> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -15694,6 +15935,7 @@
     ns1:documentTitle "EQRX INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of EQRx, Inc. - EQRX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006020567/en/EQRX-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-EQRx-Inc.---EQRX> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2138995/Eqrx_Ipo> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -16253,6 +16495,7 @@
     ns1:documentTitle "SP PLUS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of SP Plus Corporation - SP" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006389282/en/SP-PLUS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-SP-Plus-Corporation---SP> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2138997/Sp_Plus_Corporation_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -16812,6 +17055,7 @@
     ns1:documentTitle "TABULA RASA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Tabula Rasa HealthCare, Inc. - TRHC" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006930704/en/TABULA-RASA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Tabula-Rasa-HealthCare-Inc.---TRHC> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2138998/Tabula_Rasa_Healthcare_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -17371,6 +17615,7 @@
     ns1:documentTitle "STANDARD BIOTOOLS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Standard BioTools Inc. - LAB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006429040/en/STANDARD-BIOTOOLS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Standard-BioTools-Inc.---LAB> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2139011/Somalogic_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -17930,6 +18175,7 @@
     ns1:documentTitle "POINT BIOPHARMA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of POINT Biopharma Global, Inc. - PNT" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006167425/en/POINT-BIOPHARMA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-POINT-Biopharma-Global-Inc.---PNT> ;
     ns1:foundName "Kahn Swick & Foti, LLC" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Kahn Swick & Foti, LLC" ;
     ns1:participant <https://1145.am/db/2139015/Point_Biopharma_Global_Inc_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Kahn_Swick___Foti_Llc>,
@@ -18611,6 +18857,7 @@
     ns1:documentTitle "CRESTWOOD EQUITY INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Crestwood Equity Partners LP - CEQP" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006531359/en/CRESTWOOD-EQUITY-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Crestwood-Equity-Partners-LP---CEQP> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138978/Crestwood_Equity_Partners_Lp_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -19467,6 +19714,7 @@
     ns1:documentTitle "ORCHARD THERAPEUTICS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Orchard Therapeutics plc - ORTX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006816649/en/ORCHARD-THERAPEUTICS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Orchard-Therapeutics-plc---ORTX> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138982/Orchard_Therapeutics_Plc_Ipo> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -20323,6 +20571,7 @@
     ns1:documentTitle "DENBURY INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Denbury Inc. - DEN" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006732559/en/DENBURY-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Denbury-Inc.---DEN> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138985/Denbury_Inc_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -21179,6 +21428,7 @@
     ns1:documentTitle "FREQUENCY THERAPEUTICS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Frequency Therapeutics, Inc. - FREQ" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006816814/en/FREQUENCY-THERAPEUTICS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Frequency-Therapeutics-Inc.---FREQ> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138987/Frequency_Therapeutics_Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -22035,6 +22285,7 @@
     ns1:documentTitle "AMERICAN NATIONAL BANKSHARES INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of American National Bankshares Inc. - AMNB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006084150/en/AMERICAN-NATIONAL-BANKSHARES-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-American-National-Bankshares-Inc.---AMNB> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138993/American_National_Bankshares_Inc_Ipo> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -22891,6 +23142,7 @@
     ns1:documentTitle "EQRX INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of EQRx, Inc. - EQRX" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006020567/en/EQRX-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-EQRx-Inc.---EQRX> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138995/Eqrx_Ipo> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -23747,6 +23999,7 @@
     ns1:documentTitle "SP PLUS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of SP Plus Corporation - SP" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006389282/en/SP-PLUS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-SP-Plus-Corporation---SP> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138997/Sp_Plus_Corporation_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -24603,6 +24856,7 @@
     ns1:documentTitle "TABULA RASA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of Tabula Rasa HealthCare, Inc. - TRHC" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006930704/en/TABULA-RASA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-Tabula-Rasa-HealthCare-Inc.---TRHC> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2138998/Tabula_Rasa_Healthcare_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -25459,6 +25713,7 @@
     ns1:documentTitle "STANDARD BIOTOOLS INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Standard BioTools Inc. - LAB" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006429040/en/STANDARD-BIOTOOLS-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Standard-BioTools-Inc.---LAB> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/0_investor_investment_equity_investing> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2139011/Somalogic_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
@@ -26315,6 +26570,7 @@
     ns1:documentTitle "POINT BIOPHARMA INVESTOR ALERT by the Former Attorney General of Louisiana: Kahn Swick & Foti, LLC Investigates Adequacy of Price and Process in Proposed Sale of POINT Biopharma Global, Inc. - PNT" ;
     ns1:documentURL <https://www.businesswire.com/news/home/20231006167425/en/POINT-BIOPHARMA-INVESTOR-ALERT-by-the-Former-Attorney-General-of-Louisiana-Kahn-Swick-Foti-LLC-Investigates-Adequacy-of-Price-and-Process-in-Proposed-Sale-of-POINT-Biopharma-Global-Inc.---PNT> ;
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
+    ns1:industryClusterMedium <https://1145.am/db/industry/-1_organization_management_investments_investment> ;
     ns1:name "Charles C. Foti, Jr." ;
     ns1:participant <https://1145.am/db/2139015/Point_Biopharma_Global_Inc_Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,

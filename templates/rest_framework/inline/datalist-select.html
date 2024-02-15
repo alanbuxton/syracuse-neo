@@ -1,0 +1,17 @@
+{% load rest_framework %}
+
+<div class="form-group {% if field.errors %}has-error{% endif %}">
+  {% if field.label %}
+    <label class="sr-only">
+      {{ field.label }}
+    </label>
+  {% endif %}
+
+  <input class="form-control" name="{{ field.name }}" list="{{ field.name }}DatalistOptions" type="text" placeholder="Type to search...">
+
+  <datalist id="{{ field.name }}DatalistOptions">
+    {% for select in field.iter_options %}
+      <option value="{{ select.display_text }}">
+    {% endfor %}
+  </datalist>
+</div>

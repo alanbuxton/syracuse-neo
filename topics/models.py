@@ -1,5 +1,6 @@
 from neomodel import (StructuredNode, StringProperty,
-    RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty)
+    RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
+    IntegerProperty)
 from urllib.parse import urlparse
 import datetime
 from topics.geo_utils import get_geoname_uris_for_country_region
@@ -115,6 +116,55 @@ class Resource(StructuredNode):
         return all_rels
 
 
+class IndustryCluster(Resource):
+    representation = ArrayProperty(StringProperty())
+    representativeDoc = ArrayProperty(StringProperty())
+    child_right = RelationshipTo("IndustryCluster","childRight")
+    child_left = RelationshipTo("IndustryCluster","childLeft")
+    parents_left = RelationshipFrom("IndustryCluster","childLeft")
+    parents_right = RelationshipFrom("IndustryCluster","childRight")
+    topic_id = IntegerProperty()
+
+    @property
+    def parents(self):
+        return self.parents_left.all() + self.parents_right.all()
+
+    @staticmethod
+    def leaf_nodes_only():
+        query = "MATCH (n: IndustryCluster) WHERE NOT (n)-[:childLeft|childRight]->(:IndustryCluster) RETURN n"
+        results, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in results for x in sublist]
+        return flattened
+
+    @staticmethod
+    def parents_of(nodes):
+        parent_objects = []
+        for node in nodes:
+            for p in node.parents:
+                if p not in nodes:
+                    parent_objects.append(p)
+        return parent_objects
+
+    @staticmethod
+    def first_parents():
+        return IndustryCluster.parents_of(IndustryCluster.leaf_nodes_only())
+
+    @staticmethod
+    def second_parents():
+        return IndustryCluster.parents_of(IndustryCluster.first_parents())
+
+    @staticmethod
+    def with_descendants(topic_id,max_depth=500):
+        if topic_id is None:
+            return None
+        root = IndustryCluster.nodes.get_or_none(topic_id=topic_id)
+        if root is None:
+            return []
+        descendant_uris,_ = db.cypher_query(f"MATCH (n: IndustryCluster {{uri:'{root.uri}'}})-[x:childLeft|childRight*..{max_depth}]->(o: IndustryCluster) return o.uri;")
+        flattened = [x for sublist in descendant_uris for x in sublist]
+        return [root.uri] + flattened
+
+
 class ActivityMixin:
     activityType = ArrayProperty(StringProperty())
     documentDate = NativeDateTimeProperty()
@@ -209,16 +259,30 @@ class ActivityMixin:
         return flattened
 
     @staticmethod
-    def orgs_by_activity_where(geo_code,limit=None,allowed_to_set_cache=False):
-        cache_key = f"activity_mixin_orgs_by_activity_where_{geo_code}"
+    def orgs_by_activity_where_industry(geo_code=None,industry_uris=None,limit=None,allowed_to_set_cache=False):
+        if industry_uris is None:
+            hash_key = hash(None)
+        else:
+            hash_key = hash('_'.join(sorted(industry_uris)))
+        cache_key = f"activity_mixin_orgs_by_activity_where_{geo_code}_{hash_key}"
         relevant_items = cache.get(cache_key)
         if relevant_items and limit is None:
             logger.debug(f"{cache_key} cache hit")
             return relevant_items
         logger.debug(f"{cache_key} cache miss")
-        activities = ActivityMixin.by_country_or_region(geo_code,allowed_to_set_cache=allowed_to_set_cache)
-        act_uris = [x.uri for x in activities]
-        query=f"MATCH (n: Organization)-[]-(a) WHERE a.uri IN {act_uris} RETURN n"
+        if geo_code is not None and geo_code.strip() != '':
+            activities = ActivityMixin.by_country_or_region(geo_code,allowed_to_set_cache=allowed_to_set_cache)
+            act_uris = [x.uri for x in activities]
+            query=f"MATCH (n: Organization)--(a) WHERE a.uri IN {act_uris} "
+        else:
+            query=f"MATCH (n: Organization) "
+        if industry_uris is not None:
+            if "WHERE" in query:
+                query = f"{query} AND"
+            else:
+                query = f"{query} WHERE"
+            query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
+        query = query + " RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"
         orgs, _ = db.cypher_query(query,resolve_objects=True)
@@ -250,16 +314,33 @@ class BasedInGeoMixin:
         return uri
 
     @classmethod
-    def based_in_country_region(cls,geo_code,allowed_to_set_cache=False):
+    def by_country_region_industry(cls,geo_code=None,industry_uris=None,limit=20,allowed_to_set_cache=False):
         label = cls.__name__
-        cache_key = f"{label}_based_in_country_or_region_{geo_code}"
+        if industry_uris is None:
+            hash_key = hash(None)
+        else:
+            hash_key = hash('_'.join(sorted(industry_uris)))
+        cache_key = f"{label}_based_in_country_or_region_{geo_code}_{hash_key}"
         res = cache.get(cache_key)
         if res:
             logger.debug(f"{cache_key} cache hit")
             return res
         logger.debug(f"{cache_key} cache miss")
-        uris = get_geoname_uris_for_country_region(geo_code)
-        resources, _ = db.cypher_query(f"Match (loc)-[:basedInHighGeoNameRDF]-(n: {label}) where loc.uri in {uris} return n",resolve_objects=True)
+        if geo_code is not None and geo_code.strip() != '':
+            geo_uris = get_geoname_uris_for_country_region(geo_code)
+            query = f"MATCH (loc)-[:basedInHighGeoNameRDF]-(n: {label}) WHERE loc.uri IN {geo_uris} "
+        else:
+            query = f"MATCH (n: {label})"
+        if industry_uris is not None:
+            if "WHERE" in query:
+                query = f"{query} AND"
+            else:
+                query = f"{query} WHERE"
+            query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
+        query = f"{query} RETURN n"
+        if limit is not None:
+            query = f"{query} LIMIT {limit}"
+        resources, _ = db.cypher_query(query,resolve_objects=True)
         flattened = [x for sublist in resources for x in sublist]
         if allowed_to_set_cache is True:
             cache.set(cache_key, flattened)
