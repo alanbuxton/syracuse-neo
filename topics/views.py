@@ -17,7 +17,6 @@ import json
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
-from dal import autocomplete
 
 import logging
 logger = logging.getLogger(__name__)

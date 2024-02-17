@@ -90,8 +90,8 @@ Last updated {{ last_updated | localize }}</h5>
     <div id="right_panel">
       <p>or, filter for companies by industry &amp; country/region</p>
       <form class="narrow_form" action="{% url 'index' %}" method="GET" novalidate>
-          {% render_form geo_search template_pack='rest_framework/inline' %}
           {% render_form industry_search template_pack='rest_framework/inline' %}
+          {% render_form geo_search template_pack='rest_framework/inline' %}
 
           <br/><input type="submit" value="Search">
       </form>
