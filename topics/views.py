@@ -3,6 +3,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
+from topics.cache_helpers import is_cache_ready
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySerializer,OrganizationTimelineSerializer)
@@ -89,6 +90,7 @@ class Index(APIView):
                         "motd": MOTD,
                         "alpha_flag": alpha_flag,
                         "last_updated": last_updated,
+                        "cache_ready": is_cache_ready(),
                         }, status=status.HTTP_200_OK)
         return resp
 
@@ -101,7 +103,10 @@ class TopicsTimeline(APIView):
         industry = params["industry_name"]
         orgs = Organization.find_by_industry(industry)
         timeline_serializer = TimelineSerializer(orgs)
-        return Response({"industry_name":industry,"timeline_serializer": timeline_serializer.data}, status=status.HTTP_200_OK)
+        return Response({"industry_name":industry,
+                            "timeline_serializer": timeline_serializer.data,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
 
 class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -113,7 +118,9 @@ class OrganizationTimeline(APIView):
         org_serializer = OrganizationTimelineSerializer(o)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.longest_name}}
         resp = Response({"timeline_serializer": org_serializer.data,
-                            "org_data":org_data}, status=status.HTTP_200_OK)
+                            "org_data":org_data,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
         return resp
 
 
@@ -126,7 +133,8 @@ class RandomOrganization(APIView):
         vals = elements_from_uri(o.uri)
         org_serializer = OrganizationGraphSerializer(o)
         resp = Response({"data_serializer": org_serializer.data,
-                            "org_data":vals}, status=status.HTTP_200_OK)
+                            "org_data":vals,
+                            "cache_ready": is_cache_ready(),}, status=status.HTTP_200_OK)
         return resp
 
 
@@ -142,7 +150,9 @@ class OrganizationByUri(APIView):
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.longest_name}}
         resp = Response({"data_serializer": org_serializer.data,
                             "org_data":org_data,
-                            "where_is_included": include_where}, status=status.HTTP_200_OK)
+                            "where_is_included": include_where,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
         return resp
 
 

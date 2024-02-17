@@ -12,9 +12,12 @@ from .serializers import (TrackedOrganizationSerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer)
 import json
 from .date_helpers import days_ago
-from topics.model_queries import get_activities_for_serializer_by_country_and_date_range, get_stats, get_activities_by_date_range_for_api, get_activities_for_serializer_by_source_and_date_range
+from topics.model_queries import (get_activities_for_serializer_by_country_and_date_range,
+    get_stats, get_activities_by_date_range_for_api,
+    get_activities_for_serializer_by_source_and_date_range)
 from datetime import datetime, timezone, date, timedelta
 from topics.geo_utils import get_geo_data, country_and_region_code_to_name
+from topics.cache_helpers import is_cache_ready
 
 class TrackedOrganizationView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -38,7 +41,9 @@ class TrackedOrganizationView(APIView):
         tracked_orgs = self.get_queryset()
         tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
         source_page = request.headers.get("Referer")
-        resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page},status=status.HTTP_200_OK)
+        resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page,
+                            "cache_ready": is_cache_ready(),
+                            },status=status.HTTP_200_OK)
         return resp
 
 class GeoActivitiesView(APIView):
@@ -52,7 +57,9 @@ class GeoActivitiesView(APIView):
         geo_name = country_and_region_code_to_name(geo_code)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "geo_name": geo_name }, status=status.HTTP_200_OK)
+                            "geo_name": geo_name,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
         return resp
 
 class SourceActivitiesView(APIView):
@@ -65,7 +72,9 @@ class SourceActivitiesView(APIView):
         matching_activity_orgs =  get_activities_for_serializer_by_source_and_date_range(source_name, min_date, max_date, limit=20)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "source_name": source_name }, status=status.HTTP_200_OK)
+                            "source_name": source_name,
+                            "cache_ready": is_cache_ready(),
+                             }, status=status.HTTP_200_OK)
         return resp
 
 class GeoActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -108,7 +117,9 @@ class ActivityStats(APIView):
         counts_serializer = CountsSerializer(counts, many=True)
         resp = Response({"recents_by_geo":recents_by_geo_serializer.data,"counts":counts_serializer.data,
                         "recents_by_source":recents_by_source_serializer.data,
-                            "max_date":max_date}, status=status.HTTP_200_OK)
+                            "max_date":max_date,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
         return resp
 
 
@@ -124,7 +135,9 @@ class ActivitiesView(APIView):
         orgs = TrackedOrganization.uris_by_user(user)
         matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=orgs, max_date=max_date, include_same_as=True)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
-        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date}, status=status.HTTP_200_OK)
+        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                        "cache_ready": is_cache_ready(),
+                        }, status=status.HTTP_200_OK)
         return resp
 
 class ActivitiesViewSet(viewsets.ReadOnlyModelViewSet):

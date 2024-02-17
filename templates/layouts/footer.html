@@ -1,6 +1,11 @@
 
 <br/>
-<p><a href="{% url 'tracked-activity-stats' %}">Site Stats</a>
+<p>
+{% if cache_ready %}
+  <a href="{% url 'tracked-activity-stats' %}">Site Stats</a>
+{% else %}
+  Site stats calculating, please check later
+{% endif %}
   | <a href="{% url 'about' %}">About (includes privacy and cookie notices)</a>
 <br/>
 (c) by 1145, 2023-2024. Data licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License</a>.
