@@ -12,7 +12,7 @@ from topics.cache_helpers import nuke_cache
 from topics.serializers import *
 
 '''
-    Care these tests will delete
+    Care these tests will delete neodb data
 '''
 env_var="DELETE_NEO"
 if os.environ.get(env_var) != "Y":
@@ -56,18 +56,19 @@ class TestUtilsWithDumpData(TestCase):
         source_uri = "https://1145.am/db/2064074/Peak_Xv_Partners"
         o = Organization.nodes.get_or_none(uri=source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 20
+        assert len(clean_node_data) == 22
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)',
+                ['equity, finance, financial', 'acquisitions, capital, corp',
+                '3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)',
                 'Beenext', 'Investment (TechCrunch: Jul 2023)',
                 'Joint Venture (Reuters: Jul 2023)', 'Kinesys', 'Lightspeed Venture',
                 'M Venture Partners', 'Maka Motors', 'Northstar Group', 'Peak XV Partners',
                 'Pocket Aces', 'Pratyush Kumar', 'Provident', 'Saregama', 'Sarvam',
                 'Shinhan Venture Investment', 'Skystar Capital', 'Vivek Raghavan']
         )
-        assert len(clean_edge_data) == 24 # # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
+        assert len(clean_edge_data) == 26 # # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
         assert set([x['label'] for x in clean_edge_data]) == {'BUYER', 'VENDOR', 'TARGET', 'SAME_AS_MEDIUM',
-                                            'SAME_AS_HIGH', 'INVESTOR', 'PROTAGONIST'}
+                                            'SAME_AS_HIGH', 'INDUSTRY_CLUSTER_HIGH', 'INVESTOR', 'PROTAGONIST'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -75,9 +76,10 @@ class TestUtilsWithDumpData(TestCase):
         source_uri = "https://1145.am/db/2064074/Peak_Xv_Partners"
         o = Organization.nodes.get_or_none(uri=source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
-        assert len(clean_node_data) == 23
+        assert len(clean_node_data) == 25
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)', 'Beenext',
+                ['equity, finance, financial', 'acquisitions, capital, corp',
+                '3one4 Capital', 'AI4Bharat', 'Acquisition (TechCrunch: Sep 2023)', 'Beenext',
                 'Investment (TechCrunch: Jul 2023)', 'Joint Venture (Reuters: Jul 2023)',
                 'Kinesys', 'Lightspeed Venture', 'M Venture Partners', 'Maka Motors',
                 'Northstar Group', 'Peak XV Partners', 'Pocket Aces', 'Pratyush Kumar',
@@ -85,9 +87,9 @@ class TestUtilsWithDumpData(TestCase):
                 'Skystar Capital', 'Vivek Raghavan', 'https://sws.geonames.org/1269750',
                 'https://sws.geonames.org/1275004', 'https://sws.geonames.org/1643084']
         )
-        assert len(clean_edge_data) == 33 # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
+        assert len(clean_edge_data) == 35 # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
         assert set([x['label'] for x in clean_edge_data]) == {'WHERE', 'BUYER', 'VENDOR', 'BASED_IN', 'TARGET',
-                                            'SAME_AS_MEDIUM', 'SAME_AS_HIGH', 'INVESTOR', 'PROTAGONIST'}
+                                            'SAME_AS_MEDIUM', 'SAME_AS_HIGH', 'INDUSTRY_CLUSTER_HIGH', 'INVESTOR', 'PROTAGONIST'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -201,20 +203,20 @@ class TestUtilsWithDumpData(TestCase):
         assert len(matching_activity_orgs[1]['participants']) == 1
 
     def test_search_by_industry_and_geo(self):
-        selected_geo_name = "Great Britain and Northern Ireland"
-        industry_name = "hotel, hotels, hospitality, hotelier, resorts"
+        selected_geo_name = "United States"
+        industry_name = 'hotel, hotels, lodging, hotelier'
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 7
+        assert len(orgs) == 9
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
-        industry_name = "hotel, hotels, hospitality, hotelier, resorts"
+        industry_name = 'hotel, hotels, lodging, hotelier'
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 201
+        assert len(orgs) == 20
 
     def test_search_by_geo_only(self):
         selected_geo_name = "Great Britain and Northern Ireland"
@@ -222,4 +224,4 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 74
+        assert len(orgs) == 79

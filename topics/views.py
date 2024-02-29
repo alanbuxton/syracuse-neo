@@ -39,8 +39,14 @@ class Index(APIView):
         org_name = params.get("name")
         selected_geo_name = params.get("country_or_region")
         industry_name = params.get("industry")
+
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
+        if selected_geo is None:
+            selected_geo_name = None
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
+        if industry_name is None:
+            industry_name = None
+
         if org_name:
             orgs = Organization.find_by_name(org_name)
             num_hits = len(orgs)
@@ -60,15 +66,7 @@ class Index(APIView):
             org_search = NameSearchSerializer({"name":""})
             geo_search = GeoSerializer()
             search_type = 'combined_search'
-            if industry is not None:
-                search_term = f"{industry_name}"
-            else:
-                search_term = ""
-            if selected_geo is not None:
-                if industry is not None:
-                    search_term = f"{search_term} / {selected_geo_name}"
-                else:
-                    search_term = f"{selected_geo_name}"
+            search_term = industry_geo_search_str(industry_name, selected_geo_name)
         else:
             orgs = Organization.nodes.order_by('?')[:10]
             org_list = OrganizationSerializer(orgs, many=True)
@@ -168,3 +166,9 @@ def elements_from_uri(uri):
         "doc_id": doc_id,
         "name": org_name,
     }
+
+
+def industry_geo_search_str(industry, geo):
+    industry_str = "all industries" if industry is None or industry.strip() == '' else industry
+    geo_str = "all locations" if geo is None or geo.strip() == '' else geo
+    return f"{industry_str} in {geo_str}"

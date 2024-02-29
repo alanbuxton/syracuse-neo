@@ -119,15 +119,48 @@ class Resource(StructuredNode):
 class IndustryCluster(Resource):
     representation = ArrayProperty(StringProperty())
     representativeDoc = ArrayProperty(StringProperty())
-    child_right = RelationshipTo("IndustryCluster","childRight")
-    child_left = RelationshipTo("IndustryCluster","childLeft")
-    parents_left = RelationshipFrom("IndustryCluster","childLeft")
-    parents_right = RelationshipFrom("IndustryCluster","childRight")
-    topic_id = IntegerProperty()
+    childRight = RelationshipTo("IndustryCluster","childRight")
+    childLeft = RelationshipTo("IndustryCluster","childLeft")
+    parentsLeft = RelationshipFrom("IndustryCluster","childLeft")
+    parentsRight = RelationshipFrom("IndustryCluster","childRight")
+    topicId = IntegerProperty()
+    uniqueName = StringProperty()
+    orgsHigh = RelationshipFrom("Organization","industryClusterHigh")
+    orgsMedium = RelationshipFrom("Organization","industryClusterMedium")
+    peopleHigh = RelationshipFrom("Person","industryClusterHigh")
+    peopleMedium = RelationshipFrom("Person","industryClusterMedium")
+
+    def serialize(self):
+        vals = super(IndustryCluster, self).serialize()
+        vals['label'] = ", ".join(sorted(self.representation)[:3])
+        return vals
 
     @property
     def parents(self):
-        return self.parents_left.all() + self.parents_right.all()
+        return self.parentsLeft.all() + self.parentsRight.all()
+
+    @staticmethod
+    def leaf_keywords():
+        cache_key = "industry_leaf_keywords"
+        # res = cache.get(cache_key)
+        # if res:
+        #     return res
+        keywords = {}
+        for node in IndustryCluster.leaf_nodes_only():
+            words = node.uniqueName.split("_")
+            idx = words[0]
+            for word in words[1:]:
+                if word not in keywords.keys():
+                    keywords[word] = set()
+                keywords[word].add(idx)
+        cache.set(cache_key, keywords)
+        return keywords
+
+    @staticmethod
+    def top_node():
+        query = "MATCH (n: IndustryCluster) WHERE NOT (n)<-[:childLeft|childRight]-(:IndustryCluster) AND n.topicId <> -1 return n"
+        results, _ = db.cypher_query(query,resolve_objects=True)
+        return results[0][0]
 
     @staticmethod
     def leaf_nodes_only():
@@ -157,7 +190,7 @@ class IndustryCluster(Resource):
     def with_descendants(topic_id,max_depth=500):
         if topic_id is None:
             return None
-        root = IndustryCluster.nodes.get_or_none(topic_id=topic_id)
+        root = IndustryCluster.nodes.get_or_none(topicId=topic_id)
         if root is None:
             return []
         descendant_uris,_ = db.cypher_query(f"MATCH (n: IndustryCluster {{uri:'{root.uri}'}})-[x:childLeft|childRight*..{max_depth}]->(o: IndustryCluster) return o.uri;")
@@ -369,6 +402,8 @@ class Organization(Resource, BasedInGeoMixin):
     hasRole = RelationshipTo('Role','hasRole')
     locationAdded = RelationshipTo('LocationActivity','locationAdded')
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
+    industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
+    industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
 
     @staticmethod
     def get_longest_name_by_uri(uri):
@@ -593,6 +628,8 @@ class Site(Resource):
 
 class Person(Resource, BasedInGeoMixin):
     roleActivity = RelationshipTo('RoleActivity','roleActivity')
+    industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
+    industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
 
     def serialize(self):
         vals = super(Person, self).serialize()
