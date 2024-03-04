@@ -9,7 +9,7 @@ from topics.geo_utils import geo_select_list
 logger = logging.getLogger(__name__)
 
 def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=True):
-    relevant_orgs = get_relevant_orgs_for_country_region_industry(geo_code)
+    relevant_orgs = get_relevant_orgs_for_country_region_industry(geo_code,limit=limit)
     relevant_uris = [x.uri for x in relevant_orgs]
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=relevant_uris,
                                 max_date=max_date, limit=limit, include_same_as=include_same_as)
@@ -36,6 +36,7 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
                                             max_date = datetime.now(tz=timezone.utc),
                                             limit = None, include_same_as=True):
     assert min_date is not None, "Must have min date"
+    assert min_date <= max_date,  f"Min date {min_date} must be before or same as max date {max_date}"
     if (uri_or_list is None or len(uri_or_list) == 0 or set(uri_or_list) == {None}) and source_name is None:
         return []
     if source_name is None:
@@ -81,14 +82,20 @@ def get_activities_by_source_and_date_range(source_name,min_date, max_date, limi
         limit_str = f"LIMIT {limit}"
     else:
         limit_str = ""
-    query = f"""MATCH (n:CorporateFinanceActivity|RoleActivity|LocationActivity)
-                WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
-                AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
-                AND n.sourceName = ('{source_name}')
+    where_clause = f"""WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
+                    AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
+                    AND n.sourceName = ('{source_name}')"""
+
+    query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity)
+                {where_clause}
+                {return_str} {limit_str}
+                UNION
+                MATCH (x: Person)--(n:RoleActivity)--(p: Role)--(o: Organization)
+                {where_clause}
                 {return_str} {limit_str};"""
     objs, _ = db.cypher_query(query, resolve_objects=True)
     flattened = [x for sublist in objs for x in sublist]
-    return flattened
+    return flattened[:limit]
 
 def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], min_date, max_date, limit=None, include_same_as=True,
                                     counts_only = False):
@@ -112,23 +119,38 @@ def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], m
         return_str = "RETURN COUNT(DISTINCT(n))"
     else:
         return_str = "RETURN DISTINCT(n) ORDER BY n.documentDate DESC"
+    where_clause = f"""WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
+                        AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
+                        AND o.uri IN {list(uris_to_check)}"""
+
     query = f"""
-        MATCH (n:CorporateFinanceActivity|RoleActivity|LocationActivity)--(o: Organization)
-        WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
-        AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
-        AND o.uri IN {list(uris_to_check)}
+        MATCH (n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
+        {where_clause}
+        {return_str} {limit_str}
+        UNION
+        MATCH (x: Person)--(n:RoleActivity)--(p: Role)--(o: Organization)
+        {where_clause}
         {return_str} {limit_str};
     """
     logger.debug(query)
     objs, _ = db.cypher_query(query, resolve_objects=True)
     flattened = [x for sublist in objs for x in sublist]
-    return flattened
+    return flattened[:limit]
 
 def date_to_cypher_friendly(date):
     if isinstance(date, str):
         return datetime.fromisoformat(date).isoformat()
     else:
         return date.isoformat()
+
+def get_cached_stats():
+    latest_date = cache.get("cache_updated")
+    if latest_date is None:
+        return None, None
+    d = datetime.date(latest_date)
+    assert cache.get(f"stats_{d}") is not None
+    counts, recents_by_country_region, recents_by_source =  get_stats(d, allowed_to_set_cache=False)
+    return d, counts, recents_by_country_region, recents_by_source
 
 def get_stats(max_date,allowed_to_set_cache=False):
     cache_key = f"stats_{max_date}"
@@ -177,10 +199,10 @@ def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None):
 
 def get_source_counts(source_name, min_date,max_date):
     counts = get_activities_by_source_and_date_range(source_name,min_date,max_date,counts_only=True)
-    return counts[0]
+    return sum(counts)
 
 def get_country_region_counts(geo_code,min_date,max_date):
-    relevant_uris = get_relevant_orgs_for_country_region_industry(geo_code)
+    relevant_uris = get_relevant_orgs_for_country_region_industry(geo_code,limit=None)
     uris = [x.uri for x in relevant_uris]
     counts = get_activities_by_org_uri_and_date_range(uris,min_date,max_date,include_same_as=False,counts_only=True)
-    return counts[0]
+    return sum(counts)

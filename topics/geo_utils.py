@@ -67,7 +67,7 @@ def geo_select_list(include_alt_names=False):
         else:
             select_list.append( [geo_code, f"{country_name} - {admin1_name}" ])
     if include_alt_names is True:
-        select_list.append( ["GB","Great Britain and Northern Ireland"])
+        select_list.append( ["GB","United Kingdom of Great Britain and Northern Ireland"])
     return sorted(select_list, key = lambda x: x[1])
 
 def sorted_country_admin1_list(country_names_to_id,admin1_names_to_id):

@@ -557,11 +557,18 @@ class RoleActivity(Resource, ActivityMixin):
     roleHolderFoundName = ArrayProperty(StringProperty())
     roleActivity = RelationshipFrom('Person','roleActivity')
 
+    def related_orgs(self):
+        query = f"MATCH (n: RoleActivity {{uri:'{self.uri}'}})--(o: Role)--(p: Organization) RETURN p"
+        objs, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in objs for x in sublist]
+        return flattened
+
     @property
     def all_participants(self):
         return {
         "role": self.withRole.all(),
-        "person": self.roleActivity.all()
+        "person": self.roleActivity.all(),
+        "organization": self.related_orgs(),
         }
 
     @property

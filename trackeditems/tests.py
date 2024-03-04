@@ -1,9 +1,16 @@
 from django.test import TestCase
 import time
 from django.contrib.auth import get_user_model
-from .serializers import TrackedOrganizationModelSerializer
-from .models import TrackedOrganization
+from trackeditems.serializers import TrackedOrganizationModelSerializer
+from trackeditems.models import TrackedOrganization, ActivityNotification
 from django.db.utils import IntegrityError
+from datetime import datetime, timezone
+from trackeditems.notification_helpers import prepare_recent_changes_email_notification_by_max_date
+from neomodel import db
+from integration.models import DataImport
+from topics.cache_helpers import nuke_cache
+from integration.management.commands.import_ttl import do_import_ttl
+import re
 
 class TrackedOrganizationSerializerTestCase(TestCase):
 
@@ -19,3 +26,45 @@ class TrackedOrganizationSerializerTestCase(TestCase):
         assert matching_orgs[0].organization_uri == org_uri
         with self.assertRaises(IntegrityError):
             to2 = TrackedOrganizationModelSerializer().create({"user":self.user,"organization_uri":org_uri.upper()})
+
+class ActivityNotificationTestCase(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
+        DataImport.objects.all().delete()
+        assert DataImport.latest_import() == None # Empty DB
+        nuke_cache()
+        do_import_ttl(dirname="dump",force=True,do_archiving=False)
+
+    def setUp(self):
+        self.ts = time.time()
+        self.user = get_user_model().objects.create(username=f"test-{self.ts}")
+        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2139377/Shawbrook") # 2023-10-08
+        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2657106/Nokia") # 2007-03-27T00:00:00Z
+        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2138009/Bioenterprise_Canada") # 2023-10-05
+
+    def test_creates_activity_notification_for_first_time_user(self):
+        ActivityNotification.objects.filter(user=self.user).delete()
+        max_date = datetime(2023,10,9,tzinfo=timezone.utc)
+        email, activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
+        assert activity_notif.num_activities == 5
+        assert len(re.findall(r"\bNokia\b",email)) == 1
+        assert len(re.findall(r"\bBioenterprise Canada\b",email)) == 13
+        assert len(re.findall(r"\bShawbrook\b",email)) == 5
+        assert "Oct. 9, 2023" in email
+        assert "Oct. 2, 2023" in email
+
+    def test_creates_activity_notification_for_user_with_existing_notifications(self):
+        ActivityNotification.objects.filter(user=self.user).delete()
+        ActivityNotification.objects.create(user=self.user,
+                max_date=datetime(2023,10,7,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2023,10,7,tzinfo=timezone.utc))
+        max_date = datetime(2023,10,9,tzinfo=timezone.utc)
+        email, activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
+        assert activity_notif.num_activities == 1
+        assert len(re.findall(r"\bNokia\b",email)) == 1
+        assert len(re.findall(r"\bBioenterprise Canada\b",email)) == 1
+        assert len(re.findall(r"\bShawbrook\b",email)) == 5
+        assert "Oct. 9, 2023" in email
+        assert "Oct. 7, 2023" in email
+        assert "Oct. 2, 2023" not in email

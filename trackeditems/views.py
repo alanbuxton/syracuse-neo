@@ -13,7 +13,7 @@ from .serializers import (TrackedOrganizationSerializer,
 import json
 from .date_helpers import days_ago
 from topics.model_queries import (get_activities_for_serializer_by_country_and_date_range,
-    get_stats, get_activities_by_date_range_for_api,
+    get_cached_stats, get_activities_by_date_range_for_api,
     get_activities_for_serializer_by_source_and_date_range)
 from datetime import datetime, timezone, date, timedelta
 from topics.geo_utils import get_geo_data, country_and_region_code_to_name
@@ -108,10 +108,7 @@ class ActivityStats(APIView):
     template_name = 'activity_stats.html'
 
     def get(self, request):
-        max_date = request.GET.get("max_date",date.today())
-        if isinstance(max_date, str):
-            max_date = date.fromisoformat(max_date)
-        counts, recents_by_geo, recents_by_source = get_stats(max_date)
+        max_date, counts, recents_by_geo, recents_by_source = get_cached_stats()
         recents_by_geo_serializer = RecentsByGeoSerializer(recents_by_geo, many=True)
         recents_by_source_serializer = RecentsBySourceSerializer(recents_by_source, many=True)
         counts_serializer = CountsSerializer(counts, many=True)

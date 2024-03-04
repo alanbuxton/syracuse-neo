@@ -10,15 +10,14 @@
     <br/><a href="{{ row.document_url }}">{{ row.document_title }}</a>
     <br/>
     <b>Type: </b>{{ row.activity_longest_type | title }} /
-    <b>Status (at time of doc date): </b> {{ row.activity_status_as_string | title }} /
     <b>Source: </b>{{ row.source_name }}
     {% if row.participants.items|length > 0 %}
-      {% for role,org_list in row.participants.items %}
+      {% for participant_role,participant_list in row.participants.items %}
         <br/>
-        {% if org_list|length > 0 %}
-            <b>{{ role | title}}</b>:
-            {% for organization in org_list %}
-              <a href="{{ organization.uri }}">{{organization.longest_name }}</a>&nbsp;&nbsp;
+        {% if participant_list|length > 0 %}
+            <b>{{ participant_role | title}}</b>:
+            {% for entity in participant_list %}
+              <a href="{{ entity.uri }}">{{ entity.longest_name }}</a>
             {% endfor %}
         {% endif %}
       {% endfor %}

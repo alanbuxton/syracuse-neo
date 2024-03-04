@@ -20,14 +20,22 @@ class TrackedOrganization(models.Model):
         return Organization.get_longest_name_by_uri(self.organization_uri)
 
     @staticmethod
-    def uris_by_user(user):
-        objs = TrackedOrganization.objects.filter(user=user)
-        return [x.organization_uri for x in objs]
+    def by_user(user):
+        return TrackedOrganization.objects.filter(user=user)
+
+
+class ActivityNotification(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    max_date = models.DateTimeField(null=False)
+    num_activities = models.IntegerField(null=False)
+    sent_at = models.DateTimeField()
 
     @staticmethod
-    def orgs_by_user(user):
-        uris = TrackedOrganization.by_user(user)
-        return Organization.by_uris(uris)
+    def most_recent(user):
+        qs = ActivityNotification.objects.filter(user=user).order_by("-max_date")[:1]
+        if len(qs) == 0:
+            return None
+        return qs[0].sent_at
 
 
 def get_notifiable_users():
