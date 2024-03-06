@@ -53,12 +53,17 @@ class GeoActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         geo_code = request.GET.get("geo_code")
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=False)
-        geo_name = country_and_region_code_to_name(geo_code)
+        cache_ready = is_cache_ready()
+        if cache_ready:
+            matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=False)
+            geo_name = country_and_region_code_to_name(geo_code)
+        else:
+            matching_activity_orgs = []
+            geo_name = ''
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                             "geo_name": geo_name,
-                            "cache_ready": is_cache_ready(),
+                            "cache_ready": cache_ready,
                             }, status=status.HTTP_200_OK)
         return resp
 
@@ -69,11 +74,15 @@ class SourceActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         source_name = request.GET.get("source_name")
-        matching_activity_orgs =  get_activities_for_serializer_by_source_and_date_range(source_name, min_date, max_date, limit=20)
+        cache_ready = is_cache_ready()
+        if cache_ready:
+            matching_activity_orgs =  get_activities_for_serializer_by_source_and_date_range(source_name, min_date, max_date, limit=20)
+        else:
+            matching_activity_orgs = []
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                             "source_name": source_name,
-                            "cache_ready": is_cache_ready(),
+                            "cache_ready": cache_ready,
                              }, status=status.HTTP_200_OK)
         return resp
 
@@ -83,7 +92,6 @@ class GeoActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ActivitySerializer
 
     def get_queryset(self):
-        uri = self.request.GET.get('uri')
         min_date, max_date = min_and_max_date(self.request.GET)
         country_code = self.request.GET.get("geo_code")
         limit = self.request.GET.get("limit",20)
@@ -158,6 +166,4 @@ def min_and_max_date(get_params):
         max_date = datetime.fromisoformat(max_date)
     if max_date is not None and min_date is None:
         min_date = max_date - timedelta(days=7)
-    if max_date is None and min_date is None:
-        min_date = days_ago(7)
     return min_date, max_date

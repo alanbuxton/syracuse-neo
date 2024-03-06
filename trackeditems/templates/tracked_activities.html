@@ -13,15 +13,19 @@
   <p>
     {% include 'layouts/nav-header.html' %}
   </p>
-  <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
-  {% if geo_name is not None %}
-    in {{ geo_name }}.
-  {% elif source_name is not None %}
-    from {{ source_name }}.
-  {% endif %}
-  </p>
+  {% if cache_ready %}
+    <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
+    {% if geo_name is not None %}
+      in: {{ geo_name }}.
+    {% elif source_name is not None %}
+      from: {{ source_name }}.
+    {% endif %}
+    </p>
 
-  {% include 'activity_list.html' %}
+    {% include 'activity_list.html' %}
+  {% else %}
+  <br/>
+  {% endif %}
 
   {% include 'layouts/footer.html' %}
 

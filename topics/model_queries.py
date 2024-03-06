@@ -9,8 +9,7 @@ from topics.geo_utils import geo_select_list
 logger = logging.getLogger(__name__)
 
 def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=True):
-    relevant_orgs = get_relevant_orgs_for_country_region_industry(geo_code,limit=limit)
-    relevant_uris = [x.uri for x in relevant_orgs]
+    relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=relevant_uris,
                                 max_date=max_date, limit=limit, include_same_as=include_same_as)
     return matching_activity_orgs
@@ -20,7 +19,16 @@ def get_activities_for_serializer_by_source_and_date_range(source_name, min_date
                                 max_date=max_date, limit=limit, include_same_as=False)
     return matching_activity_orgs
 
+def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None, limit=20):
+    all_orgs=get_relevant_orgs_for_country_region_industry(geo_code, industry_id, limit)
+    uris = [x.uri for x in all_orgs]
+    return uris
+
 def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limit=20):
+    cache_key = f"relevant_orgs_{geo_code}_{industry_id}_{limit}"
+    res = cache.get(cache_key)
+    if res is not None:
+        return res
     industry_uris = IndustryCluster.with_descendants(industry_id)
     ts1 = datetime.utcnow()
     orgs = Organization.by_country_region_industry(geo_code,industry_uris,limit=limit)
@@ -29,6 +37,7 @@ def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limi
     ts3 = datetime.utcnow()
     logger.info(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
     all_orgs = set(orgs + orgs_by_activity)
+    cache.set(cache_key, all_orgs)
     return all_orgs
 
 def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str],None] = None,
@@ -146,7 +155,7 @@ def date_to_cypher_friendly(date):
 def get_cached_stats():
     latest_date = cache.get("cache_updated")
     if latest_date is None:
-        return None, None
+        return None, None, None, None
     d = datetime.date(latest_date)
     assert cache.get(f"stats_{d}") is not None
     counts, recents_by_country_region, recents_by_source =  get_stats(d, allowed_to_set_cache=False)
@@ -202,7 +211,6 @@ def get_source_counts(source_name, min_date,max_date):
     return sum(counts)
 
 def get_country_region_counts(geo_code,min_date,max_date):
-    relevant_uris = get_relevant_orgs_for_country_region_industry(geo_code,limit=None)
-    uris = [x.uri for x in relevant_uris]
-    counts = get_activities_by_org_uri_and_date_range(uris,min_date,max_date,include_same_as=False,counts_only=True)
+    relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
+    counts = get_activities_by_org_uri_and_date_range(relevant_uris,min_date,max_date,include_same_as=False,counts_only=True)
     return sum(counts)

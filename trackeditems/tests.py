@@ -8,9 +8,19 @@ from datetime import datetime, timezone
 from trackeditems.notification_helpers import prepare_recent_changes_email_notification_by_max_date
 from neomodel import db
 from integration.models import DataImport
-from topics.cache_helpers import nuke_cache
+from topics.cache_helpers import nuke_cache, warm_up_cache
 from integration.management.commands.import_ttl import do_import_ttl
 import re
+import os
+
+'''
+    Care these tests will delete neodb data
+'''
+env_var="DELETE_NEO"
+if os.environ.get(env_var) != "Y":
+    print(f"Set env var {env_var}=Y to confirm you want to drop Neo4j database")
+    exit(0)
+
 
 class TrackedOrganizationSerializerTestCase(TestCase):
 
@@ -27,7 +37,7 @@ class TrackedOrganizationSerializerTestCase(TestCase):
         with self.assertRaises(IntegrityError):
             to2 = TrackedOrganizationModelSerializer().create({"user":self.user,"organization_uri":org_uri.upper()})
 
-class ActivityNotificationTestCase(TestCase):
+class ActivityTestsWithSampleDataTestCase(TestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -68,3 +78,41 @@ class ActivityNotificationTestCase(TestCase):
         assert "Oct. 9, 2023" in email
         assert "Oct. 7, 2023" in email
         assert "Oct. 2, 2023" not in email
+
+    def test_only_populates_activity_pages_if_cache_available(self):
+        nuke_cache()
+        response = self.client.get("/tracked/activity_stats")
+        content = str(response.content)
+        assert "Site stats calculating, please check later" in content
+        assert "Showing updates as at" not in content
+        response = self.client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2023-10-07")
+        assert "Activities between" not in content
+        assert "Click on a document title to see the original source" not in content
+        assert "Site stats calculating, please check later" in content
+        assert "Machina Labs Secures" not in content
+        assert "Pow.Bio announced" not in content
+        response = self.client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2023-10-07")
+        assert "Activities between" not in content
+        assert "Click on a document title to see the original source" not in content
+        assert "Site stats calculating, please check later" in content
+        assert "The Humane Society of Southern Arizona" not in content
+        assert "Gluckstadt Police Department" not in content
+        warm_up_cache()
+        response = self.client.get("/tracked/activity_stats")
+        content = str(response.content)
+        assert "Site stats calculating, please check later" not in content
+        assert "Showing updates as at" in content
+        response = self.client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2023-10-07")
+        content = str(response.content)
+        assert "Activities between" in content
+        assert "Click on a document title to see the original source" in content
+        assert "Site stats calculating, please check later" not in content
+        assert "Machina Labs Secures" in content
+        assert "Pow.Bio announced" in content
+        response = self.client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2023-10-07")
+        content = str(response.content)
+        assert "Activities between" in content
+        assert "Click on a document title to see the original source" in content
+        assert "Site stats calculating, please check later" not in content
+        assert "The Humane Society of Southern Arizona" in content
+        assert "Gluckstadt Police Department" in content

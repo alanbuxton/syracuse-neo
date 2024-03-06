@@ -11,11 +11,7 @@ COUNTRIES_WITH_REGIONS = ["AE","US","CA","CN","IN"] # Countries to be broken dow
 
 def country_and_region_code_to_name(geo_code):
     _,_,country_admin1_code_to_name = get_geo_data()
-    if len(geo_code) == 2:
-        return country_admin1_code_to_name[geo_code]
-    country = country_admin1_code_to_name[geo_code[:2]]
-    region = country_admin1_code_to_name[geo_code[3:]]
-    return f"{region} ({country})"
+    return country_admin1_code_to_name[geo_code]
 
 def geoname_ids_for_country_region(geo_code):
     if geo_code is None or geo_code.strip() == '':
@@ -51,12 +47,24 @@ def get_geo_data(force_refresh=False):
     else:
         country_names_to_id, admin1_names_to_id, country_admin1_geoname_mapping = load_country_mapping()
         country_admin1_name_to_code = sorted_country_admin1_list(country_names_to_id, admin1_names_to_id)
-        country_admin1_code_to_name = {z:"".join([x,y]) for x,y,z in country_admin1_name_to_code}
+        country_admin1_code_to_name = {z:admin1_country_with_brackets(x,y) for x,y,z in country_admin1_name_to_code}
         cache.set(GEO_CACHE_KEY, {"country_admin1_geoname_mapping":country_admin1_geoname_mapping,
                                     "country_admin1_name_to_code": country_admin1_name_to_code,
                                     "country_admin1_code_to_name": country_admin1_code_to_name,
                                     })
     return country_admin1_geoname_mapping, country_admin1_name_to_code, country_admin1_code_to_name
+
+def country_admin1_with_hyphen(country,admin1):
+    if admin1 is None or admin1.strip() == '':
+        return country
+    else:
+        return f"{country} - {admin1}"
+
+def admin1_country_with_brackets(country,admin1):
+    if admin1 is None or admin1.strip() == '':
+        return country
+    else:
+        return f"{admin1} ({country})"
 
 def geo_select_list(include_alt_names=False):
     _,rows,_ = get_geo_data()
@@ -65,7 +73,7 @@ def geo_select_list(include_alt_names=False):
         if admin1_name == '':
             select_list.append( [geo_code , country_name] )
         else:
-            select_list.append( [geo_code, f"{country_name} - {admin1_name}" ])
+            select_list.append( [geo_code, country_admin1_with_hyphen(country_name, admin1_name) ])
     if include_alt_names is True:
         select_list.append( ["GB","United Kingdom of Great Britain and Northern Ireland"])
     return sorted(select_list, key = lambda x: x[1])
