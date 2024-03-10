@@ -3,8 +3,8 @@ import os
 import subprocess
 from integration.models import DataImport
 from datetime import datetime, timezone
-from integration.management.commands._neo4j_utils import (
-    setup_db_if_necessary, apoc_del_redundant_high_med,
+from integration.neo4j_utils import (
+    setup_db_if_necessary, apoc_del_redundant_med,
     get_node_name_from_rdf_row, count_nodes
 )
 import time
@@ -14,6 +14,7 @@ from trackeditems.management.commands.send_recent_activities_email import do_sen
 from topics.cache_helpers import rebuild_cache
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
+from integration.merge_nodes import merge_same_as_high
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
@@ -74,7 +75,8 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME):
         creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME)
         count_of_creations += creations
     logger.info(f"After running insertion files there are {count_nodes()} nodes")
-    apoc_del_redundant_high_med()
+    apoc_del_redundant_med()
+    merge_same_as_high()
     return count_of_creations, count_of_deletions
 
 def load_deletion_file(filepath):
@@ -150,10 +152,10 @@ def do_import_ttl(**options):
         if do_archiving is True:
             logger.info(f"Archiving files from {export_dir} to {RDF_ARCHIVE_DIR}")
             move_files(export_dir,RDF_ARCHIVE_DIR)
-    cleanup(pidfile)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
-    logger.info("re-set cache")
     rebuild_cache()
+    logger.info("re-set cache")
+    cleanup(pidfile)
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:

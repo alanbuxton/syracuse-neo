@@ -28,21 +28,18 @@ def setup_db_if_necessary():
         logger.info(query)
         db.cypher_query(query)
 
-def apoc_del_redundant_high_med():
-    output_stats("Before delete")
+def apoc_del_redundant_med():
+    output_same_as_stats("Before delete")
     apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsMedium]->(n2:Organization)-[r2:sameAsMedium]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_medium)
-    output_stats("After Delete sameAsMedium")
-    apoc_query_high = f'CALL apoc.periodic.iterate( "MATCH (n1:Organization)-[r1:sameAsHigh]->(n2:Organization)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
-    db.cypher_query(apoc_query_high)
-    output_stats("After Delete sameAsHigh")
+    output_same_as_stats("After Delete sameAsMedium")
 
-def output_stats(msg):
+def output_same_as_stats(msg):
     high = "MATCH (n1)-[r:sameAsHigh]-(n2)"
     medium = "MATCH (n1)-[r:sameAsMedium]-(n2)"
     same_as_high_count,_ = db.cypher_query(high + " RETURN COUNT(r)")
     same_as_medium_count,_ = db.cypher_query(medium + " RETURN COUNT(r)")
-    logger.info(f"{datetime.utcnow()} {msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsMedium: {same_as_medium_count[0][0]}")
+    logger.info(f"{msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsMedium: {same_as_medium_count[0][0]}")
 
 def get_node_name_from_rdf_row(row):
     res = re.findall(r"^<(https://\S.+)> a", row)
