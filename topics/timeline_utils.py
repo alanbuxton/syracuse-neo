@@ -1,9 +1,8 @@
-from topics.graph_utils import get_node_cluster
 from topics.models import Organization
 
 def get_timeline_data(orgs, limit=None):
-    org_cluster_display = []
-    org_cluster_nodes = []
+    org_display = []
+    org_nodes = []
     activities = []
     seen_orgs = set()
     errors = set()
@@ -14,18 +13,15 @@ def get_timeline_data(orgs, limit=None):
             break
         if org in seen_orgs:
             continue
-        res = get_node_cluster(org)
-        if isinstance(res, dict) and res.get("error_names") is not None:
-            errors.add(org.name)
-            seen_orgs.update(res["error_orgs"])
-            continue
+        # if isinstance(res, dict) and res.get("error_names") is not None:
+        #     errors.add(org.name)
+        #     seen_orgs.update(res["error_orgs"])
+        #     continue
         org_count += 1
-        display_data,node_cluster,_ = res
-        display_data['label'] = org.longest_name
-        display_data['uri'] = org.uri
-        seen_orgs.update(node_cluster)
-        org_cluster_display.append(display_data)
-        org_cluster_nodes.append(node_cluster)
+        display_data = org.serialize()
+        seen_orgs.add(org)
+        org_display.append(display_data)
+        org_nodes.append(org)
         vendor = []
         participant = []
         protagonist = []
@@ -35,16 +31,16 @@ def get_timeline_data(orgs, limit=None):
         location_added = []
         location_removed = []
         target = []
-        for org_in_cluster in node_cluster:
-            vendor.extend(org_in_cluster.vendor.all())
-            participant.extend(org_in_cluster.participant.all())
+
+        vendor.extend(org.vendor.all())
+        participant.extend(org.participant.all())
 #            protagonist.extend(org.protagonist.all())
-            buyer.extend(org_in_cluster.buyer.all())
-            investor.extend(org_in_cluster.investor.all())
-            location_added.extend(org_in_cluster.locationAdded.all())
-            location_removed.extend(org_in_cluster.locationRemoved.all())
-            role_activity.extend(org_in_cluster.get_role_activities()) # it's a tuple
-            target.extend(org_in_cluster.target.all())
+        buyer.extend(org.buyer.all())
+        investor.extend(org.investor.all())
+        location_added.extend(org.locationAdded.all())
+        location_removed.extend(org.locationRemoved.all())
+        role_activity.extend(org.get_role_activities()) # it's a tuple
+        target.extend(org.target.all())
         activities.append(
             {"vendor": set(vendor),
              "investor": set(investor),
@@ -74,7 +70,7 @@ def get_timeline_data(orgs, limit=None):
     items = []
     seen_uris = set()
 
-    for idx, x in enumerate(org_cluster_display):
+    for idx, x in enumerate(org_display):
         l1_group = {"id": idx, "content": x["label"], "treeLevel": 1, "nestedGroups": []}
         org_display_details[idx] = x
         for l2 in sorted(set(activity_to_subgroup.values())):

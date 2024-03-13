@@ -1,5 +1,5 @@
 import re
-from topics.models import Organization, Person, ActivityMixin, Resource, Role
+from topics.models import Organization, Person, ActivityMixin, Resource, Role, Article
 from typing import List, Dict, Tuple, Set
 import logging
 
@@ -21,6 +21,8 @@ def node_color_shape(node):
         return ("#c7deff","box")
     elif isinstance(node, Person):
         return ("#f5e342","ellipse")
+    elif isinstance(node, Article):
+        return ("#f5c4ff","hexagon")
     elif issubclass(node.__class__, ActivityMixin):
         if not hasattr(node, "status"):
             return ("#f6c655","diamond")
@@ -62,43 +64,12 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
         node_data.append(node_vals)
         edge_data.append(edge_vals)
         serialized_nodes[rel_node.uri]=rel_node.serialize_no_none()
-        edge_display_data = {"from":from_node_id,"to":to_node_id,"relationship":rel_type,"documentURL":node_vals["documentURL"],"documentTitle":node_vals["documentTitle"]}
+        edge_display_data = {"from":from_node_id,"to":to_node_id,"relationship":rel_type}
         if node_vals.get("documentExtract"):
             edge_display_data["documentExtract"] = node_vals["documentExtract"]
         serialized_edges[edge_vals["id"]]=edge_display_data
         raw_nodes.add(rel_node)
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
-
-def get_node_cluster(source_node, limit=100) -> Tuple[Dict,List[Resource],Dict,List] | Set:
-    all_nodes = source_node.same_as()
-    if len(all_nodes) > limit:
-        logger.warning(f"Found {len(all_nodes)} nodes for {source_node.uri} (limit = {limit})- not continuing")
-        errors = { "source_node": source_node, "error_names": set( [ x.longest_name for x in all_nodes] ), "error_orgs": all_nodes }
-        return errors
-    all_nodes.add(source_node)
-    uri_mapping = {}
-    node_cluster = {"clusteredURIs":set(),"names":set(),"basedInHighGeoNames":set(),
-                    "basedInHighGeoNamesRDFURLs":set(),"basedInHighGeoNamesURLs":set(),
-                    "descriptions":set(), "industries":set(), "documentURLs": set(),}
-    for node in all_nodes:
-        if node.uri != source_node.uri:
-            uri_mapping[node.uri] = source_node.uri
-        node_cluster["clusteredURIs"].add(node.uri)
-        node_cluster["names"].update(node.name)
-        if node.basedInHighGeoName:
-            node_cluster["basedInHighGeoNames"].update(node.basedInHighGeoName)
-        if node.basedInHighGeoNameRDF:
-            node_cluster["basedInHighGeoNamesRDFURLs"].add(node.basedInHighGeoNameRDFURL)
-            node_cluster["basedInHighGeoNamesURLs"].add(node.basedInHighGeoNameURL)
-        if node.industry:
-            node_cluster["industries"].update(node.industry)
-        if node.description:
-            node_cluster["descriptions"].update(node.description)
-        if node.documentURL:
-            node_cluster["documentURLs"].add(node.sourceDocumentURL)
-    data_for_display = {k:"; ".join(v) for k,v in node_cluster.items() if len(v) > 0}
-    return data_for_display, all_nodes, uri_mapping
-
 
 def graph_source_activity_target(source_node, **kwargs):
     '''
@@ -106,26 +77,20 @@ def graph_source_activity_target(source_node, **kwargs):
 
         "include_where" => include location data
     '''
-    root_node_data = get_node_cluster(source_node)
-    if isinstance(root_node_data, dict) and root_node_data.get("error_names") is not None:
-        return None
-    root_node_cluster = get_node_cluster(source_node)
-    root_node_display_data, root_nodes, uri_mapping = root_node_cluster
     root_uri = source_node.uri
-    root_node_dict_tmp = {"label":source_node.longest_name,"entityType":"Cluster","uri":root_uri}
-    root_node_dict = {**root_node_display_data,**root_node_dict_tmp}
+    root_node_dict = source_node.serialize()
     (color, shape) = node_color_shape(source_node)
     root_node_data = {**{"id":root_uri,"color":color,"shape":shape},**root_node_dict}
     all_nodes = [root_node_data]
     node_details= {root_uri: root_node_dict}
-    future_round_raw_nodes = root_nodes.copy()
+    future_round_raw_nodes = set([source_node])
     seen_raw_nodes = future_round_raw_nodes.copy()
     all_edges = []
     edge_details = {}
 
     while len(future_round_raw_nodes) > 0:
         future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details = add_next_round_of_graph(
-            future_round_raw_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details, uri_mapping)
+            future_round_raw_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details)
         future_round_raw_nodes = [x for x in future_round_raw_nodes if
                         isinstance(x,ActivityMixin) or isinstance(x,Role)]
 
@@ -141,12 +106,10 @@ def graph_source_activity_target(source_node, **kwargs):
                         all_nodes.append(node_js_data)
                         node_details[node_js_data['uri']] = node_display_data
                     if edge_js_data not in all_edges:
-                        edge_js_data["to"] = uri_mapping.get(edge_js_data["to"],edge_js_data["to"])
-                        edge_js_data["from"] = uri_mapping.get(edge_js_data["from"],edge_js_data["from"])
                         all_edges.append(edge_js_data)
                         edge_details[edge_js_data["id"]] = edge_display_data
 
-    same_as_rels = Organization.find_same_as_relationships(set(seen_raw_nodes) - set(root_nodes))
+    same_as_rels = Organization.find_same_as_relationships(set(seen_raw_nodes) - set([source_node]))
     for rel_type, node1, node2 in same_as_rels:
         edge_color = EDGE_COLORS.get(rel_type)
         edge_label = rel_type_to_edge_label(rel_type)
@@ -177,8 +140,8 @@ def get_loc_nodes_if_exist(node, field, edge_name, node_details, location_node_c
         edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
         if related_node.get("documentTitle"):
             edge_display_details["documentTitle"]=related_node["documentTitle"]
-        if related_node.get("documentURL"):
-            edge_display_details["documentURL"]=related_node["documentURL"]
+        # if related_node.get("documentURL"):
+        #     edge_display_details["documentURL"]=related_node["documentURL"]
         if related_node.get("documentExtract"):
             edge_display_details["documentExtract"] = related_node["documentExtract"]
         edge_upper = rel_type_to_edge_label(edge_name)
@@ -190,17 +153,15 @@ def get_loc_nodes_if_exist(node, field, edge_name, node_details, location_node_c
         matching_nodes.append(loc_node_data)
     return matching_nodes
 
-def add_next_round_of_graph(next_round_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details, uri_mapping):
+def add_next_round_of_graph(next_round_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details):
     future_round_raw_nodes = []
     for node in next_round_nodes:
         rels = node.all_directional_relationships()
         new_node_data, new_edge_data, serialized_nodes, raw_nodes, serialized_edges = get_nodes_edges(node.uri,rels)
         for new_node in new_node_data:
-            if new_node not in all_nodes and new_node['uri'] not in uri_mapping.keys() :
+            if new_node not in all_nodes:
                 all_nodes.append(new_node)
         for new_edge in new_edge_data:
-            new_edge["to"] = uri_mapping.get(new_edge["to"],new_edge["to"])
-            new_edge["from"] = uri_mapping.get(new_edge["from"],new_edge["from"])
             if new_edge not in all_edges:
                 all_edges.append(new_edge)
         for raw_node in raw_nodes:

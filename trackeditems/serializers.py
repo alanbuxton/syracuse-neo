@@ -52,10 +52,10 @@ class ActivityParticipantSerializer(serializers.Serializer):
     uri = serializers.URLField()
 
 class ActivitySerializer(serializers.Serializer):
-    source_name = serializers.CharField()
-    document_date = serializers.DateTimeField()
+    source_organization = serializers.CharField()
+    date_published = serializers.DateTimeField()
     document_extract = serializers.CharField()
-    document_title = serializers.CharField()
+    headline = serializers.CharField()
     document_url = serializers.URLField()
     activity_uri = serializers.URLField()
     activity_class = serializers.CharField()

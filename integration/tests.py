@@ -3,9 +3,10 @@ from neomodel import db
 import time
 import os
 from integration.models import DataImport
-from integration.management.commands._neo4j_utils import apoc_del_redundant_high_med
 from integration.management.commands.import_ttl import do_import_ttl
-from topics.models import Organization
+from topics.models import Organization, Resource
+from integration.neo4j_utils import apoc_del_redundant_med
+from integration.merge_nodes import post_import_merging
 
 '''
     Care these tests will delete
@@ -58,9 +59,9 @@ class TurtlePostProcessingTestCase(SimpleTestCase):
             (a:Organization {{uri:"{uri1}",name:"foo"}}),
             (b:Organization {{uri:"{uri2}",name:"bar"}}),
             (c:Organization {{uri:"{uri3}",name:"baz"}}),
-            (a)-[:sameAsHigh]->(b)-[:sameAsHigh]->(a),
-            (a)-[:sameAsHigh]->(c)-[:sameAsHigh]->(a),
-            (b)-[:sameAsHigh]->(c)-[:sameAsHigh]->(b)
+            (a)-[:sameAsMedium]->(b)-[:sameAsMedium]->(a),
+            (a)-[:sameAsMedium]->(c)-[:sameAsMedium]->(a),
+            (b)-[:sameAsMedium]->(c)-[:sameAsMedium]->(b)
             RETURN *
         ''')
 
@@ -73,20 +74,54 @@ class TurtlePostProcessingTestCase(SimpleTestCase):
         uri2 = self.uri2
         uri3 = self.uri3
 
-        counts1, _ = db.cypher_query(f'MATCH (n {{uri:"{uri1}"}})-[o:sameAsHigh]-(p) return count(o)' )
-        counts2, _ = db.cypher_query(f'MATCH (n {{uri:"{uri2}"}})-[o:sameAsHigh]-(p) return count(o)' )
-        counts3, _ = db.cypher_query(f'MATCH (n {{uri:"{uri3}"}})-[o:sameAsHigh]-(p) return count(o)' )
+        counts1, _ = db.cypher_query(f'MATCH (n {{uri:"{uri1}"}})-[o:sameAsMedium]-(p) return count(o)' )
+        counts2, _ = db.cypher_query(f'MATCH (n {{uri:"{uri2}"}})-[o:sameAsMedium]-(p) return count(o)' )
+        counts3, _ = db.cypher_query(f'MATCH (n {{uri:"{uri3}"}})-[o:sameAsMedium]-(p) return count(o)' )
 
         assert counts1[0][0] == 4
         assert counts2[0][0] == 4
         assert counts3[0][0] == 4
 
-        apoc_del_redundant_high_med()
+        apoc_del_redundant_med()
 
-        counts1_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri1}"}})-[o:sameAsHigh]-(p) return count(o)' )
-        counts2_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri2}"}})-[o:sameAsHigh]-(p) return count(o)' )
-        counts3_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri3}"}})-[o:sameAsHigh]-(p) return count(o)' )
+        counts1_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri1}"}})-[o:sameAsMedium]-(p) return count(o)' )
+        counts2_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri2}"}})-[o:sameAsMedium]-(p) return count(o)' )
+        counts3_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri3}"}})-[o:sameAsMedium]-(p) return count(o)' )
 
         assert counts1_after[0][0] == 2
         assert counts2_after[0][0] == 2
         assert counts3_after[0][0] == 2
+
+class MergeNodesTestCase():
+
+    def test_merges_nodes(self):
+        db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
+        node_list = "abcdefghijklmn"
+        nodes = ", ".join([make_node(x) for x in node_list])
+        query = f"""CREATE {nodes},
+            (a)-[:sameAsHigh]->(b),
+            (a)<-[:sameAsHigh]-(c),
+            (c)-[:sameAsMedium]->(d),
+            (d)-[:sameAsMedium]->(e),
+            (d)<-[:sameAsMedium]-(f),
+            (g)-[:sameAsMedium]->(e),
+
+            (h)-[:sameAsHigh]->(i),
+            (i)-[:sameAsHigh]->(j),
+            (i)<-[:sameAsHigh]-(k),
+            (l)-[:sameAsMedium]->(j),
+            (m)-[:sameAsMedium]->(i),
+            (m)-[:sameAsHigh]->(n)
+            """
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == len(node_list)
+        post_import_merging()
+        count_of_high,_ = db.cypher_query("MATCH ()-[:sameAsHigh]-() RETURN COUNT(*)")
+        assert count_of_high == [[0]]
+        count_of_medium,_ = db.cypher_query("MATCH ()-[:sameAsMedium]->() RETURN COUNT(*)")
+        assert(count_of_medium) == [[4]]
+        assert len(Resource.nodes.all()) == 6
+
+
+def make_node(letter):
+    return f"({letter}: Resource {{uri:'https/1145.am/foo/{letter}', internalDocId: {ord(letter)}, val: 'bar_{letter}', name: '{letter}' }})"

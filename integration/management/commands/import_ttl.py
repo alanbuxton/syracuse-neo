@@ -4,7 +4,7 @@ import subprocess
 from integration.models import DataImport
 from datetime import datetime, timezone
 from integration.neo4j_utils import (
-    setup_db_if_necessary, apoc_del_redundant_med,
+    setup_db_if_necessary,
     get_node_name_from_rdf_row, count_nodes
 )
 import time
@@ -14,7 +14,7 @@ from trackeditems.management.commands.send_recent_activities_email import do_sen
 from topics.cache_helpers import rebuild_cache
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
-from integration.merge_nodes import merge_same_as_high
+from integration.merge_nodes import post_import_merging
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
@@ -75,8 +75,7 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME):
         creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME)
         count_of_creations += creations
     logger.info(f"After running insertion files there are {count_nodes()} nodes")
-    apoc_del_redundant_med()
-    merge_same_as_high()
+    post_import_merging()
     return count_of_creations, count_of_deletions
 
 def load_deletion_file(filepath):

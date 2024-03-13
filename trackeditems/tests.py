@@ -50,69 +50,81 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def setUp(self):
         self.ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{self.ts}")
-        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2139377/Shawbrook") # 2023-10-08
-        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2657106/Nokia") # 2007-03-27T00:00:00Z
-        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/2138009/Bioenterprise_Canada") # 2023-10-05
+        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4071554/Openai") # 2023-10-08
+        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4074438/Titan_Pro_Technologies") # 2007-03-27T00:00:00Z
+        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4076678/Bioaffinity_Technologies") # 2023-10-05
 
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
-        max_date = datetime(2023,10,9,tzinfo=timezone.utc)
-        email, activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
-        assert activity_notif.num_activities == 5
-        assert len(re.findall(r"\bNokia\b",email)) == 1
-        assert len(re.findall(r"\bBioenterprise Canada\b",email)) == 13
-        assert len(re.findall(r"\bShawbrook\b",email)) == 5
-        assert "Oct. 9, 2023" in email
-        assert "Oct. 2, 2023" in email
+        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
+        email, activity_notif = email_and_activity_notif
+        assert activity_notif.num_activities == 19
+        assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 4
+        assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 4
+        assert len(re.findall(r"\bOpenAI\b",email)) == 52
+        assert "March 11, 2024" in email
+        assert "March 4, 2024" in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
         ActivityNotification.objects.create(user=self.user,
-                max_date=datetime(2023,10,7,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2023,10,7,tzinfo=timezone.utc))
-        max_date = datetime(2023,10,9,tzinfo=timezone.utc)
-        email, activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
-        assert activity_notif.num_activities == 1
-        assert len(re.findall(r"\bNokia\b",email)) == 1
-        assert len(re.findall(r"\bBioenterprise Canada\b",email)) == 1
-        assert len(re.findall(r"\bShawbrook\b",email)) == 5
-        assert "Oct. 9, 2023" in email
-        assert "Oct. 7, 2023" in email
-        assert "Oct. 2, 2023" not in email
+                max_date=datetime(2024,3,9,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2024,3,9,tzinfo=timezone.utc))
+        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
+        email, activity_notif = email_and_activity_notif
+        assert activity_notif.num_activities == 7
+        assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
+        assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1
+        assert len(re.findall(r"\bOpenAI\b",email)) == 22
+        assert "March 11, 2024" in email
+        assert "March 4, 2024" not in email
+        assert "March 9, 2024" in email
 
     def test_only_populates_activity_pages_if_cache_available(self):
+        ''' For testing
+            from django.test import Client
+            client = Client()
+        '''
+        client = self.client
         nuke_cache()
-        response = self.client.get("/tracked/activity_stats")
+
+        response = client.get("/tracked/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" in content
         assert "Showing updates as at" not in content
-        response = self.client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2023-10-07")
+
+        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
+        content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document title to see the original source" not in content
         assert "Site stats calculating, please check later" in content
-        assert "Machina Labs Secures" not in content
-        assert "Pow.Bio announced" not in content
-        response = self.client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2023-10-07")
+        assert "Open AI" not in content
+
+        response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
+        content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document title to see the original source" not in content
         assert "Site stats calculating, please check later" in content
-        assert "The Humane Society of Southern Arizona" not in content
-        assert "Gluckstadt Police Department" not in content
+        assert "Los Angeles Rams" not in content
+
+
         warm_up_cache()
-        response = self.client.get("/tracked/activity_stats")
+        response = client.get("/tracked/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" not in content
         assert "Showing updates as at" in content
-        response = self.client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2023-10-07")
+
+        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document title to see the original source" in content
         assert "Site stats calculating, please check later" not in content
-        assert "Machina Labs Secures" in content
-        assert "Pow.Bio announced" in content
-        response = self.client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2023-10-07")
+        assert "Open AI" in content
+
+        response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document title to see the original source" in content
         assert "Site stats calculating, please check later" not in content
-        assert "The Humane Society of Southern Arizona" in content
-        assert "Gluckstadt Police Department" in content
+        assert "Los Angeles Rams" in content

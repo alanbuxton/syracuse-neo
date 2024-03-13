@@ -37,6 +37,7 @@ def create_email_notifications(num_days=7):
     distinct_users = get_notifiable_users()
     for tracked_org_object in distinct_users:
         user = tracked_org_object.user
-        email, activity_notification = prepare_recent_changes_email_notification(user, num_days)
+        email_and_activity_notification = prepare_recent_changes_email_notification(user, num_days)
         if email is not None:
+            email, activity_notification = email_and_activity_notification
             yield (user, email, activity_notification)

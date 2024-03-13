@@ -9,24 +9,29 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
     v, _ = db.cypher_query("call n10s.graphconfig.show")
     if len(v) == 0:
-        multivals = ["actionFoundName","activityType","basedInHighGeoName",
-                    "basedInHighRaw","basedInLowRaw",
-                    "description","foundName","industry",
-                    "locationFoundName",
-                    "locationPurpose","locationType","name","orgFoundName",
-                    "roleFoundName","roleHolderFoundName",
-                    "status","targetDetails","targetName","valueRaw",
-                    "when","whenRaw","whereGeoName","whereRaw",
-                    # IndustryCluster
-                    "representation","representativeDoc",
-                    ]
-        proplist = [f"https://1145.am/db/{x}" for x in multivals]
-        '''
-            query = 'CALL n10s.graphconfig.set({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"], force: True})';
-        '''
-        query = 'CALL n10s.graphconfig.init({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]})';
-        logger.info(query)
-        db.cypher_query(query)
+        do_n10s_config()
+
+def do_n10s_config(force=False):
+    multivals = ["actionFoundName","activityType","basedInHighGeoName",
+                "basedInHighRaw","basedInLowRaw",
+                "description","foundName","industry",
+                "locationFoundName",
+                "locationPurpose","locationType","name","orgFoundName",
+                "roleFoundName","roleHolderFoundName",
+                "status","targetDetails","targetName","valueRaw",
+                "when","whenRaw","whereGeoName","whereRaw",
+                # IndustryCluster
+                "representation","representativeDoc",
+                ]
+    proplist = [f"https://1145.am/db/{x}" for x in multivals]
+    if force is True:
+        force_str = ", force: True"
+    else:
+        force_str = ""
+    query = 'CALL n10s.graphconfig.init({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]' + force_str + '})';
+    logger.info(query)
+    db.cypher_query(query)
+
 
 def apoc_del_redundant_med():
     output_same_as_stats("Before delete")

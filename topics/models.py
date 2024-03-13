@@ -7,8 +7,10 @@ from topics.geo_utils import get_geoname_uris_for_country_region
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
 from django.core.cache import cache
-import logging
 from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
+from collections import Counter
+
+import logging
 logger = logging.getLogger(__name__)
 
 
@@ -36,13 +38,19 @@ class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
-    documentTitle = StringProperty()
-    documentURL = Relationship('Resource','documentURL')
-    sourceName = StringProperty()
+    documentSource = RelationshipTo("Article","documentSource")
+    internalDocId = IntegerProperty()
 
     @property
     def sourceDocumentURL(self):
         return uri_from_related(self.documentURL)
+
+    @property
+    def sourceName(self):
+        docs = self.documentSource
+        if docs is None or len(docs) == 0:
+            return ''
+        return self.documentSource[0].sourceOrganization
 
     def ensure_connection(self):
         if self.element_id_property is not None and db.database_version is None:
@@ -54,6 +62,11 @@ class Resource(StructuredNode):
         query = f'match (n: {cls.__name__}) where any (item in n.name where item =~ "(?i).*{name}.*") return *'
         results, columns = db.cypher_query(query)
         return [cls.inflate(row[0]) for row in results]
+
+    @property
+    def best_name(self):
+        # Should override in child classes if better way to come up with display name
+        return self.longest_name
 
     @property
     def longest_name(self):
@@ -73,12 +86,9 @@ class Resource(StructuredNode):
         self.ensure_connection()
         return {
             "entityType": self.__class__.__name__,
-            "label": self.longest_name,
+            "label": self.best_name,
             "name": self.name,
             "uri": self.uri,
-            "documentTitle": self.documentTitle,
-            "documentURL": uri_from_related(self.documentURL),
-            "sourceName": self.sourceName,
         }
 
     def serialize_no_none(self):
@@ -114,6 +124,21 @@ class Resource(StructuredNode):
                 rels = [(key, direction, x) for x in self.__dict__[key].all()]
             all_rels.extend(rels)
         return all_rels
+
+class Article(Resource):
+    headline = StringProperty()
+    url = Relationship('Resource','url')
+    sourceOrganization = StringProperty()
+    datePublished = NativeDateTimeProperty()
+    dateRetrieved = NativeDateTimeProperty()
+
+    @property
+    def best_name(self):
+        return self.headline
+
+    @property
+    def documentURL(self):
+        return self.url[0].uri
 
 
 class IndustryCluster(Resource):
@@ -404,14 +429,28 @@ class Organization(Resource, BasedInGeoMixin):
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
     industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
     industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
+    name_list = ArrayProperty(StringProperty())
+    sameAsHighUri = ArrayProperty(StringProperty())
+    sameAsMediumUri = ArrayProperty(StringProperty())
+
+    @property
+    def best_name(self):
+        if self.name_list is None or len(self.name_list) == 0:
+            return self.longest_name
+        name_cands = [x.split("_##_")[1] for x in self.name_list]
+        name_counter = Counter(name_cands)
+        return name_counter.most_common(1)[0][0]
 
     @staticmethod
-    def get_longest_name_by_uri(uri):
+    def get_best_name_by_uri(uri):
         org = Organization.nodes.get_or_none(uri=uri)
         if org is not None:
-            return org.longest_name
-        else:
+            return org.best_name
+        query = f"MATCH (n: Organization) WHERE '{uri}' IN n.sameAsHighUri OR '{uri}' IN n.sameAsMediumUri RETURN n"
+        res, _ = db.cypher_query(query, resolve_objects=True)
+        if res is None or len(res) != 1 or len(res[0]) != 1:
             return None
+        return res[0][0].best_name
 
     @staticmethod
     def by_uris(uris):
@@ -595,6 +634,7 @@ class LocationActivity(Resource, ActivityMixin):
     locationRemoved = RelationshipFrom('Organization','locationRemoved')
     location = RelationshipTo('Site', 'location')
 
+    @property
     def all_participants(self):
         return {
             "location_added_by": self.locationAdded.all(),

@@ -17,7 +17,7 @@ class TrackedOrganization(models.Model):
 
     @property
     def organization_name(self):
-        return Organization.get_longest_name_by_uri(self.organization_uri)
+        return Organization.get_best_name_by_uri(self.organization_uri)
 
     @staticmethod
     def by_user(user):

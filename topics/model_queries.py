@@ -53,14 +53,14 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
     else:
         activities = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, include_same_as)
     api_results = []
-    for activity in activities:
+    for activity,article in activities:
         assert isinstance(activity, ActivityMixin), f"{activity} should be an Activity"
         api_row = {}
-        api_row["source_name"] = activity.sourceName
-        api_row["document_date"] = activity.documentDate
-        api_row["document_title"] = activity.documentTitle
+        api_row["source_organization"] = article.sourceOrganization
+        api_row["date_published"] = article.datePublished
+        api_row["headline"] = article.headline
         api_row["document_extract"] = activity.documentExtract
-        api_row["document_url"] = activity.documentURL[0].uri
+        api_row["document_url"] = article.documentURL
         api_row["activity_uri"] = activity.uri
         api_row["activity_class"] = activity.__class__.__name__
         api_row["activity_types"] = activity.activityType
@@ -78,33 +78,33 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
     return api_results
 
 def get_all_source_names():
-    sources, _ = db.cypher_query("MATCH (n:CorporateFinanceActivity|RoleActivity|LocationActivity) RETURN DISTINCT n.sourceName;")
+    sources, _ = db.cypher_query("MATCH (n:Article) RETURN DISTINCT n.sourceOrganization;")
     flattened = [x for sublist in sources for x in sublist]
     return flattened
 
 def get_activities_by_source_and_date_range(source_name,min_date, max_date, limit=None,counts_only=False):
     if counts_only is True:
-        return_str = "RETURN COUNT(n)"
+        return_str = "RETURN COUNT(DISTINCT(n))"
     else:
-        return_str = "RETURN n ORDER BY n.documentDate DESC"
+        return_str = "RETURN n,a ORDER BY a.publishDate DESC"
     if limit is not None:
         limit_str = f"LIMIT {limit}"
     else:
         limit_str = ""
-    where_clause = f"""WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
-                    AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
-                    AND n.sourceName = ('{source_name}')"""
+    where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+                    AND a.sourceOrganization = ('{source_name}')"""
 
-    query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity)
+    query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity)-[:documentSource]->(a:Article)
                 {where_clause}
                 {return_str} {limit_str}
                 UNION
-                MATCH (x: Person)--(n:RoleActivity)--(p: Role)--(o: Organization)
+                MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Organization)
                 {where_clause}
                 {return_str} {limit_str};"""
     objs, _ = db.cypher_query(query, resolve_objects=True)
-    flattened = [x for sublist in objs for x in sublist]
-    return flattened[:limit]
+
+    return objs[:limit]
 
 def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], min_date, max_date, limit=None, include_same_as=True,
                                     counts_only = False):
@@ -127,24 +127,25 @@ def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], m
     if counts_only is True:
         return_str = "RETURN COUNT(DISTINCT(n))"
     else:
-        return_str = "RETURN DISTINCT(n) ORDER BY n.documentDate DESC"
-    where_clause = f"""WHERE n.documentDate >= datetime('{date_to_cypher_friendly(min_date)}')
-                        AND n.documentDate <= datetime('{date_to_cypher_friendly(max_date)}')
-                        AND o.uri IN {list(uris_to_check)}"""
-
+        return_str = "RETURN n,a ORDER BY a.publishDate DESC"
+    where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                        AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+                        AND (o.uri IN {list(uris_to_check)}
+                            OR any(x IN o.sameAsHighUri WHERE x IN {list(uris_to_check)})
+                            OR any(x IN o.sameAsMediumUri WHERE x IN {list(uris_to_check)})
+                        )"""
     query = f"""
-        MATCH (n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
         {where_clause}
         {return_str} {limit_str}
         UNION
-        MATCH (x: Person)--(n:RoleActivity)--(p: Role)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Organization)
         {where_clause}
         {return_str} {limit_str};
     """
     logger.debug(query)
     objs, _ = db.cypher_query(query, resolve_objects=True)
-    flattened = [x for sublist in objs for x in sublist]
-    return flattened[:limit]
+    return objs[:limit]
 
 def date_to_cypher_friendly(date):
     if isinstance(date, str):
@@ -167,7 +168,7 @@ def get_stats(max_date,allowed_to_set_cache=False):
     if res is not None:
         return res
     counts = []
-    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity"]:
+    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","Article","Role"]:
         res, _ = db.cypher_query(f"MATCH (n:{x}) RETURN COUNT(n)")
         counts.append( (x , res[0][0]) )
     recents_by_country_region = []
@@ -208,9 +209,20 @@ def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None):
 
 def get_source_counts(source_name, min_date,max_date):
     counts = get_activities_by_source_and_date_range(source_name,min_date,max_date,counts_only=True)
-    return sum(counts)
+    return count_entries(counts)
 
 def get_country_region_counts(geo_code,min_date,max_date):
     relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
     counts = get_activities_by_org_uri_and_date_range(relevant_uris,min_date,max_date,include_same_as=False,counts_only=True)
-    return sum(counts)
+    return count_entries(counts)
+
+def count_entries(results):
+    '''
+        Expecting two results. For some reason, the union of two counts only returns one value if both are the same
+    '''
+    val = results[0][0]
+    if len(results) == 1:
+        val = val * 2
+    else:
+        val = val + results[1][0]
+    return val
