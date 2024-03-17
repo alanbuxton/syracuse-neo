@@ -1,0 +1,101 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/4074180/Pollen_Street_Capital> a org:Organization ;
+    ns1:basedInHighGeoName "London" ;
+    ns1:basedInHighGeoNameRDF <https://sws.geonames.org/2643743/about.rdf> ;
+    ns1:basedInHighRaw "London" ;
+    ns1:buyer <https://1145.am/db/4074180/Mattioli_Woods_Acquisition> ;
+    ns1:documentSource ns1:wwwcityamcom_yet-another-uk-firm-heads-for-private-hands-after-400m-plus-deal_ ;
+    ns1:foundName "Pollen Street Capital" ;
+    ns1:industry "private equity" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/0_investment_investments_estate_investing> ;
+    ns1:internalDocId 4074180 ;
+    ns1:name "Pollen Street Capital" ;
+    ns1:sameAsHigh <https://1145.am/db/2066738/Pollen_Street_Capital>,
+        <https://1145.am/db/3021403/Pollen_Street_Capital>,
+        <https://1145.am/db/4075853/Pollen_Street_Capital> ;
+    ns1:sameAsMedium <https://1145.am/db/373576/Pollen_Street_Capital> .
+
+<https://1145.am/db/4074317/Ageas> a org:Organization ;
+    ns1:basedInHighRaw "Belgium" ;
+    ns1:buyer <https://1145.am/db/4074317/Acquisition_Ageas_Stopped> ;
+    ns1:description "insurance" ;
+    ns1:documentSource ns1:wwwcityamcom_ageass-interest-direct-line-shows-just-how-far-the-uks-insurers-have-come-since-covid_ ;
+    ns1:foundName "Ageas" ;
+    ns1:industry "insurance" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/24_insurance_insurer_estate_risk> ;
+    ns1:internalDocId 4074317 ;
+    ns1:name "Ageas" ;
+    ns1:sameAsHigh <https://1145.am/db/2867004/Ageas>,
+        <https://1145.am/db/3081548/Ageas>,
+        <https://1145.am/db/3715805/Ageas>,
+        <https://1145.am/db/4043165/Ageas>,
+        <https://1145.am/db/4043587/Ageas_Sa_Nv>,
+        <https://1145.am/db/4045788/Ageas>,
+        <https://1145.am/db/4045850/Ageas> .
+
+<https://1145.am/db/4074664/Argo_Rannamets> a foaf:Person ;
+    ns1:basedInLowRaw "Latvian" ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2842901_0_en_Changes-in-the-Supervisory-Boards-of-AS-Ekspress-Grupp-s-subsidiarieshtml ;
+    ns1:foundName "Argo Rannamets" ;
+    ns1:internalDocId 4074664 ;
+    ns1:name "Argo Rannamets" ;
+    ns1:roleActivity <https://1145.am/db/4074664/Argo_Rannamets-Starting-Supervisory_Board> .
+
+<https://1145.am/db/4074664/As_Delfi_Meedia> a org:Organization ;
+    ns1:basedInHighRaw "Latvian" ;
+    ns1:basedInLowRaw "Latvian" ;
+    ns1:description "Business" ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2842901_0_en_Changes-in-the-Supervisory-Boards-of-AS-Ekspress-Grupp-s-subsidiarieshtml ;
+    ns1:foundName "A/S Delfi",
+        "AS Delfi Meedia" ;
+    ns1:hasRole <https://1145.am/db/4074664/As_Delfi_Meedia-Supervisory_Board> ;
+    ns1:internalDocId 4074664 ;
+    ns1:name "A/S Delfi",
+        "AS Delfi Meedia" .
+
+<https://1145.am/db/4074675/Irish_Continental_Group_Plc> a org:Organization ;
+    ns1:basedInLowRaw "Irish" ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2842894_0_en_Transaction-in-Own-Shareshtml ;
+    ns1:foundName "Irish Continental Group plc" ;
+    ns1:internalDocId 4074675 ;
+    ns1:investor <https://1145.am/db/4074675/Investment_Irish_Continental_Group_Plc_Completed> ;
+    ns1:name "Irish Continental Group plc" .
+
+<https://1145.am/db/4074773/Binance_Labs> a org:Organization ;
+    ns1:basedInHighGeoName "Republic of Singapore" ;
+    ns1:basedInHighGeoNameRDF <https://sws.geonames.org/1880251/about.rdf> ;
+    ns1:basedInHighRaw "Singapore" ;
+    ns1:description "Blockchain" ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2842969_0_en_UXUY-Secures-Strategic-Investment-from-Binance-Labs-to-Propel-Bitcoin-Lightning-Network-Ecosystemhtml ;
+    ns1:foundName "Binance Labs" ;
+    ns1:internalDocId 4074773 ;
+    ns1:investor <https://1145.am/db/4074773/Investment_Binance_Labs_Uxuy_Completed> ;
+    ns1:name "Binance Labs" ;
+    ns1:sameAsMedium <https://1145.am/db/1104843/Binance_Labs>,
+        <https://1145.am/db/1124122/Binance_Labs> .
+
+<https://1145.am/db/4074784/Businesses_Acquisition_Petrus_Sa_Completed> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-03-08T10:44:24+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Aspo's subsidiary Telko expands its lubricants business to Western Europe through acquisition in France, Belgium, Luxembourg, and Netherlands." ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2842974_0_en_Inside-information-Aspo-s-subsidiary-Telko-expands-in-Western-Europe-via-a-strategic-acquisition-in-specialty-productshtml ;
+    ns1:internalDocId 4074784 ;
+    ns1:status "completed" ;
+    ns1:targetDetails "businesses" ;
+    ns1:vendor <https://1145.am/db/4074784/Petrus_Sa> ;
+    ns1:whereGeoName "Republic of France" ;
+    ns1:whereGeoNameRDF <https://sws.geonames.org/3017382/about.rdf> ;
+    ns1:whereRaw "France and Benelux" .
+
+<https://1145.am/db/4074818/Roger_Werner> a foaf:Person ;
+    ns1:basedInLowRaw "SALT LAKE CITY" ;
+    ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2843009_14702_en_Roger-Werner-Appointed-to-Clarus-Board-of-Directorshtml ;
+    ns1:foundName "Mr. Roger Werner" ;
+    ns1:internalDocId 4074818 ;
+    ns1:name "Roger Werner" ;
+    ns1:roleActivity <https://1145.am/db/4074818/Roger_Werner-Starting-Board> .

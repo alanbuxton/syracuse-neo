@@ -32,7 +32,6 @@ def do_n10s_config(force=False):
     logger.info(query)
     db.cypher_query(query)
 
-
 def apoc_del_redundant_med():
     output_same_as_stats("Before delete")
     apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsMedium]->(n2:Organization)-[r2:sameAsMedium]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'

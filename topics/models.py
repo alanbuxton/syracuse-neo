@@ -40,6 +40,35 @@ class Resource(StructuredNode):
     name = ArrayProperty(StringProperty())
     documentSource = RelationshipTo("Article","documentSource")
     internalDocId = IntegerProperty()
+    internalDocIdList = ArrayProperty(IntegerProperty())
+    internalNameList = ArrayProperty(StringProperty())
+    sameAsMedium = Relationship('Resource','sameAsMedium')
+    sameAsHigh = Relationship('Resource','sameAsHigh')
+    internalSameAsHighUriList = ArrayProperty(StringProperty())
+    internalSameAsMediumUriList = ArrayProperty(StringProperty())
+
+    @staticmethod
+    def get_by_merged_uri(uri):
+        query = f"""MATCH (n: Resource) WHERE '{uri}' in n.internalSameAsHighUriList OR
+                    '{uri}' in n.internalSameAsMediumUriList RETURN n"""
+        res, _ = db.cypher_query(query, resolve_objects=True)
+        if res is not None and len(res)==1:
+            if len(res[0]) == 1:
+                return res[0][0]
+
+    def get_merged_same_as_high_by_unmerged_uri(self):
+        query = f"""MATCH (n: Resource) WHERE '{self.uri}' in n.internalSameAsHighUriList RETURN n"""
+        res, _ = db.cypher_query(query, resolve_objects=True)
+        if res is not None and len(res)==1:
+            if len(res[0]) == 1:
+                return res[0][0]
+
+    def get_merged_same_as_medium_by_unmerged_uri(self):
+        query = f"""MATCH (n: Resource) WHERE '{self.uri}' in n.internalSameAsMediumUriList RETURN n"""
+        res, _ = db.cypher_query(query, resolve_objects=True)
+        if res is not None and len(res)==1:
+            if len(res[0]) == 1:
+                return res[0][0]
 
     @property
     def sourceDocumentURL(self):
@@ -418,8 +447,6 @@ class Organization(Resource, BasedInGeoMixin):
     industry = ArrayProperty(StringProperty())
     investor = RelationshipTo('CorporateFinanceActivity','investor')
     buyer =  RelationshipTo('CorporateFinanceActivity', 'buyer')
-    sameAsMedium = Relationship('Organization','sameAsMedium')
-    sameAsHigh = Relationship('Organization','sameAsHigh')
     protagonist = RelationshipTo('CorporateFinanceActivity', 'protagonist')
     participant = RelationshipTo('CorporateFinanceActivity', 'participant')
     vendor = RelationshipFrom('CorporateFinanceActivity', 'vendor')
@@ -429,15 +456,12 @@ class Organization(Resource, BasedInGeoMixin):
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
     industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
     industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
-    name_list = ArrayProperty(StringProperty())
-    sameAsHighUri = ArrayProperty(StringProperty())
-    sameAsMediumUri = ArrayProperty(StringProperty())
 
     @property
     def best_name(self):
-        if self.name_list is None or len(self.name_list) == 0:
+        if self.internalNameList is None or len(self.internalNameList) == 0:
             return self.longest_name
-        name_cands = [x.split("_##_")[1] for x in self.name_list]
+        name_cands = [x.split("_##_")[1] for x in self.internalNameList]
         name_counter = Counter(name_cands)
         return name_counter.most_common(1)[0][0]
 
@@ -446,7 +470,7 @@ class Organization(Resource, BasedInGeoMixin):
         org = Organization.nodes.get_or_none(uri=uri)
         if org is not None:
             return org.best_name
-        query = f"MATCH (n: Organization) WHERE '{uri}' IN n.sameAsHighUri OR '{uri}' IN n.sameAsMediumUri RETURN n"
+        query = f"MATCH (n: Organization) WHERE '{uri}' IN n.internalSameAsHighUriList OR '{uri}' IN n.internalSameAsMediumUriList RETURN n"
         res, _ = db.cypher_query(query, resolve_objects=True)
         if res is None or len(res) != 1 or len(res[0]) != 1:
             return None

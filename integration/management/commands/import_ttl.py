@@ -55,7 +55,7 @@ def move_files(src_dir,target_dir):
     res = subprocess.run(['mv',src_dir,target_dir])
     logger.info(res)
 
-def load_ttl_files(dir_name,RDF_SLEEP_TIME):
+def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True):
     delete_dir = f"{dir_name}/deletions"
     count_of_creations = 0
     count_of_deletions = 0
@@ -63,19 +63,20 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME):
         delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
         logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
         for filename in delete_files:
-            deletions = load_deletion_file(f"{delete_dir}/{filename}")
+            _, deletions = load_deletion_file(f"{delete_dir}/{filename}")
             count_of_deletions += deletions
     logger.info(f"After running deletion files there are {count_nodes()} nodes")
     all_files = sorted([x for x in os.listdir(dir_name) if x.endswith(".ttl")])
     logger.info(f"Found {len(all_files)} ttl files to process")
     if len(all_files) == 0:
         logger.info("No insertion files to load, quitting")
-        return
+        return count_of_deletions, 0
     for filename in all_files:
         creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME)
         count_of_creations += creations
     logger.info(f"After running insertion files there are {count_nodes()} nodes")
-    post_import_merging()
+    if do_post_processing is True:
+        post_import_merging()
     return count_of_creations, count_of_deletions
 
 def load_deletion_file(filepath):
@@ -83,10 +84,12 @@ def load_deletion_file(filepath):
 #    command = f'call n10s.rdf.delete.fetch("file://{filepath}","Turtle");' # This fails for me, but not clear why
     with open(filepath) as f:
         uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
-    command = f"MATCH (n) WHERE n.uri in {uris} CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
+    count_query = f"MATCH (n) WHERE n.uri IN {uris} RETURN COUNT(n)"
+    cnt, _ = db.cypher_query(count_query)
+    command = f"MATCH (n) WHERE n.uri IN {uris} AND n.internalDocIdList IS NULL CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
     logger.info(f"Deleting {len(uris)} nodes")
     db.cypher_query(command)
-    return len(uris)
+    return len(uris), cnt[0][0]
 
 def load_file(filepath,RDF_SLEEP_TIME):
     filepath = os.path.abspath(filepath)
@@ -123,6 +126,7 @@ def do_import_ttl(**options):
     dump_dir = options.get("dirname",RDF_DUMP_DIR)
     do_archiving = options.get("do_archiving",True)
     send_notifications = options.get("send_notifications",False)
+    do_post_processing = options.get("do_post_processing",True)
     if force:
         cleanup(pidfile)
     if not is_allowed_to_start(pidfile):
@@ -138,7 +142,8 @@ def do_import_ttl(**options):
     total_deletions = 0
     for export_dir in export_dirs:
         count_of_creations, count_of_deletions = load_ttl_files(
-                                                    export_dir,RDF_SLEEP_TIME)
+                                                    export_dir,RDF_SLEEP_TIME,
+                                                    do_post_processing=do_post_processing)
         di = DataImport(
             run_at = datetime.now(tz=timezone.utc),
             import_ts = os.path.basename(export_dir),
@@ -152,7 +157,9 @@ def do_import_ttl(**options):
             logger.info(f"Archiving files from {export_dir} to {RDF_ARCHIVE_DIR}")
             move_files(export_dir,RDF_ARCHIVE_DIR)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
-    rebuild_cache()
+    if do_post_processing is True:
+        post_import_merging(with_delete_not_needed_resources=True)
+        rebuild_cache()
     logger.info("re-set cache")
     cleanup(pidfile)
     if send_notifications is True and total_creations > 0:

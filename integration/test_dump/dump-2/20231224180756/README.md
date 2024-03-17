@@ -1,12 +1,8 @@
-For test purposes, this load removes the following docs:
+For test purposes, this load attempts to remove the following docs:
 
-2834130
-2834031
-2834288
+https://1145.am/db/4076088/Jde_Peets - member of a merged group, can't be deleted
+https://1145.am/db/4076092/Sauber_Group - sole member, can be deleted
+https://1145.am/db/4074766/Openai - root of a merged group, can't be deleted
+https://1145.am/db/4076564/Oldcastle_Buildingenvelope - sole member, can be deleted
 
-And reinstates:
-
-2834130
-2834031
-
-In real life, you'd expect all deleted items to be reinstated.
+And updates the first 3

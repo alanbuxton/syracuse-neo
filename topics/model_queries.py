@@ -131,8 +131,8 @@ def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], m
     where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
                         AND (o.uri IN {list(uris_to_check)}
-                            OR any(x IN o.sameAsHighUri WHERE x IN {list(uris_to_check)})
-                            OR any(x IN o.sameAsMediumUri WHERE x IN {list(uris_to_check)})
+                            OR any(x IN o.internalSameAsHighUriList WHERE x IN {list(uris_to_check)})
+                            OR any(x IN o.internalSameAsMediumUriList WHERE x IN {list(uris_to_check)})
                         )"""
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Organization)

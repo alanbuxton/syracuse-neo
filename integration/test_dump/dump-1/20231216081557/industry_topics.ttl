@@ -1,0 +1,4569 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/industry/-1_financial_finance_business_investment> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "finance",
+        "financial",
+        "financing",
+        "fund",
+        "healthcare",
+        "investment",
+        "management",
+        "market",
+        "services" ;
+    ns1:representativeDoc "digital financial services",
+        "healthcare and financial services",
+        "investment management and financial services" ;
+    ns1:topicId -1 ;
+    ns1:uniqueName "-1_financial_finance_business_investment" .
+
+<https://1145.am/db/industry/396_brokerage_marketplace_enterprise_services_provider> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/393_pharmaceutical_pharmaceuticals_pharma_medicines_medicine> ;
+    ns1:childRight <https://1145.am/db/industry/395_software_development_management_enterprise_business> ;
+    ns1:topicId 396 ;
+    ns1:uniqueName "396_brokerage_marketplace_enterprise_services_provider" .
+
+<https://1145.am/db/industry/0_investment_investments_estate_investing> a ns1:IndustryCluster ;
+    ns1:representation "broker",
+        "brokerage",
+        "estate",
+        "investing",
+        "investment",
+        "investments",
+        "investor",
+        "investors",
+        "residential",
+        "securities" ;
+    ns1:representativeDoc "real estate investment and property services",
+        "real estate investment trusts",
+        "real estate investment, development and property management" ;
+    ns1:topicId 0 ;
+    ns1:uniqueName "0_investment_investments_estate_investing" .
+
+<https://1145.am/db/industry/100_nonprofit_organizations_organization_organisation> a ns1:IndustryCluster ;
+    ns1:representation "consultancy",
+        "consulting",
+        "enterprise",
+        "industry",
+        "management",
+        "nonprofit",
+        "organisation",
+        "organization",
+        "organizations",
+        "services" ;
+    ns1:representativeDoc "nonprofit fundraising",
+        "nonprofit management",
+        "nonprofit services" ;
+    ns1:topicId 100 ;
+    ns1:uniqueName "100_nonprofit_organizations_organization_organisation" .
+
+<https://1145.am/db/industry/101_retailer_retailers_residential_designer> a ns1:IndustryCluster ;
+    ns1:representation "design",
+        "designer",
+        "home",
+        "manufacturer",
+        "manufacturers",
+        "residential",
+        "retailer",
+        "retailers",
+        "shopping",
+        "supplier" ;
+    ns1:representativeDoc "furniture and home furnishings retailer",
+        "home decor and furnishings retailer",
+        "home furnishings retailer" ;
+    ns1:topicId 101 ;
+    ns1:uniqueName "101_retailer_retailers_residential_designer" .
+
+<https://1145.am/db/industry/102_clinic_practices_medical_practice> a ns1:IndustryCluster ;
+    ns1:representation "clinic",
+        "healthcare",
+        "management",
+        "medical",
+        "patient",
+        "practice",
+        "practices",
+        "services",
+        "surgery",
+        "surgical" ;
+    ns1:representativeDoc "dental practice",
+        "dental practice management and imaging solutions",
+        "dental practice management services" ;
+    ns1:topicId 102 ;
+    ns1:uniqueName "102_clinic_practices_medical_practice" .
+
+<https://1145.am/db/industry/103_materials_protective_protection_manufacturer> a ns1:IndustryCluster ;
+    ns1:representation "chemical",
+        "industrial",
+        "manufacturer",
+        "materials",
+        "metal",
+        "products",
+        "protection",
+        "protective",
+        "restoration",
+        "specialty" ;
+    ns1:representativeDoc "automotive oem original equipment manufacturer coatings and industrial coatings",
+        "coatings and specialty materials",
+        "specialty coatings, sealants, building materials and related services" ;
+    ns1:topicId 103 ;
+    ns1:uniqueName "103_materials_protective_protection_manufacturer" .
+
+<https://1145.am/db/industry/104_heating_air_residential_energy> a ns1:IndustryCluster ;
+    ns1:representation "air",
+        "building",
+        "energy",
+        "equipment",
+        "heating",
+        "household",
+        "rental",
+        "residential",
+        "systems",
+        "technologies" ;
+    ns1:representativeDoc "heating and air conditioning",
+        "heating, ventilation and air-conditioning",
+        "heating, ventilation, air conditioning refrigeration \"hvac " ;
+    ns1:topicId 104 ;
+    ns1:uniqueName "104_heating_air_residential_energy" .
+
+<https://1145.am/db/industry/105_email_mail_delivery_service> a ns1:IndustryCluster ;
+    ns1:representation "customer",
+        "delivery",
+        "electronic",
+        "email",
+        "enterprise",
+        "mail",
+        "provider",
+        "providers",
+        "service",
+        "services" ;
+    ns1:representativeDoc "email productivity",
+        "email service",
+        "email service provider" ;
+    ns1:topicId 105 ;
+    ns1:uniqueName "105_email_mail_delivery_service" .
+
+<https://1145.am/db/industry/106_motor_engine_electric_car> a ns1:IndustryCluster ;
+    ns1:representation "auto",
+        "car",
+        "electric",
+        "engine",
+        "industrial",
+        "industry",
+        "maker",
+        "manufacturer",
+        "manufacturing",
+        "motor" ;
+    ns1:representativeDoc "electric motor",
+        "electric motor maker",
+        "motor engine part" ;
+    ns1:topicId 106 ;
+    ns1:uniqueName "106_motor_engine_electric_car" .
+
+<https://1145.am/db/industry/107_wellness_health_healthy_healthcare> a ns1:IndustryCluster ;
+    ns1:representation "benefit",
+        "health",
+        "healthcare",
+        "healthy",
+        "lifestyle",
+        "living",
+        "management",
+        "medical",
+        "products",
+        "wellness" ;
+    ns1:representativeDoc "health and wellness coaching",
+        "health-and-wellness",
+        "lifestyle and wellness" ;
+    ns1:topicId 107 ;
+    ns1:uniqueName "107_wellness_health_healthy_healthcare" .
+
+<https://1145.am/db/industry/108_3d_graphics_printing_model> a ns1:IndustryCluster ;
+    ns1:representation "3d",
+        "design",
+        "graphics",
+        "imaging",
+        "laser",
+        "manufacturing",
+        "model",
+        "photography",
+        "printing",
+        "software" ;
+    ns1:representativeDoc "3d modeling",
+        "3d printers",
+        "3d rendering" ;
+    ns1:topicId 108 ;
+    ns1:uniqueName "108_3d_graphics_printing_model" .
+
+<https://1145.am/db/industry/109_music_media_entertainment_licensing> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "culture",
+        "entertainment",
+        "industry",
+        "licensing",
+        "media",
+        "music",
+        "production",
+        "rights",
+        "service" ;
+    ns1:representativeDoc "country music",
+        "music royalties",
+        "music venues and festivals" ;
+    ns1:topicId 109 ;
+    ns1:uniqueName "109_music_media_entertainment_licensing" .
+
+<https://1145.am/db/industry/10_restaurant_restaurants_booking_hospitality> a ns1:IndustryCluster ;
+    ns1:representation "booking",
+        "facilities",
+        "facility",
+        "food",
+        "grocery",
+        "hospitality",
+        "kitchen",
+        "restaurant",
+        "restaurants",
+        "service" ;
+    ns1:representativeDoc "food service and restaurant data technology",
+        "quick-service restaurant",
+        "restaurant reservation system" ;
+    ns1:topicId 10 ;
+    ns1:uniqueName "10_restaurant_restaurants_booking_hospitality" .
+
+<https://1145.am/db/industry/110_maker_manufacturers_manufacturer_manufacturing> a ns1:IndustryCluster ;
+    ns1:representation "company",
+        "distributor",
+        "industrial",
+        "maker",
+        "makers",
+        "manufacturer",
+        "manufacturers",
+        "manufacturing",
+        "products",
+        "wholesaler" ;
+    ns1:representativeDoc "air compressor manufacturer",
+        "cigarette-maker",
+        "e-cigarette and vaping product maker" ;
+    ns1:topicId 110 ;
+    ns1:uniqueName "110_maker_manufacturers_manufacturer_manufacturing" .
+
+<https://1145.am/db/industry/111_clinical_medical_pharmaceutical_research> a ns1:IndustryCluster ;
+    ns1:representation "clinical",
+        "diagnostics",
+        "health",
+        "healthcare",
+        "lab",
+        "medical",
+        "pharmaceutical",
+        "platform",
+        "research",
+        "software" ;
+    ns1:representativeDoc "clinical trial",
+        "clinical trial enrollment",
+        "clinical trials" ;
+    ns1:topicId 111 ;
+    ns1:uniqueName "111_clinical_medical_pharmaceutical_research" .
+
+<https://1145.am/db/industry/112_resale_wholesale_marketplace_retail> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "estate",
+        "industry",
+        "market",
+        "marketplace",
+        "online",
+        "procurement",
+        "resale",
+        "retail",
+        "wholesale" ;
+    ns1:representativeDoc "it resale",
+        "online resale",
+        "online resale marketplace" ;
+    ns1:topicId 112 ;
+    ns1:uniqueName "112_resale_wholesale_marketplace_retail" .
+
+<https://1145.am/db/industry/113_road_maintenance_traffic_inspection> a ns1:IndustryCluster ;
+    ns1:representation "contractor",
+        "equipment",
+        "inspection",
+        "maintenance",
+        "providers",
+        "repair",
+        "road",
+        "service",
+        "services",
+        "traffic" ;
+    ns1:representativeDoc "pavement repair and maintenance service providers",
+        "traffic control and pavement marking",
+        "traffic control and pavement marking services" ;
+    ns1:topicId 113 ;
+    ns1:uniqueName "113_road_maintenance_traffic_inspection" .
+
+<https://1145.am/db/industry/114_apps_app_mobile_application> a ns1:IndustryCluster ;
+    ns1:representation "analytics",
+        "app",
+        "application",
+        "applications",
+        "apps",
+        "developer",
+        "development",
+        "mobile",
+        "monitoring",
+        "software" ;
+    ns1:representativeDoc "app",
+        "mobile app analytics",
+        "mobile app development" ;
+    ns1:topicId 114 ;
+    ns1:uniqueName "114_apps_app_mobile_application" .
+
+<https://1145.am/db/industry/115_park_recreation_leisure_facility> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "company",
+        "entertainment",
+        "facilities",
+        "facility",
+        "holiday",
+        "leisure",
+        "mobility",
+        "park",
+        "recreation" ;
+    ns1:representativeDoc "amusement park",
+        "caravan park",
+        "theme park" ;
+    ns1:topicId 115 ;
+    ns1:uniqueName "115_park_recreation_leisure_facility" .
+
+<https://1145.am/db/industry/116_station_broadcasting_distributor_manufacturer> a ns1:IndustryCluster ;
+    ns1:representation "broadcast",
+        "broadcasting",
+        "communications",
+        "distributor",
+        "electronics",
+        "industry",
+        "manufacturer",
+        "provider",
+        "station",
+        "wireless" ;
+    ns1:representativeDoc "radio station",
+        "radio station industry",
+        "radio station owner" ;
+    ns1:topicId 116 ;
+    ns1:uniqueName "116_station_broadcasting_distributor_manufacturer" .
+
+<https://1145.am/db/industry/117_cell_cellular_biotech_tissue> a ns1:IndustryCluster ;
+    ns1:representation "biotech",
+        "cell",
+        "cellular",
+        "field",
+        "medicine",
+        "plant",
+        "science",
+        "technologies",
+        "technology",
+        "tissue" ;
+    ns1:representativeDoc "cell biology",
+        "stem cell",
+        "stem cell services" ;
+    ns1:topicId 117 ;
+    ns1:uniqueName "117_cell_cellular_biotech_tissue" .
+
+<https://1145.am/db/industry/118_fuel_plant_energy_technology> a ns1:IndustryCluster ;
+    ns1:representation "energy",
+        "engineers",
+        "fuel",
+        "miner",
+        "mining",
+        "plant",
+        "plants",
+        "power",
+        "production",
+        "technology" ;
+    ns1:representativeDoc "nuclear fuel",
+        "nuclear fuel technology",
+        "nuclear reactors and fuel technology" ;
+    ns1:topicId 118 ;
+    ns1:uniqueName "118_fuel_plant_energy_technology" .
+
+<https://1145.am/db/industry/119_biotechnology_biotech_therapeutics_therapeutic> a ns1:IndustryCluster ;
+    ns1:representation "biotech",
+        "biotechnology",
+        "innovation",
+        "makers",
+        "manufacturers",
+        "medical",
+        "pharmaceutical",
+        "pharmaceuticals",
+        "therapeutic",
+        "therapeutics" ;
+    ns1:representativeDoc "therapeutic vaccine",
+        "vaccine and biotech",
+        "vaccine biotech" ;
+    ns1:topicId 119 ;
+    ns1:uniqueName "119_biotechnology_biotech_therapeutics_therapeutic" .
+
+<https://1145.am/db/industry/11_semiconductor_electronics_silicon_hardware> a ns1:IndustryCluster ;
+    ns1:representation "chip",
+        "devices",
+        "electronic",
+        "electronics",
+        "fabrication",
+        "hardware",
+        "manufacturers",
+        "processors",
+        "semiconductor",
+        "silicon" ;
+    ns1:representativeDoc "semiconductor chip manufacturing",
+        "semiconductor chipmaker",
+        "semiconductor tests" ;
+    ns1:topicId 11 ;
+    ns1:uniqueName "11_semiconductor_electronics_silicon_hardware" .
+
+<https://1145.am/db/industry/120_fiber_optical_broadband_laser> a ns1:IndustryCluster ;
+    ns1:representation "broadband",
+        "connectivity",
+        "fiber",
+        "laser",
+        "materials",
+        "network",
+        "optical",
+        "products",
+        "provider",
+        "supplier" ;
+    ns1:representativeDoc "fiber",
+        "fiber optics",
+        "fiber vendors" ;
+    ns1:topicId 120 ;
+    ns1:uniqueName "120_fiber_optical_broadband_laser" .
+
+<https://1145.am/db/industry/121_hosting_provider_providers_service> a ns1:IndustryCluster ;
+    ns1:representation "cloud",
+        "hosting",
+        "internet",
+        "managed",
+        "provider",
+        "providers",
+        "service",
+        "services",
+        "web",
+        "website" ;
+    ns1:representativeDoc "domain registration and hosting",
+        "hosting",
+        "server hosting" ;
+    ns1:topicId 121 ;
+    ns1:uniqueName "121_hosting_provider_providers_service" .
+
+<https://1145.am/db/industry/122_laser_optical_light_technologies> a ns1:IndustryCluster ;
+    ns1:representation "advanced",
+        "computer",
+        "equipment",
+        "laser",
+        "light",
+        "machine",
+        "optical",
+        "silicon",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "dental laser",
+        "laser",
+        "laser technology" ;
+    ns1:topicId 122 ;
+    ns1:uniqueName "122_laser_optical_light_technologies" .
+
+<https://1145.am/db/industry/123_multifamily_investments_investment_investing> a ns1:IndustryCluster ;
+    ns1:representation "companies",
+        "firm",
+        "firms",
+        "fund",
+        "investing",
+        "investment",
+        "investments",
+        "investor",
+        "management",
+        "multifamily" ;
+    ns1:representativeDoc "multifamily",
+        "multifamily investment",
+        "multifamily management" ;
+    ns1:topicId 123 ;
+    ns1:uniqueName "123_multifamily_investments_investment_investing" .
+
+<https://1145.am/db/industry/124_wellness_fitness_resort_leisure> a ns1:IndustryCluster ;
+    ns1:representation "equipment",
+        "fitness",
+        "industry",
+        "leisure",
+        "medical",
+        "outdoor",
+        "resort",
+        "service",
+        "services",
+        "wellness" ;
+    ns1:representativeDoc "pool and wellness equipment",
+        "pool and wellness industry",
+        "spa and wellness" ;
+    ns1:topicId 124 ;
+    ns1:uniqueName "124_wellness_fitness_resort_leisure" .
+
+<https://1145.am/db/industry/125_rigging_equipment_logistics_services> a ns1:IndustryCluster ;
+    ns1:representation "consulting",
+        "duty",
+        "equipment",
+        "logistics",
+        "maintenance",
+        "manufacturing",
+        "operations",
+        "rigging",
+        "service",
+        "services" ;
+    ns1:representativeDoc "crane and rigging",
+        "crane and rigging equipment services",
+        "crane and rigging services" ;
+    ns1:topicId 125 ;
+    ns1:uniqueName "125_rigging_equipment_logistics_services" .
+
+<https://1145.am/db/industry/126_environmental_environment_sustainability_consultant> a ns1:IndustryCluster ;
+    ns1:representation "consultancy",
+        "consultant",
+        "consulting",
+        "environment",
+        "environmental",
+        "infrastructure",
+        "management",
+        "services",
+        "sustainability",
+        "water" ;
+    ns1:representativeDoc "environmental",
+        "environmental consulting",
+        "environmental services" ;
+    ns1:topicId 126 ;
+    ns1:uniqueName "126_environmental_environment_sustainability_consultant" .
+
+<https://1145.am/db/industry/127_language_software_services_service> a ns1:IndustryCluster ;
+    ns1:representation "ai",
+        "language",
+        "learning",
+        "platform",
+        "provider",
+        "service",
+        "services",
+        "software",
+        "tech",
+        "technology" ;
+    ns1:representativeDoc "language services",
+        "language technology",
+        "translation and language services" ;
+    ns1:topicId 127 ;
+    ns1:uniqueName "127_language_software_services_service" .
+
+<https://1145.am/db/industry/128_automotive_dealer_aftermarket_manufacturers> a ns1:IndustryCluster ;
+    ns1:representation "aftermarket",
+        "automotive",
+        "dealer",
+        "distributor",
+        "distributors",
+        "manufacturer",
+        "manufacturers",
+        "manufacturing",
+        "retailer",
+        "services" ;
+    ns1:representativeDoc "tire dealer and automotive aftermarket service provider",
+        "tire dealer and automotive repair station",
+        "tire, automotive, and other related services and sales" ;
+    ns1:topicId 128 ;
+    ns1:uniqueName "128_automotive_dealer_aftermarket_manufacturers" .
+
+<https://1145.am/db/industry/129_diagnostic_test_testing_diagnostics> a ns1:IndustryCluster ;
+    ns1:representation "detection",
+        "diagnostic",
+        "diagnostics",
+        "drug",
+        "drugs",
+        "laboratory",
+        "research",
+        "test",
+        "testing",
+        "therapeutic" ;
+    ns1:representativeDoc "cancer detection",
+        "cancer detection test",
+        "cancer detection tests" ;
+    ns1:topicId 129 ;
+    ns1:uniqueName "129_diagnostic_test_testing_diagnostics" .
+
+<https://1145.am/db/industry/12_cybersecurity_security_cyber_secure> a ns1:IndustryCluster ;
+    ns1:representation "cyber",
+        "cybersecurity",
+        "defense",
+        "protection",
+        "secure",
+        "security",
+        "services",
+        "software",
+        "systems",
+        "tech" ;
+    ns1:representativeDoc "cybersecurity and compliance management software",
+        "cybersecurity and cyber intelligence solutions",
+        "cybersecurity risk management" ;
+    ns1:topicId 12 ;
+    ns1:uniqueName "12_cybersecurity_security_cyber_secure" .
+
+<https://1145.am/db/industry/130_wood_materials_products_manufacturing> a ns1:IndustryCluster ;
+    ns1:representation "building",
+        "construction",
+        "equipment",
+        "industry",
+        "manufacturing",
+        "materials",
+        "production",
+        "products",
+        "tools",
+        "wood" ;
+    ns1:representativeDoc "thermally modified wood products",
+        "wood biomass",
+        "wood products" ;
+    ns1:topicId 130 ;
+    ns1:uniqueName "130_wood_materials_products_manufacturing" .
+
+<https://1145.am/db/industry/131_pharmacy_specialty_consulting_retail> a ns1:IndustryCluster ;
+    ns1:representation "clinical",
+        "consulting",
+        "electronic",
+        "pharmacy",
+        "provider",
+        "retail",
+        "services",
+        "software",
+        "specialty",
+        "technology" ;
+    ns1:representativeDoc "e-pharmacy",
+        "institutional pharmacy",
+        "pharmacy" ;
+    ns1:topicId 131 ;
+    ns1:uniqueName "131_pharmacy_specialty_consulting_retail" .
+
+<https://1145.am/db/industry/132_acquisition_firms_companies_company> a ns1:IndustryCluster ;
+    ns1:representation "acquisition",
+        "advisory",
+        "buying",
+        "companies",
+        "company",
+        "equity",
+        "firm",
+        "firms",
+        "industry",
+        "market" ;
+    ns1:representativeDoc "acquisition advisory",
+        "acquisition group",
+        "mergers and acquisition advisory firm" ;
+    ns1:topicId 132 ;
+    ns1:uniqueName "132_acquisition_firms_companies_company" .
+
+<https://1145.am/db/industry/133_power_energy_generation_equipment> a ns1:IndustryCluster ;
+    ns1:representation "design",
+        "energy",
+        "engineering",
+        "equipment",
+        "generation",
+        "industry",
+        "investment",
+        "plants",
+        "power",
+        "technology" ;
+    ns1:representativeDoc "offshore wind power generation",
+        "wind generation",
+        "wind power generation" ;
+    ns1:topicId 133 ;
+    ns1:uniqueName "133_power_energy_generation_equipment" .
+
+<https://1145.am/db/industry/134_outdoor_environmental_infrastructure_media> a ns1:IndustryCluster ;
+    ns1:representation "corporate",
+        "environmental",
+        "infrastructure",
+        "media",
+        "outdoor",
+        "provider",
+        "sector",
+        "service",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "outdoor information sector",
+        "outdoor media",
+        "outdoor media infrastructure" ;
+    ns1:topicId 134 ;
+    ns1:uniqueName "134_outdoor_environmental_infrastructure_media" .
+
+<https://1145.am/db/industry/135_lending_peertopeer_payments_payment> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "finance",
+        "lending",
+        "marketplace",
+        "mortgage",
+        "network",
+        "payment",
+        "payments",
+        "peertopeer",
+        "platform" ;
+    ns1:representativeDoc "peer to peer lending platform",
+        "peer-to-peer lending platform",
+        "peer-to-peer p2p lending platform" ;
+    ns1:topicId 135 ;
+    ns1:uniqueName "135_lending_peertopeer_payments_payment" .
+
+<https://1145.am/db/industry/136_trust_services_corporate_company> a ns1:IndustryCluster ;
+    ns1:representation "banking",
+        "business",
+        "certification",
+        "company",
+        "corporate",
+        "financial",
+        "funds",
+        "service",
+        "services",
+        "trust" ;
+    ns1:representativeDoc "corporate trust",
+        "corporate trust services",
+        "trust and corporate services" ;
+    ns1:topicId 136 ;
+    ns1:uniqueName "136_trust_services_corporate_company" .
+
+<https://1145.am/db/industry/137_fraud_ecommerce_security_assurance> a ns1:IndustryCluster ;
+    ns1:representation "account",
+        "assurance",
+        "compliance",
+        "digital",
+        "ecommerce",
+        "fraud",
+        "prevention",
+        "protection",
+        "retail",
+        "security" ;
+    ns1:representativeDoc "digital security and fraud prevention platform",
+        "fraud prevention",
+        "fraud prevention services" ;
+    ns1:topicId 137 ;
+    ns1:uniqueName "137_fraud_ecommerce_security_assurance" .
+
+<https://1145.am/db/industry/138_location_provider_urban_tracking> a ns1:IndustryCluster ;
+    ns1:representation "data",
+        "device",
+        "location",
+        "platform",
+        "platforms",
+        "provider",
+        "services",
+        "tracking",
+        "traffic",
+        "urban" ;
+    ns1:representativeDoc "location data",
+        "location platform",
+        "location technology" ;
+    ns1:topicId 138 ;
+    ns1:uniqueName "138_location_provider_urban_tracking" .
+
+<https://1145.am/db/industry/139_sensor_sensors_sensing_monitoring> a ns1:IndustryCluster ;
+    ns1:representation "detection",
+        "industrial",
+        "instrumentation",
+        "monitoring",
+        "processing",
+        "sensing",
+        "sensor",
+        "sensors",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "sensor",
+        "sensor suppler",
+        "temperature sensor" ;
+    ns1:topicId 139 ;
+    ns1:uniqueName "139_sensor_sensors_sensing_monitoring" .
+
+<https://1145.am/db/industry/13_logistics_delivery_transportation_shipping> a ns1:IndustryCluster ;
+    ns1:representation "commerce",
+        "delivery",
+        "distributors",
+        "fulfillment",
+        "logistics",
+        "procurement",
+        "shipping",
+        "transport",
+        "transportation",
+        "wholesale" ;
+    ns1:representativeDoc "delivery and logistics",
+        "logistics and delivery service",
+        "logistics and last-mile delivery provider" ;
+    ns1:topicId 13 ;
+    ns1:uniqueName "13_logistics_delivery_transportation_shipping" .
+
+<https://1145.am/db/industry/140_iot_internet_technology_devices> a ns1:IndustryCluster ;
+    ns1:representation "devices",
+        "internet",
+        "iot",
+        "network",
+        "platform",
+        "provider",
+        "services",
+        "technology",
+        "telematics",
+        "wireless" ;
+    ns1:representativeDoc "iot",
+        "iot middleware",
+        "iot technology" ;
+    ns1:topicId 140 ;
+    ns1:uniqueName "140_iot_internet_technology_devices" .
+
+<https://1145.am/db/industry/141_vision_care_surgery_services> a ns1:IndustryCluster ;
+    ns1:representation "care",
+        "equipment",
+        "health",
+        "industry",
+        "management",
+        "services",
+        "surgery",
+        "technology",
+        "therapy",
+        "vision" ;
+    ns1:representativeDoc "health and vision care",
+        "managed vision care",
+        "vision care" ;
+    ns1:topicId 141 ;
+    ns1:uniqueName "141_vision_care_surgery_services" .
+
+<https://1145.am/db/industry/142_foods_food_retailer_manufacturer> a ns1:IndustryCluster ;
+    ns1:representation "distributor",
+        "food",
+        "foods",
+        "manufacturer",
+        "manufacturers",
+        "manufacturing",
+        "packaged",
+        "producers",
+        "products",
+        "retailer" ;
+    ns1:representativeDoc "frozen foods",
+        "frozen foods retailer",
+        "health and wellness frozen and refrigerated foods" ;
+    ns1:topicId 142 ;
+    ns1:uniqueName "142_foods_food_retailer_manufacturer" .
+
+<https://1145.am/db/industry/143_aircraft_aviation_logistics_military> a ns1:IndustryCluster ;
+    ns1:representation "aircraft",
+        "aviation",
+        "delivery",
+        "industrial",
+        "industry",
+        "logistics",
+        "military",
+        "tech",
+        "technology",
+        "vehicle" ;
+    ns1:representativeDoc "aviation aerial delivery",
+        "aviation management and industrial drone franchise company",
+        "military drones" ;
+    ns1:topicId 143 ;
+    ns1:uniqueName "143_aircraft_aviation_logistics_military" .
+
+<https://1145.am/db/industry/144_building_exterior_installation_solar> a ns1:IndustryCluster ;
+    ns1:representation "building",
+        "contractor",
+        "exterior",
+        "installation",
+        "manufacturing",
+        "materials",
+        "services",
+        "solar",
+        "supplies",
+        "systems" ;
+    ns1:representativeDoc "roofing and exterior building supplies",
+        "solar and roofing installation",
+        "solar power and roofing systems installation" ;
+    ns1:topicId 144 ;
+    ns1:uniqueName "144_building_exterior_installation_solar" .
+
+<https://1145.am/db/industry/145_terminal_operator_marine_container> a ns1:IndustryCluster ;
+    ns1:representation "agent",
+        "business",
+        "charter",
+        "commercial",
+        "container",
+        "logistics",
+        "marine",
+        "operator",
+        "owner",
+        "terminal" ;
+    ns1:representativeDoc "port terminal",
+        "port terminal operator",
+        "terminal operator" ;
+    ns1:topicId 145 ;
+    ns1:uniqueName "145_terminal_operator_marine_container" .
+
+<https://1145.am/db/industry/146_forensic_services_security_consulting> a ns1:IndustryCluster ;
+    ns1:representation "consulting",
+        "data",
+        "digital",
+        "engineering",
+        "expert",
+        "forensic",
+        "security",
+        "services",
+        "software",
+        "technology" ;
+    ns1:representativeDoc "ediscovery and forensic services",
+        "forensic consulting services",
+        "forensic investigation" ;
+    ns1:topicId 146 ;
+    ns1:uniqueName "146_forensic_services_security_consulting" .
+
+<https://1145.am/db/industry/147_integrator_systems_technology_electronics> a ns1:IndustryCluster ;
+    ns1:representation "control",
+        "controls",
+        "electronics",
+        "equipment",
+        "integrator",
+        "security",
+        "services",
+        "systems",
+        "technology",
+        "telecommunications" ;
+    ns1:representativeDoc "ict system integrator",
+        "it systems integrator",
+        "systems integrator" ;
+    ns1:topicId 147 ;
+    ns1:uniqueName "147_integrator_systems_technology_electronics" .
+
+<https://1145.am/db/industry/148_capital_management_wealth_human> a ns1:IndustryCluster ;
+    ns1:representation "capital",
+        "compliance",
+        "finance",
+        "human",
+        "infrastructure",
+        "management",
+        "markets",
+        "securities",
+        "technology",
+        "wealth" ;
+    ns1:representativeDoc "human capital",
+        "human capital integritysm",
+        "human capital management" ;
+    ns1:topicId 148 ;
+    ns1:uniqueName "148_capital_management_wealth_human" .
+
+<https://1145.am/db/industry/149_av_software_enterprise_broadcast> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "av",
+        "broadcast",
+        "enterprise",
+        "equipment",
+        "industry",
+        "professional",
+        "software" ;
+    ns1:representativeDoc "av",
+        "av it",
+        "pro-av" ;
+    ns1:topicId 149 ;
+    ns1:uniqueName "149_av_software_enterprise_broadcast" .
+
+<https://1145.am/db/industry/14_transportation_trucking_transport_truck> a ns1:IndustryCluster ;
+    ns1:representation "automotive",
+        "logistics",
+        "road",
+        "transport",
+        "transportation",
+        "travel",
+        "truck",
+        "trucking",
+        "vehicle",
+        "vehicles" ;
+    ns1:representativeDoc "rail transportation",
+        "transportation and trucking",
+        "truck transport" ;
+    ns1:topicId 14 ;
+    ns1:uniqueName "14_transportation_trucking_transport_truck" .
+
+<https://1145.am/db/industry/150_luxury_trader_industry_retailer> a ns1:IndustryCluster ;
+    ns1:representation "certification",
+        "industry",
+        "luxury",
+        "processor",
+        "producer",
+        "retail",
+        "retailer",
+        "sector",
+        "smart",
+        "trader" ;
+    ns1:representativeDoc "luxury artisan jeweler",
+        "luxury jeweller",
+        "luxury jewelry" ;
+    ns1:topicId 150 ;
+    ns1:uniqueName "150_luxury_trader_industry_retailer" .
+
+<https://1145.am/db/industry/151_marketplace_equity_people_marketing> a ns1:IndustryCluster ;
+    ns1:representation "asset",
+        "commerce",
+        "community",
+        "design",
+        "equity",
+        "marketing",
+        "marketplace",
+        "people",
+        "platform",
+        "tracking" ;
+    ns1:representativeDoc "asset and people tracking solutions",
+        "crowd equity investment platform",
+        "crowdsourcing and image recognition" ;
+    ns1:topicId 151 ;
+    ns1:uniqueName "151_marketplace_equity_people_marketing" .
+
+<https://1145.am/db/industry/152_interior_architectural_architecture_designer> a ns1:IndustryCluster ;
+    ns1:representation "architectural",
+        "architecture",
+        "construction",
+        "contractor",
+        "contractors",
+        "design",
+        "designer",
+        "hospitality",
+        "interior",
+        "specialty" ;
+    ns1:representativeDoc "interior design",
+        "interior design and renovation services",
+        "interior design service" ;
+    ns1:topicId 152 ;
+    ns1:uniqueName "152_interior_architectural_architecture_designer" .
+
+<https://1145.am/db/industry/153_mobility_workforce_transition_senior> a ns1:IndustryCluster ;
+    ns1:representation "company",
+        "corporate",
+        "employee",
+        "estate",
+        "industry",
+        "management",
+        "mobility",
+        "senior",
+        "transition",
+        "workforce" ;
+    ns1:representativeDoc "senior move management",
+        "senior relocation",
+        "senior relocation and transition services" ;
+    ns1:topicId 153 ;
+    ns1:uniqueName "153_mobility_workforce_transition_senior" .
+
+<https://1145.am/db/industry/154_fashion_ingredients_products_brands> a ns1:IndustryCluster ;
+    ns1:representation "brands",
+        "company",
+        "fashion",
+        "fine",
+        "industry",
+        "ingredients",
+        "personal",
+        "products",
+        "retailer",
+        "technology" ;
+    ns1:representativeDoc "perfume and fashion brands",
+        "perfumery and ingredients",
+        "perfumery, flavors and ingredients" ;
+    ns1:topicId 154 ;
+    ns1:uniqueName "154_fashion_ingredients_products_brands" .
+
+<https://1145.am/db/industry/155_organic_garden_agriculture_cultivation> a ns1:IndustryCluster ;
+    ns1:representation "agriculture",
+        "centers",
+        "chains",
+        "cultivation",
+        "garden",
+        "indoor",
+        "organic",
+        "stores",
+        "supplies",
+        "supply" ;
+    ns1:representativeDoc "hydroponic and organic garden centers",
+        "hydroponic and organic gardening",
+        "hydroponics and organic garden centers" ;
+    ns1:topicId 155 ;
+    ns1:uniqueName "155_organic_garden_agriculture_cultivation" .
+
+<https://1145.am/db/industry/156_relationship_sites_website_site> a ns1:IndustryCluster ;
+    ns1:representation "acquisition",
+        "app",
+        "apps",
+        "business",
+        "company",
+        "relationship",
+        "site",
+        "sites",
+        "social",
+        "website" ;
+    ns1:representativeDoc "dating and relationship company",
+        "dating site",
+        "dating site acquisition" ;
+    ns1:topicId 156 ;
+    ns1:uniqueName "156_relationship_sites_website_site" .
+
+<https://1145.am/db/industry/157_printing_packaging_manufacturing_print> a ns1:IndustryCluster ;
+    ns1:representation "companies",
+        "industries",
+        "industry",
+        "manufacturer",
+        "manufacturing",
+        "packaging",
+        "paper",
+        "print",
+        "printing",
+        "products" ;
+    ns1:representativeDoc "ecommerce sticker and label custom manufacturing channel",
+        "print and label",
+        "print and label industries" ;
+    ns1:topicId 157 ;
+    ns1:uniqueName "157_printing_packaging_manufacturing_print" .
+
+<https://1145.am/db/industry/158_carbon_credit_recycling_accounting> a ns1:IndustryCluster ;
+    ns1:representation "accounting",
+        "capture",
+        "carbon",
+        "credit",
+        "finance",
+        "industry",
+        "market",
+        "project",
+        "recycling",
+        "technology" ;
+    ns1:representativeDoc "carbon credits",
+        "carbon emissions reduction and offsetting",
+        "carbon offset" ;
+    ns1:topicId 158 ;
+    ns1:uniqueName "158_carbon_credit_recycling_accounting" .
+
+<https://1145.am/db/industry/159_control_management_animal_services> a ns1:IndustryCluster ;
+    ns1:representation "animal",
+        "chemicals",
+        "company",
+        "control",
+        "management",
+        "products",
+        "service",
+        "services",
+        "supplies",
+        "treatment" ;
+    ns1:representativeDoc "pest control",
+        "pest-control",
+        "wildlife control" ;
+    ns1:topicId 159 ;
+    ns1:uniqueName "159_control_management_animal_services" .
+
+<https://1145.am/db/industry/15_building_construction_materials_buildings> a ns1:IndustryCluster ;
+    ns1:representation "building",
+        "buildings",
+        "construction",
+        "contractors",
+        "engineered",
+        "engineering",
+        "fabrication",
+        "manufacturing",
+        "material",
+        "materials" ;
+    ns1:representativeDoc "building and construction materials",
+        "building and construction materials supplier",
+        "construction and building materials" ;
+    ns1:topicId 15 ;
+    ns1:uniqueName "15_building_construction_materials_buildings" .
+
+<https://1145.am/db/industry/160_tissue_biomedical_biotech_biotechnology> a ns1:IndustryCluster ;
+    ns1:representation "biomedical",
+        "biotech",
+        "biotechnology",
+        "engineering",
+        "material",
+        "medical",
+        "medicine",
+        "sciences",
+        "technology",
+        "tissue" ;
+    ns1:representativeDoc "biomaterials, medical device and tissue processing",
+        "biomedical material",
+        "tissue engineering" ;
+    ns1:topicId 160 ;
+    ns1:uniqueName "160_tissue_biomedical_biotech_biotechnology" .
+
+<https://1145.am/db/industry/161_agency_provider_investor_consulting> a ns1:IndustryCluster ;
+    ns1:representation "agency",
+        "consulting",
+        "firm",
+        "government",
+        "insurer",
+        "investor",
+        "municipal",
+        "provider",
+        "surety",
+        "trading" ;
+    ns1:representativeDoc "commercial surety bonds",
+        "surety bond agency",
+        "surety bond provider" ;
+    ns1:topicId 161 ;
+    ns1:uniqueName "161_agency_provider_investor_consulting" .
+
+<https://1145.am/db/industry/162_listings_site_advertising_web> a ns1:IndustryCluster ;
+    ns1:representation "ad",
+        "advertising",
+        "business",
+        "directory",
+        "listings",
+        "marketplace",
+        "service",
+        "services",
+        "site",
+        "web" ;
+    ns1:representativeDoc "classified listings and buyer's directory publisher",
+        "classified site",
+        "classifieds and listings business" ;
+    ns1:topicId 162 ;
+    ns1:uniqueName "162_listings_site_advertising_web" .
+
+<https://1145.am/db/industry/163_floor_robotic_facility_wood> a ns1:IndustryCluster ;
+    ns1:representation "design",
+        "facility",
+        "floor",
+        "interior",
+        "products",
+        "retail",
+        "retailer",
+        "robotic",
+        "store",
+        "wood" ;
+    ns1:representativeDoc "carpet and floor coverings retailer",
+        "floor covering",
+        "floor covering products" ;
+    ns1:topicId 163 ;
+    ns1:uniqueName "163_floor_robotic_facility_wood" .
+
+<https://1145.am/db/industry/164_industrial_industry_synthetic_manufacturer> a ns1:IndustryCluster ;
+    ns1:representation "chemical",
+        "fluid",
+        "fuel",
+        "industrial",
+        "industry",
+        "manufacturer",
+        "products",
+        "synthetic",
+        "technology",
+        "tools" ;
+    ns1:representativeDoc "lubricants, fuel, diesel exhaust fluid def, and industrial reliability",
+        "nanoengineered lubricants, coatings, paints, and cutting tools",
+        "regional distributor of lubricants" ;
+    ns1:topicId 164 ;
+    ns1:uniqueName "164_industrial_industry_synthetic_manufacturer" .
+
+<https://1145.am/db/industry/165_provider_payments_payment_carrier> a ns1:IndustryCluster ;
+    ns1:representation "carrier",
+        "mobile",
+        "payment",
+        "payments",
+        "phone",
+        "phones",
+        "provider",
+        "service",
+        "services",
+        "transaction" ;
+    ns1:representativeDoc "pre-paid mobile phones provider",
+        "prepaid product and transaction services",
+        "prepaid segment" ;
+    ns1:topicId 165 ;
+    ns1:uniqueName "165_provider_payments_payment_carrier" .
+
+<https://1145.am/db/industry/166_services_clinic_service_provider> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "care",
+        "centers",
+        "clinic",
+        "equipment",
+        "maker",
+        "operator",
+        "provider",
+        "service",
+        "services" ;
+    ns1:representativeDoc "dialysis centers",
+        "dialysis clinic operator",
+        "kidney care provider" ;
+    ns1:topicId 166 ;
+    ns1:uniqueName "166_services_clinic_service_provider" .
+
+<https://1145.am/db/industry/167_startups_startup_security_computer> a ns1:IndustryCluster ;
+    ns1:representation "computer",
+        "connected",
+        "device",
+        "hardware",
+        "internet",
+        "maker",
+        "security",
+        "space",
+        "startup",
+        "startups" ;
+    ns1:representativeDoc "micromobility startups",
+        "start-page startups",
+        "startups" ;
+    ns1:topicId 167 ;
+    ns1:uniqueName "167_startups_startup_security_computer" .
+
+<https://1145.am/db/industry/168_materials_manufacturing_natural_industry> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "advanced",
+        "cleaning",
+        "industry",
+        "manufacturing",
+        "materials",
+        "natural",
+        "related",
+        "services",
+        "technology" ;
+    ns1:representativeDoc "natural stone",
+        "quarrier of natural stone",
+        "tile, natural stone and countertop" ;
+    ns1:topicId 168 ;
+    ns1:uniqueName "168_materials_manufacturing_natural_industry" .
+
+<https://1145.am/db/industry/169_therapeutics_therapy_treatment_medicine> a ns1:IndustryCluster ;
+    ns1:representation "clinics",
+        "facilities",
+        "health",
+        "medicine",
+        "mental",
+        "products",
+        "therapeutics",
+        "therapy",
+        "treatment",
+        "wellness" ;
+    ns1:representativeDoc "psychedelic mental health clinics",
+        "psychedelic mental-health clinics",
+        "psychedelic therapy" ;
+    ns1:topicId 169 ;
+    ns1:uniqueName "169_therapeutics_therapy_treatment_medicine" .
+
+<https://1145.am/db/industry/16_grocery_shopping_retailer_retailers> a ns1:IndustryCluster ;
+    ns1:representation "businesses",
+        "ecommerce",
+        "grocery",
+        "retail",
+        "retailer",
+        "retailers",
+        "retailing",
+        "shop",
+        "shopping",
+        "stores" ;
+    ns1:representativeDoc "convenience and grocery store industries",
+        "grocery shopping",
+        "grocery store" ;
+    ns1:topicId 16 ;
+    ns1:uniqueName "16_grocery_shopping_retailer_retailers" .
+
+<https://1145.am/db/industry/170_insurance_contract_service_provider> a ns1:IndustryCluster ;
+    ns1:representation "aftermarket",
+        "automotive",
+        "businesses",
+        "consumer",
+        "contract",
+        "insurance",
+        "products",
+        "provider",
+        "service",
+        "services" ;
+    ns1:representativeDoc "vehicle service contract and extended warranty sector",
+        "warranty aftermarket programs",
+        "warranty and service contract businesses" ;
+    ns1:topicId 170 ;
+    ns1:uniqueName "170_insurance_contract_service_provider" .
+
+<https://1145.am/db/industry/171_aggregation_construction_machinery_equipment> a ns1:IndustryCluster ;
+    ns1:representation "aggregation",
+        "construction",
+        "data",
+        "equipment",
+        "industries",
+        "industry",
+        "machinery",
+        "materials",
+        "operations",
+        "processing" ;
+    ns1:representativeDoc "aggregates and construction materials",
+        "construction aggregates",
+        "data aggregation" ;
+    ns1:topicId 171 ;
+    ns1:uniqueName "171_aggregation_construction_machinery_equipment" .
+
+<https://1145.am/db/industry/172_rental_event_industry_planning> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "event",
+        "industry",
+        "planning",
+        "rental",
+        "retail",
+        "retailer",
+        "special" ;
+    ns1:representativeDoc "bridal and special occasion authority",
+        "wedding and event venue",
+        "wedding event industry" ;
+    ns1:topicId 172 ;
+    ns1:uniqueName "172_rental_event_industry_planning" .
+
+<https://1145.am/db/industry/173_employment_workforce_employee_services> a ns1:IndustryCluster ;
+    ns1:representation "company",
+        "drug",
+        "employee",
+        "employment",
+        "industry",
+        "security",
+        "services",
+        "solutions",
+        "testing",
+        "workforce" ;
+    ns1:representativeDoc "employment background screening solutions",
+        "employment screening services",
+        "employment screening solutions" ;
+    ns1:topicId 173 ;
+    ns1:uniqueName "173_employment_workforce_employee_services" .
+
+<https://1145.am/db/industry/174_holiday_business_exchange_services> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "business",
+        "communities",
+        "community",
+        "exchange",
+        "holiday",
+        "home",
+        "industry",
+        "package",
+        "services" ;
+    ns1:representativeDoc "coach holiday",
+        "holiday",
+        "holiday services" ;
+    ns1:topicId 174 ;
+    ns1:uniqueName "174_holiday_business_exchange_services" .
+
+<https://1145.am/db/industry/175_advertising_hosting_audio_monetization> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "advertising",
+        "audio",
+        "hosting",
+        "market",
+        "marketplace",
+        "monetization" ;
+    ns1:representativeDoc "podcast hosting",
+        "podcast hosting and advertising",
+        "podcast hosting platform and advertising marketplace" ;
+    ns1:topicId 175 ;
+    ns1:uniqueName "175_advertising_hosting_audio_monetization" .
+
+<https://1145.am/db/industry/176_infrastructure_water_company_firm> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "company",
+        "firm",
+        "industry",
+        "infrastructure",
+        "oil",
+        "provider",
+        "sector",
+        "services",
+        "water" ;
+    ns1:representativeDoc "midstream produced water infrastructure",
+        "midstream produced water infrastructure company",
+        "water midstream" ;
+    ns1:topicId 176 ;
+    ns1:uniqueName "176_infrastructure_water_company_firm" .
+
+<https://1145.am/db/industry/177_dealership_truck_rental_retailer> a ns1:IndustryCluster ;
+    ns1:representation "auto",
+        "business",
+        "dealership",
+        "industry",
+        "park",
+        "rental",
+        "retailer",
+        "sales",
+        "service",
+        "truck" ;
+    ns1:representativeDoc "auto and rv dealers",
+        "auto and rv superstore",
+        "auto, heavy truck and rv dealers" ;
+    ns1:topicId 177 ;
+    ns1:uniqueName "177_dealership_truck_rental_retailer" .
+
+<https://1145.am/db/industry/178_lifecycle_services_life_technology> a ns1:IndustryCluster ;
+    ns1:representation "equipment",
+        "industrial",
+        "life",
+        "lifecycle",
+        "machinery",
+        "management",
+        "manufacturing",
+        "product",
+        "services",
+        "technology" ;
+    ns1:representativeDoc "it lifecycle",
+        "it lifecycle services",
+        "lifecycle management" ;
+    ns1:topicId 178 ;
+    ns1:uniqueName "178_lifecycle_services_life_technology" .
+
+<https://1145.am/db/industry/179_box_business_vendor_supplier> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "box",
+        "business",
+        "maker",
+        "software",
+        "supplier",
+        "tv",
+        "vendor" ;
+    ns1:representativeDoc "set-top box",
+        "set-top-box",
+        "set-top-box business" ;
+    ns1:topicId 179 ;
+    ns1:uniqueName "179_box_business_vendor_supplier" .
+
+<https://1145.am/db/industry/17_precision_fabrication_manufacturing_manufacturers> a ns1:IndustryCluster ;
+    ns1:representation "craft",
+        "equipment",
+        "fabrication",
+        "hardware",
+        "industrial",
+        "manufacturer",
+        "manufacturers",
+        "manufacturing",
+        "mechanical",
+        "precision" ;
+    ns1:representativeDoc "precision equipment",
+        "precision manufacturer",
+        "precision manufacturing" ;
+    ns1:topicId 17 ;
+    ns1:uniqueName "17_precision_fabrication_manufacturing_manufacturers" .
+
+<https://1145.am/db/industry/180_subscription_service_provider_business> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "cloud",
+        "commerce",
+        "ecommerce",
+        "enterprise",
+        "management",
+        "provider",
+        "service",
+        "software",
+        "subscription" ;
+    ns1:representativeDoc "subscription business",
+        "subscription management",
+        "subscription management platform" ;
+    ns1:topicId 180 ;
+    ns1:uniqueName "180_subscription_service_provider_business" .
+
+<https://1145.am/db/industry/181_performance_network_monitoring_internet> a ns1:IndustryCluster ;
+    ns1:representation "analysis",
+        "analytics",
+        "communications",
+        "diagnostics",
+        "internet",
+        "management",
+        "monitoring",
+        "network",
+        "performance",
+        "testing" ;
+    ns1:representativeDoc "network monitoring performance management",
+        "network performance",
+        "network performance management solutions" ;
+    ns1:topicId 181 ;
+    ns1:uniqueName "181_performance_network_monitoring_internet" .
+
+<https://1145.am/db/industry/182_builder_building_housing_construction> a ns1:IndustryCluster ;
+    ns1:representation "builder",
+        "building",
+        "construction",
+        "homes",
+        "house",
+        "housing",
+        "manufacturer",
+        "provider",
+        "space",
+        "supplier" ;
+    ns1:representativeDoc "modular space",
+        "modular space provider",
+        "modular space solution provider" ;
+    ns1:topicId 182 ;
+    ns1:uniqueName "182_builder_building_housing_construction" .
+
+<https://1145.am/db/industry/183_medical_drug_drugs_generic> a ns1:IndustryCluster ;
+    ns1:representation "device",
+        "drug",
+        "drugs",
+        "generic",
+        "manufacturers",
+        "manufacturing",
+        "medical",
+        "prevention",
+        "products",
+        "services" ;
+    ns1:representativeDoc "generic sterile injectables",
+        "sterile drugs",
+        "sterilization and infection prevention products and services" ;
+    ns1:topicId 183 ;
+    ns1:uniqueName "183_medical_drug_drugs_generic" .
+
+<https://1145.am/db/industry/184_restaurants_restaurant_hotels_sector> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "chain",
+        "hotels",
+        "restaurant",
+        "restaurants",
+        "retailer",
+        "sector" ;
+    ns1:representativeDoc "pub restaurant",
+        "pubs and hotels",
+        "pubs and restaurants" ;
+    ns1:topicId 184 ;
+    ns1:uniqueName "184_restaurants_restaurant_hotels_sector" .
+
+<https://1145.am/db/industry/185_portable_rental_accessories_products> a ns1:IndustryCluster ;
+    ns1:representation "accessories",
+        "cosmetic",
+        "industry",
+        "manufacturer",
+        "portable",
+        "products",
+        "rental",
+        "retailers",
+        "services",
+        "specialist" ;
+    ns1:representativeDoc "portable restrooms industry",
+        "portable toilet rental",
+        "portable toilets" ;
+    ns1:topicId 185 ;
+    ns1:uniqueName "185_portable_rental_accessories_products" .
+
+<https://1145.am/db/industry/186_mortgage_residential_apartment_investing> a ns1:IndustryCluster ;
+    ns1:representation "apartment",
+        "care",
+        "health",
+        "healthcare",
+        "investing",
+        "logistics",
+        "mortgage",
+        "multifamily",
+        "properties",
+        "residential" ;
+    ns1:representativeDoc "mortgage reit",
+        "mortgage reits",
+        "residential mortgage reit" ;
+    ns1:topicId 186 ;
+    ns1:uniqueName "186_mortgage_residential_apartment_investing" .
+
+<https://1145.am/db/industry/187_comparison_shopping_marketing_price> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "comparison",
+        "engine",
+        "marketing",
+        "online",
+        "price",
+        "shopping",
+        "site",
+        "technology",
+        "website" ;
+    ns1:representativeDoc "comparison shopping",
+        "comparison shopping engine",
+        "price comparison shopping and marketing technology" ;
+    ns1:topicId 187 ;
+    ns1:uniqueName "187_comparison_shopping_marketing_price" .
+
+<https://1145.am/db/industry/188_developer_platform_devices_application> a ns1:IndustryCluster ;
+    ns1:representation "application",
+        "company",
+        "delivery",
+        "developer",
+        "devices",
+        "management",
+        "monitoring",
+        "platform",
+        "technology",
+        "test" ;
+    ns1:representativeDoc "devops for devices",
+        "devops platform for devices",
+        "devops value stream delivery and management platform" ;
+    ns1:topicId 188 ;
+    ns1:uniqueName "188_developer_platform_devices_application" .
+
+<https://1145.am/db/industry/189_products_therapeutics_product_manufacturers> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "collection",
+        "industry",
+        "manufacturers",
+        "product",
+        "products",
+        "services",
+        "therapeutics" ;
+    ns1:representativeDoc "plasma product manufacturers",
+        "plasma therapeutics",
+        "plasma-derived therapeutics" ;
+    ns1:topicId 189 ;
+    ns1:uniqueName "189_products_therapeutics_product_manufacturers" .
+
+<https://1145.am/db/industry/18_oil_gas_fuel_production> a ns1:IndustryCluster ;
+    ns1:representation "commodity",
+        "contractor",
+        "fuel",
+        "gas",
+        "industrial",
+        "industries",
+        "logistics",
+        "oil",
+        "producers",
+        "production" ;
+    ns1:representativeDoc "oil and gas banker",
+        "oil and gas drilling",
+        "oil and gas-producing" ;
+    ns1:topicId 18 ;
+    ns1:uniqueName "18_oil_gas_fuel_production" .
+
+<https://1145.am/db/industry/190_document_software_management_technology> a ns1:IndustryCluster ;
+    ns1:representation "automation",
+        "content",
+        "document",
+        "engineering",
+        "management",
+        "process",
+        "processing",
+        "services",
+        "software",
+        "technology" ;
+    ns1:representativeDoc "document destruction",
+        "document management",
+        "document technology" ;
+    ns1:topicId 190 ;
+    ns1:uniqueName "190_document_software_management_technology" .
+
+<https://1145.am/db/industry/191_surgical_medical_health_care> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "advanced",
+        "care",
+        "device",
+        "health",
+        "medical",
+        "products",
+        "segment",
+        "services",
+        "surgical" ;
+    ns1:representativeDoc "advanced wound care",
+        "advanced wound care products",
+        "medical wound care health segment" ;
+    ns1:topicId 191 ;
+    ns1:uniqueName "191_surgical_medical_health_care" .
+
+<https://1145.am/db/industry/192_building_residential_construction_material> a ns1:IndustryCluster ;
+    ns1:representation "building",
+        "construction",
+        "fabricator",
+        "industrial",
+        "installation",
+        "material",
+        "mechanical",
+        "products",
+        "property",
+        "residential" ;
+    ns1:representativeDoc "building insulation",
+        "insulation and complementary building products",
+        "value-added distributor and fabricator of mechanical and building insulation products" ;
+    ns1:topicId 192 ;
+    ns1:uniqueName "192_building_residential_construction_material" .
+
+<https://1145.am/db/industry/193_simulation_software_virtual_engineering> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "education",
+        "engineering",
+        "medical",
+        "simulation",
+        "software",
+        "solutions",
+        "technologies",
+        "technology",
+        "virtual" ;
+    ns1:representativeDoc "simulation",
+        "simulation software",
+        "simulation solutions" ;
+    ns1:topicId 193 ;
+    ns1:uniqueName "193_simulation_software_virtual_engineering" .
+
+<https://1145.am/db/industry/194_earth_materials_carbon_exploration> a ns1:IndustryCluster ;
+    ns1:representation "carbon",
+        "critical",
+        "earth",
+        "exploration",
+        "industry",
+        "materials",
+        "miner",
+        "plants",
+        "producers",
+        "technology" ;
+    ns1:representativeDoc "rare earth elements",
+        "rare earth industry",
+        "rare earth materials" ;
+    ns1:topicId 194 ;
+    ns1:uniqueName "194_earth_materials_carbon_exploration" .
+
+<https://1145.am/db/industry/195_digital_web_software_document> a ns1:IndustryCluster ;
+    ns1:representation "digital",
+        "document",
+        "electronic",
+        "management",
+        "platform",
+        "services",
+        "software",
+        "validation",
+        "web",
+        "website" ;
+    ns1:representativeDoc "software and services enabling electronic document accessibility",
+        "web accessibility validation",
+        "website accessibility software solution" ;
+    ns1:topicId 195 ;
+    ns1:uniqueName "195_digital_web_software_document" .
+
+<https://1145.am/db/industry/196_exploration_travel_projects_development> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "business",
+        "company",
+        "development",
+        "exploration",
+        "production",
+        "projects",
+        "space",
+        "stage",
+        "travel" ;
+    ns1:representativeDoc "exploration",
+        "exploration business",
+        "junior exploration" ;
+    ns1:topicId 196 ;
+    ns1:uniqueName "196_exploration_travel_projects_development" .
+
+<https://1145.am/db/industry/197_medical_research_consumer_> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "consumer",
+        "medical",
+        "research" ;
+    ns1:representativeDoc "consumer neurotechnology",
+        "medical neurotechnology",
+        "neuroscience research" ;
+    ns1:topicId 197 ;
+    ns1:uniqueName "197_medical_research_consumer_" .
+
+<https://1145.am/db/industry/198_electrical_manufacturing_connectivity_distributor> a ns1:IndustryCluster ;
+    ns1:representation "assemblies",
+        "assembly",
+        "automation",
+        "bulk",
+        "connectivity",
+        "distributor",
+        "electrical",
+        "manufacturing",
+        "products",
+        "services" ;
+    ns1:representativeDoc "cable, cord sets, cable assemblies, wire harnesses and bulk wire manufacturing and distribution",
+        "wire harness and cable assembly",
+        "wire, cable, connectivity and automation distributor" ;
+    ns1:topicId 198 ;
+    ns1:uniqueName "198_electrical_manufacturing_connectivity_distributor" .
+
+<https://1145.am/db/industry/199_water_recycling_utilities_supply_solutions> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/67_water_recycling_restoration_utilities> ;
+    ns1:childRight <https://1145.am/db/industry/176_infrastructure_water_company_firm> ;
+    ns1:topicId 199 ;
+    ns1:uniqueName "199_water_recycling_utilities_supply_solutions" .
+
+<https://1145.am/db/industry/19_mobile_phones_phone_cellular> a ns1:IndustryCluster ;
+    ns1:representation "app",
+        "carrier",
+        "cellular",
+        "device",
+        "devices",
+        "mobile",
+        "mobility",
+        "phone",
+        "phones",
+        "platform" ;
+    ns1:representativeDoc "mobile",
+        "mobile adtech",
+        "mobile os" ;
+    ns1:topicId 19 ;
+    ns1:uniqueName "19_mobile_phones_phone_cellular" .
+
+<https://1145.am/db/industry/1_mortgage_banking_bank_lending> a ns1:IndustryCluster ;
+    ns1:representation "bank",
+        "banking",
+        "finance",
+        "financial",
+        "financing",
+        "fintech",
+        "lending",
+        "mortgage",
+        "payment",
+        "payments" ;
+    ns1:representativeDoc "mortgage banking",
+        "mortgage banking and financial services",
+        "mortgage banking and lending" ;
+    ns1:topicId 1 ;
+    ns1:uniqueName "1_mortgage_banking_bank_lending" .
+
+<https://1145.am/db/industry/200_hosting_provider_providers_website_service> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/121_hosting_provider_providers_service> ;
+    ns1:childRight <https://1145.am/db/industry/175_advertising_hosting_audio_monetization> ;
+    ns1:topicId 200 ;
+    ns1:uniqueName "200_hosting_provider_providers_website_service" .
+
+<https://1145.am/db/industry/201_sports_sport_games_broadcasting_game> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/34_sports_sport_games_broadcasting> ;
+    ns1:childRight <https://1145.am/db/industry/91_sports_games_gaming_game> ;
+    ns1:topicId 201 ;
+    ns1:uniqueName "201_sports_sport_games_broadcasting_game" .
+
+<https://1145.am/db/industry/202_heating_air_facilities_residential_energy> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/85_heating_facilities_residential_utility> ;
+    ns1:childRight <https://1145.am/db/industry/104_heating_air_residential_energy> ;
+    ns1:topicId 202 ;
+    ns1:uniqueName "202_heating_air_facilities_residential_energy" .
+
+<https://1145.am/db/industry/203_packaging_paper_packaged_package_printing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/157_printing_packaging_manufacturing_print> ;
+    ns1:childRight <https://1145.am/db/industry/33_packaging_paper_packaged_package> ;
+    ns1:topicId 203 ;
+    ns1:uniqueName "203_packaging_paper_packaged_package_printing" .
+
+<https://1145.am/db/industry/204_wellness_health_healthy_healthcare_fitness> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/107_wellness_health_healthy_healthcare> ;
+    ns1:childRight <https://1145.am/db/industry/124_wellness_fitness_resort_leisure> ;
+    ns1:topicId 204 ;
+    ns1:uniqueName "204_wellness_health_healthy_healthcare_fitness" .
+
+<https://1145.am/db/industry/205_senior_retirement_living_residential_healthcare> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/73_senior_retirement_living_residential> ;
+    ns1:childRight <https://1145.am/db/industry/153_mobility_workforce_transition_senior> ;
+    ns1:topicId 205 ;
+    ns1:uniqueName "205_senior_retirement_living_residential_healthcare" .
+
+<https://1145.am/db/industry/206_event_events_booking_service_services> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/172_rental_event_industry_planning> ;
+    ns1:childRight <https://1145.am/db/industry/51_event_events_booking_service> ;
+    ns1:topicId 206 ;
+    ns1:uniqueName "206_event_events_booking_service_services" .
+
+<https://1145.am/db/industry/207_diagnostics_diagnostic_testing_test_assessment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/129_diagnostic_test_testing_diagnostics> ;
+    ns1:childRight <https://1145.am/db/industry/30_diagnostics_diagnostic_testing_test> ;
+    ns1:topicId 207 ;
+    ns1:uniqueName "207_diagnostics_diagnostic_testing_test_assessment" .
+
+<https://1145.am/db/industry/208_installation_building_floor_contractor_facility> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/144_building_exterior_installation_solar> ;
+    ns1:childRight <https://1145.am/db/industry/163_floor_robotic_facility_wood> ;
+    ns1:topicId 208 ;
+    ns1:uniqueName "208_installation_building_floor_contractor_facility" .
+
+<https://1145.am/db/industry/209_nutrition_dietary_supplement_foods_ingredients> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/52_animal_health_wellness_healthcare> ;
+    ns1:childRight <https://1145.am/db/industry/60_nutrition_dietary_supplement_wellness> ;
+    ns1:topicId 209 ;
+    ns1:uniqueName "209_nutrition_dietary_supplement_foods_ingredients" .
+
+<https://1145.am/db/industry/20_beverage_beverages_alcohol_industry> a ns1:IndustryCluster ;
+    ns1:representation "alcohol",
+        "beverage",
+        "beverages",
+        "distributors",
+        "food",
+        "industries",
+        "industry",
+        "maker",
+        "manufacturing",
+        "products" ;
+    ns1:representativeDoc "alcoholic beverage",
+        "beverage",
+        "beverage can" ;
+    ns1:topicId 20 ;
+    ns1:uniqueName "20_beverage_beverages_alcohol_industry" .
+
+<https://1145.am/db/industry/210_defense_military_security_cybersecurity_aircraft> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/32_aviation_aircraft_airline_military> ;
+    ns1:childRight <https://1145.am/db/industry/94_defense_security_cybersecurity_military> ;
+    ns1:topicId 210 ;
+    ns1:uniqueName "210_defense_military_security_cybersecurity_aircraft" .
+
+<https://1145.am/db/industry/211_centres_centers_datadriven_centre_center> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/41_centres_centers_datadriven_centre> ;
+    ns1:childRight <https://1145.am/db/industry/98_contact_centres_centre_center> ;
+    ns1:topicId 211 ;
+    ns1:uniqueName "211_centres_centers_datadriven_centre_center" .
+
+<https://1145.am/db/industry/212_luxury_brands_brand_leisure_hospitality> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/58_luxury_hotel_brand_hospitality> ;
+    ns1:childRight <https://1145.am/db/industry/150_luxury_trader_industry_retailer> ;
+    ns1:topicId 212 ;
+    ns1:uniqueName "212_luxury_brands_brand_leisure_hospitality" .
+
+<https://1145.am/db/industry/213_space_earth_service_infrastructure_services> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/72_space_earth_exploration_service> ;
+    ns1:childRight <https://1145.am/db/industry/182_builder_building_housing_construction> ;
+    ns1:topicId 213 ;
+    ns1:uniqueName "213_space_earth_service_infrastructure_services" .
+
+<https://1145.am/db/industry/214_document_software_management_technology_web> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/195_digital_web_software_document> ;
+    ns1:childRight <https://1145.am/db/industry/190_document_software_management_technology> ;
+    ns1:topicId 214 ;
+    ns1:uniqueName "214_document_software_management_technology_web" .
+
+<https://1145.am/db/industry/215_restaurant_restaurants_service_kitchen_hospitality> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/10_restaurant_restaurants_booking_hospitality> ;
+    ns1:childRight <https://1145.am/db/industry/184_restaurants_restaurant_hotels_sector> ;
+    ns1:topicId 215 ;
+    ns1:uniqueName "215_restaurant_restaurants_service_kitchen_hospitality" .
+
+<https://1145.am/db/industry/216_traffic_road_control_inspection_vehicle> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/92_traffic_road_control_vehicle> ;
+    ns1:childRight <https://1145.am/db/industry/113_road_maintenance_traffic_inspection> ;
+    ns1:topicId 216 ;
+    ns1:uniqueName "216_traffic_road_control_inspection_vehicle" .
+
+<https://1145.am/db/industry/217_pharmaceutical_pharmaceuticals_drug_pharma_drugs> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/3_pharmaceutical_pharmaceuticals_drug_drugs> ;
+    ns1:childRight <https://1145.am/db/industry/119_biotechnology_biotech_therapeutics_therapeutic> ;
+    ns1:topicId 217 ;
+    ns1:uniqueName "217_pharmaceutical_pharmaceuticals_drug_pharma_drugs" .
+
+<https://1145.am/db/industry/218_outdoor_indoor_environmental_equipment_products> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/134_outdoor_environmental_infrastructure_media> ;
+    ns1:childRight <https://1145.am/db/industry/87_outdoor_indoor_equipment_products> ;
+    ns1:topicId 218 ;
+    ns1:uniqueName "218_outdoor_indoor_environmental_equipment_products" .
+
+<https://1145.am/db/industry/219_fashion_merchandise_designer_brands_shop> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/154_fashion_ingredients_products_brands> ;
+    ns1:childRight <https://1145.am/db/industry/23_fashion_designer_merchandise_shop> ;
+    ns1:topicId 219 ;
+    ns1:uniqueName "219_fashion_merchandise_designer_brands_shop" .
+
+<https://1145.am/db/industry/21_metals_minerals_mining_metal> a ns1:IndustryCluster ;
+    ns1:representation "aluminum",
+        "industrial",
+        "industries",
+        "manufacturing",
+        "materials",
+        "metal",
+        "metals",
+        "miner",
+        "minerals",
+        "mining" ;
+    ns1:representativeDoc "metals explorer",
+        "mining, metals and fertilizer industries",
+        "precious and base metals" ;
+    ns1:topicId 21 ;
+    ns1:uniqueName "21_metals_minerals_mining_metal" .
+
+<https://1145.am/db/industry/220_behavioral_therapy_health_treatment_therapeutics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/169_therapeutics_therapy_treatment_medicine> ;
+    ns1:childRight <https://1145.am/db/industry/86_behavioral_therapy_health_treatment> ;
+    ns1:topicId 220 ;
+    ns1:uniqueName "220_behavioral_therapy_health_treatment_therapeutics" .
+
+<https://1145.am/db/industry/221_materials_construction_building_material_buildings> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/15_building_construction_materials_buildings> ;
+    ns1:childRight <https://1145.am/db/industry/171_aggregation_construction_machinery_equipment> ;
+    ns1:topicId 221 ;
+    ns1:uniqueName "221_materials_construction_building_material_buildings" .
+
+<https://1145.am/db/industry/222_automotive_dealership_automobile_dealer_vehicles> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/36_automotive_dealership_dealer_automobile> ;
+    ns1:childRight <https://1145.am/db/industry/128_automotive_dealer_aftermarket_manufacturers> ;
+    ns1:topicId 222 ;
+    ns1:uniqueName "222_automotive_dealership_automobile_dealer_vehicles" .
+
+<https://1145.am/db/industry/223_performance_monitoring_application_applications_analytics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/114_apps_app_mobile_application> ;
+    ns1:childRight <https://1145.am/db/industry/181_performance_network_monitoring_internet> ;
+    ns1:topicId 223 ;
+    ns1:uniqueName "223_performance_monitoring_application_applications_analytics" .
+
+<https://1145.am/db/industry/224_mobile_phones_carrier_cellular_phone> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/19_mobile_phones_phone_cellular> ;
+    ns1:childRight <https://1145.am/db/industry/165_provider_payments_payment_carrier> ;
+    ns1:topicId 224 ;
+    ns1:uniqueName "224_mobile_phones_carrier_cellular_phone" .
+
+<https://1145.am/db/industry/225_homes_automation_house_home_household> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/101_retailer_retailers_residential_designer> ;
+    ns1:childRight <https://1145.am/db/industry/37_homes_house_automation_home> ;
+    ns1:topicId 225 ;
+    ns1:uniqueName "225_homes_automation_house_home_household" .
+
+<https://1145.am/db/industry/226_vision_care_services_surgery_clinic> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/141_vision_care_surgery_services> ;
+    ns1:childRight <https://1145.am/db/industry/166_services_clinic_service_provider> ;
+    ns1:topicId 226 ;
+    ns1:uniqueName "226_vision_care_services_surgery_clinic" .
+
+<https://1145.am/db/industry/227_social_community_collaboration_sharing_internet> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/156_relationship_sites_website_site> ;
+    ns1:childRight <https://1145.am/db/industry/25_social_community_sharing_collaboration> ;
+    ns1:topicId 227 ;
+    ns1:uniqueName "227_social_community_collaboration_sharing_internet" .
+
+<https://1145.am/db/industry/228_device_devices_medical_medicine_equipment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/31_device_devices_medical_medicine> ;
+    ns1:childRight <https://1145.am/db/industry/191_surgical_medical_health_care> ;
+    ns1:topicId 228 ;
+    ns1:uniqueName "228_device_devices_medical_medicine_equipment" .
+
+<https://1145.am/db/industry/229_facilities_maintenance_facility_architecture_architectural> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/95_engineering_consulting_infrastructure_architecture> ;
+    ns1:childRight <https://1145.am/db/industry/78_facilities_facility_maintenance_services> ;
+    ns1:topicId 229 ;
+    ns1:uniqueName "229_facilities_maintenance_facility_architecture_architectural" .
+
+<https://1145.am/db/industry/22_recycling_sustainability_sustainable_environmental> a ns1:IndustryCluster ;
+    ns1:representation "cleaning",
+        "commodity",
+        "environment",
+        "environmental",
+        "plastic",
+        "recycling",
+        "remediation",
+        "sustainability",
+        "sustainable",
+        "utilities" ;
+    ns1:representativeDoc "plastics recycling",
+        "recycling services",
+        "waste and recycling services" ;
+    ns1:topicId 22 ;
+    ns1:uniqueName "22_recycling_sustainability_sustainable_environmental" .
+
+<https://1145.am/db/industry/230_park_recreation_leisure_outdoor_facility> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/177_dealership_truck_rental_retailer> ;
+    ns1:childRight <https://1145.am/db/industry/115_park_recreation_leisure_facility> ;
+    ns1:topicId 230 ;
+    ns1:uniqueName "230_park_recreation_leisure_outdoor_facility" .
+
+<https://1145.am/db/industry/231_fuel_plant_plants_technology_energy> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/133_power_energy_generation_equipment> ;
+    ns1:childRight <https://1145.am/db/industry/118_fuel_plant_energy_technology> ;
+    ns1:topicId 231 ;
+    ns1:uniqueName "231_fuel_plant_plants_technology_energy" .
+
+<https://1145.am/db/industry/232_hr_resources_resource_management_employee> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/97_hr_resources_resource_management> ;
+    ns1:childRight <https://1145.am/db/industry/148_capital_management_wealth_human> ;
+    ns1:topicId 232 ;
+    ns1:uniqueName "232_hr_resources_resource_management_employee" .
+
+<https://1145.am/db/industry/233_wood_materials_products_manufacturing_chemical> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/130_wood_materials_products_manufacturing> ;
+    ns1:childRight <https://1145.am/db/industry/103_materials_protective_protection_manufacturer> ;
+    ns1:topicId 233 ;
+    ns1:uniqueName "233_wood_materials_products_manufacturing_chemical" .
+
+<https://1145.am/db/industry/234_surety_agency_provider_investor_firms> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/64_pos_surety_insurtech_chains> ;
+    ns1:childRight <https://1145.am/db/industry/161_agency_provider_investor_consulting> ;
+    ns1:topicId 234 ;
+    ns1:uniqueName "234_surety_agency_provider_investor_firms" .
+
+<https://1145.am/db/industry/235_banking_bank_mortgage_financial_lending> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/1_mortgage_banking_bank_lending> ;
+    ns1:childRight <https://1145.am/db/industry/186_mortgage_residential_apartment_investing> ;
+    ns1:topicId 235 ;
+    ns1:uniqueName "235_banking_bank_mortgage_financial_lending" .
+
+<https://1145.am/db/industry/236_advertising_marketing_commercial_ad_market> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/45_advertising_marketing_commercial_ad> ;
+    ns1:childRight <https://1145.am/db/industry/162_listings_site_advertising_web> ;
+    ns1:topicId 236 ;
+    ns1:uniqueName "236_advertising_marketing_commercial_ad_market" .
+
+<https://1145.am/db/industry/237_wireless_broadband_communications_telecom_telecommunications> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/2_broadband_wireless_telecom_telecommunications> ;
+    ns1:childRight <https://1145.am/db/industry/116_station_broadcasting_distributor_manufacturer> ;
+    ns1:topicId 237 ;
+    ns1:uniqueName "237_wireless_broadband_communications_telecom_telecommunications" .
+
+<https://1145.am/db/industry/238_healthcare_medical_health_insurance_medicine> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/9_healthcare_information_medical_health> ;
+    ns1:childRight <https://1145.am/db/industry/102_clinic_practices_medical_practice> ;
+    ns1:topicId 238 ;
+    ns1:uniqueName "238_healthcare_medical_health_insurance_medicine" .
+
+<https://1145.am/db/industry/239_metals_metal_minerals_aluminum_materials> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/196_exploration_travel_projects_development> ;
+    ns1:childRight <https://1145.am/db/industry/21_metals_minerals_mining_metal> ;
+    ns1:topicId 239 ;
+    ns1:uniqueName "239_metals_metal_minerals_aluminum_materials" .
+
+<https://1145.am/db/industry/23_fashion_designer_merchandise_shop> a ns1:IndustryCluster ;
+    ns1:representation "commerce",
+        "design",
+        "designer",
+        "fashion",
+        "luxury",
+        "merchandise",
+        "retail",
+        "retailing",
+        "shop",
+        "shopping" ;
+    ns1:representativeDoc "fashion",
+        "fashion apparels",
+        "fashion modeling" ;
+    ns1:topicId 23 ;
+    ns1:uniqueName "23_fashion_designer_merchandise_shop" .
+
+<https://1145.am/db/industry/240_grocery_shopping_retailer_retailers_shop> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/16_grocery_shopping_retailer_retailers> ;
+    ns1:childRight <https://1145.am/db/industry/93_sharing_app_peertopeer_service> ;
+    ns1:topicId 240 ;
+    ns1:uniqueName "240_grocery_shopping_retailer_retailers_shop" .
+
+<https://1145.am/db/industry/241_cultivation_recreational_production_distributors_retailing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/197_medical_research_consumer_> ;
+    ns1:childRight <https://1145.am/db/industry/59_cultivation_recreational_production_distributors> ;
+    ns1:topicId 241 ;
+    ns1:uniqueName "241_cultivation_recreational_production_distributors_retailing" .
+
+<https://1145.am/db/industry/242_fraud_ecommerce_security_assurance_prevention> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/137_fraud_ecommerce_security_assurance> ;
+    ns1:childRight <https://1145.am/db/industry/183_medical_drug_drugs_generic> ;
+    ns1:topicId 242 ;
+    ns1:uniqueName "242_fraud_ecommerce_security_assurance_prevention" .
+
+<https://1145.am/db/industry/243_streaming_music_service_audio_services> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/109_music_media_entertainment_licensing> ;
+    ns1:childRight <https://1145.am/db/industry/38_streaming_video_tv_internet> ;
+    ns1:topicId 243 ;
+    ns1:uniqueName "243_streaming_music_service_audio_services" .
+
+<https://1145.am/db/industry/244_renewable_energy_electricity_sustainability_sustainable> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/50_renewable_energy_electricity_solar> ;
+    ns1:childRight <https://1145.am/db/industry/6_electric_electrical_electricity_vehicle> ;
+    ns1:topicId 244 ;
+    ns1:uniqueName "244_renewable_energy_electricity_sustainability_sustainable" .
+
+<https://1145.am/db/industry/245_education_educational_school_learning_training> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/61_education_educational_school_learning> ;
+    ns1:childRight <https://1145.am/db/industry/99_education_educational_childrens_child> ;
+    ns1:topicId 245 ;
+    ns1:uniqueName "245_education_educational_school_learning_training" .
+
+<https://1145.am/db/industry/246_homes_house_automation_home_household> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/225_homes_automation_house_home_household> ;
+    ns1:childRight <https://1145.am/db/industry/170_insurance_contract_service_provider> ;
+    ns1:topicId 246 ;
+    ns1:uniqueName "246_homes_house_automation_home_household" .
+
+<https://1145.am/db/industry/247_maintenance_repair_servicing_service_services> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/83_maintenance_repair_servicing_services> ;
+    ns1:childRight <https://1145.am/db/industry/125_rigging_equipment_logistics_services> ;
+    ns1:topicId 247 ;
+    ns1:uniqueName "247_maintenance_repair_servicing_service_services" .
+
+<https://1145.am/db/industry/248_cloud_software_enterprise_applications_application> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/5_enterprise_software_services_service> ;
+    ns1:childRight <https://1145.am/db/industry/35_cloud_service_infrastructure_distributed> ;
+    ns1:topicId 248 ;
+    ns1:uniqueName "248_cloud_software_enterprise_applications_application" .
+
+<https://1145.am/db/industry/249_multifamily_housing_rentals_residential_rental> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/123_multifamily_investments_investment_investing> ;
+    ns1:childRight <https://1145.am/db/industry/43_housing_residential_rentals_rental> ;
+    ns1:topicId 249 ;
+    ns1:uniqueName "249_multifamily_housing_rentals_residential_rental" .
+
+<https://1145.am/db/industry/24_insurance_insurer_estate_risk> a ns1:IndustryCluster ;
+    ns1:representation "estate",
+        "financing",
+        "fraud",
+        "housing",
+        "insurance",
+        "insurer",
+        "property",
+        "protection",
+        "provider",
+        "risk" ;
+    ns1:representativeDoc "homeowners insurance",
+        "insurance claims",
+        "title insurance" ;
+    ns1:topicId 24 ;
+    ns1:uniqueName "24_insurance_insurer_estate_risk" .
+
+<https://1145.am/db/industry/250_logistics_delivery_shipping_transportation_transport> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/13_logistics_delivery_transportation_shipping> ;
+    ns1:childRight <https://1145.am/db/industry/143_aircraft_aviation_logistics_military> ;
+    ns1:topicId 250 ;
+    ns1:uniqueName "250_logistics_delivery_shipping_transportation_transport" .
+
+<https://1145.am/db/industry/251_recycling_sustainability_sustainable_remediation_environmental> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/22_recycling_sustainability_sustainable_environmental> ;
+    ns1:childRight <https://1145.am/db/industry/168_materials_manufacturing_natural_industry> ;
+    ns1:topicId 251 ;
+    ns1:uniqueName "251_recycling_sustainability_sustainable_remediation_environmental" .
+
+<https://1145.am/db/industry/252_contracting_contractors_contractor_government_contract> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/74_government_services_governance_technology> ;
+    ns1:childRight <https://1145.am/db/industry/70_contractor_contractors_contracting_electrical> ;
+    ns1:topicId 252 ;
+    ns1:uniqueName "252_contracting_contractors_contractor_government_contract" .
+
+<https://1145.am/db/industry/253_automation_automated_automatic_auto_autonomous> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/44_automation_automated_auto_automatic> ;
+    ns1:childRight <https://1145.am/db/industry/159_control_management_animal_services> ;
+    ns1:topicId 253 ;
+    ns1:uniqueName "253_automation_automated_automatic_auto_autonomous" .
+
+<https://1145.am/db/industry/254_sciences_science_scientific_biotech_biotechnology> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/68_retirement_financial_investments_services> ;
+    ns1:childRight <https://1145.am/db/industry/63_sciences_science_scientific_biotech> ;
+    ns1:topicId 254 ;
+    ns1:uniqueName "254_sciences_science_scientific_biotech_biotechnology" .
+
+<https://1145.am/db/industry/255_ecommerce_commerce_marketplace_marketplaces_warehousing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/7_ecommerce_commerce_marketplace_marketplaces> ;
+    ns1:childRight <https://1145.am/db/industry/151_marketplace_equity_people_marketing> ;
+    ns1:topicId 255 ;
+    ns1:uniqueName "255_ecommerce_commerce_marketplace_marketplaces_warehousing" .
+
+<https://1145.am/db/industry/256_manufacturers_manufacturer_manufacturing_distributor_makers> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/189_products_therapeutics_product_manufacturers> ;
+    ns1:childRight <https://1145.am/db/industry/110_maker_manufacturers_manufacturer_manufacturing> ;
+    ns1:topicId 256 ;
+    ns1:uniqueName "256_manufacturers_manufacturer_manufacturing_distributor_makers" .
+
+<https://1145.am/db/industry/257_device_devices_medical_medicine_equipment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/228_device_devices_medical_medicine_equipment> ;
+    ns1:childRight <https://1145.am/db/industry/226_vision_care_services_surgery_clinic> ;
+    ns1:topicId 257 ;
+    ns1:uniqueName "257_device_devices_medical_medicine_equipment" .
+
+<https://1145.am/db/industry/258_publisher_publishing_developer_developers_gaming> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/28_gaming_entertainment_games_media> ;
+    ns1:childRight <https://1145.am/db/industry/65_publisher_publishing_publication_subscription> ;
+    ns1:topicId 258 ;
+    ns1:uniqueName "258_publisher_publishing_developer_developers_gaming" .
+
+<https://1145.am/db/industry/259_investment_investments_estate_investing_investor> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/24_insurance_insurer_estate_risk> ;
+    ns1:childRight <https://1145.am/db/industry/0_investment_investments_estate_investing> ;
+    ns1:topicId 259 ;
+    ns1:uniqueName "259_investment_investments_estate_investing_investor" .
+
+<https://1145.am/db/industry/25_social_community_sharing_collaboration> a ns1:IndustryCluster ;
+    ns1:representation "advertising",
+        "collaboration",
+        "community",
+        "internet",
+        "marketing",
+        "media",
+        "monetization",
+        "share",
+        "sharing",
+        "social" ;
+    ns1:representativeDoc "social browsing",
+        "social good",
+        "social voting" ;
+    ns1:topicId 25 ;
+    ns1:uniqueName "25_social_community_sharing_collaboration" .
+
+<https://1145.am/db/industry/260_performance_monitoring_application_applications_analytics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/223_performance_monitoring_application_applications_analytics> ;
+    ns1:childRight <https://1145.am/db/industry/188_developer_platform_devices_application> ;
+    ns1:topicId 260 ;
+    ns1:uniqueName "260_performance_monitoring_application_applications_analytics" .
+
+<https://1145.am/db/industry/261_marine_logistics_tank_industry_industries> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/57_marine_logistics_tank_industry> ;
+    ns1:childRight <https://1145.am/db/industry/145_terminal_operator_marine_container> ;
+    ns1:topicId 261 ;
+    ns1:uniqueName "261_marine_logistics_tank_industry_industries" .
+
+<https://1145.am/db/industry/262_fiber_optical_laser_materials_broadband> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/120_fiber_optical_broadband_laser> ;
+    ns1:childRight <https://1145.am/db/industry/122_laser_optical_light_technologies> ;
+    ns1:topicId 262 ;
+    ns1:uniqueName "262_fiber_optical_laser_materials_broadband" .
+
+<https://1145.am/db/industry/263_diagnostics_diagnostic_testing_test_laboratory> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/207_diagnostics_diagnostic_testing_test_assessment> ;
+    ns1:childRight <https://1145.am/db/industry/42_laboratory_lab_testing_test> ;
+    ns1:topicId 263 ;
+    ns1:uniqueName "263_diagnostics_diagnostic_testing_test_laboratory" .
+
+<https://1145.am/db/industry/264_building_construction_buildings_materials_contractors> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/233_wood_materials_products_manufacturing_chemical> ;
+    ns1:childRight <https://1145.am/db/industry/221_materials_construction_building_material_buildings> ;
+    ns1:topicId 264 ;
+    ns1:uniqueName "264_building_construction_buildings_materials_contractors" .
+
+<https://1145.am/db/industry/265_agency_agencies_creative_marketing_organization> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/71_agency_agencies_creative_marketing> ;
+    ns1:childRight <https://1145.am/db/industry/132_acquisition_firms_companies_company> ;
+    ns1:topicId 265 ;
+    ns1:uniqueName "265_agency_agencies_creative_marketing_organization" .
+
+<https://1145.am/db/industry/266_storage_portable_cloud_data_space> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/53_storage_portable_cloud_space> ;
+    ns1:childRight <https://1145.am/db/industry/185_portable_rental_accessories_products> ;
+    ns1:topicId 266 ;
+    ns1:uniqueName "266_storage_portable_cloud_data_space" .
+
+<https://1145.am/db/industry/267_automotive_automobile_vehicles_vehicle_dealership> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/222_automotive_dealership_automobile_dealer_vehicles> ;
+    ns1:childRight <https://1145.am/db/industry/17_precision_fabrication_manufacturing_manufacturers> ;
+    ns1:topicId 267 ;
+    ns1:uniqueName "267_automotive_automobile_vehicles_vehicle_dealership" .
+
+<https://1145.am/db/industry/268_recruitment_staffing_workforce_recruiting_employment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/173_employment_workforce_employee_services> ;
+    ns1:childRight <https://1145.am/db/industry/27_recruitment_staffing_workforce_recruiting> ;
+    ns1:topicId 268 ;
+    ns1:uniqueName "268_recruitment_staffing_workforce_recruiting_employment" .
+
+<https://1145.am/db/industry/269_subscription_service_provider_marketing_retailer> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/142_foods_food_retailer_manufacturer> ;
+    ns1:childRight <https://1145.am/db/industry/180_subscription_service_provider_business> ;
+    ns1:topicId 269 ;
+    ns1:uniqueName "269_subscription_service_provider_marketing_retailer" .
+
+<https://1145.am/db/industry/26_analytics_enterprise_insights_data> a ns1:IndustryCluster ;
+    ns1:representation "analysis",
+        "analytics",
+        "business",
+        "businesses",
+        "data",
+        "ecommerce",
+        "enterprise",
+        "insights",
+        "intelligence",
+        "marketing" ;
+    ns1:representativeDoc "analytics and business intelligence",
+        "analytics and business intelligence consulting",
+        "business intelligence and analytics" ;
+    ns1:topicId 26 ;
+    ns1:uniqueName "26_analytics_enterprise_insights_data" .
+
+<https://1145.am/db/industry/270_wellness_health_beauty_healthy_healthcare> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/204_wellness_health_healthy_healthcare_fitness> ;
+    ns1:childRight <https://1145.am/db/industry/47_beauty_cosmetic_fashion_products> ;
+    ns1:topicId 270 ;
+    ns1:uniqueName "270_wellness_health_beauty_healthy_healthcare" .
+
+<https://1145.am/db/industry/271_safety_environmental_environment_sustainability_chemicals> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/40_safety_protection_security_protective> ;
+    ns1:childRight <https://1145.am/db/industry/126_environmental_environment_sustainability_consultant> ;
+    ns1:topicId 271 ;
+    ns1:uniqueName "271_safety_environmental_environment_sustainability_chemicals" .
+
+<https://1145.am/db/industry/272_window_exterior_building_interior_designer> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/89_window_exterior_building_interior> ;
+    ns1:childRight <https://1145.am/db/industry/192_building_residential_construction_material> ;
+    ns1:topicId 272 ;
+    ns1:uniqueName "272_window_exterior_building_interior_designer" .
+
+<https://1145.am/db/industry/273_medical_devices_technology_medicine_technologies> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/238_healthcare_medical_health_insurance_medicine> ;
+    ns1:childRight <https://1145.am/db/industry/257_device_devices_medical_medicine_equipment> ;
+    ns1:topicId 273 ;
+    ns1:uniqueName "273_medical_devices_technology_medicine_technologies" .
+
+<https://1145.am/db/industry/274_cell_cellular_biotech_biotechnology_biomedical> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/160_tissue_biomedical_biotech_biotechnology> ;
+    ns1:childRight <https://1145.am/db/industry/117_cell_cellular_biotech_tissue> ;
+    ns1:topicId 274 ;
+    ns1:uniqueName "274_cell_cellular_biotech_biotechnology_biomedical" .
+
+<https://1145.am/db/industry/275_benefits_pharmacy_benefit_employee_hr> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/131_pharmacy_specialty_consulting_retail> ;
+    ns1:childRight <https://1145.am/db/industry/76_employee_benefits_benefit_hr> ;
+    ns1:topicId 275 ;
+    ns1:uniqueName "275_benefits_pharmacy_benefit_employee_hr" .
+
+<https://1145.am/db/industry/276_mail_email_providers_provider_platform> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/105_email_mail_delivery_service> ;
+    ns1:childRight <https://1145.am/db/industry/77_web3_web_platform_services> ;
+    ns1:topicId 276 ;
+    ns1:uniqueName "276_mail_email_providers_provider_platform" .
+
+<https://1145.am/db/industry/277_pharmaceutical_pharmaceuticals_drug_drugs_pharma> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/217_pharmaceutical_pharmaceuticals_drug_pharma_drugs> ;
+    ns1:childRight <https://1145.am/db/industry/256_manufacturers_manufacturer_manufacturing_distributor_makers> ;
+    ns1:topicId 277 ;
+    ns1:uniqueName "277_pharmaceutical_pharmaceuticals_drug_drugs_pharma" .
+
+<https://1145.am/db/industry/278_oil_exploration_fuel_gas_mining> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/18_oil_gas_fuel_production> ;
+    ns1:childRight <https://1145.am/db/industry/239_metals_metal_minerals_aluminum_materials> ;
+    ns1:topicId 278 ;
+    ns1:uniqueName "278_oil_exploration_fuel_gas_mining" .
+
+<https://1145.am/db/industry/279_audio_music_software_technology_technologies> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/55_audio_music_software_technology> ;
+    ns1:childRight <https://1145.am/db/industry/127_language_software_services_service> ;
+    ns1:topicId 279 ;
+    ns1:uniqueName "279_audio_music_software_technology_technologies" .
+
+<https://1145.am/db/industry/27_recruitment_staffing_workforce_recruiting> a ns1:IndustryCluster ;
+    ns1:representation "employee",
+        "employment",
+        "recruiting",
+        "recruitment",
+        "service",
+        "services",
+        "staffing",
+        "workers",
+        "workforce",
+        "workplace" ;
+    ns1:representativeDoc "healthcare recruiting and workforce solutions staffing",
+        "recruitment, staffing and consulting services",
+        "staffing and recruitment" ;
+    ns1:topicId 27 ;
+    ns1:uniqueName "27_recruitment_staffing_workforce_recruiting" .
+
+<https://1145.am/db/industry/280_executive_search_management_enterprise_agency> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/66_executive_search_management_enterprise> ;
+    ns1:childRight <https://1145.am/db/industry/106_motor_engine_electric_car> ;
+    ns1:topicId 280 ;
+    ns1:uniqueName "280_executive_search_management_enterprise_agency" .
+
+<https://1145.am/db/industry/281_renewable_energy_electricity_sustainability_sustainable> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/244_renewable_energy_electricity_sustainability_sustainable> ;
+    ns1:childRight <https://1145.am/db/industry/231_fuel_plant_plants_technology_energy> ;
+    ns1:topicId 281 ;
+    ns1:uniqueName "281_renewable_energy_electricity_sustainability_sustainable" .
+
+<https://1145.am/db/industry/282_carbon_credit_recycling_earth_accounting> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/194_earth_materials_carbon_exploration> ;
+    ns1:childRight <https://1145.am/db/industry/158_carbon_credit_recycling_accounting> ;
+    ns1:topicId 282 ;
+    ns1:uniqueName "282_carbon_credit_recycling_earth_accounting" .
+
+<https://1145.am/db/industry/283_consulting_consultant_consultancy_sourcing_logistics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/26_analytics_enterprise_insights_data> ;
+    ns1:childRight <https://1145.am/db/industry/4_consulting_consultant_consultancy_logistics> ;
+    ns1:topicId 283 ;
+    ns1:uniqueName "283_consulting_consultant_consultancy_sourcing_logistics" .
+
+<https://1145.am/db/industry/284_semiconductor_silicon_electronics_fabrication_materials> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/11_semiconductor_electronics_silicon_hardware> ;
+    ns1:childRight <https://1145.am/db/industry/198_electrical_manufacturing_connectivity_distributor> ;
+    ns1:topicId 284 ;
+    ns1:uniqueName "284_semiconductor_silicon_electronics_fabrication_materials" .
+
+<https://1145.am/db/industry/285_agricultural_agriculture_cultivation_garden_commodity> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/39_agricultural_agriculture_cultivation_commodity> ;
+    ns1:childRight <https://1145.am/db/industry/155_organic_garden_agriculture_cultivation> ;
+    ns1:topicId 285 ;
+    ns1:uniqueName "285_agricultural_agriculture_cultivation_garden_commodity" .
+
+<https://1145.am/db/industry/286_customer_engagement_loyalty_marketing_consumer> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/90_loyalty_card_marketplace_commerce> ;
+    ns1:childRight <https://1145.am/db/industry/56_engagement_customer_marketing_consumer> ;
+    ns1:topicId 286 ;
+    ns1:uniqueName "286_customer_engagement_loyalty_marketing_consumer" .
+
+<https://1145.am/db/industry/287_security_cloud_secure_cybersecurity_protection> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/248_cloud_software_enterprise_applications_application> ;
+    ns1:childRight <https://1145.am/db/industry/12_cybersecurity_security_cyber_secure> ;
+    ns1:topicId 287 ;
+    ns1:uniqueName "287_security_cloud_secure_cybersecurity_protection" .
+
+<https://1145.am/db/industry/288_logistics_transportation_transport_trucking_warehousing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/14_transportation_trucking_transport_truck> ;
+    ns1:childRight <https://1145.am/db/industry/250_logistics_delivery_shipping_transportation_transport> ;
+    ns1:topicId 288 ;
+    ns1:uniqueName "288_logistics_transportation_transport_trucking_warehousing" .
+
+<https://1145.am/db/industry/289_3d_graphics_interactive_optical_imaging> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/82_display_graphics_image_optical> ;
+    ns1:childRight <https://1145.am/db/industry/108_3d_graphics_printing_model> ;
+    ns1:topicId 289 ;
+    ns1:uniqueName "289_3d_graphics_interactive_optical_imaging" .
+
+<https://1145.am/db/industry/28_gaming_entertainment_games_media> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "computer",
+        "entertainment",
+        "game",
+        "games",
+        "gaming",
+        "hardware",
+        "media",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "entertainment and gaming",
+        "gaming and entertainment",
+        "gaming entertainment" ;
+    ns1:topicId 28 ;
+    ns1:uniqueName "28_gaming_entertainment_games_media" .
+
+<https://1145.am/db/industry/290_hotel_hotels_booking_hospitality_resorts> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/174_holiday_business_exchange_services> ;
+    ns1:childRight <https://1145.am/db/industry/8_hotel_hotels_hospitality_resorts> ;
+    ns1:topicId 290 ;
+    ns1:uniqueName "290_hotel_hotels_booking_hospitality_resorts" .
+
+<https://1145.am/db/industry/291_beverage_beverages_alcohol_industry_manufacturing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/20_beverage_beverages_alcohol_industry> ;
+    ns1:childRight <https://1145.am/db/industry/79_snacks_food_foods_beverages> ;
+    ns1:topicId 291 ;
+    ns1:uniqueName "291_beverage_beverages_alcohol_industry_manufacturing" .
+
+<https://1145.am/db/industry/292_imaging_photography_diagnostic_medical_diagnostics> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/289_3d_graphics_interactive_optical_imaging> ;
+    ns1:childRight <https://1145.am/db/industry/49_imaging_photography_medical_diagnostic> ;
+    ns1:topicId 292 ;
+    ns1:uniqueName "292_imaging_photography_diagnostic_medical_diagnostics" .
+
+<https://1145.am/db/industry/293_tech_hightech_technology_engineering_industry> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/96_tech_technology_hightech_engineering> ;
+    ns1:childRight <https://1145.am/db/industry/167_startups_startup_security_computer> ;
+    ns1:topicId 293 ;
+    ns1:uniqueName "293_tech_hightech_technology_engineering_industry" .
+
+<https://1145.am/db/industry/294_window_exterior_interior_building_design> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/272_window_exterior_building_interior_designer> ;
+    ns1:childRight <https://1145.am/db/industry/208_installation_building_floor_contractor_facility> ;
+    ns1:topicId 294 ;
+    ns1:uniqueName "294_window_exterior_interior_building_design" .
+
+<https://1145.am/db/industry/295_film_movie_art_arts_photography> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/112_resale_wholesale_marketplace_retail> ;
+    ns1:childRight <https://1145.am/db/industry/69_film_movie_art_arts> ;
+    ns1:topicId 295 ;
+    ns1:uniqueName "295_film_movie_art_arts_photography" .
+
+<https://1145.am/db/industry/296_news_media_broadcasting_technology_communications> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/29_news_media_broadcasting_broadcast> ;
+    ns1:childRight <https://1145.am/db/industry/252_contracting_contractors_contractor_government_contract> ;
+    ns1:topicId 296 ;
+    ns1:uniqueName "296_news_media_broadcasting_technology_communications" .
+
+<https://1145.am/db/industry/297_exchanges_exchange_trading_trader_commodity> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/187_comparison_shopping_marketing_price> ;
+    ns1:childRight <https://1145.am/db/industry/48_exchanges_exchange_trading_trader> ;
+    ns1:topicId 297 ;
+    ns1:uniqueName "297_exchanges_exchange_trading_trader_commodity" .
+
+<https://1145.am/db/industry/298_interior_architectural_architecture_designer_design> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/152_interior_architectural_architecture_designer> ;
+    ns1:childRight <https://1145.am/db/industry/139_sensor_sensors_sensing_monitoring> ;
+    ns1:topicId 298 ;
+    ns1:uniqueName "298_interior_architectural_architecture_designer_design" .
+
+<https://1145.am/db/industry/299_logistics_transportation_transport_trucking_commerce> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/164_industrial_industry_synthetic_manufacturer> ;
+    ns1:childRight <https://1145.am/db/industry/288_logistics_transportation_transport_trucking_warehousing> ;
+    ns1:topicId 299 ;
+    ns1:uniqueName "299_logistics_transportation_transport_trucking_commerce" .
+
+<https://1145.am/db/industry/29_news_media_broadcasting_broadcast> a ns1:IndustryCluster ;
+    ns1:representation "broadcast",
+        "broadcasting",
+        "communications",
+        "content",
+        "entertainment",
+        "information",
+        "marketing",
+        "media",
+        "news",
+        "television" ;
+    ns1:representativeDoc "news and media",
+        "news media",
+        "political news" ;
+    ns1:topicId 29 ;
+    ns1:uniqueName "29_news_media_broadcasting_broadcast" .
+
+<https://1145.am/db/industry/2_broadband_wireless_telecom_telecommunications> a ns1:IndustryCluster ;
+    ns1:representation "broadband",
+        "communications",
+        "internet",
+        "network",
+        "networking",
+        "provider",
+        "telecom",
+        "telecommunications",
+        "telecoms",
+        "wireless" ;
+    ns1:representativeDoc "broadband and wireless communications",
+        "wireless broadband provider",
+        "wireless data communications and networking" ;
+    ns1:topicId 2 ;
+    ns1:uniqueName "2_broadband_wireless_telecom_telecommunications" .
+
+<https://1145.am/db/industry/300_accounting_finance_financial_firms_business> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/62_accounting_finance_financial_business> ;
+    ns1:childRight <https://1145.am/db/industry/46_legal_law_licensing_rights> ;
+    ns1:topicId 300 ;
+    ns1:uniqueName "300_accounting_finance_financial_firms_business" .
+
+<https://1145.am/db/industry/301_logistics_sourcing_consulting_procurement_enterprise> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/283_consulting_consultant_consultancy_sourcing_logistics> ;
+    ns1:childRight <https://1145.am/db/industry/287_security_cloud_secure_cybersecurity_protection> ;
+    ns1:topicId 301 ;
+    ns1:uniqueName "301_logistics_sourcing_consulting_procurement_enterprise" .
+
+<https://1145.am/db/industry/302_identity_verification_identification_security_secure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/84_identity_verification_identification_security> ;
+    ns1:childRight <https://1145.am/db/industry/136_trust_services_corporate_company> ;
+    ns1:topicId 302 ;
+    ns1:uniqueName "302_identity_verification_identification_security_secure" .
+
+<https://1145.am/db/industry/303_grocery_delivery_retailer_retailers_retailing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/240_grocery_shopping_retailer_retailers_shop> ;
+    ns1:childRight <https://1145.am/db/industry/135_lending_peertopeer_payments_payment> ;
+    ns1:topicId 303 ;
+    ns1:uniqueName "303_grocery_delivery_retailer_retailers_retailing" .
+
+<https://1145.am/db/industry/304_battery_recycling_cell_energy_miner> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/88_battery_cell_energy_miner> ;
+    ns1:childRight <https://1145.am/db/industry/251_recycling_sustainability_sustainable_remediation_environmental> ;
+    ns1:topicId 304 ;
+    ns1:uniqueName "304_battery_recycling_cell_energy_miner" .
+
+<https://1145.am/db/industry/305_lighting_light_audio_electrical_realtime> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/54_lighting_light_electrical_design> ;
+    ns1:childRight <https://1145.am/db/industry/279_audio_music_software_technology_technologies> ;
+    ns1:topicId 305 ;
+    ns1:uniqueName "305_lighting_light_audio_electrical_realtime" .
+
+<https://1145.am/db/industry/306_clinical_treatment_therapies_medical_medicines> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/111_clinical_medical_pharmaceutical_research> ;
+    ns1:childRight <https://1145.am/db/industry/241_cultivation_recreational_production_distributors_retailing> ;
+    ns1:topicId 306 ;
+    ns1:uniqueName "306_clinical_treatment_therapies_medical_medicines" .
+
+<https://1145.am/db/industry/307_mortgage_banking_bank_lending_financial> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/235_banking_bank_mortgage_financial_lending> ;
+    ns1:childRight <https://1145.am/db/industry/249_multifamily_housing_rentals_residential_rental> ;
+    ns1:topicId 307 ;
+    ns1:uniqueName "307_mortgage_banking_bank_lending_financial" .
+
+<https://1145.am/db/industry/308_executive_search_management_enterprise_recruitment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/280_executive_search_management_enterprise_agency> ;
+    ns1:childRight <https://1145.am/db/industry/193_simulation_software_virtual_engineering> ;
+    ns1:topicId 308 ;
+    ns1:uniqueName "308_executive_search_management_enterprise_recruitment" .
+
+<https://1145.am/db/industry/309_estate_residential_firms_investments_investment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/259_investment_investments_estate_investing_investor> ;
+    ns1:childRight <https://1145.am/db/industry/300_accounting_finance_financial_firms_business> ;
+    ns1:topicId 309 ;
+    ns1:uniqueName "309_estate_residential_firms_investments_investment" .
+
+<https://1145.am/db/industry/30_diagnostics_diagnostic_testing_test> a ns1:IndustryCluster ;
+    ns1:representation "assessment",
+        "biologics",
+        "clinical",
+        "detection",
+        "diagnostic",
+        "diagnostics",
+        "lab",
+        "laboratory",
+        "test",
+        "testing" ;
+    ns1:representativeDoc "diagnostic testing",
+        "diagnostic testing and genomics",
+        "medical diagnostic testing" ;
+    ns1:topicId 30 ;
+    ns1:uniqueName "30_diagnostics_diagnostic_testing_test" .
+
+<https://1145.am/db/industry/310_blockchain_crypto_bitcoin_currency_finance> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/293_tech_hightech_technology_engineering_industry> ;
+    ns1:childRight <https://1145.am/db/industry/75_blockchain_crypto_bitcoin_currency> ;
+    ns1:topicId 310 ;
+    ns1:uniqueName "310_blockchain_crypto_bitcoin_currency_finance" .
+
+<https://1145.am/db/industry/311_subscription_business_box_retailer_marketing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/269_subscription_service_provider_marketing_retailer> ;
+    ns1:childRight <https://1145.am/db/industry/179_box_business_vendor_supplier> ;
+    ns1:topicId 311 ;
+    ns1:uniqueName "311_subscription_business_box_retailer_marketing" .
+
+<https://1145.am/db/industry/312_solar_storage_renewable_semiconductor_electricity> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/81_solar_energy_plants_plant> ;
+    ns1:childRight <https://1145.am/db/industry/266_storage_portable_cloud_data_space> ;
+    ns1:topicId 312 ;
+    ns1:uniqueName "312_solar_storage_renewable_semiconductor_electricity" .
+
+<https://1145.am/db/industry/313_fitness_tracking_accessories_wellness_equipment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/138_location_provider_urban_tracking> ;
+    ns1:childRight <https://1145.am/db/industry/80_fitness_tracking_wellness_training> ;
+    ns1:topicId 313 ;
+    ns1:uniqueName "313_fitness_tracking_accessories_wellness_equipment" .
+
+<https://1145.am/db/industry/314_lighting_light_audio_music_stage> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/147_integrator_systems_technology_electronics> ;
+    ns1:childRight <https://1145.am/db/industry/305_lighting_light_audio_electrical_realtime> ;
+    ns1:topicId 314 ;
+    ns1:uniqueName "314_lighting_light_audio_music_stage" .
+
+<https://1145.am/db/industry/315_news_media_content_government_public> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/296_news_media_broadcasting_technology_communications> ;
+    ns1:childRight <https://1145.am/db/industry/100_nonprofit_organizations_organization_organisation> ;
+    ns1:topicId 315 ;
+    ns1:uniqueName "315_news_media_content_government_public" .
+
+<https://1145.am/db/industry/316_semiconductor_silicon_electronics_fabrication_chip> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/284_semiconductor_silicon_electronics_fabrication_materials> ;
+    ns1:childRight <https://1145.am/db/industry/140_iot_internet_technology_devices> ;
+    ns1:topicId 316 ;
+    ns1:uniqueName "316_semiconductor_silicon_electronics_fabrication_chip" .
+
+<https://1145.am/db/industry/317_lighting_light_electrical_broadcast_audio> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/149_av_software_enterprise_broadcast> ;
+    ns1:childRight <https://1145.am/db/industry/314_lighting_light_audio_music_stage> ;
+    ns1:topicId 317 ;
+    ns1:uniqueName "317_lighting_light_electrical_broadcast_audio" .
+
+<https://1145.am/db/industry/318_lifecycle_services_life_technology_software> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/178_lifecycle_services_life_technology> ;
+    ns1:childRight <https://1145.am/db/industry/146_forensic_services_security_consulting> ;
+    ns1:topicId 318 ;
+    ns1:uniqueName "318_lifecycle_services_life_technology_software" .
+
+<https://1145.am/db/industry/319_maintenance_repair_servicing_restoration_service> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/216_traffic_road_control_inspection_vehicle> ;
+    ns1:childRight <https://1145.am/db/industry/247_maintenance_repair_servicing_service_services> ;
+    ns1:topicId 319 ;
+    ns1:uniqueName "319_maintenance_repair_servicing_restoration_service" .
+
+<https://1145.am/db/industry/31_device_devices_medical_medicine> a ns1:IndustryCluster ;
+    ns1:representation "clinical",
+        "device",
+        "devices",
+        "equipment",
+        "healthcare",
+        "med",
+        "medical",
+        "medicine",
+        "pharmaceutical",
+        "pharmaceuticals" ;
+    ns1:representativeDoc "cardiovascular medical device",
+        "medical device and it",
+        "medical-device" ;
+    ns1:topicId 31 ;
+    ns1:uniqueName "31_device_devices_medical_medicine" .
+
+<https://1145.am/db/industry/320_fitness_tracking_wellness_training_accessories> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/318_lifecycle_services_life_technology_software> ;
+    ns1:childRight <https://1145.am/db/industry/313_fitness_tracking_accessories_wellness_equipment> ;
+    ns1:topicId 320 ;
+    ns1:uniqueName "320_fitness_tracking_wellness_training_accessories" .
+
+<https://1145.am/db/industry/321_wireless_network_networking_broadband_telecom> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/237_wireless_broadband_communications_telecom_telecommunications> ;
+    ns1:childRight <https://1145.am/db/industry/316_semiconductor_silicon_electronics_fabrication_chip> ;
+    ns1:topicId 321 ;
+    ns1:uniqueName "321_wireless_network_networking_broadband_telecom" .
+
+<https://1145.am/db/industry/322_customer_marketing_engagement_consumer_marketplace> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/286_customer_engagement_loyalty_marketing_consumer> ;
+    ns1:childRight <https://1145.am/db/industry/255_ecommerce_commerce_marketplace_marketplaces_warehousing> ;
+    ns1:topicId 322 ;
+    ns1:uniqueName "322_customer_marketing_engagement_consumer_marketplace" .
+
+<https://1145.am/db/industry/323_beverages_beverage_alcohol_industry_liquid> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/291_beverage_beverages_alcohol_industry_manufacturing> ;
+    ns1:childRight <https://1145.am/db/industry/311_subscription_business_box_retailer_marketing> ;
+    ns1:topicId 323 ;
+    ns1:uniqueName "323_beverages_beverage_alcohol_industry_liquid" .
+
+<https://1145.am/db/industry/324_identity_verification_identification_security_secure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/320_fitness_tracking_wellness_training_accessories> ;
+    ns1:childRight <https://1145.am/db/industry/302_identity_verification_identification_security_secure> ;
+    ns1:topicId 324 ;
+    ns1:uniqueName "324_identity_verification_identification_security_secure" .
+
+<https://1145.am/db/industry/325_hotel_hotels_hospitality_booking_resorts> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/290_hotel_hotels_booking_hospitality_resorts> ;
+    ns1:childRight <https://1145.am/db/industry/261_marine_logistics_tank_industry_industries> ;
+    ns1:topicId 325 ;
+    ns1:uniqueName "325_hotel_hotels_hospitality_booking_resorts" .
+
+<https://1145.am/db/industry/326_film_movie_production_industry_arts> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/297_exchanges_exchange_trading_trader_commodity> ;
+    ns1:childRight <https://1145.am/db/industry/295_film_movie_art_arts_photography> ;
+    ns1:topicId 326 ;
+    ns1:uniqueName "326_film_movie_production_industry_arts" .
+
+<https://1145.am/db/industry/327_identity_identification_verification_security_secure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/298_interior_architectural_architecture_designer_design> ;
+    ns1:childRight <https://1145.am/db/industry/324_identity_verification_identification_security_secure> ;
+    ns1:topicId 327 ;
+    ns1:uniqueName "327_identity_identification_verification_security_secure" .
+
+<https://1145.am/db/industry/328_web_web3_mobile_internet_platform> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/276_mail_email_providers_provider_platform> ;
+    ns1:childRight <https://1145.am/db/industry/260_performance_monitoring_application_applications_analytics> ;
+    ns1:topicId 328 ;
+    ns1:uniqueName "328_web_web3_mobile_internet_platform" .
+
+<https://1145.am/db/industry/329_sports_games_gaming_sport_game> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/201_sports_sport_games_broadcasting_game> ;
+    ns1:childRight <https://1145.am/db/industry/258_publisher_publishing_developer_developers_gaming> ;
+    ns1:topicId 329 ;
+    ns1:uniqueName "329_sports_games_gaming_sport_game" .
+
+<https://1145.am/db/industry/32_aviation_aircraft_airline_military> a ns1:IndustryCluster ;
+    ns1:representation "air",
+        "aircraft",
+        "airline",
+        "automotive",
+        "aviation",
+        "engineering",
+        "engineers",
+        "logistics",
+        "military",
+        "travel" ;
+    ns1:representativeDoc "aviation services",
+        "defense aviation",
+        "private jet aviation" ;
+    ns1:topicId 32 ;
+    ns1:uniqueName "32_aviation_aircraft_airline_military" .
+
+<https://1145.am/db/industry/330_safety_environmental_environment_prevention_health> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/271_safety_environmental_environment_sustainability_chemicals> ;
+    ns1:childRight <https://1145.am/db/industry/229_facilities_maintenance_facility_architecture_architectural> ;
+    ns1:topicId 330 ;
+    ns1:uniqueName "330_safety_environmental_environment_prevention_health" .
+
+<https://1145.am/db/industry/331_sciences_science_scientific_biotech_biotechnology> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/275_benefits_pharmacy_benefit_employee_hr> ;
+    ns1:childRight <https://1145.am/db/industry/254_sciences_science_scientific_biotech_biotechnology> ;
+    ns1:topicId 331 ;
+    ns1:uniqueName "331_sciences_science_scientific_biotech_biotechnology" .
+
+<https://1145.am/db/industry/332_identity_identification_verification_security_secure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/327_identity_identification_verification_security_secure> ;
+    ns1:childRight <https://1145.am/db/industry/310_blockchain_crypto_bitcoin_currency_finance> ;
+    ns1:topicId 332 ;
+    ns1:uniqueName "332_identity_identification_verification_security_secure" .
+
+<https://1145.am/db/industry/333_social_advertising_marketing_media_ad> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/236_advertising_marketing_commercial_ad_market> ;
+    ns1:childRight <https://1145.am/db/industry/227_social_community_collaboration_sharing_internet> ;
+    ns1:topicId 333 ;
+    ns1:uniqueName "333_social_advertising_marketing_media_ad" .
+
+<https://1145.am/db/industry/334_identity_identification_verification_security_provider> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/332_identity_identification_verification_security_secure> ;
+    ns1:childRight <https://1145.am/db/industry/326_film_movie_production_industry_arts> ;
+    ns1:topicId 334 ;
+    ns1:uniqueName "334_identity_identification_verification_security_provider" .
+
+<https://1145.am/db/industry/335_luxury_brands_brand_leisure_cars> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/212_luxury_brands_brand_leisure_hospitality> ;
+    ns1:childRight <https://1145.am/db/industry/282_carbon_credit_recycling_earth_accounting> ;
+    ns1:topicId 335 ;
+    ns1:uniqueName "335_luxury_brands_brand_leisure_cars" .
+
+<https://1145.am/db/industry/336_imaging_photography_3d_camera_optical> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/292_imaging_photography_diagnostic_medical_diagnostics> ;
+    ns1:childRight <https://1145.am/db/industry/274_cell_cellular_biotech_biotechnology_biomedical> ;
+    ns1:topicId 336 ;
+    ns1:uniqueName "336_imaging_photography_3d_camera_optical" .
+
+<https://1145.am/db/industry/337_identity_verification_identification_security_secure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/334_identity_identification_verification_security_provider> ;
+    ns1:childRight <https://1145.am/db/industry/285_agricultural_agriculture_cultivation_garden_commodity> ;
+    ns1:topicId 337 ;
+    ns1:uniqueName "337_identity_verification_identification_security_secure" .
+
+<https://1145.am/db/industry/338_estate_residential_management_investment_investments> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/265_agency_agencies_creative_marketing_organization> ;
+    ns1:childRight <https://1145.am/db/industry/309_estate_residential_firms_investments_investment> ;
+    ns1:topicId 338 ;
+    ns1:uniqueName "338_estate_residential_management_investment_investments" .
+
+<https://1145.am/db/industry/339_maintenance_repair_servicing_restoration_service> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/253_automation_automated_automatic_auto_autonomous> ;
+    ns1:childRight <https://1145.am/db/industry/319_maintenance_repair_servicing_restoration_service> ;
+    ns1:topicId 339 ;
+    ns1:uniqueName "339_maintenance_repair_servicing_restoration_service" .
+
+<https://1145.am/db/industry/33_packaging_paper_packaged_package> a ns1:IndustryCluster ;
+    ns1:representation "box",
+        "manufacturing",
+        "package",
+        "packaged",
+        "packaging",
+        "paper",
+        "printing",
+        "shipping",
+        "supplier",
+        "supplies" ;
+    ns1:representativeDoc "paper and packaging",
+        "paper and packaging solutions",
+        "paper packaging" ;
+    ns1:topicId 33 ;
+    ns1:uniqueName "33_packaging_paper_packaged_package" .
+
+<https://1145.am/db/industry/340_executive_recruitment_search_recruiting_management> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/268_recruitment_staffing_workforce_recruiting_employment> ;
+    ns1:childRight <https://1145.am/db/industry/308_executive_search_management_enterprise_recruitment> ;
+    ns1:topicId 340 ;
+    ns1:uniqueName "340_executive_recruitment_search_recruiting_management" .
+
+<https://1145.am/db/industry/341_logistics_transportation_transport_trucking_delivery> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/299_logistics_transportation_transport_trucking_commerce> ;
+    ns1:childRight <https://1145.am/db/industry/303_grocery_delivery_retailer_retailers_retailing> ;
+    ns1:topicId 341 ;
+    ns1:uniqueName "341_logistics_transportation_transport_trucking_delivery" .
+
+<https://1145.am/db/industry/342_commerce_ecommerce_providers_marketplace_procurement> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/322_customer_marketing_engagement_consumer_marketplace> ;
+    ns1:childRight <https://1145.am/db/industry/301_logistics_sourcing_consulting_procurement_enterprise> ;
+    ns1:topicId 342 ;
+    ns1:uniqueName "342_commerce_ecommerce_providers_marketplace_procurement" .
+
+<https://1145.am/db/industry/343_lighting_light_design_indoor_sensing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/317_lighting_light_electrical_broadcast_audio> ;
+    ns1:childRight <https://1145.am/db/industry/337_identity_verification_identification_security_secure> ;
+    ns1:topicId 343 ;
+    ns1:uniqueName "343_lighting_light_design_indoor_sensing" .
+
+<https://1145.am/db/industry/344_imaging_photography_diagnostic_medical_camera> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/262_fiber_optical_laser_materials_broadband> ;
+    ns1:childRight <https://1145.am/db/industry/336_imaging_photography_3d_camera_optical> ;
+    ns1:topicId 344 ;
+    ns1:uniqueName "344_imaging_photography_diagnostic_medical_camera" .
+
+<https://1145.am/db/industry/345_news_media_technology_publication_content> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/306_clinical_treatment_therapies_medical_medicines> ;
+    ns1:childRight <https://1145.am/db/industry/315_news_media_content_government_public> ;
+    ns1:topicId 345 ;
+    ns1:uniqueName "345_news_media_technology_publication_content" .
+
+<https://1145.am/db/industry/346_investments_investment_estate_assets_investing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/338_estate_residential_management_investment_investments> ;
+    ns1:childRight <https://1145.am/db/industry/331_sciences_science_scientific_biotech_biotechnology> ;
+    ns1:topicId 346 ;
+    ns1:uniqueName "346_investments_investment_estate_assets_investing" .
+
+<https://1145.am/db/industry/347_outdoor_environmental_indoor_equipment_garden> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/218_outdoor_indoor_environmental_equipment_products> ;
+    ns1:childRight <https://1145.am/db/industry/230_park_recreation_leisure_outdoor_facility> ;
+    ns1:topicId 347 ;
+    ns1:uniqueName "347_outdoor_environmental_indoor_equipment_garden" .
+
+<https://1145.am/db/industry/348_behavioral_therapy_health_therapeutics_mental> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/245_education_educational_school_learning_training> ;
+    ns1:childRight <https://1145.am/db/industry/220_behavioral_therapy_health_treatment_therapeutics> ;
+    ns1:topicId 348 ;
+    ns1:uniqueName "348_behavioral_therapy_health_therapeutics_mental" .
+
+<https://1145.am/db/industry/349_lighting_light_equipment_design_sensing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/343_lighting_light_design_indoor_sensing> ;
+    ns1:childRight <https://1145.am/db/industry/340_executive_recruitment_search_recruiting_management> ;
+    ns1:topicId 349 ;
+    ns1:uniqueName "349_lighting_light_equipment_design_sensing" .
+
+<https://1145.am/db/industry/34_sports_sport_games_broadcasting> a ns1:IndustryCluster ;
+    ns1:representation "activities",
+        "broadcasting",
+        "clubs",
+        "game",
+        "games",
+        "gaming",
+        "recreational",
+        "sport",
+        "sports",
+        "tv" ;
+    ns1:representativeDoc "sports league headware",
+        "sports officiating",
+        "winter sports" ;
+    ns1:topicId 34 ;
+    ns1:uniqueName "34_sports_sport_games_broadcasting" .
+
+<https://1145.am/db/industry/350_beverage_beverages_alcohol_industry_industries> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/323_beverages_beverage_alcohol_industry_liquid> ;
+    ns1:childRight <https://1145.am/db/industry/209_nutrition_dietary_supplement_foods_ingredients> ;
+    ns1:topicId 350 ;
+    ns1:uniqueName "350_beverage_beverages_alcohol_industry_industries" .
+
+<https://1145.am/db/industry/351_oil_fuel_gas_mining_industries> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/304_battery_recycling_cell_energy_miner> ;
+    ns1:childRight <https://1145.am/db/industry/278_oil_exploration_fuel_gas_mining> ;
+    ns1:topicId 351 ;
+    ns1:uniqueName "351_oil_fuel_gas_mining_industries" .
+
+<https://1145.am/db/industry/352_lighting_solar_light_energy_storage> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/312_solar_storage_renewable_semiconductor_electricity> ;
+    ns1:childRight <https://1145.am/db/industry/349_lighting_light_equipment_design_sensing> ;
+    ns1:topicId 352 ;
+    ns1:uniqueName "352_lighting_solar_light_energy_storage" .
+
+<https://1145.am/db/industry/353_pharmaceutical_pharmaceuticals_drug_drugs_pharma> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/242_fraud_ecommerce_security_assurance_prevention> ;
+    ns1:childRight <https://1145.am/db/industry/277_pharmaceutical_pharmaceuticals_drug_drugs_pharma> ;
+    ns1:topicId 353 ;
+    ns1:uniqueName "353_pharmaceutical_pharmaceuticals_drug_drugs_pharma" .
+
+<https://1145.am/db/industry/354_solar_lighting_technologies_technology_light> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/344_imaging_photography_diagnostic_medical_camera> ;
+    ns1:childRight <https://1145.am/db/industry/352_lighting_solar_light_energy_storage> ;
+    ns1:topicId 354 ;
+    ns1:uniqueName "354_solar_lighting_technologies_technology_light" .
+
+<https://1145.am/db/industry/355_lighting_light_optical_hotels_industry> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/325_hotel_hotels_hospitality_booking_resorts> ;
+    ns1:childRight <https://1145.am/db/industry/354_solar_lighting_technologies_technology_light> ;
+    ns1:topicId 355 ;
+    ns1:uniqueName "355_lighting_light_optical_hotels_industry" .
+
+<https://1145.am/db/industry/356_space_military_defense_aviation_aircraft> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/210_defense_military_security_cybersecurity_aircraft> ;
+    ns1:childRight <https://1145.am/db/industry/213_space_earth_service_infrastructure_services> ;
+    ns1:topicId 356 ;
+    ns1:uniqueName "356_space_military_defense_aviation_aircraft" .
+
+<https://1145.am/db/industry/357_wireless_broadband_telecom_network_networking> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/224_mobile_phones_carrier_cellular_phone> ;
+    ns1:childRight <https://1145.am/db/industry/321_wireless_network_networking_broadband_telecom> ;
+    ns1:topicId 357 ;
+    ns1:uniqueName "357_wireless_broadband_telecom_network_networking" .
+
+<https://1145.am/db/industry/358_estate_brokerage_residential_broker_investments> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/234_surety_agency_provider_investor_firms> ;
+    ns1:childRight <https://1145.am/db/industry/346_investments_investment_estate_assets_investing> ;
+    ns1:topicId 358 ;
+    ns1:uniqueName "358_estate_brokerage_residential_broker_investments" .
+
+<https://1145.am/db/industry/359_luxury_fashion_brands_brand_branded> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/219_fashion_merchandise_designer_brands_shop> ;
+    ns1:childRight <https://1145.am/db/industry/335_luxury_brands_brand_leisure_cars> ;
+    ns1:topicId 359 ;
+    ns1:uniqueName "359_luxury_fashion_brands_brand_branded" .
+
+<https://1145.am/db/industry/35_cloud_service_infrastructure_distributed> a ns1:IndustryCluster ;
+    ns1:representation "cloud",
+        "computer",
+        "computing",
+        "cyber",
+        "distributed",
+        "infrastructure",
+        "machine",
+        "network",
+        "service",
+        "services" ;
+    ns1:representativeDoc "cloud and it",
+        "cloud it",
+        "cloud migration" ;
+    ns1:topicId 35 ;
+    ns1:uniqueName "35_cloud_service_infrastructure_distributed" .
+
+<https://1145.am/db/industry/360_social_advertising_media_broadcasting_video> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/243_streaming_music_service_audio_services> ;
+    ns1:childRight <https://1145.am/db/industry/333_social_advertising_marketing_media_ad> ;
+    ns1:topicId 360 ;
+    ns1:uniqueName "360_social_advertising_media_broadcasting_video" .
+
+<https://1145.am/db/industry/361_beverage_beverages_industries_industry_restaurants> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/350_beverage_beverages_alcohol_industry_industries> ;
+    ns1:childRight <https://1145.am/db/industry/215_restaurant_restaurants_service_kitchen_hospitality> ;
+    ns1:topicId 361 ;
+    ns1:uniqueName "361_beverage_beverages_industries_industry_restaurants" .
+
+<https://1145.am/db/industry/362_providers_services_provider_marketplace_service> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/342_commerce_ecommerce_providers_marketplace_procurement> ;
+    ns1:childRight <https://1145.am/db/industry/330_safety_environmental_environment_prevention_health> ;
+    ns1:topicId 362 ;
+    ns1:uniqueName "362_providers_services_provider_marketplace_service" .
+
+<https://1145.am/db/industry/363_building_construction_buildings_manufacturing_materials> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/294_window_exterior_interior_building_design> ;
+    ns1:childRight <https://1145.am/db/industry/264_building_construction_buildings_materials_contractors> ;
+    ns1:topicId 363 ;
+    ns1:uniqueName "363_building_construction_buildings_manufacturing_materials" .
+
+<https://1145.am/db/industry/364_automotive_automobile_vehicles_vehicle_aftermarket> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/267_automotive_automobile_vehicles_vehicle_dealership> ;
+    ns1:childRight <https://1145.am/db/industry/347_outdoor_environmental_indoor_equipment_garden> ;
+    ns1:topicId 364 ;
+    ns1:uniqueName "364_automotive_automobile_vehicles_vehicle_aftermarket" .
+
+<https://1145.am/db/industry/365_investments_investment_estate_investing_investor> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/358_estate_brokerage_residential_broker_investments> ;
+    ns1:childRight <https://1145.am/db/industry/232_hr_resources_resource_management_employee> ;
+    ns1:topicId 365 ;
+    ns1:uniqueName "365_investments_investment_estate_investing_investor" .
+
+<https://1145.am/db/industry/366_oil_gas_fuel_logistics_mining> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/351_oil_fuel_gas_mining_industries> ;
+    ns1:childRight <https://1145.am/db/industry/202_heating_air_facilities_residential_energy> ;
+    ns1:topicId 366 ;
+    ns1:uniqueName "366_oil_gas_fuel_logistics_mining" .
+
+<https://1145.am/db/industry/367_homes_home_house_household_automation> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/364_automotive_automobile_vehicles_vehicle_aftermarket> ;
+    ns1:childRight <https://1145.am/db/industry/246_homes_house_automation_home_household> ;
+    ns1:topicId 367 ;
+    ns1:uniqueName "367_homes_home_house_household_automation" .
+
+<https://1145.am/db/industry/368_estate_investment_investments_residential_investor> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/345_news_media_technology_publication_content> ;
+    ns1:childRight <https://1145.am/db/industry/365_investments_investment_estate_investing_investor> ;
+    ns1:topicId 368 ;
+    ns1:uniqueName "368_estate_investment_investments_residential_investor" .
+
+<https://1145.am/db/industry/369_social_advertising_media_streaming_broadcasting> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/360_social_advertising_media_broadcasting_video> ;
+    ns1:childRight <https://1145.am/db/industry/328_web_web3_mobile_internet_platform> ;
+    ns1:topicId 369 ;
+    ns1:uniqueName "369_social_advertising_media_streaming_broadcasting" .
+
+<https://1145.am/db/industry/36_automotive_dealership_dealer_automobile> a ns1:IndustryCluster ;
+    ns1:representation "automobile",
+        "automotive",
+        "car",
+        "cars",
+        "dealer",
+        "dealership",
+        "manufacturers",
+        "reseller",
+        "vehicle",
+        "vehicles" ;
+    ns1:representativeDoc "automotive",
+        "automotive refinancing",
+        "used car dealership" ;
+    ns1:topicId 36 ;
+    ns1:uniqueName "36_automotive_dealership_dealer_automobile" .
+
+<https://1145.am/db/industry/370_pharmaceutical_pharmaceuticals_pharma_medicines_drug> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/353_pharmaceutical_pharmaceuticals_drug_drugs_pharma> ;
+    ns1:childRight <https://1145.am/db/industry/263_diagnostics_diagnostic_testing_test_laboratory> ;
+    ns1:topicId 370 ;
+    ns1:uniqueName "370_pharmaceutical_pharmaceuticals_pharma_medicines_drug" .
+
+<https://1145.am/db/industry/371_logistics_delivery_grocery_foods_food> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/361_beverage_beverages_industries_industry_restaurants> ;
+    ns1:childRight <https://1145.am/db/industry/341_logistics_transportation_transport_trucking_delivery> ;
+    ns1:topicId 371 ;
+    ns1:uniqueName "371_logistics_delivery_grocery_foods_food" .
+
+<https://1145.am/db/industry/372_analytics_consulting_software_consultancy_enterprise> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/362_providers_services_provider_marketplace_service> ;
+    ns1:childRight <https://1145.am/db/industry/211_centres_centers_datadriven_centre_center> ;
+    ns1:topicId 372 ;
+    ns1:uniqueName "372_analytics_consulting_software_consultancy_enterprise" .
+
+<https://1145.am/db/industry/373_wireless_electronics_hardware_semiconductor_telecom> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/355_lighting_light_optical_hotels_industry> ;
+    ns1:childRight <https://1145.am/db/industry/357_wireless_broadband_telecom_network_networking> ;
+    ns1:topicId 373 ;
+    ns1:uniqueName "373_wireless_electronics_hardware_semiconductor_telecom" .
+
+<https://1145.am/db/industry/374_behavioral_therapy_health_treatment_healthcare> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/205_senior_retirement_living_residential_healthcare> ;
+    ns1:childRight <https://1145.am/db/industry/348_behavioral_therapy_health_therapeutics_mental> ;
+    ns1:topicId 374 ;
+    ns1:uniqueName "374_behavioral_therapy_health_treatment_healthcare" .
+
+<https://1145.am/db/industry/375_social_advertising_media_marketing_sharing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/369_social_advertising_media_streaming_broadcasting> ;
+    ns1:childRight <https://1145.am/db/industry/214_document_software_management_technology_web> ;
+    ns1:topicId 375 ;
+    ns1:uniqueName "375_social_advertising_media_marketing_sharing" .
+
+<https://1145.am/db/industry/376_estate_investment_investor_property_brokerage> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/373_wireless_electronics_hardware_semiconductor_telecom> ;
+    ns1:childRight <https://1145.am/db/industry/368_estate_investment_investments_residential_investor> ;
+    ns1:topicId 376 ;
+    ns1:uniqueName "376_estate_investment_investor_property_brokerage" .
+
+<https://1145.am/db/industry/377_banking_bank_mortgage_payments_financial> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/307_mortgage_banking_bank_lending_financial> ;
+    ns1:childRight <https://1145.am/db/industry/206_event_events_booking_service_services> ;
+    ns1:topicId 377 ;
+    ns1:uniqueName "377_banking_bank_mortgage_payments_financial" .
+
+<https://1145.am/db/industry/378_renewable_energy_electricity_sustainability_sustainable> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/281_renewable_energy_electricity_sustainability_sustainable> ;
+    ns1:childRight <https://1145.am/db/industry/366_oil_gas_fuel_logistics_mining> ;
+    ns1:topicId 378 ;
+    ns1:uniqueName "378_renewable_energy_electricity_sustainability_sustainable" .
+
+<https://1145.am/db/industry/379_restaurants_foods_food_restaurant_grocery> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/203_packaging_paper_packaged_package_printing> ;
+    ns1:childRight <https://1145.am/db/industry/371_logistics_delivery_grocery_foods_food> ;
+    ns1:topicId 379 ;
+    ns1:uniqueName "379_restaurants_foods_food_restaurant_grocery" .
+
+<https://1145.am/db/industry/37_homes_house_automation_home> a ns1:IndustryCluster ;
+    ns1:representation "automation",
+        "home",
+        "homes",
+        "house",
+        "household",
+        "monitoring",
+        "residential",
+        "security",
+        "sensor",
+        "smart" ;
+    ns1:representativeDoc "home security and smart home automation",
+        "home security and smart home technology",
+        "smart home, security, and home and building automation solutions" ;
+    ns1:topicId 37 ;
+    ns1:uniqueName "37_homes_house_automation_home" .
+
+<https://1145.am/db/industry/380_wellness_beauty_health_healthcare_cosmetic> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/374_behavioral_therapy_health_treatment_healthcare> ;
+    ns1:childRight <https://1145.am/db/industry/270_wellness_health_beauty_healthy_healthcare> ;
+    ns1:topicId 380 ;
+    ns1:uniqueName "380_wellness_beauty_health_healthcare_cosmetic" .
+
+<https://1145.am/db/industry/381_maintenance_automotive_repair_services_service> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/339_maintenance_repair_servicing_restoration_service> ;
+    ns1:childRight <https://1145.am/db/industry/367_homes_home_house_household_automation> ;
+    ns1:topicId 381 ;
+    ns1:uniqueName "381_maintenance_automotive_repair_services_service" .
+
+<https://1145.am/db/industry/382_consulting_enterprise_consultancy_firms_investment> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/376_estate_investment_investor_property_brokerage> ;
+    ns1:childRight <https://1145.am/db/industry/372_analytics_consulting_software_consultancy_enterprise> ;
+    ns1:topicId 382 ;
+    ns1:uniqueName "382_consulting_enterprise_consultancy_firms_investment" .
+
+<https://1145.am/db/industry/383_social_advertising_media_sharing_syndication> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/200_hosting_provider_providers_website_service> ;
+    ns1:childRight <https://1145.am/db/industry/375_social_advertising_media_marketing_sharing> ;
+    ns1:topicId 383 ;
+    ns1:uniqueName "383_social_advertising_media_sharing_syndication" .
+
+<https://1145.am/db/industry/384_renewable_electricity_energy_fuel_electric> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/199_water_recycling_utilities_supply_solutions> ;
+    ns1:childRight <https://1145.am/db/industry/378_renewable_energy_electricity_sustainability_sustainable> ;
+    ns1:topicId 384 ;
+    ns1:uniqueName "384_renewable_electricity_energy_fuel_electric" .
+
+<https://1145.am/db/industry/385_food_foods_grocery_packaging_delivery> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/379_restaurants_foods_food_restaurant_grocery> ;
+    ns1:childRight <https://1145.am/db/industry/359_luxury_fashion_brands_brand_branded> ;
+    ns1:topicId 385 ;
+    ns1:uniqueName "385_food_foods_grocery_packaging_delivery" .
+
+<https://1145.am/db/industry/386_consulting_estate_firms_investment_consultancy> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/382_consulting_enterprise_consultancy_firms_investment> ;
+    ns1:childRight <https://1145.am/db/industry/377_banking_bank_mortgage_payments_financial> ;
+    ns1:topicId 386 ;
+    ns1:uniqueName "386_consulting_estate_firms_investment_consultancy" .
+
+<https://1145.am/db/industry/387_healthcare_health_wellness_medical_medicine> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/273_medical_devices_technology_medicine_technologies> ;
+    ns1:childRight <https://1145.am/db/industry/380_wellness_beauty_health_healthcare_cosmetic> ;
+    ns1:topicId 387 ;
+    ns1:uniqueName "387_healthcare_health_wellness_medical_medicine" .
+
+<https://1145.am/db/industry/388_consulting_consultancy_management_firms_development> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/356_space_military_defense_aviation_aircraft> ;
+    ns1:childRight <https://1145.am/db/industry/386_consulting_estate_firms_investment_consultancy> ;
+    ns1:topicId 388 ;
+    ns1:uniqueName "388_consulting_consultancy_management_firms_development" .
+
+<https://1145.am/db/industry/389_gaming_social_games_entertainment_media> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/329_sports_games_gaming_sport_game> ;
+    ns1:childRight <https://1145.am/db/industry/383_social_advertising_media_sharing_syndication> ;
+    ns1:topicId 389 ;
+    ns1:uniqueName "389_gaming_social_games_entertainment_media" .
+
+<https://1145.am/db/industry/38_streaming_video_tv_internet> a ns1:IndustryCluster ;
+    ns1:representation "audio",
+        "broadcast",
+        "cloud",
+        "hosting",
+        "internet",
+        "media",
+        "provider",
+        "streaming",
+        "tv",
+        "video" ;
+    ns1:representativeDoc "streaming video",
+        "video streaming",
+        "video streaming service" ;
+    ns1:topicId 38 ;
+    ns1:uniqueName "38_streaming_video_tv_internet" .
+
+<https://1145.am/db/industry/390_logistics_transportation_industry_industries_transport> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/384_renewable_electricity_energy_fuel_electric> ;
+    ns1:childRight <https://1145.am/db/industry/385_food_foods_grocery_packaging_delivery> ;
+    ns1:topicId 390 ;
+    ns1:uniqueName "390_logistics_transportation_industry_industries_transport" .
+
+<https://1145.am/db/industry/391_building_buildings_construction_builder_manufacturing> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/381_maintenance_automotive_repair_services_service> ;
+    ns1:childRight <https://1145.am/db/industry/363_building_construction_buildings_manufacturing_materials> ;
+    ns1:topicId 391 ;
+    ns1:uniqueName "391_building_buildings_construction_builder_manufacturing" .
+
+<https://1145.am/db/industry/392_brokerage_marketplace_consulting_enterprise_provider> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/390_logistics_transportation_industry_industries_transport> ;
+    ns1:childRight <https://1145.am/db/industry/388_consulting_consultancy_management_firms_development> ;
+    ns1:topicId 392 ;
+    ns1:uniqueName "392_brokerage_marketplace_consulting_enterprise_provider" .
+
+<https://1145.am/db/industry/393_pharmaceutical_pharmaceuticals_pharma_medicines_medicine> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/370_pharmaceutical_pharmaceuticals_pharma_medicines_drug> ;
+    ns1:childRight <https://1145.am/db/industry/387_healthcare_health_wellness_medical_medicine> ;
+    ns1:topicId 393 ;
+    ns1:uniqueName "393_pharmaceutical_pharmaceuticals_pharma_medicines_medicine" .
+
+<https://1145.am/db/industry/394_provider_enterprise_industry_services_infrastructure> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/392_brokerage_marketplace_consulting_enterprise_provider> ;
+    ns1:childRight <https://1145.am/db/industry/389_gaming_social_games_entertainment_media> ;
+    ns1:topicId 394 ;
+    ns1:uniqueName "394_provider_enterprise_industry_services_infrastructure" .
+
+<https://1145.am/db/industry/395_software_development_management_enterprise_business> a ns1:IndustryCluster ;
+    ns1:childLeft <https://1145.am/db/industry/391_building_buildings_construction_builder_manufacturing> ;
+    ns1:childRight <https://1145.am/db/industry/394_provider_enterprise_industry_services_infrastructure> ;
+    ns1:topicId 395 ;
+    ns1:uniqueName "395_software_development_management_enterprise_business" .
+
+<https://1145.am/db/industry/39_agricultural_agriculture_cultivation_commodity> a ns1:IndustryCluster ;
+    ns1:representation "agricultural",
+        "agriculture",
+        "commodity",
+        "cultivation",
+        "food",
+        "industries",
+        "infrastructure",
+        "land",
+        "nutrition",
+        "plant" ;
+    ns1:representativeDoc "agricultural",
+        "agricultural inputs",
+        "agricultural microinsurance" ;
+    ns1:topicId 39 ;
+    ns1:uniqueName "39_agricultural_agriculture_cultivation_commodity" .
+
+<https://1145.am/db/industry/3_pharmaceutical_pharmaceuticals_drug_drugs> a ns1:IndustryCluster ;
+    ns1:representation "biopharma",
+        "drug",
+        "drugs",
+        "medicine",
+        "medicines",
+        "pharma",
+        "pharmaceutical",
+        "pharmaceuticals",
+        "pharmacy",
+        "therapeutics" ;
+    ns1:representativeDoc "drug giant",
+        "drug regulator",
+        "pharmaceutical drug products" ;
+    ns1:topicId 3 ;
+    ns1:uniqueName "3_pharmaceutical_pharmaceuticals_drug_drugs" .
+
+<https://1145.am/db/industry/40_safety_protection_security_protective> a ns1:IndustryCluster ;
+    ns1:representation "compliance",
+        "inspection",
+        "prevention",
+        "protection",
+        "protective",
+        "public",
+        "risk",
+        "safety",
+        "security",
+        "traffic" ;
+    ns1:representativeDoc "crowd safety",
+        "fire safety",
+        "safety and productivity" ;
+    ns1:topicId 40 ;
+    ns1:uniqueName "40_safety_protection_security_protective" .
+
+<https://1145.am/db/industry/41_centres_centers_datadriven_centre> a ns1:IndustryCluster ;
+    ns1:representation "center",
+        "centers",
+        "centre",
+        "centres",
+        "cloud",
+        "database",
+        "datadriven",
+        "infrastructure",
+        "network",
+        "networking" ;
+    ns1:representativeDoc "data center",
+        "data center colocation",
+        "data center switching" ;
+    ns1:topicId 41 ;
+    ns1:uniqueName "41_centres_centers_datadriven_centre" .
+
+<https://1145.am/db/industry/42_laboratory_lab_testing_test> a ns1:IndustryCluster ;
+    ns1:representation "diagnostic",
+        "equipment",
+        "forensic",
+        "inspection",
+        "instrumentation",
+        "lab",
+        "laboratory",
+        "test",
+        "testing",
+        "tools" ;
+    ns1:representativeDoc "laboratory testing services",
+        "laboratory testing solutions",
+        "testing laboratory" ;
+    ns1:topicId 42 ;
+    ns1:uniqueName "42_laboratory_lab_testing_test" .
+
+<https://1145.am/db/industry/43_housing_residential_rentals_rental> a ns1:IndustryCluster ;
+    ns1:representation "apartment",
+        "building",
+        "buildings",
+        "construction",
+        "homes",
+        "housing",
+        "leasing",
+        "rental",
+        "rentals",
+        "residential" ;
+    ns1:representativeDoc "multifamily rental housing",
+        "prefab housing",
+        "rental-housing" ;
+    ns1:topicId 43 ;
+    ns1:uniqueName "43_housing_residential_rentals_rental" .
+
+<https://1145.am/db/industry/44_automation_automated_auto_automatic> a ns1:IndustryCluster ;
+    ns1:representation "ai",
+        "auto",
+        "automated",
+        "automatic",
+        "automation",
+        "autonomous",
+        "robotic",
+        "robotics",
+        "software",
+        "technical" ;
+    ns1:representativeDoc "automation",
+        "entrance automation",
+        "low-cost automation" ;
+    ns1:topicId 44 ;
+    ns1:uniqueName "44_automation_automated_auto_automatic" .
+
+<https://1145.am/db/industry/45_advertising_marketing_commercial_ad> a ns1:IndustryCluster ;
+    ns1:representation "ad",
+        "advertising",
+        "broadcast",
+        "business",
+        "commercial",
+        "industry",
+        "market",
+        "marketing",
+        "monetization",
+        "sales" ;
+    ns1:representativeDoc "advertising",
+        "contextual advertising",
+        "programmatic advertising" ;
+    ns1:topicId 45 ;
+    ns1:uniqueName "45_advertising_marketing_commercial_ad" .
+
+<https://1145.am/db/industry/46_legal_law_licensing_rights> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "law",
+        "legal",
+        "licensing",
+        "medical",
+        "professional",
+        "rights",
+        "services",
+        "software",
+        "technology" ;
+    ns1:representativeDoc "legal",
+        "legal documents and advice",
+        "legal profession" ;
+    ns1:topicId 46 ;
+    ns1:uniqueName "46_legal_law_licensing_rights" .
+
+<https://1145.am/db/industry/47_beauty_cosmetic_fashion_products> a ns1:IndustryCluster ;
+    ns1:representation "beauty",
+        "brands",
+        "business",
+        "cosmetic",
+        "fashion",
+        "health",
+        "industry",
+        "luxury",
+        "products",
+        "wellness" ;
+    ns1:representativeDoc "beauty and haircare",
+        "beauty and skincare",
+        "beauty services" ;
+    ns1:topicId 47 ;
+    ns1:uniqueName "47_beauty_cosmetic_fashion_products" .
+
+<https://1145.am/db/industry/48_exchanges_exchange_trading_trader> a ns1:IndustryCluster ;
+    ns1:representation "brokerage",
+        "brokers",
+        "commodity",
+        "currency",
+        "exchange",
+        "exchanges",
+        "market",
+        "markets",
+        "trader",
+        "trading" ;
+    ns1:representativeDoc "commodity exchange traded product etp provider",
+        "commodity trading",
+        "exchange" ;
+    ns1:topicId 48 ;
+    ns1:uniqueName "48_exchanges_exchange_trading_trader" .
+
+<https://1145.am/db/industry/49_imaging_photography_medical_diagnostic> a ns1:IndustryCluster ;
+    ns1:representation "camera",
+        "diagnostic",
+        "diagnostics",
+        "image",
+        "imaging",
+        "medical",
+        "medicine",
+        "photography",
+        "surgical",
+        "vision" ;
+    ns1:representativeDoc "medical imaging",
+        "medical imaging it",
+        "medical retinal imaging" ;
+    ns1:topicId 49 ;
+    ns1:uniqueName "49_imaging_photography_medical_diagnostic" .
+
+<https://1145.am/db/industry/4_consulting_consultant_consultancy_logistics> a ns1:IndustryCluster ;
+    ns1:representation "consultancy",
+        "consultant",
+        "consulting",
+        "corporate",
+        "firms",
+        "logistics",
+        "outsourcing",
+        "procurement",
+        "providers",
+        "sourcing" ;
+    ns1:representativeDoc "supply chain and technology consulting",
+        "supply chain consulting and services",
+        "supply chain consulting and services firm" ;
+    ns1:topicId 4 ;
+    ns1:uniqueName "4_consulting_consultant_consultancy_logistics" .
+
+<https://1145.am/db/industry/50_renewable_energy_electricity_solar> a ns1:IndustryCluster ;
+    ns1:representation "electricity",
+        "energy",
+        "environmental",
+        "fuel",
+        "oil",
+        "power",
+        "renewable",
+        "solar",
+        "sustainability",
+        "sustainable" ;
+    ns1:representativeDoc "renewable energy",
+        "renewable energy certificate",
+        "renewable energy sources" ;
+    ns1:topicId 50 ;
+    ns1:uniqueName "50_renewable_energy_electricity_solar" .
+
+<https://1145.am/db/industry/51_event_events_booking_service> a ns1:IndustryCluster ;
+    ns1:representation "booking",
+        "entertainment",
+        "event",
+        "events",
+        "experience",
+        "experiences",
+        "planning",
+        "provider",
+        "service",
+        "services" ;
+    ns1:representativeDoc "event",
+        "event organiser",
+        "event ticketing" ;
+    ns1:topicId 51 ;
+    ns1:uniqueName "51_event_events_booking_service" .
+
+<https://1145.am/db/industry/52_animal_health_wellness_healthcare> a ns1:IndustryCluster ;
+    ns1:representation "animal",
+        "biologics",
+        "biopharma",
+        "food",
+        "health",
+        "healthcare",
+        "medical",
+        "medicine",
+        "therapeutics",
+        "wellness" ;
+    ns1:representativeDoc "animal health",
+        "animal-health",
+        "animal-health technology and services" ;
+    ns1:topicId 52 ;
+    ns1:uniqueName "52_animal_health_wellness_healthcare" .
+
+<https://1145.am/db/industry/53_storage_portable_cloud_space> a ns1:IndustryCluster ;
+    ns1:representation "cloud",
+        "computer",
+        "computing",
+        "data",
+        "devices",
+        "drive",
+        "hardware",
+        "portable",
+        "space",
+        "storage" ;
+    ns1:representativeDoc "moving and self-storage",
+        "self-storage",
+        "storage virtualization" ;
+    ns1:topicId 53 ;
+    ns1:uniqueName "53_storage_portable_cloud_space" .
+
+<https://1145.am/db/industry/54_lighting_light_electrical_design> a ns1:IndustryCluster ;
+    ns1:representation "broadcast",
+        "design",
+        "designer",
+        "electrical",
+        "light",
+        "lighting",
+        "production",
+        "stage",
+        "television",
+        "visual" ;
+    ns1:representativeDoc "lighting fixtures",
+        "pro-lighting",
+        "show lighting" ;
+    ns1:topicId 54 ;
+    ns1:uniqueName "54_lighting_light_electrical_design" .
+
+<https://1145.am/db/industry/55_audio_music_software_technology> a ns1:IndustryCluster ;
+    ns1:representation "audio",
+        "communications",
+        "device",
+        "digital",
+        "hardware",
+        "music",
+        "professional",
+        "software",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "audio system technology",
+        "audio technology",
+        "pro-audio technology" ;
+    ns1:topicId 55 ;
+    ns1:uniqueName "55_audio_music_software_technology" .
+
+<https://1145.am/db/industry/56_engagement_customer_marketing_consumer> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "businesstobusiness",
+        "consultancy",
+        "consumer",
+        "customer",
+        "ecommerce",
+        "engagement",
+        "marketing",
+        "service",
+        "services" ;
+    ns1:representativeDoc "customer engagement",
+        "customer engagement hub",
+        "customer relationship management and customer engagement platform" ;
+    ns1:topicId 56 ;
+    ns1:uniqueName "56_engagement_customer_marketing_consumer" .
+
+<https://1145.am/db/industry/57_marine_logistics_tank_industry> a ns1:IndustryCluster ;
+    ns1:representation "equipment",
+        "industries",
+        "industry",
+        "logistics",
+        "marine",
+        "production",
+        "resorts",
+        "service",
+        "services",
+        "tank" ;
+    ns1:representativeDoc "boating marine industry",
+        "marine",
+        "marine industry" ;
+    ns1:topicId 57 ;
+    ns1:uniqueName "57_marine_logistics_tank_industry" .
+
+<https://1145.am/db/industry/58_luxury_hotel_brand_hospitality> a ns1:IndustryCluster ;
+    ns1:representation "brand",
+        "brands",
+        "fashion",
+        "hospitality",
+        "hotel",
+        "hotels",
+        "leisure",
+        "luxury",
+        "resort",
+        "resorts" ;
+    ns1:representativeDoc "luxury appliance",
+        "luxury marquee",
+        "luxury villa" ;
+    ns1:topicId 58 ;
+    ns1:uniqueName "58_luxury_hotel_brand_hospitality" .
+
+<https://1145.am/db/industry/59_cultivation_recreational_production_distributors> a ns1:IndustryCluster ;
+    ns1:representation "cultivation",
+        "distributor",
+        "distributors",
+        "industry",
+        "manufacturing",
+        "pharmaceutical",
+        "production",
+        "products",
+        "recreational",
+        "retailing" ;
+    ns1:representativeDoc "cannabis cultivation",
+        "cannabis cultivation and oil production",
+        "cannabis cultivation and production and retail" ;
+    ns1:topicId 59 ;
+    ns1:uniqueName "59_cultivation_recreational_production_distributors" .
+
+<https://1145.am/db/industry/5_enterprise_software_services_service> a ns1:IndustryCluster ;
+    ns1:representation "application",
+        "applications",
+        "automated",
+        "enterprise",
+        "providers",
+        "service",
+        "services",
+        "software",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "enterprise software and software as a service software technology",
+        "enterprise software as a service software technology",
+        "software as a service software technology enterprise technology platform" ;
+    ns1:topicId 5 ;
+    ns1:uniqueName "5_enterprise_software_services_service" .
+
+<https://1145.am/db/industry/60_nutrition_dietary_supplement_wellness> a ns1:IndustryCluster ;
+    ns1:representation "dietary",
+        "fitness",
+        "food",
+        "foods",
+        "health",
+        "healthy",
+        "ingredients",
+        "nutrition",
+        "supplement",
+        "wellness" ;
+    ns1:representativeDoc "health, nutrition and biosciences",
+        "nutrition supplement",
+        "nutrition supplement industry" ;
+    ns1:topicId 60 ;
+    ns1:uniqueName "60_nutrition_dietary_supplement_wellness" .
+
+<https://1145.am/db/industry/61_education_educational_school_learning> a ns1:IndustryCluster ;
+    ns1:representation "development",
+        "education",
+        "educational",
+        "employment",
+        "learning",
+        "school",
+        "tech",
+        "technology",
+        "training",
+        "workforce" ;
+    ns1:representativeDoc "education",
+        "post-secondary education",
+        "vocational education" ;
+    ns1:topicId 61 ;
+    ns1:uniqueName "61_education_educational_school_learning" .
+
+<https://1145.am/db/industry/62_accounting_finance_financial_business> a ns1:IndustryCluster ;
+    ns1:representation "accounting",
+        "business",
+        "finance",
+        "financial",
+        "firms",
+        "management",
+        "office",
+        "operations",
+        "services",
+        "software" ;
+    ns1:representativeDoc "accounting",
+        "accounting and tax services",
+        "accounting services" ;
+    ns1:topicId 62 ;
+    ns1:uniqueName "62_accounting_finance_financial_business" .
+
+<https://1145.am/db/industry/63_sciences_science_scientific_biotech> a ns1:IndustryCluster ;
+    ns1:representation "biopharma",
+        "biotech",
+        "biotechnology",
+        "discovery",
+        "laboratory",
+        "life",
+        "lifecycle",
+        "science",
+        "sciences",
+        "scientific" ;
+    ns1:representativeDoc "life sciences and it",
+        "life-sciences",
+        "life-sciences laboratories" ;
+    ns1:topicId 63 ;
+    ns1:uniqueName "63_sciences_science_scientific_biotech" .
+
+<https://1145.am/db/industry/64_pos_surety_insurtech_chains> a ns1:IndustryCluster ;
+    ns1:representation "",
+        "chains",
+        "firm",
+        "firms",
+        "french",
+        "insurtech",
+        "pos",
+        "surety" ;
+    ns1:representativeDoc "french grocer",
+        "p and c insurtech",
+        "pos" ;
+    ns1:topicId 64 ;
+    ns1:uniqueName "64_pos_surety_insurtech_chains" .
+
+<https://1145.am/db/industry/65_publisher_publishing_publication_subscription> a ns1:IndustryCluster ;
+    ns1:representation "book",
+        "distributor",
+        "media",
+        "publication",
+        "publisher",
+        "publishing",
+        "retailer",
+        "software",
+        "subscription",
+        "writing" ;
+    ns1:representativeDoc "academic publisher",
+        "dvd publisher",
+        "publisher" ;
+    ns1:topicId 65 ;
+    ns1:uniqueName "65_publisher_publishing_publication_subscription" .
+
+<https://1145.am/db/industry/66_executive_search_management_enterprise> a ns1:IndustryCluster ;
+    ns1:representation "agency",
+        "consultant",
+        "consulting",
+        "corporate",
+        "enterprise",
+        "executive",
+        "firms",
+        "management",
+        "recruitment",
+        "search" ;
+    ns1:representativeDoc "executive search",
+        "executive search and leadership services",
+        "executive search services" ;
+    ns1:topicId 66 ;
+    ns1:uniqueName "66_executive_search_management_enterprise" .
+
+<https://1145.am/db/industry/67_water_recycling_restoration_utilities> a ns1:IndustryCluster ;
+    ns1:representation "chemical",
+        "clean",
+        "processing",
+        "recycling",
+        "restoration",
+        "solutions",
+        "supply",
+        "treatment",
+        "utilities",
+        "water" ;
+    ns1:representativeDoc "purified drinking water dispensers",
+        "water filtration and purification",
+        "water purification" ;
+    ns1:topicId 67 ;
+    ns1:uniqueName "67_water_recycling_restoration_utilities" .
+
+<https://1145.am/db/industry/68_retirement_financial_investments_services> a ns1:IndustryCluster ;
+    ns1:representation "advisors",
+        "financial",
+        "fund",
+        "funds",
+        "healthcare",
+        "insurer",
+        "investments",
+        "retirement",
+        "services",
+        "wealth" ;
+    ns1:representativeDoc "retirement and institutional services",
+        "retirement services",
+        "savings and retirement services" ;
+    ns1:topicId 68 ;
+    ns1:uniqueName "68_retirement_financial_investments_services" .
+
+<https://1145.am/db/industry/69_film_movie_art_arts> a ns1:IndustryCluster ;
+    ns1:representation "art",
+        "arts",
+        "film",
+        "media",
+        "movie",
+        "photography",
+        "production",
+        "studio",
+        "technology",
+        "television" ;
+    ns1:representativeDoc "film",
+        "film exhibition",
+        "stretch film" ;
+    ns1:topicId 69 ;
+    ns1:uniqueName "69_film_movie_art_arts" .
+
+<https://1145.am/db/industry/6_electric_electrical_electricity_vehicle> a ns1:IndustryCluster ;
+    ns1:representation "battery",
+        "car",
+        "cars",
+        "electric",
+        "electrical",
+        "electricity",
+        "truck",
+        "utilities",
+        "vehicle",
+        "vehicles" ;
+    ns1:representativeDoc "electric power industry",
+        "electric vehicle",
+        "electric-vehicle" ;
+    ns1:topicId 6 ;
+    ns1:uniqueName "6_electric_electrical_electricity_vehicle" .
+
+<https://1145.am/db/industry/70_contractor_contractors_contracting_electrical> a ns1:IndustryCluster ;
+    ns1:representation "contract",
+        "contracting",
+        "contractor",
+        "contractors",
+        "electric",
+        "electrical",
+        "electricity",
+        "electronics",
+        "engineering",
+        "industrial" ;
+    ns1:representativeDoc "commercial electrical contractor",
+        "electrical contractor",
+        "electrical services contractor" ;
+    ns1:topicId 70 ;
+    ns1:uniqueName "70_contractor_contractors_contracting_electrical" .
+
+<https://1145.am/db/industry/71_agency_agencies_creative_marketing> a ns1:IndustryCluster ;
+    ns1:representation "agencies",
+        "agency",
+        "brand",
+        "company",
+        "consulting",
+        "creative",
+        "industry",
+        "marketing",
+        "media",
+        "organization" ;
+    ns1:representativeDoc "creative agency",
+        "creative and branding agency",
+        "digital creative agency" ;
+    ns1:topicId 71 ;
+    ns1:uniqueName "71_agency_agencies_creative_marketing" .
+
+<https://1145.am/db/industry/72_space_earth_exploration_service> a ns1:IndustryCluster ;
+    ns1:representation "earth",
+        "exploration",
+        "infrastructure",
+        "internet",
+        "network",
+        "science",
+        "service",
+        "services",
+        "space",
+        "television" ;
+    ns1:representativeDoc "space",
+        "space and satellite imagery",
+        "space launch and space services" ;
+    ns1:topicId 72 ;
+    ns1:uniqueName "72_space_earth_exploration_service" .
+
+<https://1145.am/db/industry/73_senior_retirement_living_residential> a ns1:IndustryCluster ;
+    ns1:representation "agency",
+        "healthcare",
+        "homes",
+        "hospitality",
+        "housing",
+        "living",
+        "management",
+        "residential",
+        "retirement",
+        "senior" ;
+    ns1:representativeDoc "senior living and health care",
+        "senior living services",
+        "senior-living" ;
+    ns1:topicId 73 ;
+    ns1:uniqueName "73_senior_retirement_living_residential" .
+
+<https://1145.am/db/industry/74_government_services_governance_technology> a ns1:IndustryCluster ;
+    ns1:representation "administration",
+        "administrative",
+        "federal",
+        "governance",
+        "government",
+        "service",
+        "services",
+        "systems",
+        "technologies",
+        "technology" ;
+    ns1:representativeDoc "government and public affairs",
+        "government services and technology",
+        "government services technology" ;
+    ns1:topicId 74 ;
+    ns1:uniqueName "74_government_services_governance_technology" .
+
+<https://1145.am/db/industry/75_blockchain_crypto_bitcoin_currency> a ns1:IndustryCluster ;
+    ns1:representation "bitcoin",
+        "blockchain",
+        "crypto",
+        "currency",
+        "finance",
+        "firms",
+        "investor",
+        "market",
+        "providers",
+        "security" ;
+    ns1:representativeDoc "blockchain and crypto",
+        "blockchain and crypto solutions",
+        "crypto and blockchain" ;
+    ns1:topicId 75 ;
+    ns1:uniqueName "75_blockchain_crypto_bitcoin_currency" .
+
+<https://1145.am/db/industry/76_employee_benefits_benefit_hr> a ns1:IndustryCluster ;
+    ns1:representation "benefit",
+        "benefits",
+        "employee",
+        "executive",
+        "hr",
+        "insurance",
+        "retirement",
+        "staffing",
+        "workers",
+        "workforce" ;
+    ns1:representativeDoc "employee benefits",
+        "employee benefits and payroll services",
+        "employee-benefits" ;
+    ns1:topicId 76 ;
+    ns1:uniqueName "76_employee_benefits_benefit_hr" .
+
+<https://1145.am/db/industry/77_web3_web_platform_services> a ns1:IndustryCluster ;
+    ns1:representation "browser",
+        "developer",
+        "development",
+        "infrastructure",
+        "platform",
+        "service",
+        "services",
+        "software",
+        "web",
+        "web3" ;
+    ns1:representativeDoc "content delivery and web services",
+        "web3 developer platform",
+        "web3 platform" ;
+    ns1:topicId 77 ;
+    ns1:uniqueName "77_web3_web_platform_services" .
+
+<https://1145.am/db/industry/78_facilities_facility_maintenance_services> a ns1:IndustryCluster ;
+    ns1:representation "facilities",
+        "facility",
+        "industries",
+        "infrastructure",
+        "maintenance",
+        "management",
+        "production",
+        "providers",
+        "service",
+        "services" ;
+    ns1:representativeDoc "facility maintenance",
+        "facility maintenance services",
+        "facility management services" ;
+    ns1:topicId 78 ;
+    ns1:uniqueName "78_facilities_facility_maintenance_services" .
+
+<https://1145.am/db/industry/79_snacks_food_foods_beverages> a ns1:IndustryCluster ;
+    ns1:representation "beverages",
+        "bulk",
+        "food",
+        "foods",
+        "goods",
+        "healthy",
+        "ingredients",
+        "packaged",
+        "products",
+        "snacks" ;
+    ns1:representativeDoc "drinks and snacks",
+        "snacks",
+        "snacks and drinks" ;
+    ns1:topicId 79 ;
+    ns1:uniqueName "79_snacks_food_foods_beverages" .
+
+<https://1145.am/db/industry/7_ecommerce_commerce_marketplace_marketplaces> a ns1:IndustryCluster ;
+    ns1:representation "businesstobusiness",
+        "commerce",
+        "ecommerce",
+        "marketplace",
+        "marketplaces",
+        "merchant",
+        "reseller",
+        "retail",
+        "shopping",
+        "warehousing" ;
+    ns1:representativeDoc "ecommerce acceleration",
+        "ecommerce marketing platform",
+        "ecommerce technology platform" ;
+    ns1:topicId 7 ;
+    ns1:uniqueName "7_ecommerce_commerce_marketplace_marketplaces" .
+
+<https://1145.am/db/industry/80_fitness_tracking_wellness_training> a ns1:IndustryCluster ;
+    ns1:representation "accessories",
+        "app",
+        "device",
+        "equipment",
+        "fitness",
+        "health",
+        "lifestyle",
+        "tracking",
+        "training",
+        "wellness" ;
+    ns1:representativeDoc "fitness",
+        "fitness trackers",
+        "sleep fitness" ;
+    ns1:topicId 80 ;
+    ns1:uniqueName "80_fitness_tracking_wellness_training" .
+
+<https://1145.am/db/industry/81_solar_energy_plants_plant> a ns1:IndustryCluster ;
+    ns1:representation "battery",
+        "cell",
+        "energy",
+        "plant",
+        "plants",
+        "power",
+        "project",
+        "projects",
+        "services",
+        "solar" ;
+    ns1:representativeDoc "solar farms",
+        "solar photovoltaic",
+        "solar-panel" ;
+    ns1:topicId 81 ;
+    ns1:uniqueName "81_solar_energy_plants_plant" .
+
+<https://1145.am/db/industry/82_display_graphics_image_optical> a ns1:IndustryCluster ;
+    ns1:representation "design",
+        "digital",
+        "display",
+        "graphics",
+        "hardware",
+        "image",
+        "imaging",
+        "interactive",
+        "optical",
+        "visual" ;
+    ns1:representativeDoc "digital photograph display",
+        "display technology",
+        "scoring and digital display" ;
+    ns1:topicId 82 ;
+    ns1:uniqueName "82_display_graphics_image_optical" .
+
+<https://1145.am/db/industry/83_maintenance_repair_servicing_services> a ns1:IndustryCluster ;
+    ns1:representation "automotive",
+        "cleaning",
+        "industrial",
+        "maintenance",
+        "repair",
+        "replacement",
+        "restoration",
+        "service",
+        "services",
+        "servicing" ;
+    ns1:representativeDoc "maintenance and repair services",
+        "maintenance, repair and overhaul",
+        "repair and maintenance service provider" ;
+    ns1:topicId 83 ;
+    ns1:uniqueName "83_maintenance_repair_servicing_services" .
+
+<https://1145.am/db/industry/84_identity_verification_identification_security> a ns1:IndustryCluster ;
+    ns1:representation "fraud",
+        "identification",
+        "identity",
+        "privacy",
+        "provider",
+        "secure",
+        "security",
+        "service",
+        "services",
+        "verification" ;
+    ns1:representativeDoc "biometric identity authentication",
+        "decentralized identity",
+        "identity" ;
+    ns1:topicId 84 ;
+    ns1:uniqueName "84_identity_verification_identification_security" .
+
+<https://1145.am/db/industry/85_heating_facilities_residential_utility> a ns1:IndustryCluster ;
+    ns1:representation "air",
+        "contractor",
+        "equipment",
+        "facilities",
+        "heating",
+        "industrial",
+        "maintenance",
+        "residential",
+        "services",
+        "utility" ;
+    ns1:representativeDoc "heating, air conditioning, and plumbing distributor",
+        "plumbing, heating and air conditioning services",
+        "plumbing, heating and air-conditioning" ;
+    ns1:topicId 85 ;
+    ns1:uniqueName "85_heating_facilities_residential_utility" .
+
+<https://1145.am/db/industry/86_behavioral_therapy_health_treatment> a ns1:IndustryCluster ;
+    ns1:representation "behavioral",
+        "benefits",
+        "drug",
+        "health",
+        "healthcare",
+        "medicine",
+        "mental",
+        "services",
+        "therapy",
+        "treatment" ;
+    ns1:representativeDoc "behavioral and mental health",
+        "behavioral and mental health services",
+        "mental and behavioral health" ;
+    ns1:topicId 86 ;
+    ns1:uniqueName "86_behavioral_therapy_health_treatment" .
+
+<https://1145.am/db/industry/87_outdoor_indoor_equipment_products> a ns1:IndustryCluster ;
+    ns1:representation "equipment",
+        "garden",
+        "indoor",
+        "industry",
+        "outdoor",
+        "products",
+        "recreation",
+        "recreational",
+        "sport",
+        "supplies" ;
+    ns1:representativeDoc "outdoor equipment",
+        "outdoor products",
+        "sporting and outdoor products" ;
+    ns1:topicId 87 ;
+    ns1:uniqueName "87_outdoor_indoor_equipment_products" .
+
+<https://1145.am/db/industry/88_battery_cell_energy_miner> a ns1:IndustryCluster ;
+    ns1:representation "battery",
+        "car",
+        "cell",
+        "energy",
+        "lighting",
+        "miner",
+        "products",
+        "semiconductor",
+        "service",
+        "solutions" ;
+    ns1:representativeDoc "battery cells",
+        "battery pack and charging",
+        "battery-swapping" ;
+    ns1:topicId 88 ;
+    ns1:uniqueName "88_battery_cell_energy_miner" .
+
+<https://1145.am/db/industry/89_window_exterior_building_interior> a ns1:IndustryCluster ;
+    ns1:representation "architectural",
+        "building",
+        "designer",
+        "exterior",
+        "fabrication",
+        "film",
+        "interior",
+        "manufacturers",
+        "window",
+        "wood" ;
+    ns1:representativeDoc "window and door manufacturer",
+        "window shades",
+        "window treatments" ;
+    ns1:topicId 89 ;
+    ns1:uniqueName "89_window_exterior_building_interior" .
+
+<https://1145.am/db/industry/8_hotel_hotels_hospitality_resorts> a ns1:IndustryCluster ;
+    ns1:representation "booking",
+        "hospitality",
+        "hotel",
+        "hotels",
+        "rental",
+        "rentals",
+        "resort",
+        "resorts",
+        "restaurant",
+        "restaurants" ;
+    ns1:representativeDoc "hotel and hospitality",
+        "hotel and tourism",
+        "hotel reservation" ;
+    ns1:topicId 8 ;
+    ns1:uniqueName "8_hotel_hotels_hospitality_resorts" .
+
+<https://1145.am/db/industry/90_loyalty_card_marketplace_commerce> a ns1:IndustryCluster ;
+    ns1:representation "card",
+        "commerce",
+        "consumer",
+        "customer",
+        "loyalty",
+        "marketing",
+        "marketplace",
+        "provider",
+        "service",
+        "subscription" ;
+    ns1:representativeDoc "digital loyalty card service",
+        "loyalty and credit card platform",
+        "loyalty card platform" ;
+    ns1:topicId 90 ;
+    ns1:uniqueName "90_loyalty_card_marketplace_commerce" .
+
+<https://1145.am/db/industry/91_sports_games_gaming_game> a ns1:IndustryCluster ;
+    ns1:representation "business",
+        "entertainment",
+        "financial",
+        "game",
+        "games",
+        "gaming",
+        "live",
+        "media",
+        "online",
+        "sports" ;
+    ns1:representativeDoc "gaming and sports betting",
+        "online gaming and sports betting",
+        "sports betting and online gaming" ;
+    ns1:topicId 91 ;
+    ns1:uniqueName "91_sports_games_gaming_game" .
+
+<https://1145.am/db/industry/92_traffic_road_control_vehicle> a ns1:IndustryCluster ;
+    ns1:representation "aggregator",
+        "control",
+        "management",
+        "providers",
+        "road",
+        "safety",
+        "service",
+        "services",
+        "traffic",
+        "vehicle" ;
+    ns1:representativeDoc "traffic",
+        "traffic management",
+        "traffic management solutions" ;
+    ns1:topicId 92 ;
+    ns1:uniqueName "92_traffic_road_control_vehicle" .
+
+<https://1145.am/db/industry/93_sharing_app_peertopeer_service> a ns1:IndustryCluster ;
+    ns1:representation "app",
+        "application",
+        "dealership",
+        "peertopeer",
+        "rentals",
+        "service",
+        "services",
+        "sharing",
+        "social",
+        "subscription" ;
+    ns1:representativeDoc "bike-sharing app",
+        "ride-sharing app",
+        "smart bike-sharing" ;
+    ns1:topicId 93 ;
+    ns1:uniqueName "93_sharing_app_peertopeer_service" .
+
+<https://1145.am/db/industry/94_defense_security_cybersecurity_military> a ns1:IndustryCluster ;
+    ns1:representation "advanced",
+        "civil",
+        "cybersecurity",
+        "defense",
+        "equipment",
+        "law",
+        "military",
+        "resilience",
+        "security",
+        "services" ;
+    ns1:representativeDoc "defense",
+        "unified defense siem",
+        "white-collar criminal defense" ;
+    ns1:topicId 94 ;
+    ns1:uniqueName "94_defense_security_cybersecurity_military" .
+
+<https://1145.am/db/industry/95_engineering_consulting_infrastructure_architecture> a ns1:IndustryCluster ;
+    ns1:representation "architecture",
+        "civil",
+        "construction",
+        "consulting",
+        "engineering",
+        "infrastructure",
+        "inspection",
+        "land",
+        "residential",
+        "sector" ;
+    ns1:representativeDoc "civil engineering and land planning services",
+        "civil engineering and land surveying",
+        "civil engineering consulting and land surveying" ;
+    ns1:topicId 95 ;
+    ns1:uniqueName "95_engineering_consulting_infrastructure_architecture" .
+
+<https://1145.am/db/industry/96_tech_technology_hightech_engineering> a ns1:IndustryCluster ;
+    ns1:representation "engineering",
+        "hightech",
+        "industrial",
+        "industries",
+        "industry",
+        "manufacturers",
+        "manufacturing",
+        "tech",
+        "technology",
+        "workforce" ;
+    ns1:representativeDoc "ed-tech",
+        "fit-tech",
+        "tech toy" ;
+    ns1:topicId 96 ;
+    ns1:uniqueName "96_tech_technology_hightech_engineering" .
+
+<https://1145.am/db/industry/97_hr_resources_resource_management> a ns1:IndustryCluster ;
+    ns1:representation "administration",
+        "consulting",
+        "employee",
+        "hr",
+        "management",
+        "resource",
+        "resources",
+        "software",
+        "tech",
+        "technology" ;
+    ns1:representativeDoc "human resources",
+        "human resources and technology services",
+        "human resources technology" ;
+    ns1:topicId 97 ;
+    ns1:uniqueName "97_hr_resources_resource_management" .
+
+<https://1145.am/db/industry/98_contact_centres_centre_center> a ns1:IndustryCluster ;
+    ns1:representation "center",
+        "centre",
+        "centres",
+        "cloud",
+        "contact",
+        "provider",
+        "service",
+        "services",
+        "software",
+        "telematics" ;
+    ns1:representativeDoc "cloud-contact-center software",
+        "contact center services",
+        "contact center software" ;
+    ns1:topicId 98 ;
+    ns1:uniqueName "98_contact_centres_centre_center" .
+
+<https://1145.am/db/industry/99_education_educational_childrens_child> a ns1:IndustryCluster ;
+    ns1:representation "care",
+        "child",
+        "childrens",
+        "education",
+        "educational",
+        "family",
+        "learning",
+        "service",
+        "services",
+        "specialty" ;
+    ns1:representativeDoc "early childhood education and child care",
+        "early childhood education and child care services",
+        "education and child care" ;
+    ns1:topicId 99 ;
+    ns1:uniqueName "99_education_educational_childrens_child" .
+
+<https://1145.am/db/industry/9_healthcare_information_medical_health> a ns1:IndustryCluster ;
+    ns1:representation "data",
+        "health",
+        "healthcare",
+        "information",
+        "insurance",
+        "medical",
+        "medicine",
+        "provider",
+        "providers",
+        "services" ;
+    ns1:representativeDoc "health care information",
+        "health care information management services",
+        "health care information technology" ;
+    ns1:topicId 9 ;
+    ns1:uniqueName "9_healthcare_information_medical_health" .
+

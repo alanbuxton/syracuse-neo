@@ -10,6 +10,7 @@ from neomodel import db
 from datetime import date
 from topics.cache_helpers import nuke_cache
 from topics.serializers import *
+from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
 
 '''
     Care these tests will delete neodb data
@@ -28,7 +29,9 @@ class TestUtilsWithDumpData(TestCase):
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
         nuke_cache()
-        do_import_ttl(dirname="dump",force=True,do_archiving=False)
+        do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
+        delete_all_not_needed_resources()
+        post_import_merging()
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()
@@ -56,7 +59,7 @@ class TestUtilsWithDumpData(TestCase):
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
         assert len(clean_node_data) == 8
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest Partners',
+                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest',
                 'Investment (VentureBeat: Mar 2019)', 'Peakon',
                 'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone']
         )
@@ -71,7 +74,7 @@ class TestUtilsWithDumpData(TestCase):
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
         assert len(clean_node_data) == 10
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest Partners', 'Investment (VentureBeat: Mar 2019)',
+                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest', 'Investment (VentureBeat: Mar 2019)',
                 'Peakon', 'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone',
                 'https://sws.geonames.org/2623032', 'https://sws.geonames.org/2658434']
         )
@@ -154,7 +157,7 @@ class TestUtilsWithDumpData(TestCase):
         assert len(recents_by_geo) == 65
         assert sorted(recents_by_geo)[:20] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1), ('AE', 'AE-01', 'United Arab Emirates - Abu Dhabi', 1, 1, 1),
             ('AR', 'AR', 'Argentina', 0, 0, 1), ('AU', 'AU', 'Australia', 1, 2, 2), ('BF', 'BF', 'Burkina Faso', 0, 2, 2), ('BM', 'BM', 'Bermuda', 0, 0, 3),
-            ('BR', 'BR', 'Brazil', 0, 0, 1), ('CA', 'CA', 'Canada', 22, 33, 38), ('CA', 'CA-01', 'Canada - Alberta', 1, 1, 1),
+            ('BR', 'BR', 'Brazil', 0, 0, 1), ('CA', 'CA', 'Canada', 22, 33, 39), ('CA', 'CA-01', 'Canada - Alberta', 1, 1, 1),
             ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10), ('CA', 'CA-08', 'Canada - Ontario', 7, 9, 11), ('CH', 'CH', 'Switzerland', 1, 1, 1),
             ('CN', 'CN', 'China', 1, 2, 2), ('CN', 'CN-25', 'China - Shandong Sheng', 0, 1, 1), ('DE', 'DE', 'Germany', 9, 10, 14),
             ('ES', 'ES', 'Spain', 0, 2, 3), ('FR', 'FR', 'France', 2, 3, 3), ('GB', 'GB', 'United Kingdom', 7, 10, 10), ('GR', 'GR', 'Greece', 0, 4, 4),
