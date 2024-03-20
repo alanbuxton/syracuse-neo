@@ -48,7 +48,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        post_import_merging()
+        post_import_merging(True)
         warm_up_cache()
 
     def setUp(self):
@@ -65,10 +65,10 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 4
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 4
-        assert len(re.findall(r"\bOpenAI\b",email)) == 68
+        assert len(re.findall(r"\bOpenAI\b",email)) == 52
         assert "March 11, 2024" in email
         assert "March 4, 2024" in email
-        assert activity_notif.num_activities == 23
+        assert activity_notif.num_activities == 19
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -79,11 +79,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1
-        assert len(re.findall(r"\bOpenAI\b",email)) == 40
+        assert len(re.findall(r"\bOpenAI\b",email)) == 22
         assert "March 11, 2024" in email
         assert "March 4, 2024" not in email
         assert "March 9, 2024" in email
-        assert activity_notif.num_activities == 13
+        assert activity_notif.num_activities == 7
 
     def test_only_populates_activity_pages_if_cache_available(self):
         ''' For testing

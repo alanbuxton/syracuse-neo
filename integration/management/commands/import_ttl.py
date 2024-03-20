@@ -55,7 +55,8 @@ def move_files(src_dir,target_dir):
     res = subprocess.run(['mv',src_dir,target_dir])
     logger.info(res)
 
-def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True):
+def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True,
+                    raise_on_error=True):
     delete_dir = f"{dir_name}/deletions"
     count_of_creations = 0
     count_of_deletions = 0
@@ -72,7 +73,7 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True):
         logger.info("No insertion files to load, quitting")
         return count_of_deletions, 0
     for filename in all_files:
-        creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME)
+        creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME,raise_on_error)
         count_of_creations += creations
     logger.info(f"After running insertion files there are {count_nodes()} nodes")
     if do_post_processing is True:
@@ -91,15 +92,32 @@ def load_deletion_file(filepath):
     db.cypher_query(command)
     return len(uris), cnt[0][0]
 
-def load_file(filepath,RDF_SLEEP_TIME):
+def load_file(filepath,RDF_SLEEP_TIME, raise_on_error=True):
     filepath = os.path.abspath(filepath)
     with open(filepath) as f:
         uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
     command = f'call n10s.rdf.import.fetch("file://{filepath}","Turtle");'
     logger.info(f"Loading: {command}")
-    db.cypher_query(command)
+    results,_ = db.cypher_query(command)
+    res = results[0] # row like ['KO', 0, 5025, None, 'Unexpected character U+FFFC at index 57: https://1145.am/db/techcrunchcom_2011_12_02_doo-net-gets-￼6-8m-to-reinvent-office-paperwork-oh-yes-2_ [line 5121]', {'singleTx': False}]
+    if res[0] != 'OK':
+        logger.error(f"{command}: {res}")
+        log_at_risk_doc_ids(filepath, uris)
+        if raise_on_error is True:
+            raise ValueError(f"{command} failed with {res}")
     time.sleep(RDF_SLEEP_TIME)
     return len(uris)
+
+def log_at_risk_doc_ids(filepath,uris):
+    all_doc_ids = [x.split("/")[4] for x in uris]
+    doc_ids = []
+    fname = filepath.split("/")[-1]
+    for x in set(all_doc_ids):
+        try:
+            doc_ids.append(int(x))
+        except:
+            pass
+    logger.error(f"At-risk doc_ids to check {fname}: {sorted(doc_ids)}")
 
 class Command(BaseCommand):
 
@@ -115,6 +133,18 @@ class Command(BaseCommand):
                 default=False,
                 action="store_true",
                 help="Send notification emails after successful import")
+        parser.add_argument("-g","--do_post_processing",
+                default=True,
+                action="store_false",
+                help="Set this flag to not auto-run post-processing")
+        parser.add_argument("-r","--raise_on_error",
+                default=True,
+                action="store_false",
+                help="Set this flag to continue processing imports even if the load process fails")
+        parser.add_argument("-a","--do_archiving",
+                default=True,
+                action="store_false",
+                help="Set this flag to disable archiving")
 
     def handle(self, *args, **options):
         do_import_ttl(**options)
@@ -127,6 +157,7 @@ def do_import_ttl(**options):
     do_archiving = options.get("do_archiving",True)
     send_notifications = options.get("send_notifications",False)
     do_post_processing = options.get("do_post_processing",True)
+    raise_on_error = options.get("raise_on_error",True)
     if force:
         cleanup(pidfile)
     if not is_allowed_to_start(pidfile):
@@ -143,7 +174,8 @@ def do_import_ttl(**options):
     for export_dir in export_dirs:
         count_of_creations, count_of_deletions = load_ttl_files(
                                                     export_dir,RDF_SLEEP_TIME,
-                                                    do_post_processing=do_post_processing)
+                                                    do_post_processing=do_post_processing,
+                                                    raise_on_error=raise_on_error)
         di = DataImport(
             run_at = datetime.now(tz=timezone.utc),
             import_ts = os.path.basename(export_dir),

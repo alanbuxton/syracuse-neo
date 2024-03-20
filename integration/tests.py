@@ -5,7 +5,7 @@ import os
 from integration.models import DataImport
 from integration.management.commands.import_ttl import do_import_ttl
 from topics.models import Organization, Resource, Person
-from integration.neo4j_utils import apoc_del_redundant_med
+from integration.neo4j_utils import apoc_del_redundant_same_as
 from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
 
 '''
@@ -163,7 +163,7 @@ class TurtlePostProcessingTestCase(SimpleTestCase):
         assert counts2[0][0] == 4
         assert counts3[0][0] == 4
 
-        apoc_del_redundant_med()
+        apoc_del_redundant_same_as()
 
         counts1_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri1}"}})-[o:sameAsMedium]-(p) return count(o)' )
         counts2_after, _ = db.cypher_query(f'MATCH (n {{uri:"{uri2}"}})-[o:sameAsMedium]-(p) return count(o)' )

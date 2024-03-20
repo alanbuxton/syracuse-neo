@@ -1,5 +1,5 @@
 from neomodel import db
-from integration.neo4j_utils import output_same_as_stats, apoc_del_redundant_med
+from integration.neo4j_utils import output_same_as_stats, apoc_del_redundant_same_as
 import logging
 logger = logging.getLogger(__name__)
 
@@ -54,13 +54,15 @@ find_same_as_mediums_for_merge_query = """
     """
 
 def post_import_merging(with_delete_not_needed_resources=False):
+    apoc_del_redundant_same_as()
     reallocate_same_as_to_already_merged_nodes()
     merge_same_as_high()
-    apoc_del_redundant_med()
+    apoc_del_redundant_same_as()
     merge_same_as_medium()
     if with_delete_not_needed_resources is True:
         delete_all_not_needed_resources()
     delete_self_same_as()
+    apoc_del_redundant_same_as()
 
 def delete_self_same_as():
     query = "MATCH (a: Organization)-[rel:sameAsHigh|sameAsMedium]->(a) DELETE rel;"
@@ -135,6 +137,8 @@ def reallocate_same_as_to_already_merged_nodes():
     for rel in ["sameAsHigh","sameAsMedium"]:
         query = f"""MATCH (n: Resource)-[x:{rel}]-(o: Resource)
                     WHERE o.internalDocId IS NULL
+                    AND SIZE(LABELS(n)) > 1
+                    AND SIZE(LABELS(o)) = 1
                     AND n.uri <> o.uri
                     RETURN n,o"""
         res, _ = db.cypher_query(query, resolve_objects=True)

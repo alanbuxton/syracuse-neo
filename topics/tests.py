@@ -31,7 +31,7 @@ class TestUtilsWithDumpData(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        post_import_merging()
+        post_import_merging(True)
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()

@@ -7,7 +7,8 @@
 {% for row in activities %}
   <p>
     <b>Document Date: </b>{{ row.date_published | iso_format_to_date | localize }} / <b>Activity Class: </b>{{ row.activity_class }}
-    <br/><a href="{{ row.document_url }}">{{ row.headline }}</a>
+    <br/><b>Headline: </b>{{ row.headline }}
+    <br/><b>Document Source: </b><a href="{{ row.document_url }}">row.document_url</a>
     <br/>
     <b>Type: </b>{{ row.activity_longest_type | title }} /
     <b>Source: </b>{{ row.source_organization }}

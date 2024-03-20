@@ -32,8 +32,10 @@ def do_n10s_config(force=False):
     logger.info(query)
     db.cypher_query(query)
 
-def apoc_del_redundant_med():
+def apoc_del_redundant_same_as():
     output_same_as_stats("Before delete")
+    apoc_query_high = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsHigh]->(n2:Organization)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
+    db.cypher_query(apoc_query_high)
     apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsMedium]->(n2:Organization)-[r2:sameAsMedium]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_medium)
     output_same_as_stats("After Delete sameAsMedium")
