@@ -6,8 +6,10 @@ from integration.models import DataImport
 from integration.management.commands.import_ttl import do_import_ttl
 from topics.models import Organization, Resource, Person
 from integration.neo4j_utils import apoc_del_redundant_same_as
-from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
-
+from integration.merge_nodes import (post_import_merging,
+    delete_all_not_needed_resources,
+    reallocate_same_as_to_already_merged_nodes
+)
 '''
     Care these tests will delete
 '''
@@ -298,6 +300,46 @@ class MergeNodesTestCase(TestCase):
         assert new_node_count == node_count + 1
         post_import_merging(with_delete_not_needed_resources=True)
         assert len(Resource.nodes.all()) == 3
+
+    def test_does_not_attempt_to_reallocate_node_if_does_not_correspond_to_a_merged_node(self):
+        clear_neo()
+        node_list = "ab"
+        query = f"""CREATE {make_node_list(node_list)},
+                    (x: Resource {{uri:'{uri("x")}'}}), // Will be deleted
+                    (a)-[:sameAsHigh]->(x),
+                    (b)-[:sameAsHigh]->(x)"""
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == 3
+        reallocate_same_as_to_already_merged_nodes()
+        assert len(Resource.nodes.all()) == 2
+
+    def test_reallocates_node_to_all_related_nodes(self):
+        clear_neo()
+        node_list= "ab"
+        query = f"""CREATE {make_node_list(node_list)},
+                    (a)-[:sameAsHigh]->(b)"""
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == 2
+        post_import_merging()
+        assert len(Resource.nodes.all()) == 1
+        root_node = Resource.nodes.all()[0]
+        node_list2 = "cd"
+        query2 = f"""CREATE {make_node_list(node_list2)},
+                    (x: Resource {{uri:'{uri("b")}'}}),
+                    (c)-[:sameAsHigh]->(x),
+                    (d)<-[:sameAsHigh]-(x)"""
+        db.cypher_query(query2)
+        assert len(Resource.nodes.all()) == 4
+        reallocate_same_as_to_already_merged_nodes()
+        assert len(Resource.nodes.all()) == 3
+        node_c = Resource.nodes.get_or_none(uri=uri('c'))
+        node_d = Resource.nodes.get_or_none(uri=uri('d'))
+        assert node_c is not None
+        assert node_d is not None
+        assert len(node_c.sameAsHigh) == 1
+        assert len(node_d.sameAsHigh) == 1
+        assert node_c.sameAsHigh[0].uri == root_node.uri
+        assert node_d.sameAsHigh[0].uri == root_node.uri
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")

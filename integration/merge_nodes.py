@@ -132,36 +132,38 @@ def merge_same_as_high():
     output_same_as_stats("After merge sameAsHigh")
 
 def reallocate_same_as_to_already_merged_nodes():
-    cnt = 0
+    cnt_merged = 0
+    cnt_deleted = 0
+    next_log = 100
     logger.info("Starting reallocate_same_as_to_already_merged_nodes")
-    for rel in ["sameAsHigh","sameAsMedium"]:
-        query = f"""MATCH (n: Resource)-[x:{rel}]-(o: Resource)
-                    WHERE o.internalDocId IS NULL
-                    AND SIZE(LABELS(n)) > 1
-                    AND SIZE(LABELS(o)) = 1
-                    AND n.uri <> o.uri
-                    RETURN n,o"""
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        for source, target in res:
-            reallocate_single_same_as(source, target, rel)
-            cnt += 1
-            if cnt % 1000 == 0:
-                output_same_as_stats(f"Reallocated {cnt} records")
-            if cnt % 100 == 0:
-                logger.info(f"Reallocated {cnt} records")
-    logger.info(f"Reallocated {cnt} records")
 
-def reallocate_single_same_as(source, target, rel):
-    if rel == "sameAsHigh":
-        source.sameAsHigh.disconnect(target)
-        res = target.get_merged_same_as_high_by_unmerged_uri()
-        if res is not None:
-            source.sameAsHigh.connect(res)
-    elif rel == "sameAsMedium":
-        source.sameAsMedium.disconnect(target)
-        res = target.get_merged_same_as_medium_by_unmerged_uri()
-        if res is not None:
-            source.sameAsMedium.connect(res)
-    else:
-        logger.error(f"Don't know how to handle {rel}")
-    target.delete()
+    bare_resources_query = """MATCH (target: Resource)-[x:sameAsHigh|sameAsMedium]-(source: Resource)
+        WHERE target.internalDocId IS NULL
+        AND source.internalDocId IS NOT NULL
+        AND SIZE(LABELS(target)) = 1
+        AND SIZE(LABELS(source)) > 1
+        AND source.uri <> target.uri
+        RETURN DISTINCT(target)"""
+
+    res,_ = db.cypher_query(bare_resources_query, resolve_objects=True)
+    for row in res:
+        target = row[0]
+        merged_entity = target.get_merged_same_as_high_by_unmerged_uri()
+        if merged_entity is None:
+            logger.debug(f"No merged entity for {target.uri}, will delete")
+            target.delete()
+            cnt_deleted += 1
+        else:
+            for source in target.sameAsHigh:
+                source.sameAsHigh.connect(merged_entity)
+                source.sameAsHigh.disconnect(target)
+                cnt_merged += 1
+            for source in target.sameAsMedium:
+                source.sameAsMedium.connect(merged_entity)
+                source.sameAsMedium.disconnect(target)
+                cnt_merged += 1
+            target.delete()
+        if cnt_merged >= next_log:
+            output_same_as_stats(f"Reallocated {cnt_merged} records")
+            next_log = next_log + 100
+    output_same_as_stats(f"Reallocated {cnt_merged} records; deleted {cnt_deleted} records")
