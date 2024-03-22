@@ -10,8 +10,9 @@ from integration.merge_nodes import (post_import_merging,
     delete_all_not_needed_resources,
     reallocate_same_as_to_already_merged_nodes
 )
+
 '''
-    Care these tests will delete
+    Care these tests will delete Neo4j DB
 '''
 env_var="DELETE_NEO"
 if os.environ.get(env_var) != "Y":
@@ -341,11 +342,43 @@ class MergeNodesTestCase(TestCase):
         assert node_c.sameAsHigh[0].uri == root_node.uri
         assert node_d.sameAsHigh[0].uri == root_node.uri
 
+    def only_merges_nodes_with_same_labels(self):
+        clear_neo()
+        node_list = "abc"
+        org_nodes = make_node_list(node_list)
+        node_x = make_node("x","Resource:Organization:Person")
+        query = f"""CREATE {org_nodes},
+                    {node_x},
+                    (a)-[:sameAsHigh]->(b),
+                    (b)-[:sameAsHigh]->(c),
+                    (c)-[:sameAsHigh]->(x),
+                    (b)-[:sameAsHigh]->(x)
+                """
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == 4
+        post_import_merging(True)
+        assert len(Resource.nodes.all()) == 2
+
+    def merges_nodes_with_same_labels_irrespective_of_order(self):
+        clear_neo()
+        node_a = make_node("a","Resource:Organization:Person")
+        node_b = make_node("b","Resource:Person:Organization")
+        node_c = make_node("c","Resource:Organization:Site")
+        query = f"""CREATE {node_a},
+                    {node_b}, {node_c},
+                    (a)-[:sameAsHigh]->(b),
+                    (b)-[:sameAsHigh]->(c)
+                """
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == 3
+        post_import_merging(True)
+        assert len(Resource.nodes.all()) == 2
+
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
 
-def make_node(letter):
-    return f"({letter}: Resource:Organization {{uri:'{uri(letter)}', internalDocId: {ord(letter)}, val: 'bar_{letter}', name: '{letter}' }})"
+def make_node(letter, labels="Resource:Organization"):
+    return f"({letter}: {labels} {{uri:'{uri(letter)}', internalDocId: {ord(letter)}, val: 'bar_{letter}', name: '{letter}' }})"
 
 def uri(letter):
     return f"https://1145.am/foo/{letter}"

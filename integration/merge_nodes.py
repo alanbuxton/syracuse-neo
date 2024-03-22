@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 merge_same_as_high_query = """
     MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
     WHERE m.internalDocId <= n.internalDocId
-    AND SIZE(LABELS(m)) > 1
-    AND SIZE(LABELS(n)) > 1
+    AND LABELS(m) = LABELS(n)
     AND m.uri <> n.uri
     WITH m, n
     LIMIT 1
@@ -38,7 +37,7 @@ merge_same_as_high_query = """
 find_same_as_mediums_for_merge_query = """
     MATCH (n: Resource)-[r:sameAsMedium]-(m:Resource)
     WHERE m.merged = True AND n.merged IS NULL
-    AND SIZE(LABELS(n)) > 1
+    AND LABELS(n) = LABELS(m)
     AND m.internalDocId IS NOT NULL // Much faster if being explicit about index
     AND n.internalDocId IS NOT NULL
     AND n.uri <> m.uri
