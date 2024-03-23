@@ -7,6 +7,7 @@ merge_same_as_high_query = """
     MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
     WHERE m.internalDocId <= n.internalDocId
     AND LABELS(m) = LABELS(n)
+    AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
     AND m.uri <> n.uri
     WITH m, n
     LIMIT 1
@@ -38,6 +39,7 @@ find_same_as_mediums_for_merge_query = """
     MATCH (n: Resource)-[r:sameAsMedium]-(m:Resource)
     WHERE m.merged = True AND n.merged IS NULL
     AND LABELS(n) = LABELS(m)
+    AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
     AND m.internalDocId IS NOT NULL // Much faster if being explicit about index
     AND n.internalDocId IS NOT NULL
     AND n.uri <> m.uri

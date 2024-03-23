@@ -342,7 +342,7 @@ class MergeNodesTestCase(TestCase):
         assert node_c.sameAsHigh[0].uri == root_node.uri
         assert node_d.sameAsHigh[0].uri == root_node.uri
 
-    def only_merges_nodes_with_same_labels(self):
+    def test_only_merges_nodes_with_same_labels(self):
         clear_neo()
         node_list = "abc"
         org_nodes = make_node_list(node_list)
@@ -359,7 +359,7 @@ class MergeNodesTestCase(TestCase):
         post_import_merging(True)
         assert len(Resource.nodes.all()) == 2
 
-    def merges_nodes_with_same_labels_irrespective_of_order(self):
+    def test_merges_nodes_with_same_labels_irrespective_of_order(self):
         clear_neo()
         node_a = make_node("a","Resource:Organization:Person")
         node_b = make_node("b","Resource:Person:Organization")
@@ -373,6 +373,56 @@ class MergeNodesTestCase(TestCase):
         assert len(Resource.nodes.all()) == 3
         post_import_merging(True)
         assert len(Resource.nodes.all()) == 2
+
+    def test_does_not_merge_same_as_high_activities(self):
+        clear_neo()
+        node_a = make_node("a","Resource:Organization")
+        node_b = make_node("b","Resource:Organization")
+        node_c = make_node("c","Resource:Organization:CorporateFinanceActivity")
+        node_d = make_node("d","Resource:Organization:CorporateFinanceActivity")
+        query = f"""CREATE {node_a}, {node_b}, {node_c}, {node_d},
+                    (a)-[:sameAsHigh]->(b),
+                    (a)-[:sameAsHigh]->(c),
+                    (a)-[:sameAsHigh]->(d),
+                    (b)-[:sameAsHigh]->(c),
+                    (b)-[:sameAsHigh]->(d),
+                    (c)-[:sameAsHigh]->(d)
+                    """
+        db.cypher_query(query)
+        post_import_merging(True)
+        assert len(Resource.nodes.all()) == 3
+        assert Resource.nodes.get_or_none(uri=uri("a")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("b")) is None
+        assert Resource.nodes.get_or_none(uri=uri("c")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("d")) is not None
+
+    def test_does_not_merge_same_as_medium_activities(self):
+        clear_neo()
+        fake_root1 = f"""(a: Resource:Organization:CorporateFinanceActivity
+                    {{ uri:'{uri("a")}', internalDocId: {ord('a')}, merged: True }} )"""
+        fake_root2 = f"""(b: Resource:Organization
+                    {{ uri:'{uri("b")}', internalDocId: {ord('b')}, merged: True }} )"""
+        node_m = make_node("m","Resource:Organization:CorporateFinanceActivity")
+        node_n = make_node("n","Resource:Organization:CorporateFinanceActivity")
+        node_o = make_node("o","Resource:Organization")
+        node_p = make_node("p","Resource:Organization")
+        query = f"""CREATE {node_m}, {node_n}, {fake_root1},
+                    {fake_root2}, {node_o}, {node_p},
+                    (a)-[:sameAsMedium]->(m),
+                    (a)-[:sameAsMedium]->(n),
+                    (b)-[:sameAsMedium]->(o),
+                    (b)-[:sameAsMedium]->(p)
+                    """
+        db.cypher_query(query)
+        post_import_merging(True)
+        assert len(Resource.nodes.all()) == 4
+        assert Resource.nodes.get_or_none(uri=uri("a")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("b")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("m")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("n")) is not None
+        assert Resource.nodes.get_or_none(uri=uri("o")) is None
+        assert Resource.nodes.get_or_none(uri=uri("p")) is None
+
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
