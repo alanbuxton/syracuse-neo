@@ -55,7 +55,7 @@ def move_files(src_dir,target_dir):
     res = subprocess.run(['mv',src_dir,target_dir])
     logger.info(res)
 
-def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True,
+def load_ttl_files(dir_name,RDF_SLEEP_TIME,
                     raise_on_error=True):
     delete_dir = f"{dir_name}/deletions"
     count_of_creations = 0
@@ -76,8 +76,6 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,do_post_processing=True,
         creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME,raise_on_error)
         count_of_creations += creations
     logger.info(f"After running insertion files there are {count_nodes()} nodes")
-    if do_post_processing is True:
-        post_import_merging()
     return count_of_creations, count_of_deletions
 
 def load_deletion_file(filepath):
@@ -174,7 +172,6 @@ def do_import_ttl(**options):
     for export_dir in export_dirs:
         count_of_creations, count_of_deletions = load_ttl_files(
                                                     export_dir,RDF_SLEEP_TIME,
-                                                    do_post_processing=do_post_processing,
                                                     raise_on_error=raise_on_error)
         di = DataImport(
             run_at = datetime.now(tz=timezone.utc),
@@ -189,12 +186,12 @@ def do_import_ttl(**options):
             logger.info(f"Archiving files from {export_dir} to {RDF_ARCHIVE_DIR}")
             move_files(export_dir,RDF_ARCHIVE_DIR)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
+    if send_notifications is True and total_creations > 0:
+        do_send_recent_activities_email()
+    else:
+        logger.info("No email sending this time")
     if do_post_processing is True:
         post_import_merging(with_delete_not_needed_resources=True)
         rebuild_cache()
     logger.info("re-set cache")
     cleanup(pidfile)
-    if send_notifications is True and total_creations > 0:
-        do_send_recent_activities_email()
-    else:
-        logger.info("No email sending this time")
