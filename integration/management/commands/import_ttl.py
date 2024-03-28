@@ -143,6 +143,10 @@ class Command(BaseCommand):
                 default=True,
                 action="store_false",
                 help="Set this flag to disable archiving")
+        parser.add_argument("-o","--only_post_processing",
+                default=False,
+                action="store_true",
+                help="Just run post-processing (excluding stats calculation)")
 
     def handle(self, *args, **options):
         do_import_ttl(**options)
@@ -160,6 +164,10 @@ def do_import_ttl(**options):
         cleanup(pidfile)
     if not is_allowed_to_start(pidfile):
         logger.info("Already running, or previous run did not shut down cleanly, not spawning new run")
+        return None
+    if options.get("only_post_processing",False) is True:
+        logger.info("Only doing post processing")
+        post_import_merging(with_delete_not_needed_resources=True)
         return None
     export_dirs = new_exports_to_import(dump_dir)
     if len(export_dirs) == 0:

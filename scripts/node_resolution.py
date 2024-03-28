@@ -19,3 +19,6 @@ def resolve_objects_with_error_handling(vals):
             errors.append(e)
             not_resolved.append(tmp_row)
     return resolved, errors, not_resolved
+
+def resolve_query_with_error_handling(query):
+    return resolve_objects_with_error_handling(query)

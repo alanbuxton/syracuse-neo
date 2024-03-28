@@ -26,6 +26,7 @@ def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None
 
 def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limit=20):
     cache_key = f"relevant_orgs_{geo_code}_{industry_id}_{limit}"
+    logger.info(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
     res = cache.get(cache_key)
     if res is not None:
         return res
@@ -130,10 +131,8 @@ def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], m
         return_str = "RETURN n,a ORDER BY a.publishDate DESC"
     where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
-                        AND (o.uri IN {list(uris_to_check)}
-                            OR any(x IN o.internalSameAsHighUriList WHERE x IN {list(uris_to_check)})
-                            OR any(x IN o.internalSameAsMediumUriList WHERE x IN {list(uris_to_check)})
-                        )"""
+                        AND (o.uri IN {list(uris_to_check)})
+                    """
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
         {where_clause}
