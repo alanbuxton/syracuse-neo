@@ -48,6 +48,13 @@ class Resource(StructuredNode):
     internalSameAsMediumUriList = ArrayProperty(StringProperty())
 
     @staticmethod
+    def get_by_uri_or_merged_uri(uri):
+        r = Resource.nodes.get_or_none(uri=uri)
+        if r is not None:
+            return r
+        return Resource.get_by_merged_uri(uri)
+
+    @staticmethod
     def get_by_merged_uri(uri):
         query = f"""MATCH (n: Resource) WHERE '{uri}' in n.internalSameAsHighUriList OR
                     '{uri}' in n.internalSameAsMediumUriList RETURN n"""
@@ -168,6 +175,15 @@ class Article(Resource):
     @property
     def documentURL(self):
         return self.url[0].uri
+
+    def serialize(self):
+        vals = super(Article, self).serialize()
+        vals['headline'] = self.best_name
+        vals['documentURL'] = self.documentURL
+        vals['sourceOrganization'] = self.sourceOrganization
+        vals['datePublished'] = self.datePublished
+        vals['dateRetrieved'] = self.dateRetrieved
+        return vals
 
 
 class IndustryCluster(Resource):
@@ -467,14 +483,9 @@ class Organization(Resource, BasedInGeoMixin):
 
     @staticmethod
     def get_best_name_by_uri(uri):
-        org = Organization.nodes.get_or_none(uri=uri)
+        org = Organization.get_by_uri_or_merged_uri(uri)
         if org is not None:
             return org.best_name
-        query = f"MATCH (n: Organization) WHERE '{uri}' IN n.internalSameAsHighUriList OR '{uri}' IN n.internalSameAsMediumUriList RETURN n"
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        if res is None or len(res) != 1 or len(res[0]) != 1:
-            return None
-        return res[0][0].best_name
 
     @staticmethod
     def by_uris(uris):

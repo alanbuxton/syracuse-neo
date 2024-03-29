@@ -31,6 +31,13 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         data["edge_data"] = clean_edge_data
         data["node_details"] = CustomSerializer(node_details)
         data["edge_details"] = CustomSerializer(edge_details)
+        nodes_by_type = {}
+        for node_row in clean_node_data:
+            node_type = node_row['entityType']
+            if node_type not in nodes_by_type:
+                nodes_by_type[node_type] = []
+            nodes_by_type[node_type].append(node_row['id'])
+        data["nodes_by_type"] = nodes_by_type
         return data
 
 class NameSearchSerializer(serializers.Serializer):

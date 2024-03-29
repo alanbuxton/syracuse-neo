@@ -76,6 +76,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
                 max_date=datetime(2024,3,9,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2024,3,9,tzinfo=timezone.utc))
         max_date = datetime(2024,3,11,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
+        assert email_and_activity_notif is not None
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1

@@ -27,20 +27,25 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
-<p><b>Showing linkages for:</b> {{ data_serializer.source_node }}</p>
 <p>
 {% include 'layouts/nav-header.html' %}
 | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
    Show Timeline</a>
-{% if where_is_included == False %}
-| <a href="{{ request.path }}?include_where=True">Show Where</a>
-{% elif where_is_included == True %}
-| <a href="{{ request.path }}?include_where=False">Hide Where</a>
-{% endif %}
+</p>
+<p><b>Showing linkages for:</b> {{ data_serializer.source_node }}</p>
+
+
+<p><b>Show/Hide: </b>
+{% for entity_type in data_serializer.nodes_by_type.keys %}
+  <label for="{{ entity_type }}_checkbox">{{ entity_type }}</label>
+  <input type="checkbox" name="{{ entity_type }}" id="{{ entity_type }}_checkbox" class="node_checkbox" checked>
+  {% if not forloop.last %}
+    |
+  {% endif %}
+{% endfor %}
 </p>
 
 {% include "track_org_snippet.html" %}
-
 
 <div id="main_container">
   {% if data_serializer.too_many_nodes is True %}
@@ -70,6 +75,23 @@
 {% include 'layouts/footer.html' %}
 
 <script type="text/javascript">
+
+function toggleNode(checkbox) {
+  uris = Object.entries(nodes_by_type_dict[checkbox.name])
+  for (const [k,uri] of uris) {
+    nodes.update( [{"id":uri, "hidden": ! checkbox.checked}]);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var checkboxes = document.querySelectorAll(".node_checkbox");
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener("click", function() {
+            toggleNode(checkbox);
+        });
+    });
+});
 
 var nodes = new vis.DataSet([
   {% for node_dict in data_serializer.node_data %}
@@ -114,6 +136,7 @@ var network = new vis.Network(container, data, options);
 
 const node_details_dict = {{ data_serializer.node_details | safe }} ;
 const edge_details_dict = {{ data_serializer.edge_details | safe }} ;
+const nodes_by_type_dict = {{ data_serializer.nodes_by_type | safe }} ;
 
 function convert_uri(value) {
   if (value.startsWith("https://1145.am")) {
@@ -155,7 +178,13 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
     if (key === 'retrievedAt') {
       archive_date = value;
     }
-    if (key === 'documentDate' & archive_date === "") {
+    if (key === 'documentDate') {
+      archive_date = value;
+    }
+    if (key === 'datePublished') {
+      archive_date = value;
+    }
+    if (key === 'dateRetrieved' & archive_date === "") {
       archive_date = value;
     }
   }

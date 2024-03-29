@@ -19,6 +19,12 @@ class TrackedOrganization(models.Model):
     def organization_name(self):
         return Organization.get_best_name_by_uri(self.organization_uri)
 
+    @property
+    def organization_or_merged_uri(self):
+        org = Organization.get_by_uri_or_merged_uri(self.organization_uri)
+        if org is not None:
+            return org.uri
+
     @staticmethod
     def by_user(user):
         return TrackedOrganization.objects.filter(user=user)

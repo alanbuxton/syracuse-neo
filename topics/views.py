@@ -143,12 +143,10 @@ class OrganizationByUri(APIView):
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
-        include_where = request.GET.get("include_where","false").lower() == "true"
-        org_serializer = OrganizationGraphSerializer(o, context={"include_where":include_where})
+        org_serializer = OrganizationGraphSerializer(o)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.longest_name}}
         resp = Response({"data_serializer": org_serializer.data,
                             "org_data":org_data,
-                            "where_is_included": include_where,
                             "cache_ready": is_cache_ready(),
                             }, status=status.HTTP_200_OK)
         return resp

@@ -18,7 +18,7 @@ def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_da
 
 def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date):
     tracked_orgs = TrackedOrganization.by_user(user)
-    org_uris = [x.organization_uri for x in tracked_orgs]
+    org_uris = [x.organization_or_merged_uri for x in tracked_orgs]
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=org_uris, max_date=max_date)
     if len(matching_activity_orgs) == 0:
         return None
@@ -38,6 +38,6 @@ def create_email_notifications(num_days=7):
     for tracked_org_object in distinct_users:
         user = tracked_org_object.user
         email_and_activity_notification = prepare_recent_changes_email_notification(user, num_days)
-        if email is not None:
+        if email_and_activity_notification is not None:
             email, activity_notification = email_and_activity_notification
             yield (user, email, activity_notification)

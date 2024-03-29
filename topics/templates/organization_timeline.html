@@ -41,12 +41,12 @@
 
 <body>
   <h1>{{ timeline_serializer.org_name }} - Timeline</h1>
-  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}</p>
   <p>
     {% include 'layouts/nav-header.html' %}
   |  <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
       Show Linkages</a>
   </p>
+  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}</p>
     {% include "track_org_snippet.html" %}
     <br/><em>Shown by document published date</em>
   </p>
@@ -147,11 +147,15 @@
           documentURL = value;
         }
         if (key === 'retrievedAt') {
-          console.log(value)
           archive_date = value;
         }
-        if (key === 'documentDate' & archive_date === "") {
-          console.log(value)
+        if (key === 'documentDate') {
+          archive_date = value;
+        }
+        if (key === 'datePublished') {
+          archive_date = value;
+        }
+        if (key === 'dateRetrieved' & archive_date === "") {
           archive_date = value;
         }
       }

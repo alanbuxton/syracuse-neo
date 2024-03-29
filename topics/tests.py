@@ -53,25 +53,10 @@ class TestUtilsWithDumpData(TestCase):
         geo = GeoSerializer(data={"country_or_region":"United Kingdom"})
         assert geo.get_country_or_region_id() == 'GB'
 
-    def test_corp_fin_graph_nodes_without_where(self):
+    def test_corp_fin_graph_nodes(self):
         source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
         o = Organization.nodes.get_or_none(uri=source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 8
-        assert set([x['label'] for x in clean_node_data]) == set(
-                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest',
-                'Investment (VentureBeat: Mar 2019)', 'Peakon',
-                'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone']
-        )
-        assert len(clean_edge_data) == 8 # # TODO SAME_AS* rels are redundant as they are the ones that form part of the central cluster
-        assert set([x['label'] for x in clean_edge_data]) == { 'DOCUMENT_SOURCE', 'INVESTOR', 'TARGET'}
-        assert len(node_details) >= len(clean_node_data)
-        assert len(edge_details) >= len(clean_edge_data)
-
-    def test_corp_fin_graph_nodes_with_where(self):
-        source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
-        o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
         assert len(clean_node_data) == 10
         assert set([x['label'] for x in clean_node_data]) == set(
                 ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest', 'Investment (VentureBeat: Mar 2019)',
@@ -93,19 +78,10 @@ class TestUtilsWithDumpData(TestCase):
         assert len(org_display_details) == 1
         assert errors == set()
 
-    def test_location_graph_without_where(self):
-        source_uri = "https://1145.am/db/4075107/Italian_Engineering_Group" # TODO - name for this org is really MAIRE (the foundName)
-        o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 5
-        assert len(clean_edge_data) == 5
-        assert len(node_details) >= len(clean_node_data)
-        assert len(edge_details) >= len(clean_edge_data)
-
-    def test_location_graph_with_where(self):
+    def test_location_graph(self):
         source_uri = "https://1145.am/db/4075107/Italian_Engineering_Group"
         o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
+        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
         assert len(clean_node_data) == 7
         assert len(clean_edge_data) == 7
         assert len(node_details) >= len(clean_node_data)
@@ -122,19 +98,10 @@ class TestUtilsWithDumpData(TestCase):
         assert len(org_display_details) == 1
         assert errors == set()
 
-    def test_role_without_where(self):
+    def test_role(self):
         source_uri = "https://1145.am/db/4072168/Royal_Bank_Of_Canada"
         o = Organization.nodes.get_or_none(uri=source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 6
-        assert len(clean_edge_data) == 7
-        assert len(node_details) >= len(clean_node_data)
-        assert len(edge_details) >= len(clean_edge_data)
-
-    def test_role_with_where(self):
-        source_uri = "https://1145.am/db/4072168/Royal_Bank_Of_Canada"
-        o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o,include_where=True)
         assert len(clean_node_data) == 7
         assert len(clean_edge_data) == 9
         assert len(node_details) >= len(clean_node_data)

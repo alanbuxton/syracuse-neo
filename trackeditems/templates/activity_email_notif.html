@@ -10,7 +10,7 @@
 
 <ul>
   {% for tracked_org in tracked_orgs %}
-    <li>{{ tracked_org.organization_name }}</li>
+    <li>{{ tracked_org.organization_name }} ({{ tracked_org.organization_or_merged_uri }})</li>
   {% endfor %}
 </ul>
 

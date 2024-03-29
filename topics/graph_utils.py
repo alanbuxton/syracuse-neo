@@ -72,11 +72,6 @@ def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dic
     return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
 
 def graph_source_activity_target(source_node, **kwargs):
-    '''
-        kwargs can contain
-
-        "include_where" => include location data
-    '''
     root_uri = source_node.uri
     root_node_dict = source_node.serialize()
     (color, shape) = node_color_shape(source_node)
@@ -94,20 +89,18 @@ def graph_source_activity_target(source_node, **kwargs):
         future_round_raw_nodes = [x for x in future_round_raw_nodes if
                         isinstance(x,ActivityMixin) or isinstance(x,Role)]
 
-    include_where = kwargs.get("include_where",False)
-    if include_where == True:
-        for node in seen_raw_nodes:
-            for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
-                loc_nodes = get_loc_nodes_if_exist(node, a,b, node_details)
-                if loc_nodes is None:
-                    continue
-                for node_js_data, node_display_data, edge_js_data, edge_display_data in loc_nodes:
-                    if node_js_data not in all_nodes:
-                        all_nodes.append(node_js_data)
-                        node_details[node_js_data['uri']] = node_display_data
-                    if edge_js_data not in all_edges:
-                        all_edges.append(edge_js_data)
-                        edge_details[edge_js_data["id"]] = edge_display_data
+    for node in seen_raw_nodes:
+        for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
+            loc_nodes = get_loc_nodes_if_exist(node, a,b, node_details)
+            if loc_nodes is None:
+                continue
+            for node_js_data, node_display_data, edge_js_data, edge_display_data in loc_nodes:
+                if node_js_data not in all_nodes:
+                    all_nodes.append(node_js_data)
+                    node_details[node_js_data['uri']] = node_display_data
+                if edge_js_data not in all_edges:
+                    all_edges.append(edge_js_data)
+                    edge_details[edge_js_data["id"]] = edge_display_data
 
     same_as_rels = Organization.find_same_as_relationships(set(seen_raw_nodes) - set([source_node]))
     for rel_type, node1, node2 in same_as_rels:
