@@ -60,8 +60,10 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
         api_row["source_organization"] = article.sourceOrganization
         api_row["date_published"] = article.datePublished
         api_row["headline"] = article.headline
-        api_row["document_extract"] = activity.documentExtract
+        api_row["document_extract"] = activity.documentSource.relationship(article).documentExtract
         api_row["document_url"] = article.documentURL
+        api_row["archive_org_page_url"] = article.archiveOrgPageURL
+        api_row["archive_org_list_url"] = article.archiveOrgListURL
         api_row["activity_uri"] = activity.uri
         api_row["activity_class"] = activity.__class__.__name__
         api_row["activity_types"] = activity.activityType
@@ -84,6 +86,11 @@ def get_all_source_names():
     return flattened
 
 def get_activities_by_source_and_date_range(source_name,min_date, max_date, limit=None,counts_only=False):
+    query = build_get_activities_by_source_and_date_range_query(source_name,min_date, max_date, limit,counts_only)
+    objs, _ = db.cypher_query(query, resolve_objects=True)
+    return objs[:limit]
+
+def build_get_activities_by_source_and_date_range_query(source_name,min_date, max_date, limit,counts_only):
     if counts_only is True:
         return_str = "RETURN COUNT(DISTINCT(n))"
     else:
@@ -103,12 +110,19 @@ def get_activities_by_source_and_date_range(source_name,min_date, max_date, limi
                 MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Organization)
                 {where_clause}
                 {return_str} {limit_str};"""
-    objs, _ = db.cypher_query(query, resolve_objects=True)
+    return query
 
+def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], min_date,
+                        max_date, limit=None, include_same_as=True, counts_only = False):
+    query=build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list,
+                        min_date, max_date, limit=limit, include_same_as=include_same_as,
+                        counts_only = counts_only)
+    objs, _ = db.cypher_query(query, resolve_objects=True)
     return objs[:limit]
 
-def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], min_date, max_date, limit=None, include_same_as=True,
-                                    counts_only = False):
+def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[str,List],
+                    min_date, max_date, limit=None, include_same_as=True,
+                    counts_only = False):
     if isinstance(uri_or_uri_list, str):
         uri_list = [uri_or_uri_list]
     elif isinstance(uri_or_uri_list, set):
@@ -143,8 +157,7 @@ def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], m
         {return_str} {limit_str};
     """
     logger.debug(query)
-    objs, _ = db.cypher_query(query, resolve_objects=True)
-    return objs[:limit]
+    return query
 
 def date_to_cypher_friendly(date):
     if isinstance(date, str):

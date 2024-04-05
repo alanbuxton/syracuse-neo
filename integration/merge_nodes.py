@@ -54,6 +54,33 @@ find_same_as_mediums_for_merge_query = """
     return m, n
     """
 
+def create_merge_activities_query(rel1="-[:investor]->",
+                                joiner="CorporateFinanceActivity",
+                                rel2="-[:target]->"):
+    return f"""
+    MATCH (r1: Resource){rel1}(j: {joiner}){rel2}(r2: Resource)
+    WITH r1, r2, j
+    ORDER BY j.internalDocId
+    WITH r1, r2, COLLECT(j) AS js
+    WHERE SIZE(js) > 1
+    WITH js
+    LIMIT 1
+    UNWIND(js) as n
+    WITH n
+    SET n.internalDocIdList = COALESCE(n.internalDocIdList,[]) + [n.internalDocId]
+    SET n.internalActivityList = COALESCE(n.internalActivityUriList,[]) + [n.uri]
+    WITH COLLECT(n) as nodes
+    CALL apoc.refactor.mergeNodes(nodes, {{ properties: {{
+        uri: "discard",
+        internalDocId: "discard",
+        `.*`: "combine"
+        }},
+        produceSelfRel: false,
+        mergeRels:true,
+        singleElementAsArray: true }}) YIELD node
+    RETURN node
+    """
+
 def post_import_merging(with_delete_not_needed_resources=False):
     apoc_del_redundant_same_as()
     reallocate_same_as_to_already_merged_nodes()
@@ -63,7 +90,23 @@ def post_import_merging(with_delete_not_needed_resources=False):
     if with_delete_not_needed_resources is True:
         delete_all_not_needed_resources()
     delete_self_same_as()
+    move_document_extract_to_relationship()
+    merge_all_corp_fin_activities()
     apoc_del_redundant_same_as()
+
+def move_document_extract_to_relationship():
+    logger.info("Moving document extract to relationship")
+    query = """
+        MATCH (n:CorporateFinanceActivity|LocationActivity|RoleActivity)-[d:documentSource]->(a:Article)
+        WHERE d.documentExtract IS NULL
+        CALL {
+            WITH n, d
+            SET d.documentExtract = n.documentExtract
+            REMOVE n.documentExtract
+        }
+        IN TRANSACTIONS OF 10000 ROWS;
+        """
+    db.cypher_query(query)
 
 def delete_self_same_as():
     query = "MATCH (a: Organization)-[rel:sameAsHigh|sameAsMedium]->(a) DELETE rel;"
@@ -91,6 +134,37 @@ def create_merge_nodes_query(base_uri, attach_uri):
         RETURN node
     """
     return merge_nodes_query
+
+def merge_all_corp_fin_activities():
+    cnt = 0
+    logger.info("Starting merge activities")
+    match_strs = [
+        ("-[:investor]->","-[:target]->"),
+        ("-[:buyer]->","-[:target]->"),
+        ("<-[:vendor]-","-[:target]->"),
+    ]
+    for rel1,rel2 in match_strs:
+        res = merge_activities_for(rel1,"CorporateFinanceActivity",rel2)
+        cnt += res
+    logger.info(f"Merged {cnt} records")
+
+def merge_activities_for(rel1,joiner,rel2):
+    cnt = 0
+    current_count,_ = db.cypher_query(f"MATCH (n: {joiner}) RETURN COUNT(n);")
+    logger.info(f"Merging Activities for {rel1}{joiner}{rel2} - currently {current_count[0][0]}")
+    while True:
+        query = create_merge_activities_query(rel1,joiner,rel2)
+        a,_ = db.cypher_query(query)
+        logger.debug(f"Merged {a}")
+        if len(a) == 0:
+            break
+        cnt += 1
+        if cnt % 1000 == 0:
+            current_count,_ = db.cypher_query(f"MATCH (n: {joiner}) RETURN COUNT(n);")
+            logger.info(f"Merged {cnt} {joiner} records, now {current_count[0][0]};")
+        elif cnt % 100 == 0:
+            logger.info(f"Merged {cnt} {joiner} records")
+    return cnt
 
 def merge_same_as_medium():
     '''

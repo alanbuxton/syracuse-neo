@@ -29,6 +29,17 @@ class TrackedOrganization(models.Model):
     def by_user(user):
         return TrackedOrganization.objects.filter(user=user)
 
+    @staticmethod
+    def uris_by_user(user):
+        orgs = TrackedOrganization.by_user(user)
+        return [x.organization_uri for x in orgs]
+
+    @staticmethod
+    def trackable_uris_by_user(user):
+        tracked_orgs = TrackedOrganization.by_user(user)
+        org_uris = [x.organization_or_merged_uri for x in tracked_orgs]
+        return org_uris
+
 
 class ActivityNotification(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

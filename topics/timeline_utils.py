@@ -92,7 +92,7 @@ def get_timeline_data(orgs, limit=None):
                 items.append(
                     {"group": l2_id,
                     "label": labelize(current_item,activity_type),
-                    "start": current_item.documentDate.isoformat(),
+                    "start": current_item.earliestDatePublished.isoformat(),
                     "id": current_item.uri,
                     "className": class_name_for(current_item),
                     })

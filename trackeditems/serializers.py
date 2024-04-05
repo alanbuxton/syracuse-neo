@@ -57,6 +57,8 @@ class ActivitySerializer(serializers.Serializer):
     document_extract = serializers.CharField()
     headline = serializers.CharField()
     document_url = serializers.URLField()
+    archive_org_page_url = serializers.URLField()
+    archive_org_list_url = serializers.URLField()
     activity_uri = serializers.URLField()
     activity_class = serializers.CharField()
     activity_types = serializers.ListField()

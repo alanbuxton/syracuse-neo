@@ -4,11 +4,12 @@ import time
 import os
 from integration.models import DataImport
 from integration.management.commands.import_ttl import do_import_ttl
-from topics.models import Organization, Resource, Person
+from topics.models import Organization, Resource, Person, ActivityMixin
 from integration.neo4j_utils import apoc_del_redundant_same_as
 from integration.merge_nodes import (post_import_merging,
     delete_all_not_needed_resources,
-    reallocate_same_as_to_already_merged_nodes
+    reallocate_same_as_to_already_merged_nodes,
+    merge_activities_for
 )
 
 '''
@@ -292,7 +293,7 @@ class MergeNodesTestCase(TestCase):
         post_import_merging()
         node_count = count_relevant_nodes()
         new_node = make_node("x")
-        fake_same_as = "(c: Resource {uri:'https://1145.am/foo/c'})"
+        fake_same_as = "(c: Resource {uri:'https://1145.am/foo/c'})" # e.g. new sameAs added during import that wwas already merged
         new_node_query = f"""CREATE {new_node}, {fake_same_as},
              (x)-[:sameAsHigh]->(c)"""
         db.cypher_query(new_node_query)
@@ -423,6 +424,44 @@ class MergeNodesTestCase(TestCase):
         assert Resource.nodes.get_or_none(uri=uri("o")) is None
         assert Resource.nodes.get_or_none(uri=uri("p")) is None
 
+class MergeActivitiesTestCase(SimpleTestCase):
+
+    def test_merges_activities(self):
+        clear_neo()
+        things = make_node_list("abcdefghi","Resource:Thing")
+        joiners = make_node_list("uvwxyz","Resource:Joiner")
+        # u and v should merge, w and x should merge
+        query = f"""
+        CREATE {things}, {joiners},
+        (a)-[:activates]->(w)-[:targets]->(b),
+        (a)-[:activates]->(x)-[:targets]->(b),
+        (c)-[:activates]->(y)-[:targets]->(d),
+        (e)-[:activates]->(z)-[:targets]->(f),
+        (z)-[:targets]->(g),
+        (h)-[:activates]->(u)-[:targets]->(i),
+        (h)-[:activates]->(v)-[:targets]->(i)
+        """
+        db.cypher_query(query)
+        assert len(Resource.nodes.all()) == 15
+        assert len(Joiner.nodes.all()) == 6
+        merge_activities_for("-[:activates]->","Joiner","-[:targets]->")
+        assert len(Joiner.nodes.all()) == 6 - 2
+        n1 = Joiner.nodes.get_or_none(uri=uri("u"))
+        assert set(n1.name) == set(['u', 'v'])
+        assert set(n1.internalDocIdList) == set([117, 118])
+        assert set(n1.internalActivityList) == set([uri("u"),uri("v")])
+        n_merged = Joiner.nodes.get_or_none(uri=uri("x"))
+        assert n_merged is None
+        n_no_change = Joiner.nodes.get_or_none(uri=uri("z"))
+        assert n_no_change.internalDocIdList is None
+        assert n_no_change.internalActivityList is None
+
+
+class Thing(Resource):
+    pass
+
+class Joiner(Resource, ActivityMixin):
+    pass
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
@@ -433,6 +472,6 @@ def make_node(letter, labels="Resource:Organization"):
 def uri(letter):
     return f"https://1145.am/foo/{letter}"
 
-def make_node_list(node_list):
-    nodes = ", ".join([make_node(x) for x in node_list])
+def make_node_list(node_list, labels="Resource:Organization"):
+    nodes = ", ".join([make_node(x,labels) for x in node_list])
     return nodes

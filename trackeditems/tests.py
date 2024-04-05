@@ -58,6 +58,17 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4074438/Titan_Pro_Technologies") # 2007-03-27T00:00:00Z
         to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4076678/Bioaffinity_Technologies") # 2023-10-05
 
+    def test_finds_merged_uris_for_tracked_orgs(self):
+        tracked_orgs = TrackedOrganization.by_user(self.user)
+        org_uris = [x.organization_uri for x in tracked_orgs]
+        assert set(org_uris) == set(['https://1145.am/db/4071554/Openai',
+                                'https://1145.am/db/4074438/Titan_Pro_Technologies',
+                                'https://1145.am/db/4076678/Bioaffinity_Technologies'])
+        org_or_merged_uris = [x.organization_or_merged_uri for x in tracked_orgs]
+        assert set(org_or_merged_uris) == set(['https://1145.am/db/4074581/Openai', # Different one
+                                'https://1145.am/db/4074438/Titan_Pro_Technologies',
+                                'https://1145.am/db/4076678/Bioaffinity_Technologies'])
+
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
         max_date = datetime(2024,3,11,tzinfo=timezone.utc)
@@ -69,6 +80,9 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "March 11, 2024" in email
         assert "March 4, 2024" in email
         assert activity_notif.num_activities == 19
+        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 18
+        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 18
+        assert "https://www.reuters.com/technology/sam-altman-return-openais-board-information-reports-2024-03-08/" in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -102,17 +116,16 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" not in content
-        assert "Click on a document title to see the original source" not in content
+        assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
         assert "Open AI" not in content
 
         response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" not in content
-        assert "Click on a document title to see the original source" not in content
+        assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
         assert "Los Angeles Rams" not in content
-
 
         warm_up_cache()
         response = client.get("/tracked/activity_stats")
@@ -123,13 +136,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" in content
-        assert "Click on a document title to see the original source" in content
         assert "Site stats calculating, please check later" not in content
         assert "Open AI" in content
 
         response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
         content = str(response.content)
         assert "Activities between" in content
-        assert "Click on a document title to see the original source" in content
+        assert "Click on a document link to see the original source document" in content
         assert "Site stats calculating, please check later" not in content
         assert "Los Angeles Rams" in content

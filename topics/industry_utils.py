@@ -1,7 +1,11 @@
 from topics.models import IndustryCluster
+import logging
+logger = logging.getLogger(__name__)
 
 def industry_select_list():
     entities = IndustryCluster.leaf_nodes_only()
+    if entities is None or len(entities) == 0:
+        logger.error("Did not find any Industry Data")
     return entities_to_select_list(entities)
 
 def entities_to_select_list(entities):

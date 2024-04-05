@@ -133,8 +133,6 @@ def get_loc_nodes_if_exist(node, field, edge_name, node_details, location_node_c
         edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
         if related_node.get("documentTitle"):
             edge_display_details["documentTitle"]=related_node["documentTitle"]
-        # if related_node.get("documentURL"):
-        #     edge_display_details["documentURL"]=related_node["documentURL"]
         if related_node.get("documentExtract"):
             edge_display_details["documentExtract"] = related_node["documentExtract"]
         edge_upper = rel_type_to_edge_label(edge_name)

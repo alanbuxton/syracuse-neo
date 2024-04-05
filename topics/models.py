@@ -1,6 +1,6 @@
 from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
-    IntegerProperty)
+    IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
 import datetime
 from topics.geo_utils import get_geoname_uris_for_country_region
@@ -9,10 +9,10 @@ import cleanco
 from django.core.cache import cache
 from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter
+from neomodel.cardinality import OneOrMore, One
 
 import logging
 logger = logging.getLogger(__name__)
-
 
 def uri_from_related(rel):
     if len(rel) == 0:
@@ -34,11 +34,15 @@ def shortest(arr):
         return arr # Don't sort if it's just a string
     return sorted(arr,key=len)[0]
 
+class DocumentSourceRel(StructuredRel):
+    documentExtract = StringProperty()
+
 class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
-    documentSource = RelationshipTo("Article","documentSource")
+    documentSource = RelationshipTo("Article","documentSource",
+            model=DocumentSourceRel, cardinality=OneOrMore)
     internalDocId = IntegerProperty()
     internalDocIdList = ArrayProperty(IntegerProperty())
     internalNameList = ArrayProperty(StringProperty())
@@ -46,6 +50,14 @@ class Resource(StructuredNode):
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalSameAsHighUriList = ArrayProperty(StringProperty())
     internalSameAsMediumUriList = ArrayProperty(StringProperty())
+
+    @property
+    def earliestDocumentSource(self):
+        return self.documentSource.order_by("datePublished")[0]
+
+    @property
+    def earliestDatePublished(self):
+        return self.earliestDocumentSource.datePublished
 
     @staticmethod
     def get_by_uri_or_merged_uri(uri):
@@ -163,10 +175,23 @@ class Resource(StructuredNode):
 
 class Article(Resource):
     headline = StringProperty()
-    url = Relationship('Resource','url')
+    url = RelationshipTo("Resource","url", cardinality=One)
     sourceOrganization = StringProperty()
     datePublished = NativeDateTimeProperty()
     dateRetrieved = NativeDateTimeProperty()
+
+    @property
+    def archive_date(self):
+        closest_date = self.dateRetrieved or self.datePublished
+        return closest_date.strftime("%Y%m%d")
+
+    @property
+    def archiveOrgPageURL(self):
+        return f"https://web.archive.org/{self.archive_date}235959/{self.documentURL}"
+
+    @property
+    def archiveOrgListURL(self):
+        return f"https://web.archive.org/{self.archive_date}*/{self.documentURL}"
 
     @property
     def best_name(self):
@@ -183,6 +208,8 @@ class Article(Resource):
         vals['sourceOrganization'] = self.sourceOrganization
         vals['datePublished'] = self.datePublished
         vals['dateRetrieved'] = self.dateRetrieved
+        vals['archiveOrgPageURL'] = self.archiveOrgPageURL
+        vals['archiveOrgListURL'] = self.archiveOrgListURL
         return vals
 
 
@@ -270,13 +297,12 @@ class IndustryCluster(Resource):
 
 class ActivityMixin:
     activityType = ArrayProperty(StringProperty())
-    documentDate = NativeDateTimeProperty()
-    documentExtract = StringProperty()
     when = ArrayProperty(NativeDateTimeProperty())
     whenRaw = ArrayProperty(StringProperty())
     status = ArrayProperty(StringProperty())
     whereGeoName = ArrayProperty(StringProperty())
     whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
+    internalActivityList = ArrayProperty(StringProperty())
 
     @property
     def longest_activityType(self):
@@ -294,9 +320,7 @@ class ActivityMixin:
             activityType_title = self.longest_activityType.title()
         return {
             "activityType": activityType_title,
-            "documentDate": self.documentDate,
-            "documentExtract": self.documentExtract,
-            "label": f"{activityType_title} ({self.sourceName}: {self.documentDate.strftime('%b %Y')})",
+            "label": f"{activityType_title} ({self.sourceName}: {self.earliestDatePublished.strftime('%b %Y')})",
             "status": self.status,
             "when": self.when,
             "whenRaw": self.whenRaw,
@@ -304,33 +328,6 @@ class ActivityMixin:
             "whereGeoNameURL": self.whereGeoNameURL,
             "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
         }
-
-    @staticmethod
-    def by_date(a_date):
-        date_plus_one = a_date + datetime.timedelta(days=1)
-        cq = f"match (n) where {date_for_cypher(date_plus_one)}) > n.documentDate >= {date_for_cypher(a_date)}) return n"
-        res, _ = db.cypher_query(cq, resolve_objects=True)
-        flattened = [x for sublist in res for x in sublist]
-        return flattened
-
-    def in_date_range(self, from_date, to_date):
-        if from_date is None:
-            from_date = datetime.date(1,1,1)
-        if to_date is None:
-            to_date = datetime.date(2999,12,31)
-        to_date_plus_one = to_date + datetime.timedelta(days=1)
-        constant = datetime.timedelta(days=180)
-        to_date_plus_constant = to_date + constant + datetime.timedelta(days=1)
-        from_date_minus_constant = from_date - constant
-
-        if self.when and (self.when < to_date_plus_one or self.when >= from_date):
-            return True
-        elif self.status and self.status == 'has not happened' and (self.documentDate >= from_date_minus_constant and self.documentDate < to_date_plus_one):
-            return True
-        elif self.status and self.status != 'has not happened' and (self.documentDate >= from_date and self.documentDate < to_date_plus_constant):
-            return True
-        return False
-
 
     @property
     def whereGeoNameRDFURL(self):

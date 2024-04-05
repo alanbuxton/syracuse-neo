@@ -137,8 +137,9 @@ class ActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         user = request.user
-        orgs = TrackedOrganization.uris_by_user(user)
-        matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=orgs, max_date=max_date, include_same_as=True)
+        org_uris = TrackedOrganization.trackable_uris_by_user(user)
+        matching_activity_orgs = get_activities_by_date_range_for_api(min_date,
+                        uri_or_list=org_uris, max_date=max_date, include_same_as=True)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                         "cache_ready": is_cache_ready(),
