@@ -1,0 +1,25 @@
+
+{% if tracked_orgs|length > 0 %}
+
+  <p>We are tracking the following {{ tracked_orgs | length }} organizations for you:</p>
+
+  <ul>
+    {% for org in tracked_orgs %}
+      <li><b>{{ org.organization_name }}</b> (<a href="{{ org.organization_uri }}">{{ org.organization_uri }}</a>)
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>We are not tracking any specific organizations for you.</p>
+{% endif %}
+
+{% if tracked_industry_geos|length > 0 %}
+  <p>We are tracking the following {{ tracked_industry_geos | length }} industry/region combos for you:</p>
+  <ul>
+    {% for industry_geo in tracked_industry_geos %}
+      <li>{{ industry_geo | safe }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>We are not tracking any industry/region combos for you.</p>
+{% endif %}

@@ -78,6 +78,9 @@ def geo_select_list(include_alt_names=False):
         select_list.append( ["GB","United Kingdom of Great Britain and Northern Ireland"])
     return sorted(select_list, key = lambda x: x[1])
 
+def geo_dict(include_alt_names=False):
+    return dict(geo_select_list(include_alt_names=include_alt_names))
+
 def sorted_country_admin1_list(country_names_to_id,admin1_names_to_id):
     combined_sorted_list = [] # country name, admin1_name, country_or_admin_code
     for country_name,country_code in sorted(country_names_to_id.items()):

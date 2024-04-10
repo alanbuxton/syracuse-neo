@@ -8,6 +8,9 @@
   <p>
     <b>Document Date: </b>{{ row.date_published | iso_format_to_date | localize }} / <b>Source: </b>{{ row.source_organization }}
     <br/><b>Activity Class: </b>{{ row.activity_class }} / <b>Type: </b>{{ row.activity_longest_type | title }}
+    {% if row.activity_where %}
+      / <br/><b>Region:</b> {{ row.activity_where }}
+    {% endif %}
     <br/><b>Headline: </b>{{ row.headline }}
     {% if row.participants.items|length > 0 %}
       {% for participant_role,participant_list in row.participants.items %}
@@ -15,7 +18,13 @@
         {% if participant_list|length > 0 %}
             <b>{{ participant_role | title}}</b>:
             {% for entity in participant_list %}
-              <a href="{{ entity.uri }}">{{ entity.longest_name }}</a>
+              <a href="{{ entity.uri }}">{{ entity.best_name }}</a>
+                {% if entity.industry_as_str %}
+                  / <b>Industry:</b> {{ entity.industry_as_str | title }}
+                {% endif %}
+                {% if entity.basedInHighGeoName_as_str %}
+                  / <b>Region:</b> {{ entity.basedInHighGeoName_as_str }}
+                {% endif %}
             {% endfor %}
         {% endif %}
       {% endfor %}

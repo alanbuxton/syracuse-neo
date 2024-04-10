@@ -14,7 +14,7 @@
   | <a href=" {{ source_page }}">Back to previous page</a>
   </p>
 
-  <p>You can track up to 20 organizations for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">send an email</a> if you need more.</p>
+  <p>You can track up to 20 organizations and 20 industry/region combos for free. Please <a href="mailto:info-syracuse@1145.am?subject=More%20Tracked%20Organizations%20Please!">send an email</a> if you need more.</p>
   <p>Updates will be emailed to
       {% if user.email %}
         <b>{{ user.email }}</b>.
@@ -23,14 +23,7 @@
       {% endif %}
     If your email address is blank, or if you would like to update your email address, <a href="{% url 'account_email' %}">please use this link</a>. </p>
 
-  <p>We are tracking the following {{ tracked_orgs | length }} organizations for you:</p>
-
-  <ul>
-    {% for org in tracked_orgs %}
-      <li>{{ org.organization_name }} (<a href="{{ org.organization_uri }}">{{ org.organization_uri }}</a>)
-      </li>
-    {% endfor %}
-  </ul>
+  {% include 'tracked_item_list.html' %}
 
   {% include 'layouts/footer.html' %}
 

@@ -154,7 +154,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
-        industry_name = "sciences, science, scientific, biotech"
+        industry_name = "sciences, science, scientific, biotech".title()
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
@@ -163,10 +163,10 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
-        industry_name = "sciences, science, scientific, biotech"
+        industry_name = "sciences, science, scientific, biotech".title()
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        assert industry is not None
+        assert industry is not None # Sometimes IndustrySerializer doesn't have choices in so tests will fail
         orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
         assert len(orgs) == 5
 
@@ -178,3 +178,18 @@ class TestUtilsWithDumpData(TestCase):
         assert industry is None
         orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
         assert len(orgs) == 58
+
+    def test_get_activities_by_geo_industry_time_range(self):
+        selected_geo_name = "United States - California"
+        industry_name = "investment, investments, estate, investing".title()
+        selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
+        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
+        assert industry is not None
+        min_date = date.fromisoformat("2024-02-01")
+        max_date = date.fromisoformat("2024-02-15")
+        res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
+        assert len(res) == 3
+        min_date = date.fromisoformat("2024-02-16")
+        max_date = date.fromisoformat("2024-03-31")
+        res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
+        assert len(res) == 2

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import TrackedOrganization
+from .models import TrackedOrganization, TrackedIndustryGeo
 from topics.models import Organization
 from django.contrib.auth.models import  User
 import pycountry
@@ -41,15 +41,23 @@ class TrackedOrganizationSerializer(serializers.Serializer):
     organization_uri = serializers.URLField()
     organization_name = serializers.CharField()
 
+
 class TrackedOrganizationModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackedOrganization
         fields = "__all__"
 
+class TrackedIndustryGeoModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrackedIndustryGeo
+        fields = "__all__"
+
 class ActivityParticipantSerializer(serializers.Serializer):
     name = serializers.ListField()
-    longest_name = serializers.CharField()
+    best_name = serializers.CharField()
     uri = serializers.URLField()
+    industry_as_str = serializers.CharField()
+    basedInHighGeoName_as_str = serializers.CharField()
 
 class ActivitySerializer(serializers.Serializer):
     source_organization = serializers.CharField()
@@ -65,6 +73,7 @@ class ActivitySerializer(serializers.Serializer):
     activity_longest_type = serializers.CharField()
     activity_statuses = serializers.ListField()
     activity_status_as_string = serializers.CharField()
+    activity_where = serializers.CharField()
     participants = serializers.DictField(
         child=ActivityParticipantSerializer(many=True)
     )

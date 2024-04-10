@@ -2,7 +2,7 @@ from django.test import TestCase
 import time
 from django.contrib.auth import get_user_model
 from trackeditems.serializers import TrackedOrganizationModelSerializer
-from trackeditems.models import TrackedOrganization, ActivityNotification
+from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
 from django.db.utils import IntegrityError
 from datetime import datetime, timezone
 from trackeditems.notification_helpers import prepare_recent_changes_email_notification_by_max_date
@@ -44,7 +44,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def setUpTestData(cls):
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
-        assert DataImport.latest_import() == None # Empty DB
+        assert DataImport.latest_import() is None # Empty DB
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
@@ -57,6 +57,14 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4071554/Openai") # 2023-10-08
         to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4074438/Titan_Pro_Technologies") # 2007-03-27T00:00:00Z
         to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4076678/Bioaffinity_Technologies") # 2023-10-05
+        self.ts2 = time.time()
+        self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
+        tig1 = TrackedIndustryGeo.objects.create(user=self.user2,
+                                        industry_name="Pharmaceutical, Pharmaceuticals, Drug, Drugs",
+                                        geo_code="US")
+        tig2 = TrackedIndustryGeo.objects.create(user=self.user2,
+                                        industry_name="Tech, Technology, Hightech, Engineering",
+                                        geo_code="SG")
 
     def test_finds_merged_uris_for_tracked_orgs(self):
         tracked_orgs = TrackedOrganization.by_user(self.user)
@@ -99,6 +107,22 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "March 4, 2024" not in email
         assert "March 9, 2024" in email
         assert activity_notif.num_activities == 7
+
+    def test_creates_geo_industry_notification_for_new_user(self):
+        ActivityNotification.objects.filter(user=self.user2).delete()
+        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
+        email, activity_notif = email_and_activity_notif
+        assert "<b>Pharmaceutical, Pharmaceuticals, Drug, Drugs</b> in the <b>United States</b>" in email
+        assert len(re.findall("RenovoRx",email)) == 16
+        assert "We are not tracking any specific organizations for you." in email
+        assert activity_notif.num_activities == 4
+        assert len(re.findall("Ryde Group Ltd",email)) == 3
+        assert len(re.findall(r"Industry:.+Technology",email)) == 1
+        assert len(re.findall(r"Industry:.+Biopharm",email)) == 4
+        assert len(re.findall(r"Region:.+Singapore",email)) == 2
+        assert len(re.findall(r"Region.+United States",email)) == 3
+        assert len(re.findall(r"Industry:.+Tech",email)) == 1
 
     def test_only_populates_activity_pages_if_cache_available(self):
         ''' For testing

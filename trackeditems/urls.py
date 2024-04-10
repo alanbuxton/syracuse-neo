@@ -12,6 +12,7 @@ router.register(r"v1/source_activities", views.SourceActivitiesViewSet, basename
 urlpatterns = [
     path('api/', include(router.urls)),
     path('tracked_organizations', views.TrackedOrganizationView.as_view(), name='tracked-organizations'),
+    path('tracked_industry_geos', views.TrackedIndustryGeoView.as_view(), name='tracked-industry-geos'),
     path('activities', views.ActivitiesView.as_view(), name='tracked-activities'),
     path('geo_activities', views.GeoActivitiesView.as_view(), name='tracked-geo-activities'),
     path('source_activities', views.SourceActivitiesView.as_view(), name='tracked-source-activities'),

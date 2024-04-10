@@ -1,5 +1,6 @@
 from neomodel import db
 from .models import Organization, ActivityMixin, IndustryCluster
+from .geo_utils import get_geoname_uris_for_country_region
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
 import logging
@@ -32,7 +33,7 @@ def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limi
         return res
     industry_uris = IndustryCluster.with_descendants(industry_id)
     ts1 = datetime.utcnow()
-    orgs = Organization.by_country_region_industry(geo_code,industry_uris,limit=limit)
+    orgs = Organization.by_country_region_industry(geo_code,industry_uris,limit=limit,allowed_to_set_cache=True)
     ts2 = datetime.utcnow()
     orgs_by_activity = ActivityMixin.orgs_by_activity_where_industry(geo_code,industry_uris,limit=limit)
     ts3 = datetime.utcnow()
@@ -40,6 +41,7 @@ def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limi
     all_orgs = set(orgs + orgs_by_activity)
     cache.set(cache_key, all_orgs)
     return all_orgs
+
 
 def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str],None] = None,
                                             source_name: Union[str,None] = None,
@@ -50,11 +52,43 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
     if (uri_or_list is None or len(uri_or_list) == 0 or set(uri_or_list) == {None}) and source_name is None:
         return []
     if source_name is None:
-        activities = get_activities_by_org_uri_and_date_range(uri_or_list, min_date, max_date, limit,include_same_as)
+        activity_articles = get_activities_by_org_uri_and_date_range(uri_or_list, min_date, max_date, limit,include_same_as)
     else:
-        activities = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, include_same_as)
+        activity_articles = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, include_same_as)
+    return activity_articles_to_api_results(activity_articles)
+
+def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id):
+    industry_uris = IndustryCluster.with_descendants(industry_id)
+    industry_orgs = Organization.by_country_region_industry(geo_code=None,
+                        industry_uris=industry_uris,limit=None,allowed_to_set_cache=True)
+    allowed_org_uris = [x.uri for x in industry_orgs]
+    geo_uris = get_geoname_uris_for_country_region(geo_code)
+    query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris)
+    objs, _ = db.cypher_query(query, resolve_objects=True)
+    return activity_articles_to_api_results(objs)
+
+
+def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris):
+    query = f"""
+        MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Organization)
+        WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+        AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+        AND o.uri IN {allowed_org_uris}
+        AND EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
+        RETURN x,a
+        UNION
+        MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Organization)
+        WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+        AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+        AND o.uri IN {allowed_org_uris}
+        AND EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
+        RETURN x,a
+    """
+    return query
+
+def activity_articles_to_api_results(activity_articles):
     api_results = []
-    for activity,article in activities:
+    for activity,article in activity_articles:
         assert isinstance(activity, ActivityMixin), f"{activity} should be an Activity"
         api_row = {}
         api_row["source_organization"] = article.sourceOrganization
@@ -65,6 +99,7 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
         api_row["archive_org_page_url"] = article.archiveOrgPageURL
         api_row["archive_org_list_url"] = article.archiveOrgListURL
         api_row["activity_uri"] = activity.uri
+        api_row["activity_where"] = activity.whereGeoName_as_str
         api_row["activity_class"] = activity.__class__.__name__
         api_row["activity_types"] = activity.activityType
         api_row["activity_longest_type"] = activity.longest_activityType

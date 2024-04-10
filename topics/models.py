@@ -52,6 +52,18 @@ class Resource(StructuredNode):
     internalSameAsMediumUriList = ArrayProperty(StringProperty())
 
     @property
+    def industry_as_str(self):
+        pass # override in relevant subclass
+
+    @property
+    def basedInHighGeoName_as_str(self):
+        pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
+
+    @property
+    def whereGeoName_as_str(self):
+        pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
+
+    @property
     def earliestDocumentSource(self):
         return self.documentSource.order_by("datePublished")[0]
 
@@ -305,6 +317,10 @@ class ActivityMixin:
     internalActivityList = ArrayProperty(StringProperty())
 
     @property
+    def whereGeoName_as_str(self):
+        return None if self.whereGeoName is None else ", ".join(self.whereGeoName)
+
+    @property
     def longest_activityType(self):
         return longest(self.activityType)
 
@@ -403,6 +419,10 @@ class BasedInGeoMixin:
     basedInHighGeoNameRDF = Relationship('Resource','basedInHighGeoNameRDF')
 
     @property
+    def basedInHighGeoName_as_str(self):
+        return None if self.basedInHighGeoName is None else ", ".join(self.basedInHighGeoName)
+
+    @property
     def basedInHighGeoNameRDFURL(self):
         return uri_from_related(self.basedInHighGeoNameRDF)
 
@@ -452,10 +472,12 @@ class BasedInGeoMixin:
     def based_in_fields(self):
         return {"basedInHighGeoName": self.basedInHighGeoName,
                 "basedInHighGeoNameURL": self.basedInHighGeoNameURL,
-                "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL}
+                "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL,
+                # "basedInHighGeoNameAsStr": self.basedInHighGeoName_as_str,
+                }
 
 
-class Organization(Resource, BasedInGeoMixin):
+class Organization(BasedInGeoMixin, Resource):
     description = ArrayProperty(StringProperty())
     industry = ArrayProperty(StringProperty())
     investor = RelationshipTo('CorporateFinanceActivity','investor')
@@ -469,6 +491,10 @@ class Organization(Resource, BasedInGeoMixin):
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
     industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
     industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
+
+    @property
+    def industry_as_str(self):
+        return None if self.industry is None else ", ".join(self.industry)
 
     @property
     def best_name(self):
@@ -513,7 +539,9 @@ class Organization(Resource, BasedInGeoMixin):
         vals = super(Organization, self).serialize()
         based_in_fields = self.based_in_fields
         org_vals = {"description": self.description,
-                    "industry": self.industry}
+                    "industry": self.industry,
+#                    "industryAsStr": self.industry_as_str,
+                    }
         return {**vals,**org_vals,**based_in_fields}
 
     def get_role_activities(self):
@@ -581,7 +609,7 @@ class Organization(Resource, BasedInGeoMixin):
         return new_nodes
 
 
-class CorporateFinanceActivity(Resource, ActivityMixin):
+class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())
     valueRaw = ArrayProperty(StringProperty())
     target = RelationshipTo('Organization','target')
@@ -621,7 +649,7 @@ class CorporateFinanceActivity(Resource, ActivityMixin):
         return {**vals,**act_vals,**activity_mixin_vals}
 
 
-class RoleActivity(Resource, ActivityMixin):
+class RoleActivity(ActivityMixin, Resource):
     orgFoundName = ArrayProperty(StringProperty())
     withRole = RelationshipTo('Role','role')
     roleFoundName = ArrayProperty(StringProperty())
@@ -656,7 +684,7 @@ class RoleActivity(Resource, ActivityMixin):
                     }
         return {**vals,**act_vals,**activity_mixin_vals}
 
-class LocationActivity(Resource, ActivityMixin):
+class LocationActivity(ActivityMixin, Resource):
     actionFoundName = ArrayProperty(StringProperty())
     locationFoundName = ArrayProperty(StringProperty())
     locationPurpose = ArrayProperty(StringProperty())
@@ -705,7 +733,7 @@ class Site(Resource):
         return uri
 
 
-class Person(Resource, BasedInGeoMixin):
+class Person(BasedInGeoMixin, Resource):
     roleActivity = RelationshipTo('RoleActivity','roleActivity')
     industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
     industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')

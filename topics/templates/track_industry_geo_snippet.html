@@ -1,0 +1,12 @@
+<p>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'tracked-industry-geos' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="tracked_industry_name" type="text" name="tracked_industry_name" value="{{ search_industry_name }}">
+        <input type="hidden" id="tracked_geo_code" type="text" name="tracked_geo_code" value="{{ search_geo_code }}">
+        <input type="submit" value="Track {{ search_term | striptags }}">
+    </form>
+  {% else %}
+    (Sign in to track {{ search_term | safe }})
+  {% endif %}
+</p>

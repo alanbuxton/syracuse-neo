@@ -4,12 +4,13 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from .models import TrackedOrganization
+from .models import TrackedOrganization, TrackedIndustryGeo
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer,
-    RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer)
+    RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
+    TrackedIndustryGeoModelSerializer)
 import json
 from .date_helpers import days_ago
 from topics.model_queries import (get_activities_for_serializer_by_country_and_date_range,
@@ -18,6 +19,30 @@ from topics.model_queries import (get_activities_for_serializer_by_country_and_d
 from datetime import datetime, timezone, date, timedelta
 from topics.geo_utils import get_geo_data, country_and_region_code_to_name
 from topics.cache_helpers import is_cache_ready
+
+class TrackedIndustryGeoView(APIView):
+    # renderer_classes = [TemplateHTMLRenderer]
+    # template_name = 'preferences.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+    # def get_queryset(self):
+    #     return TrackedIndustryGeo.objects.filter(user=self.request.user)
+
+    def post(self, request):
+        industry_name = request.data['tracked_industry_name']
+        geo_code = request.data['tracked_geo_code']
+        if industry_name == '':
+            industry_name = None
+        if geo_code == '':
+            geo_code = None
+        if industry_name is None and geo_code is None:
+            return redirect('tracked-organizations')
+        existing_industry_geos = TrackedIndustryGeo.items_by_user(self.request.user)
+        if len(existing_industry_geos) <= 20 and (industry_name,geo_code) not in existing_industry_geos:
+            data = {"user":self.request.user, "industry_name":industry_name,"geo_code":geo_code}
+            _ = TrackedIndustryGeoModelSerializer().create(data)
+        return redirect('tracked-organizations')
 
 class TrackedOrganizationView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -40,8 +65,10 @@ class TrackedOrganizationView(APIView):
     def get(self, request):
         tracked_orgs = self.get_queryset()
         tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
+        tracked_industry_geos = TrackedIndustryGeo.print_friendly_by_user(request.user)
         source_page = request.headers.get("Referer")
         resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page,
+                            "tracked_industry_geos":tracked_industry_geos,
                             "cache_ready": is_cache_ready(),
                             },status=status.HTTP_200_OK)
         return resp

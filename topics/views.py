@@ -88,6 +88,8 @@ class Index(APIView):
                         "motd": MOTD,
                         "alpha_flag": alpha_flag,
                         "last_updated": last_updated,
+                        "search_industry_name": industry_name,
+                        "search_geo_code": selected_geo,
                         "cache_ready": is_cache_ready(),
                         }, status=status.HTTP_200_OK)
         return resp
@@ -166,7 +168,11 @@ def elements_from_uri(uri):
     }
 
 
-def industry_geo_search_str(industry, geo):
+def industry_geo_search_str(industry, geo,with_emphasis=True):
     industry_str = "all industries" if industry is None or industry.strip() == '' else industry
     geo_str = "all locations" if geo is None or geo.strip() == '' else geo
-    return f"{industry_str} in {geo_str}"
+    if geo_str.split()[0].lower() == 'united':
+        in_str = "in the"
+    else:
+        in_str = "in"
+    return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str.title()}</b>"

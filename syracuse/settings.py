@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import neomodel
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -187,6 +188,9 @@ NEOMODEL_NEO4J_PASSWORD = os.environ.get('NEO4J_PASSWORD','itsasecret')
 NEOMODEL_NEO4J_HOSTNAME = os.environ.get('NEO4J_HOSTNAME','localhost')
 NEOMODEL_NEO4J_PORT = os.environ.get('NEO4J_PORT',7687)
 NEOMODEL_NEO4J_BOLT_URL = f'{NEOMODEL_NEO4J_SCHEME}://{NEOMODEL_NEO4J_USERNAME}:{NEOMODEL_NEO4J_PASSWORD}@{NEOMODEL_NEO4J_HOSTNAME}:{NEOMODEL_NEO4J_PORT}'
+
+if neomodel.db.url is None:
+    neomodel.db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
 
 # all-auth
 SITE_ID = 1

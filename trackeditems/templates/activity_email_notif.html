@@ -6,12 +6,6 @@
 
 {% include 'activity_list.html' %}
 
-<p>We are tracking the following organizations for you:</p>
-
-<ul>
-  {% for tracked_org in tracked_orgs %}
-    <li>{{ tracked_org.organization_name }} ({{ tracked_org.organization_or_merged_uri }})</li>
-  {% endfor %}
-</ul>
+{% include 'tracked_item_list.html' %}
 
 <p>If you have any queries, please reply to this mail and someone will help you, or visit <a href="https://syracuse.1145.am">Syracuse from 1145</a></p>.
