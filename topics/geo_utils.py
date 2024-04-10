@@ -34,6 +34,8 @@ def geonames_uris():
     return flattened
 
 def get_geoname_uris_for_country_region(geo_code):
+    if geo_code == '':
+        return None
     geoname_ids = geoname_ids_for_country_region(geo_code)
     geo_uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in geoname_ids]
     return geo_uris

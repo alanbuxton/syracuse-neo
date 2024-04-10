@@ -65,6 +65,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         tig2 = TrackedIndustryGeo.objects.create(user=self.user2,
                                         industry_name="Tech, Technology, Hightech, Engineering",
                                         geo_code="SG")
+        tig3 = TrackedIndustryGeo.objects.create(user=self.user2,
+                                        industry_name="Analytics, Enterprise, Insights, Data",
+                                        geo_code="")
+        tig4 = TrackedIndustryGeo.objects.create(user=self.user2,
+                                        industry_name="",
+                                        geo_code="AU")
 
     def test_finds_merged_uris_for_tracked_orgs(self):
         tracked_orgs = TrackedOrganization.by_user(self.user)
@@ -114,15 +120,18 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
         assert "<b>Pharmaceutical, Pharmaceuticals, Drug, Drugs</b> in the <b>United States</b>" in email
-        assert len(re.findall("RenovoRx",email)) == 16
         assert "We are not tracking any specific organizations for you." in email
-        assert activity_notif.num_activities == 4
+        assert activity_notif.num_activities == 19
+        assert len(re.findall("RenovoRx",email)) == 16
         assert len(re.findall("Ryde Group Ltd",email)) == 3
         assert len(re.findall(r"Industry:.+Technology",email)) == 1
         assert len(re.findall(r"Industry:.+Biopharm",email)) == 4
         assert len(re.findall(r"Region:.+Singapore",email)) == 2
         assert len(re.findall(r"Region.+United States",email)) == 3
-        assert len(re.findall(r"Industry:.+Tech",email)) == 1
+        assert len(re.findall(r"Industry:.+Tech",email)) == 9
+        assert len(re.findall(r"Industry:.+Artificial Intel",email)) == 14
+        assert len(re.findall("OpenAI",email)) == 37
+        assert len(re.findall("MC Mining",email)) == 3
 
     def test_only_populates_activity_pages_if_cache_available(self):
         ''' For testing

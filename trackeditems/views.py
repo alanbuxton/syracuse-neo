@@ -21,22 +21,13 @@ from topics.geo_utils import get_geo_data, country_and_region_code_to_name
 from topics.cache_helpers import is_cache_ready
 
 class TrackedIndustryGeoView(APIView):
-    # renderer_classes = [TemplateHTMLRenderer]
-    # template_name = 'preferences.html'
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
-
-    # def get_queryset(self):
-    #     return TrackedIndustryGeo.objects.filter(user=self.request.user)
 
     def post(self, request):
         industry_name = request.data['tracked_industry_name']
         geo_code = request.data['tracked_geo_code']
-        if industry_name == '':
-            industry_name = None
-        if geo_code == '':
-            geo_code = None
-        if industry_name is None and geo_code is None:
+        if industry_name == '' and geo_code == '':
             return redirect('tracked-organizations')
         existing_industry_geos = TrackedIndustryGeo.items_by_user(self.request.user)
         if len(existing_industry_geos) <= 20 and (industry_name,geo_code) not in existing_industry_geos:

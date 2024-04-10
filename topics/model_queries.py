@@ -58,10 +58,13 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
     return activity_articles_to_api_results(activity_articles)
 
 def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id):
-    industry_uris = IndustryCluster.with_descendants(industry_id)
-    industry_orgs = Organization.by_country_region_industry(geo_code=None,
-                        industry_uris=industry_uris,limit=None,allowed_to_set_cache=True)
-    allowed_org_uris = [x.uri for x in industry_orgs]
+    if industry_id is None:
+        allowed_org_uris = None
+    else:
+        industry_uris = IndustryCluster.with_descendants(industry_id)
+        industry_orgs = Organization.by_country_region_industry(geo_code=None,
+                            industry_uris=industry_uris,limit=None,allowed_to_set_cache=True)
+        allowed_org_uris = [x.uri for x in industry_orgs]
     geo_uris = get_geoname_uris_for_country_region(geo_code)
     query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris)
     objs, _ = db.cypher_query(query, resolve_objects=True)
@@ -69,19 +72,28 @@ def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_cod
 
 
 def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris):
+    if geo_uris is None:
+        geo_clause = ''
+    else:
+        geo_clause = f"""AND (EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
+                        OR EXISTS {{ MATCH (o)-[:basedInHighGeoNameRDF]-(loc:Resource) WHERE loc.uri in {geo_uris} }})"""
+    if allowed_org_uris is None:
+        org_uri_clause = ''
+    else:
+        org_uri_clause = f"AND o.uri IN {allowed_org_uris}"
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
-        AND o.uri IN {allowed_org_uris}
-        AND EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
+        {org_uri_clause}
+        {geo_clause}
         RETURN x,a
         UNION
         MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
-        AND o.uri IN {allowed_org_uris}
-        AND EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
+        {org_uri_clause}
+        {geo_clause}
         RETURN x,a
     """
     return query
