@@ -194,12 +194,13 @@ def do_import_ttl(**options):
             logger.info(f"Archiving files from {export_dir} to {RDF_ARCHIVE_DIR}")
             move_files(export_dir,RDF_ARCHIVE_DIR)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
+    if do_post_processing is True:
+        post_import_merging(with_delete_not_needed_resources=True)
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:
         logger.info("No email sending this time")
-    if do_post_processing is True:
-        post_import_merging(with_delete_not_needed_resources=True)
+    if do_post_processing is True:    
         rebuild_cache()
     logger.info("re-set cache")
     cleanup(pidfile)

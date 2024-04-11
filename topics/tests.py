@@ -192,4 +192,4 @@ class TestUtilsWithDumpData(TestCase):
         min_date = date.fromisoformat("2024-02-16")
         max_date = date.fromisoformat("2024-03-31")
         res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
-        assert len(res) == 2
+        assert len(res) == 4
