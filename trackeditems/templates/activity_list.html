@@ -7,7 +7,10 @@
 {% for row in activities %}
   <p>
     <b>Document Date: </b>{{ row.date_published | iso_format_to_date | localize }} / <b>Source: </b>{{ row.source_organization }}
-    <br/><b>Activity Class: </b>{{ row.activity_class }} / <b>Type: </b>{{ row.activity_longest_type | title }}
+    <br/><b>Activity Class: </b>{{ row.activity_class }}
+    {% if row.activity_longest_type %}
+      / <b>Type: </b>{{ row.activity_longest_type | title }}
+    {% endif %}
     {% if row.activity_where %}
       / <br/><b>Region:</b> {{ row.activity_where }}
     {% endif %}
@@ -32,10 +35,10 @@
 
     <br/>{{ row.document_extract }}
     <br/><b>Document Source: </b><a href="{{ row.document_url }}">{{ row.document_url }}</a>
-    <br/><a href="{{ row.archive_org_page_url }}">archive.org page link</a> /
-         <a href="{{ row.archive_org_list_url }}">archive.org listing link</a>
+    (><a href="{{ row.archive_org_page_url }}">archive.org page link</a> /
+         <a href="{{ row.archive_org_list_url }}">archive.org listing link</a>)
 
   </p>
 {% endfor %}
 
-<em>Archive.org page links will work if the page has already been crawled by archive.org. But we can't guarantee which pages archive.org has crawled so please treat this as experimental.</em>
+<em>Archive.org page links will work if the page has already been archived by archive.org, but we can't guarantee which pages archive.org has archived so far.</em>

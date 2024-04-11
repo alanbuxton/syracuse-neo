@@ -97,6 +97,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 18
         assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 18
         assert "https://www.reuters.com/technology/sam-altman-return-openais-board-information-reports-2024-03-08/" in email
+        assert "None" not in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -132,6 +133,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert len(re.findall(r"Industry:.+Artificial Intel",email)) == 14
         assert len(re.findall("OpenAI",email)) == 37
         assert len(re.findall("MC Mining",email)) == 3
+        assert "None" not in email
 
     def test_only_populates_activity_pages_if_cache_available(self):
         ''' For testing

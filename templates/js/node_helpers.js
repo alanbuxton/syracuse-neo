@@ -46,7 +46,7 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
   }
 
   if (archive_org_page_url !== '') {
-    text = text + "<em>Archive.org page links will work if the page has already been crawled by archive.org. But we can't guarantee which pages archive.org has crawled so please treat this as experimental.</em>"
+    text = text + "<em>Archive.org page links will work if the page has already been archived by archive.org, but we can't guarantee which pages archive.org has archived so far.</em>"
   }
 
   text = text + "<br/>";
