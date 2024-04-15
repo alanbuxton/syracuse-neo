@@ -3329,8 +3329,10 @@
     ns1:basedInLowRaw "U.S." ;
     ns1:documentSource ns1:wwwreuterscom_markets_deals_abu-dhabi-owned-unifrutti-eyes-further-latam-growth-after-fresh-acquisitions-2024-03-09_ ;
     ns1:foundName "Alpine Fresh" ;
-    ns1:industry "Agriculture" ;
-    ns1:industryClusterHigh <https://1145.am/db/industry/39_agricultural_agriculture_cultivation_commodity> ;
+    ns1:industry "Agriculture", "fresh food", "telecom" ;
+    ns1:industryClusterHigh <https://1145.am/db/industry/39_agricultural_agriculture_cultivation_commodity> ,
+          <https://1145.am/db/industry/10_restaurant_restaurants_booking_hospitality> ,
+          <https://1145.am/db/industry/2_broadband_wireless_telecom_telecommunications> ;
     ns1:internalDocId 4076003 ;
     ns1:name "Alpine Fresh" .
 
@@ -3361,13 +3363,18 @@
     ns1:targetName "AvoAmerica Peru" ;
     ns1:vendor <https://1145.am/db/4076003/Alpine_Fresh>,
         <https://1145.am/db/4076003/Solum_Partners> ;
-    ns1:whereGeoName "Republic of Peru" ;
-    ns1:whereGeoNameRDF <https://sws.geonames.org/3932488/about.rdf> ;
+    ns1:whereGeoName "Republic of Peru", "United States", "Switzerland", "New England" ;
+    ns1:whereGeoNameRDF <https://sws.geonames.org/3932488/about.rdf> ,
+            <https://sws.geonames.org/6252001/about.rdf> ,
+            <https://sws.geonames.org/2658434/about.rdf> ,
+            <https://sws.geonames.org/11919979/about.rdf> ;
     ns1:whereRaw "Peru" .
 
 <https://1145.am/db/4076003/Solum_Partners> a org:Organization ;
-    ns1:basedInHighGeoName "United States" ;
-    ns1:basedInHighGeoNameRDF <https://sws.geonames.org/6252001/about.rdf> ;
+    ns1:basedInHighGeoName "United States", "Switzerland", "New England";
+    ns1:basedInHighGeoNameRDF <https://sws.geonames.org/6252001/about.rdf>,
+            <https://sws.geonames.org/2658434/about.rdf>,
+            <https://sws.geonames.org/11919979/about.rdf>;
     ns1:basedInHighRaw "U.S." ;
     ns1:documentSource ns1:wwwreuterscom_markets_deals_abu-dhabi-owned-unifrutti-eyes-further-latam-growth-after-fresh-acquisitions-2024-03-09_ ;
     ns1:foundName "Solum Partners" ;

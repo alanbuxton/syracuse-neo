@@ -34,6 +34,11 @@ def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, ma
         tracked_industry_geos.append( industry_geo_search_str(industry_name, geo_name) )
     if len(matching_activity_orgs) == 0:
         return None
+    return make_email_notif_from_orgs(matching_activity_orgs, tracked_orgs, tracked_industry_geos,
+                                    min_date, max_date, user)
+
+def make_email_notif_from_orgs(matching_activity_orgs, tracked_orgs, tracked_industry_geos,
+                                min_date, max_date, user):
     serializer = ActivitySerializer(matching_activity_orgs, many=True)
     merge_data = {"activities":serializer.data,"min_date":min_date,
                     "max_date":max_date,"user":user,"tracked_orgs":tracked_orgs,

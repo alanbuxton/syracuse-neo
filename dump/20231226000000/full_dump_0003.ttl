@@ -12705,4 +12705,3 @@ ns1:venturebeatcom_business_levelten-energy-raises-20-5-million-to-simplify-rene
     schema:headline "LevelTen Energy raises $20.5 million to simplify renewable energy sales" ;
     schema:sourceOrganization "VentureBeat" ;
     schema:url <https://venturebeat.com/business/levelten-energy-raises-20-5-million-to-simplify-renewable-energy-sales-and-purchases/> .
-

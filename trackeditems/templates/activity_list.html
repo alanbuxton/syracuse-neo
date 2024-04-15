@@ -12,7 +12,7 @@
       / <b>Type: </b>{{ row.activity_longest_type | title }}
     {% endif %}
     {% if row.activity_where %}
-      / <br/><b>Region:</b> {{ row.activity_where }}
+      / <b>Region:</b> {{ row.activity_where }}
     {% endif %}
     <br/><b>Headline: </b>{{ row.headline }}
     {% if row.participants.items|length > 0 %}
@@ -20,23 +20,26 @@
         <br/>
         {% if participant_list|length > 0 %}
             <b>{{ participant_role | title}}</b>:
+            <ul>
             {% for entity in participant_list %}
-              <a href="{{ entity.uri }}">{{ entity.best_name }}</a>
+                <li><a href="{{ entity.uri }}">{{ entity.best_name }}</a>
                 {% if entity.industry_as_str %}
-                  / <b>Industry:</b> {{ entity.industry_as_str | title }}
+                  / <b>Industry:</b> {{ entity.industry_as_str }}
                 {% endif %}
                 {% if entity.basedInHighGeoName_as_str %}
                   / <b>Region:</b> {{ entity.basedInHighGeoName_as_str }}
                 {% endif %}
+                </li>
             {% endfor %}
+            </ul>
         {% endif %}
       {% endfor %}
     {% endif %}
 
-    <br/>{{ row.document_extract }}
+    <br/><b>Document Extract: </b><em>{{ row.document_extract }}</em>
     <br/><b>Document Source: </b><a href="{{ row.document_url }}">{{ row.document_url }}</a>
-    (><a href="{{ row.archive_org_page_url }}">archive.org page link</a> /
-         <a href="{{ row.archive_org_list_url }}">archive.org listing link</a>)
+    (<a href="{{ row.archive_org_page_url }}">archive.org page</a> /
+         <a href="{{ row.archive_org_list_url }}">archive.org listing</a>)
 
   </p>
 {% endfor %}

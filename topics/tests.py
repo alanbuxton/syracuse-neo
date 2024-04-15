@@ -121,13 +121,13 @@ class TestUtilsWithDumpData(TestCase):
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
         assert set(counts) == {('Person', 126), ('Organization', 1193), ('LocationActivity', 15), ('CorporateFinanceActivity', 471), ('Article', 500), ('Role', 112), ('RoleActivity', 144)}
         assert len(recents_by_geo) == 65
-        assert sorted(recents_by_geo)[:20] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1), ('AE', 'AE-01', 'United Arab Emirates - Abu Dhabi', 1, 1, 1),
-            ('AR', 'AR', 'Argentina', 0, 0, 1), ('AU', 'AU', 'Australia', 1, 2, 2), ('BF', 'BF', 'Burkina Faso', 0, 2, 2), ('BM', 'BM', 'Bermuda', 0, 0, 3),
+        assert sorted(recents_by_geo)[:20] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1),
+            ('AE', 'AE-01', 'United Arab Emirates - Abu Dhabi', 1, 1, 1), ('AR', 'AR', 'Argentina', 0, 0, 1),
+            ('AU', 'AU', 'Australia', 1, 2, 2), ('BF', 'BF', 'Burkina Faso', 0, 2, 2), ('BM', 'BM', 'Bermuda', 0, 0, 3),
             ('BR', 'BR', 'Brazil', 0, 0, 1), ('CA', 'CA', 'Canada', 22, 33, 39), ('CA', 'CA-01', 'Canada - Alberta', 1, 1, 1),
-            ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10), ('CA', 'CA-08', 'Canada - Ontario', 7, 9, 11), ('CH', 'CH', 'Switzerland', 1, 1, 1),
-            ('CN', 'CN', 'China', 1, 2, 2), ('CN', 'CN-25', 'China - Shandong Sheng', 0, 1, 1), ('DE', 'DE', 'Germany', 9, 10, 14),
-            ('ES', 'ES', 'Spain', 0, 2, 3), ('FR', 'FR', 'France', 2, 3, 3), ('GB', 'GB', 'United Kingdom', 7, 9, 9), ('GR', 'GR', 'Greece', 0, 4, 4),
-            ('GT', 'GT', 'Guatemala', 0, 0, 1)]
+            ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10), ('CA', 'CA-08', 'Canada - Ontario', 7, 9, 11),
+            ('CH', 'CH', 'Switzerland', 2, 2, 2), ('CN', 'CN', 'China', 1, 2, 2), ('CN', 'CN-25', 'China - Shandong Sheng', 0, 1, 1),
+            ('DE', 'DE', 'Germany', 9, 10, 14), ('ES', 'ES', 'Spain', 0, 2, 3), ('FR', 'FR', 'France', 2, 3, 3), ('GB', 'GB', 'United Kingdom', 7, 9, 9), ('GR', 'GR', 'Greece', 0, 4, 4), ('GT', 'GT', 'Guatemala', 0, 0, 1)]
         assert sorted(recents_by_source) == [('Associated Press', 1, 4, 6), ('Business Insider', 6, 6, 6), ('Business Wire', 36, 51, 51),
             ('CNN', 1, 1, 1), ('CityAM', 4, 10, 10), ('GlobeNewswire', 61, 76, 76), ('Hotel Management', 0, 5, 5), ('Luxury Travel Advisor', 1, 3, 3),
             ('MarketWatch', 11, 14, 14), ('PR Newswire', 0, 22, 107), ('Reuters', 23, 23, 23), ('Seeking Alpha', 19, 27, 27), ('South China Morning Post', 6, 6, 6),

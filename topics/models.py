@@ -318,7 +318,7 @@ class ActivityMixin:
 
     @property
     def whereGeoName_as_str(self):
-        return None if self.whereGeoName is None else ", ".join(self.whereGeoName)
+        return print_friendly(self.whereGeoName)
 
     @property
     def longest_activityType(self):
@@ -420,7 +420,7 @@ class BasedInGeoMixin:
 
     @property
     def basedInHighGeoName_as_str(self):
-        return None if self.basedInHighGeoName is None else ", ".join(self.basedInHighGeoName)
+        return print_friendly(self.basedInHighGeoName)
 
     @property
     def basedInHighGeoNameRDFURL(self):
@@ -494,7 +494,10 @@ class Organization(BasedInGeoMixin, Resource):
 
     @property
     def industry_as_str(self):
-        return None if self.industry is None else ", ".join(self.industry)
+        if self.industry is None:
+            return None
+        industry_as_titles = [ x.title() for x in self.industry ]
+        return print_friendly(industry_as_titles)
 
     @property
     def best_name(self):
@@ -756,3 +759,14 @@ class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivit
 
 class OrganizationPerson(Organization, Person):
     __class_name_is_label__ = False
+
+
+def print_friendly(vals, limit = 2):
+    if vals is None:
+        return None
+    first_n = vals[:limit]
+    val = ", ".join(first_n)
+    extras = len(vals[limit:])
+    if extras > 0:
+        val = f"{val} and {extras} more"
+    return val

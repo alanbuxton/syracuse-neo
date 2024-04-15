@@ -5,7 +5,10 @@ from trackeditems.serializers import TrackedOrganizationModelSerializer
 from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
 from django.db.utils import IntegrityError
 from datetime import datetime, timezone
-from trackeditems.notification_helpers import prepare_recent_changes_email_notification_by_max_date
+from trackeditems.notification_helpers import (
+    prepare_recent_changes_email_notification_by_max_date,
+    make_email_notif_from_orgs
+)
 from neomodel import db
 from integration.models import DataImport
 from topics.cache_helpers import nuke_cache, warm_up_cache
@@ -13,6 +16,8 @@ from integration.management.commands.import_ttl import do_import_ttl
 import re
 import os
 from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
+from topics.models import Article, CorporateFinanceActivity
+from topics.model_queries import activity_articles_to_api_results
 
 '''
     Care these tests will delete neodb data
@@ -82,6 +87,17 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert set(org_or_merged_uris) == set(['https://1145.am/db/4074581/Openai', # Different one
                                 'https://1145.am/db/4074438/Titan_Pro_Technologies',
                                 'https://1145.am/db/4076678/Bioaffinity_Technologies'])
+
+    def test_writes_and_x_more_when_more_than_limit(self):
+        activity_uri = "https://1145.am/db/4076003/Avoamerica_Peru_Acquisition"
+        article_uri = "https://1145.am/db/wwwreuterscom_markets_deals_abu-dhabi-owned-unifrutti-eyes-further-latam-growth-after-fresh-acquisitions-2024-03-09_"
+        article = Article.nodes.get_or_none(uri=article_uri)
+        activity = CorporateFinanceActivity.nodes.get_or_none(uri=activity_uri)
+        activity_articles = [(activity,article),]
+        matching_activity_orgs = activity_articles_to_api_results(activity_articles)
+        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
+        assert len(re.findall("and 1 more",email)) == 2
+        assert len(re.findall("and 2 more",email)) == 1
 
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
