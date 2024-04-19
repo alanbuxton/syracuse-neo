@@ -326,7 +326,12 @@ class ActivityMixin:
 
     @property
     def status_as_string(self):
-        return "; ".join(sorted(self.status))
+        if len(self.status) > 1:
+            return "unknown"
+        elif self.status[0] == "has not happened":
+            return "unknown"
+        else:
+            return self.status[0]
 
     @property
     def activity_fields(self):

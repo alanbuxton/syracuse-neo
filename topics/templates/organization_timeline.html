@@ -48,6 +48,8 @@
     {% include 'layouts/nav-header.html' %}
   |  <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
       Show Linkages</a>
+  | <a href="{% url 'organization-children-list' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+    Show Child Org List</a>
   </p>
   <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}</p>
     {% include "track_org_snippet.html" %}

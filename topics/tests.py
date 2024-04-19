@@ -92,7 +92,7 @@ class TestUtilsWithDumpData(TestCase):
         groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
         assert len(groups) == 4
         assert len(items) == 1
-        assert set([x['label'] for x in items]) == {'Added - added Skikda petrochemical plant - has not happened'}
+        assert set([x['label'] for x in items]) == {'Added - added Skikda petrochemical plant - unknown'}
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
         assert errors == set()
@@ -193,3 +193,12 @@ class TestUtilsWithDumpData(TestCase):
         max_date = date.fromisoformat("2024-03-31")
         res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
         assert len(res) == 4
+
+    def test_gets_children_list(self):
+        client = self.client
+
+        response = client.get("/parent-child?name=Zendesk")
+        content = str(response.content)
+        assert "Smooch" in content
+        assert "VentureBeat" in content
+        assert "Zendesk acquires conversational platform Smooch" in content

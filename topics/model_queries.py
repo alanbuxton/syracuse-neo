@@ -1,5 +1,5 @@
 from neomodel import db
-from .models import Organization, ActivityMixin, IndustryCluster
+from .models import Organization, ActivityMixin, IndustryCluster, Article, CorporateFinanceActivity
 from .geo_utils import get_geoname_uris_for_country_region
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
@@ -285,3 +285,68 @@ def count_entries(results):
     else:
         val = val + results[1][0]
     return val
+
+def get_child_orgs(uri: str, relationship = "investor|buyer|vendor")->[(Organization, ActivityMixin, Article)]:
+    assert "'" not in uri, f"Can't have ' in {uri}"
+    # query = f"""
+    #     MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization)
+    #     WHERE EXISTS {{
+    #         MATCH (b: Organization)-[x:{relationship}]-(c: CorporateFinanceActivity) where b.uri = '{uri}'
+    #     }}
+    #     return t, c, a
+    #     ORDER BY a.datePublished
+    # """
+    query = f"""
+        MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization),
+        (b: Organization)-[x:{relationship}]-(c: CorporateFinanceActivity)
+        WHERE b.uri = '{uri}'
+        return t, c, a, x
+        ORDER BY a.datePublished
+    """
+    results, _ = db.cypher_query(query, resolve_objects=False)
+    return results
+
+def org_activity_articles_to_api(results):
+    api_results = []
+    for org_node, activity_node, article_node, parent_rel in results:
+        org = Organization.inflate(org_node)
+        if org is None:
+            continue
+        activity = CorporateFinanceActivity.inflate(activity_node)
+        article = Article.inflate(article_node)
+        api_row = org.serialize()
+        api_row["source_organization"] = article.sourceOrganization
+        api_row["date_published"] = article.datePublished
+        api_row["headline"] = article.headline
+        api_row["document_extract"] = activity.documentSource.relationship(article).documentExtract
+        api_row["document_url"] = article.documentURL
+        api_row["archive_org_page_url"] = article.archiveOrgPageURL
+        api_row["archive_org_list_url"] = article.archiveOrgListURL
+        api_row["activity_uri"] = activity.uri
+        api_row["activity_class"] = activity.__class__.__name__
+        api_row["activity_types"] = activity.activityType
+        api_row["activity_longest_type"] = activity.longest_activityType
+        api_row["activity_statuses"] = activity.status
+        api_row["activity_status_as_string"] = activity.status_as_string
+        api_row["parent_relationship_type"] = parent_rel.type
+        api_results.append(api_row)
+    return api_results
+
+def get_children_for_api(orgs: List[Organization]):
+    api_results = []
+    for org in orgs:
+        children_for_api = single_org_children(org)
+        if children_for_api == []:
+            continue
+        api_row = {"parent_org":org.best_name,
+                    "parent_org_uri":org.uri,
+                    "children": children_for_api}
+        api_results.append(api_row)
+    return api_results
+
+def single_org_children(org):
+    children = get_child_orgs(org.uri)
+    if len(children) == 0:
+        return []
+    children_for_api = org_activity_articles_to_api(children)
+    return children_for_api

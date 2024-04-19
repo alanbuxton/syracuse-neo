@@ -6,7 +6,7 @@
 {% load rest_framework %}
 {% load static %}
 
-<title>{{ data_serializer.source_node_name }} (Linkages)</title>
+<title>{{ org_data.source_node_name }} (Linkages)</title>
 <style>
 
 #main_container {
@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<h1>{{ data_serializer.source_node_name }} - Linkages</h1>
+<h1>{{ org_data.source_node_name }} - Linkages</h1>
 
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -32,6 +32,8 @@
 
 <p>
 {% include 'layouts/nav-header.html' %}
+| <a href="{% url 'organization-children-list' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+  Show Child Org List</a>
 | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
    Show Timeline</a>
 </p>

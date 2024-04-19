@@ -1,0 +1,40 @@
+
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+
+<title>{{ org_data.source_node_name }} - Children</title>
+
+
+</style>
+</head>
+
+<body>
+  <h1>{{ org_data.source_node_name }} - Children</h1>
+  <p>
+    {% include 'layouts/nav-header.html' %}
+  |  <a href="{% url 'organization-linkages' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+      Show Linkages</a>
+  | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+     Show Timeline</a>
+  </p>
+
+  {% if org_children|length > 0 %}
+    <p><b>Showing Children for:</b> {{ org_data.uri }}</p>
+
+    {% include 'parent_child_list.html' %}
+
+    {% for child in org_children %}
+      {% include 'parent_child_list.html' %}
+    {% endfor %}
+  {% else %}
+    <p>No children found</p>
+  {% endif %}
+
+  {% include 'layouts/footer.html' %}
+
+
+</html>

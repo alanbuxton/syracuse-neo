@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin
 from topics.cache_helpers import is_cache_ready
+from topics.model_queries import get_children_for_api, single_org_children
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySerializer,OrganizationTimelineSerializer)
@@ -94,6 +95,40 @@ class Index(APIView):
                         }, status=status.HTTP_200_OK)
         return resp
 
+class ParentChildWithSearch(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'parent_child_with_search.html'
+
+    def get(self, request):
+        params = request.query_params
+        org_name = params.get("name")
+        org_search = NameSearchSerializer({"name":org_name})
+        if org_name is None or org_name == '':
+            return Response({"search_serializer": org_search},status=status.HTTP_200_OK)
+        orgs = Organization.find_by_name(org_name)
+        if len(orgs) == 0:
+            logger.debug(f"Couldn't find org with {org_name}")
+        orgs_and_children = get_children_for_api(orgs)
+        return Response({"orgs_and_children": orgs_and_children,
+                        "search_serializer": org_search,
+                        "cache_ready": is_cache_ready(),
+                        }, status=status.HTTP_200_OK)
+
+class OrganizationChildrenList(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'organization_children_list.html'
+
+    def get(self, request, *args, **kwargs):
+        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        o = Organization.nodes.get(uri=uri)
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        children = single_org_children(o)
+        resp = Response({"org_children": children,
+                            "org_data":org_data,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
+        return resp
+
 class TopicsTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'topics_timeline.html'
@@ -116,7 +151,7 @@ class OrganizationTimeline(APIView):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
         org_serializer = OrganizationTimelineSerializer(o)
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.longest_name}}
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         resp = Response({"timeline_serializer": org_serializer.data,
                             "org_data":org_data,
                             "cache_ready": is_cache_ready(),
@@ -146,7 +181,7 @@ class OrganizationByUri(APIView):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
         org_serializer = OrganizationGraphSerializer(o)
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.longest_name}}
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         resp = Response({"data_serializer": org_serializer.data,
                             "org_data":org_data,
                             "cache_ready": is_cache_ready(),
