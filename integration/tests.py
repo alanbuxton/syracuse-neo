@@ -105,7 +105,7 @@ class RdfPostProcessingTestCase(TestCase):
         merged_uris = [x[0].uri for x in merged_tos]
         assert set(merged_uris) == {'https://1145.am/db/4074766/Openai',
                 'https://1145.am/db/4075266/Jde_Peets',
-                'https://1145.am/db/4074581/Openai'} # SameAsMedium between the two OpenAI examples
+                'https://1145.am/db/4074581/Openai'} # sameAsNameOnly between the two OpenAI examples
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")

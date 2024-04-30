@@ -125,7 +125,7 @@
         <https://1145.am/db/753446/Royal_Bank_Of_Canada>,
         <https://1145.am/db/940618/Royal_Bank_Of_Canada>,
         <https://1145.am/db/945355/Royal_Bank_Of_Canada> ;
-    ns1:sameAsMedium <https://1145.am/db/1125905/Royal_Bank_Of_Canada>,
+    ns1:sameAsNameOnly <https://1145.am/db/1125905/Royal_Bank_Of_Canada>,
         <https://1145.am/db/1150054/Royal_Bank_Of_Canada>,
         <https://1145.am/db/1151467/Royal_Bank_Of_Canada>,
         <https://1145.am/db/1256453/Royal_Bank_Of_Canada>,
@@ -269,7 +269,7 @@
     ns1:sameAsHigh <https://1145.am/db/1740055/Found>,
         <https://1145.am/db/1762180/Found>,
         <https://1145.am/db/2191183/Found> ;
-    ns1:sameAsMedium <https://1145.am/db/1827885/Found> .
+    ns1:sameAsNameOnly <https://1145.am/db/1827885/Found> .
 
 <https://1145.am/db/4074708/Sarah_Jones_Simmer> a foaf:Person ;
     ns1:documentSource ns1:wwwbusinessinsidercom_ceo-weight-loss-company-found-is-stepping-down-2024-3 ;
@@ -323,7 +323,7 @@
     ns1:name "Data Storage Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/540441/Data_Storage_Corporation>,
         <https://1145.am/db/734011/Data_Storage_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/3358549/Data_Storage_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/3358549/Data_Storage_Corporation>,
         <https://1145.am/db/3938269/Data_Storage_Corporation> .
 
 <https://1145.am/db/4075064/Nancy_M_Stallone> a foaf:Person ;
@@ -438,7 +438,7 @@
     ns1:hasRole <https://1145.am/db/4075290/New_York_State-Board_Of_Regents> ;
     ns1:internalDocId 4075290 ;
     ns1:name "New York State" ;
-    ns1:sameAsMedium <https://1145.am/db/988089/New_York_State> .
+    ns1:sameAsNameOnly <https://1145.am/db/988089/New_York_State> .
 
 <https://1145.am/db/4075290/Seema_Rivera> a foaf:Person ;
     ns1:basedInHighGeoName "Potsdam" ;
@@ -539,7 +539,7 @@
     ns1:sameAsHigh <https://1145.am/db/1181759/Trillion_Energy_International_Inc>,
         <https://1145.am/db/3943909/Trillion_Energy_International_Inc>,
         <https://1145.am/db/463094/Trillion_Energy_International_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1172260/Trillion_Energy_International_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1172260/Trillion_Energy_International_Inc>,
         <https://1145.am/db/1238610/Trillion_Energy_International_Inc>,
         <https://1145.am/db/1292118/Trillion_Energy_International_Inc>,
         <https://1145.am/db/774454/Trillion_Energy_International_Inc> .
@@ -562,7 +562,7 @@
     ns1:hasRole <https://1145.am/db/4075372/Confluent_Medical_Technologies-Board_Of_Directors> ;
     ns1:internalDocId 4075372 ;
     ns1:name "Confluent Medical Technologies" ;
-    ns1:sameAsMedium <https://1145.am/db/1275971/Confluent_Medical_Technologies>,
+    ns1:sameAsNameOnly <https://1145.am/db/1275971/Confluent_Medical_Technologies>,
         <https://1145.am/db/1424385/Confluent_Medical_Technologies>,
         <https://1145.am/db/1430648/Confluent_Medical_Technologies>,
         <https://1145.am/db/1468209/Confluent_Medical_Technologies>,
@@ -600,7 +600,7 @@
     ns1:name "Rush Enterprises, Inc." ;
     ns1:sameAsHigh <https://1145.am/db/549252/Rush_Enterprises_Inc>,
         <https://1145.am/db/698091/Rush_Enterprises_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/765051/Rush_Enterprises> .
+    ns1:sameAsNameOnly <https://1145.am/db/765051/Rush_Enterprises> .
 
 <https://1145.am/db/4075382/Rush_Enterprises_Inc-Senior_Vice_President_Of_Finance_Insurance_And_Leasing> a org:Role ;
     ns1:documentSource ns1:wwwglobenewswirecom_news-release_2024_03_08_2843345_8005_en_Rush-Enterprises-announces-retirements-of-Michael-McRoberts-Chief-Operating-Officer-and-Scott-Anderson-Senior-Vice-President-of-Finance-Insurance-and-Leasinghtml ;
@@ -651,7 +651,7 @@
         <https://1145.am/db/549052/Voxtur_Analytics_Corp>,
         <https://1145.am/db/648044/Voxtur_Analytics_Corp>,
         <https://1145.am/db/726462/Voxtur_Analytics_Corp> ;
-    ns1:sameAsMedium <https://1145.am/db/423417/Voxtur_Analytics_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/423417/Voxtur_Analytics_Corp>,
         <https://1145.am/db/423451/Voxtur_Analytics_Corp>,
         <https://1145.am/db/424870/Voxtur_Analytics_Corp> .
 
@@ -691,7 +691,7 @@
     ns1:hasRole <https://1145.am/db/4075639/Germany-Coach> ;
     ns1:internalDocId 4075639 ;
     ns1:name "Germany" ;
-    ns1:sameAsMedium <https://1145.am/db/1184802/Germany>,
+    ns1:sameAsNameOnly <https://1145.am/db/1184802/Germany>,
         <https://1145.am/db/1502305/Germany>,
         <https://1145.am/db/1588143/Germany>,
         <https://1145.am/db/175686/Germany>,
@@ -772,7 +772,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/26_analytics_enterprise_insights_data> ;
     ns1:internalDocId 4075876 ;
     ns1:name "ChatGPT" ;
-    ns1:sameAsMedium <https://1145.am/db/2842522/Chatgpt>,
+    ns1:sameAsNameOnly <https://1145.am/db/2842522/Chatgpt>,
         <https://1145.am/db/3126015/Chatgpt>,
         <https://1145.am/db/3741424/Chatgpt> .
 
@@ -855,7 +855,7 @@
         <https://1145.am/db/620429/Audi>,
         <https://1145.am/db/804239/Audi>,
         <https://1145.am/db/805915/Audi> ;
-    ns1:sameAsMedium <https://1145.am/db/1822392/Audi> .
+    ns1:sameAsNameOnly <https://1145.am/db/1822392/Audi> .
 
 <https://1145.am/db/4076092/Gernot_Doellner> a foaf:Person ;
     ns1:basedInLowRaw "Austria" ;
@@ -882,7 +882,7 @@
     ns1:hasRole <https://1145.am/db/4076092/Sauber_Group-Board_Of_Directors> ;
     ns1:internalDocId 4076092 ;
     ns1:name "Sauber Group" ;
-    ns1:sameAsMedium <https://1145.am/db/4075656/Sauber> .
+    ns1:sameAsNameOnly <https://1145.am/db/4075656/Sauber> .
 
 <https://1145.am/db/4076138/Deutsche_Boerse> a org:Organization ;
     ns1:basedInHighGeoName "Federal Republic of Germany" ;
@@ -894,7 +894,7 @@
         <https://1145.am/db/4076138/Deutsche_Boerse-Chief_Executive_Officer_And_Chairman_Of> ;
     ns1:internalDocId 4076138 ;
     ns1:name "Deutsche Boerse" ;
-    ns1:sameAsMedium <https://1145.am/db/161098/Deutsche_Boerse>,
+    ns1:sameAsNameOnly <https://1145.am/db/161098/Deutsche_Boerse>,
         <https://1145.am/db/1985006/Deutsche_Boerse>,
         <https://1145.am/db/2049835/Deutsche_Boerse>,
         <https://1145.am/db/2050559/Deutsche_Boerse>,
@@ -1125,7 +1125,7 @@
         <https://1145.am/db/908834/Ubs_Asset_Management>,
         <https://1145.am/db/908843/Ubs_Asset_Management>,
         <https://1145.am/db/91970/Ubs> ;
-    ns1:sameAsMedium <https://1145.am/db/1168276/Ubs>,
+    ns1:sameAsNameOnly <https://1145.am/db/1168276/Ubs>,
         <https://1145.am/db/1340354/Ubs_Next>,
         <https://1145.am/db/134226/Ubs>,
         <https://1145.am/db/135071/Ubs>,
@@ -1252,7 +1252,7 @@
     ns1:internalDocId 4076564 ;
     ns1:name "Oldcastle BuildingEnvelope" ;
     ns1:sameAsHigh <https://1145.am/db/3980033/Oldcastle_Buildingenvelope_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1391398/Oldcastle_Buildingenvelope>,
+    ns1:sameAsNameOnly <https://1145.am/db/1391398/Oldcastle_Buildingenvelope>,
         <https://1145.am/db/861646/Oldcastle_Buildingenvelope_Inc> .
 
 <https://1145.am/db/4076564/Steve_Dean> a foaf:Person ;
@@ -1271,7 +1271,7 @@
         <https://1145.am/db/4076608/Carmila-Directors> ;
     ns1:internalDocId 4076608 ;
     ns1:name "Carmila" ;
-    ns1:sameAsMedium <https://1145.am/db/1085976/Carmila>,
+    ns1:sameAsNameOnly <https://1145.am/db/1085976/Carmila>,
         <https://1145.am/db/1174731/Carmila>,
         <https://1145.am/db/1223869/Carmila>,
         <https://1145.am/db/1665946/Carmila>,
@@ -1333,7 +1333,7 @@
         <https://1145.am/db/3995010/Grange_Insurance_Company>,
         <https://1145.am/db/516729/Grange_Insurance>,
         <https://1145.am/db/903761/Grange_Insurance> ;
-    ns1:sameAsMedium <https://1145.am/db/4032266/Grange_Insurance_Company>,
+    ns1:sameAsNameOnly <https://1145.am/db/4032266/Grange_Insurance_Company>,
         <https://1145.am/db/517852/Grange_Insurance> .
 
 <https://1145.am/db/4076691/Jeremiah_Johnson> a foaf:Person ;
@@ -1437,7 +1437,7 @@
         <https://1145.am/db/2042947/Renovorx>,
         <https://1145.am/db/3961807/Renovorx>,
         <https://1145.am/db/3982639/Renovorx> ;
-    ns1:sameAsMedium <https://1145.am/db/2295771/Renovorx>,
+    ns1:sameAsNameOnly <https://1145.am/db/2295771/Renovorx>,
         <https://1145.am/db/432207/Renovorx> .
 
 <https://1145.am/db/4076728/Ronald_B_Kocak> a foaf:Person ;
@@ -1493,7 +1493,7 @@
         <https://1145.am/db/579689/Sonendo>,
         <https://1145.am/db/592171/Sonendo_Inc>,
         <https://1145.am/db/676645/Sonendo> ;
-    ns1:sameAsMedium <https://1145.am/db/4061429/Sonendo> .
+    ns1:sameAsNameOnly <https://1145.am/db/4061429/Sonendo> .
 
 <https://1145.am/db/4076731/David_Campbell> a foaf:Person ;
     ns1:documentSource ns1:wwwbusinesswirecom_news_home_20240308954979_en_Evergy-Chairman-Mark-Ruelle-to-Retire-Evergy-President-and-CEO-David-Campbell-to-Serve-as-Chairman-of-the-Board ;
@@ -1510,7 +1510,7 @@
         <https://1145.am/db/4076731/Evergy-Chairman_Of_The_Board> ;
     ns1:internalDocId 4076731 ;
     ns1:name "Evergy" ;
-    ns1:sameAsMedium <https://1145.am/db/1265844/Evergy>,
+    ns1:sameAsNameOnly <https://1145.am/db/1265844/Evergy>,
         <https://1145.am/db/1268654/Evergy>,
         <https://1145.am/db/146198/Evergy>,
         <https://1145.am/db/146318/Evergy>,
@@ -1596,7 +1596,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/34_sports_sport_games_broadcasting> ;
     ns1:internalDocId 4077021 ;
     ns1:name "Aberdeen" ;
-    ns1:sameAsMedium <https://1145.am/db/2363772/Aberdeen>,
+    ns1:sameAsNameOnly <https://1145.am/db/2363772/Aberdeen>,
         <https://1145.am/db/2856655/Aberdeen>,
         <https://1145.am/db/2920437/Aberdeen>,
         <https://1145.am/db/2931785/Aberdeen>,
@@ -1678,7 +1678,7 @@
         <https://1145.am/db/4050134/New_York_Community_Bancorp>,
         <https://1145.am/db/4056009/New_York_Community_Bancorp>,
         <https://1145.am/db/4068681/New_York_Community_Bancorp> ;
-    ns1:sameAsMedium <https://1145.am/db/1453794/New_York_Community_Bancorp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1453794/New_York_Community_Bancorp>,
         <https://1145.am/db/1480033/New_York_Community_Bancorp>,
         <https://1145.am/db/318746/New_York_Community_Bancorp>,
         <https://1145.am/db/3651023/New_York_Community_Bancorp>,
@@ -2281,7 +2281,7 @@
     ns1:name "ZoomerMedia" ;
     ns1:sameAsHigh <https://1145.am/db/3996120/Zoomermedia>,
         <https://1145.am/db/4023455/Zoomermedia> ;
-    ns1:sameAsMedium <https://1145.am/db/4075665/Zoomermedia> .
+    ns1:sameAsNameOnly <https://1145.am/db/4075665/Zoomermedia> .
 
 <https://1145.am/db/4075369/David_Thompson-None-Permanent_Chief_Financial_Officer_(cfo)> a ns1:RoleActivity ;
     ns1:documentDate "2024-03-08T22:00:00+00:00"^^xsd:dateTime ;
@@ -2515,7 +2515,7 @@
         <https://1145.am/db/1686655/Alliant_Energy_Corporation>,
         <https://1145.am/db/3651019/Alliant_Energy>,
         <https://1145.am/db/852809/Alliant_Energy_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
         <https://1145.am/db/1621460/Alliant_Energy_Corporation>,
         <https://1145.am/db/1950815/Alliant_Energy_Corporation>,
         <https://1145.am/db/2061838/Alliant_Energy_Corporation>,
@@ -2595,7 +2595,7 @@
     ns1:hasRole <https://1145.am/db/4075665/Zoomermedia-Chief_Financial_Officer> ;
     ns1:internalDocId 4075665 ;
     ns1:name "ZoomerMedia" ;
-    ns1:sameAsMedium <https://1145.am/db/3996120/Zoomermedia>,
+    ns1:sameAsNameOnly <https://1145.am/db/3996120/Zoomermedia>,
         <https://1145.am/db/4023455/Zoomermedia>,
         <https://1145.am/db/4075359/Zoomermedia> .
 
@@ -3439,7 +3439,7 @@
         <https://1145.am/db/3824426/Alliant_Energy>,
         <https://1145.am/db/4004425/Alliant_Energy>,
         <https://1145.am/db/955071/Alliant_Energy> ;
-    ns1:sameAsMedium <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
         <https://1145.am/db/1685388/Alliant_Energy_Corporation>,
         <https://1145.am/db/1686655/Alliant_Energy_Corporation>,
         <https://1145.am/db/1950815/Alliant_Energy_Corporation>,
@@ -4469,7 +4469,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/3977238/Openai>,
         <https://1145.am/db/4075602/Openai>,
         <https://1145.am/db/4075805/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1692414/Openai>,
         <https://1145.am/db/2019224/Openai>,
@@ -4561,7 +4561,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
     ns1:hasRole <https://1145.am/db/4074745/Openai-Board_Of_Directors> ;
     ns1:internalDocId 4074745 ;
     ns1:name "OpenAI" ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1633549/Openai>,
         <https://1145.am/db/1692414/Openai>,
@@ -4709,7 +4709,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4074811/Openai>,
         <https://1145.am/db/4075273/Openai>,
         <https://1145.am/db/4076432/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/2019224/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/2019224/Openai>,
         <https://1145.am/db/2019387/Openai>,
         <https://1145.am/db/2031636/Openai>,
         <https://1145.am/db/2066410/Openai>,
@@ -4833,7 +4833,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4074766/Openai>,
         <https://1145.am/db/4075273/Openai>,
         <https://1145.am/db/4076432/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/2019224/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/2019224/Openai>,
         <https://1145.am/db/2019387/Openai>,
         <https://1145.am/db/2031636/Openai>,
         <https://1145.am/db/2088167/Openai>,
@@ -4897,7 +4897,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4075105/Openai-Ceo> ;
     ns1:internalDocId 4075105 ;
     ns1:name "OpenAI" ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1633549/Openai>,
         <https://1145.am/db/1692414/Openai>,
@@ -5049,7 +5049,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4074766/Openai>,
         <https://1145.am/db/4074811/Openai>,
         <https://1145.am/db/4076432/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/2019224/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/2019224/Openai>,
         <https://1145.am/db/2019387/Openai>,
         <https://1145.am/db/2031636/Openai>,
         <https://1145.am/db/2066410/Openai>,
@@ -5142,7 +5142,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/3977238/Openai>,
         <https://1145.am/db/4074581/Openai>,
         <https://1145.am/db/4075805/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1692414/Openai>,
         <https://1145.am/db/2019224/Openai>,
@@ -5253,7 +5253,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/3977238/Openai>,
         <https://1145.am/db/4074581/Openai>,
         <https://1145.am/db/4075602/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1692414/Openai>,
         <https://1145.am/db/2019224/Openai>,
@@ -5346,7 +5346,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4076328/Openai-Directors> ;
     ns1:internalDocId 4076328 ;
     ns1:name "OpenAI" ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1633549/Openai>,
         <https://1145.am/db/1692414/Openai>,
@@ -5498,7 +5498,7 @@ ns1:wwwtheglobeandmailcom_business_article-canadian-bank-rbc-lifts-2024-ceo-pay-
         <https://1145.am/db/4074766/Openai>,
         <https://1145.am/db/4074811/Openai>,
         <https://1145.am/db/4075273/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/2019224/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/2019224/Openai>,
         <https://1145.am/db/2019387/Openai>,
         <https://1145.am/db/2031636/Openai>,
         <https://1145.am/db/2066410/Openai>,
@@ -5588,7 +5588,7 @@ ns1:wwwreuterscom_business_finance_embattled-lender-nycb-announces-incoming-ceo-
     ns1:hasRole <https://1145.am/db/4071554/Openai-Ceo> ;
     ns1:internalDocId 4071554 ;
     ns1:name "OpenAI" ;
-    ns1:sameAsMedium <https://1145.am/db/1623938/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/1623938/Openai>,
         <https://1145.am/db/1631476/Openai>,
         <https://1145.am/db/1633549/Openai>,
         <https://1145.am/db/1692414/Openai>,

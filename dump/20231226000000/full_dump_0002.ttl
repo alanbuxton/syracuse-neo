@@ -65,7 +65,7 @@
         <https://1145.am/db/4001788/Frasers_Group>,
         <https://1145.am/db/4032849/Frasers_Group>,
         <https://1145.am/db/4058352/Frasers_Group> ;
-    ns1:sameAsMedium <https://1145.am/db/108054/Frasers_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/108054/Frasers_Group>,
         <https://1145.am/db/1099218/Frasers>,
         <https://1145.am/db/1177162/Frasers_Group>,
         <https://1145.am/db/1414093/Frasers_Group>,
@@ -158,7 +158,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/6_electric_electrical_electricity_vehicle> ;
     ns1:internalDocId 4074174 ;
     ns1:name "Public Power Corporation" ;
-    ns1:sameAsMedium <https://1145.am/db/1125741/Public_Power_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1125741/Public_Power_Corp>,
         <https://1145.am/db/1461712/Public_Power_Corp>,
         <https://1145.am/db/1579109/Public_Power_Corp>,
         <https://1145.am/db/1930680/Public_Power_Corp>,
@@ -196,7 +196,7 @@
         <https://1145.am/db/2095599/Wynn_Resorts>,
         <https://1145.am/db/3995518/Wynn_Resorts>,
         <https://1145.am/db/4032734/Wynn_Resorts> ;
-    ns1:sameAsMedium <https://1145.am/db/1491069/Wynn_Resorts>,
+    ns1:sameAsNameOnly <https://1145.am/db/1491069/Wynn_Resorts>,
         <https://1145.am/db/1546147/Wynn_Resorts>,
         <https://1145.am/db/1547763/Wynn_Resorts>,
         <https://1145.am/db/2083175/Wynn_Resorts>,
@@ -279,7 +279,7 @@
         <https://1145.am/db/1547802/Luxurban_Hotels_Inc>,
         <https://1145.am/db/4069230/Luxurban_Hotels_Inc>,
         <https://1145.am/db/4070332/Luxurban_Hotels> ;
-    ns1:sameAsMedium <https://1145.am/db/1550114/Luxurban_Hotels_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1550114/Luxurban_Hotels_Inc>,
         <https://1145.am/db/2814154/Luxurban_Hotels_Inc>,
         <https://1145.am/db/3720043/Luxurban_Hotels> .
 
@@ -327,7 +327,7 @@
         <https://1145.am/db/4051696/Exxon>,
         <https://1145.am/db/4051917/Exxon>,
         <https://1145.am/db/4069788/Exxon_Mobil> ;
-    ns1:sameAsMedium <https://1145.am/db/2719693/Exxon>,
+    ns1:sameAsNameOnly <https://1145.am/db/2719693/Exxon>,
         <https://1145.am/db/272419/Exxon>,
         <https://1145.am/db/2769205/Exxon>,
         <https://1145.am/db/2825880/Exxon>,
@@ -350,7 +350,7 @@
     ns1:name "Bridger Aerospace Group Holdings" ;
     ns1:sameAsHigh <https://1145.am/db/1253884/Bridger_Aerospace_Group_Holdings_Inc>,
         <https://1145.am/db/1594054/Bridger_Aerospace_Group_Holdings> ;
-    ns1:sameAsMedium <https://1145.am/db/3719056/Bridger_Aerospace_Group_Holdings_Inc> .
+    ns1:sameAsNameOnly <https://1145.am/db/3719056/Bridger_Aerospace_Group_Holdings_Inc> .
 
 <https://1145.am/db/4074841/David_A_Schellenberg> a foaf:Person ;
     ns1:basedInLowRaw "Mont." ;
@@ -403,7 +403,7 @@
     ns1:internalDocId 4074982 ;
     ns1:investor <https://1145.am/db/4074982/Investment_Char_Tech_Natural_Resources_Canada_Has_Not_Happened> ;
     ns1:name "Natural Resources Canada" ;
-    ns1:sameAsMedium <https://1145.am/db/1929147/Natural_Resources_Canada> .
+    ns1:sameAsNameOnly <https://1145.am/db/1929147/Natural_Resources_Canada> .
 
 <https://1145.am/db/4074994/Barbara_Wood> a foaf:Person ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -443,7 +443,7 @@
         <https://1145.am/db/900657/Sellas_Life_Sciences_Group>,
         <https://1145.am/db/946036/Sellas_Life_Sciences_Group>,
         <https://1145.am/db/948163/Sellas_Life_Sciences_Group> ;
-    ns1:sameAsMedium <https://1145.am/db/3638550/Sellas_Life_Sciences_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/3638550/Sellas_Life_Sciences_Group>,
         <https://1145.am/db/3652023/Sellas_Life_Sciences_Group> .
 
 <https://1145.am/db/4074996/Apollo_Global_Management> a org:Organization ;
@@ -498,7 +498,7 @@
         <https://1145.am/db/730535/Apollo_Global_Management>,
         <https://1145.am/db/742652/Apollo_Global_Management_Inc>,
         <https://1145.am/db/849980/Apollo_Global_Management_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1009371/Apollo_Global_Management_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1009371/Apollo_Global_Management_Inc>,
         <https://1145.am/db/101084/Apollo_Global_Management>,
         <https://1145.am/db/1013650/Apollo_Global_Management>,
         <https://1145.am/db/1086477/Apollo_Global_Management>,
@@ -726,7 +726,7 @@
     ns1:investor <https://1145.am/db/4075026/Seed_Investment_Eclipse_Efficient_Computer_Completed> ;
     ns1:name "Eclipse" ;
     ns1:sameAsHigh <https://1145.am/db/2044829/Eclipse> ;
-    ns1:sameAsMedium <https://1145.am/db/1083437/Eclipse>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083437/Eclipse>,
         <https://1145.am/db/1378103/Eclipse>,
         <https://1145.am/db/1413052/Eclipse>,
         <https://1145.am/db/1413960/Eclipse>,
@@ -751,7 +751,7 @@
     ns1:internalDocId 4075066 ;
     ns1:investor <https://1145.am/db/4075066/Investment_China_Everbright_Bank_Sunrise_New_Energy_Co_Ltd_Completed> ;
     ns1:name "China Everbright Bank" ;
-    ns1:sameAsMedium <https://1145.am/db/2355452/China_Everbright>,
+    ns1:sameAsNameOnly <https://1145.am/db/2355452/China_Everbright>,
         <https://1145.am/db/2355454/China_Everbright_Limited>,
         <https://1145.am/db/2892886/China_Everbright_Bank>,
         <https://1145.am/db/2892931/China_Everbright_Bank>,
@@ -835,7 +835,7 @@
         <https://1145.am/db/824503/Canada_Pension_Plan_Investment_Board>,
         <https://1145.am/db/961073/Canada_Pension_Plan_Investment_Board>,
         <https://1145.am/db/996815/Canada_Pension_Plan_Investment_Board> ;
-    ns1:sameAsMedium <https://1145.am/db/1120274/Canada_Pension_Plan_Investment_Board>,
+    ns1:sameAsNameOnly <https://1145.am/db/1120274/Canada_Pension_Plan_Investment_Board>,
         <https://1145.am/db/1243417/Canada_Pension_Plan_Investment_Board>,
         <https://1145.am/db/1359667/Canada_Pension_Plan_Investment_Board>,
         <https://1145.am/db/1739674/Canada_Pension_Plan_Investment_Board>,
@@ -874,7 +874,7 @@
     ns1:sameAsHigh <https://1145.am/db/2059460/Cpp_Investments>,
         <https://1145.am/db/2798406/Cpp_Investments>,
         <https://1145.am/db/3334236/Cpp_Investments> ;
-    ns1:sameAsMedium <https://1145.am/db/1693891/Cpp_Investments>,
+    ns1:sameAsNameOnly <https://1145.am/db/1693891/Cpp_Investments>,
         <https://1145.am/db/1761607/Cpp_Investments>,
         <https://1145.am/db/3064501/Cpp_Investments>,
         <https://1145.am/db/317470/Cpp_Investments>,
@@ -888,7 +888,7 @@
     ns1:internalDocId 4075112 ;
     ns1:investor <https://1145.am/db/4075112/Netco_Network_Acquisition> ;
     ns1:name "Kohlberg Kravis Roberts & Co." ;
-    ns1:sameAsMedium <https://1145.am/db/2629313/Kohlberg_Kravis_Roberts___Co>,
+    ns1:sameAsNameOnly <https://1145.am/db/2629313/Kohlberg_Kravis_Roberts___Co>,
         <https://1145.am/db/2647818/Kohlberg_Kravis_Roberts___Co>,
         <https://1145.am/db/2667112/Kohlberg_Kravis_Roberts_And_Co>,
         <https://1145.am/db/2669352/Kohlberg_Kravis_Roberts___Co>,
@@ -1032,7 +1032,7 @@
         <https://1145.am/db/875144/Chevron_Corporation>,
         <https://1145.am/db/959625/Chevron_Corporation>,
         <https://1145.am/db/961030/Chevron_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/1066040/Chevron>,
+    ns1:sameAsNameOnly <https://1145.am/db/1066040/Chevron>,
         <https://1145.am/db/1067252/Chevron>,
         <https://1145.am/db/117087/Chevron>,
         <https://1145.am/db/117211/Chevron>,
@@ -1087,7 +1087,7 @@
         <https://1145.am/db/4005347/Hewlett_Packard>,
         <https://1145.am/db/4035401/Hewlett_Packard>,
         <https://1145.am/db/4039927/Hewlett_Packard> ;
-    ns1:sameAsMedium <https://1145.am/db/2900192/Hewlett_Packard>,
+    ns1:sameAsNameOnly <https://1145.am/db/2900192/Hewlett_Packard>,
         <https://1145.am/db/3008195/Hewlett_Packard>,
         <https://1145.am/db/3141150/Hewlett_Packard>,
         <https://1145.am/db/3993179/Hewlett_Packard> .
@@ -1126,7 +1126,7 @@
         <https://1145.am/db/3949995/Renesas_Electronics_Corporation>,
         <https://1145.am/db/3997888/Renesas_Electronics_Corporation>,
         <https://1145.am/db/4032765/Renesas_Electronics_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/1120899/Renesas_Electronics_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1120899/Renesas_Electronics_Corporation>,
         <https://1145.am/db/1121382/Renesas_Electronics_Corporation>,
         <https://1145.am/db/1215749/Renesas_Electronics_Corporation>,
         <https://1145.am/db/2078143/Renesas_Electronics_Corporation>,
@@ -1190,7 +1190,7 @@
         <https://1145.am/db/3997884/Restaurant_Brands_International_Inc>,
         <https://1145.am/db/620278/Restaurant_Brands_International_Inc>,
         <https://1145.am/db/624029/Restaurant_Brands_International> ;
-    ns1:sameAsMedium <https://1145.am/db/1763289/Restaurant_Brands_International>,
+    ns1:sameAsNameOnly <https://1145.am/db/1763289/Restaurant_Brands_International>,
         <https://1145.am/db/3326247/Restaurant_Brands_International>,
         <https://1145.am/db/3544538/Restaurant_Brands_International_Inc>,
         <https://1145.am/db/3801026/Restaurant_Brands_International_Limited_Partnership>,
@@ -1203,7 +1203,7 @@
     ns1:foundName "Sekisui House, Ltd." ;
     ns1:internalDocId 4075415 ;
     ns1:name "Sekisui House" ;
-    ns1:sameAsMedium <https://1145.am/db/1127277/Sekisui_House_Us_Holdings_Llc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1127277/Sekisui_House_Us_Holdings_Llc>,
         <https://1145.am/db/3759804/Sekisui_House>,
         <https://1145.am/db/3759817/Sekisui_House_Ltd>,
         <https://1145.am/db/3937010/Sekisui_House_Ltd>,
@@ -1234,7 +1234,7 @@
         <https://1145.am/db/3527066/Synopsys>,
         <https://1145.am/db/3638169/Synopsys>,
         <https://1145.am/db/3882068/Synopsys_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1780950/Synopsys>,
+    ns1:sameAsNameOnly <https://1145.am/db/1780950/Synopsys>,
         <https://1145.am/db/2088237/Synopsys>,
         <https://1145.am/db/2427329/Synopsys>,
         <https://1145.am/db/3126313/Synopsys>,
@@ -1258,7 +1258,7 @@
     ns1:internalDocId 4075416 ;
     ns1:name "Alcoa Corporation" ;
     ns1:protagonist <https://1145.am/db/4075416/Merger_Alcoa_Corporation_Alumina_Limited_Has_Not_Happened> ;
-    ns1:sameAsMedium <https://1145.am/db/1262755/Alcoa_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1262755/Alcoa_Corporation>,
         <https://1145.am/db/1265745/Alcoa_Corporation>,
         <https://1145.am/db/1940306/Alcoa_Corporation>,
         <https://1145.am/db/1969757/Alcoa_Corporation>,
@@ -1291,7 +1291,7 @@
     ns1:name "Alumina Limited" ;
     ns1:protagonist <https://1145.am/db/4075416/Merger_Alcoa_Corporation_Alumina_Limited_Has_Not_Happened> ;
     ns1:sameAsHigh <https://1145.am/db/4052769/Alumina> ;
-    ns1:sameAsMedium <https://1145.am/db/4036112/Alumina>,
+    ns1:sameAsNameOnly <https://1145.am/db/4036112/Alumina>,
         <https://1145.am/db/4036255/Alumina>,
         <https://1145.am/db/4036334/Alumina_Limited>,
         <https://1145.am/db/4036730/Alumina>,
@@ -1304,7 +1304,7 @@
     ns1:internalDocId 4075416 ;
     ns1:name "Chord Energy Corporation" ;
     ns1:protagonist <https://1145.am/db/4075416/Merger_Chord_Energy_Corporation_Enerplus_Corporation_Has_Not_Happened> ;
-    ns1:sameAsMedium <https://1145.am/db/1195515/Chord_Energy_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1195515/Chord_Energy_Corporation>,
         <https://1145.am/db/1198567/Chord_Energy_Corporation>,
         <https://1145.am/db/3660930/Chord_Energy>,
         <https://1145.am/db/4027369/Chord_Energy>,
@@ -1319,7 +1319,7 @@
     ns1:internalDocId 4075416 ;
     ns1:investor <https://1145.am/db/4075416/Societal_Cdmo_Investment> ;
     ns1:name "CoreRx" ;
-    ns1:sameAsMedium <https://1145.am/db/2337231/Corerx>,
+    ns1:sameAsNameOnly <https://1145.am/db/2337231/Corerx>,
         <https://1145.am/db/2537456/Corerx>,
         <https://1145.am/db/2553641/Corerx>,
         <https://1145.am/db/4044619/Corerx>,
@@ -1338,7 +1338,7 @@
     ns1:protagonist <https://1145.am/db/4075416/Merger_Chord_Energy_Corporation_Enerplus_Corporation_Has_Not_Happened> ;
     ns1:sameAsHigh <https://1145.am/db/4027369/Enerplus>,
         <https://1145.am/db/4039434/Enerplus_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/1684900/Enerplus_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1684900/Enerplus_Corp>,
         <https://1145.am/db/1687947/Enerplus_Corp>,
         <https://1145.am/db/303955/Enerplus_Corp>,
         <https://1145.am/db/3994408/Enerplus>,
@@ -1351,7 +1351,7 @@
     ns1:internalDocId 4075416 ;
     ns1:investor <https://1145.am/db/4075416/Ngm_Biopharmaceuticals_Inc_Investment> ;
     ns1:name "The Column Group" ;
-    ns1:sameAsMedium <https://1145.am/db/1503058/The_Column_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/1503058/The_Column_Group>,
         <https://1145.am/db/1533327/The_Column_Group>,
         <https://1145.am/db/1533685/The_Column_Group>,
         <https://1145.am/db/1536915/The_Column_Group>,
@@ -1447,7 +1447,7 @@
         <https://1145.am/db/710313/Arcline_Investment_Management>,
         <https://1145.am/db/735648/Arcline_Investment_Management>,
         <https://1145.am/db/990583/Arcline_Investment_Management> ;
-    ns1:sameAsMedium <https://1145.am/db/1135735/Arcline_Investment_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1135735/Arcline_Investment_Management>,
         <https://1145.am/db/1468209/Arcline_Investment_Management>,
         <https://1145.am/db/1598647/Arcline_Investment_Management>,
         <https://1145.am/db/3181426/Arcline_Investment_Management>,
@@ -1509,7 +1509,7 @@
     ns1:foundName "North American Stainless" ;
     ns1:internalDocId 4075418 ;
     ns1:name "North American Stainless" ;
-    ns1:sameAsMedium <https://1145.am/db/1654808/North_American_Stainless>,
+    ns1:sameAsNameOnly <https://1145.am/db/1654808/North_American_Stainless>,
         <https://1145.am/db/3976152/North_American_Stainless>,
         <https://1145.am/db/3976225/North_American_Stainless>,
         <https://1145.am/db/3978384/North_American_Stainless>,
@@ -1745,7 +1745,7 @@
         <https://1145.am/db/713105/Sanofi_Sa>,
         <https://1145.am/db/713127/Sanofi_Sa>,
         <https://1145.am/db/913775/Sanofi> ;
-    ns1:sameAsMedium <https://1145.am/db/1936265/Sanofi>,
+    ns1:sameAsNameOnly <https://1145.am/db/1936265/Sanofi>,
         <https://1145.am/db/2278955/Sanofi>,
         <https://1145.am/db/2335735/Sanofi>,
         <https://1145.am/db/2367541/Sanofi_Genzyme_Bioventures>,
@@ -1785,7 +1785,7 @@
     ns1:sameAsHigh <https://1145.am/db/2066738/Pollen_Street_Capital>,
         <https://1145.am/db/3021403/Pollen_Street_Capital>,
         <https://1145.am/db/4074180/Pollen_Street_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/373576/Pollen_Street_Capital> .
+    ns1:sameAsNameOnly <https://1145.am/db/373576/Pollen_Street_Capital> .
 
 <https://1145.am/db/4075950/Macys> a org:Organization ;
     ns1:basedInHighGeoName "New York City" ;
@@ -1797,7 +1797,7 @@
     ns1:internalDocId 4075950 ;
     ns1:name "Macy's" ;
     ns1:protagonist <https://1145.am/db/4075950/Ipo_Macys_Has_Not_Happened> ;
-    ns1:sameAsMedium <https://1145.am/db/1281081/Macys_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1281081/Macys_Inc>,
         <https://1145.am/db/1281687/Macys_Inc>,
         <https://1145.am/db/1319932/Macys_Inc>,
         <https://1145.am/db/1320703/Macys_Inc>,
@@ -1922,7 +1922,7 @@
         <https://1145.am/db/815148/Eqt>,
         <https://1145.am/db/815852/Eqt>,
         <https://1145.am/db/946887/Eqt> ;
-    ns1:sameAsMedium <https://1145.am/db/1093129/Eqt>,
+    ns1:sameAsNameOnly <https://1145.am/db/1093129/Eqt>,
         <https://1145.am/db/1161102/Eqt>,
         <https://1145.am/db/122989/Eqt_Corp>,
         <https://1145.am/db/1318524/Eqt_Corp>,
@@ -2021,7 +2021,7 @@
         <https://1145.am/db/702246/Warner_Music_Group>,
         <https://1145.am/db/732340/Warner_Music_Group_Corp>,
         <https://1145.am/db/756442/Warner_Music_Group> ;
-    ns1:sameAsMedium <https://1145.am/db/1747605/Warner_Music>,
+    ns1:sameAsNameOnly <https://1145.am/db/1747605/Warner_Music>,
         <https://1145.am/db/3161738/Warner_Music_Group>,
         <https://1145.am/db/4070649/Warner_Music_Group> .
 
@@ -2134,7 +2134,7 @@
         <https://1145.am/db/719216/Novo_Nordisk>,
         <https://1145.am/db/721891/Novo_Nordisk>,
         <https://1145.am/db/722559/Novo_Nordisk> ;
-    ns1:sameAsMedium <https://1145.am/db/2025992/Novo_Nordisk>,
+    ns1:sameAsNameOnly <https://1145.am/db/2025992/Novo_Nordisk>,
         <https://1145.am/db/2301408/Novo_Nordisk>,
         <https://1145.am/db/2316823/Novo_Nordisk>,
         <https://1145.am/db/2317440/Novo_Nordisk>,
@@ -2191,7 +2191,7 @@
     ns1:name "Cloudflare" ;
     ns1:sameAsHigh <https://1145.am/db/3995474/Cloudflare>,
         <https://1145.am/db/4069336/Cloudflare_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1036095/Cloudflare>,
+    ns1:sameAsNameOnly <https://1145.am/db/1036095/Cloudflare>,
         <https://1145.am/db/1038112/Cloudflare>,
         <https://1145.am/db/1648828/Cloudflare>,
         <https://1145.am/db/1735099/Cloudflare>,
@@ -2287,7 +2287,7 @@
         <https://1145.am/db/670880/Ssr_Mining>,
         <https://1145.am/db/801789/Ssr_Mining_Inc>,
         <https://1145.am/db/922761/Ssr_Mining_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/3275941/Ssr_Mining_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/3275941/Ssr_Mining_Inc>,
         <https://1145.am/db/3309902/Ssr_Mining_Inc>,
         <https://1145.am/db/3404635/Ssr_Mining_Inc> .
 
@@ -2313,7 +2313,7 @@
         <https://1145.am/db/3710254/Anglogold_Ashanti>,
         <https://1145.am/db/376084/Anglogold_Ashanti_Ltd>,
         <https://1145.am/db/507541/Anglogold_Ashanti> ;
-    ns1:sameAsMedium <https://1145.am/db/3940069/Anglogold_Ashanti_Plc>,
+    ns1:sameAsNameOnly <https://1145.am/db/3940069/Anglogold_Ashanti_Plc>,
         <https://1145.am/db/468721/Anglogold_Ashanti>,
         <https://1145.am/db/472537/Anglogold_Ashanti_Limited>,
         <https://1145.am/db/473612/Anglogold_Ashanti_Limited>,
@@ -2352,7 +2352,7 @@
         <https://1145.am/db/800257/Belden_Inc>,
         <https://1145.am/db/818010/Belden_Inc>,
         <https://1145.am/db/848079/Belden_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/112149/Belden_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/112149/Belden_Inc>,
         <https://1145.am/db/1340166/Belden>,
         <https://1145.am/db/1696313/Belden>,
         <https://1145.am/db/2445395/Belden_Inc>,
@@ -2426,7 +2426,7 @@
     ns1:hasRole <https://1145.am/db/4076479/Atscale-Board_Of_Directors> ;
     ns1:internalDocId 4076479 ;
     ns1:name "AtScale" ;
-    ns1:sameAsMedium <https://1145.am/db/1018199/Atscale>,
+    ns1:sameAsNameOnly <https://1145.am/db/1018199/Atscale>,
         <https://1145.am/db/1019267/Atscale>,
         <https://1145.am/db/1285095/Atscale>,
         <https://1145.am/db/1288406/Atscale>,
@@ -2483,7 +2483,7 @@
         <https://1145.am/db/3580339/Blackrock>,
         <https://1145.am/db/4076145/Blackrock>,
         <https://1145.am/db/650891/Blackrock> ;
-    ns1:sameAsMedium <https://1145.am/db/1186267/Blackrock>,
+    ns1:sameAsNameOnly <https://1145.am/db/1186267/Blackrock>,
         <https://1145.am/db/1213606/Blackrock>,
         <https://1145.am/db/1214036/Blackrock>,
         <https://1145.am/db/1334242/Blackrock_Inc>,
@@ -2631,7 +2631,7 @@
     ns1:foundName "Sean Kelly" ;
     ns1:internalDocId 4076722 ;
     ns1:name "Sean Kelly" ;
-    ns1:sameAsMedium <https://1145.am/db/1182151/Sean_Kelly> .
+    ns1:sameAsNameOnly <https://1145.am/db/1182151/Sean_Kelly> .
 
 <https://1145.am/db/4076760/Lingxi> a org:Organization ;
     ns1:basedInLowRaw "China" ;
@@ -2640,7 +2640,7 @@
     ns1:hasRole <https://1145.am/db/4076760/Lingxi-Head> ;
     ns1:internalDocId 4076760 ;
     ns1:name "Lingxi" ;
-    ns1:sameAsMedium <https://1145.am/db/1734737/Lingxi> .
+    ns1:sameAsNameOnly <https://1145.am/db/1734737/Lingxi> .
 
 <https://1145.am/db/4076760/Zhan_Zhonghui> a foaf:Person ;
     ns1:basedInLowRaw "Chinese" ;
@@ -2674,7 +2674,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/16_grocery_shopping_retailer_retailers> ;
     ns1:internalDocId 4074172 ;
     ns1:name "Matches Fashion" ;
-    ns1:sameAsMedium <https://1145.am/db/3045972/Matches_Fashion> .
+    ns1:sameAsNameOnly <https://1145.am/db/3045972/Matches_Fashion> .
 
 <https://1145.am/db/4074174/Business_Arm_Acquisition_Currys_Public_Power_Corporation_Has_Not_Happened> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2707,7 +2707,7 @@
         <https://1145.am/db/2974919/Dixons_Carphone>,
         <https://1145.am/db/2997111/Dixons_Carphone>,
         <https://1145.am/db/3053764/Dixons_Carphone> ;
-    ns1:sameAsMedium <https://1145.am/db/2954207/Dixons_Carphone>,
+    ns1:sameAsNameOnly <https://1145.am/db/2954207/Dixons_Carphone>,
         <https://1145.am/db/2958884/Dixons_Carphone>,
         <https://1145.am/db/2960848/Dixons_Carphone>,
         <https://1145.am/db/2961383/Dixons_Carphone>,
@@ -2757,7 +2757,7 @@
     ns1:foundName "Mondi" ;
     ns1:internalDocId 4074176 ;
     ns1:name "Mondi" ;
-    ns1:sameAsMedium <https://1145.am/db/1033846/Mondi>,
+    ns1:sameAsNameOnly <https://1145.am/db/1033846/Mondi>,
         <https://1145.am/db/1580395/Mondi_Plc>,
         <https://1145.am/db/2018669/Mondi>,
         <https://1145.am/db/2028495/Mondi>,
@@ -2778,7 +2778,7 @@
     ns1:internalDocId 4074307 ;
     ns1:name "Canary Wharf" ;
     ns1:sameAsHigh <https://1145.am/db/2935842/Canary_Wharf_Group> ;
-    ns1:sameAsMedium <https://1145.am/db/2965677/Canary_Wharf>,
+    ns1:sameAsNameOnly <https://1145.am/db/2965677/Canary_Wharf>,
         <https://1145.am/db/2965965/Canary_Wharf>,
         <https://1145.am/db/2968165/Canary_Wharf>,
         <https://1145.am/db/2968846/Canary_Wharf>,
@@ -2797,7 +2797,7 @@
     ns1:investor <https://1145.am/db/4074374/Senior_Notes_Investment_Wynn_Las_Vegas_Llc_And_Wynn_Las_Vegas_Capital_Corp_Wynn_Las_Vegas_Llc_And_Wynn_Las_Vegas_Capital_Corp_Wynn_Resorts_Completed> ;
     ns1:name "Wynn Las Vegas, LLC",
         "Wynn Las Vegas, LLC and Wynn Las Vegas Capital Corp." ;
-    ns1:sameAsMedium <https://1145.am/db/2082249/Wynn_Las_Vegas_Llc>,
+    ns1:sameAsNameOnly <https://1145.am/db/2082249/Wynn_Las_Vegas_Llc>,
         <https://1145.am/db/2095599/Wynn_Las_Vegas_Llc>,
         <https://1145.am/db/2493662/Wynn_Las_Vegas>,
         <https://1145.am/db/2714394/Wynn_Las_Vegas>,
@@ -2858,7 +2858,7 @@
         <https://1145.am/db/667957/Swiggy>,
         <https://1145.am/db/778652/Swiggy>,
         <https://1145.am/db/846925/Swiggy> ;
-    ns1:sameAsMedium <https://1145.am/db/1765712/Swiggy> .
+    ns1:sameAsNameOnly <https://1145.am/db/1765712/Swiggy> .
 
 <https://1145.am/db/4074689/Swiggy_Stake_Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -2984,7 +2984,7 @@
         <https://1145.am/db/4011014/Pioneer_Natural>,
         <https://1145.am/db/4056941/Pioneer_Natural>,
         <https://1145.am/db/4069788/Pioneer_Natural_Resouces> ;
-    ns1:sameAsMedium <https://1145.am/db/3726136/Pioneer_Natural> .
+    ns1:sameAsNameOnly <https://1145.am/db/3726136/Pioneer_Natural> .
 
 <https://1145.am/db/4074840/Pioneer_Natural_Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -3222,7 +3222,7 @@
     ns1:foundName "Sunrise New Energy Co., Ltd." ;
     ns1:internalDocId 4075066 ;
     ns1:name "Sunrise New Energy Co., Ltd." ;
-    ns1:sameAsMedium <https://1145.am/db/4071296/Sunrise_New_Energy_Co_Ltd> .
+    ns1:sameAsNameOnly <https://1145.am/db/4071296/Sunrise_New_Energy_Co_Ltd> .
 
 <https://1145.am/db/4075107/Algeria> a org:Site ;
     ns1:basedInHighRaw "Africa" ;
@@ -3289,7 +3289,7 @@
         <https://1145.am/db/2101709/Netco>,
         <https://1145.am/db/2124401/Netco>,
         <https://1145.am/db/2136594/Netco> ;
-    ns1:sameAsMedium <https://1145.am/db/2082516/Netco>,
+    ns1:sameAsNameOnly <https://1145.am/db/2082516/Netco>,
         <https://1145.am/db/2637995/Netco>,
         <https://1145.am/db/2639049/Netco> .
 
@@ -3348,7 +3348,7 @@
         <https://1145.am/db/3859209/Akero_Therapeutics>,
         <https://1145.am/db/4060496/Akero_Therapeutics>,
         <https://1145.am/db/4064477/Akero_Therapeutics> ;
-    ns1:sameAsMedium <https://1145.am/db/3593688/Akero_Therapeutics>,
+    ns1:sameAsNameOnly <https://1145.am/db/3593688/Akero_Therapeutics>,
         <https://1145.am/db/3789491/Akero_Therapeutics>,
         <https://1145.am/db/3844214/Akero_Therapeutics>,
         <https://1145.am/db/4070421/Akero_Therapeutics> .
@@ -3371,7 +3371,7 @@
     ns1:foundName "Juniper Networks, Inc." ;
     ns1:internalDocId 4075412 ;
     ns1:name "Juniper Networks" ;
-    ns1:sameAsMedium <https://1145.am/db/1056689/Juniper_Networks>,
+    ns1:sameAsNameOnly <https://1145.am/db/1056689/Juniper_Networks>,
         <https://1145.am/db/1057269/Juniper_Networks>,
         <https://1145.am/db/1156497/Juniper_Networks>,
         <https://1145.am/db/12106/Juniper_Networks>,
@@ -3462,7 +3462,7 @@
     ns1:foundName "Transphorm, Inc" ;
     ns1:internalDocId 4075412 ;
     ns1:name "Transphorm" ;
-    ns1:sameAsMedium <https://1145.am/db/1105779/Transphorm>,
+    ns1:sameAsNameOnly <https://1145.am/db/1105779/Transphorm>,
         <https://1145.am/db/1108235/Transphorm>,
         <https://1145.am/db/1838965/Transphorm>,
         <https://1145.am/db/1957352/Transphorm>,
@@ -3511,7 +3511,7 @@
         <https://1145.am/db/3526604/Ansys>,
         <https://1145.am/db/3758806/Ansys>,
         <https://1145.am/db/3825928/Ansys> ;
-    ns1:sameAsMedium <https://1145.am/db/1137653/Ansys>,
+    ns1:sameAsNameOnly <https://1145.am/db/1137653/Ansys>,
         <https://1145.am/db/1141855/Ansys>,
         <https://1145.am/db/2443935/Ansys>,
         <https://1145.am/db/3100679/Ansys_Inc>,
@@ -3584,7 +3584,7 @@
     ns1:foundName "M.D.C. Holdings, Inc." ;
     ns1:internalDocId 4075415 ;
     ns1:name "M.D.C. Holdings" ;
-    ns1:sameAsMedium <https://1145.am/db/3172987/Mdc_Holdings_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/3172987/Mdc_Holdings_Inc>,
         <https://1145.am/db/3331940/Mdc_Holdings_Inc>,
         <https://1145.am/db/3889758/Mdc_Holdings>,
         <https://1145.am/db/3937010/Mdc_Holdings>,
@@ -3614,7 +3614,7 @@
     ns1:foundName "NGM Biopharmaceuticals, Inc" ;
     ns1:internalDocId 4075416 ;
     ns1:name "NGM Biopharmaceuticals, Inc" ;
-    ns1:sameAsMedium <https://1145.am/db/1174676/Ngm_Biopharmaceuticals>,
+    ns1:sameAsNameOnly <https://1145.am/db/1174676/Ngm_Biopharmaceuticals>,
         <https://1145.am/db/2323574/Ngm_Biopharmaceuticals>,
         <https://1145.am/db/2323578/Ngm_Biopharmaceuticals>,
         <https://1145.am/db/2323686/Ngm_Biopharmaceuticals>,
@@ -3633,7 +3633,7 @@
     ns1:foundName "Societal CDMO, Inc." ;
     ns1:internalDocId 4075416 ;
     ns1:name "Societal CDMO" ;
-    ns1:sameAsMedium <https://1145.am/db/1571115/Societal_Cdmo>,
+    ns1:sameAsNameOnly <https://1145.am/db/1571115/Societal_Cdmo>,
         <https://1145.am/db/1571118/Societal_Cdmo>,
         <https://1145.am/db/1581307/Societal_Cdmo>,
         <https://1145.am/db/1587000/Societal_Cdmo>,
@@ -3649,7 +3649,7 @@
         "Haynes International, Inc." ;
     ns1:internalDocId 4075418 ;
     ns1:name "Haynes International" ;
-    ns1:sameAsMedium <https://1145.am/db/3976152/Haynes_International>,
+    ns1:sameAsNameOnly <https://1145.am/db/3976152/Haynes_International>,
         <https://1145.am/db/3976225/Haynes_International>,
         <https://1145.am/db/3978384/Haynes_International>,
         <https://1145.am/db/3986490/Haynes_International>,
@@ -3670,7 +3670,7 @@
         <https://1145.am/db/3950012/Inhibrx>,
         <https://1145.am/db/3984706/Inhibrx>,
         <https://1145.am/db/3998059/Inhibrx> ;
-    ns1:sameAsMedium <https://1145.am/db/3410496/Inhibrx>,
+    ns1:sameAsNameOnly <https://1145.am/db/3410496/Inhibrx>,
         <https://1145.am/db/3997877/Inhibrx> .
 
 <https://1145.am/db/4075418/Kaman_Corp> a org:Organization ;
@@ -3678,7 +3678,7 @@
     ns1:foundName "Kaman Corp." ;
     ns1:internalDocId 4075418 ;
     ns1:name "Kaman Corp." ;
-    ns1:sameAsMedium <https://1145.am/db/1079171/Kaman_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1079171/Kaman_Corporation>,
         <https://1145.am/db/1079246/Kaman_Corporation>,
         <https://1145.am/db/1079279/Kaman_Corporation>,
         <https://1145.am/db/1120758/Kaman_Corporation>,
@@ -3749,7 +3749,7 @@
     ns1:internalDocId 4075853 ;
     ns1:name "Mattioli Woods" ;
     ns1:sameAsHigh <https://1145.am/db/4074180/Mattioli_Woods> ;
-    ns1:sameAsMedium <https://1145.am/db/2985652/Mattioli_Woods> .
+    ns1:sameAsNameOnly <https://1145.am/db/2985652/Mattioli_Woods> .
 
 <https://1145.am/db/4075853/Mattioli_Woods_Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -3803,7 +3803,7 @@
         <https://1145.am/db/3992260/Mondi>,
         <https://1145.am/db/836564/Mondi>,
         <https://1145.am/db/837421/Mondi> ;
-    ns1:sameAsMedium <https://1145.am/db/2018669/Mondi>,
+    ns1:sameAsNameOnly <https://1145.am/db/2018669/Mondi>,
         <https://1145.am/db/4074176/Mondi> .
 
 <https://1145.am/db/4075950/Ipo_Macys_Has_Not_Happened> a ns1:CorporateFinanceActivity ;
@@ -3847,7 +3847,7 @@
         <https://1145.am/db/347047/Believe>,
         <https://1145.am/db/3963926/Believe>,
         <https://1145.am/db/4000471/Believe> ;
-    ns1:sameAsMedium <https://1145.am/db/3998027/Believe>,
+    ns1:sameAsNameOnly <https://1145.am/db/3998027/Believe>,
         <https://1145.am/db/4047679/Believe>,
         <https://1145.am/db/4054699/Believe>,
         <https://1145.am/db/733788/Believe> .
@@ -3932,7 +3932,7 @@
         <https://1145.am/db/734505/Catalent>,
         <https://1145.am/db/911386/Catalent>,
         <https://1145.am/db/995486/Catalent> ;
-    ns1:sameAsMedium <https://1145.am/db/129873/Catalent>,
+    ns1:sameAsNameOnly <https://1145.am/db/129873/Catalent>,
         <https://1145.am/db/1326240/Catalent>,
         <https://1145.am/db/1672961/Catalent>,
         <https://1145.am/db/1995832/Catalent>,
@@ -4719,7 +4719,7 @@
     ns1:foundName "DS Smith" ;
     ns1:internalDocId 4074176 ;
     ns1:name "DS Smith" ;
-    ns1:sameAsMedium <https://1145.am/db/1318942/Ds_Smith>,
+    ns1:sameAsNameOnly <https://1145.am/db/1318942/Ds_Smith>,
         <https://1145.am/db/1319086/Ds_Smith>,
         <https://1145.am/db/1338591/Ds_Smith>,
         <https://1145.am/db/1512186/Ds_Smith_Plc>,
@@ -4781,7 +4781,7 @@
     ns1:internalDocId 4074959 ;
     ns1:name "BIGG Digital Assets Inc." ;
     ns1:sameAsHigh <https://1145.am/db/4059142/Bigg_Digital_Assets_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1126764/Bigg_Digital_Assets_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1126764/Bigg_Digital_Assets_Inc>,
         <https://1145.am/db/3646487/Bigg_Digital_Assets>,
         <https://1145.am/db/4002964/Bigg_Digital_Assets_Inc> .
 
@@ -4950,7 +4950,7 @@
         <https://1145.am/db/943807/Telecom_Italia>,
         <https://1145.am/db/945189/Telecom_Italia>,
         <https://1145.am/db/977823/Telecom_Italia> ;
-    ns1:sameAsMedium <https://1145.am/db/1047409/Telecom_Italia>,
+    ns1:sameAsNameOnly <https://1145.am/db/1047409/Telecom_Italia>,
         <https://1145.am/db/1077234/Telecom_Italia>,
         <https://1145.am/db/1093535/Telecom_Italia>,
         <https://1145.am/db/1099220/Telecom_Italia>,
@@ -5116,7 +5116,7 @@
     ns1:foundName "Hess Corporation" ;
     ns1:internalDocId 4075412 ;
     ns1:name "Hess Corporation" ;
-    ns1:sameAsMedium <https://1145.am/db/2144109/Hess_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/2144109/Hess_Corp>,
         <https://1145.am/db/2717498/Hess>,
         <https://1145.am/db/2718004/Hess>,
         <https://1145.am/db/2719445/Hess_Corp>,
@@ -5258,7 +5258,7 @@
         <https://1145.am/db/435686/Hess_Corporation>,
         <https://1145.am/db/438289/Hess_Corporation>,
         <https://1145.am/db/872312/Hess_Corporation> ;
-    ns1:sameAsMedium <https://1145.am/db/2144109/Hess_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/2144109/Hess_Corp>,
         <https://1145.am/db/2717498/Hess>,
         <https://1145.am/db/2718004/Hess>,
         <https://1145.am/db/2719445/Hess_Corp>,
@@ -5319,7 +5319,7 @@
         <https://1145.am/db/3335066/Ds_Smith_Plc>,
         <https://1145.am/db/3377228/Ds_Smith_Plc>,
         <https://1145.am/db/4065754/Ds_Smith> ;
-    ns1:sameAsMedium <https://1145.am/db/3306430/Ds_Smith_Plc>,
+    ns1:sameAsNameOnly <https://1145.am/db/3306430/Ds_Smith_Plc>,
         <https://1145.am/db/4074176/Ds_Smith> .
 
 <https://1145.am/db/4075979/Believe_Sa_Acquisition> a ns1:CorporateFinanceActivity ;
@@ -5654,7 +5654,7 @@ ns1:wwwtheglobeandmailcom_business_article-chevrons-ceo-faces-challenges-of-a-li
         <https://1145.am/db/4040068/Currys>,
         <https://1145.am/db/4042300/Currys>,
         <https://1145.am/db/4062344/Currys> ;
-    ns1:sameAsMedium <https://1145.am/db/4054310/Currys>,
+    ns1:sameAsNameOnly <https://1145.am/db/4054310/Currys>,
         <https://1145.am/db/4062989/Currys> .
 
 <https://1145.am/db/4075112/Netco_Network_Acquisition> a ns1:CorporateFinanceActivity ;

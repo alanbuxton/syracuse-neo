@@ -25,7 +25,7 @@
     ns1:internalDocId 3145111 ;
     ns1:investor <https://1145.am/db/3145111/Investment_American_Family_Ventures_Baidu_Bose_Ventures_Vesper_Completed> ;
     ns1:name "American Family Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1140409/American_Family_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1140409/American_Family_Ventures>,
         <https://1145.am/db/1283133/American_Family_Ventures>,
         <https://1145.am/db/1713178/American_Family_Ventures>,
         <https://1145.am/db/1718718/American_Family_Ventures>,
@@ -43,7 +43,7 @@
     ns1:internalDocId 3145111 ;
     ns1:investor <https://1145.am/db/3145111/Investment_American_Family_Ventures_Baidu_Bose_Ventures_Vesper_Completed> ;
     ns1:name "Baidu" ;
-    ns1:sameAsMedium <https://1145.am/db/1125592/Baidu_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1125592/Baidu_Inc>,
         <https://1145.am/db/1133949/Baidu>,
         <https://1145.am/db/1138249/Baidu>,
         <https://1145.am/db/151763/Baidu_Inc>,
@@ -124,7 +124,7 @@
     ns1:internalDocId 3145111 ;
     ns1:investor <https://1145.am/db/3145111/Investment_American_Family_Ventures_Baidu_Bose_Ventures_Vesper_Completed> ;
     ns1:name "Bose Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1787640/Bose> .
+    ns1:sameAsNameOnly <https://1145.am/db/1787640/Bose> .
 
 <https://1145.am/db/3145124/Investment_Minute_Media_Completed> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -157,7 +157,7 @@
         <https://1145.am/db/2825519/Denso>,
         <https://1145.am/db/423118/Denso>,
         <https://1145.am/db/559798/Denso> ;
-    ns1:sameAsMedium <https://1145.am/db/1492141/Denso_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1492141/Denso_Corp>,
         <https://1145.am/db/1583529/Denso>,
         <https://1145.am/db/1786229/Denso>,
         <https://1145.am/db/2120871/Denso_Corp>,
@@ -190,7 +190,7 @@
         <https://1145.am/db/3573028/Electronic_Arts>,
         <https://1145.am/db/515086/Electronic_Arts_Inc>,
         <https://1145.am/db/799271/Electronic_Arts_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1701552/Electronic_Arts>,
+    ns1:sameAsNameOnly <https://1145.am/db/1701552/Electronic_Arts>,
         <https://1145.am/db/1703401/Electronic_Arts>,
         <https://1145.am/db/1718283/Electronic_Arts>,
         <https://1145.am/db/172050/Electronic_Arts_Inc>,
@@ -245,7 +245,7 @@
     ns1:internalDocId 3145223 ;
     ns1:investor <https://1145.am/db/3145223/Investment_Bessemer_Venture_Partners_Blue_Delta_Capital_Iconiq_Capital_New_Enterprise_Associates_Samsung_Soros_Capital_Virtru_Completed> ;
     ns1:name "Blue Delta Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1818535/Blue_Delta_Capital> .
+    ns1:sameAsNameOnly <https://1145.am/db/1818535/Blue_Delta_Capital> .
 
 <https://1145.am/db/3145223/Samsung> a org:Organization ;
     ns1:basedInLowRaw "South Korea" ;
@@ -254,7 +254,7 @@
     ns1:internalDocId 3145223 ;
     ns1:investor <https://1145.am/db/3145223/Investment_Bessemer_Venture_Partners_Blue_Delta_Capital_Iconiq_Capital_New_Enterprise_Associates_Samsung_Soros_Capital_Virtru_Completed> ;
     ns1:name "Samsung" ;
-    ns1:sameAsMedium <https://1145.am/db/1451663/Samsung>,
+    ns1:sameAsNameOnly <https://1145.am/db/1451663/Samsung>,
         <https://1145.am/db/1562073/Samsung>,
         <https://1145.am/db/1603183/Samsung>,
         <https://1145.am/db/1668508/Samsung>,
@@ -331,7 +331,7 @@
     ns1:internalDocId 3145223 ;
     ns1:investor <https://1145.am/db/3145223/Investment_Bessemer_Venture_Partners_Blue_Delta_Capital_Iconiq_Capital_New_Enterprise_Associates_Samsung_Soros_Capital_Virtru_Completed> ;
     ns1:name "Soros Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1726611/Soros_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1726611/Soros_Capital>,
         <https://1145.am/db/1739063/Soros>,
         <https://1145.am/db/2848453/George_Soros>,
         <https://1145.am/db/2867474/Soros_Fund_Management>,
@@ -356,7 +356,7 @@
     ns1:internalDocId 3145263 ;
     ns1:investor <https://1145.am/db/3145263/Investment_Iron_Gate_Capital_Kozo_Keikaku_Engineering_Nelnet_Remotelock_Service_Provider_Capital_Completed> ;
     ns1:name "Iron Gate Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1150749/Iron_Gate_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1150749/Iron_Gate_Capital>,
         <https://1145.am/db/676440/Iron_Gate_Capital> .
 
 <https://1145.am/db/3145263/Kozo_Keikaku_Engineering> a org:Organization ;
@@ -373,7 +373,7 @@
     ns1:internalDocId 3145263 ;
     ns1:investor <https://1145.am/db/3145263/Investment_Iron_Gate_Capital_Kozo_Keikaku_Engineering_Nelnet_Remotelock_Service_Provider_Capital_Completed> ;
     ns1:name "Nelnet" ;
-    ns1:sameAsMedium <https://1145.am/db/2616736/Nelnet>,
+    ns1:sameAsNameOnly <https://1145.am/db/2616736/Nelnet>,
         <https://1145.am/db/3129148/Nelnet>,
         <https://1145.am/db/3344557/Nelnet>,
         <https://1145.am/db/779870/Nelnet> .
@@ -389,7 +389,7 @@
         <https://1145.am/db/464156/Service_Provider_Capital>,
         <https://1145.am/db/556705/Service_Provider_Capital>,
         <https://1145.am/db/731044/Service_Provider_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1010245/Service_Provider_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1010245/Service_Provider_Capital>,
         <https://1145.am/db/1010585/Service_Provider_Capital>,
         <https://1145.am/db/1340220/Service_Provider_Capital>,
         <https://1145.am/db/2187105/Service_Provider_Capital>,
@@ -415,7 +415,7 @@
     ns1:internalDocId 3145294 ;
     ns1:investor <https://1145.am/db/3145294/Investment_Heal_Trans-Pacific_Technology_Fund_Completed> ;
     ns1:name "Trans-Pacific Technology Fund" ;
-    ns1:sameAsMedium <https://1145.am/db/1183099/Trans-Pacific_Technology_Fund>,
+    ns1:sameAsNameOnly <https://1145.am/db/1183099/Trans-Pacific_Technology_Fund>,
         <https://1145.am/db/1758516/Trans-Pacific_Technology_Fund> .
 
 <https://1145.am/db/3145301/Bloomberg_Beta> a org:Organization ;
@@ -425,7 +425,7 @@
     ns1:internalDocId 3145301 ;
     ns1:investor <https://1145.am/db/3145301/Series_B_Investment_Bloomberg_Beta_Flybridge_Capital_Partners_Shasta_Ventures_Tenaya_Capital_Valimail_Completed> ;
     ns1:name "Bloomberg Beta" ;
-    ns1:sameAsMedium <https://1145.am/db/1010371/Bloomberg_Beta>,
+    ns1:sameAsNameOnly <https://1145.am/db/1010371/Bloomberg_Beta>,
         <https://1145.am/db/11103/Bloomberg_Beta>,
         <https://1145.am/db/1700061/Bloomberg_Beta>,
         <https://1145.am/db/1740409/Bloomberg_Beta>,
@@ -475,7 +475,7 @@
         <https://1145.am/db/2292800/Flybridge_Capital_Partners>,
         <https://1145.am/db/2342084/Flybridge_Capital_Partners>,
         <https://1145.am/db/2346988/Flybridge_Capital_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1359438/Flybridge>,
+    ns1:sameAsNameOnly <https://1145.am/db/1359438/Flybridge>,
         <https://1145.am/db/1371739/Flybridge_Capital_Partners>,
         <https://1145.am/db/1637088/Flybridge_Capital>,
         <https://1145.am/db/1708256/Flybridge_Capital>,
@@ -535,7 +535,7 @@
         <https://1145.am/db/458931/Shasta_Ventures>,
         <https://1145.am/db/562996/Shasta_Ventures>,
         <https://1145.am/db/848133/Shasta_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1003926/Shasta_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1003926/Shasta_Ventures>,
         <https://1145.am/db/1360721/Shasta_Ventures>,
         <https://1145.am/db/1500696/Shasta_Ventures>,
         <https://1145.am/db/1701961/Shasta_Ventures>,
@@ -805,7 +805,7 @@
         <https://1145.am/db/94376/Softbank_Group_Corp>,
         <https://1145.am/db/97808/Softbank_Group_Corp>,
         <https://1145.am/db/97818/Softbank_Group_Corp> ;
-    ns1:sameAsMedium <https://1145.am/db/103808/Softbank_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/103808/Softbank_Corp>,
         <https://1145.am/db/106063/Softbank_Group_Corp>,
         <https://1145.am/db/1129671/Softbank>,
         <https://1145.am/db/1130952/Softbank>,
@@ -1206,7 +1206,7 @@
         <https://1145.am/db/507855/Toyota_Motor_Corp>,
         <https://1145.am/db/676075/Toyota_Motor_Corp>,
         <https://1145.am/db/676087/Toyota_Motor_Corp> ;
-    ns1:sameAsMedium <https://1145.am/db/1741438/Toyota_Motor_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1741438/Toyota_Motor_Corp>,
         <https://1145.am/db/1766871/Toyota_Motor_Corporation>,
         <https://1145.am/db/2408741/Toyota_Motor>,
         <https://1145.am/db/316714/Toyota_Motor_Corp>,
@@ -1248,7 +1248,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Series_B_Investment_Hard_Yaka_Practica_Capital_Revo_Capital_Transfergo_U-Start_Club_Vostok_Emerging_Finance_Completed> ;
     ns1:name "Hard Yaka" ;
-    ns1:sameAsMedium <https://1145.am/db/1005549/Hard_Yaka>,
+    ns1:sameAsNameOnly <https://1145.am/db/1005549/Hard_Yaka>,
         <https://1145.am/db/1449371/Hard_Yaka>,
         <https://1145.am/db/1456668/Hard_Yaka>,
         <https://1145.am/db/1744781/Hard_Yaka>,
@@ -1264,7 +1264,7 @@
     ns1:name "Practica Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1802857/Practica_Capital>,
         <https://1145.am/db/1838411/Practica_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1746487/Practica_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1746487/Practica_Capital>,
         <https://1145.am/db/1845609/Practica_Capital> .
 
 <https://1145.am/db/3145658/Revo_Capital> a org:Organization ;
@@ -1274,7 +1274,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Series_B_Investment_Hard_Yaka_Practica_Capital_Revo_Capital_Transfergo_U-Start_Club_Vostok_Emerging_Finance_Completed> ;
     ns1:name "Revo Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1136588/Revo>,
+    ns1:sameAsNameOnly <https://1145.am/db/1136588/Revo>,
         <https://1145.am/db/1190032/Revo>,
         <https://1145.am/db/1744781/Revo_Capital>,
         <https://1145.am/db/1777489/Revo_Capital>,
@@ -1297,7 +1297,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Series_B_Investment_Hard_Yaka_Practica_Capital_Revo_Capital_Transfergo_U-Start_Club_Vostok_Emerging_Finance_Completed> ;
     ns1:name "Vostok Emerging Finance" ;
-    ns1:sameAsMedium <https://1145.am/db/1744781/Vostok_Emerging_Finance>,
+    ns1:sameAsNameOnly <https://1145.am/db/1744781/Vostok_Emerging_Finance>,
         <https://1145.am/db/1753805/Vostok_Emerging_Finance>,
         <https://1145.am/db/1769979/Vostok_Emerging_Finance>,
         <https://1145.am/db/1776594/Vostok_Emerging_Finance>,
@@ -1322,7 +1322,7 @@
         <https://1145.am/db/2059186/Rainier_Partners>,
         <https://1145.am/db/2809832/Rainier_Partners>,
         <https://1145.am/db/521824/Rainier_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/739155/Rainier_Partners> .
+    ns1:sameAsNameOnly <https://1145.am/db/739155/Rainier_Partners> .
 
 <https://1145.am/db/3145692/Atlassian> a org:Organization ;
     ns1:basedInLowRaw "New York" ;
@@ -1331,7 +1331,7 @@
     ns1:internalDocId 3145692 ;
     ns1:investor <https://1145.am/db/3145692/Series_F_Investment_Atlassian_Battery_Ventures_Firstmark_Geodesic_Capital_Goldman_Sachs_Iconiq_Capital_Invision_Spark_Capital_Tiger_Global_Management_Completed> ;
     ns1:name "Atlassian" ;
-    ns1:sameAsMedium <https://1145.am/db/1228720/Atlassian>,
+    ns1:sameAsNameOnly <https://1145.am/db/1228720/Atlassian>,
         <https://1145.am/db/1282808/Atlassian>,
         <https://1145.am/db/1606523/Atlassian>,
         <https://1145.am/db/1720833/Atlassian>,
@@ -1406,7 +1406,7 @@
         <https://1145.am/db/396100/Battery_Ventures>,
         <https://1145.am/db/469241/Battery_Ventures>,
         <https://1145.am/db/605863/Battery_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1140730/Battery_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1140730/Battery_Ventures>,
         <https://1145.am/db/1146684/Battery_Ventures>,
         <https://1145.am/db/1149208/Battery_Ventures>,
         <https://1145.am/db/1149834/Battery_Ventures>,
@@ -1547,7 +1547,7 @@
     ns1:name "FirstMark" ;
     ns1:sameAsHigh <https://1145.am/db/1740803/Firstmark>,
         <https://1145.am/db/1766059/Firstmark> ;
-    ns1:sameAsMedium <https://1145.am/db/1070975/Firstmark>,
+    ns1:sameAsNameOnly <https://1145.am/db/1070975/Firstmark>,
         <https://1145.am/db/1541230/Firstmark>,
         <https://1145.am/db/1541843/Firstmark>,
         <https://1145.am/db/1735902/Firstmark>,
@@ -1581,7 +1581,7 @@
         <https://1145.am/db/3236326/Geodesic_Capital>,
         <https://1145.am/db/471436/Geodesic>,
         <https://1145.am/db/868533/Geodesic_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1632690/Geodesic_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1632690/Geodesic_Capital>,
         <https://1145.am/db/1635018/Geodesic_Capital>,
         <https://1145.am/db/1697296/Geodesic_Capital>,
         <https://1145.am/db/1735902/Geodesic_Capital>,
@@ -1621,7 +1621,7 @@
     ns1:name "Catalyst Investors" ;
     ns1:sameAsHigh <https://1145.am/db/3131088/Catalyst_Investors>,
         <https://1145.am/db/3135036/Catalyst_Investors> ;
-    ns1:sameAsMedium <https://1145.am/db/1790901/Catalyst_Investors>,
+    ns1:sameAsNameOnly <https://1145.am/db/1790901/Catalyst_Investors>,
         <https://1145.am/db/1830819/Catalyst_Investors>,
         <https://1145.am/db/1843216/Catalyst_Investors>,
         <https://1145.am/db/708814/Catalyst_Investors> .
@@ -1633,7 +1633,7 @@
     ns1:internalDocId 3145849 ;
     ns1:investor <https://1145.am/db/3145849/Investment_Bessemer_Venture_Partners_Catalyst_Investors_Crosslink_Capital_Lead_Edge_Capital_Pelion_Venture_Partners_Weave_Completed> ;
     ns1:name "Lead Edge Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1319871/Lead_Edge_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1319871/Lead_Edge_Capital>,
         <https://1145.am/db/1320629/Lead_Edge_Capital>,
         <https://1145.am/db/1445730/Lead_Edge_Capital>,
         <https://1145.am/db/1744864/Lead_Edge_Capital>,
@@ -1670,7 +1670,7 @@
         <https://1145.am/db/1763371/Pelion_Venture_Partners>,
         <https://1145.am/db/1840388/Pelion_Venture_Partners>,
         <https://1145.am/db/1881288/Pelion_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1698138/Pelion_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1698138/Pelion_Venture_Partners>,
         <https://1145.am/db/1736579/Pelion_Venture_Partners>,
         <https://1145.am/db/1753418/Pelion_Venture_Partners>,
         <https://1145.am/db/1754204/Pelion_Venture_Partners>,
@@ -1689,7 +1689,7 @@
     ns1:internalDocId 3146051 ;
     ns1:investor <https://1145.am/db/3146051/Investment_Alychlo_Balderton_Capital_Generation_Investment_Management_Idinvest_Partners_Sophia_Genetics_Completed> ;
     ns1:name "Alychlo" ;
-    ns1:sameAsMedium <https://1145.am/db/1204076/Alychlo>,
+    ns1:sameAsNameOnly <https://1145.am/db/1204076/Alychlo>,
         <https://1145.am/db/1205197/Alychlo>,
         <https://1145.am/db/1788186/Alychlo>,
         <https://1145.am/db/2154431/Alychlo>,
@@ -1703,7 +1703,7 @@
     ns1:internalDocId 3146051 ;
     ns1:investor <https://1145.am/db/3146051/Investment_Alychlo_Balderton_Capital_Generation_Investment_Management_Idinvest_Partners_Sophia_Genetics_Completed> ;
     ns1:name "Generation Investment Management" ;
-    ns1:sameAsMedium <https://1145.am/db/1164590/Generation_Investment_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1164590/Generation_Investment_Management>,
         <https://1145.am/db/1166121/Generation_Investment_Management>,
         <https://1145.am/db/1232401/Generation_Investment_Management>,
         <https://1145.am/db/1475598/Generation_Investment_Management>,
@@ -1755,7 +1755,7 @@
     ns1:internalDocId 3146255 ;
     ns1:investor <https://1145.am/db/3146255/Investment_China_Everbright_Limited_New_Economy_Fund_China_Growth_Capital_Nreal_Shunwei_Capital_Iqiyi_Completed> ;
     ns1:name "China Everbright Limited New Economy Fund" ;
-    ns1:sameAsMedium <https://1145.am/db/3831485/China_Everbright_Limited_New_Economy_Fund_Lp> .
+    ns1:sameAsNameOnly <https://1145.am/db/3831485/China_Everbright_Limited_New_Economy_Fund_Lp> .
 
 <https://1145.am/db/3146255/China_Growth_Capital> a org:Organization ;
     ns1:basedInLowRaw "China" ;
@@ -1764,7 +1764,7 @@
     ns1:internalDocId 3146255 ;
     ns1:investor <https://1145.am/db/3146255/Investment_China_Everbright_Limited_New_Economy_Fund_China_Growth_Capital_Nreal_Shunwei_Capital_Iqiyi_Completed> ;
     ns1:name "China Growth Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1779627/China_Growth_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1779627/China_Growth_Capital>,
         <https://1145.am/db/1793140/China_Growth_Capital>,
         <https://1145.am/db/3559914/China_Growth_Capital>,
         <https://1145.am/db/3792765/China_Growth_Capital>,
@@ -1780,7 +1780,7 @@
     ns1:investor <https://1145.am/db/3146255/Investment_China_Everbright_Limited_New_Economy_Fund_China_Growth_Capital_Nreal_Shunwei_Capital_Iqiyi_Completed> ;
     ns1:name "iQiyi" ;
     ns1:sameAsHigh <https://1145.am/db/1775324/Iqiyi> ;
-    ns1:sameAsMedium <https://1145.am/db/1133949/Iqiyi>,
+    ns1:sameAsNameOnly <https://1145.am/db/1133949/Iqiyi>,
         <https://1145.am/db/1138249/Iqiyi>,
         <https://1145.am/db/158316/Iqiyi>,
         <https://1145.am/db/158455/Iqiyi>,
@@ -1814,7 +1814,7 @@
     ns1:internalDocId 3146255 ;
     ns1:investor <https://1145.am/db/3146255/Investment_China_Everbright_Limited_New_Economy_Fund_China_Growth_Capital_Nreal_Shunwei_Capital_Iqiyi_Completed> ;
     ns1:name "Shunwei Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1226693/Shunwei_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1226693/Shunwei_Capital>,
         <https://1145.am/db/1745401/Shunwei_Capital>,
         <https://1145.am/db/1746435/Shunwei_Capital>,
         <https://1145.am/db/1746542/Shunwei_Capital>,
@@ -1844,7 +1844,7 @@
     ns1:internalDocId 3146353 ;
     ns1:investor <https://1145.am/db/3146353/Series_D_Investment_Bosch_Cisco_Investments_Ericsson_Hewlett_Packard_Enterprise_Pubnub_Relay_Ventures_Sapphire_Ventures_Scale_Venture_Partners_Completed> ;
     ns1:name "Bosch" ;
-    ns1:sameAsMedium <https://1145.am/db/1641575/Bosch>,
+    ns1:sameAsNameOnly <https://1145.am/db/1641575/Bosch>,
         <https://1145.am/db/1656124/Bosch>,
         <https://1145.am/db/1760908/Bosch>,
         <https://1145.am/db/1765873/Bosch>,
@@ -1878,7 +1878,7 @@
     ns1:investor <https://1145.am/db/3146353/Series_D_Investment_Bosch_Cisco_Investments_Ericsson_Hewlett_Packard_Enterprise_Pubnub_Relay_Ventures_Sapphire_Ventures_Scale_Venture_Partners_Completed> ;
     ns1:name "Cisco Investments" ;
     ns1:sameAsHigh <https://1145.am/db/3144640/Cisco_Investments> ;
-    ns1:sameAsMedium <https://1145.am/db/1232596/Cisco_Investments>,
+    ns1:sameAsNameOnly <https://1145.am/db/1232596/Cisco_Investments>,
         <https://1145.am/db/1251023/Cisco_Investments>,
         <https://1145.am/db/1253565/Cisco_Investments>,
         <https://1145.am/db/1298285/Cisco_Investments>,
@@ -1914,7 +1914,7 @@
     ns1:internalDocId 3146353 ;
     ns1:investor <https://1145.am/db/3146353/Series_D_Investment_Bosch_Cisco_Investments_Ericsson_Hewlett_Packard_Enterprise_Pubnub_Relay_Ventures_Sapphire_Ventures_Scale_Venture_Partners_Completed> ;
     ns1:name "Ericsson" ;
-    ns1:sameAsMedium <https://1145.am/db/1010341/Ericsson>,
+    ns1:sameAsNameOnly <https://1145.am/db/1010341/Ericsson>,
         <https://1145.am/db/1012103/Ericsson>,
         <https://1145.am/db/1100279/Ericsson>,
         <https://1145.am/db/1101018/Ericsson>,
@@ -2154,7 +2154,7 @@
         <https://1145.am/db/3034344/Hewlett_Packard_Enterprise>,
         <https://1145.am/db/3120114/Hewlett_Packard_Enterprise>,
         <https://1145.am/db/7855/Hewlett_Packard_Enterprise> ;
-    ns1:sameAsMedium <https://1145.am/db/1006163/Hewlett_Packard_Enterprise>,
+    ns1:sameAsNameOnly <https://1145.am/db/1006163/Hewlett_Packard_Enterprise>,
         <https://1145.am/db/1068478/Hewlett_Packard_Enterprise>,
         <https://1145.am/db/1069960/Hewlett_Packard_Enterprise>,
         <https://1145.am/db/1202509/Hewlett_Packard_Enterprise>,
@@ -2211,7 +2211,7 @@
         <https://1145.am/db/1819898/Relay_Ventures>,
         <https://1145.am/db/1824295/Relay_Ventures>,
         <https://1145.am/db/1836676/Relay_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1293985/Relay>,
+    ns1:sameAsNameOnly <https://1145.am/db/1293985/Relay>,
         <https://1145.am/db/1294726/Relay>,
         <https://1145.am/db/1406385/Relay>,
         <https://1145.am/db/1776068/Relay_Ventures>,
@@ -2262,7 +2262,7 @@
         <https://1145.am/db/661275/Sapphire_Ventures>,
         <https://1145.am/db/751030/Chicago_Ventures_Generation_Investment_Management_Sapphire>,
         <https://1145.am/db/772724/Sapphire_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1051768/Sapphire>,
+    ns1:sameAsNameOnly <https://1145.am/db/1051768/Sapphire>,
         <https://1145.am/db/1468368/Sapphire_Ventures>,
         <https://1145.am/db/1667921/Sapphire_Ventures>,
         <https://1145.am/db/1709908/Sapphire_Ventures>,
@@ -2343,7 +2343,7 @@
         <https://1145.am/db/633695/Scale_Venture_Partners>,
         <https://1145.am/db/633929/Scale_Venture_Partners>,
         <https://1145.am/db/634370/Scale_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1043342/Scale_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1043342/Scale_Venture_Partners>,
         <https://1145.am/db/1511179/Scale_Venture_Partners>,
         <https://1145.am/db/1512945/Scale_Venture_Partners>,
         <https://1145.am/db/1695419/Scale_Venture_Partners>,
@@ -2410,7 +2410,7 @@
         <https://1145.am/db/787742/Ivp>,
         <https://1145.am/db/979753/Ivp>,
         <https://1145.am/db/980678/Ivp> ;
-    ns1:sameAsMedium <https://1145.am/db/1083449/Ivp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083449/Ivp>,
         <https://1145.am/db/1085686/Ivp>,
         <https://1145.am/db/129916/Ivp>,
         <https://1145.am/db/1706219/Ivp>,
@@ -2463,7 +2463,7 @@
         <https://1145.am/db/1777106/Tpg_Growth>,
         <https://1145.am/db/438236/Tpg_Growth>,
         <https://1145.am/db/584767/Tpg_Growth> ;
-    ns1:sameAsMedium <https://1145.am/db/1006619/Tpg_Growth>,
+    ns1:sameAsNameOnly <https://1145.am/db/1006619/Tpg_Growth>,
         <https://1145.am/db/1476555/Tpg_Growth>,
         <https://1145.am/db/1775794/Tpg_Growth>,
         <https://1145.am/db/1775871/Tpg_Growth>,
@@ -2535,7 +2535,7 @@
         <https://1145.am/db/3020526/Atomico>,
         <https://1145.am/db/3928437/Atomico>,
         <https://1145.am/db/3928440/Atomico> ;
-    ns1:sameAsMedium <https://1145.am/db/1411065/Atomico>,
+    ns1:sameAsNameOnly <https://1145.am/db/1411065/Atomico>,
         <https://1145.am/db/1411394/Atomico>,
         <https://1145.am/db/1696889/Atomico>,
         <https://1145.am/db/1700042/Atomico>,
@@ -2721,7 +2721,7 @@
         <https://1145.am/db/815148/Eqt>,
         <https://1145.am/db/848069/Eqt_Corporation>,
         <https://1145.am/db/946887/Eqt> ;
-    ns1:sameAsMedium <https://1145.am/db/1093129/Eqt>,
+    ns1:sameAsNameOnly <https://1145.am/db/1093129/Eqt>,
         <https://1145.am/db/1161102/Eqt>,
         <https://1145.am/db/122989/Eqt_Corp>,
         <https://1145.am/db/1318524/Eqt_Corp>,
@@ -2827,7 +2827,7 @@
         <https://1145.am/db/3132992/Sunstone>,
         <https://1145.am/db/3325640/Sunstone_Partners>,
         <https://1145.am/db/426688/Sunstone> ;
-    ns1:sameAsMedium <https://1145.am/db/1709941/Sunstone>,
+    ns1:sameAsNameOnly <https://1145.am/db/1709941/Sunstone>,
         <https://1145.am/db/1832324/Sunstone>,
         <https://1145.am/db/2360125/Sunstone> .
 
@@ -2845,7 +2845,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Avista Development" ;
-    ns1:sameAsMedium <https://1145.am/db/428027/Avista_Development> .
+    ns1:sameAsNameOnly <https://1145.am/db/428027/Avista_Development> .
 
 <https://1145.am/db/3146481/Constellation_Technology_Ventures> a org:Organization ;
     ns1:basedInLowRaw "Seattle" ;
@@ -2854,7 +2854,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Constellation Technology Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1773807/Constellation_Technology_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1773807/Constellation_Technology_Ventures>,
         <https://1145.am/db/2023596/Constellation_Technology_Ventures>,
         <https://1145.am/db/428027/Constellation_Technology_Ventures>,
         <https://1145.am/db/471494/Constellation_Technology_Ventures>,
@@ -2867,7 +2867,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Element 8 Fund" ;
-    ns1:sameAsMedium <https://1145.am/db/1773807/Element_8_Fund> .
+    ns1:sameAsNameOnly <https://1145.am/db/1773807/Element_8_Fund> .
 
 <https://1145.am/db/3146481/Equinor_Energy_Ventures> a org:Organization ;
     ns1:basedInLowRaw "Norway" ;
@@ -2876,7 +2876,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Equinor Energy Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1773807/Equinor_Energy_Ventures> .
+    ns1:sameAsNameOnly <https://1145.am/db/1773807/Equinor_Energy_Ventures> .
 
 <https://1145.am/db/3146481/Founders_Co-Op> a org:Organization ;
     ns1:basedInLowRaw "Seattle" ;
@@ -2885,7 +2885,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Founders' Co-op" ;
-    ns1:sameAsMedium <https://1145.am/db/1767412/Founders_Co-Op>,
+    ns1:sameAsNameOnly <https://1145.am/db/1767412/Founders_Co-Op>,
         <https://1145.am/db/1773807/Founders_Co-Op>,
         <https://1145.am/db/1781681/Founders_Co-Op>,
         <https://1145.am/db/1782282/Founders>,
@@ -2914,7 +2914,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Prelude Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1006262/Com_Prelude_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1006262/Com_Prelude_Ventures>,
         <https://1145.am/db/1119699/Prelude_Ventures>,
         <https://1145.am/db/1122750/Prelude_Ventures>,
         <https://1145.am/db/1377174/Prelude>,
@@ -2954,7 +2954,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Techstars Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1014186/Techstars>,
+    ns1:sameAsNameOnly <https://1145.am/db/1014186/Techstars>,
         <https://1145.am/db/1115248/Techstars>,
         <https://1145.am/db/1117172/Techstars>,
         <https://1145.am/db/1126227/Techstars>,
@@ -3048,7 +3048,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Total Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/101414/Total>,
+    ns1:sameAsNameOnly <https://1145.am/db/101414/Total>,
         <https://1145.am/db/102551/Total>,
         <https://1145.am/db/1080/Total_Sa>,
         <https://1145.am/db/165816/Total>,
@@ -3103,7 +3103,7 @@
     ns1:internalDocId 3146481 ;
     ns1:investor <https://1145.am/db/3146481/Series_B_Investment_Avista_Development_Constellation_Technology_Ventures_Element_8_Fund_Equinor_Energy_Ventures_Founders_Co-Op_Levelten_Energy_Prelude_Ventures_Techstars_Ventures_Total_Ventures_Wireframe_Ventures_Completed> ;
     ns1:name "Wireframe Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1106214/Wireframe_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1106214/Wireframe_Ventures>,
         <https://1145.am/db/1741370/Wireframe_Ventures>,
         <https://1145.am/db/1755152/Wireframe_Ventures>,
         <https://1145.am/db/1773807/Wireframe_Ventures>,
@@ -3135,7 +3135,7 @@
         <https://1145.am/db/421410/Turtle_Beach_Corporation>,
         <https://1145.am/db/715215/Turtle_Beach_Corporation>,
         <https://1145.am/db/869931/Turtle_Beach_Corp> ;
-    ns1:sameAsMedium <https://1145.am/db/3408922/Turtle_Beach>,
+    ns1:sameAsNameOnly <https://1145.am/db/3408922/Turtle_Beach>,
         <https://1145.am/db/3838635/Turtle_Beach_Corporation>,
         <https://1145.am/db/3883509/Turtle_Beach_Corporation>,
         <https://1145.am/db/418284/Turtle_Beach_Corporation> .
@@ -3159,7 +3159,7 @@
     ns1:internalDocId 3146550 ;
     ns1:investor <https://1145.am/db/3146550/Series_B_Investment_Blue_Shield_California_Cardinal_Analytx_Solutions_Guidewell_Mutual_Holding_Corporation_John_Doerr_Premera_Blue_Cross_Completed> ;
     ns1:name "GuideWell Mutual Holding Corporation" ;
-    ns1:sameAsMedium <https://1145.am/db/402422/Guidewell_Mutual_Holding_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/402422/Guidewell_Mutual_Holding_Corporation>,
         <https://1145.am/db/426501/Guidewell_Mutual_Holding_Corporation>,
         <https://1145.am/db/427363/Guidewell_Mutual_Holding_Corporation>,
         <https://1145.am/db/768705/Guidewell_Mutual_Holding_Corporation> .
@@ -3175,7 +3175,7 @@
     ns1:internalDocId 3146550 ;
     ns1:investor <https://1145.am/db/3146550/Series_B_Investment_Blue_Shield_California_Cardinal_Analytx_Solutions_Guidewell_Mutual_Holding_Corporation_John_Doerr_Premera_Blue_Cross_Completed> ;
     ns1:name "John Doerr" ;
-    ns1:sameAsMedium <https://1145.am/db/1169687/John_Doerr>,
+    ns1:sameAsNameOnly <https://1145.am/db/1169687/John_Doerr>,
         <https://1145.am/db/1355550/John_Doerr>,
         <https://1145.am/db/1356166/John_Doerr>,
         <https://1145.am/db/1857306/John_Doerr>,
@@ -3193,7 +3193,7 @@
     ns1:internalDocId 3146550 ;
     ns1:investor <https://1145.am/db/3146550/Series_B_Investment_Blue_Shield_California_Cardinal_Analytx_Solutions_Guidewell_Mutual_Holding_Corporation_John_Doerr_Premera_Blue_Cross_Completed> ;
     ns1:name "Premera Blue Cross" ;
-    ns1:sameAsMedium <https://1145.am/db/2277762/Premera_Blue_Cross> .
+    ns1:sameAsNameOnly <https://1145.am/db/2277762/Premera_Blue_Cross> .
 
 <https://1145.am/db/3146556/Itochu> a org:Organization ;
     ns1:basedInHighGeoName "Japan" ;
@@ -3207,7 +3207,7 @@
     ns1:internalDocId 3146556 ;
     ns1:investor <https://1145.am/db/3146556/Investment_Fyusion_Completed> ;
     ns1:name "Itochu" ;
-    ns1:sameAsMedium <https://1145.am/db/1700056/Itochu_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1700056/Itochu_Corporation>,
         <https://1145.am/db/1747264/Itochu>,
         <https://1145.am/db/1758659/Itochu>,
         <https://1145.am/db/1779512/Itochu_Corporation>,
@@ -3248,7 +3248,7 @@
         <https://1145.am/db/1779810/American_Express>,
         <https://1145.am/db/3021200/American_Express>,
         <https://1145.am/db/3082889/American_Express> ;
-    ns1:sameAsMedium <https://1145.am/db/1399732/American_Express_Co>,
+    ns1:sameAsNameOnly <https://1145.am/db/1399732/American_Express_Co>,
         <https://1145.am/db/1639075/American_Express>,
         <https://1145.am/db/1639504/American_Express>,
         <https://1145.am/db/1749135/American_Express>,
@@ -3353,7 +3353,7 @@
         <https://1145.am/db/951023/Citigroup_Inc>,
         <https://1145.am/db/951626/Citi>,
         <https://1145.am/db/952998/Citi> ;
-    ns1:sameAsMedium <https://1145.am/db/1045289/Citi>,
+    ns1:sameAsNameOnly <https://1145.am/db/1045289/Citi>,
         <https://1145.am/db/1057974/Citi>,
         <https://1145.am/db/1065167/Citi>,
         <https://1145.am/db/125165/Citi>,
@@ -3417,7 +3417,7 @@
         <https://1145.am/db/2966695/Aviva>,
         <https://1145.am/db/2990226/Aviva>,
         <https://1145.am/db/3410422/Aviva_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1250444/Aviva>,
+    ns1:sameAsNameOnly <https://1145.am/db/1250444/Aviva>,
         <https://1145.am/db/170286/Aviva>,
         <https://1145.am/db/170407/Aviva>,
         <https://1145.am/db/1768614/Aviva>,
@@ -3535,7 +3535,7 @@
         <https://1145.am/db/2307565/Edbi>,
         <https://1145.am/db/3935446/Edbi>,
         <https://1145.am/db/969990/Edbi> ;
-    ns1:sameAsMedium <https://1145.am/db/1042080/Edbi>,
+    ns1:sameAsNameOnly <https://1145.am/db/1042080/Edbi>,
         <https://1145.am/db/1443192/Edbi>,
         <https://1145.am/db/1444350/Edbi>,
         <https://1145.am/db/1739285/Edbi>,
@@ -3569,7 +3569,7 @@
     ns1:name "Jianke" ;
     ns1:sameAsHigh <https://1145.am/db/1778189/Jianke>,
         <https://1145.am/db/3410422/Jianke> ;
-    ns1:sameAsMedium <https://1145.am/db/3765847/Jianke> .
+    ns1:sameAsNameOnly <https://1145.am/db/3765847/Jianke> .
 
 <https://1145.am/db/3146633/Massmutual_Ventures> a org:Organization ;
     ns1:basedInLowRaw "Singapore" ;
@@ -3592,7 +3592,7 @@
         <https://1145.am/db/513425/Massmutual_Ventures>,
         <https://1145.am/db/615337/Massmutual_Ventures>,
         <https://1145.am/db/734867/Massmutual_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1153067/Massmutual_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1153067/Massmutual_Ventures>,
         <https://1145.am/db/1520815/Massmutual>,
         <https://1145.am/db/1618747/Massmutual>,
         <https://1145.am/db/1619431/Massmutual>,
@@ -3630,7 +3630,7 @@
         <https://1145.am/db/1944564/Openspace_Ventures>,
         <https://1145.am/db/2113238/Openspace_Ventures>,
         <https://1145.am/db/3519330/Openspace> ;
-    ns1:sameAsMedium <https://1145.am/db/1699433/Openspace>,
+    ns1:sameAsNameOnly <https://1145.am/db/1699433/Openspace>,
         <https://1145.am/db/1718395/Openspace>,
         <https://1145.am/db/1739792/Openspace_Ventures>,
         <https://1145.am/db/1745226/Openspace_Ventures>,
@@ -3662,7 +3662,7 @@
     ns1:investor <https://1145.am/db/3146633/Series_B_Investment_Aviva_Ventures_Biofourmis_Edbi_Jianke_Massmutual_Ventures_Openspace_Ventures_Sginnovate_Sequoia_Capitals_Sequoia_India_Completed> ;
     ns1:name "SGInnovate" ;
     ns1:sameAsHigh <https://1145.am/db/1747241/Sginnovate> ;
-    ns1:sameAsMedium <https://1145.am/db/1753705/Sginnovate>,
+    ns1:sameAsNameOnly <https://1145.am/db/1753705/Sginnovate>,
         <https://1145.am/db/1955153/Sginnovate>,
         <https://1145.am/db/3410422/Sginnovate> .
 
@@ -3692,7 +3692,7 @@
     ns1:investor <https://1145.am/db/3146700/Investment_Burst_Capital_Google_Ventures_Instawork_Sv_Angel_Spark_Capital_Tuesday_Capital_Completed> ;
     ns1:name "Burst Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1455790/Burst_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1700579/Burst_Media>,
+    ns1:sameAsNameOnly <https://1145.am/db/1700579/Burst_Media>,
         <https://1145.am/db/1758776/Burst_Capital>,
         <https://1145.am/db/326622/Burst> .
 
@@ -3738,7 +3738,7 @@
         <https://1145.am/db/773684/Google_Ventures>,
         <https://1145.am/db/8080/Google_Ventures>,
         <https://1145.am/db/823763/Google_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1106670/Google>,
+    ns1:sameAsNameOnly <https://1145.am/db/1106670/Google>,
         <https://1145.am/db/1114979/Google_Ventures>,
         <https://1145.am/db/112896/Google>,
         <https://1145.am/db/1156925/Google_Ventures>,
@@ -4402,7 +4402,7 @@
         <https://1145.am/db/640939/Sv_Angel>,
         <https://1145.am/db/768089/Sv_Angel>,
         <https://1145.am/db/961837/Sv_Angel> ;
-    ns1:sameAsMedium <https://1145.am/db/1038236/Sv_Angel>,
+    ns1:sameAsNameOnly <https://1145.am/db/1038236/Sv_Angel>,
         <https://1145.am/db/1172694/Sosv>,
         <https://1145.am/db/1375010/Sv_Angel>,
         <https://1145.am/db/1696334/Sv_Angel>,
@@ -4472,7 +4472,7 @@
     ns1:sameAsHigh <https://1145.am/db/1770045/Tuesday_Capital>,
         <https://1145.am/db/3147189/Tuesday_Capital>,
         <https://1145.am/db/3342694/Tuesday_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1109071/Tuesday_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1109071/Tuesday_Capital>,
         <https://1145.am/db/1737008/Tuesday_Ventures>,
         <https://1145.am/db/1740856/Tuesday_Capital>,
         <https://1145.am/db/1743969/Tuesday_Capital>,
@@ -4490,7 +4490,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Freestyle Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1086553/Freestyle>,
+    ns1:sameAsNameOnly <https://1145.am/db/1086553/Freestyle>,
         <https://1145.am/db/1175686/Freestyle>,
         <https://1145.am/db/1355590/Freestyle>,
         <https://1145.am/db/1356191/Freestyle>,
@@ -4534,7 +4534,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Lightspeed Venture Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1153338/Lightspeed_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1153338/Lightspeed_Venture_Partners>,
         <https://1145.am/db/1166471/Lightspeed_Venture_Partners>,
         <https://1145.am/db/1298167/Lightspeed_Venture_Partners>,
         <https://1145.am/db/1311917/Lightspeed_Venture_Partners>,
@@ -4745,7 +4745,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Silicon Valley Bank" ;
-    ns1:sameAsMedium <https://1145.am/db/1083805/Silicon_Valley_Bank>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083805/Silicon_Valley_Bank>,
         <https://1145.am/db/113246/Silicon_Valley_Company>,
         <https://1145.am/db/1150348/Silicon_Valley_Bank>,
         <https://1145.am/db/1152132/Silicon_Valley_Bank>,
@@ -4918,7 +4918,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Threshold Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1165434/Threshold_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1165434/Threshold_Ventures>,
         <https://1145.am/db/1232401/Threshold_Ventures>,
         <https://1145.am/db/1265821/Threshold_Ventures>,
         <https://1145.am/db/1267274/Threshold_Ventures>,
@@ -4951,7 +4951,7 @@
     ns1:internalDocId 3146878 ;
     ns1:investor <https://1145.am/db/3146878/Series_B_Investment_Ironscales_K1_Investment_Management_Completed> ;
     ns1:name "K1 Investment Management" ;
-    ns1:sameAsMedium <https://1145.am/db/1447663/K1_Investment_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1447663/K1_Investment_Management>,
         <https://1145.am/db/1453472/K1_Investment_Management>,
         <https://1145.am/db/1458232/K1_Investment_Management>,
         <https://1145.am/db/1592439/K1_Investment_Management>,
@@ -4989,7 +4989,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/8_hotel_hotels_hospitality_resorts> ;
     ns1:internalDocId 3147148 ;
     ns1:name "BlaBlaCar" ;
-    ns1:sameAsMedium <https://1145.am/db/1743959/Blablacar>,
+    ns1:sameAsNameOnly <https://1145.am/db/1743959/Blablacar>,
         <https://1145.am/db/1754648/Blablacar>,
         <https://1145.am/db/1769961/Blablacar>,
         <https://1145.am/db/1780727/Blablacar>,
@@ -5061,7 +5061,7 @@
         <https://1145.am/db/440608/Jpmorgan_Chase___Co>,
         <https://1145.am/db/442074/Jpmorgan_Chase___Co>,
         <https://1145.am/db/489765/Jpmorgan_Chase___Co> ;
-    ns1:sameAsMedium <https://1145.am/db/1213262/Jpmorgan_Chase___Co>,
+    ns1:sameAsNameOnly <https://1145.am/db/1213262/Jpmorgan_Chase___Co>,
         <https://1145.am/db/1213763/Jpmorgan_Chase___Co>,
         <https://1145.am/db/1217331/Jpmorgan_Chase___Co>,
         <https://1145.am/db/1326360/Jpmorgan_Chase___Co>,
@@ -5091,7 +5091,7 @@
     ns1:foundName "IBM" ;
     ns1:internalDocId 3147321 ;
     ns1:name "IBM" ;
-    ns1:sameAsMedium <https://1145.am/db/1113794/Ibm>,
+    ns1:sameAsNameOnly <https://1145.am/db/1113794/Ibm>,
         <https://1145.am/db/1187106/Ibm>,
         <https://1145.am/db/1364021/Ibm>,
         <https://1145.am/db/1561961/Ibm>,
@@ -5285,7 +5285,7 @@
         <https://1145.am/db/3036203/Salesforce>,
         <https://1145.am/db/3048137/Salesforce_Uk>,
         <https://1145.am/db/3057898/Salesforce> ;
-    ns1:sameAsMedium <https://1145.am/db/1543777/Salesforce_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1543777/Salesforce_Inc>,
         <https://1145.am/db/1553910/Salesforce>,
         <https://1145.am/db/1554998/Salesforce>,
         <https://1145.am/db/1655374/Salesforce>,
@@ -5389,7 +5389,7 @@
     ns1:name "Contour Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/3268462/Contour_Ventures>,
         <https://1145.am/db/726461/Contour_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1879823/Contour_Ventures> .
+    ns1:sameAsNameOnly <https://1145.am/db/1879823/Contour_Ventures> .
 
 <https://1145.am/db/3147394/Outrun_Ventures> a org:Organization ;
     ns1:basedInLowRaw "U.K." ;
@@ -5416,7 +5416,7 @@
     ns1:internalDocId 3147394 ;
     ns1:investor <https://1145.am/db/3147394/Series_A_Investment_Contour_Ventures_Cutover_Index_Ventures_Outrun_Ventures_Partnership_Fund_For_New_York_Sussex_Place_Ventures_Completed> ;
     ns1:name "Sussex Place Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1726981/Sussex_Place_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1726981/Sussex_Place_Ventures>,
         <https://1145.am/db/1795491/Sussex_Place_Ventures> .
 
 <https://1145.am/db/3147396/Comcast_Ventures> a org:Organization ;
@@ -5425,7 +5425,7 @@
     ns1:internalDocId 3147396 ;
     ns1:investor <https://1145.am/db/3147396/Series_A_Investment_Comcast_Ventures_Hive_Rembrandt_Venture_Partners_Tribeca_Venture_Partners_Vocap_Investment_Partners_Completed> ;
     ns1:name "Comcast Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1124882/Comcast>,
+    ns1:sameAsNameOnly <https://1145.am/db/1124882/Comcast>,
         <https://1145.am/db/1154675/Comcast_Corp>,
         <https://1145.am/db/1238697/Comcast>,
         <https://1145.am/db/1299924/Comcast_Ventures>,
@@ -5624,7 +5624,7 @@
         <https://1145.am/db/1881748/Rembrandt_Venture_Partners>,
         <https://1145.am/db/1891823/Rembrandt_Venture_Partners>,
         <https://1145.am/db/1919845/Rembrandt_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1707790/Rembrandt_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1707790/Rembrandt_Venture_Partners>,
         <https://1145.am/db/1771750/Rembrandt_Venture_Partners>,
         <https://1145.am/db/1828992/Rembrandt_Venture_Partners>,
         <https://1145.am/db/1834392/Rembrandt_Venture_Partners>,
@@ -5643,7 +5643,7 @@
     ns1:internalDocId 3147396 ;
     ns1:investor <https://1145.am/db/3147396/Series_A_Investment_Comcast_Ventures_Hive_Rembrandt_Venture_Partners_Tribeca_Venture_Partners_Vocap_Investment_Partners_Completed> ;
     ns1:name "Tribeca Venture Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1008276/Tribeca_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1008276/Tribeca_Venture_Partners>,
         <https://1145.am/db/1171136/Tribeca_Venture_Partners>,
         <https://1145.am/db/1322913/Tribeca_Venture_Partners>,
         <https://1145.am/db/1713248/Tribeca_Venture_Partners>,
@@ -5661,7 +5661,7 @@
     ns1:internalDocId 3147396 ;
     ns1:investor <https://1145.am/db/3147396/Series_A_Investment_Comcast_Ventures_Hive_Rembrandt_Venture_Partners_Tribeca_Venture_Partners_Vocap_Investment_Partners_Completed> ;
     ns1:name "Vocap Investment Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1854123/Vocap_Investment_Partners> .
+    ns1:sameAsNameOnly <https://1145.am/db/1854123/Vocap_Investment_Partners> .
 
 <https://1145.am/db/3147411/Seed_Investment_Angular_Ventures_Completed> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -5687,7 +5687,7 @@
     ns1:investor <https://1145.am/db/3147514/Investment_Insight_Partners_Vitruvian_Partners_Walkme_Completed> ;
     ns1:name "Insight Partners" ;
     ns1:participant <https://1145.am/db/3147514/Investment_Insight_Partners_Vitruvian_Partners_Walkme_Completed> ;
-    ns1:sameAsMedium <https://1145.am/db/1004004/Insight_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1004004/Insight_Partners>,
         <https://1145.am/db/1006574/Insight_Partners>,
         <https://1145.am/db/1007161/Insight_Partners>,
         <https://1145.am/db/1007527/Insight_Partners>,
@@ -6054,7 +6054,7 @@
     ns1:internalDocId 3147514 ;
     ns1:investor <https://1145.am/db/3147514/Investment_Insight_Partners_Vitruvian_Partners_Walkme_Completed> ;
     ns1:name "Vitruvian Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1218151/Vitruvian_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1218151/Vitruvian_Partners>,
         <https://1145.am/db/1737644/Vitruvian_Partners>,
         <https://1145.am/db/1757289/Vitruvian_Partners>,
         <https://1145.am/db/1772872/Vitruvian_Partners>,
@@ -6083,7 +6083,7 @@
     ns1:investor <https://1145.am/db/3147580/Series_D_Investment_Blue_Cloud_Ventures_Crv_Harmony_Partners_Index_Ventures_Stereo_Capital_Viking_Global_Investors_Completed> ;
     ns1:name "Blue Cloud Ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1989365/Blue_Cloud_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1371086/Blue_Cloud_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1371086/Blue_Cloud_Ventures>,
         <https://1145.am/db/1753174/Blue_Cloud_Ventures>,
         <https://1145.am/db/1783221/Blue_Cloud_Ventures>,
         <https://1145.am/db/1790901/Blue_Cloud_Ventures>,
@@ -6116,7 +6116,7 @@
         <https://1145.am/db/3158513/CRV>,
         <https://1145.am/db/415322/CRV>,
         <https://1145.am/db/768306/CRV> ;
-    ns1:sameAsMedium <https://1145.am/db/1017154/CRV>,
+    ns1:sameAsNameOnly <https://1145.am/db/1017154/CRV>,
         <https://1145.am/db/1066481/CRV>,
         <https://1145.am/db/1139285/CRV>,
         <https://1145.am/db/1142546/CRV>,
@@ -6179,7 +6179,7 @@
     ns1:internalDocId 3147580 ;
     ns1:investor <https://1145.am/db/3147580/Series_D_Investment_Blue_Cloud_Ventures_Crv_Harmony_Partners_Index_Ventures_Stereo_Capital_Viking_Global_Investors_Completed> ;
     ns1:name "Harmony Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1378599/Harmony_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1378599/Harmony_Capital>,
         <https://1145.am/db/1594259/Harmony_Partners>,
         <https://1145.am/db/1625455/Harmony_Biosciences_Holdings>,
         <https://1145.am/db/1721548/Harmony_Capital>,
@@ -6217,7 +6217,7 @@
     ns1:internalDocId 3147580 ;
     ns1:investor <https://1145.am/db/3147580/Series_D_Investment_Blue_Cloud_Ventures_Crv_Harmony_Partners_Index_Ventures_Stereo_Capital_Viking_Global_Investors_Completed> ;
     ns1:name "Stereo Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1754751/Stereo_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1754751/Stereo_Capital>,
         <https://1145.am/db/1783221/Stereo_Capital> .
 
 <https://1145.am/db/3147580/Viking_Global_Investors> a org:Organization ;
@@ -6227,7 +6227,7 @@
     ns1:internalDocId 3147580 ;
     ns1:investor <https://1145.am/db/3147580/Series_D_Investment_Blue_Cloud_Ventures_Crv_Harmony_Partners_Index_Ventures_Stereo_Capital_Viking_Global_Investors_Completed> ;
     ns1:name "Viking Global Investors" ;
-    ns1:sameAsMedium <https://1145.am/db/1050767/Viking_Global_Investors>,
+    ns1:sameAsNameOnly <https://1145.am/db/1050767/Viking_Global_Investors>,
         <https://1145.am/db/1052126/Viking_Global_Investors>,
         <https://1145.am/db/1334895/Viking_Global_Investors>,
         <https://1145.am/db/1653506/Viking_Global_Investors>,
@@ -6278,7 +6278,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/65_publisher_publishing_publication_subscription> ;
     ns1:internalDocId 3147625 ;
     ns1:name "Kongregate" ;
-    ns1:sameAsMedium <https://1145.am/db/1704113/Kongregate>,
+    ns1:sameAsNameOnly <https://1145.am/db/1704113/Kongregate>,
         <https://1145.am/db/1706364/Kongregate>,
         <https://1145.am/db/1862018/Kongregate> .
 
@@ -6303,7 +6303,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/55_audio_music_software_technology> ;
     ns1:internalDocId 3145111 ;
     ns1:name "Vesper" ;
-    ns1:sameAsMedium <https://1145.am/db/1060802/Vesper>,
+    ns1:sameAsNameOnly <https://1145.am/db/1060802/Vesper>,
         <https://1145.am/db/383042/Vesper_Company>,
         <https://1145.am/db/730499/Vesper>,
         <https://1145.am/db/731732/Vesper> .
@@ -6320,7 +6320,7 @@
     ns1:internalDocId 3145124 ;
     ns1:name "Minute Media" ;
     ns1:sameAsHigh <https://1145.am/db/3036157/Minute_Media> ;
-    ns1:sameAsMedium <https://1145.am/db/1780051/Minute_Media> .
+    ns1:sameAsNameOnly <https://1145.am/db/1780051/Minute_Media> .
 
 <https://1145.am/db/3145138/Metawave> a org:Organization ;
     ns1:description "Wireless technology" ;
@@ -6330,7 +6330,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/2_broadband_wireless_telecom_telecommunications> ;
     ns1:internalDocId 3145138 ;
     ns1:name "Metawave" ;
-    ns1:sameAsMedium <https://1145.am/db/1043407/Metawave_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1043407/Metawave_Corporation>,
         <https://1145.am/db/1045697/Metawave_Corporation>,
         <https://1145.am/db/1133416/Metawave_Corporation>,
         <https://1145.am/db/1134594/Metawave_Corporation> .
@@ -6487,7 +6487,7 @@
         <https://1145.am/db/862851/Bessemer_Venture_Partners>,
         <https://1145.am/db/884806/Bessemer_Venture_Partners>,
         <https://1145.am/db/924505/Bessemer_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1060146/Bessemer_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1060146/Bessemer_Venture_Partners>,
         <https://1145.am/db/1061468/Bessemer_Venture_Partners>,
         <https://1145.am/db/1061911/Bessemer_Venture_Partners>,
         <https://1145.am/db/1064710/Bessemer_Venture_Partners>,
@@ -6630,7 +6630,7 @@
     ns1:internalDocId 3145223 ;
     ns1:investor <https://1145.am/db/3145223/Investment_Bessemer_Venture_Partners_Blue_Delta_Capital_Iconiq_Capital_New_Enterprise_Associates_Samsung_Soros_Capital_Virtru_Completed> ;
     ns1:name "Iconiq Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1736201/Iconiq>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736201/Iconiq>,
         <https://1145.am/db/1748063/Iconiq_Capital>,
         <https://1145.am/db/1750406/Iconiq_Capital>,
         <https://1145.am/db/1751656/Iconiq_Capital>,
@@ -6798,7 +6798,7 @@
         <https://1145.am/db/893810/New_Enterprise_Associates>,
         <https://1145.am/db/918706/New_Enterprise_Associates>,
         <https://1145.am/db/961672/New_Enterprise_Associates> ;
-    ns1:sameAsMedium <https://1145.am/db/1031040/New_Enterprise_Associates>,
+    ns1:sameAsNameOnly <https://1145.am/db/1031040/New_Enterprise_Associates>,
         <https://1145.am/db/1115600/New_Enterprise_Associates>,
         <https://1145.am/db/1116035/New_Enterprise_Associates>,
         <https://1145.am/db/1371086/New_Enterprise_Associates>,
@@ -7029,7 +7029,7 @@
     ns1:name "Virtru" ;
     ns1:sameAsHigh <https://1145.am/db/1774025/Virtru>,
         <https://1145.am/db/1818535/Virtru> ;
-    ns1:sameAsMedium <https://1145.am/db/1297233/Virtru>,
+    ns1:sameAsNameOnly <https://1145.am/db/1297233/Virtru>,
         <https://1145.am/db/266087/Virtru> .
 
 <https://1145.am/db/3145259/Epistema> a org:Organization ;
@@ -7050,7 +7050,7 @@
     ns1:foundName "LockState" ;
     ns1:internalDocId 3145263 ;
     ns1:name "RemoteLock" ;
-    ns1:sameAsMedium <https://1145.am/db/208788/Remotelock>,
+    ns1:sameAsNameOnly <https://1145.am/db/208788/Remotelock>,
         <https://1145.am/db/547724/Remotelock> .
 
 <https://1145.am/db/3145281/Luma_Health> a org:Organization ;
@@ -7096,7 +7096,7 @@
     ns1:internalDocId 3145301 ;
     ns1:investor <https://1145.am/db/3145301/Series_B_Investment_Bloomberg_Beta_Flybridge_Capital_Partners_Shasta_Ventures_Tenaya_Capital_Valimail_Completed> ;
     ns1:name "Tenaya Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1697031/Tenaya_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1697031/Tenaya_Capital>,
         <https://1145.am/db/1717966/Tenaya_Capital>,
         <https://1145.am/db/1718012/Tenaya_Capital>,
         <https://1145.am/db/1718048/Tenaya_Capital>,
@@ -7157,7 +7157,7 @@
     ns1:foundName "Valimail" ;
     ns1:internalDocId 3145301 ;
     ns1:name "Valimail" ;
-    ns1:sameAsMedium <https://1145.am/db/1803630/Valimail> .
+    ns1:sameAsNameOnly <https://1145.am/db/1803630/Valimail> .
 
 <https://1145.am/db/3145352/Grab> a org:Organization ;
     ns1:basedInHighGeoName "Asia" ;
@@ -7212,7 +7212,7 @@
         <https://1145.am/db/520708/Grab>,
         <https://1145.am/db/667806/Grab>,
         <https://1145.am/db/773083/Grab_Holdings_Ltd> ;
-    ns1:sameAsMedium <https://1145.am/db/1740443/Grab>,
+    ns1:sameAsNameOnly <https://1145.am/db/1740443/Grab>,
         <https://1145.am/db/1771326/Grab>,
         <https://1145.am/db/1774369/Grab>,
         <https://1145.am/db/1776123/Grab>,
@@ -7280,7 +7280,7 @@
         <https://1145.am/db/3449198/Back_Market>,
         <https://1145.am/db/3466172/Back_Market>,
         <https://1145.am/db/751129/Back_Market> ;
-    ns1:sameAsMedium <https://1145.am/db/1736160/Back_Market>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736160/Back_Market>,
         <https://1145.am/db/3079346/Back_Market> .
 
 <https://1145.am/db/3145517/Crestle> a org:Organization ;
@@ -7323,7 +7323,7 @@
     ns1:foundName "AppOnboard" ;
     ns1:internalDocId 3145688 ;
     ns1:name "AppOnboard" ;
-    ns1:sameAsMedium <https://1145.am/db/1771689/Apponboard>,
+    ns1:sameAsNameOnly <https://1145.am/db/1771689/Apponboard>,
         <https://1145.am/db/3149158/Apponboard> .
 
 <https://1145.am/db/3145692/Goldman_Sachs> a org:Organization ;
@@ -7368,7 +7368,7 @@
         <https://1145.am/db/702810/Goldman_Sachs>,
         <https://1145.am/db/711018/Goldman_Sachs>,
         <https://1145.am/db/886532/Goldman_Sachs> ;
-    ns1:sameAsMedium <https://1145.am/db/1006297/Goldman_Sachs>,
+    ns1:sameAsNameOnly <https://1145.am/db/1006297/Goldman_Sachs>,
         <https://1145.am/db/1047510/Goldman_Sachs>,
         <https://1145.am/db/1102089/Goldman_Sachs>,
         <https://1145.am/db/1142600/Goldman_Sachs>,
@@ -7588,7 +7588,7 @@
         <https://1145.am/db/3236326/Iconiq_Capital>,
         <https://1145.am/db/3274951/Iconiq_Capital>,
         <https://1145.am/db/424834/Iconiq> ;
-    ns1:sameAsMedium <https://1145.am/db/1736201/Iconiq>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736201/Iconiq>,
         <https://1145.am/db/1750406/Iconiq_Capital>,
         <https://1145.am/db/1751656/Iconiq_Capital>,
         <https://1145.am/db/1757631/Iconiq_Capital>,
@@ -7648,7 +7648,7 @@
         <https://1145.am/db/1806312/Invision>,
         <https://1145.am/db/1809617/Invision>,
         <https://1145.am/db/1821013/Invision> ;
-    ns1:sameAsMedium <https://1145.am/db/1745587/Invision>,
+    ns1:sameAsNameOnly <https://1145.am/db/1745587/Invision>,
         <https://1145.am/db/1769960/Invision>,
         <https://1145.am/db/1772349/Invision>,
         <https://1145.am/db/1773701/Invision>,
@@ -7667,7 +7667,7 @@
     ns1:internalDocId 3145692 ;
     ns1:investor <https://1145.am/db/3145692/Series_F_Investment_Atlassian_Battery_Ventures_Firstmark_Geodesic_Capital_Goldman_Sachs_Iconiq_Capital_Invision_Spark_Capital_Tiger_Global_Management_Completed> ;
     ns1:name "Spark Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1009578/Spark_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1009578/Spark_Capital>,
         <https://1145.am/db/1011517/Spark_Capital>,
         <https://1145.am/db/1072020/Spark_Capital>,
         <https://1145.am/db/1075614/Spark_Capital>,
@@ -7890,7 +7890,7 @@
         <https://1145.am/db/750299/Tiger_Global_Management>,
         <https://1145.am/db/753230/Tiger_Global_Management>,
         <https://1145.am/db/970752/Tiger_Global_Management> ;
-    ns1:sameAsMedium <https://1145.am/db/1083841/Tiger_Global_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083841/Tiger_Global_Management>,
         <https://1145.am/db/1284574/Tiger_Global_Management>,
         <https://1145.am/db/1738016/Tiger_Global_Management>,
         <https://1145.am/db/1738389/Tiger_Global_Management>,
@@ -8047,7 +8047,7 @@
         <https://1145.am/db/316895/Lyft_Inc>,
         <https://1145.am/db/317744/Lyft_Inc>,
         <https://1145.am/db/670923/Lyft_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1751577/Lyft>,
+    ns1:sameAsNameOnly <https://1145.am/db/1751577/Lyft>,
         <https://1145.am/db/1766595/Lyft>,
         <https://1145.am/db/1769099/Lyft>,
         <https://1145.am/db/1769644/Lyft>,
@@ -8183,7 +8183,7 @@
         <https://1145.am/db/862851/Bessemer_Venture_Partners>,
         <https://1145.am/db/884806/Bessemer_Venture_Partners>,
         <https://1145.am/db/924505/Bessemer_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1060146/Bessemer_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1060146/Bessemer_Venture_Partners>,
         <https://1145.am/db/1061468/Bessemer_Venture_Partners>,
         <https://1145.am/db/1061911/Bessemer_Venture_Partners>,
         <https://1145.am/db/1064710/Bessemer_Venture_Partners>,
@@ -8327,7 +8327,7 @@
     ns1:internalDocId 3145849 ;
     ns1:investor <https://1145.am/db/3145849/Investment_Bessemer_Venture_Partners_Catalyst_Investors_Crosslink_Capital_Lead_Edge_Capital_Pelion_Venture_Partners_Weave_Completed> ;
     ns1:name "Crosslink Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1066120/Crosslink_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1066120/Crosslink_Capital>,
         <https://1145.am/db/1091554/Crosslink_Capital>,
         <https://1145.am/db/1091576/Crosslink_Capital>,
         <https://1145.am/db/1134229/Crosslink_Capital>,
@@ -8428,7 +8428,7 @@
     ns1:internalDocId 3145849 ;
     ns1:name "Weave" ;
     ns1:sameAsHigh <https://1145.am/db/1838546/Weave> ;
-    ns1:sameAsMedium <https://1145.am/db/1157286/Weave>,
+    ns1:sameAsNameOnly <https://1145.am/db/1157286/Weave>,
         <https://1145.am/db/1158126/Weave>,
         <https://1145.am/db/1185673/Weave>,
         <https://1145.am/db/1188692/Weave>,
@@ -8450,7 +8450,7 @@
     ns1:internalDocId 3146051 ;
     ns1:investor <https://1145.am/db/3146051/Investment_Alychlo_Balderton_Capital_Generation_Investment_Management_Idinvest_Partners_Sophia_Genetics_Completed> ;
     ns1:name "Balderton Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1121763/Balderton_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1121763/Balderton_Capital>,
         <https://1145.am/db/1694038/Balderton>,
         <https://1145.am/db/1698954/Balderton_Capital>,
         <https://1145.am/db/1701043/Balderton_Capital>,
@@ -8646,7 +8646,7 @@
     ns1:internalDocId 3146051 ;
     ns1:investor <https://1145.am/db/3146051/Investment_Alychlo_Balderton_Capital_Generation_Investment_Management_Idinvest_Partners_Sophia_Genetics_Completed> ;
     ns1:name "Idinvest Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1736066/Idinvest_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736066/Idinvest_Partners>,
         <https://1145.am/db/1738123/Idinvest_Partners>,
         <https://1145.am/db/1740498/Idinvest_Partners>,
         <https://1145.am/db/1750172/Idinvest_Partners>,
@@ -8737,7 +8737,7 @@
         <https://1145.am/db/3189973/Sophia_Genetics>,
         <https://1145.am/db/3430056/Sophia_Genetics>,
         <https://1145.am/db/3582043/Sophia_Genetics> ;
-    ns1:sameAsMedium <https://1145.am/db/1788186/Sophia_Genetics>,
+    ns1:sameAsNameOnly <https://1145.am/db/1788186/Sophia_Genetics>,
         <https://1145.am/db/2153861/Sophia_Genetics>,
         <https://1145.am/db/2154431/Sophia_Genetics>,
         <https://1145.am/db/3123423/Sophia_Genetics>,
@@ -8754,7 +8754,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/5_enterprise_software_services_service> ;
     ns1:internalDocId 3146198 ;
     ns1:name "Catalytic" ;
-    ns1:sameAsMedium <https://1145.am/db/1776646/Catalytic>,
+    ns1:sameAsNameOnly <https://1145.am/db/1776646/Catalytic>,
         <https://1145.am/db/870743/Catalytic> .
 
 <https://1145.am/db/3146353/Pubnub> a org:Organization ;
@@ -8766,7 +8766,7 @@
     ns1:foundName "PubNub" ;
     ns1:internalDocId 3146353 ;
     ns1:name "PubNub" ;
-    ns1:sameAsMedium <https://1145.am/db/1750851/Pubnub>,
+    ns1:sameAsNameOnly <https://1145.am/db/1750851/Pubnub>,
         <https://1145.am/db/1776068/Pubnub>,
         <https://1145.am/db/1791361/Pubnub>,
         <https://1145.am/db/1812189/Pubnub>,
@@ -8780,7 +8780,7 @@
     ns1:foundName "Expanse" ;
     ns1:internalDocId 3146360 ;
     ns1:name "Expanse" ;
-    ns1:sameAsMedium <https://1145.am/db/1736390/Expanse>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736390/Expanse>,
         <https://1145.am/db/1760649/Expanse>,
         <https://1145.am/db/1775403/Expanse> .
 
@@ -8895,7 +8895,7 @@
         <https://1145.am/db/893810/New_Enterprise_Associates>,
         <https://1145.am/db/918706/New_Enterprise_Associates>,
         <https://1145.am/db/961672/New_Enterprise_Associates> ;
-    ns1:sameAsMedium <https://1145.am/db/1031040/New_Enterprise_Associates>,
+    ns1:sameAsNameOnly <https://1145.am/db/1031040/New_Enterprise_Associates>,
         <https://1145.am/db/1115600/New_Enterprise_Associates>,
         <https://1145.am/db/1116035/New_Enterprise_Associates>,
         <https://1145.am/db/1371086/New_Enterprise_Associates>,
@@ -9139,7 +9139,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/7_ecommerce_commerce_marketplace_marketplaces> ;
     ns1:internalDocId 3146389 ;
     ns1:name "Thirstie" ;
-    ns1:sameAsMedium <https://1145.am/db/1783931/Thirstie> .
+    ns1:sameAsNameOnly <https://1145.am/db/1783931/Thirstie> .
 
 <https://1145.am/db/3146396/Balderton_Capital> a org:Organization ;
     ns1:basedInLowRaw "Denmark" ;
@@ -9168,7 +9168,7 @@
         <https://1145.am/db/3153997/Balderton_Capital>,
         <https://1145.am/db/3430056/Balderton_Capital>,
         <https://1145.am/db/3817535/Balderton_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1121763/Balderton_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1121763/Balderton_Capital>,
         <https://1145.am/db/1694038/Balderton>,
         <https://1145.am/db/1698954/Balderton_Capital>,
         <https://1145.am/db/1701043/Balderton_Capital>,
@@ -9373,7 +9373,7 @@
         <https://1145.am/db/3463186/Idinvest_Partners>,
         <https://1145.am/db/3499174/Idinvest_Capital300>,
         <https://1145.am/db/3882475/Idinvest_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/1736066/Idinvest_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1736066/Idinvest_Partners>,
         <https://1145.am/db/1738123/Idinvest_Partners>,
         <https://1145.am/db/1740498/Idinvest_Partners>,
         <https://1145.am/db/1757815/Idinvest_Partners>,
@@ -9427,7 +9427,7 @@
     ns1:foundName "Peakon" ;
     ns1:internalDocId 3146396 ;
     ns1:name "Peakon" ;
-    ns1:sameAsMedium <https://1145.am/db/1761888/Peakon>,
+    ns1:sameAsNameOnly <https://1145.am/db/1761888/Peakon>,
         <https://1145.am/db/1799096/Peakon> .
 
 <https://1145.am/db/3146449/Acquisition_Stillfront_Has_Not_Happened> a ns1:CorporateFinanceActivity ;
@@ -9453,7 +9453,7 @@
     ns1:name "LevelTen Energy" ;
     ns1:sameAsHigh <https://1145.am/db/1773807/Levelten_Energy>,
         <https://1145.am/db/354619/Levelten_Energy> ;
-    ns1:sameAsMedium <https://1145.am/db/428027/Levelten_Energy>,
+    ns1:sameAsNameOnly <https://1145.am/db/428027/Levelten_Energy>,
         <https://1145.am/db/471520/Levelten_Energy>,
         <https://1145.am/db/545488/Levelten_Energy> .
 
@@ -9508,7 +9508,7 @@
     ns1:foundName "Fyusion" ;
     ns1:internalDocId 3146556 ;
     ns1:name "Fyusion" ;
-    ns1:sameAsMedium <https://1145.am/db/3246807/Fyusion> .
+    ns1:sameAsNameOnly <https://1145.am/db/3246807/Fyusion> .
 
 <https://1145.am/db/3146556/Investment_Fyusion_Completed> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -9544,7 +9544,7 @@
         <https://1145.am/db/3250378/Even_Financial>,
         <https://1145.am/db/837715/Even_Financial_Inc>,
         <https://1145.am/db/842970/Even_Financial_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1785541/Even_Financial> .
+    ns1:sameAsNameOnly <https://1145.am/db/1785541/Even_Financial> .
 
 <https://1145.am/db/3146582/Goldman_Sachs> a org:Organization ;
     ns1:basedInHighGeoName "New York City" ;
@@ -9624,7 +9624,7 @@
         <https://1145.am/db/702810/Goldman_Sachs>,
         <https://1145.am/db/711018/Goldman_Sachs>,
         <https://1145.am/db/867879/Goldman_Sachs> ;
-    ns1:sameAsMedium <https://1145.am/db/1047510/Goldman_Sachs>,
+    ns1:sameAsNameOnly <https://1145.am/db/1047510/Goldman_Sachs>,
         <https://1145.am/db/1102089/Goldman_Sachs>,
         <https://1145.am/db/1142600/Goldman_Sachs>,
         <https://1145.am/db/1207590/Goldman_Sachs>,
@@ -9805,7 +9805,7 @@
         <https://1145.am/db/2197697/Biofourmis>,
         <https://1145.am/db/3410422/Biofourmis>,
         <https://1145.am/db/3567605/Biofourmis> ;
-    ns1:sameAsMedium <https://1145.am/db/1767370/Biofourmis>,
+    ns1:sameAsNameOnly <https://1145.am/db/1767370/Biofourmis>,
         <https://1145.am/db/2155052/Biofourmis>,
         <https://1145.am/db/2193108/Biofourmis>,
         <https://1145.am/db/2198523/Biofourmis>,
@@ -9836,7 +9836,7 @@
     ns1:foundName "Ivalua" ;
     ns1:internalDocId 3146637 ;
     ns1:name "Ivalua" ;
-    ns1:sameAsMedium <https://1145.am/db/3142355/Ivalua> .
+    ns1:sameAsNameOnly <https://1145.am/db/3142355/Ivalua> .
 
 <https://1145.am/db/3146637/Tiger_Global_Management> a org:Organization ;
     ns1:basedInLowRaw "California" ;
@@ -9895,7 +9895,7 @@
         <https://1145.am/db/848266/Tiger_Global_Management>,
         <https://1145.am/db/852005/Tiger_Global_Management>,
         <https://1145.am/db/955858/Tiger_Global_Management> ;
-    ns1:sameAsMedium <https://1145.am/db/1083841/Tiger_Global_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083841/Tiger_Global_Management>,
         <https://1145.am/db/1134165/Tiger_Global_Management>,
         <https://1145.am/db/1136173/Tiger_Global_Management>,
         <https://1145.am/db/1151052/Tiger_Global_Management>,
@@ -10068,7 +10068,7 @@
         <https://1145.am/db/921634/Animoca_Brands>,
         <https://1145.am/db/925724/Animoca_Brands>,
         <https://1145.am/db/959913/Animoca_Brands> ;
-    ns1:sameAsMedium <https://1145.am/db/1011043/Animoca_Brands>,
+    ns1:sameAsNameOnly <https://1145.am/db/1011043/Animoca_Brands>,
         <https://1145.am/db/1011921/Animoca_Brands>,
         <https://1145.am/db/1049869/Animoca_Brands>,
         <https://1145.am/db/1065192/Animoca_Brands>,
@@ -10157,7 +10157,7 @@
         <https://1145.am/db/3222313/Copper>,
         <https://1145.am/db/3283029/Copper>,
         <https://1145.am/db/3342335/Copper> ;
-    ns1:sameAsMedium <https://1145.am/db/1007161/Copper>,
+    ns1:sameAsNameOnly <https://1145.am/db/1007161/Copper>,
         <https://1145.am/db/1366512/Copper>,
         <https://1145.am/db/1367448/Copper>,
         <https://1145.am/db/1582247/Copper>,
@@ -10177,7 +10177,7 @@
     ns1:foundName "Instawork" ;
     ns1:internalDocId 3146700 ;
     ns1:name "Instawork" ;
-    ns1:sameAsMedium <https://1145.am/db/393587/Instawork>,
+    ns1:sameAsNameOnly <https://1145.am/db/393587/Instawork>,
         <https://1145.am/db/400052/Instawork>,
         <https://1145.am/db/428202/Instawork>,
         <https://1145.am/db/765590/Instawork> .
@@ -10189,7 +10189,7 @@
     ns1:internalDocId 3146700 ;
     ns1:investor <https://1145.am/db/3146700/Investment_Burst_Capital_Google_Ventures_Instawork_Sv_Angel_Spark_Capital_Tuesday_Capital_Completed> ;
     ns1:name "Spark Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1009578/Spark_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1009578/Spark_Capital>,
         <https://1145.am/db/1011517/Spark_Capital>,
         <https://1145.am/db/1072020/Spark_Capital>,
         <https://1145.am/db/1075614/Spark_Capital>,
@@ -10377,7 +10377,7 @@
         <https://1145.am/db/286140/Betterup>,
         <https://1145.am/db/3073682/Betterup>,
         <https://1145.am/db/532510/Betterup> ;
-    ns1:sameAsMedium <https://1145.am/db/1386988/Betterup>,
+    ns1:sameAsNameOnly <https://1145.am/db/1386988/Betterup>,
         <https://1145.am/db/1388197/Betterup>,
         <https://1145.am/db/1746508/Betterup>,
         <https://1145.am/db/283347/Betterup_Inc>,
@@ -10399,7 +10399,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Crosslink Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1066120/Crosslink_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1066120/Crosslink_Capital>,
         <https://1145.am/db/1091554/Crosslink_Capital>,
         <https://1145.am/db/1091576/Crosslink_Capital>,
         <https://1145.am/db/1134229/Crosslink_Capital>,
@@ -10497,7 +10497,7 @@
     ns1:internalDocId 3146839 ;
     ns1:investor <https://1145.am/db/3146839/Series_C_Investment_Betterup_Crosslink_Capital_Freestyle_Capital_Lightspeed_Venture_Partners_Silicon_Valley_Bank_Tenaya_Capital_Threshold_Ventures_Completed> ;
     ns1:name "Tenaya Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1697031/Tenaya_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1697031/Tenaya_Capital>,
         <https://1145.am/db/1717966/Tenaya_Capital>,
         <https://1145.am/db/1718012/Tenaya_Capital>,
         <https://1145.am/db/1718048/Tenaya_Capital>,
@@ -10560,7 +10560,7 @@
     ns1:name "Ironscales" ;
     ns1:sameAsHigh <https://1145.am/db/1564033/Ironscales>,
         <https://1145.am/db/1567281/Ironscales> ;
-    ns1:sameAsMedium <https://1145.am/db/1187176/Ironscales>,
+    ns1:sameAsNameOnly <https://1145.am/db/1187176/Ironscales>,
         <https://1145.am/db/287310/Ironscales>,
         <https://1145.am/db/676635/Ironscales> .
 
@@ -10597,7 +10597,7 @@
     ns1:foundName "Busfor" ;
     ns1:internalDocId 3147148 ;
     ns1:name "Busfor" ;
-    ns1:sameAsMedium <https://1145.am/db/1743959/Busfor>,
+    ns1:sameAsNameOnly <https://1145.am/db/1743959/Busfor>,
         <https://1145.am/db/1754648/Busfor> .
 
 <https://1145.am/db/3147148/Busfor_Merger> a ns1:CorporateFinanceActivity ;
@@ -10741,7 +10741,7 @@
         <https://1145.am/db/813667/Softbank>,
         <https://1145.am/db/886532/Softbank>,
         <https://1145.am/db/930512/Softbank> ;
-    ns1:sameAsMedium <https://1145.am/db/103808/Softbank_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/103808/Softbank_Corp>,
         <https://1145.am/db/1129671/Softbank>,
         <https://1145.am/db/1130952/Softbank>,
         <https://1145.am/db/116996/Softbank>,
@@ -11003,7 +11003,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/5_enterprise_software_services_service> ;
     ns1:internalDocId 3147321 ;
     ns1:name "MuleSoft" ;
-    ns1:sameAsMedium <https://1145.am/db/1709168/Mulesoft>,
+    ns1:sameAsNameOnly <https://1145.am/db/1709168/Mulesoft>,
         <https://1145.am/db/1779198/Mulesoft>,
         <https://1145.am/db/1830084/Mulesoft>,
         <https://1145.am/db/1836989/Mulesoft>,
@@ -11030,7 +11030,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/5_enterprise_software_services_service> ;
     ns1:internalDocId 3147321 ;
     ns1:name "RedHat" ;
-    ns1:sameAsMedium <https://1145.am/db/1742575/Redhat>,
+    ns1:sameAsNameOnly <https://1145.am/db/1742575/Redhat>,
         <https://1145.am/db/1834982/Redhat>,
         <https://1145.am/db/905570/Redhat> .
 
@@ -11055,7 +11055,7 @@
     ns1:foundName "Cutover" ;
     ns1:internalDocId 3147394 ;
     ns1:name "Cutover" ;
-    ns1:sameAsMedium <https://1145.am/db/3514364/Cutover> .
+    ns1:sameAsNameOnly <https://1145.am/db/3514364/Cutover> .
 
 <https://1145.am/db/3147394/Index_Ventures> a org:Organization ;
     ns1:basedInLowRaw "U.K." ;
@@ -11064,7 +11064,7 @@
     ns1:internalDocId 3147394 ;
     ns1:investor <https://1145.am/db/3147394/Series_A_Investment_Contour_Ventures_Cutover_Index_Ventures_Outrun_Ventures_Partnership_Fund_For_New_York_Sussex_Place_Ventures_Completed> ;
     ns1:name "Index Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1151328/Index_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1151328/Index_Ventures>,
         <https://1145.am/db/1153706/Index_Ventures>,
         <https://1145.am/db/1243661/Index_Capital>,
         <https://1145.am/db/1247967/Index_Ventures>,
@@ -11428,7 +11428,7 @@
     ns1:foundName "Hive" ;
     ns1:internalDocId 3147396 ;
     ns1:name "Hive" ;
-    ns1:sameAsMedium <https://1145.am/db/1746751/Hive>,
+    ns1:sameAsNameOnly <https://1145.am/db/1746751/Hive>,
         <https://1145.am/db/1754611/Hive>,
         <https://1145.am/db/311767/Hive> .
 
@@ -11440,7 +11440,7 @@
     ns1:foundName "Angular Ventures" ;
     ns1:internalDocId 3147411 ;
     ns1:name "Angular Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1701052/Angular_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1701052/Angular_Ventures>,
         <https://1145.am/db/1752609/Angular_Ventures>,
         <https://1145.am/db/1755278/Angular_Ventures>,
         <https://1145.am/db/1762397/Angular_Ventures>,
@@ -11457,7 +11457,7 @@
     ns1:name "WalkMe" ;
     ns1:sameAsHigh <https://1145.am/db/1623008/Walkme_Ltd>,
         <https://1145.am/db/3310840/Walkme> ;
-    ns1:sameAsMedium <https://1145.am/db/1775134/Walkme>,
+    ns1:sameAsNameOnly <https://1145.am/db/1775134/Walkme>,
         <https://1145.am/db/1791716/Walkme>,
         <https://1145.am/db/1799261/Walkme>,
         <https://1145.am/db/1801537/Walkme>,
@@ -11473,7 +11473,7 @@
     ns1:internalDocId 3147580 ;
     ns1:investor <https://1145.am/db/3147580/Series_D_Investment_Blue_Cloud_Ventures_Crv_Harmony_Partners_Index_Ventures_Stereo_Capital_Viking_Global_Investors_Completed> ;
     ns1:name "Index Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1151328/Index_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1151328/Index_Ventures>,
         <https://1145.am/db/1153706/Index_Ventures>,
         <https://1145.am/db/1243661/Index_Capital>,
         <https://1145.am/db/1247967/Index_Ventures>,
@@ -11850,7 +11850,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/96_tech_technology_hightech_engineering> ;
     ns1:internalDocId 3146255 ;
     ns1:name "Nreal" ;
-    ns1:sameAsMedium <https://1145.am/db/1705768/Nreal>,
+    ns1:sameAsNameOnly <https://1145.am/db/1705768/Nreal>,
         <https://1145.am/db/1738538/Nreal>,
         <https://1145.am/db/1750033/Nreal>,
         <https://1145.am/db/2753529/Nreal>,
@@ -12063,7 +12063,7 @@ ns1:venturebeatcom_transportation_lyft-files-for-an-ipo-ahead-of-rival-uber_ a s
         <https://1145.am/db/557324/Wework>,
         <https://1145.am/db/580712/Wework_Inc>,
         <https://1145.am/db/941922/Wework_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1090529/Wework_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1090529/Wework_Inc>,
         <https://1145.am/db/1164329/Wework_Inc>,
         <https://1145.am/db/1165216/Wework_Inc>,
         <https://1145.am/db/1272659/Wework>,

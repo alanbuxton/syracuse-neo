@@ -9,7 +9,7 @@
     ns1:internalDocId 3147825 ;
     ns1:investor <https://1145.am/db/3147825/Investment_Amity_Ventures_Evisort_M12_Microsoft_Serra_Ventures_Vertex_Ventures_Completed> ;
     ns1:name "Amity Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1749055/Amity_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1749055/Amity_Ventures>,
         <https://1145.am/db/1756475/Amity>,
         <https://1145.am/db/1761249/Amity>,
         <https://1145.am/db/1762896/Amity_Ventures>,
@@ -26,7 +26,7 @@
     ns1:internalDocId 3147825 ;
     ns1:investor <https://1145.am/db/3147825/Investment_Amity_Ventures_Evisort_M12_Microsoft_Serra_Ventures_Vertex_Ventures_Completed> ;
     ns1:name "M12" ;
-    ns1:sameAsMedium <https://1145.am/db/1083145/M12>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083145/M12>,
         <https://1145.am/db/1233008/M12>,
         <https://1145.am/db/1238474/M12>,
         <https://1145.am/db/1394982/M12>,
@@ -81,7 +81,7 @@
     ns1:internalDocId 3147825 ;
     ns1:investor <https://1145.am/db/3147825/Investment_Amity_Ventures_Evisort_M12_Microsoft_Serra_Ventures_Vertex_Ventures_Completed> ;
     ns1:name "Microsoft" ;
-    ns1:sameAsMedium <https://1145.am/db/1017437/Microsoft_Corp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1017437/Microsoft_Corp>,
         <https://1145.am/db/1025001/Microsoft_Corp>,
         <https://1145.am/db/1092654/Microsoft>,
         <https://1145.am/db/1190136/Microsoft>,
@@ -775,7 +775,7 @@
     ns1:internalDocId 3147825 ;
     ns1:investor <https://1145.am/db/3147825/Investment_Amity_Ventures_Evisort_M12_Microsoft_Serra_Ventures_Vertex_Ventures_Completed> ;
     ns1:name "Serra Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1023070/Serra_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1023070/Serra_Ventures>,
         <https://1145.am/db/1023884/Serra_Ventures>,
         <https://1145.am/db/1752958/Serra_Ventures>,
         <https://1145.am/db/2131689/E14_Congruent_Serra_Ventures>,
@@ -791,7 +791,7 @@
     ns1:internalDocId 3147825 ;
     ns1:investor <https://1145.am/db/3147825/Investment_Amity_Ventures_Evisort_M12_Microsoft_Serra_Ventures_Vertex_Ventures_Completed> ;
     ns1:name "Vertex Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1008260/Vertex_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1008260/Vertex_Ventures>,
         <https://1145.am/db/1219592/Vertex_Ventures>,
         <https://1145.am/db/1249497/Vertex_Inc>,
         <https://1145.am/db/1432626/Vertex_Ventures>,
@@ -898,7 +898,7 @@
         <https://1145.am/db/3042810/Idinvest>,
         <https://1145.am/db/3146153/Idinvest>,
         <https://1145.am/db/3499174/Idinvest_Capital300> ;
-    ns1:sameAsMedium <https://1145.am/db/1767687/Idinvest>,
+    ns1:sameAsNameOnly <https://1145.am/db/1767687/Idinvest>,
         <https://1145.am/db/1774799/Idinvest>,
         <https://1145.am/db/1779515/Idinvest>,
         <https://1145.am/db/1789716/Idinvest>,
@@ -935,7 +935,7 @@
         <https://1145.am/db/3822035/Lakestar>,
         <https://1145.am/db/682553/Lakestar>,
         <https://1145.am/db/683306/Lakestar> ;
-    ns1:sameAsMedium <https://1145.am/db/1214143/Lakestar>,
+    ns1:sameAsNameOnly <https://1145.am/db/1214143/Lakestar>,
         <https://1145.am/db/1214311/Lakestar>,
         <https://1145.am/db/166929/Lakestar>,
         <https://1145.am/db/1708941/Lakestar>,
@@ -1001,7 +1001,7 @@
         <https://1145.am/db/3842309/Mubadala_Consortium>,
         <https://1145.am/db/607979/Mubadala_Investment_Company>,
         <https://1145.am/db/912288/Mubadala> ;
-    ns1:sameAsMedium <https://1145.am/db/1115949/Mubadala>,
+    ns1:sameAsNameOnly <https://1145.am/db/1115949/Mubadala>,
         <https://1145.am/db/1367421/Mubadala>,
         <https://1145.am/db/141802/Mubadala>,
         <https://1145.am/db/141809/Mubadala>,
@@ -1054,7 +1054,7 @@
     ns1:foundName "PHOENIX Rehabilitation and Health Services" ;
     ns1:internalDocId 3159265 ;
     ns1:name "PHOENIX Rehabilitation and Health Services" ;
-    ns1:sameAsMedium <https://1145.am/db/3219102/Phoenix_Rehabilitation_And_Health_Services> .
+    ns1:sameAsNameOnly <https://1145.am/db/3219102/Phoenix_Rehabilitation_And_Health_Services> .
 
 <https://1145.am/db/3160125/Gryphon_Technologies> a org:Organization ;
     ns1:basedInHighGeoName "Washington" ;
@@ -1081,7 +1081,7 @@
     ns1:sameAsHigh <https://1145.am/db/3469070/Sandvik_Machining_Solutions>,
         <https://1145.am/db/3823695/Sandvik_Machining_Solutions>,
         <https://1145.am/db/3899686/Sandvik_Machining_Solutions> ;
-    ns1:sameAsMedium <https://1145.am/db/3605288/Sandvik_Machining_Solutions> .
+    ns1:sameAsNameOnly <https://1145.am/db/3605288/Sandvik_Machining_Solutions> .
 
 <https://1145.am/db/3160786/Walter> a org:Organization ;
     ns1:basedInHighGeoName "Kingdom of Sweden" ;
@@ -1108,7 +1108,7 @@
     ns1:name "LCS" ;
     ns1:sameAsHigh <https://1145.am/db/1496616/LCS>,
         <https://1145.am/db/807869/LCS> ;
-    ns1:sameAsMedium <https://1145.am/db/2430944/LCS> .
+    ns1:sameAsNameOnly <https://1145.am/db/2430944/LCS> .
 
 <https://1145.am/db/3162567/Arthur_J_Gallagher___Co> a org:Organization ;
     ns1:basedInHighGeoName "Rolling Meadows" ;
@@ -1169,7 +1169,7 @@
         <https://1145.am/db/734599/Arthur_J_Gallagher___Co>,
         <https://1145.am/db/965641/Arthur_J_Gallagher___Co>,
         <https://1145.am/db/988306/Arthur_J_Gallagher___Co> ;
-    ns1:sameAsMedium <https://1145.am/db/1060599/Arthur_J_Gallagher___Co>,
+    ns1:sameAsNameOnly <https://1145.am/db/1060599/Arthur_J_Gallagher___Co>,
         <https://1145.am/db/1083872/Arthur_J_Gallagher___Co>,
         <https://1145.am/db/1217037/Arthur_J_Gallagher___Co>,
         <https://1145.am/db/1262253/Arthur_J_Gallagher___Co>,
@@ -1195,7 +1195,7 @@
     ns1:internalDocId 3163894 ;
     ns1:name "Genesco Inc" ;
     ns1:sameAsHigh <https://1145.am/db/2102620/Genesco_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/3249664/Genesco_Inc>,
+    ns1:sameAsNameOnly <https://1145.am/db/3249664/Genesco_Inc>,
         <https://1145.am/db/3262684/Genesco_Inc> .
 
 <https://1145.am/db/3164823/Quotient> a org:Organization ;
@@ -1211,7 +1211,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/5_enterprise_software_services_service> ;
     ns1:internalDocId 3164823 ;
     ns1:name "Quotient" ;
-    ns1:sameAsMedium <https://1145.am/db/1007344/Quotient_Limited>,
+    ns1:sameAsNameOnly <https://1145.am/db/1007344/Quotient_Limited>,
         <https://1145.am/db/1086157/Quotient_Technology_Inc>,
         <https://1145.am/db/1158843/Quotient_Limited>,
         <https://1145.am/db/1158857/Quotient_Limited>,
@@ -1338,7 +1338,7 @@
         <https://1145.am/db/751031/Levine_Leichtman_Capital_Partners>,
         <https://1145.am/db/781795/Levine_Leichtman_Capital_Partners>,
         <https://1145.am/db/835317/Levine_Leichtman_Capital_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/2797526/Levine_Leichtman_Capital_Partners> .
+    ns1:sameAsNameOnly <https://1145.am/db/2797526/Levine_Leichtman_Capital_Partners> .
 
 <https://1145.am/db/3168317/Paypal_Holdings_Inc> a org:Organization ;
     ns1:basedInHighGeoName "San Jose" ;
@@ -1349,7 +1349,7 @@
     ns1:foundName "PayPal Holdings, Inc" ;
     ns1:internalDocId 3168317 ;
     ns1:name "PayPal Holdings, Inc" ;
-    ns1:sameAsMedium <https://1145.am/db/1752666/Paypal_Holdings>,
+    ns1:sameAsNameOnly <https://1145.am/db/1752666/Paypal_Holdings>,
         <https://1145.am/db/192928/Paypal_Holdings_Inc>,
         <https://1145.am/db/193002/Paypal_Holdings_Inc>,
         <https://1145.am/db/2084380/Paypal_Holdings>,
@@ -1380,7 +1380,7 @@
     ns1:name "Huitao Technology Co., Ltd" ;
     ns1:protagonist <https://1145.am/db/3168395/Merger_Huitao_Technology_Co_Ltd_Sunway_Kids_International_Education_Group_Ltd_Inc_Completed> ;
     ns1:sameAsHigh <https://1145.am/db/3277583/Huitao_Technology_Co_Ltd> ;
-    ns1:sameAsMedium <https://1145.am/db/3233682/Huitao_Technology_Co_Ltd>,
+    ns1:sameAsNameOnly <https://1145.am/db/3233682/Huitao_Technology_Co_Ltd>,
         <https://1145.am/db/3330917/Huitao_Technology_Co_Ltd>,
         <https://1145.am/db/3351484/Huitao_Technology_Co_Ltd> .
 
@@ -1419,7 +1419,7 @@
     ns1:internalDocId 3168879 ;
     ns1:investor <https://1145.am/db/3168879/Investment_Arrowmark_Partners_Broadfin_Capital_Cvf_Llc_Ew_Healthcare_Partners_General_Atlantic_Jmr_Capital_Meritech_Capital_Partners_Neomed_Management_Perceptive_Advisors_Neomed_Management_Perceptive_Advisors_Orbimed_Advisors_Llc_Redmile_Group_Seb_Private_Equity_Security_Pacific_Finance_Sonendo_Inc_Completed> ;
     ns1:name "ArrowMark Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1363697/Arrowmark_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1363697/Arrowmark_Partners>,
         <https://1145.am/db/1366557/Arrowmark_Partners>,
         <https://1145.am/db/1737723/Arrowmark_Partners>,
         <https://1145.am/db/1779322/Arrowmark_Partners>,
@@ -1445,7 +1445,7 @@
     ns1:internalDocId 3168879 ;
     ns1:investor <https://1145.am/db/3168879/Investment_Arrowmark_Partners_Broadfin_Capital_Cvf_Llc_Ew_Healthcare_Partners_General_Atlantic_Jmr_Capital_Meritech_Capital_Partners_Neomed_Management_Perceptive_Advisors_Neomed_Management_Perceptive_Advisors_Orbimed_Advisors_Llc_Redmile_Group_Seb_Private_Equity_Security_Pacific_Finance_Sonendo_Inc_Completed> ;
     ns1:name "Broadfin Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/2357144/Broadfin_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/2357144/Broadfin_Capital>,
         <https://1145.am/db/2357566/Broadfin_Capital_Llc>,
         <https://1145.am/db/2358173/Broadfin_Capital> .
 
@@ -1460,7 +1460,7 @@
     ns1:sameAsHigh <https://1145.am/db/2337571/Cvf_Llc>,
         <https://1145.am/db/2337577/Cvf_Llc>,
         <https://1145.am/db/2546216/Cvf_Llc> ;
-    ns1:sameAsMedium <https://1145.am/db/2348440/CVF>,
+    ns1:sameAsNameOnly <https://1145.am/db/2348440/CVF>,
         <https://1145.am/db/2348448/Cvf_Llc>,
         <https://1145.am/db/2356420/Cvf_Llc>,
         <https://1145.am/db/3234273/CVF> .
@@ -1480,7 +1480,7 @@
         <https://1145.am/db/1113452/Ew_Healthcare_Partners>,
         <https://1145.am/db/1427497/Ew_Healthcare_Partners>,
         <https://1145.am/db/2189544/Ew_Healthcare> ;
-    ns1:sameAsMedium <https://1145.am/db/1098789/Ew_Healthcare_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1098789/Ew_Healthcare_Partners>,
         <https://1145.am/db/1103071/Ew_Healthcare_Partners>,
         <https://1145.am/db/1201278/Ew_Healthcare_Partners>,
         <https://1145.am/db/1202055/Ew_Healthcare_Partners>,
@@ -1556,7 +1556,7 @@
         <https://1145.am/db/893316/General_Atlantic>,
         <https://1145.am/db/977490/General_Atlantic>,
         <https://1145.am/db/98194/General_Atlantic> ;
-    ns1:sameAsMedium <https://1145.am/db/1036069/General_Atlantic>,
+    ns1:sameAsNameOnly <https://1145.am/db/1036069/General_Atlantic>,
         <https://1145.am/db/1059207/General_Atlantic>,
         <https://1145.am/db/1067133/General_Atlantic_Lp>,
         <https://1145.am/db/1074820/General_Atlantic_Lp>,
@@ -1695,7 +1695,7 @@
     ns1:internalDocId 3168879 ;
     ns1:investor <https://1145.am/db/3168879/Investment_Arrowmark_Partners_Broadfin_Capital_Cvf_Llc_Ew_Healthcare_Partners_General_Atlantic_Jmr_Capital_Meritech_Capital_Partners_Neomed_Management_Perceptive_Advisors_Neomed_Management_Perceptive_Advisors_Orbimed_Advisors_Llc_Redmile_Group_Seb_Private_Equity_Security_Pacific_Finance_Sonendo_Inc_Completed> ;
     ns1:name "JMR Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1363697/Jmr_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1363697/Jmr_Capital>,
         <https://1145.am/db/1366557/Jmr_Capital> .
 
 <https://1145.am/db/3168879/Meritech_Capital_Partners> a org:Organization ;
@@ -1710,7 +1710,7 @@
         <https://1145.am/db/299738/Meritech_Capital>,
         <https://1145.am/db/306236/Meritech_Capital>,
         <https://1145.am/db/982661/Meritech_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1134229/Meritech_Capital_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1134229/Meritech_Capital_Partners>,
         <https://1145.am/db/1707407/Meritech_Capital_Partners>,
         <https://1145.am/db/1722130/Meritech_Capital_Partners>,
         <https://1145.am/db/1735902/Meritech_Capital>,
@@ -1780,7 +1780,7 @@
         <https://1145.am/db/837743/Perceptive_Advisors>,
         <https://1145.am/db/847232/Perceptive_Advisors>,
         <https://1145.am/db/884787/Perceptive_Advisors> ;
-    ns1:sameAsMedium <https://1145.am/db/1181658/Perceptive_Advisors>,
+    ns1:sameAsNameOnly <https://1145.am/db/1181658/Perceptive_Advisors>,
         <https://1145.am/db/1737730/Perceptive_Advisors>,
         <https://1145.am/db/1747873/Perceptive_Advisors>,
         <https://1145.am/db/1773135/Perceptive_Advisors>,
@@ -1826,7 +1826,7 @@
         <https://1145.am/db/2344786/Orbimed_Advisors>,
         <https://1145.am/db/2345435/Orbimed_Advisors_Llc>,
         <https://1145.am/db/2345453/Orbimed_Advisors_Llc> ;
-    ns1:sameAsMedium <https://1145.am/db/1665536/Orbimed_Advisors>,
+    ns1:sameAsNameOnly <https://1145.am/db/1665536/Orbimed_Advisors>,
         <https://1145.am/db/1809007/Orbimed_Advisors>,
         <https://1145.am/db/2198816/Orbimed_Advisors>,
         <https://1145.am/db/2245885/Orbimed_Advisors_Llc>,
@@ -1923,7 +1923,7 @@
     ns1:internalDocId 3168879 ;
     ns1:investor <https://1145.am/db/3168879/Investment_Arrowmark_Partners_Broadfin_Capital_Cvf_Llc_Ew_Healthcare_Partners_General_Atlantic_Jmr_Capital_Meritech_Capital_Partners_Neomed_Management_Perceptive_Advisors_Neomed_Management_Perceptive_Advisors_Orbimed_Advisors_Llc_Redmile_Group_Seb_Private_Equity_Security_Pacific_Finance_Sonendo_Inc_Completed> ;
     ns1:name "Redmile Group" ;
-    ns1:sameAsMedium <https://1145.am/db/1086649/Redmile_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/1086649/Redmile_Group>,
         <https://1145.am/db/1192327/Redmile_Group>,
         <https://1145.am/db/1533327/Redmile_Group>,
         <https://1145.am/db/1533685/Redmile_Group>,
@@ -1978,7 +1978,7 @@
     ns1:investor <https://1145.am/db/3168879/Investment_Arrowmark_Partners_Broadfin_Capital_Cvf_Llc_Ew_Healthcare_Partners_General_Atlantic_Jmr_Capital_Meritech_Capital_Partners_Neomed_Management_Perceptive_Advisors_Neomed_Management_Perceptive_Advisors_Orbimed_Advisors_Llc_Redmile_Group_Seb_Private_Equity_Security_Pacific_Finance_Sonendo_Inc_Completed> ;
     ns1:name "SEB Private Equity" ;
     ns1:sameAsHigh <https://1145.am/db/1854510/Seb_Private_Equity> ;
-    ns1:sameAsMedium <https://1145.am/db/1785268/Seb_Private_Equity>,
+    ns1:sameAsNameOnly <https://1145.am/db/1785268/Seb_Private_Equity>,
         <https://1145.am/db/1849844/Seb_Private_Equity> .
 
 <https://1145.am/db/3168879/Security_Pacific_Finance> a org:Organization ;
@@ -2036,7 +2036,7 @@
         <https://1145.am/db/411431/Harvest_Health___Recreation_Inc>,
         <https://1145.am/db/417291/Harvest_Health___Recreation_Inc>,
         <https://1145.am/db/82209/Harvest_Health_And_Recreation> ;
-    ns1:sameAsMedium <https://1145.am/db/3348314/Harvest_Health___Recreation_Inc> .
+    ns1:sameAsNameOnly <https://1145.am/db/3348314/Harvest_Health___Recreation_Inc> .
 
 <https://1145.am/db/3169292/Album_Vc> a org:Organization ;
     ns1:basedInLowRaw "SALT LAKE CITY" ;
@@ -2048,7 +2048,7 @@
     ns1:internalDocId 3169292 ;
     ns1:investor <https://1145.am/db/3169292/Investment_Album_Vc_Collaborative_Fund_Dragonfly_Capital_Partners_Global_Founders_Capital_Ttv_Capital_Ttv_Capital_Table_Management_Taxbit_Valar_Ventures_Winklevoss_Capital_Completed> ;
     ns1:name "Album VC" ;
-    ns1:sameAsMedium <https://1145.am/db/1087329/Album_Vc>,
+    ns1:sameAsNameOnly <https://1145.am/db/1087329/Album_Vc>,
         <https://1145.am/db/1115458/Album_Vc>,
         <https://1145.am/db/1117028/Album_Vc>,
         <https://1145.am/db/1696721/Album_Vc>,
@@ -2071,7 +2071,7 @@
     ns1:internalDocId 3169292 ;
     ns1:investor <https://1145.am/db/3169292/Investment_Album_Vc_Collaborative_Fund_Dragonfly_Capital_Partners_Global_Founders_Capital_Ttv_Capital_Ttv_Capital_Table_Management_Taxbit_Valar_Ventures_Winklevoss_Capital_Completed> ;
     ns1:name "Collaborative Fund" ;
-    ns1:sameAsMedium <https://1145.am/db/1010987/Collaborative_Fund>,
+    ns1:sameAsNameOnly <https://1145.am/db/1010987/Collaborative_Fund>,
         <https://1145.am/db/1297175/Collaborative_Fund>,
         <https://1145.am/db/1297529/Collaborative_Fund>,
         <https://1145.am/db/1505319/Collaborative_Fund>,
@@ -2123,7 +2123,7 @@
         <https://1145.am/db/1745376/Dragonfly_Capital>,
         <https://1145.am/db/1747533/Dragonfly>,
         <https://1145.am/db/1761773/Dragonfly> ;
-    ns1:sameAsMedium <https://1145.am/db/1087049/Dragonfly_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1087049/Dragonfly_Capital>,
         <https://1145.am/db/1120030/Dragonfly_Capital>,
         <https://1145.am/db/1120071/Dragonfly_Capital>,
         <https://1145.am/db/1196728/Dragonfly_Capital>,
@@ -2156,7 +2156,7 @@
     ns1:internalDocId 3169292 ;
     ns1:investor <https://1145.am/db/3169292/Investment_Album_Vc_Collaborative_Fund_Dragonfly_Capital_Partners_Global_Founders_Capital_Ttv_Capital_Ttv_Capital_Table_Management_Taxbit_Valar_Ventures_Winklevoss_Capital_Completed> ;
     ns1:name "Global Founders Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/1014186/Global_Founders_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1014186/Global_Founders_Capital>,
         <https://1145.am/db/1081049/Global_Founders_Capital>,
         <https://1145.am/db/1100234/Global_Founders_Capital>,
         <https://1145.am/db/1147804/Global_Founders_Capital>,
@@ -2272,7 +2272,7 @@
     ns1:internalDocId 3169292 ;
     ns1:investor <https://1145.am/db/3169292/Investment_Album_Vc_Collaborative_Fund_Dragonfly_Capital_Partners_Global_Founders_Capital_Ttv_Capital_Ttv_Capital_Table_Management_Taxbit_Valar_Ventures_Winklevoss_Capital_Completed> ;
     ns1:name "Table Management" ;
-    ns1:sameAsMedium <https://1145.am/db/1787255/Table_Management>,
+    ns1:sameAsNameOnly <https://1145.am/db/1787255/Table_Management>,
         <https://1145.am/db/540473/Table_Management>,
         <https://1145.am/db/576700/Table_Management>,
         <https://1145.am/db/581040/Table_Management> .
@@ -2298,7 +2298,7 @@
         <https://1145.am/db/943425/Ttv_Capital>,
         <https://1145.am/db/962091/Ttv_Capital>,
         <https://1145.am/db/963819/Ttv_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1115248/Ttv_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1115248/Ttv_Capital>,
         <https://1145.am/db/1126227/Ttv_Capital>,
         <https://1145.am/db/1213119/TTV>,
         <https://1145.am/db/1287929/Ttv_Capital>,
@@ -2337,7 +2337,7 @@
         <https://1145.am/db/2103395/Valar_Ventures>,
         <https://1145.am/db/474667/Valar_Ventures>,
         <https://1145.am/db/734916/Valar_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1352190/Valar_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1352190/Valar_Ventures>,
         <https://1145.am/db/1504833/Valar_Ventures>,
         <https://1145.am/db/1720160/Valar_Ventures>,
         <https://1145.am/db/1725345/Valar_Ventures>,
@@ -2386,7 +2386,7 @@
     ns1:name "Winklevoss Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1812012/Winklevoss_Capital>,
         <https://1145.am/db/1814643/Winklevoss_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1776769/Winklevoss_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1776769/Winklevoss_Capital>,
         <https://1145.am/db/1782716/Winklevoss_Capital>,
         <https://1145.am/db/1803996/Winklevoss_Capital>,
         <https://1145.am/db/1837039/Winklevoss_Capital>,
@@ -2408,7 +2408,7 @@
         <https://1145.am/db/3370306/Perrigo_Company_Plc>,
         <https://1145.am/db/3371693/Perrigo_Company_Plc>,
         <https://1145.am/db/3610576/Perrigo_Company_Plc> ;
-    ns1:sameAsMedium <https://1145.am/db/253141/Perrigo_Company_Plc>,
+    ns1:sameAsNameOnly <https://1145.am/db/253141/Perrigo_Company_Plc>,
         <https://1145.am/db/3239978/Perrigo_Company_Plc>,
         <https://1145.am/db/3371764/Perrigo_Company_Plc>,
         <https://1145.am/db/3435543/Perrigo_Company_Plc>,
@@ -2439,7 +2439,7 @@
         <https://1145.am/db/3756019/Sandvik>,
         <https://1145.am/db/3769079/Sandvik>,
         <https://1145.am/db/3808303/Sandvik> ;
-    ns1:sameAsMedium <https://1145.am/db/3153414/Sandvik>,
+    ns1:sameAsNameOnly <https://1145.am/db/3153414/Sandvik>,
         <https://1145.am/db/3207023/Sandvik>,
         <https://1145.am/db/3292418/Sandvik_Ab>,
         <https://1145.am/db/3504327/Sandvik>,
@@ -2497,7 +2497,7 @@
     ns1:internalDocId 3172070 ;
     ns1:investor <https://1145.am/db/3172070/Investment_Pardee_Resources_Company_Completed> ;
     ns1:name "Pardee Resources Company" ;
-    ns1:sameAsMedium <https://1145.am/db/741037/Pardee_Resources_Company> .
+    ns1:sameAsNameOnly <https://1145.am/db/741037/Pardee_Resources_Company> .
 
 <https://1145.am/db/3172500/Expedition_Water_Solutions_Colorado_Llc> a org:Organization ;
     ns1:basedInLowRaw "Colorado" ;
@@ -2535,7 +2535,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/49_imaging_photography_medical_diagnostic> ;
     ns1:internalDocId 3172945 ;
     ns1:name "Dover" ;
-    ns1:sameAsMedium <https://1145.am/db/1739479/Dover>,
+    ns1:sameAsNameOnly <https://1145.am/db/1739479/Dover>,
         <https://1145.am/db/2143169/Dover>,
         <https://1145.am/db/2143877/Dover_Corp>,
         <https://1145.am/db/3179562/Dover>,
@@ -2613,7 +2613,7 @@
     ns1:foundName "ACON Investments, L.L.C." ;
     ns1:internalDocId 3174821 ;
     ns1:name "ACON Investments, L.L.C." ;
-    ns1:sameAsMedium <https://1145.am/db/1035547/Acon_Investments>,
+    ns1:sameAsNameOnly <https://1145.am/db/1035547/Acon_Investments>,
         <https://1145.am/db/1370921/Acon_Investments>,
         <https://1145.am/db/3259011/Acon_Investments_Llc>,
         <https://1145.am/db/562042/Acon_Investments_Llc>,
@@ -2662,7 +2662,7 @@
         <https://1145.am/db/708472/The_Halifax_Group>,
         <https://1145.am/db/842791/The_Halifax_Group>,
         <https://1145.am/db/901175/The_Halifax_Group> ;
-    ns1:sameAsMedium <https://1145.am/db/1575300/The_Halifax_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/1575300/The_Halifax_Group>,
         <https://1145.am/db/1576198/The_Halifax_Group> .
 
 <https://1145.am/db/3175149/Activate_Venture_Partners> a org:Organization ;
@@ -2672,7 +2672,7 @@
     ns1:internalDocId 3175149 ;
     ns1:investor <https://1145.am/db/3175149/Seed_Investment_Activate_Venture_Partners_Anthro_Ventures_Bioadvance_Leading_Edge_Ventures_Newark_Venture_Partners_Ride_Health_Startup_Health_Completed> ;
     ns1:name "Activate Venture Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1083894/Activate_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1083894/Activate_Venture_Partners>,
         <https://1145.am/db/1085802/Activate_Venture_Partners>,
         <https://1145.am/db/2839796/Activate_Venture_Partners> .
 
@@ -2684,7 +2684,7 @@
     ns1:internalDocId 3175149 ;
     ns1:investor <https://1145.am/db/3175149/Seed_Investment_Activate_Venture_Partners_Anthro_Ventures_Bioadvance_Leading_Edge_Ventures_Newark_Venture_Partners_Ride_Health_Startup_Health_Completed> ;
     ns1:name "Anthro Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1763875/Anthro_Ventures> .
+    ns1:sameAsNameOnly <https://1145.am/db/1763875/Anthro_Ventures> .
 
 <https://1145.am/db/3175149/Bioadvance> a org:Organization ;
     ns1:basedInLowRaw "Americans" ;
@@ -2693,7 +2693,7 @@
     ns1:internalDocId 3175149 ;
     ns1:investor <https://1145.am/db/3175149/Seed_Investment_Activate_Venture_Partners_Anthro_Ventures_Bioadvance_Leading_Edge_Ventures_Newark_Venture_Partners_Ride_Health_Startup_Health_Completed> ;
     ns1:name "BioAdvance" ;
-    ns1:sameAsMedium <https://1145.am/db/1196322/Bioadvance>,
+    ns1:sameAsNameOnly <https://1145.am/db/1196322/Bioadvance>,
         <https://1145.am/db/1223133/Bioadvance>,
         <https://1145.am/db/1223149/Bioadvance>,
         <https://1145.am/db/1326655/Bioadvance>,
@@ -2744,7 +2744,7 @@
         <https://1145.am/db/3302583/Newark_Venture_Partners>,
         <https://1145.am/db/3350827/Newark_Venture_Partners>,
         <https://1145.am/db/676747/Newark_Venture_Partners> ;
-    ns1:sameAsMedium <https://1145.am/db/254357/Newark_Venture_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/254357/Newark_Venture_Partners>,
         <https://1145.am/db/3247668/Newark_Venture_Partners>,
         <https://1145.am/db/3935273/Newark_Venture_Partners> .
 
@@ -2755,7 +2755,7 @@
     ns1:internalDocId 3175149 ;
     ns1:investor <https://1145.am/db/3175149/Seed_Investment_Activate_Venture_Partners_Anthro_Ventures_Bioadvance_Leading_Edge_Ventures_Newark_Venture_Partners_Ride_Health_Startup_Health_Completed> ;
     ns1:name "Startup Health" ;
-    ns1:sameAsMedium <https://1145.am/db/1738477/Startup_Health>,
+    ns1:sameAsNameOnly <https://1145.am/db/1738477/Startup_Health>,
         <https://1145.am/db/1759657/Startup_Health>,
         <https://1145.am/db/2011571/Startup_Health>,
         <https://1145.am/db/2183141/Startup_Health>,
@@ -2773,7 +2773,7 @@
     ns1:foundName "Alliant Capital" ;
     ns1:internalDocId 3175239 ;
     ns1:name "Alliant Capital" ;
-    ns1:sameAsMedium <https://1145.am/db/2010054/Alliant_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/2010054/Alliant_Capital>,
         <https://1145.am/db/3252686/Alliant_Capital>,
         <https://1145.am/db/422547/Alliant>,
         <https://1145.am/db/424525/Alliant>,
@@ -2833,7 +2833,7 @@
     ns1:internalDocId 3175674 ;
     ns1:investor <https://1145.am/db/3175674/Series_B_Investment_Cerebral_Therapeutics_Granite_Point_Capital_Management_Matthew_Hammond_Ra_Capital_Management_Vivo_Capital_Weston_Nichols_Completed> ;
     ns1:name "Granite Point Capital Management" ;
-    ns1:sameAsMedium <https://1145.am/db/1164709/Granite_Point_Capital_Management_Lp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1164709/Granite_Point_Capital_Management_Lp>,
         <https://1145.am/db/1166452/Granite_Point_Capital_Management_Lp> .
 
 <https://1145.am/db/3175674/Matthew_Hammond> a org:Organization ;
@@ -2856,7 +2856,7 @@
     ns1:internalDocId 3175674 ;
     ns1:investor <https://1145.am/db/3175674/Series_B_Investment_Cerebral_Therapeutics_Granite_Point_Capital_Management_Matthew_Hammond_Ra_Capital_Management_Vivo_Capital_Weston_Nichols_Completed> ;
     ns1:name "RA Capital Management" ;
-    ns1:sameAsMedium <https://1145.am/db/1134574/Ra_Capital_Management_Lp>,
+    ns1:sameAsNameOnly <https://1145.am/db/1134574/Ra_Capital_Management_Lp>,
         <https://1145.am/db/1164709/Ra_Capital_Management>,
         <https://1145.am/db/1166452/Ra_Capital_Management>,
         <https://1145.am/db/1198548/Ra_Capital_Management>,
@@ -2953,7 +2953,7 @@
         <https://1145.am/db/2549555/Vivo_Capital_Fund_Viii>,
         <https://1145.am/db/677845/Vivo_Capital>,
         <https://1145.am/db/681970/Vivo_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1482048/Vivo_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1482048/Vivo_Capital>,
         <https://1145.am/db/2029866/Vivo_Ventures>,
         <https://1145.am/db/2068430/Vivo_Capital>,
         <https://1145.am/db/2153988/Vivo_Capital>,
@@ -3043,7 +3043,7 @@
     ns1:internalDocId 3175685 ;
     ns1:name "Antuit.ai" ;
     ns1:sameAsHigh <https://1145.am/db/531886/Antuitai> ;
-    ns1:sameAsMedium <https://1145.am/db/267985/Antuitai>,
+    ns1:sameAsNameOnly <https://1145.am/db/267985/Antuitai>,
         <https://1145.am/db/353327/Antuitai>,
         <https://1145.am/db/435639/Antuitai>,
         <https://1145.am/db/437747/Antuitai> .
@@ -3058,7 +3058,7 @@
     ns1:internalDocId 3176079 ;
     ns1:investor <https://1145.am/db/3176079/Site_Investment_Allied_Hotel_Properties_Inc_Fengate_Freed_Has_Not_Happened> ;
     ns1:name "Fengate" ;
-    ns1:sameAsMedium <https://1145.am/db/3281892/Fengate>,
+    ns1:sameAsNameOnly <https://1145.am/db/3281892/Fengate>,
         <https://1145.am/db/3306660/Fengate>,
         <https://1145.am/db/525645/Fengate>,
         <https://1145.am/db/526337/Fengate> .
@@ -3091,7 +3091,7 @@
     ns1:internalDocId 3176125 ;
     ns1:investor <https://1145.am/db/3176125/Investment_Blockchain_Valley_Ventures_Dynata_Measure_Protocol_Medicys_Limited_Completed> ;
     ns1:name "Dynata" ;
-    ns1:sameAsMedium <https://1145.am/db/1121266/Dynata>,
+    ns1:sameAsNameOnly <https://1145.am/db/1121266/Dynata>,
         <https://1145.am/db/1460259/Dynata>,
         <https://1145.am/db/3424446/Dynata>,
         <https://1145.am/db/3450674/Dynata>,
@@ -3135,7 +3135,7 @@
         <https://1145.am/db/2816414/Lightspeed>,
         <https://1145.am/db/3151197/Lightspeed>,
         <https://1145.am/db/3488617/Lightspeed_Pos_Inc> ;
-    ns1:sameAsMedium <https://1145.am/db/1053949/Lightspeed>,
+    ns1:sameAsNameOnly <https://1145.am/db/1053949/Lightspeed>,
         <https://1145.am/db/1697544/Lightspeed>,
         <https://1145.am/db/1701485/Lightspeed>,
         <https://1145.am/db/1713719/Lightspeed>,
@@ -3242,7 +3242,7 @@
         <https://1145.am/db/983969/Aon_Plc>,
         <https://1145.am/db/984617/Aon_Plc>,
         <https://1145.am/db/988161/Aon> ;
-    ns1:sameAsMedium <https://1145.am/db/180877/Aon>,
+    ns1:sameAsNameOnly <https://1145.am/db/180877/Aon>,
         <https://1145.am/db/239366/Aon>,
         <https://1145.am/db/2868557/Aon>,
         <https://1145.am/db/3059607/Aon>,
@@ -3271,7 +3271,7 @@
     ns1:internalDocId 3176502 ;
     ns1:investor <https://1145.am/db/3176502/Aerorepair_Interest_Investment> ;
     ns1:name "GenNx360 Capital Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1015003/Gennx360_Capital_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1015003/Gennx360_Capital_Partners>,
         <https://1145.am/db/1264196/Gennx360_Capital_Partners>,
         <https://1145.am/db/1298254/Gennx360_Capital_Partners>,
         <https://1145.am/db/1388738/Gennx360_Capital_Partners>,
@@ -3337,7 +3337,7 @@
     ns1:internalDocId 3178162 ;
     ns1:investor <https://1145.am/db/3178162/Series_B_Investment_Blackhorn_Ventures_Drive_Capital_Fontinalis_Partners_Highland_Capital_Tectonic_Ventures_Vecna_Robotics_Completed> ;
     ns1:name "Blackhorn Ventures" ;
-    ns1:sameAsMedium <https://1145.am/db/1175576/Blackhorn_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1175576/Blackhorn_Ventures>,
         <https://1145.am/db/1233803/Blackhorn_Ventures>,
         <https://1145.am/db/1336504/Blackhorn_Ventures>,
         <https://1145.am/db/1540723/Blackhorn_Ventures>,
@@ -3368,7 +3368,7 @@
         <https://1145.am/db/874339/Drive_Capital>,
         <https://1145.am/db/890044/Drive_Capital>,
         <https://1145.am/db/892831/Drive_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1168757/Drive_Capital>,
+    ns1:sameAsNameOnly <https://1145.am/db/1168757/Drive_Capital>,
         <https://1145.am/db/1334160/Drive_Capital>,
         <https://1145.am/db/1334934/Drive_Capital>,
         <https://1145.am/db/1360721/Drive_Capital>,
@@ -3413,7 +3413,7 @@
     ns1:internalDocId 3178162 ;
     ns1:investor <https://1145.am/db/3178162/Series_B_Investment_Blackhorn_Ventures_Drive_Capital_Fontinalis_Partners_Highland_Capital_Tectonic_Ventures_Vecna_Robotics_Completed> ;
     ns1:name "Fontinalis Partners" ;
-    ns1:sameAsMedium <https://1145.am/db/1139186/Fontinalis_Partners>,
+    ns1:sameAsNameOnly <https://1145.am/db/1139186/Fontinalis_Partners>,
         <https://1145.am/db/1558423/Fontinalis_Partners>,
         <https://1145.am/db/1723529/Fontinalis_Partners>,
         <https://1145.am/db/1741881/Fontinalis>,
@@ -3464,7 +3464,7 @@
         <https://1145.am/db/3796674/Highland_Capital_Partners>,
         <https://1145.am/db/513897/Highland_Capital>,
         <https://1145.am/db/514151/Highland_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/1506064/Highland>,
+    ns1:sameAsNameOnly <https://1145.am/db/1506064/Highland>,
         <https://1145.am/db/1785265/Highland_Capital>,
         <https://1145.am/db/1806906/Highland_Capital_Partners>,
         <https://1145.am/db/1819710/Highland_Capital_Partners>,
@@ -3522,7 +3522,7 @@
         <https://1145.am/db/1783607/Tectonic_Ventures>,
         <https://1145.am/db/3199627/Tectonic_Ventures>,
         <https://1145.am/db/528532/Tectonic_Ventures> ;
-    ns1:sameAsMedium <https://1145.am/db/1232048/Tectonic_Ventures>,
+    ns1:sameAsNameOnly <https://1145.am/db/1232048/Tectonic_Ventures>,
         <https://1145.am/db/1693898/Tectonic_Ventures>,
         <https://1145.am/db/1734269/Tectonic_Capital>,
         <https://1145.am/db/2082923/Tectonic_Ventures>,
@@ -3547,7 +3547,7 @@
     ns1:internalDocId 3178206 ;
     ns1:name "ACON" ;
     ns1:sameAsHigh <https://1145.am/db/523991/Acon> ;
-    ns1:sameAsMedium <https://1145.am/db/562042/Acon_Investments_Llc> .
+    ns1:sameAsNameOnly <https://1145.am/db/562042/Acon_Investments_Llc> .
 
 <https://1145.am/db/3178640/Valet_Living> a org:Organization ;
     ns1:basedInHighGeoName "Tampa" ;
@@ -3577,7 +3577,7 @@
         <https://1145.am/db/881249/Evisort>,
         <https://1145.am/db/971809/Evisort>,
         <https://1145.am/db/973344/Evisort> ;
-    ns1:sameAsMedium <https://1145.am/db/3441854/Evisort>,
+    ns1:sameAsNameOnly <https://1145.am/db/3441854/Evisort>,
         <https://1145.am/db/714988/Evisort>,
         <https://1145.am/db/882597/Evisort> .
 
@@ -3605,7 +3605,7 @@
         <https://1145.am/db/3541692/Glovo>,
         <https://1145.am/db/727709/Glovo>,
         <https://1145.am/db/733265/Glovo> ;
-    ns1:sameAsMedium <https://1145.am/db/1756477/Glovo>,
+    ns1:sameAsNameOnly <https://1145.am/db/1756477/Glovo>,
         <https://1145.am/db/1758302/Glovo>,
         <https://1145.am/db/342475/Glovo> .
 
@@ -3904,7 +3904,7 @@
     ns1:foundName "Honey Science Corporation" ;
     ns1:internalDocId 3168317 ;
     ns1:name "Honey Science Corporation" ;
-    ns1:sameAsMedium <https://1145.am/db/1747183/Honey_Science_Corporation>,
+    ns1:sameAsNameOnly <https://1145.am/db/1747183/Honey_Science_Corporation>,
         <https://1145.am/db/1759263/Honey_Science_Corporation>,
         <https://1145.am/db/3432659/Honey_Science_Corp> .
 
@@ -3984,7 +3984,7 @@
     ns1:foundName "Interurban Capital Group, Inc." ;
     ns1:internalDocId 3169275 ;
     ns1:name "Interurban Capital Group" ;
-    ns1:sameAsMedium <https://1145.am/db/3322450/Interurban_Capital_Group>,
+    ns1:sameAsNameOnly <https://1145.am/db/3322450/Interurban_Capital_Group>,
         <https://1145.am/db/3335941/Interurban_Capital_Group> .
 
 <https://1145.am/db/3169275/Interurban_Capital_Group_Acquisition> a ns1:CorporateFinanceActivity ;
@@ -4013,7 +4013,7 @@
     ns1:name "TaxBit" ;
     ns1:sameAsHigh <https://1145.am/db/192928/Taxbit>,
         <https://1145.am/db/193002/Taxbit> ;
-    ns1:sameAsMedium <https://1145.am/db/1762560/Taxbit> .
+    ns1:sameAsNameOnly <https://1145.am/db/1762560/Taxbit> .
 
 <https://1145.am/db/3169763/Bonfit_America_Inc> a org:Organization ;
     ns1:basedInLowRaw "America" ;
@@ -4171,7 +4171,7 @@
     ns1:foundName "The United Mexican States" ;
     ns1:internalDocId 3173917 ;
     ns1:name "Mexico" ;
-    ns1:sameAsMedium <https://1145.am/db/1595657/Mexico>,
+    ns1:sameAsNameOnly <https://1145.am/db/1595657/Mexico>,
         <https://1145.am/db/1671414/Mexico>,
         <https://1145.am/db/1960790/Mexico>,
         <https://1145.am/db/1966243/Mexico>,
@@ -4211,7 +4211,7 @@
     ns1:internalDocId 3174832 ;
     ns1:name "Chesapeake Energy Corporation" ;
     ns1:sameAsHigh <https://1145.am/db/367978/Chesapeake_Energy_Corp> ;
-    ns1:sameAsMedium <https://1145.am/db/1254505/Chesapeake_Energy>,
+    ns1:sameAsNameOnly <https://1145.am/db/1254505/Chesapeake_Energy>,
         <https://1145.am/db/1652894/Chesapeake_Energy_Corp>,
         <https://1145.am/db/1677850/Chesapeake_Energy_Corp>,
         <https://1145.am/db/2083778/Chesapeake_Energy_Corporation>,
@@ -4270,7 +4270,7 @@
     ns1:foundName "Genuine Parts Company" ;
     ns1:internalDocId 3174834 ;
     ns1:name "Genuine Parts Company" ;
-    ns1:sameAsMedium <https://1145.am/db/3255851/Genuine_Parts_Company>,
+    ns1:sameAsNameOnly <https://1145.am/db/3255851/Genuine_Parts_Company>,
         <https://1145.am/db/3313353/Genuine_Parts_Company>,
         <https://1145.am/db/3353983/Genuine_Parts_Company>,
         <https://1145.am/db/3372305/Genuine_Parts_Company>,
@@ -4326,7 +4326,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/193_simulation_software_virtual_engineering> ;
     ns1:internalDocId 3174836 ;
     ns1:name "TriMech" ;
-    ns1:sameAsMedium <https://1145.am/db/1163119/Trimech>,
+    ns1:sameAsNameOnly <https://1145.am/db/1163119/Trimech>,
         <https://1145.am/db/1165012/Trimech>,
         <https://1145.am/db/901175/Trimech> .
 
@@ -4356,7 +4356,7 @@
     ns1:foundName "Ride Health" ;
     ns1:internalDocId 3175149 ;
     ns1:name "Ride Health" ;
-    ns1:sameAsMedium <https://1145.am/db/473592/Ride_Health> .
+    ns1:sameAsNameOnly <https://1145.am/db/473592/Ride_Health> .
 
 <https://1145.am/db/3175239/Blue_Mountain_Terrace> a org:Organization ;
     ns1:basedInHighGeoName "Winters",
@@ -4499,7 +4499,7 @@
     ns1:industryClusterHigh <https://1145.am/db/industry/17_precision_fabrication_manufacturing_manufacturers> ;
     ns1:internalDocId 3176451 ;
     ns1:name "DRS" ;
-    ns1:sameAsMedium <https://1145.am/db/1007292/DRS>,
+    ns1:sameAsNameOnly <https://1145.am/db/1007292/DRS>,
         <https://1145.am/db/1146826/DRS>,
         <https://1145.am/db/1557716/DRS>,
         <https://1145.am/db/1600904/DRS>,
@@ -4772,7 +4772,7 @@
         <https://1145.am/db/766800/Alexandria_Real_Estate_Equities_Inc>,
         <https://1145.am/db/805220/Alexandria_Real_Estate_Equities>,
         <https://1145.am/db/931821/Alexandria_Real_Estate_Equities> ;
-    ns1:sameAsMedium <https://1145.am/db/2152070/Alexandria_Real_Estate_Equities>,
+    ns1:sameAsNameOnly <https://1145.am/db/2152070/Alexandria_Real_Estate_Equities>,
         <https://1145.am/db/2319822/Alexandria_Real_Estate_Equities_Inc>,
         <https://1145.am/db/2324289/Alexandria_Real_Estate_Equities_Inc>,
         <https://1145.am/db/2331763/Alexandria_Real_Estate_Equities>,
@@ -4792,7 +4792,7 @@
     ns1:foundName "Alexandria Real Estate Equities, Inc." ;
     ns1:internalDocId 3173903 ;
     ns1:name "Alexandria Real Estate Equities, Inc." ;
-    ns1:sameAsMedium <https://1145.am/db/2152070/Alexandria_Real_Estate_Equities>,
+    ns1:sameAsNameOnly <https://1145.am/db/2152070/Alexandria_Real_Estate_Equities>,
         <https://1145.am/db/2319822/Alexandria_Real_Estate_Equities_Inc>,
         <https://1145.am/db/2324289/Alexandria_Real_Estate_Equities_Inc>,
         <https://1145.am/db/2331763/Alexandria_Real_Estate_Equities>,

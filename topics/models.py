@@ -47,7 +47,7 @@ class Resource(StructuredNode):
     documentSource = RelationshipTo("Article","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore)
     internalDocId = IntegerProperty()
-    sameAsMedium = Relationship('Resource','sameAsMedium')
+    sameAsNameOnly = Relationship('Resource','sameAsNameOnly')
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalMergedSameAsHighStatus = StringProperty() # None, MERGED_FROM, MERGED_TO
     internalMergedSameAsHighToUri = StringProperty()
@@ -637,7 +637,7 @@ class Organization(BasedInGeoMixin, Resource):
                 med_matches = node.same_as_mediums(min_name_length=min_name_length,include_merged_from=include_merged_from)
                 for med_match in med_matches:
                     if med_match in node_list:
-                        matching_rels.add( ("sameAsMedium", node, med_match) )
+                        matching_rels.add( ("sameAsNameOnly", node, med_match) )
         return matching_rels
 
     def same_as_highs(self,include_merged_from):
@@ -671,7 +671,7 @@ class Organization(BasedInGeoMixin, Resource):
         return found_nodes
 
     def same_as_mediums_by_length(self, min_name_length,include_merged_from):
-        new_nodes = [node for node in self.sameAsMedium
+        new_nodes = [node for node in self.sameAsNameOnly
                         if node.is_showable_merged_resource(include_merged_from)
                         and node.shortest_name_length >= min_name_length]
         return new_nodes

@@ -33,7 +33,7 @@
     ns1:internalDocId 4076092 ;
     ns1:name "Sauber Group" ;
     ns1:industry "Sauberization" ;
-    ns1:sameAsMedium <https://1145.am/db/4075656/Sauber> .
+    ns1:sameAsNameOnly <https://1145.am/db/4075656/Sauber> .
 
 <https://1145.am/db/4074766/Openai> a org:Organization ;
     ns1:description "AI" ;
@@ -80,7 +80,7 @@
         <https://1145.am/db/4074811/Openai>,
         <https://1145.am/db/4075273/Openai>,
         <https://1145.am/db/4076432/Openai> ;
-    ns1:sameAsMedium <https://1145.am/db/2019224/Openai>,
+    ns1:sameAsNameOnly <https://1145.am/db/2019224/Openai>,
         <https://1145.am/db/2019387/Openai>,
         <https://1145.am/db/2031636/Openai>,
         <https://1145.am/db/2066410/Openai>,

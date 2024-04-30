@@ -18,7 +18,7 @@
     ns1:sameAsHigh <https://1145.am/db/2066738/Pollen_Street_Capital>,
         <https://1145.am/db/3021403/Pollen_Street_Capital>,
         <https://1145.am/db/4075853/Pollen_Street_Capital> ;
-    ns1:sameAsMedium <https://1145.am/db/373576/Pollen_Street_Capital> .
+    ns1:sameAsNameOnly <https://1145.am/db/373576/Pollen_Street_Capital> .
 
 <https://1145.am/db/4074317/Ageas> a org:Organization ;
     ns1:basedInHighRaw "Belgium" ;
@@ -109,7 +109,7 @@
     ns1:name "Kwik-Fit",
         "Kwik-Fit Insurance Services" ;
     ns1:sameAsHigh <https://1145.am/db/2856955/Kwik-Fit> ;
-    ns1:sameAsMedium <https://1145.am/db/2883195/Kwik-Fit>,
+    ns1:sameAsNameOnly <https://1145.am/db/2883195/Kwik-Fit>,
         <https://1145.am/db/2883405/Kwik-Fit> .
 
 <https://1145.am/db/article/wwwcityamcom_ageas-215m-deal-kwik-fit-insurance-arm_> a schema:Article ;
@@ -158,7 +158,7 @@
     ns1:internalDocId 4074773 ;
     ns1:investor <https://1145.am/db/4074773/Investment_Binance_Labs_Uxuy_Completed> ;
     ns1:name "Binance Labs" ;
-    ns1:sameAsMedium <https://1145.am/db/1104843/Binance_Labs>,
+    ns1:sameAsNameOnly <https://1145.am/db/1104843/Binance_Labs>,
         <https://1145.am/db/1124122/Binance_Labs> .
 
 <https://1145.am/db/4074784/Businesses_Acquisition_Petrus_Sa_Completed> a ns1:CorporateFinanceActivity ;

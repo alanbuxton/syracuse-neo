@@ -43,7 +43,7 @@ merge_same_as_high_query = """
 """
 
 find_same_as_mediums_for_merge_query = """
-    MATCH (n: Resource)-[r:sameAsMedium]-(m:Resource)
+    MATCH (n: Resource)-[r:sameAsNameOnly]-(m:Resource)
     WHERE m.merged = True AND n.merged IS NULL
     AND LABELS(n) = LABELS(m)
     AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
@@ -52,7 +52,7 @@ find_same_as_mediums_for_merge_query = """
     AND n.uri <> m.uri
     WITH n, m, count(m) as count_of_merged
     WHERE count_of_merged = 1
-    SET n.internalSameAsMediumUriList = COALESCE(n.internalSameAsMediumUriList,[]) + [n.uri]
+    SET n.internalsameAsNameOnlyUriList = COALESCE(n.internalsameAsNameOnlyUriList,[]) + [n.uri]
     SET n.internalDocIdList = COALESCE(n.internalDocIdList,[]) + [n.internalDocId]
     WITH m, n
     UNWIND(n.name) as name
@@ -117,7 +117,7 @@ def move_document_extract_to_relationship():
     db.cypher_query(query)
 
 def delete_self_same_as():
-    query = "MATCH (a: Organization)-[rel:sameAsHigh|sameAsMedium]->(a) DELETE rel;"
+    query = "MATCH (a: Organization)-[rel:sameAsHigh|sameAsNameOnly]->(a) DELETE rel;"
     db.cypher_query(query)
 
 
@@ -176,13 +176,13 @@ def merge_activities_for(rel1,joiner,rel2,logfile):
 def merge_same_as_medium(logfile):
     '''
         If this medium is connected to one merged node (i.e. to some 'sameAsHigh' that have been merged), then merge the
-        sameAsMedium as well.
+        sameAsNameOnly as well.
 
         There may be cases where a similar name is a different company, so if all of the sameAs point to the same company
-        we can use it to merge to. If there are disagreements in the sameAsMedium piece then don't change anything
+        we can use it to merge to. If there are disagreements in the sameAsNameOnly piece then don't change anything
     '''
     cnt = 0
-    logger.info("Starting merge sameAsMediumUri")
+    logger.info("Starting merge sameAsNameOnlyUri")
     write_log_header("merge_same_as_medium",logfile)
     while True:
         nodes_to_merge, _ = db.cypher_query(find_same_as_mediums_for_merge_query, resolve_objects=True)
@@ -198,10 +198,10 @@ def merge_same_as_medium(logfile):
             logfile.write(f"merged {val_row[2]} into {val_row[1]} (check: {val_row[0]['uri']}; {node_to_attach.uri} -> {base_node.uri})\n")
             cnt += 1
             if cnt % 1000 == 0:
-                output_same_as_stats(f"After merging {cnt} sameAsMedium records")
+                output_same_as_stats(f"After merging {cnt} sameAsNameOnly records")
             if cnt % 100 == 0:
-                logger.info(f"Merged {cnt} sameAsMedium records")
-    output_same_as_stats("After merge sameAsMedium")
+                logger.info(f"Merged {cnt} sameAsNameOnly records")
+    output_same_as_stats("After merge sameAsNameOnly")
 
 def merge_same_as_high(logfile):
     cnt = 0
@@ -230,7 +230,7 @@ def reallocate_same_as_to_already_merged_nodes(logfile):
     logger.info("Starting reallocate_same_as_to_already_merged_nodes")
     write_log_header("reallocate_same_as_to_already_merged_nodes",logfile)
 
-    bare_resources_query = """MATCH (target: Resource)-[x:sameAsHigh|sameAsMedium]-(source: Resource)
+    bare_resources_query = """MATCH (target: Resource)-[x:sameAsHigh|sameAsNameOnly]-(source: Resource)
         WHERE target.internalDocId IS NULL
         AND source.internalDocId IS NOT NULL
         AND SIZE(LABELS(target)) = 1
@@ -253,10 +253,10 @@ def reallocate_same_as_to_already_merged_nodes(logfile):
                 source.sameAsHigh.disconnect(target)
                 logfile.write(f"Reallocated sameAsHigh for {source.uri} from {target.uri} to {merged_entity.uri}\n")
                 cnt_merged += 1
-            for source in target.sameAsMedium:
-                source.sameAsMedium.connect(merged_entity)
-                source.sameAsMedium.disconnect(target)
-                logfile.write(f"Reallocated sameAsMedium for {source.uri} from {target.uri} to {merged_entity.uri}\n")
+            for source in target.sameAsNameOnly:
+                source.sameAsNameOnly.connect(merged_entity)
+                source.sameAsNameOnly.disconnect(target)
+                logfile.write(f"Reallocated sameAsNameOnly for {source.uri} from {target.uri} to {merged_entity.uri}\n")
                 cnt_merged += 1
             target.delete()
             logfile.write(f"Deleted {target.uri}\n")
