@@ -38,18 +38,19 @@ class DocumentSourceRel(StructuredRel):
     documentExtract = StringProperty()
 
 class Resource(StructuredNode):
+    MERGED_FROM = 'merged_from'
+    MERGED_TO = 'merged_to'
+
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
     documentSource = RelationshipTo("Article","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore)
     internalDocId = IntegerProperty()
-    internalDocIdList = ArrayProperty(IntegerProperty())
-    internalNameList = ArrayProperty(StringProperty())
     sameAsMedium = Relationship('Resource','sameAsMedium')
     sameAsHigh = Relationship('Resource','sameAsHigh')
-    internalSameAsHighUriList = ArrayProperty(StringProperty())
-    internalSameAsMediumUriList = ArrayProperty(StringProperty())
+    internalMergedSameAsHighStatus = StringProperty() # None, MERGED_FROM, MERGED_TO
+    internalMergedSameAsHighToUri = StringProperty()
 
     @property
     def industry_as_str(self):
@@ -74,32 +75,13 @@ class Resource(StructuredNode):
     @staticmethod
     def get_by_uri_or_merged_uri(uri):
         r = Resource.nodes.get_or_none(uri=uri)
-        if r is not None:
+        if r is None:
+            return None
+        elif r.internalMergedSameAsHighToUri is None:
+            assert r.internalMergedSameAsHighStatus != Resource.MERGED_FROM, f"{r.uri} has merged to URI but does not have merged from status"
             return r
-        return Resource.get_by_merged_uri(uri)
-
-    @staticmethod
-    def get_by_merged_uri(uri):
-        query = f"""MATCH (n: Resource) WHERE '{uri}' in n.internalSameAsHighUriList OR
-                    '{uri}' in n.internalSameAsMediumUriList RETURN n"""
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        if res is not None and len(res)==1:
-            if len(res[0]) == 1:
-                return res[0][0]
-
-    def get_merged_same_as_high_by_unmerged_uri(self):
-        query = f"""MATCH (n: Resource) WHERE '{self.uri}' in n.internalSameAsHighUriList RETURN n"""
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        if res is not None and len(res)==1:
-            if len(res[0]) == 1:
-                return res[0][0]
-
-    def get_merged_same_as_medium_by_unmerged_uri(self):
-        query = f"""MATCH (n: Resource) WHERE '{self.uri}' in n.internalSameAsMediumUriList RETURN n"""
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        if res is not None and len(res)==1:
-            if len(res[0]) == 1:
-                return res[0][0]
+        else:
+            return Resource.get_by_uri_or_merged_uri(r.internalMergedSameAsHighToUri)
 
     @property
     def sourceDocumentURL(self):
@@ -166,9 +148,18 @@ class Resource(StructuredNode):
             "name": splitted_uri[3],
         }
 
+    def is_showable_merged_resource(self, include_merged_from):
+        if include_merged_from is True:
+            return True
+        elif self.internalMergedSameAsHighStatus == Resource.MERGED_FROM:
+            return False
+        else:
+            return True
+
     def all_directional_relationships(self, **kwargs):
         from_date = kwargs.get('from_date')
         to_date = kwargs.get('to_date')
+        include_merged_from = kwargs.get('include_merged_from',False)
         all_rels = []
         for key, rel in self.__all_relationships__:
             if isinstance(rel, RelationshipTo):
@@ -179,11 +170,34 @@ class Resource(StructuredNode):
                 continue
 
             if from_date and to_date:
-                rels = [(key, direction, x) for x in self.__dict__[key].all() if x.in_date_range(from_date,to_date)]
+                rels = [(key, direction, x) for x in self.__dict__[key].all()
+                    if x.in_date_range(from_date,to_date)
+                    and x.is_showable_merged_resource(include_merged_from)]
             else:
-                rels = [(key, direction, x) for x in self.__dict__[key].all()]
+                rels = [(key, direction, x) for x in self.__dict__[key].all()
+                    if x.is_showable_merged_resource(include_merged_from)]
             all_rels.extend(rels)
         return all_rels
+
+    @staticmethod
+    def merge_node_connections(source_node, target_node):
+        for rel_key,_ in source_node.__all_relationships__:
+            if rel_key.startswith("sameAs"):
+                logger.debug(f"ignoring {rel_key}")
+                continue
+            for other_node in source_node.__dict__[rel_key].all():
+                logger.debug(f"connecting {other_node.uri} to {target_node.uri}")
+                new_rel = target_node.__dict__[rel_key].connect(other_node)
+                old_rel = source_node.__dict__[rel_key].relationship(other_node)
+                if hasattr(old_rel, 'documentExtract'):
+                    new_rel.documentExtract = old_rel.documentExtract
+                    new_rel.save()
+            source_node.internalMergedSameAsHighStatus = Resource.MERGED_FROM
+            source_node.internalMergedSameAsHighToUri = target_node.uri
+            target_node.internalMergedSameAsHighStatus = Resource.MERGED_TO
+            source_node.save()
+            target_node.save()
+
 
 class Article(Resource):
     headline = StringProperty()
@@ -249,11 +263,11 @@ class IndustryCluster(Resource):
         return self.parentsLeft.all() + self.parentsRight.all()
 
     @staticmethod
-    def leaf_keywords():
+    def leaf_keywords(ignore_cache=False):
         cache_key = "industry_leaf_keywords"
-        # res = cache.get(cache_key)
-        # if res:
-        #     return res
+        res = cache.get(cache_key)
+        if res is not None and ignore_cache is False:
+            return res
         keywords = {}
         for node in IndustryCluster.leaf_nodes_only():
             words = node.uniqueName.split("_")
@@ -380,7 +394,8 @@ class ActivityMixin:
         return flattened
 
     @staticmethod
-    def orgs_by_activity_where_industry(geo_code=None,industry_uris=None,limit=None,allowed_to_set_cache=False):
+    def orgs_by_activity_where_industry(geo_code=None,industry_uris=None,limit=None,
+                allowed_to_set_cache=False,include_merged_from=False):
         if industry_uris is None:
             hash_key = hash(None)
         else:
@@ -403,6 +418,12 @@ class ActivityMixin:
             else:
                 query = f"{query} WHERE"
             query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
+        if include_merged_from is False:
+            if "WHERE" in query:
+                query = f"{query} AND"
+            else:
+                query = f"{query} WHERE"
+            query = f"{query} (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')"
         query = query + " RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"
@@ -439,7 +460,8 @@ class BasedInGeoMixin:
         return uri
 
     @classmethod
-    def by_country_region_industry(cls,geo_code=None,industry_uris=None,limit=20,allowed_to_set_cache=False):
+    def by_country_region_industry(cls,geo_code=None,industry_uris=None,limit=20,
+                allowed_to_set_cache=False,include_merged_from=False):
         label = cls.__name__
         if industry_uris is None:
             hash_key = hash(None)
@@ -462,6 +484,12 @@ class BasedInGeoMixin:
             else:
                 query = f"{query} WHERE"
             query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
+        if include_merged_from is False:
+            if "WHERE" in query:
+                query = f"{query} AND"
+            else:
+                query = f"{query} WHERE"
+            query = f"{query} (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')"
         query = f"{query} RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"
@@ -499,18 +527,42 @@ class Organization(BasedInGeoMixin, Resource):
 
     @property
     def industry_as_str(self):
-        if self.industry is None:
-            return None
-        industry_as_titles = [ x.title() for x in self.industry ]
-        return print_friendly(industry_as_titles)
+        by_popularity = self.get_industry_list()
+        return print_friendly(by_popularity)
+
+    def get_industry_list(self):
+        cache_key = f"industries_{self.uri}"
+        name = cache.get(cache_key)
+        if name is not None:
+            return name
+        name_cands = self.industry or []
+        for x in self.sameAsHigh:
+            if x.industry is not None:
+                name_cands.extend(x.industry)
+        name_counter = Counter(sorted(name_cands,key=len))
+        by_popularity = [x[0].title() for x in name_counter.most_common()]
+        return by_popularity
+
+    def reset_cache(self):
+        cache_key = f"org_name_{self.uri}"
+        cache.delete(cache_key)
+        cache_key = f"industries_{self.uri}"
+        cache.delete(industries)
 
     @property
     def best_name(self):
-        if self.internalNameList is None or len(self.internalNameList) == 0:
-            return self.longest_name
-        name_cands = [x.split("_##_")[1] for x in self.internalNameList]
+        cache_key = f"org_name_{self.uri}"
+        name = cache.get(cache_key)
+        if name is not None:
+            return name
+        name_cands = self.name
+        for x in self.sameAsHigh:
+            if x.name is not None:
+                name_cands.extend(x.name)
         name_counter = Counter(name_cands)
-        return name_counter.most_common(1)[0][0]
+        top_name = name_counter.most_common(1)[0][0]
+        cache.set(cache_key, top_name)
+        return top_name
 
     @staticmethod
     def get_best_name_by_uri(uri):
@@ -548,7 +600,7 @@ class Organization(BasedInGeoMixin, Resource):
         based_in_fields = self.based_in_fields
         org_vals = {"description": self.description,
                     "industry": self.industry,
-#                    "industryAsStr": self.industry_as_str,
+                    "industry_as_str": self.industry_as_str,
                     }
         return {**vals,**org_vals,**based_in_fields}
 
@@ -559,33 +611,39 @@ class Organization(BasedInGeoMixin, Resource):
             role_activities.extend([(role,act) for act in acts])
         return role_activities
 
-    def same_as(self,min_name_length=2):
-        high_matches = set(self.same_as_highs())
+    def same_as(self,min_name_length=2,include_merged_from=False):
+        high_matches = set(self.same_as_highs(include_merged_from))
         med_matches = set()
         if (self.name is not None and not isinstance(self.name, str) and
                 all([len(x.split()) >= min_name_length for x in self.name])):
-            med_matches = self.same_as_mediums(min_name_length)
+            med_matches = self.same_as_mediums(min_name_length,include_merged_from)
         return high_matches.union(med_matches)
 
     @staticmethod
-    def find_same_as_relationships(node_list, min_name_length=2):
+    def find_same_as_relationships(node_list, min_name_length=2,include_merged_from=False):
         matching_rels = set()
         for node in node_list:
             if not isinstance(node, Organization):
                 logger.debug(f"Can't do sameAs for {node}")
                 continue
-            matches = node.same_as_highs()
+            if node.is_showable_merged_resource(include_merged_from) is False:
+                continue
+            matches = node.same_as_highs(include_merged_from)
             for match in matches:
-                matching_rels.add( ("sameAsHigh", node, match) )
+                if match in node_list:
+                    matching_rels.add( ("sameAsHigh", node, match) )
             if (node.name is not None and not isinstance(node.name, str) and
                     all([len(x.split()) >= min_name_length for x in node.name])):
-                med_matches = node.same_as_mediums(min_name_length=min_name_length)
+                med_matches = node.same_as_mediums(min_name_length=min_name_length,include_merged_from=include_merged_from)
                 for med_match in med_matches:
-                    matching_rels.add( ("sameAsMedium", node, med_match) )
+                    if med_match in node_list:
+                        matching_rels.add( ("sameAsMedium", node, med_match) )
         return matching_rels
 
-    def same_as_highs(self):
-        return self.related_by("sameAsHigh")
+    def same_as_highs(self,include_merged_from):
+        matches = [x for x in self.related_by("sameAsHigh")
+                    if x.is_showable_merged_resource(include_merged_from)]
+        return matches
 
     def related_by(self,relationship):
         query = f'''
@@ -603,17 +661,19 @@ class Organization(BasedInGeoMixin, Resource):
         flattened = [x for sublist in nodes for x in sublist]
         return flattened
 
-    def same_as_mediums(self, min_name_length, max_iterations=5):
+    def same_as_mediums(self, min_name_length, max_iterations=5, include_merged_from=False):
         found_nodes = set()
         new_nodes = [self]
         for r in range(0,max_iterations):
-            new_nodes = self.same_as_mediums_by_length(min_name_length)
+            new_nodes = self.same_as_mediums_by_length(min_name_length, include_merged_from=include_merged_from)
             new_nodes = [n for n in new_nodes if n not in found_nodes]
             found_nodes.update(new_nodes)
         return found_nodes
 
-    def same_as_mediums_by_length(self, min_name_length):
-        new_nodes = [node for node in self.sameAsMedium if node.shortest_name_length >= min_name_length]
+    def same_as_mediums_by_length(self, min_name_length,include_merged_from):
+        new_nodes = [node for node in self.sameAsMedium
+                        if node.is_showable_merged_resource(include_merged_from)
+                        and node.shortest_name_length >= min_name_length]
         return new_nodes
 
 

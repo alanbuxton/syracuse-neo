@@ -228,7 +228,10 @@ def get_stats(max_date,allowed_to_set_cache=False):
         return res
     counts = []
     for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","Article","Role"]:
-        res, _ = db.cypher_query(f"MATCH (n:{x}) RETURN COUNT(n)")
+        res, _ = db.cypher_query(f"""MATCH (n:{x}) WHERE
+                    (n.internalMergedSameAsHighStatus IS NULL OR
+                    n.internalMergedSameAsHighStatus = '{Organization.MERGED_TO}')
+                    RETURN COUNT(n)""")
         counts.append( (x , res[0][0]) )
     recents_by_country_region = []
     ts1 = datetime.utcnow()

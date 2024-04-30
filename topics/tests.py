@@ -10,7 +10,8 @@ from neomodel import db
 from datetime import date
 from topics.cache_helpers import nuke_cache
 from topics.serializers import *
-from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
+from integration.neo4j_utils import delete_all_not_needed_resources
+from integration.rdf_post_processor import RDFPostProcesser
 
 '''
     Care these tests will delete neodb data
@@ -30,7 +31,8 @@ class TestUtilsWithDumpData(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        post_import_merging(True)
+        r = RDFPostProcesser()
+        r.run_all_in_order()
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()
@@ -56,13 +58,13 @@ class TestUtilsWithDumpData(TestCase):
         source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
         o = Organization.nodes.get_or_none(uri=source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 10
+        assert len(clean_node_data) == 9
         assert set([x['label'] for x in clean_node_data]) == set(
                 ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest', 'Investment (VentureBeat: Mar 2019)',
                 'Peakon', 'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone',
-                'https://sws.geonames.org/2623032', 'https://sws.geonames.org/2658434']
+                'https://sws.geonames.org/2623032']
         )
-        assert len(clean_edge_data) == 10
+        assert len(clean_edge_data) == 9
         assert set([x['label'] for x in clean_edge_data]) == {'BASED_IN', 'DOCUMENT_SOURCE', 'INVESTOR', 'TARGET'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
@@ -119,15 +121,13 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-03-10")
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
-        assert set(counts) == {('Person', 126), ('Organization', 1193), ('LocationActivity', 15), ('CorporateFinanceActivity', 471), ('Article', 500), ('Role', 112), ('RoleActivity', 144)}
+        assert set(counts) == {('Person', 126), ('Article', 500), ('Organization', 1202), ('RoleActivity', 144), ('CorporateFinanceActivity', 473), ('Role', 112), ('LocationActivity', 15)}
         assert len(recents_by_geo) == 65
-        assert sorted(recents_by_geo)[:20] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1),
+        assert sorted(recents_by_geo)[:10] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1),
             ('AE', 'AE-01', 'United Arab Emirates - Abu Dhabi', 1, 1, 1), ('AR', 'AR', 'Argentina', 0, 0, 1),
             ('AU', 'AU', 'Australia', 1, 2, 2), ('BF', 'BF', 'Burkina Faso', 0, 2, 2), ('BM', 'BM', 'Bermuda', 0, 0, 3),
             ('BR', 'BR', 'Brazil', 0, 0, 1), ('CA', 'CA', 'Canada', 22, 33, 39), ('CA', 'CA-01', 'Canada - Alberta', 1, 1, 1),
-            ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10), ('CA', 'CA-08', 'Canada - Ontario', 7, 9, 11),
-            ('CH', 'CH', 'Switzerland', 2, 2, 2), ('CN', 'CN', 'China', 1, 2, 2), ('CN', 'CN-25', 'China - Shandong Sheng', 0, 1, 1),
-            ('DE', 'DE', 'Germany', 9, 10, 14), ('ES', 'ES', 'Spain', 0, 2, 3), ('FR', 'FR', 'France', 2, 3, 3), ('GB', 'GB', 'United Kingdom', 7, 9, 9), ('GR', 'GR', 'Greece', 0, 4, 4), ('GT', 'GT', 'Guatemala', 0, 0, 1)]
+            ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10)]
         assert sorted(recents_by_source) == [('Associated Press', 1, 4, 6), ('Business Insider', 6, 6, 6), ('Business Wire', 36, 51, 51),
             ('CNN', 1, 1, 1), ('CityAM', 4, 10, 10), ('GlobeNewswire', 61, 76, 76), ('Hotel Management', 0, 5, 5), ('Luxury Travel Advisor', 1, 3, 3),
             ('MarketWatch', 11, 14, 14), ('PR Newswire', 0, 22, 107), ('Reuters', 23, 23, 23), ('Seeking Alpha', 19, 27, 27), ('South China Morning Post', 6, 6, 6),

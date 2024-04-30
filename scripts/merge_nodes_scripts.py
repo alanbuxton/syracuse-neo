@@ -1,5 +1,11 @@
+'''
+    Original 'node merging' logic which has now been simplified and moved to
+    integration.rdf_post_processor
+
+'''
+
 from neomodel import db
-from integration.neo4j_utils import output_same_as_stats, apoc_del_redundant_same_as
+from integration.neo4j_utils import output_same_as_stats
 import logging
 from datetime import datetime
 logger = logging.getLogger(__name__)
@@ -85,7 +91,6 @@ def create_merge_activities_query(rel1="-[:investor]->",
 def post_import_merging(with_delete_not_needed_resources=False):
     tsnow = datetime.utcnow().isoformat().replace(":","").replace(".","_")
     with open(f"merge_logs/merge_{tsnow}.log","w",encoding='utf-8') as f:
-        apoc_del_redundant_same_as()
         reallocate_same_as_to_already_merged_nodes(f)
         merge_same_as_high(f)
         apoc_del_redundant_same_as()
@@ -116,11 +121,6 @@ def delete_self_same_as():
     db.cypher_query(query)
 
 
-def delete_all_not_needed_resources():
-    query = """MATCH (n: Resource) WHERE n.uri CONTAINS 'https://1145.am/db/'
-            AND SIZE(LABELS(n)) = 1
-            CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;"""
-    db.cypher_query(query)
 
 def create_merge_nodes_query(base_uri, attach_uri):
     merge_nodes_query=f"""

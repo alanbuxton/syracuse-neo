@@ -7,6 +7,7 @@ logger = logging.getLogger(__name__)
 
 def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
+    db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
     v, _ = db.cypher_query("call n10s.graphconfig.show")
     if len(v) == 0:
         do_n10s_config()
@@ -40,6 +41,13 @@ def apoc_del_redundant_same_as():
     db.cypher_query(apoc_query_medium)
     output_same_as_stats("After Delete sameAsMedium")
 
+def delete_all_not_needed_resources():
+    query = """MATCH (n: Resource) WHERE n.uri CONTAINS 'https://1145.am/db/'
+            AND SIZE(LABELS(n)) = 1
+            CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;"""
+    db.cypher_query(query)
+    apoc_del_redundant_same_as()
+
 def output_same_as_stats(msg):
     high = "MATCH (n1)-[r:sameAsHigh]-(n2)"
     medium = "MATCH (n1)-[r:sameAsMedium]-(n2)"
@@ -54,6 +62,11 @@ def get_node_name_from_rdf_row(row):
     else:
         return None
 
+def count_relationships():
+    vals, _ = db.cypher_query("MATCH ()-[x]-() RETURN COUNT(x);")
+    cnt = vals[0][0]
+    return cnt
+    
 def count_nodes():
     val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")
     return val[0][0]

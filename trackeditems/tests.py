@@ -15,9 +15,10 @@ from topics.cache_helpers import nuke_cache, warm_up_cache
 from integration.management.commands.import_ttl import do_import_ttl
 import re
 import os
-from integration.merge_nodes import post_import_merging, delete_all_not_needed_resources
+from integration.neo4j_utils import delete_all_not_needed_resources
 from topics.models import Article, CorporateFinanceActivity
 from topics.model_queries import activity_articles_to_api_results
+from integration.rdf_post_processor import RDFPostProcesser
 
 '''
     Care these tests will delete neodb data
@@ -53,13 +54,14 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        post_import_merging(True)
+        r = RDFPostProcesser()
+        r.run_all_in_order()
         warm_up_cache()
 
     def setUp(self):
         self.ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{self.ts}")
-        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4071554/Openai") # 2023-10-08
+        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4075273/Openai")
         to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4074438/Titan_Pro_Technologies") # 2007-03-27T00:00:00Z
         to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4076678/Bioaffinity_Technologies") # 2023-10-05
         self.ts2 = time.time()
@@ -80,11 +82,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def test_finds_merged_uris_for_tracked_orgs(self):
         tracked_orgs = TrackedOrganization.by_user(self.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
-        assert set(org_uris) == set(['https://1145.am/db/4071554/Openai',
+        assert set(org_uris) == set(['https://1145.am/db/4075273/Openai',
                                 'https://1145.am/db/4074438/Titan_Pro_Technologies',
                                 'https://1145.am/db/4076678/Bioaffinity_Technologies'])
         org_or_merged_uris = [x.organization_or_merged_uri for x in tracked_orgs]
-        assert set(org_or_merged_uris) == set(['https://1145.am/db/4074581/Openai', # Different one
+        assert set(org_or_merged_uris) == set(['https://1145.am/db/4074766/Openai', # Different one
                                 'https://1145.am/db/4074438/Titan_Pro_Technologies',
                                 'https://1145.am/db/4076678/Bioaffinity_Technologies'])
 
@@ -106,13 +108,13 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 4
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 4
-        assert len(re.findall(r"\bOpenAI\b",email)) == 52
+        assert len(re.findall(r"\bOpenAI\b",email)) == 33
         assert "March 11, 2024" in email
         assert "March 4, 2024" in email
-        assert activity_notif.num_activities == 19
-        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 18
-        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 18
-        assert "https://www.reuters.com/technology/sam-altman-return-openais-board-information-reports-2024-03-08/" in email
+        assert activity_notif.num_activities == 10
+        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 10
+        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 10
+        assert "https://www.theglobeandmail.com/world/article-openai-has-full-confidence-in-ceo-sam-altman-after-investigation/" in email
         assert "None" not in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
@@ -125,11 +127,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1
-        assert len(re.findall(r"\bOpenAI\b",email)) == 22
+        assert len(re.findall(r"\bOpenAI\b",email)) == 25
         assert "March 11, 2024" in email
         assert "March 4, 2024" not in email
         assert "March 9, 2024" in email
-        assert activity_notif.num_activities == 7
+        assert activity_notif.num_activities == 6
 
     def test_creates_geo_industry_notification_for_new_user(self):
         ActivityNotification.objects.filter(user=self.user2).delete()
@@ -145,9 +147,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert len(re.findall(r"Industry:.+Biopharm",email)) == 4
         assert len(re.findall(r"Region:.+Singapore",email)) == 2
         assert len(re.findall(r"Region.+United States",email)) == 3
-        assert len(re.findall(r"Industry:.+Tech",email)) == 9
-        assert len(re.findall(r"Industry:.+Artificial Intel",email)) == 14
-        assert len(re.findall("OpenAI",email)) == 37
+        assert len(re.findall(r"Industry:.+Tech",email)) == 16
+        assert len(re.findall("OpenAI",email)) == 44
         assert len(re.findall("MC Mining",email)) == 3
         assert "None" not in email
 
@@ -169,7 +170,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
-        assert "Open AI" not in content
+        assert "Sonendo " not in content
 
         response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
         content = str(response.content)
@@ -188,7 +189,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         content = str(response.content)
         assert "Activities between" in content
         assert "Site stats calculating, please check later" not in content
-        assert "Open AI" in content
+        assert "Sonendo " in content
 
         response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
         content = str(response.content)

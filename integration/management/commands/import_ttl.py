@@ -14,10 +14,12 @@ from trackeditems.management.commands.send_recent_activities_email import do_sen
 from topics.cache_helpers import rebuild_cache
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
-from integration.merge_nodes import post_import_merging
+from topics.models import Organization
+from integration.rdf_post_processor import RDFPostProcesser
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
+
 
 def is_running(pidfile):
     if os.path.exists(pidfile):
@@ -85,7 +87,7 @@ def load_deletion_file(filepath):
         uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
     count_query = f"MATCH (n) WHERE n.uri IN {uris} RETURN COUNT(n)"
     cnt, _ = db.cypher_query(count_query)
-    command = f"MATCH (n) WHERE n.uri IN {uris} AND n.internalDocIdList IS NULL CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
+    command = f"MATCH (n) WHERE n.uri IN {uris} AND n.merged_status IS NULL CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
     logger.info(f"Deleting {len(uris)} nodes")
     db.cypher_query(command)
     return len(uris), cnt[0][0]
@@ -160,6 +162,7 @@ def do_import_ttl(**options):
     send_notifications = options.get("send_notifications",False)
     do_post_processing = options.get("do_post_processing",True)
     raise_on_error = options.get("raise_on_error",True)
+    R = RDFPostProcesser()
     if force:
         cleanup(pidfile)
     if not is_allowed_to_start(pidfile):
@@ -167,7 +170,7 @@ def do_import_ttl(**options):
         return None
     if options.get("only_post_processing",False) is True:
         logger.info("Only doing post processing")
-        post_import_merging(with_delete_not_needed_resources=True)
+        R.run_all_in_order()
         return None
     export_dirs = new_exports_to_import(dump_dir)
     if len(export_dirs) == 0:
@@ -195,12 +198,12 @@ def do_import_ttl(**options):
             move_files(export_dir,RDF_ARCHIVE_DIR)
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
     if do_post_processing is True:
-        post_import_merging(with_delete_not_needed_resources=True)
+        R.run_all_in_order()
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:
         logger.info("No email sending this time")
-    if do_post_processing is True:    
+    if do_post_processing is True:
         rebuild_cache()
     logger.info("re-set cache")
     cleanup(pidfile)
