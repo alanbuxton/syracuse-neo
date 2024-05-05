@@ -5,7 +5,7 @@ from integration.neo4j_utils import output_same_as_stats, count_relationships
 from datetime import datetime
 logger = logging.getLogger(__name__)
 
-class RDFPostProcesser(object):
+class RDFPostProcessor(object):
 
     # m is target (that we are going to merge to), n is source (that we are copying relationships from)
     QUERY_SAME_AS_HIGH_FOR_MERGE = f"""
@@ -19,6 +19,17 @@ class RDFPostProcesser(object):
         RETURN m,n
         ORDER BY m.internalDocId
         LIMIT 1
+    """
+
+    QUERY_SAME_AS_HIGH_FOR_MERGE_COUNT = f"""
+        MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
+        WHERE m.internalDocId <= n.internalDocId
+        AND (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus <> '{Resource.MERGED_FROM}')
+        AND (m.internalMergedSameAsHighStatus IS NULL OR m.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')
+        AND LABELS(m) = LABELS(n)
+        AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
+        AND m.uri <> n.uri
+        RETURN count(*)
     """
 
     def run_all_in_order(self):

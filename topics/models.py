@@ -10,6 +10,7 @@ from django.core.cache import cache
 from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One
+from neomodel import Q
 
 import logging
 logger = logging.getLogger(__name__)
@@ -51,6 +52,13 @@ class Resource(StructuredNode):
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalMergedSameAsHighStatus = StringProperty() # None, MERGED_FROM, MERGED_TO
     internalMergedSameAsHighToUri = StringProperty()
+
+    @classmethod
+    def randomized_active_nodes(cls,limit=10):
+        return cls.nodes.filter(
+            Q(internalMergedSameAsHighStatus__isnull=False) |
+            Q(internalMergedSameAsHighStatus__exact=Resource.MERGED_TO)
+        ).order_by('?')[:limit]
 
     @property
     def industry_as_str(self):
@@ -100,9 +108,12 @@ class Resource(StructuredNode):
             db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
 
     @classmethod
-    def find_by_name(cls, name):
-        query = f'match (n: {cls.__name__}) where any (item in n.name where item =~ "(?i).*{name}.*") return *'
-        results, columns = db.cypher_query(query)
+    def find_by_name(cls, name, include_merged_from=False):
+        query = f'MATCH (n: {cls.__name__}) WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")'
+        if include_merged_from == False:
+            query = query + f" AND (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{cls.MERGED_TO}') "
+        query = query + ' RETURN *'
+        results, _ = db.cypher_query(query,resolve_objects=False)
         return [cls.inflate(row[0]) for row in results]
 
     @property
@@ -528,6 +539,8 @@ class Organization(BasedInGeoMixin, Resource):
     @property
     def industry_as_str(self):
         by_popularity = self.get_industry_list()
+        if len(by_popularity) == 0:
+            return None
         return print_friendly(by_popularity)
 
     def get_industry_list(self):

@@ -2,12 +2,13 @@ from django.shortcuts import render
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from topics.models import Organization, ActivityMixin
+from topics.models import Organization, ActivityMixin, Resource
 from topics.cache_helpers import is_cache_ready
 from topics.model_queries import get_children_for_api, single_org_children
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
-    IndustrySerializer,OrganizationTimelineSerializer)
+    IndustrySerializer,OrganizationTimelineSerializer,
+    ResourceSerializer)
 from rest_framework import status
 from datetime import date, datetime
 from .model_queries import get_relevant_orgs_for_country_region_industry
@@ -69,7 +70,7 @@ class Index(APIView):
             search_type = 'combined_search'
             search_term = industry_geo_search_str(industry_name, selected_geo_name)
         else:
-            orgs = Organization.nodes.order_by('?')[:10]
+            orgs = Organization.randomized_active_nodes(10)
             org_list = OrganizationSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
             geo_search = GeoSerializer()
@@ -94,6 +95,38 @@ class Index(APIView):
                         "cache_ready": is_cache_ready(),
                         }, status=status.HTTP_200_OK)
         return resp
+
+
+class ShowResource(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'show_resource.html'
+
+    def get(self, request, *args, **kwargs):
+        uri = f"https://{kwargs['domain']}/{kwargs['path']}"
+        doc_id = kwargs.get("doc_id")
+        if doc_id is not None:
+            uri = f"{uri}/{doc_id}"
+        uri = f"{uri}/{kwargs['name']}"
+        r = Resource.nodes.get(uri=uri)
+        if r is None:
+            raise ValueError(f"Couldn't find Resource with uri {uri}")
+        if isinstance(r, Organization):
+            self.template_name = 'organization_linkages.html'
+            org_serializer = OrganizationGraphSerializer(r)
+            org_data = {**kwargs, **{"uri":r.uri,"source_node_name":r.best_name}}
+            resp = Response({"data_serializer": org_serializer.data,
+                                "org_data":org_data,
+                                "cache_ready": is_cache_ready(),
+                                }, status=status.HTTP_200_OK)
+            return resp
+        else:
+            resource_serializer = ResourceSerializer(r)
+            resp = Response({"data_serializer":resource_serializer.data,
+                            "cache_ready": is_cache_ready(),
+                            }, status=status.HTTP_200_OK)
+            return resp
+
+
 
 class ParentChildWithSearch(APIView):
     renderer_classes = [TemplateHTMLRenderer]

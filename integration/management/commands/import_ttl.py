@@ -15,7 +15,7 @@ from topics.cache_helpers import rebuild_cache
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
 from topics.models import Organization
-from integration.rdf_post_processor import RDFPostProcesser
+from integration.rdf_post_processor import RDFPostProcessor
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
@@ -162,7 +162,7 @@ def do_import_ttl(**options):
     send_notifications = options.get("send_notifications",False)
     do_post_processing = options.get("do_post_processing",True)
     raise_on_error = options.get("raise_on_error",True)
-    R = RDFPostProcesser()
+    R = RDFPostProcessor()
     if force:
         cleanup(pidfile)
     if not is_allowed_to_start(pidfile):

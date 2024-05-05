@@ -6,7 +6,7 @@ from integration.models import DataImport
 from integration.management.commands.import_ttl import do_import_ttl
 from topics.models import Organization, Resource, Person, ActivityMixin
 from integration.neo4j_utils import delete_all_not_needed_resources, count_relationships
-from integration.rdf_post_processor import RDFPostProcesser
+from integration.rdf_post_processor import RDFPostProcessor
 
 
 '''
@@ -94,7 +94,7 @@ class RdfPostProcessingTestCase(TestCase):
         clean_db_and_load_files("integration/test_dump/dump-1")
         rels = count_relationships()
         assert rels == 2514
-        R = RDFPostProcesser()
+        R = RDFPostProcessor()
         R.add_document_extract_to_relationship()
         R.merge_same_as_high_connections()
         rels = count_relationships()

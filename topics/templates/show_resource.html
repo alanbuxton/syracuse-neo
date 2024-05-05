@@ -1,0 +1,29 @@
+
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+
+<title>Show Resource</title>
+</head>
+<body>
+
+<h1>Resource: {{ data_serializer.uri }}</h1>
+<p>
+  {% include 'layouts/nav-header.html' %}
+</p>
+
+<p>
+  {% for field, value in data_serializer.items %}
+    <strong>{{ field }}</strong>:
+    {{ value|pretty_print_list_uri:request |safe}}<br/>
+  {% endfor %}
+</p>
+
+{% include 'layouts/footer.html' %}
+
+</body>
+</html>

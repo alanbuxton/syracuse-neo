@@ -1,8 +1,8 @@
 function convert_uri(value) {
   if (value.startsWith("https://1145.am")) {
     var regex = /^https:\/\/1145.am/i ;
-    val = value.replace(regex, location.protocol + "//" + location.host + "/1145.am");
-    return val;
+    tmp_val = value.replace(regex, location.protocol + "//" + location.host + "/resource/1145.am");
+    return tmp_val;
   } else {
     return value;
   }

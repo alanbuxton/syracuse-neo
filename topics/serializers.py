@@ -13,6 +13,9 @@ class OrganizationSerializer(serializers.BaseSerializer):
         repres["splitted_uri"] = splitted_uri
         return repres
 
+class ResourceSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        return instance.serialize_no_none()
 
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 

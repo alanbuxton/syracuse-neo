@@ -11,7 +11,7 @@ from datetime import date
 from topics.cache_helpers import nuke_cache
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
-from integration.rdf_post_processor import RDFPostProcesser
+from integration.rdf_post_processor import RDFPostProcessor
 
 '''
     Care these tests will delete neodb data
@@ -31,7 +31,7 @@ class TestUtilsWithDumpData(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        r = RDFPostProcesser()
+        r = RDFPostProcessor()
         r.run_all_in_order()
 
     def test_data_list_choice_field_include_great_britain_option(self):
@@ -197,8 +197,26 @@ class TestUtilsWithDumpData(TestCase):
     def test_gets_children_list(self):
         client = self.client
 
-        response = client.get("/parent-child?name=Zendesk")
+        response = client.get("/parent_child?name=Zendesk")
         content = str(response.content)
         assert "Smooch" in content
         assert "VentureBeat" in content
         assert "Zendesk acquires conversational platform Smooch" in content
+
+    def test_shows_resource_data_with_no_docid(self):
+        client = self.client
+        resp = client.get("/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b")
+        content = str(resp.content)
+        assert "/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo" in content
+        assert "https://1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b" in content
+        assert "<strong>documentURL</strong>" in content
+        assert "<strong>name</strong>" not in content
+
+    def test_shows_resource_data_with_docid(self):
+        client = self.client
+        resp = client.get("/resource/1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors")
+        content = str(resp.content)
+        assert "/resource/1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
+        assert "https://1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
+        assert "<strong>documentURL</strong>" not in content
+        assert "<strong>name</strong>" in content

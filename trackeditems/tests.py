@@ -18,7 +18,7 @@ import os
 from integration.neo4j_utils import delete_all_not_needed_resources
 from topics.models import Article, CorporateFinanceActivity
 from topics.model_queries import activity_articles_to_api_results
-from integration.rdf_post_processor import RDFPostProcesser
+from integration.rdf_post_processor import RDFPostProcessor
 
 '''
     Care these tests will delete neodb data
@@ -54,7 +54,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         nuke_cache()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
-        r = RDFPostProcesser()
+        r = RDFPostProcessor()
         r.run_all_in_order()
         warm_up_cache()
 
