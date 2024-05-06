@@ -9,12 +9,14 @@ class RDFPostProcessor(object):
 
     # m is target (that we are going to merge to), n is source (that we are copying relationships from)
     QUERY_SAME_AS_HIGH_FOR_MERGE = f"""
-        MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
+        MATCH (m: Organization)-[x:sameAsHigh]-(n: Organization)
         WHERE m.internalDocId <= n.internalDocId
         AND m.internalMergedSameAsHighToUri IS NULL
         AND n.internalMergedSameAsHighToUri IS NULL
         AND LABELS(m) = LABELS(n)
-        AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
+        AND NOT "CorporateFinanceActivity" IN LABELS(m)
+        AND NOT "RoleActivity" IN LABELS(m)
+        AND NOT "LocationActivity" IN LABELS(m)
         RETURN m,n
         ORDER BY m.internalDocId
         LIMIT 1

@@ -66,7 +66,7 @@ def count_relationships():
     vals, _ = db.cypher_query("MATCH ()-[x]-() RETURN COUNT(x);")
     cnt = vals[0][0]
     return cnt
-    
+
 def count_nodes():
     val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")
     return val[0][0]
