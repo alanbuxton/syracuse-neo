@@ -39,9 +39,6 @@ class DocumentSourceRel(StructuredRel):
     documentExtract = StringProperty()
 
 class Resource(StructuredNode):
-    MERGED_FROM = 'merged_from'
-    MERGED_TO = 'merged_to'
-
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
@@ -50,15 +47,11 @@ class Resource(StructuredNode):
     internalDocId = IntegerProperty()
     sameAsNameOnly = Relationship('Resource','sameAsNameOnly')
     sameAsHigh = Relationship('Resource','sameAsHigh')
-    internalMergedSameAsHighStatus = StringProperty() # None, MERGED_FROM, MERGED_TO
     internalMergedSameAsHighToUri = StringProperty()
 
     @classmethod
     def randomized_active_nodes(cls,limit=10):
-        return cls.nodes.filter(
-            Q(internalMergedSameAsHighStatus__isnull=False) |
-            Q(internalMergedSameAsHighStatus__exact=Resource.MERGED_TO)
-        ).order_by('?')[:limit]
+        return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).order_by('?')[:limit]
 
     @property
     def industry_as_str(self):
@@ -86,7 +79,6 @@ class Resource(StructuredNode):
         if r is None:
             return None
         elif r.internalMergedSameAsHighToUri is None:
-            assert r.internalMergedSameAsHighStatus != Resource.MERGED_FROM, f"{r.uri} has merged to URI but does not have merged from status"
             return r
         else:
             return Resource.get_by_uri_or_merged_uri(r.internalMergedSameAsHighToUri)
@@ -111,7 +103,7 @@ class Resource(StructuredNode):
     def find_by_name(cls, name, include_merged_from=False):
         query = f'MATCH (n: {cls.__name__}) WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")'
         if include_merged_from == False:
-            query = query + f" AND (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{cls.MERGED_TO}') "
+            query = query + f" AND n.internalMergedSameAsHighToUri IS NULL "
         query = query + ' RETURN *'
         results, _ = db.cypher_query(query,resolve_objects=False)
         return [cls.inflate(row[0]) for row in results]
@@ -162,7 +154,7 @@ class Resource(StructuredNode):
     def is_showable_merged_resource(self, include_merged_from):
         if include_merged_from is True:
             return True
-        elif self.internalMergedSameAsHighStatus == Resource.MERGED_FROM:
+        elif self.internalMergedSameAsHighToUri is not None:
             return False
         else:
             return True
@@ -203,9 +195,7 @@ class Resource(StructuredNode):
                 if hasattr(old_rel, 'documentExtract'):
                     new_rel.documentExtract = old_rel.documentExtract
                     new_rel.save()
-            source_node.internalMergedSameAsHighStatus = Resource.MERGED_FROM
             source_node.internalMergedSameAsHighToUri = target_node.uri
-            target_node.internalMergedSameAsHighStatus = Resource.MERGED_TO
             source_node.save()
             target_node.save()
 
@@ -434,7 +424,7 @@ class ActivityMixin:
                 query = f"{query} AND"
             else:
                 query = f"{query} WHERE"
-            query = f"{query} (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')"
+            query = f"{query} n.internalMergedSameAsHighToUri IS NULL "
         query = query + " RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"
@@ -500,7 +490,7 @@ class BasedInGeoMixin:
                 query = f"{query} AND"
             else:
                 query = f"{query} WHERE"
-            query = f"{query} (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')"
+            query = f"{query} n.internalMergedSameAsHighToUri IS NULL "
         query = f"{query} RETURN n"
         if limit is not None:
             query = f"{query} LIMIT {limit}"

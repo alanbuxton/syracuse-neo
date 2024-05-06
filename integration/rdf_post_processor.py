@@ -11,11 +11,10 @@ class RDFPostProcessor(object):
     QUERY_SAME_AS_HIGH_FOR_MERGE = f"""
         MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
         WHERE m.internalDocId <= n.internalDocId
-        AND (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus <> '{Resource.MERGED_FROM}')
-        AND (m.internalMergedSameAsHighStatus IS NULL OR m.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')
+        AND m.internalMergedSameAsHighToUri IS NULL
+        AND n.internalMergedSameAsHighToUri IS NULL
         AND LABELS(m) = LABELS(n)
         AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
-        AND m.uri <> n.uri
         RETURN m,n
         ORDER BY m.internalDocId
         LIMIT 1
@@ -24,11 +23,10 @@ class RDFPostProcessor(object):
     QUERY_SAME_AS_HIGH_FOR_MERGE_COUNT = f"""
         MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
         WHERE m.internalDocId <= n.internalDocId
-        AND (n.internalMergedSameAsHighStatus IS NULL OR n.internalMergedSameAsHighStatus <> '{Resource.MERGED_FROM}')
-        AND (m.internalMergedSameAsHighStatus IS NULL OR m.internalMergedSameAsHighStatus = '{Resource.MERGED_TO}')
+        AND m.internalMergedSameAsHighToUri IS NULL
+        AND n.internalMergedSameAsHighToUri IS NULL
         AND LABELS(m) = LABELS(n)
         AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
-        AND m.uri <> n.uri
         RETURN count(*)
     """
 

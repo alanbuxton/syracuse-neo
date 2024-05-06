@@ -64,13 +64,11 @@ class RdfPostProcessingTestCase(TestCase):
         target_node = Organization.nodes.get_or_none(uri="https://1145.am/db/4075266/Jde_Peets")
         source_node = Organization.nodes.get_or_none(uri="https://1145.am/db/4076088/Jde_Peets")
         assert len(target_node.hasRole.all()) == 3
-        assert target_node.internalMergedSameAsHighStatus is None
-        assert source_node.internalMergedSameAsHighStatus is None
+        assert target_node.internalMergedSameAsHighToUri is None
+        assert source_node.internalMergedSameAsHighToUri is None
         Organization.merge_node_connections(source_node,target_node)
         target_node2 = Organization.nodes.get_or_none(uri="https://1145.am/db/4075266/Jde_Peets")
         source_node2 = Organization.nodes.get_or_none(uri="https://1145.am/db/4076088/Jde_Peets")
-        assert target_node2.internalMergedSameAsHighStatus == Organization.MERGED_TO
-        assert source_node2.internalMergedSameAsHighStatus == Organization.MERGED_FROM
         assert target_node2.internalMergedSameAsHighToUri is None
         assert source_node2.internalMergedSameAsHighToUri == target_node.uri
         assert len(target_node.hasRole.all()) == 4
@@ -84,8 +82,6 @@ class RdfPostProcessingTestCase(TestCase):
         Organization.merge_node_connections(source_node,target_node)
         source_node2 = Organization.nodes.get_or_none(uri="https://1145.am/db/4074317/Ageas")
         target_node2 = Organization.nodes.get_or_none(uri="https://1145.am/db/2867004/Ageas")
-        assert target_node2.internalMergedSameAsHighStatus == Organization.MERGED_TO
-        assert source_node2.internalMergedSameAsHighStatus == Organization.MERGED_FROM
         assert target_node2.internalMergedSameAsHighToUri is None
         assert source_node2.internalMergedSameAsHighToUri == target_node.uri
         assert len(target_node2.buyer.all()) == 2
@@ -96,16 +92,27 @@ class RdfPostProcessingTestCase(TestCase):
         assert rels == 2514
         R = RDFPostProcessor()
         R.add_document_extract_to_relationship()
+        unmerged,_ = db.cypher_query("""MATCH (n: Organization)
+            WHERE n.internalMergedSameAsHighToUri IS NULL RETURN *;""", resolve_objects=True)
+        merged_uris = [x[0].uri for x in unmerged]
+        openais = [x for x in merged_uris if "openai" in x.lower()]
+        assert set(openais) == set(['https://1145.am/db/4075602/Openai', 'https://1145.am/db/4075805/Openai',
+                'https://1145.am/db/4074581/Openai', 'https://1145.am/db/4074745/Openai',
+                'https://1145.am/db/4074811/Openai', 'https://1145.am/db/4075105/Openai',
+                'https://1145.am/db/4076328/Openai', 'https://1145.am/db/4074766/Openai',
+                'https://1145.am/db/4071554/Openai', 'https://1145.am/db/4075273/Openai',
+                'https://1145.am/db/4076432/Openai'])
         R.merge_same_as_high_connections()
         rels = count_relationships()
         assert rels == 2548
 
         merged_tos,_ = db.cypher_query("""MATCH (n: Organization)
-            WHERE n.internalMergedSameAsHighStatus = 'merged_to' RETURN *;""", resolve_objects=True)
+            WHERE n.internalMergedSameAsHighToUri IS NULL RETURN *;""", resolve_objects=True)
         merged_uris = [x[0].uri for x in merged_tos]
-        assert set(merged_uris) == {'https://1145.am/db/4074766/Openai',
-                'https://1145.am/db/4075266/Jde_Peets',
-                'https://1145.am/db/4074581/Openai'} # sameAsNameOnly between the two OpenAI examples
+        openais = [x for x in merged_uris if "openai" in x.lower()]
+        assert set(openais) == set(['https://1145.am/db/4074581/Openai', 'https://1145.am/db/4074745/Openai',
+                    'https://1145.am/db/4075105/Openai', 'https://1145.am/db/4076328/Openai',
+                    'https://1145.am/db/4074766/Openai', 'https://1145.am/db/4071554/Openai'])
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
