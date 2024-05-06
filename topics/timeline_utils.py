@@ -114,9 +114,11 @@ def labelize(activity,activity_type):
         fields = ' '.join(filter(None, (activity.longest_name, activity.longest_locationPurpose)))
         label = f"{label} - {fields} - {activity.status_as_string}"
     else:
-        label = activity.longest_activityType.title()
+        label_with_parens = ""
+        if activity.longest_activityType is not None:
+            label_with_parens = f"({activity.longest_activityType.title()})"
         fields = ' '.join(filter(None, (activity.longest_targetName,activity.longest_targetDetails)))
-        label = f"{activity_type.title()} - {fields} - {activity.status_as_string} ({label})"
+        label = f"{activity_type.title()} - {fields} - {activity.status_as_string} {label_with_parens}".strip()
     return label
 
 def class_name_for(activity):
