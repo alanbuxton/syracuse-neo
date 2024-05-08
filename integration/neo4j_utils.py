@@ -46,7 +46,6 @@ def delete_all_not_needed_resources():
             AND SIZE(LABELS(n)) = 1
             CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;"""
     db.cypher_query(query)
-    apoc_del_redundant_same_as()
 
 def output_same_as_stats(msg):
     high = "MATCH (n1)-[r:sameAsHigh]-(n2)"

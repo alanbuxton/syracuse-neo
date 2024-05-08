@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Parent - Child<h1>
+<h1>Parent - Child</h1>
   <p>
     {% include 'layouts/nav-header.html' %}
   </p>
@@ -22,18 +22,20 @@
       <br/><input type="submit" value="Search">
   </form>
 
-  {% if orgs_and_children|length > 0 %}
-  <p>Found {{ orgs_and_children|length }} matching organization(s). For each organization,
+  {% if orgs_with_completed_children > 0 %}
+  <p>Found {{ orgs_with_completed_children }} matching organization(s). For each organization,
     results are shown in date order, oldest first.</p>
   {% endif %}
 
   {% for org in orgs_and_children %}
-    <h5><a href="{ org.parent_org_uri } ">{{ org.parent_org }}</a></h5>
-    <ul>
-    {% for child in org.children %}
-      {% include 'parent_child_list.html' %}
-    {% endfor %}
-    </ul>
+    {% if org.completed_children_count > 0 %}
+      <h5><a href="{ org.parent_org_uri } ">{{ org.parent_org }}</a></h5>
+      <ul>
+      {% for child in org.children %}
+        {% include 'parent_child_list.html' %}
+      {% endfor %}
+      </ul>
+    {% endif %}
   {% endfor %}
 
   {% include 'layouts/footer.html' %}

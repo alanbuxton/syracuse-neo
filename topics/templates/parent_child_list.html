@@ -1,6 +1,5 @@
 
-
-{% if child %}
+{% if child and child.activity_status_as_string == 'completed' %}
   <li>
     <b><a href="{{ child.uri }}">{{ child.label }}</a></b>
     {{ child.date_published }}

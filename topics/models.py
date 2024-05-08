@@ -101,12 +101,20 @@ class Resource(StructuredNode):
 
     @classmethod
     def find_by_name(cls, name, include_merged_from=False):
+        name = name.lower()
+        cache_key = f"{cls.__name__}_{name}_{include_merged_from}"
+        res = cache.get(cache_key)
+        if res is not None:
+            logger.debug(f"From cache {cache_key}")
+            return res
         query = f'MATCH (n: {cls.__name__}) WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")'
         if include_merged_from == False:
             query = query + f" AND n.internalMergedSameAsHighToUri IS NULL "
         query = query + ' RETURN *'
         results, _ = db.cypher_query(query,resolve_objects=False)
-        return [cls.inflate(row[0]) for row in results]
+        objs = [cls.inflate(row[0]) for row in results]
+        cache.set(cache_key, objs)
+        return objs
 
     @property
     def best_name(self):

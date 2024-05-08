@@ -100,7 +100,7 @@ def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geoname
         reader = csv.DictReader(f)
         for row in reader:
             cnt += 1
-            if cnt % 100_000 == 0:
+            if cnt % 1_000_000 == 0:
                 logger.info(f"Processed: {cnt} records. country_admin1_mapping length: {len(country_admin1_mapping)}; all admin1_data length: {len(all_admin1_data)}")
             cc = row['country_code']
             if cc is None or cc.strip() == '': # not related to a country
@@ -125,7 +125,7 @@ def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geoname
                     if cc not in country_admin1_mapping:
                         country_admin1_mapping[cc] = set()
                     country_admin1_mapping[cc].add(geo_id)
-
+    logger.info(f"Processed: {cnt} records. country_admin1_mapping length: {len(country_admin1_mapping)}; all admin1_data length: {len(all_admin1_data)}")
     return country_admin1_mapping, all_admin1_data
 
 def narrow_admin1_data(country_admin1_to_geonames, all_admin1_data):

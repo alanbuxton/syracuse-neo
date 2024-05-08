@@ -5,7 +5,10 @@ import os
 from integration.models import DataImport
 from integration.management.commands.import_ttl import do_import_ttl
 from topics.models import Organization, Resource, Person, ActivityMixin
-from integration.neo4j_utils import delete_all_not_needed_resources, count_relationships
+from integration.neo4j_utils import (
+    delete_all_not_needed_resources, count_relationships,
+    apoc_del_redundant_same_as,
+)
 from integration.rdf_post_processor import RDFPostProcessor
 
 
@@ -30,7 +33,7 @@ def clean_db_and_load_files(dirname):
     assert DataImport.latest_import() == None # Empty DB
     do_import_ttl(dirname=dirname,force=True,do_archiving=False,do_post_processing=False)
     delete_all_not_needed_resources() # Lots of "sameAs" entries that aren't available in any test data
-
+    apoc_del_redundant_same_as()
 
 class TurtleLoadingTestCase(TestCase):
 

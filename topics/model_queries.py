@@ -27,7 +27,7 @@ def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None
 
 def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limit=20):
     cache_key = f"relevant_orgs_{geo_code}_{industry_id}_{limit}"
-    logger.info(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
+    logger.debug(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
     res = cache.get(cache_key)
     if res is not None:
         return res
@@ -37,7 +37,7 @@ def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limi
     ts2 = datetime.utcnow()
     orgs_by_activity = ActivityMixin.orgs_by_activity_where_industry(geo_code,industry_uris,limit=limit)
     ts3 = datetime.utcnow()
-    logger.info(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
+    logger.debug(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
     all_orgs = set(orgs + orgs_by_activity)
     cache.set(cache_key, all_orgs)
     return all_orgs
@@ -288,7 +288,8 @@ def count_entries(results):
         val = val + results[1][0]
     return val
 
-def get_child_orgs(uri: str, relationship = "investor|buyer|vendor")->[(Organization, ActivityMixin, Article)]:
+def get_child_orgs(uri: str, relationship = "investor|buyer|vendor",
+                        include_merged_from=False)->[(Organization, ActivityMixin, Article)]:
     assert "'" not in uri, f"Can't have ' in {uri}"
     # query = f"""
     #     MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization)
@@ -301,7 +302,10 @@ def get_child_orgs(uri: str, relationship = "investor|buyer|vendor")->[(Organiza
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization),
         (b: Organization)-[x:{relationship}]-(c: CorporateFinanceActivity)
-        WHERE b.uri = '{uri}'
+        WHERE b.uri = '{uri}'"""
+    if include_merged_from is False:
+        query = query + " AND t.internalMergedSameAsHighToUri IS NULL "
+    query = query + """
         return t, c, a, x
         ORDER BY a.datePublished
     """
@@ -342,13 +346,22 @@ def get_children_for_api(orgs: List[Organization]):
             continue
         api_row = {"parent_org":org.best_name,
                     "parent_org_uri":org.uri,
-                    "children": children_for_api}
+                    "children": children_for_api,
+                    "completed_children_count": sum(
+                            [x["activity_status_as_string"]=="completed" for x in children_for_api]),
+                }
         api_results.append(api_row)
     return api_results
 
 def single_org_children(org):
+    cache_key = f"single_org_children_{org.uri}"
+    cached = cache.get(cache_key)
+    if cached is not None:
+        logger.debug(f"Single Org children from cache {cache_key}")
+        return cached
     children = get_child_orgs(org.uri)
     if len(children) == 0:
         return []
     children_for_api = org_activity_articles_to_api(children)
+    cache.set(cache_key, children_for_api)
     return children_for_api

@@ -1,7 +1,7 @@
 from topics.models import Resource
 from neomodel import db
 import logging
-from integration.neo4j_utils import output_same_as_stats, count_relationships
+from integration.neo4j_utils import output_same_as_stats, count_relationships, apoc_del_redundant_same_as
 from datetime import datetime
 logger = logging.getLogger(__name__)
 
@@ -33,6 +33,7 @@ class RDFPostProcessor(object):
     """
 
     def run_all_in_order(self):
+        apoc_del_redundant_same_as()
         tsnow = datetime.utcnow().isoformat().replace(":","").replace(".","_")
         with open(f"merge_logs/merge_{tsnow}.log","w",encoding='utf-8') as f:
             write_log_header("add_document_extract_to_relationship",f)

@@ -143,6 +143,8 @@ class ParentChildWithSearch(APIView):
             logger.debug(f"Couldn't find org with {org_name}")
         orgs_and_children = get_children_for_api(orgs)
         return Response({"orgs_and_children": orgs_and_children,
+                        "orgs_with_completed_children": sum(
+                            [x["completed_children_count"] > 0 for x in orgs_and_children ]),
                         "search_serializer": org_search,
                         "cache_ready": is_cache_ready(),
                         }, status=status.HTTP_200_OK)
