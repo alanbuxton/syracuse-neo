@@ -5,6 +5,7 @@
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 {% load static %}
+{% load topics_extras %}
 
 <title>{{ org_data.source_node_name }} - Children</title>
 
@@ -22,16 +23,30 @@
      Show Timeline</a>
   </p>
 
-  {% if org_children|length > 0 %}
-    <p><b>Showing Children for:</b> {{ org_data.uri }}</p>
-
-    {% include 'parent_child_list.html' %}
-
-    {% for child in org_children %}
-      {% include 'parent_child_list.html' %}
-    {% endfor %}
+  {% if completed_children_count > 0 %}
+    <p>Child organizations for <a href="{{ org_data.uri|local_uri:request }}">{{org_data.source_node_name}}</a>:</p>
+    <ul>
+      {% for child in org_children %}
+        {% include 'parent_child_list.html' %}
+      {% endfor %}
+    </ul>
   {% else %}
-    <p>No children found</p>
+    <p>No direct children found for {{ org_data.uri }}</p>
+  {% endif %}
+
+  {% if orgs_and_children|length > 0 %}
+    <p>Children for organizations with same/similar name to {{org_data.source_node_name }}:</p>
+    {% for org in orgs_and_children %}
+      {% if org.completed_children_count > 0 %}
+        <h6>{{ org.parent_org }} ({{ org.parent_org_uri|pretty_print_list_uri:request }})</a></h6>
+        <ul>
+        {% for child in org.children %}
+          {% include 'parent_child_list.html' %}
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
+
   {% endif %}
 
   {% include 'layouts/footer.html' %}

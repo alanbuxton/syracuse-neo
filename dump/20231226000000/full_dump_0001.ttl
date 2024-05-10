@@ -3447,7 +3447,7 @@
     ns1:documentExtract "Andrew Burton BlackRock (NYSE: BLK) agreed to acquire the remaining equity interest in SpiderRock Advisors, a provider of option overlay strategies in the U.S. wealth market, the company said on Friday." ;
     ns1:documentSource ns1:seekingalphacom_news_4077693-blackrock-to-acquire-the-rest-of-spiderrock-advisors-adding-to-sma-presence ;
     ns1:internalDocId 4076145 ;
-    ns1:status "has not happened" ;
+    ns1:status "completed" ;
     ns1:target <https://1145.am/db/4076145/Spiderrock> ;
     ns1:targetName "SpiderRock" ;
     ns1:whereGeoName "United States" ;

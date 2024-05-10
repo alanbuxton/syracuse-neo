@@ -158,9 +158,13 @@ class OrganizationChildrenList(APIView):
         o = Organization.nodes.get(uri=uri)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         children = single_org_children(o)
+        completed_children_count = sum([x["activity_status_as_string"]=="completed" for x in children])
+        orgs_and_children = get_children_for_api(o.sameAsNameOnly)
         resp = Response({"org_children": children,
+                            "completed_children_count": completed_children_count,
                             "org_data":org_data,
                             "cache_ready": is_cache_ready(),
+                            "orgs_and_children":orgs_and_children,
                             }, status=status.HTTP_200_OK)
         return resp
 

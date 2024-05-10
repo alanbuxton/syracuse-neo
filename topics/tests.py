@@ -197,7 +197,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_gets_children_list(self):
         client = self.client
 
-        response = client.get("/parent_child?name=Zendesk")
+        response = client.get("/parent-child?name=Zendesk")
         content = str(response.content)
         assert "Smooch" in content
         assert "VentureBeat" in content
@@ -220,3 +220,20 @@ class TestUtilsWithDumpData(TestCase):
         assert "https://1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
         assert "<strong>documentURL</strong>" not in content
         assert "<strong>name</strong>" in content
+
+    def test_shows_direct_parent_child_rels(self):
+        client = self.client
+        resp = client.get("/organization/children/uri/1145.am/db/3147748/Blackrock")
+        content = str(resp.content)
+        assert "Rivian" in content
+        assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
+        assert 'a href="https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/"' in content
+
+
+    def test_shows_parent_child_rels_via_same_as_name_only(self):
+        client = self.client
+        resp = client.get("/organization/children/uri/1145.am/db/4076145/Blackrock")
+        content = str(resp.content)
+        assert "Rivian" in content
+        assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
+        assert 'a href="https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/"' in content

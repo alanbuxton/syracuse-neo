@@ -19,7 +19,7 @@
 <p>
   {% for field, value in data_serializer.items %}
     <strong>{{ field }}</strong>:
-    {{ value|pretty_print_list_uri:request |safe}}<br/>
+    {{ value|pretty_print_list_uri:request }}<br/>
   {% endfor %}
 </p>
 
