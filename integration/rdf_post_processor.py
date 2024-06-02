@@ -9,7 +9,7 @@ class RDFPostProcessor(object):
 
     # m is target (that we are going to merge to), n is source (that we are copying relationships from)
     QUERY_SAME_AS_HIGH_FOR_MERGE = f"""
-        MATCH (m: Organization)-[x:sameAsHigh]-(n: Organization)
+        MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
         WHERE m.internalDocId <= n.internalDocId
         AND m.internalMergedSameAsHighToUri IS NULL
         AND n.internalMergedSameAsHighToUri IS NULL
