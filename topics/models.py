@@ -836,6 +836,12 @@ class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivit
 class OrganizationPerson(Organization, Person):
     __class_name_is_label__ = False
 
+class OrganizationRolePerson(Organization, Role, Person):
+    __class_name_is_label__ = False
+
+class OrganizationRole(Organization, Role):
+    __class_name_is_label__ = False
+
 
 def print_friendly(vals, limit = 2):
     if vals is None:
