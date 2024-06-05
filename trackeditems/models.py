@@ -51,7 +51,7 @@ class TrackedOrganization(models.Model):
 
     @property
     def organization_or_merged_uri(self):
-        org = Organization.get_by_uri_or_merged_uri(self.organization_uri)
+        org = Organization.self_or_ultimate_target_node(self.organization_uri)
         if org is not None:
             return org.uri
 

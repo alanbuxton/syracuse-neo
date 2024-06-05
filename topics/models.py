@@ -50,6 +50,14 @@ class Resource(StructuredNode):
     internalMergedSameAsHighToUri = StringProperty()
 
     @classmethod
+    def unmerged_or_none_by_uri(cls, uri):
+        return cls.unmerged_or_none({"uri":uri})
+
+    @classmethod
+    def unmerged_or_none(cls,params):
+        return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).get_or_none(**params)
+
+    @classmethod
     def randomized_active_nodes(cls,limit=10):
         return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).order_by('?')[:limit]
 
@@ -74,14 +82,14 @@ class Resource(StructuredNode):
         return self.earliestDocumentSource.datePublished
 
     @staticmethod
-    def get_by_uri_or_merged_uri(uri):
+    def self_or_ultimate_target_node(uri):
         r = Resource.nodes.get_or_none(uri=uri)
         if r is None:
             return None
         elif r.internalMergedSameAsHighToUri is None:
             return r
         else:
-            return Resource.get_by_uri_or_merged_uri(r.internalMergedSameAsHighToUri)
+            return Resource.self_or_ultimate_target_node(r.internalMergedSameAsHighToUri)
 
     @property
     def sourceDocumentURL(self):
@@ -546,19 +554,20 @@ class Organization(BasedInGeoMixin, Resource):
         name = cache.get(cache_key)
         if name is not None:
             return name
-        name_cands = self.industry or []
+        name_cands = (self.industry or []) + [] # ensure this is a copy of self.industry
         for x in self.sameAsHigh:
             if x.industry is not None:
                 name_cands.extend(x.industry)
         name_counter = Counter(sorted(name_cands,key=len))
         by_popularity = [x[0].title() for x in name_counter.most_common()]
+        cache.set(cache_key,by_popularity)
         return by_popularity
 
     def reset_cache(self):
         cache_key = f"org_name_{self.uri}"
         cache.delete(cache_key)
         cache_key = f"industries_{self.uri}"
-        cache.delete(industries)
+        cache.delete(cache_key)
 
     @property
     def best_name(self):
@@ -566,7 +575,7 @@ class Organization(BasedInGeoMixin, Resource):
         name = cache.get(cache_key)
         if name is not None:
             return name
-        name_cands = self.name
+        name_cands = (self.name or []) + [] # Ensure name_cands is a copy
         for x in self.sameAsHigh:
             if x.name is not None:
                 name_cands.extend(x.name)
@@ -577,7 +586,7 @@ class Organization(BasedInGeoMixin, Resource):
 
     @staticmethod
     def get_best_name_by_uri(uri):
-        org = Organization.get_by_uri_or_merged_uri(uri)
+        org = Organization.self_or_ultimate_target_node(uri)
         if org is not None:
             return org.best_name
 

@@ -19,7 +19,7 @@ class RDFPostProcessor(object):
         AND NOT "LocationActivity" IN LABELS(m)
         RETURN m,n
         ORDER BY m.internalDocId
-        LIMIT 1
+        LIMIT 1000
     """
 
     QUERY_SAME_AS_HIGH_FOR_MERGE_COUNT = f"""
@@ -34,37 +34,51 @@ class RDFPostProcessor(object):
 
     def run_all_in_order(self):
         apoc_del_redundant_same_as()
-        tsnow = datetime.utcnow().isoformat().replace(":","").replace(".","_")
-        with open(f"merge_logs/merge_{tsnow}.log","w",encoding='utf-8') as f:
-            write_log_header("add_document_extract_to_relationship",f)
-            self.add_document_extract_to_relationship()
-            write_log_header("merge_same_as_high_connections",f)
-            self.merge_same_as_high_connections(f)
+        write_log_header("add_document_extract_to_relationship")
+        self.add_document_extract_to_relationship()
+        write_log_header("merge_same_as_high_connections")
+        self.merge_same_as_high_connections()
 
-    def merge_same_as_high_connections(self,logfile=None):
-        if logfile:
-            logfunc = logfile.write
-        else:
-            logfunc = logger.debug
+    def merge_same_as_high_connections(self):
         cnt = 0
         log_count_relationships("Before merge_same_as_high_connections")
         while True:
+            logger.info("Querying for entries to merge")
             vals,_ = db.cypher_query(self.QUERY_SAME_AS_HIGH_FOR_MERGE,
                                         resolve_objects=True)
             if len(vals) == 0:
                 break
-            assert len(vals) == 1, f"{vals} should be one row"
-            val_row = vals[0]
-            target_node = val_row[0]
-            source_node = val_row[1]
-            logfunc(f"merging {source_node.uri} into {target_node.uri}\n")
-            Resource.merge_node_connections(source_node,target_node)
-            cnt += 1
-            if cnt % 1000 == 0:
-                log_count_relationships(f"After merge_same_as_high_connections {cnt} records")
-            if cnt % 100 == 0:
-                logger.info(f"Merged merge_same_as_high_connections {cnt} records")
+            for target_node_tmp, source_node_tmp in vals:
+                res = self.merge_nodes(source_node_tmp, target_node_tmp)
+                if res is False:
+                    break
+                cnt += 1
+                if cnt % 1000 == 0:
+                    log_count_relationships(f"After merge_same_as_high_connections {cnt} records")
+                if cnt % 100 == 0:
+                    logger.info(f"Merged merge_same_as_high_connections {cnt} records")
+
         log_count_relationships("After merge_same_as_high_connections")
+
+    def merge_nodes(self,source_node_tmp, target_node_tmp):
+        source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp.uri)
+        target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp.uri)
+        logger.info(f"Merging {source_node_tmp.uri} ({source_node2.uri}) into {target_node_tmp.uri} ({target_node2.uri})")
+        if source_node2.internalMergedSameAsHighToUri is not None:
+            logger.info(f"{source_node2.uri} is already merged into {source_node2.internalMergedSameAsHighToUri}, not merging again")
+            return False
+        if target_node2.internalDocId <= source_node2.internalDocId:
+            source_node = source_node2
+            target_node = target_node2
+        else:
+            logger.info(f"Flipping them round because {source_node2.internalDocId} is lower then {target_node2.internalDocId}")
+            source_node = target_node2
+            target_node = source_node2
+        if source_node.uri == target_node.uri:
+            logger.info("Nodes are already merged to the same target, skipping")
+            return False
+        Resource.merge_node_connections(source_node,target_node)
+        return True
 
 
     def add_document_extract_to_relationship(self):
@@ -81,16 +95,9 @@ class RDFPostProcessor(object):
             """
         db.cypher_query(query)
 
-def write_log_header(message,logfile):
-    logfile.writelines([
-        "\n",
-        "*" * 50,
-        "\n",
-        message,
-        "\n",
-        "*" * 50,
-        "\n",
-        ])
+def write_log_header(message):
+    for row in ["*" * 50, message, "*" * 50]:
+        logger.info(row)
 
 def log_count_relationships(text):
     cnt = count_relationships()

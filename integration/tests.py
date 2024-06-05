@@ -1,4 +1,5 @@
 from django.test import SimpleTestCase, TestCase
+from topics.cache_helpers import nuke_cache
 from neomodel import db
 import time
 import os
@@ -10,6 +11,8 @@ from integration.neo4j_utils import (
     apoc_del_redundant_same_as,
 )
 from integration.rdf_post_processor import RDFPostProcessor
+import logging
+logger = logging.getLogger(__name__)
 
 
 '''
@@ -27,9 +30,12 @@ def count_relevant_nodes():
     val, _ = db.cypher_query(query)
     return val[0][0]
 
-def clean_db_and_load_files(dirname):
+def clean_db():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
     DataImport.objects.all().delete()
+
+def clean_db_and_load_files(dirname):
+    clean_db()
     assert DataImport.latest_import() == None # Empty DB
     do_import_ttl(dirname=dirname,force=True,do_archiving=False,do_post_processing=False)
     delete_all_not_needed_resources() # Lots of "sameAs" entries that aren't available in any test data
@@ -117,5 +123,96 @@ class RdfPostProcessingTestCase(TestCase):
                     'https://1145.am/db/4075105/Openai', 'https://1145.am/db/4076328/Openai',
                     'https://1145.am/db/4074766/Openai', 'https://1145.am/db/4071554/Openai'])
 
+class MergeSameAsHighTestCase(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        clean_db()
+        nuke_cache() # Company name etc are stored in cache
+        org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijk")]
+        act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"mnopqrs")]
+        node_list = ", ".join(org_nodes + act_nodes)
+        query = f"""
+            CREATE {node_list},
+            (a)<-[:sameAsHigh]-(b),
+            (b)-[:sameAsHigh]->(c),
+            (c)-[:sameAsHigh]->(d),
+            (e)-[:sameAsHigh]->(f),
+            (f)<-[:sameAsHigh]-(g),
+            (g)-[:sameAsHigh]->(a),
+
+            (h)-[:sameAsHigh]->(i),
+            (i)-[:sameAsHigh]->(j),
+            (i)<-[:sameAsHigh]-(k),
+
+            (a)-[:buyer]->(m),
+            (b)-[:buyer]->(n),
+            (c)-[:buyer]->(o),
+            (d)-[:investor]->(p),
+            (e)-[:investor]->(q),
+            (f)-[:buyer]->(r),
+            (g)-[:buyer]->(s),
+
+            (m)-[:target]->(h),
+            (n)-[:target]->(i),
+            (o)-[:target]->(j),
+            (p)-[:target]->(k),
+            (q)-[:target]->(h),
+            (r)-[:target]->(i),
+            (s)-[:target]->(j)
+        """
+        res,_ = db.cypher_query(query)
+        R = RDFPostProcessor()
+        a = Organization.nodes.get_or_none(uri="https://1145.am/db/100/a")
+        assert len(a.buyer) == 1
+        assert len(a.investor) == 0
+        assert len(a.vendor) == 0
+        R.merge_same_as_high_connections()
+
+    def test_merges_all_same_as_highs(self):
+        target_uris = []
+        merged_uris = []
+        for x, y in zip("abcdefghijk",range(100,200)):
+            uri = f"https://1145.am/db/{y}/{x}"
+            if x in "ah": # target merged nodes
+                target_uris.append(uri)
+            else:
+                merged_uris.append(uri)
+        for uri in target_uris:
+            logger.info(uri)
+            assert Organization.unmerged_or_none_by_uri(uri) is not None
+        for uri in merged_uris:
+            logger.info(uri)
+            assert Organization.nodes.get_or_none(uri=uri) is not None
+            assert Organization.unmerged_or_none_by_uri(uri) is None
+
+    def test_attributes_for_ultimate_target(self):
+        a = Organization.self_or_ultimate_target_node("https://1145.am/db/100/a")
+        assert a.best_name == 'Name A'
+        assert a.industry_as_str == 'Baz, Bar'
+
+    def test_gets_ultimate_target(self):
+        o = Organization.self_or_ultimate_target_node("https://1145.am/db/105/f")
+        assert o.uri == "https://1145.am/db/100/a"
+        assert o.best_name == 'Name A'
+
+    def test_merges_connections1(self):
+        a = Organization.self_or_ultimate_target_node("https://1145.am/db/101/b") # Actually a
+        assert a.uri == "https://1145.am/db/100/a"
+        assert len(a.buyer) == 5
+        assert len(a.investor) == 2
+        assert len(a.vendor) == 0
+
+    def test_merges_connections2(self):
+        h = Organization.self_or_ultimate_target_node("https://1145.am/db/109/j") # Actually h
+        assert len(h.target) == 7
+
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
+
+
+def make_node(doc_id,letter,node_type="Organization"):
+    industry = "bar" if letter in "aeiou" else "baz"
+    node = f"({letter}:Resource:{node_type} {{uri: 'https://1145.am/db/{doc_id}/{letter}', name: ['Name {letter.upper()}'], industry: ['{industry}'], internalDocId: {doc_id}}})"
+    doc_source = f"(docsource_{letter}:Resource:Article {{uri: 'https://1145.am/db/article_{letter}', sourceOrganization:'Foo'}})"
+    return f"{node}-[:documentSource]->{doc_source}"
