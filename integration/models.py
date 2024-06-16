@@ -25,6 +25,8 @@ class DataImport(models.Model):
     @staticmethod
     def latest_import_ts():
         ts = DataImport.latest_import()
+        if ts is None:
+            return None
         fmt = "%Y%m%d%H%M%S"
         d = datetime.strptime(str(ts),fmt)
-        return d.astimezone(timezone.utc)    
+        return d.astimezone(timezone.utc)

@@ -10,14 +10,14 @@ function convert_uri(value) {
 
 function showItemDetails(item_id, lookup_dict, node_or_edge) {
 	item_vals = Object.entries(lookup_dict[item_id]);
-  entityType = '';
+  entity_type = '';
   text = "";
   documentURL = "";
   archive_org_page_url = "";
   archive_org_list_url = "";
 
   for (const [key, value] of item_vals) {
-    if (key.endsWith("URL") | (key.toLowerCase() == "uri")) {
+    if ( key.toLowerCase().endsWith("url") | (key.toLowerCase().endsWith("uri")) ) {
       if (Array.isArray(value)) {
         val_as_arr = value
       } else {
@@ -26,23 +26,23 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
       for (val_id in val_as_arr) {
           val = val_as_arr[val_id]
           uri_target = convert_uri(val)
-          text = text + "<b>" + key + "</b>: <a href='" + uri_target + "' target='_blank'>" + val + "</a></br>";
+          text = text + "<strong>" + titleCase(key) + "</strong>: <a href='" + uri_target + "' target='_blank'>" + val + "</a></br>";
       }
     } else {
-      text = text + "<b>" + key + "</b>: " + value + "</br>";
+      text = text + "<strong>" + titleCase(key) + "</strong>: " + value + "</br>";
     }
-    if (key === 'entityType') {
-      entityType = value;
+    if (key === 'entity_type') {
+      entity_type = value;
     }
-    if (key === 'documentURL') {
-      documentURL = value;
-    }
-    if (key === 'archiveOrgPageURL') {
+    // if (key === 'document_url') {
+    //   documentURL = value;
+    // }
+    if (key === 'internet_archive_page_url') {
       archive_org_page_url = value;
     }
-    if (key === 'archiveOrgListURL') {
-      archive_org_list_url = value;
-    }
+    // if (key === 'internet_archive_list_url') {
+    //   archive_org_list_url = value;
+    // }
   }
 
   if (archive_org_page_url !== '') {
@@ -51,11 +51,11 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
 
   text = text + "<br/>";
 
-  if (entityType == 'Organization') {
+  if (entity_type == 'Organization') {
     path = item_id.replace("https://","");
     path = path.replace("http://","");
     text = text + "<p><a href='/organization/linkages/uri/" + path + "'>Show a new visualization centered on this organization</a></p>";
-  } else if (entityType == 'Cluster') {
+  } else if (entity_type == 'Cluster') {
     text = text + "<p>This is the central organization for this linkages graph</p>";
   }
 
@@ -73,4 +73,14 @@ function error_form(node_or_edge, unique_id) {
   text = text + "<textarea name='reason' id='reasonTextArea' class='form-control' rows='3'></textarea></div><input type='submit' value='Submit Suggestion'/></form>";
   return text
 
+}
+
+// From https://stackoverflow.com/a/46501455/7414500
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1, str.length).toLowerCase();
+}
+
+function titleCase(str) {
+  s1 = str.replace(/[^\ \/\-\_]+/g, capitalize).replace(/_/g," ");
+  return s1.replace("Uri","URI").replace("Url","URL").replace("Rdf","RDF");
 }

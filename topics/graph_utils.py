@@ -1,5 +1,5 @@
 import re
-from topics.models import Organization, Person, ActivityMixin, Resource, Role, Article
+from topics.models import Organization, Person, ActivityMixin, Resource, Role, Article, IndustryCluster
 from typing import List, Dict, Tuple, Set
 import logging
 
@@ -12,7 +12,8 @@ EDGE_COLORS = { "spender": "red",
                 "vendor": "cyan",
                 "participant": "orange",
                 "protagonist": "salmon",
-                "target": "green"}
+                "target": "green",
+                "documenSource": "black"}
 
 LOCATION_NODE_COLOR = "#cddb9a"
 
@@ -21,169 +22,94 @@ def node_color_shape(node):
         return ("#c7deff","box")
     elif isinstance(node, Person):
         return ("#f5e342","ellipse")
-    elif isinstance(node, Article):
+    elif isinstance(node, ActivityMixin):
         return ("#f5c4ff","hexagon")
-    elif issubclass(node.__class__, ActivityMixin):
-        if not hasattr(node, "status"):
-            return ("#f6c655","diamond")
-        if node.when is not None:
-            return ("#f6c655","diamond")
-        elif node.status == "has not happened":
-            return ("#ffe6ff","diamond")
-        else:
-            return ("#b3ffff","diamond")
+    elif isinstance(node, Article):
+        return ("#f6c655","diamond")
+    elif isinstance(node, IndustryCluster):
+        return ("#cf6e1f","diamond")
     return ("#defa9d","triangleDown")
 
-def get_nodes_edges(source_node_id,relationships) -> Tuple[ List[Dict], List[Dict], Dict, Set[Resource] ]:
-    node_data = [] # list of dicts - including basic serialzied info (includes URI)
-    edge_data = [] # list of dicts
-    serialized_nodes = {} # full details for each node, keyed by URI, for detailed node display
-    raw_nodes = set()
-    serialized_edges = {}
-    for rel_type, direction, rel_node in relationships:
-        val = rel_node.serialize()
-        val["id"] = val["uri"]
-        (color, shape) = node_color_shape(rel_node)
-        node_vals = {**val, **{"color": color, "shape": shape}}
-        if direction == "to":
-            from_node_id = source_node_id
-            to_node_id = rel_node.uri
-            arrow_direction = "to"
-        elif direction == "from":
-            from_node_id = rel_node.uri
-            to_node_id = source_node_id
-            arrow_direction = "to"
-        else:
-            sorted_nodes = sorted([source_node_id,rel_node.uri],key=lambda x: x.uri)
-            from_node_id = sorted_nodes[0]
-            to_node_id = sorted_nodes[1]
-            arrow_direction = "none"
-        edge_color = EDGE_COLORS.get(rel_type)
-        edge_label = rel_type_to_edge_label(rel_type)
-        edge_vals = {"id": f"{from_node_id}-{to_node_id}-{edge_label}", "from": from_node_id, "to": to_node_id, "label": edge_label, "arrows": arrow_direction, "color": edge_color}
-        node_data.append(node_vals)
-        edge_data.append(edge_vals)
-        serialized_nodes[rel_node.uri]=rel_node.serialize_no_none()
-        edge_display_data = {"from":from_node_id,"to":to_node_id,"relationship":rel_type}
-        if node_vals.get("documentExtract"):
-            edge_display_data["documentExtract"] = node_vals["documentExtract"]
-        serialized_edges[edge_vals["id"]]=edge_display_data
-        raw_nodes.add(rel_node)
-    return node_data, edge_data, serialized_nodes, raw_nodes, serialized_edges
+def graph_centered_on(start_node, **kwargs):
+    root_node = Resource.self_or_ultimate_target_node(start_node)
+    root_uri = root_node.uri
+    node_data = [ resource_to_node_data(root_node) ] # Nodes for graph
+    node_details = {root_uri:root_node.serialize_no_none()} # Node info to show on click
+    edge_data = [] # Edges for graph
+    edge_details = {} # Edge info to show on click
+    root_node_data = resource_to_node_data(root_node)
+    include_same_as_name_only = kwargs.get("include_same_as_name_only",True)
+    uris_to_ignore = set()
 
-def graph_source_activity_target(source_node, **kwargs):
-    root_uri = source_node.uri
-    root_node_dict = source_node.serialize()
-    (color, shape) = node_color_shape(source_node)
-    root_node_data = {**{"id":root_uri,"color":color,"shape":shape},**root_node_dict}
-    all_nodes = [root_node_data]
-    node_details= {root_uri: root_node_dict}
-    future_round_raw_nodes = set([source_node])
-    seen_raw_nodes = future_round_raw_nodes.copy()
-    all_edges = []
-    edge_details = {}
+    if include_same_as_name_only is True:
+        same_as_name_onlies = root_node.sameAsNameOnly.all()
+        uris_to_ignore = set([x.uri for x in same_as_name_onlies])
 
-    while len(future_round_raw_nodes) > 0:
-        future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details = add_next_round_of_graph(
-            future_round_raw_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details)
-        future_round_raw_nodes = [x for x in future_round_raw_nodes if
-                        isinstance(x,ActivityMixin) or isinstance(x,Role)]
+    for rel_data in root_node.all_directional_relationships():
+        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
 
-    for node in seen_raw_nodes:
-        for a,b in zip ( ["basedInHighGeoName","nameGeoName","whereGeoName" ], ["basedIn","where","where"]):
-            loc_nodes = get_loc_nodes_if_exist(node, a,b, node_details)
-            if loc_nodes is None:
-                continue
-            for node_js_data, node_display_data, edge_js_data, edge_display_data in loc_nodes:
-                if node_js_data not in all_nodes:
-                    all_nodes.append(node_js_data)
-                    node_details[node_js_data['uri']] = node_display_data
-                if edge_js_data not in all_edges:
-                    all_edges.append(edge_js_data)
-                    edge_details[edge_js_data["id"]] = edge_display_data
+    if include_same_as_name_only is True:
+        for org in same_as_name_onlies:
+            for rel_data in org.all_directional_relationships(override_from_uri=root_uri):
+                if rel_data["other_node"] not in same_as_name_onlies:
+                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
 
-    same_as_rels = Organization.find_same_as_relationships(set(seen_raw_nodes) - set([source_node]))
-    for rel_type, node1, node2 in same_as_rels:
-        edge_color = EDGE_COLORS.get(rel_type)
-        edge_label = rel_type_to_edge_label(rel_type)
-        edge_vals = {"id": f"{node1.uri}-{node2.uri}-{edge_label}","from": node1.uri, "to": node2.uri, "label": edge_label, "arrows": "none", "color": edge_color}
-        if edge_vals not in all_edges:
-            all_edges.append(edge_vals)
-        edge_details[edge_vals["id"]] = {"from":node1.uri,"to":node2.uri,"relationship":rel_type}
-
-    cleaned_nodes, cleaned_edges = clean_graph_data(all_nodes, all_edges)
-
-    return cleaned_nodes, cleaned_edges, node_details, edge_details
+    return node_data, edge_data, node_details, edge_details
 
 
-def get_loc_nodes_if_exist(node, field, edge_name, node_details, location_node_color=LOCATION_NODE_COLOR):
-    url_field = field + "URL"
-    if not hasattr(node, url_field):
-        return None
-    locations = getattr(node,url_field)
-    if locations is None:
-        return None
-    matching_nodes = []
-    if isinstance(locations, str):
-        locations = [locations]
-    for loc_uri in locations:
-        node_display_details = {"label":loc_uri, "entityType":"Location","uri":loc_uri}
-        node_extra_js_data = {"id": loc_uri, "color": location_node_color}
-        related_node = node_details[node.uri]
-        edge_display_details = {"from":node.uri,"to":loc_uri,"relationship":edge_name}
-        if related_node.get("documentTitle"):
-            edge_display_details["documentTitle"]=related_node["documentTitle"]
-        if related_node.get("documentExtract"):
-            edge_display_details["documentExtract"] = related_node["documentExtract"]
-        edge_upper = rel_type_to_edge_label(edge_name)
-        edge_extra_js_data = {"id": f"{node.uri}-{loc_uri}-{edge_upper}","label": edge_upper, "arrows": "to", "color": "black"}
-        loc_node_data = ({**node_display_details,**node_extra_js_data},
-                            node_display_details,
-                            {**edge_display_details,**edge_extra_js_data},
-                            edge_display_details)
-        matching_nodes.append(loc_node_data)
-    return matching_nodes
+def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore):
+    other_node = rel_data["other_node"]
+    logger.info(f"From {rel_data['from_uri']} to {other_node.uri}")
+    if other_node.uri in uris_to_ignore:
+        logger.info(f"Ignoring {other_node}")
+        return
+    if not isinstance(other_node, IndustryCluster) and other_node.internalDocId is None:
+        logger.info(f"Not showing external {other_node}")
+    # Add this relationship and node to the graph
+    next_edge = build_edge_vals(rel_data["direction"],rel_data["label"],rel_data["from_uri"],other_node.uri)
+    next_edge_id = next_edge["id"]
+    if next_edge_id in edge_details:
+        logger.info(f"Already seen {next_edge_id}, ignoring")
+        return
+    edge_data.append(next_edge)
+    edge_detail = {"from_uri":rel_data["from_uri"],"to_uri":other_node.uri,"relationship":rel_data["label"]}
+    doc_extract = rel_data.get("document_extract")
+    if doc_extract is not None:
+        edge_detail["document_extract"] = doc_extract
+    edge_details[next_edge_id] = edge_detail
+    other_uri = other_node.uri
+    if other_uri in node_details:
+        logger.info(f"{other_uri} already seen, not adding")
+        return
+    node_details[other_uri] = other_node.serialize_no_none()
+    node_data.append( resource_to_node_data(other_node))
+    # find more relationships
+    if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster):
+        for rel_data in other_node.all_directional_relationships():
+            build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
 
-def add_next_round_of_graph(next_round_nodes, seen_raw_nodes, all_nodes, all_edges, node_details, edge_details):
-    future_round_raw_nodes = []
-    for node in next_round_nodes:
-        rels = node.all_directional_relationships()
-        new_node_data, new_edge_data, serialized_nodes, raw_nodes, serialized_edges = get_nodes_edges(node.uri,rels)
-        for new_node in new_node_data:
-            if new_node not in all_nodes:
-                all_nodes.append(new_node)
-        for new_edge in new_edge_data:
-            if new_edge not in all_edges:
-                all_edges.append(new_edge)
-        for raw_node in raw_nodes:
-            if raw_node not in seen_raw_nodes:
-                future_round_raw_nodes.append(raw_node)
-                seen_raw_nodes.add(raw_node)
-        node_details = {**serialized_nodes,**node_details} # Don't overwrite existing node details with new ones
-        edge_details = {**serialized_edges,**edge_details}
-    return future_round_raw_nodes, seen_raw_nodes, all_nodes, node_details, all_edges, edge_details
 
-def rel_type_to_edge_label(text):
-    text = re.sub(r'(?<!^)(?=[A-Z])', '_', text).upper()
-    text = re.sub(r'^REL_','',text)
-    text = re.sub("_GEO_NAME_","_GEONAME_",text)
-    text = re.sub("R_D_F","RDF",text)
-    return text
+def build_edge_vals(direction, edge_label, source_node_id, target_node_id):
+    if direction == "to":
+        from_node_id = source_node_id
+        to_node_id = target_node_id
+        arrow_direction = "to"
+    elif direction == "from":
+        from_node_id = target_node_id
+        to_node_id = source_node_id
+        arrow_direction = "to"
+    else:
+        sorted_nodes = sorted([source_node_id,target_node_id])
+        from_node_id = sorted_nodes[0]
+        to_node_id = sorted_nodes[1]
+        arrow_direction = "none"
+    edge_color = EDGE_COLORS.get(edge_label)
+    edge_vals = {"id": f"{from_node_id}-{to_node_id}-{edge_label}", "from": from_node_id, "to": to_node_id, "label": edge_label, "arrows": arrow_direction, "color": edge_color}
+    return edge_vals
 
-def clean_graph_data(node_data, edge_data):
-    seen_nodes = [] # list of ids
-    seen_edges = [] # tuple of from, to, type
-    clean_node_data = []
-    clean_edge_data = []
-    for node in node_data:
-        if node["id"] in seen_nodes:
-            continue
-        seen_nodes.append(node["id"])
-        clean_node_data.append(node)
-    for edge in edge_data:
-        tup = (edge["from"],edge["to"],edge["label"],edge["arrows"])
-        if tup in seen_edges:
-            continue
-        seen_edges.append(tup)
-        clean_edge_data.append(edge)
-    return clean_node_data, clean_edge_data
+
+def resource_to_node_data(node):
+    color, shape = node_color_shape(node)
+    serialized = node.serialize_no_none()
+    node_data = {"id":node.uri,"color":color,"shape":shape,"label":serialized.get("label",node.uri),"entity_type":serialized["entity_type"]}
+    return node_data

@@ -31,6 +31,9 @@ def pretty_local_uri(uri, request):
 def local_uri(uri, request):
     return re.sub(r"^https://",f"{request.scheme}://{request.get_host()}/resource/",uri)
 
+def prettify_snake_case(text):
+    return text.replace("_"," ").title()
 
 register.filter("pretty_print_list_uri",pretty_print_list_uri)
 register.filter("local_uri",local_uri)
+register.filter("prettify_snake_case",prettify_snake_case)

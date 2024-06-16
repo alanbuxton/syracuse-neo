@@ -1,7 +1,7 @@
 from django.test import TestCase
 from topics.models import *
 from topics.model_queries import *
-from topics.graph_utils import graph_source_activity_target
+from topics.graph_utils import graph_centered_on
 from topics.timeline_utils import get_timeline_data
 import os
 from integration.management.commands.import_ttl import do_import_ttl
@@ -12,6 +12,9 @@ from topics.cache_helpers import nuke_cache
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
+from integration.tests import make_node, clean_db
+import json
+import re
 
 '''
     Care these tests will delete neodb data
@@ -57,15 +60,15 @@ class TestUtilsWithDumpData(TestCase):
     def test_corp_fin_graph_nodes(self):
         source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
         o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 9
+        clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
+        assert len(clean_node_data) == 8
         assert set([x['label'] for x in clean_node_data]) == set(
                 ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest', 'Investment (VentureBeat: Mar 2019)',
                 'Peakon', 'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone',
-                'https://sws.geonames.org/2623032']
+                ]
         )
-        assert len(clean_edge_data) == 9
-        assert set([x['label'] for x in clean_edge_data]) == {'BASED_IN', 'DOCUMENT_SOURCE', 'INVESTOR', 'TARGET'}
+        assert len(clean_edge_data) == 8
+        assert set([x['label'] for x in clean_edge_data]) == {'target', 'documentSource', 'investor'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -82,9 +85,9 @@ class TestUtilsWithDumpData(TestCase):
     def test_location_graph(self):
         source_uri = "https://1145.am/db/4075107/Italian_Engineering_Group"
         o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 7
-        assert len(clean_edge_data) == 7
+        clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
+        assert len(clean_node_data) == 5
+        assert len(clean_edge_data) == 6
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -99,12 +102,12 @@ class TestUtilsWithDumpData(TestCase):
         assert len(org_display_details) == 1
         assert errors == set()
 
-    def test_role(self):
+    def test_role_graph(self):
         source_uri = "https://1145.am/db/4072168/Royal_Bank_Of_Canada"
         o = Organization.nodes.get_or_none(uri=source_uri)
-        clean_node_data, clean_edge_data, node_details, edge_details = graph_source_activity_target(o)
-        assert len(clean_node_data) == 7
-        assert len(clean_edge_data) == 9
+        clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
+        assert len(clean_node_data) == 6
+        assert len(clean_edge_data) == 8
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -117,6 +120,20 @@ class TestUtilsWithDumpData(TestCase):
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
         assert errors == set()
+
+    def test_organization_graph_view_with_same_as_name_only(self):
+        client = self.client
+        response = client.get("/organization/linkages/uri/1145.am/db/3146906/Yamaha_Motor?include_same_as_name_only=1")
+        content = str(response.content)
+        assert len(re.findall("https://1145.am/db",content)) == 226
+        assert "Roam Robotics" in content
+
+    def test_organization_graph_view_without_same_as_name_only(self):
+        client = self.client
+        response = client.get("/organization/linkages/uri/1145.am/db/3146906/Yamaha_Motor?include_same_as_name_only=0")
+        content = str(response.content)
+        assert len(re.findall("https://1145.am/db",content)) == 98
+        assert  "Roam Robotics" not in content
 
     def test_stats(self):
         max_date = date.fromisoformat("2024-03-10")
@@ -138,7 +155,7 @@ class TestUtilsWithDumpData(TestCase):
         max_date = date.fromisoformat("2024-03-10")
         min_date = date.fromisoformat("2024-03-03")
         country_code = 'CA-02'
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as_name_only=False)
         assert len(matching_activity_orgs) == 5
         sorted_participants = [tuple(sorted(x['participants'].keys())) for x in matching_activity_orgs]
         assert set(sorted_participants) == {(), ('vendor',), ('organization', 'person', 'role')}
@@ -194,23 +211,14 @@ class TestUtilsWithDumpData(TestCase):
         res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
         assert len(res) == 4
 
-    def test_gets_children_list(self):
-        client = self.client
-
-        response = client.get("/parent-child?name=Zendesk")
-        content = str(response.content)
-        assert "Smooch" in content
-        assert "VentureBeat" in content
-        assert "Zendesk acquires conversational platform Smooch" in content
-
     def test_shows_resource_data_with_no_docid(self):
         client = self.client
         resp = client.get("/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b")
         content = str(resp.content)
         assert "/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo" in content
         assert "https://1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b" in content
-        assert "<strong>documentURL</strong>" in content
-        assert "<strong>name</strong>" not in content
+        assert "<strong>Document Url</strong>" in content
+        assert "<strong>Name</strong>" not in content
 
     def test_shows_resource_data_with_docid(self):
         client = self.client
@@ -218,22 +226,104 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         assert "/resource/1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
         assert "https://1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
-        assert "<strong>documentURL</strong>" not in content
-        assert "<strong>name</strong>" in content
+        assert "<strong>Document Url</strong>" not in content
+        assert "<strong>Name</strong>" in content
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        resp = client.get("/organization/children/uri/1145.am/db/3147748/Blackrock")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3147748/Blackrock")
         content = str(resp.content)
         assert "Rivian" in content
         assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
-        assert 'a href="https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/"' in content
-
+        assert "https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/" in content
 
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
-        resp = client.get("/organization/children/uri/1145.am/db/4076145/Blackrock")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/4076145/Blackrock")
         content = str(resp.content)
         assert "Rivian" in content
         assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
-        assert 'a href="https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/"' in content
+        assert "https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/" in content
+
+class TestFamilyTree(TestCase):
+
+    def setUpTestData():
+        clean_db()
+        nuke_cache() # Company name etc are stored in cache
+        org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
+        act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"opqrstuvw")]
+        node_list = ", ".join(org_nodes + act_nodes)
+        query = f"""CREATE {node_list},
+            (a)-[:buyer]->(q)-[:target]->(b),
+            (a)-[:investor]->(r)-[:target]->(c),
+            (b)-[:buyer]->(s)-[:target]->(d),
+
+            (a)-[:sameAsNameOnly]->(e),
+            (e)-[:buyer]->(o)-[:target]->(f),
+            (b)-[:sameAsNameOnly]->(g),
+            (g)-[:investor]->(p)-[:target]->(h),
+            (z)-[:sameAsNameOnly]->(d),
+
+            (i)-[:buyer]->(w)-[:target]->(j),
+            (i)-[:investor]->(t)-[:target]->(k),
+            (j)-[:buyer]->(u)-[:target]->(l),
+
+            (l)-[:sameAsNameOnly]->(n),
+            (m)-[:buyer]->(v)-[:target]->(n)
+        """
+        db.cypher_query(query)
+
+    def test_gets_parent_orgs_without_same_as_name_only(self):
+        uri = "https://1145.am/db/111/l"
+        parents, other_parents = get_parent_orgs(uri,include_same_as_name_only=False)
+        assert len(parents) == 1
+        uris = [x.uri for x,_,_,_,_ in parents]
+        assert set(uris) == set(["https://1145.am/db/109/j"])
+        assert len(other_parents) == 0
+
+    def test_gets_parent_orgs_with_same_as_name_only(self):
+        uri = "https://1145.am/db/111/l"
+        parents, other_parents = get_parent_orgs(uri,include_same_as_name_only=True)
+        assert len(parents) == 1
+        uris = [x.uri for x,_,_,_,_ in parents]
+        assert set(uris) == set(["https://1145.am/db/109/j"])
+        assert len(other_parents) == 1
+        assert other_parents[0] == "https://1145.am/db/112/m"
+
+    def test_gets_child_orgs_without_same_as_name_only(self):
+        uri = "https://1145.am/db/101/b"
+        children = get_child_orgs(uri,include_same_as_name_only=False)
+        assert len(children) == 1
+        child_uris = [x.uri for (x,_,_,_,_) in children]
+        assert set(child_uris) == set(["https://1145.am/db/103/d"])
+
+    def test_gets_child_orgs_with_same_as_name_only(self):
+        uri = "https://1145.am/db/101/b"
+        children = get_child_orgs(uri)
+        assert len(children) == 2
+        child_uris = [x.uri for (x,_,_,_,_) in children]
+        assert set(child_uris) == set(["https://1145.am/db/103/d","https://1145.am/db/107/h"])
+
+    def test_gets_family_tree_without_same_as_name_only(self):
+        uri = "https://1145.am/db/101/b"
+        o = Organization.self_or_ultimate_target_node(uri)
+        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":False})
+        d = nodes_edges.data
+        assert len(d['nodes']) == 4
+        assert len(d['edges']) == 3
+        edge_details = json.loads(d['edge_details'])
+        assert len(edge_details) == len(d['edges'])
+        node_details = json.loads(d['node_details'])
+        assert len(node_details) == len(d['nodes'])
+
+    def test_gets_family_tree_with_same_as_name_only(self):
+        uri = "https://1145.am/db/101/b"
+        o = Organization.self_or_ultimate_target_node(uri)
+        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":True})
+        d = nodes_edges.data
+        assert len(d['nodes']) == 6
+        assert len(d['edges']) == 5
+        edge_details = json.loads(d['edge_details'])
+        assert len(edge_details) == len(d['edges'])
+        node_details = json.loads(d['node_details'])
+        assert len(node_details) == len(d['nodes'])

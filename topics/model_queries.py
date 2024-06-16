@@ -9,15 +9,15 @@ from topics.geo_utils import geo_select_list
 
 logger = logging.getLogger(__name__)
 
-def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=True):
+def get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as_name_only=True):
     relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=relevant_uris,
-                                max_date=max_date, limit=limit, include_same_as=include_same_as)
+                                max_date=max_date, limit=limit, include_same_as_name_only=include_same_as_name_only)
     return matching_activity_orgs
 
 def get_activities_for_serializer_by_source_and_date_range(source_name, min_date, max_date, limit=20):
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, source_name=source_name,
-                                max_date=max_date, limit=limit, include_same_as=False)
+                                max_date=max_date, limit=limit, include_same_as_name_only=False)
     return matching_activity_orgs
 
 def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None, limit=20):
@@ -46,15 +46,15 @@ def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limi
 def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str],None] = None,
                                             source_name: Union[str,None] = None,
                                             max_date = datetime.now(tz=timezone.utc),
-                                            limit = None, include_same_as=True):
+                                            limit = None, include_same_as_name_only=True):
     assert min_date is not None, "Must have min date"
     assert min_date <= max_date,  f"Min date {min_date} must be before or same as max date {max_date}"
     if (uri_or_list is None or len(uri_or_list) == 0 or set(uri_or_list) == {None}) and source_name is None:
         return []
     if source_name is None:
-        activity_articles = get_activities_by_org_uri_and_date_range(uri_or_list, min_date, max_date, limit,include_same_as)
+        activity_articles = get_activities_by_org_uri_and_date_range(uri_or_list, min_date, max_date, limit,include_same_as_name_only)
     else:
-        activity_articles = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, include_same_as)
+        activity_articles = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, include_same_as_name_only)
     return activity_articles_to_api_results(activity_articles)
 
 def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id):
@@ -160,15 +160,15 @@ def build_get_activities_by_source_and_date_range_query(source_name,min_date, ma
     return query
 
 def get_activities_by_org_uri_and_date_range(uri_or_uri_list: Union[str,List], min_date,
-                        max_date, limit=None, include_same_as=True, counts_only = False):
+                        max_date, limit=None, include_same_as_name_only=True, counts_only = False):
     query=build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list,
-                        min_date, max_date, limit=limit, include_same_as=include_same_as,
+                        min_date, max_date, limit=limit, include_same_as_name_only=include_same_as_name_only,
                         counts_only = counts_only)
     objs, _ = db.cypher_query(query, resolve_objects=True)
     return objs[:limit]
 
 def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[str,List],
-                    min_date, max_date, limit=None, include_same_as=True,
+                    min_date, max_date, limit=None, include_same_as_name_only=True,
                     counts_only = False):
     if isinstance(uri_or_uri_list, str):
         uri_list = [uri_or_uri_list]
@@ -178,9 +178,9 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
         uri_list = uri_or_uri_list
     orgs = Organization.nodes.filter(uri__in=uri_list)
     uris_to_check = set(uri_list)
-    if include_same_as is True:
+    if include_same_as_name_only is True:
         for org in orgs:
-            new_uris = [x.uri for x in org.same_as()]
+            new_uris = [x.uri for x in org.sameAsNameOnly]
             uris_to_check.update(new_uris)
     if limit is not None:
         limit_str = f"LIMIT {limit}"
@@ -274,7 +274,7 @@ def get_source_counts(source_name, min_date,max_date):
 
 def get_country_region_counts(geo_code,min_date,max_date):
     relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
-    counts = get_activities_by_org_uri_and_date_range(relevant_uris,min_date,max_date,include_same_as=False,counts_only=True)
+    counts = get_activities_by_org_uri_and_date_range(relevant_uris,min_date,max_date,include_same_as_name_only=False,counts_only=True)
     return count_entries(counts)
 
 def count_entries(results):
@@ -288,80 +288,66 @@ def count_entries(results):
         val = val + results[1][0]
     return val
 
-def get_child_orgs(uri: str, relationship = "investor|buyer|vendor",
-                        include_merged_from=False)->[(Organization, ActivityMixin, Article)]:
+def do_get_parent_orgs_query(uri: str, parent_rels = "investor|buyer|vendor") -> [(Organization, ActivityMixin, Article, str)]:
     assert "'" not in uri, f"Can't have ' in {uri}"
-    # query = f"""
-    #     MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization)
-    #     WHERE EXISTS {{
-    #         MATCH (b: Organization)-[x:{relationship}]-(c: CorporateFinanceActivity) where b.uri = '{uri}'
-    #     }}
-    #     return t, c, a
-    #     ORDER BY a.datePublished
-    # """
     query = f"""
-        MATCH (a: Article)<-[:documentSource]-(c: CorporateFinanceActivity)-[:target]-(t: Organization),
-        (b: Organization)-[x:{relationship}]-(c: CorporateFinanceActivity)
-        WHERE b.uri = '{uri}'"""
-    if include_merged_from is False:
-        query = query + " AND t.internalMergedSameAsHighToUri IS NULL "
-    query = query + """
-        return t, c, a, x
+        MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Organization),
+        (b: Organization)-[x:{parent_rels}]-(c: CorporateFinanceActivity)
+        WHERE t.uri = '{uri}'
+        AND b.internalMergedSameAsHighToUri IS NULL
+        RETURN b, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished
     """
-    results, _ = db.cypher_query(query, resolve_objects=False)
+    results, _ = db.cypher_query(query, resolve_objects=True)
     return results
 
-def org_activity_articles_to_api(results):
-    api_results = []
-    for org_node, activity_node, article_node, parent_rel in results:
-        org = Organization.inflate(org_node)
-        if org is None:
-            continue
-        activity = CorporateFinanceActivity.inflate(activity_node)
-        article = Article.inflate(article_node)
-        api_row = org.serialize()
-        api_row["source_organization"] = article.sourceOrganization
-        api_row["date_published"] = article.datePublished
-        api_row["headline"] = article.headline
-        api_row["document_extract"] = activity.documentSource.relationship(article).documentExtract
-        api_row["document_url"] = article.documentURL
-        api_row["archive_org_page_url"] = article.archiveOrgPageURL
-        api_row["archive_org_list_url"] = article.archiveOrgListURL
-        api_row["activity_uri"] = activity.uri
-        api_row["activity_class"] = activity.__class__.__name__
-        api_row["activity_types"] = activity.activityType
-        api_row["activity_longest_type"] = activity.longest_activityType
-        api_row["activity_statuses"] = activity.status
-        api_row["activity_status_as_string"] = activity.status_as_string
-        api_row["parent_relationship_type"] = parent_rel.type
-        api_results.append(api_row)
-    return api_results
+def do_get_child_orgs_query(uri: str, relationships = "investor|buyer|vendor") ->[(Organization, ActivityMixin, Article, str)]:
+    assert "'" not in uri, f"Can't have ' in {uri}"
+    query = f"""
+        MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Organization),
+        (b: Organization)-[x:{relationships}]-(c: CorporateFinanceActivity)
+        WHERE b.uri = '{uri}'
+        AND t.internalMergedSameAsHighToUri IS NULL
+        RETURN t, c, a, TYPE(x), d.documentExtract
+        ORDER BY a.datePublished
+    """
+    results, _ = db.cypher_query(query, resolve_objects=True)
+    return results
 
-def get_children_for_api(orgs: List[Organization]):
-    api_results = []
-    for org in orgs:
-        children_for_api = single_org_children(org)
-        if children_for_api == []:
-            continue
-        api_row = {"parent_org":org.best_name,
-                    "parent_org_uri":org.uri,
-                    "children": children_for_api,
-                    "completed_children_count": sum(
-                            [x["activity_status_as_string"]=="completed" for x in children_for_api]),
-                }
-        api_results.append(api_row)
-    return api_results
+def get_child_orgs(uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    res = do_get_child_orgs_query(uri, relationships)
+    if include_same_as_name_only is False:
+        return res
+    org = Organization.self_or_ultimate_target_node(uri)
+    for other_org in org.sameAsNameOnly:
+        res = res + do_get_child_orgs_query(other_org.uri,relationships)
+    return res
 
-def single_org_children(org):
-    cache_key = f"single_org_children_{org.uri}"
-    cached = cache.get(cache_key)
-    if cached is not None:
-        logger.debug(f"Single Org children from cache {cache_key}")
-        return cached
-    children = get_child_orgs(org.uri)
-    if len(children) == 0:
-        return []
-    children_for_api = org_activity_articles_to_api(children)
-    cache.set(cache_key, children_for_api)
-    return children_for_api
+def get_parent_orgs(uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    res = do_get_parent_orgs_query(uri, relationships)
+    if include_same_as_name_only is False:
+        return res, []
+    org = Organization.self_or_ultimate_target_node(uri)
+    other_parents = []
+    for other_org in org.sameAsNameOnly:
+        others = do_get_parent_orgs_query(other_org.uri, relationships)
+        other_parents.extend( [x.uri for x,_,_,_,_ in others ])
+    return res, other_parents
+
+def org_family_tree(organization_uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    children = get_child_orgs(organization_uri,
+                    include_same_as_name_only=include_same_as_name_only,
+                    relationships=relationships)
+    parents, other_parents = get_parent_orgs(organization_uri,
+                    include_same_as_name_only=include_same_as_name_only,
+                    relationships=relationships)
+    siblings = []
+    for org,_,_,_,_ in parents:
+        siblings.extend(get_child_orgs(org.uri,
+                        include_same_as_name_only=include_same_as_name_only,
+                        relationships=relationships))
+    for org_uri in other_parents:
+        siblings.extend(get_child_orgs(org_uri,
+                        include_same_as_name_only=include_same_as_name_only_name_only,
+                        relationships=relationships))
+    return parents, siblings, children

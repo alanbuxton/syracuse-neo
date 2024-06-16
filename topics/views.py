@@ -4,11 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin, Resource
 from topics.cache_helpers import is_cache_ready
-from topics.model_queries import get_children_for_api, single_org_children
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
-    ResourceSerializer)
+    ResourceSerializer, FamilyTreeSerializer)
 from rest_framework import status
 from datetime import date, datetime
 from .model_queries import get_relevant_orgs_for_country_region_industry
@@ -126,47 +125,23 @@ class ShowResource(APIView):
                             }, status=status.HTTP_200_OK)
             return resp
 
-
-
-class ParentChildWithSearch(APIView):
+class FamilyTree(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'parent_child_with_search.html'
-
-    def get(self, request):
-        params = request.query_params
-        org_name = params.get("name")
-        org_search = NameSearchSerializer({"name":org_name})
-        if org_name is None or org_name == '':
-            return Response({"search_serializer": org_search},status=status.HTTP_200_OK)
-        orgs = Organization.find_by_name(org_name)
-        if len(orgs) == 0:
-            logger.debug(f"Couldn't find org with {org_name}")
-        orgs_and_children = get_children_for_api(orgs)
-        return Response({"orgs_and_children": orgs_and_children,
-                        "orgs_with_completed_children": sum(
-                            [x["completed_children_count"] > 0 for x in orgs_and_children ]),
-                        "search_serializer": org_search,
-                        "cache_ready": is_cache_ready(),
-                        }, status=status.HTTP_200_OK)
-
-class OrganizationChildrenList(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'organization_children_list.html'
+    template_name = 'family_tree.html'
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        o = Organization.nodes.get(uri=uri)
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
-        children = single_org_children(o)
-        completed_children_count = sum([x["activity_status_as_string"]=="completed" for x in children])
-        orgs_and_children = get_children_for_api(o.sameAsNameOnly)
-        resp = Response({"org_children": children,
-                            "completed_children_count": completed_children_count,
-                            "org_data":org_data,
-                            "cache_ready": is_cache_ready(),
-                            "orgs_and_children":orgs_and_children,
-                            }, status=status.HTTP_200_OK)
-        return resp
+        include_same_as_name_only = bool(int(request.GET.get('include_same_as_name_only',"1")))
+        o = Organization.self_or_ultimate_target_node(uri)
+        uri_parts = elements_from_uri(o.uri)
+        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":include_same_as_name_only})
+
+        return Response({"nodes_edges":nodes_edges.data,
+                            "requested_uri": uri,
+                            "org_data": o,
+                            "uri_parts": uri_parts,
+                            "cache_ready": is_cache_ready()}, status=status.HTTP_200_OK)
+
 
 class TopicsTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -219,7 +194,8 @@ class OrganizationByUri(APIView):
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Organization.nodes.get(uri=uri)
-        org_serializer = OrganizationGraphSerializer(o)
+        include_same_as_name_only = bool(int(request.GET.get('include_same_as_name_only',"1")))
+        org_serializer = OrganizationGraphSerializer(o,context={"include_same_as_name_only":include_same_as_name_only})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         resp = Response({"data_serializer": org_serializer.data,
                             "org_data":org_data,

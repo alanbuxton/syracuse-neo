@@ -33,12 +33,12 @@
 
 <p>
 {% include 'layouts/nav-header.html' %}
-| <a href="{% url 'organization-children-list' org_data.domain org_data.path org_data.doc_id org_data.name %}">
-  Show Child Org List</a>
+| <a href="{% url 'organization-family-tree' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+  Show Family Tree</a>
 | <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
    Show Timeline</a>
 </p>
-<p><b>Showing linkages for:</b> {{ data_serializer.source_node }}</p>
+<p><b>Showing linkages for:</b> <a href="{{ data_serializer.source_node }}">{{ data_serializer.source_node }}</a></p>
 
 
 <p><b>Show/Hide: </b>
@@ -62,17 +62,6 @@
         <div id="object_details">
           <p><strong>Click an item in the graph for more details</strong></p>
         </div>
-        <div id="legend">
-          <div id="legend_details">
-            <p><strong>Legend</strong></p>
-            <div class="organization">Organization</div>
-            <div class="person">Person</div>
-            <div class="location">Location</div>
-            <div class="activity_with_when">Activity with Date</div>
-            <div class="activity_has_happened">Activity which happened before publish date</div>
-            <div class="activity_not_happened">Activity which had not happened by publish date</div>
-          </div>
-       </div>
        <br/>
      </div>
   {% endif %}
@@ -160,7 +149,7 @@ network.on("doubleClick", function(params) {
   uri = nodes[0];
   node_vals = Object.entries(node_details_dict[uri]);
   for (const [key, value] of node_vals) {
-    if (key == 'entityType') {
+    if (key == 'entity_type') {
       if (value != 'Organization') {
         console.log("Cannot crate new graph centered on " + uri)
         return;

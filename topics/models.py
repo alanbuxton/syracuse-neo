@@ -50,6 +50,10 @@ class Resource(StructuredNode):
     internalMergedSameAsHighToUri = StringProperty()
 
     @classmethod
+    def get_by_uri(cls,uri):
+        return cls.nodes.get(uri)
+
+    @classmethod
     def unmerged_or_none_by_uri(cls, uri):
         return cls.unmerged_or_none({"uri":uri})
 
@@ -82,8 +86,11 @@ class Resource(StructuredNode):
         return self.earliestDocumentSource.datePublished
 
     @staticmethod
-    def self_or_ultimate_target_node(uri):
-        r = Resource.nodes.get_or_none(uri=uri)
+    def self_or_ultimate_target_node(uri_or_object):
+        if isinstance(uri_or_object, str):
+            r = Resource.nodes.get_or_none(uri=uri_or_object)
+        else:
+            r = uri_or_object
         if r is None:
             return None
         elif r.internalMergedSameAsHighToUri is None:
@@ -116,7 +123,7 @@ class Resource(StructuredNode):
             logger.debug(f"From cache {cache_key}")
             return res
         query = f'MATCH (n: {cls.__name__}) WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")'
-        if include_merged_from == False:
+        if include_merged_from is False:
             query = query + f" AND n.internalMergedSameAsHighToUri IS NULL "
         query = query + ' RETURN *'
         results, _ = db.cypher_query(query,resolve_objects=False)
@@ -146,7 +153,7 @@ class Resource(StructuredNode):
     def serialize(self):
         self.ensure_connection()
         return {
-            "entityType": self.__class__.__name__,
+            "entity_type": self.__class__.__name__,
             "label": self.best_name,
             "name": self.name,
             "uri": self.uri,
@@ -170,15 +177,26 @@ class Resource(StructuredNode):
     def is_showable_merged_resource(self, include_merged_from):
         if include_merged_from is True:
             return True
-        elif self.internalMergedSameAsHighToUri is not None:
-            return False
-        else:
+        elif self.internalMergedSameAsHighToUri is None:
             return True
+        else:
+            return False
+
 
     def all_directional_relationships(self, **kwargs):
-        from_date = kwargs.get('from_date')
-        to_date = kwargs.get('to_date')
-        include_merged_from = kwargs.get('include_merged_from',False)
+        '''
+            Returns dict:
+            from_uri
+            label: relationship label
+            direction:
+            other_node:
+            relationship_data: (only if source is Activity and other node is Article)
+        '''
+        override_from_uri = kwargs.get("override_from_uri")
+        if override_from_uri is not None:
+            from_uri = override_from_uri
+        else:
+            from_uri = self.uri
         all_rels = []
         for key, rel in self.__all_relationships__:
             if isinstance(rel, RelationshipTo):
@@ -188,14 +206,13 @@ class Resource(StructuredNode):
             else:
                 continue
 
-            if from_date and to_date:
-                rels = [(key, direction, x) for x in self.__dict__[key].all()
-                    if x.in_date_range(from_date,to_date)
-                    and x.is_showable_merged_resource(include_merged_from)]
-            else:
-                rels = [(key, direction, x) for x in self.__dict__[key].all()
-                    if x.is_showable_merged_resource(include_merged_from)]
-            all_rels.extend(rels)
+            for x in self.__dict__[key]:
+                other_node = Resource.self_or_ultimate_target_node(x)
+                vals = {"from_uri": from_uri, "label":key, "direction":direction, "other_node":other_node}
+                if isinstance(self, ActivityMixin) and isinstance(x, Article):
+                    document_extract = self.documentSource.relationship(x).documentExtract
+                    vals["document_extract"] = document_extract
+                all_rels.append( vals )
         return all_rels
 
     @staticmethod
@@ -218,7 +235,7 @@ class Resource(StructuredNode):
 
 class Article(Resource):
     headline = StringProperty()
-    url = RelationshipTo("Resource","url", cardinality=One)
+    url = Relationship("Resource","url", cardinality=One)
     sourceOrganization = StringProperty()
     datePublished = NativeDateTimeProperty()
     dateRetrieved = NativeDateTimeProperty()
@@ -247,12 +264,12 @@ class Article(Resource):
     def serialize(self):
         vals = super(Article, self).serialize()
         vals['headline'] = self.best_name
-        vals['documentURL'] = self.documentURL
-        vals['sourceOrganization'] = self.sourceOrganization
-        vals['datePublished'] = self.datePublished
-        vals['dateRetrieved'] = self.dateRetrieved
-        vals['archiveOrgPageURL'] = self.archiveOrgPageURL
-        vals['archiveOrgListURL'] = self.archiveOrgListURL
+        vals['document_url'] = self.documentURL
+        vals['source_organization'] = self.sourceOrganization
+        vals['date_published'] = self.datePublished
+        vals['date_retrieved'] = self.dateRetrieved
+        vals['internet_archive_page_url'] = self.archiveOrgPageURL
+        vals['internet_archive_list_url'] = self.archiveOrgListURL
         return vals
 
 
@@ -272,7 +289,11 @@ class IndustryCluster(Resource):
 
     def serialize(self):
         vals = super(IndustryCluster, self).serialize()
-        vals['label'] = ", ".join(sorted(self.representation)[:3])
+        if self.representation is None:
+            name_words = self.uniqueName.split("_")[1:]
+        else:
+            name_words = self.representation
+        vals['label'] = ", ".join(sorted(name_words,key=len,reverse=True)[:3])
         return vals
 
     @property
@@ -371,14 +392,14 @@ class ActivityMixin:
         else:
             activityType_title = self.longest_activityType.title()
         return {
-            "activityType": activityType_title,
+            "activity_type": activityType_title,
             "label": f"{activityType_title} ({self.sourceName}: {self.earliestDatePublished.strftime('%b %Y')})",
             "status": self.status,
             "when": self.when,
-            "whenRaw": self.whenRaw,
-            "whereGeoName": self.whereGeoName,
-            "whereGeoNameURL": self.whereGeoNameURL,
-            "whereGeoNameRDFURL": self.whereGeoNameRDFURL,
+            "when_raw": self.whenRaw,
+            "where_geo_name": self.whereGeoName,
+            "where_geo_name_url": self.whereGeoNameURL,
+            "where_geo_name_rdf_url": self.whereGeoNameRDFURL,
         }
 
     @property
@@ -520,9 +541,9 @@ class BasedInGeoMixin:
 
     @property
     def based_in_fields(self):
-        return {"basedInHighGeoName": self.basedInHighGeoName,
-                "basedInHighGeoNameURL": self.basedInHighGeoNameURL,
-                "basedInHighGeoNameRDFURL": self.basedInHighGeoNameRDFURL,
+        return {"based_in_high_geonames_name": self.basedInHighGeoName,
+                "based_in_high_geonames_url": self.basedInHighGeoNameURL,
+                "based_in_high_geonames_rdf_url": self.basedInHighGeoNameRDFURL,
                 # "basedInHighGeoNameAsStr": self.basedInHighGeoName_as_str,
                 }
 
@@ -604,10 +625,6 @@ class Organization(BasedInGeoMixin, Resource):
     def get_random():
         return Organization.nodes.order_by('?')[0]
 
-    @staticmethod
-    def get_by_uri(uri):
-        return Organization.nodes.get(uri)
-
     @property
     def shortest_name_length(self):
         words = shortest(self.name)
@@ -619,8 +636,7 @@ class Organization(BasedInGeoMixin, Resource):
         vals = super(Organization, self).serialize()
         based_in_fields = self.based_in_fields
         org_vals = {"description": self.description,
-                    "industry": self.industry,
-                    "industry_as_str": self.industry_as_str,
+                    "industry": self.industry_as_str,
                     }
         return {**vals,**org_vals,**based_in_fields}
 
@@ -630,71 +646,6 @@ class Organization(BasedInGeoMixin, Resource):
             acts = role.withRole.all()
             role_activities.extend([(role,act) for act in acts])
         return role_activities
-
-    def same_as(self,min_name_length=2,include_merged_from=False):
-        high_matches = set(self.same_as_highs(include_merged_from))
-        med_matches = set()
-        if (self.name is not None and not isinstance(self.name, str) and
-                all([len(x.split()) >= min_name_length for x in self.name])):
-            med_matches = self.same_as_mediums(min_name_length,include_merged_from)
-        return high_matches.union(med_matches)
-
-    @staticmethod
-    def find_same_as_relationships(node_list, min_name_length=2,include_merged_from=False):
-        matching_rels = set()
-        for node in node_list:
-            if not isinstance(node, Organization):
-                logger.debug(f"Can't do sameAs for {node}")
-                continue
-            if node.is_showable_merged_resource(include_merged_from) is False:
-                continue
-            matches = node.same_as_highs(include_merged_from)
-            for match in matches:
-                if match in node_list:
-                    matching_rels.add( ("sameAsHigh", node, match) )
-            if (node.name is not None and not isinstance(node.name, str) and
-                    all([len(x.split()) >= min_name_length for x in node.name])):
-                med_matches = node.same_as_mediums(min_name_length=min_name_length,include_merged_from=include_merged_from)
-                for med_match in med_matches:
-                    if med_match in node_list:
-                        matching_rels.add( ("sameAsNameOnly", node, med_match) )
-        return matching_rels
-
-    def same_as_highs(self,include_merged_from):
-        matches = [x for x in self.related_by("sameAsHigh")
-                    if x.is_showable_merged_resource(include_merged_from)]
-        return matches
-
-    def related_by(self,relationship):
-        query = f'''
-            match (n: {self.__class__.__name__} {{ uri:"{self.uri}"}})
-            CALL apoc.path.subgraphNodes(n, {{
-            	relationshipFilter: "{relationship}",
-                labelFilter: "{self.__class__.__name__}",
-                minLevel: 1,
-                maxLevel: 5
-            }})
-            YIELD node
-            RETURN node;
-        '''
-        nodes, _ = db.cypher_query(query,resolve_objects=True)
-        flattened = [x for sublist in nodes for x in sublist]
-        return flattened
-
-    def same_as_mediums(self, min_name_length, max_iterations=5, include_merged_from=False):
-        found_nodes = set()
-        new_nodes = [self]
-        for r in range(0,max_iterations):
-            new_nodes = self.same_as_mediums_by_length(min_name_length, include_merged_from=include_merged_from)
-            new_nodes = [n for n in new_nodes if n not in found_nodes]
-            found_nodes.update(new_nodes)
-        return found_nodes
-
-    def same_as_mediums_by_length(self, min_name_length,include_merged_from):
-        new_nodes = [node for node in self.sameAsNameOnly
-                        if node.is_showable_merged_resource(include_merged_from)
-                        and node.shortest_name_length >= min_name_length]
-        return new_nodes
 
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
@@ -730,9 +681,9 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
         vals = super(CorporateFinanceActivity, self).serialize()
         activity_mixin_vals = self.activity_fields
         act_vals = {
-                    "targetDetails": self.targetDetails,
-                    "valueRaw": self.valueRaw,
-                    "targetName": self.targetName,
+                    "target_details": self.targetDetails,
+                    "value_raw": self.valueRaw,
+                    "target_name": self.targetName,
                     }
         return {**vals,**act_vals,**activity_mixin_vals}
 
@@ -766,9 +717,9 @@ class RoleActivity(ActivityMixin, Resource):
         vals = super(RoleActivity, self).serialize()
         activity_mixin_vals = self.activity_fields
         act_vals = {
-                    "orgFoundName": self.orgFoundName,
-                    "roleFoundName": self.roleFoundName,
-                    "roleHolderFoundName": self.roleHolderFoundName,
+                    "org_found_name": self.orgFoundName,
+                    "role_found_name": self.roleFoundName,
+                    "role_holder_found_name": self.roleHolderFoundName,
                     }
         return {**vals,**act_vals,**activity_mixin_vals}
 
@@ -798,9 +749,9 @@ class LocationActivity(ActivityMixin, Resource):
         vals = super(LocationActivity, self).serialize()
         activity_fields = self.activity_fields
         act_vals = {
-                    "actionFoundName": self.actionFoundName,
-                    "locationPurpose": self.locationPurpose,
-                    "locationType": self.locationType,
+                    "action_found_name": self.actionFoundName,
+                    "location_purpose": self.locationPurpose,
+                    "location_type": self.locationType,
                     }
         return {**vals,**act_vals,**activity_fields}
 
@@ -819,6 +770,13 @@ class Site(Resource):
         if uri:
             uri = uri.replace("/about.rdf","")
         return uri
+
+    def serialize(self):
+        vals = super(Site, self).serialize()
+        vals["geonames_name"] = self.nameGeoName
+        vals["geonames_url"] = self.nameGeoNameURL
+        vals["geonames_rdf_url"] = self.nameGeoNameRDFURL
+        return vals
 
 
 class Person(BasedInGeoMixin, Resource):

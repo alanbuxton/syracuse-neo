@@ -1,0 +1,100 @@
+
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+
+<title>{{ org_data.best_name }} (Family Tree)</title>
+<style>
+
+#main_container {
+  display: flex;
+  width: 90%;
+  height: 800px;
+  flex-direction: row;
+}
+
+#visualization {
+  flex: 0 0 70%;
+}
+
+</style>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<script src="{% static 'js/node_helpers.js' %}"></script>
+
+
+  <h1>{{ org_data.best_name }} - Family Tree</h1>
+  <p>
+    {% include 'layouts/nav-header.html' %}
+  |  <a href="{% url 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+      Show Linkages</a>
+  | <a href="{% url 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+     Show Timeline</a>
+  </p>
+
+  <div id="main_container">
+    <div id="visualization"></div>
+    <div id="right_panel">
+      <div id="object_details">
+        <p><strong>Click an item in the graph for more details</strong></p>
+      </div>
+    </div>
+  </div>
+
+
+  {% include 'layouts/footer.html' %}
+
+
+<script type="text/javascript">
+var nodes = new vis.DataSet( {{ nodes_edges.nodes | safe }} );
+
+var edges = new vis.DataSet( {{ nodes_edges.edges | safe }} );
+
+// create a network
+var container = document.getElementById("visualization");
+var data = {
+  nodes: nodes,
+  edges: edges,
+};
+
+var options = {
+  edges: {
+    smooth: {
+      type: "cubicBezier",
+      forceDirection: "horizontal",
+      roundness: 0.4,
+    },
+  },
+  layout: {
+    hierarchical: {
+      direction: 'LR',
+    },
+  },
+  physics: true,
+  interaction: {selectConnectedEdges: false},
+};
+
+var network = new vis.Network(container, data, options);
+
+const node_details_dict = {{ nodes_edges.node_details | safe }} ;
+const edge_details_dict = {{ nodes_edges.edge_details | safe }} ;
+
+
+network.on("selectEdge", function(obj) {
+  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showItemDetails(obj.edges[0],edge_details_dict,"edge");
+});
+
+network.on("selectNode", function(obj) {
+  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node");
+})
+
+</script>
+
+</body>
+</html>

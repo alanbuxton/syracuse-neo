@@ -108,12 +108,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 4
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 4
-        assert len(re.findall(r"\bOpenAI\b",email)) == 33
+        assert len(re.findall(r"\bOpenAI\b",email)) == 87
         assert "March 11, 2024" in email
         assert "March 4, 2024" in email
-        assert activity_notif.num_activities == 10
-        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 10
-        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 10
+        assert activity_notif.num_activities == 27
+        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 26
+        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 26
         assert "https://www.theglobeandmail.com/world/article-openai-has-full-confidence-in-ceo-sam-altman-after-investigation/" in email
         assert "None" not in email
 
@@ -127,11 +127,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email, activity_notif = email_and_activity_notif
         assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
         assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1
-        assert len(re.findall(r"\bOpenAI\b",email)) == 25
+        assert len(re.findall(r"\bOpenAI\b",email)) == 46
         assert "March 11, 2024" in email
         assert "March 4, 2024" not in email
         assert "March 9, 2024" in email
-        assert activity_notif.num_activities == 6
+        assert activity_notif.num_activities == 13
 
     def test_creates_geo_industry_notification_for_new_user(self):
         ActivityNotification.objects.filter(user=self.user2).delete()

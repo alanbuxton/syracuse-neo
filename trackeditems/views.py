@@ -73,7 +73,7 @@ class GeoActivitiesView(APIView):
         geo_code = request.GET.get("geo_code")
         cache_ready = is_cache_ready()
         if cache_ready:
-            matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=False)
+            matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as_name_only=False)
             geo_name = country_and_region_code_to_name(geo_code)
         else:
             matching_activity_orgs = []
@@ -113,7 +113,7 @@ class GeoActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
         min_date, max_date = min_and_max_date(self.request.GET)
         country_code = self.request.GET.get("geo_code")
         limit = self.request.GET.get("limit",20)
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,include_same_as_name_only=False)
         return matching_activity_orgs
 
 class SourceActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -125,7 +125,7 @@ class SourceActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
         source_name = self.request.GET.get('source_name')
         min_date, max_date = min_and_max_date(self.request.GET)
         limit = self.request.GET.get("limit",20)
-        matching_activity_orgs = get_activities_for_serializer_by_source_name_and_date_range(source_name,min_date,max_date,limit=20,include_same_as=False)
+        matching_activity_orgs = get_activities_for_serializer_by_source_name_and_date_range(source_name,min_date,max_date,limit=20,include_same_as_name_only=False)
         return matching_activity_orgs
 
 
@@ -157,7 +157,7 @@ class ActivitiesView(APIView):
         user = request.user
         org_uris = TrackedOrganization.trackable_uris_by_user(user)
         matching_activity_orgs = get_activities_by_date_range_for_api(min_date,
-                        uri_or_list=org_uris, max_date=max_date, include_same_as=True)
+                        uri_or_list=org_uris, max_date=max_date, include_same_as_name_only=True)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                         "cache_ready": is_cache_ready(),
