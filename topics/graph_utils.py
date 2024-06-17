@@ -13,7 +13,7 @@ EDGE_COLORS = { "spender": "red",
                 "participant": "orange",
                 "protagonist": "salmon",
                 "target": "green",
-                "documenSource": "black"}
+                "documentSource": "black"}
 
 LOCATION_NODE_COLOR = "#cddb9a"
 
