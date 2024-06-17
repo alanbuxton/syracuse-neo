@@ -251,6 +251,7 @@ class TestFamilyTree(TestCase):
         clean_db()
         nuke_cache() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
+        org_nodes = sorted(org_nodes, reverse=True)
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"opqrstuvw")]
         node_list = ", ".join(org_nodes + act_nodes)
         query = f"""CREATE {node_list},
@@ -327,3 +328,23 @@ class TestFamilyTree(TestCase):
         assert len(edge_details) == len(d['edges'])
         node_details = json.loads(d['node_details'])
         assert len(node_details) == len(d['nodes'])
+
+    def test_gets_children_where_there_is_no_parent(self):
+        uri = "https://1145.am/db/100/a"
+        o = Organization.self_or_ultimate_target_node(uri)
+        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":True})
+        d = nodes_edges.data
+        assert len(d['nodes']) == 4
+
+    def test_shows_nodes_in_name_order(self):
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/101/b")
+        content = str(response.content)
+        res = re.search(r"const node_details_dict = (.+?) ;",content)
+        as_dict = json.loads(res.groups(0)[0])
+        names = [x['label'] for x in as_dict.values()]
+        assert len(names) == 6
+        bpos = names.index("Name B")
+        cpos = names.index("Name C")
+        fpos = names.index("Name F")
+        assert bpos < cpos < fpos

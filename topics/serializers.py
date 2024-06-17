@@ -5,6 +5,8 @@ from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
 from .industry_utils import industry_select_list
 from .model_queries import org_family_tree
+import logging
+logger = logging.getLogger(__name__)
 
 class OrganizationSerializer(serializers.ModelSerializer):
 
@@ -35,39 +37,50 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             "article_uri": article.uri,
         }
 
+    def add_child_nodes_edges(self, central_uri, nodes, node_data, edges, edge_data, parent_uri, family_tree_results, level):
+        for node,activity,art,label,docExtract in sorted(family_tree_results , key=lambda x: x[0].best_name):
+            if node.uri in node_data:
+                logger.info(f"Already seen {node.uri}, ignoring")
+                continue
+            node_data[node.uri] = node.serialize_no_none()
+            node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
+            if node.uri == central_uri:
+                node_attribs['color'] = '#f6c655'
+            nodes.append(node_attribs)
+            edge_id = f"{ parent_uri }-{ label }-{ node.uri }"
+            if edge_id in edge_data:
+                logger.info(f"Already seen {edge_id}, ignoring")
+                continue
+            edge_data[edge_id] = self.generate_edge_data(activity,art,label,docExtract)
+            edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
+            edges.append ( { "id": edge_id,
+                        "from": f"{ parent_uri }", "to": f"{ node.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
+
+
     def to_representation(self, instance):
         organization_uri = instance.uri
         include_same_as_name_only = self.context.get('include_same_as_name_only',True)
-        parents, self_and_siblings, children = org_family_tree(organization_uri, include_same_as_name_only=include_same_as_name_only)
+        parents, parents_children, org_children = org_family_tree(organization_uri, include_same_as_name_only=include_same_as_name_only)
         nodes = []
         edges = []
         node_data = {}
         edge_data = {}
 
-        for parent,_,_,_,_ in parents:
+        for parent,_,_,_,_ in sorted(parents, key=lambda x: x[0].best_name):
+            if parent.uri in node_data:
+                logger.info(f"Already seen {parent.uri}, ignoring")
+                continue
             node_data[parent.uri] = parent.serialize_no_none()
             nodes.append( {"id": parent.uri, "label": parent.best_name, "level": 0})
-            for level1,activity,art,label,docExtract in self_and_siblings:
-                edge_data[f"{parent.uri }-{label}-{level1.uri}"] = self.generate_edge_data(activity,art,label,docExtract)
-                edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
-                edges.append ( { "id": f"{ parent.uri }-{ label }-{ level1.uri }",
-                            "from": f"{ parent.uri }", "to": f"{ level1.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
+            self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, parent.uri, parents_children, 1)
 
-        for level1,_,_,_,_ in self_and_siblings:
-            node_data[level1.uri] = level1.serialize_no_none()
-            node_attribs = {"id": level1.uri, "label": level1.best_name, "level": 1}
-            if level1.uri == organization_uri:
-                node_attribs['color'] = '#f6c655'
-            nodes.append(node_attribs)
+        self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, organization_uri, org_children, 2)
 
-        for level2,activity,art,label,docExtract in children:
-            node_data[level2.uri] = level2.serialize_no_none()
-            node_attribs = {"id": level2.uri, "label": level2.best_name, "level": 2}
+        if organization_uri not in node_data:
+            node_data[organization_uri] = instance.serialize_no_none()
+            node_attribs = {"id": organization_uri, "label": instance.best_name, "level": 1}
+            node_attribs['color'] = '#f6c655'
             nodes.append(node_attribs)
-            edge_data[f"{organization_uri }-{label}-{level2.uri}"] =  self.generate_edge_data(activity,art,label,docExtract)
-            edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
-            edges.append( { "id": f"{ organization_uri }-{ label }-{ level2.uri }",
-                        "from": f"{ organization_uri }", "to": f"{ level2.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
 
         return {
             "nodes": nodes,
