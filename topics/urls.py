@@ -10,7 +10,6 @@ urlpatterns = [
     path('organization/linkages/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationByUri.as_view(), name='organization-linkages'),
     path('organization/timeline/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationTimeline.as_view(), name='organization-timeline'),
     path('organization/family-tree/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.FamilyTree.as_view(), name='organization-family-tree'),
-    path('timeline', views.TopicsTimeline.as_view(), name="timeline"),
     path('about', views.About.as_view(), name="about"),
     path('resource/<str:domain>/<str:path>/<doc_id>/<str:name>', views.ShowResource.as_view(), name='resource-with-doc-id'),
     path('resource/<str:domain>/<str:path>/<str:name>', views.ShowResource.as_view(), name='resource-no-doc-id'),

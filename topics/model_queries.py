@@ -1,6 +1,6 @@
 from neomodel import db
 from .models import Organization, ActivityMixin, IndustryCluster, Article, CorporateFinanceActivity
-from .geo_utils import get_geoname_uris_for_country_region
+from .geo_utils import geoname_ids_for_country_region
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
 import logging
@@ -21,27 +21,8 @@ def get_activities_for_serializer_by_source_and_date_range(source_name, min_date
     return matching_activity_orgs
 
 def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None, limit=20):
-    all_orgs=get_relevant_orgs_for_country_region_industry(geo_code, industry_id, limit)
-    uris = [x.uri for x in all_orgs]
+    uris=Organization.by_industry_and_or_geo(industry_id, geo_code,limit=limit, uris_only=True)
     return uris
-
-def get_relevant_orgs_for_country_region_industry(geo_code,industry_id=None,limit=20):
-    cache_key = f"relevant_orgs_{geo_code}_{industry_id}_{limit}"
-    logger.debug(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
-    res = cache.get(cache_key)
-    if res is not None:
-        return res
-    industry_uris = IndustryCluster.with_descendants(industry_id)
-    ts1 = datetime.utcnow()
-    orgs = Organization.by_country_region_industry(geo_code,industry_uris,limit=limit,allowed_to_set_cache=True)
-    ts2 = datetime.utcnow()
-    orgs_by_activity = ActivityMixin.orgs_by_activity_where_industry(geo_code,industry_uris,limit=limit)
-    ts3 = datetime.utcnow()
-    logger.debug(f"{geo_code} orgs took: {ts2 - ts1}; orgs by act took: {ts3 - ts2}")
-    all_orgs = set(orgs + orgs_by_activity)
-    cache.set(cache_key, all_orgs)
-    return all_orgs
-
 
 def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str],None] = None,
                                             source_name: Union[str,None] = None,
@@ -61,22 +42,20 @@ def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_cod
     if industry_id is None:
         allowed_org_uris = None
     else:
-        industry_uris = IndustryCluster.with_descendants(industry_id)
-        industry_orgs = Organization.by_country_region_industry(geo_code=None,
-                            industry_uris=industry_uris,limit=None,allowed_to_set_cache=True)
-        allowed_org_uris = [x.uri for x in industry_orgs]
-    geo_uris = get_geoname_uris_for_country_region(geo_code)
-    query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris)
+        allowed_org_uris = Organization.by_industry_and_or_geo(industry_id,
+                            geo_code,uris_only=True,limit=None,allowed_to_set_cache=True)
+    geonames_ids = geoname_ids_for_country_region(geo_code)
+    query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids)
     objs, _ = db.cypher_query(query, resolve_objects=True)
     return activity_articles_to_api_results(objs)
 
 
-def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geo_uris):
-    if geo_uris is None:
+def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids):
+    if geonames_ids is None:
         geo_clause = ''
     else:
-        geo_clause = f"""AND (EXISTS {{ MATCH (x)-[:whereGeoNameRDF]-(loc:Resource) WHERE loc.uri IN {geo_uris} }}
-                        OR EXISTS {{ MATCH (o)-[:basedInHighGeoNameRDF]-(loc:Resource) WHERE loc.uri in {geo_uris} }})"""
+        geo_clause = f"""AND (EXISTS {{ MATCH (x)-[:whereGeoNamesLocation]-(loc:GeoNamesLocation) WHERE loc.geoNamesId IN {list(geonames_ids)} }}
+                        OR EXISTS {{ MATCH (o)-[:basedInHighGeoNamesLocation]-(loc:GeoNamesLocation) WHERE loc.geoNamesId in {list(geonames_ids)} }})"""
     if allowed_org_uris is None:
         org_uri_clause = ''
     else:
@@ -85,6 +64,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+        AND o.internalMergedSameAsHighToUri IS NULL
         {org_uri_clause}
         {geo_clause}
         RETURN x,a
@@ -92,6 +72,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+        AND o.internalMergedSameAsHighToUri IS NULL
         {org_uri_clause}
         {geo_clause}
         RETURN x,a
@@ -148,7 +129,8 @@ def build_get_activities_by_source_and_date_range_query(source_name,min_date, ma
         limit_str = ""
     where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                     AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
-                    AND a.sourceOrganization = ('{source_name}')"""
+                    AND a.sourceOrganization = ('{source_name}')
+                    AND n.internalMergedSameAsHighToUri IS NULL"""
 
     query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity)-[:documentSource]->(a:Article)
                 {where_clause}
@@ -193,6 +175,7 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
     where_clause = f"""WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
                         AND (o.uri IN {list(uris_to_check)})
+                        AND n.internalMergedSameAsHighToUri IS NULL
                     """
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
@@ -265,7 +248,7 @@ def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None):
     elif source_name is not None:
         res = get_source_counts(source_name,min_date,max_date)
     else:
-        raise ValueError(f"counts_by_timedelta must supplier geo_code or source_name")
+        raise ValueError(f"counts_by_timedelta must supply geo_code or source_name")
     return res
 
 def get_source_counts(source_name, min_date,max_date):
@@ -295,6 +278,7 @@ def do_get_parent_orgs_query(uri: str, parent_rels = "investor|buyer|vendor") ->
         (b: Organization)-[x:{parent_rels}]-(c: CorporateFinanceActivity)
         WHERE t.uri = '{uri}'
         AND b.internalMergedSameAsHighToUri IS NULL
+        AND t.internalMergedSameAsHighToUri IS NULL
         RETURN b, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished
     """
@@ -308,6 +292,7 @@ def do_get_child_orgs_query(uri: str, relationships = "investor|buyer|vendor") -
         (b: Organization)-[x:{relationships}]-(c: CorporateFinanceActivity)
         WHERE b.uri = '{uri}'
         AND t.internalMergedSameAsHighToUri IS NULL
+        AND b.internalMergedSameAsHighToUri IS NULL
         RETURN t, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished
     """

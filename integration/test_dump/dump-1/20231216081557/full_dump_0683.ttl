@@ -1,0 +1,2499 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/3024715/Albion_Capital> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> ;
+    ns1:foundName "Albion Capital" ;
+    ns1:internalDocId 3024715 ;
+    ns1:investor <https://1145.am/db/3024715/Albion_Capital-Ido_Investments-Locums_Nest-Investment> ;
+    ns1:name "Albion Capital" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1814727/Albion_Ventures>,
+        <https://1145.am/db/1834139/Albion>,
+        <https://1145.am/db/1854837/Albion_Ventures>,
+        <https://1145.am/db/2364908/Albion_Ventures>,
+        <https://1145.am/db/2963294/Albion_Ventures>,
+        <https://1145.am/db/3032700/Albion_Vc>,
+        <https://1145.am/db/3039578/Albion_Vc>,
+        <https://1145.am/db/3069335/Albion_Vc> .
+
+<https://1145.am/db/3024715/Ido_Investments> a org:Organization ;
+    ns1:basedInLowRaw "London" ;
+    ns1:documentSource <https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> ;
+    ns1:foundName "IDO Investments" ;
+    ns1:internalDocId 3024715 ;
+    ns1:investor <https://1145.am/db/3024715/Albion_Capital-Ido_Investments-Locums_Nest-Investment> ;
+    ns1:name "IDO Investments" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1823826/Ido_Investments>,
+        <https://1145.am/db/2154417/Ido_Investments> .
+
+<https://1145.am/db/3619563/Harvest_Health_Recreation> a org:Organization ;
+    ns1:basedInHighClean "Phoenix" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5308655> ;
+    ns1:basedInHighRaw "PHOENIX" ;
+    ns1:description "Cannabis" ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:foundName "Harvest Health & Recreation, Inc" ;
+    ns1:industry "cannabis" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
+    ns1:internalDocId 3619563 ;
+    ns1:locationAdded <https://1145.am/db/3619563/Harvest_Health_Recreation-Added-California> ;
+    ns1:name "Harvest Health & Recreation" ;
+    ns1:sameAsHigh <https://1145.am/db/3160798/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3169263/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3169275/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3172673/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3217365/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3276718/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3277787/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/328061/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/328680/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3304029/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3322450/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3335941/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3349157/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3360764/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3369652/Harvest_Health_Recreation>,
+        <https://1145.am/db/3429520/Harvest_Health_Recreation>,
+        <https://1145.am/db/3437749/Harvest_Health_Recreation>,
+        <https://1145.am/db/3439998/Harvest_Health_Recreation>,
+        <https://1145.am/db/3462009/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/3512208/Harvest_Health_Recreation>,
+        <https://1145.am/db/3546973/Harvest_Health_And_Recreation>,
+        <https://1145.am/db/3555047/Harvest_Health_Recreation>,
+        <https://1145.am/db/3607089/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/396580/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/406889/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/411431/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/417291/Harvest_Health_Recreation_Inc>,
+        <https://1145.am/db/82209/Harvest_Health_And_Recreation> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3348314/Harvest_Health_Recreation_Inc> .
+
+<https://1145.am/db/3619563/Multi-State_Vertically_Integrated_Cannabis_Company> a org:Organization ;
+    ns1:basedInHighClean "California" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5332921> ;
+    ns1:basedInHighRaw "California." ;
+    ns1:description "cannabis" ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:foundName "Multi-State, Vertically Integrated Cannabis Company" ;
+    ns1:internalDocId 3619563 ;
+    ns1:locationAdded <https://1145.am/db/3619563/Multi-State_Vertically_Integrated_Cannabis_Company-Added-California> ;
+    ns1:name "Multi-State, Vertically Integrated Cannabis Company" ;
+    ns1:sameAsHigh <https://1145.am/db/3512208/Multi-State_Vertically_Integrated_Cannabis_Company>,
+        <https://1145.am/db/3609442/Multi-State_Vertically_Integrated_Cannabis_Company> .
+
+<https://1145.am/db/3785309/JLL> a org:Organization ;
+    ns1:basedInHighClean "Chicago" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4887398> ;
+    ns1:basedInHighRaw "Chicago" ;
+    ns1:buyer <https://1145.am/db/3785309/Valud_Consulting-Acquisition> ;
+    ns1:description "real estate" ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
+    ns1:foundName "JLL" ;
+    ns1:internalDocId 3785309 ;
+    ns1:name "JLL" ;
+    ns1:sameAsHigh <https://1145.am/db/1326421/JLL>,
+        <https://1145.am/db/1326785/JLL>,
+        <https://1145.am/db/2545525/JLL>,
+        <https://1145.am/db/2699507/JLL>,
+        <https://1145.am/db/2700021/JLL>,
+        <https://1145.am/db/2700357/JLL>,
+        <https://1145.am/db/2702716/JLL>,
+        <https://1145.am/db/2825078/JLL>,
+        <https://1145.am/db/2956703/JLL>,
+        <https://1145.am/db/3015945/JLL>,
+        <https://1145.am/db/3023423/JLL>,
+        <https://1145.am/db/3031195/JLL>,
+        <https://1145.am/db/3058892/JLL>,
+        <https://1145.am/db/3151577/JLL>,
+        <https://1145.am/db/3199478/JLL>,
+        <https://1145.am/db/3324595/JLL>,
+        <https://1145.am/db/3413038/JLL>,
+        <https://1145.am/db/3506296/JLL>,
+        <https://1145.am/db/3567058/JLL>,
+        <https://1145.am/db/3582076/JLL>,
+        <https://1145.am/db/3615902/JLL>,
+        <https://1145.am/db/3771953/JLL>,
+        <https://1145.am/db/3841286/JLL>,
+        <https://1145.am/db/3846272/JLL>,
+        <https://1145.am/db/3877745/JLL>,
+        <https://1145.am/db/3902124/JLL>,
+        <https://1145.am/db/668624/JLL> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1738089/JLL>,
+        <https://1145.am/db/1764536/JLL>,
+        <https://1145.am/db/1767886/JLL>,
+        <https://1145.am/db/2371883/JLL>,
+        <https://1145.am/db/2575604/JLL>,
+        <https://1145.am/db/2690306/JLL>,
+        <https://1145.am/db/2803820/JLL>,
+        <https://1145.am/db/2960133/JLL>,
+        <https://1145.am/db/2962682/JLL>,
+        <https://1145.am/db/2967122/JLL>,
+        <https://1145.am/db/3018442/JLL>,
+        <https://1145.am/db/3593014/JLL>,
+        <https://1145.am/db/3627041/JLL> .
+
+<https://1145.am/db/3785317/Thoma_Bravo> a org:Organization ;
+    ns1:basedInLowRaw "LOS ANGELES" ;
+    ns1:buyer <https://1145.am/db/3785317/Apttus-Acquisition-Interest> ;
+    ns1:documentSource <https://1145.am/db/3785317/wwwprnewswirecom_news-releases_k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473html> ;
+    ns1:foundName "Thoma Bravo" ;
+    ns1:industry "private equity" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/146_investors_investor_firms_investments> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
+    ns1:internalDocId 3785317 ;
+    ns1:name "Thoma Bravo" ;
+    ns1:sameAsHigh <https://1145.am/db/1007509/Thoma_Bravo>,
+        <https://1145.am/db/1010987/Thoma_Bravo>,
+        <https://1145.am/db/1057475/Thoma_Bravo>,
+        <https://1145.am/db/1061263/Thoma_Bravo>,
+        <https://1145.am/db/1061507/Thoma_Bravo>,
+        <https://1145.am/db/1062346/Thoma_Bravo>,
+        <https://1145.am/db/1101732/Thoma_Bravo>,
+        <https://1145.am/db/1103727/Thoma_Bravo>,
+        <https://1145.am/db/1111973/Thoma_Bravo>,
+        <https://1145.am/db/1112255/Thoma_Bravo>,
+        <https://1145.am/db/1112810/Thoma_Bravo>,
+        <https://1145.am/db/1113751/Thoma_Bravo>,
+        <https://1145.am/db/1115849/Thoma_Bravo>,
+        <https://1145.am/db/1123743/Thoma_Bravo>,
+        <https://1145.am/db/1125173/Thoma_Bravo>,
+        <https://1145.am/db/1150608/Thoma_Bravo>,
+        <https://1145.am/db/1151052/Thoma_Bravo>,
+        <https://1145.am/db/1152589/Thoma_Bravo>,
+        <https://1145.am/db/1157587/Thoma_Bravo>,
+        <https://1145.am/db/1174947/Thoma_Bravo>,
+        <https://1145.am/db/1176204/Thoma_Bravo>,
+        <https://1145.am/db/1193666/Thoma_Bravo>,
+        <https://1145.am/db/1251785/Thoma_Bravo>,
+        <https://1145.am/db/1253878/Thoma_Bravo>,
+        <https://1145.am/db/1281471/Thoma_Bravo>,
+        <https://1145.am/db/1282460/Thoma_Bravo>,
+        <https://1145.am/db/1283713/Thoma_Bravo>,
+        <https://1145.am/db/1286054/Thoma_Bravo>,
+        <https://1145.am/db/1293308/Thoma_Bravo_Lp>,
+        <https://1145.am/db/1300005/Thoma_Bravo>,
+        <https://1145.am/db/1305889/Thoma_Bravo>,
+        <https://1145.am/db/1353070/Thoma_Bravo>,
+        <https://1145.am/db/1355282/Thoma_Bravo>,
+        <https://1145.am/db/1355366/Thoma_Bravo>,
+        <https://1145.am/db/1378204/Thoma_Bravo>,
+        <https://1145.am/db/1386574/Thoma_Bravo>,
+        <https://1145.am/db/1411088/Thoma_Bravo>,
+        <https://1145.am/db/1413534/Thoma_Bravo>,
+        <https://1145.am/db/1415056/Thoma_Bravo>,
+        <https://1145.am/db/1453404/Thoma_Bravo>,
+        <https://1145.am/db/1455056/Thoma_Bravo>,
+        <https://1145.am/db/1467980/Thoma_Bravo>,
+        <https://1145.am/db/1571337/Thoma_Bravo>,
+        <https://1145.am/db/1574216/Thoma_Bravo>,
+        <https://1145.am/db/1574491/Thoma_Bravo>,
+        <https://1145.am/db/1626314/Thoma_Bravo>,
+        <https://1145.am/db/1638777/Thoma_Bravo>,
+        <https://1145.am/db/1639041/Thoma_Bravo>,
+        <https://1145.am/db/1717992/Thoma_Bravo>,
+        <https://1145.am/db/1721107/Thoma_Bravo>,
+        <https://1145.am/db/1729386/Thoma_Bravo>,
+        <https://1145.am/db/1737932/Thoma_Bravo>,
+        <https://1145.am/db/1738815/Thoma_Bravo>,
+        <https://1145.am/db/1746489/Thoma_Bravo>,
+        <https://1145.am/db/1751724/Thoma_Bravo>,
+        <https://1145.am/db/1752538/Thoma_Bravo>,
+        <https://1145.am/db/1753086/Thoma_Bravo>,
+        <https://1145.am/db/1754707/Thoma_Bravo>,
+        <https://1145.am/db/1772655/Thoma_Bravo>,
+        <https://1145.am/db/1779104/Thoma_Bravo>,
+        <https://1145.am/db/180485/Thoma_Bravo>,
+        <https://1145.am/db/1856827/Thoma_Bravo>,
+        <https://1145.am/db/1936317/Thoma_Bravo>,
+        <https://1145.am/db/1947049/Thoma_Bravo>,
+        <https://1145.am/db/1957275/Thoma_Bravo>,
+        <https://1145.am/db/2035026/Thoma_Bravo>,
+        <https://1145.am/db/2058912/Thoma_Bravo>,
+        <https://1145.am/db/2067755/Thoma_Bravo>,
+        <https://1145.am/db/2079396/Thoma_Bravo>,
+        <https://1145.am/db/2095826/Thoma_Bravo>,
+        <https://1145.am/db/2108960/Thoma_Bravo>,
+        <https://1145.am/db/2110116/Thoma_Bravo>,
+        <https://1145.am/db/211869/Thoma_Bravo>,
+        <https://1145.am/db/2181126/Thoma_Bravo>,
+        <https://1145.am/db/221684/Thoma_Bravo>,
+        <https://1145.am/db/2258/Thoma_Bravo>,
+        <https://1145.am/db/2262/Thoma_Bravo>,
+        <https://1145.am/db/2284170/Thoma_Bravo>,
+        <https://1145.am/db/2615026/Thoma_Bravo>,
+        <https://1145.am/db/2615818/Thoma_Bravo>,
+        <https://1145.am/db/2617570/Thoma_Bravo>,
+        <https://1145.am/db/266095/Thoma_Bravo>,
+        <https://1145.am/db/2718135/Thoma_Bravo>,
+        <https://1145.am/db/2820/Thoma_Bravo>,
+        <https://1145.am/db/2826018/Thoma_Bravo>,
+        <https://1145.am/db/283071/Thoma_Bravo>,
+        <https://1145.am/db/284837/Thoma_Bravo_Lp>,
+        <https://1145.am/db/2944/Thoma_Bravo>,
+        <https://1145.am/db/3044289/Thoma_Bravo>,
+        <https://1145.am/db/3151070/Thoma_Bravo>,
+        <https://1145.am/db/3154376/Thoma_Bravo>,
+        <https://1145.am/db/316655/Thoma_Bravo>,
+        <https://1145.am/db/317683/Thoma_Bravo>,
+        <https://1145.am/db/3193447/Thoma_Bravo>,
+        <https://1145.am/db/3216535/Thoma_Bravo>,
+        <https://1145.am/db/3234114/Thoma_Bravo>,
+        <https://1145.am/db/3235230/Thoma_Bravo>,
+        <https://1145.am/db/3322080/Thoma_Bravo>,
+        <https://1145.am/db/3325640/Thoma_Bravo>,
+        <https://1145.am/db/3344036/Thoma_Bravo>,
+        <https://1145.am/db/3345286/Thoma_Bravo>,
+        <https://1145.am/db/3347963/Thoma_Bravo>,
+        <https://1145.am/db/3361151/Thoma_Bravo>,
+        <https://1145.am/db/3362349/Thoma_Bravo>,
+        <https://1145.am/db/3407779/Thoma_Bravo>,
+        <https://1145.am/db/3440950/Thoma_Bravo>,
+        <https://1145.am/db/3481884/Thoma_Bravo>,
+        <https://1145.am/db/3488661/Thoma_Bravo>,
+        <https://1145.am/db/3489573/Thoma_Bravo>,
+        <https://1145.am/db/3508385/Thoma_Bravo_Llc>,
+        <https://1145.am/db/3534408/Thoma_Bravo>,
+        <https://1145.am/db/3573904/Thoma_Bravo>,
+        <https://1145.am/db/3574552/Thoma_Bravo_Llc>,
+        <https://1145.am/db/3582122/Thoma_Bravo>,
+        <https://1145.am/db/3620921/Thoma_Bravo>,
+        <https://1145.am/db/3631575/Thoma_Bravo>,
+        <https://1145.am/db/364265/Thoma_Bravo>,
+        <https://1145.am/db/3648687/Thoma_Bravo>,
+        <https://1145.am/db/364967/Thoma_Bravo>,
+        <https://1145.am/db/3649740/Thoma_Bravo>,
+        <https://1145.am/db/365670/Thoma_Bravo>,
+        <https://1145.am/db/366186/Thoma_Bravo>,
+        <https://1145.am/db/3697754/Thoma_Bravo>,
+        <https://1145.am/db/3702922/Thoma_Bravo>,
+        <https://1145.am/db/3707649/Thoma_Bravo>,
+        <https://1145.am/db/3709020/Thoma_Bravo>,
+        <https://1145.am/db/3712162/Thoma_Bravo>,
+        <https://1145.am/db/3738889/Thoma_Bravo>,
+        <https://1145.am/db/3743938/Thoma_Bravo>,
+        <https://1145.am/db/3748026/Thoma_Bravo>,
+        <https://1145.am/db/3763/Thoma_Bravo>,
+        <https://1145.am/db/3766693/Thoma_Bravo>,
+        <https://1145.am/db/3767363/Thoma_Bravo>,
+        <https://1145.am/db/3780293/Thoma_Bravo>,
+        <https://1145.am/db/3784380/Thoma_Bravo>,
+        <https://1145.am/db/3785936/Thoma_Bravo>,
+        <https://1145.am/db/3790506/Thoma_Bravo>,
+        <https://1145.am/db/3807752/Thoma_Bravo>,
+        <https://1145.am/db/3816185/Thoma_Bravo>,
+        <https://1145.am/db/3821696/Thoma_Bravo>,
+        <https://1145.am/db/3839955/Thoma_Bravo>,
+        <https://1145.am/db/3843983/Thoma_Bravo>,
+        <https://1145.am/db/3845048/Thoma_Bravo_Llc>,
+        <https://1145.am/db/3847471/Thoma_Bravo>,
+        <https://1145.am/db/3861867/Thoma_Bravo>,
+        <https://1145.am/db/386210/Thoma_Bravo>,
+        <https://1145.am/db/3862502/Thoma_Bravo>,
+        <https://1145.am/db/386561/Thoma_Bravo>,
+        <https://1145.am/db/3899520/Thoma_Bravo>,
+        <https://1145.am/db/3900668/Thoma_Bravo>,
+        <https://1145.am/db/3903786/Thoma_Bravo>,
+        <https://1145.am/db/3911012/Thoma_Bravo>,
+        <https://1145.am/db/3922537/Thoma_Bravo>,
+        <https://1145.am/db/3978968/Thoma_Bravo>,
+        <https://1145.am/db/3979528/Thoma_Bravo>,
+        <https://1145.am/db/3980301/Thoma_Bravo>,
+        <https://1145.am/db/4023683/Thoma_Bravo>,
+        <https://1145.am/db/4054574/Thoma_Bravo>,
+        <https://1145.am/db/4075411/Thoma_Bravo>,
+        <https://1145.am/db/4094962/Thoma_Bravo>,
+        <https://1145.am/db/4101482/Thoma_Bravo>,
+        <https://1145.am/db/4103956/Thoma_Bravo>,
+        <https://1145.am/db/4113729/Thoma_Bravo>,
+        <https://1145.am/db/4159099/Thoma_Bravo>,
+        <https://1145.am/db/4159615/Thoma_Bravo>,
+        <https://1145.am/db/416561/Thoma_Bravo>,
+        <https://1145.am/db/4191674/Thoma_Bravo>,
+        <https://1145.am/db/4192717/Thoma_Bravo>,
+        <https://1145.am/db/4193041/Thoma_Bravo>,
+        <https://1145.am/db/4205211/Thoma_Bravo>,
+        <https://1145.am/db/4230222/Thoma_Bravo>,
+        <https://1145.am/db/4241203/Thoma_Bravo>,
+        <https://1145.am/db/4250754/Thoma_Bravo>,
+        <https://1145.am/db/457127/Thoma_Bravo>,
+        <https://1145.am/db/473139/Thoma_Bravo>,
+        <https://1145.am/db/473169/Thoma_Bravo>,
+        <https://1145.am/db/475809/Thoma_Bravo>,
+        <https://1145.am/db/514221/Thoma_Bravo>,
+        <https://1145.am/db/515273/Thoma_Bravo>,
+        <https://1145.am/db/528344/Thoma_Bravo>,
+        <https://1145.am/db/529394/Thoma_Bravo>,
+        <https://1145.am/db/5457/Thoma_Bravo>,
+        <https://1145.am/db/548391/Thoma_Bravo>,
+        <https://1145.am/db/549115/Thoma_Bravo>,
+        <https://1145.am/db/554790/Thoma_Bravo>,
+        <https://1145.am/db/582984/Thoma_Bravo>,
+        <https://1145.am/db/586365/Thoma_Bravo>,
+        <https://1145.am/db/596088/Thoma_Bravo>,
+        <https://1145.am/db/596094/Thoma_Bravo>,
+        <https://1145.am/db/701814/Thoma_Bravo>,
+        <https://1145.am/db/704231/Thoma_Bravo>,
+        <https://1145.am/db/740988/Thoma_Bravo>,
+        <https://1145.am/db/768061/Thoma_Bravo>,
+        <https://1145.am/db/909043/Thoma_Bravo>,
+        <https://1145.am/db/917432/Thoma_Bravo>,
+        <https://1145.am/db/918260/Thoma_Bravo>,
+        <https://1145.am/db/924780/Thoma_Bravo>,
+        <https://1145.am/db/953653/Thoma_Bravo>,
+        <https://1145.am/db/959899/Thoma_Bravo>,
+        <https://1145.am/db/968211/Thoma_Bravo>,
+        <https://1145.am/db/969217/Thoma_Bravo>,
+        <https://1145.am/db/970108/Thoma_Bravo>,
+        <https://1145.am/db/971990/Thoma_Bravo>,
+        <https://1145.am/db/972213/Thoma_Bravo>,
+        <https://1145.am/db/982329/Thoma_Bravo>,
+        <https://1145.am/db/985715/Thoma_Bravo> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1003876/Thoma_Bravo>,
+        <https://1145.am/db/1005175/Thoma_Bravo>,
+        <https://1145.am/db/1011766/Thoma_Bravo>,
+        <https://1145.am/db/1012391/Thoma_Bravo>,
+        <https://1145.am/db/1035158/Thoma_Bravo>,
+        <https://1145.am/db/1038292/Thoma_Bravo>,
+        <https://1145.am/db/1061567/Thoma_Bravo>,
+        <https://1145.am/db/1117537/Thoma_Bravo>,
+        <https://1145.am/db/1120908/Thoma_Bravo>,
+        <https://1145.am/db/1122219/Thoma_Bravo>,
+        <https://1145.am/db/1122241/Thoma_Bravo>,
+        <https://1145.am/db/1123201/Thoma_Bravo>,
+        <https://1145.am/db/1124353/Thoma_Bravo>,
+        <https://1145.am/db/1125302/Thoma_Bravo>,
+        <https://1145.am/db/1137987/Thoma_Bravo>,
+        <https://1145.am/db/1140211/Thoma_Bravo>,
+        <https://1145.am/db/1141774/Thoma_Bravo>,
+        <https://1145.am/db/1142656/Thoma_Bravo>,
+        <https://1145.am/db/1158834/Thoma_Bravo>,
+        <https://1145.am/db/117337/Thoma_Bravo>,
+        <https://1145.am/db/1188266/Thoma_Bravo>,
+        <https://1145.am/db/1229514/Thoma_Bravo>,
+        <https://1145.am/db/1257158/Thoma_Bravo>,
+        <https://1145.am/db/1260258/Thoma_Bravo>,
+        <https://1145.am/db/1261940/Thoma_Bravo>,
+        <https://1145.am/db/1269931/Thoma_Bravo>,
+        <https://1145.am/db/1277670/Thoma_Bravo>,
+        <https://1145.am/db/1324013/Thoma_Bravo>,
+        <https://1145.am/db/1324655/Thoma_Bravo>,
+        <https://1145.am/db/1354525/Thoma_Bravo>,
+        <https://1145.am/db/1355964/Thoma_Bravo>,
+        <https://1145.am/db/1393247/Thoma_Bravo>,
+        <https://1145.am/db/1406480/Thoma_Bravo>,
+        <https://1145.am/db/1407571/Thoma_Bravo>,
+        <https://1145.am/db/1411399/Thoma_Bravo>,
+        <https://1145.am/db/1414277/Thoma_Bravo>,
+        <https://1145.am/db/1420196/Thoma_Bravo>,
+        <https://1145.am/db/1434243/Thoma_Bravo>,
+        <https://1145.am/db/1459628/Thoma_Bravo>,
+        <https://1145.am/db/1461413/Thoma_Bravo>,
+        <https://1145.am/db/1461456/Thoma_Bravo>,
+        <https://1145.am/db/1468368/Thoma_Bravo>,
+        <https://1145.am/db/1513425/Thoma_Bravo>,
+        <https://1145.am/db/1573361/Thoma_Bravo>,
+        <https://1145.am/db/1575691/Thoma_Bravo>,
+        <https://1145.am/db/1575695/Thoma_Bravo>,
+        <https://1145.am/db/1576673/Thoma_Bravo>,
+        <https://1145.am/db/1576674/Thoma_Bravo>,
+        <https://1145.am/db/1595235/Thoma_Bravo>,
+        <https://1145.am/db/1622700/Thoma_Bravo>,
+        <https://1145.am/db/1695849/Thoma_Bravo>,
+        <https://1145.am/db/1697637/Thoma_Bravo>,
+        <https://1145.am/db/1707576/Thoma_Bravo>,
+        <https://1145.am/db/1734845/Thoma_Bravo>,
+        <https://1145.am/db/1736574/Thoma_Bravo>,
+        <https://1145.am/db/1750086/Thoma_Bravo>,
+        <https://1145.am/db/1753093/Thoma_Bravo>,
+        <https://1145.am/db/1762322/Thoma_Bravo>,
+        <https://1145.am/db/1762924/Thoma_Bravo>,
+        <https://1145.am/db/1765923/Thoma_Bravo>,
+        <https://1145.am/db/1782873/Thoma_Bravo>,
+        <https://1145.am/db/1802046/Thoma_Bravo>,
+        <https://1145.am/db/1869110/Thoma_Bravo>,
+        <https://1145.am/db/2034204/Thoma_Bravo>,
+        <https://1145.am/db/2034831/Thoma_Bravo>,
+        <https://1145.am/db/2067907/Thoma_Bravo>,
+        <https://1145.am/db/2141814/Thoma_Bravo>,
+        <https://1145.am/db/2174920/Thoma_Bravo>,
+        <https://1145.am/db/2242028/Thoma_Bravo>,
+        <https://1145.am/db/2254383/Thoma_Bravo>,
+        <https://1145.am/db/2500920/Thoma_Bravo>,
+        <https://1145.am/db/2616680/Thoma_Bravo>,
+        <https://1145.am/db/2809252/Thoma_Bravo>,
+        <https://1145.am/db/3041130/Thoma_Bravo>,
+        <https://1145.am/db/3079350/Thoma_Bravo>,
+        <https://1145.am/db/3160714/Thoma_Bravo>,
+        <https://1145.am/db/3190268/Thoma_Bravo>,
+        <https://1145.am/db/3199053/Thoma_Bravo>,
+        <https://1145.am/db/3200357/Thoma_Bravo>,
+        <https://1145.am/db/3247481/Thoma_Bravo>,
+        <https://1145.am/db/3271834/Thoma_Bravo>,
+        <https://1145.am/db/3275098/Thoma_Bravo>,
+        <https://1145.am/db/3278124/Thoma_Bravo>,
+        <https://1145.am/db/3293271/Thoma_Bravo>,
+        <https://1145.am/db/3308100/Thoma_Bravo>,
+        <https://1145.am/db/3386044/Thoma_Bravo>,
+        <https://1145.am/db/3489979/Thoma_Bravo_Llc>,
+        <https://1145.am/db/3558676/Thoma_Bravo>,
+        <https://1145.am/db/3574633/Thoma_Bravo>,
+        <https://1145.am/db/361437/Thoma_Bravo>,
+        <https://1145.am/db/362693/Thoma_Bravo>,
+        <https://1145.am/db/364926/Thoma_Bravo>,
+        <https://1145.am/db/3651504/Thoma_Bravo>,
+        <https://1145.am/db/3651836/Thoma_Bravo>,
+        <https://1145.am/db/3652510/Thoma_Bravo>,
+        <https://1145.am/db/3655426/Thoma_Bravo>,
+        <https://1145.am/db/3668766/Thoma_Bravo>,
+        <https://1145.am/db/3726376/Thoma_Bravo>,
+        <https://1145.am/db/3734811/Thoma_Bravo>,
+        <https://1145.am/db/3735451/Thoma_Bravo>,
+        <https://1145.am/db/3735699/Thoma_Bravo>,
+        <https://1145.am/db/3735995/Thoma_Bravo>,
+        <https://1145.am/db/3736272/Thoma_Bravo>,
+        <https://1145.am/db/3749782/Thoma_Bravo>,
+        <https://1145.am/db/3805078/Thoma_Bravo>,
+        <https://1145.am/db/3835515/Thoma_Bravo>,
+        <https://1145.am/db/3919794/Thoma_Bravo_Llc>,
+        <https://1145.am/db/3978276/Thoma_Bravo>,
+        <https://1145.am/db/3978547/Thoma_Bravo>,
+        <https://1145.am/db/3980660/Thoma_Bravo>,
+        <https://1145.am/db/3980718/Thoma_Bravo>,
+        <https://1145.am/db/3987229/Thoma_Bravo>,
+        <https://1145.am/db/3997881/Thoma_Bravo>,
+        <https://1145.am/db/400499/Thoma_Bravo>,
+        <https://1145.am/db/4005347/Thoma_Bravo>,
+        <https://1145.am/db/4018074/Thoma_Bravo>,
+        <https://1145.am/db/4052777/Thoma_Bravo>,
+        <https://1145.am/db/4056355/Thoma_Bravo>,
+        <https://1145.am/db/4086807/Thoma_Bravo>,
+        <https://1145.am/db/4122132/Thoma_Bravo>,
+        <https://1145.am/db/4140196/Thoma_Bravo>,
+        <https://1145.am/db/4191876/Thoma_Bravo>,
+        <https://1145.am/db/4232870/Thoma_Bravo_Lp>,
+        <https://1145.am/db/431533/Thoma_Bravo>,
+        <https://1145.am/db/508589/Thoma_Bravo>,
+        <https://1145.am/db/520567/Thoma_Bravo>,
+        <https://1145.am/db/523913/Thoma_Bravo>,
+        <https://1145.am/db/596987/Thoma_Bravo>,
+        <https://1145.am/db/710269/Thoma_Bravo>,
+        <https://1145.am/db/919887/Thoma_Bravo>,
+        <https://1145.am/db/925389/Thoma_Bravo>,
+        <https://1145.am/db/938139/Thoma_Bravo>,
+        <https://1145.am/db/940251/Thoma_Bravo>,
+        <https://1145.am/db/974372/Thoma_Bravo>,
+        <https://1145.am/db/974966/Thoma_Bravo>,
+        <https://1145.am/db/976061/Thoma_Bravo>,
+        <https://1145.am/db/976385/Thoma_Bravo>,
+        <https://1145.am/db/976570/Thoma_Bravo>,
+        <https://1145.am/db/982330/Thoma_Bravo> .
+
+<https://1145.am/db/3785695/Holy_Cross_Health-Holy_Cross_Hospital-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-03T15:37:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "SILVER SPRING, Md., Oct. 3, 2018 /PRNewswire/ - The Nora Roberts Foundation has donated $ 250,000 to Holy Cross Health to support the renovation and expansion of maternity and perinatal health services at Holy Cross Hospital, the largest birthing hospital in the state of Maryland and the District of Columbia." ;
+    ns1:documentSource <https://1145.am/db/3785695/wwwprnewswirecom_news-releases_nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763html> ;
+    ns1:foundName "donated" ;
+    ns1:internalDocId 3785695 ;
+    ns1:name "donated" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3785695/Holy_Cross_Health>,
+        <https://1145.am/db/3785695/Holy_Cross_Hospital> ;
+    ns1:valueRaw "$ 250,000" ;
+    ns1:when "2018-10-03T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Oct. 3, 2018" ;
+    ns1:whereClean "Maryland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
+    ns1:whereRaw "Maryland" .
+
+<https://1145.am/db/3785698/Showcase_Idx-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-03T15:33:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "ATLANTA, Oct. 3, 2018 /PRNewswire/ - Showcase IDX, an Atlanta - based real estate technology company that provides IDX home search and consumer engagement tools for WordPress to real estate agents, teams, and brokers has successfully closed its first-ever round of investment from a private equity source on Friday, September 28, 2018." ;
+    ns1:documentSource <https://1145.am/db/3785698/wwwprnewswirecom_news-releases_showcase-idx-closes-private-equity-investment-round-300723761html> ;
+    ns1:foundName "investment" ;
+    ns1:internalDocId 3785698 ;
+    ns1:name "investment" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3785698/Showcase_Idx> ;
+    ns1:when "2018-09-28T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "September 28, 2018" ;
+    ns1:whereClean "Atlanta" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
+    ns1:whereRaw "Atlanta" .
+
+<https://1145.am/db/4151859/Oculis_Holding_Ag> a org:Organization ;
+    ns1:basedInHighClean "Switzerland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:basedInHighRaw "Switzerland" ;
+    ns1:description "a global biopharmaceutical company" ;
+    ns1:documentSource <https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> ;
+    ns1:foundName "Oculis Holding AG (Nasdaq: OCS) (\"Oculis\")" ;
+    ns1:hasRole <https://1145.am/db/4151859/Oculis_Holding_Ag-President_Of_R_D> ;
+    ns1:industry "biopharmaceutical" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
+    ns1:internalDocId 4151859 ;
+    ns1:name "Oculis Holding AG" ;
+    ns1:sameAsHigh <https://1145.am/db/3641095/Oculis_Holding>,
+        <https://1145.am/db/4154881/Oculis_Holding_Ag> .
+
+<https://1145.am/db/4151859/Snehal_Shah> a foaf:Person ;
+    ns1:basedInLowRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> ;
+    ns1:foundName "Dr. Snehal Shah" ;
+    ns1:internalDocId 4151859 ;
+    ns1:name "Snehal Shah" ;
+    ns1:roleActivity <https://1145.am/db/4151859/Snehal_Shah-Starting-President_Of_R_D> .
+
+<https://1145.am/db/4168148/Global_Infrastructure_Partners> a org:Organization ;
+    ns1:basedInLowRaw "French" ;
+    ns1:description "infrastructure" ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:foundName "Global Infrastructure Partners" ;
+    ns1:internalDocId 4168148 ;
+    ns1:investor <https://1145.am/db/4168148/Edinburgh_Airport-Investment-Stake> ;
+    ns1:name "Global Infrastructure Partners" ;
+    ns1:sameAsHigh <https://1145.am/db/1086294/Global_Infrastructure_Partners>,
+        <https://1145.am/db/1086298/Global_Infrastructure_Partners>,
+        <https://1145.am/db/1421945/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2131897/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2132973/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2863624/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2877716/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3120893/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3185693/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3354154/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3906668/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3940550/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4216052/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4220544/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4225837/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4230364/Global_Infrastructure_Partners>,
+        <https://1145.am/db/618946/Global_Infrastructure_Partners>,
+        <https://1145.am/db/620823/Global_Infrastructure_Partners>,
+        <https://1145.am/db/797358/Global_Infrastructure_Partners>,
+        <https://1145.am/db/800916/Global_Infrastructure_Partners>,
+        <https://1145.am/db/930281/Global_Infrastructure_Partners>,
+        <https://1145.am/db/932790/Global_Infrastructure_Partners>,
+        <https://1145.am/db/961485/Global_Infrastructure_Partners> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1581801/Global_Infrastructure_Partners>,
+        <https://1145.am/db/166190/Global_Infrastructure_Partners>,
+        <https://1145.am/db/199148/Global_Infrastructure_Partners>,
+        <https://1145.am/db/199149/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2067395/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2070912/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2087283/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2505917/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2787275/Global_Infrastructure_Partners>,
+        <https://1145.am/db/281136/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2859966/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2872479/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2874045/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2900264/Global_Infrastructure_Partners>,
+        <https://1145.am/db/2914820/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3025275/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3033502/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3058836/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3060974/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3083362/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3119676/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3165923/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3355359/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3535065/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3636516/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3699116/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3702865/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3759009/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3939107/Global_Infrastructure_Partners>,
+        <https://1145.am/db/3980069/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4004436/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4004444/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4157361/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4211028/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4215636/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4216133/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4216337/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4216855/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4235568/Global_Infrastructure_Partners>,
+        <https://1145.am/db/4241265/Global_Infrastructure_Partners>,
+        <https://1145.am/db/601004/Global_Infrastructure_Partners>,
+        <https://1145.am/db/619993/Global_Infrastructure_Partners>,
+        <https://1145.am/db/620251/Global_Infrastructure_Partners>,
+        <https://1145.am/db/620441/Global_Infrastructure_Partners>,
+        <https://1145.am/db/624398/Global_Infrastructure_Partners>,
+        <https://1145.am/db/683588/Global_Infrastructure_Partners>,
+        <https://1145.am/db/912063/Global_Infrastructure_Partners>,
+        <https://1145.am/db/965718/Global_Infrastructure_Partners>,
+        <https://1145.am/db/966307/Global_Infrastructure_Partners> .
+
+<https://1145.am/db/4168148/London_Gatwick-Acquisition-Stake> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T09:03:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "London Gatwick co-owner strikes £1.27bn deal for majority stake in Edinburgh Airport." ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:internalDocId 4168148 ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4168148/London_Gatwick> ;
+    ns1:targetDetails "stake" ;
+    ns1:targetName "London Gatwick" ;
+    ns1:valueRaw "£1.27bn" ;
+    ns1:whereClean "Republic of France" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
+    ns1:whereRaw "France" .
+
+<https://1145.am/db/4168148/Vinci> a org:Organization ;
+    ns1:basedInHighClean "Republic of France" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
+    ns1:basedInHighRaw "France" ;
+    ns1:description "French infrastructure group" ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:foundName "Vinci" ;
+    ns1:industry "infrastructure" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/505_infrastructure_sustainable_investment_investor> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/571_infrastructure_it_services_technology> ;
+    ns1:internalDocId 4168148 ;
+    ns1:investor <https://1145.am/db/4168148/Edinburgh_Airport-Investment-Stake> ;
+    ns1:name "Vinci" ;
+    ns1:sameAsHigh <https://1145.am/db/1574874/Vinci>,
+        <https://1145.am/db/1597085/Vinci>,
+        <https://1145.am/db/296990/Vinci>,
+        <https://1145.am/db/297443/Vinci>,
+        <https://1145.am/db/4216426/Vinci>,
+        <https://1145.am/db/727539/Vinci_Sa>,
+        <https://1145.am/db/727564/Vinci_Sa> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1210662/Vinci>,
+        <https://1145.am/db/1243387/Vinci>,
+        <https://1145.am/db/1591964/Vinci>,
+        <https://1145.am/db/1675255/Vinci>,
+        <https://1145.am/db/3028806/Vinci>,
+        <https://1145.am/db/310873/Vinci>,
+        <https://1145.am/db/4214891/Vinci> .
+
+<https://1145.am/db/4168197/Daniel_K_Et_Nsk> a org:Organization ;
+    ns1:basedInHighClean "Czechia" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:basedInHighRaw "Czech",
+        "Czech Republic" ;
+    ns1:buyer <https://1145.am/db/4168197/Royal_Mail-Acquisition>,
+        <https://1145.am/db/4168197/Telegraph_Media_Group-Acquisition> ;
+    ns1:description "energy, industrial and logistics" ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "Daniel Křetínský",
+        "Křetínský" ;
+    ns1:industry "European conglomerate" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/55_ott_technology_rtsm_tmt> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/385_energy_services_service_infrastructure> ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "Daniel Křetínský",
+        "Křetínský" ;
+    ns1:sameAsHigh <https://1145.am/db/2073985/Daniel_Kretinsky>,
+        <https://1145.am/db/4045272/Daniel_Kretinsky>,
+        <https://1145.am/db/4192810/Daniel_Kretinsky>,
+        <https://1145.am/db/4192824/Daniel_Kretinsky> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1368378/Daniel_Kretinsky>,
+        <https://1145.am/db/1462796/Daniel_Kretinsky>,
+        <https://1145.am/db/1682020/Daniel_Kretinsky>,
+        <https://1145.am/db/1689056/Daniel_Kretinsky>,
+        <https://1145.am/db/1943595/Daniel_Kretinsky>,
+        <https://1145.am/db/1966172/Daniel_Kretinsky>,
+        <https://1145.am/db/1974476/Daniel_Kretinsky>,
+        <https://1145.am/db/1979799/Daniel_Kretinsky>,
+        <https://1145.am/db/2015786/Daniel_Kretinsky>,
+        <https://1145.am/db/2032696/Daniel_Kretinsky>,
+        <https://1145.am/db/2036757/Daniel_Kretinsky>,
+        <https://1145.am/db/2048225/Daniel_Kretinsky>,
+        <https://1145.am/db/2055291/Daniel_Kretinsky>,
+        <https://1145.am/db/2055330/Daniel_Kretinsky>,
+        <https://1145.am/db/2063929/Daniel_Kretinsky>,
+        <https://1145.am/db/2087527/Daniel_Kretinsky>,
+        <https://1145.am/db/2094334/Daniel_Kretinsky>,
+        <https://1145.am/db/2128492/Daniel_Kretinsky>,
+        <https://1145.am/db/2141041/Daniel_Kretinsky>,
+        <https://1145.am/db/2149568/Daniel_Kretinsky>,
+        <https://1145.am/db/2765147/Daniel_Kretinsky>,
+        <https://1145.am/db/2790495/Daniel_Kretinsky>,
+        <https://1145.am/db/2792717/Daniel_Kretinsky>,
+        <https://1145.am/db/2825514/Daniel_Kretinsky>,
+        <https://1145.am/db/2852351/Daniel_K_Et_Nsk>,
+        <https://1145.am/db/3069029/Daniel_K_Et_Nsk>,
+        <https://1145.am/db/3074425/Daniel_Kretinsky>,
+        <https://1145.am/db/3111249/Daniel_Kretinsky>,
+        <https://1145.am/db/358843/Daniel_Kretinsky>,
+        <https://1145.am/db/3976357/Daniel_Kretinsky>,
+        <https://1145.am/db/4039873/Daniel_Kretinsky>,
+        <https://1145.am/db/4192562/Daniel_Kretinsky>,
+        <https://1145.am/db/4246777/Daniel_Kretinsky>,
+        <https://1145.am/db/4250239/Daniel_K_Et_Nsk>,
+        <https://1145.am/db/4252342/Daniel_Kretinsky>,
+        <https://1145.am/db/4252434/Daniel_K_Et_Nsk> .
+
+<https://1145.am/db/4168197/West_Ham> a org:Organization ;
+    ns1:basedInLowRaw "Czech" ;
+    ns1:buyer <https://1145.am/db/4168197/Ids-Acquisition> ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "West Ham" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "West Ham" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2856020/West_Ham>,
+        <https://1145.am/db/2864717/West_Ham>,
+        <https://1145.am/db/2891457/West_Ham>,
+        <https://1145.am/db/2921427/West_Ham>,
+        <https://1145.am/db/3074425/West_Ham> .
+
+<https://1145.am/db/4168343/Hpq_Silicon_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T10:45:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "MONTREAL, April 17, 2024 (GLOBE NEWSWIRE) - PyroGenesis Canada Inc. (http: //pyrogenesis.com) (TSX: PYR) (OTCQX: PYRGF) (FRA: 8PY) , a high-tech company (the \"Company\" or \"PyroGenesis\") that designs, develops, manufactures and commercializes advanced plasma processes and sustainable solutions which are geared to reduce greenhouse gases (GHG) and address environmental pollutants, is pleased to announce that, further to its news release of April 10, 2024 announcing a block sale of 3,779,700 shares in HPQ Silicon Inc. (\"HPQ\") to P. Peter Pascali, President and CEO of PyroGenesis, the transaction has been approved by the Toronto Stock Exchange (\"TSX\") ." ;
+    ns1:documentSource <https://1145.am/db/4168343/wwwglobenewswirecom_news-release_2024_04_17_2864358_0_en_PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shareshtml> ;
+    ns1:internalDocId 4168343 ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4168343/Hpq_Silicon_Inc> ;
+    ns1:targetName "HPQ Silicon Inc." ;
+    ns1:vendor <https://1145.am/db/4168343/Pyrogenesis_Canada_Inc> ;
+    ns1:when "2024-04-10T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "April 10, 2024" ;
+    ns1:whereClean "Canada" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereRaw "Canada" .
+
+<https://1145.am/db/4168398/Newmark> a org:Organization ;
+    ns1:basedInHighClean "New York City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:basedInHighRaw "New York" ;
+    ns1:description "real estate investment trust" ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:foundName "Newmark" ;
+    ns1:internalDocId 4168398 ;
+    ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
+    ns1:name "Newmark" ;
+    ns1:sameAsHigh <https://1145.am/db/1072093/Newmark>,
+        <https://1145.am/db/1124181/Newmark>,
+        <https://1145.am/db/1135018/Newmark>,
+        <https://1145.am/db/1758844/Newmark>,
+        <https://1145.am/db/3359958/Newmark>,
+        <https://1145.am/db/3387625/Newmark>,
+        <https://1145.am/db/3416952/Newmark>,
+        <https://1145.am/db/3451710/Newmark>,
+        <https://1145.am/db/404098/Newmark>,
+        <https://1145.am/db/4168416/Newmark>,
+        <https://1145.am/db/818680/Newmark> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1210835/Newmark>,
+        <https://1145.am/db/1238636/Newmark>,
+        <https://1145.am/db/1245562/Newmark>,
+        <https://1145.am/db/1543079/Newmark>,
+        <https://1145.am/db/1549971/Newmark>,
+        <https://1145.am/db/1598845/Newmark>,
+        <https://1145.am/db/1634574/Newmark>,
+        <https://1145.am/db/447772/Newmark> .
+
+<https://1145.am/db/4168398/Sl_Green_Realty_Corp> a org:Organization ;
+    ns1:basedInHighClean "New York City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:basedInHighRaw "New York" ;
+    ns1:description "acquiring, managing and maximizing the value of Manhattan commercial properties" ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:foundName "SL Green Realty Corp." ;
+    ns1:industry "real estate investment trust" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/465_investment_property_company_firm> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/378_trust_trusts_trustee_> ;
+    ns1:internalDocId 4168398 ;
+    ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
+    ns1:name "SL Green Realty Corp." ;
+    ns1:sameAsHigh <https://1145.am/db/1334009/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/1334021/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/2049580/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/2051043/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/4168396/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/4168412/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/4168416/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/4169233/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/881943/Sl_Green_Realty_Corp>,
+        <https://1145.am/db/994226/Sl_Green_Realty_Corp> .
+
+<https://1145.am/db/4168398/Vornado_Realty_Trust> a org:Organization ;
+    ns1:basedInHighClean "New York City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:basedInHighRaw "New York" ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:foundName "Vornado Realty Trust" ;
+    ns1:industry "real estate investment trust" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/465_investment_property_company_firm> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/378_trust_trusts_trustee_> ;
+    ns1:internalDocId 4168398 ;
+    ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
+    ns1:name "Vornado Realty Trust" ;
+    ns1:sameAsHigh <https://1145.am/db/3421766/Vornado_Realty_Trust>,
+        <https://1145.am/db/4168396/Vornado_Realty_Trust>,
+        <https://1145.am/db/4168412/Vornado_Realty_Trust>,
+        <https://1145.am/db/4168416/Vornado_Realty_Trust>,
+        <https://1145.am/db/4215901/Vornado_Realty_Trust>,
+        <https://1145.am/db/628882/Vornado_Realty_Trust> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1210268/Vornado_Realty_Trust>,
+        <https://1145.am/db/3402894/Vornado_Realty_Trust>,
+        <https://1145.am/db/3655700/Vornado_Realty_Trust>,
+        <https://1145.am/db/4022678/Vornado_Realty_Trust>,
+        <https://1145.am/db/438235/Vornado_Realty_Trust>,
+        <https://1145.am/db/470345/Vornado_Realty_Trust> .
+
+<https://1145.am/db/4169893/Access_Point_Financial> a org:Organization ;
+    ns1:description "hospitality industry" ;
+    ns1:documentSource <https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> ;
+    ns1:foundName "Access Point Financial" ;
+    ns1:industry "hospitality" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/303_hoteliers_hotel_hotels_hospitality> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/107_hotel_hospitality_investment_lodging>,
+        <https://1145.am/db/industry/338_nightlife_nightclubs_nightclub_bar> ;
+    ns1:internalDocId 4169893 ;
+    ns1:investor <https://1145.am/db/4169893/Access_Point_Financial-Citibank-Investment-Portfolio_Refinance> ;
+    ns1:name "Access Point Financial" ;
+    ns1:sameAsHigh <https://1145.am/db/2700875/Access_Point_Financial> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2689494/Access_Point_Financial>,
+        <https://1145.am/db/2694602/Access_Point_Financial>,
+        <https://1145.am/db/2700076/Access_Point_Financial>,
+        <https://1145.am/db/2831974/Access_Point_Financial> .
+
+<https://1145.am/db/4170097/Battery_Ventures> a org:Organization ;
+    ns1:basedInLowRaw "global" ;
+    ns1:buyer <https://1145.am/db/4170097/Labguru-Acquisition> ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> ;
+    ns1:foundName "Battery Ventures" ;
+    ns1:internalDocId 4170097 ;
+    ns1:name "Battery Ventures" ;
+    ns1:sameAsHigh <https://1145.am/db/1149208/Battery_Ventures>,
+        <https://1145.am/db/1151236/Battery_Ventures>,
+        <https://1145.am/db/1293880/Battery_Ventures>,
+        <https://1145.am/db/1294451/Battery_Ventures>,
+        <https://1145.am/db/1440411/Battery_Ventures>,
+        <https://1145.am/db/1490834/Battery_Ventures>,
+        <https://1145.am/db/1505395/Battery_Ventures>,
+        <https://1145.am/db/1579849/Battery_Ventures>,
+        <https://1145.am/db/1583444/Battery_Ventures>,
+        <https://1145.am/db/1584334/Battery_Ventures>,
+        <https://1145.am/db/1629362/Battery_Ventures>,
+        <https://1145.am/db/1637876/Battery_Ventures>,
+        <https://1145.am/db/1699934/Battery_Ventures>,
+        <https://1145.am/db/1702158/Battery_Ventures>,
+        <https://1145.am/db/1704375/Battery_Ventures>,
+        <https://1145.am/db/1712506/Battery_Ventures>,
+        <https://1145.am/db/1720145/Battery_Ventures>,
+        <https://1145.am/db/1731037/Battery_Ventures>,
+        <https://1145.am/db/1734496/Battery_Ventures>,
+        <https://1145.am/db/1735902/Battery_Ventures>,
+        <https://1145.am/db/1741431/Battery_Ventures>,
+        <https://1145.am/db/1752462/Battery_Ventures>,
+        <https://1145.am/db/1753745/Battery_Ventures>,
+        <https://1145.am/db/1761685/Battery_Ventures>,
+        <https://1145.am/db/1764914/Battery_Ventures>,
+        <https://1145.am/db/1767995/Battery_Ventures>,
+        <https://1145.am/db/1773136/Battery_Ventures>,
+        <https://1145.am/db/1775952/Battery_Ventures>,
+        <https://1145.am/db/1781793/Battery_Ventures>,
+        <https://1145.am/db/1781882/Battery_Ventures>,
+        <https://1145.am/db/1782740/Battery_Ventures>,
+        <https://1145.am/db/1784964/Battery_Ventures>,
+        <https://1145.am/db/1794996/Battery_Ventures>,
+        <https://1145.am/db/1799099/Battery_Ventures>,
+        <https://1145.am/db/1799888/Battery_Ventures>,
+        <https://1145.am/db/1810106/Battery_Ventures>,
+        <https://1145.am/db/1811114/Battery_Ventures>,
+        <https://1145.am/db/1818814/Battery_Ventures>,
+        <https://1145.am/db/1830149/Battery_Ventures>,
+        <https://1145.am/db/1839867/Battery_Ventures>,
+        <https://1145.am/db/1840881/Battery_Ventures>,
+        <https://1145.am/db/1856009/Battery_Ventures>,
+        <https://1145.am/db/1862592/Battery_Ventures>,
+        <https://1145.am/db/1876063/Battery_Ventures>,
+        <https://1145.am/db/1876361/Battery_Ventures>,
+        <https://1145.am/db/1879023/Battery_Ventures>,
+        <https://1145.am/db/1881490/Battery_Ventures>,
+        <https://1145.am/db/1882506/Battery_Ventures>,
+        <https://1145.am/db/1885417/Battery_Ventures>,
+        <https://1145.am/db/1886261/Battery_Ventures>,
+        <https://1145.am/db/1893971/Battery_Ventures>,
+        <https://1145.am/db/1894610/Battery_Ventures>,
+        <https://1145.am/db/1894748/Battery_Ventures>,
+        <https://1145.am/db/1915972/Battery_Ventures>,
+        <https://1145.am/db/1925731/Battery_Ventures>,
+        <https://1145.am/db/1926051/Battery_Ventures>,
+        <https://1145.am/db/1957109/Battery_Ventures>,
+        <https://1145.am/db/2008487/Battery>,
+        <https://1145.am/db/2070530/Battery>,
+        <https://1145.am/db/2130220/Battery_Ventures>,
+        <https://1145.am/db/2294503/Battery_Ventures>,
+        <https://1145.am/db/2443838/Battery_Ventures>,
+        <https://1145.am/db/2449850/Battery_Ventures>,
+        <https://1145.am/db/3113955/Battery_Ventures>,
+        <https://1145.am/db/3140015/Battery_Ventures>,
+        <https://1145.am/db/3145692/Battery_Ventures>,
+        <https://1145.am/db/3153209/Battery_Ventures>,
+        <https://1145.am/db/3256653/Battery_Ventures>,
+        <https://1145.am/db/3342723/Battery_Ventures>,
+        <https://1145.am/db/334443/Battery_Ventures>,
+        <https://1145.am/db/3409017/Battery_Ventures>,
+        <https://1145.am/db/3457510/Battery_Ventures>,
+        <https://1145.am/db/3486583/Battery_Ventures>,
+        <https://1145.am/db/350445/Battery_Ventures>,
+        <https://1145.am/db/3549251/Battery_Ventures>,
+        <https://1145.am/db/3555152/Battery_Ventures>,
+        <https://1145.am/db/3590282/Battery_Ventures>,
+        <https://1145.am/db/3795172/Battery_Ventures>,
+        <https://1145.am/db/3808516/Battery_Ventures>,
+        <https://1145.am/db/3849720/Battery_Ventures>,
+        <https://1145.am/db/3856820/Battery_Ventures>,
+        <https://1145.am/db/3886598/Battery_Ventures>,
+        <https://1145.am/db/390307/Battery_Ventures>,
+        <https://1145.am/db/396100/Battery_Ventures>,
+        <https://1145.am/db/4086165/Battery_Ventures>,
+        <https://1145.am/db/4222731/Battery_Ventures>,
+        <https://1145.am/db/4254025/Battery_Ventures>,
+        <https://1145.am/db/454747/Battery_Ventures>,
+        <https://1145.am/db/469241/Battery_Ventures>,
+        <https://1145.am/db/474759/Battery_Ventures>,
+        <https://1145.am/db/605863/Battery_Ventures>,
+        <https://1145.am/db/658987/Battery_Ventures>,
+        <https://1145.am/db/683977/Battery_Ventures>,
+        <https://1145.am/db/868623/Battery_Ventures>,
+        <https://1145.am/db/9640/Battery_Ventures>,
+        <https://1145.am/db/995480/Battery_Ventures>,
+        <https://1145.am/db/995701/Battery_Ventures> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1140730/Battery_Ventures>,
+        <https://1145.am/db/1146684/Battery_Ventures>,
+        <https://1145.am/db/1149834/Battery_Ventures>,
+        <https://1145.am/db/1150654/Battery_Ventures>,
+        <https://1145.am/db/1166471/Battery_Ventures>,
+        <https://1145.am/db/1186101/Battery_Ventures>,
+        <https://1145.am/db/1318972/Battery_Ventures>,
+        <https://1145.am/db/1440423/Battery_Ventures>,
+        <https://1145.am/db/1440674/Battery_Ventures>,
+        <https://1145.am/db/1440685/Battery_Ventures>,
+        <https://1145.am/db/1448733/Battery_Ventures>,
+        <https://1145.am/db/1449370/Battery_Ventures>,
+        <https://1145.am/db/1619381/Battery_Ventures>,
+        <https://1145.am/db/1667921/Battery_Ventures>,
+        <https://1145.am/db/1695489/Battery_Ventures>,
+        <https://1145.am/db/1697373/Battery_Ventures>,
+        <https://1145.am/db/1700036/Battery_Ventures>,
+        <https://1145.am/db/1702544/Battery_Ventures>,
+        <https://1145.am/db/1705827/Battery_Ventures>,
+        <https://1145.am/db/1713187/Battery_Ventures>,
+        <https://1145.am/db/1714565/Battery_Ventures>,
+        <https://1145.am/db/1718949/Battery_Ventures>,
+        <https://1145.am/db/1726246/Battery_Ventures>,
+        <https://1145.am/db/1738403/Battery_Ventures>,
+        <https://1145.am/db/1743277/Battery_Ventures>,
+        <https://1145.am/db/1743908/Battery_Ventures>,
+        <https://1145.am/db/1748417/Battery_Ventures>,
+        <https://1145.am/db/1750406/Battery_Ventures>,
+        <https://1145.am/db/1754313/Battery_Ventures>,
+        <https://1145.am/db/1755414/Battery_Ventures>,
+        <https://1145.am/db/1757794/Battery_Ventures>,
+        <https://1145.am/db/1761426/Battery_Ventures>,
+        <https://1145.am/db/1762631/Battery_Ventures>,
+        <https://1145.am/db/1763931/Battery_Ventures>,
+        <https://1145.am/db/1764116/Battery_Ventures>,
+        <https://1145.am/db/1767983/Battery_Ventures>,
+        <https://1145.am/db/1777518/Battery_Ventures>,
+        <https://1145.am/db/1778179/Battery_Ventures>,
+        <https://1145.am/db/1781782/Battery_Ventures>,
+        <https://1145.am/db/1783186/Battery_Ventures>,
+        <https://1145.am/db/1783765/Battery_Ventures>,
+        <https://1145.am/db/1783842/Battery_Ventures>,
+        <https://1145.am/db/1795794/Battery_Ventures>,
+        <https://1145.am/db/1803147/Battery_Ventures>,
+        <https://1145.am/db/1804390/Battery_Ventures>,
+        <https://1145.am/db/1811649/Battery_Ventures>,
+        <https://1145.am/db/1820377/Battery_Ventures>,
+        <https://1145.am/db/1825570/Battery_Ventures>,
+        <https://1145.am/db/1826830/Battery_Ventures>,
+        <https://1145.am/db/1828979/Battery_Ventures>,
+        <https://1145.am/db/1829078/Battery_Ventures>,
+        <https://1145.am/db/1829302/Battery_Ventures>,
+        <https://1145.am/db/1831508/Battery_Ventures>,
+        <https://1145.am/db/1834220/Battery_Ventures>,
+        <https://1145.am/db/1837754/Battery_Ventures>,
+        <https://1145.am/db/1838507/Battery_Ventures>,
+        <https://1145.am/db/1838520/Battery_Ventures>,
+        <https://1145.am/db/1851462/Battery_Ventures>,
+        <https://1145.am/db/1853553/Battery_Ventures>,
+        <https://1145.am/db/1854142/Battery_Ventures>,
+        <https://1145.am/db/1872851/Battery_Ventures>,
+        <https://1145.am/db/1875709/Battery_Ventures>,
+        <https://1145.am/db/1882810/Battery_Ventures>,
+        <https://1145.am/db/1884049/Battery_Ventures>,
+        <https://1145.am/db/1886354/Battery_Ventures>,
+        <https://1145.am/db/1888430/Battery_Ventures>,
+        <https://1145.am/db/1888884/Battery_Ventures>,
+        <https://1145.am/db/1892106/Battery_Ventures>,
+        <https://1145.am/db/1893956/Battery_Ventures>,
+        <https://1145.am/db/1908484/Battery_Ventures>,
+        <https://1145.am/db/2009532/Battery_Ventures>,
+        <https://1145.am/db/2010546/Battery_Ventures>,
+        <https://1145.am/db/2188510/Battery_Ventures>,
+        <https://1145.am/db/2282049/Battery_Ventures>,
+        <https://1145.am/db/3037349/Battery_Ventures>,
+        <https://1145.am/db/3114792/Battery_Ventures>,
+        <https://1145.am/db/3119396/Battery_Ventures>,
+        <https://1145.am/db/3142491/Battery_Ventures>,
+        <https://1145.am/db/3143526/Battery_Ventures>,
+        <https://1145.am/db/3146626/Battery_Ventures>,
+        <https://1145.am/db/3154901/Battery_Ventures>,
+        <https://1145.am/db/3158788/Battery_Ventures>,
+        <https://1145.am/db/3160518/Battery_Ventures>,
+        <https://1145.am/db/323838/Battery_Ventures>,
+        <https://1145.am/db/3412020/Battery_Ventures>,
+        <https://1145.am/db/3463095/Battery_Ventures>,
+        <https://1145.am/db/3465257/Battery_Ventures>,
+        <https://1145.am/db/3495964/Battery_Ventures>,
+        <https://1145.am/db/3501012/Battery_Ventures>,
+        <https://1145.am/db/3529252/Battery_Ventures>,
+        <https://1145.am/db/3565424/Battery_Ventures>,
+        <https://1145.am/db/3591244/Battery_Ventures>,
+        <https://1145.am/db/3595355/Battery_Ventures>,
+        <https://1145.am/db/3599147/Battery_Ventures>,
+        <https://1145.am/db/3628338/Battery_Ventures>,
+        <https://1145.am/db/3628626/Battery_Ventures>,
+        <https://1145.am/db/3767858/Battery_Ventures>,
+        <https://1145.am/db/3806250/Battery_Ventures>,
+        <https://1145.am/db/3810101/Battery_Ventures>,
+        <https://1145.am/db/3850962/Battery_Ventures>,
+        <https://1145.am/db/3877948/Battery_Ventures>,
+        <https://1145.am/db/395877/Battery_Ventures>,
+        <https://1145.am/db/4120163/Battery_Ventures>,
+        <https://1145.am/db/4127694/Battery_Ventures>,
+        <https://1145.am/db/506588/Battery_Ventures>,
+        <https://1145.am/db/888743/Battery_Ventures>,
+        <https://1145.am/db/922144/Battery_Ventures>,
+        <https://1145.am/db/924938/Battery_Ventures>,
+        <https://1145.am/db/979672/Battery_Ventures>,
+        <https://1145.am/db/980168/Battery_Ventures> .
+
+<https://1145.am/db/4170102/One_Equity_Partners> a org:Organization ;
+    ns1:basedInLowRaw "Coatesville, PA" ;
+    ns1:buyer <https://1145.am/db/4170102/Ballymore_Safety_Products-Acquisition> ;
+    ns1:description "middle market private equity firm" ;
+    ns1:documentSource <https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> ;
+    ns1:foundName "One Equity Partners" ;
+    ns1:industry "private equity firm" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/146_investors_investor_firms_investments> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
+    ns1:internalDocId 4170102 ;
+    ns1:name "One Equity Partners" ;
+    ns1:sameAsHigh <https://1145.am/db/1006707/One_Equity_Partners>,
+        <https://1145.am/db/1007761/One_Equity_Partners>,
+        <https://1145.am/db/1114794/One_Equity_Partners>,
+        <https://1145.am/db/1114821/One_Equity_Partners>,
+        <https://1145.am/db/1150346/One_Equity_Partners>,
+        <https://1145.am/db/1152119/One_Equity_Partners>,
+        <https://1145.am/db/1204969/One_Equity_Partners>,
+        <https://1145.am/db/1245121/One_Equity_Partners>,
+        <https://1145.am/db/1245132/One_Equity_Partners>,
+        <https://1145.am/db/1262739/One_Equity_Partners>,
+        <https://1145.am/db/1265754/One_Equity_Partners>,
+        <https://1145.am/db/1278970/One_Equity_Partners>,
+        <https://1145.am/db/1279964/One_Equity_Partners>,
+        <https://1145.am/db/1310799/One_Equity_Partners>,
+        <https://1145.am/db/1312018/One_Equity_Partners>,
+        <https://1145.am/db/1370710/One_Equity_Partners>,
+        <https://1145.am/db/1375000/One_Equity_Partners>,
+        <https://1145.am/db/1406030/One_Equity_Partners>,
+        <https://1145.am/db/1406481/One_Equity_Partners>,
+        <https://1145.am/db/1503057/One_Equity_Partners>,
+        <https://1145.am/db/1676654/One_Equity_Partners>,
+        <https://1145.am/db/1994494/One_Equity_Partners>,
+        <https://1145.am/db/2003857/One_Equity_Partners>,
+        <https://1145.am/db/2033932/One_Equity_Partners>,
+        <https://1145.am/db/2306151/One_Equity_Partners>,
+        <https://1145.am/db/2306155/One_Equity_Partners>,
+        <https://1145.am/db/2633244/One_Equity_Partners>,
+        <https://1145.am/db/3088255/One_Equity_Partners>,
+        <https://1145.am/db/3119333/One_Equity_Partners>,
+        <https://1145.am/db/3439265/One_Equity_Partners>,
+        <https://1145.am/db/3783664/One_Equity_Partners>,
+        <https://1145.am/db/3928488/One_Equity_Partners>,
+        <https://1145.am/db/3935735/One_Equity_Partners>,
+        <https://1145.am/db/3965588/One_Equity_Partners>,
+        <https://1145.am/db/3972340/One_Equity_Partners>,
+        <https://1145.am/db/4123958/One_Equity_Partners>,
+        <https://1145.am/db/4124204/One_Equity_Partners>,
+        <https://1145.am/db/4142019/One_Equity_Partners>,
+        <https://1145.am/db/4168657/One_Equity_Partners>,
+        <https://1145.am/db/4170307/One_Equity_Partners>,
+        <https://1145.am/db/523052/One_Equity_Partners>,
+        <https://1145.am/db/544981/One_Equity_Partners>,
+        <https://1145.am/db/603591/One_Equity_Partners>,
+        <https://1145.am/db/652653/One_Equity_Partners>,
+        <https://1145.am/db/654985/One_Equity_Partners>,
+        <https://1145.am/db/658781/One_Equity_Partners>,
+        <https://1145.am/db/659674/One_Equity_Partners>,
+        <https://1145.am/db/739035/One_Equity_Partners>,
+        <https://1145.am/db/739579/One_Equity_Partners>,
+        <https://1145.am/db/789501/One_Equity_Partners>,
+        <https://1145.am/db/790288/One_Equity_Partners>,
+        <https://1145.am/db/866583/One_Equity_Partners>,
+        <https://1145.am/db/879952/One_Equity_Partners>,
+        <https://1145.am/db/901012/One_Equity_Partners>,
+        <https://1145.am/db/901687/One_Equity_Partners>,
+        <https://1145.am/db/92671/One_Equity_Partners>,
+        <https://1145.am/db/992915/One_Equity_Partners> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1081481/One_Equity_Partners>,
+        <https://1145.am/db/1205259/One_Equity_Partners>,
+        <https://1145.am/db/1265324/One_Equity_Partners>,
+        <https://1145.am/db/1411173/One_Equity_Partners>,
+        <https://1145.am/db/1635902/One_Equity_Partners>,
+        <https://1145.am/db/1636187/One_Equity_Partners>,
+        <https://1145.am/db/1636269/One_Equity_Partners>,
+        <https://1145.am/db/2229231/One_Equity_Partners>,
+        <https://1145.am/db/2289434/One_Equity>,
+        <https://1145.am/db/3636835/One_Equity_Partners>,
+        <https://1145.am/db/3646796/One_Equity_Partners>,
+        <https://1145.am/db/4141975/One_Equity_Partners>,
+        <https://1145.am/db/4170582/One_Equity_Partners>,
+        <https://1145.am/db/901562/One_Equity_Partners> .
+
+<https://1145.am/db/4170112/Future_Pak> a org:Organization ;
+    ns1:basedInLowRaw "Future Pak LLC" ;
+    ns1:buyer <https://1145.am/db/4170112/Vanda_Pharmaceuticals_Inc-Acquisition> ;
+    ns1:description "Business" ;
+    ns1:documentSource <https://1145.am/db/4170112/wwwbusinesswirecom_news_home_20240417171574_en_Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-725-to-775-Per-Share-in-Cash> ;
+    ns1:foundName "Future Pak LLC" ;
+    ns1:internalDocId 4170112 ;
+    ns1:name "Future Pak" ;
+    ns1:sameAsNameOnly <https://1145.am/db/4173116/Future_Pak>,
+        <https://1145.am/db/4174725/Future_Pak>,
+        <https://1145.am/db/4187288/Future_Pak>,
+        <https://1145.am/db/4234466/Future_Pak>,
+        <https://1145.am/db/4235641/Future_Pak> .
+
+<https://1145.am/db/4170120/Pestco_Holdings_Llc> a org:Organization ;
+    ns1:basedInHighClean "Portland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5746545> ;
+    ns1:basedInHighRaw "Portland, Oregon" ;
+    ns1:buyer <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp-Acquisition> ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:foundName "PestCo Holdings, LLC" ;
+    ns1:industry "Pest control services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/442_pest_termite_control_services> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "PestCo Holdings, LLC" ;
+    ns1:sameAsHigh <https://1145.am/db/1079016/Pestco_Holdings_Llc>,
+        <https://1145.am/db/1079209/Pestco_Holdings_Llc>,
+        <https://1145.am/db/1196066/Pestco_Holdings_Llc>,
+        <https://1145.am/db/1197858/Pestco_Holdings_Llc>,
+        <https://1145.am/db/1553037/Pestco_Holdings_Llc>,
+        <https://1145.am/db/1553107/Pestco_Holdings_Llc>,
+        <https://1145.am/db/2138702/Pestco_Holdings_Llc>,
+        <https://1145.am/db/4045566/Pestco_Holdings_Llc>,
+        <https://1145.am/db/581473/Pestco_Holdings_Llc>,
+        <https://1145.am/db/607558/Pestco_Holdings_Llc>,
+        <https://1145.am/db/846826/Pestco_Holdings_Llc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1387409/Pestco_Holdings_Llc>,
+        <https://1145.am/db/619175/Pestco_Holdings_Llc> .
+
+<https://1145.am/db/4170120/Thompson_Street_Capital_Partners> a org:Organization ;
+    ns1:basedInHighClean "Saint-Louis" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2246452> ;
+    ns1:basedInHighRaw "St. Louis" ;
+    ns1:description "private equity firm" ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:foundName "Thompson Street Capital Partners" ;
+    ns1:industry "private equity" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/146_investors_investor_firms_investments> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "Thompson Street Capital Partners" ;
+    ns1:participant <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp-Acquisition> ;
+    ns1:sameAsHigh <https://1145.am/db/1016038/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1079016/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1079209/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1196066/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1197858/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1253079/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1265498/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1266311/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1272478/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1273195/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1278671/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1279638/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1281913/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1282744/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1369951/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1370181/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1375792/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1376070/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1387409/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1459712/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1553037/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1553107/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1656903/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1663459/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1667839/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1679207/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/173152/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/1926409/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/2051486/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/2067945/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/2138702/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/2798666/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3207464/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3346175/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3490745/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3490805/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3968880/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/4045566/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/452938/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/555987/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/581473/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/583034/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/607558/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/619175/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/633069/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/701660/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/713274/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/714376/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/846826/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/867942/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/894004/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/895233/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/955109/Thompson_Street_Capital_Partners> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3502332/Thompson_Street_Capital_Partners>,
+        <https://1145.am/db/3912987/Thompson_Street_Capital_Partners> .
+
+<https://1145.am/db/4170137/Data_Clean> a org:Organization ;
+    ns1:basedInHighClean "Ontario" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6093943> ;
+    ns1:basedInHighRaw "Ontario, Canada" ;
+    ns1:buyer <https://1145.am/db/4170137/Dc_Canada-Acquisition> ;
+    ns1:description "decontamination services" ;
+    ns1:documentSource <https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> ;
+    ns1:foundName "Data Clean Corporation" ;
+    ns1:internalDocId 4170137 ;
+    ns1:name "Data Clean" ;
+    ns1:sameAsHigh <https://1145.am/db/1484124/Data_Clean>,
+        <https://1145.am/db/2811304/Data_Clean> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4063979/Data_Clean>,
+        <https://1145.am/db/4065136/Data_Clean> .
+
+<https://1145.am/db/4170138/Armis> a org:Organization ;
+    ns1:buyer <https://1145.am/db/4170138/Silk_Platform-Acquisition> ;
+    ns1:description "cybersecurity" ;
+    ns1:documentSource <https://1145.am/db/4170138/wwwbusinesswirecom_news_home_20240417719399_en_Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix_E2_84_A2> ;
+    ns1:foundName "Armis" ;
+    ns1:industry "cybersecurity" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/30_cybersecurity_cybertech_cyber_cyberdefense> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/614_cybersecurity_cyber_compliance_security> ;
+    ns1:internalDocId 4170138 ;
+    ns1:name "Armis" ;
+    ns1:sameAsHigh <https://1145.am/db/3151691/Armis>,
+        <https://1145.am/db/3176236/Armis>,
+        <https://1145.am/db/3524348/Armis>,
+        <https://1145.am/db/3809177/Armis>,
+        <https://1145.am/db/3965826/Armis>,
+        <https://1145.am/db/4007075/Armis>,
+        <https://1145.am/db/415755/Armis> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3172894/Armis>,
+        <https://1145.am/db/3257787/Armis> .
+
+<https://1145.am/db/4170166/Bowman_Consulting_Group_Ltd> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:buyer <https://1145.am/db/4170166/Moore_Consulting_Engineers-Acquisition> ;
+    ns1:description "engineering services" ;
+    ns1:documentSource <https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> ;
+    ns1:foundName "Bowman Consulting Group Ltd." ;
+    ns1:industry "engineering services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/216_epc_engineering_services_construction> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/44_consulting_consultancy_engineers_consultant> ;
+    ns1:internalDocId 4170166 ;
+    ns1:name "Bowman Consulting Group Ltd." ;
+    ns1:sameAsHigh <https://1145.am/db/1031622/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1032045/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1050187/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1050330/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1213399/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1216430/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1285394/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1290431/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1371029/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1371981/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1480299/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1926441/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1958941/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2007033/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2010144/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2027190/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2035453/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2075280/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2077212/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2095156/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2129604/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2135228/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2145568/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2802989/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2805126/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2811336/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/2835068/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/3649840/Bowman_Consulting_Group>,
+        <https://1145.am/db/3654212/Bowman_Consulting_Group>,
+        <https://1145.am/db/3668631/Bowman_Consulting_Group>,
+        <https://1145.am/db/3753232/Bowman_Consulting_Group>,
+        <https://1145.am/db/3979128/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/3987638/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/403314/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/4105740/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/4121041/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/4121184/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/4138533/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/4150374/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/516811/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/537814/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/539526/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/550561/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/550667/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/700786/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/719865/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/720116/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/777951/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/799787/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/801198/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/816693/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/819415/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/826289/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/867349/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/870724/Bowman_Consulting_Group_Ltd> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1105785/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1108238/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1192120/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1193005/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1290993/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1291475/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1302129/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1304078/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1553093/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/1553204/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/3713719/Bowman_Consulting>,
+        <https://1145.am/db/4209593/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/457456/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/459212/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/714001/Bowman_Consulting_Group_Ltd>,
+        <https://1145.am/db/716871/Bowman_Consulting_Group_Ltd> .
+
+<https://1145.am/db/4170175/Berry_Global_Group> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:description "Health, Hygiene and Specialties" ;
+    ns1:documentSource <https://1145.am/db/4170175/wwwbusinesswirecom_news_home_20240417746650_en_Berry-and-Glatfelter-Announce-Regulatory-Milestone-in-Proposed-Transaction-for-Spin-Off-and-Merger-of-Berry_E2_80_99s-Health-Hygiene-and-Specialties-Global-Nonwovens-and-Films-Business-with-Glatfelter> ;
+    ns1:foundName "Berry Global Group, Inc." ;
+    ns1:internalDocId 4170175 ;
+    ns1:name "Berry Global Group" ;
+    ns1:protagonist <https://1145.am/db/4170175/Berry_Global_Group-Glatfelter_Corporation-Merger-Segment> ;
+    ns1:sameAsHigh <https://1145.am/db/1657176/Berry_Global_Group>,
+        <https://1145.am/db/3990800/Berry_Global_Group>,
+        <https://1145.am/db/3997883/Berry_Global_Group>,
+        <https://1145.am/db/4154639/Berry_Global> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1526801/Berry_Global_Group>,
+        <https://1145.am/db/1528005/Berry_Global_Group>,
+        <https://1145.am/db/1660574/Berry_Global_Group>,
+        <https://1145.am/db/1969780/Berry_Global_Group>,
+        <https://1145.am/db/3030975/Berry_Global>,
+        <https://1145.am/db/3033658/Berry_Global>,
+        <https://1145.am/db/3388565/Berry_Global>,
+        <https://1145.am/db/3627939/Berry_Global_Group>,
+        <https://1145.am/db/3673878/Berry_Global_Group>,
+        <https://1145.am/db/3960124/Berry_Global_Group>,
+        <https://1145.am/db/3960124/Berry_Global_Inc>,
+        <https://1145.am/db/4003978/Berry_Global>,
+        <https://1145.am/db/4011766/Berry_Global>,
+        <https://1145.am/db/4243032/Berry_Global_Group_Inc> .
+
+<https://1145.am/db/4170175/Glatfelter_Corporation> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:description "the specialty materials industry" ;
+    ns1:documentSource <https://1145.am/db/4170175/wwwbusinesswirecom_news_home_20240417746650_en_Berry-and-Glatfelter-Announce-Regulatory-Milestone-in-Proposed-Transaction-for-Spin-Off-and-Merger-of-Berry_E2_80_99s-Health-Hygiene-and-Specialties-Global-Nonwovens-and-Films-Business-with-Glatfelter> ;
+    ns1:foundName "Glatfelter",
+        "Glatfelter Corporation" ;
+    ns1:industry "specialty materials" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/468_specialty_speciality_products_chemicals> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/563_materials_material_technical_engineering>,
+        <https://1145.am/db/industry/581_ingredients_chemicals_ingredient_additives> ;
+    ns1:internalDocId 4170175 ;
+    ns1:name "Glatfelter Corporation" ;
+    ns1:protagonist <https://1145.am/db/4170175/Berry_Global_Group-Glatfelter_Corporation-Merger-Segment> ;
+    ns1:sameAsHigh <https://1145.am/db/3990800/Glatfelter_Corporation>,
+        <https://1145.am/db/4011766/Glatfelter> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3711557/Glatfelter_Corp>,
+        <https://1145.am/db/3732715/Glatfelter_Corporation>,
+        <https://1145.am/db/3750231/Glatfelter>,
+        <https://1145.am/db/3997883/Glatfelter_Corporation>,
+        <https://1145.am/db/4154639/Glatfelter_Corporation>,
+        <https://1145.am/db/4156604/Glatfelter>,
+        <https://1145.am/db/479620/Glatfelter_Corporation>,
+        <https://1145.am/db/549350/Glatfelter_Corporation> .
+
+<https://1145.am/db/3024715/Locums_Nest> a org:Organization ;
+    ns1:basedInLowRaw "England" ;
+    ns1:description "healthtech" ;
+    ns1:documentSource <https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> ;
+    ns1:foundName "Locum's Nest" ;
+    ns1:industry "Healthtech" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/199_agetech_healthtech_heathtech_caretech> ;
+    ns1:internalDocId 3024715 ;
+    ns1:name "Locum's Nest" .
+
+<https://1145.am/db/3619563/Harvest_Health_Recreation-Added-California> a ns1:LocationActivity ;
+    ns1:activityType "added" ;
+    ns1:documentDate "2019-09-30T12:48:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "PHOENIX, Sept. 30, 2019 /PRNewswire/ - Harvest Health & Recreation, Inc. (CSE: HARV, OTCQX: HRVSF) (\"Harvest\") , a vertically integrated cannabis company with one of the largest and deepest footprints in the U.S., today announced the opening of Harvest of Venice, expanding their footprint in the California market." ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:foundName "opening" ;
+    ns1:internalDocId 3619563 ;
+    ns1:location <https://1145.am/db/3619563/California> ;
+    ns1:locationFoundName "California" ;
+    ns1:locationType "Site" ;
+    ns1:name "Added California" ;
+    ns1:orgFoundName "Harvest Health & Recreation, Inc" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/3619563/Multi-State_Vertically_Integrated_Cannabis_Company-Added-California> a ns1:LocationActivity ;
+    ns1:activityType "added" ;
+    ns1:documentDate "2019-09-30T12:48:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Multi-State, Vertically Integrated Cannabis Company Expands California Growth.",
+        "PHOENIX, Sept. 30, 2019 /PRNewswire/ - Harvest Health & Recreation, Inc. (CSE: HARV, OTCQX: HRVSF) (\"Harvest\") , a vertically integrated cannabis company with one of the largest and deepest footprints in the U.S., today announced the opening of Harvest of Venice, expanding their footprint in the California market." ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:foundName "Expands",
+        "opening" ;
+    ns1:internalDocId 3619563 ;
+    ns1:location <https://1145.am/db/3619563/California> ;
+    ns1:locationFoundName "California" ;
+    ns1:locationType "Site" ;
+    ns1:name "Added California" ;
+    ns1:orgFoundName "Multi-State, Vertically Integrated Cannabis Company" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/3785309/Valud_Consulting> a org:Organization ;
+    ns1:basedInHighClean "Republic of India",
+        "United States" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1269750>,
+        <https://1145.am/db/geonames_location/6252001> ;
+    ns1:basedInHighRaw "United States and India" ;
+    ns1:description "IBM software integration and consulting services" ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
+    ns1:foundName "ValuD Consulting" ;
+    ns1:internalDocId 3785309 ;
+    ns1:name "ValuD Consulting" .
+
+<https://1145.am/db/3785309/Valud_Consulting-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-10-03T15:16:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "CHICAGO, Oct. 3, 2018 /PRNewswire/ - JLL (NYSE: JLL) today announced an agreement to acquire ValuD Consulting, a leading provider of IBM software integration and consulting services in the United States and India." ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 3785309 ;
+    ns1:name "acquire" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/3785309/Valud_Consulting> ;
+    ns1:targetName "ValuD Consulting" ;
+    ns1:whereClean "Republic of India",
+        "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1269750>,
+        <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States and India" .
+
+<https://1145.am/db/3785317/Apttus> a org:Organization ;
+    ns1:basedInHighClean "Los Angeles" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:basedInHighRaw "LOS ANGELES" ;
+    ns1:description "middle office" ;
+    ns1:documentSource <https://1145.am/db/3785317/wwwprnewswirecom_news-releases_k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473html> ;
+    ns1:foundName "Apttus" ;
+    ns1:industry "software" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
+    ns1:internalDocId 3785317 ;
+    ns1:name "Apttus" ;
+    ns1:sameAsHigh <https://1145.am/db/1779104/Apttus>,
+        <https://1145.am/db/3443759/Apttus>,
+        <https://1145.am/db/3463586/Apttus>,
+        <https://1145.am/db/3544010/Apttus>,
+        <https://1145.am/db/3552883/Apttus>,
+        <https://1145.am/db/3558676/Apttus>,
+        <https://1145.am/db/3629913/Apttus>,
+        <https://1145.am/db/3767363/Apttus>,
+        <https://1145.am/db/3808842/Apttus>,
+        <https://1145.am/db/3810768/Apttus>,
+        <https://1145.am/db/3816185/Apttus>,
+        <https://1145.am/db/3859215/Apttus> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1778624/Apttus>,
+        <https://1145.am/db/1782873/Apttus>,
+        <https://1145.am/db/1795198/Apttus>,
+        <https://1145.am/db/1828103/Apttus>,
+        <https://1145.am/db/3796136/Apttus>,
+        <https://1145.am/db/3891618/Apttus>,
+        <https://1145.am/db/941347/Apttus> .
+
+<https://1145.am/db/3785317/Apttus-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-10-03T15:22:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "LOS ANGELES, Oct. 3, 2018 /PRNewswire/ - K1 Investment Management, a leading private equity firm exclusively focused on enterprise software, today announced a successful exit from its investment in Apttus, as Thoma Bravo acquired a majority interest in the company." ;
+    ns1:documentSource <https://1145.am/db/3785317/wwwprnewswirecom_news-releases_k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473html> ;
+    ns1:foundName "acquired" ;
+    ns1:internalDocId 3785317 ;
+    ns1:name "acquired" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3785317/Apttus> ;
+    ns1:targetDetails "interest" ;
+    ns1:targetName "Apttus" ;
+    ns1:when "2018-10-03T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Oct. 3, 2018" ;
+    ns1:whereClean "Los Angeles" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:whereRaw "LOS ANGELES" .
+
+<https://1145.am/db/3785695/Holy_Cross_Health> a org:Organization ;
+    ns1:basedInHighClean "Maryland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
+    ns1:basedInHighRaw "Maryland" ;
+    ns1:description "Maternal and children's health" ;
+    ns1:documentSource <https://1145.am/db/3785695/wwwprnewswirecom_news-releases_nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763html> ;
+    ns1:foundName "Holy Cross Health" ;
+    ns1:industry "health care" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
+    ns1:internalDocId 3785695 ;
+    ns1:name "Holy Cross Health" .
+
+<https://1145.am/db/3785695/Holy_Cross_Hospital> a org:Organization ;
+    ns1:basedInHighClean "Maryland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
+    ns1:basedInHighRaw "Maryland" ;
+    ns1:description "Maternal and children's health" ;
+    ns1:documentSource <https://1145.am/db/3785695/wwwprnewswirecom_news-releases_nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763html> ;
+    ns1:foundName "Holy Cross Hospital" ;
+    ns1:industry "health system" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/345_marketing_healthcare_advertising_health>,
+        <https://1145.am/db/industry/92_automation_automated_automatic_technologies> ;
+    ns1:internalDocId 3785695 ;
+    ns1:name "Holy Cross Hospital" ;
+    ns1:sameAsHigh <https://1145.am/db/2231680/Holy_Cross_Hospital>,
+        <https://1145.am/db/2242868/Holy_Cross_Hospital> .
+
+<https://1145.am/db/3785698/Showcase_Idx> a org:Organization ;
+    ns1:basedInHighClean "Atlanta" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
+    ns1:basedInHighRaw "Atlanta" ;
+    ns1:description "real estate agents, teams, and brokers" ;
+    ns1:documentSource <https://1145.am/db/3785698/wwwprnewswirecom_news-releases_showcase-idx-closes-private-equity-investment-round-300723761html> ;
+    ns1:foundName "Showcase IDX" ;
+    ns1:industry "real estate technology" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/120_proptech_fintech_prop_tech> ;
+    ns1:internalDocId 3785698 ;
+    ns1:name "Showcase IDX" .
+
+<https://1145.am/db/4151859/Snehal_Shah-Starting-President_Of_R_D> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-04-10T10:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "ZUG, Switzerland and BOSTON, April 10, 2024 (GLOBE NEWSWIRE) - Oculis Holding AG (Nasdaq: OCS) (\"Oculis\") , a global biopharmaceutical company purposefully driven to save sight and improve eye care, today announced the appointment of Dr. Snehal Shah, executive leader with over two decades of research & development (R & D) and regulatory experience, to the role of President of R & D." ;
+    ns1:documentSource <https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4151859 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "Oculis Holding AG (Nasdaq: OCS) (\"Oculis\")" ;
+    ns1:role <https://1145.am/db/4151859/Oculis_Holding_Ag-President_Of_R_D> ;
+    ns1:roleFoundName "President of R & D" ;
+    ns1:roleHolderFoundName "Snehal Shah" ;
+    ns1:status "completed" ;
+    ns1:when "2024-04-10T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "April 10, 2024" ;
+    ns1:whereClean "Switzerland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:whereRaw "Switzerland" .
+
+<https://1145.am/db/4168148/Edinburgh_Airport> a org:Organization ;
+    ns1:basedInHighClean "Scotland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
+    ns1:basedInHighRaw "Scotland" ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:foundName "Edinburgh Airport" ;
+    ns1:internalDocId 4168148 ;
+    ns1:name "Edinburgh Airport" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2901724/Edinburgh_Airport>,
+        <https://1145.am/db/2901726/Edinburgh_Airport>,
+        <https://1145.am/db/2906470/Edinburgh_Airport>,
+        <https://1145.am/db/2914820/Edinburgh_Airport>,
+        <https://1145.am/db/3033502/Edinburgh_Airport>,
+        <https://1145.am/db/4168185/Edinburgh_Airport> .
+
+<https://1145.am/db/4168148/London_Gatwick> a org:Organization ;
+    ns1:basedInLowRaw "France" ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:foundName "London Gatwick" ;
+    ns1:industry "Airport" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/124_airline_airlines_airliners_airliner> ;
+    ns1:internalDocId 4168148 ;
+    ns1:name "London Gatwick" .
+
+<https://1145.am/db/4168197/Ids> a org:Organization ;
+    ns1:basedInLowRaw "Czech" ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "IDS" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "IDS" ;
+    ns1:sameAsNameOnly <https://1145.am/db/4250239/Ids>,
+        <https://1145.am/db/965768/Ids> .
+
+<https://1145.am/db/4168197/Ids-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:06:51+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "'Czech Sphinx' West Ham director makes bid for Royal Mail owner IDS." ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "bid" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "bid" ;
+    ns1:status "stopped" ;
+    ns1:target <https://1145.am/db/4168197/Ids> ;
+    ns1:targetName "IDS" ;
+    ns1:whereClean "Czechia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereRaw "Czech" .
+
+<https://1145.am/db/4168197/Royal_Mail> a org:Organization ;
+    ns1:basedInLowRaw "Czech" ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "Royal Mail" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "Royal Mail" ;
+    ns1:sameAsHigh <https://1145.am/db/4001762/Royal_Mail>,
+        <https://1145.am/db/4290155/Royal_Mail> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
+        <https://1145.am/db/194587/Royal_Mail_Plc>,
+        <https://1145.am/db/194605/Royal_Mail_Plc>,
+        <https://1145.am/db/194606/Royal_Mail_Plc>,
+        <https://1145.am/db/194607/Royal_Mail_Plc>,
+        <https://1145.am/db/1998848/Royal_Mail>,
+        <https://1145.am/db/2005816/Royal_Mail>,
+        <https://1145.am/db/2841455/Royal_Mail>,
+        <https://1145.am/db/2847880/Royal_Mail>,
+        <https://1145.am/db/2864441/Royal_Mail>,
+        <https://1145.am/db/2939544/Royal_Mail>,
+        <https://1145.am/db/2941320/Royal_Mail>,
+        <https://1145.am/db/2945763/Royal_Mail>,
+        <https://1145.am/db/2959107/Royal_Mail>,
+        <https://1145.am/db/2969395/Royal_Mail>,
+        <https://1145.am/db/2977176/Royal_Mail>,
+        <https://1145.am/db/2977364/Royal_Mail>,
+        <https://1145.am/db/2984033/Royal_Mail>,
+        <https://1145.am/db/2988964/Royal_Mail>,
+        <https://1145.am/db/2988998/Royal_Mail>,
+        <https://1145.am/db/3009355/Royal_Mail>,
+        <https://1145.am/db/3023028/Royal_Mail>,
+        <https://1145.am/db/3026949/Royal_Mail>,
+        <https://1145.am/db/3050026/Royal_Mail>,
+        <https://1145.am/db/3058845/Royal_Mail>,
+        <https://1145.am/db/3073967/Royal_Mail>,
+        <https://1145.am/db/4133454/Royal_Mail>,
+        <https://1145.am/db/534151/Royal_Mail> .
+
+<https://1145.am/db/4168197/Royal_Mail-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:06:51+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "A major European conglomerate led by Daniel Křetínský, who is known as the Czech Sphinx, has had a bid for Royal Mail's parent company International Distributions Services (IDS) knocked back." ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:internalDocId 4168197 ;
+    ns1:status "stopped" ;
+    ns1:target <https://1145.am/db/4168197/Royal_Mail> ;
+    ns1:targetName "Royal Mail" ;
+    ns1:whereClean "Europe" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6255148> ;
+    ns1:whereRaw "European" .
+
+<https://1145.am/db/4168197/Telegraph_Media_Group> a org:Organization ;
+    ns1:basedInLowRaw "UK" ;
+    ns1:description "publishing" ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "Telegraph Media Group" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "Telegraph Media Group" ;
+    ns1:sameAsHigh <https://1145.am/db/2716133/Telegraph_Media_Group>,
+        <https://1145.am/db/2828474/Telegraph_Media_Group>,
+        <https://1145.am/db/2974323/Telegraph_Media_Group>,
+        <https://1145.am/db/4199873/Telegraph_Media_Group> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1810450/Telegraph_Media_Group>,
+        <https://1145.am/db/2824292/Telegraph_Media_Group>,
+        <https://1145.am/db/2852351/Telegraph_Media_Group>,
+        <https://1145.am/db/2855155/Telegraph_Media_Group>,
+        <https://1145.am/db/3142355/Telegraph_Media_Group>,
+        <https://1145.am/db/3949511/Telegraph_Media_Group>,
+        <https://1145.am/db/3958408/Telegraph_Media_Group>,
+        <https://1145.am/db/4081621/Telegraph_Media_Group>,
+        <https://1145.am/db/4087284/Telegraph_Media_Group>,
+        <https://1145.am/db/4106905/Telegraph_Media_Group>,
+        <https://1145.am/db/4109436/Telegraph_Media_Group>,
+        <https://1145.am/db/4198431/Telegraph_Media_Group> .
+
+<https://1145.am/db/4168197/Telegraph_Media_Group-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:06:51+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Czech billionaire Křetínský, who also part-owns West Ham, last year threw his hat into the ring in a high-profile auction for the UK's Telegraph Media Group." ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:foundName "auction" ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "auction" ;
+    ns1:status "stopped" ;
+    ns1:target <https://1145.am/db/4168197/Telegraph_Media_Group> ;
+    ns1:targetName "Telegraph Media Group" ;
+    ns1:when "2023-05-20T17:21:29.470645"^^xsd:dateTime ;
+    ns1:whenRaw "last year" ;
+    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereRaw "UK" .
+
+<https://1145.am/db/4168343/Hpq_Silicon_Inc> a org:Organization ;
+    ns1:basedInLowRaw "Canada" ;
+    ns1:description "a high-tech company" ;
+    ns1:documentSource <https://1145.am/db/4168343/wwwglobenewswirecom_news-release_2024_04_17_2864358_0_en_PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shareshtml> ;
+    ns1:foundName "HPQ Silicon Inc." ;
+    ns1:internalDocId 4168343 ;
+    ns1:name "HPQ Silicon Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/4152709/Hpq_Silicon_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4235635/Hpq_Silicon> .
+
+<https://1145.am/db/4168343/Pyrogenesis_Canada_Inc> a org:Organization ;
+    ns1:basedInHighClean "Canada" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:basedInHighRaw "Canada" ;
+    ns1:description "a high-tech company" ;
+    ns1:documentSource <https://1145.am/db/4168343/wwwglobenewswirecom_news-release_2024_04_17_2864358_0_en_PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shareshtml> ;
+    ns1:foundName "PyroGenesis Canada Inc." ;
+    ns1:industry "high-tech" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/511_technology_tech_high_industries> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/615_retailers_high_retailer_street> ;
+    ns1:internalDocId 4168343 ;
+    ns1:name "PyroGenesis Canada Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/1431090/Pyrogenesis_Canada_Inc>,
+        <https://1145.am/db/405479/Pyrogenesis_Canada_Inc>,
+        <https://1145.am/db/4136464/Pyrogenesis_Canada_Inc>,
+        <https://1145.am/db/4152709/Pyrogenesis_Canada_Inc>,
+        <https://1145.am/db/472547/Pyrogenesis_Canada_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4235635/Pyrogenesis_Canada_Inc> .
+
+<https://1145.am/db/4169893/Access_Point_Financial-Citibank-Investment-Portfolio_Refinance> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2024-04-17T09:07:34+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Access Point Financial, a direct capital provider focused exclusively on the hospitality industry, has closed a $ 90 million investment in Citibank's recent $ 631.5 million commercial mortgage-backed security single-asset single-borrower hotel portfolio refinance (HTL 2024-T53) ." ;
+    ns1:documentSource <https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> ;
+    ns1:foundName "investment" ;
+    ns1:internalDocId 4169893 ;
+    ns1:name "investment" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4169893/Citibank> ;
+    ns1:targetDetails "portfolio refinance" ;
+    ns1:valueRaw "$ 631.5 million",
+        "$ 90 million" ;
+    ns1:whereClean "14/31 Ambohijafy" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11933798> ;
+    ns1:whereRaw "14 states" .
+
+<https://1145.am/db/4169893/Citibank> a org:Organization ;
+    ns1:description "commercial mortgage-backed security single-asset single-borrower hotel portfolio refinance" ;
+    ns1:documentSource <https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> ;
+    ns1:foundName "Citibank" ;
+    ns1:internalDocId 4169893 ;
+    ns1:name "Citibank" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1026018/Citibank>,
+        <https://1145.am/db/2333351/Citibank>,
+        <https://1145.am/db/2352682/Citibank>,
+        <https://1145.am/db/2352723/Citibank>,
+        <https://1145.am/db/2536552/Citibank>,
+        <https://1145.am/db/2734293/Citibank>,
+        <https://1145.am/db/2783567/Citibank>,
+        <https://1145.am/db/2861060/Citibank>,
+        <https://1145.am/db/2971099/Citibank>,
+        <https://1145.am/db/3093338/Citibank>,
+        <https://1145.am/db/3519521/Citibank>,
+        <https://1145.am/db/3847301/Citibank>,
+        <https://1145.am/db/4229835/Citibank>,
+        <https://1145.am/db/846832/Citibank> .
+
+<https://1145.am/db/4170097/Holtzbrinck_Digital> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> ;
+    ns1:foundName "Holtzbrinck Digital" ;
+    ns1:internalDocId 4170097 ;
+    ns1:name "Holtzbrinck Digital" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1705169/Holtzbrinck_Digital>,
+        <https://1145.am/db/1742188/Holtzbrinck_Digital>,
+        <https://1145.am/db/1860152/Holtzbrinck_Digital> .
+
+<https://1145.am/db/4170097/Labguru> a org:Organization ;
+    ns1:basedInLowRaw "BioData Inc." ;
+    ns1:description "scientists" ;
+    ns1:documentSource <https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> ;
+    ns1:foundName "Labguru" ;
+    ns1:industry "life-science" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/133_lifesciences_lifescience_biosciences_biotech> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/257_biosciences_diagnostics_biotech_diagnostic>,
+        <https://1145.am/db/industry/292_healthcare_biosciences_biotechnology_health> ;
+    ns1:internalDocId 4170097 ;
+    ns1:name "Labguru" .
+
+<https://1145.am/db/4170097/Labguru-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T10:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Battery Ventures, a global, technology - focused investment firm, announced the acquisition of Labguru (BioData Inc.) , the life-science laboratory-data platform, from Holtzbrinck Digital." ;
+    ns1:documentSource <https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 4170097 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170097/Labguru> ;
+    ns1:targetName "Labguru" ;
+    ns1:vendor <https://1145.am/db/4170097/Holtzbrinck_Digital> .
+
+<https://1145.am/db/4170102/Ballymore_Safety_Products> a org:Organization ;
+    ns1:basedInHighClean "Coatesville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4557247> ;
+    ns1:basedInHighRaw "Coatesville, PA" ;
+    ns1:description "designing and manufacturing" ;
+    ns1:documentSource <https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> ;
+    ns1:foundName "Ballymore Safety Products" ;
+    ns1:internalDocId 4170102 ;
+    ns1:name "Ballymore Safety Products" ;
+    ns1:sameAsHigh <https://1145.am/db/4168657/Ballymore_Safety_Products> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4170307/Ballymore_Safety_Products> .
+
+<https://1145.am/db/4170102/Ballymore_Safety_Products-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T10:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Graycliff Partners LP today announced the sale of Ballymore Safety Products (\"Ballymore\") , a leading designer and manufacturer of engineered vertical access and material handling safety-related products for use in industrial and retail environments, to One Equity Partners (\"OEP\") , a middle market private equity firm." ;
+    ns1:documentSource <https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> ;
+    ns1:foundName "sale" ;
+    ns1:internalDocId 4170102 ;
+    ns1:name "sale" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170102/Ballymore_Safety_Products> ;
+    ns1:targetName "Ballymore Safety Products" ;
+    ns1:vendor <https://1145.am/db/4170102/Graycliff_Partners> ;
+    ns1:whereClean "Coatesville" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4557247> ;
+    ns1:whereRaw "Coatesville, PA" .
+
+<https://1145.am/db/4170102/Graycliff_Partners> a org:Organization ;
+    ns1:basedInLowRaw "Coatesville, PA" ;
+    ns1:documentSource <https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> ;
+    ns1:foundName "Graycliff Partners LP" ;
+    ns1:industry "private equity" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/146_investors_investor_firms_investments> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
+    ns1:internalDocId 4170102 ;
+    ns1:name "Graycliff Partners" ;
+    ns1:sameAsHigh <https://1145.am/db/1385842/Graycliff_Partners_Lp>,
+        <https://1145.am/db/1386599/Graycliff_Partners_Lp>,
+        <https://1145.am/db/1437070/Graycliff_Capital_Partners>,
+        <https://1145.am/db/490237/Graycliff_Partners_Lp> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2786124/Graycliff_Partners>,
+        <https://1145.am/db/3873080/Graycliff_Partners>,
+        <https://1145.am/db/3873088/Graycliff_Partners>,
+        <https://1145.am/db/4168657/Graycliff_Partners> .
+
+<https://1145.am/db/4170112/Vanda_Pharmaceuticals_Inc> a org:Organization ;
+    ns1:basedInLowRaw "Future Pak LLC" ;
+    ns1:description "Pharmaceuticals" ;
+    ns1:documentSource <https://1145.am/db/4170112/wwwbusinesswirecom_news_home_20240417171574_en_Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-725-to-775-Per-Share-in-Cash> ;
+    ns1:foundName "Vanda Pharmaceuticals, Inc" ;
+    ns1:industry "Pharmaceuticals" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 4170112 ;
+    ns1:name "Vanda Pharmaceuticals, Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/2348191/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/2349193/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/2350124/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/2367153/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/2543548/Vanda_Pharmaceuticals>,
+        <https://1145.am/db/2580053/Vanda_Pharmaceuticals>,
+        <https://1145.am/db/2832052/Vanda_Pharmaceuticals>,
+        <https://1145.am/db/3301390/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/3603285/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/3808323/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/4173116/Vanda_Pharmaceuticals>,
+        <https://1145.am/db/4174725/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/4187288/Vanda_Pharmaceuticals_Inc>,
+        <https://1145.am/db/4234466/Vanda_Pharmaceuticals>,
+        <https://1145.am/db/4235641/Vanda_Pharmaceuticals> .
+
+<https://1145.am/db/4170112/Vanda_Pharmaceuticals_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T10:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Future Pak LLC (\"Future Pak\") today announced that it has submitted three proposals since February to acquire all of the outstanding shares of common stock of Vanda Pharmaceuticals, Inc. (\"Vanda\") (NASDAQ: VNDA) , and confirms that its most recent proposal to acquire Vanda for cash consideration of $ 7.25 to $ 7.75 per share remains open for Vanda and its Board of Directors to consider." ;
+    ns1:documentSource <https://1145.am/db/4170112/wwwbusinesswirecom_news_home_20240417171574_en_Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-725-to-775-Per-Share-in-Cash> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 4170112 ;
+    ns1:name "acquire" ;
+    ns1:status "stopped" ;
+    ns1:target <https://1145.am/db/4170112/Vanda_Pharmaceuticals_Inc> ;
+    ns1:targetName "Vanda Pharmaceuticals, Inc" .
+
+<https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp> a org:Organization ;
+    ns1:basedInHighClean "Portland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5746545> ;
+    ns1:basedInHighRaw "Portland, Oregon" ;
+    ns1:description "pest control services" ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:foundName "Sasquatch" ;
+    ns1:industry "Pest control services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/442_pest_termite_control_services> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "Sasquatch Pest Control Corp" .
+
+<https://1145.am/db/4170137/Dc_Canada> a org:Organization ;
+    ns1:basedInHighClean "Ontario" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6093943> ;
+    ns1:basedInHighRaw "Ontario, Canada" ;
+    ns1:description "decontamination services" ;
+    ns1:documentSource <https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> ;
+    ns1:foundName "DC Canada, Inc." ;
+    ns1:internalDocId 4170137 ;
+    ns1:name "DC Canada" .
+
+<https://1145.am/db/4170137/Dc_Canada-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Data Clean Corporation (\"Data Clean\") today announced the acquisition of DC Canada, Inc. (\"DC Canada\") , a provider of decontamination services for critical environments focused on data centers across Canada." ;
+    ns1:documentSource <https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 4170137 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170137/Dc_Canada> ;
+    ns1:targetName "DC Canada" ;
+    ns1:whereClean "Canada" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereRaw "Canada" .
+
+<https://1145.am/db/4170138/Silk_Platform> a org:Organization ;
+    ns1:description "cyber risk prioritization and remediation" ;
+    ns1:documentSource <https://1145.am/db/4170138/wwwbusinesswirecom_news_home_20240417719399_en_Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix_E2_84_A2> ;
+    ns1:foundName "Silk Security" ;
+    ns1:industry "cybersecurity" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/30_cybersecurity_cybertech_cyber_cyberdefense> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/614_cybersecurity_cyber_compliance_security> ;
+    ns1:internalDocId 4170138 ;
+    ns1:name "Silk Platform" .
+
+<https://1145.am/db/4170138/Silk_Platform-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Armis has acquired Silk Security for a total of $ 150M, and will integrate the Silk Platform into the Armis Centrix™ AI based Vulnerability Prioritization and Remediation solution to supercharge its capabilities and now be able to provide security teams with a consolidated view of security findings that encompass all sources of data from on prem devices to cloud compute, code, and application security tools, and fully manage and automate remediation.",
+        "Armis, the asset intelligence cybersecurity company, today announced it has acquired Silk Security, the leading platform for cyber risk prioritization and remediation." ;
+    ns1:documentSource <https://1145.am/db/4170138/wwwbusinesswirecom_news_home_20240417719399_en_Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix_E2_84_A2> ;
+    ns1:foundName "acquired" ;
+    ns1:internalDocId 4170138 ;
+    ns1:name "acquired" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170138/Silk_Platform> ;
+    ns1:targetName "Silk Platform" ;
+    ns1:valueRaw "$ 150M" ;
+    ns1:whereClean "State of Israel" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereRaw "Israel" .
+
+<https://1145.am/db/4170166/Moore_Consulting_Engineers> a org:Organization ;
+    ns1:basedInHighClean "Chatsworth" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4501186> ;
+    ns1:basedInHighRaw "Shamong, New Jersey" ;
+    ns1:description "Mechanical, electrical, plumbing, and fire protection" ;
+    ns1:documentSource <https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> ;
+    ns1:foundName "Moore Consulting Engineers" ;
+    ns1:industry "engineering services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/216_epc_engineering_services_construction> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/44_consulting_consultancy_engineers_consultant> ;
+    ns1:internalDocId 4170166 ;
+    ns1:name "Moore Consulting Engineers" .
+
+<https://1145.am/db/4170166/Moore_Consulting_Engineers-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Bowman Consulting Group Ltd. (the \"Company\" or \"Bowman\") (NASDAQ: BWMN) , a national engineering services firm delivering infrastructure solutions to customers who own, develop, and maintain the built environment, today announced the acquisition of Moore Consulting Engineers (\"Moore\") , a mechanical, electrical, plumbing, and fire protection (\"MEP/FP\") engineering firm based in Shamong, New Jersey." ;
+    ns1:documentSource <https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 4170166 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170166/Moore_Consulting_Engineers> ;
+    ns1:targetName "Moore Consulting Engineers" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States" .
+
+<https://1145.am/db/geonames_location/11933798> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> ;
+    ns1:geoNamesId 11933798 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/11933798/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/11933798> ;
+    ns1:internalDocId 4169893 ;
+    ns1:name "14/31 Ambohijafy" .
+
+<https://1145.am/db/geonames_location/2246452> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:geoNamesId 2246452 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2246452/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2246452> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "Saint-Louis" .
+
+<https://1145.am/db/geonames_location/2635167> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:geoNamesId 2635167 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2635167/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2635167> ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "United Kingdom of Great Britain and Northern Ireland" .
+
+<https://1145.am/db/geonames_location/294640> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170138/wwwbusinesswirecom_news_home_20240417719399_en_Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix_E2_84_A2> ;
+    ns1:geoNamesId 294640 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/294640/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/294640> ;
+    ns1:internalDocId 4170138 ;
+    ns1:name "State of Israel" .
+
+<https://1145.am/db/geonames_location/4501186> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> ;
+    ns1:geoNamesId 4501186 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4501186/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4501186> ;
+    ns1:internalDocId 4170166 ;
+    ns1:name "Chatsworth" .
+
+<https://1145.am/db/geonames_location/4887398> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
+    ns1:geoNamesId 4887398 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4887398/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4887398> ;
+    ns1:internalDocId 3785309 ;
+    ns1:name "Chicago" .
+
+<https://1145.am/db/geonames_location/5125771> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:geoNamesId 5125771 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5125771/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5125771> ;
+    ns1:internalDocId 4168398 ;
+    ns1:name "Manhattan" .
+
+<https://1145.am/db/geonames_location/5308655> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:geoNamesId 5308655 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5308655/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5308655> ;
+    ns1:internalDocId 3619563 ;
+    ns1:name "Phoenix" .
+
+<https://1145.am/db/geonames_location/5744337> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:geoNamesId 5744337 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5744337/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5744337> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "Oregon" .
+
+<https://1145.am/db/geonames_location/6255148> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:geoNamesId 6255148 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6255148/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6255148> ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "Europe" .
+
+<https://1145.am/db/geonames_location/6269131> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> ;
+    ns1:geoNamesId 6269131 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6269131/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6269131> ;
+    ns1:internalDocId 3024715 ;
+    ns1:name "England" .
+
+<https://1145.am/db/3024715/Albion_Capital-Ido_Investments-Locums_Nest-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-03T15:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Healthtech startup Locum's Nest scores £4.1m backing from Albion Capital.",
+        "Locum's Nest, a startup which acts a recruitment agency for doctors in hospitals, has landed a further £3m in funding from London backer Albion Capital and IDO Investments, taking its total amount raised to £4.1m." ;
+    ns1:documentSource <https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> ;
+    ns1:foundName "backing",
+        "funding" ;
+    ns1:internalDocId 3024715 ;
+    ns1:name "backing",
+        "funding" ;
+    ns1:status "completed",
+        "not happened at date of document" ;
+    ns1:target <https://1145.am/db/3024715/Locums_Nest> ;
+    ns1:valueRaw "£3m",
+        "£4.1m" ;
+    ns1:whereClean "England" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6269131> ;
+    ns1:whereRaw "England" .
+
+<https://1145.am/db/3619563/California> a org:Site ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:foundName "California" ;
+    ns1:internalDocId 3619563 ;
+    ns1:name "California" ;
+    ns1:nameClean "California" ;
+    ns1:nameGeoNamesLocation <https://1145.am/db/geonames_location/5332921> .
+
+<https://1145.am/db/4151859/Oculis_Holding_Ag-President_Of_R_D> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> ;
+    ns1:foundName "President of R & D" ;
+    ns1:internalDocId 4151859 ;
+    ns1:name "President of R & D" ;
+    ns1:orgFoundName "Oculis Holding AG (Nasdaq: OCS) (\"Oculis\")" .
+
+<https://1145.am/db/4168148/Edinburgh_Airport-Investment-Stake> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2024-04-17T09:03:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "A majority stake in Edinburgh Airport has been acquired by French infrastructure group Vinci for £1.27bn, it has been confirmed.",
+        "A majority stake in Edinburgh Airport has been acquired by a French giant." ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:foundName "acquired" ;
+    ns1:internalDocId 4168148 ;
+    ns1:name "acquired" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4168148/Edinburgh_Airport> ;
+    ns1:targetDetails "stake" ;
+    ns1:targetName "Edinburgh Airport" ;
+    ns1:valueRaw "£1.27bn" ;
+    ns1:whereClean "Scotland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
+    ns1:whereRaw "Scotland" .
+
+<https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-17T10:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Thompson Street Capital Partners (TSCP) , a private equity firm based in St. Louis, today announced the acquisition of the assets of Sasquatch Pest Control Corp. (Sasquatch) by PestCo Holdings, LLC (PestCo) , a TSCP portfolio company." ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp> ;
+    ns1:targetName "Sasquatch Pest Control Corp" ;
+    ns1:whereClean "Oregon" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5744337> ;
+    ns1:whereRaw "Oregon" .
+
+<https://1145.am/db/4170175/Berry_Global_Group-Glatfelter_Corporation-Merger-Segment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "merger" ;
+    ns1:documentDate "2024-04-17T11:15:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Berry Global Group, Inc. (NYSE: BERY) and Glatfelter Corporation (NYSE: GLT) announced today the achievement of a regulatory milestone in the proposed transaction involving the combination of a majority of Berry's Health, Hygiene and Specialties segment to include its Global Nonwovens and Films business (\"HHNF\") with Glatfelter, with the expiration of the required waiting period under the Hart-Scott-Rodino (HSR) Antitrust Improvements Act." ;
+    ns1:documentSource <https://1145.am/db/4170175/wwwbusinesswirecom_news_home_20240417746650_en_Berry-and-Glatfelter-Announce-Regulatory-Milestone-in-Proposed-Transaction-for-Spin-Off-and-Merger-of-Berry_E2_80_99s-Health-Hygiene-and-Specialties-Global-Nonwovens-and-Films-Business-with-Glatfelter> ;
+    ns1:foundName "combination",
+        "transaction" ;
+    ns1:internalDocId 4170175 ;
+    ns1:name "combination",
+        "transaction" ;
+    ns1:status "not happened at date of document" ;
+    ns1:targetDetails "segment" ;
+    ns1:whereRaw "Global" .
+
+<https://1145.am/db/geonames_location/1269750> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
+    ns1:geoNamesId 1269750 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1269750/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1269750> ;
+    ns1:internalDocId 3785309 ;
+    ns1:name "Republic of India" .
+
+<https://1145.am/db/geonames_location/2638360> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:geoNamesId 2638360 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2638360/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2638360> ;
+    ns1:internalDocId 4168148 ;
+    ns1:name "Scotland" .
+
+<https://1145.am/db/geonames_location/2658434> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> ;
+    ns1:geoNamesId 2658434 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2658434/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2658434> ;
+    ns1:internalDocId 4151859 ;
+    ns1:name "Switzerland" .
+
+<https://1145.am/db/geonames_location/3017382> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> ;
+    ns1:geoNamesId 3017382 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3017382/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3017382> ;
+    ns1:internalDocId 4168148 ;
+    ns1:name "Republic of France" .
+
+<https://1145.am/db/geonames_location/3077311> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> ;
+    ns1:geoNamesId 3077311 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3077311/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3077311> ;
+    ns1:internalDocId 4168197 ;
+    ns1:name "Czechia" .
+
+<https://1145.am/db/geonames_location/4180439> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785698/wwwprnewswirecom_news-releases_showcase-idx-closes-private-equity-investment-round-300723761html> ;
+    ns1:geoNamesId 4180439 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4180439/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4180439> ;
+    ns1:internalDocId 3785698 ;
+    ns1:name "Atlanta" .
+
+<https://1145.am/db/geonames_location/4557247> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> ;
+    ns1:geoNamesId 4557247 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4557247/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4557247> ;
+    ns1:internalDocId 4170102 ;
+    ns1:name "Coatesville" .
+
+<https://1145.am/db/geonames_location/5332921> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> ;
+    ns1:geoNamesId 5332921 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5332921/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5332921> ;
+    ns1:internalDocId 3619563 ;
+    ns1:name "California" .
+
+<https://1145.am/db/geonames_location/5368361> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785317/wwwprnewswirecom_news-releases_k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473html> ;
+    ns1:geoNamesId 5368361 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5368361/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5368361> ;
+    ns1:internalDocId 3785317 ;
+    ns1:name "Los Angeles" .
+
+<https://1145.am/db/geonames_location/5746545> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> ;
+    ns1:geoNamesId 5746545 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5746545/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5746545> ;
+    ns1:internalDocId 4170120 ;
+    ns1:name "Portland" .
+
+<https://1145.am/db/geonames_location/6093943> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> ;
+    ns1:geoNamesId 6093943 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6093943/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6093943> ;
+    ns1:internalDocId 4170137 ;
+    ns1:name "Ontario" .
+
+<https://1145.am/db/3785698/wwwprnewswirecom_news-releases_showcase-idx-closes-private-equity-investment-round-300723761html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T18:15:09+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3785698 ;
+    schema:datePublished "2018-10-03T15:33:00+00:00"^^xsd:dateTime ;
+    schema:headline "Showcase IDX Closes Private Equity Investment Round" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/showcase-idx-closes-private-equity-investment-round-300723761.html> .
+
+<https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2024-04-17T11:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "NEW YORK, April 17, 2024 (GLOBE NEWSWIRE) - SL Green Realty Corp. (NYSE: SLG) and Vornado Realty Trust (NYSE: VNO) modified and extended the $ 125.0 million mezzanine loan on 280 Park Avenue and subsequently repaid the loan for $ 62.5 million." ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:foundName "extended",
+        "repaid" ;
+    ns1:internalDocId 4168398 ;
+    ns1:name "extended",
+        "repaid" ;
+    ns1:status "completed" ;
+    ns1:valueRaw "$ 125.0 million",
+        "$ 62.5 million" ;
+    ns1:when "2024-04-17T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "April 17, 2024" ;
+    ns1:whereClean "Manhattan" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5125771> ;
+    ns1:whereRaw "Manhattan" .
+
+<https://1145.am/db/4170112/wwwbusinesswirecom_news_home_20240417171574_en_Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-725-to-775-Per-Share-in-Cash> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:04+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170112 ;
+    schema:datePublished "2024-04-17T10:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Future Pak Confirms Proposal to Acquire Vanda Pharmaceuticals for $7.25 to $7.75 Per Share in Cash" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417171574/en/Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-7.25-to-7.75-Per-Share-in-Cash> .
+
+<https://1145.am/db/4170175/wwwbusinesswirecom_news_home_20240417746650_en_Berry-and-Glatfelter-Announce-Regulatory-Milestone-in-Proposed-Transaction-for-Spin-Off-and-Merger-of-Berry_E2_80_99s-Health-Hygiene-and-Specialties-Global-Nonwovens-and-Films-Business-with-Glatfelter> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:57+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170175 ;
+    schema:datePublished "2024-04-17T11:15:00+00:00"^^xsd:dateTime ;
+    schema:headline "Berry and Glatfelter Announce Regulatory Milestone in Proposed Transaction for Spin-Off and Merger of Berry's Health, Hygiene and Specialties Global Nonwovens and Films Business with Glatfelter" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417746650/en/Berry-and-Glatfelter-Announce-Regulatory-Milestone-in-Proposed-Transaction-for-Spin-Off-and-Merger-of-Berry%25E2%2580%2599s-Health-Hygiene-and-Specialties-Global-Nonwovens-and-Films-Business-with-Glatfelter> .
+
+<https://1145.am/db/geonames_location/4361885> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785695/wwwprnewswirecom_news-releases_nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763html> ;
+    ns1:geoNamesId 4361885 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4361885/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4361885> ;
+    ns1:internalDocId 3785695 ;
+    ns1:name "Maryland" .
+
+<https://1145.am/db/geonames_location/5128581> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> ;
+    ns1:geoNamesId 5128581 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5128581/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5128581> ;
+    ns1:internalDocId 4168398 ;
+    ns1:name "New York City" .
+
+<https://1145.am/db/geonames_location/6251999> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4168343/wwwglobenewswirecom_news-release_2024_04_17_2864358_0_en_PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shareshtml>,
+        <https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> ;
+    ns1:geoNamesId 6251999 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6251999/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6251999> ;
+    ns1:internalDocId 4168343,
+        4170137 ;
+    ns1:name "Canada" .
+
+<https://1145.am/db/geonames_location/6252001> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html>,
+        <https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> ;
+    ns1:geoNamesId 6252001 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6252001/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6252001> ;
+    ns1:internalDocId 3785309,
+        4170166 ;
+    ns1:name "United States" .
+
+<https://1145.am/db/3785317/wwwprnewswirecom_news-releases_k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T18:13:39+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3785317 ;
+    schema:datePublished "2018-10-03T15:22:00+00:00"^^xsd:dateTime ;
+    schema:headline "K1 Exits Apttus, Realizes Enterprise Value Growth Over $1 Billion" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/k1-exits-apttus-realizes-enterprise-value-growth-over-1-billion-300723473.html> .
+
+<https://1145.am/db/3785695/wwwprnewswirecom_news-releases_nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T18:15:09+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3785695 ;
+    schema:datePublished "2018-10-03T15:37:00+00:00"^^xsd:dateTime ;
+    schema:headline "Nora Roberts Foundation Donates $250,000 to Holy Cross Health" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/nora-roberts-foundation-donates-250-000-to-holy-cross-health-300723763.html> .
+
+<https://1145.am/db/4168343/wwwglobenewswirecom_news-release_2024_04_17_2864358_0_en_PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shareshtml> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:00:48+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4168343 ;
+    schema:datePublished "2024-04-17T10:45:00+00:00"^^xsd:dateTime ;
+    schema:headline "PyroGenesis Receives Exchange Approval for Block Sale of HPQ Silicon Inc. Shares" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/04/17/2864358/0/en/PyroGenesis-Receives-Exchange-Approval-for-Block-Sale-of-HPQ-Silicon-Inc-Shares.html> .
+
+<https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:04:29+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4169893 ;
+    schema:datePublished "2024-04-17T09:07:34+00:00"^^xsd:dateTime ;
+    schema:headline "Access Point Financial invests in hotel portfolio refinance" ;
+    schema:sourceOrganization "Hotel Management" ;
+    schema:url <https://www.hotelmanagement.net/financing/access-point-financial-invests-hotel-portfolio-refinance> .
+
+<https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:05:57+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170097 ;
+    schema:datePublished "2024-04-17T10:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Labguru joins Titian Software in Battery Ventures Life-Science Platform" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417562351/en/Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> .
+
+<https://1145.am/db/4170138/wwwbusinesswirecom_news_home_20240417719399_en_Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix_E2_84_A2> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:24+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170138 ;
+    schema:datePublished "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Armis Acquires Silk Security to Incorporate Best in Class Security Prioritization and Remediation into Armis Centrix™" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417719399/en/Armis-Acquires-Silk-Security-to-Incorporate-Best-in-Class-Security-Prioritization-and-Remediation-into-Armis-Centrix%25E2%2584%25A2> .
+
+<https://1145.am/db/3024715/wwwcityamcom_healthtech-startup-locums-nest-scores-41m-backing-albion_> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T04:41:30+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3024715 ;
+    schema:datePublished "2018-10-03T15:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Healthtech startup Locum's Nest scores £4.1m backing from Albion Capital" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/healthtech-startup-locums-nest-scores-41m-backing-albion/> .
+
+<https://1145.am/db/4151859/wwwglobenewswirecom_news-release_2024_04_10_2860586_0_en_Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Developmenthtml> a schema:Article ;
+    ns1:dateRetrieved "2024-04-11T06:02:38+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4151859 ;
+    schema:datePublished "2024-04-10T10:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Oculis Strengthens its Executive Leadership Team with the Appointment of Snehal Shah, Pharm.D. as President of Research & Development" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/04/10/2860586/0/en/Oculis-Strengthens-its-Executive-Leadership-Team-with-the-Appointment-of-Snehal-Shah-Pharm-D-as-President-of-Research-Development.html> .
+
+<https://1145.am/db/4170102/wwwbusinesswirecom_news_home_20240417531989_en_Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:05:59+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170102 ;
+    schema:datePublished "2024-04-17T10:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Graycliff Partners Announces Sale of Ballymore Safety Products" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417531989/en/Graycliff-Partners-Announces-Sale-of-Ballymore-Safety-Products> .
+
+<https://1145.am/db/4170137/wwwbusinesswirecom_news_home_20240417726026_en_Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:23+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170137 ;
+    schema:datePublished "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Angeles Equity Partners Portfolio Company Data Clean Acquires DC Canada" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417726026/en/Angeles-Equity-Partners-Portfolio-Company-Data-Clean-Acquires-DC-Canada> .
+
+<https://1145.am/db/4170166/wwwbusinesswirecom_news_home_20240416224100_en_Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:43+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170166 ;
+    schema:datePublished "2024-04-17T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Bowman Acquires MEP and Fire Protection Engineering Firm Moore Consulting Engineers" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240416224100/en/Bowman-Acquires-MEP-and-Fire-Protection-Engineering-Firm-Moore-Consulting-Engineers> .
+
+<https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T18:13:37+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3785309 ;
+    schema:datePublished "2018-10-03T15:16:00+00:00"^^xsd:dateTime ;
+    schema:headline "JLL grows technology expertise with acquisition of ValuD" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/jll-grows-technology-expertise-with-acquisition-of-valud-300723745.html> .
+
+<https://1145.am/db/4168398/wwwglobenewswirecom_news-release_2024_04_17_2864418_0_en_SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repaymenthtml> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:00:51+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4168398 ;
+    schema:datePublished "2024-04-17T11:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "SL Green and Vornado Announce 280 Park Avenue Mezzanine Loan Repayment" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/04/17/2864418/0/en/SL-Green-and-Vornado-Announce-280-Park-Avenue-Mezzanine-Loan-Repayment.html> .
+
+<https://1145.am/db/3619563/wwwprnewswirecom_news-releases_harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-17T21:56:58+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3619563 ;
+    schema:datePublished "2019-09-30T12:48:00+00:00"^^xsd:dateTime ;
+    schema:headline "Harvest Health & Recreation, Inc. Opens Highly Anticipated Venice Location in California" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/harvest-health--recreation-inc-opens-highly-anticipated-venice-location-in-california-300927463.html> .
+
+<https://1145.am/db/4170120/wwwbusinesswirecom_news_home_20240417247491_en_PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:06:15+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4170120 ;
+    schema:datePublished "2024-04-17T10:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "PestCo Expands its Pacific Northwest Footprint Through Acquisition of Sasquatch Pest Control Assets" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240417247491/en/PestCo-Expands-its-Pacific-Northwest-Footprint-Through-Acquisition-of-Sasquatch-Pest-Control-Assets> .
+
+<https://1145.am/db/4168148/wwwcityamcom_london-gatwick-owner-strikes-deal-for-edinburgh-airport_> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:00:39+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4168148 ;
+    schema:datePublished "2024-04-17T09:03:14+00:00"^^xsd:dateTime ;
+    schema:headline "London Gatwick co-owner strikes £1.27bn deal for majority stake in Edinburgh Airport" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/london-gatwick-owner-strikes-deal-for-edinburgh-airport/> .
+
+<https://1145.am/db/4168197/wwwcityamcom_czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids_> a schema:Article ;
+    ns1:dateRetrieved "2024-04-18T07:00:42+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4168197 ;
+    schema:datePublished "2024-04-17T11:06:51+00:00"^^xsd:dateTime ;
+    schema:headline "'Czech Sphinx' West Ham director makes bid for Royal Mail owner IDS" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/czech-sphinx-west-ham-owner-makes-bid-for-royal-mail-owner-ids/> .

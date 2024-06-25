@@ -1,0 +1,1960 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/1770910/Permira> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> ;
+    ns1:foundName "Permira" ;
+    ns1:internalDocId 1770910 ;
+    ns1:investor <https://1145.am/db/1770910/Minted-Minted-Permira-T_Rowe_Price-Investment-Series_E> ;
+    ns1:name "Permira" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1048903/Permira>,
+        <https://1145.am/db/1077549/Permira>,
+        <https://1145.am/db/1159563/Permira>,
+        <https://1145.am/db/1159912/Permira>,
+        <https://1145.am/db/1160332/Permira>,
+        <https://1145.am/db/1160683/Permira>,
+        <https://1145.am/db/1166713/Permira>,
+        <https://1145.am/db/1241259/Permira>,
+        <https://1145.am/db/1244609/Permira>,
+        <https://1145.am/db/1245131/Permira>,
+        <https://1145.am/db/1311369/Permira>,
+        <https://1145.am/db/1319914/Permira>,
+        <https://1145.am/db/1320716/Permira>,
+        <https://1145.am/db/1333884/Permira>,
+        <https://1145.am/db/1338533/Permira>,
+        <https://1145.am/db/1339990/Permira>,
+        <https://1145.am/db/1352007/Permira>,
+        <https://1145.am/db/1353782/Permira>,
+        <https://1145.am/db/1354354/Permira>,
+        <https://1145.am/db/1523686/Permira>,
+        <https://1145.am/db/1523929/Permira>,
+        <https://1145.am/db/1525260/Permira>,
+        <https://1145.am/db/1655263/Permira>,
+        <https://1145.am/db/1746541/Permira>,
+        <https://1145.am/db/1758834/Permira>,
+        <https://1145.am/db/1761520/Permira>,
+        <https://1145.am/db/1764053/Permira>,
+        <https://1145.am/db/1804060/Permira>,
+        <https://1145.am/db/1824518/Permira>,
+        <https://1145.am/db/186968/Permira>,
+        <https://1145.am/db/1896374/Permira>,
+        <https://1145.am/db/1904886/Permira>,
+        <https://1145.am/db/1927657/Permira>,
+        <https://1145.am/db/195233/Permira>,
+        <https://1145.am/db/195237/Permira>,
+        <https://1145.am/db/2019391/Permira>,
+        <https://1145.am/db/2039123/Permira>,
+        <https://1145.am/db/2071409/Permira>,
+        <https://1145.am/db/2106529/Permira>,
+        <https://1145.am/db/2121631/Permira>,
+        <https://1145.am/db/2122964/Permira>,
+        <https://1145.am/db/2133925/Permira>,
+        <https://1145.am/db/2139424/Permira>,
+        <https://1145.am/db/2157342/Permira>,
+        <https://1145.am/db/2284380/Permira>,
+        <https://1145.am/db/2334963/Permira>,
+        <https://1145.am/db/2562184/Permira>,
+        <https://1145.am/db/2565596/Permira>,
+        <https://1145.am/db/258323/Permira>,
+        <https://1145.am/db/2609645/Permira>,
+        <https://1145.am/db/2612072/Permira>,
+        <https://1145.am/db/2629313/Permira>,
+        <https://1145.am/db/2659745/Permira>,
+        <https://1145.am/db/2667842/Permira>,
+        <https://1145.am/db/2669352/Permira>,
+        <https://1145.am/db/2680827/Permira>,
+        <https://1145.am/db/2682053/Permira>,
+        <https://1145.am/db/2718055/Permira>,
+        <https://1145.am/db/2746226/Permira>,
+        <https://1145.am/db/2816248/Permira>,
+        <https://1145.am/db/2816763/Permira>,
+        <https://1145.am/db/2857791/Permira>,
+        <https://1145.am/db/2861009/Permira>,
+        <https://1145.am/db/2862936/Permira>,
+        <https://1145.am/db/2863129/Permira>,
+        <https://1145.am/db/2864671/Permira>,
+        <https://1145.am/db/2865052/Permira>,
+        <https://1145.am/db/2865105/Permira>,
+        <https://1145.am/db/2870332/Permira>,
+        <https://1145.am/db/2881228/Permira>,
+        <https://1145.am/db/2881231/Permira>,
+        <https://1145.am/db/2902237/Permira>,
+        <https://1145.am/db/2910532/Permira>,
+        <https://1145.am/db/2914866/Permira>,
+        <https://1145.am/db/2914873/Permira>,
+        <https://1145.am/db/2915851/Permira>,
+        <https://1145.am/db/2919919/Permira>,
+        <https://1145.am/db/2920069/Permira>,
+        <https://1145.am/db/2925829/Permira>,
+        <https://1145.am/db/2928011/Permira>,
+        <https://1145.am/db/2932453/Permira>,
+        <https://1145.am/db/2941178/Permira>,
+        <https://1145.am/db/2941420/Permira>,
+        <https://1145.am/db/2942456/Permira>,
+        <https://1145.am/db/2951987/Permira>,
+        <https://1145.am/db/2967161/Permira>,
+        <https://1145.am/db/2970990/Permira>,
+        <https://1145.am/db/2973117/Permira>,
+        <https://1145.am/db/2976045/Permira>,
+        <https://1145.am/db/2978405/Permira>,
+        <https://1145.am/db/2982416/Permira>,
+        <https://1145.am/db/3022391/Permira>,
+        <https://1145.am/db/3032669/Permira>,
+        <https://1145.am/db/3037235/Permira>,
+        <https://1145.am/db/3045945/Permira>,
+        <https://1145.am/db/3077430/Permira>,
+        <https://1145.am/db/3080084/Permira>,
+        <https://1145.am/db/3081830/Permira>,
+        <https://1145.am/db/3153096/Permira>,
+        <https://1145.am/db/3158302/Permira>,
+        <https://1145.am/db/3488288/Permira>,
+        <https://1145.am/db/3627998/Permira>,
+        <https://1145.am/db/3645692/Permira>,
+        <https://1145.am/db/3660270/Permira>,
+        <https://1145.am/db/3675792/Permira>,
+        <https://1145.am/db/3689625/Permira>,
+        <https://1145.am/db/376447/Permira>,
+        <https://1145.am/db/3894206/Permira>,
+        <https://1145.am/db/4059112/Permira>,
+        <https://1145.am/db/4090494/Permira>,
+        <https://1145.am/db/410407/Permira>,
+        <https://1145.am/db/4111904/Permira>,
+        <https://1145.am/db/414406/Permira>,
+        <https://1145.am/db/414463/Permira>,
+        <https://1145.am/db/4147601/Permira>,
+        <https://1145.am/db/4149715/Permira>,
+        <https://1145.am/db/4205211/Permira>,
+        <https://1145.am/db/4240993/Permira>,
+        <https://1145.am/db/4241203/Permira>,
+        <https://1145.am/db/4241274/Permira>,
+        <https://1145.am/db/4242013/Permira>,
+        <https://1145.am/db/4242466/Permira>,
+        <https://1145.am/db/4244164/Permira>,
+        <https://1145.am/db/4246499/Permira>,
+        <https://1145.am/db/4250754/Permira>,
+        <https://1145.am/db/4250998/Permira>,
+        <https://1145.am/db/4254579/Permira>,
+        <https://1145.am/db/540063/Permira>,
+        <https://1145.am/db/605223/Permira>,
+        <https://1145.am/db/625860/Permira>,
+        <https://1145.am/db/626988/Permira>,
+        <https://1145.am/db/629527/Permira>,
+        <https://1145.am/db/635592/Permira>,
+        <https://1145.am/db/677572/Permira>,
+        <https://1145.am/db/687857/Permira>,
+        <https://1145.am/db/696854/Permira>,
+        <https://1145.am/db/697048/Permira>,
+        <https://1145.am/db/702546/Permira>,
+        <https://1145.am/db/733185/Permira>,
+        <https://1145.am/db/740656/Permira>,
+        <https://1145.am/db/799510/Permira>,
+        <https://1145.am/db/831823/Permira>,
+        <https://1145.am/db/868617/Permira>,
+        <https://1145.am/db/898277/Permira>,
+        <https://1145.am/db/95036/Permira> .
+
+<https://1145.am/db/1770910/T_Rowe_Price> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> ;
+    ns1:foundName "T. Rowe Price" ;
+    ns1:internalDocId 1770910 ;
+    ns1:investor <https://1145.am/db/1770910/Minted-Minted-Permira-T_Rowe_Price-Investment-Series_E> ;
+    ns1:name "T. Rowe Price" ;
+    ns1:sameAsNameOnly <https://1145.am/db/112384/T_Rowe_Price>,
+        <https://1145.am/db/112397/T_Rowe_Price>,
+        <https://1145.am/db/1188418/T_Rowe_Price>,
+        <https://1145.am/db/1231536/T_Rowe_Price>,
+        <https://1145.am/db/1705750/T_Rowe_Price>,
+        <https://1145.am/db/1739469/T_Rowe_Price>,
+        <https://1145.am/db/1741830/T_Rowe_Price>,
+        <https://1145.am/db/1742668/T_Rowe_Price>,
+        <https://1145.am/db/1744371/T_Rowe_Price>,
+        <https://1145.am/db/1748789/T_Rowe_Price>,
+        <https://1145.am/db/1770312/T_Rowe_Price>,
+        <https://1145.am/db/1779826/T_Rowe_Price>,
+        <https://1145.am/db/1797759/T_Rowe_Price>,
+        <https://1145.am/db/1827503/T_Rowe_Price>,
+        <https://1145.am/db/1829408/T_Rowe_Price>,
+        <https://1145.am/db/1854098/T_Rowe_Price>,
+        <https://1145.am/db/1856811/T_Rowe_Price>,
+        <https://1145.am/db/200040/T_Rowe_Price>,
+        <https://1145.am/db/2198338/T_Rowe_Price>,
+        <https://1145.am/db/221051/T_Rowe_Price>,
+        <https://1145.am/db/2224478/T_Rowe_Price>,
+        <https://1145.am/db/2236068/T_Rowe_Price>,
+        <https://1145.am/db/229855/T_Rowe_Price>,
+        <https://1145.am/db/2307889/T_Rowe_Price>,
+        <https://1145.am/db/2313135/T_Rowe_Price>,
+        <https://1145.am/db/2313143/T_Rowe_Price>,
+        <https://1145.am/db/2557987/T_Rowe_Price>,
+        <https://1145.am/db/2938510/T_Rowe_Price>,
+        <https://1145.am/db/3034358/T_Rowe_Price>,
+        <https://1145.am/db/3052242/T_Rowe_Price>,
+        <https://1145.am/db/3147748/T_Rowe_Price>,
+        <https://1145.am/db/3154607/T_Rowe_Price>,
+        <https://1145.am/db/3381717/T_Rowe_Price>,
+        <https://1145.am/db/3422896/T_Rowe_Price>,
+        <https://1145.am/db/3442960/T_Rowe_Price>,
+        <https://1145.am/db/345025/T_Rowe_Price>,
+        <https://1145.am/db/345083/T_Rowe_Price>,
+        <https://1145.am/db/3467477/T_Rowe_Price>,
+        <https://1145.am/db/3538694/T_Rowe_Price>,
+        <https://1145.am/db/3541745/T_Rowe_Price>,
+        <https://1145.am/db/3559765/T_Rowe_Price>,
+        <https://1145.am/db/3645750/T_Rowe_Price>,
+        <https://1145.am/db/3656121/T_Rowe_Price>,
+        <https://1145.am/db/377391/T_Rowe_Price>,
+        <https://1145.am/db/3840871/T_Rowe_Price>,
+        <https://1145.am/db/387521/T_Rowe_Price>,
+        <https://1145.am/db/472389/T_Rowe_Price>,
+        <https://1145.am/db/473354/T_Rowe_Price>,
+        <https://1145.am/db/579022/T_Rowe_Price>,
+        <https://1145.am/db/582541/T_Rowe_Price>,
+        <https://1145.am/db/582815/T_Rowe_Price>,
+        <https://1145.am/db/607880/T_Rowe_Price>,
+        <https://1145.am/db/711371/T_Rowe_Price> .
+
+<https://1145.am/db/2191226/Cigna> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:buyer <https://1145.am/db/2191226/Cigna-Merger> ;
+    ns1:description "Healthcare providers" ;
+    ns1:documentSource <https://1145.am/db/2191226/wwwfiercehealthcarecom_payer_cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york> ;
+    ns1:foundName "Cigna" ;
+    ns1:industry "health care" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
+    ns1:internalDocId 2191226 ;
+    ns1:name "Cigna" ;
+    ns1:sameAsHigh <https://1145.am/db/1176577/Cigna_Corporation>,
+        <https://1145.am/db/1299951/Cigna_Corporation>,
+        <https://1145.am/db/2181552/Cigna>,
+        <https://1145.am/db/2181569/Cigna>,
+        <https://1145.am/db/2182225/Cigna>,
+        <https://1145.am/db/2185002/Cigna>,
+        <https://1145.am/db/2185937/Cigna>,
+        <https://1145.am/db/2186010/Cigna>,
+        <https://1145.am/db/2186072/Cigna>,
+        <https://1145.am/db/2186278/Cigna>,
+        <https://1145.am/db/2186997/Cigna>,
+        <https://1145.am/db/2188019/Cigna>,
+        <https://1145.am/db/2189068/Cigna>,
+        <https://1145.am/db/2189108/Cigna>,
+        <https://1145.am/db/2190363/Cigna>,
+        <https://1145.am/db/2190374/Cigna>,
+        <https://1145.am/db/2190700/Cigna>,
+        <https://1145.am/db/2190742/Cigna>,
+        <https://1145.am/db/2191853/Cigna>,
+        <https://1145.am/db/2191863/Cigna>,
+        <https://1145.am/db/2191895/Cigna>,
+        <https://1145.am/db/2191898/Cigna>,
+        <https://1145.am/db/2194735/Cigna>,
+        <https://1145.am/db/2194778/Cigna>,
+        <https://1145.am/db/2196471/Cigna_Corp>,
+        <https://1145.am/db/2196927/Cigna>,
+        <https://1145.am/db/2197323/Cigna>,
+        <https://1145.am/db/2198049/Cigna>,
+        <https://1145.am/db/2198190/Cigna>,
+        <https://1145.am/db/2198369/Cigna>,
+        <https://1145.am/db/2198427/Cigna>,
+        <https://1145.am/db/2202518/Cigna>,
+        <https://1145.am/db/2203587/Cigna>,
+        <https://1145.am/db/2204859/Cigna>,
+        <https://1145.am/db/2207741/Cigna_Corporation>,
+        <https://1145.am/db/2207743/Cigna>,
+        <https://1145.am/db/2210879/Cigna_Corporation>,
+        <https://1145.am/db/2212804/Cigna>,
+        <https://1145.am/db/2213170/Cigna>,
+        <https://1145.am/db/2215165/Cigna>,
+        <https://1145.am/db/2226157/Cigna>,
+        <https://1145.am/db/2253145/Cigna>,
+        <https://1145.am/db/2253469/Cigna>,
+        <https://1145.am/db/2253498/Cigna>,
+        <https://1145.am/db/2254824/Cigna>,
+        <https://1145.am/db/2254830/Cigna>,
+        <https://1145.am/db/2256365/Cigna>,
+        <https://1145.am/db/2259943/Cigna>,
+        <https://1145.am/db/2260831/Cigna>,
+        <https://1145.am/db/2261551/Cigna>,
+        <https://1145.am/db/2261575/Cigna>,
+        <https://1145.am/db/2262399/Cigna>,
+        <https://1145.am/db/2262418/Cigna>,
+        <https://1145.am/db/2262557/Cigna>,
+        <https://1145.am/db/2262569/Cigna>,
+        <https://1145.am/db/2262593/Cigna_Corporation>,
+        <https://1145.am/db/2262709/Cigna>,
+        <https://1145.am/db/2263121/Cigna>,
+        <https://1145.am/db/2263124/Cigna_Corporation>,
+        <https://1145.am/db/2263323/Cigna>,
+        <https://1145.am/db/2263946/Cigna>,
+        <https://1145.am/db/2263947/Cigna>,
+        <https://1145.am/db/2264155/Cigna_Corporation>,
+        <https://1145.am/db/2264196/Cigna>,
+        <https://1145.am/db/2264287/Cigna>,
+        <https://1145.am/db/2264927/Cigna>,
+        <https://1145.am/db/2265966/Cigna>,
+        <https://1145.am/db/2266814/Cigna_Corporation>,
+        <https://1145.am/db/2269231/Cigna_Corporation>,
+        <https://1145.am/db/2269236/Cigna_Corporation>,
+        <https://1145.am/db/2270334/Cigna>,
+        <https://1145.am/db/2272244/Cigna>,
+        <https://1145.am/db/2273656/Cigna>,
+        <https://1145.am/db/2274766/Cigna>,
+        <https://1145.am/db/2275377/Cigna>,
+        <https://1145.am/db/2276449/Cigna>,
+        <https://1145.am/db/2276491/Cigna>,
+        <https://1145.am/db/2278149/Cigna_Corporation>,
+        <https://1145.am/db/2278153/Cigna>,
+        <https://1145.am/db/2362051/Cigna_Corporation>,
+        <https://1145.am/db/2574392/Cigna_Corporation>,
+        <https://1145.am/db/2580223/Cigna>,
+        <https://1145.am/db/2594588/Cigna>,
+        <https://1145.am/db/2825379/Cigna>,
+        <https://1145.am/db/2825799/Cigna>,
+        <https://1145.am/db/2825852/Cigna>,
+        <https://1145.am/db/2826128/Cigna>,
+        <https://1145.am/db/3150072/Cigna>,
+        <https://1145.am/db/3168969/Cigna>,
+        <https://1145.am/db/3181561/Cigna>,
+        <https://1145.am/db/3199438/Cigna_Corporation>,
+        <https://1145.am/db/3284887/Cigna_Corporation>,
+        <https://1145.am/db/3286800/Cigna>,
+        <https://1145.am/db/3330161/Cigna>,
+        <https://1145.am/db/3454350/Cigna>,
+        <https://1145.am/db/3551813/Cigna>,
+        <https://1145.am/db/3639667/Cigna>,
+        <https://1145.am/db/3701292/Cigna>,
+        <https://1145.am/db/3721934/Cigna>,
+        <https://1145.am/db/3890147/Cigna>,
+        <https://1145.am/db/3947809/Cigna>,
+        <https://1145.am/db/3970306/Cigna>,
+        <https://1145.am/db/3985652/Cigna>,
+        <https://1145.am/db/452933/Cigna_Corporation>,
+        <https://1145.am/db/497291/Cigna_Corp>,
+        <https://1145.am/db/533401/Cigna_Corporation>,
+        <https://1145.am/db/534105/Cigna_Corp>,
+        <https://1145.am/db/534338/Cigna_Corp>,
+        <https://1145.am/db/536997/Cigna_Corporation> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2194924/Cigna>,
+        <https://1145.am/db/2198626/Cigna>,
+        <https://1145.am/db/2202333/Cigna_Corporation>,
+        <https://1145.am/db/2206572/Cigna>,
+        <https://1145.am/db/2208946/Cigna>,
+        <https://1145.am/db/2251815/Cigna_Corporation>,
+        <https://1145.am/db/2257160/Cigna_Corporation>,
+        <https://1145.am/db/2260489/Cigna_Corporation>,
+        <https://1145.am/db/2263103/Cigna_Corporation>,
+        <https://1145.am/db/2263119/Cigna_Corporation>,
+        <https://1145.am/db/2266810/Cigna>,
+        <https://1145.am/db/2266833/Cigna>,
+        <https://1145.am/db/2268363/Cigna_Corporation>,
+        <https://1145.am/db/2268395/Cigna_Corporation>,
+        <https://1145.am/db/2275405/Cigna>,
+        <https://1145.am/db/2276996/Cigna>,
+        <https://1145.am/db/2277983/Cigna>,
+        <https://1145.am/db/2595943/Cigna>,
+        <https://1145.am/db/3772251/Cigna_Corporation>,
+        <https://1145.am/db/3831434/Cigna>,
+        <https://1145.am/db/3867873/Cigna> .
+
+<https://1145.am/db/3145650/Dott-Investment-Venture_Capital> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T08:43:26+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Urban transportation startup Dott today announced that it has raised $ 23 million in venture capital as the electric scooter and bike company prepares to launch its first pilot early next year." ;
+    ns1:documentSource <https://1145.am/db/3145650/venturebeatcom_business_mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes_> ;
+    ns1:foundName "raised" ;
+    ns1:internalDocId 3145650 ;
+    ns1:name "raised" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3145650/Dott> ;
+    ns1:targetDetails "venture capital" ;
+    ns1:valueRaw "$ 23 million" ;
+    ns1:whereClean "People’s Republic of China" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereRaw "China" .
+
+<https://1145.am/db/3145658/Hard_Yaka> a org:Organization ;
+    ns1:basedInHighClean "San Francisco" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:basedInHighRaw "San Francisco" ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "Hard Yaka" ;
+    ns1:internalDocId 3145658 ;
+    ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
+    ns1:name "Hard Yaka" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1005549/Hard_Yaka>,
+        <https://1145.am/db/1449371/Hard_Yaka>,
+        <https://1145.am/db/1456668/Hard_Yaka>,
+        <https://1145.am/db/1744781/Hard_Yaka>,
+        <https://1145.am/db/1755860/Hard_Yaka>,
+        <https://1145.am/db/3072081/Hard_Yaka> .
+
+<https://1145.am/db/3145658/Practica_Capital> a org:Organization ;
+    ns1:description "VC firm" ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "Practica Capital" ;
+    ns1:internalDocId 3145658 ;
+    ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
+    ns1:name "Practica Capital" ;
+    ns1:sameAsHigh <https://1145.am/db/1802857/Practica_Capital>,
+        <https://1145.am/db/1838411/Practica_Capital> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1746487/Practica_Capital>,
+        <https://1145.am/db/1845609/Practica_Capital>,
+        <https://1145.am/db/4030641/Practica_Capital>,
+        <https://1145.am/db/4031854/Practica_Capital> .
+
+<https://1145.am/db/3145658/Revo_Capital> a org:Organization ;
+    ns1:description "VC firm" ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "Revo Capital" ;
+    ns1:internalDocId 3145658 ;
+    ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
+    ns1:name "Revo Capital" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1136588/Revo>,
+        <https://1145.am/db/1190032/Revo>,
+        <https://1145.am/db/1744781/Revo_Capital>,
+        <https://1145.am/db/1777489/Revo_Capital>,
+        <https://1145.am/db/3043402/Revo>,
+        <https://1145.am/db/3106360/Revo_Capital>,
+        <https://1145.am/db/329077/Revo>,
+        <https://1145.am/db/538482/Revo_Capital> .
+
+<https://1145.am/db/3145658/U-Start_Club> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "U-Start Club" ;
+    ns1:internalDocId 3145658 ;
+    ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
+    ns1:name "U-Start Club" .
+
+<https://1145.am/db/3145658/Vostok_Emerging_Finance> a org:Organization ;
+    ns1:basedInLowRaw "Russia" ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "Vostok Emerging Finance" ;
+    ns1:internalDocId 3145658 ;
+    ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
+    ns1:name "Vostok Emerging Finance" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1744781/Vostok_Emerging_Finance>,
+        <https://1145.am/db/1753805/Vostok_Emerging_Finance>,
+        <https://1145.am/db/1769979/Vostok_Emerging_Finance>,
+        <https://1145.am/db/1776594/Vostok_Emerging_Finance>,
+        <https://1145.am/db/3140015/Vostok_Emerging_Finance>,
+        <https://1145.am/db/3602144/Vostok_Emerging_Finance> .
+
+<https://1145.am/db/3860816/Credito_Capital> a org:Organization ;
+    ns1:basedInHighClean "Hong Kong Special Administrative Region" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1819730> ;
+    ns1:basedInHighRaw "Hong Kong" ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "Credito Capital" ;
+    ns1:internalDocId 3860816 ;
+    ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
+    ns1:name "Credito Capital" .
+
+<https://1145.am/db/3860816/Primitive_Ventures> a org:Organization ;
+    ns1:basedInHighClean "Silicon Valley" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6940309> ;
+    ns1:basedInHighRaw "Silicon Valley" ;
+    ns1:description "Silicon Valley" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "Primitive Ventures" ;
+    ns1:internalDocId 3860816 ;
+    ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
+    ns1:name "Primitive Ventures" .
+
+<https://1145.am/db/3860816/Sora_Ventures> a org:Organization ;
+    ns1:basedInHighClean "People’s Republic of China" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:basedInHighRaw "China" ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "Sora Ventures from China" ;
+    ns1:internalDocId 3860816 ;
+    ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
+    ns1:name "Sora Ventures" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1759900/Sora>,
+        <https://1145.am/db/3566163/Sora>,
+        <https://1145.am/db/4120530/Sora_Ventures> .
+
+<https://1145.am/db/3860816/Spartan_Group> a org:Organization ;
+    ns1:basedInHighClean "Republic of Singapore" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
+    ns1:basedInHighRaw "Singapore" ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "Spartan Group" ;
+    ns1:internalDocId 3860816 ;
+    ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
+    ns1:name "Spartan Group" ;
+    ns1:sameAsHigh <https://1145.am/db/1232510/Spartan_Group>,
+        <https://1145.am/db/1233681/Spartan_Group>,
+        <https://1145.am/db/1272854/Spartan_Capital>,
+        <https://1145.am/db/1273469/Spartan_Capital>,
+        <https://1145.am/db/1726544/Spartan_Group>,
+        <https://1145.am/db/1753909/Spartan_Group>,
+        <https://1145.am/db/1759554/Spartan_Group>,
+        <https://1145.am/db/3158851/Spartan_Group>,
+        <https://1145.am/db/561315/Spartan_Capital>,
+        <https://1145.am/db/754197/Spartan_Capital>,
+        <https://1145.am/db/866534/Spartan_Group> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1066151/Spartan_Group>,
+        <https://1145.am/db/1748452/Spartan_Group>,
+        <https://1145.am/db/1983189/Spartan_Group>,
+        <https://1145.am/db/2150999/Spartan>,
+        <https://1145.am/db/3126247/Spartan_Group>,
+        <https://1145.am/db/3155620/Spartan_Capital>,
+        <https://1145.am/db/3159952/Spartan>,
+        <https://1145.am/db/375428/Spartan_Group>,
+        <https://1145.am/db/4089853/Spartan_Group>,
+        <https://1145.am/db/4168572/Spartan_Group>,
+        <https://1145.am/db/591625/Spartan_Group>,
+        <https://1145.am/db/767089/Spartan_Group>,
+        <https://1145.am/db/962740/Spartan_Group> .
+
+<https://1145.am/db/3860816/TRG> a org:Organization ;
+    ns1:basedInHighClean "Netherland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/7218844> ;
+    ns1:basedInHighRaw "Netherland" ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "TRG" ;
+    ns1:internalDocId 3860816 ;
+    ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
+    ns1:name "TRG" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1168964/TRG>,
+        <https://1145.am/db/1638792/TRG>,
+        <https://1145.am/db/2112825/TRG>,
+        <https://1145.am/db/2182620/TRG>,
+        <https://1145.am/db/2851759/TRG>,
+        <https://1145.am/db/3025502/TRG>,
+        <https://1145.am/db/3917390/TRG>,
+        <https://1145.am/db/4222905/TRG>,
+        <https://1145.am/db/887475/TRG> .
+
+<https://1145.am/db/3860828/Alliant_Energy_Corporation-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2018-12-14T03:35:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "MADISON, Wis., Dec. 13, 2018 /PRNewswire/ - Alliant Energy Corporation (NYSE: LNT) announced today that it has priced its public offering of 7,268,673 shares of its common stock at a public offering price of $ 44.85 per share." ;
+    ns1:documentSource <https://1145.am/db/3860828/wwwprnewswirecom_news-releases_alliant-energy-corporation-prices-public-offering-of-7-268-673-shares-of-common-stock-300765588html> ;
+    ns1:foundName "public offering" ;
+    ns1:internalDocId 3860828 ;
+    ns1:name "public offering" ;
+    ns1:status "completed" ;
+    ns1:vendor <https://1145.am/db/3860828/Alliant_Energy_Corporation> ;
+    ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 13, 2018" ;
+    ns1:whereClean "Wisconsin" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
+    ns1:whereRaw "Wis." .
+
+<https://1145.am/db/3861965/Ames_Watson_Capital> a org:Organization ;
+    ns1:basedInLowRaw "Tenn" ;
+    ns1:description "Fanzz" ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "Ames Watson Capital, LLC" ;
+    ns1:industry "licensed sports industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "Ames Watson Capital" ;
+    ns1:participant <https://1145.am/db/3861965/Fanzzlids_Holdings-Investment>,
+        <https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3339333/Ames_Watson>,
+        <https://1145.am/db/786587/Ames_Watson> .
+
+<https://1145.am/db/3861965/Fanatics_Inc> a org:Organization ;
+    ns1:basedInLowRaw "Tenn" ;
+    ns1:description "sports licensing and ecommerce" ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "Fanatics Inc." ;
+    ns1:industry "licensed sports industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
+    ns1:internalDocId 3861965 ;
+    ns1:investor <https://1145.am/db/3861965/Fanzzlids_Holdings-Investment> ;
+    ns1:name "Fanatics Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/1034429/Fanatics>,
+        <https://1145.am/db/1454873/Fanatics>,
+        <https://1145.am/db/1558864/Fanatics>,
+        <https://1145.am/db/1766033/Fanatics>,
+        <https://1145.am/db/1781918/Fanatics>,
+        <https://1145.am/db/1959957/Fanatics_Inc>,
+        <https://1145.am/db/285381/Fanatics>,
+        <https://1145.am/db/2994125/Fanatics>,
+        <https://1145.am/db/3205648/Fanatics>,
+        <https://1145.am/db/3675407/Fanatics>,
+        <https://1145.am/db/3753951/Fanatics>,
+        <https://1145.am/db/394986/Fanatics>,
+        <https://1145.am/db/731258/Fanatics>,
+        <https://1145.am/db/733024/Fanatics>,
+        <https://1145.am/db/733254/Fanatics>,
+        <https://1145.am/db/735493/Fanatics>,
+        <https://1145.am/db/844181/Fanatics>,
+        <https://1145.am/db/844185/Fanatics> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1451832/Fanatics>,
+        <https://1145.am/db/3720907/Fanatics>,
+        <https://1145.am/db/735831/Fanatics>,
+        <https://1145.am/db/872508/Fanatics> .
+
+<https://1145.am/db/3861980/Canadian_Solar_Inc-Investment-Project> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "GUELPH, Ontario, Dec. 14, 2018 /PRNewswire/ - Canadian Solar Inc. (the \"Company\", or \"Canadian Solar\") (NASDAQ: CSIQ) , one of the world's largest solar power companies, today announced it has achieved financial close on a US $ 69.0 million non-recourse project financing for the 67.8 MWp Aguascalientes solar power project in Mexico." ;
+    ns1:documentSource <https://1145.am/db/3861980/wwwprnewswirecom_news-releases_canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639html> ;
+    ns1:foundName "financing" ;
+    ns1:internalDocId 3861980 ;
+    ns1:name "financing" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3861980/Canadian_Solar_Inc> ;
+    ns1:targetDetails "project" ;
+    ns1:valueRaw "$ 69.0 million",
+        "US $ 69.0 million" ;
+    ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 14, 2018" ;
+    ns1:whereClean "Mexico" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
+    ns1:whereRaw "Mexico" .
+
+<https://1145.am/db/3861981/Rexford_Industrial> a org:Organization ;
+    ns1:basedInHighClean "Southern California" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
+    ns1:basedInHighRaw "Southern California" ;
+    ns1:description "owning and operating industrial properties" ;
+    ns1:documentSource <https://1145.am/db/3861981/wwwprnewswirecom_news-releases_rexford-industrial-acquires-industrial-property-for-18-2-million-300765671html> ;
+    ns1:foundName "Rexford Industrial Realty, Inc" ;
+    ns1:industry "real estate investment trust" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/465_investment_property_company_firm> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/378_trust_trusts_trustee_> ;
+    ns1:internalDocId 3861981 ;
+    ns1:investor <https://1145.am/db/3861981/Rexford_Industrial-Investment-Property> ;
+    ns1:name "Rexford Industrial" ;
+    ns1:sameAsHigh <https://1145.am/db/3180980/Rexford_Industrial>,
+        <https://1145.am/db/3187373/Rexford_Industrial>,
+        <https://1145.am/db/3193581/Rexford_Industrial>,
+        <https://1145.am/db/3253511/Rexford_Industrial>,
+        <https://1145.am/db/3302300/Rexford_Industrial>,
+        <https://1145.am/db/3352064/Rexford_Industrial>,
+        <https://1145.am/db/3366844/Rexford_Industrial>,
+        <https://1145.am/db/3416801/Rexford_Industrial>,
+        <https://1145.am/db/3481367/Rexford_Industrial>,
+        <https://1145.am/db/3525246/Rexford_Industrial>,
+        <https://1145.am/db/3560343/Rexford_Industrial>,
+        <https://1145.am/db/3565766/Rexford_Industrial>,
+        <https://1145.am/db/3578098/Rexford_Industrial>,
+        <https://1145.am/db/3582313/Rexford_Industrial>,
+        <https://1145.am/db/3607695/Rexford_Industrial>,
+        <https://1145.am/db/3616456/Rexford_Industrial>,
+        <https://1145.am/db/3621013/Rexford_Industrial>,
+        <https://1145.am/db/3762726/Rexford_Industrial>,
+        <https://1145.am/db/3792390/Rexford_Industrial>,
+        <https://1145.am/db/3804503/Rexford_Industrial>,
+        <https://1145.am/db/3815024/Rexford_Industrial>,
+        <https://1145.am/db/3818495/Rexford_Industrial>,
+        <https://1145.am/db/3825343/Rexford_Industrial>,
+        <https://1145.am/db/3851618/Rexford_Industrial>,
+        <https://1145.am/db/3870363/Rexford_Industrial>,
+        <https://1145.am/db/3883159/Rexford_Industrial>,
+        <https://1145.am/db/3911074/Rexford_Industrial>,
+        <https://1145.am/db/3911532/Rexford_Industrial>,
+        <https://1145.am/db/3921591/Rexford_Industrial>,
+        <https://1145.am/db/3922522/Rexford_Industrial> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3749308/Rexford_Industrial> .
+
+<https://1145.am/db/4250362/Caleb_Smith> a foaf:Person ;
+    ns1:basedInHighClean "Nashville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:basedInHighRaw "Nashville" ;
+    ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:foundName "Caleb Smith" ;
+    ns1:internalDocId 4250362 ;
+    ns1:name "Caleb Smith" ;
+    ns1:roleActivity <https://1145.am/db/4250362/Caleb_Smith-Starting-Managing_Director_North_America_Real_Estate_Services> .
+
+<https://1145.am/db/4250362/Gordon_Brothers> a org:Organization ;
+    ns1:basedInHighClean "Nashville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:basedInHighRaw "Nashville" ;
+    ns1:description "real estate" ;
+    ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:foundName "Gordon Brothers" ;
+    ns1:hasRole <https://1145.am/db/4250362/Gordon_Brothers-Managing_Director_North_America_Real_Estate_Services> ;
+    ns1:industry "Real Estate Services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/721_conveyancing_property_services_estate> ;
+    ns1:internalDocId 4250362 ;
+    ns1:name "Gordon Brothers" ;
+    ns1:sameAsHigh <https://1145.am/db/1106632/Gordon_Brothers>,
+        <https://1145.am/db/1213802/Gordon_Brothers>,
+        <https://1145.am/db/1265467/Gordon_Brothers>,
+        <https://1145.am/db/1450434/Gordon_Brothers>,
+        <https://1145.am/db/1547938/Gordon_Brothers>,
+        <https://1145.am/db/255451/Gordon_Brothers>,
+        <https://1145.am/db/4017555/Gordon_Brothers>,
+        <https://1145.am/db/4111285/Gordon_Brothers>,
+        <https://1145.am/db/4205651/Gordon_Brothers>,
+        <https://1145.am/db/4247224/Gordon_Brothers>,
+        <https://1145.am/db/996815/Gordon_Brothers> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1171898/Gordon_Brothers>,
+        <https://1145.am/db/1195058/Gordon_Brothers>,
+        <https://1145.am/db/1198285/Gordon_Brothers>,
+        <https://1145.am/db/1203749/Gordon_Brothers>,
+        <https://1145.am/db/1359184/Gordon_Brothers>,
+        <https://1145.am/db/1538028/Gordon_Brothers>,
+        <https://1145.am/db/1572256/Gordon_Brothers>,
+        <https://1145.am/db/1579728/Gordon_Brothers>,
+        <https://1145.am/db/1933633/Gordon_Brothers>,
+        <https://1145.am/db/254923/Gordon_Brothers>,
+        <https://1145.am/db/2995455/Gordon_Brothers>,
+        <https://1145.am/db/3049414/Gordon_Brothers>,
+        <https://1145.am/db/3061378/Gordon_Brothers>,
+        <https://1145.am/db/3609243/Gordon_Brothers>,
+        <https://1145.am/db/3820077/Gordon_Brothers>,
+        <https://1145.am/db/3820081/Gordon_Brothers>,
+        <https://1145.am/db/4016572/Gordon_Brothers>,
+        <https://1145.am/db/4118816/Gordon_Brothers>,
+        <https://1145.am/db/4148965/Gordon_Brothers>,
+        <https://1145.am/db/4184105/Gordon_Brothers>,
+        <https://1145.am/db/490118/Gordon_Brothers>,
+        <https://1145.am/db/490128/Gordon_Brothers>,
+        <https://1145.am/db/847161/Gordon_Brothers> .
+
+<https://1145.am/db/4250371/Cansortium_Inc> a org:Organization ;
+    ns1:basedInHighClean "Tampa" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4174757> ;
+    ns1:basedInHighRaw "TAMPA, Fla." ;
+    ns1:description "cannabis" ;
+    ns1:documentSource <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> ;
+    ns1:foundName "(CSE: TIUM.U) (OTCQX: CNTMF) (\"Cansortium\" or the \"Company\")" ;
+    ns1:hasRole <https://1145.am/db/4250371/Cansortium_Inc-Cfo> ;
+    ns1:industry "cannabis" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
+    ns1:internalDocId 4250371 ;
+    ns1:name "Cansortium Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/3201709/Cansortium_Inc>,
+        <https://1145.am/db/3240515/Cansortium_Inc>,
+        <https://1145.am/db/3249270/Cansortium_Inc>,
+        <https://1145.am/db/3274615/Cansortium_Inc>,
+        <https://1145.am/db/3298835/Cansortium_Inc>,
+        <https://1145.am/db/3322067/Cansortium_Inc>,
+        <https://1145.am/db/3512595/Cansortium_Inc>,
+        <https://1145.am/db/3568559/Cansortium_Inc>,
+        <https://1145.am/db/3943916/Cansortium_Inc>,
+        <https://1145.am/db/4086396/Cansortium_Inc>,
+        <https://1145.am/db/4142935/Cansortium_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3594374/Cansortium_Inc> .
+
+<https://1145.am/db/4250371/Patricia_Fonseca> a foaf:Person ;
+    ns1:basedInLowRaw "TAMPA, Fla." ;
+    ns1:documentSource <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> ;
+    ns1:foundName "Patricia Fonseca" ;
+    ns1:internalDocId 4250371 ;
+    ns1:name "Patricia Fonseca" ;
+    ns1:roleActivity <https://1145.am/db/4250371/Patricia_Fonseca-Continuing-Cfo> .
+
+<https://1145.am/db/4250412/Axiomise> a org:Organization ;
+    ns1:basedInHighClean "London" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:basedInHighRaw "LONDON" ;
+    ns1:description "a company" ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "Axiomise" ;
+    ns1:hasRole <https://1145.am/db/4250412/Axiomise-Technical_Advisory_Board> ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Axiomise" ;
+    ns1:sameAsNameOnly <https://1145.am/db/866510/Axiomise> .
+
+<https://1145.am/db/4250412/Colin_Mckellar> a foaf:Person ;
+    ns1:basedInLowRaw "X-Silicon Inc." ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "Colin McKellar" ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Colin McKellar" ;
+    ns1:roleActivity <https://1145.am/db/4250412/Colin_Mckellar-Starting-Technical_Advisory_Board> .
+
+<https://1145.am/db/4250412/Vidya_Chandran_Darbari> a foaf:Person ;
+    ns1:basedInLowRaw "LONDON" ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "Dr. Vidya Chandran Darbari" ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Vidya Chandran Darbari" ;
+    ns1:roleActivity <https://1145.am/db/4250412/Vidya_Chandran_Darbari-Starting-Technical_Advisory_Board> .
+
+<https://1145.am/db/4250496/Atlas_Technical_Consultants_Inc> a org:Organization ;
+    ns1:basedInHighClean "Texas" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:basedInHighRaw "Texas" ;
+    ns1:description "a company that provides infrastructure and environmental solutions" ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:foundName "Atlas Technical Consultants, Inc" ;
+    ns1:hasRole <https://1145.am/db/4250496/Atlas_Technical_Consultants_Inc-Chief_Legal_Officer> ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Atlas Technical Consultants, Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/1658600/Atlas_Technical_Consultants_Inc>,
+        <https://1145.am/db/906003/Atlas_Technical_Consultants>,
+        <https://1145.am/db/919985/Atlas_Technical_Consultants> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1660214/Atlas_Technical_Consultants_Inc>,
+        <https://1145.am/db/1687282/Atlas_Technical_Consultants_Inc>,
+        <https://1145.am/db/3583885/Atlas_Technical_Consultants>,
+        <https://1145.am/db/3886166/Atlas_Technical_Consultants> .
+
+<https://1145.am/db/4250496/Sarah_Kinnick_Hilty> a foaf:Person ;
+    ns1:basedInHighClean "Austin" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4671654> ;
+    ns1:basedInHighRaw "AUSTIN, Texas" ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:foundName "Sarah Kinnick Hilty" ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Sarah Kinnick Hilty" ;
+    ns1:roleActivity <https://1145.am/db/4250496/Sarah_Kinnick_Hilty-Starting-Chief_Legal_Officer> .
+
+<https://1145.am/db/4250529/El_Septimo_Cigars> a org:Organization ;
+    ns1:basedInHighClean "Los Angeles" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:basedInHighRaw "Los Angeles, CA" ;
+    ns1:description "Cigars" ;
+    ns1:documentSource <https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> ;
+    ns1:foundName "El Septimo Cigars" ;
+    ns1:hasRole <https://1145.am/db/4250529/El_Septimo_Cigars-Eastern_Seaboard_Sales_Manager> ;
+    ns1:internalDocId 4250529 ;
+    ns1:name "El Septimo Cigars" ;
+    ns1:sameAsHigh <https://1145.am/db/4244076/El_Septimo_Cigars> .
+
+<https://1145.am/db/4250529/Walter_Cukier> a foaf:Person ;
+    ns1:basedInHighClean "Los Angeles" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:basedInHighRaw "Los Angeles, CA" ;
+    ns1:documentSource <https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> ;
+    ns1:foundName "Walter Cukier" ;
+    ns1:internalDocId 4250529 ;
+    ns1:name "Walter Cukier" ;
+    ns1:roleActivity <https://1145.am/db/4250529/Walter_Cukier-Starting-Eastern_Seaboard_Sales_Manager> .
+
+<https://1145.am/db/4251913/Clara_Analytics> a org:Organization ;
+    ns1:basedInLowRaw "U.S." ;
+    ns1:description "insurance claims optimization" ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "CLARA",
+        "CLARA Analytics (\"CLARA\")" ;
+    ns1:hasRole <https://1145.am/db/4251913/Clara_Analytics-Chief_Customer_Officer>,
+        <https://1145.am/db/4251913/Clara_Analytics-Chief_Technology_Officer> ;
+    ns1:industry "insurance" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "CLARA Analytics" ;
+    ns1:sameAsHigh <https://1145.am/db/1014424/Clara_Analytics>,
+        <https://1145.am/db/10818/Clara_Analytics>,
+        <https://1145.am/db/4106013/Clara_Analytics>,
+        <https://1145.am/db/700416/Clara_Analytics>,
+        <https://1145.am/db/750349/Clara_Analytics>,
+        <https://1145.am/db/753373/Clara_Analytics>,
+        <https://1145.am/db/847155/Clara_Analytics>,
+        <https://1145.am/db/848384/Clara_Analytics> .
+
+<https://1145.am/db/4251913/Mark_Tainton> a foaf:Person ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "Mark Tainton" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Mark Tainton" ;
+    ns1:roleActivity <https://1145.am/db/4251913/Mark_Tainton-Starting-Chief_Customer_Officer> .
+
+<https://1145.am/db/4251913/Wayne_Chung> a foaf:Person ;
+    ns1:basedInLowRaw "U.S." ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "Wayne Chung" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Wayne Chung" ;
+    ns1:roleActivity <https://1145.am/db/4251913/Wayne_Chung-Starting-Chief_Technology_Officer> .
+
+<https://1145.am/db/4251920/Crosscountry_Consulting> a org:Organization ;
+    ns1:basedInHighClean "Washington" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
+    ns1:basedInHighRaw "Washington, D.C." ;
+    ns1:description "business advisory firm" ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "CrossCountry Consulting" ;
+    ns1:hasRole <https://1145.am/db/4251920/Crosscountry_Consulting-Government_Contracting_Industry_Lead>,
+        <https://1145.am/db/4251920/Crosscountry_Consulting-Partner> ;
+    ns1:industry "business advisory firm" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/175_advisory_advisor_adviser_advising> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/566_advisory_tech_technology_firm> ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "CrossCountry Consulting" ;
+    ns1:sameAsHigh <https://1145.am/db/147936/Crosscountry_Consulting>,
+        <https://1145.am/db/1981103/Crosscountry_Consulting>,
+        <https://1145.am/db/208656/Crosscountry_Consulting>,
+        <https://1145.am/db/2100823/Crosscountry_Consulting>,
+        <https://1145.am/db/218447/Crosscountry_Consulting>,
+        <https://1145.am/db/4135994/Crosscountry_Consulting> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1567282/Crosscountry_Consulting> .
+
+<https://1145.am/db/4251920/Laura_Adams> a foaf:Person ;
+    ns1:basedInHighClean "Washington" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
+    ns1:basedInHighRaw "Washington, D.C." ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "Laura Adams" ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Laura Adams" ;
+    ns1:roleActivity <https://1145.am/db/4251920/Laura_Adams-Starting-Government_Contracting_Industry_Lead>,
+        <https://1145.am/db/4251920/Laura_Adams-Starting-Partner> .
+
+<https://1145.am/db/4251921/John_Maggiacomo> a foaf:Person ;
+    ns1:basedInHighClean "North Salt Lake" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
+    ns1:basedInHighRaw "North America" ;
+    ns1:documentSource <https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> ;
+    ns1:foundName "John Maggiacomo" ;
+    ns1:internalDocId 4251921 ;
+    ns1:name "John Maggiacomo" ;
+    ns1:roleActivity <https://1145.am/db/4251921/John_Maggiacomo-Starting-Head_Of_Client_Sales> .
+
+<https://1145.am/db/4251921/Marketaxess_Holdings_Inc> a org:Organization ;
+    ns1:basedInLowRaw "North America" ;
+    ns1:description "trading" ;
+    ns1:documentSource <https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> ;
+    ns1:foundName "MarketAxess Holdings Inc" ;
+    ns1:hasRole <https://1145.am/db/4251921/Marketaxess_Holdings_Inc-Head_Of_Client_Sales> ;
+    ns1:internalDocId 4251921 ;
+    ns1:name "MarketAxess Holdings Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/1626281/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/1980025/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/2078243/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/2117098/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/2131983/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/2802758/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/381044/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/4039073/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/4196902/Marketaxess_Holdings_Inc>,
+        <https://1145.am/db/556088/Marketaxess_Holdings_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3941319/Marketaxess_Holdings> .
+
+<https://1145.am/db/4251937/Damon_Cates> a foaf:Person ;
+    ns1:basedInLowRaw "United" ;
+    ns1:documentSource <https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> ;
+    ns1:foundName "Damon Cates, EdD" ;
+    ns1:internalDocId 4251937 ;
+    ns1:name "Damon Cates" ;
+    ns1:roleActivity <https://1145.am/db/4251937/Damon_Cates-Finishing-President_Chief_Executive_Officer_(ceo)> .
+
+<https://1145.am/db/4251937/One_Hope_United> a org:Organization ;
+    ns1:basedInLowRaw "United" ;
+    ns1:documentSource <https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> ;
+    ns1:foundName "One Hope United (OHU)" ;
+    ns1:hasRole <https://1145.am/db/4251937/One_Hope_United-President_Chief_Executive_Officer_(ceo)> ;
+    ns1:internalDocId 4251937 ;
+    ns1:name "One Hope United" .
+
+<https://1145.am/db/4251941/Iconectiv> a org:Organization ;
+    ns1:description "building trusted communications networks" ;
+    ns1:documentSource <https://1145.am/db/4251941/wwwbusinesswirecom_news_home_20240516091994_en_iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> ;
+    ns1:foundName "iconectiv" ;
+    ns1:hasRole <https://1145.am/db/4251941/Iconectiv-Board_Of_Directors> ;
+    ns1:internalDocId 4251941 ;
+    ns1:name "iconectiv" .
+
+<https://1145.am/db/4251941/Steve_Tang> a foaf:Person ;
+    ns1:documentSource <https://1145.am/db/4251941/wwwbusinesswirecom_news_home_20240516091994_en_iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> ;
+    ns1:foundName "Steve Tang" ;
+    ns1:internalDocId 4251941 ;
+    ns1:name "Steve Tang" ;
+    ns1:roleActivity <https://1145.am/db/4251941/Steve_Tang-Starting-Board_Of_Directors> .
+
+<https://1145.am/db/4251946/Concetta_Yates> a foaf:Person ;
+    ns1:documentSource <https://1145.am/db/4251946/wwwbusinesswirecom_news_home_20240516229902_en_Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> ;
+    ns1:foundName "Concetta Yates" ;
+    ns1:internalDocId 4251946 ;
+    ns1:name "Concetta Yates" ;
+    ns1:roleActivity <https://1145.am/db/4251946/Concetta_Yates-Starting-Head_Of_Data_Analytics_And_Artificial_Intelligence> .
+
+<https://1145.am/db/4251946/Red_River> a org:Organization ;
+    ns1:description "government and enterprise customers" ;
+    ns1:documentSource <https://1145.am/db/4251946/wwwbusinesswirecom_news_home_20240516229902_en_Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> ;
+    ns1:foundName "Red River" ;
+    ns1:hasRole <https://1145.am/db/4251946/Red_River-Head_Of_Data_Analytics_And_Artificial_Intelligence> ;
+    ns1:industry "IT sector" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/179_it_solutions_services_service> ;
+    ns1:internalDocId 4251946 ;
+    ns1:name "Red River" ;
+    ns1:sameAsHigh <https://1145.am/db/1070624/Red_River>,
+        <https://1145.am/db/1073307/Red_River>,
+        <https://1145.am/db/1168407/Red_River>,
+        <https://1145.am/db/1169615/Red_River>,
+        <https://1145.am/db/2053284/Red_River>,
+        <https://1145.am/db/2151032/Red_River>,
+        <https://1145.am/db/4179882/Red_River> ;
+    ns1:sameAsNameOnly <https://1145.am/db/121664/Red_River> .
+
+<https://1145.am/db/1770910/Minted> a org:Organization ;
+    ns1:description "independent artists" ;
+    ns1:documentSource <https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> ;
+    ns1:foundName "Minted",
+        "the design marketplace" ;
+    ns1:industry "design marketplace" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/414_marketplace_marketplaces_market_online> ;
+    ns1:internalDocId 1770910 ;
+    ns1:name "Minted" .
+
+<https://1145.am/db/2191226/Cigna-Merger> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "merger" ;
+    ns1:documentDate "2018-12-14T01:35:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Cigna's $ 67 billion acquisition of Express Scripts cleared regulatory hurdles in two states on Thursday, putting the deal on pace to close by the end of the year." ;
+    ns1:documentSource <https://1145.am/db/2191226/wwwfiercehealthcarecom_payer_cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york> ;
+    ns1:internalDocId 2191226 ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States" .
+
+<https://1145.am/db/3145650/Dott> a org:Organization ;
+    ns1:basedInHighClean "Amsterdam" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2759794> ;
+    ns1:basedInHighRaw "Amsterdam" ;
+    ns1:description "Urban transportation" ;
+    ns1:documentSource <https://1145.am/db/3145650/venturebeatcom_business_mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes_> ;
+    ns1:foundName "Dott" ;
+    ns1:industry "Urban transportation" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/51_transportation_transport_transit_commuting> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/156_land_development_developers_property>,
+        <https://1145.am/db/industry/650_logistics_transportation_transport_trucking> ;
+    ns1:internalDocId 3145650 ;
+    ns1:name "Dott" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1755676/Dott>,
+        <https://1145.am/db/1770192/Dott>,
+        <https://1145.am/db/1789535/Dott>,
+        <https://1145.am/db/3080392/Dott>,
+        <https://1145.am/db/3112231/Dott>,
+        <https://1145.am/db/3354142/Dott>,
+        <https://1145.am/db/3411956/Dott>,
+        <https://1145.am/db/799379/Dott> .
+
+<https://1145.am/db/3145658/Transfergo> a org:Organization ;
+    ns1:basedInHighClean "London" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:basedInHighRaw "London" ;
+    ns1:description "transferring money to individuals or businesses in other countries" ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "TransferGo" ;
+    ns1:industry "fintech" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/130_fintech_fintechs_banking_bank> ;
+    ns1:internalDocId 3145658 ;
+    ns1:name "TransferGo" ;
+    ns1:sameAsHigh <https://1145.am/db/1744781/Transfergo>,
+        <https://1145.am/db/3034612/Transfergo>,
+        <https://1145.am/db/3034614/Transfergo>,
+        <https://1145.am/db/3072081/Transfergo>,
+        <https://1145.am/db/4149045/Transfergo> .
+
+<https://1145.am/db/3860816/Alphaslot> a org:Organization ;
+    ns1:basedInHighClean "Hong Kong Special Administrative Region" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1819730> ;
+    ns1:basedInHighRaw "HONG KONG" ;
+    ns1:description "gaming" ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "Alphaslot" ;
+    ns1:industry "gaming" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/58_gaming_gamer_igaming_videogaming> ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "Alphaslot" .
+
+<https://1145.am/db/3860828/Alliant_Energy_Corporation> a org:Organization ;
+    ns1:basedInHighClean "Wisconsin" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
+    ns1:basedInHighRaw "Wis." ;
+    ns1:documentSource <https://1145.am/db/3860828/wwwprnewswirecom_news-releases_alliant-energy-corporation-prices-public-offering-of-7-268-673-shares-of-common-stock-300765588html> ;
+    ns1:foundName "Alliant Energy Corporation" ;
+    ns1:internalDocId 3860828 ;
+    ns1:name "Alliant Energy Corporation" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
+        <https://1145.am/db/1621460/Alliant_Energy_Corporation>,
+        <https://1145.am/db/1685388/Alliant_Energy_Corporation>,
+        <https://1145.am/db/1686655/Alliant_Energy_Corporation>,
+        <https://1145.am/db/1950815/Alliant_Energy_Corporation>,
+        <https://1145.am/db/2061838/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3465034/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3543527/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3550338/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3553883/Alliant_Energy>,
+        <https://1145.am/db/3576338/Alliant_Energy>,
+        <https://1145.am/db/3586048/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3651019/Alliant_Energy>,
+        <https://1145.am/db/3824426/Alliant_Energy>,
+        <https://1145.am/db/3845296/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3859587/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3859615/Alliant_Energy_Corporation>,
+        <https://1145.am/db/3927881/Alliant_Energy_Corporation>,
+        <https://1145.am/db/4004425/Alliant_Energy>,
+        <https://1145.am/db/4075658/Alliant_Energy>,
+        <https://1145.am/db/4076751/Alliant_Energy_Corporation>,
+        <https://1145.am/db/470377/Alliant_Energy_Corporation>,
+        <https://1145.am/db/629133/Alliant_Energy_Corporation>,
+        <https://1145.am/db/852809/Alliant_Energy_Corporation>,
+        <https://1145.am/db/955071/Alliant_Energy> .
+
+<https://1145.am/db/3861965/Fanzzlids_Holdings> a org:Organization ;
+    ns1:basedInLowRaw "Tenn" ;
+    ns1:buyer <https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> ;
+    ns1:description "a specialty retailer of officially licensed sports apparel" ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "FanzzLids Holdings" ;
+    ns1:industry "licensed sports industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "FanzzLids Holdings" ;
+    ns1:sameAsNameOnly <https://1145.am/db/3452794/Fanzzlids_Holdings> .
+
+<https://1145.am/db/3861965/Lids_Sports_Group> a org:Organization ;
+    ns1:basedInHighClean "Nashville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:basedInHighRaw "NASHVILLE, Tenn." ;
+    ns1:description "licensed sports industry" ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "Lids Sports Group" ;
+    ns1:industry "licensed sports industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "Lids Sports Group" .
+
+<https://1145.am/db/3861980/Canadian_Solar_Inc> a org:Organization ;
+    ns1:basedInHighClean "Guelph" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5967629> ;
+    ns1:basedInHighRaw "GUELPH, Ontario" ;
+    ns1:description "solar power" ;
+    ns1:documentSource <https://1145.am/db/3861980/wwwprnewswirecom_news-releases_canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639html> ;
+    ns1:foundName "Canadian Solar Inc" ;
+    ns1:industry "solar power" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
+    ns1:internalDocId 3861980 ;
+    ns1:name "Canadian Solar Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/2438961/Canadian_Solar_Inc>,
+        <https://1145.am/db/2439002/Canadian_Solar_Inc>,
+        <https://1145.am/db/2441393/Canadian_Solar_Inc>,
+        <https://1145.am/db/2442079/Canadian_Solar>,
+        <https://1145.am/db/2442187/Canadian_Solar_Inc>,
+        <https://1145.am/db/2786570/Canadian_Solar>,
+        <https://1145.am/db/2786915/Canadian_Solar>,
+        <https://1145.am/db/3167440/Canadian_Solar_Inc>,
+        <https://1145.am/db/3167498/Canadian_Solar_Inc>,
+        <https://1145.am/db/3232707/Canadian_Solar>,
+        <https://1145.am/db/3244532/Canadian_Solar_Inc>,
+        <https://1145.am/db/3289684/Canadian_Solar_Inc>,
+        <https://1145.am/db/3337386/Canadian_Solar_Inc>,
+        <https://1145.am/db/3344191/Canadian_Solar_Inc>,
+        <https://1145.am/db/3390040/Canadian_Solar_Inc>,
+        <https://1145.am/db/3422793/Canadian_Solar_Inc>,
+        <https://1145.am/db/3424358/Canadian_Solar_Inc>,
+        <https://1145.am/db/3437727/Canadian_Solar_Inc>,
+        <https://1145.am/db/3446255/Canadian_Solar_Inc>,
+        <https://1145.am/db/3469124/Canadian_Solar_Inc>,
+        <https://1145.am/db/3473324/Canadian_Solar_Inc>,
+        <https://1145.am/db/3508477/Canadian_Solar_Inc>,
+        <https://1145.am/db/3509414/Canadian_Solar_Inc>,
+        <https://1145.am/db/3543611/Canadian_Solar_Inc>,
+        <https://1145.am/db/3599087/Canadian_Solar_Inc>,
+        <https://1145.am/db/3613178/Canadian_Solar_Inc>,
+        <https://1145.am/db/3621008/Canadian_Solar_Inc>,
+        <https://1145.am/db/3625080/Canadian_Solar_Inc>,
+        <https://1145.am/db/3704830/Canadian_Solar>,
+        <https://1145.am/db/3774233/Canadian_Solar_Inc>,
+        <https://1145.am/db/3774537/Canadian_Solar_Inc>,
+        <https://1145.am/db/3782556/Canadian_Solar_Inc>,
+        <https://1145.am/db/3840134/Canadian_Solar_Inc>,
+        <https://1145.am/db/3844205/Canadian_Solar_Inc>,
+        <https://1145.am/db/3852277/Canadian_Solar_Inc>,
+        <https://1145.am/db/3876988/Canadian_Solar_Inc>,
+        <https://1145.am/db/3877530/Canadian_Solar_Inc>,
+        <https://1145.am/db/3899531/Canadian_Solar_Inc>,
+        <https://1145.am/db/3919220/Canadian_Solar_Inc>,
+        <https://1145.am/db/3929727/Canadian_Solar_Inc>,
+        <https://1145.am/db/3949137/Canadian_Solar_Inc>,
+        <https://1145.am/db/4227054/Canadian_Solar> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3116122/Canadian_Solar_Inc>,
+        <https://1145.am/db/3117575/Canadian_Solar_Inc>,
+        <https://1145.am/db/3495555/Canadian_Solar_Inc>,
+        <https://1145.am/db/3568583/Canadian_Solar_Inc>,
+        <https://1145.am/db/3934224/Canadian_Solar_Inc> .
+
+<https://1145.am/db/3861981/Rexford_Industrial-Investment-Property> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "LOS ANGELES, Dec. 14, 2018 /PRNewswire/ - Rexford Industrial Realty, Inc. (the \"Company\" or \"Rexford Industrial\") (NYSE: REXR) , a real estate investment trust focused on owning and operating industrial properties located in Southern California infill markets, today announced the acquisition of a multi-tenant industrial property for $ 18.2 million." ;
+    ns1:documentSource <https://1145.am/db/3861981/wwwprnewswirecom_news-releases_rexford-industrial-acquires-industrial-property-for-18-2-million-300765671html> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 3861981 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:targetDetails "property" ;
+    ns1:valueRaw "$ 18.2 million" ;
+    ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 14, 2018" ;
+    ns1:whereClean "Southern California" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
+    ns1:whereRaw "Southern California" .
+
+<https://1145.am/db/4250362/Caleb_Smith-Starting-Managing_Director_North_America_Real_Estate_Services> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Boston, May 16, 2024 (GLOBE NEWSWIRE) - Caleb Smith has joined Gordon Brothers, the global asset experts, as Managing Director, North America Real Estate Services." ;
+    ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:foundName "joined" ;
+    ns1:internalDocId 4250362 ;
+    ns1:name "Joined" ;
+    ns1:orgFoundName "Gordon Brothers" ;
+    ns1:role <https://1145.am/db/4250362/Gordon_Brothers-Managing_Director_North_America_Real_Estate_Services> ;
+    ns1:roleFoundName "Managing Director, North America Real Estate Services" ;
+    ns1:roleHolderFoundName "Caleb Smith" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 16, 2024" ;
+    ns1:whereClean "Boston" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
+    ns1:whereRaw "Boston" .
+
+<https://1145.am/db/4250371/Patricia_Fonseca-Continuing-Cfo> a ns1:RoleActivity ;
+    ns1:activityType "continuing" ;
+    ns1:documentDate "2024-05-16T13:02:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "TAMPA, Fla., May 16, 2024 (GLOBE NEWSWIRE) - Cansortium Inc. (CSE: TIUM.U) (OTCQX: CNTMF) (\"Cansortium\" or the \"Company\") , a vertically-integrated cannabis company operating under the FLUENT™ brand, announces that Jeffrey Batliner has tendered his resignation as Chief Financial Officer (\"CFO\") of the Company effective May 13, 2024." ;
+    ns1:documentSource <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> ;
+    ns1:foundName "re" ;
+    ns1:internalDocId 4250371 ;
+    ns1:name "Re" ;
+    ns1:orgFoundName "(CSE: TIUM.U) (OTCQX: CNTMF) (\"Cansortium\" or the \"Company\")" ;
+    ns1:role <https://1145.am/db/4250371/Cansortium_Inc-Cfo> ;
+    ns1:roleFoundName "CFO" ;
+    ns1:roleHolderFoundName "Patricia Fonseca" ;
+    ns1:status "stopped" ;
+    ns1:when "2024-05-13T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 13, 2024" ;
+    ns1:whereClean "Tampa" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4174757> ;
+    ns1:whereRaw "TAMPA, Fla." .
+
+<https://1145.am/db/4250412/Colin_Mckellar-Starting-Technical_Advisory_Board> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:18:12+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "LONDON, May 16, 2024 (GLOBE NEWSWIRE) - Axiomise, a company noted for enabling formal verification adoption, today announced the formation of its Technical Advisory Board and its first two members, Dr. Vidya Chandran Darbari and Colin McKellar." ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "formation" ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Formation" ;
+    ns1:orgFoundName "Axiomise" ;
+    ns1:role <https://1145.am/db/4250412/Axiomise-Technical_Advisory_Board> ;
+    ns1:roleFoundName "Technical Advisory Board" ;
+    ns1:roleHolderFoundName "Colin McKellar" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 16, 2024" ;
+    ns1:whereClean "London" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereRaw "LONDON" .
+
+<https://1145.am/db/4250412/Vidya_Chandran_Darbari-Starting-Technical_Advisory_Board> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:18:12+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "LONDON, May 16, 2024 (GLOBE NEWSWIRE) - Axiomise, a company noted for enabling formal verification adoption, today announced the formation of its Technical Advisory Board and its first two members, Dr. Vidya Chandran Darbari and Colin McKellar." ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "formation" ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Formation" ;
+    ns1:orgFoundName "Axiomise" ;
+    ns1:role <https://1145.am/db/4250412/Axiomise-Technical_Advisory_Board> ;
+    ns1:roleFoundName "Technical Advisory Board" ;
+    ns1:roleHolderFoundName "Vidya Chandran Darbari" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 16, 2024" ;
+    ns1:whereClean "London" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereRaw "LONDON" .
+
+<https://1145.am/db/4250496/Sarah_Kinnick_Hilty-Starting-Chief_Legal_Officer> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:53:54+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "AUSTIN, Texas, May 16, 2024 (GLOBE NEWSWIRE) - Atlas Technical Consultants, Inc. (Atlas) , a leading provider of infrastructure and environmental solutions, today announced the appointment of Sarah Kinnick Hilty as its new Chief Legal Officer." ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "Atlas Technical Consultants, Inc" ;
+    ns1:role <https://1145.am/db/4250496/Atlas_Technical_Consultants_Inc-Chief_Legal_Officer> ;
+    ns1:roleFoundName "Chief Legal Officer" ;
+    ns1:roleHolderFoundName "Sarah Kinnick Hilty" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 16, 2024" ;
+    ns1:whereClean "Texas" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereRaw "Texas" .
+
+<https://1145.am/db/4250529/Walter_Cukier-Starting-Eastern_Seaboard_Sales_Manager> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Los Angeles, CA, May 16, 2024 (GLOBE NEWSWIRE) - El Septimo Cigars, the creator of the world's finest premium cigars, announces with great excitement the appointment of Walter Cukier as Eastern Seaboard Sales Manager." ;
+    ns1:documentSource <https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4250529 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "El Septimo Cigars" ;
+    ns1:role <https://1145.am/db/4250529/El_Septimo_Cigars-Eastern_Seaboard_Sales_Manager> ;
+    ns1:roleFoundName "Eastern Seaboard Sales Manager" ;
+    ns1:roleHolderFoundName "Walter Cukier" ;
+    ns1:status "completed" ;
+    ns1:whereClean "Los Angeles" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:whereRaw "Los Angeles" .
+
+<https://1145.am/db/4251913/Mark_Tainton-Starting-Chief_Customer_Officer> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "CLARA Analytics (\"CLARA\") , a leading provider of artificial intelligence (AI) technology for insurance claims optimization, today announced two new senior level hires, adding Wayne Chung as the company's new Chief Technology Officer and insurance industry veteran Mark Tainton, who will serve as CLARA's Chief Customer Officer.",
+        "Mark Tainton will serve in the newly created role of Chief Customer Officer, underscoring CLARA's commitment to achieving outstanding results for its clients." ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "adding",
+        "serve" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Adding",
+        "Serve" ;
+    ns1:orgFoundName "CLARA Analytics (\"CLARA\")" ;
+    ns1:role <https://1145.am/db/4251913/Clara_Analytics-Chief_Customer_Officer> ;
+    ns1:roleFoundName "Chief Customer Officer" ;
+    ns1:roleHolderFoundName "Mark Tainton" ;
+    ns1:status "completed",
+        "not happened at date of document" .
+
+<https://1145.am/db/4251913/Wayne_Chung-Starting-Chief_Technology_Officer> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "CLARA Analytics (\"CLARA\") , a leading provider of artificial intelligence (AI) technology for insurance claims optimization, today announced two new senior level hires, adding Wayne Chung as the company's new Chief Technology Officer and insurance industry veteran Mark Tainton, who will serve as CLARA's Chief Customer Officer." ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "adding" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Adding" ;
+    ns1:orgFoundName "CLARA Analytics (\"CLARA\")" ;
+    ns1:role <https://1145.am/db/4251913/Clara_Analytics-Chief_Technology_Officer> ;
+    ns1:roleFoundName "Chief Technology Officer" ;
+    ns1:roleHolderFoundName "Wayne Chung" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/4251920/Laura_Adams-Starting-Government_Contracting_Industry_Lead> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:35:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "CrossCountry Consulting, a leading business advisory firm, today announced that Laura Adams has been appointed Partner in the Accounting Advisory practice as the national Government Contracting Industry Lead to support clients in the aerospace, defense, and government contracting industries." ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "appointed" ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Appointed" ;
+    ns1:orgFoundName "CrossCountry Consulting" ;
+    ns1:role <https://1145.am/db/4251920/Crosscountry_Consulting-Government_Contracting_Industry_Lead> ;
+    ns1:roleFoundName "Government Contracting Industry Lead" ;
+    ns1:roleHolderFoundName "Laura Adams" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/4251920/Laura_Adams-Starting-Partner> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:35:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "CrossCountry Consulting, a leading business advisory firm, today announced that Laura Adams has been appointed Partner in the Accounting Advisory practice as the national Government Contracting Industry Lead to support clients in the aerospace, defense, and government contracting industries." ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "appointed" ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Appointed" ;
+    ns1:orgFoundName "CrossCountry Consulting" ;
+    ns1:role <https://1145.am/db/4251920/Crosscountry_Consulting-Partner> ;
+    ns1:roleFoundName "Partner" ;
+    ns1:roleHolderFoundName "Laura Adams" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/4251921/John_Maggiacomo-Starting-Head_Of_Client_Sales> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T13:36:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "MarketAxess Holdings Inc. (Nasdaq: MKTX) , the operator of a leading electronic trading platform for fixed-income securities, today announced the appointment of John Maggiacomo as Head of Client Sales in North America." ;
+    ns1:documentSource <https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4251921 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "MarketAxess Holdings Inc" ;
+    ns1:role <https://1145.am/db/4251921/Marketaxess_Holdings_Inc-Head_Of_Client_Sales> ;
+    ns1:roleFoundName "Head of Client Sales" ;
+    ns1:roleHolderFoundName "John Maggiacomo" ;
+    ns1:status "completed" ;
+    ns1:whereClean "North Salt Lake" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
+    ns1:whereRaw "North America" .
+
+<https://1145.am/db/4251937/Damon_Cates-Finishing-President_Chief_Executive_Officer_(ceo)> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "After an extensive national search, One Hope United (OHU) announces the appointment of Damon Cates, EdD as its new President & Chief Executive Officer (CEO) ." ;
+    ns1:documentSource <https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4251937 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "One Hope United (OHU)" ;
+    ns1:role <https://1145.am/db/4251937/One_Hope_United-President_Chief_Executive_Officer_(ceo)> ;
+    ns1:roleFoundName "President & Chief Executive Officer (CEO)" ;
+    ns1:roleHolderFoundName "Damon Cates" ;
+    ns1:status "completed" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States" .
+
+<https://1145.am/db/4251941/Steve_Tang-Starting-Board_Of_Directors> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "In its continuing commitment to ensure a trusted communications ecosystem, iconectiv announced that Steve Tang, the company's Chief Technology Officer, has been elected to the Board of Directors of the SIP Forum." ;
+    ns1:documentSource <https://1145.am/db/4251941/wwwbusinesswirecom_news_home_20240516091994_en_iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> ;
+    ns1:foundName "elected" ;
+    ns1:internalDocId 4251941 ;
+    ns1:name "Elected" ;
+    ns1:orgFoundName "iconectiv" ;
+    ns1:role <https://1145.am/db/4251941/Iconectiv-Board_Of_Directors> ;
+    ns1:roleFoundName "Board of Directors" ;
+    ns1:roleHolderFoundName "Steve Tang" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/4251946/Concetta_Yates-Starting-Head_Of_Data_Analytics_And_Artificial_Intelligence> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-16T14:04:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Red River, a technology transformation company serving government and enterprise customers, today announced Concetta Yates has been named Head of Data Analytics and Artificial Intelligence for the company." ;
+    ns1:documentSource <https://1145.am/db/4251946/wwwbusinesswirecom_news_home_20240516229902_en_Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> ;
+    ns1:foundName "named" ;
+    ns1:internalDocId 4251946 ;
+    ns1:name "Named" ;
+    ns1:orgFoundName "Red River" ;
+    ns1:role <https://1145.am/db/4251946/Red_River-Head_Of_Data_Analytics_And_Artificial_Intelligence> ;
+    ns1:roleFoundName "Head of Data Analytics and Artificial Intelligence" ;
+    ns1:roleHolderFoundName "Concetta Yates" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/geonames_location/1880251> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:geoNamesId 1880251 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1880251/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1880251> ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "Republic of Singapore" .
+
+<https://1145.am/db/geonames_location/2759794> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3145650/venturebeatcom_business_mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes_> ;
+    ns1:geoNamesId 2759794 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2759794/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2759794> ;
+    ns1:internalDocId 3145650 ;
+    ns1:name "Amsterdam" .
+
+<https://1145.am/db/geonames_location/3996063> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3861980/wwwprnewswirecom_news-releases_canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639html> ;
+    ns1:geoNamesId 3996063 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3996063/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3996063> ;
+    ns1:internalDocId 3861980 ;
+    ns1:name "Mexico" .
+
+<https://1145.am/db/geonames_location/4671654> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:geoNamesId 4671654 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4671654/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4671654> ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Austin" .
+
+<https://1145.am/db/geonames_location/4930956> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:geoNamesId 4930956 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4930956/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4930956> ;
+    ns1:internalDocId 4250362 ;
+    ns1:name "Boston" .
+
+<https://1145.am/db/geonames_location/5391959> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:geoNamesId 5391959 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5391959/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5391959> ;
+    ns1:internalDocId 3145658 ;
+    ns1:name "San Francisco" .
+
+<https://1145.am/db/geonames_location/5967629> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3861980/wwwprnewswirecom_news-releases_canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639html> ;
+    ns1:geoNamesId 5967629 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5967629/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5967629> ;
+    ns1:internalDocId 3861980 ;
+    ns1:name "Guelph" .
+
+<https://1145.am/db/geonames_location/6940309> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:geoNamesId 6940309 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6940309/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6940309> ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "Silicon Valley" .
+
+<https://1145.am/db/geonames_location/7218844> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:geoNamesId 7218844 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/7218844/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/7218844> ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "Netherland" .
+
+<https://1145.am/db/1770910/Minted-Minted-Permira-T_Rowe_Price-Investment-Series_E> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T00:33:40+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Minted, a company we 've been covering on this site for a decade-plus, plans to double down on its wholesale and licensing business, which helps larger retailers sell stationery, art and home decor designed by its community of independent artists.",
+        "To fund the growing initiative, the design marketplace is today announcing a $ 208 million Series E funding led by Permira, with participation from T. Rowe Price." ;
+    ns1:documentSource <https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 1770910 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1770910/Minted> ;
+    ns1:targetDetails "Series E" ;
+    ns1:valueRaw "$ 208 million" .
+
+<https://1145.am/db/3861965/Fanzzlids_Holdings-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T11:50:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Fanatics Inc., a leader in sports licensing and ecommerce, will make a minority investment in FanzzLids Holdings in connection with entering into a commercial arrangement with that holding company.",
+        "NASHVILLE, Tenn., Dec. 14, 2018 /PRNewswire/ - Genesco Inc. (NYSE: GCO) announced today that the Company has entered into a definitive agreement for the sale of the Lids Sports Group for $ 100 million in cash subject to adjustment for a normalized level of working capital to FanzzLids Holdings, a holding company controlled and operated by affiliates of Ames Watson Capital, LLC." ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "investment" ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "investment" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/3861965/Fanzzlids_Holdings>,
+        <https://1145.am/db/3861965/Genesco_Inc> ;
+    ns1:targetName "FanzzLids Holdings" ;
+    ns1:valueRaw "$ 100 million" ;
+    ns1:whereClean "Nashville" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:whereRaw "NASHVILLE, Tenn." .
+
+<https://1145.am/db/3861965/Genesco_Inc> a org:Organization ;
+    ns1:basedInHighClean "Nashville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:basedInHighRaw "NASHVILLE, Tenn." ;
+    ns1:description "Business" ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "Genesco Inc" ;
+    ns1:industry "licensed sports industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "Genesco Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/2102620/Genesco_Inc>,
+        <https://1145.am/db/3249664/Genesco_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3163894/Genesco_Inc>,
+        <https://1145.am/db/3262684/Genesco_Inc>,
+        <https://1145.am/db/3452794/Genesco_Inc>,
+        <https://1145.am/db/3599722/Genesco_Inc>,
+        <https://1145.am/db/3627015/Genesco_Inc>,
+        <https://1145.am/db/3798240/Genesco_Inc>,
+        <https://1145.am/db/3912237/Genesco_Inc> .
+
+<https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-12-14T11:50:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "NASHVILLE, Tenn., Dec. 14, 2018 /PRNewswire/ - Genesco Inc. (NYSE: GCO) announced today that the Company has entered into a definitive agreement for the sale of the Lids Sports Group for $ 100 million in cash subject to adjustment for a normalized level of working capital to FanzzLids Holdings, a holding company controlled and operated by affiliates of Ames Watson Capital, LLC." ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> ;
+    ns1:foundName "sale" ;
+    ns1:internalDocId 3861965 ;
+    ns1:name "sale" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/3861965/Lids_Sports_Group> ;
+    ns1:targetName "Lids Sports Group" ;
+    ns1:valueRaw "$ 100 million" ;
+    ns1:vendor <https://1145.am/db/3861965/Genesco_Inc> ;
+    ns1:whereClean "Nashville" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:whereRaw "NASHVILLE, Tenn." .
+
+<https://1145.am/db/4250362/Gordon_Brothers-Managing_Director_North_America_Real_Estate_Services> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:foundName "Managing Director, North America Real Estate Services" ;
+    ns1:internalDocId 4250362 ;
+    ns1:name "Managing Director, North America Real Estate Services" ;
+    ns1:orgFoundName "Gordon Brothers" .
+
+<https://1145.am/db/4250371/Cansortium_Inc-Cfo> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> ;
+    ns1:foundName "CFO" ;
+    ns1:internalDocId 4250371 ;
+    ns1:name "CFO" ;
+    ns1:orgFoundName "(CSE: TIUM.U) (OTCQX: CNTMF) (\"Cansortium\" or the \"Company\")" .
+
+<https://1145.am/db/4250496/Atlas_Technical_Consultants_Inc-Chief_Legal_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:foundName "Chief Legal Officer" ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Chief Legal Officer" ;
+    ns1:orgFoundName "Atlas Technical Consultants, Inc" .
+
+<https://1145.am/db/4250529/El_Septimo_Cigars-Eastern_Seaboard_Sales_Manager> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> ;
+    ns1:foundName "Eastern Seaboard Sales Manager" ;
+    ns1:internalDocId 4250529 ;
+    ns1:name "Eastern Seaboard Sales Manager" ;
+    ns1:orgFoundName "El Septimo Cigars" .
+
+<https://1145.am/db/4251913/Clara_Analytics-Chief_Customer_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "Chief Customer Officer" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Chief Customer Officer" ;
+    ns1:orgFoundName "CLARA",
+        "CLARA Analytics (\"CLARA\")" .
+
+<https://1145.am/db/4251913/Clara_Analytics-Chief_Technology_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> ;
+    ns1:foundName "Chief Technology Officer" ;
+    ns1:internalDocId 4251913 ;
+    ns1:name "Chief Technology Officer" ;
+    ns1:orgFoundName "CLARA Analytics (\"CLARA\")" .
+
+<https://1145.am/db/4251920/Crosscountry_Consulting-Government_Contracting_Industry_Lead> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "Government Contracting Industry Lead" ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Government Contracting Industry Lead" ;
+    ns1:orgFoundName "CrossCountry Consulting" .
+
+<https://1145.am/db/4251920/Crosscountry_Consulting-Partner> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:foundName "Partner" ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Partner" ;
+    ns1:orgFoundName "CrossCountry Consulting" .
+
+<https://1145.am/db/4251921/Marketaxess_Holdings_Inc-Head_Of_Client_Sales> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> ;
+    ns1:foundName "Head of Client Sales" ;
+    ns1:internalDocId 4251921 ;
+    ns1:name "Head of Client Sales" ;
+    ns1:orgFoundName "MarketAxess Holdings Inc" .
+
+<https://1145.am/db/4251937/One_Hope_United-President_Chief_Executive_Officer_(ceo)> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> ;
+    ns1:foundName "President & Chief Executive Officer (CEO)" ;
+    ns1:internalDocId 4251937 ;
+    ns1:name "President & Chief Executive Officer (CEO)" ;
+    ns1:orgFoundName "One Hope United (OHU)" .
+
+<https://1145.am/db/4251941/Iconectiv-Board_Of_Directors> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251941/wwwbusinesswirecom_news_home_20240516091994_en_iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> ;
+    ns1:foundName "Board of Directors" ;
+    ns1:internalDocId 4251941 ;
+    ns1:name "Board of Directors" ;
+    ns1:orgFoundName "iconectiv" .
+
+<https://1145.am/db/4251946/Red_River-Head_Of_Data_Analytics_And_Artificial_Intelligence> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4251946/wwwbusinesswirecom_news_home_20240516229902_en_Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> ;
+    ns1:foundName "Head of Data Analytics and Artificial Intelligence" ;
+    ns1:internalDocId 4251946 ;
+    ns1:name "Head of Data Analytics and Artificial Intelligence" ;
+    ns1:orgFoundName "Red River" .
+
+<https://1145.am/db/geonames_location/11071615> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3861981/wwwprnewswirecom_news-releases_rexford-industrial-acquires-industrial-property-for-18-2-million-300765671html> ;
+    ns1:geoNamesId 11071615 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/11071615/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/11071615> ;
+    ns1:internalDocId 3861981 ;
+    ns1:name "Southern California" .
+
+<https://1145.am/db/geonames_location/1819730> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:geoNamesId 1819730 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1819730/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1819730> ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "Hong Kong Special Administrative Region" .
+
+<https://1145.am/db/geonames_location/4140963> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> ;
+    ns1:geoNamesId 4140963 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4140963/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4140963> ;
+    ns1:internalDocId 4251920 ;
+    ns1:name "Washington" .
+
+<https://1145.am/db/geonames_location/4174757> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> ;
+    ns1:geoNamesId 4174757 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4174757/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4174757> ;
+    ns1:internalDocId 4250371 ;
+    ns1:name "Tampa" .
+
+<https://1145.am/db/geonames_location/4736286> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> ;
+    ns1:geoNamesId 4736286 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4736286/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4736286> ;
+    ns1:internalDocId 4250496 ;
+    ns1:name "Texas" .
+
+<https://1145.am/db/geonames_location/5279468> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3860828/wwwprnewswirecom_news-releases_alliant-energy-corporation-prices-public-offering-of-7-268-673-shares-of-common-stock-300765588html> ;
+    ns1:geoNamesId 5279468 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5279468/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5279468> ;
+    ns1:internalDocId 3860828 ;
+    ns1:name "Wisconsin" .
+
+<https://1145.am/db/geonames_location/5779068> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> ;
+    ns1:geoNamesId 5779068 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5779068/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5779068> ;
+    ns1:internalDocId 4251921 ;
+    ns1:name "North Salt Lake" .
+
+<https://1145.am/db/geonames_location/6252001> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2191226/wwwfiercehealthcarecom_payer_cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york>,
+        <https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> ;
+    ns1:geoNamesId 6252001 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6252001/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6252001> ;
+    ns1:internalDocId 2191226,
+        4251937 ;
+    ns1:name "United States" .
+
+<https://1145.am/db/2191226/wwwfiercehealthcarecom_payer_cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york> a schema:Article ;
+    ns1:internalDocId 2191226 ;
+    schema:datePublished "2018-12-14T01:35:00+00:00"^^xsd:dateTime ;
+    schema:headline "Cigna-Express Scripts nears finish line with approvals from California and New York" ;
+    schema:sourceOrganization "Fierce Healthcare" ;
+    schema:url <https://www.fiercehealthcare.com/payer/cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york> .
+
+<https://1145.am/db/3860828/wwwprnewswirecom_news-releases_alliant-energy-corporation-prices-public-offering-of-7-268-673-shares-of-common-stock-300765588html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T22:46:30+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3860828 ;
+    schema:datePublished "2018-12-14T03:35:00+00:00"^^xsd:dateTime ;
+    schema:headline "Alliant Energy Corporation Prices Public Offering of 7,268,673 Shares of Common Stock" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/alliant-energy-corporation-prices-public-offering-of-7-268-673-shares-of-common-stock-300765588.html> .
+
+<https://1145.am/db/3861981/wwwprnewswirecom_news-releases_rexford-industrial-acquires-industrial-property-for-18-2-million-300765671html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T22:50:50+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3861981 ;
+    schema:datePublished "2018-12-14T12:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Rexford Industrial Acquires Industrial Property For $18.2 Million" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/rexford-industrial-acquires-industrial-property-for-18-2-million-300765671.html> .
+
+<https://1145.am/db/4250412/Axiomise-Technical_Advisory_Board> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:foundName "Technical Advisory Board" ;
+    ns1:internalDocId 4250412 ;
+    ns1:name "Technical Advisory Board" ;
+    ns1:orgFoundName "Axiomise" .
+
+<https://1145.am/db/geonames_location/1814991> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3145650/venturebeatcom_business_mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes_>,
+        <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:geoNamesId 1814991 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1814991/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1814991> ;
+    ns1:internalDocId 3145650,
+        3860816 ;
+    ns1:name "People’s Republic of China" .
+
+<https://1145.am/db/geonames_location/5368361> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> ;
+    ns1:geoNamesId 5368361 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5368361/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5368361> ;
+    ns1:internalDocId 4250529 ;
+    ns1:name "Los Angeles" .
+
+<https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> a schema:Article ;
+    ns1:internalDocId 1770910 ;
+    schema:datePublished "2018-12-14T00:33:40+00:00"^^xsd:dateTime ;
+    schema:headline "Minted lands $208M Series E from Permira and T. Rowe Price" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/12/13/minted-lands-208m-series-e-from-permira-and-t-rowe-price/> .
+
+<https://1145.am/db/3145650/venturebeatcom_business_mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes_> a schema:Article ;
+    ns1:dateRetrieved "2024-01-13T22:50:01+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3145650 ;
+    schema:datePublished "2018-12-14T08:43:26+00:00"^^xsd:dateTime ;
+    schema:headline "Mobility startup Dott raises $23 million for its durable electric scooters and bikes" ;
+    schema:sourceOrganization "VentureBeat" ;
+    schema:url <https://venturebeat.com/business/mobility-startup-dott-raises-23-million-for-its-durable-electric-scooters-and-bikes/> .
+
+<https://1145.am/db/3861980/wwwprnewswirecom_news-releases_canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T22:50:49+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3861980 ;
+    schema:datePublished "2018-12-14T12:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Canadian Solar Closes US$69.0 million Financing with Bancomext and Banco Sabadell for Solar Project in Mexico" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/canadian-solar-closes-us69-0-million-financing-with-bancomext-and-banco-sabadell-for-solar-project-in-mexico-300765639.html> .
+
+<https://1145.am/db/4251941/wwwbusinesswirecom_news_home_20240516091994_en_iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:24:54+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251941 ;
+    schema:datePublished "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "iconectiv Chief Technology Officer Elected to SIP Forum Board of Directors" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516091994/en/iconectiv-Chief-Technology-Officer-Elected-to-SIP-Forum-Board-of-Directors> .
+
+<https://1145.am/db/4251946/wwwbusinesswirecom_news_home_20240516229902_en_Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:25:01+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251946 ;
+    schema:datePublished "2024-05-16T14:04:00+00:00"^^xsd:dateTime ;
+    schema:headline "Red River Names Concetta Yates to Lead AI Practice" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516229902/en/Red-River-Names-Concetta-Yates-to-Lead-AI-Practice> .
+
+<https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T10:37:19+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "TransferGo, an international money transfer service based in London, has raised $ 17.5 million in a series B round of funding led by San Francisco VC firm Hard Yaka and Vostok Emerging Finance, with participation from Revo Capital, U-Start Club, and Practica Capital." ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 3145658 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3145658/Transfergo> ;
+    ns1:targetDetails "series B" ;
+    ns1:valueRaw "$ 17.5 million" ;
+    ns1:whereClean "London" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereRaw "London" .
+
+<https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T03:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "HONG KONG, Dec. 13, 2018 /PRNewswire/ - Alphaslot, the blockchain gaming ecosystem creator, today announced that it raised a multimillion USD investment round led by Sora Ventures from China, with participation from Hong Kong's Credito Capital and Shinobi Capital, Singapore's Spartan Group, Netherland's TRG, Silicon Valley's Primitive Ventures and others." ;
+    ns1:documentSource <https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> ;
+    ns1:foundName "investment",
+        "raised" ;
+    ns1:internalDocId 3860816 ;
+    ns1:name "investment",
+        "raised" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3860816/Alphaslot> ;
+    ns1:valueRaw "multimillion USD" ;
+    ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 13, 2018" ;
+    ns1:whereClean "People’s Republic of China" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereRaw "China" .
+
+<https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:09:10+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4250371 ;
+    schema:datePublished "2024-05-16T13:02:00+00:00"^^xsd:dateTime ;
+    schema:headline "Cansortium Announces Change in Chief Financial Officer" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/16/2883503/0/en/Cansortium-Announces-Change-in-Chief-Financial-Officer.html> .
+
+<https://1145.am/db/4250529/wwwglobenewswirecom_news-release_2024_05_16_2883587_0_en_Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigarshtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:09:16+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4250529 ;
+    schema:datePublished "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Walter Cukier Leaves Perdomo to Join El Septimo Cigars" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/16/2883587/0/en/Walter-Cukier-Leaves-Perdomo-to-Join-El-Septimo-Cigars.html> .
+
+<https://1145.am/db/4251921/wwwbusinesswirecom_news_home_20240516428453_en_John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:24:00+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251921 ;
+    schema:datePublished "2024-05-16T13:36:00+00:00"^^xsd:dateTime ;
+    schema:headline "John Maggiacomo Joins MarketAxess as Head of North America Client Sales" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516428453/en/John-Maggiacomo-Joins-MarketAxess-as-Head-of-North-America-Client-Sales> .
+
+<https://1145.am/db/4251937/wwwbusinesswirecom_news_home_20240516323508_en_One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:24:38+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251937 ;
+    schema:datePublished "2024-05-16T14:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "One Hope United Welcomes Damon Cates, EdD as President & Chief Executive Officer" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516323508/en/One-Hope-United-Welcomes-Damon-Cates-EdD-as-President-Chief-Executive-Officer> .
+
+<https://1145.am/db/geonames_location/2643743> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_>,
+        <https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> ;
+    ns1:geoNamesId 2643743 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2643743/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2643743> ;
+    ns1:internalDocId 3145658,
+        4250412 ;
+    ns1:name "London" .
+
+<https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:09:10+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4250362 ;
+    schema:datePublished "2024-05-16T13:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Caleb Smith Joins Gordon Brothers as Managing Director, North America Real Estate Services" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/16/2883488/0/en/Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Services.html> .
+
+<https://1145.am/db/4250496/wwwglobenewswirecom_news-release_2024_05_16_2883570_0_en_Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officerhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:09:15+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4250496 ;
+    schema:datePublished "2024-05-16T13:53:54+00:00"^^xsd:dateTime ;
+    schema:headline "Atlas Names Sarah Hilty as New Chief Legal Officer" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/16/2883570/0/en/Atlas-Names-Sarah-Hilty-as-New-Chief-Legal-Officer.html> .
+
+<https://1145.am/db/geonames_location/4644585> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html>,
+        <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
+    ns1:geoNamesId 4644585 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4644585/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4644585> ;
+    ns1:internalDocId 3861965,
+        4250362 ;
+    ns1:name "Nashville" .
+
+<https://1145.am/db/4250412/wwwglobenewswirecom_news-release_2024_05_16_2883523_0_en_Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Boardhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:09:12+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4250412 ;
+    schema:datePublished "2024-05-16T13:18:12+00:00"^^xsd:dateTime ;
+    schema:headline "Axiomise Names Two Executives to Newly Formed Technical Advisory Board" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/16/2883523/0/en/Axiomise-Names-Two-Executives-to-Newly-Formed-Technical-Advisory-Board.html> .
+
+<https://1145.am/db/4251913/wwwbusinesswirecom_news_home_20240516321718_en_CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:23:41+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251913 ;
+    schema:datePublished "2024-05-16T13:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "CLARA Analytics Expands Its Top-Talent Tech and Insurance Roster" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516321718/en/CLARA-Analytics-Expands-Its-Top-Talent-Tech-and-Insurance-Roster> .
+
+<https://1145.am/db/4251920/wwwbusinesswirecom_news_home_20240516225420_en_CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> a schema:Article ;
+    ns1:dateRetrieved "2024-05-17T05:24:00+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4251920 ;
+    schema:datePublished "2024-05-16T13:35:00+00:00"^^xsd:dateTime ;
+    schema:headline "CrossCountry Consulting Appoints National Government Contracting Industry Leader" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240516225420/en/CrossCountry-Consulting-Appoints-National-Government-Contracting-Industry-Leader> .
+
+<https://1145.am/db/3861965/wwwprnewswirecom_news-releases_genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T22:50:47+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3861965 ;
+    schema:datePublished "2018-12-14T11:50:00+00:00"^^xsd:dateTime ;
+    schema:headline "Genesco Announces Definitive Agreement For The Sale Of Lids Sports Group And $125 Million Share Repurchase Authorization" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/genesco-announces-definitive-agreement-for-the-sale-of-lids-sports-group-and-125-million-share-repurchase-authorization-300765617.html> .
+
+<https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> a schema:Article ;
+    ns1:dateRetrieved "2024-01-13T22:50:02+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3145658 ;
+    schema:datePublished "2018-12-14T10:37:19+00:00"^^xsd:dateTime ;
+    schema:headline "TransferGo raises $17.5 million as global remittance market heats up" ;
+    schema:sourceOrganization "VentureBeat" ;
+    schema:url <https://venturebeat.com/entrepreneur/transfergo-raises-17-5-million-as-global-remittance-market-heats-up/> .
+
+<https://1145.am/db/3860816/wwwprnewswirecom_news-releases_hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T22:46:28+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3860816 ;
+    schema:datePublished "2018-12-14T03:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Hong Kong's Alphaslot Announces Multimillion USD Investment Led by China's Sora Ventures to Build Its Blockchain Ecosystem for Gaming Entertainment" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/hong-kongs-alphaslot-announces-multimillion-usd-investment-led-by-chinas-sora-ventures-to-build-its-blockchain-ecosystem-for-gaming-entertainment-300765571.html> .
+

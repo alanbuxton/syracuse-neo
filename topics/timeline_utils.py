@@ -13,10 +13,6 @@ def get_timeline_data(orgs, limit=None):
             break
         if org in seen_orgs:
             continue
-        # if isinstance(res, dict) and res.get("error_names") is not None:
-        #     errors.add(org.name)
-        #     seen_orgs.update(res["error_orgs"])
-        #     continue
         org_count += 1
         display_data = org.serialize()
         seen_orgs.add(org)

@@ -11,12 +11,11 @@ def industry_select_list():
 def entities_to_select_list(entities):
     entities = sorted(entities, key=lambda x: x.topicId)
     name_to_id = {}
-    for row in entities:
-        vals = row.uniqueName.split("_")
-        if int(vals[0]) == -1:
+    for industry in entities:
+        if industry.topicId == -1:
             continue
-        name = ", ".join(vals[1:]).title()
-        name_to_id[name] = vals[0]
+        name, idx = industry.friendly_name_and_id
+        name_to_id[name] = idx
     select_list = [(v,k) for k,v in name_to_id.items()]
     sorted_select_list = sorted(select_list, key=lambda x: x[1])
     return sorted_select_list

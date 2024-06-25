@@ -10,7 +10,6 @@ from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     ResourceSerializer, FamilyTreeSerializer)
 from rest_framework import status
 from datetime import date, datetime
-from .model_queries import get_relevant_orgs_for_country_region_industry
 from urllib.parse import urlparse
 from syracuse.settings import MOTD
 from rest_framework.permissions import IsAuthenticated
@@ -142,20 +141,6 @@ class FamilyTree(APIView):
                             "uri_parts": uri_parts,
                             "cache_ready": is_cache_ready()}, status=status.HTTP_200_OK)
 
-
-class TopicsTimeline(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'topics_timeline.html'
-
-    def get(self, request):
-        params = request.query_params
-        industry = params["industry_name"]
-        orgs = Organization.find_by_industry(industry)
-        timeline_serializer = TimelineSerializer(orgs)
-        return Response({"industry_name":industry,
-                            "timeline_serializer": timeline_serializer.data,
-                            "cache_ready": is_cache_ready(),
-                            }, status=status.HTTP_200_OK)
 
 class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]

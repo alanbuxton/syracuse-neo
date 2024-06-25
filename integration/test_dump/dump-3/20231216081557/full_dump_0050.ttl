@@ -1,0 +1,2357 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/1770196/Costanoa_Ventures> a org:Organization ;
+    ns1:basedInLowRaw "Costanoa Ventures" ;
+    ns1:documentSource <https://1145.am/db/1770196/techcrunchcom_2018_12_13_toyota-invests-in-autonomous-driving-simulation-startup-parallel-domain_> ;
+    ns1:foundName "Costanoa Ventures" ;
+    ns1:internalDocId 1770196 ;
+    ns1:investor <https://1145.am/db/1770196/Costanoa_Ventures-Parallel_Domain-Parallel_Domain-Investment> ;
+    ns1:name "Costanoa Ventures" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1051768/Costanoa_Ventures>,
+        <https://1145.am/db/1072020/Costanoa_Ventures>,
+        <https://1145.am/db/11103/Costanoa_Ventures>,
+        <https://1145.am/db/1111973/Costanoa_Ventures>,
+        <https://1145.am/db/1112255/Costanoa_Ventures>,
+        <https://1145.am/db/1282890/Costanoa_Ventures>,
+        <https://1145.am/db/1295021/Costanoa_Ventures>,
+        <https://1145.am/db/1468368/Costanoa_Ventures>,
+        <https://1145.am/db/1615206/Costanoa_Ventures>,
+        <https://1145.am/db/1617007/Costanoa_Ventures>,
+        <https://1145.am/db/1695849/Costanoa_Ventures>,
+        <https://1145.am/db/1707637/Costanoa_Ventures>,
+        <https://1145.am/db/1711423/Costanoa_Ventures>,
+        <https://1145.am/db/1715551/Costanoa_Ventures>,
+        <https://1145.am/db/1743541/Costanoa_Ventures>,
+        <https://1145.am/db/1743747/Costanoa_Ventures>,
+        <https://1145.am/db/1751740/Costanoa_Ventures>,
+        <https://1145.am/db/1753294/Costanoa_Ventures>,
+        <https://1145.am/db/1754606/Costanoa_Ventures>,
+        <https://1145.am/db/1754784/Costanoa_Ventures>,
+        <https://1145.am/db/1755756/Costanoa_Ventures>,
+        <https://1145.am/db/1756151/Costanoa_Ventures>,
+        <https://1145.am/db/1756306/Costanoa_Ventures>,
+        <https://1145.am/db/1757844/Costanoa_Ventures>,
+        <https://1145.am/db/1764038/Costanoa_Vc>,
+        <https://1145.am/db/1764111/Costanoa_Ventures>,
+        <https://1145.am/db/1777187/Costanoa_Ventures>,
+        <https://1145.am/db/1783607/Costanoa_Ventures>,
+        <https://1145.am/db/1785486/Costanoa_Ventures>,
+        <https://1145.am/db/1799102/Costanoa_Venture_Capital>,
+        <https://1145.am/db/1825294/Costanoa_Venture_Capital>,
+        <https://1145.am/db/1841598/Costanoa_Ventures>,
+        <https://1145.am/db/1849549/Costanoa>,
+        <https://1145.am/db/1855392/Costanoa_Venture_Capital>,
+        <https://1145.am/db/2025081/Costanoa_Ventures>,
+        <https://1145.am/db/2603222/Costanoa_Ventures>,
+        <https://1145.am/db/3144269/Costanoa_Ventures>,
+        <https://1145.am/db/3153313/Costanoa_Ventures>,
+        <https://1145.am/db/3153574/Costanoa_Ventures>,
+        <https://1145.am/db/3158154/Costanoa_Ventures>,
+        <https://1145.am/db/3182424/Costanoa_Ventures>,
+        <https://1145.am/db/3242256/Costanoa_Ventures>,
+        <https://1145.am/db/3247481/Costanoa_Ventures>,
+        <https://1145.am/db/3432002/Costanoa_Ventures>,
+        <https://1145.am/db/3439770/Costanoa_Ventures>,
+        <https://1145.am/db/346598/Costanoa_Ventures>,
+        <https://1145.am/db/3535057/Costanoa_Ventures>,
+        <https://1145.am/db/3765265/Costanoa_Ventures>,
+        <https://1145.am/db/3817094/Costanoa_Ventures>,
+        <https://1145.am/db/3934062/Costanoa_Ventures>,
+        <https://1145.am/db/3989030/Costanoa_Ventures>,
+        <https://1145.am/db/4000834/Costanoa_Ventures>,
+        <https://1145.am/db/4118669/Costanoa_Ventures>,
+        <https://1145.am/db/4172746/Costanoa_Ventures>,
+        <https://1145.am/db/431027/Costanoa_Ventures>,
+        <https://1145.am/db/468825/Costanoa_Ventures>,
+        <https://1145.am/db/525909/Costanoa_Ventures>,
+        <https://1145.am/db/682553/Costanoa_Ventures>,
+        <https://1145.am/db/683306/Costanoa_Ventures>,
+        <https://1145.am/db/699470/Costanoa>,
+        <https://1145.am/db/829036/Costanoa_Ventures>,
+        <https://1145.am/db/831936/Costanoa_Ventures> .
+
+<https://1145.am/db/1770896/Softbank_Vision_Fund> a org:Organization ;
+    ns1:basedInLowRaw "Japan" ;
+    ns1:documentSource <https://1145.am/db/1770896/techcrunchcom_2018_12_13_zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund_> ;
+    ns1:foundName "the SoftBank Vision Fund" ;
+    ns1:internalDocId 1770896 ;
+    ns1:investor <https://1145.am/db/1770896/Softbank_Vision_Fund-Zymergen-Investment-Series_C> ;
+    ns1:name "SoftBank Vision Fund" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1736101/Softbank_Vision_Fund>,
+        <https://1145.am/db/1740798/Softbank_Vision_Fund>,
+        <https://1145.am/db/1741693/Softbank_Vision_Fund>,
+        <https://1145.am/db/1742089/Softbank_Vision_Fund>,
+        <https://1145.am/db/1745151/Softbank_Vision_Fund>,
+        <https://1145.am/db/1773420/Softbank_Vision_Fund>,
+        <https://1145.am/db/1789742/Softbank_Vision_Fund>,
+        <https://1145.am/db/1807667/Softbank_Vision_Fund>,
+        <https://1145.am/db/1823027/Softbank_Vision_Fund>,
+        <https://1145.am/db/2102084/Softbank_Vision_Fund>,
+        <https://1145.am/db/2186077/Softbank_Vision_Fund>,
+        <https://1145.am/db/2295596/Softbank_Vision_Fund>,
+        <https://1145.am/db/2427300/Softbank_Vision_Fund>,
+        <https://1145.am/db/3019867/Softbank_Vision_Fund>,
+        <https://1145.am/db/3029955/Softbank_Vision_Fund>,
+        <https://1145.am/db/3064409/Softbank_Vision_Fund>,
+        <https://1145.am/db/3083875/Softbank_Vision_Fund>,
+        <https://1145.am/db/3364125/Softbank_Vision_Fund>,
+        <https://1145.am/db/3378975/Softbank_Vision_Fund>,
+        <https://1145.am/db/3381681/Softbank_Vision_Fund>,
+        <https://1145.am/db/3556423/Softbank_Vision_Fund>,
+        <https://1145.am/db/3559601/Softbank_Vision_Fund>,
+        <https://1145.am/db/3600057/Softbank_Vision_Fund>,
+        <https://1145.am/db/3626411/Softbank_Vision_Fund>,
+        <https://1145.am/db/3630583/Softbank_Vision_Fund>,
+        <https://1145.am/db/3671911/Softbank_Vision_Fund>,
+        <https://1145.am/db/3860950/Softbank_Vision_Fund>,
+        <https://1145.am/db/3898783/Softbank_Vision_Fund>,
+        <https://1145.am/db/3904235/Softbank_Vision_Fund>,
+        <https://1145.am/db/419489/Softbank_Vision_Fund>,
+        <https://1145.am/db/661388/Softbank_Vision_Fund> .
+
+<https://1145.am/db/1771672/Forestay_Capital> a org:Organization ;
+    ns1:basedInLowRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Forestay Capital" ;
+    ns1:internalDocId 1771672 ;
+    ns1:investor <https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> ;
+    ns1:name "Forestay Capital" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1090262/Forestay_Capital>,
+        <https://1145.am/db/1760231/Forestay_Capital> .
+
+<https://1145.am/db/1771672/Gal_O_Capital_And_Top_Funds> a org:Organization ;
+    ns1:basedInLowRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Galéo Capital and TOP Funds" ;
+    ns1:internalDocId 1771672 ;
+    ns1:investor <https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> ;
+    ns1:name "Galéo Capital and TOP Funds" .
+
+<https://1145.am/db/1771672/Highland_Europe> a org:Organization ;
+    ns1:basedInLowRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Highland Europe" ;
+    ns1:internalDocId 1771672 ;
+    ns1:investor <https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> ;
+    ns1:name "Highland Europe" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1049478/Highland_Europe>,
+        <https://1145.am/db/1220313/Highland_Europe>,
+        <https://1145.am/db/164849/Highland_Europe>,
+        <https://1145.am/db/1743625/Highland_Europe>,
+        <https://1145.am/db/1747004/Highland_Europe>,
+        <https://1145.am/db/1750172/Highland_Europe>,
+        <https://1145.am/db/1753688/Highland_Europe>,
+        <https://1145.am/db/1758834/Highland_Europe>,
+        <https://1145.am/db/1759902/Highland_Europe>,
+        <https://1145.am/db/1760285/Highland_Europe>,
+        <https://1145.am/db/1761520/Highland_Europe>,
+        <https://1145.am/db/1765235/Highland_Europe>,
+        <https://1145.am/db/1768870/Highland_Europe>,
+        <https://1145.am/db/1771829/Highland_Europe>,
+        <https://1145.am/db/1773827/Highland_Europe>,
+        <https://1145.am/db/1774173/Highland_Europe>,
+        <https://1145.am/db/1779739/Highland_Europe>,
+        <https://1145.am/db/1781782/Highland_Europe>,
+        <https://1145.am/db/1791365/Highland_Europe>,
+        <https://1145.am/db/1792158/Highland_Europe>,
+        <https://1145.am/db/1797558/Highland_Europe>,
+        <https://1145.am/db/1802429/Highland_Europe>,
+        <https://1145.am/db/1802725/Highland_Europe>,
+        <https://1145.am/db/1807277/Highland_Europe>,
+        <https://1145.am/db/1811631/Highland_Europe>,
+        <https://1145.am/db/1817733/Highland_Europe>,
+        <https://1145.am/db/181783/Highland_Europe>,
+        <https://1145.am/db/1821349/Highland_Europe>,
+        <https://1145.am/db/2787308/Highland_Europe>,
+        <https://1145.am/db/3030499/Highland_Europe>,
+        <https://1145.am/db/3039384/Highland_Europe>,
+        <https://1145.am/db/3052198/Highland_Europe>,
+        <https://1145.am/db/3069263/Highland_Europe>,
+        <https://1145.am/db/3070210/Highland_Europe>,
+        <https://1145.am/db/3070220/Highland_Europe>,
+        <https://1145.am/db/3076880/Highland_Europe>,
+        <https://1145.am/db/3081039/Highland_Europe>,
+        <https://1145.am/db/3113955/Highland_Europe>,
+        <https://1145.am/db/3119396/Highland_Europe>,
+        <https://1145.am/db/3133957/Highland_Europe>,
+        <https://1145.am/db/3142355/Highland_Europe>,
+        <https://1145.am/db/3142760/Highland_Europe>,
+        <https://1145.am/db/3146843/Highland_Europe>,
+        <https://1145.am/db/3149670/Highland_Europe>,
+        <https://1145.am/db/3467838/Highland_Europe>,
+        <https://1145.am/db/3482936/Highland_Europe>,
+        <https://1145.am/db/3496808/Highland_Europe>,
+        <https://1145.am/db/3529657/Highland_Europe>,
+        <https://1145.am/db/3932019/Highland_Europe>,
+        <https://1145.am/db/921276/Highland_Europe>,
+        <https://1145.am/db/923475/Highland_Europe> .
+
+<https://1145.am/db/1771672/Index_Ventures> a org:Organization ;
+    ns1:basedInHighClean "Switzerland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:basedInHighRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Index Ventures" ;
+    ns1:internalDocId 1771672 ;
+    ns1:investor <https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> ;
+    ns1:name "Index Ventures" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1151328/Index_Ventures>,
+        <https://1145.am/db/1153706/Index_Ventures>,
+        <https://1145.am/db/1243661/Index_Capital>,
+        <https://1145.am/db/1247967/Index_Ventures>,
+        <https://1145.am/db/1264587/Index_Ventures>,
+        <https://1145.am/db/1358814/Index_Ventures>,
+        <https://1145.am/db/1490485/Index_Ventures>,
+        <https://1145.am/db/1493654/Index_Ventures>,
+        <https://1145.am/db/1553352/Index_Ventures>,
+        <https://1145.am/db/1693951/Index_Ventures>,
+        <https://1145.am/db/1694279/Index_Ventures>,
+        <https://1145.am/db/1699089/Index_Ventures>,
+        <https://1145.am/db/1704793/Index_Ventures>,
+        <https://1145.am/db/1711587/Index_Ventures>,
+        <https://1145.am/db/1711731/Index_Ventures>,
+        <https://1145.am/db/1711750/Index_Ventures>,
+        <https://1145.am/db/1712506/Index_Ventures>,
+        <https://1145.am/db/1717317/Index_Ventures>,
+        <https://1145.am/db/1717574/Index_Ventures>,
+        <https://1145.am/db/1725680/Index_Ventures>,
+        <https://1145.am/db/1726121/Index_Ventures>,
+        <https://1145.am/db/1726149/Index_Ventures>,
+        <https://1145.am/db/1733028/Index_Ventures>,
+        <https://1145.am/db/1735596/Index_Ventures>,
+        <https://1145.am/db/1736117/Index_Ventures>,
+        <https://1145.am/db/1737031/Index>,
+        <https://1145.am/db/1737079/Index_Ventures>,
+        <https://1145.am/db/1737467/Index>,
+        <https://1145.am/db/1737527/Index_Ventures>,
+        <https://1145.am/db/1737696/Index_Ventures>,
+        <https://1145.am/db/1738342/Index>,
+        <https://1145.am/db/1738402/Index_Ventures>,
+        <https://1145.am/db/1738465/Index_Ventures>,
+        <https://1145.am/db/1740781/Index_Ventures>,
+        <https://1145.am/db/1742878/Index_Ventures>,
+        <https://1145.am/db/1743290/Index>,
+        <https://1145.am/db/1744753/Index_Ventures>,
+        <https://1145.am/db/1745368/Index_Ventures>,
+        <https://1145.am/db/1745702/Index_Ventures>,
+        <https://1145.am/db/1746192/Index_Ventures>,
+        <https://1145.am/db/1746800/Index_Ventures>,
+        <https://1145.am/db/1746845/Index_Ventures>,
+        <https://1145.am/db/1746947/Index_Ventures>,
+        <https://1145.am/db/1747153/Index_Ventures>,
+        <https://1145.am/db/1747208/Index_Ventures>,
+        <https://1145.am/db/1748172/Index_Ventures>,
+        <https://1145.am/db/1748621/Index_Ventures>,
+        <https://1145.am/db/1750406/Index_Ventures>,
+        <https://1145.am/db/1750420/Index_Ventures>,
+        <https://1145.am/db/1750828/Index_Ventures>,
+        <https://1145.am/db/1752154/Index_Ventures>,
+        <https://1145.am/db/1755398/Index_Ventures>,
+        <https://1145.am/db/1755899/Index_Ventures>,
+        <https://1145.am/db/1756141/Index_Ventures>,
+        <https://1145.am/db/1756768/Index_Ventures>,
+        <https://1145.am/db/1756873/Index_Ventures>,
+        <https://1145.am/db/1758069/Index_Ventures>,
+        <https://1145.am/db/1758834/Index_Ventures>,
+        <https://1145.am/db/1759939/Index_Ventures>,
+        <https://1145.am/db/1760816/Index_Ventures>,
+        <https://1145.am/db/1760954/Index_Ventures>,
+        <https://1145.am/db/1760984/Index_Ventures>,
+        <https://1145.am/db/1761328/Index_Partners>,
+        <https://1145.am/db/1761566/Index_Ventures>,
+        <https://1145.am/db/1761664/Index_Ventures>,
+        <https://1145.am/db/1762988/Index_Ventures>,
+        <https://1145.am/db/1763352/Index_Ventures>,
+        <https://1145.am/db/1765809/Index_Ventures>,
+        <https://1145.am/db/1765870/Index_Ventures>,
+        <https://1145.am/db/1766059/Index_Ventures>,
+        <https://1145.am/db/1766253/Index_Ventures>,
+        <https://1145.am/db/1769654/Index_Ventures>,
+        <https://1145.am/db/1770982/Index_Ventures>,
+        <https://1145.am/db/1771734/Index_Ventures>,
+        <https://1145.am/db/1771773/Index_Ventures>,
+        <https://1145.am/db/1775903/Index_Ventures>,
+        <https://1145.am/db/1776139/Index_Ventures>,
+        <https://1145.am/db/1776626/Index_Ventures>,
+        <https://1145.am/db/1777546/Index_Ventures>,
+        <https://1145.am/db/1778195/Index_Ventures>,
+        <https://1145.am/db/1780507/Index_Ventures>,
+        <https://1145.am/db/1780733/Index_Ventures>,
+        <https://1145.am/db/1783754/Index_Ventures>,
+        <https://1145.am/db/1787471/Index_Ventures>,
+        <https://1145.am/db/1787621/Index_Ventures>,
+        <https://1145.am/db/1788328/Index_Ventures>,
+        <https://1145.am/db/1790777/Index_Ventures>,
+        <https://1145.am/db/1791303/Index_Ventures>,
+        <https://1145.am/db/1791667/Index_Ventures>,
+        <https://1145.am/db/1791743/Index_Ventures>,
+        <https://1145.am/db/1795239/Index>,
+        <https://1145.am/db/1795469/Index_Ventures>,
+        <https://1145.am/db/1796201/Index_Ventures>,
+        <https://1145.am/db/1798568/Index_Ventures>,
+        <https://1145.am/db/1798836/Index_Ventures>,
+        <https://1145.am/db/1799293/Index_Ventures>,
+        <https://1145.am/db/1800172/Index_Ventures>,
+        <https://1145.am/db/1800232/Index_Ventures>,
+        <https://1145.am/db/1800998/Index_Ventures>,
+        <https://1145.am/db/1805201/Index_Ventures>,
+        <https://1145.am/db/1805473/Index_Ventures>,
+        <https://1145.am/db/1807173/Index_Ventures>,
+        <https://1145.am/db/1808484/Index_Ventures>,
+        <https://1145.am/db/1809821/Index_Ventures>,
+        <https://1145.am/db/1810000/Index_Ventures>,
+        <https://1145.am/db/1811357/Index_Ventures>,
+        <https://1145.am/db/1812038/Index_Ventures>,
+        <https://1145.am/db/1812890/Index_Ventures>,
+        <https://1145.am/db/1813037/Index_Ventures>,
+        <https://1145.am/db/1813404/Index_Ventures>,
+        <https://1145.am/db/1814064/Index_Ventures>,
+        <https://1145.am/db/1817075/Index>,
+        <https://1145.am/db/1819133/Index_Ventures>,
+        <https://1145.am/db/1819302/Index_Ventures>,
+        <https://1145.am/db/1819387/Index_Ventures>,
+        <https://1145.am/db/1821174/Index_Ventures>,
+        <https://1145.am/db/1823078/Index_Ventures>,
+        <https://1145.am/db/1823141/Index_Ventures>,
+        <https://1145.am/db/1824561/Index_Ventures>,
+        <https://1145.am/db/1826699/Index>,
+        <https://1145.am/db/1828638/Index_Ventures>,
+        <https://1145.am/db/1829991/Index_Ventures>,
+        <https://1145.am/db/1830023/Index_Ventures>,
+        <https://1145.am/db/1831440/Index_Ventures>,
+        <https://1145.am/db/1832655/Index_Ventures>,
+        <https://1145.am/db/1832808/Index_Ventures>,
+        <https://1145.am/db/1832926/Index_Ventures>,
+        <https://1145.am/db/1835321/Index_Ventures>,
+        <https://1145.am/db/1835516/Index_Ventures>,
+        <https://1145.am/db/1836455/Index_Ventures>,
+        <https://1145.am/db/1836572/Index_Ventures>,
+        <https://1145.am/db/1837081/Index_Ventures>,
+        <https://1145.am/db/1837143/Index_Ventures>,
+        <https://1145.am/db/1839663/Index_Ventures>,
+        <https://1145.am/db/1840137/Index_Ventures>,
+        <https://1145.am/db/1842402/Index_Ventures>,
+        <https://1145.am/db/1843003/Index_Ventures>,
+        <https://1145.am/db/1843031/Index_Ventures>,
+        <https://1145.am/db/1845548/Index_Ventures>,
+        <https://1145.am/db/1845841/Index_Ventures>,
+        <https://1145.am/db/1846254/Index_Ventures>,
+        <https://1145.am/db/1846794/Index_Ventures>,
+        <https://1145.am/db/1847483/Index_Ventures>,
+        <https://1145.am/db/1848631/Index_Ventures>,
+        <https://1145.am/db/1848736/Index>,
+        <https://1145.am/db/1849844/Index_Ventures>,
+        <https://1145.am/db/1849884/Index_Ventures>,
+        <https://1145.am/db/1849912/Index_Ventures>,
+        <https://1145.am/db/1850428/Index_Ventures>,
+        <https://1145.am/db/1851035/Index_Ventures>,
+        <https://1145.am/db/1851744/Index_Ventures>,
+        <https://1145.am/db/1853547/Index_Ventures>,
+        <https://1145.am/db/1854191/Index_Ventures>,
+        <https://1145.am/db/1856171/Index_Ventures>,
+        <https://1145.am/db/1856191/Index_Ventures>,
+        <https://1145.am/db/1856802/Index_Ventures>,
+        <https://1145.am/db/1856967/Index_Ventures>,
+        <https://1145.am/db/1857638/Index_Ventures>,
+        <https://1145.am/db/1858520/Index_Ventures>,
+        <https://1145.am/db/1858521/Index_Ventures>,
+        <https://1145.am/db/1862594/Index_Ventures>,
+        <https://1145.am/db/1863500/Index_Ventures>,
+        <https://1145.am/db/1865106/Index_Ventures>,
+        <https://1145.am/db/1865524/Index_Ventures>,
+        <https://1145.am/db/1866804/Index_Ventures>,
+        <https://1145.am/db/1868923/Index_Ventures>,
+        <https://1145.am/db/1868935/Index_Ventures>,
+        <https://1145.am/db/1870074/Index_Ventures>,
+        <https://1145.am/db/1870079/Index_Ventures>,
+        <https://1145.am/db/1870810/Index_Ventures>,
+        <https://1145.am/db/1871091/Index_Ventures>,
+        <https://1145.am/db/1876014/Index_Ventures>,
+        <https://1145.am/db/1876914/Index_Ventures>,
+        <https://1145.am/db/1878630/Index_Ventures>,
+        <https://1145.am/db/1880386/Index_Ventures>,
+        <https://1145.am/db/1881391/Index_Ventures>,
+        <https://1145.am/db/1881430/Index_Ventures>,
+        <https://1145.am/db/1882301/Index_Ventures>,
+        <https://1145.am/db/1882686/Index_Ventures>,
+        <https://1145.am/db/1884077/Index_Ventures>,
+        <https://1145.am/db/1885147/Index_Ventures>,
+        <https://1145.am/db/1890254/Index_Ventures>,
+        <https://1145.am/db/1893255/Index_Ventures>,
+        <https://1145.am/db/1894621/Index_Ventures>,
+        <https://1145.am/db/1894627/Index_Ventures>,
+        <https://1145.am/db/1896185/Index_Ventures>,
+        <https://1145.am/db/1896379/Index_Ventures>,
+        <https://1145.am/db/1899674/Index>,
+        <https://1145.am/db/1899697/Index_Ventures>,
+        <https://1145.am/db/1900904/Index_Ventures>,
+        <https://1145.am/db/1902032/Index_Ventures>,
+        <https://1145.am/db/1905858/Index_Ventures>,
+        <https://1145.am/db/1910957/Index_Ventures>,
+        <https://1145.am/db/1914220/Index_Ventures>,
+        <https://1145.am/db/1915168/Index_Ventures>,
+        <https://1145.am/db/1916258/Index_Ventures>,
+        <https://1145.am/db/1916868/Index_Ventures>,
+        <https://1145.am/db/1919238/Index_Ventures>,
+        <https://1145.am/db/1967520/Index_Ventures>,
+        <https://1145.am/db/1967683/Index_Ventures>,
+        <https://1145.am/db/199212/Index_Ventures>,
+        <https://1145.am/db/2028609/Index_Ventures>,
+        <https://1145.am/db/2060465/Index_Ventures>,
+        <https://1145.am/db/2062814/Index_Ventures>,
+        <https://1145.am/db/2127786/Index_Ventures>,
+        <https://1145.am/db/217906/Index_Ventures>,
+        <https://1145.am/db/2198066/Index_Ventures>,
+        <https://1145.am/db/2234558/Index_Ventures>,
+        <https://1145.am/db/2290088/Index_Ventures>,
+        <https://1145.am/db/2290200/Index_Ventures>,
+        <https://1145.am/db/2297905/Index_Ventures>,
+        <https://1145.am/db/2303009/Index_Ventures>,
+        <https://1145.am/db/2303187/Index>,
+        <https://1145.am/db/2303849/Index_Ventures>,
+        <https://1145.am/db/2309490/Index_Ventures>,
+        <https://1145.am/db/2309840/Index_Ventures>,
+        <https://1145.am/db/2309847/Index_Ventures>,
+        <https://1145.am/db/2313410/Index_Ventures>,
+        <https://1145.am/db/2317779/Index_Ventures>,
+        <https://1145.am/db/2325140/Index_Ventures>,
+        <https://1145.am/db/2325147/Index_Ventures>,
+        <https://1145.am/db/2327222/Index_Ventures>,
+        <https://1145.am/db/2333601/Index_Ventures>,
+        <https://1145.am/db/2338079/Index_Ventures>,
+        <https://1145.am/db/2338193/Index_Ventures>,
+        <https://1145.am/db/2338196/Index_Ventures>,
+        <https://1145.am/db/2344127/Index_Ventures>,
+        <https://1145.am/db/2347571/Index_Ventures>,
+        <https://1145.am/db/2348012/Index_Ventures>,
+        <https://1145.am/db/2348618/Index_Ventures>,
+        <https://1145.am/db/2348620/Index_Ventures>,
+        <https://1145.am/db/2350031/Index_Ventures>,
+        <https://1145.am/db/2352142/Index_Ventures>,
+        <https://1145.am/db/2352145/Index_Ventures>,
+        <https://1145.am/db/2355609/Index_Ventures>,
+        <https://1145.am/db/2355952/Index_Ventures>,
+        <https://1145.am/db/2357169/Index_Ventures>,
+        <https://1145.am/db/2357356/Index_Ventures>,
+        <https://1145.am/db/2358233/Index_Ventures>,
+        <https://1145.am/db/2358246/Index_Ventures>,
+        <https://1145.am/db/2362736/Index_Ventures>,
+        <https://1145.am/db/2362737/Index_Ventures>,
+        <https://1145.am/db/2364597/Index_Ventures>,
+        <https://1145.am/db/2364600/Index_Ventures>,
+        <https://1145.am/db/2391680/Index>,
+        <https://1145.am/db/2507691/Index_Ventures>,
+        <https://1145.am/db/2555540/Index_Ventures>,
+        <https://1145.am/db/2589317/Index_Ventures>,
+        <https://1145.am/db/2643797/Index_Ventures>,
+        <https://1145.am/db/2901788/Index_Ventures>,
+        <https://1145.am/db/2912219/Index_Ventures>,
+        <https://1145.am/db/2937623/Index_Ventures>,
+        <https://1145.am/db/2957311/Index>,
+        <https://1145.am/db/2965818/Index_Ventures>,
+        <https://1145.am/db/2972888/Index_Ventures>,
+        <https://1145.am/db/2988776/Index_Ventures>,
+        <https://1145.am/db/2993252/Index_Ventures>,
+        <https://1145.am/db/2993630/Index>,
+        <https://1145.am/db/2994091/Index_Ventures>,
+        <https://1145.am/db/3005302/Index_Ventures>,
+        <https://1145.am/db/3020504/Index_Ventures>,
+        <https://1145.am/db/3030239/Index_Ventures>,
+        <https://1145.am/db/3035853/Index_Ventures>,
+        <https://1145.am/db/3038560/Index_Ventures>,
+        <https://1145.am/db/3042120/Index_Ventures>,
+        <https://1145.am/db/3044014/Index_Ventures>,
+        <https://1145.am/db/3052721/Index_Ventures>,
+        <https://1145.am/db/306236/Index_Ventures>,
+        <https://1145.am/db/3064501/Index_Ventures>,
+        <https://1145.am/db/3070089/Index_Ventures>,
+        <https://1145.am/db/3132289/Index_Ventures>,
+        <https://1145.am/db/3132300/Index_Ventures>,
+        <https://1145.am/db/3133683/Index_Ventures>,
+        <https://1145.am/db/3140015/Index_Ventures>,
+        <https://1145.am/db/3140187/Index_Ventures>,
+        <https://1145.am/db/3140658/Index_Ventures>,
+        <https://1145.am/db/3141776/Index_Ventures>,
+        <https://1145.am/db/3143689/Index_Ventures>,
+        <https://1145.am/db/3146153/Index_Ventures>,
+        <https://1145.am/db/3147066/Index_Ventures>,
+        <https://1145.am/db/3147394/Index_Ventures>,
+        <https://1145.am/db/3147580/Index_Ventures>,
+        <https://1145.am/db/3151847/Index_Ventures>,
+        <https://1145.am/db/3153986/Index_Ventures>,
+        <https://1145.am/db/3155322/Index_Ventures>,
+        <https://1145.am/db/3155428/Index_Ventures>,
+        <https://1145.am/db/3171360/Index_Ventures>,
+        <https://1145.am/db/317470/Index_Ventures>,
+        <https://1145.am/db/318142/Index_Ventures>,
+        <https://1145.am/db/3215510/Index_Ventures>,
+        <https://1145.am/db/323273/Index_Ventures>,
+        <https://1145.am/db/3246579/Index_Ventures>,
+        <https://1145.am/db/3285616/Index_Ventures>,
+        <https://1145.am/db/3296043/Index_Ventures>,
+        <https://1145.am/db/3344765/Index_Ventures>,
+        <https://1145.am/db/3347927/Index_Ventures>,
+        <https://1145.am/db/337401/Index_Ventures>,
+        <https://1145.am/db/3395524/Index_Ventures>,
+        <https://1145.am/db/3397592/Index_Ventures>,
+        <https://1145.am/db/3408528/Index_Ventures>,
+        <https://1145.am/db/3418661/Index_Ventures>,
+        <https://1145.am/db/3429627/Index_Ventures>,
+        <https://1145.am/db/3476835/Index_Ventures>,
+        <https://1145.am/db/348633/Index_Ventures>,
+        <https://1145.am/db/3499398/Index_Ventures>,
+        <https://1145.am/db/3507217/Index_Ventures>,
+        <https://1145.am/db/3507975/Index_Ventures>,
+        <https://1145.am/db/3514364/Index_Ventures>,
+        <https://1145.am/db/3517786/Index_Ventures>,
+        <https://1145.am/db/3536375/Index_Ventures>,
+        <https://1145.am/db/3545155/Index_Ventures>,
+        <https://1145.am/db/3548500/Index_Ventures>,
+        <https://1145.am/db/3576896/Index_Ventures>,
+        <https://1145.am/db/3600168/Index_Ventures>,
+        <https://1145.am/db/3629423/Index_Ventures>,
+        <https://1145.am/db/366983/Index_Ventures>,
+        <https://1145.am/db/367008/Index_Ventures>,
+        <https://1145.am/db/3760838/Index>,
+        <https://1145.am/db/3773352/Index>,
+        <https://1145.am/db/3774549/Index_Ventures>,
+        <https://1145.am/db/3804395/Index_Ventures>,
+        <https://1145.am/db/3821696/Index_Ventures>,
+        <https://1145.am/db/3847471/Index_Ventures>,
+        <https://1145.am/db/3849720/Index_Ventures>,
+        <https://1145.am/db/3856420/Index_Ventures>,
+        <https://1145.am/db/3865082/Index_Ventures>,
+        <https://1145.am/db/3871271/Index_Ventures>,
+        <https://1145.am/db/3921266/Index>,
+        <https://1145.am/db/4026899/Index_Ventures>,
+        <https://1145.am/db/4082339/Index_Ventures>,
+        <https://1145.am/db/4084531/Index_Ventures>,
+        <https://1145.am/db/4123949/Index_Ventures>,
+        <https://1145.am/db/4156621/Index_Ventures>,
+        <https://1145.am/db/4186470/Index_Ventures>,
+        <https://1145.am/db/4210308/Index_Ventures>,
+        <https://1145.am/db/4242356/Index_Ventures>,
+        <https://1145.am/db/460454/Index_Ventures>,
+        <https://1145.am/db/475105/Index_Ventures>,
+        <https://1145.am/db/479113/Index_Ventures>,
+        <https://1145.am/db/539919/Index_Ventures>,
+        <https://1145.am/db/577120/Index_Ventures>,
+        <https://1145.am/db/578277/Index_Ventures>,
+        <https://1145.am/db/633695/Index_Ventures>,
+        <https://1145.am/db/659010/Index_Ventures>,
+        <https://1145.am/db/661818/Index_Ventures>,
+        <https://1145.am/db/707126/Index_Ventures>,
+        <https://1145.am/db/709798/Index_Ventures>,
+        <https://1145.am/db/749147/Index_Ventures>,
+        <https://1145.am/db/749209/Index_Ventures>,
+        <https://1145.am/db/768008/Index_Ventures>,
+        <https://1145.am/db/789218/Index_Ventures>,
+        <https://1145.am/db/791505/Index_Ventures>,
+        <https://1145.am/db/796629/Index_Ventures>,
+        <https://1145.am/db/798095/Index_Ventures>,
+        <https://1145.am/db/803541/Index_Ventures>,
+        <https://1145.am/db/838181/Index_Venture_Capital>,
+        <https://1145.am/db/854512/Index_Ventures>,
+        <https://1145.am/db/868352/Index_Ventures>,
+        <https://1145.am/db/893076/Index_Ventures>,
+        <https://1145.am/db/893316/Index_Ventures>,
+        <https://1145.am/db/909344/Index_Ventures>,
+        <https://1145.am/db/957097/Index_Ventures>,
+        <https://1145.am/db/980375/Index_Ventures>,
+        <https://1145.am/db/981840/Index_Ventures> .
+
+<https://1145.am/db/1771672/Olivier_Pomel> a org:Organization ;
+    ns1:basedInLowRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Olivier Pomel" ;
+    ns1:internalDocId 1771672 ;
+    ns1:investor <https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> ;
+    ns1:name "Olivier Pomel" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1721092/Olivier_Pomel>,
+        <https://1145.am/db/1743303/Olivier_Pomel>,
+        <https://1145.am/db/1748190/Olivier_Pomel>,
+        <https://1145.am/db/1788701/Olivier_Pomel>,
+        <https://1145.am/db/2035454/Olivier_Pomel> .
+
+<https://1145.am/db/2154577/Zymergen-Zymergen-Investment-Series_C> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T21:29:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Zymergen has raised over $ 400 million in a series C funding round, which it says will help double the capacity of its synthetic biology contract manufacturing platform." ;
+    ns1:documentSource <https://1145.am/db/2154577/wwwfiercebiotechcom_medtech_softbank-returns-to-back-synthetic-biology-firm-zymergen-a-400m-series-c-round> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 2154577 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/2154577/Zymergen> ;
+    ns1:targetDetails "series C" ;
+    ns1:valueRaw "over $ 400 million" ;
+    ns1:whereClean "Emeryville" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5346462> ;
+    ns1:whereRaw "Emeryville, California" .
+
+<https://1145.am/db/3864986/Astellas_Pharma_Inc> a org:Organization ;
+    ns1:basedInHighClean "Tokyo" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1850147> ;
+    ns1:basedInHighRaw "TOKYO" ;
+    ns1:buyer <https://1145.am/db/3864986/Potenza-Acquisition> ;
+    ns1:description "Pharmaceuticals" ;
+    ns1:documentSource <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> ;
+    ns1:foundName "Astellas Pharma Inc" ;
+    ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 3864986 ;
+    ns1:name "Astellas Pharma Inc" ;
+    ns1:sameAsHigh <https://1145.am/db/1988637/Astellas_Pharma_Inc>,
+        <https://1145.am/db/1988943/Astellas_Pharma>,
+        <https://1145.am/db/2010010/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2038202/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2154845/Astellas_Pharma>,
+        <https://1145.am/db/2280769/Astellas_Pharma>,
+        <https://1145.am/db/2287015/Astellas_Pharma>,
+        <https://1145.am/db/2291200/Astellas_Pharma>,
+        <https://1145.am/db/2292385/Astellas_Pharma>,
+        <https://1145.am/db/2302618/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2303415/Astellas_Pharma>,
+        <https://1145.am/db/2304902/Astellas_Pharma>,
+        <https://1145.am/db/2310968/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2312088/Astellas_Pharma>,
+        <https://1145.am/db/2319111/Astellas_Pharma>,
+        <https://1145.am/db/2319208/Astellas_Pharma>,
+        <https://1145.am/db/2319211/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2325196/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2327304/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2331796/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2342367/Astellas_Pharma>,
+        <https://1145.am/db/2350134/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2354064/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2354086/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2356965/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2357962/Astellas_Pharma>,
+        <https://1145.am/db/2358193/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2359745/Astellas_Pharma>,
+        <https://1145.am/db/2360371/Astellas_Pharma>,
+        <https://1145.am/db/2362425/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2366678/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2367730/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2367731/Astellas_Pharma>,
+        <https://1145.am/db/2368654/Astellas_Pharma>,
+        <https://1145.am/db/2369520/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2370015/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2370029/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2370041/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2370409/Astellas_Pharma>,
+        <https://1145.am/db/2543372/Astellas_Pharma>,
+        <https://1145.am/db/2543375/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2543378/Astellas_Pharma>,
+        <https://1145.am/db/2545610/Astellas_Pharma>,
+        <https://1145.am/db/2549670/Astellas_Pharma>,
+        <https://1145.am/db/2553619/Astellas_Pharma>,
+        <https://1145.am/db/2557314/Astellas_Pharma>,
+        <https://1145.am/db/2558133/Astellas_Pharma>,
+        <https://1145.am/db/2560865/Astellas_Pharma>,
+        <https://1145.am/db/2563422/Astellas_Pharma>,
+        <https://1145.am/db/2566038/Astellas_Pharma>,
+        <https://1145.am/db/2573339/Astellas_Pharma>,
+        <https://1145.am/db/2577419/Astellas_Pharma>,
+        <https://1145.am/db/2583402/Astellas_Pharma>,
+        <https://1145.am/db/2584750/Astellas_Pharma>,
+        <https://1145.am/db/2590159/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2594602/Astellas_Pharma>,
+        <https://1145.am/db/2595368/Astellas_Pharma>,
+        <https://1145.am/db/2595413/Astellas_Pharma_Inc>,
+        <https://1145.am/db/2597935/Astellas_Pharma>,
+        <https://1145.am/db/2858291/Astellas_Pharma>,
+        <https://1145.am/db/2862935/Astellas_Pharma>,
+        <https://1145.am/db/3107725/Astellas_Pharma>,
+        <https://1145.am/db/3475959/Astellas_Pharma_Inc>,
+        <https://1145.am/db/3613788/Astellas_Pharma_Inc>,
+        <https://1145.am/db/3651748/Astellas_Pharma_Inc>,
+        <https://1145.am/db/3743525/Astellas_Pharma>,
+        <https://1145.am/db/3748834/Astellas_Pharma>,
+        <https://1145.am/db/3799744/Astellas_Pharma_Inc>,
+        <https://1145.am/db/3925834/Astellas_Pharma_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2347222/Astellas_Pharma_Inc> .
+
+<https://1145.am/db/3865010/Versalift_Midwest> a org:Organization ;
+    ns1:basedInHighClean "Waco" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4739526> ;
+    ns1:basedInHighRaw "WACO, Texas" ;
+    ns1:buyer <https://1145.am/db/3865010/Cannon_Truck_Equipment-Acquisition> ;
+    ns1:description "selling new Versalift truck-mounted aerial lifts, cable placers and digger" ;
+    ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
+    ns1:foundName "Versalift" ;
+    ns1:internalDocId 3865010 ;
+    ns1:name "Versalift Midwest" .
+
+<https://1145.am/db/3865608/Eli_Lilly_And_Company> a org:Organization ;
+    ns1:basedInHighClean "Indianapolis" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4259418> ;
+    ns1:basedInHighRaw "INDIANAPOLIS" ;
+    ns1:buyer <https://1145.am/db/3865608/Eli_Lilly_And_Company-Hydra_Biosciences-Acquisition-Assets> ;
+    ns1:description "Pharmaceuticals" ;
+    ns1:documentSource <https://1145.am/db/3865608/wwwprnewswirecom_news-releases_lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876html> ;
+    ns1:foundName "Eli Lilly and Company" ;
+    ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 3865608 ;
+    ns1:name "Eli Lilly and Company" ;
+    ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1087869/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1217359/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1272276/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1340338/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1425255/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1428583/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1432746/Eli_Lilly>,
+        <https://1145.am/db/1534004/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1534438/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1546070/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1553175/Eli_Lilly_Company>,
+        <https://1145.am/db/1553459/Eli_Lilly_Company>,
+        <https://1145.am/db/1663572/Eli_Lilly_And_Company>,
+        <https://1145.am/db/1979697/Eli_Lilly>,
+        <https://1145.am/db/1984558/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2045539/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2055009/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2058865/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2062260/Eli_Lilly>,
+        <https://1145.am/db/2065629/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2139015/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2154037/Eli_Lilly>,
+        <https://1145.am/db/2154391/Eli_Lilly>,
+        <https://1145.am/db/2279118/Eli_Lilly>,
+        <https://1145.am/db/2281211/Eli_Lilly>,
+        <https://1145.am/db/2282739/Eli_Lilly>,
+        <https://1145.am/db/2282930/Eli_Lilly>,
+        <https://1145.am/db/2283595/Eli_Lilly>,
+        <https://1145.am/db/2285156/Eli_Lilly>,
+        <https://1145.am/db/2285189/Eli_Lilly>,
+        <https://1145.am/db/2285525/Eli_Lilly>,
+        <https://1145.am/db/2286126/Eli_Lilly>,
+        <https://1145.am/db/2286379/Eli_Lilly>,
+        <https://1145.am/db/2286402/Eli_Lilly>,
+        <https://1145.am/db/2286404/Eli_Lilly>,
+        <https://1145.am/db/2286617/Eli_Lilly>,
+        <https://1145.am/db/2286911/Eli_Lilly>,
+        <https://1145.am/db/2286998/Eli_Lilly>,
+        <https://1145.am/db/2287005/Eli_Lilly>,
+        <https://1145.am/db/2288158/Eli_Lilly>,
+        <https://1145.am/db/229232/Eli_Lilly>,
+        <https://1145.am/db/2294118/Eli_Lilly>,
+        <https://1145.am/db/2298022/Eli_Lilly>,
+        <https://1145.am/db/2299157/Eli_Lilly>,
+        <https://1145.am/db/2301879/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2302104/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2305497/Eli_Lilly>,
+        <https://1145.am/db/2305501/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2306807/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2307651/Eli_Lilly>,
+        <https://1145.am/db/2309473/Eli_Lilly>,
+        <https://1145.am/db/2309599/Eli_Lilly>,
+        <https://1145.am/db/2314412/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2316092/Eli_Lilly>,
+        <https://1145.am/db/2316549/Eli_Lilly>,
+        <https://1145.am/db/2318587/Eli_Lilly>,
+        <https://1145.am/db/2320006/Eli_Lilly>,
+        <https://1145.am/db/2320338/Eli_Lilly>,
+        <https://1145.am/db/2322619/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2323165/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2325557/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2328522/Eli_Lilly>,
+        <https://1145.am/db/2328527/Eli_Lilly>,
+        <https://1145.am/db/2328554/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2328718/Eli_Lilly>,
+        <https://1145.am/db/2329114/Eli_Lilly>,
+        <https://1145.am/db/2334645/Eli_Lilly>,
+        <https://1145.am/db/2335594/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2336074/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2338059/Eli_Lilly>,
+        <https://1145.am/db/2340948/Eli_Lilly>,
+        <https://1145.am/db/2341481/Eli_Lilly>,
+        <https://1145.am/db/2341496/Eli_Lilly>,
+        <https://1145.am/db/2342503/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2343945/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2344800/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2344808/Eli_Lilly>,
+        <https://1145.am/db/2344991/Eli_Lilly>,
+        <https://1145.am/db/2345213/Eli_Lilly>,
+        <https://1145.am/db/2345214/Eli_Lilly>,
+        <https://1145.am/db/2349020/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2349300/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2352358/Eli_Lilly>,
+        <https://1145.am/db/2353350/Eli_Lilly>,
+        <https://1145.am/db/2354761/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2354853/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2359240/Eli_Lilly>,
+        <https://1145.am/db/2361027/Eli_Lilly>,
+        <https://1145.am/db/2364605/Eli_Lilly>,
+        <https://1145.am/db/2365178/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2366948/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2366953/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2368562/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2369000/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2370162/Eli_Lilly>,
+        <https://1145.am/db/2371016/Eli_Lilly>,
+        <https://1145.am/db/2371058/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2371075/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2536960/Eli_Lilly>,
+        <https://1145.am/db/2537335/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2537665/Eli_Lilly>,
+        <https://1145.am/db/2537666/Eli_Lilly>,
+        <https://1145.am/db/2537817/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2537826/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2539287/Eli_Lilly>,
+        <https://1145.am/db/2539970/Eli_Lilly>,
+        <https://1145.am/db/2543185/Eli_Lilly>,
+        <https://1145.am/db/2545618/Eli_Lilly>,
+        <https://1145.am/db/2549450/Eli_Lilly>,
+        <https://1145.am/db/2550996/Eli_Lilly>,
+        <https://1145.am/db/2551049/Eli_Lilly>,
+        <https://1145.am/db/2551101/Eli_Lilly>,
+        <https://1145.am/db/2553131/Eli_Lilly>,
+        <https://1145.am/db/2553551/Eli_Lilly>,
+        <https://1145.am/db/2556906/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2556969/Eli_Lilly>,
+        <https://1145.am/db/2559125/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2560487/Eli_Lilly>,
+        <https://1145.am/db/2561357/Eli_Lilly>,
+        <https://1145.am/db/2561960/Eli_Lilly>,
+        <https://1145.am/db/2562442/Eli_Lilly>,
+        <https://1145.am/db/2562576/Eli_Lilly>,
+        <https://1145.am/db/2567343/Eli_Lilly>,
+        <https://1145.am/db/2569829/Eli_Lilly>,
+        <https://1145.am/db/2569849/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2572312/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2572711/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2572957/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2573885/Eli_Lilly>,
+        <https://1145.am/db/2574950/Eli_Lilly>,
+        <https://1145.am/db/2575554/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2575909/Eli_Lilly>,
+        <https://1145.am/db/2575972/Eli_Lilly>,
+        <https://1145.am/db/2576086/Eli_Lilly>,
+        <https://1145.am/db/2576171/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2576460/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2576462/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2576892/Eli_Lilly>,
+        <https://1145.am/db/2576933/Eli_Lilly>,
+        <https://1145.am/db/2576939/Eli_Lilly>,
+        <https://1145.am/db/2576944/Eli_Lilly>,
+        <https://1145.am/db/2577171/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2578048/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2578603/Eli_Lilly>,
+        <https://1145.am/db/2578874/Eli_Lilly>,
+        <https://1145.am/db/2578876/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2581257/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2581745/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2584135/Eli_Lilly>,
+        <https://1145.am/db/2584766/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2585144/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2585710/Eli_Lilly>,
+        <https://1145.am/db/2586687/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2587215/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2587605/Eli_Lilly>,
+        <https://1145.am/db/2587690/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2587699/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2587853/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2589156/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2589700/Eli_Lilly>,
+        <https://1145.am/db/2590071/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2590486/Eli_Lilly>,
+        <https://1145.am/db/2590997/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2591001/Eli_Lilly>,
+        <https://1145.am/db/2591708/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2593780/Eli_Lilly>,
+        <https://1145.am/db/2594485/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2594494/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2596644/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2597644/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2597855/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2598317/Eli_Lilly>,
+        <https://1145.am/db/2813938/Eli_Lilly>,
+        <https://1145.am/db/2813976/Eli_Lilly>,
+        <https://1145.am/db/2817959/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2831707/Eli_Lilly>,
+        <https://1145.am/db/2934107/Eli_Lilly>,
+        <https://1145.am/db/2953545/Eli_Lilly>,
+        <https://1145.am/db/3029576/Eli_Lilly>,
+        <https://1145.am/db/3102250/Eli_Lilly>,
+        <https://1145.am/db/3183251/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3193785/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3195889/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3216723/Eli_Lilly>,
+        <https://1145.am/db/3220525/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3243719/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3264085/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3310505/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3343553/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3360026/Eli_Lilly>,
+        <https://1145.am/db/3389295/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3412602/Eli_Lilly>,
+        <https://1145.am/db/3435240/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3437629/Eli_Lilly>,
+        <https://1145.am/db/3450156/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3464715/Eli_Lilly_Company>,
+        <https://1145.am/db/3507722/Eli_Lilly_Company>,
+        <https://1145.am/db/3549221/Eli_Lilly>,
+        <https://1145.am/db/3553449/Eli_Lilly>,
+        <https://1145.am/db/3559924/Eli_Lilly>,
+        <https://1145.am/db/3572250/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3592210/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3648607/Eli_Lilly>,
+        <https://1145.am/db/3652366/Eli_Lilly>,
+        <https://1145.am/db/3662656/Eli_Lilly>,
+        <https://1145.am/db/3664111/Eli_Lilly>,
+        <https://1145.am/db/3681304/Eli_Lilly>,
+        <https://1145.am/db/3681533/Eli_Lilly>,
+        <https://1145.am/db/3703094/Eli_Lilly>,
+        <https://1145.am/db/3704092/Eli_Lilly>,
+        <https://1145.am/db/3727087/Eli_Lilly>,
+        <https://1145.am/db/3741122/Eli_Lilly>,
+        <https://1145.am/db/3745203/Eli_Lilly>,
+        <https://1145.am/db/3748271/Eli_Lilly>,
+        <https://1145.am/db/3792776/Eli_Lilly>,
+        <https://1145.am/db/3802207/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3817396/Eli_Lilly_And_Company>,
+        <https://1145.am/db/4003917/Eli_Lilly>,
+        <https://1145.am/db/4051844/Eli_Lilly>,
+        <https://1145.am/db/4058269/Eli_Lilly>,
+        <https://1145.am/db/4087876/Eli_Lilly_Company>,
+        <https://1145.am/db/4103069/Eli_Lilly>,
+        <https://1145.am/db/4105662/Eli_Lilly_And_Company>,
+        <https://1145.am/db/4234228/Eli_Lilly>,
+        <https://1145.am/db/4240650/Eli_Lilly_And_Company>,
+        <https://1145.am/db/461671/Eli_Lilly_And_Company>,
+        <https://1145.am/db/768105/Eli_Lilly> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1121894/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2109798/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2280616/Eli_Lilly>,
+        <https://1145.am/db/2304319/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2310738/Eli_Lilly>,
+        <https://1145.am/db/2315325/Eli_Lilly>,
+        <https://1145.am/db/2317682/Eli_Lilly>,
+        <https://1145.am/db/2325257/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2327587/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2328633/Eli_Lilly>,
+        <https://1145.am/db/2329915/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2349001/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2360338/Eli_Lilly>,
+        <https://1145.am/db/2361510/Eli_Lilly>,
+        <https://1145.am/db/2368321/Eli_Lilly_And_Company>,
+        <https://1145.am/db/2560025/Eli_Lilly>,
+        <https://1145.am/db/2562999/Eli_Lilly>,
+        <https://1145.am/db/2575947/Eli_Lilly>,
+        <https://1145.am/db/2581804/Eli_Lilly>,
+        <https://1145.am/db/2583703/Eli_Lilly>,
+        <https://1145.am/db/2593456/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3195443/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3448439/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3504766/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3536712/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3846248/Eli_Lilly_And_Company>,
+        <https://1145.am/db/3847390/Eli_Lilly_And_Company> .
+
+<https://1145.am/db/3865641/Flowers_Foods> a org:Organization ;
+    ns1:basedInHighClean "Thomasville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4226348> ;
+    ns1:basedInHighRaw "THOMASVILLE, Ga." ;
+    ns1:buyer <https://1145.am/db/3865641/Canyon_Bakehouse-Acquisition> ;
+    ns1:description "Food" ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> ;
+    ns1:foundName "Flowers Foods, Inc" ;
+    ns1:internalDocId 3865641 ;
+    ns1:name "Flowers Foods" ;
+    ns1:sameAsHigh <https://1145.am/db/1102729/Flowers_Foods_Inc>,
+        <https://1145.am/db/3187684/Flowers_Foods>,
+        <https://1145.am/db/3217460/Flowers_Foods>,
+        <https://1145.am/db/3348575/Flowers_Foods>,
+        <https://1145.am/db/3431662/Flowers_Foods>,
+        <https://1145.am/db/3585780/Flowers_Foods>,
+        <https://1145.am/db/3611409/Flowers_Foods>,
+        <https://1145.am/db/3807100/Flowers_Foods_Inc>,
+        <https://1145.am/db/3810358/Flowers_Foods> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1576789/Flowers_Foods_Inc> .
+
+<https://1145.am/db/3865643/Dominion_Energy> a org:Organization ;
+    ns1:basedInHighClean "Richmond" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4781708> ;
+    ns1:basedInHighRaw "RICHMOND, Va." ;
+    ns1:description "mergers" ;
+    ns1:documentSource <https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> ;
+    ns1:foundName "Dominion Energy, Inc." ;
+    ns1:internalDocId 3865643 ;
+    ns1:name "Dominion Energy" ;
+    ns1:protagonist <https://1145.am/db/3865643/Dominion_Energy-Scana_Corporation-Merger> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1221886/Dominion_Energy>,
+        <https://1145.am/db/1308468/Dominion_Energy>,
+        <https://1145.am/db/1309510/Dominion_Energy>,
+        <https://1145.am/db/1476073/Dominion_Energy>,
+        <https://1145.am/db/1483610/Dominion_Energy_Inc>,
+        <https://1145.am/db/1583050/Dominion_Energy>,
+        <https://1145.am/db/1962265/Dominion_Energy>,
+        <https://1145.am/db/1966178/Dominion_Energy_Inc>,
+        <https://1145.am/db/2058902/Dominion_Energy>,
+        <https://1145.am/db/2063848/Dominion_Energy>,
+        <https://1145.am/db/2105305/Dominion_Energy>,
+        <https://1145.am/db/2109220/Dominion_Energy>,
+        <https://1145.am/db/3119091/Dominion_Energy>,
+        <https://1145.am/db/3363434/Dominion_Energy>,
+        <https://1145.am/db/3372332/Dominion_Energy_Inc>,
+        <https://1145.am/db/3420038/Dominion_Energy>,
+        <https://1145.am/db/3467126/Dominion_Energy>,
+        <https://1145.am/db/3566743/Dominion_Energy>,
+        <https://1145.am/db/3602960/Dominion_Energy>,
+        <https://1145.am/db/3608246/Dominion_Energy>,
+        <https://1145.am/db/3609668/Dominion_Energy_Inc>,
+        <https://1145.am/db/3613753/Dominion_Energy_Inc>,
+        <https://1145.am/db/3743170/Dominion_Energy>,
+        <https://1145.am/db/3765686/Dominion_Energy>,
+        <https://1145.am/db/3777558/Dominion_Energy>,
+        <https://1145.am/db/3784053/Dominion_Energy>,
+        <https://1145.am/db/3786696/Dominion_Energy>,
+        <https://1145.am/db/3807698/Dominion_Energy>,
+        <https://1145.am/db/3812036/Dominion_Energy>,
+        <https://1145.am/db/3844601/Dominion_Energy_Inc>,
+        <https://1145.am/db/3845780/Dominion_Energy>,
+        <https://1145.am/db/3852856/Dominion_Energy_Incorporated>,
+        <https://1145.am/db/3854406/Dominion_Energy>,
+        <https://1145.am/db/3864429/Dominion_Energy>,
+        <https://1145.am/db/3867896/Dominion_Energy>,
+        <https://1145.am/db/3867901/Dominion_Energy>,
+        <https://1145.am/db/3875453/Dominion_Energy>,
+        <https://1145.am/db/3886152/Dominion_Energy>,
+        <https://1145.am/db/3894822/Dominion_Energy_Inc>,
+        <https://1145.am/db/3909384/Dominion_Energy>,
+        <https://1145.am/db/3935180/Dominion_Energy>,
+        <https://1145.am/db/519358/Dominion_Energy_Inc>,
+        <https://1145.am/db/525308/Dominion_Energy>,
+        <https://1145.am/db/529413/Dominion_Energy>,
+        <https://1145.am/db/529542/Dominion_Energy_Inc>,
+        <https://1145.am/db/530910/Dominion_Energy>,
+        <https://1145.am/db/728515/Dominion_Energy> .
+
+<https://1145.am/db/3865643/Scana_Corporation> a org:Organization ;
+    ns1:basedInLowRaw "South Carolina" ;
+    ns1:description "merger" ;
+    ns1:documentSource <https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> ;
+    ns1:foundName "SCANA Corporation" ;
+    ns1:internalDocId 3865643 ;
+    ns1:name "SCANA Corporation" ;
+    ns1:protagonist <https://1145.am/db/3865643/Dominion_Energy-Scana_Corporation-Merger> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3363434/Scana>,
+        <https://1145.am/db/3372332/Scana_Corporation>,
+        <https://1145.am/db/3375450/Scana_Corporation>,
+        <https://1145.am/db/3772203/Scana_Corporation>,
+        <https://1145.am/db/3827146/Scana_Corporation>,
+        <https://1145.am/db/3844601/Scana_Corporation>,
+        <https://1145.am/db/3845780/Scana>,
+        <https://1145.am/db/3852856/Scana_Corporation>,
+        <https://1145.am/db/3854406/Scana_Corporation>,
+        <https://1145.am/db/3875453/Scana_Corporation>,
+        <https://1145.am/db/3875501/Scana_Corporation>,
+        <https://1145.am/db/3909384/Scana>,
+        <https://1145.am/db/3935180/Scana> .
+
+<https://1145.am/db/3865649/Fibra_Prologis> a org:Organization ;
+    ns1:basedInHighClean "Mexico" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
+    ns1:basedInHighRaw "Mexico" ;
+    ns1:description "Real estate" ;
+    ns1:documentSource <https://1145.am/db/3865649/wwwprnewswirecom_news-releases_fibra-prologis-acquires-662-500-square-feet-of-class-a-logistics-space-300765951html> ;
+    ns1:foundName "FIBRA Prologis" ;
+    ns1:industry "Real estate" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/321_property_properties_redevelopment_estate> ;
+    ns1:internalDocId 3865649 ;
+    ns1:investor <https://1145.am/db/3865649/Fibra_Prologis-Investment> ;
+    ns1:name "FIBRA Prologis" ;
+    ns1:sameAsHigh <https://1145.am/db/1542376/Fibra_Prologis>,
+        <https://1145.am/db/164998/Fibra_Prologis>,
+        <https://1145.am/db/3169836/Fibra_Prologis>,
+        <https://1145.am/db/3181266/Fibra_Prologis>,
+        <https://1145.am/db/3385677/Fibra_Prologis>,
+        <https://1145.am/db/3459683/Fibra_Prologis>,
+        <https://1145.am/db/3923795/Fibra_Prologis>,
+        <https://1145.am/db/3928248/Fibra_Prologis>,
+        <https://1145.am/db/747585/Fibra_Prologis> .
+
+<https://1145.am/db/4252541/Seppo_Parvi> a foaf:Person ;
+    ns1:basedInHighClean "Republic of Finland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
+    ns1:basedInHighRaw "Finland" ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:foundName "Seppo Parvi" ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Seppo Parvi" ;
+    ns1:roleActivity <https://1145.am/db/4252541/Seppo_Parvi-Finishing-Chief_Financial_Officer_And_Deputy_Ceo> .
+
+<https://1145.am/db/4252541/Stora_Enso> a org:Organization ;
+    ns1:basedInHighClean "Republic of Finland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
+    ns1:basedInHighRaw "Finland" ;
+    ns1:description "the forest industry" ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:foundName "Stora Enso'" ;
+    ns1:hasRole <https://1145.am/db/4252541/Stora_Enso-Chief_Financial_Officer_And_Deputy_Ceo> ;
+    ns1:industry "forest industry" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/579_forestry_forest_reforestation_industry> ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Stora Enso" ;
+    ns1:sameAsHigh <https://1145.am/db/1336083/Stora_Enso>,
+        <https://1145.am/db/1583308/Stora_Enso> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1343912/Stora_Enso>,
+        <https://1145.am/db/1612527/Stora_Enso>,
+        <https://1145.am/db/1612535/Stora_Enso>,
+        <https://1145.am/db/1612665/Stora_Enso>,
+        <https://1145.am/db/1612669/Stora_Enso>,
+        <https://1145.am/db/1731261/Stora_Enso>,
+        <https://1145.am/db/2339784/Stora_Enso> .
+
+<https://1145.am/db/4252806/Calibre_Mining_Corp> a org:Organization ;
+    ns1:basedInHighClean "British Columbia" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:basedInHighRaw "British Columbia" ;
+    ns1:basedInLowRaw "Elguindi" ;
+    ns1:description "Board",
+        "Mining" ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "(TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\")",
+        "Calibre" ;
+    ns1:hasRole <https://1145.am/db/4252806/Calibre_Mining_Corp-Board>,
+        <https://1145.am/db/4252806/Calibre_Mining_Corp-Board_Of_Directors>,
+        <https://1145.am/db/4252806/Calibre_Mining_Corp-Senior_Vice_President_And_Chief_Financial_Officer> ;
+    ns1:industry "mining" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/200_mining_exploration_biomining_minerals> ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Calibre",
+        "Calibre Mining Corp." ;
+    ns1:sameAsHigh <https://1145.am/db/3617031/Calibre_Mining_Corp>,
+        <https://1145.am/db/3950548/Calibre_Mining_Corp>,
+        <https://1145.am/db/4070842/Calibre_Mining_Corp>,
+        <https://1145.am/db/4101160/Calibre_Mining_Corp>,
+        <https://1145.am/db/718025/Calibre_Mining_Corp>,
+        <https://1145.am/db/736159/Calibre_Mining_Corp>,
+        <https://1145.am/db/738117/Calibre_Mining_Corp> .
+
+<https://1145.am/db/4252806/David_Splett> a foaf:Person ;
+    ns1:basedInLowRaw "British Columbia" ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Mr",
+        "Mr. David Splett" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "David Splett" ;
+    ns1:roleActivity <https://1145.am/db/4252806/David_Splett-Finishing-Senior_Vice_President_And_Chief_Financial_Officer> .
+
+<https://1145.am/db/4252806/Douglas_Hurst> a foaf:Person ;
+    ns1:basedInLowRaw "British Columbia" ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Mr. Douglas Hurst" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Douglas Hurst" ;
+    ns1:roleActivity <https://1145.am/db/4252806/Douglas_Hurst-Finishing-Board_Of_Directors> .
+
+<https://1145.am/db/4252806/Omaya_Elguindi> a foaf:Person ;
+    ns1:basedInLowRaw "British Columbia" ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Ms. Omaya Elguindi" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Omaya Elguindi" ;
+    ns1:roleActivity <https://1145.am/db/4252806/Omaya_Elguindi-Starting-Board> .
+
+<https://1145.am/db/4252806/Raymond_Threlkeld> a foaf:Person ;
+    ns1:basedInLowRaw "British Columbia" ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Mr. Raymond Threlkeld" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Raymond Threlkeld" ;
+    ns1:roleActivity <https://1145.am/db/4252806/Raymond_Threlkeld-Finishing-Board_Of_Directors> .
+
+<https://1145.am/db/4252854/Bank_Midwest> a org:Organization ;
+    ns1:basedInHighClean "Kansas City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4393217> ;
+    ns1:basedInHighRaw "Kansas City, Mo." ;
+    ns1:description "Middle Market Banking" ;
+    ns1:documentSource <https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> ;
+    ns1:foundName "Bank Midwest" ;
+    ns1:hasRole <https://1145.am/db/4252854/Bank_Midwest-President> ;
+    ns1:internalDocId 4252854 ;
+    ns1:name "Bank Midwest" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1635612/Bank_Midwest> .
+
+<https://1145.am/db/4252854/Charlie_Koch> a foaf:Person ;
+    ns1:basedInHighClean "Kansas City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4393217> ;
+    ns1:basedInHighRaw "Kansas City, Mo." ;
+    ns1:documentSource <https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> ;
+    ns1:foundName "Charlie Koch" ;
+    ns1:internalDocId 4252854 ;
+    ns1:name "Charlie Koch" ;
+    ns1:roleActivity <https://1145.am/db/4252854/Charlie_Koch-Starting-President> .
+
+<https://1145.am/db/4253854/Jerome_Lambert> a foaf:Person ;
+    ns1:basedInLowRaw "France" ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "Jerome Lambert" ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Jerome Lambert" ;
+    ns1:roleActivity <https://1145.am/db/4253854/Jerome_Lambert-Finishing-Chief_Executive_Officer> .
+
+<https://1145.am/db/4253854/Nicolas_Bos> a foaf:Person ;
+    ns1:basedInLowRaw "France" ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "Nicolas Bos" ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Nicolas Bos" ;
+    ns1:roleActivity <https://1145.am/db/4253854/Nicolas_Bos-Starting-Chief_Executive_Officer> .
+
+<https://1145.am/db/4253854/Richemont> a org:Organization ;
+    ns1:basedInLowRaw "France" ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "Richemont" ;
+    ns1:hasRole <https://1145.am/db/4253854/Richemont-Chief_Executive_Officer> ;
+    ns1:industry "luxury" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/34_luxury_prestige_fashion_beauty> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/196_luxury_car_cars_automobiles>,
+        <https://1145.am/db/industry/606_luxury_travel_hospitality_resort> ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Richemont" ;
+    ns1:sameAsHigh <https://1145.am/db/1261110/Richemont>,
+        <https://1145.am/db/1297979/Richemont>,
+        <https://1145.am/db/1299118/Richemont>,
+        <https://1145.am/db/137755/Richemont>,
+        <https://1145.am/db/142710/Richemont>,
+        <https://1145.am/db/2065076/Richemont>,
+        <https://1145.am/db/2071478/Richemont>,
+        <https://1145.am/db/2124578/Richemont>,
+        <https://1145.am/db/2151586/Richemont>,
+        <https://1145.am/db/2718076/Richemont>,
+        <https://1145.am/db/281718/Richemont>,
+        <https://1145.am/db/2860107/Richemont>,
+        <https://1145.am/db/2860937/Richemont>,
+        <https://1145.am/db/2926286/Richemont>,
+        <https://1145.am/db/2981537/Richemont>,
+        <https://1145.am/db/3024492/Richemont>,
+        <https://1145.am/db/3074466/Richemont>,
+        <https://1145.am/db/3641357/Richemont>,
+        <https://1145.am/db/3674036/Richemont>,
+        <https://1145.am/db/4253755/Richemont>,
+        <https://1145.am/db/613960/Richemont>,
+        <https://1145.am/db/929518/Richemont> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2803341/Richemont>,
+        <https://1145.am/db/2825543/Richemont>,
+        <https://1145.am/db/3091712/Richemont>,
+        <https://1145.am/db/3640650/Richemont>,
+        <https://1145.am/db/637234/Richemont> .
+
+<https://1145.am/db/4254008/David_V_Auld> a foaf:Person ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "David V. Auld" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "David V. Auld" ;
+    ns1:roleActivity <https://1145.am/db/4254008/David_V_Auld-Starting-Executive_Chairman> .
+
+<https://1145.am/db/4254008/Donald_R_Horton> a foaf:Person ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "Donald R. Horton" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "Donald R. Horton" ;
+    ns1:roleActivity <https://1145.am/db/4254008/Donald_R_Horton-Finishing-Founder_And_Chairman_Of_The_Board_Of_Directors> .
+
+<https://1145.am/db/4254008/Horton_Inc> a org:Organization ;
+    ns1:basedInLowRaw "America",
+        "United States" ;
+    ns1:description "Builder",
+        "building" ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "(NYSE: DHI) , America's Builder",
+        "(NYSE: DHI) , America's Builder," ;
+    ns1:hasRole <https://1145.am/db/4254008/Horton_Inc-Executive_Chairman>,
+        <https://1145.am/db/4254008/Horton_Inc-Founder_And_Chairman_Of_The_Board_Of_Directors> ;
+    ns1:industry "Builder",
+        "homebuilding" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/308_homebuilder_housebuilder_homebuilders_housebuilders> ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "(NYSE: DHI), America's Builder",
+        "Horton, Inc." .
+
+<https://1145.am/db/4254020/Marti_Technologies> a org:Organization ;
+    ns1:basedInLowRaw "Türkiye" ;
+    ns1:description "introducing new services and growing its existing services" ;
+    ns1:documentSource <https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> ;
+    ns1:foundName "Marti Technologies, Inc" ;
+    ns1:hasRole <https://1145.am/db/4254020/Marti_Technologies-Chief_Financial_Officer_(cfo)> ;
+    ns1:internalDocId 4254020 ;
+    ns1:name "Marti Technologies" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2056768/Marti_Technologies_Inc>,
+        <https://1145.am/db/2839331/Marti_Technologies>,
+        <https://1145.am/db/3978980/Marti_Technologies> .
+
+<https://1145.am/db/4254020/Oguz_Erkan> a foaf:Person ;
+    ns1:basedInLowRaw "Türkiye" ;
+    ns1:documentSource <https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> ;
+    ns1:foundName "Oguz Erkan" ;
+    ns1:internalDocId 4254020 ;
+    ns1:name "Oguz Erkan" ;
+    ns1:roleActivity <https://1145.am/db/4254020/Oguz_Erkan-Starting-Chief_Financial_Officer_(cfo)> .
+
+<https://1145.am/db/4254022/Kumar_Gaurav_Gupta> a foaf:Person ;
+    ns1:basedInLowRaw "India" ;
+    ns1:documentSource <https://1145.am/db/4254022/wwwbusinesswirecom_news_home_20240517777111_en_Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> ;
+    ns1:foundName "Kumar Gaurav Gupta" ;
+    ns1:internalDocId 4254022 ;
+    ns1:name "Kumar Gaurav Gupta" ;
+    ns1:roleActivity <https://1145.am/db/4254022/Kumar_Gaurav_Gupta-Starting-Chief_Executive_Officer_(ceo)> .
+
+<https://1145.am/db/4254022/Verdantis> a org:Organization ;
+    ns1:basedInLowRaw "India" ;
+    ns1:description "Data platform & services" ;
+    ns1:documentSource <https://1145.am/db/4254022/wwwbusinesswirecom_news_home_20240517777111_en_Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> ;
+    ns1:foundName "Verdantis" ;
+    ns1:hasRole <https://1145.am/db/4254022/Verdantis-Chief_Executive_Officer_(ceo)> ;
+    ns1:industry "Data platform & services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/41_database_data_software_computing> ;
+    ns1:internalDocId 4254022 ;
+    ns1:name "Verdantis" .
+
+<https://1145.am/db/4254038/Immunome> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:description "developing first-in-class and best-in-class targeted cancer therapies" ;
+    ns1:documentSource <https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> ;
+    ns1:foundName "(Nasdaq: IMNM)" ;
+    ns1:hasRole <https://1145.am/db/4254038/Immunome-Chief_Financial_Officer> ;
+    ns1:industry "biotechnology" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/154_biomanufacturing_bioprocessing_biotechnologies_bioproduction> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical>,
+        <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 4254038 ;
+    ns1:name "Immunome" ;
+    ns1:sameAsHigh <https://1145.am/db/2052967/Immunome>,
+        <https://1145.am/db/2133590/Immunome>,
+        <https://1145.am/db/2354135/Immunome_Inc>,
+        <https://1145.am/db/2368876/Immunome>,
+        <https://1145.am/db/2370724/Immunome>,
+        <https://1145.am/db/2799029/Immunome>,
+        <https://1145.am/db/3101805/Immunome>,
+        <https://1145.am/db/3105807/Immunome>,
+        <https://1145.am/db/315940/Immunome>,
+        <https://1145.am/db/3638584/Immunome>,
+        <https://1145.am/db/3985716/Immunome>,
+        <https://1145.am/db/3987655/Immunome>,
+        <https://1145.am/db/4004319/Immunome>,
+        <https://1145.am/db/4004501/Immunome>,
+        <https://1145.am/db/4018109/Immunome>,
+        <https://1145.am/db/4024480/Immunome>,
+        <https://1145.am/db/4189173/Immunome> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4118720/Immunome> .
+
+<https://1145.am/db/4254038/Max_Rosett> a foaf:Person ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:documentSource <https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> ;
+    ns1:foundName "Max Rosett" ;
+    ns1:internalDocId 4254038 ;
+    ns1:name "Max Rosett" ;
+    ns1:roleActivity <https://1145.am/db/4254038/Max_Rosett-Starting-Chief_Financial_Officer> .
+
+<https://1145.am/db/4254451/Ispe> a org:Organization ;
+    ns1:description "Pharmaceutical Engineering" ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "ISPE" ;
+    ns1:hasRole <https://1145.am/db/4254451/Ispe-President_And>,
+        <https://1145.am/db/4254451/Ispe-President_And_Ceo> ;
+    ns1:industry "Pharmaceutical Engineering" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma> ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "ISPE" ;
+    ns1:sameAsHigh <https://1145.am/db/2355988/Ispe> .
+
+<https://1145.am/db/4254451/Thomas_B_Hartman> a foaf:Person ;
+    ns1:basedInLowRaw "NORTH BETHESDA, Md." ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "Thomas B. Hartman" ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "Thomas B. Hartman" ;
+    ns1:roleActivity <https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And>,
+        <https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And_Ceo> .
+
+<https://1145.am/db/4254796/Heerenveen> a org:Organization ;
+    ns1:basedInHighClean "Kingdom of the Netherlands" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:basedInHighRaw "Netherlands" ;
+    ns1:documentSource <https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> ;
+    ns1:foundName "Heerenveen" ;
+    ns1:hasRole <https://1145.am/db/4254796/Heerenveen-Head_Coaching> ;
+    ns1:industry "Sports" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/283_esports_esport_gaming_games> ;
+    ns1:internalDocId 4254796 ;
+    ns1:name "Heerenveen" .
+
+<https://1145.am/db/4254796/Robin_Van_Persie> a foaf:Person ;
+    ns1:basedInHighClean "Kingdom of the Netherlands" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:basedInHighRaw "Netherlands" ;
+    ns1:documentSource <https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> ;
+    ns1:foundName "Robin van Persie" ;
+    ns1:internalDocId 4254796 ;
+    ns1:name "Robin van Persie" ;
+    ns1:roleActivity <https://1145.am/db/4254796/Robin_Van_Persie-Starting-Head_Coaching> .
+
+<https://1145.am/db/1770196/Costanoa_Ventures-Parallel_Domain-Parallel_Domain-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T18:14:24+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Parallel Domain, the startup that develops software to train self-driving cars in virtual worlds, has added an additional investor to its seed round." ;
+    ns1:documentSource <https://1145.am/db/1770196/techcrunchcom_2018_12_13_toyota-invests-in-autonomous-driving-simulation-startup-parallel-domain_> ;
+    ns1:internalDocId 1770196 ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1770196/Parallel_Domain> ;
+    ns1:valueRaw "$ 2.65 million" .
+
+<https://1145.am/db/1770196/Parallel_Domain> a org:Organization ;
+    ns1:description "software" ;
+    ns1:documentSource <https://1145.am/db/1770196/techcrunchcom_2018_12_13_toyota-invests-in-autonomous-driving-simulation-startup-parallel-domain_> ;
+    ns1:foundName "Parallel Domain" ;
+    ns1:internalDocId 1770196 ;
+    ns1:name "Parallel Domain" .
+
+<https://1145.am/db/1770896/Softbank_Vision_Fund-Zymergen-Investment-Series_C> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T18:44:18+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Zymergen, a five-year-old company that manufacturers molecules for a wide array of uses and industries, has closed on $ 400 million in Series C funding led by one of its earlier investors, the SoftBank Vision Fund." ;
+    ns1:documentSource <https://1145.am/db/1770896/techcrunchcom_2018_12_13_zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund_> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 1770896 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1770896/Zymergen> ;
+    ns1:targetDetails "Series C" ;
+    ns1:valueRaw "$ 400 million" .
+
+<https://1145.am/db/1771672/Nexthink> a org:Organization ;
+    ns1:basedInHighClean "Switzerland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:basedInHighRaw "Switzerland" ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "Nexthink" ;
+    ns1:internalDocId 1771672 ;
+    ns1:name "Nexthink" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1758834/Nexthink>,
+        <https://1145.am/db/3406449/Nexthink>,
+        <https://1145.am/db/970701/Nexthink> .
+
+<https://1145.am/db/3864986/Potenza> a org:Organization ;
+    ns1:basedInHighClean "Northbrook" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4904056> ;
+    ns1:basedInHighRaw "NORTHBROOK, Ill." ;
+    ns1:description "immuno-oncology" ;
+    ns1:documentSource <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> ;
+    ns1:foundName "Potenza Therapeutics, Inc." ;
+    ns1:industry "Pharma" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 3864986 ;
+    ns1:name "Potenza" .
+
+<https://1145.am/db/3864986/Potenza-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-12-14T18:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "TOKYO and NORTHBROOK, Ill., Dec. 14, 2018 /PRNewswire/ - Astellas Pharma Inc. (TSE: 4503, President and CEO: Kenji Yasukawa, Ph.D., \"Astellas\") today announced that it exercised, and closed on its exclusive option to acquire Potenza Therapeutics, Inc. (\"Potenza\") on December 13, 2018, U.S. Eastern Time." ;
+    ns1:documentSource <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 3864986 ;
+    ns1:name "acquire" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3864986/Potenza> ;
+    ns1:targetName "Potenza" ;
+    ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "December 13, 2018" ;
+    ns1:whereClean "Northbrook" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4904056> ;
+    ns1:whereRaw "NORTHBROOK, Ill" .
+
+<https://1145.am/db/3865010/Cannon_Truck_Equipment> a org:Organization ;
+    ns1:basedInHighClean "Waco" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4739526> ;
+    ns1:basedInHighRaw "WACO, Texas" ;
+    ns1:description "Aerial lift manufacturer" ;
+    ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
+    ns1:foundName "Cannon Truck Equipment" ;
+    ns1:internalDocId 3865010 ;
+    ns1:name "Cannon Truck Equipment" .
+
+<https://1145.am/db/3865010/Cannon_Truck_Equipment-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-12-14T18:54:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "WACO, Texas, Dec. 14, 2018 /PRNewswire/ - Aerial lift manufacturer Versalift, a Time Manufacturing Company, announced today that it has acquired Cannon Truck Equipment in a transaction that establishes a new company - owned distributor called \"Versalift Midwest\"." ;
+    ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
+    ns1:foundName "acquired" ;
+    ns1:internalDocId 3865010 ;
+    ns1:name "acquired" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3865010/Cannon_Truck_Equipment> ;
+    ns1:targetName "Cannon Truck Equipment" ;
+    ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 14, 2018" ;
+    ns1:whereClean "Midwest" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11887750> ;
+    ns1:whereRaw "Midwest" .
+
+<https://1145.am/db/3865608/Eli_Lilly_And_Company-Hydra_Biosciences-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-12-14T20:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "INDIANAPOLIS, Dec. 14, 2018 /PRNewswire/ - Eli Lilly and Company (NYSE: LLY) today announced an agreement with Hydra Biosciences to acquire all assets related to Hydra's pre-clinical program of TRPA1 antagonists, part of the Transient Receptor Potential (TRP) family of ion channels, that is currently being studied for the potential treatment of chronic pain syndromes." ;
+    ns1:documentSource <https://1145.am/db/3865608/wwwprnewswirecom_news-releases_lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876html> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 3865608 ;
+    ns1:name "acquire" ;
+    ns1:status "not happened at date of document" ;
+    ns1:targetDetails "assets" ;
+    ns1:vendor <https://1145.am/db/3865608/Hydra_Biosciences> ;
+    ns1:whereClean "Indianapolis" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4259418> ;
+    ns1:whereRaw "INDIANAPOLIS" .
+
+<https://1145.am/db/3865608/Hydra_Biosciences> a org:Organization ;
+    ns1:basedInHighClean "Indianapolis" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4259418> ;
+    ns1:basedInHighRaw "INDIANAPOLIS" ;
+    ns1:description "Drug development" ;
+    ns1:documentSource <https://1145.am/db/3865608/wwwprnewswirecom_news-releases_lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876html> ;
+    ns1:foundName "Hydra" ;
+    ns1:industry "Pharmaceutical" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
+    ns1:internalDocId 3865608 ;
+    ns1:name "Hydra Biosciences" ;
+    ns1:sameAsHigh <https://1145.am/db/2322022/Hydra_Biosciences>,
+        <https://1145.am/db/2359626/Hydra_Biosciences> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2322012/Hydra_Biosciences> .
+
+<https://1145.am/db/3865641/Canyon_Bakehouse> a org:Organization ;
+    ns1:basedInHighClean "Johnstown" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5578536> ;
+    ns1:basedInHighRaw "Johnstown, Colo." ;
+    ns1:description "baking" ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> ;
+    ns1:foundName "Canyon Bakehouse LLC" ;
+    ns1:internalDocId 3865641 ;
+    ns1:name "Canyon Bakehouse" ;
+    ns1:sameAsHigh <https://1145.am/db/3807100/Canyon_Bakehouse> .
+
+<https://1145.am/db/3865641/Canyon_Bakehouse-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-12-14T21:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "THOMASVILLE, Ga., Dec. 14, 2018 /PRNewswire/ - Flowers Foods, Inc. (NYSE: FLO) today announced it has completed its acquisition of Canyon Bakehouse LLC, a privately held, gluten-free baking company based in Johnstown, Colo. Canyon Bakehouse will operate as an independent subsidiary of Flowers Foods." ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 3865641 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3865641/Canyon_Bakehouse> ;
+    ns1:targetName "Canyon Bakehouse" ;
+    ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 14, 2018" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States" .
+
+<https://1145.am/db/3865649/Fibra_Prologis-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T22:13:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "MEXICO CITY, Dec. 14, 2018 /PRNewswire/ - FIBRA Prologis (BMV: FIBRAPL14) , one of the leading owners of Class-A logistics real estate in Mexico, today announced the acquisition of 662,500 square feet of Class-A logistic space in Monterrey for a total investment of US $ 34.9 million, including closing costs." ;
+    ns1:documentSource <https://1145.am/db/3865649/wwwprnewswirecom_news-releases_fibra-prologis-acquires-662-500-square-feet-of-class-a-logistics-space-300765951html> ;
+    ns1:foundName "acquisition" ;
+    ns1:internalDocId 3865649 ;
+    ns1:name "acquisition" ;
+    ns1:status "completed" ;
+    ns1:valueRaw "US $ 34.9 million" ;
+    ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "Dec. 14, 2018" ;
+    ns1:whereClean "Mexico" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
+    ns1:whereRaw "Mexico" .
+
+<https://1145.am/db/4252541/Seppo_Parvi-Finishing-Chief_Financial_Officer_And_Deputy_Ceo> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T09:38:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "HELSINKI, May 17, 2024 /PRNewswire/ - Stora Enso's Chief Financial Officer and Deputy CEO, Seppo Parvi, has decided to leave Stora Enso to assume a role with a company outside of the forest industry." ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:foundName "leave" ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Leave" ;
+    ns1:orgFoundName "Stora Enso" ;
+    ns1:role <https://1145.am/db/4252541/Stora_Enso-Chief_Financial_Officer_And_Deputy_Ceo> ;
+    ns1:roleFoundName "Chief Financial Officer and Deputy CEO" ;
+    ns1:roleHolderFoundName "Seppo Parvi" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whenRaw "the fourth quarter of 2024" ;
+    ns1:whereClean "Helsinki" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/658225> ;
+    ns1:whereRaw "HELSINKI" .
+
+<https://1145.am/db/4252806/David_Splett-Finishing-Senior_Vice_President_And_Chief_Financial_Officer> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T10:00:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Calibre is pleased to announce that Ms. Omaya Elguindi will be nominated for election at the Meeting as a new member of the Board." ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "resignation" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Resignation" ;
+    ns1:orgFoundName "Calibre" ;
+    ns1:role <https://1145.am/db/4252806/Calibre_Mining_Corp-Senior_Vice_President_And_Chief_Financial_Officer> ;
+    ns1:roleFoundName "Senior Vice President and Chief Financial Officer" ;
+    ns1:roleHolderFoundName "David Splett" ;
+    ns1:status "stopped" ;
+    ns1:when "2024-07-31T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "July 31, 2024",
+        "Meeting" .
+
+<https://1145.am/db/4252806/Douglas_Hurst-Finishing-Board_Of_Directors> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T10:00:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "VANCOUVER, British Columbia, May 17, 2024 (GLOBE NEWSWIRE) - Calibre Mining Corp. (TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\") announces that Mr. Douglas Hurst and Mr. Raymond Threlkeld will not stand for re-election to the Company's board of directors (the \"Board\") during the June 12, 2024 annual general meeting (the \"Meeting\") ." ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "stand" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Stand" ;
+    ns1:orgFoundName "(TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\")" ;
+    ns1:role <https://1145.am/db/4252806/Calibre_Mining_Corp-Board_Of_Directors> ;
+    ns1:roleFoundName "board of directors" ;
+    ns1:roleHolderFoundName "Douglas Hurst" ;
+    ns1:status "stopped" ;
+    ns1:when "2024-06-12T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "June 12, 2024" ;
+    ns1:whereClean "British Columbia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereRaw "British Columbia" .
+
+<https://1145.am/db/4252806/Omaya_Elguindi-Starting-Board> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T10:00:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Calibre is pleased to announce that Ms. Omaya Elguindi will be nominated for election at the Meeting as a new member of the Board." ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "nominated" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Nominated" ;
+    ns1:orgFoundName "Calibre" ;
+    ns1:role <https://1145.am/db/4252806/Calibre_Mining_Corp-Board> ;
+    ns1:roleFoundName "Board" ;
+    ns1:roleHolderFoundName "Omaya Elguindi" ;
+    ns1:status "not happened at date of document" ;
+    ns1:when "2024-07-31T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "July 31, 2024",
+        "Meeting" .
+
+<https://1145.am/db/4252806/Raymond_Threlkeld-Finishing-Board_Of_Directors> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T10:00:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "VANCOUVER, British Columbia, May 17, 2024 (GLOBE NEWSWIRE) - Calibre Mining Corp. (TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\") announces that Mr. Douglas Hurst and Mr. Raymond Threlkeld will not stand for re-election to the Company's board of directors (the \"Board\") during the June 12, 2024 annual general meeting (the \"Meeting\") ." ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "stand" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Stand" ;
+    ns1:orgFoundName "(TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\")" ;
+    ns1:role <https://1145.am/db/4252806/Calibre_Mining_Corp-Board_Of_Directors> ;
+    ns1:roleFoundName "board of directors" ;
+    ns1:roleHolderFoundName "Raymond Threlkeld" ;
+    ns1:status "stopped" ;
+    ns1:when "2024-06-12T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "June 12, 2024" ;
+    ns1:whereClean "British Columbia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereRaw "British Columbia" .
+
+<https://1145.am/db/4252854/Charlie_Koch-Starting-President> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T10:50:17+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "KANSAS CITY, Mo., May 17, 2024 (GLOBE NEWSWIRE) - Bank Midwest, a division of NBH Bank, has named Charlie Koch as its new President, effective June 15, 2024." ;
+    ns1:documentSource <https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> ;
+    ns1:foundName "named" ;
+    ns1:internalDocId 4252854 ;
+    ns1:name "Named" ;
+    ns1:orgFoundName "Bank Midwest" ;
+    ns1:role <https://1145.am/db/4252854/Bank_Midwest-President> ;
+    ns1:roleFoundName "President" ;
+    ns1:roleHolderFoundName "Charlie Koch" ;
+    ns1:status "completed" ;
+    ns1:when "2024-06-15T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "June 15, 2024" ;
+    ns1:whereClean "Kansas City" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4393217> ;
+    ns1:whereRaw "Kansas City" .
+
+<https://1145.am/db/4253854/Jerome_Lambert-Finishing-Chief_Executive_Officer> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T10:22:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Cartier owner Richemont said Nicolas Bos will replace Jerome Lambert as its chief executive officer, tapping a company veteran who most recently led its French jewelry brand Van Cleef & Arpels as the luxury industry navigates a slowdown in spending." ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "replace" ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Replace" ;
+    ns1:orgFoundName "Richemont" ;
+    ns1:role <https://1145.am/db/4253854/Richemont-Chief_Executive_Officer> ;
+    ns1:roleFoundName "chief executive officer" ;
+    ns1:roleHolderFoundName "Jerome Lambert" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/4253854/Nicolas_Bos-Starting-Chief_Executive_Officer> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T10:22:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Cartier owner Richemont said Nicolas Bos will replace Jerome Lambert as its chief executive officer, tapping a company veteran who most recently led its French jewelry brand Van Cleef & Arpels as the luxury industry navigates a slowdown in spending." ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "replace" ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Replace" ;
+    ns1:orgFoundName "Richemont" ;
+    ns1:role <https://1145.am/db/4253854/Richemont-Chief_Executive_Officer> ;
+    ns1:roleFoundName "chief executive officer" ;
+    ns1:roleHolderFoundName "Nicolas Bos" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/4254008/David_V_Auld-Starting-Executive_Chairman> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T10:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "D.R. Horton, Inc. (NYSE: DHI) , America's Builder, today announced the sudden passing of Donald R. Horton, the Company's Founder and Chairman of the Board of Directors (\"the Board\") ." ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "appointed" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "Appointed" ;
+    ns1:orgFoundName "(NYSE: DHI) , America's Builder" ;
+    ns1:role <https://1145.am/db/4254008/Horton_Inc-Executive_Chairman> ;
+    ns1:roleFoundName "Executive Chairman" ;
+    ns1:roleHolderFoundName "David V. Auld" ;
+    ns1:status "stopped" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "America" .
+
+<https://1145.am/db/4254008/Donald_R_Horton-Finishing-Founder_And_Chairman_Of_The_Board_Of_Directors> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T10:30:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "D.R. Horton, Inc. (NYSE: DHI) , America's Builder, today announced the sudden passing of Donald R. Horton, the Company's Founder and Chairman of the Board of Directors (\"the Board\") .",
+        "Horton, Inc. (NYSE: DHI) , America's Builder, today announced the sudden passing of Donald R. Horton, the Company's Founder and Chairman of the Board of Directors (\"the Board\")." ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "passing" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "Passing" ;
+    ns1:orgFoundName "(NYSE: DHI) , America's Builder",
+        "(NYSE: DHI) , America's Builder," ;
+    ns1:role <https://1145.am/db/4254008/Horton_Inc-Founder_And_Chairman_Of_The_Board_Of_Directors> ;
+    ns1:roleFoundName "Founder and Chairman of the Board of Directors" ;
+    ns1:roleHolderFoundName "Donald R. Horton" ;
+    ns1:status "completed" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "America" .
+
+<https://1145.am/db/4254020/Oguz_Erkan-Starting-Chief_Financial_Officer_(cfo)> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Marti Technologies, Inc. (\"Marti\" or the \"Company\") (NYSE American: MRT) , Türkiye's leading mobility super app, today announced that it has appointed Oguz Erkan as its new Chief Financial Officer (\"CFO\") , effective May 17, 2024." ;
+    ns1:documentSource <https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> ;
+    ns1:foundName "appointed" ;
+    ns1:internalDocId 4254020 ;
+    ns1:name "Appointed" ;
+    ns1:orgFoundName "Marti Technologies, Inc" ;
+    ns1:role <https://1145.am/db/4254020/Marti_Technologies-Chief_Financial_Officer_(cfo)> ;
+    ns1:roleFoundName "Chief Financial Officer (\"CFO\")" ;
+    ns1:roleHolderFoundName "Oguz Erkan" ;
+    ns1:status "not happened at date of document" ;
+    ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 17, 2024" ;
+    ns1:whereClean "Republic of Turkey" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/298795> ;
+    ns1:whereRaw "Türkiye" .
+
+<https://1145.am/db/4254022/Kumar_Gaurav_Gupta-Starting-Chief_Executive_Officer_(ceo)> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Verdantis, a pioneering leader in AI-powered data solutions, proudly announces the appointment of Kumar Gaurav Gupta as its new Chief Executive Officer (CEO) ." ;
+    ns1:documentSource <https://1145.am/db/4254022/wwwbusinesswirecom_news_home_20240517777111_en_Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> ;
+    ns1:foundName "appointment" ;
+    ns1:internalDocId 4254022 ;
+    ns1:name "Appointment" ;
+    ns1:orgFoundName "Verdantis" ;
+    ns1:role <https://1145.am/db/4254022/Verdantis-Chief_Executive_Officer_(ceo)> ;
+    ns1:roleFoundName "Chief Executive Officer (CEO)" ;
+    ns1:roleHolderFoundName "Kumar Gaurav Gupta" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/4254038/Max_Rosett-Starting-Chief_Financial_Officer> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Immunome, Inc. (Nasdaq: IMNM) , a biotechnology company focused on developing first-in-class and best-in-class targeted cancer therapies, today announced the promotion of Max Rosett to Chief Financial Officer, effective May 9." ;
+    ns1:documentSource <https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> ;
+    ns1:foundName "promotion" ;
+    ns1:internalDocId 4254038 ;
+    ns1:name "Promotion" ;
+    ns1:orgFoundName "(Nasdaq: IMNM)" ;
+    ns1:role <https://1145.am/db/4254038/Immunome-Chief_Financial_Officer> ;
+    ns1:roleFoundName "Chief Financial Officer" ;
+    ns1:roleHolderFoundName "Max Rosett" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-09T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 9" ;
+    ns1:whereClean "United States" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereRaw "United States" .
+
+<https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "NORTH BETHESDA, Md., May 17, 2024 /PRNewswire-PRWeb/ - The International Society for Pharmaceutical Engineering (ISPE) International Board of Directors has announced the retirement of Thomas B. Hartman, President and CEO of ISPE." ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "retirement" ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "Retirement" ;
+    ns1:orgFoundName "ISPE" ;
+    ns1:role <https://1145.am/db/4254451/Ispe-President_And> ;
+    ns1:roleFoundName "President and" ;
+    ns1:roleHolderFoundName "Thomas B. Hartman" ;
+    ns1:status "completed" ;
+    ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 17, 2024" ;
+    ns1:whereClean "North Bethesda" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
+    ns1:whereRaw "NORTH BETHESDA, Md" .
+
+<https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And_Ceo> a ns1:RoleActivity ;
+    ns1:activityType "finishing" ;
+    ns1:documentDate "2024-05-17T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "ISPE President and CEO Thomas B. Hartman has announced his intentions to retire from ISPE in early fall 2024.",
+        "NORTH BETHESDA, Md., May 17, 2024 /PRNewswire-PRWeb/ - The International Society for Pharmaceutical Engineering (ISPE) International Board of Directors has announced the retirement of Thomas B. Hartman, President and CEO of ISPE." ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "retire",
+        "retirement" ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "Retire",
+        "Retirement" ;
+    ns1:orgFoundName "ISPE" ;
+    ns1:role <https://1145.am/db/4254451/Ispe-President_And_Ceo> ;
+    ns1:roleFoundName "President and CEO" ;
+    ns1:roleHolderFoundName "Thomas B. Hartman" ;
+    ns1:status "completed",
+        "not happened at date of document" ;
+    ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
+    ns1:whenRaw "May 17, 2024",
+        "early fall 2024" ;
+    ns1:whereClean "North Bethesda" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
+    ns1:whereRaw "NORTH BETHESDA, Md" .
+
+<https://1145.am/db/4254796/Robin_Van_Persie-Starting-Head_Coaching> a ns1:RoleActivity ;
+    ns1:activityType "starting" ;
+    ns1:documentDate "2024-05-17T10:43:21+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Former Arsenal striker Robin van Persie landed his first head coaching job Friday when he was hired by Dutch top-flight club Heerenveen." ;
+    ns1:documentSource <https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> ;
+    ns1:foundName "hired" ;
+    ns1:internalDocId 4254796 ;
+    ns1:name "Hired" ;
+    ns1:orgFoundName "Heerenveen" ;
+    ns1:role <https://1145.am/db/4254796/Heerenveen-Head_Coaching> ;
+    ns1:roleFoundName "head coaching" ;
+    ns1:roleHolderFoundName "Robin van Persie" ;
+    ns1:status "completed" ;
+    ns1:whenRaw "Friday" ;
+    ns1:whereClean "Kingdom of the Netherlands" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereRaw "Dutch" .
+
+<https://1145.am/db/geonames_location/11887750> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
+    ns1:geoNamesId 11887750 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/11887750/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/11887750> ;
+    ns1:internalDocId 3865010 ;
+    ns1:name "Midwest" .
+
+<https://1145.am/db/geonames_location/1850147> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> ;
+    ns1:geoNamesId 1850147 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1850147/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1850147> ;
+    ns1:internalDocId 3864986 ;
+    ns1:name "Tokyo" .
+
+<https://1145.am/db/geonames_location/298795> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> ;
+    ns1:geoNamesId 298795 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/298795/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/298795> ;
+    ns1:internalDocId 4254020 ;
+    ns1:name "Republic of Turkey" .
+
+<https://1145.am/db/geonames_location/4226348> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> ;
+    ns1:geoNamesId 4226348 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4226348/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4226348> ;
+    ns1:internalDocId 3865641 ;
+    ns1:name "Thomasville" .
+
+<https://1145.am/db/geonames_location/4597040> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> ;
+    ns1:geoNamesId 4597040 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4597040/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4597040> ;
+    ns1:internalDocId 3865643 ;
+    ns1:name "South Carolina" .
+
+<https://1145.am/db/geonames_location/4781708> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> ;
+    ns1:geoNamesId 4781708 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4781708/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4781708> ;
+    ns1:internalDocId 3865643 ;
+    ns1:name "Richmond" .
+
+<https://1145.am/db/geonames_location/5578536> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> ;
+    ns1:geoNamesId 5578536 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5578536/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5578536> ;
+    ns1:internalDocId 3865641 ;
+    ns1:name "Johnstown" .
+
+<https://1145.am/db/geonames_location/658225> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:geoNamesId 658225 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/658225/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/658225> ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Helsinki" .
+
+<https://1145.am/db/1770896/Zymergen> a org:Organization ;
+    ns1:basedInHighClean "Emeryville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5346462> ;
+    ns1:basedInHighRaw "Emeryville, Calif." ;
+    ns1:description "to engineer tiny microbes with the aid of advanced computing to help increase the yields from" ;
+    ns1:documentSource <https://1145.am/db/1770896/techcrunchcom_2018_12_13_zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund_> ;
+    ns1:foundName "Zymergen" ;
+    ns1:internalDocId 1770896 ;
+    ns1:name "Zymergen" ;
+    ns1:sameAsHigh <https://1145.am/db/2154577/Zymergen>,
+        <https://1145.am/db/2292222/Zymergen> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1230095/Zymergen_Inc>,
+        <https://1145.am/db/1230408/Zymergen>,
+        <https://1145.am/db/1230964/Zymergen_Inc>,
+        <https://1145.am/db/1237342/Zymergen>,
+        <https://1145.am/db/1737730/Zymergen>,
+        <https://1145.am/db/1818582/Zymergen>,
+        <https://1145.am/db/2325015/Zymergen>,
+        <https://1145.am/db/3740114/Zymergen_Inc> .
+
+<https://1145.am/db/2154577/Zymergen> a org:Organization ;
+    ns1:basedInHighClean "Emeryville" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5346462> ;
+    ns1:basedInHighRaw "Emeryville, California" ;
+    ns1:description "synthetic biology" ;
+    ns1:documentSource <https://1145.am/db/2154577/wwwfiercebiotechcom_medtech_softbank-returns-to-back-synthetic-biology-firm-zymergen-a-400m-series-c-round> ;
+    ns1:foundName "Zymergen" ;
+    ns1:industry "SynBio" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/154_biomanufacturing_bioprocessing_biotechnologies_bioproduction> ;
+    ns1:internalDocId 2154577 ;
+    ns1:name "Zymergen" ;
+    ns1:sameAsHigh <https://1145.am/db/1737730/Zymergen>,
+        <https://1145.am/db/1770896/Zymergen>,
+        <https://1145.am/db/2292222/Zymergen> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1230095/Zymergen_Inc>,
+        <https://1145.am/db/1230408/Zymergen>,
+        <https://1145.am/db/1230964/Zymergen_Inc>,
+        <https://1145.am/db/1237342/Zymergen>,
+        <https://1145.am/db/1818582/Zymergen>,
+        <https://1145.am/db/2325015/Zymergen>,
+        <https://1145.am/db/3740114/Zymergen_Inc> .
+
+<https://1145.am/db/3865643/Dominion_Energy-Scana_Corporation-Merger> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "merger" ;
+    ns1:documentDate "2018-12-14T21:47:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "RICHMOND, Va. and CAYCE, S.C., Dec. 14, 2018 /PRNewswire/ - Today the Public Service Commission of South Carolina (SCPSC) voted to approve the merger between Dominion Energy, Inc. (NYSE: D) and SCANA Corporation (NYSE: SCG) with conditions to be outlined later as part of a written order that is to be issued by Dec. 21, 2018." ;
+    ns1:documentSource <https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> ;
+    ns1:foundName "merger" ;
+    ns1:internalDocId 3865643 ;
+    ns1:name "merger" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereClean "South Carolina" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
+    ns1:whereRaw "South Carolina" .
+
+<https://1145.am/db/4252541/Stora_Enso-Chief_Financial_Officer_And_Deputy_Ceo> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:foundName "Chief Financial Officer and Deputy CEO" ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Chief Financial Officer and Deputy CEO" ;
+    ns1:orgFoundName "Stora Enso'" .
+
+<https://1145.am/db/4252806/Calibre_Mining_Corp-Board> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Board" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Board" ;
+    ns1:orgFoundName "Calibre" .
+
+<https://1145.am/db/4252806/Calibre_Mining_Corp-Senior_Vice_President_And_Chief_Financial_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "Senior Vice President and Chief Financial Officer" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Senior Vice President and Chief Financial Officer" ;
+    ns1:orgFoundName "Calibre" .
+
+<https://1145.am/db/4252854/Bank_Midwest-President> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> ;
+    ns1:foundName "President" ;
+    ns1:internalDocId 4252854 ;
+    ns1:name "President" ;
+    ns1:orgFoundName "Bank Midwest" .
+
+<https://1145.am/db/4254008/Horton_Inc-Executive_Chairman> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "Executive Chairman" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "Executive Chairman" ;
+    ns1:orgFoundName "(NYSE: DHI) , America's Builder" .
+
+<https://1145.am/db/4254008/Horton_Inc-Founder_And_Chairman_Of_The_Board_Of_Directors> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> ;
+    ns1:foundName "Founder and Chairman of the Board of Directors" ;
+    ns1:internalDocId 4254008 ;
+    ns1:name "Founder and Chairman of the Board of Directors" ;
+    ns1:orgFoundName "(NYSE: DHI) , America's Builder",
+        "(NYSE: DHI) , America's Builder," .
+
+<https://1145.am/db/4254020/Marti_Technologies-Chief_Financial_Officer_(cfo)> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> ;
+    ns1:foundName "Chief Financial Officer (\"CFO\")" ;
+    ns1:internalDocId 4254020 ;
+    ns1:name "Chief Financial Officer (\"CFO\")" ;
+    ns1:orgFoundName "Marti Technologies, Inc" .
+
+<https://1145.am/db/4254022/Verdantis-Chief_Executive_Officer_(ceo)> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254022/wwwbusinesswirecom_news_home_20240517777111_en_Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> ;
+    ns1:foundName "Chief Executive Officer (CEO)" ;
+    ns1:internalDocId 4254022 ;
+    ns1:name "Chief Executive Officer (CEO)" ;
+    ns1:orgFoundName "Verdantis" .
+
+<https://1145.am/db/4254038/Immunome-Chief_Financial_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> ;
+    ns1:foundName "Chief Financial Officer" ;
+    ns1:internalDocId 4254038 ;
+    ns1:name "Chief Financial Officer" ;
+    ns1:orgFoundName "(Nasdaq: IMNM)" .
+
+<https://1145.am/db/4254451/Ispe-President_And> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "President and" ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "President And" ;
+    ns1:orgFoundName "ISPE" .
+
+<https://1145.am/db/4254451/Ispe-President_And_Ceo> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:foundName "President and CEO" ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "President and CEO" ;
+    ns1:orgFoundName "ISPE" .
+
+<https://1145.am/db/4254796/Heerenveen-Head_Coaching> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> ;
+    ns1:foundName "head coaching" ;
+    ns1:internalDocId 4254796 ;
+    ns1:name "Head Coaching" ;
+    ns1:orgFoundName "Heerenveen" .
+
+<https://1145.am/db/geonames_location/3996063> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865649/wwwprnewswirecom_news-releases_fibra-prologis-acquires-662-500-square-feet-of-class-a-logistics-space-300765951html> ;
+    ns1:geoNamesId 3996063 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3996063/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3996063> ;
+    ns1:internalDocId 3865649 ;
+    ns1:name "Mexico" .
+
+<https://1145.am/db/geonames_location/4363843> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> ;
+    ns1:geoNamesId 4363843 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4363843/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4363843> ;
+    ns1:internalDocId 4254451 ;
+    ns1:name "North Bethesda" .
+
+<https://1145.am/db/geonames_location/4739526> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
+    ns1:geoNamesId 4739526 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4739526/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4739526> ;
+    ns1:internalDocId 3865010 ;
+    ns1:name "Waco" .
+
+<https://1145.am/db/geonames_location/4904056> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> ;
+    ns1:geoNamesId 4904056 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4904056/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4904056> ;
+    ns1:internalDocId 3864986 ;
+    ns1:name "Northbrook" .
+
+<https://1145.am/db/geonames_location/660013> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
+    ns1:geoNamesId 660013 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/660013/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/660013> ;
+    ns1:internalDocId 4252541 ;
+    ns1:name "Republic of Finland" .
+
+<https://1145.am/db/1770196/techcrunchcom_2018_12_13_toyota-invests-in-autonomous-driving-simulation-startup-parallel-domain_> a schema:Article ;
+    ns1:internalDocId 1770196 ;
+    schema:datePublished "2018-12-14T18:14:24+00:00"^^xsd:dateTime ;
+    schema:headline "Toyota invests in autonomous driving simulation startup Parallel Domain" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/12/13/toyota-invests-in-autonomous-driving-simulation-startup-parallel-domain/> .
+
+<https://1145.am/db/2154577/wwwfiercebiotechcom_medtech_softbank-returns-to-back-synthetic-biology-firm-zymergen-a-400m-series-c-round> a schema:Article ;
+    ns1:internalDocId 2154577 ;
+    schema:datePublished "2018-12-14T21:29:14+00:00"^^xsd:dateTime ;
+    schema:headline "SoftBank returns to back synthetic biology firm Zymergen in a $400M series C round" ;
+    schema:sourceOrganization "Fierce Biotech" ;
+    schema:url <https://www.fiercebiotech.com/medtech/softbank-returns-to-back-synthetic-biology-firm-zymergen-a-400m-series-c-round> .
+
+<https://1145.am/db/3865649/wwwprnewswirecom_news-releases_fibra-prologis-acquires-662-500-square-feet-of-class-a-logistics-space-300765951html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:04:20+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3865649 ;
+    schema:datePublished "2018-12-14T22:13:00+00:00"^^xsd:dateTime ;
+    schema:headline "FIBRA Prologis Acquires 662,500 Square Feet of Class-A Logistics Space" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/fibra-prologis-acquires-662-500-square-feet-of-class-a-logistics-space-300765951.html> .
+
+<https://1145.am/db/4252806/Calibre_Mining_Corp-Board_Of_Directors> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:foundName "board of directors" ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "Board of Directors" ;
+    ns1:orgFoundName "(TSX: CXB; OTCQX: CXBMF) (the \"Company\" or \"Calibre\")" .
+
+<https://1145.am/db/4253854/Richemont-Chief_Executive_Officer> a org:Role ;
+    ns1:documentSource <https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> ;
+    ns1:foundName "chief executive officer" ;
+    ns1:internalDocId 4253854 ;
+    ns1:name "Chief Executive Officer" ;
+    ns1:orgFoundName "Richemont" .
+
+<https://1145.am/db/geonames_location/2658434> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:geoNamesId 2658434 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2658434/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2658434> ;
+    ns1:internalDocId 1771672 ;
+    ns1:name "Switzerland" .
+
+<https://1145.am/db/geonames_location/2750405> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> ;
+    ns1:geoNamesId 2750405 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2750405/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2750405> ;
+    ns1:internalDocId 4254796 ;
+    ns1:name "Kingdom of the Netherlands" .
+
+<https://1145.am/db/geonames_location/4259418> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865608/wwwprnewswirecom_news-releases_lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876html> ;
+    ns1:geoNamesId 4259418 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4259418/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4259418> ;
+    ns1:internalDocId 3865608 ;
+    ns1:name "Indianapolis" .
+
+<https://1145.am/db/geonames_location/4393217> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> ;
+    ns1:geoNamesId 4393217 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4393217/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4393217> ;
+    ns1:internalDocId 4252854 ;
+    ns1:name "Kansas City" .
+
+<https://1145.am/db/geonames_location/5346462> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/1770896/techcrunchcom_2018_12_13_zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund_>,
+        <https://1145.am/db/2154577/wwwfiercebiotechcom_medtech_softbank-returns-to-back-synthetic-biology-firm-zymergen-a-400m-series-c-round> ;
+    ns1:geoNamesId 5346462 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5346462/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5346462> ;
+    ns1:internalDocId 1770896,
+        2154577 ;
+    ns1:name "Emeryville" .
+
+<https://1145.am/db/geonames_location/5909050> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> ;
+    ns1:geoNamesId 5909050 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5909050/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5909050> ;
+    ns1:internalDocId 4252806 ;
+    ns1:name "British Columbia" .
+
+<https://1145.am/db/1770896/techcrunchcom_2018_12_13_zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund_> a schema:Article ;
+    ns1:internalDocId 1770896 ;
+    schema:datePublished "2018-12-14T18:44:18+00:00"^^xsd:dateTime ;
+    schema:headline "Zymergen lands $400 million more, led by SoftBank Vision Fund, for its genetically altered microbes" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/12/13/zymergen-lands-400-million-more-for-its-genetically-altered-microbes-led-by-softbank-vision-fund/> .
+
+<https://1145.am/db/3865608/wwwprnewswirecom_news-releases_lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:04:11+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3865608 ;
+    schema:datePublished "2018-12-14T20:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Lilly to Acquire Pre-Clinical Pain Program from Hydra Biosciences" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/lilly-to-acquire-pre-clinical-pain-program-from-hydra-biosciences-300765876.html> .
+
+<https://1145.am/db/4254022/wwwbusinesswirecom_news_home_20240517777111_en_Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:23:41+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254022 ;
+    schema:datePublished "2024-05-17T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Verdantis Appoints Kumar Gaurav Gupta as Chief Executive Officer" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240517777111/en/Verdantis-Appoints-Kumar-Gaurav-Gupta-as-Chief-Executive-Officer> .
+
+<https://1145.am/db/geonames_location/6252001> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html>,
+        <https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton>,
+        <https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> ;
+    ns1:geoNamesId 6252001 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6252001/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6252001> ;
+    ns1:internalDocId 3865641,
+        4254008,
+        4254038 ;
+    ns1:name "United States" .
+
+<https://1145.am/db/1771672/Forestay_Capital-Gal_O_Capital_And_Top_Funds-Highland_Europe-Index_Ventures-Nexthink-Olivier_Pomel-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-12-14T17:44:35+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Lausanne, Switzerland - based Nexthink has nailed down $ 85 million in funding led by Index Ventures (which has a base in nearby Geneva) , with participation also from Highland Europe, Forestay Capital, Galéo Capital and TOP Funds and Olivier Pomel (co-founder and CEO of Datadog) ." ;
+    ns1:documentSource <https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 1771672 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1771672/Nexthink> ;
+    ns1:valueRaw "$ 85 million" ;
+    ns1:whereClean "Switzerland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:whereRaw "Switzerland" .
+
+<https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:02:04+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3864986 ;
+    schema:datePublished "2018-12-14T18:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Astellas Acquires Potenza Therapeutics" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/astellas-acquires-potenza-therapeutics-300765809.html> .
+
+<https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:02:11+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3865010 ;
+    schema:datePublished "2018-12-14T18:54:00+00:00"^^xsd:dateTime ;
+    schema:headline "Versalift Acquires Cannon Truck Equipment, establishes Versalift Midwest" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833.html> .
+
+<https://1145.am/db/3865643/wwwprnewswirecom_news-releases_statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:04:19+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3865643 ;
+    schema:datePublished "2018-12-14T21:47:00+00:00"^^xsd:dateTime ;
+    schema:headline "Statement by Dominion Energy, SCANA Corporation on Public Service Commission of South Carolina Vote on Merger, Associated Customer Benefit Plan" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/statement-by-dominion-energy-scana-corporation-on-public-service-commission-of-south-carolina-vote-on-merger-associated-customer-benefit-plan-300765941.html> .
+
+<https://1145.am/db/4252854/wwwglobenewswirecom_news-release_2024_05_17_2884112_0_en_Bank-Midwest-Names-Koch-as-New-Presidenthtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:09:24+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4252854 ;
+    schema:datePublished "2024-05-17T10:50:17+00:00"^^xsd:dateTime ;
+    schema:headline "Bank Midwest Names Koch as New President" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/17/2884112/0/en/Bank-Midwest-Names-Koch-as-New-President.html> .
+
+<https://1145.am/db/4254020/wwwbusinesswirecom_news_home_20240517191405_en_Marti-Technologies-Inc-Appoints-New-Chief-Financial-Officer> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:23:39+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254020 ;
+    schema:datePublished "2024-05-17T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Marti Technologies, Inc. Appoints New Chief Financial Officer" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240517191405/en/Marti-Technologies-Inc.-Appoints-New-Chief-Financial-Officer> .
+
+<https://1145.am/db/4254038/wwwbusinesswirecom_news_home_20240517911577_en_Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:24:01+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254038 ;
+    schema:datePublished "2024-05-17T12:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Immunome Announces Promotion of Max Rosett to Chief Financial Officer" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240517911577/en/Immunome-Announces-Promotion-of-Max-Rosett-to-Chief-Financial-Officer> .
+
+<https://1145.am/db/4254796/apnewscom_article_van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> a schema:Article ;
+    ns1:dateRetrieved "2024-05-19T05:12:17+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254796 ;
+    schema:datePublished "2024-05-17T10:43:21+00:00"^^xsd:dateTime ;
+    schema:headline "Robin van Persie hired as coach of Dutch club Heerenveen" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/article/van-persie-dutch-coaching-heerenveen-6b439d2600749979ed482de8ef1b9299> .
+
+<https://1145.am/db/3865641/wwwprnewswirecom_news-releases_flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T23:04:18+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3865641 ;
+    schema:datePublished "2018-12-14T21:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "Flowers Foods Completes Acquisition Of Canyon Bakehouse" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/flowers-foods-completes-acquisition-of-canyon-bakehouse-300765866.html> .
+
+<https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:08:56+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4252541 ;
+    schema:datePublished "2024-05-17T09:38:00+00:00"^^xsd:dateTime ;
+    schema:headline "CFO and Deputy CEO Seppo Parvi leaves Stora Enso during the fourth quarter of 2024" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830.html> .
+
+<https://1145.am/db/4253854/wwwmarketwatchcom_story_cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:13:41+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4253854 ;
+    schema:datePublished "2024-05-17T10:22:00+00:00"^^xsd:dateTime ;
+    schema:headline "Cartier Owner Richemont Names Van Cleef & Arpels Head as New CEO - 2nd Update" ;
+    schema:sourceOrganization "MarketWatch" ;
+    schema:url <https://www.marketwatch.com/story/cartier-owner-richemont-names-van-cleef-arpels-head-as-new-ceo-2nd-update-71b6740d> .
+
+<https://1145.am/db/4254451/wwwprwebcom_releases_ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556html> a schema:Article ;
+    ns1:dateRetrieved "2024-05-19T05:08:45+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254451 ;
+    schema:datePublished "2024-05-17T12:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "ISPE International Board of Directors Announces the Retirement of Thomas B. Hartman, President and CEO of ISPE" ;
+    schema:sourceOrganization "prweb" ;
+    schema:url <https://www.prweb.com/releases/ispe-international-board-of-directors-announces-the-retirement-of-thomas-b-hartman-president-and-ceo-of-ispe-302148556.html> .
+
+<https://1145.am/db/1771672/techcrunchcom_2018_12_12_nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps_> a schema:Article ;
+    ns1:internalDocId 1771672 ;
+    schema:datePublished "2018-12-14T17:44:35+00:00"^^xsd:dateTime ;
+    schema:headline "Nexthink raises $85M to monitor and improve 'employee experience' of apps" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/12/12/nexthink-raises-85m-to-monitor-and-improve-employee-experience-of-apps/> .
+
+<https://1145.am/db/4254008/wwwbusinesswirecom_news_home_20240517493282_en_DR-Horton-Inc-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R-Horton> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:23:22+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4254008 ;
+    schema:datePublished "2024-05-17T10:30:00+00:00"^^xsd:dateTime ;
+    schema:headline "D.R. Horton, Inc. Announces the Passing of Company Founder and Chairman, Donald R. Horton" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240517493282/en/D.R.-Horton-Inc.-Announces-the-Passing-of-Company-Founder-and-Chairman-Donald-R.-Horton> .
+
+<https://1145.am/db/4252806/wwwglobenewswirecom_news-release_2024_05_17_2884099_0_en_Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Managementhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-05-18T05:09:21+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4252806 ;
+    schema:datePublished "2024-05-17T10:00:55+00:00"^^xsd:dateTime ;
+    schema:headline "Calibre Announces Proposed Update to its Board of Directors and Change to Senior Management" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/05/17/2884099/0/en/Calibre-Announces-Proposed-Update-to-its-Board-of-Directors-and-Change-to-Senior-Management.html> .
+

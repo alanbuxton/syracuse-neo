@@ -10,7 +10,7 @@ from django.core.cache import cache
 from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One
-from neomodel import Q
+from typing import List
 
 import logging
 logger = logging.getLogger(__name__)
@@ -97,6 +97,11 @@ class Resource(StructuredNode):
             return r
         else:
             return Resource.self_or_ultimate_target_node(r.internalMergedSameAsHighToUri)
+
+    @staticmethod
+    def self_or_ultimate_target_node_set(uris_or_objects: List):
+        items = [Resource.self_or_ultimate_target_node(x) for x  in uris_or_objects]
+        return list(set(items))
 
     @property
     def sourceDocumentURL(self):
@@ -282,10 +287,10 @@ class IndustryCluster(Resource):
     parentsRight = RelationshipFrom("IndustryCluster","childRight")
     topicId = IntegerProperty()
     uniqueName = StringProperty()
-    orgsHigh = RelationshipFrom("Organization","industryClusterHigh")
-    orgsMedium = RelationshipFrom("Organization","industryClusterMedium")
-    peopleHigh = RelationshipFrom("Person","industryClusterHigh")
-    peopleMedium = RelationshipFrom("Person","industryClusterMedium")
+    orgsPrimary = RelationshipFrom("Organization","industryClusterPrimary")
+    orgsSecondary = RelationshipFrom("Organization","industryClusterSecondary")
+    peoplePrimary = RelationshipFrom("Person","industryClusterPrimary")
+    peopleSecondary = RelationshipFrom("Person","industryClusterSecondary")
 
     def serialize(self):
         vals = super(IndustryCluster, self).serialize()
@@ -358,19 +363,36 @@ class IndustryCluster(Resource):
         flattened = [x for sublist in descendant_uris for x in sublist]
         return [root.uri] + flattened
 
+    @property
+    def friendly_name_and_id(self):
+        vals = self.uniqueName.split("_")
+        name = ", ".join(vals[1:]).title()
+        return name, vals[0]
+
 
 class ActivityMixin:
     activityType = ArrayProperty(StringProperty())
     when = ArrayProperty(NativeDateTimeProperty())
     whenRaw = ArrayProperty(StringProperty())
     status = ArrayProperty(StringProperty())
-    whereGeoName = ArrayProperty(StringProperty())
-    whereGeoNameRDF = Relationship('Resource','whereGeoNameRDF')
+    whereClean = ArrayProperty(StringProperty())
+    whereGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereGeoNamesLocation')
     internalActivityList = ArrayProperty(StringProperty())
 
     @property
     def whereGeoName_as_str(self):
-        return print_friendly(self.whereGeoName)
+        cache_key = f"{self.__class__.__name__}_activity_mixin_name_{self.uri}"
+        names = cache.get(cache_key)
+        if names is not None:
+            return names
+        names = []
+        for x in self.whereGeoNamesLocation:
+            if x.name is None:
+                continue
+            names.extend(x.name)
+        name = print_friendly(names)
+        cache.set(cache_key,name)
+        return name
 
     @property
     def longest_activityType(self):
@@ -397,9 +419,7 @@ class ActivityMixin:
             "status": self.status,
             "when": self.when,
             "when_raw": self.whenRaw,
-            "where_geo_name": self.whereGeoName,
-            "where_geo_name_url": self.whereGeoNameURL,
-            "where_geo_name_rdf_url": self.whereGeoNameRDFURL,
+            "where_clean": self.whereClean
         }
 
     @property
@@ -414,141 +434,45 @@ class ActivityMixin:
             uris.append(uri)
         return uris
 
-    @staticmethod
-    def by_country_or_region(geo_code,allowed_to_set_cache=False):
-        cache_key = f"activity_mixin_by_country_{geo_code}"
-        res = cache.get(cache_key)
-        if res:
-            logger.debug(f"{cache_key} cache hit")
-            return res
-        logger.debug(f"{cache_key} cache miss")
-        uris = get_geoname_uris_for_country_region(geo_code)
-        resources, _ = db.cypher_query(f"MATCH (loc)-[:whereGeoNameRDF]-(n) WHERE loc.uri IN {uris} RETURN n",resolve_objects=True)
-        flattened = [x for sublist in resources for x in sublist]
-        if allowed_to_set_cache is True:
-            cache.set(cache_key, flattened)
-        else:
-            logger.debug("Not allowed to set cache")
-        return flattened
-
-    @staticmethod
-    def orgs_by_activity_where_industry(geo_code=None,industry_uris=None,limit=None,
-                allowed_to_set_cache=False,include_merged_from=False):
-        if industry_uris is None:
-            hash_key = hash(None)
-        else:
-            hash_key = hash('_'.join(sorted(industry_uris)))
-        cache_key = f"activity_mixin_orgs_by_activity_where_{geo_code}_{hash_key}"
-        relevant_items = cache.get(cache_key)
-        if relevant_items and limit is None:
-            logger.debug(f"{cache_key} cache hit")
-            return relevant_items
-        logger.debug(f"{cache_key} cache miss")
-        if geo_code is not None and geo_code.strip() != '':
-            activities = ActivityMixin.by_country_or_region(geo_code,allowed_to_set_cache=allowed_to_set_cache)
-            act_uris = [x.uri for x in activities]
-            query=f"MATCH (n: Organization)--(a) WHERE a.uri IN {act_uris} "
-        else:
-            query=f"MATCH (n: Organization) "
-        if industry_uris is not None:
-            if "WHERE" in query:
-                query = f"{query} AND"
-            else:
-                query = f"{query} WHERE"
-            query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
-        if include_merged_from is False:
-            if "WHERE" in query:
-                query = f"{query} AND"
-            else:
-                query = f"{query} WHERE"
-            query = f"{query} n.internalMergedSameAsHighToUri IS NULL "
-        query = query + " RETURN n"
-        if limit is not None:
-            query = f"{query} LIMIT {limit}"
-        orgs, _ = db.cypher_query(query,resolve_objects=True)
-        flattened = [x for sublist in orgs for x in sublist]
-        if allowed_to_set_cache is True:
-            cache.set(cache_key, flattened)
-        else:
-            logger.debug("Not allowed to set cache")
-        return flattened
-
-
-def date_for_cypher(a_date):
-    return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
-
-
-class BasedInGeoMixin:
-    basedInHighGeoName = ArrayProperty(StringProperty())
-    basedInHighGeoNameRDF = Relationship('Resource','basedInHighGeoNameRDF')
+class GeoNamesLocation(Resource):
+    geoNamesId = IntegerProperty()
+    geoNames = Relationship('Resource','geoNames')
 
     @property
-    def basedInHighGeoName_as_str(self):
-        return print_friendly(self.basedInHighGeoName)
+    def geoNamesURL(self):
+        return uri_from_related(self.geoNames)
 
     @property
-    def basedInHighGeoNameRDFURL(self):
-        return uri_from_related(self.basedInHighGeoNameRDF)
-
-    @property
-    def basedInHighGeoNameURL(self):
-        uri = uri_from_related(self.basedInHighGeoNameRDF)
-        if uri:
-            uri = uri.replace("/about.rdf","")
+    def geoNamesRDFURL(self):
+        if self.geoNamesURL is None:
+            return None
+        uri = self.geoNamesURL + "/about.rdf"
         return uri
 
-    @classmethod
-    def by_country_region_industry(cls,geo_code=None,industry_uris=None,limit=20,
-                allowed_to_set_cache=False,include_merged_from=False):
-        label = cls.__name__
-        if industry_uris is None:
-            hash_key = hash(None)
-        else:
-            hash_key = hash('_'.join(sorted(industry_uris)))
-        cache_key = f"{label}_based_in_country_or_region_{geo_code}_{hash_key}"
+    def serialize(self):
+        vals = super(GeoNamesLocation, self).serialize()
+        vals['geonames_id'] = self.geoNamesId
+        vals['geonames_rdf_url'] = self.geoNamesRDFURL
+        vals['geonames_url'] = self.geoNamesURL
+        return vals
+
+    @staticmethod
+    def uris_by_geo_code(geo_code):
+        if geo_code is None or geo_code.strip() == '':
+            return None
+        cache_key = f"geonames_locations_{geo_code}"
         res = cache.get(cache_key)
-        if res:
-            logger.debug(f"{cache_key} cache hit")
+        if res is not None:
             return res
-        logger.debug(f"{cache_key} cache miss")
-        if geo_code is not None and geo_code.strip() != '':
-            geo_uris = get_geoname_uris_for_country_region(geo_code)
-            query = f"MATCH (loc)-[:basedInHighGeoNameRDF]-(n: {label}) WHERE loc.uri IN {geo_uris} "
-        else:
-            query = f"MATCH (n: {label})"
-        if industry_uris is not None:
-            if "WHERE" in query:
-                query = f"{query} AND"
-            else:
-                query = f"{query} WHERE"
-            query = f"{query} EXISTS {{ MATCH (n)--(i:IndustryCluster) WHERE i.uri IN {industry_uris} }}"
-        if include_merged_from is False:
-            if "WHERE" in query:
-                query = f"{query} AND"
-            else:
-                query = f"{query} WHERE"
-            query = f"{query} n.internalMergedSameAsHighToUri IS NULL "
-        query = f"{query} RETURN n"
-        if limit is not None:
-            query = f"{query} LIMIT {limit}"
-        resources, _ = db.cypher_query(query,resolve_objects=True)
-        flattened = [x for sublist in resources for x in sublist]
-        if allowed_to_set_cache is True:
-            cache.set(cache_key, flattened)
-        else:
-            logger.debug("Not allowed to update cache")
-        return flattened
-
-    @property
-    def based_in_fields(self):
-        return {"based_in_high_geonames_name": self.basedInHighGeoName,
-                "based_in_high_geonames_url": self.basedInHighGeoNameURL,
-                "based_in_high_geonames_rdf_url": self.basedInHighGeoNameRDFURL,
-                # "basedInHighGeoNameAsStr": self.basedInHighGeoName_as_str,
-                }
+        geonames_uris = get_geoname_uris_for_country_region(geo_code)
+        vals, _ = db.cypher_query(f"""MATCH (n: GeoNamesLocation)-[:geoNamesURL]-(r: Resource)
+                                    WHERE r.uri in {geonames_uris} RETURN n""",resolve_objects=True)
+        uris = [x[0].uri for x in vals]
+        cache.set(cache_key, uris)
+        return uris
 
 
-class Organization(BasedInGeoMixin, Resource):
+class Organization(Resource):
     description = ArrayProperty(StringProperty())
     industry = ArrayProperty(StringProperty())
     investor = RelationshipTo('CorporateFinanceActivity','investor')
@@ -560,8 +484,10 @@ class Organization(BasedInGeoMixin, Resource):
     hasRole = RelationshipTo('Role','hasRole')
     locationAdded = RelationshipTo('LocationActivity','locationAdded')
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
-    industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
-    industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
+    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
+    # industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
+    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
+    basedInHighClean = ArrayProperty(StringProperty())
 
     @property
     def industry_as_str(self):
@@ -615,12 +541,6 @@ class Organization(BasedInGeoMixin, Resource):
     def by_uris(uris):
         return Organization.nodes.filter(uri__in=uris)
 
-    @classmethod
-    def find_by_industry(cls, industry):
-        query = f'match (n: {cls.__name__}) where any (item in n.industry where item =~ "(?i).*{industry}.*") return *'
-        results, columns = db.cypher_query(query)
-        return [cls.inflate(row[0]) for row in results]
-
     @staticmethod
     def get_random():
         return Organization.nodes.order_by('?')[0]
@@ -634,11 +554,10 @@ class Organization(BasedInGeoMixin, Resource):
 
     def serialize(self):
         vals = super(Organization, self).serialize()
-        based_in_fields = self.based_in_fields
         org_vals = {"description": self.description,
                     "industry": self.industry_as_str,
                     }
-        return {**vals,**org_vals,**based_in_fields}
+        return {**vals,**org_vals}
 
     def get_role_activities(self):
         role_activities = []
@@ -647,6 +566,47 @@ class Organization(BasedInGeoMixin, Resource):
             role_activities.extend([(role,act) for act in acts])
         return role_activities
 
+    @staticmethod
+    def by_industry_and_or_geo(industry_id, geo_code,uris_only=False,limit=None,allowed_to_set_cache=False):
+        cache_key = f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}"
+        vals = cache.get(cache_key)
+        if vals is not None:
+            return vals
+        logger.info(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
+        industry_uris = IndustryCluster.with_descendants(industry_id)
+        geo_uris = GeoNamesLocation.uris_by_geo_code(geo_code)
+        if industry_uris is None and geo_uris is None:
+            return None
+        match1 = None
+        match2 = None
+        where1 = None
+        where2 = None
+        if industry_uris is not None:
+            match1 = "(n: Organization)-[:industryClusterPrimary]-(i: IndustryCluster) "
+            where1 = f" i.uri IN {industry_uris} "
+        if geo_uris is not None:
+            match2 = "(n: Organization)-[:basedInHighGeoNamesLocation]-(g: GeoNamesLocation) "
+            where2 = f" g.uri IN {geo_uris} "
+        if industry_uris is None and geo_uris is not None:
+            query = f"MATCH {match2} WHERE {where2} RETURN n "
+        elif industry_uris is not None and geo_uris is None:
+            query = f"MATCH {match1} WHERE {where1} RETURN n "
+        else:
+            query = f"MATCH {match1}, {match2} WHERE {where1} and {where2} RETURN n "
+        if limit is not None:
+            query = f"{query} LIMIT {limit}"
+        logger.debug(query)
+        vals, _ = db.cypher_query(query, resolve_objects=True)
+        if uris_only is True:
+            res = [x[0].uri for x in vals]
+            if allowed_to_set_cache is True:
+                cache.set(cache_key,res)
+            return res
+        else:
+            res = [x[0] for x in vals]
+            if allowed_to_set_cache is True:
+                cache.set(cache_key,res)
+            return res
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())
@@ -662,11 +622,11 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
     @property
     def all_participants(self):
         return {
-            "vendor": self.vendor.all(),
-            "investor": self.investor.all(),
-            "buyer": self.buyer.all(),
-            "protagonist": self.protagonist.all(),
-            "participant": self.participant.all(),
+            "vendor": Resource.self_or_ultimate_target_node_set(self.vendor),
+            "investor": Resource.self_or_ultimate_target_node_set(self.investor),
+            "buyer": Resource.self_or_ultimate_target_node_set(self.buyer),
+            "protagonist": Resource.self_or_ultimate_target_node_set(self.protagonist),
+            "participant": Resource.self_or_ultimate_target_node_set(self.participant),
         }
 
     @property
@@ -756,38 +716,39 @@ class LocationActivity(ActivityMixin, Resource):
         return {**vals,**act_vals,**activity_fields}
 
 class Site(Resource):
-    nameGeoName = StringProperty()
-    nameGeoNameRDF = Relationship('Resource','nameGeoNameRDF')
+    nameClean = StringProperty()
     location = RelationshipFrom('LocationActivity','location')
+    nameGeoNamesLocation = RelationshipTo('GeoNamesLocation','nameGeoNamesLocation')
+    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
 
     @property
-    def nameGeoNameRDFURL(self):
-        return uri_from_related(self.nameGeoNameRDF)
+    def nameGeoNamesLocationRDFURL(self):
+        return uri_from_related(self.nameGeoNamesLocation)
 
     @property
-    def nameGeoNameURL(self):
-        uri = uri_from_related(self.nameGeoNameRDF)
+    def nameGeoNamesLocationURL(self):
+        uri = uri_from_related(self.nameGeoNamesLocation)
         if uri:
             uri = uri.replace("/about.rdf","")
         return uri
 
-    def serialize(self):
-        vals = super(Site, self).serialize()
-        vals["geonames_name"] = self.nameGeoName
-        vals["geonames_url"] = self.nameGeoNameURL
-        vals["geonames_rdf_url"] = self.nameGeoNameRDFURL
-        return vals
+    @property
+    def basedInHighGeoNamesLocationRDFURL(self):
+        return uri_from_related(self.basedInHighGeoNamesLocation)
+
+    @property
+    def basedInHighGeoNamesLocationURL(self):
+        uri = uri_from_related(self.basedInHighGeoNamesLocation)
+        if uri:
+            uri = uri.replace("/about.rdf","")
+        return uri
 
 
-class Person(BasedInGeoMixin, Resource):
+class Person(Resource):
     roleActivity = RelationshipTo('RoleActivity','roleActivity')
-    industryClusterHigh = RelationshipTo('IndustryCluster','industryClusterHigh')
-    industryClusterMedium = RelationshipTo('IndustryCluster','industryClusterMedium')
+    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
+    industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
 
-    def serialize(self):
-        vals = super(Person, self).serialize()
-        based_in_fields = self.based_in_fields
-        return {**vals,**based_in_fields}
 
 class Role(Resource):
     orgFoundName = ArrayProperty(StringProperty())
@@ -819,3 +780,7 @@ def print_friendly(vals, limit = 2):
     if extras > 0:
         val = f"{val} and {extras} more"
     return val
+
+
+def date_for_cypher(a_date):
+    return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"

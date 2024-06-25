@@ -13,14 +13,16 @@ def setup_db_if_necessary():
         do_n10s_config()
 
 def do_n10s_config(force=False):
-    multivals = ["actionFoundName","activityType","basedInHighGeoName",
+    multivals = ["actionFoundName","activityType","basedInHighClean",
+                "basedInHighGeoName",
                 "basedInHighRaw","basedInLowRaw",
                 "description","foundName","industry",
                 "locationFoundName",
-                "locationPurpose","locationType","name","orgFoundName",
+                "locationPurpose","locationType","name",
+                "nameClean", "orgFoundName",
                 "roleFoundName","roleHolderFoundName",
                 "status","targetDetails","targetName","valueRaw",
-                "when","whenRaw","whereGeoName","whereRaw",
+                "when","whenRaw","whereGeoName","whereRaw","whereClean",
                 # IndustryCluster
                 "representation","representativeDoc",
                 ]

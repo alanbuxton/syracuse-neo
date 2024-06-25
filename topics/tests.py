@@ -58,23 +58,24 @@ class TestUtilsWithDumpData(TestCase):
         assert geo.get_country_or_region_id() == 'GB'
 
     def test_corp_fin_graph_nodes(self):
-        source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/3558745/Jb_Hunt"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
-        assert len(clean_node_data) == 8
+        assert len(clean_node_data) == 6
         assert set([x['label'] for x in clean_node_data]) == set(
-                ['Atomico', 'Balderton Capital', 'EQT Ventures', 'Idinvest', 'Investment (VentureBeat: Mar 2019)',
-                'Peakon', 'Peakon raises $35 million to drive employee retention through frequent surveys', 'Sunstone',
-                ]
+            ['Acquisition (Business Insider: Jan 2019)',
+            'Buying furniture from the internet has become normal - and trucking companies are investing millions in the e-commerce boom',
+            'Cory 1st Choice Home Delivery', 'J.B. Hunt', 'United States',
+            'transportation, truckload, transport']
         )
-        assert len(clean_edge_data) == 8
-        assert set([x['label'] for x in clean_edge_data]) == {'target', 'documentSource', 'investor'}
+        assert len(clean_edge_data) == 7
+        assert set([x['label'] for x in clean_edge_data]) == {'industryClusterPrimary', 'buyer', 'basedInHighGeoNamesLocation', 'whereGeoNamesLocation', 'documentSource', 'target'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
     def test_corp_fin_timeline(self):
-        source_uri = "https://1145.am/db/3146396/Eqt_Ventures"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/3558745/Jb_Hunt"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
         assert len(groups) == 4
         assert len(items) == 1
@@ -83,37 +84,37 @@ class TestUtilsWithDumpData(TestCase):
         assert errors == set()
 
     def test_location_graph(self):
-        source_uri = "https://1145.am/db/4075107/Italian_Engineering_Group"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/1736082/Tesla"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
-        assert len(clean_node_data) == 5
-        assert len(clean_edge_data) == 6
+        assert len(clean_node_data) == 13
+        assert len(clean_edge_data) == 20
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
     def test_location_timeline(self):
-        source_uri = "https://1145.am/db/4075107/Italian_Engineering_Group"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/1736082/Tesla"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
         assert len(groups) == 4
-        assert len(items) == 1
-        assert set([x['label'] for x in items]) == {'Added - added Skikda petrochemical plant - unknown'}
+        assert len(items) == 3
+        assert set([x['label'] for x in items]) == {'Added - Added Brandenburg European gigafactory - not happened at date of document', 'Added - Added Berlin European gigafactory - not happened at date of document', 'Added - Added Grüenheide European gigafactory - not happened at date of document'}
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
         assert errors == set()
 
     def test_role_graph(self):
-        source_uri = "https://1145.am/db/4072168/Royal_Bank_Of_Canada"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/1824114/Square"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o)
-        assert len(clean_node_data) == 6
-        assert len(clean_edge_data) == 8
+        assert len(clean_node_data) == 7
+        assert len(clean_edge_data) == 9
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
     def test_role_timeline(self):
-        source_uri = "https://1145.am/db/4072168/Royal_Bank_Of_Canada"
-        o = Organization.nodes.get_or_none(uri=source_uri)
+        source_uri = "https://1145.am/db/1824114/Square"
+        o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
         assert len(groups) == 4
         assert len(items) == 1
@@ -123,69 +124,77 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_organization_graph_view_with_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/3146906/Yamaha_Motor?include_same_as_name_only=1")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?include_same_as_name_only=1")
         content = str(response.content)
-        assert len(re.findall("https://1145.am/db",content)) == 226
-        assert "Roam Robotics" in content
+        assert len(re.findall("https://1145.am/db",content)) == 114
+        assert "technologies" in content # from sameAsNameOnly's industry
 
     def test_organization_graph_view_without_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/3146906/Yamaha_Motor?include_same_as_name_only=0")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?include_same_as_name_only=0")
         content = str(response.content)
-        assert len(re.findall("https://1145.am/db",content)) == 98
-        assert  "Roam Robotics" not in content
+        assert len(re.findall("https://1145.am/db",content)) == 50
+        assert "technologies" not in content
 
     def test_stats(self):
-        max_date = date.fromisoformat("2024-03-10")
+        max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
-        assert set(counts) == {('Person', 126), ('Article', 500), ('Organization', 1202), ('RoleActivity', 144), ('CorporateFinanceActivity', 473), ('Role', 112), ('LocationActivity', 15)}
-        assert len(recents_by_geo) == 65
-        assert sorted(recents_by_geo)[:10] == [('AE', 'AE', 'United Arab Emirates', 1, 1, 1),
-            ('AE', 'AE-01', 'United Arab Emirates - Abu Dhabi', 1, 1, 1), ('AR', 'AR', 'Argentina', 0, 0, 1),
-            ('AU', 'AU', 'Australia', 1, 2, 2), ('BF', 'BF', 'Burkina Faso', 0, 2, 2), ('BM', 'BM', 'Bermuda', 0, 0, 3),
-            ('BR', 'BR', 'Brazil', 0, 0, 1), ('CA', 'CA', 'Canada', 22, 33, 39), ('CA', 'CA-01', 'Canada - Alberta', 1, 1, 1),
-            ('CA', 'CA-02', 'Canada - British Columbia', 5, 7, 10)]
-        assert sorted(recents_by_source) == [('Associated Press', 1, 4, 6), ('Business Insider', 6, 6, 6), ('Business Wire', 36, 51, 51),
-            ('CNN', 1, 1, 1), ('CityAM', 4, 10, 10), ('GlobeNewswire', 61, 76, 76), ('Hotel Management', 0, 5, 5), ('Luxury Travel Advisor', 1, 3, 3),
-            ('MarketWatch', 11, 14, 14), ('PR Newswire', 0, 22, 107), ('Reuters', 23, 23, 23), ('Seeking Alpha', 19, 27, 27), ('South China Morning Post', 6, 6, 6),
-            ('TechCrunch', 3, 4, 4), ('The Globe and Mail', 11, 13, 13), ('VentureBeat', 3, 3, 3), ('prweb', 6, 7, 7)]
+        assert set(counts) == {('Organization', 405), ('Article', 189), ('LocationActivity', 11), ('Person', 12), ('Role', 11), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
+        assert len(recents_by_geo) == 33
+        assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1),
+            ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1),
+            ('DK', 'DK', 'Denmark', 1, 1, 1), ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1),
+            ('GB', 'GB', 'United Kingdom', 1, 1, 1), ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1),
+            ('KE', 'KE', 'Kenya', 1, 1, 1), ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35),
+            ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), ('US', 'US-CA', 'United States - California', 1, 1, 3),
+            ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), ('US', 'US-FL', 'United States - Florida', 0, 0, 2),
+            ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), ('US', 'US-ID', 'United States - Idaho', 1, 1, 1),
+            ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3),
+            ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), ('US', 'US-MD', 'United States - Maryland', 1, 1, 1),
+            ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1),
+            ('US', 'US-NY', 'United States - New York', 4, 4, 10), ('US', 'US-OH', 'United States - Ohio', 1, 1, 1),
+            ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2),
+            ('US', 'US-TX', 'United States - Texas', 2, 2, 9), ('US', 'US-VA', 'United States - Virginia', 1, 1, 2),
+            ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
+        assert sorted(recents_by_source) == [('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4),
+            ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1),
+            ('MarketWatch', 4, 4, 4), ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
+            ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
 
 
     def test_recent_activities_by_country(self):
-        max_date = date.fromisoformat("2024-03-10")
-        min_date = date.fromisoformat("2024-03-03")
-        country_code = 'CA-02'
+        max_date = date.fromisoformat("2024-06-02")
+        min_date = date.fromisoformat("2024-05-03")
+        country_code = 'US-NY'
         matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as_name_only=False)
-        assert len(matching_activity_orgs) == 5
+        assert len(matching_activity_orgs) == 4
         sorted_participants = [tuple(sorted(x['participants'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_participants) == {(), ('vendor',), ('organization', 'person', 'role')}
+        assert set(sorted_participants) == {('participant', 'protagonist'), ('investor',)}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
-        assert Counter(activity_classes).most_common() == [('RoleActivity', 3), ('CorporateFinanceActivity', 2)]
+        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 4)]
         urls = sorted([x['document_url'] for x in matching_activity_orgs])
-        assert urls == ['https://www.globenewswire.com/news-release/2024/03/08/2843337/0/en/TRILLION-ENERGY-ANNOUNCES-CFO-AND-DIRECTOR-CHANGE.html',
-                        'https://www.globenewswire.com/news-release/2024/03/08/2843337/0/en/TRILLION-ENERGY-ANNOUNCES-CFO-AND-DIRECTOR-CHANGE.html',
-                        'https://www.globenewswire.com/news-release/2024/03/08/2843337/0/en/TRILLION-ENERGY-ANNOUNCES-CFO-AND-DIRECTOR-CHANGE.html',
-                        'https://www.globenewswire.com/news-release/2024/03/08/2843354/0/en/Mirasol-Resources-Announces-Private-Placement-Financing.html',
-                        'https://www.globenewswire.com/news-release/2024/03/08/2843354/0/en/Mirasol-Resources-Announces-Private-Placement-Financing.html']
-
+        assert urls == ['https://www.globenewswire.com/news-release/2024/06/01/2891798/0/en/CERE-NASDAQ-REMINDER-BFA-Law-Reminds-Cerevel-Shareholders-to-Inquire-About-Ongoing-Investigation-into-the-45-Merger-Offer.html',
+                        'https://www.prnewswire.com/news-releases/bbh-capital-partners-completes-investment-in-ethos-veterinary-health-llc-300775214.html',
+                        'https://www.prnewswire.com/news-releases/gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390.html',
+                        'https://www.prnewswire.com/news-releases/the-praedium-group-acquires-novel-bellevue-in-nashville-tn-300775104.html']
 
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
-        industry_name = "sciences, science, scientific, biotech".title()
+        industry_name = 'Biopharmaceutical, Biopharmaceuticals, Biopharma, Bioceutical'
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 3
+        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
+        assert len(orgs) == 2
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
-        industry_name = "sciences, science, scientific, biotech".title()
+        industry_name = 'Biopharmaceutical, Biopharmaceuticals, Biopharma, Bioceutical'
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None # Sometimes IndustrySerializer doesn't have choices in so tests will fail
-        orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 5
+        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
+        assert len(orgs) == 6
 
     def test_search_by_geo_only(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
@@ -193,57 +202,30 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry,limit=None)
-        assert len(orgs) == 58
+        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
+        assert len(orgs) == 7
 
-    def test_get_activities_by_geo_industry_time_range(self):
-        selected_geo_name = "United States - California"
-        industry_name = "investment, investments, estate, investing".title()
-        selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
-        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        assert industry is not None
-        min_date = date.fromisoformat("2024-02-01")
-        max_date = date.fromisoformat("2024-02-15")
-        res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
-        assert len(res) == 3
-        min_date = date.fromisoformat("2024-02-16")
-        max_date = date.fromisoformat("2024-03-31")
-        res = get_activities_by_date_range_industry_geo_for_api(min_date,max_date,selected_geo,industry)
-        assert len(res) == 4
-
-    def test_shows_resource_data_with_no_docid(self):
+    def test_shows_resource_page(self):
         client = self.client
-        resp = client.get("/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b")
+        resp = client.get("/resource/1145.am/db/3544275/wwwbusinessinsidercom_hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12")
         content = str(resp.content)
-        assert "/resource/1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo" in content
-        assert "https://1145.am/db/wwwmarketwatchcom_story_openai-reinstates-ceo-sam-altman-to-companys-board-of-directors-after-investigation-48bdb92b" in content
+        assert "https://www.businessinsider.com/hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12" in content
+        assert "first female empowerment-themed hotel will open in Washington, DC with a Ruth Bader Ginsburg mural" in content
         assert "<strong>Document Url</strong>" in content
+        assert "<strong>Headline</strong>" in content
         assert "<strong>Name</strong>" not in content
-
-    def test_shows_resource_data_with_docid(self):
-        client = self.client
-        resp = client.get("/resource/1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors")
-        content = str(resp.content)
-        assert "/resource/1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
-        assert "https://1145.am/db/4076432/Sam_Altman-Starting-Board_Of_Directors" in content
-        assert "<strong>Document Url</strong>" not in content
-        assert "<strong>Name</strong>" in content
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3147748/Blackrock")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?include_same_as_name_only=0")
         content = str(resp.content)
-        assert "Rivian" in content
-        assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
-        assert "https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/" in content
+        assert "REDOVIA" not in content
 
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/4076145/Blackrock")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?include_same_as_name_only=1")
         content = str(resp.content)
-        assert "Rivian" in content
-        assert "Blackrock to acquire the rest of SpiderRock Advisors" in content
-        assert "https://venturebeat.com/entrepreneur/rivian-raises-1-3-billion-for-its-electric-pickup-truck-and-suv/" in content
+        assert "REDAVIA" in content
 
 class TestFamilyTree(TestCase):
 

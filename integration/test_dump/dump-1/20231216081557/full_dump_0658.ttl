@@ -1,0 +1,2286 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/1768188/Microsoft> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/1768188/techcrunchcom_2018_10_08_microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services_> ;
+    ns1:foundName "Microsoft" ;
+    ns1:internalDocId 1768188 ;
+    ns1:investor <https://1145.am/db/1768188/Grab-Microsoft-Investment> ;
+    ns1:name "Microsoft" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1017437/Microsoft_Corp>,
+        <https://1145.am/db/1025001/Microsoft_Corp>,
+        <https://1145.am/db/1092654/Microsoft>,
+        <https://1145.am/db/1190136/Microsoft>,
+        <https://1145.am/db/1311662/Microsoft_Corp>,
+        <https://1145.am/db/1314290/Microsoft>,
+        <https://1145.am/db/1343611/Microsoft_Corp>,
+        <https://1145.am/db/1346180/Microsoft>,
+        <https://1145.am/db/1382052/Microsoft_Corp>,
+        <https://1145.am/db/1398821/Microsoft>,
+        <https://1145.am/db/1428802/Microsoft>,
+        <https://1145.am/db/1487902/Microsoft>,
+        <https://1145.am/db/1527244/Microsoft_Corp>,
+        <https://1145.am/db/1558774/Microsoft>,
+        <https://1145.am/db/1566732/Microsoft>,
+        <https://1145.am/db/1571096/Microsoft>,
+        <https://1145.am/db/1600830/Microsoft_Corp>,
+        <https://1145.am/db/1617851/Microsoft>,
+        <https://1145.am/db/1618044/Microsoft_Corp>,
+        <https://1145.am/db/161893/Microsoft>,
+        <https://1145.am/db/1631476/Microsoft_Corp>,
+        <https://1145.am/db/1633549/Microsoft>,
+        <https://1145.am/db/1654251/Microsoft>,
+        <https://1145.am/db/1655883/Microsoft>,
+        <https://1145.am/db/1678251/Microsoft>,
+        <https://1145.am/db/1689071/Microsoft>,
+        <https://1145.am/db/1691718/Microsoft_Corp>,
+        <https://1145.am/db/1695812/Microsoft>,
+        <https://1145.am/db/1697158/Microsoft>,
+        <https://1145.am/db/1697321/Microsoft>,
+        <https://1145.am/db/1697590/Microsoft>,
+        <https://1145.am/db/1698342/Microsoft>,
+        <https://1145.am/db/1699320/Microsoft>,
+        <https://1145.am/db/1699790/Microsoft>,
+        <https://1145.am/db/1701497/Microsoft>,
+        <https://1145.am/db/1703728/Microsoft_Corporation>,
+        <https://1145.am/db/1706033/Microsoft>,
+        <https://1145.am/db/1708523/Microsoft>,
+        <https://1145.am/db/1708611/Microsoft>,
+        <https://1145.am/db/1709652/Microsoft>,
+        <https://1145.am/db/1709976/Microsoft>,
+        <https://1145.am/db/1710427/Microsoft>,
+        <https://1145.am/db/1710962/Microsoft>,
+        <https://1145.am/db/1711305/Microsoft>,
+        <https://1145.am/db/1712686/Microsoft_Corp>,
+        <https://1145.am/db/1712862/Microsoft>,
+        <https://1145.am/db/1714418/Microsoft>,
+        <https://1145.am/db/1716650/Microsoft>,
+        <https://1145.am/db/1717533/Microsoft>,
+        <https://1145.am/db/1718033/Microsoft>,
+        <https://1145.am/db/1718245/Microsoft>,
+        <https://1145.am/db/1719232/Microsoft>,
+        <https://1145.am/db/1721134/Microsoft>,
+        <https://1145.am/db/1723140/Microsoft_Corp>,
+        <https://1145.am/db/1726210/Microsoft>,
+        <https://1145.am/db/1727481/Microsoft>,
+        <https://1145.am/db/1734650/Microsoft>,
+        <https://1145.am/db/1734778/Microsoft>,
+        <https://1145.am/db/1734931/Microsoft>,
+        <https://1145.am/db/1735301/Microsoft>,
+        <https://1145.am/db/1737935/Microsoft>,
+        <https://1145.am/db/1741120/Microsoft>,
+        <https://1145.am/db/1741140/Microsoft>,
+        <https://1145.am/db/1742118/Microsoft>,
+        <https://1145.am/db/1746848/Microsoft>,
+        <https://1145.am/db/1746971/Microsoft>,
+        <https://1145.am/db/1747044/Microsoft>,
+        <https://1145.am/db/1747812/Microsoft>,
+        <https://1145.am/db/1748887/Microsoft>,
+        <https://1145.am/db/1749016/Microsoft>,
+        <https://1145.am/db/1751726/Microsoft>,
+        <https://1145.am/db/1752062/Microsoft>,
+        <https://1145.am/db/1754464/Microsoft>,
+        <https://1145.am/db/1755059/Microsoft>,
+        <https://1145.am/db/1755209/Microsoft>,
+        <https://1145.am/db/1758390/Microsoft>,
+        <https://1145.am/db/1758900/Microsoft>,
+        <https://1145.am/db/1758924/Microsoft>,
+        <https://1145.am/db/1759192/Microsoft>,
+        <https://1145.am/db/1759760/Microsoft>,
+        <https://1145.am/db/1759766/Microsoft>,
+        <https://1145.am/db/1760029/Microsoft>,
+        <https://1145.am/db/1760205/Microsoft>,
+        <https://1145.am/db/1760729/Microsoft>,
+        <https://1145.am/db/1760981/Microsoft>,
+        <https://1145.am/db/1762702/Microsoft>,
+        <https://1145.am/db/1763332/Microsoft>,
+        <https://1145.am/db/1764427/Microsoft>,
+        <https://1145.am/db/1768388/Microsoft>,
+        <https://1145.am/db/1769233/Microsoft>,
+        <https://1145.am/db/1770225/Microsoft>,
+        <https://1145.am/db/1770401/Microsoft>,
+        <https://1145.am/db/1771744/Microsoft>,
+        <https://1145.am/db/1772579/Microsoft>,
+        <https://1145.am/db/1772600/Microsoft>,
+        <https://1145.am/db/1773454/Microsoft>,
+        <https://1145.am/db/1777695/Microsoft>,
+        <https://1145.am/db/1778043/Microsoft>,
+        <https://1145.am/db/1778089/Microsoft>,
+        <https://1145.am/db/1778879/Microsoft>,
+        <https://1145.am/db/1780530/Microsoft>,
+        <https://1145.am/db/1781499/Microsoft>,
+        <https://1145.am/db/1782580/Microsoft>,
+        <https://1145.am/db/1783135/Microsoft>,
+        <https://1145.am/db/1786640/Microsoft>,
+        <https://1145.am/db/1786753/Microsoft>,
+        <https://1145.am/db/1786991/Microsoft>,
+        <https://1145.am/db/1788358/Microsoft>,
+        <https://1145.am/db/1790700/Microsoft>,
+        <https://1145.am/db/1791808/Microsoft>,
+        <https://1145.am/db/1792227/Microsoft>,
+        <https://1145.am/db/1792368/Microsoft>,
+        <https://1145.am/db/1792666/Microsoft>,
+        <https://1145.am/db/1792965/Microsoft>,
+        <https://1145.am/db/1793015/Microsoft>,
+        <https://1145.am/db/1794612/Microsoft>,
+        <https://1145.am/db/1795244/Microsoft>,
+        <https://1145.am/db/1795255/Microsoft>,
+        <https://1145.am/db/1795869/Microsoft>,
+        <https://1145.am/db/1795925/Microsoft>,
+        <https://1145.am/db/1796232/Microsoft>,
+        <https://1145.am/db/1796259/Microsoft>,
+        <https://1145.am/db/1796273/Microsoft>,
+        <https://1145.am/db/1798246/Microsoft>,
+        <https://1145.am/db/1798437/Microsoft>,
+        <https://1145.am/db/1800013/Microsoft>,
+        <https://1145.am/db/1801241/Microsoft>,
+        <https://1145.am/db/1802129/Microsoft>,
+        <https://1145.am/db/1803214/Microsoft>,
+        <https://1145.am/db/1807226/Microsoft>,
+        <https://1145.am/db/1808409/Microsoft>,
+        <https://1145.am/db/1809462/Microsoft>,
+        <https://1145.am/db/1810877/Microsoft>,
+        <https://1145.am/db/1811070/Microsoft>,
+        <https://1145.am/db/1811482/Microsoft>,
+        <https://1145.am/db/1813957/Microsoft>,
+        <https://1145.am/db/1814632/Microsoft>,
+        <https://1145.am/db/1814865/Microsoft>,
+        <https://1145.am/db/1816265/Microsoft>,
+        <https://1145.am/db/1816532/Microsoft>,
+        <https://1145.am/db/1817819/Microsoft>,
+        <https://1145.am/db/1818394/Microsoft>,
+        <https://1145.am/db/1818533/Microsoft>,
+        <https://1145.am/db/1818534/Microsoft>,
+        <https://1145.am/db/1819909/Microsoft>,
+        <https://1145.am/db/1820048/Microsoft>,
+        <https://1145.am/db/1822222/Microsoft>,
+        <https://1145.am/db/1823778/Microsoft>,
+        <https://1145.am/db/1824780/Microsoft>,
+        <https://1145.am/db/1825996/Microsoft>,
+        <https://1145.am/db/1826121/Microsoft>,
+        <https://1145.am/db/1827341/Microsoft>,
+        <https://1145.am/db/1828648/Microsoft>,
+        <https://1145.am/db/1828902/Microsoft>,
+        <https://1145.am/db/1831301/Microsoft>,
+        <https://1145.am/db/1832770/Microsoft>,
+        <https://1145.am/db/1833510/Microsoft>,
+        <https://1145.am/db/1834475/Microsoft>,
+        <https://1145.am/db/1835226/Microsoft>,
+        <https://1145.am/db/1835448/Microsoft>,
+        <https://1145.am/db/1838210/Microsoft>,
+        <https://1145.am/db/1838478/Microsoft>,
+        <https://1145.am/db/1839207/Microsoft>,
+        <https://1145.am/db/1841018/Microsoft_Corp>,
+        <https://1145.am/db/1842562/Microsoft>,
+        <https://1145.am/db/1842887/Microsoft>,
+        <https://1145.am/db/1843454/Microsoft>,
+        <https://1145.am/db/1843539/Microsoft>,
+        <https://1145.am/db/1843972/Microsoft>,
+        <https://1145.am/db/1852125/Microsoft>,
+        <https://1145.am/db/1853227/Microsoft>,
+        <https://1145.am/db/1854780/Microsoft>,
+        <https://1145.am/db/1854945/Microsoft>,
+        <https://1145.am/db/1855966/Microsoft>,
+        <https://1145.am/db/1856684/Microsoft>,
+        <https://1145.am/db/1858254/Microsoft>,
+        <https://1145.am/db/1858451/Microsoft>,
+        <https://1145.am/db/1858692/Microsoft>,
+        <https://1145.am/db/1860773/Microsoft>,
+        <https://1145.am/db/1861339/Microsoft>,
+        <https://1145.am/db/1871130/Microsoft>,
+        <https://1145.am/db/1871611/Microsoft>,
+        <https://1145.am/db/1874678/Microsoft>,
+        <https://1145.am/db/1875189/Microsoft>,
+        <https://1145.am/db/1879673/Microsoft>,
+        <https://1145.am/db/1879985/Microsoft>,
+        <https://1145.am/db/1881214/Microsoft>,
+        <https://1145.am/db/1882058/Microsoft>,
+        <https://1145.am/db/1882161/Microsoft>,
+        <https://1145.am/db/1884277/Microsoft>,
+        <https://1145.am/db/1885560/Microsoft>,
+        <https://1145.am/db/1888008/Microsoft>,
+        <https://1145.am/db/1895009/Microsoft>,
+        <https://1145.am/db/1897581/Microsoft>,
+        <https://1145.am/db/1901098/Microsoft>,
+        <https://1145.am/db/1902016/Microsoft>,
+        <https://1145.am/db/1902079/Microsoft>,
+        <https://1145.am/db/1902847/Microsoft>,
+        <https://1145.am/db/1903669/Microsoft>,
+        <https://1145.am/db/1903721/Microsoft>,
+        <https://1145.am/db/1905425/Microsoft>,
+        <https://1145.am/db/1909119/Microsoft_Corp>,
+        <https://1145.am/db/1910290/Microsoft_Corp>,
+        <https://1145.am/db/1914747/Microsoft>,
+        <https://1145.am/db/1915432/Microsoft>,
+        <https://1145.am/db/1915560/Microsoft>,
+        <https://1145.am/db/1941048/Microsoft_Corp>,
+        <https://1145.am/db/1942901/Microsoft_Corp>,
+        <https://1145.am/db/1943925/Microsoft_Corp>,
+        <https://1145.am/db/1947749/Microsoft>,
+        <https://1145.am/db/1947898/Microsoft>,
+        <https://1145.am/db/1948338/Microsoft>,
+        <https://1145.am/db/1961649/Microsoft>,
+        <https://1145.am/db/1974598/Microsoft>,
+        <https://1145.am/db/1981521/Microsoft>,
+        <https://1145.am/db/1982175/Microsoft>,
+        <https://1145.am/db/1984927/Microsoft>,
+        <https://1145.am/db/1986630/Microsoft>,
+        <https://1145.am/db/1987503/Microsoft>,
+        <https://1145.am/db/1993523/Microsoft>,
+        <https://1145.am/db/199718/Microsoft>,
+        <https://1145.am/db/199816/Microsoft>,
+        <https://1145.am/db/2002065/Microsoft_Corp>,
+        <https://1145.am/db/2004213/Microsoft_Corp>,
+        <https://1145.am/db/2006775/Microsoft>,
+        <https://1145.am/db/2007265/Microsoft>,
+        <https://1145.am/db/2008078/Microsoft_Corp>,
+        <https://1145.am/db/2011789/Microsoft>,
+        <https://1145.am/db/2013724/Microsoft>,
+        <https://1145.am/db/2015713/Microsoft_Corp>,
+        <https://1145.am/db/2015981/Microsoft>,
+        <https://1145.am/db/2029229/Microsoft>,
+        <https://1145.am/db/2033848/Microsoft>,
+        <https://1145.am/db/2034613/Microsoft>,
+        <https://1145.am/db/2034974/Microsoft_Corp>,
+        <https://1145.am/db/2036186/Microsoft>,
+        <https://1145.am/db/2036982/Microsoft_Corp>,
+        <https://1145.am/db/2037760/Microsoft>,
+        <https://1145.am/db/2039253/Microsoft>,
+        <https://1145.am/db/2040859/Microsoft>,
+        <https://1145.am/db/2045433/Microsoft>,
+        <https://1145.am/db/2047060/Microsoft>,
+        <https://1145.am/db/2050229/Microsoft>,
+        <https://1145.am/db/2053053/Microsoft>,
+        <https://1145.am/db/2053123/Microsoft>,
+        <https://1145.am/db/2053654/Microsoft>,
+        <https://1145.am/db/2059318/Microsoft>,
+        <https://1145.am/db/2059491/Microsoft>,
+        <https://1145.am/db/2059502/Microsoft>,
+        <https://1145.am/db/2059547/Microsoft>,
+        <https://1145.am/db/2060416/Microsoft>,
+        <https://1145.am/db/2060997/Microsoft>,
+        <https://1145.am/db/2062372/Microsoft>,
+        <https://1145.am/db/2063305/Microsoft>,
+        <https://1145.am/db/2063335/Microsoft_Corp>,
+        <https://1145.am/db/2063909/Microsoft>,
+        <https://1145.am/db/2064352/Microsoft>,
+        <https://1145.am/db/2065497/Microsoft>,
+        <https://1145.am/db/2067787/Microsoft>,
+        <https://1145.am/db/2072814/Microsoft>,
+        <https://1145.am/db/2083718/Microsoft>,
+        <https://1145.am/db/2093298/Microsoft>,
+        <https://1145.am/db/2094024/Microsoft>,
+        <https://1145.am/db/2109233/Microsoft>,
+        <https://1145.am/db/2120040/Microsoft>,
+        <https://1145.am/db/2122854/Microsoft>,
+        <https://1145.am/db/2127651/Microsoft>,
+        <https://1145.am/db/2144448/Microsoft>,
+        <https://1145.am/db/2145163/Microsoft>,
+        <https://1145.am/db/2148259/Microsoft>,
+        <https://1145.am/db/2162386/Microsoft>,
+        <https://1145.am/db/217185/Microsoft>,
+        <https://1145.am/db/2172604/Microsoft>,
+        <https://1145.am/db/2173138/Microsoft>,
+        <https://1145.am/db/2174297/Microsoft>,
+        <https://1145.am/db/2178519/Microsoft>,
+        <https://1145.am/db/2180858/Microsoft>,
+        <https://1145.am/db/2187630/Microsoft>,
+        <https://1145.am/db/2197267/Microsoft>,
+        <https://1145.am/db/2198071/Microsoft>,
+        <https://1145.am/db/2198670/Microsoft>,
+        <https://1145.am/db/2207923/Microsoft>,
+        <https://1145.am/db/2225131/Microsoft>,
+        <https://1145.am/db/2278997/Microsoft>,
+        <https://1145.am/db/2279241/Microsoft>,
+        <https://1145.am/db/228046/Microsoft>,
+        <https://1145.am/db/2284483/Microsoft>,
+        <https://1145.am/db/232308/Microsoft_Corp>,
+        <https://1145.am/db/232337/Microsoft_Corp>,
+        <https://1145.am/db/2326224/Microsoft_Corp>,
+        <https://1145.am/db/2508969/Microsoft>,
+        <https://1145.am/db/2601736/Microsoft>,
+        <https://1145.am/db/2602130/Microsoft>,
+        <https://1145.am/db/2602724/Microsoft>,
+        <https://1145.am/db/2602863/Microsoft>,
+        <https://1145.am/db/2602958/Microsoft>,
+        <https://1145.am/db/2603484/Microsoft>,
+        <https://1145.am/db/2604604/Microsoft>,
+        <https://1145.am/db/2606540/Microsoft>,
+        <https://1145.am/db/2611328/Microsoft>,
+        <https://1145.am/db/2611331/Microsoft>,
+        <https://1145.am/db/2611481/Microsoft>,
+        <https://1145.am/db/2612223/Microsoft>,
+        <https://1145.am/db/2612606/Microsoft>,
+        <https://1145.am/db/2613829/Microsoft>,
+        <https://1145.am/db/2617989/Microsoft>,
+        <https://1145.am/db/2620025/Microsoft>,
+        <https://1145.am/db/2620026/Microsoft>,
+        <https://1145.am/db/2622354/Microsoft>,
+        <https://1145.am/db/2623559/Microsoft>,
+        <https://1145.am/db/2626449/Microsoft>,
+        <https://1145.am/db/2627269/Microsoft>,
+        <https://1145.am/db/2628760/Microsoft>,
+        <https://1145.am/db/2634465/Microsoft>,
+        <https://1145.am/db/2634487/Microsoft>,
+        <https://1145.am/db/2636189/Microsoft>,
+        <https://1145.am/db/2636234/Microsoft>,
+        <https://1145.am/db/2639094/Microsoft>,
+        <https://1145.am/db/2640110/Microsoft>,
+        <https://1145.am/db/2640182/Microsoft>,
+        <https://1145.am/db/2644494/Microsoft>,
+        <https://1145.am/db/2648410/Microsoft>,
+        <https://1145.am/db/2648535/Microsoft>,
+        <https://1145.am/db/2648546/Microsoft>,
+        <https://1145.am/db/2651427/Microsoft>,
+        <https://1145.am/db/2651769/Microsoft>,
+        <https://1145.am/db/2652890/Microsoft>,
+        <https://1145.am/db/2653297/Microsoft>,
+        <https://1145.am/db/2653310/Microsoft>,
+        <https://1145.am/db/2653481/Microsoft>,
+        <https://1145.am/db/2653908/Microsoft>,
+        <https://1145.am/db/2654138/Microsoft>,
+        <https://1145.am/db/2654146/Microsoft>,
+        <https://1145.am/db/2654238/Microsoft>,
+        <https://1145.am/db/2654294/Microsoft>,
+        <https://1145.am/db/2654510/Microsoft>,
+        <https://1145.am/db/2654524/Microsoft>,
+        <https://1145.am/db/2655064/Microsoft>,
+        <https://1145.am/db/2655146/Microsoft>,
+        <https://1145.am/db/2655423/Microsoft>,
+        <https://1145.am/db/2655439/Microsoft>,
+        <https://1145.am/db/2655461/Microsoft>,
+        <https://1145.am/db/2656101/Microsoft>,
+        <https://1145.am/db/2656359/Microsoft>,
+        <https://1145.am/db/2656986/Microsoft>,
+        <https://1145.am/db/2657038/Microsoft>,
+        <https://1145.am/db/2658038/Microsoft>,
+        <https://1145.am/db/2658913/Microsoft>,
+        <https://1145.am/db/2659072/Microsoft>,
+        <https://1145.am/db/2659897/Microsoft>,
+        <https://1145.am/db/2659924/Microsoft>,
+        <https://1145.am/db/2659958/Microsoft>,
+        <https://1145.am/db/2661009/Microsoft>,
+        <https://1145.am/db/2661125/Microsoft>,
+        <https://1145.am/db/2661187/Microsoft>,
+        <https://1145.am/db/2662106/Microsoft>,
+        <https://1145.am/db/2662211/Microsoft>,
+        <https://1145.am/db/2662486/Microsoft>,
+        <https://1145.am/db/2663295/Microsoft>,
+        <https://1145.am/db/2663557/Microsoft>,
+        <https://1145.am/db/2664293/Microsoft>,
+        <https://1145.am/db/2664464/Microsoft>,
+        <https://1145.am/db/2666156/Microsoft>,
+        <https://1145.am/db/2667065/Microsoft>,
+        <https://1145.am/db/2667078/Microsoft>,
+        <https://1145.am/db/2667474/Microsoft>,
+        <https://1145.am/db/2667526/Microsoft>,
+        <https://1145.am/db/2667660/Microsoft>,
+        <https://1145.am/db/2669494/Microsoft>,
+        <https://1145.am/db/2670705/Microsoft>,
+        <https://1145.am/db/2671587/Microsoft>,
+        <https://1145.am/db/2671878/Microsoft>,
+        <https://1145.am/db/2672066/Microsoft>,
+        <https://1145.am/db/2672194/Microsoft>,
+        <https://1145.am/db/2672819/Microsoft>,
+        <https://1145.am/db/2673373/Microsoft>,
+        <https://1145.am/db/2673385/Microsoft>,
+        <https://1145.am/db/2673437/Microsoft>,
+        <https://1145.am/db/2673898/Microsoft>,
+        <https://1145.am/db/2675617/Microsoft>,
+        <https://1145.am/db/2679159/Microsoft>,
+        <https://1145.am/db/2679256/Microsoft>,
+        <https://1145.am/db/2679342/Microsoft>,
+        <https://1145.am/db/2681897/Microsoft>,
+        <https://1145.am/db/2682508/Microsoft>,
+        <https://1145.am/db/2683061/Microsoft>,
+        <https://1145.am/db/2683066/Microsoft>,
+        <https://1145.am/db/2683067/Microsoft>,
+        <https://1145.am/db/2683069/Microsoft>,
+        <https://1145.am/db/2683074/Microsoft>,
+        <https://1145.am/db/2683077/Microsoft>,
+        <https://1145.am/db/2683079/Microsoft>,
+        <https://1145.am/db/2683465/Microsoft>,
+        <https://1145.am/db/2686285/Microsoft>,
+        <https://1145.am/db/2686301/Microsoft>,
+        <https://1145.am/db/2686449/Microsoft>,
+        <https://1145.am/db/2700623/Microsoft>,
+        <https://1145.am/db/2738271/Microsoft>,
+        <https://1145.am/db/2754611/Microsoft>,
+        <https://1145.am/db/2760139/Microsoft_Corp>,
+        <https://1145.am/db/2761530/Microsoft_Corp>,
+        <https://1145.am/db/2762134/Microsoft>,
+        <https://1145.am/db/2762347/Microsoft_Corp>,
+        <https://1145.am/db/2762562/Microsoft>,
+        <https://1145.am/db/2776232/Microsoft>,
+        <https://1145.am/db/2782429/Microsoft>,
+        <https://1145.am/db/2801091/Microsoft_Corporation>,
+        <https://1145.am/db/2818231/Microsoft>,
+        <https://1145.am/db/282538/Microsoft_Corp>,
+        <https://1145.am/db/2839904/Microsoft>,
+        <https://1145.am/db/2842522/Microsoft>,
+        <https://1145.am/db/2844225/Microsoft>,
+        <https://1145.am/db/2845259/Microsoft>,
+        <https://1145.am/db/2847288/Microsoft>,
+        <https://1145.am/db/2847300/Microsoft>,
+        <https://1145.am/db/2847758/Microsoft>,
+        <https://1145.am/db/2848015/Microsoft>,
+        <https://1145.am/db/2848233/Microsoft>,
+        <https://1145.am/db/2848892/Microsoft>,
+        <https://1145.am/db/2849709/Microsoft>,
+        <https://1145.am/db/2850091/Microsoft>,
+        <https://1145.am/db/2851288/Microsoft>,
+        <https://1145.am/db/2851307/Microsoft>,
+        <https://1145.am/db/2852686/Microsoft>,
+        <https://1145.am/db/2853830/Microsoft>,
+        <https://1145.am/db/2885803/Microsoft>,
+        <https://1145.am/db/2888480/Microsoft>,
+        <https://1145.am/db/2888578/Microsoft_Corp>,
+        <https://1145.am/db/2891450/Microsoft>,
+        <https://1145.am/db/2891451/Microsoft>,
+        <https://1145.am/db/2899356/Microsoft>,
+        <https://1145.am/db/2914467/Microsoft>,
+        <https://1145.am/db/2918537/Microsoft>,
+        <https://1145.am/db/2927035/Microsoft>,
+        <https://1145.am/db/2933127/Microsoft>,
+        <https://1145.am/db/2936619/Microsoft>,
+        <https://1145.am/db/2937319/Microsoft>,
+        <https://1145.am/db/2937324/Microsoft>,
+        <https://1145.am/db/2937326/Microsoft>,
+        <https://1145.am/db/2937360/Microsoft>,
+        <https://1145.am/db/2937548/Microsoft>,
+        <https://1145.am/db/2943517/Microsoft>,
+        <https://1145.am/db/2943934/Microsoft>,
+        <https://1145.am/db/2943968/Microsoft>,
+        <https://1145.am/db/2945202/Microsoft>,
+        <https://1145.am/db/2946604/Microsoft>,
+        <https://1145.am/db/2951657/Microsoft>,
+        <https://1145.am/db/2952413/Microsoft>,
+        <https://1145.am/db/2952455/Microsoft>,
+        <https://1145.am/db/2952916/Microsoft>,
+        <https://1145.am/db/2953565/Microsoft>,
+        <https://1145.am/db/2961223/Microsoft>,
+        <https://1145.am/db/2977003/Microsoft>,
+        <https://1145.am/db/2980321/Microsoft>,
+        <https://1145.am/db/3000581/Microsoft>,
+        <https://1145.am/db/3002285/Microsoft>,
+        <https://1145.am/db/3002976/Microsoft>,
+        <https://1145.am/db/3002978/Microsoft>,
+        <https://1145.am/db/3006914/Microsoft>,
+        <https://1145.am/db/3008407/Microsoft>,
+        <https://1145.am/db/3010294/Microsoft>,
+        <https://1145.am/db/3013913/Microsoft>,
+        <https://1145.am/db/3024762/Microsoft>,
+        <https://1145.am/db/305288/Microsoft_Corp>,
+        <https://1145.am/db/3053431/Microsoft>,
+        <https://1145.am/db/3054076/Microsoft>,
+        <https://1145.am/db/3054631/Microsoft>,
+        <https://1145.am/db/3055530/Microsoft>,
+        <https://1145.am/db/305594/Microsoft_Corp>,
+        <https://1145.am/db/3060738/Microsoft>,
+        <https://1145.am/db/3063849/Microsoft>,
+        <https://1145.am/db/3069895/Microsoft>,
+        <https://1145.am/db/3077191/Microsoft_Corp>,
+        <https://1145.am/db/3077743/Microsoft>,
+        <https://1145.am/db/3079251/Microsoft>,
+        <https://1145.am/db/3079535/Microsoft>,
+        <https://1145.am/db/3080529/Microsoft>,
+        <https://1145.am/db/3082990/Microsoft>,
+        <https://1145.am/db/3083875/Microsoft>,
+        <https://1145.am/db/3084428/Microsoft>,
+        <https://1145.am/db/3090001/Microsoft>,
+        <https://1145.am/db/3093003/Microsoft>,
+        <https://1145.am/db/3095465/Microsoft>,
+        <https://1145.am/db/3097352/Microsoft>,
+        <https://1145.am/db/3110552/Microsoft>,
+        <https://1145.am/db/3111643/Microsoft>,
+        <https://1145.am/db/3124797/Microsoft>,
+        <https://1145.am/db/3125366/Microsoft>,
+        <https://1145.am/db/3125915/Microsoft>,
+        <https://1145.am/db/3126465/Microsoft>,
+        <https://1145.am/db/3126466/Microsoft>,
+        <https://1145.am/db/3126478/Microsoft>,
+        <https://1145.am/db/3127190/Microsoft>,
+        <https://1145.am/db/3130083/Microsoft>,
+        <https://1145.am/db/3131164/Microsoft>,
+        <https://1145.am/db/3132578/Microsoft>,
+        <https://1145.am/db/3132873/Microsoft>,
+        <https://1145.am/db/3136900/Microsoft>,
+        <https://1145.am/db/3136902/Microsoft>,
+        <https://1145.am/db/3137829/Microsoft>,
+        <https://1145.am/db/3140492/Microsoft>,
+        <https://1145.am/db/3141980/Microsoft>,
+        <https://1145.am/db/3142337/Microsoft>,
+        <https://1145.am/db/3142607/Microsoft>,
+        <https://1145.am/db/3143694/Microsoft>,
+        <https://1145.am/db/3146139/Microsoft>,
+        <https://1145.am/db/3146181/Microsoft>,
+        <https://1145.am/db/3146825/Microsoft>,
+        <https://1145.am/db/3147825/Microsoft>,
+        <https://1145.am/db/3148498/Microsoft>,
+        <https://1145.am/db/3151085/Microsoft>,
+        <https://1145.am/db/3151701/Microsoft>,
+        <https://1145.am/db/3151731/Microsoft>,
+        <https://1145.am/db/3153733/Microsoft>,
+        <https://1145.am/db/3153936/Microsoft>,
+        <https://1145.am/db/3156370/Microsoft>,
+        <https://1145.am/db/3161398/Microsoft>,
+        <https://1145.am/db/3167002/Microsoft>,
+        <https://1145.am/db/3193768/Microsoft>,
+        <https://1145.am/db/3200998/Microsoft>,
+        <https://1145.am/db/3201427/Microsoft>,
+        <https://1145.am/db/3207316/Microsoft>,
+        <https://1145.am/db/3233529/Microsoft>,
+        <https://1145.am/db/3295845/Microsoft>,
+        <https://1145.am/db/3310206/Microsoft>,
+        <https://1145.am/db/3315670/Microsoft>,
+        <https://1145.am/db/3315721/Microsoft>,
+        <https://1145.am/db/3329411/Microsoft>,
+        <https://1145.am/db/3329456/Microsoft>,
+        <https://1145.am/db/3330349/Microsoft>,
+        <https://1145.am/db/3331948/Microsoft_Corp>,
+        <https://1145.am/db/3333776/Microsoft>,
+        <https://1145.am/db/3333846/Microsoft>,
+        <https://1145.am/db/3334519/Microsoft>,
+        <https://1145.am/db/3334549/Microsoft>,
+        <https://1145.am/db/3335198/Microsoft>,
+        <https://1145.am/db/3335775/Microsoft>,
+        <https://1145.am/db/3338013/Microsoft>,
+        <https://1145.am/db/3338936/Microsoft>,
+        <https://1145.am/db/3339581/Microsoft>,
+        <https://1145.am/db/3341566/Microsoft>,
+        <https://1145.am/db/3352141/Microsoft_Corp>,
+        <https://1145.am/db/3370762/Microsoft>,
+        <https://1145.am/db/3385810/Microsoft>,
+        <https://1145.am/db/3388012/Microsoft>,
+        <https://1145.am/db/3390381/Microsoft>,
+        <https://1145.am/db/3391583/Microsoft>,
+        <https://1145.am/db/3398898/Microsoft>,
+        <https://1145.am/db/3398944/Microsoft>,
+        <https://1145.am/db/3403352/Microsoft>,
+        <https://1145.am/db/3406737/Microsoft>,
+        <https://1145.am/db/3407891/Microsoft>,
+        <https://1145.am/db/3411277/Microsoft>,
+        <https://1145.am/db/3424688/Microsoft>,
+        <https://1145.am/db/3427032/Microsoft>,
+        <https://1145.am/db/3427949/Microsoft>,
+        <https://1145.am/db/3429606/Microsoft>,
+        <https://1145.am/db/3440497/Microsoft>,
+        <https://1145.am/db/3443677/Microsoft>,
+        <https://1145.am/db/3448368/Microsoft>,
+        <https://1145.am/db/3461401/Microsoft>,
+        <https://1145.am/db/3462842/Microsoft>,
+        <https://1145.am/db/3462901/Microsoft>,
+        <https://1145.am/db/3465838/Microsoft>,
+        <https://1145.am/db/3465917/Microsoft>,
+        <https://1145.am/db/3467055/Microsoft>,
+        <https://1145.am/db/3469053/Microsoft>,
+        <https://1145.am/db/3473026/Microsoft>,
+        <https://1145.am/db/3474683/Microsoft>,
+        <https://1145.am/db/347978/Microsoft_Corp>,
+        <https://1145.am/db/348031/Microsoft_Corp>,
+        <https://1145.am/db/3482378/Microsoft>,
+        <https://1145.am/db/3486413/Microsoft>,
+        <https://1145.am/db/3495949/Microsoft>,
+        <https://1145.am/db/3501442/Microsoft>,
+        <https://1145.am/db/3502689/Microsoft>,
+        <https://1145.am/db/3502717/Microsoft>,
+        <https://1145.am/db/3508592/Microsoft>,
+        <https://1145.am/db/3508741/Microsoft>,
+        <https://1145.am/db/3509026/Microsoft>,
+        <https://1145.am/db/3512173/Microsoft>,
+        <https://1145.am/db/3514844/Microsoft>,
+        <https://1145.am/db/3516831/Microsoft>,
+        <https://1145.am/db/3519287/Microsoft>,
+        <https://1145.am/db/3520590/Microsoft>,
+        <https://1145.am/db/3530198/Microsoft>,
+        <https://1145.am/db/3531115/Microsoft>,
+        <https://1145.am/db/3551154/Microsoft>,
+        <https://1145.am/db/355324/Microsoft_Corp>,
+        <https://1145.am/db/355332/Microsoft_Corp>,
+        <https://1145.am/db/3559369/Microsoft>,
+        <https://1145.am/db/3584461/Microsoft_Corp>,
+        <https://1145.am/db/361491/Microsoft>,
+        <https://1145.am/db/3640871/Microsoft>,
+        <https://1145.am/db/3650037/Microsoft>,
+        <https://1145.am/db/3653329/Microsoft>,
+        <https://1145.am/db/365521/Microsoft_Corp>,
+        <https://1145.am/db/3661470/Microsoft>,
+        <https://1145.am/db/3669987/Microsoft>,
+        <https://1145.am/db/3670228/Microsoft>,
+        <https://1145.am/db/3674469/Microsoft>,
+        <https://1145.am/db/3676909/Microsoft>,
+        <https://1145.am/db/3679162/Microsoft>,
+        <https://1145.am/db/3681995/Microsoft>,
+        <https://1145.am/db/3684816/Microsoft>,
+        <https://1145.am/db/3684938/Microsoft>,
+        <https://1145.am/db/3685529/Microsoft>,
+        <https://1145.am/db/3686959/Microsoft>,
+        <https://1145.am/db/3689646/Microsoft>,
+        <https://1145.am/db/3697011/Microsoft>,
+        <https://1145.am/db/3703928/Microsoft>,
+        <https://1145.am/db/3707973/Microsoft>,
+        <https://1145.am/db/3709563/Microsoft>,
+        <https://1145.am/db/3710815/Microsoft>,
+        <https://1145.am/db/3713773/Microsoft>,
+        <https://1145.am/db/3718386/Microsoft>,
+        <https://1145.am/db/3719616/Microsoft>,
+        <https://1145.am/db/3722806/Microsoft>,
+        <https://1145.am/db/3725946/Microsoft>,
+        <https://1145.am/db/3727034/Microsoft>,
+        <https://1145.am/db/3728440/Microsoft>,
+        <https://1145.am/db/3728738/Microsoft>,
+        <https://1145.am/db/3729461/Microsoft>,
+        <https://1145.am/db/3731330/Microsoft>,
+        <https://1145.am/db/3732736/Microsoft>,
+        <https://1145.am/db/3733092/Microsoft>,
+        <https://1145.am/db/3733492/Microsoft>,
+        <https://1145.am/db/3734226/Microsoft>,
+        <https://1145.am/db/3734876/Microsoft>,
+        <https://1145.am/db/3735270/Microsoft>,
+        <https://1145.am/db/3735976/Microsoft>,
+        <https://1145.am/db/3736001/Microsoft>,
+        <https://1145.am/db/3736733/Microsoft>,
+        <https://1145.am/db/3737422/Microsoft>,
+        <https://1145.am/db/3739120/Microsoft>,
+        <https://1145.am/db/3744920/Microsoft>,
+        <https://1145.am/db/3750972/Microsoft>,
+        <https://1145.am/db/3752788/Microsoft>,
+        <https://1145.am/db/3756248/Microsoft>,
+        <https://1145.am/db/3775884/Microsoft_Corp>,
+        <https://1145.am/db/3837916/Microsoft>,
+        <https://1145.am/db/387846/Microsoft_Corp>,
+        <https://1145.am/db/3934369/Microsoft>,
+        <https://1145.am/db/3966693/Microsoft>,
+        <https://1145.am/db/3977238/Microsoft>,
+        <https://1145.am/db/4033114/Microsoft_Corporation>,
+        <https://1145.am/db/4047720/Microsoft>,
+        <https://1145.am/db/4050424/Microsoft>,
+        <https://1145.am/db/4099780/Microsoft>,
+        <https://1145.am/db/4100443/Microsoft>,
+        <https://1145.am/db/4104542/Microsoft>,
+        <https://1145.am/db/4105122/Microsoft>,
+        <https://1145.am/db/4117917/Microsoft>,
+        <https://1145.am/db/4145846/Microsoft>,
+        <https://1145.am/db/4146106/Microsoft>,
+        <https://1145.am/db/4146194/Microsoft>,
+        <https://1145.am/db/4146432/Microsoft>,
+        <https://1145.am/db/4149519/Microsoft>,
+        <https://1145.am/db/4160011/Microsoft>,
+        <https://1145.am/db/4163435/Microsoft>,
+        <https://1145.am/db/4167110/Microsoft>,
+        <https://1145.am/db/4169269/Microsoft>,
+        <https://1145.am/db/4203189/Microsoft>,
+        <https://1145.am/db/4216917/Microsoft>,
+        <https://1145.am/db/4217554/Microsoft>,
+        <https://1145.am/db/4218459/Microsoft>,
+        <https://1145.am/db/4221611/Microsoft>,
+        <https://1145.am/db/4222335/Microsoft>,
+        <https://1145.am/db/4236056/Microsoft>,
+        <https://1145.am/db/4236435/Microsoft>,
+        <https://1145.am/db/505767/Microsoft_Corp>,
+        <https://1145.am/db/544757/Microsoft>,
+        <https://1145.am/db/549213/Microsoft_Corp>,
+        <https://1145.am/db/644370/Microsoft_Corp>,
+        <https://1145.am/db/692886/Microsoft_Corp>,
+        <https://1145.am/db/698837/Microsoft>,
+        <https://1145.am/db/710355/Microsoft>,
+        <https://1145.am/db/710798/Microsoft>,
+        <https://1145.am/db/765281/Microsoft_Corp>,
+        <https://1145.am/db/766576/Microsoft_Corp>,
+        <https://1145.am/db/767841/Microsoft>,
+        <https://1145.am/db/767857/Microsoft_Corp>,
+        <https://1145.am/db/771073/Microsoft>,
+        <https://1145.am/db/771474/Microsoft>,
+        <https://1145.am/db/771701/Microsoft_Corp>,
+        <https://1145.am/db/771800/Microsoft_Corp>,
+        <https://1145.am/db/772395/Microsoft>,
+        <https://1145.am/db/774623/Microsoft_Corp>,
+        <https://1145.am/db/784797/Microsoft>,
+        <https://1145.am/db/798667/Microsoft_Corp>,
+        <https://1145.am/db/798704/Microsoft>,
+        <https://1145.am/db/798950/Microsoft_Corp>,
+        <https://1145.am/db/816467/Microsoft_Corp>,
+        <https://1145.am/db/817822/Microsoft_Corp>,
+        <https://1145.am/db/829840/Microsoft_Corp>,
+        <https://1145.am/db/85685/Microsoft_Corp>,
+        <https://1145.am/db/867602/Microsoft_Corporation>,
+        <https://1145.am/db/871474/Microsoft_Corporation>,
+        <https://1145.am/db/877583/Microsoft_Corp>,
+        <https://1145.am/db/879601/Microsoft>,
+        <https://1145.am/db/880066/Microsoft_Corp>,
+        <https://1145.am/db/907229/Microsoft>,
+        <https://1145.am/db/920712/Microsoft>,
+        <https://1145.am/db/969129/Microsoft>,
+        <https://1145.am/db/973870/Microsoft> .
+
+<https://1145.am/db/1768712/Nubank-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-08T21:43:21+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Nubank, the Brazilian financial services company, has raised $ 180 million from the Chinese internet giant, Tencent." ;
+    ns1:documentSource <https://1145.am/db/1768712/techcrunchcom_2018_10_08_tencent-cash-values-nubank-at-4-billion_> ;
+    ns1:internalDocId 1768712 ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1768712/Nubank> ;
+    ns1:valueRaw "$ 180 million" ;
+    ns1:whereClean "Latin America" ;
+    ns1:whereRaw "Latin America" .
+
+<https://1145.am/db/2194924/Cigna> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:buyer <https://1145.am/db/2194924/Cigna-Acquisition> ;
+    ns1:documentSource <https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> ;
+    ns1:foundName "Cigna" ;
+    ns1:internalDocId 2194924 ;
+    ns1:name "Cigna" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1176577/Cigna_Corporation>,
+        <https://1145.am/db/1299951/Cigna_Corporation>,
+        <https://1145.am/db/2181552/Cigna>,
+        <https://1145.am/db/2181569/Cigna>,
+        <https://1145.am/db/2182225/Cigna>,
+        <https://1145.am/db/2185002/Cigna>,
+        <https://1145.am/db/2185937/Cigna>,
+        <https://1145.am/db/2186010/Cigna>,
+        <https://1145.am/db/2186072/Cigna>,
+        <https://1145.am/db/2186278/Cigna>,
+        <https://1145.am/db/2186997/Cigna>,
+        <https://1145.am/db/2188019/Cigna>,
+        <https://1145.am/db/2189068/Cigna>,
+        <https://1145.am/db/2189108/Cigna>,
+        <https://1145.am/db/2190363/Cigna>,
+        <https://1145.am/db/2190374/Cigna>,
+        <https://1145.am/db/2190700/Cigna>,
+        <https://1145.am/db/2190742/Cigna>,
+        <https://1145.am/db/2191226/Cigna>,
+        <https://1145.am/db/2191853/Cigna>,
+        <https://1145.am/db/2191863/Cigna>,
+        <https://1145.am/db/2191895/Cigna>,
+        <https://1145.am/db/2191898/Cigna>,
+        <https://1145.am/db/2194735/Cigna>,
+        <https://1145.am/db/2194778/Cigna>,
+        <https://1145.am/db/2196471/Cigna_Corp>,
+        <https://1145.am/db/2196927/Cigna>,
+        <https://1145.am/db/2197323/Cigna>,
+        <https://1145.am/db/2198049/Cigna>,
+        <https://1145.am/db/2198190/Cigna>,
+        <https://1145.am/db/2198369/Cigna>,
+        <https://1145.am/db/2198427/Cigna>,
+        <https://1145.am/db/2198626/Cigna>,
+        <https://1145.am/db/2202333/Cigna_Corporation>,
+        <https://1145.am/db/2202518/Cigna>,
+        <https://1145.am/db/2203587/Cigna>,
+        <https://1145.am/db/2204859/Cigna>,
+        <https://1145.am/db/2206572/Cigna>,
+        <https://1145.am/db/2207741/Cigna_Corporation>,
+        <https://1145.am/db/2207743/Cigna>,
+        <https://1145.am/db/2208946/Cigna>,
+        <https://1145.am/db/2210879/Cigna_Corporation>,
+        <https://1145.am/db/2212804/Cigna>,
+        <https://1145.am/db/2213170/Cigna>,
+        <https://1145.am/db/2215165/Cigna>,
+        <https://1145.am/db/2226157/Cigna>,
+        <https://1145.am/db/2251815/Cigna_Corporation>,
+        <https://1145.am/db/2253145/Cigna>,
+        <https://1145.am/db/2253469/Cigna>,
+        <https://1145.am/db/2253498/Cigna>,
+        <https://1145.am/db/2254824/Cigna>,
+        <https://1145.am/db/2254830/Cigna>,
+        <https://1145.am/db/2256365/Cigna>,
+        <https://1145.am/db/2257160/Cigna_Corporation>,
+        <https://1145.am/db/2259943/Cigna>,
+        <https://1145.am/db/2260489/Cigna_Corporation>,
+        <https://1145.am/db/2260831/Cigna>,
+        <https://1145.am/db/2261551/Cigna>,
+        <https://1145.am/db/2261575/Cigna>,
+        <https://1145.am/db/2262399/Cigna>,
+        <https://1145.am/db/2262418/Cigna>,
+        <https://1145.am/db/2262557/Cigna>,
+        <https://1145.am/db/2262569/Cigna>,
+        <https://1145.am/db/2262593/Cigna_Corporation>,
+        <https://1145.am/db/2262709/Cigna>,
+        <https://1145.am/db/2263103/Cigna_Corporation>,
+        <https://1145.am/db/2263119/Cigna_Corporation>,
+        <https://1145.am/db/2263121/Cigna>,
+        <https://1145.am/db/2263124/Cigna_Corporation>,
+        <https://1145.am/db/2263323/Cigna>,
+        <https://1145.am/db/2263946/Cigna>,
+        <https://1145.am/db/2263947/Cigna>,
+        <https://1145.am/db/2264155/Cigna_Corporation>,
+        <https://1145.am/db/2264196/Cigna>,
+        <https://1145.am/db/2264287/Cigna>,
+        <https://1145.am/db/2264927/Cigna>,
+        <https://1145.am/db/2265966/Cigna>,
+        <https://1145.am/db/2266810/Cigna>,
+        <https://1145.am/db/2266814/Cigna_Corporation>,
+        <https://1145.am/db/2266833/Cigna>,
+        <https://1145.am/db/2268363/Cigna_Corporation>,
+        <https://1145.am/db/2268395/Cigna_Corporation>,
+        <https://1145.am/db/2269231/Cigna_Corporation>,
+        <https://1145.am/db/2269236/Cigna_Corporation>,
+        <https://1145.am/db/2270334/Cigna>,
+        <https://1145.am/db/2272244/Cigna>,
+        <https://1145.am/db/2273656/Cigna>,
+        <https://1145.am/db/2274766/Cigna>,
+        <https://1145.am/db/2275377/Cigna>,
+        <https://1145.am/db/2275405/Cigna>,
+        <https://1145.am/db/2276449/Cigna>,
+        <https://1145.am/db/2276491/Cigna>,
+        <https://1145.am/db/2276996/Cigna>,
+        <https://1145.am/db/2277983/Cigna>,
+        <https://1145.am/db/2278149/Cigna_Corporation>,
+        <https://1145.am/db/2278153/Cigna>,
+        <https://1145.am/db/2362051/Cigna_Corporation>,
+        <https://1145.am/db/2574392/Cigna_Corporation>,
+        <https://1145.am/db/2580223/Cigna>,
+        <https://1145.am/db/2594588/Cigna>,
+        <https://1145.am/db/2595943/Cigna>,
+        <https://1145.am/db/2825379/Cigna>,
+        <https://1145.am/db/2825799/Cigna>,
+        <https://1145.am/db/2825852/Cigna>,
+        <https://1145.am/db/2826128/Cigna>,
+        <https://1145.am/db/3150072/Cigna>,
+        <https://1145.am/db/3168969/Cigna>,
+        <https://1145.am/db/3181561/Cigna>,
+        <https://1145.am/db/3199438/Cigna_Corporation>,
+        <https://1145.am/db/3284887/Cigna_Corporation>,
+        <https://1145.am/db/3286800/Cigna>,
+        <https://1145.am/db/3330161/Cigna>,
+        <https://1145.am/db/3454350/Cigna>,
+        <https://1145.am/db/3551813/Cigna>,
+        <https://1145.am/db/3639667/Cigna>,
+        <https://1145.am/db/3701292/Cigna>,
+        <https://1145.am/db/3721934/Cigna>,
+        <https://1145.am/db/3772251/Cigna_Corporation>,
+        <https://1145.am/db/3831434/Cigna>,
+        <https://1145.am/db/3867873/Cigna>,
+        <https://1145.am/db/3890147/Cigna>,
+        <https://1145.am/db/3947809/Cigna>,
+        <https://1145.am/db/3970306/Cigna>,
+        <https://1145.am/db/3985652/Cigna>,
+        <https://1145.am/db/452933/Cigna_Corporation>,
+        <https://1145.am/db/497291/Cigna_Corp>,
+        <https://1145.am/db/533401/Cigna_Corporation>,
+        <https://1145.am/db/534105/Cigna_Corp>,
+        <https://1145.am/db/534338/Cigna_Corp>,
+        <https://1145.am/db/536997/Cigna_Corporation> .
+
+<https://1145.am/db/2194924/Rxadvance-Ipo-Venture> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2018-10-09T00:20:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "A pharmacy benefit manager (PBM) backed by Centene closed a $ 50 million funding round last week." ;
+    ns1:documentSource <https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 2194924 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:targetDetails "venture" ;
+    ns1:vendor <https://1145.am/db/2194924/Rxadvance> ;
+    ns1:whenRaw "Friday" ;
+    ns1:whereClean "Massachusetts" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:whereRaw "Massachusetts" .
+
+<https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners> a org:Organization ;
+    ns1:description "venture" ;
+    ns1:documentSource <https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> ;
+    ns1:foundName "Goldman Sachs",
+        "Goldman Sachs Investment Partners" ;
+    ns1:internalDocId 3518892 ;
+    ns1:investor <https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners-Kevin_Ryan-Ual-Investment-Series_B> ;
+    ns1:name "Goldman Sachs Investment Partners" ;
+    ns1:participant <https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners-Kevin_Ryan-Ual-Investment-Series_B> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3141211/Goldman_Sachs_Investment_Partners>,
+        <https://1145.am/db/3768748/Goldman_Sachs_Investment_Partners> .
+
+<https://1145.am/db/3518892/Kevin_Ryan> a org:Organization ;
+    ns1:description "entrepreneur" ;
+    ns1:documentSource <https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> ;
+    ns1:foundName "Kevin",
+        "Kevin Ryan" ;
+    ns1:internalDocId 3518892 ;
+    ns1:investor <https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners-Kevin_Ryan-Ual-Investment-Series_B> ;
+    ns1:name "Kevin Ryan" ;
+    ns1:sameAsHigh <https://1145.am/db/3375572/Kevin_Ryan> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2141183/Kevin_Ryan> .
+
+<https://1145.am/db/3518892/Point72_Ventures> a org:Organization ;
+    ns1:basedInLowRaw "Argentinian" ;
+    ns1:documentSource <https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> ;
+    ns1:foundName "Point72 Ventures" ;
+    ns1:internalDocId 3518892 ;
+    ns1:investor <https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners-Kevin_Ryan-Ual-Investment-Series_B> ;
+    ns1:name "Point72 Ventures" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1046072/Point72_Ventures>,
+        <https://1145.am/db/1067956/Point72>,
+        <https://1145.am/db/1120030/Point72_Ventures>,
+        <https://1145.am/db/1120071/Point72_Ventures>,
+        <https://1145.am/db/1175576/Point72_Ventures>,
+        <https://1145.am/db/1217359/Point72>,
+        <https://1145.am/db/1236915/Point72>,
+        <https://1145.am/db/1378599/Point72_Ventures>,
+        <https://1145.am/db/1558678/Point72_Ventures>,
+        <https://1145.am/db/1703120/Point72_Ventures>,
+        <https://1145.am/db/1708060/Point72_Ventures>,
+        <https://1145.am/db/1734504/Point72_Ventures>,
+        <https://1145.am/db/1742267/Point72_Ventures>,
+        <https://1145.am/db/1743085/Point72_Ventures>,
+        <https://1145.am/db/1743392/Point72_Ventures>,
+        <https://1145.am/db/1744775/Point72_Ventures>,
+        <https://1145.am/db/1745746/Point72_Ventures>,
+        <https://1145.am/db/1746957/Point72_Ventures>,
+        <https://1145.am/db/1751694/Point72_Ventures>,
+        <https://1145.am/db/1754996/Point72_Ventures>,
+        <https://1145.am/db/1763308/Point72_Ventures>,
+        <https://1145.am/db/1764764/Point72_Ventures>,
+        <https://1145.am/db/1782221/Point72_Ventures>,
+        <https://1145.am/db/1784603/Point72_Ventures>,
+        <https://1145.am/db/1787536/Point72_Ventures>,
+        <https://1145.am/db/2062003/Point72>,
+        <https://1145.am/db/208628/Point72>,
+        <https://1145.am/db/2109529/Point72_Ventures>,
+        <https://1145.am/db/2127890/Point72_Ventures>,
+        <https://1145.am/db/2129159/Point72_Ventures>,
+        <https://1145.am/db/219462/Point72>,
+        <https://1145.am/db/219527/Point72>,
+        <https://1145.am/db/2817959/Point72>,
+        <https://1145.am/db/3143173/Point72_Ventures>,
+        <https://1145.am/db/3158653/Point72_Ventures>,
+        <https://1145.am/db/3372264/Point72>,
+        <https://1145.am/db/3458379/Point72>,
+        <https://1145.am/db/3521196/Point72_Ventures>,
+        <https://1145.am/db/3549009/Point72>,
+        <https://1145.am/db/3552803/Point72_Ventures>,
+        <https://1145.am/db/3565590/Point72_Ventures>,
+        <https://1145.am/db/3630212/Point72_Ventures>,
+        <https://1145.am/db/3705810/Point72>,
+        <https://1145.am/db/3770161/Point72_Ventures>,
+        <https://1145.am/db/3900574/Point72_Ventures>,
+        <https://1145.am/db/4121825/Point72_Ventures>,
+        <https://1145.am/db/4122197/Point72_Ventures>,
+        <https://1145.am/db/4123756/Point72_Ventures>,
+        <https://1145.am/db/4141599/Point72>,
+        <https://1145.am/db/4172746/Point72_Ventures>,
+        <https://1145.am/db/419489/Point72_Ventures>,
+        <https://1145.am/db/431027/Point72_Ventures>,
+        <https://1145.am/db/606144/Point72_Ventures>,
+        <https://1145.am/db/696893/Point72_Ventures>,
+        <https://1145.am/db/734448/Point72>,
+        <https://1145.am/db/873711/Point72_Ventures>,
+        <https://1145.am/db/896855/Point72> .
+
+<https://1145.am/db/3803945/Neo_Lights_Holdings> a org:Organization ;
+    ns1:basedInLowRaw "Philadelphia, PA" ;
+    ns1:buyer <https://1145.am/db/3803945/Simkar_Corporation-Acquisition> ;
+    ns1:description "Lighting" ;
+    ns1:documentSource <https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> ;
+    ns1:foundName "Neo Lights Holdings",
+        "Neo Lights Holdings, Inc." ;
+    ns1:industry "lighting products" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/8_lighting_light_led_skylights> ;
+    ns1:internalDocId 3803945 ;
+    ns1:name "Neo Lights Holdings" ;
+    ns1:sameAsNameOnly <https://1145.am/db/3891236/Neo_Lights_Holdings> .
+
+<https://1145.am/db/3804435/Qgog_Constellation> a org:Organization ;
+    ns1:basedInHighClean "Grand Duchy of Luxembourg" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2960313> ;
+    ns1:basedInHighRaw "LUXEMBOURG" ;
+    ns1:buyer <https://1145.am/db/3804435/Qgog_Constellation-Ipo> ;
+    ns1:description "What is the name of the person or organization that QGOG Constellation is involved in" ;
+    ns1:documentSource <https://1145.am/db/3804435/wwwprnewswirecom_news-releases_qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288html> ;
+    ns1:foundName "QGOG Constellation S.A." ;
+    ns1:internalDocId 3804435 ;
+    ns1:name "QGOG Constellation" .
+
+<https://1145.am/db/3999108/Solidium> a org:Organization ;
+    ns1:basedInLowRaw "Finland" ;
+    ns1:buyer <https://1145.am/db/3999108/Kemira_Oyj-Ipo> ;
+    ns1:description "Equity Offering" ;
+    ns1:documentSource <https://1145.am/db/3999108/wwwglobenewswirecom_news-release_2024_02_13_2827957_0_en_SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHAREShtml> ;
+    ns1:foundName "Solidium" ;
+    ns1:internalDocId 3999108 ;
+    ns1:name "Solidium" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1321989/Solidium> .
+
+<https://1145.am/db/4000210/Lancaster_Resources_Inc> a org:Organization ;
+    ns1:basedInLowRaw "British Columbia" ;
+    ns1:buyer <https://1145.am/db/4000210/Lancaster_Resources_Inc-Merger>,
+        <https://1145.am/db/4000210/Nelson_Lake_Copper_Corp-Merger> ;
+    ns1:description "mining" ;
+    ns1:documentSource <https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> ;
+    ns1:foundName "Lancaster",
+        "Lancaster Resources Inc." ;
+    ns1:internalDocId 4000210 ;
+    ns1:name "Lancaster Resources Inc." ;
+    ns1:protagonist <https://1145.am/db/4000210/Nelson_Lake_Copper_Corp-Merger> ;
+    ns1:sameAsHigh <https://1145.am/db/3975291/Lancaster_Resources_Inc>,
+        <https://1145.am/db/3995686/Lancaster_Resources_Inc>,
+        <https://1145.am/db/4040654/Lancaster_Resources_Inc>,
+        <https://1145.am/db/4152096/Lancaster_Resources_Inc>,
+        <https://1145.am/db/4228702/Lancaster_Resources_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3940271/Lancaster_Resources_Inc> .
+
+<https://1145.am/db/4000217/Beamr-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2024-02-13T01:02:17+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Herzliya, Israel, Feb. 12, 2024 (GLOBE NEWSWIRE) - Beamr Imaging Ltd. (Nasdaq: BMR) (\"Beamr\" or the \"Company\") , a leader in video optimization technology, today announced the pricing of an underwritten public offering of 1,714,200 ordinary shares." ;
+    ns1:documentSource <https://1145.am/db/4000217/wwwglobenewswirecom_news-release_2024_02_13_2827921_0_en_Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offeringhtml> ;
+    ns1:foundName "public offering" ;
+    ns1:internalDocId 4000217 ;
+    ns1:name "public offering" ;
+    ns1:status "completed" ;
+    ns1:valueRaw "$ 12 million" ;
+    ns1:vendor <https://1145.am/db/4000217/Beamr> ;
+    ns1:whereClean "State of Israel" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereRaw "Israel" .
+
+<https://1145.am/db/4000882/Anthony_Lacavera> a org:Organization ;
+    ns1:basedInLowRaw "Canada" ;
+    ns1:buyer <https://1145.am/db/4000882/Wealth_One-Acquisition> ;
+    ns1:description "investment firm" ;
+    ns1:documentSource <https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_> ;
+    ns1:foundName "Anthony Lacavera",
+        "Wind Mobile" ;
+    ns1:industry "investment" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/242_investment_investments_investing_defi> ;
+    ns1:internalDocId 4000882 ;
+    ns1:name "Anthony Lacavera" ;
+    ns1:participant <https://1145.am/db/4000882/Wealth_One-Acquisition> .
+
+<https://1145.am/db/4000882/Globalive_Capital_Inc> a org:Organization ;
+    ns1:basedInLowRaw "Canada" ;
+    ns1:buyer <https://1145.am/db/4000882/Wealth_One-Acquisition> ;
+    ns1:description "governance of the SPV",
+        "investment",
+        "the sale of Wealth One Bank of Canada" ;
+    ns1:documentSource <https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_> ;
+    ns1:foundName "Globalive",
+        "Globalive Capital",
+        "Globalive Capital Inc." ;
+    ns1:industry "investment" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/242_investment_investments_investing_defi> ;
+    ns1:internalDocId 4000882 ;
+    ns1:investor <https://1145.am/db/4000882/Wealth_One-Acquisition> ;
+    ns1:name "Globalive",
+        "Globalive Capital",
+        "Globalive Capital Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/1071340/Globalive_Capital>,
+        <https://1145.am/db/2064584/Globalive_Capital>,
+        <https://1145.am/db/3781375/Globalive_Capital>,
+        <https://1145.am/db/435691/Globalive_Capital>,
+        <https://1145.am/db/438279/Globalive_Capital>,
+        <https://1145.am/db/485336/Globalive_Capital> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2613923/Globalive_Capital>,
+        <https://1145.am/db/3996874/Globalive> .
+
+<https://1145.am/db/4001440/Buckthorn_Partners> a org:Organization ;
+    ns1:basedInLowRaw "Buckthorn Partners" ;
+    ns1:buyer <https://1145.am/db/4001440/Coretrax-Acquisition> ;
+    ns1:description "investment" ;
+    ns1:documentSource <https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> ;
+    ns1:foundName "Buckthorn Partners" ;
+    ns1:internalDocId 4001440 ;
+    ns1:name "Buckthorn Partners" ;
+    ns1:sameAsHigh <https://1145.am/db/3072695/Buckthorn>,
+        <https://1145.am/db/3088255/Buckthorn_Partners> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1411173/Buckthorn_Partners> .
+
+<https://1145.am/db/4001440/Expro> a org:Organization ;
+    ns1:basedInLowRaw "NYSE" ;
+    ns1:buyer <https://1145.am/db/4001440/Coretrax-Acquisition> ;
+    ns1:description "energy services" ;
+    ns1:documentSource <https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> ;
+    ns1:foundName "Expro" ;
+    ns1:industry "energy services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/385_energy_services_service_infrastructure> ;
+    ns1:internalDocId 4001440 ;
+    ns1:name "Expro" ;
+    ns1:sameAsHigh <https://1145.am/db/1669585/Expro>,
+        <https://1145.am/db/2099424/Expro>,
+        <https://1145.am/db/2133438/Expro>,
+        <https://1145.am/db/2871694/Expro>,
+        <https://1145.am/db/4249415/Expro>,
+        <https://1145.am/db/903783/Expro> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1415119/Expro>,
+        <https://1145.am/db/3645048/Expro> .
+
+<https://1145.am/db/4001762/Evri-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-02-13T07:25:10+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "This weekend, it was reported that Evri's private equity owners were prepping for a £2bn sale of the firm, leading to further consolidation within the industry." ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "sale" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "sale" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/4001762/Evri> ;
+    ns1:targetName "Evri" ;
+    ns1:valueRaw "£2bn" .
+
+<https://1145.am/db/4001762/Royal_Mail> a org:Organization ;
+    ns1:basedInLowRaw "Czech" ;
+    ns1:buyer <https://1145.am/db/4001762/Czech_Parcel_Giant-Acquisition> ;
+    ns1:description "looking to expand" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "Royal Mail" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Royal Mail" ;
+    ns1:sameAsHigh <https://1145.am/db/4168197/Royal_Mail>,
+        <https://1145.am/db/4290155/Royal_Mail> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
+        <https://1145.am/db/194587/Royal_Mail_Plc>,
+        <https://1145.am/db/194605/Royal_Mail_Plc>,
+        <https://1145.am/db/194606/Royal_Mail_Plc>,
+        <https://1145.am/db/194607/Royal_Mail_Plc>,
+        <https://1145.am/db/1998848/Royal_Mail>,
+        <https://1145.am/db/2005816/Royal_Mail>,
+        <https://1145.am/db/2841455/Royal_Mail>,
+        <https://1145.am/db/2847880/Royal_Mail>,
+        <https://1145.am/db/2864441/Royal_Mail>,
+        <https://1145.am/db/2939544/Royal_Mail>,
+        <https://1145.am/db/2941320/Royal_Mail>,
+        <https://1145.am/db/2945763/Royal_Mail>,
+        <https://1145.am/db/2959107/Royal_Mail>,
+        <https://1145.am/db/2969395/Royal_Mail>,
+        <https://1145.am/db/2977176/Royal_Mail>,
+        <https://1145.am/db/2977364/Royal_Mail>,
+        <https://1145.am/db/2984033/Royal_Mail>,
+        <https://1145.am/db/2988964/Royal_Mail>,
+        <https://1145.am/db/2988998/Royal_Mail>,
+        <https://1145.am/db/3009355/Royal_Mail>,
+        <https://1145.am/db/3023028/Royal_Mail>,
+        <https://1145.am/db/3026949/Royal_Mail>,
+        <https://1145.am/db/3050026/Royal_Mail>,
+        <https://1145.am/db/3058845/Royal_Mail>,
+        <https://1145.am/db/3073967/Royal_Mail>,
+        <https://1145.am/db/4133454/Royal_Mail>,
+        <https://1145.am/db/534151/Royal_Mail> .
+
+<https://1145.am/db/4001762/Solano_Partners> a org:Organization ;
+    ns1:basedInLowRaw "UK" ;
+    ns1:description "merchant bank" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "Solano Partners" ;
+    ns1:industry "merchant bank" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Solano Partners" ;
+    ns1:protagonist <https://1145.am/db/4001762/Yodel-Acquisition> ;
+    ns1:sameAsHigh <https://1145.am/db/4001774/Solano_Partners> .
+
+<https://1145.am/db/4001762/Ydlgp> a org:Organization ;
+    ns1:basedInLowRaw "UK" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "YDLGP" ;
+    ns1:industry "logistics" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/189_logistics_services_infrastructure_operations> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/650_logistics_transportation_transport_trucking>,
+        <https://1145.am/db/industry/707_logistics_property_reit_properties> ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "YDLGP" ;
+    ns1:protagonist <https://1145.am/db/4001762/Yodel-Acquisition> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4001774/Ydlgp_Limited> .
+
+<https://1145.am/db/4003172/Climentum_Capital> a org:Organization ;
+    ns1:description "Investing" ;
+    ns1:documentSource <https://1145.am/db/4003172/wwwbusinesswirecom_news_home_20240213625041_en_Aegir-Insights-Raises-_E2_82_AC85M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> ;
+    ns1:foundName "Climentum Capital" ;
+    ns1:internalDocId 4003172 ;
+    ns1:investor <https://1145.am/db/4003172/Aegir_Insights-Climentum_Capital-Seaya_Andromeda-Investment-Series_A> ;
+    ns1:name "Climentum Capital" ;
+    ns1:sameAsNameOnly <https://1145.am/db/3229808/Climentum_Capital> .
+
+<https://1145.am/db/4003172/Seaya_Andromeda> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/4003172/wwwbusinesswirecom_news_home_20240213625041_en_Aegir-Insights-Raises-_E2_82_AC85M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> ;
+    ns1:foundName "Seaya Andromeda" ;
+    ns1:internalDocId 4003172 ;
+    ns1:investor <https://1145.am/db/4003172/Aegir_Insights-Climentum_Capital-Seaya_Andromeda-Investment-Series_A> ;
+    ns1:name "Seaya Andromeda" .
+
+<https://1145.am/db/4003470/Finom-Investment-Series_B> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2024-02-13T08:00:57+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Finom, a European challenger bank aimed at SMEs (small and medium-sized enterprises) and freelancers, has raised €50 million ($ 54 million) in a Series B equity round of funding." ;
+    ns1:documentSource <https://1145.am/db/4003470/techcrunchcom_2024_02_13_finom-a-european-challenger-bank-for-smes-raises-54m_> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 4003470 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4003470/Finom> ;
+    ns1:targetDetails "Series B" ;
+    ns1:valueRaw "$ 54 million",
+        "€50 million" ;
+    ns1:whereClean "Kingdom of the Netherlands" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereRaw "Netherlands" .
+
+<https://1145.am/db/4010045/Eltek-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2024-02-13T07:54:09+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Eltek (NASDAQ: ELTK) announces the pricing of an underwritten public offering of 0.63 million shares of its ordinary shares for $ 16.00 per share, for an expected gross proceeds of approximately $ 10 million." ;
+    ns1:documentSource <https://1145.am/db/4010045/seekingalphacom_news_4065868-eltek-stock-slides-on-pricing-stock-offering-to-raise-10-million> ;
+    ns1:foundName "public offering" ;
+    ns1:internalDocId 4010045 ;
+    ns1:name "public offering" ;
+    ns1:status "not happened at date of document" ;
+    ns1:valueRaw "$ 10 million" ;
+    ns1:vendor <https://1145.am/db/4010045/Eltek> ;
+    ns1:whereRaw "NASDAQ" .
+
+<https://1145.am/db/4010047/Beamr_Imaging-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2024-02-13T07:43:05+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Beamr Imaging (NASDAQ: BMR) announces the pricing of an underwritten public offering of 1.71 million ordinary shares at a public offering price of $ 7.00 per share." ;
+    ns1:documentSource <https://1145.am/db/4010047/seekingalphacom_news_4065866-beamr-imaging-announces-pricing-of-stock-offering-to-raise-12m> ;
+    ns1:foundName "public offering" ;
+    ns1:internalDocId 4010047 ;
+    ns1:name "public offering" ;
+    ns1:status "not happened at date of document" ;
+    ns1:vendor <https://1145.am/db/4010047/Beamr_Imaging> ;
+    ns1:whereRaw "NASDAQ" .
+
+<https://1145.am/db/4174501/Silver_Mountain_Resources_Inc-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2024-04-19T11:39:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "TORONTO, April 19, 2024 (GLOBE NEWSWIRE) - Silver Mountain Resources Inc. (TSXV: AGMR) (OTCQB: AGMRF) (\"Silver Mountain\" or the \"Company\") , is pleased to announce that it has upsized its previously announced public offering (the \"Offering\") of units (the \"Units\") to up to $ 9,000,035 from $ 7,502,000, at a price of $ 0.11 per Unit." ;
+    ns1:documentSource <https://1145.am/db/4174501/wwwglobenewswirecom_news-release_2024_04_19_2866102_0_en_Silver-Mountain-Announces-Upsize-of-Previously-Announced-Public-Offering-of-Units-to-9-Millionhtml> ;
+    ns1:foundName "public offering" ;
+    ns1:internalDocId 4174501 ;
+    ns1:name "public offering" ;
+    ns1:status "not happened at date of document" ;
+    ns1:valueRaw "$ 7,502,000",
+        "up to $ 9,000,035" ;
+    ns1:vendor <https://1145.am/db/4174501/Silver_Mountain_Resources_Inc> ;
+    ns1:whereClean "Canada" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereRaw "Canada" .
+
+<https://1145.am/db/4174522/Contextlogic_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-19T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "SAN FRANCISCO, April 19, 2024 (GLOBE NEWSWIRE) - ContextLogic Inc. (d/b/a Wish) (NASDAQ: WISH) (\"ContextLogic\" or the \"Company\") announced its stockholders have approved the Asset Sale transaction with Qoo10 Pte." ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:foundName "Asset Sale" ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "Asset Sale" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/4174522/Contextlogic_Inc> ;
+    ns1:targetName "ContextLogic Inc." ;
+    ns1:whereClean "San Francisco" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:whereRaw "SAN FRANCISCO" .
+
+<https://1145.am/db/4174522/Qoo10> a org:Organization ;
+    ns1:buyer <https://1145.am/db/4174522/Qoo10-Acquisition> ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:foundName "Qoo10" ;
+    ns1:industry "ecommerce platform" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/36_commerce_ecommerce_ebusiness_merchant> ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "Qoo10" ;
+    ns1:sameAsHigh <https://1145.am/db/1755475/Qoo10>,
+        <https://1145.am/db/3999637/Qoo10>,
+        <https://1145.am/db/4000194/Qoo10>,
+        <https://1145.am/db/4010388/Qoo10>,
+        <https://1145.am/db/4018657/Qoo10>,
+        <https://1145.am/db/4097241/Qoo10>,
+        <https://1145.am/db/4174879/Qoo10>,
+        <https://1145.am/db/4234640/Qoo10_Pte> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4035388/Qoo10>,
+        <https://1145.am/db/4115582/Qoo10>,
+        <https://1145.am/db/4126348/Qoo10>,
+        <https://1145.am/db/4136977/Qoo10>,
+        <https://1145.am/db/4148809/Qoo10>,
+        <https://1145.am/db/4154967/Qoo10>,
+        <https://1145.am/db/4168651/Qoo10_Pte> .
+
+<https://1145.am/db/4175644/Amcon> a org:Organization ;
+    ns1:basedInHighClean "Omaha" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5074472> ;
+    ns1:basedInHighRaw "Omaha, Nebraska" ;
+    ns1:buyer <https://1145.am/db/4175644/Richmond_Master_Distributors-Acquisition> ;
+    ns1:description "Business" ;
+    ns1:documentSource <https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> ;
+    ns1:foundName "AMCON Distributing Company" ;
+    ns1:industry "Convenience and Foodservice Distributor" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/99_wholesale_wholesaler_wholesalers_distributors> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/254_foodservice_foodservices_food_service>,
+        <https://1145.am/db/industry/561_convenience_retail_stores_retailer> ;
+    ns1:internalDocId 4175644 ;
+    ns1:name "AMCON" ;
+    ns1:sameAsHigh <https://1145.am/db/1564701/Amcon>,
+        <https://1145.am/db/1565723/Amcon>,
+        <https://1145.am/db/1664211/Amcon>,
+        <https://1145.am/db/4034787/Amcon>,
+        <https://1145.am/db/4094812/Amcon>,
+        <https://1145.am/db/4144176/Amcon> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4093728/Amcon>,
+        <https://1145.am/db/4234652/Amcon> .
+
+<https://1145.am/db/4175671/Rsted> a org:Organization ;
+    ns1:basedInLowRaw "Denmark" ;
+    ns1:buyer <https://1145.am/db/4175671/Sunrise_Wind-Acquisition-Interest> ;
+    ns1:description "wind" ;
+    ns1:documentSource <https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> ;
+    ns1:foundName "Ørsted" ;
+    ns1:internalDocId 4175671 ;
+    ns1:name "rsted" ;
+    ns1:sameAsHigh <https://1145.am/db/2855605/Rsted>,
+        <https://1145.am/db/3084683/Rsted>,
+        <https://1145.am/db/3706310/Rsted>,
+        <https://1145.am/db/3723889/Rsted> ;
+    ns1:sameAsNameOnly <https://1145.am/db/2018446/Rsted>,
+        <https://1145.am/db/3063996/Rsted>,
+        <https://1145.am/db/3571950/Rsted>,
+        <https://1145.am/db/3581885/Rsted>,
+        <https://1145.am/db/3642238/Rsted>,
+        <https://1145.am/db/3778700/Rsted>,
+        <https://1145.am/db/4004436/Rsted> .
+
+<https://1145.am/db/1768188/Grab> a org:Organization ;
+    ns1:basedInHighClean "Republic of Singapore" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
+    ns1:basedInHighRaw "Singapore" ;
+    ns1:description "ride-hailing" ;
+    ns1:documentSource <https://1145.am/db/1768188/techcrunchcom_2018_10_08_microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services_> ;
+    ns1:foundName "Grab" ;
+    ns1:industry "ride-hailing and on-demand services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/656_transportation_transport_demand_shuttle> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/340_hailing_ride_ridehailing_ridehire>,
+        <https://1145.am/db/industry/408_demand_service_services_on> ;
+    ns1:internalDocId 1768188 ;
+    ns1:name "Grab" ;
+    ns1:sameAsHigh <https://1145.am/db/162163/Grab>,
+        <https://1145.am/db/1758911/Grab>,
+        <https://1145.am/db/1766132/Grab>,
+        <https://1145.am/db/1767080/Grab>,
+        <https://1145.am/db/1769032/Grab>,
+        <https://1145.am/db/1770225/Grab>,
+        <https://1145.am/db/1771385/Grab>,
+        <https://1145.am/db/1777863/Grab>,
+        <https://1145.am/db/1786942/Grab>,
+        <https://1145.am/db/1788663/Grab>,
+        <https://1145.am/db/1789073/Grab>,
+        <https://1145.am/db/1789738/Grab>,
+        <https://1145.am/db/1823438/Grab>,
+        <https://1145.am/db/196775/Grab>,
+        <https://1145.am/db/198589/Grab>,
+        <https://1145.am/db/200450/Grab>,
+        <https://1145.am/db/200974/Grab>,
+        <https://1145.am/db/2147309/Grab>,
+        <https://1145.am/db/216962/Grab>,
+        <https://1145.am/db/230023/Grab>,
+        <https://1145.am/db/230104/Grab>,
+        <https://1145.am/db/243056/Grab>,
+        <https://1145.am/db/2723493/Grab>,
+        <https://1145.am/db/3032957/Grab>,
+        <https://1145.am/db/303652/Grab>,
+        <https://1145.am/db/3046162/Grab>,
+        <https://1145.am/db/3058745/Grab>,
+        <https://1145.am/db/3062445/Grab>,
+        <https://1145.am/db/3063739/Grab>,
+        <https://1145.am/db/3063982/Grab>,
+        <https://1145.am/db/3064160/Grab>,
+        <https://1145.am/db/3145352/Grab>,
+        <https://1145.am/db/3390428/Grab>,
+        <https://1145.am/db/3394821/Grab>,
+        <https://1145.am/db/391662/Grab>,
+        <https://1145.am/db/414863/Grab>,
+        <https://1145.am/db/414887/Grab>,
+        <https://1145.am/db/519065/Grab>,
+        <https://1145.am/db/520708/Grab>,
+        <https://1145.am/db/667806/Grab> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1740443/Grab>,
+        <https://1145.am/db/1771326/Grab>,
+        <https://1145.am/db/1774369/Grab>,
+        <https://1145.am/db/1776123/Grab>,
+        <https://1145.am/db/1778089/Grab>,
+        <https://1145.am/db/1783135/Grab>,
+        <https://1145.am/db/1784967/Grab>,
+        <https://1145.am/db/1785115/Grab>,
+        <https://1145.am/db/1790202/Grab>,
+        <https://1145.am/db/1813725/Grab>,
+        <https://1145.am/db/1821058/Grab>,
+        <https://1145.am/db/1822055/Grab>,
+        <https://1145.am/db/348415/Grab>,
+        <https://1145.am/db/348584/Grab>,
+        <https://1145.am/db/665262/Grab>,
+        <https://1145.am/db/666813/Grab>,
+        <https://1145.am/db/668969/Grab>,
+        <https://1145.am/db/853392/Grab> .
+
+<https://1145.am/db/1768188/Grab-Microsoft-Investment> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-09T01:28:06+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Microsoft has made a strategic investment in ride-hailing and on-demand services company Grab as part of a deal that includes collaborating on big data and AI projects." ;
+    ns1:documentSource <https://1145.am/db/1768188/techcrunchcom_2018_10_08_microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services_> ;
+    ns1:foundName "investment" ;
+    ns1:internalDocId 1768188 ;
+    ns1:name "investment" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/1768188/Grab> ;
+    ns1:whereClean "Republic of Singapore" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
+    ns1:whereRaw "Singapore" .
+
+<https://1145.am/db/1768712/Nubank> a org:Organization ;
+    ns1:basedInHighClean "Federative Republic of Brazil" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3469034> ;
+    ns1:basedInHighRaw "Brazil" ;
+    ns1:description "financial services" ;
+    ns1:documentSource <https://1145.am/db/1768712/techcrunchcom_2018_10_08_tencent-cash-values-nubank-at-4-billion_> ;
+    ns1:foundName "Nubank" ;
+    ns1:industry "financial services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/386_banking_financial_finance_industries> ;
+    ns1:internalDocId 1768712 ;
+    ns1:name "Nubank" ;
+    ns1:sameAsHigh <https://1145.am/db/1268457/Nubank>,
+        <https://1145.am/db/1297675/Nubank>,
+        <https://1145.am/db/1298616/Nubank>,
+        <https://1145.am/db/1560244/Nubank>,
+        <https://1145.am/db/1787197/Nubank>,
+        <https://1145.am/db/1795761/Nubank>,
+        <https://1145.am/db/1818369/Nubank>,
+        <https://1145.am/db/1926764/Nubank>,
+        <https://1145.am/db/1927646/Nubank>,
+        <https://1145.am/db/211624/Nubank>,
+        <https://1145.am/db/3070625/Nubank>,
+        <https://1145.am/db/315144/Nubank>,
+        <https://1145.am/db/315157/Nubank>,
+        <https://1145.am/db/3449653/Nubank>,
+        <https://1145.am/db/348989/Nubank>,
+        <https://1145.am/db/358101/Nubank>,
+        <https://1145.am/db/358366/Nubank>,
+        <https://1145.am/db/358444/Nubank>,
+        <https://1145.am/db/394731/Nubank>,
+        <https://1145.am/db/395775/Nubank>,
+        <https://1145.am/db/433817/Nubank>,
+        <https://1145.am/db/577322/Nubank>,
+        <https://1145.am/db/968882/Nubank> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1758188/Nubank>,
+        <https://1145.am/db/1763942/Nubank>,
+        <https://1145.am/db/661599/Nubank> .
+
+<https://1145.am/db/2194924/Cigna-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-10-09T00:20:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "The transaction, which allows Centene to expand its investment in the future, came just a week after Cigna announced it would purchase Express Scripts." ;
+    ns1:documentSource <https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> ;
+    ns1:foundName "purchase" ;
+    ns1:internalDocId 2194924 ;
+    ns1:name "purchase" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereClean "Massachusetts" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:whereRaw "Massachusetts" .
+
+<https://1145.am/db/2194924/Rxadvance> a org:Organization ;
+    ns1:basedInHighClean "Massachusetts" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:basedInHighRaw "Massachusetts" ;
+    ns1:documentSource <https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> ;
+    ns1:foundName "RxAdvance" ;
+    ns1:internalDocId 2194924 ;
+    ns1:name "RxAdvance" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2191863/Rxadvance>,
+        <https://1145.am/db/2213590/Rxadvance>,
+        <https://1145.am/db/2228758/Rxadvance>,
+        <https://1145.am/db/2247399/Rxadvance> .
+
+<https://1145.am/db/3518892/Ual> a org:Organization ;
+    ns1:basedInHighRaw "Argentinian" ;
+    ns1:description "a financial management app and a fee-free prepaid MasterCard" ;
+    ns1:documentSource <https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> ;
+    ns1:foundName "Ualá" ;
+    ns1:industry "banking" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers>,
+        <https://1145.am/db/industry/386_banking_financial_finance_industries> ;
+    ns1:internalDocId 3518892 ;
+    ns1:name "Ualá" ;
+    ns1:sameAsHigh <https://1145.am/db/1329281/Uala>,
+        <https://1145.am/db/1742280/Uala>,
+        <https://1145.am/db/1744145/Ual>,
+        <https://1145.am/db/1762519/Ual>,
+        <https://1145.am/db/2030693/Uala>,
+        <https://1145.am/db/2111291/Uala>,
+        <https://1145.am/db/3543830/Ual> ;
+    ns1:sameAsNameOnly <https://1145.am/db/1744079/Ual> .
+
+<https://1145.am/db/3803945/Simkar_Corporation> a org:Organization ;
+    ns1:basedInHighClean "Philadelphia" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4560349> ;
+    ns1:basedInHighRaw "Philadelphia, PA" ;
+    ns1:description "Lighting products" ;
+    ns1:documentSource <https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> ;
+    ns1:foundName "Simkar Corporation" ;
+    ns1:industry "Lighting" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/8_lighting_light_led_skylights> ;
+    ns1:internalDocId 3803945 ;
+    ns1:name "Simkar Corporation" ;
+    ns1:sameAsHigh <https://1145.am/db/3891236/Simkar> .
+
+<https://1145.am/db/3803945/Simkar_Corporation-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2018-10-08T21:43:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "In May of 2018, Neo Lights Holdings, Inc. acquired Simkar Corporation (http: //www.simkar.com/) , based in Philadelphia, PA. A well-known manufacturer of lighting products, Simkar's world-class large scale manufacturing capabilities will enable Neo Lights Holdings to deliver their new technology quickly to an eager marketplace." ;
+    ns1:documentSource <https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> ;
+    ns1:foundName "acquired" ;
+    ns1:internalDocId 3803945 ;
+    ns1:name "acquired" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3803945/Simkar_Corporation> ;
+    ns1:targetName "Simkar Corporation" ;
+    ns1:whenRaw "May of 2018" ;
+    ns1:whereClean "Philadelphia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4560349> ;
+    ns1:whereRaw "Philadelphia, PA" .
+
+<https://1145.am/db/3804435/Qgog_Constellation-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2018-10-08T22:25:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "LUXEMBOURG, Oct. 8, 2018 /PRNewswire/ - QGOG Constellation S.A. (\"QGOG Constellation \"or the \"Company \") has been involved in discussions and negotiations with certain holders (and investment managers for certain holders) (each, a \"Noteholder \") of the 9.00 % Cash / 0.50 % PIK Senior Secured Notes due 2024 (the \"2024 Notes \") issued by the Company pursuant to that indenture dated as of July 27, 2017 by and among the Company, the subsidiary guarantors party thereto from time to time and Wilmington Trust, National Association, as trustee, paying agent, transfer agent and registrar (the \"2024 Notes Indenture \")." ;
+    ns1:documentSource <https://1145.am/db/3804435/wwwprnewswirecom_news-releases_qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288html> ;
+    ns1:internalDocId 3804435 ;
+    ns1:status "stopped" ;
+    ns1:whereClean "Grand Duchy of Luxembourg" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2960313> ;
+    ns1:whereRaw "LUXEMBOURG" .
+
+<https://1145.am/db/3999108/Kemira_Oyj> a org:Organization ;
+    ns1:basedInHighClean "Republic of Finland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
+    ns1:basedInHighRaw "Finland" ;
+    ns1:description "a Finnish anchor owner" ;
+    ns1:documentSource <https://1145.am/db/3999108/wwwglobenewswirecom_news-release_2024_02_13_2827957_0_en_SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHAREShtml> ;
+    ns1:foundName "Kemira Oyj" ;
+    ns1:internalDocId 3999108 ;
+    ns1:name "Kemira Oyj" ;
+    ns1:sameAsNameOnly <https://1145.am/db/3988431/Kemira>,
+        <https://1145.am/db/3999950/Kemira> .
+
+<https://1145.am/db/3999108/Kemira_Oyj-Ipo> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "ipo" ;
+    ns1:documentDate "2024-02-13T06:48:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Solidium has today, 13 February 2024, placed 7,782,765 shares in Kemira Oyj, representing approximately 5.0 per cent of all the shares in Kemira Oyj, in an accelerated bookbuilt offering to Finnish and international institutional investors (the \"Equity Offering\") , at a price of EUR 16.0 per share, resulting in gross proceeds of approximately EUR 125 million." ;
+    ns1:documentSource <https://1145.am/db/3999108/wwwglobenewswirecom_news-release_2024_02_13_2827957_0_en_SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHAREShtml> ;
+    ns1:internalDocId 3999108 ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3999108/Kemira_Oyj> ;
+    ns1:targetName "Kemira Oyj" ;
+    ns1:valueRaw "EUR 125 million" ;
+    ns1:whereClean "Republic of Finland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
+    ns1:whereRaw "Finland" .
+
+<https://1145.am/db/4000210/Lancaster_Resources_Inc-Merger> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "merger" ;
+    ns1:documentDate "2024-02-12T23:54:25+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Lancaster Resources Inc. (CSE: LCR | OTCQB: LANRF | FRA:6UF0) (\"Lancaster\" or the \"Company\") is pleased to announce that on February 2, 2024, the Supreme Court of British Columbia granted an interim order (the \"Interim Order\") in connection with the proposed spin-off of Nelson Lake Copper Corp. (\"Nelson Lake\") by Lancaster by way of Plan of Arrangement (the \"Arrangement\") ." ;
+    ns1:documentSource <https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> ;
+    ns1:foundName "spin-off" ;
+    ns1:internalDocId 4000210 ;
+    ns1:name "spin-off" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereClean "British Columbia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereRaw "British Columbia" .
+
+<https://1145.am/db/4000210/Nelson_Lake_Copper_Corp> a org:Organization ;
+    ns1:basedInHighClean "British Columbia" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:basedInHighRaw "British Columbia" ;
+    ns1:description "mining" ;
+    ns1:documentSource <https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> ;
+    ns1:foundName "Nelson Lake Copper Corp." ;
+    ns1:internalDocId 4000210 ;
+    ns1:name "Nelson Lake Copper Corp." ;
+    ns1:sameAsHigh <https://1145.am/db/3963542/Nelson_Lake_Copper_Corp>,
+        <https://1145.am/db/3995686/Nelson_Lake_Copper_Corp> .
+
+<https://1145.am/db/4000217/Beamr> a org:Organization ;
+    ns1:basedInHighClean "Herzliya" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/294778> ;
+    ns1:basedInHighRaw "Herzliya, Israel" ;
+    ns1:description "video optimization technology" ;
+    ns1:documentSource <https://1145.am/db/4000217/wwwglobenewswirecom_news-release_2024_02_13_2827921_0_en_Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offeringhtml> ;
+    ns1:foundName "Beamr Imaging Ltd" ;
+    ns1:internalDocId 4000217 ;
+    ns1:name "Beamr" ;
+    ns1:sameAsHigh <https://1145.am/db/2169511/Beamr>,
+        <https://1145.am/db/2171563/Beamr>,
+        <https://1145.am/db/2174174/Beamr>,
+        <https://1145.am/db/4013290/Beamr> .
+
+<https://1145.am/db/4000882/Wealth_One> a org:Organization ;
+    ns1:basedInHighClean "Canada" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:basedInHighRaw "Canada" ;
+    ns1:description "Chinese-Canadian clients" ;
+    ns1:documentSource <https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_> ;
+    ns1:foundName "Wealth One",
+        "Wealth One Bank of Canada" ;
+    ns1:industry "banking" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers>,
+        <https://1145.am/db/industry/386_banking_financial_finance_industries> ;
+    ns1:internalDocId 4000882 ;
+    ns1:name "Wealth One" .
+
+<https://1145.am/db/4001440/Coretrax> a org:Organization ;
+    ns1:description "energy services" ;
+    ns1:documentSource <https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> ;
+    ns1:foundName "Coretrax" ;
+    ns1:industry "energy services" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/385_energy_services_service_infrastructure> ;
+    ns1:internalDocId 4001440 ;
+    ns1:name "Coretrax" ;
+    ns1:sameAsHigh <https://1145.am/db/4249415/Coretrax> .
+
+<https://1145.am/db/4001762/Czech_Parcel_Giant> a org:Organization ;
+    ns1:basedInHighClean "Czechia" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:basedInHighRaw "Czech" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "Packeta" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Czech parcel giant" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2841455/Czech_Parcel_Giant> .
+
+<https://1145.am/db/4001762/Czech_Parcel_Giant-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-02-13T07:25:10+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Royal Mail has also been looking to expand, considering a bid for Czech parcel giant Packeta at the end of last year." ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "bid" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "bid" ;
+    ns1:status "stopped" ;
+    ns1:target <https://1145.am/db/4001762/Czech_Parcel_Giant> ;
+    ns1:targetName "Czech parcel giant" ;
+    ns1:whereClean "Czechia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereRaw "Czech" .
+
+<https://1145.am/db/4001762/Evri> a org:Organization ;
+    ns1:basedInLowRaw "Israel" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "Evri" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Evri" ;
+    ns1:sameAsNameOnly <https://1145.am/db/1725824/Evri>,
+        <https://1145.am/db/3997687/Evri> .
+
+<https://1145.am/db/4001762/Yodel> a org:Organization ;
+    ns1:basedInHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:basedInHighRaw "UK" ;
+    ns1:description "Parcel delivery" ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "Yodel" ;
+    ns1:industry "Parcel delivery" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/447_parcel_parcels_delivery_couriers> ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Yodel" ;
+    ns1:sameAsHigh <https://1145.am/db/3988607/Yodel> .
+
+<https://1145.am/db/4003172/Aegir_Insights> a org:Organization ;
+    ns1:description "offshore wind sector" ;
+    ns1:documentSource <https://1145.am/db/4003172/wwwbusinesswirecom_news_home_20240213625041_en_Aegir-Insights-Raises-_E2_82_AC85M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> ;
+    ns1:foundName "Aegir Insights" ;
+    ns1:industry "offshore wind" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/693_offshore_wind_turbine_energy> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/274_offshore_marine_rig_companies>,
+        <https://1145.am/db/industry/310_wind_turbines_turbine_energy> ;
+    ns1:internalDocId 4003172 ;
+    ns1:name "Aegir Insights" ;
+    ns1:sameAsHigh <https://1145.am/db/1398701/Aegir_Insights>,
+        <https://1145.am/db/1400553/Aegir_Insights>,
+        <https://1145.am/db/1631735/Aegir_Insights>,
+        <https://1145.am/db/1984632/Aegir_Insights> .
+
+<https://1145.am/db/4003470/Finom> a org:Organization ;
+    ns1:basedInHighClean "Kingdom of the Netherlands" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:basedInHighRaw "Netherlands" ;
+    ns1:description "SMEs" ;
+    ns1:documentSource <https://1145.am/db/4003470/techcrunchcom_2024_02_13_finom-a-european-challenger-bank-for-smes-raises-54m_> ;
+    ns1:foundName "Finom" ;
+    ns1:industry "banking" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers>,
+        <https://1145.am/db/industry/386_banking_financial_finance_industries> ;
+    ns1:internalDocId 4003470 ;
+    ns1:name "Finom" ;
+    ns1:sameAsHigh <https://1145.am/db/1758117/Finom> .
+
+<https://1145.am/db/4010045/Eltek> a org:Organization ;
+    ns1:basedInLowRaw "NASDAQ" ;
+    ns1:description "production" ;
+    ns1:documentSource <https://1145.am/db/4010045/seekingalphacom_news_4065868-eltek-stock-slides-on-pricing-stock-offering-to-raise-10-million> ;
+    ns1:foundName "Eltek" ;
+    ns1:internalDocId 4010045 ;
+    ns1:name "Eltek" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2650259/Eltek_Asa>,
+        <https://1145.am/db/3385621/Eltek_Ltd>,
+        <https://1145.am/db/3473092/Eltek_Ltd>,
+        <https://1145.am/db/3516366/Eltek_Ltd>,
+        <https://1145.am/db/3582275/Eltek_Ltd>,
+        <https://1145.am/db/3878888/Eltek_Ltd> .
+
+<https://1145.am/db/4010047/Beamr_Imaging> a org:Organization ;
+    ns1:basedInLowRaw "NASDAQ" ;
+    ns1:documentSource <https://1145.am/db/4010047/seekingalphacom_news_4065866-beamr-imaging-announces-pricing-of-stock-offering-to-raise-12m> ;
+    ns1:foundName "Beamr Imaging" ;
+    ns1:internalDocId 4010047 ;
+    ns1:name "Beamr Imaging" .
+
+<https://1145.am/db/4174501/Silver_Mountain_Resources_Inc> a org:Organization ;
+    ns1:basedInLowRaw "TORONTO" ;
+    ns1:description "mining" ;
+    ns1:documentSource <https://1145.am/db/4174501/wwwglobenewswirecom_news-release_2024_04_19_2866102_0_en_Silver-Mountain-Announces-Upsize-of-Previously-Announced-Public-Offering-of-Units-to-9-Millionhtml> ;
+    ns1:foundName "Silver Mountain Resources Inc." ;
+    ns1:internalDocId 4174501 ;
+    ns1:name "Silver Mountain Resources Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/4166894/Silver_Mountain_Resources_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/4235717/Silver_Mountain_Resources> .
+
+<https://1145.am/db/4174522/Contextlogic_Inc> a org:Organization ;
+    ns1:basedInHighClean "San Francisco" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:basedInHighRaw "SAN FRANCISCO" ;
+    ns1:description "Business" ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:foundName "ContextLogic Inc." ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "ContextLogic Inc." ;
+    ns1:sameAsHigh <https://1145.am/db/1267818/Contextlogic_Inc>,
+        <https://1145.am/db/1269612/Contextlogic_Inc>,
+        <https://1145.am/db/1327479/Contextlogic_Inc>,
+        <https://1145.am/db/1330709/Contextlogic_Inc>,
+        <https://1145.am/db/175460/Contextlogic>,
+        <https://1145.am/db/4010388/Contextlogic>,
+        <https://1145.am/db/4097241/Contextlogic_Inc>,
+        <https://1145.am/db/4115582/Contextlogic_Inc>,
+        <https://1145.am/db/4126348/Contextlogic_Inc>,
+        <https://1145.am/db/4136977/Contextlogic_Inc>,
+        <https://1145.am/db/4148809/Contextlogic_Inc>,
+        <https://1145.am/db/4154967/Contextlogic_Inc>,
+        <https://1145.am/db/4168651/Contextlogic_Inc>,
+        <https://1145.am/db/607174/Contextlogic_Inc>,
+        <https://1145.am/db/607188/Contextlogic_Inc>,
+        <https://1145.am/db/610690/Contextlogic_Inc>,
+        <https://1145.am/db/610774/Contextlogic_Inc>,
+        <https://1145.am/db/795832/Contextlogic_Inc>,
+        <https://1145.am/db/798138/Contextlogic_Inc> ;
+    ns1:sameAsNameOnly <https://1145.am/db/173868/Contextlogic_Inc>,
+        <https://1145.am/db/176220/Contextlogic_Inc>,
+        <https://1145.am/db/178354/Contextlogic_Inc>,
+        <https://1145.am/db/1867510/Contextlogic>,
+        <https://1145.am/db/330549/Contextlogic_Inc>,
+        <https://1145.am/db/3658561/Contextlogic>,
+        <https://1145.am/db/3999637/Contextlogic_Inc>,
+        <https://1145.am/db/4000194/Contextlogic_Inc>,
+        <https://1145.am/db/4018657/Contextlogic_Inc>,
+        <https://1145.am/db/4035388/Contextlogic_Inc>,
+        <https://1145.am/db/4136058/Contextlogic>,
+        <https://1145.am/db/4174879/Contextlogic>,
+        <https://1145.am/db/4239022/Contextlogic> .
+
+<https://1145.am/db/4174522/Qoo10-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-19T12:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "As previously announced, upon the close of the transaction, Qoo10 will acquire substantially all of the Company's operating assets and liabilities, principally comprising its Wish ecommerce platform, for approximately $ 173 million in cash." ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "acquire" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereClean "Nō" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1855099> ;
+    ns1:whereRaw "no" .
+
+<https://1145.am/db/4175644/Richmond_Master_Distributors> a org:Organization ;
+    ns1:basedInHighClean "South Bend" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/4926563> ;
+    ns1:basedInHighRaw "South Bend, Indiana" ;
+    ns1:description "Convenience and Foodservice Distributor" ;
+    ns1:documentSource <https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> ;
+    ns1:foundName "Richmond Master Distributors, Inc" ;
+    ns1:industry "Convenience and Foodservice Distributor" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/99_wholesale_wholesaler_wholesalers_distributors> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/254_foodservice_foodservices_food_service>,
+        <https://1145.am/db/industry/561_convenience_retail_stores_retailer> ;
+    ns1:internalDocId 4175644 ;
+    ns1:name "Richmond Master Distributors" ;
+    ns1:sameAsNameOnly <https://1145.am/db/4234652/Richmond_Master_Distributors> .
+
+<https://1145.am/db/4175644/Richmond_Master_Distributors-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-19T11:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "AMCON Distributing Company (\"AMCON\", or the \"Company\") (NYSE American: DIT) , an Omaha, Nebraska - based Convenience and Foodservice Distributor is pleased to announce it has signed an Asset Purchase Agreement to acquire Richmond Master Distributors, Inc. (\"Master Distributors\") , of South Bend, Indiana." ;
+    ns1:documentSource <https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> ;
+    ns1:foundName "Purchase" ;
+    ns1:internalDocId 4175644 ;
+    ns1:name "Purchase" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4175644/Richmond_Master_Distributors> ;
+    ns1:targetName "Richmond Master Distributors" ;
+    ns1:whereClean "South Bend" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4926563> ;
+    ns1:whereRaw "South Bend" .
+
+<https://1145.am/db/4175671/Eversource> a org:Organization ;
+    ns1:basedInHighClean "New York City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:basedInHighRaw "New York" ;
+    ns1:description "construction" ;
+    ns1:documentSource <https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> ;
+    ns1:foundName "Eversource",
+        "Eversource Energy" ;
+    ns1:industry "Energy" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/13_sustainability_sustainable_energy_renewable> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/385_energy_services_service_infrastructure> ;
+    ns1:internalDocId 4175671 ;
+    ns1:name "Eversource" ;
+    ns1:sameAsHigh <https://1145.am/db/4004436/Eversource>,
+        <https://1145.am/db/4004444/Eversource> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3873825/Eversource> .
+
+<https://1145.am/db/4175671/Sunrise_Wind> a org:Organization ;
+    ns1:basedInHighClean "New York City" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:basedInHighRaw "New York" ;
+    ns1:description "wind" ;
+    ns1:documentSource <https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> ;
+    ns1:foundName "Sunrise Wind" ;
+    ns1:industry "renewable energy certificates" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/95_renewables_renewable_energy_solar> ;
+    ns1:internalDocId 4175671 ;
+    ns1:name "Sunrise Wind" ;
+    ns1:sameAsHigh <https://1145.am/db/4004436/Sunrise_Wind> ;
+    ns1:sameAsNameOnly <https://1145.am/db/3952222/Sunrise_Wind> .
+
+<https://1145.am/db/4175671/Sunrise_Wind-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-04-19T11:48:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Eversource Energy (NYSE: ES) (\"Eversource\") today announced it has finalized definitive documents regarding its previously announced agreement to sell its 50 percent ownership stake in the 924-megawatt Sunrise Wind project to Ørsted.",
+        "On January 24, 2024, Eversource announced that it had reached an agreement to sell its 50 percent interest in Sunrise Wind to Ørsted, contingent on, among other things, the project's successful award in the most recent offshore wind renewable energy certificates request for proposals (ORECRFP23-1) issued by New York's energy agency, NYSERDA (New York State Energy Research and Development Authority) ." ;
+    ns1:documentSource <https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> ;
+    ns1:foundName "sell" ;
+    ns1:internalDocId 4175671 ;
+    ns1:name "sell" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4175671/Sunrise_Wind> ;
+    ns1:targetDetails "interest" ;
+    ns1:targetName "Sunrise Wind" ;
+    ns1:vendor <https://1145.am/db/4175671/Eversource> ;
+    ns1:whereClean "New York City" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereRaw "New York" .
+
+<https://1145.am/db/geonames_location/1855099> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:geoNamesId 1855099 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1855099/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1855099> ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "Nō" .
+
+<https://1145.am/db/geonames_location/294640> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4000217/wwwglobenewswirecom_news-release_2024_02_13_2827921_0_en_Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offeringhtml> ;
+    ns1:geoNamesId 294640 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/294640/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/294640> ;
+    ns1:internalDocId 4000217 ;
+    ns1:name "State of Israel" .
+
+<https://1145.am/db/geonames_location/294778> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4000217/wwwglobenewswirecom_news-release_2024_02_13_2827921_0_en_Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offeringhtml> ;
+    ns1:geoNamesId 294778 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/294778/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/294778> ;
+    ns1:internalDocId 4000217 ;
+    ns1:name "Herzliya" .
+
+<https://1145.am/db/geonames_location/3469034> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/1768712/techcrunchcom_2018_10_08_tencent-cash-values-nubank-at-4-billion_> ;
+    ns1:geoNamesId 3469034 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3469034/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3469034> ;
+    ns1:internalDocId 1768712 ;
+    ns1:name "Federative Republic of Brazil" .
+
+<https://1145.am/db/geonames_location/5074472> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> ;
+    ns1:geoNamesId 5074472 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5074472/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5074472> ;
+    ns1:internalDocId 4175644 ;
+    ns1:name "Omaha" .
+
+<https://1145.am/db/4000210/Nelson_Lake_Copper_Corp-Merger> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "merger" ;
+    ns1:documentDate "2024-02-12T23:54:25+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Lancaster Resources Inc. (CSE: LCR | OTCQB: LANRF | FRA:6UF0) (\"Lancaster\" or the \"Company\") is pleased to announce that on February 2, 2024, the Supreme Court of British Columbia granted an interim order (the \"Interim Order\") in connection with the proposed spin-off of Nelson Lake Copper Corp. (\"Nelson Lake\") by Lancaster by way of Plan of Arrangement (the \"Arrangement\") ." ;
+    ns1:documentSource <https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> ;
+    ns1:foundName "spin-off" ;
+    ns1:internalDocId 4000210 ;
+    ns1:name "spin-off" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/4000210/Nelson_Lake_Copper_Corp> ;
+    ns1:targetName "Nelson Lake Copper Corp." ;
+    ns1:whereClean "British Columbia" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereRaw "British Columbia" .
+
+<https://1145.am/db/4001440/Coretrax-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition" ;
+    ns1:documentDate "2024-02-13T02:45:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Expro (NYSE: XPRO) , a leading provider of energy services, today announced it had entered into a definitive agreement (subject to customary closing conditions and working capital adjustments) to acquire Coretrax, a technology leader in performance drilling tools and wellbore cleanup, well integrity and production optimization solutions, from an investment group led by Buckthorn Partners." ;
+    ns1:documentSource <https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 4001440 ;
+    ns1:name "acquire" ;
+    ns1:status "not happened at date of document" ;
+    ns1:target <https://1145.am/db/4001440/Coretrax> ;
+    ns1:targetName "Coretrax" ;
+    ns1:valueRaw "approximately $ 210 million" .
+
+<https://1145.am/db/4001762/Yodel-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition",
+        "bankruptcy" ;
+    ns1:documentDate "2024-02-13T07:25:10+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Parcel delivery group Yodel has been saved from the brink of collapse by competitor Shift overnight.",
+        "Parcel delivery group Yodel has been saved from the brink of collapse by rapidly-scaling competitor Shift overnight.",
+        "Shift executives, including its founder Jacob Corlett, have formed a new company called YDLGP with merchant bank Solano Partners to acquire Yodel this morning." ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:foundName "acquire" ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "acquire" ;
+    ns1:status "not happened at date of document",
+        "stopped" ;
+    ns1:target <https://1145.am/db/4001762/Yodel> ;
+    ns1:targetName "Yodel" ;
+    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereRaw "UK" .
+
+<https://1145.am/db/4003172/Aegir_Insights-Climentum_Capital-Seaya_Andromeda-Investment-Series_A> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2024-02-13T08:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Aegir Insights, a leading provider of decision-making software, data, and intelligence for the offshore wind sector, has raised €8.5M in Series A funding, led by Seaya Andromeda with the participation of Climentum Capital." ;
+    ns1:documentSource <https://1145.am/db/4003172/wwwbusinesswirecom_news_home_20240213625041_en_Aegir-Insights-Raises-_E2_82_AC85M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> ;
+    ns1:foundName "funding" ;
+    ns1:internalDocId 4003172 ;
+    ns1:name "funding" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/4003172/Aegir_Insights> ;
+    ns1:targetDetails "Series A" ;
+    ns1:valueRaw "€8.5M" .
+
+<https://1145.am/db/4010045/seekingalphacom_news_4065868-eltek-stock-slides-on-pricing-stock-offering-to-raise-10-million> a schema:Article ;
+    ns1:dateRetrieved "2024-02-15T13:52:53+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4010045 ;
+    schema:datePublished "2024-02-13T07:54:09+00:00"^^xsd:dateTime ;
+    schema:headline "Eltek stock slides on pricing stock offering to raise $10 million" ;
+    schema:sourceOrganization "Seeking Alpha" ;
+    schema:url <https://seekingalpha.com/news/4065868-eltek-stock-slides-on-pricing-stock-offering-to-raise-10-million> .
+
+<https://1145.am/db/4010047/seekingalphacom_news_4065866-beamr-imaging-announces-pricing-of-stock-offering-to-raise-12m> a schema:Article ;
+    ns1:dateRetrieved "2024-02-15T13:53:01+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4010047 ;
+    schema:datePublished "2024-02-13T07:43:05+00:00"^^xsd:dateTime ;
+    schema:headline "Beamr Imaging announces pricing of stock offering to raise $12M" ;
+    schema:sourceOrganization "Seeking Alpha" ;
+    schema:url <https://seekingalpha.com/news/4065866-beamr-imaging-announces-pricing-of-stock-offering-to-raise-12m> .
+
+<https://1145.am/db/geonames_location/1880251> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/1768188/techcrunchcom_2018_10_08_microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services_> ;
+    ns1:geoNamesId 1880251 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/1880251/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/1880251> ;
+    ns1:internalDocId 1768188 ;
+    ns1:name "Republic of Singapore" .
+
+<https://1145.am/db/geonames_location/2635167> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:geoNamesId 2635167 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2635167/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2635167> ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "United Kingdom of Great Britain and Northern Ireland" .
+
+<https://1145.am/db/geonames_location/2750405> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4003470/techcrunchcom_2024_02_13_finom-a-european-challenger-bank-for-smes-raises-54m_> ;
+    ns1:geoNamesId 2750405 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2750405/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2750405> ;
+    ns1:internalDocId 4003470 ;
+    ns1:name "Kingdom of the Netherlands" .
+
+<https://1145.am/db/geonames_location/2960313> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3804435/wwwprnewswirecom_news-releases_qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288html> ;
+    ns1:geoNamesId 2960313 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/2960313/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/2960313> ;
+    ns1:internalDocId 3804435 ;
+    ns1:name "Grand Duchy of Luxembourg" .
+
+<https://1145.am/db/geonames_location/3077311> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> ;
+    ns1:geoNamesId 3077311 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/3077311/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/3077311> ;
+    ns1:internalDocId 4001762 ;
+    ns1:name "Czechia" .
+
+<https://1145.am/db/geonames_location/4560349> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> ;
+    ns1:geoNamesId 4560349 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4560349/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4560349> ;
+    ns1:internalDocId 3803945 ;
+    ns1:name "Philadelphia" .
+
+<https://1145.am/db/geonames_location/4926563> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> ;
+    ns1:geoNamesId 4926563 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/4926563/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/4926563> ;
+    ns1:internalDocId 4175644 ;
+    ns1:name "South Bend" .
+
+<https://1145.am/db/geonames_location/5391959> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
+    ns1:geoNamesId 5391959 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5391959/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5391959> ;
+    ns1:internalDocId 4174522 ;
+    ns1:name "San Francisco" .
+
+<https://1145.am/db/geonames_location/660013> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/3999108/wwwglobenewswirecom_news-release_2024_02_13_2827957_0_en_SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHAREShtml> ;
+    ns1:geoNamesId 660013 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/660013/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/660013> ;
+    ns1:internalDocId 3999108 ;
+    ns1:name "Republic of Finland" .
+
+<https://1145.am/db/1768712/techcrunchcom_2018_10_08_tencent-cash-values-nubank-at-4-billion_> a schema:Article ;
+    ns1:internalDocId 1768712 ;
+    schema:datePublished "2018-10-08T21:43:21+00:00"^^xsd:dateTime ;
+    schema:headline "Nubank is now worth $4 billion after Tencent's $180 million investment" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/10/08/tencent-cash-values-nubank-at-4-billion/> .
+
+<https://1145.am/db/3804435/wwwprnewswirecom_news-releases_qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T19:22:50+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3804435 ;
+    schema:datePublished "2018-10-08T22:25:00+00:00"^^xsd:dateTime ;
+    schema:headline "QGOG Constellation Announces Update on Restructuring Settlement Negotiations" ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288.html> .
+
+<https://1145.am/db/4003470/techcrunchcom_2024_02_13_finom-a-european-challenger-bank-for-smes-raises-54m_> a schema:Article ;
+    ns1:dateRetrieved "2024-02-14T06:24:19+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4003470 ;
+    schema:datePublished "2024-02-13T08:00:57+00:00"^^xsd:dateTime ;
+    schema:headline "Finom, a European challenger bank for SMEs, raises $54M" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2024/02/13/finom-a-european-challenger-bank-for-smes-raises-54m/> .
+
+<https://1145.am/db/4174501/wwwglobenewswirecom_news-release_2024_04_19_2866102_0_en_Silver-Mountain-Announces-Upsize-of-Previously-Announced-Public-Offering-of-Units-to-9-Millionhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-04-20T05:09:16+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4174501 ;
+    schema:datePublished "2024-04-19T11:39:55+00:00"^^xsd:dateTime ;
+    schema:headline "Silver Mountain Announces Upsize of Previously Announced Public Offering of Units to $9 Million" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/04/19/2866102/0/en/Silver-Mountain-Announces-Upsize-of-Previously-Announced-Public-Offering-of-Units-to-9-Million.html> .
+
+<https://1145.am/db/geonames_location/5128581> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> ;
+    ns1:geoNamesId 5128581 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5128581/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5128581> ;
+    ns1:internalDocId 4175671 ;
+    ns1:name "New York City" .
+
+<https://1145.am/db/geonames_location/5909050> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> ;
+    ns1:geoNamesId 5909050 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/5909050/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/5909050> ;
+    ns1:internalDocId 4000210 ;
+    ns1:name "British Columbia" .
+
+<https://1145.am/db/geonames_location/6251999> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_>,
+        <https://1145.am/db/4174501/wwwglobenewswirecom_news-release_2024_04_19_2866102_0_en_Silver-Mountain-Announces-Upsize-of-Previously-Announced-Public-Offering-of-Units-to-9-Millionhtml> ;
+    ns1:geoNamesId 6251999 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6251999/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6251999> ;
+    ns1:internalDocId 4000882,
+        4174501 ;
+    ns1:name "Canada" .
+
+<https://1145.am/db/geonames_location/6254926> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> ;
+    ns1:geoNamesId 6254926 ;
+    ns1:geoNamesRDF <https://sws.geonames.org/6254926/about.rdf> ;
+    ns1:geoNamesURL <https://sws.geonames.org/6254926> ;
+    ns1:internalDocId 2194924 ;
+    ns1:name "Massachusetts" .
+
+<https://1145.am/db/1768188/techcrunchcom_2018_10_08_microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services_> a schema:Article ;
+    ns1:internalDocId 1768188 ;
+    schema:datePublished "2018-10-09T01:28:06+00:00"^^xsd:dateTime ;
+    schema:headline "Microsoft invests in Grab to bring AI and big data to on-demand services" ;
+    schema:sourceOrganization "TechCrunch" ;
+    schema:url <https://techcrunch.com/2018/10/08/microsoft-invests-in-grab-to-bring-ai-and-big-data-to-on-demand-services/> .
+
+<https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners-Kevin_Ryan-Ual-Investment-Series_B> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "investment" ;
+    ns1:documentDate "2018-10-09T00:00:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Goldman Sachs' venture unit is leading a new round of investment in an Argentinian fintech company backed by billionaire investors George Soros and Steven Cohen.",
+        "Ualá, an Argentinian mobile banking startup, has raised $ 34 million in a new round of funding led by Goldman Sachs's venture unit, along with investors including billionaire George Soros' family office and Point72 Ventures, the early-stage VC firm funded by Steve Cohen.",
+        "Ualá, the one-year-old mobile banking startup, raised $ 34 million in its series B round led by Goldman Sachs Investment Partners, along with existing investors including a private fund managed by Soros Fund Management, Jefferies, the venture arm of Steve Cohen's Point72, and entrepreneur Kevin Ryan, according to an announcement seen by Business Insider." ;
+    ns1:documentSource <https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> ;
+    ns1:foundName "funding",
+        "raised" ;
+    ns1:internalDocId 3518892 ;
+    ns1:name "funding",
+        "raised" ;
+    ns1:status "completed" ;
+    ns1:target <https://1145.am/db/3518892/Ual> ;
+    ns1:targetDetails "series B" ;
+    ns1:valueRaw "$ 34 million" ;
+    ns1:whereRaw "Argentinian" .
+
+<https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> a schema:Article ;
+    ns1:dateRetrieved "2024-01-18T19:21:00+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3803945 ;
+    schema:datePublished "2018-10-08T21:43:00+00:00"^^xsd:dateTime ;
+    schema:headline "Neo Lights Holdings, Inc. Enters Negotiations To Bring Manufacturing to India." ;
+    schema:sourceOrganization "PR Newswire" ;
+    schema:url <https://www.prnewswire.com/news-releases/neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262.html> .
+
+<https://1145.am/db/3999108/wwwglobenewswirecom_news-release_2024_02_13_2827957_0_en_SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHAREShtml> a schema:Article ;
+    ns1:dateRetrieved "2024-02-13T07:11:45+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3999108 ;
+    schema:datePublished "2024-02-13T06:48:00+00:00"^^xsd:dateTime ;
+    schema:headline "SUCCESSFUL PLACEMENT BY SOLIDIUM OF KEMIRA OYJ SHARES" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/02/13/2827957/0/en/SUCCESSFUL-PLACEMENT-BY-SOLIDIUM-OF-KEMIRA-OYJ-SHARES.html> .
+
+<https://1145.am/db/4000217/wwwglobenewswirecom_news-release_2024_02_13_2827921_0_en_Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offeringhtml> a schema:Article ;
+    ns1:dateRetrieved "2024-02-13T07:13:24+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4000217 ;
+    schema:datePublished "2024-02-13T01:02:17+00:00"^^xsd:dateTime ;
+    schema:headline "Beamr Imaging Ltd. Announces Pricing of $12 Million Public Offering" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/02/13/2827921/0/en/Beamr-Imaging-Ltd-Announces-Pricing-of-12-Million-Public-Offering.html> .
+
+<https://1145.am/db/4000882/Wealth_One-Acquisition> a ns1:CorporateFinanceActivity ;
+    ns1:activityType "acquisition",
+        "investment" ;
+    ns1:documentDate "2024-02-13T01:04:43.886000+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Federal banking regulators and national-security agencies will insist on a high bar before Ottawa approves the sale of Wealth One Bank of Canada to Globalive Capital Inc., one that must entail the removal of a trio of Wealth One's founding shareholders, according to a source with direct knowledge.",
+        "Globalive and partners would acquire 54 per cent of Wealth One for about $ 51-million, with existing shareholders remaining as a minority.",
+        "The Globe and Mail reported last week that former chair and chief executive officer of Wind Mobile, Anthony Lacavera, is leading a bid through his investment firm Globalive Capital to acquire a majority of Wealth One in a structure that would see a special purpose vehicle (SPV) take over the small lender, which caters to Chinese-Canadian clients." ;
+    ns1:documentSource <https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_> ;
+    ns1:foundName "acquire",
+        "sale" ;
+    ns1:internalDocId 4000882 ;
+    ns1:name "acquire",
+        "sale" ;
+    ns1:status "not happened at date of document",
+        "stopped" ;
+    ns1:target <https://1145.am/db/4000882/Wealth_One> ;
+    ns1:targetName "Wealth One" ;
+    ns1:valueRaw "about $ 51-million" ;
+    ns1:whereClean "Canada" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereRaw "Canada" .
+
+<https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> a schema:Article ;
+    ns1:dateRetrieved "2024-02-13T07:23:17+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4001440 ;
+    schema:datePublished "2024-02-13T02:45:00+00:00"^^xsd:dateTime ;
+    schema:headline "Expro to Enhance Well Construction and Well Intervention & Integrity Offerings With Acquisition of Aberdeen Scotland-based Coretrax" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240212889637/en/%25C2%25A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> .
+
+<https://1145.am/db/4003172/wwwbusinesswirecom_news_home_20240213625041_en_Aegir-Insights-Raises-_E2_82_AC85M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> a schema:Article ;
+    ns1:dateRetrieved "2024-02-14T06:21:17+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4003172 ;
+    schema:datePublished "2024-02-13T08:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Aegir Insights Raises €8.5M to Build the Next Generation of Its Software and Data to Accelerate Offshore Wind Investments" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240213625041/en/Aegir-Insights-Raises-%25E2%2582%25AC8.5M-to-Build-the-Next-Generation-of-Its-Software-and-Data-to-Accelerate-Offshore-Wind-Investments> .
+
+<https://1145.am/db/2194924/wwwfiercehealthcarecom_payer_centene-backed-rxadvance-closes-50m-funding-round> a schema:Article ;
+    ns1:internalDocId 2194924 ;
+    schema:datePublished "2018-10-09T00:20:14+00:00"^^xsd:dateTime ;
+    schema:headline "Centene-backed RxAdvance closes $50M funding round" ;
+    schema:sourceOrganization "Fierce Healthcare" ;
+    schema:url <https://www.fiercehealthcare.com/payer/centene-backed-rxadvance-closes-50m-funding-round> .
+
+<https://1145.am/db/3518892/wwwbusinessinsidercom_uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> a schema:Article ;
+    ns1:dateRetrieved "2024-01-17T18:22:24+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 3518892 ;
+    schema:datePublished "2018-10-09T00:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "Goldman Sachs has joined George Soros and Steve Cohen in backing an Argentinian mobile banking startup" ;
+    schema:sourceOrganization "Business Insider" ;
+    schema:url <https://www.businessinsider.com/uala-wins-backing-from-goldman-sachs-george-soros-steve-cohen-2018-10> .
+
+<https://1145.am/db/4000210/wwwglobenewswirecom_news-release_2024_02_12_2827909_0_en_CORRECTION-Lancaster-Resources-Inchtml> a schema:Article ;
+    ns1:dateRetrieved "2024-02-13T07:13:23+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4000210 ;
+    schema:datePublished "2024-02-12T23:54:25+00:00"^^xsd:dateTime ;
+    schema:headline "CORRECTION - Lancaster Resources Inc." ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/02/12/2827909/0/en/CORRECTION-Lancaster-Resources-Inc.html> .
+
+<https://1145.am/db/4000882/wwwtheglobeandmailcom_politics_article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one_> a schema:Article ;
+    ns1:dateRetrieved "2024-02-13T07:18:32+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4000882 ;
+    schema:datePublished "2024-02-13T01:04:43.886000+00:00"^^xsd:dateTime ;
+    schema:headline "Ottawa leery of approving Globalive Capital takeover of Wealth One Bank of Canada" ;
+    schema:sourceOrganization "The Globe and Mail" ;
+    schema:url <https://www.theglobeandmail.com/politics/article-ottawa-leery-of-approving-globalive-capital-takeover-of-wealth-one/> .
+
+<https://1145.am/db/4175644/wwwbusinesswirecom_news_home_20240419258700_en_AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc> a schema:Article ;
+    ns1:dateRetrieved "2024-04-20T05:23:51+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4175644 ;
+    schema:datePublished "2024-04-19T11:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "AMCON Distributing Company Acquires Richmond Master Distributors, Inc." ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240419258700/en/AMCON-Distributing-Company-Acquires-Richmond-Master-Distributors-Inc.> .
+
+<https://1145.am/db/4175671/wwwbusinesswirecom_news_home_20240419043805_en_Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-_C3_98rsted-to-Sell-Sunrise-Wind> a schema:Article ;
+    ns1:dateRetrieved "2024-04-20T05:24:27+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4175671 ;
+    schema:datePublished "2024-04-19T11:48:00+00:00"^^xsd:dateTime ;
+    schema:headline "Eversource Energy Announces Execution of Definitive Agreement with Ørsted to Sell Sunrise Wind" ;
+    schema:sourceOrganization "Business Wire" ;
+    schema:url <https://www.businesswire.com/news/home/20240419043805/en/Eversource-Energy-Announces-Execution-of-Definitive-Agreement-with-%25C3%2598rsted-to-Sell-Sunrise-Wind> .
+
+<https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> a schema:Article ;
+    ns1:dateRetrieved "2024-04-20T05:09:17+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4174522 ;
+    schema:datePublished "2024-04-19T12:00:00+00:00"^^xsd:dateTime ;
+    schema:headline "ContextLogic Announces Stockholder Approval of Transaction with Qoo10" ;
+    schema:sourceOrganization "GlobeNewswire" ;
+    schema:url <https://www.globenewswire.com/news-release/2024/04/19/2866115/0/en/ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10.html> .
+
+<https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> a schema:Article ;
+    ns1:dateRetrieved "2024-02-14T06:15:48+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 4001762 ;
+    schema:datePublished "2024-02-13T07:25:10+00:00"^^xsd:dateTime ;
+    schema:headline "Parcel deliverer Yodel saved from brink by fast growing rival Shift" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift/> .

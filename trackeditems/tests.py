@@ -61,102 +61,79 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def setUp(self):
         self.ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{self.ts}")
-        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4075273/Openai")
-        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4074438/Titan_Pro_Technologies") # 2007-03-27T00:00:00Z
-        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/4076678/Bioaffinity_Technologies") # 2023-10-05
+        # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
+        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
         self.ts2 = time.time()
         self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
         tig1 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="Pharmaceutical, Pharmaceuticals, Drug, Drugs",
-                                        geo_code="US")
-        tig2 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="Tech, Technology, Hightech, Engineering",
-                                        geo_code="SG")
-        tig3 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="Analytics, Enterprise, Insights, Data",
-                                        geo_code="")
-        tig4 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="",
-                                        geo_code="AU")
+                                        industry_name='Investing, Financial, Wealth, Planning',
+                                        geo_code="US-TX")
 
     def test_finds_merged_uris_for_tracked_orgs(self):
         tracked_orgs = TrackedOrganization.by_user(self.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
-        assert set(org_uris) == set(['https://1145.am/db/4075273/Openai',
-                                'https://1145.am/db/4074438/Titan_Pro_Technologies',
-                                'https://1145.am/db/4076678/Bioaffinity_Technologies'])
+        assert set(org_uris) == {'https://1145.am/db/3029576/Celgene',
+                                    'https://1145.am/db/3475299/Napajen_Pharma',
+                                    'https://1145.am/db/3458127/The_Hilb_Group'}
         org_or_merged_uris = [x.organization_or_merged_uri for x in tracked_orgs]
-        assert set(org_or_merged_uris) == set(['https://1145.am/db/4074766/Openai', # Different one
-                                'https://1145.am/db/4074438/Titan_Pro_Technologies',
-                                'https://1145.am/db/4076678/Bioaffinity_Technologies'])
+        assert set(org_or_merged_uris) == {'https://1145.am/db/2543227/Celgene',
+                                    'https://1145.am/db/3469058/Napajen_Pharma',
+                                    'https://1145.am/db/3458127/The_Hilb_Group'}
 
-    def test_writes_and_x_more_when_more_than_limit(self):
-        activity_uri = "https://1145.am/db/4076003/Avoamerica_Peru_Acquisition"
-        article_uri = "https://1145.am/db/wwwreuterscom_markets_deals_abu-dhabi-owned-unifrutti-eyes-further-latam-growth-after-fresh-acquisitions-2024-03-09_"
-        article = Article.nodes.get_or_none(uri=article_uri)
-        activity = CorporateFinanceActivity.nodes.get_or_none(uri=activity_uri)
+
+    def test_creates_email_from_activity_and_article_and_write_x_more_if_many_industries(self):
+        activity_uri = "https://1145.am/db/3029576/Loxo_Oncology-Acquisition"
+        article_uri = "https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_"
+        article = Article.self_or_ultimate_target_node(article_uri)
+        activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
         activity_articles = [(activity,article),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
         email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
-        assert len(re.findall("and 1 more",email)) == 2
-        assert len(re.findall("and 2 more",email)) == 1
+        assert len(re.findall("and 4 more",email)) == 1 # Per https://1145.am/db/3029576/Eli_Lilly
 
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
-        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+        max_date = datetime(2024,5,30,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 4
-        assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 4
-        assert len(re.findall(r"\bOpenAI\b",email)) == 87
-        assert "March 11, 2024" in email
-        assert "March 4, 2024" in email
-        assert activity_notif.num_activities == 27
-        assert len(re.findall("https://web.archive.org/20240309235959/",email)) == 26
-        assert len(re.findall("https://web.archive.org/20240309\*/",email)) == 26
-        assert "https://www.theglobeandmail.com/world/article-openai-has-full-confidence-in-ceo-sam-altman-after-investigation/" in email
+        assert len(re.findall("The Hilb Group",email)) == 4
+        assert len(re.findall("Mitsui",email)) == 2
+        assert "May 30, 2024" in email
+        assert "May 23, 2024" in email
+        assert activity_notif.num_activities == 2
+        assert len(re.findall("https://web.archive.org",email)) == 4
+        assert "https://www.prnewswire.com/news-releases/correction----napajen-pharma-inc-300775556.html" in email
         assert "None" not in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
         ActivityNotification.objects.create(user=self.user,
-                max_date=datetime(2024,3,9,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2024,3,9,tzinfo=timezone.utc))
-        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+                max_date=datetime(2024,5,28,tzinfo=timezone.utc),num_activities=2,sent_at=datetime(2024,3,9,tzinfo=timezone.utc))
+        max_date = datetime(2024,5,30,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
         assert email_and_activity_notif is not None
         email, activity_notif = email_and_activity_notif
-        assert len(re.findall(r"\bTitan Pro Technologies\b",email)) == 1
-        assert len(re.findall(r"\bbioAffinity Technologies\b",email)) == 1
-        assert len(re.findall(r"\bOpenAI\b",email)) == 46
-        assert "March 11, 2024" in email
-        assert "March 4, 2024" not in email
-        assert "March 9, 2024" in email
-        assert activity_notif.num_activities == 13
+        assert len(re.findall("The Hilb Group",email)) == 1
+        assert len(re.findall("NapaJen",email)) == 4
+        assert "May 30, 2024" in email
+        assert "May 23, 2024" not in email
+        assert "May 28, 2024" in email
+        assert activity_notif.num_activities == 1
 
     def test_creates_geo_industry_notification_for_new_user(self):
         ActivityNotification.objects.filter(user=self.user2).delete()
-        max_date = datetime(2024,3,11,tzinfo=timezone.utc)
+        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert "<b>Pharmaceutical, Pharmaceuticals, Drug, Drugs</b> in the <b>United States</b>" in email
+        assert "<b>Investing, Financial, Wealth, Planning</b> in the <b>United States - Texas</b>" in email
         assert "We are not tracking any specific organizations for you." in email
-        assert activity_notif.num_activities == 19
-        assert len(re.findall("RenovoRx",email)) == 16
-        assert len(re.findall("Ryde Group Ltd",email)) == 3
-        assert len(re.findall(r"Industry:.+Technology",email)) == 1
-        assert len(re.findall(r"Industry:.+Biopharm",email)) == 4
-        assert len(re.findall(r"Region:.+Singapore",email)) == 2
-        assert len(re.findall(r"Region.+United States",email)) == 3
-        assert len(re.findall(r"Industry:.+Tech",email)) == 16
-        assert len(re.findall("OpenAI",email)) == 44
-        assert len(re.findall("MC Mining",email)) == 3
+        assert activity_notif.num_activities == 2
+        assert len(re.findall("Atria Wealth Solutions",email)) == 5
         assert "None" not in email
 
-    def test_only_populates_activity_pages_if_cache_available(self):
-        ''' For testing
-            from django.test import Client
-            client = Client()
-        '''
+    def test_does_not_populate_activity_pages_if_cache_not_available(self):
         client = self.client
         nuke_cache()
 
@@ -165,35 +142,44 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Site stats calculating, please check later" in content
         assert "Showing updates as at" not in content
 
-        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
+        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
-        assert "Sonendo " not in content
+        assert "Rollins, Inc. Agrees To Acquire Clark Pest Control" not in content
 
-        response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
+        response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
-        assert "Los Angeles Rams" not in content
+        assert "largest banks are betting big on weed" not in content
 
+
+    def test_only_populates_activity_pages_if_cache_available(self):
+        ''' For testing
+            from django.test import Client
+            client = Client()
+        '''
+        nuke_cache()
         warm_up_cache()
+        client = self.client
+
         response = client.get("/tracked/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" not in content
         assert "Showing updates as at" in content
 
-        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2024-03-10")
+        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Site stats calculating, please check later" not in content
-        assert "Sonendo " in content
+        assert "Rollins, Inc. Agrees To Acquire Clark Pest Control" in content
 
-        response = client.get("/tracked/source_activities?source_name=Associated%20Press&max_date=2024-03-10")
+        response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document link to see the original source document" in content
         assert "Site stats calculating, please check later" not in content
-        assert "Los Angeles Rams" in content
+        assert "largest banks are betting big on weed" in content

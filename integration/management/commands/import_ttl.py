@@ -62,13 +62,13 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,
     delete_dir = f"{dir_name}/deletions"
     count_of_creations = 0
     count_of_deletions = 0
-    if os.path.isdir(delete_dir):
-        delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
-        logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
-        for filename in delete_files:
-            _, deletions = load_deletion_file(f"{delete_dir}/{filename}")
-            count_of_deletions += deletions
-    logger.info(f"After running deletion files there are {count_nodes()} nodes")
+    # if os.path.isdir(delete_dir):
+    #     delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
+    #     logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
+    #     for filename in delete_files:
+    #         _, deletions = load_deletion_file(f"{delete_dir}/{filename}")
+    #         count_of_deletions += deletions
+    # logger.info(f"After running deletion files there are {count_nodes()} nodes")
     all_files = sorted([x for x in os.listdir(dir_name) if x.endswith(".ttl")])
     logger.info(f"Found {len(all_files)} ttl files to process")
     if len(all_files) == 0:

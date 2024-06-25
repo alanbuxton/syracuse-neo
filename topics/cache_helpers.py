@@ -23,9 +23,7 @@ def warm_up_cache(max_date=date.today()):
     _, _, country_region_codes = get_geo_data()
     for country_region_code in country_region_codes.keys():
         logger.info(f"Warming up {country_region_code}")
-        Organization.by_country_region_industry(country_region_code,allowed_to_set_cache=True)
-        Person.by_country_region_industry(country_region_code,allowed_to_set_cache=True)
-        ActivityMixin.orgs_by_activity_where_industry(country_region_code,allowed_to_set_cache=True)
+        Organization.by_industry_and_or_geo(None,country_region_code,allowed_to_set_cache=True)
     logger.info("Warming up stats")
     get_stats(max_date,allowed_to_set_cache=True)
     cache.set("cache_updated",datetime.now(tz=timezone.utc))

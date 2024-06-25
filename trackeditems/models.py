@@ -82,7 +82,7 @@ class ActivityNotification(models.Model):
         qs = ActivityNotification.objects.filter(user=user).order_by("-max_date")[:1]
         if len(qs) == 0:
             return None
-        return qs[0].sent_at
+        return qs[0].max_date
 
 
 def get_notifiable_users():

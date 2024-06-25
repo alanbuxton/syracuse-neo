@@ -37,7 +37,7 @@ def get_geoname_uris_for_country_region(geo_code):
     if geo_code == '':
         return None
     geoname_ids = geoname_ids_for_country_region(geo_code)
-    geo_uris = [f"https://sws.geonames.org/{x}/about.rdf" for x in geoname_ids]
+    geo_uris = [f"https://sws.geonames.org/{x}" for x in geoname_ids]
     return geo_uris
 
 def get_geo_data(force_refresh=False):
@@ -106,6 +106,7 @@ def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geoname
             if cc is None or cc.strip() == '': # not related to a country
                 continue
             geo_id = row['geonameid']
+            geo_id = int(geo_id)
             geonames_uri = f"https://sws.geonames.org/{geo_id}/about.rdf"
             feature_code = row['feature_code']
             if feature_code == 'ADM1':
