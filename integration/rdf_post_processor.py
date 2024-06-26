@@ -32,12 +32,24 @@ class RDFPostProcessor(object):
         RETURN count(*)
     """
 
+    QUERY_SELF_RELATIONSHIP = f"""
+        MATCH (n: Resource)-[r]-(n)
+        DELETE r
+        RETURN *
+    """
+
     def run_all_in_order(self):
         apoc_del_redundant_same_as()
+        write_log_header("delete_self_relationships")
+        self.delete_self_relationships()
         write_log_header("add_document_extract_to_relationship")
         self.add_document_extract_to_relationship()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
+
+    def delete_self_relationships(self):
+        res, _ = db.cypher_query(self.QUERY_SELF_RELATIONSHIP)
+        logger.info(f"Deleted {len(res)} self-relationships")
 
     def merge_same_as_high_connections(self):
         cnt = 0

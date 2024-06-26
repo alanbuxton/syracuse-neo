@@ -27,8 +27,8 @@ def geoname_ids_for_country_region(geo_code):
     region_code = geo_code[3:]
     return geo_mapping[country_code][region_code]
 
-def geonames_uris():
-    qry = "match (n) where n.uri contains ('sws.geonames.org') return n.uri"
+def get_geoname_ids():
+    qry = "match (n: GeoNamesLocation) return n.geoNamesId"
     res,_ = db.cypher_query(qry)
     flattened = [x for sublist in res for x in sublist]
     return flattened
@@ -107,14 +107,13 @@ def load_filtered_country_mapping(fpath="dump/relevant_geo.csv",existing_geoname
                 continue
             geo_id = row['geonameid']
             geo_id = int(geo_id)
-            geonames_uri = f"https://sws.geonames.org/{geo_id}/about.rdf"
             feature_code = row['feature_code']
             if feature_code == 'ADM1':
                 admin1_code = row["admin1_code"]
                 if cc not in all_admin1_data:
                     all_admin1_data[cc] = {}
                 all_admin1_data[cc][admin1_code] = row["name"]
-            if geonames_uri in existing_geonames_ids:
+            if geo_id in existing_geonames_ids:
                 if cc in COUNTRIES_WITH_REGIONS:
                     if cc not in country_admin1_mapping:
                         country_admin1_mapping[cc] = {}
@@ -143,7 +142,7 @@ def narrow_admin1_data(country_admin1_to_geonames, all_admin1_data):
 def load_country_mapping(fpath="dump/relevant_geo.csv"):
     if not os.path.isfile(fpath):
         raise ValueError(f"{fpath} not found, please check https://github.com/alanbuxton/syracuse-neo/blob/main/dump/README.md")
-    existing_geonames_ids = geonames_uris()
+    existing_geonames_ids = get_geoname_ids()
     country_admin1_to_used_geonames, all_admin1_code_to_name= load_filtered_country_mapping(fpath, set(existing_geonames_ids))
     admin1_names_to_id = narrow_admin1_data(country_admin1_to_used_geonames, all_admin1_code_to_name)
     country_names_to_id = {}

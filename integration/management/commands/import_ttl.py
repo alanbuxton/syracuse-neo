@@ -96,7 +96,8 @@ def load_file(filepath,RDF_SLEEP_TIME, raise_on_error=True):
     filepath = os.path.abspath(filepath)
     with open(filepath) as f:
         uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
-    command = f'call n10s.rdf.import.fetch("file://{filepath}","Turtle");'
+    command = f"""CALL n10s.rdf.import.fetch("file://{filepath}","Turtle",
+                {{ predicateExclusionList : [ "https://1145.am/db/geoNamesRDF" ] }} );"""
     logger.info(f"Loading: {command}")
     results,_ = db.cypher_query(command)
     res = results[0] # row like ['KO', 0, 5025, None, 'Unexpected character U+FFFC at index 57: https://1145.am/db/techcrunchcom_2011_12_02_doo-net-gets-￼6-8m-to-reinvent-office-paperwork-oh-yes-2_ [line 5121]', {'singleTx': False}]

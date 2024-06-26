@@ -52,11 +52,11 @@ class TurtleLoadingTestCase(TestCase):
     def test_reloads_ttl_files(self):
         clean_db_and_load_files("integration/test_dump/dump-1",do_post_processing=True)
         node_count = count_relevant_nodes()
-        assert node_count == 1809
+        assert node_count == 1765
         latest_import = DataImport.objects.all()[0]
         assert latest_import.deletions == 0
         assert latest_import.creations > 0 and latest_import.creations <= node_count
-        
+
         # TODO re-implement delete & recreate logic
         # node_will_be_deleted_and_reinstated = "https://1145.am/db/4076092/Sauber_Group"
         # node_will_be_deleted = "https://1145.am/db/4076564/Oldcastle_Buildingenvelope"
