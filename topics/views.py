@@ -58,7 +58,7 @@ class Index(APIView):
             search_type = 'org_name'
             search_term = org_name
         elif selected_geo or industry:
-            orgs = get_relevant_orgs_for_country_region_industry(selected_geo,industry)
+            orgs = Organization.by_industry_and_or_geo(industry,selected_geo)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)

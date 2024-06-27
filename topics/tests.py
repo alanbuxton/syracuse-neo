@@ -227,6 +227,12 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         assert "REDAVIA" in content
 
+    def test_does_search_by_industry_region(self):
+        client = self.client
+        resp = client.get("/?industry=Hospital%2C+Hospitals%2C+Hospitalist%2C+Healthcare&country_or_region=United+States+-+New+York")
+        content = str(resp.content)
+        assert "https://1145.am/db/3452774/Hhaexchange" in content
+
 class TestFamilyTree(TestCase):
 
     def setUpTestData():
