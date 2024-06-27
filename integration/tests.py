@@ -5,7 +5,9 @@ import time
 import os
 from datetime import datetime, timezone
 from integration.models import DataImport
-from integration.management.commands.import_ttl import do_import_ttl
+from integration.management.commands.import_ttl import ( do_import_ttl,
+    load_deletion_file, load_file
+)
 from topics.models import Organization, Resource, Person, ActivityMixin
 from integration.neo4j_utils import (
     delete_all_not_needed_resources, count_relationships,
@@ -49,7 +51,7 @@ class TurtleLoadingTestCase(TestCase):
         assert len(DataImport.objects.all()) == 2
         assert DataImport.latest_import() == 20231224180800
 
-    def test_reloads_ttl_files(self):
+    def test_loads_deletion_and_recreation_step_by_step(self):
         clean_db_and_load_files("integration/test_dump/dump-1",do_post_processing=True)
         node_count = count_relevant_nodes()
         assert node_count == 1765
@@ -57,16 +59,101 @@ class TurtleLoadingTestCase(TestCase):
         assert latest_import.deletions == 0
         assert latest_import.creations > 0 and latest_import.creations <= node_count
 
-        # TODO re-implement delete & recreate logic
-        # node_will_be_deleted_and_reinstated = "https://1145.am/db/4076092/Sauber_Group"
-        # node_will_be_deleted = "https://1145.am/db/4076564/Oldcastle_Buildingenvelope"
-        #
-        # do_import_ttl(dirname="integration/test_dump/dump-1.5",force=True,do_archiving=False,do_post_processing=True)
-        #
-        # do_import_ttl(dirname="integration/test_dump/dump-2",force=True,do_archiving=False,do_post_processing=True)
-        # delete_all_not_needed_resources()
-        # node_count2 = count_relevant_nodes()
-        # assert node_count2 == node_count - 1
+        # 4001762 is the one that will be recreated
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/4290155/Royal_Mail").uri == "https://1145.am/db/4001762/Royal_Mail"
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail").uri == "https://1145.am/db/4001762/Royal_Mail"
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/2984033/Royal_Mail") is None
+
+        # 2984033 should be the ultimate target node - next load will ensure this is the case
+        do_import_ttl(dirname="integration/test_dump/dump-1.5",force=True,do_archiving=False,do_post_processing=True)
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/4290155/Royal_Mail").uri == "https://1145.am/db/2984033/Royal_Mail"
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail").uri == "https://1145.am/db/2984033/Royal_Mail"
+        assert Organization.self_or_ultimate_target_node("https://1145.am/db/2984033/Royal_Mail").uri == "https://1145.am/db/2984033/Royal_Mail"
+
+        ultimate_target_node = Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail")
+        assert ultimate_target_node.uri == "https://1145.am/db/2984033/Royal_Mail"
+        target_node_rels = all_related_uris(ultimate_target_node) # Before we get to deletions
+
+        doc_id = 4001762
+        nodes_to_delete = list(Resource.nodes.filter(internalDocId=doc_id))
+        uris_to_delete = [x.uri for x in nodes_to_delete]
+        merged_nodes = list(Resource.nodes.filter(internalMergedSameAsHighToUri__in=uris_to_delete))
+        assert len(nodes_to_delete) > 0
+        assert len(merged_nodes) > 0
+
+        # Now load deletion file
+        filepath = "integration/test_dump/dump-2/20231224180756/deletions/for_deletion_4001762.ttl"
+        load_deletion_file(filepath)
+        do_import_ttl(force=True,only_post_processing=True)
+        assert len(list(Resource.nodes.filter(internalDocId=doc_id))) == 0 # all deleted
+        assert len(list(Resource.nodes.filter(internalMergedSameAsHighToUri__in=uris_to_delete))) == 0
+
+        # And load the file with the new additions
+        load_file("integration/test_dump/dump-2/20231224180756/identical_4001762.ttl",RDF_SLEEP_TIME=0)
+        do_import_ttl(force=True,only_post_processing=True)
+        assert len(list(Resource.nodes.filter(internalDocId=doc_id))) == len(nodes_to_delete)
+        # assert len(list(Resource.nodes.filter(internalMergedSameAsHighToUri__in=uris_to_delete))) == len(merged_nodes)
+
+        ultimate_target_node2 = Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail")
+        assert ultimate_target_node2.uri == "https://1145.am/db/2984033/Royal_Mail"
+        new_vals = all_related_uris(ultimate_target_node2)
+
+        assert len(new_vals) == len(target_node_rels)
+        for k in new_vals:
+            if k != 'sameAsNameOnly':
+                assert new_vals[k] == target_node_rels[k]
+        assert target_node_rels['sameAsNameOnly'] - new_vals['sameAsNameOnly'] == {"https://1145.am/db/4001762/Royal_Mail"} # not recreated in the files
+
+    def test_loads_deletion_with_new_edit(self):
+        clean_db_and_load_files("integration/test_dump/dump-1",do_post_processing=True)
+        do_import_ttl(dirname="integration/test_dump/dump-1.5",force=True,do_archiving=False,do_post_processing=True)
+        ultimate_target_node = Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail")
+        assert ultimate_target_node.uri == "https://1145.am/db/2984033/Royal_Mail"
+        target_node_rels = all_related_uris(ultimate_target_node)
+        do_import_ttl(dirname="integration/test_dump/dump-2.1",force=True,do_archiving=False,do_post_processing=True)
+
+        # and check the new company name
+        n = Organization.nodes.get_or_none(uri="https://1145.am/db/4001762/Royal_Mail")
+        assert n.name == ['Royal Maily Foo Bar'] # name was edited (only updates in the original node)
+
+        ultimate_target_node2 = Organization.self_or_ultimate_target_node(n)
+        new_vals = all_related_uris(ultimate_target_node2)
+
+        assert len(new_vals) == len(target_node_rels)
+        for k in new_vals:
+            if k not in ['sameAsNameOnly','investor']: # investor was added
+                assert new_vals[k] == target_node_rels[k]
+
+        assert target_node_rels['investor'] - new_vals['investor'] == set()
+        assert new_vals['investor'] - target_node_rels['investor'] == {'https://1145.am/db/4001762/Evri-Acquisition'}
+
+    def test_loads_deletion_without_new_file(self):
+        clean_db_and_load_files("integration/test_dump/dump-1",do_post_processing=True)
+        do_import_ttl(dirname="integration/test_dump/dump-1.5",force=True,do_archiving=False,do_post_processing=True)
+        ultimate_target_node = Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail")
+        assert ultimate_target_node.uri == "https://1145.am/db/2984033/Royal_Mail"
+        target_node_rels = all_related_uris(ultimate_target_node)
+        do_import_ttl(dirname="integration/test_dump/dump-2.2",force=True,do_archiving=False,do_post_processing=True)
+        ultimate_target_node2 = Organization.self_or_ultimate_target_node("https://1145.am/db/4001762/Royal_Mail")
+        assert ultimate_target_node2 is None
+        main_node = Organization.self_or_ultimate_target_node("https://1145.am/db/2984033/Royal_Mail")
+        new_vals = all_related_uris(main_node)
+        assert len(new_vals) == len(target_node_rels)
+
+        doc_id_in_uri = False
+        for v in target_node_rels.values():
+            if any([x.find("/4001762/") > 0 for x in v]):
+                doc_id_in_uri = True
+                break
+        assert doc_id_in_uri is True # Originally the main node had relationships that included 4001762 doc id
+
+        doc_id_in_uri = False
+        for v in new_vals.values():
+            if any([x.find("/4001762/") > 0 for x in v]):
+                doc_id_in_uri = True
+                break
+        assert doc_id_in_uri is False # Should be no occurrence of the deleted doc id in Royal Mail's relationships
+
 
 class MergeSameAsHighTestCase(TestCase):
 
@@ -179,3 +266,10 @@ def make_node(doc_id,letter,node_type="Organization",doc_extract=None,datestamp=
     if "Activity" in node_type:
         doc_extract_str = f"{{ documentExtract: 'Doc Extract {letter.upper()}' }}"
     return f"{node}-[:documentSource {doc_extract_str}]->{doc_source}, (docsource_{letter})-[:url]->(ext_{letter}:Resource {{ uri: 'https://example.org/external/art_{letter}' }})"
+
+def all_related_uris(resource):
+    vals = {}
+    for k,v in resource.__all_relationships__:
+        rel_lens = [x.uri for x in resource.__dict__[k]]
+        vals[k] = set(rel_lens)
+    return vals

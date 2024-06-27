@@ -2,6 +2,7 @@ import logging
 from neomodel import db
 import re
 from datetime import datetime
+from topics.models import Resource
 
 logger = logging.getLogger(__name__)
 
@@ -56,12 +57,29 @@ def output_same_as_stats(msg):
     same_as_medium_count,_ = db.cypher_query(medium + " RETURN COUNT(r)")
     logger.info(f"{msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsNameOnly: {same_as_medium_count[0][0]}")
 
+def get_internal_doc_ids_from_rdf_row(row):
+    res = re.findall(r"^\s+ns1:internalDocId\s(\d+)", row)
+    if len(res) > 0:
+        return int(res[0])
+    else:
+        return None
+
 def get_node_name_from_rdf_row(row):
     res = re.findall(r"^<(https://\S.+)> a", row)
     if len(res) > 0:
         return res[0]
     else:
         return None
+
+def delete_and_clean_up_nodes_by_doc_id(doc_id):
+    nodes_to_delete = Resource.nodes.filter(internalDocId=doc_id)
+    uris_to_delete = [x.uri for x in nodes_to_delete]
+    merged_nodes = Resource.nodes.filter(internalMergedSameAsHighToUri__in=uris_to_delete)
+    for n in nodes_to_delete:
+        n.delete()
+    for m in merged_nodes:
+        m.internalMergedSameAsHighToUri = None
+        m.save()
 
 def count_relationships():
     vals, _ = db.cypher_query("MATCH ()-[x]-() RETURN COUNT(x);")

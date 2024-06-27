@@ -4,8 +4,9 @@ import subprocess
 from integration.models import DataImport
 from datetime import datetime, timezone
 from integration.neo4j_utils import (
-    setup_db_if_necessary,
-    get_node_name_from_rdf_row, count_nodes
+    setup_db_if_necessary, get_node_name_from_rdf_row,
+    get_internal_doc_ids_from_rdf_row, count_nodes,
+    delete_and_clean_up_nodes_by_doc_id,
 )
 import time
 import logging
@@ -62,13 +63,13 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,
     delete_dir = f"{dir_name}/deletions"
     count_of_creations = 0
     count_of_deletions = 0
-    # if os.path.isdir(delete_dir):
-    #     delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
-    #     logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
-    #     for filename in delete_files:
-    #         _, deletions = load_deletion_file(f"{delete_dir}/{filename}")
-    #         count_of_deletions += deletions
-    # logger.info(f"After running deletion files there are {count_nodes()} nodes")
+    if os.path.isdir(delete_dir):
+        delete_files = [x for x in os.listdir(delete_dir) if x.endswith(".ttl")]
+        logger.info(f"Found {len(delete_files)} ttl files to delete, currenty have {count_nodes()} nodes")
+        for filename in delete_files:
+            deletions = load_deletion_file(f"{delete_dir}/{filename}")
+            count_of_deletions += deletions
+    logger.info(f"After running deletion files there are {count_nodes()} nodes")
     all_files = sorted([x for x in os.listdir(dir_name) if x.endswith(".ttl")])
     logger.info(f"Found {len(all_files)} ttl files to process")
     if len(all_files) == 0:
@@ -82,43 +83,32 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,
 
 def load_deletion_file(filepath):
     filepath = os.path.abspath(filepath)
-#    command = f'call n10s.rdf.delete.fetch("file://{filepath}","Turtle");' # This fails for me, but not clear why
-    with open(filepath) as f:
-        uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
-    count_query = f"MATCH (n) WHERE n.uri IN {uris} RETURN COUNT(n)"
+    count_query = f"MATCH (n: Resource) RETURN COUNT(n)"
     cnt, _ = db.cypher_query(count_query)
-    command = f"MATCH (n) WHERE n.uri IN {uris} AND n.merged_status IS NULL CALL apoc.nodes.delete(n, 1000) YIELD value RETURN value;"
-    logger.info(f"Deleting {len(uris)} nodes")
-    db.cypher_query(command)
-    return len(uris), cnt[0][0]
+    with open(filepath) as f:
+        doc_ids = set([get_internal_doc_ids_from_rdf_row(x) for x in f.readlines() if get_internal_doc_ids_from_rdf_row(x) is not None])
+    for doc_id in doc_ids:
+        delete_and_clean_up_nodes_by_doc_id(doc_id)
+    cnt2, _ = db.cypher_query(count_query)
+    logger.info(f"Before deleting {cnt[0][0]} nodes. After delete {cnt2[0][0]} nodes")
+    return cnt2[0][0] - cnt[0][0]
 
 def load_file(filepath,RDF_SLEEP_TIME, raise_on_error=True):
     filepath = os.path.abspath(filepath)
-    with open(filepath) as f:
-        uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
     command = f"""CALL n10s.rdf.import.fetch("file://{filepath}","Turtle",
                 {{ predicateExclusionList : [ "https://1145.am/db/geoNamesRDF" ] }} );"""
     logger.info(f"Loading: {command}")
-    results,_ = db.cypher_query(command)
+    results,columns = db.cypher_query(command)
     res = results[0] # row like ['KO', 0, 5025, None, 'Unexpected character U+FFFC at index 57: https://1145.am/db/techcrunchcom_2011_12_02_doo-net-gets-￼6-8m-to-reinvent-office-paperwork-oh-yes-2_ [line 5121]', {'singleTx': False}]
     if res[0] != 'OK':
         logger.error(f"{command}: {res}")
-        log_at_risk_doc_ids(filepath, uris)
         if raise_on_error is True:
             raise ValueError(f"{command} failed with {res}")
+    with open(filepath) as f:
+        uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
     time.sleep(RDF_SLEEP_TIME)
     return len(uris)
 
-def log_at_risk_doc_ids(filepath,uris):
-    all_doc_ids = [x.split("/")[4] for x in uris]
-    doc_ids = []
-    fname = filepath.split("/")[-1]
-    for x in set(all_doc_ids):
-        try:
-            doc_ids.append(int(x))
-        except:
-            pass
-    logger.error(f"At-risk doc_ids to check {fname}: {sorted(doc_ids)}")
 
 class Command(BaseCommand):
 
