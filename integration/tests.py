@@ -1,5 +1,4 @@
 from django.test import SimpleTestCase, TestCase
-from topics.cache_helpers import nuke_cache
 from neomodel import db
 import time
 import os
@@ -14,6 +13,7 @@ from integration.neo4j_utils import (
     apoc_del_redundant_same_as,
 )
 from integration.rdf_post_processor import RDFPostProcessor
+from precalculator.models import P
 import logging
 logger = logging.getLogger(__name__)
 
@@ -160,7 +160,7 @@ class MergeSameAsHighTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         clean_db()
-        nuke_cache() # Company name etc are stored in cache
+        P.nuke_all() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijk")]
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"mnopqrs")]
         node_list = ", ".join(org_nodes + act_nodes)

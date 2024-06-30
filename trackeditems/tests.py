@@ -11,7 +11,8 @@ from trackeditems.notification_helpers import (
 )
 from neomodel import db
 from integration.models import DataImport
-from topics.cache_helpers import nuke_cache, warm_up_cache
+from topics.precalculator_helpers import warm_up_precalculator
+from precalculator.models import P
 from integration.management.commands.import_ttl import do_import_ttl
 import re
 import os
@@ -51,12 +52,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() is None # Empty DB
-        nuke_cache()
+        P.nuke_all()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
         r.run_all_in_order()
-        warm_up_cache()
+        warm_up_precalculator()
 
     def setUp(self):
         self.ts = time.time()
@@ -135,7 +136,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
 
     def test_does_not_populate_activity_pages_if_cache_not_available(self):
         client = self.client
-        nuke_cache()
+        P.nuke_all()
 
         response = client.get("/tracked/activity_stats")
         content = str(response.content)
@@ -162,8 +163,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
             from django.test import Client
             client = Client()
         '''
-        nuke_cache()
-        warm_up_cache()
+        P.nuke_all()
+        warm_up_precalculator()
         client = self.client
 
         response = client.get("/tracked/activity_stats")

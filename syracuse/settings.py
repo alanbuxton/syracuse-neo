@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'feedbacks.apps.FeedbacksConfig',
     'trackeditems.apps.TrackeditemsConfig',
     'integration.apps.IntegrationConfig',
+    'precalculator.apps.PrecalculatorConfig',
     'rest_framework',
     'django_bootstrap5',
     'rest_framework.authtoken',

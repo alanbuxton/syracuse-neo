@@ -8,7 +8,7 @@ from integration.management.commands.import_ttl import do_import_ttl
 from integration.models import DataImport
 from neomodel import db
 from datetime import date
-from topics.cache_helpers import nuke_cache
+from precalculator.models import P
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
@@ -31,7 +31,7 @@ class TestUtilsWithDumpData(TestCase):
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
-        nuke_cache()
+        P.nuke_all()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
@@ -237,7 +237,7 @@ class TestFamilyTree(TestCase):
 
     def setUpTestData():
         clean_db()
-        nuke_cache() # Company name etc are stored in cache
+        P.nuke_all() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
         org_nodes = sorted(org_nodes, reverse=True)
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"opqrstuvw")]

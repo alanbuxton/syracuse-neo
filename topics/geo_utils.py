@@ -2,11 +2,10 @@ import os
 import logging
 import pycountry
 import csv
-from django.core.cache import cache
 from neomodel import db
 logger = logging.getLogger(__name__)
+from precalculator.models import  P
 
-GEO_CACHE_KEY="geo_data"
 COUNTRIES_WITH_REGIONS = ["AE","US","CA","CN","IN"] # Countries to be broken down to state/province
 
 def country_and_region_code_to_name(geo_code):
@@ -41,7 +40,8 @@ def get_geoname_uris_for_country_region(geo_code):
     return geo_uris
 
 def get_geo_data(force_refresh=False):
-    res = cache.get(GEO_CACHE_KEY)
+    logger.info("get_geo_data started")
+    res = P.get_geo_data()
     if force_refresh is False and res is not None:
         country_admin1_geoname_mapping = res["country_admin1_geoname_mapping"]
         country_admin1_name_to_code = res["country_admin1_name_to_code"]
@@ -50,7 +50,7 @@ def get_geo_data(force_refresh=False):
         country_names_to_id, admin1_names_to_id, country_admin1_geoname_mapping = load_country_mapping()
         country_admin1_name_to_code = sorted_country_admin1_list(country_names_to_id, admin1_names_to_id)
         country_admin1_code_to_name = {z:admin1_country_with_brackets(x,y) for x,y,z in country_admin1_name_to_code}
-        cache.set(GEO_CACHE_KEY, {"country_admin1_geoname_mapping":country_admin1_geoname_mapping,
+        P.set_geo_data({"country_admin1_geoname_mapping":country_admin1_geoname_mapping,
                                     "country_admin1_name_to_code": country_admin1_name_to_code,
                                     "country_admin1_code_to_name": country_admin1_code_to_name,
                                     })

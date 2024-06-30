@@ -3,7 +3,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin, Resource
-from topics.cache_helpers import is_cache_ready
+from precalculator.models import is_cache_ready
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, TimelineSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,

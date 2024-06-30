@@ -18,7 +18,7 @@ from topics.model_queries import (get_activities_for_serializer_by_country_and_d
     get_activities_for_serializer_by_source_and_date_range)
 from datetime import datetime, timezone, date, timedelta
 from topics.geo_utils import get_geo_data, country_and_region_code_to_name
-from topics.cache_helpers import is_cache_ready
+from precalculator.models import is_cache_ready
 
 class TrackedIndustryGeoView(APIView):
     permission_classes = [IsAuthenticated]

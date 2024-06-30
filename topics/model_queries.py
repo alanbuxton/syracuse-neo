@@ -4,7 +4,7 @@ from .geo_utils import geoname_ids_for_country_region
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
 import logging
-from django.core.cache import cache
+from precalculator.models import P
 from topics.geo_utils import geo_select_list
 
 logger = logging.getLogger(__name__)
@@ -196,17 +196,15 @@ def date_to_cypher_friendly(date):
         return date.isoformat()
 
 def get_cached_stats():
-    latest_date = cache.get("cache_updated")
+    latest_date = P.get_last_updated()
     if latest_date is None:
         return None, None, None, None
     d = datetime.date(latest_date)
-    assert cache.get(f"stats_{d}") is not None
-    counts, recents_by_country_region, recents_by_source =  get_stats(d, allowed_to_set_cache=False)
+    counts, recents_by_country_region, recents_by_source = get_stats(d, allowed_to_set_cache=False)
     return d, counts, recents_by_country_region, recents_by_source
 
 def get_stats(max_date,allowed_to_set_cache=False):
-    cache_key = f"stats_{max_date}"
-    res = cache.get(cache_key)
+    res = P.get_stats(max_date)
     if res is not None:
         return res
     counts = []
@@ -236,7 +234,7 @@ def get_stats(max_date,allowed_to_set_cache=False):
     ts2 = datetime.utcnow()
     logger.debug(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
     if allowed_to_set_cache is True:
-        cache.set( cache_key, (counts, recents_by_country_region, recents_by_source) )
+        P.set_stats(max_date, (counts, recents_by_country_region, recents_by_source) )
     else:
         logger.debug("Not allowed to set cache")
     return counts, recents_by_country_region, recents_by_source
