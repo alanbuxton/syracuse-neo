@@ -113,7 +113,8 @@ class TurtleLoadingTestCase(TestCase):
         do_import_ttl(dirname="integration/test_dump/dump-2.1",force=True,do_archiving=False,do_post_processing=True)
 
         # and check the new company name
-        n = Organization.nodes.get_or_none(uri="https://1145.am/db/4001762/Royal_Mail")
+        n = Resource.nodes.get_or_none(uri="https://1145.am/db/4001762/Royal_Mail") # search by Resource is faster due to explicit index
+        assert isinstance(n, Organization)
         assert n.name == ['Royal Maily Foo Bar'] # name was edited (only updates in the original node)
 
         ultimate_target_node2 = Organization.self_or_ultimate_target_node(n)
@@ -195,7 +196,7 @@ class MergeSameAsHighTestCase(TestCase):
         """
         res,_ = db.cypher_query(query)
         R = RDFPostProcessor()
-        a = Organization.nodes.get_or_none(uri="https://1145.am/db/100/a")
+        a = Resource.nodes.get_or_none(uri="https://1145.am/db/100/a")
         assert len(a.buyer) == 1
         assert len(a.investor) == 0
         assert len(a.vendor) == 0
@@ -215,7 +216,7 @@ class MergeSameAsHighTestCase(TestCase):
             assert Organization.unmerged_or_none_by_uri(uri) is not None
         for uri in merged_uris:
             logger.info(uri)
-            assert Organization.nodes.get_or_none(uri=uri) is not None
+            assert Resource.nodes.get_or_none(uri=uri) is not None
             assert Organization.unmerged_or_none_by_uri(uri) is None
 
     def test_attributes_for_ultimate_target(self):

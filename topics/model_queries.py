@@ -61,7 +61,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
     else:
         org_uri_clause = f"AND o.uri IN {allowed_org_uris}"
     query = f"""
-        MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Resource&Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
         AND o.internalMergedSameAsHighToUri IS NULL
@@ -69,7 +69,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         {geo_clause}
         RETURN x,a
         UNION
-        MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Resource&Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
         AND o.internalMergedSameAsHighToUri IS NULL
@@ -178,11 +178,11 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
                         AND n.internalMergedSameAsHighToUri IS NULL
                     """
     query = f"""
-        MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Resource&Organization)
         {where_clause}
         {return_str} {limit_str}
         UNION
-        MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Organization)
+        MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Resource&Organization)
         {where_clause}
         {return_str} {limit_str};
     """
@@ -272,7 +272,7 @@ def count_entries(results):
 def do_get_parent_orgs_query(uri: str, parent_rels = "investor|buyer|vendor") -> [(Organization, ActivityMixin, Article, str)]:
     assert "'" not in uri, f"Can't have ' in {uri}"
     query = f"""
-        MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Organization),
+        MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Resource&Organization),
         (b: Organization)-[x:{parent_rels}]-(c: CorporateFinanceActivity)
         WHERE t.uri = '{uri}'
         AND b.internalMergedSameAsHighToUri IS NULL
@@ -287,17 +287,19 @@ def do_get_child_orgs_query(uri: str, relationships = "investor|buyer|vendor") -
     assert "'" not in uri, f"Can't have ' in {uri}"
     query = f"""
         MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Organization),
-        (b: Organization)-[x:{relationships}]-(c: CorporateFinanceActivity)
+        (b: Resource&Organization)-[x:{relationships}]-(c: CorporateFinanceActivity)
         WHERE b.uri = '{uri}'
         AND t.internalMergedSameAsHighToUri IS NULL
         AND b.internalMergedSameAsHighToUri IS NULL
         RETURN t, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished
     """
+    logger.debug(query)
     results, _ = db.cypher_query(query, resolve_objects=True)
     return results
 
 def get_child_orgs(uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    logger.debug(f"get_child_orgs for {uri}")
     res = do_get_child_orgs_query(uri, relationships)
     if include_same_as_name_only is False:
         return res
@@ -307,6 +309,7 @@ def get_child_orgs(uri, include_same_as_name_only=True, relationships="investor|
     return res
 
 def get_parent_orgs(uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    logger.debug(f"get_parent_orgs for {uri}")
     res = do_get_parent_orgs_query(uri, relationships)
     if include_same_as_name_only is False:
         return res, []
@@ -318,6 +321,7 @@ def get_parent_orgs(uri, include_same_as_name_only=True, relationships="investor
     return res, other_parents
 
 def org_family_tree(organization_uri, include_same_as_name_only=True, relationships="investor|buyer|vendor"):
+    logger.info(f"org_family_tree for {organization_uri}")
     children = get_child_orgs(organization_uri,
                     include_same_as_name_only=include_same_as_name_only,
                     relationships=relationships)
@@ -331,6 +335,6 @@ def org_family_tree(organization_uri, include_same_as_name_only=True, relationsh
                         relationships=relationships))
     for org_uri in other_parents:
         siblings.extend(get_child_orgs(org_uri,
-                        include_same_as_name_only=include_same_as_name_only_name_only,
+                        include_same_as_name_only=include_same_as_name_only,
                         relationships=relationships))
     return parents, siblings, children

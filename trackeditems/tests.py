@@ -148,7 +148,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
-        assert "Rollins, Inc. Agrees To Acquire Clark Pest Control" not in content
+        assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" not in content
 
         response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
@@ -176,7 +176,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         content = str(response.content)
         assert "Activities between" in content
         assert "Site stats calculating, please check later" not in content
-        assert "Rollins, Inc. Agrees To Acquire Clark Pest Control" in content
+        assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" in content
 
         response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)

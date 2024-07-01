@@ -148,7 +148,7 @@ class OrganizationTimeline(APIView):
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        o = Organization.nodes.get(uri=uri)
+        o = Resource.nodes.get(uri=uri)
         org_serializer = OrganizationTimelineSerializer(o)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         resp = Response({"timeline_serializer": org_serializer.data,
@@ -178,7 +178,7 @@ class OrganizationByUri(APIView):
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        o = Organization.nodes.get(uri=uri)
+        o = Resource.nodes.get(uri=uri)
         include_same_as_name_only = bool(int(request.GET.get('include_same_as_name_only',"1")))
         org_serializer = OrganizationGraphSerializer(o,context={"include_same_as_name_only":include_same_as_name_only})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}

@@ -49,9 +49,9 @@ class Resource(StructuredNode):
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalMergedSameAsHighToUri = StringProperty()
 
-    @classmethod
-    def get_by_uri(cls,uri):
-        return cls.nodes.get(uri)
+    @staticmethod
+    def get_by_uri(uri):
+        return Resource.nodes.get(uri)
 
     @classmethod
     def unmerged_or_none_by_uri(cls, uri):

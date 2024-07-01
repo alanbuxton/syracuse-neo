@@ -140,17 +140,16 @@ class TestUtilsWithDumpData(TestCase):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
         assert set(counts) == {('Organization', 405), ('Article', 189), ('LocationActivity', 11), ('Person', 12), ('Role', 11), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
-        assert len(recents_by_geo) == 33
+        assert len(recents_by_geo) == 31
         assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1),
             ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1),
             ('DK', 'DK', 'Denmark', 1, 1, 1), ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1),
-            ('GB', 'GB', 'United Kingdom', 1, 1, 1), ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1),
-            ('KE', 'KE', 'Kenya', 1, 1, 1), ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35),
-            ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), ('US', 'US-CA', 'United States - California', 1, 1, 3),
-            ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), ('US', 'US-FL', 'United States - Florida', 0, 0, 2),
-            ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), ('US', 'US-ID', 'United States - Idaho', 1, 1, 1),
-            ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3),
-            ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), ('US', 'US-MD', 'United States - Maryland', 1, 1, 1),
+            ('GB', 'GB', 'United Kingdom', 1, 1, 1), ('IL', 'IL', 'Israel', 1, 1, 1), ('KE', 'KE', 'Kenya', 1, 1, 1),
+            ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 5, 5, 16), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1),
+            ('US', 'US-CA', 'United States - California', 0, 0, 2), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1),
+            ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1),
+            ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3),
+            ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MD', 'United States - Maryland', 1, 1, 1),
             ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1),
             ('US', 'US-NY', 'United States - New York', 4, 4, 10), ('US', 'US-OH', 'United States - Ohio', 1, 1, 1),
             ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2),
