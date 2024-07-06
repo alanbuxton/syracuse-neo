@@ -33,13 +33,8 @@
 
 <p>
 {% include 'layouts/nav-header.html' %}
-| <a href="{% url 'organization-family-tree' org_data.domain org_data.path org_data.doc_id org_data.name %}">
-  Show Family Tree</a>
-| <a href="{% url 'organization-timeline' org_data.domain org_data.path org_data.doc_id org_data.name %}">
-   Show Timeline</a>
 </p>
 <p><b>Showing linkages for:</b> <a href="{{ data_serializer.source_node }}">{{ data_serializer.source_node }}</a></p>
-
 
 <p><b>Show/Hide: </b>
 {% for entity_type in data_serializer.nodes_by_type.keys %}

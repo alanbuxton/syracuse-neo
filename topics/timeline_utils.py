@@ -1,53 +1,55 @@
 from topics.models import Organization
 
-def get_timeline_data(orgs, limit=None):
+def get_timeline_data(org,combine_same_as_name_only):
     org_display = []
     org_nodes = []
     activities = []
-    seen_orgs = set()
-    errors = set()
-    org_count = 0
+ 
+    display_data = org.serialize()
+    org_display.append(display_data)
+    org_nodes.append(org)
+    vendor = []
+    participant = []
+    protagonist = []
+    buyer = []
+    investor = []
+    role_activity = []
+    location_added = []
+    location_removed = []
+    target = []
 
-    for org in orgs:
-        if limit is not None and org_count > limit:
-            break
-        if org in seen_orgs:
-            continue
-        org_count += 1
-        display_data = org.serialize()
-        seen_orgs.add(org)
-        org_display.append(display_data)
-        org_nodes.append(org)
-        vendor = []
-        participant = []
-        protagonist = []
-        buyer = []
-        investor = []
-        role_activity = []
-        location_added = []
-        location_removed = []
-        target = []
-
-        vendor.extend(org.vendor.all())
-        participant.extend(org.participant.all())
+    vendor.extend(org.vendor.all())
+    participant.extend(org.participant.all())
 #            protagonist.extend(org.protagonist.all())
-        buyer.extend(org.buyer.all())
-        investor.extend(org.investor.all())
-        location_added.extend(org.locationAdded.all())
-        location_removed.extend(org.locationRemoved.all())
-        role_activity.extend(org.get_role_activities()) # it's a tuple
-        target.extend(org.target.all())
-        activities.append(
-            {"vendor": set(vendor),
-             "investor": set(investor),
-             "participant": set(participant),
+    buyer.extend(org.buyer.all())
+    investor.extend(org.investor.all())
+    location_added.extend(org.locationAdded.all())
+    location_removed.extend(org.locationRemoved.all())
+    role_activity.extend(org.get_role_activities()) # it's a tuple
+    target.extend(org.target.all())
+
+    if combine_same_as_name_only is True:
+        for x in org.sameAsNameOnly:
+            vendor.extend(x.vendor.all())
+            participant.extend(x.participant.all())
+            buyer.extend(x.buyer.all())
+            investor.extend(x.investor.all())
+            location_added.extend(x.locationAdded.all())
+            location_removed.extend(x.locationRemoved.all())
+            role_activity.extend(x.get_role_activities())
+            target.extend(x.target.all())
+            
+    activities.append(
+        {"vendor": set(vendor),
+        "investor": set(investor),
+        "participant": set(participant),
 #             "protagonist": set(protagonist),
-             "buyer": set(buyer),
-             "location_added": set(location_added),
-             "location_removed": set(location_removed),
-             "role_activity": set(role_activity),
-             "target": set(target),
-             })
+        "buyer": set(buyer),
+        "location_added": set(location_added),
+        "location_removed": set(location_removed),
+        "role_activity": set(role_activity),
+        "target": set(target),
+        })
 
     groups = []
     org_display_details = {}
@@ -95,7 +97,7 @@ def get_timeline_data(orgs, limit=None):
                 item_display_details[current_item.uri] = current_item.serialize_no_none()
                 seen_uris.add(current_item.uri)
 
-    return groups, items, item_display_details, org_display_details, errors
+    return groups, items, item_display_details, org_display_details
 
 
 def labelize(activity,activity_type):

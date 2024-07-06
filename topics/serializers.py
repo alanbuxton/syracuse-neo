@@ -38,15 +38,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         }
 
     def add_child_nodes_edges(self, central_uri, nodes, node_data, edges, edge_data, parent_uri, family_tree_results, level):
-        for node,activity,art,label,docExtract in sorted(family_tree_results , key=lambda x: x[0].best_name):
-            if node.uri in node_data:
-                logger.info(f"Already seen {node.uri}, ignoring")
-                continue
-            node_data[node.uri] = node.serialize_no_none()
-            node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
-            if node.uri == central_uri:
-                node_attribs['color'] = '#f6c655'
-            nodes.append(node_attribs)
+        for _,node,activity,art,label,docExtract in sorted(family_tree_results , key=lambda x: x[0].best_name):
             edge_id = f"{ parent_uri }-{ label }-{ node.uri }"
             if edge_id in edge_data:
                 logger.info(f"Already seen {edge_id}, ignoring")
@@ -55,24 +47,33 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
             edges.append ( { "id": edge_id,
                         "from": f"{ parent_uri }", "to": f"{ node.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
+            if node.uri in node_data:
+                logger.info(f"Already seen {node.uri}, ignoring")
+                continue
+            node_data[node.uri] = node.serialize_no_none()
+            node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
+            if node.uri == central_uri:
+                node_attribs['color'] = '#f6c655'
+            nodes.append(node_attribs)
 
 
     def to_representation(self, instance):
         organization_uri = instance.uri
-        include_same_as_name_only = self.context.get('include_same_as_name_only',True)
-        parents, parents_children, org_children = org_family_tree(organization_uri, include_same_as_name_only=include_same_as_name_only)
+        combine_same_as_name_only = self.context.get('combine_same_as_name_only',True)
+        parents, parents_children, org_children = org_family_tree(organization_uri, combine_same_as_name_only=combine_same_as_name_only)
         nodes = []
         edges = []
         node_data = {}
         edge_data = {}
-
-        for parent,_,_,_,_ in sorted(parents, key=lambda x: x[0].best_name):
+        
+        for parent,_,_,_,_,_ in sorted(parents, key=lambda x: x[0].best_name):
             if parent.uri in node_data:
                 logger.info(f"Already seen {parent.uri}, ignoring")
                 continue
             node_data[parent.uri] = parent.serialize_no_none()
             nodes.append( {"id": parent.uri, "label": parent.best_name, "level": 0})
-            self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, parent.uri, parents_children, 1)
+            relevant_children = [x for x in parents_children if x[0] == parent]
+            self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, parent.uri, relevant_children, 1)
 
         self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, organization_uri, org_children, 2)
 
@@ -82,12 +83,27 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             node_attribs['color'] = '#f6c655'
             nodes.append(node_attribs)
 
+        pruned_nodes = prune_not_needed_nodes(nodes, edges) 
+        pruned_node_data = {}
+        for node in pruned_nodes:
+            pruned_node_data[node['id']] = node_data[node['id']]
+        
         return {
-            "nodes": nodes,
-            "node_details": CustomSerializer(node_data),
+            "nodes": pruned_nodes,
+            "node_details": CustomSerializer(pruned_node_data),
             "edges": edges,
             "edge_details": CustomSerializer(edge_data),
         }
+
+def prune_not_needed_nodes(nodes, edges):
+    nodes_to_keep = []
+    for node in nodes:
+        for edge in edges:
+            if node['id'] == edge['from'] or node['id'] == edge['to']:
+                nodes_to_keep.append(node)
+                break
+    nodes_to_keep = sorted(nodes_to_keep, key=lambda x: f"{x['level']}-{x['label']}")
+    return nodes_to_keep
 
 
 
@@ -151,41 +167,15 @@ class GeoSerializer(serializers.Serializer):
         self.is_valid()
         return self['country_or_region'].value
 
-class TimelineSerializer(serializers.Serializer):
-    def to_representation(self, instance, **kwargs):
-        limit = 10
-        groups, items, item_display_details, org_display_details, errors = get_timeline_data(instance, limit)
-        errors = sorted(errors)
-        if len(errors) > 50:
-            errors = "; ".join(errors[:50]) + f" plus {len(errors) - 50} other organizations"
-        else:
-            errors = "; ".join(errors)
-        if len(groups) + len(errors) > limit:
-            limit_message = f'Max {limit} organizations shown for web users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20timeline%20data.">contact us</a> for API or bulk data.'
-        else:
-            limit_message = ""
-        resp = {"groups": groups, "items":items,
-            "item_display_details":CustomSerializer(item_display_details),
-            "org_display_details": CustomSerializer(org_display_details),
-            "errors": errors,
-            "limit_msg": limit_message,
-            }
-        return resp
-
 class OrganizationTimelineSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
-        groups, items, item_display_details, org_display_details, errors = get_timeline_data([instance], None)
-        errors = sorted(errors)
-        if len(errors) > 50:
-            errors = "; ".join(errors[:50]) + f" plus {len(errors) - 50} other organizations"
-        else:
-            errors = "; ".join(errors)
+        combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
+        groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only)
         resp = {"groups": groups, "items":items,
             "item_display_details":CustomSerializer(item_display_details),
             "org_name": instance.longest_name,
             "org_node": instance.uri,
             "org_display_details": CustomSerializer(org_display_details),
-            "errors": errors,
             }
         return resp

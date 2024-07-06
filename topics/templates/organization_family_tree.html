@@ -32,10 +32,6 @@
   <h1>{{ org_data.best_name }} - Family Tree</h1>
   <p>
     {% include 'layouts/nav-header.html' %}
-  |  <a href="{% url 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
-      Show Linkages</a>
-  | <a href="{% url 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
-     Show Timeline</a>
   </p>
 
   <div id="main_container">

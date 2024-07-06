@@ -3,14 +3,14 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from topics.models import Organization, ActivityMixin, Resource
-from precalculator.models import is_cache_ready
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
-    NameSearchSerializer, GeoSerializer, TimelineSerializer,
+    NameSearchSerializer, GeoSerializer, 
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer)
 from rest_framework import status
 from datetime import date, datetime
-from urllib.parse import urlparse
+from precalculator.models import cache_last_updated_date
+from urllib.parse import urlparse, urlencode
 from syracuse.settings import MOTD
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
@@ -47,8 +47,10 @@ class Index(APIView):
         if industry_name is None:
             industry_name = None
 
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+
         if org_name:
-            orgs = Organization.find_by_name(org_name)
+            orgs = Organization.find_by_name(org_name, combine_same_as_name_only)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
@@ -90,7 +92,7 @@ class Index(APIView):
                         "last_updated": last_updated,
                         "search_industry_name": industry_name,
                         "search_geo_code": selected_geo,
-                        "cache_ready": is_cache_ready(),
+                        "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
 
@@ -101,6 +103,7 @@ class ShowResource(APIView):
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}"
+        request_state, combine_same_as_name_only = prepare_request_state(request)
         doc_id = kwargs.get("doc_id")
         if doc_id is not None:
             uri = f"{uri}/{doc_id}"
@@ -114,32 +117,33 @@ class ShowResource(APIView):
             org_data = {**kwargs, **{"uri":r.uri,"source_node_name":r.best_name}}
             resp = Response({"data_serializer": org_serializer.data,
                                 "org_data":org_data,
-                                "cache_ready": is_cache_ready(),
+                                "request_state": request_state,
                                 }, status=status.HTTP_200_OK)
             return resp
         else:
             resource_serializer = ResourceSerializer(r)
             resp = Response({"data_serializer":resource_serializer.data,
-                            "cache_ready": is_cache_ready(),
+                            "request_state": request_state,
                             }, status=status.HTTP_200_OK)
             return resp
 
 class FamilyTree(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'family_tree.html'
+    template_name = 'organization_family_tree.html'
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        include_same_as_name_only = bool(int(request.GET.get('include_same_as_name_only',"1")))
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state["hide_link"]="organization_family_tree"
         o = Organization.self_or_ultimate_target_node(uri)
         uri_parts = elements_from_uri(o.uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":include_same_as_name_only})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only})
 
         return Response({"nodes_edges":nodes_edges.data,
                             "requested_uri": uri,
                             "org_data": o,
                             "uri_parts": uri_parts,
-                            "cache_ready": is_cache_ready()}, status=status.HTTP_200_OK)
+                            "request_state": request_state}, status=status.HTTP_200_OK)
 
 
 class OrganizationTimeline(APIView):
@@ -148,12 +152,16 @@ class OrganizationTimeline(APIView):
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state["hide_link"]="organization_timeline"
         o = Resource.nodes.get(uri=uri)
-        org_serializer = OrganizationTimelineSerializer(o)
+        org_serializer = OrganizationTimelineSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        uri_parts = elements_from_uri(o.uri)
         resp = Response({"timeline_serializer": org_serializer.data,
                             "org_data":org_data,
-                            "cache_ready": is_cache_ready(),
+                            "request_state": request_state,
+                            "uri_parts": uri_parts,
                             }, status=status.HTTP_200_OK)
         return resp
 
@@ -164,11 +172,13 @@ class RandomOrganization(APIView):
 
     def get(self, request):
         o = Organization.get_random()
+        request_state, combine_same_as_name_only = prepare_request_state(request)
         vals = elements_from_uri(o.uri)
         org_serializer = OrganizationGraphSerializer(o)
         resp = Response({"data_serializer": org_serializer.data,
                             "org_data":vals,
-                            "cache_ready": is_cache_ready(),}, status=status.HTTP_200_OK)
+                            "request_state": request_state,
+                        }, status=status.HTTP_200_OK)
         return resp
 
 
@@ -179,12 +189,16 @@ class OrganizationByUri(APIView):
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Resource.nodes.get(uri=uri)
-        include_same_as_name_only = bool(int(request.GET.get('include_same_as_name_only',"1")))
-        org_serializer = OrganizationGraphSerializer(o,context={"include_same_as_name_only":include_same_as_name_only})
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state["hide_link"]="organization_linkages"
+        org_serializer = OrganizationGraphSerializer(o,context=
+                                    {"combine_same_as_name_only":combine_same_as_name_only})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        uri_parts = elements_from_uri(o.uri)
         resp = Response({"data_serializer": org_serializer.data,
-                            "org_data":org_data,
-                            "cache_ready": is_cache_ready(),
+                            "org_data": org_data,
+                            "uri_parts": uri_parts,
+                            "request_state": request_state,
                             }, status=status.HTTP_200_OK)
         return resp
 
@@ -211,3 +225,15 @@ def industry_geo_search_str(industry, geo,with_emphasis=True):
     else:
         in_str = "in"
     return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str.title()}</b>"
+
+
+def prepare_request_state(request):
+    combine_same_as_name_only = bool(int(request.GET.get("combine_same_as_name_only","1")))
+    new_params = request.GET.dict()
+    new_params["combine_same_as_name_only"] = int(not combine_same_as_name_only)
+    new_url = f"{request.META['PATH_INFO']}?{urlencode(new_params)}"
+    new_params["name_only_current_state"] = "Yes" if combine_same_as_name_only is True else "No"
+    new_params["name_only_toggle_name"] = "Off" if combine_same_as_name_only is True else "On"
+    new_params["name_only_toggle_url"] = new_url
+    new_params["cache_last_updated"] = cache_last_updated_date()
+    return new_params, combine_same_as_name_only

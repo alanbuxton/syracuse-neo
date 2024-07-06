@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime, timezone
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.cache import cache
 
 LAST_UPDATED_KEY="last_updated"
 GEO_DATA_KEY="geo_data"
@@ -43,7 +44,7 @@ class PrecalculatedData(models.Model):
     @staticmethod
     def get_last_updated():
         return P.get_value(LAST_UPDATED_KEY,"datetime_value")
-        
+
     @staticmethod
     def set_last_updated(ts=datetime.now(tz=timezone.utc)):
         return P.set_value(LAST_UPDATED_KEY,"datetime_value",ts)
@@ -67,13 +68,15 @@ class PrecalculatedData(models.Model):
         return P.set_value(key, "json_value",new_data)
 
     @staticmethod
-    def nuke_all():
+    def nuke_all(including_cache=True):
         P.objects.all().delete()
+        if including_cache is True:
+            cache.clear()
 
 P = PrecalculatedData # save your keyboard
 
-def is_cache_ready():
+def cache_last_updated_date():
     if P.get_last_updated() is None:
         return False
     else:
-        return True
+        return P.get_last_updated()

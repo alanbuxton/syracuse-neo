@@ -1,10 +1,27 @@
 {% if user.is_authenticated %}
   {{ user.username }}, you're logged in, great stuff.
-   <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
-|  <a href="{% url 'tracked-activities' %}">Recent Tracked Activities</a>
-|  <a href="/">Home</a>
-|  <a href="{% url 'account_logout' %}">Log out</a>
+{% endif %}
+  <a href="/">Home</a>
+  {% if request_state.hide_link != 'organization_linkages' and uri_parts %}
+  |  <a href="{% url 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+      Show Linkages</a>
+  {% endif %}
+  {% if request_state.hide_link != 'organization_family_tree' and uri_parts %}
+  | <a href="{% url 'organization-family-tree' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+    Show Family Tree</a>
+  {% endif %}
+  {% if request_state.hide_link != 'organization_timeline' and uri_parts %}
+  | <a href="{% url 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+     Show Timeline</a>
+  {% endif %}
+  {% if request_state.name_only_current_state %}
+    | Treat sameAsNameOnly relationship as same? {{ request_state.name_only_current_state }}
+       <a href="{{ request_state.name_only_toggle_url }}">(Turn {{ request_state.name_only_toggle_name }})</a>
+  {% endif %}
+  |  <a href="{% url 'tracked-organizations' %}">Tracked Organizations</a>
+  |  <a href="{% url 'tracked-activities' %}">Recent Tracked Activities</a>
+{% if user.is_authenticated %}
+  |  <a href="{% url 'account_logout' %}">Log out</a>
 {% else %}
-   <a href="/">Home</a>
-|  <a href="{% url 'account_login' %}">Log in or Sign Up for full access</a>
+  |  <a href="{% url 'account_login' %}">Log in or Sign Up for full access</a>
 {% endif %}

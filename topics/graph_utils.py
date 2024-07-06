@@ -1,10 +1,8 @@
-import re
 from topics.models import (Organization, Person, ActivityMixin,
     Resource, Role, Article, IndustryCluster, GeoNamesLocation, Site)
-from typing import List, Dict, Tuple, Set
 import logging
 
-logger = logging.getLogger("syracuse")
+logger = logging.getLogger(__name__)
 
 EDGE_COLORS = { "spender": "salmon",
                 "buyer": "salmon",
@@ -57,27 +55,38 @@ def graph_centered_on(start_node, **kwargs):
     edge_data = [] # Edges for graph
     edge_details = {} # Edge info to show on click
     root_node_data = resource_to_node_data(root_node)
-    include_same_as_name_only = kwargs.get("include_same_as_name_only",True)
+    combine_same_as_name_only = kwargs.get("combine_same_as_name_only",True)
     uris_to_ignore = set()
+    nodes_found_so_far = set()
 
-    if include_same_as_name_only is True:
-        same_as_name_onlies = root_node.sameAsNameOnly.all()
-        uris_to_ignore = set([x.uri for x in same_as_name_onlies])
+    if combine_same_as_name_only is True:
+        center_node_same_as_name_onlies = root_node.sameAsNameOnly.all()
+        uris_to_ignore = set([x.uri for x in center_node_same_as_name_onlies])
 
     for rel_data in root_node.all_directional_relationships():
-        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
+        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
 
-    if include_same_as_name_only is True:
-        for org in same_as_name_onlies:
+    if combine_same_as_name_only is True:
+        for org in center_node_same_as_name_onlies:
             for rel_data in org.all_directional_relationships(override_from_uri=root_uri):
-                if rel_data["other_node"] not in same_as_name_onlies:
-                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
+                rel_data["other_node"] = keep_or_switch_node(rel_data["other_node"],nodes_found_so_far, combine_same_as_name_only)
+                if rel_data["other_node"] not in center_node_same_as_name_onlies:
+                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
 
     return node_data, edge_data, node_details, edge_details
 
+def keep_or_switch_node(current_node, nodes_found_so_far, combine_same_as_name_only):
+    if combine_same_as_name_only is False:
+        return current_node
+    for same_as in current_node.sameAsNameOnly:
+        if same_as in nodes_found_so_far:
+            return same_as
+    nodes_found_so_far.add(current_node)
+    return current_node
 
-def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore):
+def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only):
     other_node = rel_data["other_node"]
+    other_node = keep_or_switch_node(other_node, nodes_found_so_far, combine_same_as_name_only)
     logger.debug(f"From {rel_data['from_uri']} to {other_node.uri}")
     if other_node.uri in uris_to_ignore:
         logger.debug(f"Ignoring {other_node}")
@@ -105,7 +114,7 @@ def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_d
     # find more relationships
     if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster) and not isinstance(other_node, GeoNamesLocation):
         for rel_data in other_node.all_directional_relationships():
-            build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore)
+            build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
 
 
 def build_edge_vals(direction, edge_label, source_node_id, target_node_id):

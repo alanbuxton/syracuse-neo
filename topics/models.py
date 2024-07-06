@@ -20,7 +20,6 @@ def uri_from_related(rel):
         return None
     return rel[0].uri
 
-
 def longest(arr):
     if arr is None:
         return None
@@ -63,7 +62,14 @@ class Resource(StructuredNode):
 
     @classmethod
     def randomized_active_nodes(cls,limit=10):
-        return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).order_by('?')[:limit]
+        query = f"""MATCH (n: {cls.__name__})
+                    WHERE n.internalMergedSameAsHighToUri IS NULL
+                    AND NOT (n)-[:sameAsNameOnly]-()
+                    RETURN n,rand() as r
+                    ORDER BY r
+                    LIMIT {limit}"""
+        res,_ = db.cypher_query(query, resolve_objects=True)
+        return [x[0] for x in res]
 
     @property
     def industry_as_str(self):
@@ -120,21 +126,52 @@ class Resource(StructuredNode):
             db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
 
     @classmethod
-    def find_by_name(cls, name, include_merged_from=False):
+    def find_by_name(cls, name, combine_same_as_name_only):
         name = name.lower()
-        cache_key = f"{cls.__name__}_{name}_{include_merged_from}"
+        cache_key = f"{cls.__name__}_{name}_{combine_same_as_name_only}"
         res = cache.get(cache_key)
         if res is not None:
             logger.debug(f"From cache {cache_key}")
             return res
-        query = f'MATCH (n: {cls.__name__}) WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")'
-        if include_merged_from is False:
-            query = query + f" AND n.internalMergedSameAsHighToUri IS NULL "
-        query = query + ' RETURN *'
-        results, _ = db.cypher_query(query,resolve_objects=False)
-        objs = [cls.inflate(row[0]) for row in results]
+        objs1 = cls.find_by_name_optional_same_as_onlies(name,combine_same_as_name_only)
+        if combine_same_as_name_only is True:
+            objs2 = cls.get_first_same_as_name_onlies(name)
+        else:
+            objs2 = []
+        objs = set(objs1 + objs2)
         cache.set(cache_key, objs)
         return objs
+
+    @classmethod
+    def find_by_name_optional_same_as_onlies(cls, name, exclude_same_as_onlies):
+        query = f'''MATCH (n: {cls.__name__})
+                    WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
+                    AND n.internalMergedSameAsHighToUri IS NULL '''
+        if exclude_same_as_onlies is True:
+            query = f"{query} AND NOT (n)-[:sameAsNameOnly]-() "
+        query = query + " RETURN n"
+        results, _ = db.cypher_query(query,resolve_objects=True)
+        objs = [x[0] for x in results]
+        return objs
+
+    @classmethod
+    def get_first_same_as_name_onlies(cls, name):
+        query = f"""MATCH (n: {cls.__name__})-[:sameAsNameOnly]-(o)
+                    WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
+                    AND n.internalMergedSameAsHighToUri IS NULL
+                    AND o.internalMergedSameAsHighToUri IS NULL
+                    AND n.internalDocId <= o.internalDocId
+                    RETURN n,o ORDER BY n.internalDocId"""
+        results,_ = db.cypher_query(query, resolve_objects=True)
+        entities_to_keep = []
+        found_uris = set()
+        for source, target in results:
+            found_uris.add(target.uri)
+            if source.uri in found_uris:
+                continue
+            entities_to_keep.append(source)     
+            found_uris.add(source.uri)
+        return entities_to_keep
 
     @property
     def best_name(self):
@@ -178,15 +215,6 @@ class Resource(StructuredNode):
             "doc_id": splitted_uri[2],
             "name": splitted_uri[3],
         }
-
-    def is_showable_merged_resource(self, include_merged_from):
-        if include_merged_from is True:
-            return True
-        elif self.internalMergedSameAsHighToUri is None:
-            return True
-        else:
-            return False
-
 
     def all_directional_relationships(self, **kwargs):
         '''
@@ -588,11 +616,11 @@ class Organization(Resource):
             match2 = "(n: Organization)-[:basedInHighGeoNamesLocation]-(g: GeoNamesLocation) "
             where2 = f" g.uri IN {geo_uris} "
         if industry_uris is None and geo_uris is not None:
-            query = f"MATCH {match2} WHERE {where2} RETURN n "
+            query = f"MATCH {match2} WHERE {where2} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
         elif industry_uris is not None and geo_uris is None:
-            query = f"MATCH {match1} WHERE {where1} RETURN n "
+            query = f"MATCH {match1} WHERE {where1} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
         else:
-            query = f"MATCH {match1}, {match2} WHERE {where1} and {where2} RETURN n "
+            query = f"MATCH {match1}, {match2} WHERE {where1} AND {where2} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
         if limit is not None:
             query = f"{query} LIMIT {limit}"
         logger.debug(query)

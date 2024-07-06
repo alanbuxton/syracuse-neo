@@ -1,7 +1,7 @@
 
 <br/>
 <p>
-{% if cache_ready %}
+{% if request_state.cache_last_updated %}
   <a href="{% url 'tracked-activity-stats' %}">Site Stats</a>
 {% else %}
   Site stats calculating, please check later

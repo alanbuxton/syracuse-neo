@@ -19,7 +19,7 @@
   <h1>Stats</h1>
   {% include 'layouts/nav-header.html' %}
 
-  {% if cache_ready %}
+  {% if request_state.cache_last_updated %}
 
     <p>Showing updates as at {{ max_date | localize }}</p>
 

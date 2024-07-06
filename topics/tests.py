@@ -38,7 +38,7 @@ class TestUtilsWithDumpData(TestCase):
         r.run_all_in_order()
 
     def test_data_list_choice_field_include_great_britain_option(self):
-        geo = GeoSerializer()
+        geo = GeoSerializer()   
         field = geo.fields['country_or_region']
         assert 'United Kingdom of Great Britain and Northern Ireland' in field.choices.keys(), "Great Britain not in field choices"
         assert 'United Kingdom' in field.choices.keys()
@@ -76,12 +76,11 @@ class TestUtilsWithDumpData(TestCase):
     def test_corp_fin_timeline(self):
         source_uri = "https://1145.am/db/3558745/Jb_Hunt"
         o = Organization.self_or_ultimate_target_node(source_uri)
-        groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
+        groups, items, item_display_details, org_display_details = get_timeline_data(o,True)
         assert len(groups) == 4
         assert len(items) == 1
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
-        assert errors == set()
 
     def test_location_graph(self):
         source_uri = "https://1145.am/db/1736082/Tesla"
@@ -95,13 +94,12 @@ class TestUtilsWithDumpData(TestCase):
     def test_location_timeline(self):
         source_uri = "https://1145.am/db/1736082/Tesla"
         o = Organization.self_or_ultimate_target_node(source_uri)
-        groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
+        groups, items, item_display_details, org_display_details = get_timeline_data(o,True)
         assert len(groups) == 4
         assert len(items) == 3
         assert set([x['label'] for x in items]) == {'Added - Added Brandenburg European gigafactory - not happened at date of document', 'Added - Added Berlin European gigafactory - not happened at date of document', 'Added - Added Grüenheide European gigafactory - not happened at date of document'}
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
-        assert errors == set()
 
     def test_role_graph(self):
         source_uri = "https://1145.am/db/1824114/Square"
@@ -115,23 +113,22 @@ class TestUtilsWithDumpData(TestCase):
     def test_role_timeline(self):
         source_uri = "https://1145.am/db/1824114/Square"
         o = Organization.self_or_ultimate_target_node(source_uri)
-        groups, items, item_display_details, org_display_details, errors = get_timeline_data([o])
+        groups, items, item_display_details, org_display_details = get_timeline_data(o,True)
         assert len(groups) == 4
         assert len(items) == 1
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
-        assert errors == set()
 
     def test_organization_graph_view_with_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?include_same_as_name_only=1")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1")
         content = str(response.content)
         assert len(re.findall("https://1145.am/db",content)) == 114
         assert "technologies" in content # from sameAsNameOnly's industry
 
     def test_organization_graph_view_without_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?include_same_as_name_only=0")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=0")
         content = str(response.content)
         assert len(re.findall("https://1145.am/db",content)) == 50
         assert "technologies" not in content
@@ -140,21 +137,21 @@ class TestUtilsWithDumpData(TestCase):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
         assert set(counts) == {('Organization', 405), ('Article', 189), ('LocationActivity', 11), ('Person', 12), ('Role', 11), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
-        assert len(recents_by_geo) == 31
-        assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1),
-            ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1),
-            ('DK', 'DK', 'Denmark', 1, 1, 1), ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1),
-            ('GB', 'GB', 'United Kingdom', 1, 1, 1), ('IL', 'IL', 'Israel', 1, 1, 1), ('KE', 'KE', 'Kenya', 1, 1, 1),
-            ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 5, 5, 16), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1),
-            ('US', 'US-CA', 'United States - California', 0, 0, 2), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1),
-            ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1),
-            ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3),
-            ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MD', 'United States - Maryland', 1, 1, 1),
-            ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1),
-            ('US', 'US-NY', 'United States - New York', 4, 4, 10), ('US', 'US-OH', 'United States - Ohio', 1, 1, 1),
-            ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2),
-            ('US', 'US-TX', 'United States - Texas', 2, 2, 9), ('US', 'US-VA', 'United States - Virginia', 1, 1, 2),
-            ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
+        assert len(recents_by_geo) == 33
+        assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1), ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), 
+                                          ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
+                                          ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1), ('GB', 'GB', 'United Kingdom', 1, 1, 1), 
+                                          ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1), ('KE', 'KE', 'Kenya', 1, 1, 1), 
+                                          ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), 
+                                          ('US', 'US-CA', 'United States - California', 1, 1, 3), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), 
+                                          ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), 
+                                          ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), 
+                                          ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), 
+                                          ('US', 'US-MD', 'United States - Maryland', 1, 1, 1), ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), 
+                                          ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1), ('US', 'US-NY', 'United States - New York', 4, 4, 10), 
+                                          ('US', 'US-OH', 'United States - Ohio', 1, 1, 1), ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), 
+                                          ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2), ('US', 'US-TX', 'United States - Texas', 2, 2, 9), 
+                                          ('US', 'US-VA', 'United States - Virginia', 1, 1, 2), ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
         assert sorted(recents_by_source) == [('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4),
             ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1),
             ('MarketWatch', 4, 4, 4), ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
@@ -165,7 +162,7 @@ class TestUtilsWithDumpData(TestCase):
         max_date = date.fromisoformat("2024-06-02")
         min_date = date.fromisoformat("2024-05-03")
         country_code = 'US-NY'
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,include_same_as_name_only=False)
+        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,combine_same_as_name_only=False)
         assert len(matching_activity_orgs) == 4
         sorted_participants = [tuple(sorted(x['participants'].keys())) for x in matching_activity_orgs]
         assert set(sorted_participants) == {('participant', 'protagonist'), ('investor',)}
@@ -216,21 +213,109 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?include_same_as_name_only=0")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0")
         content = str(resp.content)
+        assert "REDAVIA" in content
         assert "REDOVIA" not in content
 
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?include_same_as_name_only=1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1")
         content = str(resp.content)
         assert "REDAVIA" in content
+        assert "REDOVIA" in content
 
     def test_does_search_by_industry_region(self):
         client = self.client
         resp = client.get("/?industry=Hospital%2C+Hospitals%2C+Hospitalist%2C+Healthcare&country_or_region=United+States+-+New+York")
         content = str(resp.content)
         assert "https://1145.am/db/3452774/Hhaexchange" in content
+
+    def test_company_search_with_combine_same_as_name_only(self):
+        client = self.client
+        resp = client.get("/?name=eli&combine_same_as_name_only=1")
+        content = str(resp.content)
+        assert "Eli Lilly" in content
+        assert "https://1145.am/db/3029576/Eli_Lilly" in content
+        assert "Eli Lilly and Company" not in content
+        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" not in content
+
+    def test_company_search_without_combine_same_as_name_only(self):
+        client = self.client
+        resp = client.get("/?name=eli&combine_same_as_name_only=0")
+        content = str(resp.content)
+        assert "Eli Lilly" in content
+        assert "https://1145.am/db/3029576/Eli_Lilly" in content
+        assert "Eli Lilly and Company" in content
+        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content
+
+    def test_search_industry_with_geo(self):
+        client = self.client
+        resp = client.get("/?industry=Pharma%2C+Pharmas%2C+Pharmaceuticals%2C+Pharmaceutical&country_or_region=United+States")
+        content = str(resp.content)
+        assert len(re.findall(r"Celgene\s*</a>",content)) == 1
+        assert len(re.findall(r"NapaJen Pharma\s*</a>",content)) == 1
+        assert len(re.findall(r"Lilly\s*</a>",content)) == 0
+
+    def test_search_industry_no_geo(self):
+        client = self.client
+        resp = client.get("/?industry=Pharma%2C+Pharmas%2C+Pharmaceuticals%2C+Pharmaceutical&country_or_region=")
+        content = str(resp.content)
+        assert len(re.findall(r"Celgene\s*</a>",content)) == 1
+        assert len(re.findall(r"NapaJen Pharma\s*</a>",content)) == 1
+        assert len(re.findall(r"Lilly\s*</a>",content)) == 1
+
+    def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
+        client = self.client
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0")
+        content0 = str(resp.content)
+        activities0 = len(re.findall("Acquisition",content0))
+        eli_lillies0 = len(re.findall("Eli Lilly",content0))
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1")
+        content1 = str(resp.content)
+        activities1 = len(re.findall("Acquisition",content1))
+        eli_lillies1 = len(re.findall("Eli Lilly",content1))
+        assert activities0 == activities1
+        assert eli_lillies0 > eli_lillies1 # when combined same as name only have fewer orgs
+
+    def test_graph_combines_same_as_name_only_off_vs_on_based_on_central_node(self):
+        client = self.client
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0")
+        content0 = str(resp.content)
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1")
+        content1 = str(resp.content)
+        assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content0
+        assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content1
+        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" not in content0
+        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" in content1
+
+    def test_timeline_combines_same_as_name_only_on_off(self):
+        client = self.client
+        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0")
+        content0 = str(resp.content)
+        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1")
+        content1 = str(resp.content)
+        assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content0
+        assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content1
+        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" not in content0
+        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" in content1
+
+    def test_family_tree_same_as_name_only_on_off_parents(self):
+        client = self.client
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0")
+        content0 = str(resp.content)
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1")
+        content1 = str(resp.content)
+
+        assert "https://1145.am/db/3029576/Eli_Lilly" in content0
+        assert "https://1145.am/db/3029576/Eli_Lilly" in content1
+        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content0
+        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" not in content1
+        assert "Buyer (CityAM Mar 2024)" in content0
+        assert "Buyer (CityAM Mar 2024)" in content1
+        assert "Buyer (PR Newswire Jan 2019)" in content0
+        assert "Buyer (PR Newswire Jan 2019)" not in content1
+
 
 class TestFamilyTree(TestCase):
 
@@ -263,39 +348,39 @@ class TestFamilyTree(TestCase):
 
     def test_gets_parent_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"
-        parents, other_parents = get_parent_orgs(uri,include_same_as_name_only=False)
+        parents, other_parents = get_parent_orgs(uri,combine_same_as_name_only=False)
         assert len(parents) == 1
-        uris = [x.uri for x,_,_,_,_ in parents]
+        uris = [x.uri for x,_,_,_,_,_ in parents]
         assert set(uris) == set(["https://1145.am/db/109/j"])
         assert len(other_parents) == 0
 
     def test_gets_parent_orgs_with_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"
-        parents, other_parents = get_parent_orgs(uri,include_same_as_name_only=True)
+        parents, other_parents = get_parent_orgs(uri,combine_same_as_name_only=True)
         assert len(parents) == 1
-        uris = [x.uri for x,_,_,_,_ in parents]
+        uris = [x.uri for x,_,_,_,_,_ in parents]
         assert set(uris) == set(["https://1145.am/db/109/j"])
         assert len(other_parents) == 1
         assert other_parents[0] == "https://1145.am/db/112/m"
 
     def test_gets_child_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
-        children = get_child_orgs(uri,include_same_as_name_only=False)
+        children = get_child_orgs(uri,combine_same_as_name_only=False)
         assert len(children) == 1
-        child_uris = [x.uri for (x,_,_,_,_) in children]
+        child_uris = [x.uri for (_,x,_,_,_,_) in children]
         assert set(child_uris) == set(["https://1145.am/db/103/d"])
 
     def test_gets_child_orgs_with_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
-        children = get_child_orgs(uri)
+        children = get_child_orgs(uri,combine_same_as_name_only=True)
         assert len(children) == 2
-        child_uris = [x.uri for (x,_,_,_,_) in children]
+        child_uris = [x.uri for (_,x,_,_,_,_) in children]
         assert set(child_uris) == set(["https://1145.am/db/103/d","https://1145.am/db/107/h"])
 
     def test_gets_family_tree_without_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":False})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":False})
         d = nodes_edges.data
         assert len(d['nodes']) == 4
         assert len(d['edges']) == 3
@@ -307,7 +392,7 @@ class TestFamilyTree(TestCase):
     def test_gets_family_tree_with_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":True})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True})
         d = nodes_edges.data
         assert len(d['nodes']) == 6
         assert len(d['edges']) == 5
@@ -319,7 +404,7 @@ class TestFamilyTree(TestCase):
     def test_gets_children_where_there_is_no_parent(self):
         uri = "https://1145.am/db/100/a"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"include_same_as_name_only":True})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True})
         d = nodes_edges.data
         assert len(d['nodes']) == 4
 
@@ -334,4 +419,4 @@ class TestFamilyTree(TestCase):
         bpos = names.index("Name B")
         cpos = names.index("Name C")
         fpos = names.index("Name F")
-        assert bpos < cpos < fpos
+        assert bpos < cpos < fpos, f"Expected {bpos} < {cpos} < {fpos}"
