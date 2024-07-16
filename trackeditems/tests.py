@@ -69,7 +69,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         self.ts2 = time.time()
         self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
         tig1 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name='Investing, Financial, Wealth, Planning',
+                                        industry_name="Financial Planning And Wealth Management Services",
                                         geo_code="US-TX")
 
     def test_finds_merged_uris_for_tracked_orgs(self):
@@ -128,7 +128,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert "<b>Investing, Financial, Wealth, Planning</b> in the <b>United States - Texas</b>" in email
+        assert "<b>Financial Planning And Wealth Management Services</b> in the <b>United States - Texas</b>" in email
         assert "We are not tracking any specific organizations for you." in email
         assert activity_notif.num_activities == 2
         assert len(re.findall("Atria Wealth Solutions",email)) == 5

@@ -66,7 +66,7 @@ class TestUtilsWithDumpData(TestCase):
             ['Acquisition (Business Insider: Jan 2019)',
             'Buying furniture from the internet has become normal - and trucking companies are investing millions in the e-commerce boom',
             'Cory 1st Choice Home Delivery', 'J.B. Hunt', 'United States',
-            'transportation, truckload, transport']
+            'Truckload Freight Services']
         )
         assert len(clean_edge_data) == 7
         assert set([x['label'] for x in clean_edge_data]) == {'industryClusterPrimary', 'buyer', 'basedInHighGeoNamesLocation', 'whereGeoNamesLocation', 'documentSource', 'target'}
@@ -176,7 +176,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
-        industry_name = 'Biopharmaceutical, Biopharmaceuticals, Biopharma, Bioceutical'
+        industry_name = "Biopharmaceutical And Biotech Industry"
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
@@ -185,7 +185,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
-        industry_name = 'Biopharmaceutical, Biopharmaceuticals, Biopharma, Bioceutical'
+        industry_name = "Biopharmaceutical And Biotech Industry"
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None # Sometimes IndustrySerializer doesn't have choices in so tests will fail
@@ -227,7 +227,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_does_search_by_industry_region(self):
         client = self.client
-        resp = client.get("/?industry=Hospital%2C+Hospitals%2C+Hospitalist%2C+Healthcare&country_or_region=United+States+-+New+York")
+        resp = client.get("/?industry=Hospital+Management+Service&country_or_region=United+States+-+New+York")
         content = str(resp.content)
         assert "https://1145.am/db/3452774/Hhaexchange" in content
 
@@ -251,19 +251,19 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_industry_with_geo(self):
         client = self.client
-        resp = client.get("/?industry=Pharma%2C+Pharmas%2C+Pharmaceuticals%2C+Pharmaceutical&country_or_region=United+States")
+        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=United+States")
         content = str(resp.content)
         assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"NapaJen Pharma\s*</a>",content)) == 1
-        assert len(re.findall(r"Lilly\s*</a>",content)) == 0
+        assert len(re.findall(r"PAREXEL International Corporation\s*</a>",content)) == 1
+        assert len(re.findall(r"EUSA Pharma\s*</a>",content)) == 0
 
     def test_search_industry_no_geo(self):
         client = self.client
-        resp = client.get("/?industry=Pharma%2C+Pharmas%2C+Pharmaceuticals%2C+Pharmaceutical&country_or_region=")
+        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=")
         content = str(resp.content)
         assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"NapaJen Pharma\s*</a>",content)) == 1
-        assert len(re.findall(r"Lilly\s*</a>",content)) == 1
+        assert len(re.findall(r"PAREXEL International Corporation\s*</a>",content)) == 1
+        assert len(re.findall(r"EUSA Pharma\s*</a>",content)) == 1
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client

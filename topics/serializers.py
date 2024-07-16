@@ -3,7 +3,7 @@ from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
-from .industry_utils import industry_select_list
+from .models import IndustryCluster
 from .model_queries import org_family_tree
 import logging
 logger = logging.getLogger(__name__)
@@ -154,11 +154,12 @@ class DataListChoiceField(serializers.ChoiceField):
         return res
 
 class IndustrySerializer(serializers.Serializer):
-    industry =  DataListChoiceField(choices=industry_select_list())
+    industry =  DataListChoiceField(choices=IndustryCluster.representative_docs_to_industry())
 
     def get_industry_id(self):
         self.is_valid()
         return self['industry'].value
+
 
 class GeoSerializer(serializers.Serializer):
     country_or_region = DataListChoiceField(choices=geo_select_list(include_alt_names=True))

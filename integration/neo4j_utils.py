@@ -6,6 +6,17 @@ from topics.models import Resource
 
 logger = logging.getLogger(__name__)
 
+def delete_and_clean_up_nodes_from_doc_id_file(doc_id_file):
+    with open(doc_id_file, "r") as f:
+        doc_ids = f.readlines()
+    for row in doc_ids:
+        try:
+            doc_id = int(row.strip())
+            logger.info(f"Deleting internalDocId {doc_id}")
+            delete_and_clean_up_nodes_by_doc_id(doc_id)
+        except:
+            logger.info(f"Couldn't do anything with internalDocID {row}")
+
 def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")

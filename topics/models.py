@@ -322,12 +322,27 @@ class IndustryCluster(Resource):
 
     def serialize(self):
         vals = super(IndustryCluster, self).serialize()
-        if self.representation is None:
+        if self.representativeDoc is None:
             name_words = self.uniqueName.split("_")[1:]
+            name_words = ", ".join(name_words)
         else:
-            name_words = self.representation
-        vals['label'] = ", ".join(sorted(name_words,key=len,reverse=True)[:3])
+            name_words = sorted(self.representativeDoc, key=len)[-1]
+        vals['label'] = name_words
+        vals['representative_doc'] = (", ").join(self.representativeDoc) if self.representativeDoc else None
+        vals['internal_cluster_id'] = self.topicId
+        vals['unique_name'] = self.uniqueName
+        vals['representation'] = (", ").join(self.representation) if self.representation else None
         return vals
+
+    @staticmethod
+    def representative_docs_to_industry():
+        docs_to_industry_uri = []
+        for ind in IndustryCluster.nodes.filter(representativeDoc__isnull=False):
+            if ind.topicId == -1:
+                continue
+            longest_doc = sorted(ind.representativeDoc,key=len)[-1]
+            docs_to_industry_uri.append( (ind.topicId, longest_doc))
+        return docs_to_industry_uri
 
     @property
     def parents(self):
