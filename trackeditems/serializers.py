@@ -52,7 +52,7 @@ class TrackedIndustryGeoModelSerializer(serializers.ModelSerializer):
         model = TrackedIndustryGeo
         fields = "__all__"
 
-class ActivityParticipantSerializer(serializers.Serializer):
+class ActivityActorSerializer(serializers.Serializer):
     name = serializers.ListField()
     best_name = serializers.CharField()
     uri = serializers.URLField()
@@ -74,6 +74,6 @@ class ActivitySerializer(serializers.Serializer):
     activity_statuses = serializers.ListField()
     activity_status_as_string = serializers.CharField()
     activity_where = serializers.CharField()
-    participants = serializers.DictField(
-        child=ActivityParticipantSerializer(many=True)
+    actors = serializers.DictField(
+        child = ActivityActorSerializer(many=True)
     )

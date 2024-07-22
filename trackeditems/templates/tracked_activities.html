@@ -9,10 +9,11 @@
 <title>Syracuse - Recent Activities</title>
 </head>
 <body>
-  <h1>Recent Activities</h1>
   <p>
     {% include 'layouts/nav-header.html' %}
   </p>
+  <h1>Recent Activities</h1>
+
   {% if request_state.cache_last_updated %}
     <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
     {% if geo_name is not None %}

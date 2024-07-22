@@ -10,11 +10,13 @@
 <title>Show Resource</title>
 </head>
 <body>
-
-<h1>Resource: {{ data_serializer.uri }}</h1>
 <p>
   {% include 'layouts/nav-header.html' %}
 </p>
+
+<h1>Resource: {{ data_serializer.uri }}</h1>
+
+<p>{% include 'layouts/nav-org.html' %}</p>
 
 <p>
   {% for field, value in data_serializer.items %}

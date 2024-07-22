@@ -28,12 +28,15 @@
 <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 <script src="{% static 'js/node_helpers.js' %}"></script>
 
-
-  <h1>{{ org_data.best_name }} - Family Tree</h1>
   <p>
     {% include 'layouts/nav-header.html' %}
   </p>
-
+  <h1>{{ org_data.source_node_name }} - Family Tree</h1>
+  <p><b>Showing family tree for:</b> {{ org_data.uri }}
+    {% include 'layouts/nav-org.html' %}
+ </p>
+   {% include "track_org_snippet.html" %}
+ 
   <div id="main_container">
     <div id="visualization"></div>
     <div id="right_panel">

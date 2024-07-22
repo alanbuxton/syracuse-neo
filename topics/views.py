@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,9 +11,6 @@ from datetime import date, datetime
 from precalculator.models import cache_last_updated_date
 from urllib.parse import urlparse, urlencode
 from syracuse.settings import MOTD
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-import json
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
@@ -136,12 +132,13 @@ class FamilyTree(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_family_tree"
         o = Organization.self_or_ultimate_target_node(uri)
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
         nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only})
 
         return Response({"nodes_edges":nodes_edges.data,
                             "requested_uri": uri,
-                            "org_data": o,
+                            "org_data": org_data,
                             "uri_parts": uri_parts,
                             "request_state": request_state}, status=status.HTTP_200_OK)
 

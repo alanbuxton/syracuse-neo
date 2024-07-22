@@ -93,6 +93,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
         email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
         assert len(re.findall("and 4 more",email)) == 1 # Per https://1145.am/db/3029576/Eli_Lilly
+        assert "Loxo Oncology" in email
 
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -100,7 +101,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
         email, activity_notif = email_and_activity_notif
         assert len(re.findall("The Hilb Group",email)) == 4
-        assert len(re.findall("Mitsui",email)) == 2
+        assert len(re.findall("Mitsui",email)) == 3 # Once in activity URL, twice in body
         assert "May 30, 2024" in email
         assert "May 23, 2024" in email
         assert activity_notif.num_activities == 2
@@ -117,7 +118,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert email_and_activity_notif is not None
         email, activity_notif = email_and_activity_notif
         assert len(re.findall("The Hilb Group",email)) == 1
-        assert len(re.findall("NapaJen",email)) == 4
+        assert len(re.findall("NapaJen",email)) == 5
         assert "May 30, 2024" in email
         assert "May 23, 2024" not in email
         assert "May 28, 2024" in email

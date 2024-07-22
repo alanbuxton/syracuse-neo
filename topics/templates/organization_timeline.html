@@ -37,20 +37,20 @@
 #visualization {
     flex: 0 0 80%;
 }
-
-
+s
 </style>
 </head>
 
 <body>
-  <h1>{{ timeline_serializer.org_name }} - Timeline</h1>
   <p>
   {% include 'layouts/nav-header.html' %}
   </p>
-  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}</p>
-    {% include "track_org_snippet.html" %}
-    <br/><em>Shown by document published date</em>
+  <h1>{{ timeline_serializer.org_name }} - Timeline</h1>
+  <p><b>Showing timeline for:</b> {{ timeline_serializer.org_node }}
+     {% include 'layouts/nav-org.html' %}
   </p>
+    {% include "track_org_snippet.html" %}
+  <p><em>Shown by document published date</em></p>
   <div id="main_container">
     <div id="visualization"></div>
     <div id="right_panel">

@@ -2,11 +2,11 @@
 {% load l10n %}
 
 <p>Click on a document link to see the original source document.
-  Click on the name of a participant to see more organization linkages and timelines.</p>
+  Click on the name of an organization to see more organization linkages and timelines.</p>
 
 {% for row in activities %}
   <p>
-    <br/><h4>{{ row.headline }}</h4>
+    <br/><h4><a href="{{ row.activity_uri }}">{{ row.headline }}</a></h4>
     <b>Document Date: </b>{{ row.date_published | iso_format_to_date | localize }} / <b>Source: </b>{{ row.source_organization }}
     <br/><b>Activity Class: </b>{{ row.activity_class }}
     {% if row.activity_longest_type %}
@@ -15,13 +15,13 @@
     {% if row.activity_where %}
       / <b>Region:</b> {{ row.activity_where }}
     {% endif %}
-    {% if row.participants.items|length > 0 %}
+    {% if row.actors.items|length > 0 %}
       <br/>
-      {% for participant_role,participant_list in row.participants.items %}
-        {% if participant_list|length > 0 %}
-            <b>{{ participant_role | title}}</b>:
+      {% for actor_role,actor_list in row.actors.items %}
+        {% if actor_list|length > 0 %}
+            <b>{{ actor_role | title}}</b>:
             <ul>
-            {% for entity in participant_list %}
+            {% for entity in actor_list %}
                 <li><a href="{{ entity.uri }}">{{ entity.best_name }}</a>
                 {% if entity.industry_as_str %}
                   / <b>Industry:</b> {{ entity.industry_as_str }}

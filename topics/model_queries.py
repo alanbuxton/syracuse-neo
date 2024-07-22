@@ -98,13 +98,13 @@ def activity_articles_to_api_results(activity_articles):
         api_row["activity_longest_type"] = activity.longest_activityType
         api_row["activity_statuses"] = activity.status
         api_row["activity_status_as_string"] = activity.status_as_string
-        participants = {}
-        for participant_role, participant in activity.all_participants.items():
-            if participant is not None and participant != []:
-                if participants.get(participant_role) is None:
-                    participants[participant_role] = set()
-                participants[participant_role].update(participant)
-        api_row["participants"] = participants
+        actors = {}
+        for actor_role, actor in activity.all_actors.items():
+            if actor is not None and actor != []:
+                if actors.get(actor_role) is None:
+                    actors[actor_role] = set()
+                actors[actor_role].update(actor)
+        api_row["actors"] = actors
         api_results.append(api_row)
     return api_results
 

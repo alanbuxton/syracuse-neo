@@ -43,12 +43,6 @@
 </head>
 <body>
 
-<h1>Topic Identification: Syracuse from 1145</h1>
-
-<h5>Welcome to Syracuse, your database of key events in company lifecycles.
-Last updated {{ last_updated | localize }}</h5>
-{{ motd | safe }}
-
 {% if request.user.is_authenticated %}
 <p>
   {% include 'layouts/nav-header-no-homepage.html' %}
@@ -60,6 +54,14 @@ Last updated {{ last_updated | localize }}</h5>
   If you want to track companies please <a href="{% url 'account_signup' %}">sign up for a free account</a> first.</p>
  <p>If you have an existing account, <a href="{% url 'account_login' %}">click here</a> to login.</a></p>
 {% endif %}
+
+<h1>Topic Identification: Syracuse from 1145</h1>
+
+<h5>Welcome to Syracuse, your database of key events in company lifecycles.
+Last updated {{ last_updated | localize }}</h5>
+{{ motd | safe }}
+
+
 
 {% if alpha_flag %}
   <div class="search_section">

@@ -164,8 +164,8 @@ class TestUtilsWithDumpData(TestCase):
         country_code = 'US-NY'
         matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,combine_same_as_name_only=False)
         assert len(matching_activity_orgs) == 4
-        sorted_participants = [tuple(sorted(x['participants'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_participants) == {('participant', 'protagonist'), ('investor',)}
+        sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
+        assert set(sorted_actors) == {('investor', 'target'), ('participant', 'protagonist')}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
         assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 4)]
         urls = sorted([x['document_url'] for x in matching_activity_orgs])

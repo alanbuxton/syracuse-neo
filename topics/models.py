@@ -418,6 +418,7 @@ class ActivityMixin:
     when = ArrayProperty(NativeDateTimeProperty())
     whenRaw = ArrayProperty(StringProperty())
     status = ArrayProperty(StringProperty())
+    whereRaw = ArrayProperty(StringProperty())
     whereClean = ArrayProperty(StringProperty())
     whereGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereGeoNamesLocation')
     internalActivityList = ArrayProperty(StringProperty())
@@ -462,7 +463,8 @@ class ActivityMixin:
             "status": self.status,
             "when": self.when,
             "when_raw": self.whenRaw,
-            "where_clean": self.whereClean
+            "where_raw": self.whereRaw,
+            "where_clean": self.whereClean,
         }
 
     @property
@@ -530,6 +532,7 @@ class Organization(Resource):
     industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
     # industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
     basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
+    basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
 
     @property
@@ -599,6 +602,8 @@ class Organization(Resource):
         vals = super(Organization, self).serialize()
         org_vals = {"description": self.description,
                     "industry": self.industry_as_str,
+                    "based_in_high_raw": self.basedInHighRaw,
+                    "based_in_high_clean": self.basedInHighClean,
                     }
         return {**vals,**org_vals}
 
@@ -663,13 +668,14 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
     participant = RelationshipFrom('Organization', 'participant')
 
     @property
-    def all_participants(self):
+    def all_actors(self):
         return {
             "vendor": Resource.self_or_ultimate_target_node_set(self.vendor),
             "investor": Resource.self_or_ultimate_target_node_set(self.investor),
             "buyer": Resource.self_or_ultimate_target_node_set(self.buyer),
             "protagonist": Resource.self_or_ultimate_target_node_set(self.protagonist),
             "participant": Resource.self_or_ultimate_target_node_set(self.participant),
+            "target": Resource.self_or_ultimate_target_node_set(self.target),
         }
 
     @property
@@ -705,7 +711,7 @@ class RoleActivity(ActivityMixin, Resource):
         return flattened
 
     @property
-    def all_participants(self):
+    def all_actors(self):
         return {
         "role": self.withRole.all(),
         "person": self.roleActivity.all(),
@@ -737,7 +743,7 @@ class LocationActivity(ActivityMixin, Resource):
     location = RelationshipTo('Site', 'location')
 
     @property
-    def all_participants(self):
+    def all_actors(self):
         return {
             "location_added_by": self.locationAdded.all(),
             "location_removed_by": self.locationRemoved.all(),
