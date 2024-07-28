@@ -156,6 +156,9 @@ network.on("doubleClick", function(params) {
   }
   tmp_url = new URL(uri);
   target_url = "/organization/linkages/uri/" + tmp_url.hostname + tmp_url.pathname ;
+  {% if request_state.qs_params %}
+    target_url = target_url + "?{{ request_state.qs_params|dict_to_query_string }}";
+  {% endif %}
   window.location.replace(target_url);
 })
 </script>

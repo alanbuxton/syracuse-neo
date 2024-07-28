@@ -24,6 +24,7 @@
     ns1:foundName "Camber Creek" ;
     ns1:internalDocId 1786805 ;
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
+    ns1:buyer <https://1145.am/db/3029762/Faroe_Petroleum-Acquisition> ;
     ns1:name "Camber Creek" ;
     ns1:sameAsNameOnly <https://1145.am/db/1151219/Camber_Creek>,
         <https://1145.am/db/1736022/Camber_Creek>,

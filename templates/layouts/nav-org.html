@@ -1,13 +1,14 @@
+{% load topics_extras %}
 
 {% if request_state.hide_link != 'organization_linkages' and uri_parts %}
-| <a href="{% url 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+| <a href="{% url_with_querystring 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">
     Show Linkages</a> 
 {% endif %}
 {% if request_state.hide_link != 'organization_family_tree' and uri_parts %}
-| <a href="{% url 'organization-family-tree' org_data.domain org_data.path org_data.doc_id org_data.name %}">
+| <a href="{% url_with_querystring 'organization-family-tree' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">
   Show Family Tree</a> 
 {% endif %}
 {% if request_state.hide_link != 'organization_timeline' and uri_parts %}
-| <a href="{% url 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name %}">
+| <a href="{% url_with_querystring 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">
    Show Timeline</a> 
 {% endif %}

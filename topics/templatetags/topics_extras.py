@@ -1,6 +1,8 @@
 from django import template
 from django.utils.html import escape, mark_safe
+from django.urls import reverse
 import re
+from urllib.parse import urlencode
 
 register = template.Library()
 
@@ -34,6 +36,21 @@ def local_uri(uri, request):
 def prettify_snake_case(text):
     return text.replace("_"," ").title()
 
+def dict_to_query_string(d):
+    return urlencode(d)
+
+
+@register.simple_tag
+def url_with_querystring(viewname, *args, qs_params=[]):
+    # Add your custom logic here
+    url = reverse(viewname, args=args)
+    # For example, you could add a query parameter to all URLs:
+    if qs_params is not None and len(qs_params) > 0:
+        return f"{url}?{ urlencode(qs_params) }"
+    else:
+        return url
+
 register.filter("pretty_print_list_uri",pretty_print_list_uri)
 register.filter("local_uri",local_uri)
 register.filter("prettify_snake_case",prettify_snake_case)
+register.filter("dict_to_query_string",dict_to_query_string)

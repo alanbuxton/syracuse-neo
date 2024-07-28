@@ -14,6 +14,7 @@ from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
+from topics.templatetags.topics_extras import url_with_querystring
 
 import logging
 logger = logging.getLogger(__name__)
@@ -75,7 +76,6 @@ class Index(APIView):
             num_hits = 0
         industry_serializer = IndustrySerializer()
         last_updated = DataImport.latest_import_ts()
-        alpha_flag = request.GET.get("alpha_flag")
         resp = Response({"organizations":org_list.data,
                         "search_serializer": org_search,
                         "search_term": search_term,
@@ -84,7 +84,6 @@ class Index(APIView):
                         "geo_search": geo_search,
                         "search_type": search_type,
                         "motd": MOTD,
-                        "alpha_flag": alpha_flag,
                         "last_updated": last_updated,
                         "search_industry_name": industry_name,
                         "search_geo_code": selected_geo,
@@ -134,15 +133,36 @@ class FamilyTree(APIView):
         o = Organization.self_or_ultimate_target_node(uri)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only})
+        relationships = request_state["qs_params"].get("rels","buyer,vendor")
 
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only,
+                                                                "relationship_str":relationships})
+
+        relationship_vals = set(relationships.split(","))  
+        relationship_link_data = self.create_relationship_links(request_state, relationship_vals)    
+    
         return Response({"nodes_edges":nodes_edges.data,
                             "requested_uri": uri,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
+                            "relationship_link_data": relationship_link_data,
                             "request_state": request_state}, status=status.HTTP_200_OK)
-
-
+    
+    def create_relationship_links(self, request_state, rels):
+        
+        options = [set(["buyer","vendor"]),
+                    set(["investor"]),
+                    set(["buyer","investor","vendor"])]
+        names = ["Acquisitions","Investments","All"]
+        idx = options.index(rels)
+        selected_name = names[idx]
+        next_vals = []
+        for tmp_idx,(row_opts,row_name) in enumerate(zip(options,names)):
+            if tmp_idx == idx:
+                continue
+            next_vals.append( {"name":row_name, "query_string_params": {**request_state["qs_params"],**{"rels":",".join(sorted(row_opts))}} } )
+        return {"selected_name":selected_name, "next_vals": next_vals}            
+            
 class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_timeline.html'
@@ -170,10 +190,13 @@ class RandomOrganization(APIView):
     def get(self, request):
         o = Organization.get_random()
         request_state, combine_same_as_name_only = prepare_request_state(request)
-        vals = elements_from_uri(o.uri)
+        uri_parts = elements_from_uri(o.uri)
         org_serializer = OrganizationGraphSerializer(o)
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        request_state["hide_link"]="organization_linkages"
         resp = Response({"data_serializer": org_serializer.data,
-                            "org_data":vals,
+                            "org_data":org_data,
+                            "uri_parts": uri_parts,
                             "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
@@ -226,11 +249,14 @@ def industry_geo_search_str(industry, geo,with_emphasis=True):
 
 def prepare_request_state(request):
     combine_same_as_name_only = bool(int(request.GET.get("combine_same_as_name_only","1")))
-    new_params = request.GET.dict()
-    new_params["combine_same_as_name_only"] = int(not combine_same_as_name_only)
-    new_url = f"{request.META['PATH_INFO']}?{urlencode(new_params)}"
-    new_params["name_only_current_state"] = "Yes" if combine_same_as_name_only is True else "No"
-    new_params["name_only_toggle_name"] = "Off" if combine_same_as_name_only is True else "On"
-    new_params["name_only_toggle_url"] = new_url
-    new_params["cache_last_updated"] = cache_last_updated_date()
-    return new_params, combine_same_as_name_only
+    qs_params = request.GET.dict()
+    toggle_combine_as_same_name_only = int(not combine_same_as_name_only)
+    toggle_params = {**qs_params,**{"combine_same_as_name_only":toggle_combine_as_same_name_only}}
+    new_url = f"{request.META['PATH_INFO']}?{urlencode(toggle_params)}"
+    request_state = {}
+    request_state["qs_params"] = qs_params
+    request_state["name_only_current_state"] = "Yes" if combine_same_as_name_only is True else "No"
+    request_state["name_only_toggle_name"] = "Off" if combine_same_as_name_only is True else "On"
+    request_state["name_only_toggle_url"] = new_url
+    request_state["cache_last_updated"] = cache_last_updated_date()
+    return request_state, combine_same_as_name_only

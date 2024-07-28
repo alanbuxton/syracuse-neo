@@ -62,7 +62,7 @@ class Resource(StructuredNode):
 
     @classmethod
     def randomized_active_nodes(cls,limit=10):
-        query = f"""MATCH (n: {cls.__name__})
+        query = f"""MATCH (n: Resource:{cls.__name__})
                     WHERE n.internalMergedSameAsHighToUri IS NULL
                     AND NOT (n)-[:sameAsNameOnly]-()
                     RETURN n,rand() as r

@@ -4,6 +4,7 @@
 {% include 'layouts/main-styling.html' %}
 {% load l10n %}
 {% load rest_framework %}
+{% load topics_extras %}
 
 <style>
 
@@ -62,20 +63,6 @@ Last updated {{ last_updated | localize }}</h5>
 {{ motd | safe }}
 
 
-
-{% if alpha_flag %}
-  <div class="search_section">
-    <div>
-      <p><strong>Enter an industry name to show a timeline by industry</strong></p>
-      <form class="narrow_form" action="{% url 'timeline' %}" method="GET" novalidate>
-          {% render_form industry_serializer template_pack='rest_framework/inline' %}
-          <br/><input type="submit" value="Search">
-      </form>
-    </div>
-  </div>
-  <div><br/><p>OR</p></div>
-{% endif %}
-
 <div class="search_section">
   <div class="wide_bar">
     <p><strong>Search for a specific organization to display</strong></p>
@@ -113,7 +100,7 @@ Last updated {{ last_updated | localize }}</h5>
         {% endif %}
       </p>
       {% for org in organizations %}
-        <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+        <p><b><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
           {{ org.label }} </a></b> ({{ org.uri }})</p>
      {% endfor %}
     </div>
@@ -124,12 +111,12 @@ Last updated {{ last_updated | localize }}</h5>
 <br/>
 <div class="search_section">
   <div id="result_list">
-    <p>Feeling lucky? Click for a <b><a href="{% url 'random-organization' %}">Random Organization</a></b>
+    <p>Feeling lucky? Click for a <b><a href="{% url_with_querystring 'random-organization' qs_params=request_state.qs_params %}">Random Organization</a></b>
 
     {% if search_type != 'org_name' and search_type != 'combined_search' %}
       , or select from one of these 10 random examples</p>
       {% for org in organizations %}
-        <p><b><a href="{% url 'organization-linkages' domain=org.splitted_uri.domain path=org.splitted_uri.path doc_id=org.splitted_uri.doc_id name=org.splitted_uri.name %}">
+        <p><b><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
           {{ org.label }}</a></b> ({{ org.uri }})</p>
       {% endfor %}
     {% endif %}

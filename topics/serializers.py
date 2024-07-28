@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from collections import defaultdict
 from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
@@ -60,7 +61,12 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         organization_uri = instance.uri
         combine_same_as_name_only = self.context.get('combine_same_as_name_only',True)
-        parents, parents_children, org_children = org_family_tree(organization_uri, combine_same_as_name_only=combine_same_as_name_only)
+        rels = self.context.get('relationship_str','buyer,vendor')
+        rels = rels.replace(",","|")
+        clean_rels = only_valid_relationships(rels)
+        parents, parents_children, org_children = org_family_tree(organization_uri, 
+                                                                  combine_same_as_name_only=combine_same_as_name_only,
+                                                                  relationships=clean_rels)
         nodes = []
         edges = []
         node_data = {}
@@ -87,13 +93,39 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         pruned_node_data = {}
         for node in pruned_nodes:
             pruned_node_data[node['id']] = node_data[node['id']]
-        
+
+        sorted_edges = sort_edges(edges, pruned_nodes)
+
         return {
             "nodes": pruned_nodes,
             "node_details": CustomSerializer(pruned_node_data),
-            "edges": edges,
+            "edges": sorted_edges,
             "edge_details": CustomSerializer(edge_data),
         }
+
+
+def only_valid_relationships(text):
+    full_text = text
+    valid_rels = ["buyer","vendor","investor"]
+    for rel in valid_rels:
+        text = text.replace(rel,"")
+    text = text.replace("|","")
+    if len(text) != 0:
+        logger.warning(f"Got illegal relationships {text}")
+        full_text = "buyer|vendor"
+    return full_text
+
+def sort_edges(edges, nodes):
+    edge_dict_to = defaultdict(list)
+    for x in edges:
+        edge_dict_to[x['to']].append(x)
+    sorted_edges = []
+    for node in nodes:
+        edges = edge_dict_to.pop(node['id'],[]) 
+        sorted_edges.extend(edges)
+    for remaining_edges in edge_dict_to.values():
+        sorted_edges.extend(remaining_edges)
+    return sorted_edges
 
 def prune_not_needed_nodes(nodes, edges):
     nodes_to_keep = []
@@ -160,13 +192,12 @@ class IndustrySerializer(serializers.Serializer):
         self.is_valid()
         return self['industry'].value
 
-
 class GeoSerializer(serializers.Serializer):
     country_or_region = DataListChoiceField(choices=geo_select_list(include_alt_names=True))
 
     def get_country_or_region_id(self):
         self.is_valid()
-        return self['country_or_region'].value
+        return self['country_or_region'].value 
 
 class OrganizationTimelineSerializer(serializers.BaseSerializer):
 

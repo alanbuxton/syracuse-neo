@@ -333,7 +333,7 @@ def get_parent_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ve
     return items_to_keep, other_parents
 
 def org_family_tree(organization_uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor"):
-    logger.info(f"org_family_tree for {organization_uri}")
+    logger.info(f"org_family_tree for {organization_uri} with '{relationships}'")
     nodes_found_so_far = set()
     children = get_child_orgs(organization_uri,
                     combine_same_as_name_only=combine_same_as_name_only,

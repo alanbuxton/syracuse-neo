@@ -15,6 +15,7 @@ from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
 import json
 import re
+from .serializers import only_valid_relationships, FamilyTreeSerializer
 
 '''
     Care these tests will delete neodb data
@@ -213,14 +214,14 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor")
         content = str(resp.content)
         assert "REDAVIA" in content
         assert "REDOVIA" not in content
 
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1&rels=buyer,investor,vendor")
         content = str(resp.content)
         assert "REDAVIA" in content
         assert "REDOVIA" in content
@@ -316,6 +317,50 @@ class TestUtilsWithDumpData(TestCase):
         assert "Buyer (PR Newswire Jan 2019)" in content0
         assert "Buyer (PR Newswire Jan 2019)" not in content1
 
+    def test_family_tree_serializer_sorts_edges(self):
+        uri = "https://1145.am/db/2543227/Celgene"
+        o = Organization.self_or_ultimate_target_node(uri)
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True,
+                                                                "relationship_str":"buyer,vendor"})
+        vals = nodes_edges.data
+        assert vals["edges"] == [{'id': 'https://1145.am/db/2543227/Bristol-Myers-buyer-https://1145.am/db/2543227/Celgene', 
+                                    'from': 'https://1145.am/db/2543227/Bristol-Myers', 'to': 'https://1145.am/db/2543227/Celgene',
+                                    'color': 'blue', 'label': 'Buyer (Fierce Pharma Mar 2024)', 'arrows': 'to'}, 
+                                 {'id': 'https://1145.am/db/3029576/Bristol-Myers_Squibb-buyer-https://1145.am/db/2543227/Celgene', 
+                                    'from': 'https://1145.am/db/3029576/Bristol-Myers_Squibb', 'to': 'https://1145.am/db/2543227/Celgene', 
+                                    'color': 'blue', 'label': 'Buyer (CityAM Mar 2024)', 'arrows': 'to'}]
+
+    def test_family_tree_uris_acquisition(self):
+        client = self.client
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0")
+        content = str(resp.content)
+        assert "Faroe Petroleum" in content
+        assert "Bowery Valuation" not in content
+        assert re.search(r"Family tree relationships:<\/strong>\\n\s*Acquisitions",content) is not None
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&amp;combine_same_as_name_only=0">Investments</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&amp;combine_same_as_name_only=0">All</a>""" in content 
+
+    def test_family_tree_uris_investor(self):
+        client = self.client
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0")
+        content = str(resp.content)
+        assert "Faroe Petroleum" not in content
+        assert "Bowery Valuation" in content
+        assert re.search(r"Family tree relationships:<\/strong>\\n\s*Investments",content) is not None
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&amp;combine_same_as_name_only=0">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&amp;combine_same_as_name_only=0">All</a>""" in content 
+
+    def test_family_tree_uris_all(self):
+        client = self.client
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor%2Cinvestor&combine_same_as_name_only=0")
+        content = str(resp.content)
+        assert "Faroe Petroleum" in content
+        assert "Bowery Valuation" in content
+        assert re.search(r"Family tree relationships:<\/strong>\\n\s*All",content) is not None
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&amp;combine_same_as_name_only=0">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&amp;combine_same_as_name_only=0">Investments</a>""" in content
+
+
 
 class TestFamilyTree(TestCase):
 
@@ -380,7 +425,8 @@ class TestFamilyTree(TestCase):
     def test_gets_family_tree_without_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":False})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":False,
+                                                    "relationship_str":"buyer,vendor,investor"})
         d = nodes_edges.data
         assert len(d['nodes']) == 4
         assert len(d['edges']) == 3
@@ -392,7 +438,8 @@ class TestFamilyTree(TestCase):
     def test_gets_family_tree_with_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True,
+                                                       "relationship_str":"buyer,vendor,investor"})
         d = nodes_edges.data
         assert len(d['nodes']) == 6
         assert len(d['edges']) == 5
@@ -404,13 +451,15 @@ class TestFamilyTree(TestCase):
     def test_gets_children_where_there_is_no_parent(self):
         uri = "https://1145.am/db/100/a"
         o = Organization.self_or_ultimate_target_node(uri)
-        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True})
+        nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":True,
+                                                         "relationship_str":"buyer,vendor,investor"})
         d = nodes_edges.data
-        assert len(d['nodes']) == 4
+        names = [x['label'] for x in d['nodes']]
+        assert set(names) == set(["Name A","Name B","Name C","Name F"])
 
     def test_shows_nodes_in_name_order(self):
         client = self.client
-        response = client.get("/organization/family-tree/uri/1145.am/db/101/b")
+        response = client.get("/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor")
         content = str(response.content)
         res = re.search(r"const node_details_dict = (.+?) ;",content)
         as_dict = json.loads(res.groups(0)[0])
@@ -420,3 +469,13 @@ class TestFamilyTree(TestCase):
         cpos = names.index("Name C")
         fpos = names.index("Name F")
         assert bpos < cpos < fpos, f"Expected {bpos} < {cpos} < {fpos}"
+
+class TestSerializers(TestCase):
+
+    def test_cleans_relationship_string1(self):
+        val = only_valid_relationships("<foobar>vendor</foobar>")
+        assert val == "buyer|vendor"
+
+    def test_cleans_relationship_string2(self):
+        val = only_valid_relationships("investor|buyer|vendor")
+        assert val == "investor|buyer|vendor"

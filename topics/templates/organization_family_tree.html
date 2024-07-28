@@ -5,8 +5,9 @@
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 {% load static %}
+{% load topics_extras %}
 
-<title>{{ org_data.best_name }} (Family Tree)</title>
+<title>{{ org_data.source_node_name }} (Family Tree)</title>
 <style>
 
 #main_container {
@@ -32,20 +33,29 @@
     {% include 'layouts/nav-header.html' %}
   </p>
   <h1>{{ org_data.source_node_name }} - Family Tree</h1>
+
   <p><b>Showing family tree for:</b> {{ org_data.uri }}
     {% include 'layouts/nav-org.html' %}
- </p>
-   {% include "track_org_snippet.html" %}
- 
-  <div id="main_container">
-    <div id="visualization"></div>
-    <div id="right_panel">
-      <div id="object_details">
-        <p><strong>Click an item in the graph for more details</strong></p>
+  </p>
+  <p><strong>Family tree relationships:</strong>
+    {{ relationship_link_data.selected_name }} 
+    {% for rel_data in relationship_link_data.next_vals %}
+      | <a href="{% url_with_querystring 'organization-family-tree' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=rel_data.query_string_params %}">{{ rel_data.name }}</a>
+    {% endfor %}
+  </p>
+  {% if nodes_edges.nodes %}
+    {% include "track_org_snippet.html" %}
+    <div id="main_container">
+      <div id="visualization"></div>
+      <div id="right_panel">
+        <div id="object_details">
+          <p><strong>Click an item in the graph for more details</strong></p>
+        </div>
       </div>
     </div>
-  </div>
-
+    {% else %}
+    <p><strong>Nothing found</strong></p>
+  {% endif %}
 
   {% include 'layouts/footer.html' %}
 
@@ -73,6 +83,7 @@ var options = {
   layout: {
     hierarchical: {
       direction: 'LR',
+      sortMethod: 'directed',
     },
   },
   physics: true,
