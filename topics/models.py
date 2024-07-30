@@ -218,7 +218,7 @@ class Resource(StructuredNode):
 
     def all_directional_relationships(self, **kwargs):
         '''
-            Returns dict:
+            Returns dicts:
             from_uri
             label: relationship label
             direction:
@@ -245,7 +245,8 @@ class Resource(StructuredNode):
                 if isinstance(self, ActivityMixin) and isinstance(x, Article):
                     document_extract = self.documentSource.relationship(x).documentExtract
                     vals["document_extract"] = document_extract
-                all_rels.append( vals )
+                if vals not in all_rels:
+                    all_rels.append( vals )
         return all_rels
 
     @staticmethod
@@ -272,6 +273,8 @@ class Article(Resource):
     sourceOrganization = StringProperty()
     datePublished = NativeDateTimeProperty()
     dateRetrieved = NativeDateTimeProperty()
+    relatedEntity = RelationshipFrom("Resource","documentSource",
+            model=DocumentSourceRel, cardinality=OneOrMore)
 
     @property
     def archive_date(self):

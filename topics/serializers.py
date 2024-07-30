@@ -19,7 +19,14 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
 class ResourceSerializer(serializers.Serializer):
     def to_representation(self, instance):
-        return instance.serialize_no_none()
+        related = instance.all_directional_relationships()
+        related_by_group = defaultdict(list)
+        for entry in related:
+            related_by_group[entry["label"]].append(entry["other_node"])
+        return {
+            "resource": instance.serialize_no_none(),
+            "relationships": dict(related_by_group),
+        }
 
 class FamilyTreeSerializer(serializers.BaseSerializer):
 

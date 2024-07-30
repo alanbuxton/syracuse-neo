@@ -36,6 +36,12 @@ def local_uri(uri, request):
 def prettify_snake_case(text):
     return text.replace("_"," ").title()
 
+def prettify_camel_case(text):
+    # https://stackoverflow.com/a/37697078/7414500
+    text = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', text))
+    return text.title()
+    
+
 def dict_to_query_string(d):
     return urlencode(d)
 
@@ -53,4 +59,5 @@ def url_with_querystring(viewname, *args, qs_params=[]):
 register.filter("pretty_print_list_uri",pretty_print_list_uri)
 register.filter("local_uri",local_uri)
 register.filter("prettify_snake_case",prettify_snake_case)
+register.filter("prettify_camel_case",prettify_camel_case)
 register.filter("dict_to_query_string",dict_to_query_string)

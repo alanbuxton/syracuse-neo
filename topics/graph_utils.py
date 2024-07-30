@@ -76,6 +76,11 @@ def graph_centered_on(start_node, **kwargs):
     return node_data, edge_data, node_details, edge_details
 
 def keep_or_switch_node(current_node, nodes_found_so_far, combine_same_as_name_only):
+    '''
+        Returns current_node if combine_name_as_same_only is False
+        Else, if a sameAsNameOnly node is in nodes_found_so_far, return that
+        Else, return current_node
+    '''
     if combine_same_as_name_only is False:
         return current_node
     for same_as in current_node.sameAsNameOnly:
@@ -112,7 +117,7 @@ def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_d
     node_details[other_uri] = other_node.serialize_no_none()
     node_data.append( resource_to_node_data(other_node))
     # find more relationships
-    if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster) and not isinstance(other_node, GeoNamesLocation):
+    if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster) and not isinstance(other_node, GeoNamesLocation) and not isinstance(other_node, Article):
         for rel_data in other_node.all_directional_relationships():
             build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
 
