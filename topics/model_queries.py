@@ -269,18 +269,23 @@ def count_entries(results):
         val = val + results[1][0]
     return val
 
-def do_get_parent_orgs_query(uri: str, parent_rels = "buyer|vendor|investor") -> [(Organization, Organization, ActivityMixin, Article, str)]:
-    assert "'" not in uri, f"Can't have ' in {uri}"
+def do_get_parent_orgs_query(uri_or_uris: Union[str,List], parent_rels = "buyer|vendor|investor") -> [(Organization, Organization, ActivityMixin, Article, str)]:
+    if isinstance(uri_or_uris, str):
+        uri_or_uris = [uri_or_uris]
+    else:
+        uri_or_uris = list(uri_or_uris)
+    assert all(["'" not in x for x in uri_or_uris]), f"Can't have ' in uri: {uri_or_uris}"
     query = f"""
         MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Resource&Organization),
         (b: Organization)-[x:{parent_rels}]-(c: CorporateFinanceActivity)
-        WHERE t.uri = '{uri}'
+        WHERE t.uri in {uri_or_uris}
         AND b.internalMergedSameAsHighToUri IS NULL
         AND t.internalMergedSameAsHighToUri IS NULL
         RETURN b, t, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished DESCENDING
     """
     results, _ = db.cypher_query(query, resolve_objects=True)
+    logger.debug(query)
     return results
 
 def do_get_child_orgs_query(uri: str, relationships = "buyer|vendor|investor") ->[(Organization, Organization, ActivityMixin, Article, str)]:
@@ -299,7 +304,7 @@ def do_get_child_orgs_query(uri: str, relationships = "buyer|vendor|investor") -
     return results
 
 def get_child_orgs(uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor",nodes_found_so_far=set()):
-    logger.info(f"get_child_orgs for {uri}")
+    logger.debug(f"get_child_orgs for {uri}")
     res = do_get_child_orgs_query(uri, relationships)
     if combine_same_as_name_only is False:
         return res
@@ -316,21 +321,20 @@ def get_child_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ven
 
 def get_parent_orgs(uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor",nodes_found_so_far=set()):
     logger.debug(f"get_parent_orgs for {uri}")
-    res = do_get_parent_orgs_query(uri, relationships)
     if combine_same_as_name_only is False:
-        return res, []
-    items_to_keep = []
-    other_parents = []
-    for item in res:
-        node_or_same_as = keep_or_switch_node(item[1], nodes_found_so_far, combine_same_as_name_only)
-        if node_or_same_as == item[1]:
-            items_to_keep.append(item)
-        other_parents.extend( [x.uri for x in item[0].sameAsNameOnly] )
+        res = do_get_parent_orgs_query(uri, relationships)
+        return res
+
     org = Organization.self_or_ultimate_target_node(uri)
-    for other_org in org.sameAsNameOnly:
-        others = do_get_parent_orgs_query(other_org.uri, relationships)
-        other_parents.extend( [x.uri for x,_,_,_,_,_ in others ])
-    return items_to_keep, other_parents
+    same_as_uris = [x.uri for x in org.sameAsNameOnly if x.internalMergedSameAsHighToUri is None]
+    res = do_get_parent_orgs_query(same_as_uris + [uri], relationships)
+
+    items_to_keep = []
+    for item in res:
+        node_or_same_as = keep_or_switch_node(item[0], nodes_found_so_far, combine_same_as_name_only)
+        if node_or_same_as == item[0]:
+            items_to_keep.append(item)
+    return items_to_keep
 
 def org_family_tree(organization_uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor"):
     logger.info(f"org_family_tree for {organization_uri} with '{relationships}'")
@@ -338,16 +342,14 @@ def org_family_tree(organization_uri, combine_same_as_name_only=True, relationsh
     children = get_child_orgs(organization_uri,
                     combine_same_as_name_only=combine_same_as_name_only,
                     relationships=relationships,nodes_found_so_far=nodes_found_so_far)
-    parents, other_parents = get_parent_orgs(organization_uri,
+    parents = get_parent_orgs(organization_uri,
                     combine_same_as_name_only=combine_same_as_name_only,
                     relationships=relationships,nodes_found_so_far=nodes_found_so_far)
+
     siblings = []
     for org,_,_,_,_,_ in parents:
         siblings.extend(get_child_orgs(org.uri,
                         combine_same_as_name_only=combine_same_as_name_only,
                         relationships=relationships,nodes_found_so_far=nodes_found_so_far))
-    for org_uri in other_parents:
-        siblings.extend(get_child_orgs(org_uri,
-                        combine_same_as_name_only=combine_same_as_name_only,
-                        relationships=relationships,nodes_found_so_far=nodes_found_so_far))
+
     return parents, siblings, children

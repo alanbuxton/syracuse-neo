@@ -393,20 +393,17 @@ class TestFamilyTree(TestCase):
 
     def test_gets_parent_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"
-        parents, other_parents = get_parent_orgs(uri,combine_same_as_name_only=False)
+        parents = get_parent_orgs(uri,combine_same_as_name_only=False)
         assert len(parents) == 1
         uris = [x.uri for x,_,_,_,_,_ in parents]
         assert set(uris) == set(["https://1145.am/db/109/j"])
-        assert len(other_parents) == 0
 
     def test_gets_parent_orgs_with_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"
-        parents, other_parents = get_parent_orgs(uri,combine_same_as_name_only=True)
-        assert len(parents) == 1
+        parents = get_parent_orgs(uri,combine_same_as_name_only=True)
+        assert len(parents) == 2
         uris = [x.uri for x,_,_,_,_,_ in parents]
-        assert set(uris) == set(["https://1145.am/db/109/j"])
-        assert len(other_parents) == 1
-        assert other_parents[0] == "https://1145.am/db/112/m"
+        assert set(uris) == set(["https://1145.am/db/109/j", "https://1145.am/db/112/m"])
 
     def test_gets_child_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/101/b"
