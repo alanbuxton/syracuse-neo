@@ -104,6 +104,35 @@ network.on("selectNode", function(obj) {
   document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node");
 })
 
+function getNodeUri(obj) {
+  attribs = obj.nodes ;
+  if ((attribs === undefined) || (attribs.length == 0)) {
+    return ;
+  }
+  var uri = attribs[0];
+  console.log("Uri " + uri)
+  return uri ;
+}
+
+function getActivityUri(obj) {
+  var edge_id = obj.edges[0];
+  var edge_uri = edge_details_dict[edge_id].activity_uri;
+  return edge_uri;
+}
+
+network.on("doubleClick", function(obj) {
+  console.log(obj);
+  org_uri = getNodeUri(obj) ;
+  if (org_uri) {
+    drillIntoUri(org_uri, "/organization/family-tree/uri/", "{{ request_state.qs_params|dict_to_query_string }}");
+  } else {
+    activity_uri = getActivityUri(obj);    
+    if (activity_uri) {
+      drillIntoUri(activity_uri, "/resource/", "{{ request_state.qs_params|dict_to_query_string }}");
+    }
+  }
+})
+
 </script>
 
 </body>

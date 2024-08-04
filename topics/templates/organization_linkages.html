@@ -58,7 +58,7 @@
       <div id="visualization"></div>
       <div id="right_panel">
         <div id="object_details">
-          <p><strong>Click an item in the graph for more details</strong></p>
+          <p><strong>Click an item in the graph for more details, or double-click to drill further.</strong></p>
         </div>
        <br/>
      </div>
@@ -132,34 +132,37 @@ const edge_details_dict = {{ data_serializer.edge_details | safe }} ;
 const nodes_by_type_dict = {{ data_serializer.nodes_by_type | safe }} ;
 
 network.on("selectEdge", function(obj) {
-  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showItemDetails(obj.edges[0],edge_details_dict,"edge");
+  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showItemDetails(obj.edges[0],edge_details_dict,"edge","{{ request_state.qs_params|dict_to_query_string }}");
 });
 
 network.on("selectNode", function(obj) {
-  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node");
+  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node","{{ request_state.qs_params|dict_to_query_string }}");
 })
 
-network.on("doubleClick", function(params) {
-  nodes = params.nodes
-  if ((typeof nodes === undefined) || (nodes.length == 0)) {
+network.on("doubleClick", function(obj) {
+  attribs = obj.nodes ;
+  if ((attribs === undefined) || (attribs.length == 0)) {
+    console.log("Can't drill into " + attribs) ;
+    return ;
+  }
+  var uri = attribs[0];
+  console.log("Uri " + uri)
+  var vals = node_details_dict[uri] ;
+  if (vals === undefined) {
+    console.log("Can't find node in " + params);
     return;
   }
-  uri = nodes[0];
-  node_vals = Object.entries(node_details_dict[uri]);
-  for (const [key, value] of node_vals) {
+  vals = Object.entries(vals) ;
+  var root_path = "/resource/"
+  for (const [key, value] of vals) {
     if (key == 'entity_type') {
-      if (value != 'Organization') {
-        console.log("Cannot crate new graph centered on " + uri)
-        return;
+      if (value == 'Organization') {
+        root_path = "/organization/linkages/uri/" ;
       }
+      break ;
     }
   }
-  tmp_url = new URL(uri);
-  target_url = "/organization/linkages/uri/" + tmp_url.hostname + tmp_url.pathname ;
-  {% if request_state.qs_params %}
-    target_url = target_url + "?{{ request_state.qs_params|dict_to_query_string }}";
-  {% endif %}
-  window.location.replace(target_url);
+  drillIntoUri(uri, root_path, "{{ request_state.qs_params|dict_to_query_string }}");
 })
 </script>
 

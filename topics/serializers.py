@@ -22,7 +22,9 @@ class ResourceSerializer(serializers.Serializer):
         related = instance.all_directional_relationships()
         related_by_group = defaultdict(list)
         for entry in related:
-            related_by_group[entry["label"]].append(entry["other_node"])
+            other_node = entry["other_node"].serialize_no_none()
+            other_node["doc_extract"] = entry.get("document_extract")
+            related_by_group[entry["label"]].append(other_node)
         return {
             "resource": instance.serialize_no_none(),
             "relationships": dict(related_by_group),

@@ -5,6 +5,7 @@
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 {% load static %}
+{% load topics_extras %}
 
 <title>{{ timeline_serializer.org_name }} (Timeline)</title>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
@@ -37,7 +38,7 @@
 #visualization {
     flex: 0 0 80%;
 }
-s
+
 </style>
 </head>
 
@@ -55,7 +56,7 @@ s
     <div id="visualization"></div>
     <div id="right_panel">
       <div id="item_details">
-        <p>Click an organization name or an item in the timeline for more details</p>
+        <p><strong>Click an organization name or an item in the timeline for more details, or double-click to drill further.</strong></p>
       </div>
       <br/>
    </div>
@@ -100,9 +101,18 @@ s
     timeline.on('click', function (properties) {
       console.log(properties);
       if (properties.item) {
-        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict, 'node');
-      } else if (properties.what == 'group-label') {
-        document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict, 'node');
+        document.getElementById('item_details').innerHTML = '<h4>Selected Activity Details</h4>' + showItemDetails(properties.item, item_display_dict, 'node',"{{ request_state.qs_params|dict_to_query_string }}");
+      } else if (properties.what === 'group-label') {
+        document.getElementById('item_details').innerHTML = '<h4>Selected Organization Details</h4>' + showItemDetails(properties.group, org_display_dict, 'node',"{{ request_state.qs_params|dict_to_query_string }}");
+      }
+    });
+
+    timeline.on("doubleClick", function(properties) {
+      if (properties.item) { // it's an item in the timeline, i.e. an activity
+        drillIntoUri(properties.item, "/resource/", "{{ request_state.qs_params|dict_to_query_string }}");
+      } else if (properties.what === 'group-label') { // it's an entity name
+        item_vals = Object.entries(org_display_dict[properties.group]);
+        drillIntoUri(item_vals.uri, "/organization/timeline/uri/", "{{ request_state.qs_params|dict_to_query_string }}");
       }
     });
 

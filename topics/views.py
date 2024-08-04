@@ -1,6 +1,7 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import redirect
 from topics.models import Organization, ActivityMixin, Resource
 from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
     NameSearchSerializer, GeoSerializer, 
@@ -107,13 +108,9 @@ class ShowResource(APIView):
         if r is None:
             raise ValueError(f"Couldn't find Resource with uri {uri}")
         if isinstance(r, Organization):
-            self.template_name = 'organization_linkages.html'
-            org_serializer = OrganizationGraphSerializer(r)
-            org_data = {**kwargs, **{"uri":r.uri,"source_node_name":r.best_name}}
-            resp = Response({"data_serializer": org_serializer.data,
-                                "org_data":org_data,
-                                "request_state": request_state,
-                                }, status=status.HTTP_200_OK)
+            resp = redirect("organization-linkages",**kwargs)
+            if len(request.GET) > 0:
+                resp['Location'] = resp['Location'] + "?" + urlencode(request.GET) # https://stackoverflow.com/a/41875812/7414500
             return resp
         else:
             resource_serializer = ResourceSerializer(r)

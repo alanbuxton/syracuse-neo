@@ -245,6 +245,9 @@ class Resource(StructuredNode):
                 if isinstance(self, ActivityMixin) and isinstance(x, Article):
                     document_extract = self.documentSource.relationship(x).documentExtract
                     vals["document_extract"] = document_extract
+                elif isinstance(self, Article) and isinstance(x, ActivityMixin):
+                    document_extract = self.relatedEntity.relationship(x).documentExtract
+                    vals["document_extract"] = document_extract
                 if vals not in all_rels:
                     all_rels.append( vals )
         return all_rels

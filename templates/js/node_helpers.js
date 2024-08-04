@@ -1,4 +1,7 @@
-function convert_uri(value) {
+function convert_uri(value,query_string) {
+  if (query_string !== '') {
+    value = value + "?" + query_string;
+  }
   if (value.startsWith("https://1145.am")) {
     var regex = /^https:\/\/1145.am/i ;
     tmp_val = value.replace(regex, location.protocol + "//" + location.host + "/resource/1145.am");
@@ -8,7 +11,7 @@ function convert_uri(value) {
   }
 }
 
-function showItemDetails(item_id, lookup_dict, node_or_edge) {
+function showItemDetails(item_id, lookup_dict, node_or_edge, query_string) {
 	item_vals = Object.entries(lookup_dict[item_id]);
   entity_type = '';
   text = "";
@@ -25,7 +28,7 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
       }
       for (val_id in val_as_arr) {
           val = val_as_arr[val_id]
-          uri_target = convert_uri(val)
+          uri_target = convert_uri(val,query_string)
           text = text + "<strong>" + titleCase(key) + "</strong>: <a href='" + uri_target + "' target='_blank'>" + val + "</a></br>";
       }
     } else {
@@ -34,15 +37,9 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
     if (key === 'entity_type') {
       entity_type = value;
     }
-    // if (key === 'document_url') {
-    //   documentURL = value;
-    // }
     if (key === 'internet_archive_page_url') {
       archive_org_page_url = value;
     }
-    // if (key === 'internet_archive_list_url') {
-    //   archive_org_list_url = value;
-    // }
   }
 
   if (archive_org_page_url !== '') {
@@ -50,14 +47,6 @@ function showItemDetails(item_id, lookup_dict, node_or_edge) {
   }
 
   text = text + "<br/>";
-
-  if (entity_type == 'Organization') {
-    path = item_id.replace("https://","");
-    path = path.replace("http://","");
-    text = text + "<p><a href='/organization/linkages/uri/" + path + "'>Show a new visualization centered on this organization</a></p>";
-  } else if (entity_type == 'Cluster') {
-    text = text + "<p>This is the central organization for this linkages graph</p>";
-  }
 
   text = text + error_form(node_or_edge, item_id);
 	return text;
@@ -73,6 +62,15 @@ function error_form(node_or_edge, unique_id) {
   text = text + "<textarea name='reason' id='reasonTextArea' class='form-control' rows='3'></textarea></div><input type='submit' value='Submit Suggestion'/></form>";
   return text
 
+}
+
+function drillIntoUri(uri, root_path, query_string) {
+  tmp_url = new URL(uri);
+  target_url = root_path + tmp_url.hostname + tmp_url.pathname ;
+  if (query_string !== '') {
+    target_url = target_url + "?" + query_string;
+  }
+  window.location.replace(target_url);
 }
 
 // From https://stackoverflow.com/a/46501455/7414500

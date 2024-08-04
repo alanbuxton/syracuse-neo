@@ -337,8 +337,8 @@ class TestUtilsWithDumpData(TestCase):
         assert "Faroe Petroleum" in content
         assert "Bowery Valuation" not in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Acquisitions",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&amp;combine_same_as_name_only=0">Investments</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&amp;combine_same_as_name_only=0">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0">Investments</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0">All</a>""" in content 
 
     def test_family_tree_uris_investor(self):
         client = self.client
@@ -347,8 +347,8 @@ class TestUtilsWithDumpData(TestCase):
         assert "Faroe Petroleum" not in content
         assert "Bowery Valuation" in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Investments",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&amp;combine_same_as_name_only=0">Acquisitions</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&amp;combine_same_as_name_only=0">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0">All</a>""" in content 
 
     def test_family_tree_uris_all(self):
         client = self.client
@@ -357,8 +357,104 @@ class TestUtilsWithDumpData(TestCase):
         assert "Faroe Petroleum" in content
         assert "Bowery Valuation" in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*All",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&amp;combine_same_as_name_only=0">Acquisitions</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&amp;combine_same_as_name_only=0">Investments</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0">Investments</a>""" in content
+
+    def test_query_strings_in_drill_down_linkages_source_page(self):
+        client = self.client
+        uri = "/organization/linkages/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "<h1>Cory 1st Choice Home Delivery - Linkages</h1>" in content
+        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor")' in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_activity_resource_page(self):
+        client = self.client
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
+        assert "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
+        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
+        assert "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_linkages_from_resource_page(self):
+        client = self.client
+        uri = "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri,follow=True) # Will be redirected
+        assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor', 302)]
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "<h1>J.B. Hunt - Linkages</h1>" in content
+        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor")' in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_resource_from_resource_page(self):
+        client = self.client
+        uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "<h1>Resource: https://1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1</h1>" in content
+        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_family_tree_source_page(self):
+        client = self.client
+        uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "<h1>Cory 1st Choice Home Delivery - Family Tree</h1>" in content
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_org_from_family_tree(self):
+        client = self.client
+        uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "<h1>J.B. Hunt - Family Tree</h1>" in content
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+
+    def test_query_strings_in_drill_down_activity_from_family_tree(self):
+        client = self.client
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+        assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
+        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
+
+    def test_query_strings_in_drill_down_timeline_source_page(self):
+        client = self.client
+        uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+        assert "<h1>J.B. Hunt - Timeline</h1>" in content
+        assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+        assert 'drillIntoUri(item_vals.uri, "/organization/timeline/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor");' in content
+
+    def test_query_strings_in_drill_down_resource_from_timeline_page(self):
+        client = self.client
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
+        assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
+        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor" in content
 
 
 

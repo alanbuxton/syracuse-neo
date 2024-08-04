@@ -4,6 +4,7 @@ from django.urls import reverse
 import re
 from urllib.parse import urlencode
 
+
 register = template.Library()
 
 def pretty_print_list_uri(value, request):
@@ -28,6 +29,8 @@ def pretty_local_uri(uri, request):
         link_uri = local_uri(uri, request)
     else:
         link_uri = uri
+    if len(request.GET) > 0:
+        link_uri = f"{link_uri}?{urlencode(request.GET)}"
     return f"<a href='{link_uri}'>{display_uri}</a>"
 
 def local_uri(uri, request):
@@ -42,8 +45,10 @@ def prettify_camel_case(text):
     return text.title()
     
 
-def dict_to_query_string(d):
-    return urlencode(d)
+def dict_to_query_string(data):
+    if data is None or data == []:
+        return ''
+    return mark_safe(urlencode(data))
 
 
 @register.simple_tag
@@ -52,9 +57,9 @@ def url_with_querystring(viewname, *args, qs_params=[]):
     url = reverse(viewname, args=args)
     # For example, you could add a query parameter to all URLs:
     if qs_params is not None and len(qs_params) > 0:
-        return f"{url}?{ urlencode(qs_params) }"
+        return mark_safe(f"{url}?{ urlencode(qs_params) }")
     else:
-        return url
+        return mark_safe(url)
 
 register.filter("pretty_print_list_uri",pretty_print_list_uri)
 register.filter("local_uri",local_uri)
