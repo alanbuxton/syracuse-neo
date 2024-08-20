@@ -10,8 +10,4 @@
   |  <a href="{% url 'account_login' %}">Log in or Sign Up for full access</a>
 {% endif %}
 | <a href="{% url_with_querystring 'tracked-organizations' qs_params=request_state.qs_params %}">Tracked Organizations</a>
-|  <a href="{% url_with_querystring 'tracked-activities' qs_params=request_state.qs_params %}">Recent Tracked Activities</a>
-{% if request_state.name_only_current_state %}
-| Treat sameAsNameOnly relationship as same? {{ request_state.name_only_current_state }}
-   <a href="{{ request_state.name_only_toggle_url | safe }}">(Turn {{ request_state.name_only_toggle_name }})</a>  
-{% endif %}
+| <a href="{% url_with_querystring 'tracked-activities' qs_params=request_state.qs_params %}">Recent Tracked Activities</a>

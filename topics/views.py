@@ -99,7 +99,7 @@ class ShowResource(APIView):
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}"
-        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state, _ = prepare_request_state(request)
         doc_id = kwargs.get("doc_id")
         if doc_id is not None:
             uri = f"{uri}/{doc_id}"
@@ -131,22 +131,23 @@ class FamilyTree(APIView):
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
         relationships = request_state["qs_params"].get("rels","buyer,vendor")
-
+        source_str = request_state["qs_params"].get("sources","_core")
         nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only,
-                                                                "relationship_str":relationships})
+                                                                "relationship_str":relationships,
+                                                                "source_str":source_str})
 
         relationship_vals = set(relationships.split(","))  
         relationship_link_data = self.create_relationship_links(request_state, relationship_vals)    
-    
-        return Response({"nodes_edges":nodes_edges.data,
+        nodes_edges_data = nodes_edges.data
+        request_state["document_sources"]=nodes_edges_data.pop("document_sources")
+        return Response({"nodes_edges":nodes_edges_data,
                             "requested_uri": uri,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
                             "relationship_link_data": relationship_link_data,
                             "request_state": request_state}, status=status.HTTP_200_OK)
     
-    def create_relationship_links(self, request_state, rels):
-        
+    def create_relationship_links(self, request_state, rels):       
         options = [set(["buyer","vendor"]),
                     set(["investor"]),
                     set(["buyer","investor","vendor"])]
@@ -169,10 +170,14 @@ class OrganizationTimeline(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_timeline"
         o = Resource.nodes.get(uri=uri)
-        org_serializer = OrganizationTimelineSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only})
+        source_str = request_state["qs_params"].get("sources","_core")
+        org_serializer = OrganizationTimelineSerializer(o, context={"combine_same_as_name_only":combine_same_as_name_only,
+                                                                    "source_str":source_str})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
-        resp = Response({"timeline_serializer": org_serializer.data,
+        org_serializer_data = org_serializer.data
+        request_state["document_sources"]=org_serializer_data.pop("document_sources")
+        resp = Response({"timeline_serializer": org_serializer_data,
                             "org_data":org_data,
                             "request_state": request_state,
                             "uri_parts": uri_parts,
@@ -208,11 +213,15 @@ class OrganizationByUri(APIView):
         o = Resource.nodes.get(uri=uri)
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_linkages"
+        source_str = request_state["qs_params"].get("sources","_core")
         org_serializer = OrganizationGraphSerializer(o,context=
-                                    {"combine_same_as_name_only":combine_same_as_name_only})
+                                    {"combine_same_as_name_only":combine_same_as_name_only,
+                                     "source_str":source_str})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
-        resp = Response({"data_serializer": org_serializer.data,
+        org_serializer_data = org_serializer.data
+        request_state["document_sources"]=org_serializer_data.pop("document_sources")
+        resp = Response({"data_serializer": org_serializer_data,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
                             "request_state": request_state,
@@ -249,11 +258,13 @@ def prepare_request_state(request):
     qs_params = request.GET.dict()
     toggle_combine_as_same_name_only = int(not combine_same_as_name_only)
     toggle_params = {**qs_params,**{"combine_same_as_name_only":toggle_combine_as_same_name_only}}
-    new_url = f"{request.META['PATH_INFO']}?{urlencode(toggle_params)}"
+    current_path = request.META['PATH_INFO']
+    new_url = f"{current_path}?{urlencode(toggle_params)}"
     request_state = {}
     request_state["qs_params"] = qs_params
     request_state["name_only_current_state"] = "Yes" if combine_same_as_name_only is True else "No"
     request_state["name_only_toggle_name"] = "Off" if combine_same_as_name_only is True else "On"
     request_state["name_only_toggle_url"] = new_url
     request_state["cache_last_updated"] = cache_last_updated_date()
+    request_state["current_page_no_qs"] = current_path
     return request_state, combine_same_as_name_only

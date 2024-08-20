@@ -4,7 +4,6 @@ from django.urls import reverse
 import re
 from urllib.parse import urlencode
 
-
 register = template.Library()
 
 def pretty_print_list_uri(value, request):
@@ -44,22 +43,35 @@ def prettify_camel_case(text):
     text = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', text))
     return text.title()
     
-
 def dict_to_query_string(data):
     if data is None or data == []:
         return ''
     return mark_safe(urlencode(data))
 
-
 @register.simple_tag
-def url_with_querystring(viewname, *args, qs_params=[]):
-    # Add your custom logic here
+def url_with_querystring(viewname, *args, qs_params={}):
     url = reverse(viewname, args=args)
-    # For example, you could add a query parameter to all URLs:
     if qs_params is not None and len(qs_params) > 0:
         return mark_safe(f"{url}?{ urlencode(qs_params) }")
     else:
         return mark_safe(url)
+
+@register.simple_tag
+def url_with_extra_querystring(url, qs_args1={}, qs_args2=""):
+    ''' 
+        qs_args1 is a dict 
+        qs_args2 is in query string form e.g. foo=bar&baz=boz
+        If the same key exists in both qs_args1 and qs_args2 then qs_args2 will win
+    '''
+    qs_args2_dict = {}
+    for args in qs_args2.split("&"):
+        key, value = args.split("=")
+        qs_args2_dict[key]=value
+    qs_params = qs_args1 | qs_args2_dict
+    if qs_params is not None and len(qs_params) > 0:
+        return mark_safe(f"{url}?{ urlencode(qs_params) }")
+    else:
+        return mark_safe(url)   
 
 register.filter("pretty_print_list_uri",pretty_print_list_uri)
 register.filter("local_uri",local_uri)

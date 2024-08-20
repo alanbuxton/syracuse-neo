@@ -4,8 +4,9 @@ from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
-from .models import IndustryCluster
+from .models import IndustryCluster, Article
 from .model_queries import org_family_tree
+from typing import Union, List
 import logging
 logger = logging.getLogger(__name__)
 
@@ -19,7 +20,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
 class ResourceSerializer(serializers.Serializer):
     def to_representation(self, instance):
-        related = instance.all_directional_relationships()
+        related = instance.all_directional_relationships(source_names=Article.all_sources())
         related_by_group = defaultdict(list)
         for entry in related:
             other_node = entry["other_node"].serialize_no_none()
@@ -51,14 +52,14 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         for _,node,activity,art,label,docExtract in sorted(family_tree_results , key=lambda x: x[0].best_name):
             edge_id = f"{ parent_uri }-{ label }-{ node.uri }"
             if edge_id in edge_data:
-                logger.info(f"Already seen {edge_id}, ignoring")
+                logger.debug(f"Already seen {edge_id}, ignoring")
                 continue
             edge_data[edge_id] = self.generate_edge_data(activity,art,label,docExtract)
             edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
             edges.append ( { "id": edge_id,
                         "from": f"{ parent_uri }", "to": f"{ node.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
             if node.uri in node_data:
-                logger.info(f"Already seen {node.uri}, ignoring")
+                logger.debug(f"Already seen {node.uri}, ignoring")
                 continue
             node_data[node.uri] = node.serialize_no_none()
             node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
@@ -73,9 +74,11 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         rels = self.context.get('relationship_str','buyer,vendor')
         rels = rels.replace(",","|")
         clean_rels = only_valid_relationships(rels)
+        source_names = source_names_from_str(self.context.get("source_str")) 
         parents, parents_children, org_children = org_family_tree(organization_uri, 
                                                                   combine_same_as_name_only=combine_same_as_name_only,
-                                                                  relationships=clean_rels)
+                                                                  relationships=clean_rels,
+                                                                  source_names=source_names)
         nodes = []
         edges = []
         node_data = {}
@@ -83,7 +86,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         
         for parent,_,_,_,_,_ in sorted(parents, key=lambda x: x[0].best_name):
             if parent.uri in node_data:
-                logger.info(f"Already seen {parent.uri}, ignoring")
+                logger.debug(f"Already seen {parent.uri}, ignoring")
                 continue
             node_data[parent.uri] = parent.serialize_no_none()
             nodes.append( {"id": parent.uri, "label": parent.best_name, "level": 0})
@@ -110,8 +113,62 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             "node_details": CustomSerializer(pruned_node_data),
             "edges": sorted_edges,
             "edge_details": CustomSerializer(edge_data),
+            "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
         }
 
+def create_source_pretty_print_data(text):
+    sorted_core_sources = ", ".join(sorted(Article.core_sources()))
+    core_entries = f"Core Sources ({sorted_core_sources})"
+    if text is None:
+        return core_entries
+    result_entries = []
+    vals = sorted(text.split(","))
+    has_core = False
+    has_all = False
+    available_names = Article.available_source_names_dict()
+    for x in vals:
+        if x.lower() == "_all":
+            sorted_all_sources = ", ".join(sorted(Article.all_sources()))
+            result_entries.append(f"All Sources ({sorted_all_sources})")
+            has_all = True
+        elif x.lower() == "_core":
+            result_entries.append(core_entries)
+            has_core = True
+        else:
+            name = available_names.get(x.lower())
+            if name:
+                result_entries.append(name)
+    return {
+        "pretty_print_text": ", ".join(result_entries),
+        "has_core": has_core,
+        "has_all": has_all,
+    }
+
+def source_names_from_str(text) -> Union[List,str]:
+    '''
+        Returns list of source names - which can include special
+        terms "_all" for all sources or "_core" for core sources only
+    '''
+    if text is None:
+        return Article.core_sources()
+    vals = text.split(",")
+    available_names = Article.available_source_names_dict()
+    matches = []
+    no_matches = []
+    for x in vals:
+        if x.lower() == "_all":
+            return Article.all_sources()
+        if x.lower() == "_core":
+            matches.extend(Article.core_sources())
+            continue
+        name = available_names.get(x.lower())
+        if name:
+            matches.append(name)
+        else:
+            no_matches.append(x)
+    if len(no_matches) > 0:
+        logger.warning(f"Don't have any info from the following sources: {no_matches}")
+    return matches
 
 def only_valid_relationships(text):
     full_text = text
@@ -147,11 +204,11 @@ def prune_not_needed_nodes(nodes, edges):
     return nodes_to_keep
 
 
-
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
-        graph_data = graph_centered_on(instance,**self.context)
+        source_names = source_names_from_str(self.context.get("source_str"))
+        graph_data = graph_centered_on(instance,source_names=source_names,**self.context)
         data = {"source_node": instance.uri,
                 "source_node_name": instance.longest_name,
                 "too_many_nodes":False}
@@ -172,6 +229,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
                 nodes_by_type[node_type] = []
             nodes_by_type[node_type].append(node_row['id'])
         data["nodes_by_type"] = nodes_by_type
+        data["document_sources"] = create_source_pretty_print_data(self.context.get("source_str"))
         return data
 
 class NameSearchSerializer(serializers.Serializer):
@@ -212,11 +270,13 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
         combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
-        groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only)
+        source_names = source_names_from_str(self.context.get("source_str"))
+        groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only, source_names)
         resp = {"groups": groups, "items":items,
             "item_display_details":CustomSerializer(item_display_details),
             "org_name": instance.longest_name,
             "org_node": instance.uri,
             "org_display_details": CustomSerializer(org_display_details),
+            "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
             }
         return resp

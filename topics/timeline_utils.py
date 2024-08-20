@@ -1,6 +1,6 @@
-from topics.models import Organization
+from topics.models import Article
 
-def get_timeline_data(org,combine_same_as_name_only):
+def get_timeline_data(org,combine_same_as_name_only, source_names=Article.core_sources()):
     org_display = []
     org_nodes = []
     activities = []
@@ -18,32 +18,32 @@ def get_timeline_data(org,combine_same_as_name_only):
     location_removed = []
     target = []
 
-    vendor.extend(org.vendor.all())
-    participant.extend(org.participant.all())
-#            protagonist.extend(org.protagonist.all())
-    buyer.extend(org.buyer.all())
-    investor.extend(org.investor.all())
-    location_added.extend(org.locationAdded.all())
-    location_removed.extend(org.locationRemoved.all())
-    role_activity.extend(org.get_role_activities()) # it's a tuple
-    target.extend(org.target.all())
+    vendor.extend(allowable_entities(org.vendor,source_names))
+    participant.extend(allowable_entities(org.participant,source_names))
+    protagonist.extend(allowable_entities(org.protagonist,source_names))
+    buyer.extend(allowable_entities(org.buyer,source_names))
+    investor.extend(allowable_entities(org.investor,source_names))
+    location_added.extend(allowable_entities(org.locationAdded,source_names))
+    location_removed.extend(allowable_entities(org.locationRemoved,source_names))
+    role_activity.extend(org.get_role_activities(source_names)) # it's a tuple
+    target.extend(allowable_entities(org.target,source_names))
 
     if combine_same_as_name_only is True:
         for x in org.sameAsNameOnly:
-            vendor.extend(x.vendor.all())
-            participant.extend(x.participant.all())
-            buyer.extend(x.buyer.all())
-            investor.extend(x.investor.all())
-            location_added.extend(x.locationAdded.all())
-            location_removed.extend(x.locationRemoved.all())
-            role_activity.extend(x.get_role_activities())
-            target.extend(x.target.all())
+            vendor.extend(allowable_entities(x.vendor,source_names))
+            participant.extend(allowable_entities(x.participant,source_names))
+            buyer.extend(allowable_entities(x.buyer,source_names))
+            investor.extend(allowable_entities(x.investor,source_names))
+            location_added.extend(allowable_entities(x.locationAdded,source_names))
+            location_removed.extend(allowable_entities(x.locationRemoved,source_names))
+            role_activity.extend(x.get_role_activities(source_names))
+            target.extend(allowable_entities(x.target,source_names))
             
     activities.append(
         {"vendor": set(vendor),
         "investor": set(investor),
         "participant": set(participant),
-#             "protagonist": set(protagonist),
+        "protagonist": set(protagonist),
         "buyer": set(buyer),
         "location_added": set(location_added),
         "location_removed": set(location_removed),
@@ -98,6 +98,9 @@ def get_timeline_data(org,combine_same_as_name_only):
                 seen_uris.add(current_item.uri)
 
     return groups, items, item_display_details, org_display_details
+
+def allowable_entities(related_entities, source_names):
+    return [x for x in related_entities if x.has_permitted_document_source(source_names)]
 
 
 def labelize(activity,activity_type):

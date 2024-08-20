@@ -1,13 +1,38 @@
 
+{% load topics_extras %}
+
+<em>
 <br/>
+<p>
+{% if request_state.document_sources %}
+  Document sources: {{ request_state.document_sources.pretty_print_text }}
+  {% if request_state.document_sources.has_core is False %}
+    <a href="{% url_with_extra_querystring request_state.current_page_no_qs qs_args1=request_state.qs_params qs_args2='sources=_core' %}">
+      (Switch to Core Sources)
+    </a>
+  {% endif %}
+  {% if request_state.document_sources.has_all is False %}
+    <a href="{% url_with_extra_querystring request_state.current_page_no_qs qs_args1=request_state.qs_params qs_args2='sources=_all' %}">
+      (Switch to All Sources)
+    </a> 
+  {% endif %}
+{% endif %}
+</p>
+<p>
+{% if request_state.name_only_current_state %}
+  Treat sameAsNameOnly relationship as same? {{ request_state.name_only_current_state }}
+    <a href="{{ request_state.name_only_toggle_url | safe }}">(Turn {{ request_state.name_only_toggle_name }})</a>  
+{% endif %}
+</p>
+</em>
 <p>
 {% if request_state.cache_last_updated %}
   <a href="{% url 'tracked-activity-stats' %}">Site Stats</a>
 {% else %}
   Site stats calculating, please check later
 {% endif %}
-  | <a href="{% url 'about' %}">About (includes privacy and cookie notices)</a>
-<p>
-  (c) by 1145, 2023-2024. Data licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License</a>.
+| <a href="{% url 'about' %}">About (includes privacy and cookie notices)</a>
+<br/> 
+(c) by 1145, 2023-2024. Data licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License</a>.
   Please <a href="mailto:info-syracuse@1145.am">send an email</a> if you need a non-share-alike license and/or you need API access.
 </p>

@@ -4,7 +4,7 @@ FAQ = {
 
     "What sort of open-ish data?": "Syracuse takes raw data from various text documents (currently news articles, but it could be any text document) and uses machine learning to structure the relevant content into linkages and timelines. You can see the latest sources on the <a href='/tracked/activity_stats'>Stats page</a>. Currently it's only English-language sources.",
 
-    "Why would I use it?": "Two main purposes: [a] getting alerts about company events and [b] researching company activities in a region. In this context a 'company event' is something like a new senior hire, or launching in a region, or taking on investment. Both these use cases could be useful in Know Your Customer / Know Your Supplier processes.",
+    "Why would I use it?": "Three main purposes: [a] getting alerts about company events, [b] looking at family trees (e.g. if I'm doing business with Company A, and they are owned by Company B then what other companies are also owned by Company B) and [c] researching company activities in a region. In this context a 'company event' is something like a new senior hire, or launching in a region, or taking on investment. These use cases could be useful in Know Your Customer / Know Your Supplier processes.",
 
     "Why Syracuse?": "I called my first natural language processing application <a href=\"https://alanbuxton.wordpress.com/2021/09/21/transformers-for-use-oriented-entity-extraction/\">Napoli</a> because it includes all the consonants in NLP (the abbreviation for natural language processing). Since then I've given my other projects similarly-themed names related to Ancient Greek Mediterranean coastal towns and cities.",
 
@@ -16,19 +16,25 @@ FAQ = {
 
     "Is there any generative AI in here?": "One part of the 1145 system (Neapolis) uses <a href=\"https://alanbuxton.wordpress.com/2022/11/25/entity-extraction-powered-by-flan/\">an out-of-the-box FlanT5 model</a> to help extract some meaning from text, but the bulk of the machine learning is a fine-tuned RoBERTa model used for classification and then one <a href=\"https://alanbuxton.wordpress.com/2021/10/06/is-it-worth-training-an-nlp-transformer-from-scratch/\">fine-tuned RoBERTa model per type of activity</a> to do the named entity extraction. Very little GenAI, but plenty of large language models and Machine Learning.",
 
-    "What about the New York Times's law-suit against OpenAI - if OpenAI's work turns out to be illegal then doesn't that risk destroying this project?": "I'm not a lawyer but my common-sense view is that 1145 is more similar to a search engine than to a generative AI service. 1145 helps you find relevant data related to a company or region that you're interested in with full provenance back to the original data source. It's not creating things that may or may not breach someone's intellectual property rights. All the scraped data in it is scraped responsibly.",
-
-    "What's the license?": "I am licensing the data that you access via the website via the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</a>. This is the same share-alike license that <a href=\"https://opencorporates.com/\">OpenCorporates</a> uses. If you're familiar with OpenCorporates then the model is the same here. I'm also open-sourcing the <a href=\"https://github.com/alanbuxton/syracuse-neo\">Syracuse codebase</a> with an MIT license. When I was learning these technologies there weren't many resources available to help with <a href=\"https://www.django-rest-framework.org/\">Django Rest Framework, <a href=\"https://neo4j.com/\">Neo4j</a> and <a href=\"https://en.wikipedia.org/wiki/Resource_Description_Framework\">RDF</a>, so I'm also open sourcing the codebase in the hope that it can help others learn from my learnings. And also that others out there can point out problems in my code that I can learn from and improve.",
-
-    "This fails <a href=\"https://opendefinition.org/od/2.1/en/\">condition 1.2 of the Open Definition</a> so how can you represent it as open data?": "Bored. Next. ..... In all seriousness, this is why I am calling it open-ish data. The important point is that anyone can browse this data for free and I'm more than happy to give the underlying data to people working in the public benefit either via API or via a data dump. Please <a href=\"mailto:info-syracuse@1145.am\">send a mail</a> if you'd like to discuss.",
-
-    "What about if the share-alike license isn't for me?": "Drop me a line and we can discuss. I'm more than happy to charge people for API access or bulk data in order to fund the future development of this project. Very similar to the OpenCorporates approach which I admire greatly.",
-
-    "Is it all open source?": "Nope. Just the Syracuse piece is open source. The other parts of the 1145 ecosystem that are running behind the scenes are top secret proprietary intellectual property :)",
-
     "Does it suffer from hallucinations?": "Not really, because any generative element is run within very tight guardrails. But there could be other errors creeping in that aren't hallucinations, which is why there's a feedback form that you are free to use if you spot anything that looks wrong.",
 
     "What sort of accuracy does it have?": "No ML system is going to be 100% correct all the time. Accuracy is usually measured by looking at False Positives and False Negatives. A False Positive is when the system says that something happened when it didn't happen. A False Negative is missing something that we would have liked the system to spot. 1145 leans a bit more towards minimising false positives. This does increase the risk of false negatives. But 1145 is looking at multiple data sources so even if it misses a topic from one source, we should expect to be find it in another one. It seems a reasonable position to take in the accuracy balancing act, but more than happy to hear feedback from anyone using this.",
+
+    "How comprehensive is it?": "Hard to say, but it will only get more comprehensive as more data sources get added to it. It is a fully automated system and so can scale without too much effort",
+    
+    "What about the <a href=\"https://copyrightblog.kluweriplaw.com/2024/02/29/is-generative-ai-fair-use-of-copyright-works-nyt-v-openai/\">New York Times's law-suit against OpenAI</a> - if OpenAI's work turns out to be illegal then doesn't that risk destroying this project?": "I'm not a lawyer but my common-sense view is that 1145 is more similar to a search engine than to a generative AI service. 1145 helps you find relevant data related to a company or region that you're interested in with full provenance back to the original data source. It's not creating things that may or may not breach someone's intellectual property rights. All the scraped data in it is scraped responsibly.",
+
+    "What's the license?": "I am licensing the data that you access via the website via the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</a>. This is the same share-alike license that <a href=\"https://opencorporates.com/\">OpenCorporates</a> uses. If you're familiar with OpenCorporates then the model is the same here.",
+     
+    "What about if the share-alike license isn't for me?": "Drop me a line and we can discuss. I'm more than happy to charge people for API access or bulk data in order to fund the future development of this project. Very similar to the OpenCorporates approach which I admire greatly.",
+
+    "I love this, can I access it via API?": "Of course. Drop me a line and we can get something set up.",
+
+    "This fails <a href=\"https://opendefinition.org/od/2.1/en/\">condition 1.2 of the Open Definition</a> so how can you represent it as open data?": "Bored. Next. ..... In all seriousness, this is why I am calling it open-ish data. The important point is that anyone can browse this data for free and I'm more than happy to give the underlying data to people working in the public benefit either via API or via a data dump. Please <a href=\"mailto:info-syracuse@1145.am\">send a mail</a> if you'd like to discuss.",
+
+    "Is the code open source?": "The <a href=\"https://github.com/alanbuxton/syracuse-neo\">Syracuse codebase</a> is released with an MIT license. When I was learning these technologies there weren't many resources available to help with <a href=\"https://www.django-rest-framework.org/\">Django Rest Framework, <a href=\"https://neo4j.com/\">Neo4j</a> and <a href=\"https://en.wikipedia.org/wiki/Resource_Description_Framework\">RDF</a>, so I'm open sourcing the codebase in the hope that it can help others learn from my learnings. And also that others out there can point out problems in my code that I can learn from and improve.",
+
+    "Is it all open source?": "Nope. Just the Syracuse piece is open source. The other parts of the 1145 ecosystem that are running behind the scenes are top secret proprietary intellectual property :)",
 
     "What about Cookies?": "This site does some high level tracking with Google Analytics so I can get a sense of who is accessing the site and from where. It uses its own cookies for [a] authenticating your login and [b] internal security features (so-called 'csrf tokens'). If you never login there will never be a cookie that can identify you at all.",
 
@@ -40,6 +46,6 @@ FAQ = {
 
     "Website looks a bit rubbish, mate.": "Yep, I'm not going to disagree on that front. Front-end web design really is not my bag - just have a look at the quality of the favicon. But, to be honest, this 1995-era aesthetic seems to go pretty well with a site that's all about the data so I'm not too worried.",
 
-    "And it's slow.": "You're browsing a version of this site that is running on one small cloud machine for demo/proof-of-concept purposes more than anything else, so please do a bit forgiving if it's not blazing fast. Thanks.",
+    "And it's slow.": "You're browsing a version of this site that is running on one small cloud machine for demo/proof-of-concept purposes more than anything else. Please do a bit forgiving if it's not blazing fast. Thanks.",
 
 }

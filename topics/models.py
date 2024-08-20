@@ -42,11 +42,35 @@ class Resource(StructuredNode):
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
     documentSource = RelationshipTo("Article","documentSource",
-            model=DocumentSourceRel, cardinality=OneOrMore)
+            model=DocumentSourceRel, cardinality=OneOrMore) # But not for Article or IndustryCluster
     internalDocId = IntegerProperty()
     sameAsNameOnly = Relationship('Resource','sameAsNameOnly')
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalMergedSameAsHighToUri = StringProperty()
+
+    @property
+    def related_articles(self):
+        cache_key = f"{self.uri}_related_articles"
+        arts = cache.get(cache_key)
+        if arts is not None:
+            return arts
+        if isinstance(self, Article) is True or isinstance(self, IndustryCluster) is True:
+            arts = None
+        else:
+            arts = self.documentSource.all()
+        cache.set(cache_key,arts)
+        return arts
+    
+    def has_permitted_document_source(self,source_names):
+        if isinstance(self, IndustryCluster):
+            # Industry Clusters are always legitimate to show because they didn't come from specific articles
+            return True 
+        if hasattr(self, "sourceOrganization") and self.sourceOrganization in source_names:
+            return True
+        for x in self.related_articles or []:
+            if x.sourceOrganization in source_names:
+                return True
+        return False
 
     @staticmethod
     def get_by_uri(uri):
@@ -226,11 +250,13 @@ class Resource(StructuredNode):
             relationship_data: (only if source is Activity and other node is Article)
         '''
         override_from_uri = kwargs.get("override_from_uri")
+        source_names = kwargs.get("source_names")
         if override_from_uri is not None:
             from_uri = override_from_uri
         else:
             from_uri = self.uri
         all_rels = []
+        logger.debug(f"Source node: {self.uri} - has permitted source with {source_names}? {self.has_permitted_document_source(source_names)}")
         for key, rel in self.__all_relationships__:
             if isinstance(rel, RelationshipTo):
                 direction = "to"
@@ -241,6 +267,10 @@ class Resource(StructuredNode):
 
             for x in self.__dict__[key]:
                 other_node = Resource.self_or_ultimate_target_node(x)
+                if other_node.has_permitted_document_source(source_names) is False:
+                    logger.debug(f"Skipping {other_node.uri} due to invalid source_names")
+                    continue
+                logger.debug(f"Working on {other_node.uri}")
                 vals = {"from_uri": from_uri, "label":key, "direction":direction, "other_node":other_node}
                 if isinstance(self, ActivityMixin) and isinstance(x, Article):
                     document_extract = self.documentSource.relationship(x).documentExtract
@@ -271,13 +301,51 @@ class Resource(StructuredNode):
 
 
 class Article(Resource):
-    headline = StringProperty()
+    headline = StringProperty(required=True)
     url = Relationship("Resource","url", cardinality=One)
-    sourceOrganization = StringProperty()
-    datePublished = NativeDateTimeProperty()
-    dateRetrieved = NativeDateTimeProperty()
+    sourceOrganization = StringProperty(required=True)
+    datePublished = NativeDateTimeProperty(required=True)
+    dateRetrieved = NativeDateTimeProperty(required=True)
     relatedEntity = RelationshipFrom("Resource","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore)
+    
+    @staticmethod
+    def available_source_names_dict():
+        cache_key = "available_source_names"
+        sources = cache.get(cache_key)
+        if sources is not None:
+            return sources
+        res = db.cypher_query("MATCH (n: Resource:Article) RETURN DISTINCT(n.sourceOrganization)")
+        sources = {x[0].lower():x[0] for x in res[0]}
+        assert None not in sources, f"We have an Article with None sourceOrganization"
+        cache.set(cache_key,sources)
+        return sources
+    
+    @staticmethod
+    def all_sources():
+        return list(Article.available_source_names_dict().values())
+    
+    @staticmethod
+    def core_sources():
+        '''
+            Generic, high quality sources that we get good results with.
+            Will run with newer data sources for a while before adding them to this list.
+        '''
+        return [
+            'Associated Press',
+            'Business Insider',
+            'Business Wire',
+            'CNN',
+            'CNN International',
+            'GlobeNewswire',
+            'Indiatimes',
+            'PR Newswire',
+            'Sifted',
+            'South China Morning Post',
+            'TechCrunch',
+            'The Globe and Mail',
+            'prweb',
+        ]
 
     @property
     def archive_date(self):
@@ -427,7 +495,6 @@ class ActivityMixin:
     whereRaw = ArrayProperty(StringProperty())
     whereClean = ArrayProperty(StringProperty())
     whereGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereGeoNamesLocation')
-    internalActivityList = ArrayProperty(StringProperty())
 
     @property
     def whereGeoName_as_str(self):
@@ -613,11 +680,11 @@ class Organization(Resource):
                     }
         return {**vals,**org_vals}
 
-    def get_role_activities(self):
+    def get_role_activities(self,source_names=Article.core_sources()):
         role_activities = []
         for role in self.hasRole:
             acts = role.withRole.all()
-            role_activities.extend([(role,act) for act in acts])
+            role_activities.extend([(role,act) for act in acts if act.has_permitted_document_source(source_names)])
         return role_activities
 
     @staticmethod
@@ -626,7 +693,7 @@ class Organization(Resource):
         vals = cache.get(cache_key)
         if vals is not None:
             return vals
-        logger.info(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
+        logger.debug(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
         industry_uris = IndustryCluster.with_descendants(industry_id)
         geo_uris = GeoNamesLocation.uris_by_geo_code(geo_code)
         if industry_uris is None and geo_uris is None:

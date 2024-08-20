@@ -54,8 +54,8 @@ def graph_centered_on(start_node, **kwargs):
     node_details = {root_uri:root_node.serialize_no_none()} # Node info to show on click
     edge_data = [] # Edges for graph
     edge_details = {} # Edge info to show on click
-    root_node_data = resource_to_node_data(root_node)
     combine_same_as_name_only = kwargs.get("combine_same_as_name_only",True)
+    source_names = kwargs.get("source_names",Article.core_sources())
     uris_to_ignore = set()
     nodes_found_so_far = set()
 
@@ -63,15 +63,17 @@ def graph_centered_on(start_node, **kwargs):
         center_node_same_as_name_onlies = root_node.sameAsNameOnly.all()
         uris_to_ignore = set([x.uri for x in center_node_same_as_name_onlies])
 
-    for rel_data in root_node.all_directional_relationships():
-        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
+    for rel_data in root_node.all_directional_relationships(source_names=source_names):
+        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
+                                nodes_found_so_far, combine_same_as_name_only, source_names)
 
     if combine_same_as_name_only is True:
         for org in center_node_same_as_name_onlies:
-            for rel_data in org.all_directional_relationships(override_from_uri=root_uri):
+            for rel_data in org.all_directional_relationships(override_from_uri=root_uri,source_names=source_names):
                 rel_data["other_node"] = keep_or_switch_node(rel_data["other_node"],nodes_found_so_far, combine_same_as_name_only)
                 if rel_data["other_node"] not in center_node_same_as_name_onlies:
-                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
+                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
+                                            nodes_found_so_far, combine_same_as_name_only, source_names)
 
     return node_data, edge_data, node_details, edge_details
 
@@ -89,7 +91,8 @@ def keep_or_switch_node(current_node, nodes_found_so_far, combine_same_as_name_o
     nodes_found_so_far.add(current_node)
     return current_node
 
-def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only):
+def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
+                            nodes_found_so_far, combine_same_as_name_only, source_names):
     other_node = rel_data["other_node"]
     other_node = keep_or_switch_node(other_node, nodes_found_so_far, combine_same_as_name_only)
     logger.debug(f"From {rel_data['from_uri']} to {other_node.uri}")
@@ -118,8 +121,9 @@ def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_d
     node_data.append( resource_to_node_data(other_node))
     # find more relationships
     if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster) and not isinstance(other_node, GeoNamesLocation) and not isinstance(other_node, Article):
-        for rel_data in other_node.all_directional_relationships():
-            build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, nodes_found_so_far, combine_same_as_name_only)
+        for rel_data in other_node.all_directional_relationships(source_names=source_names):
+            build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, 
+                                    uris_to_ignore, nodes_found_so_far, combine_same_as_name_only, source_names)
 
 
 def build_edge_vals(direction, edge_label, source_node_id, target_node_id):
