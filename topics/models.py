@@ -340,6 +340,8 @@ class Article(Resource):
             'GlobeNewswire',
             'Indiatimes',
             'PR Newswire',
+            'PR Newswire UK',
+            'PR Web',
             'Sifted',
             'South China Morning Post',
             'TechCrunch',
