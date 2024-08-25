@@ -57,17 +57,12 @@ def url_with_querystring(viewname, *args, qs_params={}):
         return mark_safe(url)
 
 @register.simple_tag
-def url_with_extra_querystring(url, qs_args1={}, qs_args2=""):
+def url_with_extra_querystring_param(url, qs_args1={}, qs_arg2="", qs_val2=""):
     ''' 
         qs_args1 is a dict 
-        qs_args2 is in query string form e.g. foo=bar&baz=boz
-        If the same key exists in both qs_args1 and qs_args2 then qs_args2 will win
+        If the same key exists in both qs_args1 and qs_arg2 then qs_arg2 will win
     '''
-    qs_args2_dict = {}
-    for args in qs_args2.split("&"):
-        key, value = args.split("=")
-        qs_args2_dict[key]=value
-    qs_params = qs_args1 | qs_args2_dict
+    qs_params = qs_args1 | {qs_arg2:qs_val2}
     if qs_params is not None and len(qs_params) > 0:
         return mark_safe(f"{url}?{ urlencode(qs_params) }")
     else:

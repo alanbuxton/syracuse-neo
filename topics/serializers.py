@@ -6,9 +6,12 @@ from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
 from .models import IndustryCluster, Article
 from .model_queries import org_family_tree
+from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
+from datetime import date, timedelta
 import logging
 logger = logging.getLogger(__name__)
+
 
 class OrganizationSerializer(serializers.ModelSerializer):
 
@@ -75,10 +78,12 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         rels = rels.replace(",","|")
         clean_rels = only_valid_relationships(rels)
         source_names = source_names_from_str(self.context.get("source_str")) 
+        earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
         parents, parents_children, org_children = org_family_tree(organization_uri, 
                                                                   combine_same_as_name_only=combine_same_as_name_only,
                                                                   relationships=clean_rels,
-                                                                  source_names=source_names)
+                                                                  source_names=source_names,
+                                                                  earliest_doc_date=earliest_doc_date)
         nodes = []
         edges = []
         node_data = {}
@@ -114,6 +119,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             "edges": sorted_edges,
             "edge_details": CustomSerializer(edge_data),
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
+            "earliest_doc_date": create_earliest_date_pretty_print_data(self.context.get("earliest_str")),
         }
 
 def create_source_pretty_print_data(text):
@@ -143,6 +149,41 @@ def create_source_pretty_print_data(text):
         "has_core": has_core,
         "has_all": has_all,
     }
+
+def create_earliest_date_pretty_print_data(text,today=date.today()):
+    min_date = date_from_str_with_default(text)
+    one_year_ago = today - timedelta(days=365)
+    if min_date == one_year_ago: one_year_ago = None
+    three_years_ago = today - timedelta(days = (365*3))
+    if min_date == three_years_ago: three_years_ago = None
+    five_years_ago = today - timedelta(days = (365*4))
+    if min_date == five_years_ago: five_years_ago = None
+
+    return {"min_date": min_date,
+            "one_year_ago": one_year_ago,
+            "one_year_ago_fmt": one_year_ago.strftime("%Y-%m-%d") if one_year_ago else None,
+            "three_years_ago": three_years_ago,
+            "three_years_ago_fmt": three_years_ago.strftime("%Y-%m-%d") if three_years_ago else None,
+            "five_years_ago": five_years_ago,
+            "five_years_ago_fmt": five_years_ago.strftime("%Y-%m-%d") if five_years_ago else None,
+            "all_time_flag": True if min_date == BEGINNING_OF_TIME else False,
+            }
+
+def date_from_str(text):
+    if text == str(ALL_TIME_MAGIC_NUMBER):
+        return BEGINNING_OF_TIME
+    # parse yyyy-mm-dd format
+    try:
+        d = date.fromisoformat(text)
+    except:
+        d = None
+    return d
+
+def date_from_str_with_default(text, default_years_ago=5):
+    d = date_from_str(text)
+    if d is None:
+        d = date.today() - timedelta(days = (365 * default_years_ago))
+    return d
 
 def source_names_from_str(text) -> Union[List,str]:
     '''
@@ -208,7 +249,10 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
         source_names = source_names_from_str(self.context.get("source_str"))
-        graph_data = graph_centered_on(instance,source_names=source_names,**self.context)
+        earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
+        graph_data = graph_centered_on(instance,source_names=source_names,
+                                       min_date=earliest_doc_date,
+                                       **self.context)
         data = {"source_node": instance.uri,
                 "source_node_name": instance.longest_name,
                 "too_many_nodes":False}
@@ -230,6 +274,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
             nodes_by_type[node_type].append(node_row['id'])
         data["nodes_by_type"] = nodes_by_type
         data["document_sources"] = create_source_pretty_print_data(self.context.get("source_str"))
+        data["earliest_doc_date"] = create_earliest_date_pretty_print_data(self.context.get("earliest_str"))
         return data
 
 class NameSearchSerializer(serializers.Serializer):
@@ -271,12 +316,15 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
     def to_representation(self, instance, **kwargs):
         combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
         source_names = source_names_from_str(self.context.get("source_str"))
-        groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only, source_names)
+        earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
+        groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only, 
+                                                                                     source_names, earliest_doc_date)
         resp = {"groups": groups, "items":items,
             "item_display_details":CustomSerializer(item_display_details),
             "org_name": instance.longest_name,
             "org_node": instance.uri,
             "org_display_details": CustomSerializer(org_display_details),
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
+            "earliest_doc_date": create_earliest_date_pretty_print_data(self.context.get("earliest_str")),
             }
         return resp

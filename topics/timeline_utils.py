@@ -1,6 +1,8 @@
 from topics.models import Article
 
-def get_timeline_data(org,combine_same_as_name_only, source_names=Article.core_sources()):
+def get_timeline_data(org,combine_same_as_name_only, 
+                      source_names = Article.core_sources(),
+                      min_date = None):
     org_display = []
     org_nodes = []
     activities = []
@@ -86,11 +88,14 @@ def get_timeline_data(org,combine_same_as_name_only, source_names=Article.core_s
                     current_item = v
                 if current_item.uri in seen_uris:
                     continue
+                item_start = current_item.earliestDatePublished
+                if min_date is not None and item_start.date() < min_date:
+                    continue
                 l2_id = f"{idx}-{activity_to_subgroup[activity_type]}"
                 items.append(
                     {"group": l2_id,
                     "label": labelize(current_item,activity_type),
-                    "start": current_item.earliestDatePublished.isoformat(),
+                    "start": item_start.isoformat(),
                     "id": current_item.uri,
                     "className": class_name_for(current_item),
                     })

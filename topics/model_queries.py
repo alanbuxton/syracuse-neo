@@ -6,6 +6,8 @@ from typing import List, Union
 import logging
 from precalculator.models import P
 from .graph_utils import keep_or_switch_node
+from .constants import BEGINNING_OF_TIME
+
 
 logger = logging.getLogger(__name__)
 
@@ -270,7 +272,8 @@ def count_entries(results):
     return val
 
 def do_get_parent_orgs_query(uri_or_uris: Union[str,List], parent_rels = "buyer|vendor|investor",
-                             source_names=Article.core_sources()) -> [(Organization, Organization, ActivityMixin, Article, str)]:
+                             source_names=Article.core_sources(),
+                             min_date=BEGINNING_OF_TIME) -> [(Organization, Organization, ActivityMixin, Article, str)]:
     if isinstance(uri_or_uris, str):
         uri_or_uris = [uri_or_uris]
     else:
@@ -283,6 +286,7 @@ def do_get_parent_orgs_query(uri_or_uris: Union[str,List], parent_rels = "buyer|
         AND b.internalMergedSameAsHighToUri IS NULL
         AND t.internalMergedSameAsHighToUri IS NULL
         AND a.sourceOrganization in {source_names}
+        AND a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         RETURN b, t, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished DESCENDING
     """
@@ -291,7 +295,8 @@ def do_get_parent_orgs_query(uri_or_uris: Union[str,List], parent_rels = "buyer|
     return results
 
 def do_get_child_orgs_query(uri: str, relationships = "buyer|vendor|investor",
-                            source_names=Article.core_sources()) ->[(Organization, Organization, ActivityMixin, Article, str)]:
+                            source_names=Article.core_sources(),
+                            min_date=BEGINNING_OF_TIME) ->[(Organization, Organization, ActivityMixin, Article, str)]:
     assert "'" not in uri, f"Can't have ' in {uri}"
     query = f"""
         MATCH (a: Article)<-[d:documentSource]-(c: CorporateFinanceActivity)-[:target]->(t: Organization),
@@ -300,6 +305,7 @@ def do_get_child_orgs_query(uri: str, relationships = "buyer|vendor|investor",
         AND t.internalMergedSameAsHighToUri IS NULL
         AND b.internalMergedSameAsHighToUri IS NULL
         AND a.sourceOrganization in {source_names}
+        AND a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         RETURN b, t, c, a, TYPE(x), d.documentExtract
         ORDER BY a.datePublished DESCENDING
     """
@@ -308,14 +314,15 @@ def do_get_child_orgs_query(uri: str, relationships = "buyer|vendor|investor",
     return results
 
 def get_child_orgs(uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor",
-                   nodes_found_so_far=set(), source_names=Article.core_sources()):
+                   nodes_found_so_far=set(), source_names=Article.core_sources(),
+                   earliest_doc_date=BEGINNING_OF_TIME):
     logger.debug(f"get_child_orgs for {uri}")
-    res = do_get_child_orgs_query(uri, relationships, source_names)
+    res = do_get_child_orgs_query(uri, relationships, source_names, earliest_doc_date)
     if combine_same_as_name_only is False:
         return res
     org = Organization.self_or_ultimate_target_node(uri)
     for other_org in org.sameAsNameOnly:
-        res = res + do_get_child_orgs_query(other_org.uri,relationships, source_names)
+        res = res + do_get_child_orgs_query(other_org.uri,relationships, source_names, earliest_doc_date)
     items_to_keep = []
     for item in res:
         target_node_or_same_as = keep_or_switch_node(item[1], nodes_found_so_far, combine_same_as_name_only)
@@ -325,15 +332,16 @@ def get_child_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ven
     return items_to_keep
 
 def get_parent_orgs(uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor",
-                    nodes_found_so_far=set(),source_names=Article.core_sources()):
+                    nodes_found_so_far=set(),source_names=Article.core_sources(),
+                    earliest_doc_date=BEGINNING_OF_TIME):
     logger.debug(f"get_parent_orgs for {uri}")
     if combine_same_as_name_only is False:
-        res = do_get_parent_orgs_query(uri, relationships, source_names)
+        res = do_get_parent_orgs_query(uri, relationships, source_names, earliest_doc_date)
         return res
 
     org = Organization.self_or_ultimate_target_node(uri)
     same_as_uris = [x.uri for x in org.sameAsNameOnly if x.internalMergedSameAsHighToUri is None]
-    res = do_get_parent_orgs_query(same_as_uris + [uri], relationships, source_names)
+    res = do_get_parent_orgs_query(same_as_uris + [uri], relationships, source_names, earliest_doc_date)
 
     items_to_keep = []
     for item in res:
@@ -343,23 +351,24 @@ def get_parent_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ve
     return items_to_keep
 
 def org_family_tree(organization_uri, combine_same_as_name_only=True, relationships="buyer|vendor|investor",
-                    source_names=Article.core_sources()):
+                    source_names=Article.core_sources(),
+                    earliest_doc_date=BEGINNING_OF_TIME):
     logger.debug(f"org_family_tree for {organization_uri} with '{relationships}' and '{source_names}'")
     nodes_found_so_far = set()
     children = get_child_orgs(organization_uri,
                     combine_same_as_name_only=combine_same_as_name_only,
                     relationships=relationships,nodes_found_so_far=nodes_found_so_far,
-                    source_names=source_names)
+                    source_names=source_names,earliest_doc_date=earliest_doc_date)
     parents = get_parent_orgs(organization_uri,
                     combine_same_as_name_only=combine_same_as_name_only,
                     relationships=relationships,nodes_found_so_far=nodes_found_so_far,
-                    source_names=source_names)
+                    source_names=source_names,earliest_doc_date=earliest_doc_date)
 
     siblings = []
     for org,_,_,_,_,_ in parents:
         siblings.extend(get_child_orgs(org.uri,
                         combine_same_as_name_only=combine_same_as_name_only,
                         relationships=relationships,nodes_found_so_far=nodes_found_so_far,
-                        source_names=source_names))
+                        source_names=source_names,earliest_doc_date=earliest_doc_date))
 
     return parents, siblings, children

@@ -132,14 +132,17 @@ class FamilyTree(APIView):
         uri_parts = elements_from_uri(o.uri)
         relationships = request_state["qs_params"].get("rels","buyer,vendor")
         source_str = request_state["qs_params"].get("sources","_core")
+        earliest_str = request_state["qs_params"].get("earliest_date","")
         nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                 "relationship_str":relationships,
-                                                                "source_str":source_str})
+                                                                "source_str":source_str,
+                                                                "earliest_str":earliest_str})
 
         relationship_vals = set(relationships.split(","))  
         relationship_link_data = self.create_relationship_links(request_state, relationship_vals)    
         nodes_edges_data = nodes_edges.data
         request_state["document_sources"]=nodes_edges_data.pop("document_sources")
+        request_state["earliest_doc_date"]=nodes_edges_data.pop("earliest_doc_date")
         return Response({"nodes_edges":nodes_edges_data,
                             "requested_uri": uri,
                             "org_data": org_data,
@@ -171,14 +174,17 @@ class OrganizationTimeline(APIView):
         request_state["hide_link"]="organization_timeline"
         o = Resource.nodes.get(uri=uri)
         source_str = request_state["qs_params"].get("sources","_core")
+        earliest_str = request_state["qs_params"].get("earliest_date","")
         org_serializer = OrganizationTimelineSerializer(o, context={"combine_same_as_name_only":combine_same_as_name_only,
-                                                                    "source_str":source_str})
+                                                                    "source_str":source_str,
+                                                                    "earliest_str":earliest_str})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
-        request_state["document_sources"]=org_serializer_data.pop("document_sources")
+        request_state["document_sources"] = org_serializer_data.pop("document_sources")
+        request_state["earliest_doc_date"] = org_serializer_data.pop("earliest_doc_date")
         resp = Response({"timeline_serializer": org_serializer_data,
-                            "org_data":org_data,
+                            "org_data": org_data,
                             "request_state": request_state,
                             "uri_parts": uri_parts,
                             }, status=status.HTTP_200_OK)
@@ -214,13 +220,17 @@ class OrganizationByUri(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_linkages"
         source_str = request_state["qs_params"].get("sources","_core")
+        earliest_str = request_state["qs_params"].get("earliest_date","")
         org_serializer = OrganizationGraphSerializer(o,context=
                                     {"combine_same_as_name_only":combine_same_as_name_only,
-                                     "source_str":source_str})
+                                     "source_str":source_str,
+                                     "earliest_str":earliest_str,
+                                     })
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"]=org_serializer_data.pop("document_sources")
+        request_state["earliest_doc_date"] = org_serializer_data.pop("earliest_doc_date") 
         resp = Response({"data_serializer": org_serializer_data,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
@@ -243,7 +253,7 @@ def elements_from_uri(uri):
     }
 
 
-def industry_geo_search_str(industry, geo,with_emphasis=True):
+def industry_geo_search_str(industry, geo):
     industry_str = "all industries" if industry is None or industry.strip() == '' else industry
     geo_str = "all locations" if geo is None or geo.strip() == '' else geo
     if geo_str.split()[0].lower() == 'united':

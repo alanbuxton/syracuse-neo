@@ -71,6 +71,19 @@ class Resource(StructuredNode):
             if x.sourceOrganization in source_names:
                 return True
         return False
+    
+    def is_recent_enough(self, min_date):
+        if isinstance(self, IndustryCluster):
+            return True
+        if isinstance(self, Article):
+            if self.datePublished.date() >= min_date:
+                return True
+            else:       
+                return False
+        for x in self.related_articles or []:
+            if x.datePublished.date() >= min_date:
+                return True
+        return False
 
     @staticmethod
     def get_by_uri(uri):
@@ -115,6 +128,13 @@ class Resource(StructuredNode):
     def earliestDatePublished(self):
         return self.earliestDocumentSource.datePublished
 
+    @property
+    def latestDatePublished(self):
+        docs = self.documentSource.order_by("-datePublished")
+        if len(docs) == 0:
+            return None
+        return docs[0].datePublished
+    
     @staticmethod
     def self_or_ultimate_target_node(uri_or_object):
         if isinstance(uri_or_object, str):
@@ -251,6 +271,7 @@ class Resource(StructuredNode):
         '''
         override_from_uri = kwargs.get("override_from_uri")
         source_names = kwargs.get("source_names")
+        min_date = kwargs.get("min_date")
         if override_from_uri is not None:
             from_uri = override_from_uri
         else:
@@ -269,6 +290,9 @@ class Resource(StructuredNode):
                 other_node = Resource.self_or_ultimate_target_node(x)
                 if other_node.has_permitted_document_source(source_names) is False:
                     logger.debug(f"Skipping {other_node.uri} due to invalid source_names")
+                    continue
+                if min_date is not None and other_node.is_recent_enough(min_date) is False:
+                    logger.debug(f"Skipping {other_node} as it is too old")
                     continue
                 logger.debug(f"Working on {other_node.uri}")
                 vals = {"from_uri": from_uri, "label":key, "direction":direction, "other_node":other_node}
