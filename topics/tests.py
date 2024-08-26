@@ -507,8 +507,8 @@ class TestUtilsWithDumpData(TestCase):
         uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
-        assert "Switch to All" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to All","",content_filtered)
+        assert "Switch to all" in content_filtered
+        content_filtered = re.sub(r"Document sources:.+Switch to all","",content_filtered)
         assert "PR Newswire" in content_filtered # CityAM story is newer but not included
         assert "CityAM" not in content_filtered # Not available in core
 
@@ -517,8 +517,8 @@ class TestUtilsWithDumpData(TestCase):
         uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
-        assert "Switch to Core" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to Core","",content_filtered)
+        assert "Switch to core" in content_filtered
+        content_filtered = re.sub(r"Document sources:.+Switch to core","",content_filtered)
         assert "PR Newswire" not in content_filtered # Was shown in the Document sources list but not in body of the graph
         assert "CityAM" in content_filtered # Newest dated version
 
@@ -527,8 +527,8 @@ class TestUtilsWithDumpData(TestCase):
         uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
-        assert "Switch to All" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to All","",content_filtered)
+        assert "Switch to all" in content_filtered
+        content_filtered = re.sub(r"Document sources:.+Switch to all","",content_filtered)
         assert "PR Newswire" in content_filtered 
         assert "CityAM" not in content_filtered # Not available in core
 
@@ -537,8 +537,8 @@ class TestUtilsWithDumpData(TestCase):
         uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
-        assert "Switch to Core" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to Core","",content_filtered)
+        assert "Switch to core" in content_filtered
+        content_filtered = re.sub(r"Document sources:.+Switch to core","",content_filtered)
         assert "PR Newswire" in content_filtered 
         assert "CityAM" in content_filtered
 

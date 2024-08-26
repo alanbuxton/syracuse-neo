@@ -9,12 +9,12 @@
   Document sources: {{ request_state.document_sources.pretty_print_text }}
   {% if request_state.document_sources.has_core is False %}
     <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='sources' qs_val2='_core' %}">
-      (Switch to Core Sources)
+      (Switch to core sources)
     </a>
   {% endif %}
   {% if request_state.document_sources.has_all is False %}
     <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='sources' qs_val2='_all' %}">
-      (Switch to All Sources)
+      (Switch to all sources)
     </a> 
   {% endif %}
 {% endif %}
@@ -29,17 +29,17 @@
     {% endif %}
     {% if request_state.earliest_doc_date.one_year_ago_fmt %}
       <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='earliest_date' qs_val2=request_state.earliest_doc_date.one_year_ago_fmt %}">
-        (Switch to 1 year ago)
+        (Switch to last 1 year)
       </a>
     {% endif %}
     {% if request_state.earliest_doc_date.three_years_ago_fmt %}
       <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='earliest_date' qs_val2=request_state.earliest_doc_date.three_years_ago_fmt %}">
-        (Switch to 3 years ago)
+        (Switch to last 3 years)
       </a>
     {% endif %}
     {% if request_state.earliest_doc_date.five_years_ago_fmt %}
       <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='earliest_date' qs_val2=request_state.earliest_doc_date.five_years_ago_fmt %}">
-        (Switch to 5 years ago)
+        (Switch to last 5 years)
       </a>
     {% endif %}
     {% if request_state.earliest_doc_date.all_time_flag is False %}

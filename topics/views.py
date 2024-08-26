@@ -190,26 +190,6 @@ class OrganizationTimeline(APIView):
                             }, status=status.HTTP_200_OK)
         return resp
 
-
-class RandomOrganization(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'organization_linkages.html'
-
-    def get(self, request):
-        o = Organization.get_random()
-        request_state, combine_same_as_name_only = prepare_request_state(request)
-        uri_parts = elements_from_uri(o.uri)
-        org_serializer = OrganizationGraphSerializer(o)
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
-        request_state["hide_link"]="organization_linkages"
-        resp = Response({"data_serializer": org_serializer.data,
-                            "org_data":org_data,
-                            "uri_parts": uri_parts,
-                            "request_state": request_state,
-                        }, status=status.HTTP_200_OK)
-        return resp
-
-
 class OrganizationByUri(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_linkages.html'
