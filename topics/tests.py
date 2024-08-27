@@ -615,8 +615,10 @@ class TestFamilyTree(TestCase):
         clean_db()
         P.nuke_all() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
+        org_nodes = org_nodes + [make_node(x,y) for x,y in zip(range(200,210),["p1","p2","s1","s2","c1","c2"])]
         org_nodes = sorted(org_nodes, reverse=True)
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"opqrstuvw")]
+        act_nodes = act_nodes + [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(200,210),["a1","a2","a3"])]
         node_list = ", ".join(org_nodes + act_nodes)
         query = f"""CREATE {node_list},
             (a)-[:buyer]->(q)-[:target]->(b),
@@ -634,7 +636,13 @@ class TestFamilyTree(TestCase):
             (j)-[:buyer]->(u)-[:target]->(l),
 
             (l)-[:sameAsNameOnly]->(n),
-            (m)-[:buyer]->(v)-[:target]->(n)
+            (m)-[:buyer]->(v)-[:target]->(n),
+
+            (p1)-[:buyer]->(a1)-[:target]->(s1),
+            (s1)-[:sameAsNameOnly]->(s2),
+            (s2)-[:buyer]->(a2)-[:target]->(c1),
+            (p1)-[:sameAsNameOnly]->(p2),
+            (p2)-[:buyer]->(a3)-[:target]->(c2)            
         """
         db.cypher_query(query)
 
@@ -705,15 +713,31 @@ class TestFamilyTree(TestCase):
         client = self.client
         response = client.get("/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&earliest_date=-1")
         content = str(response.content)
-        res = re.search(r"const node_details_dict = (.+?) ;",content)
-        as_dict = json.loads(res.groups(0)[0])
-        names = [x['label'] for x in as_dict.values()]
-        assert len(names) == 6
-        bpos = names.index("Name B")
-        cpos = names.index("Name C")
-        fpos = names.index("Name F")
-        assert bpos < cpos < fpos, f"Expected {bpos} < {cpos} < {fpos}"
+        res = re.search(r"var edges = new vis.DataSet\( (.+?) \);",content)
+        as_dict = json.loads(res.groups(0)[0].replace("\\'","\""))
+        target_ids = [x['to'] for x in as_dict]
+        assert target_ids == ['https://1145.am/db/101/b', 'https://1145.am/db/102/c', 
+                              'https://1145.am/db/105/f', 'https://1145.am/db/103/d', 
+                              'https://1145.am/db/107/h']
 
+    def test_links_parent_and_child_if_only_linked_via_same_as_name_only(self):
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1")
+        content = str(response.content)
+        assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" in content # link from p1 to s1
+        assert "https://1145.am/db/202/s1-buyer-https://1145.am/db/204/c1" in content # link from s1 to c1 (but it was s2 who bought c1)
+
+    def test_switches_sibling_if_parent_has_different_same_as_child(self):
+        '''
+        Looking for s2, which is sameAsNameOnly with s1, so there shouldn't be any reference to s1 here
+        '''
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
+        content = str(response.content)
+        assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
+        assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
+
+ 
 class TestSerializers(TestCase):
 
     def test_cleans_relationship_string1(self):

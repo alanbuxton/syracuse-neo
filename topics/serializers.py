@@ -53,22 +53,25 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
 
     def add_child_nodes_edges(self, central_uri, nodes, node_data, edges, edge_data, parent_uri, family_tree_results, level):
         for _,node,activity,art,label,docExtract in sorted(family_tree_results , key=lambda x: x[0].best_name):
-            edge_id = f"{ parent_uri }-{ label }-{ node.uri }"
-            if edge_id in edge_data:
-                logger.debug(f"Already seen {edge_id}, ignoring")
-                continue
-            edge_data[edge_id] = self.generate_edge_data(activity,art,label,docExtract)
-            edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
-            edges.append ( { "id": edge_id,
-                        "from": f"{ parent_uri }", "to": f"{ node.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
-            if node.uri in node_data:
-                logger.debug(f"Already seen {node.uri}, ignoring")
-                continue
-            node_data[node.uri] = node.serialize_no_none()
-            node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
-            if node.uri == central_uri:
-                node_attribs['color'] = '#f6c655'
-            nodes.append(node_attribs)
+            self.add_node_edge(parent_uri, central_uri, node, activity, art, label, docExtract, nodes, edges, node_data, edge_data, level)
+
+    def add_node_edge(self, parent_uri, central_uri, node, activity, art, label, docExtract, nodes, edges, node_data, edge_data, level):
+        edge_id = f"{ parent_uri }-{ label }-{ node.uri }"
+        if edge_id in edge_data:
+            logger.debug(f"Already seen {edge_id}, ignoring")
+            return
+        edge_data[edge_id] = self.generate_edge_data(activity,art,label,docExtract)
+        edge_label = f"{label.title()} ({art.sourceOrganization} {art.datePublished.strftime('%b %Y')})"
+        edges.append ( { "id": edge_id,
+                    "from": f"{ parent_uri }", "to": f"{ node.uri }", "color": "blue", "label": edge_label, "arrows": "to" })
+        if node.uri in node_data:
+            logger.debug(f"Already seen {node.uri}, ignoring")
+            return
+        node_data[node.uri] = node.serialize_no_none()
+        node_attribs = {"id": node.uri, "label": node.best_name, "level": level}
+        if node.uri == central_uri:
+            node_attribs['color'] = '#f6c655'
+        nodes.append(node_attribs)
 
 
     def to_representation(self, instance):
@@ -89,33 +92,36 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         node_data = {}
         edge_data = {}
         
-        for parent,_,_,_,_,_ in sorted(parents, key=lambda x: x[0].best_name):
+        for parent,child,activity,art,label,docExtract in sorted(parents, key=lambda x: x[0].best_name):
             if parent.uri in node_data:
                 logger.debug(f"Already seen {parent.uri}, ignoring")
                 continue
             node_data[parent.uri] = parent.serialize_no_none()
             nodes.append( {"id": parent.uri, "label": parent.best_name, "level": 0})
+            if child.uri not in node_data:
+                self.add_node_edge(parent.uri, organization_uri, child, activity, art, label, docExtract, 
+                                    nodes, edges, node_data, edge_data, 1)
+                
             relevant_children = [x for x in parents_children if x[0] == parent]
             self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, parent.uri, relevant_children, 1)
+            
 
         self.add_child_nodes_edges(organization_uri, nodes, node_data, edges, edge_data, organization_uri, org_children, 2)
 
         if organization_uri not in node_data:
+            # could be the case if the requested node doesn't have a parent
             node_data[organization_uri] = instance.serialize_no_none()
             node_attribs = {"id": organization_uri, "label": instance.best_name, "level": 1}
             node_attribs['color'] = '#f6c655'
             nodes.append(node_attribs)
 
-        pruned_nodes = prune_not_needed_nodes(nodes, edges) 
-        pruned_node_data = {}
-        for node in pruned_nodes:
-            pruned_node_data[node['id']] = node_data[node['id']]
+        sorted_nodes = sorted(nodes, key=lambda x: f"{x['level']}-{x['label']}")
 
-        sorted_edges = sort_edges(edges, pruned_nodes)
+        sorted_edges = sort_edges(edges, sorted_nodes)
 
         return {
-            "nodes": pruned_nodes,
-            "node_details": CustomSerializer(pruned_node_data),
+            "nodes": sorted_nodes,
+            "node_details": CustomSerializer(node_data),
             "edges": sorted_edges,
             "edge_details": CustomSerializer(edge_data),
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
@@ -233,16 +239,6 @@ def sort_edges(edges, nodes):
     for remaining_edges in edge_dict_to.values():
         sorted_edges.extend(remaining_edges)
     return sorted_edges
-
-def prune_not_needed_nodes(nodes, edges):
-    nodes_to_keep = []
-    for node in nodes:
-        for edge in edges:
-            if node['id'] == edge['from'] or node['id'] == edge['to']:
-                nodes_to_keep.append(node)
-                break
-    nodes_to_keep = sorted(nodes_to_keep, key=lambda x: f"{x['level']}-{x['label']}")
-    return nodes_to_keep
 
 
 class OrganizationGraphSerializer(serializers.BaseSerializer):
