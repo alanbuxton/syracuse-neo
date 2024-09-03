@@ -615,10 +615,10 @@ class TestFamilyTree(TestCase):
         clean_db()
         P.nuke_all() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
-        org_nodes = org_nodes + [make_node(x,y) for x,y in zip(range(200,210),["p1","p2","s1","s2","c1","c2"])]
+        org_nodes = org_nodes + [make_node(x,y) for x,y in zip(range(200,210),["p1","p2","s1","s2","c1","c2","p3"])]
         org_nodes = sorted(org_nodes, reverse=True)
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"opqrstuvw")]
-        act_nodes = act_nodes + [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(200,210),["a1","a2","a3"])]
+        act_nodes = act_nodes + [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(200,210),["a1","a2","a3","a4"])]
         node_list = ", ".join(org_nodes + act_nodes)
         query = f"""CREATE {node_list},
             (a)-[:buyer]->(q)-[:target]->(b),
@@ -642,7 +642,8 @@ class TestFamilyTree(TestCase):
             (s1)-[:sameAsNameOnly]->(s2),
             (s2)-[:buyer]->(a2)-[:target]->(c1),
             (p1)-[:sameAsNameOnly]->(p2),
-            (p2)-[:buyer]->(a3)-[:target]->(c2)            
+            (p2)-[:buyer]->(a3)-[:target]->(c2),
+            (p3)-[:buyer]->(a4)-[:target]->(s1)
         """
         db.cypher_query(query)
 
@@ -737,7 +738,27 @@ class TestFamilyTree(TestCase):
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
 
- 
+    def test_switches_sibling_if_different_parent_has_same_as_name_only_child(self):
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
+        content = str(response.content)
+        assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
+        assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
+
+    def test_updates_sibling_target_if_central_org_is_linked_by_same_only(self):
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1")
+        content = str(response.content)
+        # p3 bought s2, but I'm looking at s1 which has sameAsNameOnly with s2, so should only be seeing s1
+        assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/203/s2' not in content
+        assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content 
+
+    def test_links_multiple_parents_to_same_child(self):
+        client = self.client
+        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1")
+        content = str(response.content)
+        assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content
+
 class TestSerializers(TestCase):
 
     def test_cleans_relationship_string1(self):

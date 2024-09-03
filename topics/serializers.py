@@ -98,8 +98,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
                 continue
             node_data[parent.uri] = parent.serialize_no_none()
             nodes.append( {"id": parent.uri, "label": parent.best_name, "level": 0})
-            if child.uri not in node_data:
-                self.add_node_edge(parent.uri, organization_uri, child, activity, art, label, docExtract, 
+            self.add_node_edge(parent.uri, organization_uri, child, activity, art, label, docExtract, 
                                     nodes, edges, node_data, edge_data, 1)
                 
             relevant_children = [x for x in parents_children if x[0] == parent]
