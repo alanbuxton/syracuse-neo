@@ -99,6 +99,10 @@ class Resource(StructuredNode):
 
     @classmethod
     def randomized_active_nodes(cls,limit=10):
+        cache_key = "randomized_nodes"
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
         query = f"""MATCH (n: Resource:{cls.__name__})
                     WHERE n.internalMergedSameAsHighToUri IS NULL
                     AND NOT (n)-[:sameAsNameOnly]-()
@@ -106,7 +110,9 @@ class Resource(StructuredNode):
                     ORDER BY r
                     LIMIT {limit}"""
         res,_ = db.cypher_query(query, resolve_objects=True)
-        return [x[0] for x in res]
+        vals = [x[0] for x in res]
+        cache.set(cache_key, vals)
+        return vals
 
     @property
     def industry_as_str(self):

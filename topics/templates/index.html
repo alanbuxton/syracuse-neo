@@ -112,7 +112,7 @@ Last updated {{ last_updated | localize }}</h5>
 <div class="search_section">
   <div id="result_list">
     {% if search_type != 'org_name' and search_type != 'combined_search' %}
-      Not sure where to start? Click one of these 10 random examples</p>
+      Not sure where to start? Click one of these examples:</p>
       {% for org in organizations %}
         <p><b><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
           {{ org.label }}</a></b> ({{ org.uri }})</p>
