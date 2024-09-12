@@ -2,20 +2,19 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import redirect
-from topics.models import Organization, ActivityMixin, Resource
-from .serializers import (OrganizationGraphSerializer, OrganizationSerializer,
+from topics.models import Organization, Resource
+from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
     NameSearchSerializer, GeoSerializer, 
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer)
 from rest_framework import status
-from datetime import date, datetime
+from datetime import datetime, timedelta
 from precalculator.models import cache_last_updated_date
 from urllib.parse import urlparse, urlencode
 from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
-from topics.templatetags.topics_extras import url_with_querystring
 
 import logging
 logger = logging.getLogger(__name__)
@@ -41,47 +40,49 @@ class Index(APIView):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         if selected_geo is None:
             selected_geo_name = None
-        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        if industry_name is None:
-            industry_name = None
 
+        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         request_state, combine_same_as_name_only = prepare_request_state(request)
+        min_date_for_article_counts = datetime.today() - timedelta(days = 365 * 2)
 
         if org_name:
-            orgs = Organization.find_by_name(org_name, combine_same_as_name_only)
+            orgs = Organization.find_by_name(org_name, combine_same_as_name_only, 
+                                             min_date=min_date_for_article_counts)
+            orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
-            org_list = OrganizationSerializer(orgs, many=True)
+            org_list = OrganizationWithCountsSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_search = GeoSerializer()
             search_type = 'org_name'
             search_term = org_name
         elif selected_geo or industry:
-            orgs = Organization.by_industry_and_or_geo(industry,selected_geo)
+            orgs = Organization.by_industry_and_or_geo(industry,selected_geo,
+                                                       min_date=min_date_for_article_counts)
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
-            org_list = OrganizationSerializer(orgs, many=True)
+            orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
+            org_list = OrganizationWithCountsSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":""})
-            geo_search = GeoSerializer()
             search_type = 'combined_search'
             search_term = industry_geo_search_str(industry_name, selected_geo_name)
         else:
-            orgs = Organization.randomized_active_nodes(10)
-            org_list = OrganizationSerializer(orgs, many=True)
+            orgs = Organization.randomized_active_nodes(10,min_date=min_date_for_article_counts)
+            org_list = OrganizationWithCountsSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
-            geo_search = GeoSerializer()
             search_type = 'random'
             search_term = None
             num_hits = 0
-        industry_serializer = IndustrySerializer()
         last_updated = DataImport.latest_import_ts()
+        geo_search = GeoSerializer()
+        industry_search = IndustrySerializer({"industry":industry_name})
+
         resp = Response({"organizations":org_list.data,
                         "search_serializer": org_search,
                         "search_term": search_term,
                         "num_hits": num_hits,
-                        "industry_search": industry_serializer,
+                        "industry_search": industry_search,
                         "geo_search": geo_search,
                         "search_type": search_type,
                         "motd": MOTD,

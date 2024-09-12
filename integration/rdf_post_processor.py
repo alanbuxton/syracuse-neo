@@ -1,8 +1,7 @@
 from topics.models import Resource
 from neomodel import db
 import logging
-from integration.neo4j_utils import output_same_as_stats, count_relationships, apoc_del_redundant_same_as
-from datetime import datetime
+from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as
 logger = logging.getLogger(__name__)
 
 class RDFPostProcessor(object):

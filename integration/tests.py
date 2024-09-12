@@ -244,9 +244,9 @@ def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
 
 
-def make_node(doc_id,letter,node_type="Organization",doc_extract=None,datestamp=datetime.now(tz=timezone.utc)):
+def make_node(doc_id,identifier,node_type="Organization",doc_extract=None,datestamp=datetime.now(tz=timezone.utc)):
     if node_type == "Organization":
-        industry = "bar" if letter in "aeiou" else "baz"
+        industry = "bar" if identifier in "aeiou" else "baz"
         industry_str = f"industry: ['{industry}'],"
     else:
         industry_str = ""
@@ -255,18 +255,20 @@ def make_node(doc_id,letter,node_type="Organization",doc_extract=None,datestamp=
     else:
         status_str = ""
 
-    node = f"({letter}:Resource:{node_type} {{uri: 'https://1145.am/db/{doc_id}/{letter}', name: ['Name {letter.upper()}'], {industry_str} {status_str} internalDocId: {doc_id}}})"
+    friendly_name = identifier.replace("_"," ")
+
+    node = f"({identifier}:Resource:{node_type} {{uri: 'https://1145.am/db/{doc_id}/{identifier}', name: ['Name {friendly_name.upper()}'], {industry_str} {status_str} internalDocId: {doc_id}}})"
     if doc_extract is None:
         doc_extract_text = ''
     else:
         doc_extract = doc_extract.replace("'","")
         doc_extract_text = f"documentExtract: '{doc_extract}''"
-    doc_source = f"""(docsource_{letter}:Resource:Article {{uri: 'https://1145.am/db/article_{letter}',
-                        headline: 'Headline {letter}', sourceOrganization:'prweb', datePublished: datetime('{datestamp.isoformat()}') }})"""
+    doc_source = f"""(docsource_{identifier}:Resource:Article {{uri: 'https://1145.am/db/article_{identifier}',
+                        headline: 'Headline {identifier}', sourceOrganization:'prweb', datePublished: datetime('{datestamp.isoformat()}') }})"""
     doc_extract_str = ""
     if "Activity" in node_type:
-        doc_extract_str = f"{{ documentExtract: 'Doc Extract {letter.upper()}' }}"
-    return f"{node}-[:documentSource {doc_extract_str}]->{doc_source}, (docsource_{letter})-[:url]->(ext_{letter}:Resource {{ uri: 'https://example.org/external/art_{letter}' }})"
+        doc_extract_str = f"{{ documentExtract: 'Doc Extract {doc_extract_text}' }}"
+    return f"{node}-[:documentSource {doc_extract_str}]->{doc_source}, (docsource_{identifier})-[:url]->(ext_{identifier}:Resource {{ uri: 'https://example.org/external/art_{identifier}' }})"
 
 def all_related_uris(resource):
     vals = {}

@@ -2,7 +2,6 @@ from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
     IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
-import datetime
 from topics.geo_utils import get_geoname_uris_for_country_region
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
@@ -11,9 +10,12 @@ from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One
 from typing import List
+from datetime import datetime
+from .constants import BEGINNING_OF_TIME
 
 import logging
 logger = logging.getLogger(__name__)
+
 
 def uri_from_related(rel):
     if len(rel) == 0:
@@ -98,19 +100,21 @@ class Resource(StructuredNode):
         return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).get_or_none(**params)
 
     @classmethod
-    def randomized_active_nodes(cls,limit=10):
+    def randomized_active_nodes(cls,limit=10,min_date=BEGINNING_OF_TIME):
         cache_key = "randomized_nodes"
         res = cache.get(cache_key)
         if res is not None:
             return res
-        query = f"""MATCH (n: Resource:{cls.__name__})
+        query = f"""MATCH (n: Resource&{cls.__name__})--(a: Article)
                     WHERE n.internalMergedSameAsHighToUri IS NULL
                     AND NOT (n)-[:sameAsNameOnly]-()
-                    RETURN n,rand() as r
+                    AND a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    WITH n, count(a) as article_count
+                    RETURN n,article_count,rand() as r
                     ORDER BY r
                     LIMIT {limit}"""
         res,_ = db.cypher_query(query, resolve_objects=True)
-        vals = [x[0] for x in res]
+        vals = [(x[0],x[1]) for x in res]
         cache.set(cache_key, vals)
         return vals
 
@@ -176,16 +180,16 @@ class Resource(StructuredNode):
             db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
 
     @classmethod
-    def find_by_name(cls, name, combine_same_as_name_only):
+    def find_by_name(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
         name = name.lower()
-        cache_key = f"{cls.__name__}_{name}_{combine_same_as_name_only}"
+        cache_key = f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date}"
         res = cache.get(cache_key)
         if res is not None:
             logger.debug(f"From cache {cache_key}")
             return res
-        objs1 = cls.find_by_name_optional_same_as_onlies(name,combine_same_as_name_only)
+        objs1 = cls.find_by_name_optional_same_as_onlies(name,combine_same_as_name_only,min_date)
         if combine_same_as_name_only is True:
-            objs2 = cls.get_first_same_as_name_onlies(name)
+            objs2 = cls.get_first_same_as_name_onlies(name,min_date)
         else:
             objs2 = []
         objs = set(objs1 + objs2)
@@ -193,33 +197,39 @@ class Resource(StructuredNode):
         return objs
 
     @classmethod
-    def find_by_name_optional_same_as_onlies(cls, name, exclude_same_as_onlies):
+    def find_by_name_optional_same_as_onlies(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
         query = f'''MATCH (n: {cls.__name__})
                     WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
-                    AND n.internalMergedSameAsHighToUri IS NULL '''
-        if exclude_same_as_onlies is True:
+                    AND n.internalMergedSameAsHighToUri IS NULL 
+                   '''
+        if combine_same_as_name_only is True: # then exclude entries with same_as_name_only here
             query = f"{query} AND NOT (n)-[:sameAsNameOnly]-() "
-        query = query + " RETURN n"
+        query = f"""{query}  OPTIONAL MATCH (n)-[]-(a:Article)
+                    WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}') """
+        query = query + " WITH n, count(a) as cnt_artices RETURN n, cnt_artices"
         results, _ = db.cypher_query(query,resolve_objects=True)
-        objs = [x[0] for x in results]
+        objs = [(x[0],x[1]) for x in results]
         return objs
 
     @classmethod
-    def get_first_same_as_name_onlies(cls, name):
+    def get_first_same_as_name_onlies(cls, name, min_date=BEGINNING_OF_TIME):
         query = f"""MATCH (n: {cls.__name__})-[:sameAsNameOnly]-(o)
                     WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
                     AND n.internalMergedSameAsHighToUri IS NULL
                     AND o.internalMergedSameAsHighToUri IS NULL
                     AND n.internalDocId <= o.internalDocId
-                    RETURN n,o ORDER BY n.internalDocId"""
+                    OPTIONAL MATCH (a:Article)-[]-(n)
+                    WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    WITH n, o, count(a) as cnt_artices
+                    RETURN n, o, cnt_artices ORDER BY n.internalDocId"""
         results,_ = db.cypher_query(query, resolve_objects=True)
         entities_to_keep = []
         found_uris = set()
-        for source, target in results:
+        for source, target, cnt in results:
             found_uris.add(target.uri)
             if source.uri in found_uris:
                 continue
-            entities_to_keep.append(source)     
+            entities_to_keep.append((source, cnt))     
             found_uris.add(source.uri)
         return entities_to_keep
 
@@ -720,8 +730,13 @@ class Organization(Resource):
         return role_activities
 
     @staticmethod
-    def by_industry_and_or_geo(industry_id, geo_code,uris_only=False,limit=None,allowed_to_set_cache=False):
-        cache_key = f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}"
+    def by_industry_and_or_geo(industry_id, geo_code,uris_only=False,limit=None,
+                               allowed_to_set_cache=False,min_date=BEGINNING_OF_TIME):
+        '''
+            Returns list of tuples: (org, count)
+            or, if uris_only is True, just a list of uris
+        '''
+        cache_key = f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}_{min_date}"
         vals = cache.get(cache_key)
         if vals is not None:
             return vals
@@ -741,11 +756,13 @@ class Organization(Resource):
             match2 = "(n: Organization)-[:basedInHighGeoNamesLocation]-(g: GeoNamesLocation) "
             where2 = f" g.uri IN {geo_uris} "
         if industry_uris is None and geo_uris is not None:
-            query = f"MATCH {match2} WHERE {where2} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
+            query = f"MATCH {match2} WHERE {where2} AND n.internalMergedSameAsHighToUri IS NULL "
         elif industry_uris is not None and geo_uris is None:
-            query = f"MATCH {match1} WHERE {where1} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
+            query = f"MATCH {match1} WHERE {where1} AND n.internalMergedSameAsHighToUri IS NULL "
         else:
-            query = f"MATCH {match1}, {match2} WHERE {where1} AND {where2} AND n.internalMergedSameAsHighToUri IS NULL RETURN DISTINCT(n) "
+            query = f"MATCH {match1}, {match2} WHERE {where1} AND {where2} AND n.internalMergedSameAsHighToUri IS NULL "
+        article_clause = f" OPTIONAL MATCH (a:Article)-[]-(n) WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}') "
+        query = f"{query} {article_clause} WITH n, count(a) as cnt_articles RETURN n, cnt_articles "
         if limit is not None:
             query = f"{query} LIMIT {limit}"
         logger.debug(query)
@@ -756,7 +773,7 @@ class Organization(Resource):
                 cache.set(cache_key,res)
             return res
         else:
-            res = [x[0] for x in vals]
+            res = [(x[0],x[1]) for x in vals]
             if allowed_to_set_cache is True:
                 cache.set(cache_key,res)
             return res
@@ -938,3 +955,9 @@ def print_friendly(vals, limit = 2):
 
 def date_for_cypher(a_date):
     return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
+
+def date_to_cypher_friendly(date):
+    if isinstance(date, str):
+        return datetime.fromisoformat(date).isoformat()
+    else:
+        return date.isoformat()

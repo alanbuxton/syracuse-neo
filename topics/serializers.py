@@ -13,12 +13,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class OrganizationWithCountsSerializer(serializers.ModelSerializer):
 
     def to_representation(self,instance):
-        repres = instance.serialize()
-        splitted_uri = instance.split_uri()
+        ''' instance is a tuple of organization and count'''
+        repres = instance[0].serialize()
+        splitted_uri = instance[0].split_uri()
         repres["splitted_uri"] = splitted_uri
+        repres["article_count"] = instance[1]
         return repres
 
 class ResourceSerializer(serializers.Serializer):
@@ -298,6 +300,9 @@ class IndustrySerializer(serializers.Serializer):
     def get_industry_id(self):
         self.is_valid()
         return self['industry'].value
+
+    def set_default_value(self, val):
+        self['industry'].value = val
 
 class GeoSerializer(serializers.Serializer):
     country_or_region = DataListChoiceField(choices=geo_select_list(include_alt_names=True))

@@ -35,7 +35,7 @@
   flex: 1;
 }
 
-#result_list {
+.result_list {
   padding-left: 15%;
 }
 
@@ -77,18 +77,17 @@ Last updated {{ last_updated | localize }}</h5>
       </form>
     </div>
     <div id="right_panel">
-      <p>or, filter for companies by industry &amp; country/region</p>
+      <p>or, filter for companies by industry and/or country/region</p>
       <form class="narrow_form" action="{% url 'index' %}" method="GET" novalidate>
           {% render_form industry_search template_pack='rest_framework/inline' %}
           {% render_form geo_search template_pack='rest_framework/inline' %}
-
           <br/><input type="submit" value="Search">
       </form>
     </div>
   </div>
   {% if search_type == 'org_name' or search_type == 'combined_search' %}
-    <div id="result_list">
-      <p>Searched for {{ search_term | safe }}.
+    <div class="result_list">
+      <p>Searched for &quot;{{ search_term | safe }}&quot;.
         {% if search_type == 'combined_search' %}
           {% include "track_industry_geo_snippet.html" %}
         {% endif %}
@@ -99,26 +98,19 @@ Last updated {{ last_updated | localize }}</h5>
          organizations:
         {% endif %}
       </p>
-      {% for org in organizations %}
-        <p><b><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
-          {{ org.label }} </a></b> ({{ org.uri }})</p>
-     {% endfor %}
+    {% include "organization_list.html" %}
     </div>
     <em>This search will only find organizations that are tagged to the respective industry or location: not all organizations have this data available.</em>
-  {% endif %}
-</div>
+  {% else %}
 
-<br/>
-<div class="search_section">
-  <div id="result_list">
-    {% if search_type != 'org_name' and search_type != 'combined_search' %}
-      Not sure where to start? Click one of these examples:</p>
-      {% for org in organizations %}
-        <p><b><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
-          {{ org.label }}</a></b> ({{ org.uri }})</p>
-      {% endfor %}
-    {% endif %}
-  </div>
+  <br/>
+    <div class="search_section">
+      <div class="result_list">
+        Not sure where to start? Click one of these examples:</p>
+        {% include "organization_list.html" %}
+      </div>
+    </div>
+  {% endif %}
 </div>
 
 {% include 'layouts/footer.html' %}

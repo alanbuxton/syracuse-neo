@@ -1,5 +1,5 @@
 from neomodel import db
-from .models import Organization, ActivityMixin, Article
+from .models import Organization, ActivityMixin, Article, date_to_cypher_friendly
 from .geo_utils import geoname_ids_for_country_region, geo_select_list
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
@@ -190,12 +190,6 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
     """
     logger.debug(query)
     return query
-
-def date_to_cypher_friendly(date):
-    if isinstance(date, str):
-        return datetime.fromisoformat(date).isoformat()
-    else:
-        return date.isoformat()
 
 def get_cached_stats():
     latest_date = P.get_last_updated()

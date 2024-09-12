@@ -15,6 +15,7 @@ from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
 import json
 import re
+from topics.geo_utils import get_geo_data
 from .serializers import (
     only_valid_relationships, FamilyTreeSerializer, 
     create_earliest_date_pretty_print_data,
@@ -29,8 +30,7 @@ if os.environ.get(env_var) != "Y":
 
 class TestUtilsWithDumpData(TestCase):
 
-    @classmethod
-    def setUpTestData(cls):
+    def setUpTestData():
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
@@ -39,6 +39,7 @@ class TestUtilsWithDumpData(TestCase):
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
         r.run_all_in_order()
+        get_geo_data(True)
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()   
@@ -260,16 +261,16 @@ class TestUtilsWithDumpData(TestCase):
         resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=United+States&earliest_date=-1")
         content = str(resp.content)
         assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"PAREXEL International Corporation\s*</a>",content)) == 1
-        assert len(re.findall(r"EUSA Pharma\s*</a>",content)) == 0
+        assert len(re.findall(r"Parexel_International_Corporation\s*</a>",content)) == 1
+        assert len(re.findall(r"Eusa_Pharma\s*</a>",content)) == 0
 
     def test_search_industry_no_geo(self):
         client = self.client
         resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=&earliest_date=-1")
         content = str(resp.content)
         assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"PAREXEL International Corporation\s*</a>",content)) == 1
-        assert len(re.findall(r"EUSA Pharma\s*</a>",content)) == 1
+        assert len(re.findall(r"Parexel_International_Corporation\s*</a>",content)) == 1
+        assert len(re.findall(r"Eusa_Pharma\s*</a>",content)) == 1
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
@@ -768,3 +769,73 @@ class TestSerializers(TestCase):
     def test_cleans_relationship_string2(self):
         val = only_valid_relationships("investor|buyer|vendor")
         assert val == "investor|buyer|vendor"
+
+class TestFindResultsArticleCounts(TestCase):
+
+    def setUpTestData():
+        clean_db()
+        P.nuke_all() # Company name etc are stored in cache
+        node_data = [
+            {"doc_id":100,"identifier":"foo_new_one","datestamp": datetime.now() - timedelta(365)},
+            {"doc_id":101,"identifier":"foo_old_one","datestamp": datetime.now() - timedelta(365 * 5)},
+            {"doc_id":102,"identifier":"bar_new_one","datestamp": datetime.now() - timedelta(365)},
+            {"doc_id":103,"identifier":"bar_old_one","datestamp": datetime.now() - timedelta(365 * 5)},
+        ]
+
+        nodes = [make_node(**data) for data in node_data]
+        node_list = ", ".join(nodes)
+        query = f"""
+            CREATE {node_list},
+            (ind1: Resource:IndustryCluster {{uri:"https://1145.am/ind1", topicId: 23, representativeDoc:['paper printing','cardboard packaging']}}),
+            (ind2: Resource:IndustryCluster {{uri:"https://1145.am/ind2", topicId: 24, representativeDoc:['computers','server hardware']}}),
+            (loc1: Resource:GeoNamesLocation {{uri:"https://1145.am/loc1", geoNamesId: 4509884}}), // In US-Ohio
+            (loc2: Resource:GeoNamesLocation {{uri:"https://1145.am/loc2", geoNamesId: 4791259}}), // In US-Virginia 
+            
+            (foo_new_one)-[:industryClusterPrimary]->(ind1),
+            (foo_old_one)-[:industryClusterPrimary]->(ind1),
+            (foo_new_one)-[:basedInHighGeoNamesLocation]->(loc1),
+            (bar_new_one)-[:basedInHighGeoNamesLocation]->(loc1),
+            (bar_old_one)-[:basedInHighGeoNamesLocation]->(loc1),
+            (loc1)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4509884",sourceOrganization:"source_org_foo"}}),
+            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}})
+        """
+        db.cypher_query(query)
+        RDFPostProcessor().run_all_in_order()
+        get_geo_data(True)
+
+    def search_by_name_check_counts(self):
+        min_date = datetime.now() - timedelta(365 * 2)
+        res = Organization.find_by_name("foo",True,min_date)
+        sorted_res = sorted(res, key=lambda x: x[1],reverse=True)
+        assert sorted_res[0][0].uri == 'https://1145.am/db/100/foo_new_one'
+        assert sorted_res[0][1] == 1
+        assert sorted_res[1][0].uri == 'https://1145.am/db/101/foo_old_one'
+        assert sorted_res[1][1] == 0 # Doc is more than 2 years old
+        assert 1 == 2
+
+    def search_by_geo_counts(self):
+        min_date = datetime.now() - timedelta(365 * 2)
+        res = Organization.by_industry_and_or_geo(None, 'US-OH', min_date=min_date)
+        check_org_and_counts(res, 
+                [ ('https://1145.am/db/102/bar_new_one',1),
+                    ('https://1145.am/db/100/foo_new_one',1),
+                    ('https://1145.am/db/103/bar_old_one',0),
+                ])
+
+    def search_by_industry_counts(self):
+        min_date = datetime.now() - timedelta(365 * 2)
+        res = Organization.by_industry_and_or_geo(23, None, min_date=min_date)
+        check_org_and_counts(res,
+            [('https://1145.am/db/101/foo_old_one', 0), 
+             ('https://1145.am/db/100/foo_new_one', 1)])
+        
+    def search_by_industry_geo_counts(self):
+        min_date = datetime.now() - timedelta(365 * 2)
+        res = Organization.by_industry_and_or_geo(23, 'US-OH', min_date=min_date)
+        check_org_and_counts(res,
+            [('https://1145.am/db/100/foo_new_one', 1)])
+
+def check_org_and_counts(results, expected_counts_for_uri):
+    vals = [ (x[0].uri,x[1]) for x in results]
+    assert set(vals) == set(expected_counts_for_uri)
+        
