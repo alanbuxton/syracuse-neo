@@ -7,11 +7,13 @@ from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
 from django.core.cache import cache
 from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
-from collections import Counter
+from collections import Counter, defaultdict
 from neomodel.cardinality import OneOrMore, One
 from typing import List
 from datetime import datetime
 from .constants import BEGINNING_OF_TIME
+import re
+import string
 
 import logging
 logger = logging.getLogger(__name__)
@@ -52,7 +54,7 @@ class Resource(StructuredNode):
 
     @property
     def related_articles(self):
-        cache_key = f"{self.uri}_related_articles"
+        cache_key = cache_friendly(f"{self.uri}_related_articles")
         arts = cache.get(cache_key)
         if arts is not None:
             return arts
@@ -182,7 +184,7 @@ class Resource(StructuredNode):
     @classmethod
     def find_by_name(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
         name = name.lower()
-        cache_key = f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date}"
+        cache_key = cache_friendly(f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date.isoformat()}")
         res = cache.get(cache_key)
         if res is not None:
             logger.debug(f"From cache {cache_key}")
@@ -198,40 +200,60 @@ class Resource(StructuredNode):
 
     @classmethod
     def find_by_name_optional_same_as_onlies(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
+        class_name = cls.__name__
+        if "Resource" not in class_name: 
+            class_name = f"Resource&{class_name}"
         query = f'''MATCH (n: {cls.__name__})
                     WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
                     AND n.internalMergedSameAsHighToUri IS NULL 
                    '''
-        if combine_same_as_name_only is True: # then exclude entries with same_as_name_only here
+        if combine_same_as_name_only is True: # then exclude entries with same_as_name_only here, they will be added later
             query = f"{query} AND NOT (n)-[:sameAsNameOnly]-() "
         query = f"""{query}  OPTIONAL MATCH (n)-[]-(a:Article)
                     WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}') """
         query = query + " WITH n, count(a) as cnt_artices RETURN n, cnt_artices"
+        logger.debug(query)
         results, _ = db.cypher_query(query,resolve_objects=True)
         objs = [(x[0],x[1]) for x in results]
         return objs
 
     @classmethod
     def get_first_same_as_name_onlies(cls, name, min_date=BEGINNING_OF_TIME):
-        query = f"""MATCH (n: {cls.__name__})-[:sameAsNameOnly]-(o)
+        '''
+            For any group of nodes connected by sameAsNameOnly return the one with smallest internalDocId
+        '''
+        class_name = cls.__name__
+        if 'Resource' not in class_name:
+            class_name = f"Resource&{class_name}"
+        query = f"""MATCH (n: {class_name})-[:sameAsNameOnly]-(o: {class_name})
                     WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
                     AND n.internalMergedSameAsHighToUri IS NULL
                     AND o.internalMergedSameAsHighToUri IS NULL
                     AND n.internalDocId <= o.internalDocId
-                    OPTIONAL MATCH (a:Article)-[]-(n)
+                    OPTIONAL MATCH (a:Article)--(n)
                     WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                    WITH n, o, count(a) as cnt_artices
-                    RETURN n, o, cnt_artices ORDER BY n.internalDocId"""
+                    OPTIONAL MATCH (a2:Article)--(o)
+                    WHERE a2.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    WITH n, o, count(a) as cnt_articles, count(a2) as cnt_articles2
+                    RETURN n, o, cnt_articles, cnt_articles2 ORDER BY n.internalDocId"""
+        logger.debug(query)
         results,_ = db.cypher_query(query, resolve_objects=True)
-        entities_to_keep = []
-        found_uris = set()
-        for source, target, cnt in results:
-            found_uris.add(target.uri)
-            if source.uri in found_uris:
-                continue
-            entities_to_keep.append((source, cnt))     
-            found_uris.add(source.uri)
-        return entities_to_keep
+        '''
+            n: desired value 
+            o: other sameAsNameOnly
+            cnt_articles 
+        '''
+        entities_to_keep = defaultdict(int)
+        seen_orgs = set()
+        for source_node, other_node, cnt_articles, cnt_articles2 in results:
+            logger.debug(f"{source_node.uri} ({cnt_articles}) <-> {other_node.uri} ({cnt_articles2})")
+            if source_node not in seen_orgs:
+                entities_to_keep[source_node] += cnt_articles 
+                seen_orgs.add(source_node)
+            if other_node not in seen_orgs:
+                entities_to_keep[source_node] += cnt_articles2
+                seen_orgs.add(other_node)
+        return list(entities_to_keep.items())
 
     @property
     def best_name(self):
@@ -540,7 +562,7 @@ class ActivityMixin:
 
     @property
     def whereGeoName_as_str(self):
-        cache_key = f"{self.__class__.__name__}_activity_mixin_name_{self.uri}"
+        cache_key = cache_friendly(f"{self.__class__.__name__}_activity_mixin_name_{self.uri}")
         names = cache.get(cache_key)
         if names is not None:
             return names
@@ -658,7 +680,7 @@ class Organization(Resource):
         return print_friendly(by_popularity)
 
     def get_industry_list(self):
-        cache_key = f"industries_{self.uri}"
+        cache_key = cache_friendly(f"industries_{self.uri}")
         name = cache.get(cache_key)
         if name is not None:
             return name
@@ -672,14 +694,14 @@ class Organization(Resource):
         return by_popularity
 
     def reset_cache(self):
-        cache_key = f"org_name_{self.uri}"
+        cache_key = cache_friendly(f"org_name_{self.uri}")
         cache.delete(cache_key)
-        cache_key = f"industries_{self.uri}"
+        cache_key = cache_friendly(f"industries_{self.uri}")
         cache.delete(cache_key)
 
     @property
     def best_name(self):
-        cache_key = f"org_name_{self.uri}"
+        cache_key = cache_friendly(f"org_name_{self.uri}")
         name = cache.get(cache_key)
         if name is not None:
             return name
@@ -736,7 +758,7 @@ class Organization(Resource):
             Returns list of tuples: (org, count)
             or, if uris_only is True, just a list of uris
         '''
-        cache_key = f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}_{min_date}"
+        cache_key = cache_friendly(f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}_{min_date.isoformat()}")
         vals = cache.get(cache_key)
         if vals is not None:
             return vals
@@ -961,3 +983,6 @@ def date_to_cypher_friendly(date):
         return datetime.fromisoformat(date).isoformat()
     else:
         return date.isoformat()
+
+def cache_friendly(key):
+    return re.sub(rf"[{string.punctuation} ]","_",key)

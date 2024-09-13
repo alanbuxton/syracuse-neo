@@ -775,11 +775,21 @@ class TestFindResultsArticleCounts(TestCase):
     def setUpTestData():
         clean_db()
         P.nuke_all() # Company name etc are stored in cache
+        one_year_ago = datetime.now() - timedelta(365)
+        five_years_ago = datetime.now() - timedelta(365 * 5)
         node_data = [
-            {"doc_id":100,"identifier":"foo_new_one","datestamp": datetime.now() - timedelta(365)},
-            {"doc_id":101,"identifier":"foo_old_one","datestamp": datetime.now() - timedelta(365 * 5)},
-            {"doc_id":102,"identifier":"bar_new_one","datestamp": datetime.now() - timedelta(365)},
-            {"doc_id":103,"identifier":"bar_old_one","datestamp": datetime.now() - timedelta(365 * 5)},
+            {"doc_id":100,"identifier":"foo_new_one","datestamp": one_year_ago},
+            {"doc_id":101,"identifier":"foo_old_one","datestamp": five_years_ago},
+            {"doc_id":102,"identifier":"bar_new_one","datestamp": one_year_ago},
+            {"doc_id":103,"identifier":"bar_old_one","datestamp": five_years_ago},
+            {"doc_id":200,"identifier":"same_as_one","datestamp": one_year_ago},
+            {"doc_id":201,"identifier":"same_as_two","datestamp": one_year_ago},
+            {"doc_id":202,"identifier":"same_as_three","datestamp": five_years_ago},
+            {"doc_id":203,"identifier":"same_as_four","datestamp": one_year_ago},
+            {"doc_id":204,"identifier":"same_as_five","datestamp": five_years_ago},
+            {"doc_id":300,"identifier":"same_as_b_one","datestamp": one_year_ago},
+            {"doc_id":301,"identifier":"same_as_b_two","datestamp": five_years_ago},
+            {"doc_id":302,"identifier":"same_as_b_three","datestamp": one_year_ago},
         ]
 
         nodes = [make_node(**data) for data in node_data]
@@ -797,7 +807,22 @@ class TestFindResultsArticleCounts(TestCase):
             (bar_new_one)-[:basedInHighGeoNamesLocation]->(loc1),
             (bar_old_one)-[:basedInHighGeoNamesLocation]->(loc1),
             (loc1)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4509884",sourceOrganization:"source_org_foo"}}),
-            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}})
+            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}}),
+
+            (same_as_one)-[:sameAsNameOnly]->(same_as_two),
+            (same_as_one)-[:sameAsNameOnly]->(same_as_three),
+            (same_as_one)-[:sameAsNameOnly]->(same_as_four),
+            (same_as_one)-[:sameAsNameOnly]->(same_as_five),
+            (same_as_two)-[:sameAsNameOnly]->(same_as_three),
+            (same_as_two)-[:sameAsNameOnly]->(same_as_four),
+            (same_as_two)-[:sameAsNameOnly]->(same_as_five),
+            (same_as_three)-[:sameAsNameOnly]->(same_as_four),
+            (same_as_three)-[:sameAsNameOnly]->(same_as_five),
+            (same_as_four)-[:sameAsNameOnly]->(same_as_five),
+
+            (same_as_b_one)-[:sameAsNameOnly]->(same_as_b_two),
+            (same_as_b_one)-[:sameAsNameOnly]->(same_as_b_three),
+            (same_as_b_two)-[:sameAsNameOnly]->(same_as_b_three)
         """
         db.cypher_query(query)
         RDFPostProcessor().run_all_in_order()
@@ -834,6 +859,14 @@ class TestFindResultsArticleCounts(TestCase):
         res = Organization.by_industry_and_or_geo(23, 'US-OH', min_date=min_date)
         check_org_and_counts(res,
             [('https://1145.am/db/100/foo_new_one', 1)])
+        
+    def search_by_same_as_name_only(self):
+        min_date =  datetime.now() - timedelta(365 * 2)
+        res = Organization.find_by_name("same",combine_same_as_name_only=True,min_date=min_date)
+        check_org_and_counts(res,
+            [('https://1145.am/db/300/same_as_b_one', 2), 
+             ('https://1145.am/db/200/same_as_one', 3)]
+        )
 
 def check_org_and_counts(results, expected_counts_for_uri):
     vals = [ (x[0].uri,x[1]) for x in results]
