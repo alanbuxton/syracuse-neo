@@ -8,7 +8,7 @@ from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSer
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer)
 from rest_framework import status
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 from precalculator.models import cache_last_updated_date
 from urllib.parse import urlparse, urlencode
 from syracuse.settings import MOTD
@@ -43,7 +43,7 @@ class Index(APIView):
 
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         request_state, combine_same_as_name_only = prepare_request_state(request)
-        min_date_for_article_counts = datetime.today() - timedelta(days = 365 * 2)
+        min_date_for_article_counts = date.today() - timedelta(days = 365 * 2)
 
         if org_name:
             orgs = Organization.find_by_name(org_name, combine_same_as_name_only, 
