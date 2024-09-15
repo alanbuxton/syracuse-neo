@@ -985,4 +985,6 @@ def date_to_cypher_friendly(date):
         return date.isoformat()
 
 def cache_friendly(key):
-    return re.sub(rf"[{string.punctuation} ]","_",key)
+    no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
+    cleaned = re.sub(r"_{2,}","_",no_punct)
+    return cleaned

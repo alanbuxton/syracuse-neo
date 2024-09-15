@@ -40,7 +40,7 @@ def get_geoname_uris_for_country_region(geo_code):
     return geo_uris
 
 def get_geo_data(force_refresh=False):
-    logger.info("get_geo_data started")
+    logger.debug("get_geo_data started")
     res = P.get_geo_data()
     if force_refresh is False and res is not None:
         country_admin1_geoname_mapping = res["country_admin1_geoname_mapping"]

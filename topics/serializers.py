@@ -4,11 +4,12 @@ from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 from .geo_utils import geo_select_list
-from .models import IndustryCluster, Article
+from .models import IndustryCluster, Article, cache_friendly
 from .model_queries import org_family_tree
 from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
 from datetime import date, timedelta
+from django.core.cache import cache
 import logging
 logger = logging.getLogger(__name__)
 
@@ -84,6 +85,12 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         clean_rels = only_valid_relationships(rels)
         source_names = source_names_from_str(self.context.get("source_str")) 
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
+        source_names_as_hash = hash(",".join(sorted(source_names)))
+        cache_key=cache_friendly(f"familytree_{organization_uri}_{source_names_as_hash}_{combine_same_as_name_only}_{clean_rels}_{earliest_doc_date}")
+        res = cache.get(cache_key)
+        if res is not None:
+            logger.debug(f"Cache hit {cache_key}: {res}")
+            return res
         parents, parents_children, org_children = org_family_tree(organization_uri, 
                                                                   combine_same_as_name_only=combine_same_as_name_only,
                                                                   relationships=clean_rels,
@@ -120,7 +127,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
 
         sorted_edges = sort_edges(edges, sorted_nodes)
 
-        return {
+        res = {
             "nodes": sorted_nodes,
             "node_details": CustomSerializer(node_data),
             "edges": sorted_edges,
@@ -128,6 +135,10 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
             "earliest_doc_date": create_earliest_date_pretty_print_data(self.context.get("earliest_str")),
         }
+        
+        cache.set(cache_key, res)
+        return res
+
 
 def create_source_pretty_print_data(text):
     sorted_core_sources = ", ".join(sorted(Article.core_sources()))
@@ -247,16 +258,22 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
     def to_representation(self, instance, **kwargs):
         source_names = source_names_from_str(self.context.get("source_str"))
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
+        source_names_as_hash = hash(",".join(sorted(source_names)))
+        combine_same_as_name_only = self.context.get("combine_same_as_name_only")
+        cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
+        res = cache.get(cache_key)
+        if res is not None:
+            logger.debug(f"Cache hit {cache_key}: {res}")
+            return res
         graph_data = graph_centered_on(instance,source_names=source_names,
                                        min_date=earliest_doc_date,
-                                       **self.context)
+                                       combine_same_as_name_only=combine_same_as_name_only)
         data = {"source_node": instance.uri,
                 "source_node_name": instance.longest_name,
-                "too_many_nodes":False}
+                }
         if graph_data is None:
             data["node_data"] = []
             data["edge_data"] = []
-            data["too_many_nodes"] = True
             return data
         clean_node_data, clean_edge_data, node_details, edge_details = graph_data
         data["node_data"] = clean_node_data
@@ -272,6 +289,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         data["nodes_by_type"] = nodes_by_type
         data["document_sources"] = create_source_pretty_print_data(self.context.get("source_str"))
         data["earliest_doc_date"] = create_earliest_date_pretty_print_data(self.context.get("earliest_str"))
+        cache.set(cache_key, data)
         return data
 
 class NameSearchSerializer(serializers.Serializer):
@@ -317,6 +335,12 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
         combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
         source_names = source_names_from_str(self.context.get("source_str"))
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
+        source_names_as_hash = hash(",".join(sorted(source_names)))
+        cache_key=cache_friendly(f"timeline_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
+        res = cache.get(cache_key)
+        if res is not None:
+            logger.debug(f"Cache hit {cache_key}: {res}")
+            return res
         groups, items, item_display_details, org_display_details = get_timeline_data(instance, combine_same_as_name_only, 
                                                                                      source_names, earliest_doc_date)
         resp = {"groups": groups, "items":items,
@@ -327,4 +351,5 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
             "earliest_doc_date": create_earliest_date_pretty_print_data(self.context.get("earliest_str")),
             }
+        cache.set(cache_key,resp)
         return resp
