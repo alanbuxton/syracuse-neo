@@ -94,12 +94,14 @@ def activity_articles_to_api_results(activity_articles):
         api_row["archive_org_page_url"] = article.archiveOrgPageURL
         api_row["archive_org_list_url"] = article.archiveOrgListURL
         api_row["activity_uri"] = activity.uri
-        api_row["activity_where"] = activity.whereGeoName_as_str
+        api_row["activity_locations"] = activity.whereGeoNamesLocation
+        api_row["activity_location_as_string"] = activity.whereGeoName_as_str
         api_row["activity_class"] = activity.__class__.__name__
         api_row["activity_types"] = activity.activityType
         api_row["activity_longest_type"] = activity.longest_activityType
         api_row["activity_statuses"] = activity.status
         api_row["activity_status_as_string"] = activity.status_as_string
+        api_row["source_is_core"] = article.is_core
         actors = {}
         for actor_role, actor in activity.all_actors.items():
             if actor is not None and actor != []:

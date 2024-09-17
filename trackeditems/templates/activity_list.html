@@ -12,8 +12,8 @@
     {% if row.activity_longest_type %}
       / <b>Type: </b>{{ row.activity_longest_type | title }}
     {% endif %}
-    {% if row.activity_where %}
-      / <b>Region:</b> {{ row.activity_where }}
+    {% if row.activity_location_as_string %}
+      / <b>Region:</b> {{ row.activity_location_as_string }}
     {% endif %}
     {% if row.actors.items|length > 0 %}
       <br/>
@@ -23,8 +23,8 @@
             <ul>
             {% for entity in actor_list %}
                 <li><a href="{{ entity.uri }}">{{ entity.best_name }}</a>
-                {% if entity.industry_as_str %}
-                  / <b>Industry:</b> {{ entity.industry_as_str }}
+                {% if entity.industry_as_string %}
+                  / <b>Industry:</b> {{ entity.industry_as_string }}
                 {% endif %}
                 {% if entity.basedInHighGeoName_as_str %}
                   / <b>Region:</b> {{ entity.basedInHighGeoName_as_str }}

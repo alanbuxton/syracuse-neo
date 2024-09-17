@@ -2,7 +2,7 @@ FAQ = {
 
     "Who are you and what is this?": "I'm <a href=\"https://alanbuxton.wordpress.com/\">Alan Buxton</a> and this is my open-ish data project.",
 
-    "What sort of open-ish data?": "Syracuse takes raw data from various text documents (currently news articles, but it could be any text document) and uses machine learning to structure the relevant content into linkages and timelines. You can see the latest sources on the <a href='/tracked/activity_stats'>Stats page</a>. Currently it's only English-language sources.",
+    "What sort of open-ish data?": "Syracuse takes raw data from various text documents (currently news articles, but it could be any text document) and uses machine learning to structure the relevant content into linkages and timelines. You can see the latest sources on the <a href='//activity_stats'>Stats page</a>. Currently it's only English-language sources.",
 
     "Why would I use it?": "Three main purposes: [a] getting alerts about company events, [b] looking at family trees (e.g. if I'm doing business with Company A, and they are owned by Company B then what other companies are also owned by Company B) and [c] researching company activities in a region. In this context a 'company event' is something like a new senior hire, or launching in a region, or taking on investment. These use cases could be useful in Know Your Customer / Know Your Supplier processes.",
 

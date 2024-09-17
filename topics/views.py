@@ -1,13 +1,16 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from django.shortcuts import redirect
-from topics.models import Organization, Resource
+from topics.models import Organization, Resource, IndustryCluster
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
     NameSearchSerializer, GeoSerializer, 
     IndustrySerializer,OrganizationTimelineSerializer,
-    ResourceSerializer, FamilyTreeSerializer)
-from rest_framework import status
+    ResourceSerializer, FamilyTreeSerializer,
+    CountryRegionSerializer, IndustryClusterSerializer)
+from rest_framework import status, viewsets
 from datetime import date, timedelta
 from precalculator.models import cache_last_updated_date
 from urllib.parse import urlparse, urlencode
@@ -15,6 +18,7 @@ from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
+from topics.geo_utils import get_geo_data
 
 import logging
 logger = logging.getLogger(__name__)
@@ -26,7 +30,30 @@ class About(APIView):
 
     def get(self,request):
         return Response({"faqs": FAQ}, status=status.HTTP_200_OK)
+    
 
+class IndustriesViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = IndustryClusterSerializer
+
+    def get_queryset(self):
+        return IndustryCluster.for_external_api()
+
+class CountriesAndRegionsViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = CountryRegionSerializer 
+
+    def get_queryset(self):
+        _, vals, _ = get_geo_data()
+        return [
+            {"country_name":x,
+             "region_name": y,
+             "country_region_code": z} for x,y,z in vals
+        ]
+
+    
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'index.html'

@@ -353,3 +353,13 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
             }
         cache.set(cache_key,resp)
         return resp
+
+class CountryRegionSerializer(serializers.Serializer):
+    country_region_code = serializers.CharField()
+    country_name = serializers.CharField()
+    region_name = serializers.CharField()
+
+class IndustryClusterSerializer(serializers.Serializer):
+    representative_docs_list = serializers.ListField()
+    longest_representative_doc = serializers.CharField()
+    industry_id = serializers.IntegerField()

@@ -18,7 +18,6 @@ import string
 import logging
 logger = logging.getLogger(__name__)
 
-
 def uri_from_related(rel):
     if len(rel) == 0:
         return None
@@ -51,6 +50,18 @@ class Resource(StructuredNode):
     sameAsNameOnly = Relationship('Resource','sameAsNameOnly')
     sameAsHigh = Relationship('Resource','sameAsHigh')
     internalMergedSameAsHighToUri = StringProperty()
+
+    @property
+    def industry_clusters(self):
+        return None # override in subclass
+    
+    @property
+    def based_in_high_geonames_locations(self):
+        return None # override in subclass
+    
+    @property
+    def based_in_high_clean_names(self):
+        return None # override in subclass
 
     @property
     def related_articles(self):
@@ -121,7 +132,7 @@ class Resource(StructuredNode):
         return vals
 
     @property
-    def industry_as_str(self):
+    def industry_as_string(self):
         pass # override in relevant subclass
 
     @property
@@ -410,6 +421,10 @@ class Article(Resource):
             'The Globe and Mail',
             'prweb',
         ]
+    
+    @property
+    def is_core(self):
+        return self.sourceOrganization in Article.core_sources()
 
     @property
     def archive_date(self):
@@ -458,6 +473,18 @@ class IndustryCluster(Resource):
     peoplePrimary = RelationshipFrom("Person","industryClusterPrimary")
     peopleSecondary = RelationshipFrom("Person","industryClusterSecondary")
 
+    @property
+    def topic_id(self):
+        return self.topicId
+    
+    @property
+    def unique_name(self):
+        return self.uniqueName
+    
+    @property
+    def representative_docs(self):
+        return self.representativeDoc
+
     def serialize(self):
         vals = super(IndustryCluster, self).serialize()
         if self.representativeDoc is None:
@@ -466,10 +493,28 @@ class IndustryCluster(Resource):
         else:
             name_words = sorted(self.representativeDoc, key=len)[-1]
         vals['label'] = name_words
-        vals['representative_doc'] = (", ").join(self.representativeDoc) if self.representativeDoc else None
+        vals['representative_docs'] = (", ").join(self.representativeDoc) if self.representativeDoc else None
         vals['internal_cluster_id'] = self.topicId
         vals['unique_name'] = self.uniqueName
-        vals['representation'] = (", ").join(self.representation) if self.representation else None
+        return vals
+
+    @property
+    def longest_representative_doc(self):
+        docs = self.representativeDoc
+        if docs is None:
+            return None
+        val = sorted(docs,key=len)[-1]
+        return val
+
+    @staticmethod
+    def for_external_api():
+        vals = []
+        for ind in IndustryCluster.nodes.filter(representativeDoc__isnull=False):
+            serialized = {"industry_id": ind.topicId,
+                          "representative_docs_list": ind.representativeDoc,
+                          "longest_representative_doc": ind.longest_representative_doc,
+            }
+            vals.append(serialized)
         return vals
 
     @staticmethod
@@ -562,7 +607,7 @@ class ActivityMixin:
 
     @property
     def whereGeoName_as_str(self):
-        cache_key = cache_friendly(f"{self.__class__.__name__}_activity_mixin_name_{self.uri}")
+        cache_key = cache_friendly(f"{self.__class__.__name__}_activity_mixin_{self.uri}")
         names = cache.get(cache_key)
         if names is not None:
             return names
@@ -618,7 +663,7 @@ class ActivityMixin:
 
 class GeoNamesLocation(Resource):
     geoNamesId = IntegerProperty()
-    geoNames = Relationship('Resource','geoNames')
+    geoNames = Relationship('Resource','geoNamesURL')
 
     @property
     def geoNamesURL(self):
@@ -673,31 +718,59 @@ class Organization(Resource):
     basedInHighClean = ArrayProperty(StringProperty())
 
     @property
-    def industry_as_str(self):
-        by_popularity = self.get_industry_list()
-        if len(by_popularity) == 0:
-            return None
-        return print_friendly(by_popularity)
+    def industry_clusters(self):
+        return self.industryClusterPrimary
 
-    def get_industry_list(self):
-        cache_key = cache_friendly(f"industries_{self.uri}")
-        name = cache.get(cache_key)
-        if name is not None:
-            return name
-        name_cands = (self.industry or []) + [] # ensure this is a copy of self.industry
+    @property
+    def based_in_high_geonames_locations(self):
+        return self.basedInHighGeoNamesLocation
+    
+    @property
+    def based_in_high_clean_names(self):
+        vals = set(self.basedInHighClean) if self.basedInHighClean is not None else set()
         for x in self.sameAsHigh:
-            if x.industry is not None:
-                name_cands.extend(x.industry)
-        name_counter = Counter(sorted(name_cands,key=len))
-        by_popularity = [x[0].title() for x in name_counter.most_common()]
-        cache.set(cache_key,by_popularity)
-        return by_popularity
+            if x.basedInHighClean is None:
+                continue
+            vals.update(x.basedInHighClean)
+        return list(vals)
+    
+    @property
+    def industry_list(self):
+        cache_key = cache_friendly(f"industry_list_{self.uri}")
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
+        inds = self.industryClusterPrimary.all()
+        for x in self.sameAsHigh:
+            inds.extend(x.industryClusterPrimary.all())
+        c = Counter(inds)
+        if c == []:
+            val = None
+        else:
+            by_popularity = c.most_common()
+            val = [x[0] for x in by_popularity]
+        cache.set(cache_key,val)
+        return val
 
-    def reset_cache(self):
-        cache_key = cache_friendly(f"org_name_{self.uri}")
-        cache.delete(cache_key)
-        cache_key = cache_friendly(f"industries_{self.uri}")
-        cache.delete(cache_key)
+    @property
+    def top_industry(self):
+        inds = self.industry_list
+        if inds is None:
+            return None
+        return inds[0]
+
+    @property
+    def industry_as_string(self):
+        inds = self.industry_list
+        if inds is None or len(inds) == 0:
+            return None
+        sorted_inds = sorted([x.longest_representative_doc for x in inds])
+        top_inds = sorted_inds[:2]
+        top_inds_as_str = ", ".join(sorted(top_inds))
+        if len(sorted_inds) < 3:
+            return top_inds_as_str
+        other_ind_num = len(sorted_inds) - 2
+        return f"{top_inds_as_str} and {other_ind_num} more"
 
     @property
     def best_name(self):
@@ -738,7 +811,7 @@ class Organization(Resource):
     def serialize(self):
         vals = super(Organization, self).serialize()
         org_vals = {"description": self.description,
-                    "industry": self.industry_as_str,
+                    "industry": self.industry_as_string,
                     "based_in_high_raw": self.basedInHighRaw,
                     "based_in_high_clean": self.basedInHighClean,
                     }
@@ -914,6 +987,10 @@ class Site(Resource):
     nameGeoNamesLocation = RelationshipTo('GeoNamesLocation','nameGeoNamesLocation')
     basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
 
+    @property
+    def based_in_high_geonames_location(self):
+        return self.basedInHighGeoNamesLocation
+    
     @property
     def nameGeoNamesLocationRDFURL(self):
         return uri_from_related(self.nameGeoNamesLocation)

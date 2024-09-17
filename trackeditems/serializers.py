@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from .models import TrackedOrganization, TrackedIndustryGeo
-from topics.models import Organization
-from django.contrib.auth.models import  User
 import pycountry
 
 class RecentsByGeoSerializer(serializers.Serializer):
@@ -41,7 +39,6 @@ class TrackedOrganizationSerializer(serializers.Serializer):
     organization_uri = serializers.URLField()
     organization_name = serializers.CharField()
 
-
 class TrackedOrganizationModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackedOrganization
@@ -52,18 +49,32 @@ class TrackedIndustryGeoModelSerializer(serializers.ModelSerializer):
         model = TrackedIndustryGeo
         fields = "__all__"
 
+class GeoNamesLocationSerializer(serializers.Serializer):
+    uri = serializers.URLField()
+    geoNamesURL = serializers.IntegerField
+    name = serializers.ListField()
+
+class IndustryClusterSerializer(serializers.Serializer):
+    representative_docs = serializers.ListField()
+    topic_id = serializers.IntegerField()
+    unique_name = serializers.CharField()
+    uri = serializers.URLField()
+
 class ActivityActorSerializer(serializers.Serializer):
     name = serializers.ListField()
     best_name = serializers.CharField()
     uri = serializers.URLField()
-    industry_as_str = serializers.CharField()
-    basedInHighGeoName_as_str = serializers.CharField()
+    industry_as_string = serializers.CharField()
+    industry_clusters = IndustryClusterSerializer(many=True)
+    based_in_high_geonames_locations = GeoNamesLocationSerializer(many=True)
+    based_in_high_clean_names = serializers.ListField()
 
 class ActivitySerializer(serializers.Serializer):
     source_organization = serializers.CharField()
+    source_is_core = serializers.BooleanField()
+    headline = serializers.CharField()
     date_published = serializers.DateTimeField()
     document_extract = serializers.CharField()
-    headline = serializers.CharField()
     document_url = serializers.URLField()
     archive_org_page_url = serializers.URLField()
     archive_org_list_url = serializers.URLField()
@@ -73,7 +84,8 @@ class ActivitySerializer(serializers.Serializer):
     activity_longest_type = serializers.CharField()
     activity_statuses = serializers.ListField()
     activity_status_as_string = serializers.CharField()
-    activity_where = serializers.CharField()
+    activity_locations = GeoNamesLocationSerializer(many=True)
+    activity_location_as_string = serializers.CharField()
     actors = serializers.DictField(
         child = ActivityActorSerializer(many=True)
     )

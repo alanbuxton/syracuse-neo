@@ -11,15 +11,14 @@ from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
     TrackedIndustryGeoModelSerializer)
-import json
-from .date_helpers import days_ago
 from topics.model_queries import (get_activities_for_serializer_by_country_and_date_range,
     get_cached_stats, get_activities_by_date_range_for_api,
-    get_activities_for_serializer_by_source_and_date_range)
-from datetime import datetime, timezone, date, timedelta
-from topics.geo_utils import get_geo_data, country_and_region_code_to_name
+    get_activities_for_serializer_by_source_and_date_range,
+    get_activities_by_date_range_industry_geo_for_api)
+from datetime import datetime, timezone, timedelta, date
+from topics.geo_utils import country_and_region_code_to_name
 from topics.views import prepare_request_state
-from precalculator.models import cache_last_updated_date
+from topics.serializers import date_from_str
 
 class TrackedIndustryGeoView(APIView):
     permission_classes = [IsAuthenticated]
@@ -59,7 +58,7 @@ class TrackedOrganizationView(APIView):
         tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
         tracked_industry_geos = TrackedIndustryGeo.print_friendly_by_user(request.user)
         source_page = request.headers.get("Referer")
-        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state, _ = prepare_request_state(request)
         resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page,
                             "tracked_industry_geos":tracked_industry_geos,
                             "request_state": request_state,
@@ -106,30 +105,6 @@ class SourceActivitiesView(APIView):
                              }, status=status.HTTP_200_OK)
         return resp
 
-class GeoActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = ActivitySerializer
-
-    def get_queryset(self):
-        min_date, max_date = min_and_max_date(self.request.GET)
-        country_code = self.request.GET.get("geo_code")
-        limit = self.request.GET.get("limit",20)
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(geo_code,min_date,max_date,limit=20,combine_same_as_name_only=False)
-        return matching_activity_orgs
-
-class SourceActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = ActivitySerializer
-
-    def get_queryset(self):
-        source_name = self.request.GET.get('source_name')
-        min_date, max_date = min_and_max_date(self.request.GET)
-        limit = self.request.GET.get("limit",20)
-        matching_activity_orgs = get_activities_for_serializer_by_source_name_and_date_range(source_name,min_date,max_date,limit=20,combine_same_as_name_only=False)
-        return matching_activity_orgs
-
 
 class ActivityStats(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -168,7 +143,7 @@ class ActivitiesView(APIView):
                         }, status=status.HTTP_200_OK)
         return resp
 
-class ActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
+class ActivitiesByUriViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     serializer_class = ActivitySerializer
@@ -178,7 +153,28 @@ class ActivitiesViewSet(viewsets.ReadOnlyModelViewSet):
         min_date = self.request.GET.get('min_date')
         results = get_activities_by_date_range_for_api(min_date,uri_or_list=[uri])
         return results
+    
+class ActivitiesByIndustryRegionViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = ActivitySerializer
 
+    def get_queryset(self):
+        industry_id = self.request.GET.get('industry_id')
+        geo_code = self.request.GET.get('region_code')
+        if industry_id is None and geo_code is None:
+            raise ValueError("Must provide industry id or geo code (or both)")
+        min_date = self.request.GET.get('min_date')
+        min_date = date_from_str(min_date)
+        if min_date is None:
+            min_date = date.today() - timedelta(days=7)
+        max_date = self.request.GET.get('max_date')
+        max_date = date_from_str(max_date)
+        if max_date is None:
+            max_date = date.today()
+        acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id)
+        return acts
+    
 
 def min_and_max_date(get_params):
     min_date = get_params.get("min_date")

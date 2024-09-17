@@ -165,6 +165,8 @@ class MergeSameAsHighTestCase(TestCase):
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijk")]
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"mnopqrs")]
         node_list = ", ".join(org_nodes + act_nodes)
+        ind1_connections = [f"({x})-[:industryClusterPrimary]->(ind1)" for x in "aei"]
+        ind2_connections = [f"({x})-[:industryClusterPrimary]->(ind2)" for x in "bcdfghjk"]
         query = f"""
             CREATE {node_list},
             (a)<-[:sameAsHigh]-(b),
@@ -192,7 +194,11 @@ class MergeSameAsHighTestCase(TestCase):
             (p)-[:target]->(k),
             (q)-[:target]->(h),
             (r)-[:target]->(i),
-            (s)-[:target]->(j)
+            (s)-[:target]->(j),
+
+            (ind1: Resource:IndustryCluster {{uri:"https://1145.am/ind1", topicId: 23, representativeDoc:['Baz']}}),
+            (ind2: Resource:IndustryCluster {{uri:"https://1145.am/ind2", topicId: 24, representativeDoc:['Bar']}}),
+            { ', '.join(ind1_connections + ind2_connections) }
         """
         res,_ = db.cypher_query(query)
         R = RDFPostProcessor()
@@ -222,7 +228,7 @@ class MergeSameAsHighTestCase(TestCase):
     def test_attributes_for_ultimate_target(self):
         a = Organization.self_or_ultimate_target_node("https://1145.am/db/100/a")
         assert a.best_name == 'Name A'
-        assert a.industry_as_str == 'Baz, Bar'
+        assert a.industry_as_string == 'Bar, Baz'
 
     def test_gets_ultimate_target(self):
         o = Organization.self_or_ultimate_target_node("https://1145.am/db/105/f")

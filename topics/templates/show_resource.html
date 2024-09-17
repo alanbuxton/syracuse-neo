@@ -30,14 +30,17 @@
   {% for label, entries in data_serializer.relationships.items %}
     <strong>{{ label|prettify_camel_case }}</strong>:
     <ul>
-      {% for entry in entries %}
+      {% for entry in entries|slice:":10" %}
       <li>
-        {{ entry.best_name }} ({{ entry.uri|pretty_print_list_uri:request }})
+        {{ entry.label }} ({{ entry.uri|pretty_print_list_uri:request }})
         {% if entry.doc_extract %}
           <em>{{ entry.doc_extract }}</em>
         {% endif %}
       </li>
       {% endfor %}
+      {% if entries|length > 10 %}
+        <li><em>Max 10 entries shown</em></li>
+      {% endif %}        
     </ul>
   {% endfor %}
 </p>

@@ -72,7 +72,6 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
                                         industry_name="Financial Planning And Wealth Management Services",
                                         geo_code="US-TX")
 
-    def test_finds_merged_uris_for_tracked_orgs(self):
         tracked_orgs = TrackedOrganization.by_user(self.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
         assert set(org_uris) == {'https://1145.am/db/3029576/Celgene',
@@ -92,8 +91,19 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         activity_articles = [(activity,article),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
         email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
-        assert len(re.findall("and 4 more",email)) == 1 # Per https://1145.am/db/3029576/Eli_Lilly
+        assert len(re.findall("Biomanufacturing Technologies, Oncology Solutions and 1 more",email)) == 1 # Per https://1145.am/db/3029576/Loxo_Oncology
         assert "Loxo Oncology" in email
+
+    def test_creates_email_from_activity_and_shows_location_name(self):
+        activity_uri = "https://1145.am/db/3029576/Loxo_Oncology-Acquisition"
+        article_uri = "https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_"
+        article = Article.self_or_ultimate_target_node(article_uri)
+        activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
+        activity_articles = [(activity,article),]
+        matching_activity_orgs = activity_articles_to_api_results(activity_articles)
+        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
+        assert "Loxo Oncology" in email
+        assert "<b>Region:</b> United States" in email
 
     def test_creates_activity_notification_for_first_time_user(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -139,19 +149,19 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         client = self.client
         P.nuke_all()
 
-        response = client.get("/tracked/activity_stats")
+        response = client.get("/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" in content
         assert "Showing updates as at" not in content
 
-        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2019-01-10")
+        response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
         assert "Site stats calculating, please check later" in content
         assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" not in content
 
-        response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
+        response = client.get("/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" not in content
         assert "Click on a document link to see the original source document" not in content
@@ -168,18 +178,18 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         warm_up_precalculator()
         client = self.client
 
-        response = client.get("/tracked/activity_stats")
+        response = client.get("/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" not in content
         assert "Showing updates as at" in content
 
-        response = client.get("/tracked/geo_activities?geo_code=US-CA&max_date=2019-01-10")
+        response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Site stats calculating, please check later" not in content
         assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" in content
 
-        response = client.get("/tracked/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
+        response = client.get("/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document link to see the original source document" in content
