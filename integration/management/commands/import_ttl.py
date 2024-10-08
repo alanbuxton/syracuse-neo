@@ -136,6 +136,9 @@ class Command(BaseCommand):
                 default=True,
                 action="store_false",
                 help="Set this flag to disable archiving")
+        parser.add_argument("-d","--dirname",
+                default=RDF_DUMP_DIR,
+                help="Set dump directory")
         parser.add_argument("-o","--only_post_processing",
                 default=False,
                 action="store_true",

@@ -1,0 +1,178 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/9937/Syncmd> a org:Organization ;
+    ns1:description "Veteran Health Records Management" ;
+    ns1:documentSource <https://1145.am/db/9937/apnewscom_14c0b1a0349641d29f6cfbcea53a1746> ;
+    ns1:foundName "Sync.MD" ;
+    ns1:industry "health care" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/59_hospital_hospitals_hospitalist_healthcare> ;
+    ns1:internalDocId 9937 ;
+    ns1:name "Sync.MD" ;
+    ns1:partnership <https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> .
+
+<https://1145.am/db/9937/Veteran_Health_Records_Management> a org:Organization ;
+    ns1:description "Veterans" ;
+    ns1:documentSource <https://1145.am/db/9937/apnewscom_14c0b1a0349641d29f6cfbcea53a1746> ;
+    ns1:foundName "AMVETS" ;
+    ns1:internalDocId 9937 ;
+    ns1:name "Veteran Health Records Management" ;
+    ns1:partnership <https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> .
+
+<https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> a ns1:PartnershipActivity ;
+    ns1:documentDate "2019-11-09T03:29:17+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "\" Health care coordination is critical to ensuring the wellness of veterans who often face a host of overlapping medical issues. This starts with empowering veterans, as well as their spouses and caregivers in many cases, with the ability to consolidate treatment records from multiple sources, so that at any given time a provider can appreciate a patient's complete medical history ,\" said AMVETS Chief Advocacy Officer Sherman Gillums. \" The partnership between AMVETS and Sync.MD represents a major step forward in the effort to put veterans in greater control of their health care and ultimately their lives .\" The pilot is scheduled to launch on December 1, 2019. AMVETS is the nation's largest and oldest Congressionally-chartered veterans service organization that is open to and fights for all veterans who served honorably, including reservists & guardsmen.",
+        "\" Sync.MD is thrilled to be entering this relationship with AMVETS ,\" said Eugene Luskin, Sync.MD CEO. \" We have successfully improved care coordination in the private health sector through the use of our technology, and we believe those who served our country also deserve the best health care delivery and coordination possible. We are delighted to be able to help make that happen .\" The first phase of the partnership involves the launch of a pilot to validate how the health service functions of AMVETS and the Sync.MD technology can work together. Both parties expect that the relationship will deliver significant improvements in the health care of veterans in terms of more timely access to medical information, reduced errors and oversights, and the ability to link otherwise incompatible medical records systems.",
+        "AMVETS Partners with Sync.MD to Revolutionize Veteran Health Records Management. AMVETS and Sync.MD announced a strategic partnership formed for the purpose of streamlining health record management for veterans. This follows the implementation of the VA MISSION Act in June 2019 that allows eligible veterans to choose care in the community at VA expense. AMVETS and Sync.MD plan to provide more than 250,000 veterans with expanded personalized health information options through Sync.MD's patented technology to install and transport complete medical records securely on a smartphone, tablet, laptop, or desktop computer. \" Sync.MD is thrilled to be entering this relationship with AMVETS ,\" said Eugene Luskin, Sync.MD CEO.",
+        "AMVETS and Sync.MD announced a strategic partnership formed for the purpose of streamlining health record management for veterans. This follows the implementation of the VA MISSION Act in June 2019 that allows eligible veterans to choose care in the community at VA expense. AMVETS and Sync.MD plan to provide more than 250,000 veterans with expanded personalized health information options through Sync.MD's patented technology to install and transport complete medical records securely on a smartphone, tablet, laptop, or desktop computer. \" Sync.MD is thrilled to be entering this relationship with AMVETS ,\" said Eugene Luskin, Sync.MD CEO. \" We have successfully improved care coordination in the private health sector through the use of our technology, and we believe those who served our country also deserve the best health care delivery and coordination possible.",
+        "AMVETS and Sync.MD plan to provide more than 250,000 veterans with expanded personalized health information options through Sync.MD's patented technology to install and transport complete medical records securely on a smartphone, tablet, laptop, or desktop computer. \" Sync.MD is thrilled to be entering this relationship with AMVETS ,\" said Eugene Luskin, Sync.MD CEO. \" We have successfully improved care coordination in the private health sector through the use of our technology, and we believe those who served our country also deserve the best health care delivery and coordination possible. We are delighted to be able to help make that happen .\" The first phase of the partnership involves the launch of a pilot to validate how the health service functions of AMVETS and the Sync.MD technology can work together.",
+        "This follows the implementation of the VA MISSION Act in June 2019 that allows eligible veterans to choose care in the community at VA expense. AMVETS and Sync.MD plan to provide more than 250,000 veterans with expanded personalized health information options through Sync.MD's patented technology to install and transport complete medical records securely on a smartphone, tablet, laptop, or desktop computer. \" Sync.MD is thrilled to be entering this relationship with AMVETS ,\" said Eugene Luskin, Sync.MD CEO. \" We have successfully improved care coordination in the private health sector through the use of our technology, and we believe those who served our country also deserve the best health care delivery and coordination possible. We are delighted to be able to help make that happen .\"",
+        "This starts with empowering veterans, as well as their spouses and caregivers in many cases, with the ability to consolidate treatment records from multiple sources, so that at any given time a provider can appreciate a patient's complete medical history ,\" said AMVETS Chief Advocacy Officer Sherman Gillums. \" The partnership between AMVETS and Sync.MD represents a major step forward in the effort to put veterans in greater control of their health care and ultimately their lives .\" The pilot is scheduled to launch on December 1, 2019. AMVETS is the nation's largest and oldest Congressionally-chartered veterans service organization that is open to and fights for all veterans who served honorably, including reservists & guardsmen. AMVETS has been a nonpartisan advocate for veterans and their families for more than 70 years." ;
+    ns1:documentSource <https://1145.am/db/9937/apnewscom_14c0b1a0349641d29f6cfbcea53a1746> ;
+    ns1:foundName "Veteran Health Records Management",
+        "health record management",
+        "health record management for",
+        "partnership" ;
+    ns1:internalDocId 9937 ;
+    ns1:name "Health Record Management",
+        "Health Record Management For",
+        "Partnership",
+        "Veteran Health Records Management" ;
+    ns1:organizationNames "Sync.MD",
+        "Veteran Health Records Management" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/9937/apnewscom_14c0b1a0349641d29f6cfbcea53a1746> a schema:Article ;
+    ns1:internalDocId 9937 ;
+    schema:datePublished "2019-11-09T03:29:17+00:00"^^xsd:dateTime ;
+    schema:headline "AMVETS Partners with Sync.MD to Revolutionize Veteran Health Records Management" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/14c0b1a0349641d29f6cfbcea53a1746> .
+
+<https://1145.am/db/11057/Major_League_Baseball> a org:Organization ;
+    ns1:awarded <https://1145.am/db/11057/Machine_Learning_Artificial_Intelligence_And_Deep_Learning_Workloads-Amazon_Web_Services_Major_League_Baseball> ;
+    ns1:documentSource <https://1145.am/db/11057/apnewscom_11ce6168a75842c684cf0fc98f2d7cb7> ;
+    ns1:foundName "Major League Baseball" ;
+    ns1:internalDocId 11057 ;
+    ns1:name "Major League Baseball" .
+
+<https://1145.am/db/11057/Amazon_Web_Services> a org:Organization ;
+    ns1:awarded <https://1145.am/db/11057/Machine_Learning_Artificial_Intelligence_And_Deep_Learning_Workloads-Amazon_Web_Services_Major_League_Baseball> ;
+    ns1:description "cloud - based machine learning services" ;
+    ns1:documentSource <https://1145.am/db/11057/apnewscom_11ce6168a75842c684cf0fc98f2d7cb7> ;
+    ns1:foundName "Amazon Web Services, Inc." ;
+    ns1:internalDocId 11057 ;
+    ns1:name "Amazon Web Services" ;
+    ns1:sameAsHigh <https://1145.am/db/10739/Amazon_Web_Services>,
+        <https://1145.am/db/5971/Amazon_Web_Services> .
+
+<https://1145.am/db/11057/Machine_Learning_Artificial_Intelligence_And_Deep_Learning_Workloads-Amazon_Web_Services_Major_League_Baseball> a ns1:PartnershipActivity ;
+    ns1:documentDate "2018-07-17T12:59:53+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Major League Baseball Selects AWS as its Official Provider for Machine Learning, Artificial Intelligence, and Deep Learning. Today, Amazon Web Services, Inc. (AWS) , an Amazon.com company (NASDAQ: AMZN) , announced that Major League Baseball (MLB) has chosen AWS as its official provider for machine learning, artificial intelligence, and deep learning workloads. In extending its long-standing relationship, MLB will use AWS machine learning services to continue development of Statcast-the tracking technology that runs on AWS to analyze player performance for every game-and develop new technologies to support MLB Clubs in driving innovative fan experiences and engagement across all 30 Major League ballparks. In addition, MLB will work with the Amazon ML Solutions Lab to amplify game statistical data integrations within broadcasts, including MLB Network, and live digital distribution, such as MLB.com and the MLB At Bat app, using machine learning, creating more personalized viewer experiences tailored for each market and geographic region. AWS's broad range of cloud - based machine learning services will enable MLB to eliminate the manual, time-intensive processes associated with record keeping and statistics, such as scorekeeping, capturing game notes, and classifying pitches.",
+        "Today, Amazon Web Services, Inc. (AWS) , an Amazon.com company (NASDAQ: AMZN) , announced that Major League Baseball (MLB) has chosen AWS as its official provider for machine learning, artificial intelligence, and deep learning workloads. In extending its long-standing relationship, MLB will use AWS machine learning services to continue development of Statcast-the tracking technology that runs on AWS to analyze player performance for every game-and develop new technologies to support MLB Clubs in driving innovative fan experiences and engagement across all 30 Major League ballparks. In addition, MLB will work with the Amazon ML Solutions Lab to amplify game statistical data integrations within broadcasts, including MLB Network, and live digital distribution, such as MLB.com and the MLB At Bat app, using machine learning, creating more personalized viewer experiences tailored for each market and geographic region. AWS's broad range of cloud - based machine learning services will enable MLB to eliminate the manual, time-intensive processes associated with record keeping and statistics, such as scorekeeping, capturing game notes, and classifying pitches. By using Amazon SageMaker, MLB is empowering its developers and data scientists to automate these tasks as they learn to quickly and easily build, train, and deploy machine learning models at scale." ;
+    ns1:documentSource <https://1145.am/db/11057/apnewscom_11ce6168a75842c684cf0fc98f2d7cb7> ;
+    ns1:foundName "machine learning, artificial intelligence, and deep learning workloads" ;
+    ns1:internalDocId 11057 ;
+    ns1:name "Machine Learning, Artificial Intelligence, and Deep Learning Workloads" ;
+    ns1:organizationNames "Amazon Web Services",
+        "Major League Baseball" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/11057/apnewscom_11ce6168a75842c684cf0fc98f2d7cb7> a schema:Article ;
+    ns1:internalDocId 11057 ;
+    schema:datePublished "2018-07-17T12:59:53+00:00"^^xsd:dateTime ;
+    schema:headline "Major League Baseball Selects AWS as its Official Provider for Machine Learning, Artificial Intelligence, and Deep Learning" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/11ce6168a75842c684cf0fc98f2d7cb7> .
+
+<https://1145.am/db/11594/DSM> a org:Organization ;
+    ns1:basedInLowRaw "Netherlands" ;
+    ns1:description "research" ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
+    ns1:foundName "DSM" ;
+    ns1:industry "life sciences" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/127_lifesciences_lifescience_biosciences_biotech> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/294_healthcare_biosciences_biotechnology_health>,
+        <https://1145.am/db/industry/618_biotech_investor_investments_investment> ;
+    ns1:internalDocId 11594 ;
+    ns1:name "DSM" ;
+    ns1:partnership <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> .
+
+<https://1145.am/db/11594/Royal_Dsm_Nv> a org:Organization ;
+    ns1:awarded <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Royal_Dsm_Nv> ;
+    ns1:basedInLowRaw "Belgium" ;
+    ns1:description "Research and development" ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
+    ns1:foundName "Royal DSM N.V." ;
+    ns1:internalDocId 11594 ;
+    ns1:name "Royal DSM N.V." .
+
+
+<https://1145.am/db/11594/Biomax_Informatics_Ag> a org:Organization ;
+    ns1:basedInLowRaw "Netherlands",
+        "Switzerland" ;
+    ns1:description "Business",
+        "Science" ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
+    ns1:foundName "Biomax",
+        "Biomax Informatics AG" ;
+    ns1:internalDocId 11594 ;
+    ns1:name "Biomax",
+        "Biomax Informatics AG" ;
+    ns1:partnership <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> .
+
+<https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Royal_Dsm_Nv> a ns1:PartnershipActivity ;
+    ns1:documentDate "2018-05-15T12:01:45+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Biomax Informatics AG announces that their longtime client, Royal DSM N.V., has signed a multi-year license for the Biomax \"semantic search\" technology to implement their new enterprise knowledge platform for fast, simple and comprehensive knowledge discovery. The Biomax™ semantic search technology provides an extensible framework that automatically maintains a growing and evolving semantic network. The platform works with in-house documents such as R & D archives as well as public data resources. It integrates seamlessly with existing infrastructure and helps leverage knowledge buried both in decades old data as well as data derived from news feeds - providing real-time semantic analysis of breaking news. Leveraging semantic networks, the search platform contains a sophisticated question answering system using Artificial Intelligence (AI) -augmented search algorithms.",
+        "Biomax Software Licensed by Royal DSM N.V. to Implement an AI-Augmented Semantic Search Platform for Global Research. Biomax Informatics AG announces that their longtime client, Royal DSM N.V., has signed a multi-year license for the Biomax \"semantic search\" technology to implement their new enterprise knowledge platform for fast, simple and comprehensive knowledge discovery. The Biomax™ semantic search technology provides an extensible framework that automatically maintains a growing and evolving semantic network. The platform works with in-house documents such as R & D archives as well as public data resources. It integrates seamlessly with existing infrastructure and helps leverage knowledge buried both in decades old data as well as data derived from news feeds - providing real-time semantic analysis of breaking news." ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
+    ns1:foundName "enterprise knowledge platform",
+        "partnership" ;
+    ns1:internalDocId 11594 ;
+    ns1:name "Enterprise Knowledge Platform",
+        "Partnership" ;
+    ns1:organizationNames "Biomax Informatics AG",
+        "Royal DSM N.V." ;
+    ns1:providedBy <https://1145.am/db/11594/Biomax_Informatics_Ag> ;
+    ns1:status "completed" ;
+    ns1:whereClean "Kingdom of the Netherlands" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereRaw "Netherlands" .
+
+<https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> a ns1:PartnershipActivity ;
+    ns1:documentDate "2018-05-15T12:01:45+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "\" DSM and Biomax already have a long-standing relationship and I am happy that we can expand this relationship into building a knowledge platform for DSM research. Better knowledge discovery for DSM is pivotal in achieving our innovation ambition for the coming years ,\" comments Dr. Marcus Remmers, CTO Royal DSM N.V. Biomax Informatics CEO, Dr. Klaus Heumann added, \"We are excited to contribute to DSM's ambition to be at the forefront of innovation by deploying our semantic search technology company-wide for better time management, increased effectiveness and accelerated productivity .\" About Royal DSM Royal DSM is a global science - based company active in health, nutrition and materials. By connecting its unique competences in life sciences and materials sciences DSM is driving economic prosperity, environmental progress and social advances to create sustainable value for all stakeholders simultaneously.",
+        "It integrates seamlessly with existing infrastructure and helps leverage knowledge buried both in decades old data as well as data derived from news feeds - providing real-time semantic analysis of breaking news. Leveraging semantic networks, the search platform contains a sophisticated question answering system using Artificial Intelligence (AI) -augmented search algorithms. The extensible semantic network connects and gets more sustainable value from the ever-increasing wealth of knowledge generated by DSM research across all domains. \" DSM and Biomax already have a long-standing relationship and I am happy that we can expand this relationship into building a knowledge platform for DSM research. Better knowledge discovery for DSM is pivotal in achieving our innovation ambition for the coming years ,\" comments Dr. Marcus Remmers, CTO Royal DSM N.V.",
+        "Leveraging semantic networks, the search platform contains a sophisticated question answering system using Artificial Intelligence (AI) -augmented search algorithms. The extensible semantic network connects and gets more sustainable value from the ever-increasing wealth of knowledge generated by DSM research across all domains. \" DSM and Biomax already have a long-standing relationship and I am happy that we can expand this relationship into building a knowledge platform for DSM research. Better knowledge discovery for DSM is pivotal in achieving our innovation ambition for the coming years ,\" comments Dr. Marcus Remmers, CTO Royal DSM N.V. Biomax Informatics CEO, Dr. Klaus Heumann added, \"We are excited to contribute to DSM's ambition to be at the forefront of innovation by deploying our semantic search technology company-wide for better time management, increased effectiveness and accelerated productivity .\"",
+        "The extensible semantic network connects and gets more sustainable value from the ever-increasing wealth of knowledge generated by DSM research across all domains. \" DSM and Biomax already have a long-standing relationship and I am happy that we can expand this relationship into building a knowledge platform for DSM research. Better knowledge discovery for DSM is pivotal in achieving our innovation ambition for the coming years ,\" comments Dr. Marcus Remmers, CTO Royal DSM N.V. Biomax Informatics CEO, Dr. Klaus Heumann added, \"We are excited to contribute to DSM's ambition to be at the forefront of innovation by deploying our semantic search technology company-wide for better time management, increased effectiveness and accelerated productivity .\" About Royal DSM Royal DSM is a global science - based company active in health, nutrition and materials.",
+        "The platform works with in-house documents such as R & D archives as well as public data resources. It integrates seamlessly with existing infrastructure and helps leverage knowledge buried both in decades old data as well as data derived from news feeds - providing real-time semantic analysis of breaking news. Leveraging semantic networks, the search platform contains a sophisticated question answering system using Artificial Intelligence (AI) -augmented search algorithms. The extensible semantic network connects and gets more sustainable value from the ever-increasing wealth of knowledge generated by DSM research across all domains. \" DSM and Biomax already have a long-standing relationship and I am happy that we can expand this relationship into building a knowledge platform for DSM research." ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
+    ns1:foundName "partnership" ;
+    ns1:internalDocId 11594 ;
+    ns1:name "Partnership" ;
+    ns1:organizationNames "Biomax",
+        "DSM" ;
+    ns1:status "completed" ;
+    ns1:whereClean "Kingdom of the Netherlands" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereRaw "Netherlands" .
+
+<https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> a schema:Article ;
+    ns1:internalDocId 11594 ;
+    schema:datePublished "2018-05-15T12:01:45+00:00"^^xsd:dateTime ;
+    schema:headline "Biomax Software Licensed by Royal DSM N.V. to Implement an AI-Augmented Semantic Search Platform for Global Research" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/0dd1e9affa1f4dafb5c098bd5c62d0b6> .
+
+<https://1145.am/db/geonames_location/2750405> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6>,
+        <https://1145.am/db/7626/apnewscom_4102221a862c4425837f04a00eabb3db>,
+        <https://1145.am/db/8792/apnewscom_2e42271c4f4a4f31bc6be85af1679de7> ;
+    ns1:geoNamesId 2750405 ;
+    ns1:geoNamesURL <https://sws.geonames.org/2750405> ;
+    ns1:internalDocId 7626,
+        8792,
+        11594 ;
+    ns1:name "Kingdom of the Netherlands" .

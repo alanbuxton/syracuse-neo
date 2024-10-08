@@ -24,14 +24,15 @@ def setup_db_if_necessary():
     if len(v) == 0:
         do_n10s_config()
 
-def do_n10s_config(force=False):
+def do_n10s_config(overwrite=False):
     multivals = ["actionFoundName","activityType","basedInHighClean",
                 "basedInHighGeoName",
                 "basedInHighRaw","basedInLowRaw",
                 "description","foundName","industry",
                 "locationFoundName",
                 "locationPurpose","locationType","name",
-                "nameClean", "orgFoundName",
+                "nameClean", "organizationNames", 
+                "orgFoundName",
                 "roleFoundName","roleHolderFoundName",
                 "status","targetDetails","targetName","valueRaw",
                 "when","whenRaw","whereGeoName","whereRaw","whereClean",
@@ -39,11 +40,11 @@ def do_n10s_config(force=False):
                 "representation","representativeDoc",
                 ]
     proplist = [f"https://1145.am/db/{x}" for x in multivals]
-    if force is True:
-        force_str = ", force: True"
+    params = 'handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]'
+    if overwrite is True:
+        query = 'CALL n10s.graphconfig.set({' + params + ', force: true })'
     else:
-        force_str = ""
-    query = 'CALL n10s.graphconfig.init({handleVocabUris: "MAP",handleMultival:"ARRAY",multivalPropList:["' + "\",\"".join(proplist) + '"]' + force_str + '})';
+        query = 'CALL n10s.graphconfig.init({' + params + '})';
     logger.info(query)
     db.cypher_query(query)
 

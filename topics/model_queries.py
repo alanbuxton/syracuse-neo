@@ -63,7 +63,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
     else:
         org_uri_clause = f"AND o.uri IN {allowed_org_uris}"
     query = f"""
-        MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity)--(o: Resource&Organization)
+        MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity|PartnershipActivity)--(o: Resource&Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND a.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
         AND o.internalMergedSameAsHighToUri IS NULL
@@ -136,11 +136,11 @@ def build_get_activities_by_source_and_date_range_query(source_name,min_date, ma
                     AND a.sourceOrganization = ('{source_name}')
                     AND n.internalMergedSameAsHighToUri IS NULL"""
 
-    query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity)-[:documentSource]->(a:Article)
+    query = f"""MATCH (n:CorporateFinanceActivity|LocationActivity|PartnershipActivity)-[:documentSource]->(a:Article)
                 {where_clause}
                 {return_str} {limit_str}
                 UNION
-                MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(p: Role)--(o: Organization)
+                MATCH (a: Article)<-[:documentSource]-(n:RoleActivity)--(Role)--(Organization)
                 {where_clause}
                 {return_str} {limit_str};"""
     return query
@@ -182,7 +182,7 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
                         AND n.internalMergedSameAsHighToUri IS NULL
                     """
     query = f"""
-        MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity)--(o: Resource&Organization)
+        MATCH (a: Article)<-[:documentSource]-(n:CorporateFinanceActivity|LocationActivity|PartnershipActivity)--(o: Resource&Organization)
         {where_clause}
         {return_str} {limit_str}
         UNION
@@ -206,7 +206,7 @@ def get_stats(max_date,allowed_to_set_cache=False):
     if res is not None:
         return res
     counts = []
-    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","Article","Role"]:
+    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","PartnershipActivity","Article","Role"]:
         res, _ = db.cypher_query(f"""MATCH (n:{x}) WHERE
                     n.internalMergedSameAsHighToUri IS NULL
                     RETURN COUNT(n)""")

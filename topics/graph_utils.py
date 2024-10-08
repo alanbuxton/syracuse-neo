@@ -25,6 +25,9 @@ EDGE_COLORS = { "spender": "salmon",
                 "locationAdded": "salmon",
                 "locationRemoved": "salmon",
                 "location": "yellowgreen",
+                "partnership": "salmon",
+                "providedBy": "lightskyblue", 
+                "awarded": "salmon",
                 }
 
 def node_color_shape(node):

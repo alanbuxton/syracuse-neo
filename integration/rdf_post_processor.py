@@ -16,6 +16,7 @@ class RDFPostProcessor(object):
         AND NOT "CorporateFinanceActivity" IN LABELS(m)
         AND NOT "RoleActivity" IN LABELS(m)
         AND NOT "LocationActivity" IN LABELS(m)
+        AND NOT "PartnershipActivity" IN LABELS(m)
         RETURN m,n
         ORDER BY m.internalDocId
         LIMIT 1000

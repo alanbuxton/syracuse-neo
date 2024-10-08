@@ -143,7 +143,8 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source = get_stats(max_date)
-        assert set(counts) == {('Organization', 405), ('Article', 189), ('LocationActivity', 11), ('Person', 12), ('Role', 11), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
+        assert set(counts) == {('PartnershipActivity', 4), ('LocationActivity', 11), ('Organization', 412), 
+                               ('Person', 12), ('Role', 11), ('Article', 192), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
         assert len(recents_by_geo) == 33
         assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1), ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), 
                                           ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
@@ -609,6 +610,14 @@ class TestUtilsWithDumpData(TestCase):
                        'three_years_ago_fmt': '2021-01-01', 'five_years_ago': date(2020, 1, 2), 
                        'five_years_ago_fmt': '2020-01-02', 'all_time_flag': True}
 
+    def test_partnership_graph_data(self):
+        o = Resource.nodes.get_or_none(uri='https://1145.am/db/11594/Biomax_Informatics_Ag')
+        s = OrganizationGraphSerializer(o, context={"combine_same_as_name_only":True,
+                                                    "source_str":"_all",
+                                                    "earliest_str":"2010-01-01"})
+        data = s.data
+        assert len(data["node_data"]) == 5
+        assert len(data["edge_data"]) == 7
 
 class TestFamilyTree(TestCase):
 
@@ -760,6 +769,7 @@ class TestFamilyTree(TestCase):
         content = str(response.content)
         assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content
 
+
 class TestSerializers(TestCase):
 
     def test_cleans_relationship_string1(self):
@@ -769,6 +779,7 @@ class TestSerializers(TestCase):
     def test_cleans_relationship_string2(self):
         val = only_valid_relationships("investor|buyer|vendor")
         assert val == "investor|buyer|vendor"
+
 
 class TestFindResultsArticleCounts(TestCase):
 

@@ -714,6 +714,9 @@ class Organization(Resource):
     industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
     # industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
     basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
+    partnership = RelationshipTo('PartnershipActivity','partnership')
+    awarded = RelationshipTo('PartnershipActivity','awarded')
+    providedBy = RelationshipFrom('PartnershipActivity','providedBy')
     basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
 
@@ -742,7 +745,8 @@ class Organization(Resource):
             return res
         inds = self.industryClusterPrimary.all()
         for x in self.sameAsHigh:
-            inds.extend(x.industryClusterPrimary.all())
+            if hasattr(x, "industryClusterPrimary"):
+                inds.extend(x.industryClusterPrimary.all())
         c = Counter(inds)
         if c == []:
             val = None
@@ -913,6 +917,9 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
                     }
         return {**vals,**act_vals,**activity_mixin_vals}
 
+class PartnershipActivity(ActivityMixin, Resource):
+    providedBy = RelationshipTo('Organization','providedBy')
+    organizationNames = ArrayProperty(StringProperty())
 
 class RoleActivity(ActivityMixin, Resource):
     orgFoundName = ArrayProperty(StringProperty())

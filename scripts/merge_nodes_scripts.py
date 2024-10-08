@@ -105,7 +105,7 @@ def post_import_merging(with_delete_not_needed_resources=False):
 def move_document_extract_to_relationship():
     logger.info("Moving document extract to relationship")
     query = """
-        MATCH (n:CorporateFinanceActivity|LocationActivity|RoleActivity)-[d:documentSource]->(a:Article)
+        MATCH (n:CorporateFinanceActivity|LocationActivity|RoleActivity|PartnershipActivity)-[d:documentSource]->(a:Article)
         WHERE d.documentExtract IS NULL
         CALL {
             WITH n, d
