@@ -616,8 +616,8 @@ class TestUtilsWithDumpData(TestCase):
                                                     "source_str":"_all",
                                                     "earliest_str":"2010-01-01"})
         data = s.data
-        assert len(data["node_data"]) == 5
-        assert len(data["edge_data"]) == 7
+        assert len(data["node_data"]) == 7
+        assert len(data["edge_data"]) == 9
 
 class TestFamilyTree(TestCase):
 
