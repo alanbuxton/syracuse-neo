@@ -1,10 +1,11 @@
 function convert_uri(value,query_string) {
-  if (query_string !== '') {
-    value = value + "?" + query_string;
-  }
   if (value.startsWith("https://1145.am")) {
     var regex = /^https:\/\/1145.am/i ;
     tmp_val = value.replace(regex, location.protocol + "//" + location.host + "/resource/1145.am");
+    if (query_string !== undefined ) {
+      // query_string includes application state so don't add to external links
+      tmp_val = tmp_val + "?" + query_string;
+    }
     return tmp_val;
   } else {
     return value;
@@ -67,7 +68,7 @@ function error_form(node_or_edge, unique_id) {
 function drillIntoUri(uri, root_path, query_string) {
   tmp_url = new URL(uri);
   target_url = root_path + tmp_url.hostname + tmp_url.pathname ;
-  if (query_string !== '') {
+  if ((query_string !== undefined) & (query_string !== '')) {
     target_url = target_url + "?" + query_string;
   }
   window.location.replace(target_url);

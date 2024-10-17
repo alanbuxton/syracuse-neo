@@ -454,6 +454,15 @@ class TestUtilsWithDumpData(TestCase):
         assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
         assert 'drillIntoUri(item_vals.uri, "/organization/timeline/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
 
+    def test_query_strings_in_drill_down_family_tree_source_page(self):
+        client = self.client
+        uri = "/organization/family-tree/uri/1145.am/db/2543227/Celgene?source=_all&earliest_date=-1"
+        resp = client.get(uri)
+        content = str(resp.content)
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "source=_all&earliest_date=-1");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "source=_all&earliest_date=-1");' in content
+        assert len(re.findall("source=_all&earliest_date=-1",content)) == 13
+
     def test_query_strings_in_drill_down_resource_from_timeline_page(self):
         client = self.client
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"

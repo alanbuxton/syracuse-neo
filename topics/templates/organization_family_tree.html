@@ -100,11 +100,11 @@ const edge_details_dict = {{ nodes_edges.edge_details | safe }} ;
 
 
 network.on("selectEdge", function(obj) {
-  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showItemDetails(obj.edges[0],edge_details_dict,"edge");
+  document.getElementById('object_details').innerHTML = '<h4>Selected Edge (Relationship) Details</h4>' + showItemDetails(obj.edges[0],edge_details_dict,"edge","{{ request_state.qs_params|dict_to_query_string }}");
 });
 
 network.on("selectNode", function(obj) {
-  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node");
+  document.getElementById('object_details').innerHTML = '<h4>Selected Node Details</h4>' + showItemDetails(obj.nodes[0],node_details_dict,"node","{{ request_state.qs_params|dict_to_query_string }}");
 })
 
 function getNodeUri(obj) {
