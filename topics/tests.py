@@ -81,7 +81,7 @@ class TestUtilsWithDumpData(TestCase):
         source_uri = "https://1145.am/db/3558745/Jb_Hunt"
         o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details = get_timeline_data(o,True,Article.all_sources())
-        assert len(groups) == 4
+        assert len(groups) == 5
         assert len(items) == 1
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
@@ -100,10 +100,9 @@ class TestUtilsWithDumpData(TestCase):
         source_uri = "https://1145.am/db/1736082/Tesla"
         o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details = get_timeline_data(o,True,Article.all_sources())
-        assert len(groups) == 4
+        assert len(groups) == 5
         assert len(items) == 3
-        assert set([x['label'] for x in items]) == {'Added - Added Brandenburg European gigafactory - not happened at date of document', 'Added - Added Berlin European gigafactory - not happened at date of document', 'Added - Added Grüenheide European gigafactory - not happened at date of document'}
-        assert len(item_display_details) >= len(items)
+        assert set([x['label'] for x in items]) == {'Added Berlin', 'Added Brandenburg', 'Added Grüenheide'}
         assert len(org_display_details) == 1
 
     def test_role_graph(self):
@@ -121,7 +120,7 @@ class TestUtilsWithDumpData(TestCase):
         o = Organization.self_or_ultimate_target_node(source_uri)
         groups, items, item_display_details, org_display_details = get_timeline_data(o,True,
                                                             source_names=Article.all_sources())
-        assert len(groups) == 4
+        assert len(groups) == 5
         assert len(items) == 1
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1

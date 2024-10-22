@@ -900,6 +900,16 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
         }
 
     @property
+    def summary_name(self):
+        if self.longest_targetName is not None:
+            text = f"{self.longest_targetName}"
+        else:
+            text = ""
+        if self.longest_targetDetails is not None:
+            text = f"{text} {self.longest_targetDetails}"
+        return text
+    
+    @property
     def longest_targetName(self):
         return longest(self.targetName)
 
@@ -923,6 +933,10 @@ class PartnershipActivity(ActivityMixin, Resource):
     partnership = RelationshipFrom('Organization','partnership')
     awarded = RelationshipFrom('Organization','awarded')
 
+    @property
+    def summary_name(self):
+        return ", ".join(sorted(self.organizationNames))
+
     def serialize(self):
         vals = super().serialize()
         activity_mixin_vals = self.activity_fields
@@ -935,6 +949,10 @@ class RoleActivity(ActivityMixin, Resource):
     roleFoundName = ArrayProperty(StringProperty())
     roleHolderFoundName = ArrayProperty(StringProperty())
     roleActivity = RelationshipFrom('Person','roleActivity')
+
+    @property
+    def summary_name(self):
+        return f"{self.longest_activityType.title()}: {self.longest_roleFoundName}"
 
     def related_orgs(self):
         query = f"MATCH (n: RoleActivity {{uri:'{self.uri}'}})--(o: Role)--(p: Organization) RETURN p"
@@ -973,6 +991,10 @@ class LocationActivity(ActivityMixin, Resource):
     locationAdded = RelationshipFrom('Organization','locationAdded')
     locationRemoved = RelationshipFrom('Organization','locationRemoved')
     location = RelationshipTo('Site', 'location')
+
+    @property
+    def summary_name(self):
+        return self.best_name
 
     @property
     def all_actors(self):
