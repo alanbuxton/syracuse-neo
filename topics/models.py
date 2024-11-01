@@ -929,18 +929,18 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
 
 class PartnershipActivity(ActivityMixin, Resource):
     providedBy = RelationshipTo('Organization','providedBy')
-    organizationNames = ArrayProperty(StringProperty())
+    orgName = ArrayProperty(StringProperty())
     partnership = RelationshipFrom('Organization','partnership')
     awarded = RelationshipFrom('Organization','awarded')
 
     @property
     def summary_name(self):
-        return ", ".join(sorted(self.organizationNames))
+        return ", ".join(sorted(self.orgName))
 
     def serialize(self):
         vals = super().serialize()
         activity_mixin_vals = self.activity_fields
-        act_vals = {"organization_names": ", ".join(self.organizationNames)}
+        act_vals = {"org_names": ", ".join(self.orgName)}
         return {**vals,**act_vals,**activity_mixin_vals}
 
 class RoleActivity(ActivityMixin, Resource):

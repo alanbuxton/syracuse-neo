@@ -31,7 +31,7 @@ def do_n10s_config(overwrite=False):
                 "description","foundName","industry",
                 "locationFoundName",
                 "locationPurpose","locationType","name",
-                "nameClean", "organizationNames", 
+                "nameClean", "orgName", 
                 "orgFoundName",
                 "roleFoundName","roleHolderFoundName",
                 "status","targetDetails","targetName","valueRaw",

@@ -40,7 +40,7 @@
         "Health Record Management For",
         "Partnership",
         "Veteran Health Records Management" ;
-    ns1:organizationNames "Sync.MD",
+    ns1:orgName "Sync.MD",
         "Veteran Health Records Management" ;
     ns1:status "not happened at date of document" .
 
@@ -76,7 +76,7 @@
     ns1:foundName "machine learning, artificial intelligence, and deep learning workloads" ;
     ns1:internalDocId 11057 ;
     ns1:name "Machine Learning, Artificial Intelligence, and Deep Learning Workloads" ;
-    ns1:organizationNames "Amazon Web Services",
+    ns1:orgName "Amazon Web Services",
         "Major League Baseball" ;
     ns1:status "not happened at date of document" .
 
@@ -133,7 +133,7 @@
     ns1:internalDocId 11594 ;
     ns1:name "Enterprise Knowledge Platform",
         "Partnership" ;
-    ns1:organizationNames "Biomax Informatics AG",
+    ns1:orgName "Biomax Informatics AG",
         "Royal DSM N.V." ;
     ns1:providedBy <https://1145.am/db/11594/Biomax_Informatics_Ag> ;
     ns1:status "completed" ;
@@ -152,7 +152,7 @@
     ns1:foundName "partnership" ;
     ns1:internalDocId 11594 ;
     ns1:name "Partnership" ;
-    ns1:organizationNames "Biomax",
+    ns1:orgName "Biomax",
         "DSM" ;
     ns1:status "completed" ;
     ns1:whereClean "Kingdom of the Netherlands" ;
