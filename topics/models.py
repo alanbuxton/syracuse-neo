@@ -196,7 +196,7 @@ class Resource(StructuredNode):
     def find_by_name(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
         name = name.lower()
         cache_key = cache_friendly(f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date.isoformat()}")
-        res = cache.get(cache_key)
+        res = None #cache.get(cache_key)
         if res is not None:
             logger.debug(f"From cache {cache_key}")
             return res
@@ -211,11 +211,9 @@ class Resource(StructuredNode):
 
     @classmethod
     def find_by_name_optional_same_as_onlies(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
-        class_name = cls.__name__
-        if "Resource" not in class_name: 
-            class_name = f"Resource&{class_name}"
-        query = f'''MATCH (n: {cls.__name__})
-                    WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
+        query = f'''CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic"}}) YIELD node as n
+                    WITH n
+                    WHERE "{cls.__name__}" IN LABELS(n)
                     AND n.internalMergedSameAsHighToUri IS NULL 
                    '''
         if combine_same_as_name_only is True: # then exclude entries with same_as_name_only here, they will be added later
@@ -234,10 +232,10 @@ class Resource(StructuredNode):
             For any group of nodes connected by sameAsNameOnly return the one with smallest internalDocId
         '''
         class_name = cls.__name__
-        if 'Resource' not in class_name:
-            class_name = f"Resource&{class_name}"
-        query = f"""MATCH (n: {class_name})-[:sameAsNameOnly]-(o: {class_name})
-                    WHERE ANY (item IN n.name WHERE item =~ "(?i).*{name}.*")
+        query = f"""CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic" }}) YIELD node as n
+                    WITH n
+                    MATCH (n)-[:sameAsNameOnly]-(o: {class_name})
+                    WHERE "{class_name}" in LABELS(n)
                     AND n.internalMergedSameAsHighToUri IS NULL
                     AND o.internalMergedSameAsHighToUri IS NULL
                     AND n.internalDocId <= o.internalDocId
@@ -265,6 +263,7 @@ class Resource(StructuredNode):
                 entities_to_keep[source_node] += cnt_articles2
                 seen_orgs.add(other_node)
         return list(entities_to_keep.items())
+
 
     @property
     def best_name(self):

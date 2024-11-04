@@ -21,6 +21,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
+    db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
     v, _ = db.cypher_query("call n10s.graphconfig.show")
     if len(v) == 0:
         do_n10s_config()
