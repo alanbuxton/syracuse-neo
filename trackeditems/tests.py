@@ -4,10 +4,11 @@ from django.contrib.auth import get_user_model
 from trackeditems.serializers import TrackedOrganizationModelSerializer
 from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
 from django.db.utils import IntegrityError
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
-    make_email_notif_from_orgs
+    make_email_notif_from_orgs,
+    recents_by_user_min_max_date
 )
 from neomodel import db
 from integration.models import DataImport
@@ -195,3 +196,18 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Click on a document link to see the original source document" in content
         assert "Site stats calculating, please check later" not in content
         assert "largest banks are betting big on weed" in content
+
+    def test_prepares_activity_data_by_org(self):
+        max_date = datetime(2024,5,30,tzinfo=timezone.utc)
+        min_date = max_date - timedelta(days=7)
+        acts, _, _ = recents_by_user_min_max_date(self.user,min_date,max_date)
+        assert len(acts) == 2
+
+    def test_prepares_activity_data_by_industry(self):
+        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
+        min_date = max_date - timedelta(days=7)
+        acts,_,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
+        assert len(acts) == 2
+
+
+

@@ -19,6 +19,7 @@ from datetime import datetime, timezone, timedelta, date
 from topics.geo_utils import country_and_region_code_to_name
 from topics.views import prepare_request_state
 from topics.serializers import date_from_str
+from .notification_helpers import recents_by_user_min_max_date
 
 class TrackedIndustryGeoView(APIView):
     permission_classes = [IsAuthenticated]
@@ -133,9 +134,7 @@ class ActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         user = request.user
-        org_uris = TrackedOrganization.trackable_uris_by_user(user)
-        matching_activity_orgs = get_activities_by_date_range_for_api(min_date,
-                        uri_or_list=org_uris, max_date=max_date, combine_same_as_name_only=True)
+        matching_activity_orgs, _, _ = recents_by_user_min_max_date(user, min_date, max_date)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         request_state, combine_same_as_name_only = prepare_request_state(request)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,

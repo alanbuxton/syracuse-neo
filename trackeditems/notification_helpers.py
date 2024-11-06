@@ -9,6 +9,8 @@ from .models import ActivityNotification
 from topics.views import industry_geo_search_str
 from topics.geo_utils import geo_dict
 from topics.serializers import IndustrySerializer
+from topics.models import cache_friendly
+from django.core.cache import cache
 
 def prepare_recent_changes_email_notification(user, num_days):
     max_date = DataImport.latest_import_ts()
@@ -20,7 +22,11 @@ def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_da
         min_date = days_ago(num_days, max_date)
     return prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date)
 
-def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date):
+def recents_by_user_min_max_date(user, min_date, max_date):
+    cache_key = cache_friendly(f"recents_{user.id}_{min_date}_{max_date}")
+    res = cache.get(cache_key)
+    if res is not None:
+        return res
     tracked_orgs = TrackedOrganization.by_user(user)
     org_uris = [x.organization_or_merged_uri for x in tracked_orgs]
     matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=org_uris, max_date=max_date)
@@ -32,6 +38,11 @@ def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, ma
         matching_activity_orgs.extend(acts)
         geo_name = geo_lookup[geo_code]
         tracked_industry_geos.append( industry_geo_search_str(industry_name, geo_name) )
+    cache.set(cache_key, (matching_activity_orgs, tracked_orgs, tracked_industry_geos) )
+    return matching_activity_orgs, tracked_orgs, tracked_industry_geos
+
+def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date):
+    matching_activity_orgs, tracked_orgs, tracked_industry_geos = recents_by_user_min_max_date(user, min_date, max_date)
     if len(matching_activity_orgs) == 0:
         return None
     return make_email_notif_from_orgs(matching_activity_orgs, tracked_orgs, tracked_industry_geos,
