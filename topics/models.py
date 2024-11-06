@@ -933,6 +933,13 @@ class PartnershipActivity(ActivityMixin, Resource):
     awarded = RelationshipFrom('Organization','awarded')
 
     @property
+    def all_actors(self):
+        return {"provided_by": self.providedBy.all(),
+                "partnership": self.partnership.all(),
+                "awarded": self.awarded.all(),
+                }
+
+    @property
     def summary_name(self):
         return ", ".join(sorted(self.orgName))
 

@@ -38,6 +38,7 @@ def recents_by_user_min_max_date(user, min_date, max_date):
         matching_activity_orgs.extend(acts)
         geo_name = geo_lookup[geo_code]
         tracked_industry_geos.append( industry_geo_search_str(industry_name, geo_name) )
+    matching_activity_orgs = sorted(matching_activity_orgs, key = lambda x: x['date_published'], reverse=True)
     cache.set(cache_key, (matching_activity_orgs, tracked_orgs, tracked_industry_geos) )
     return matching_activity_orgs, tracked_orgs, tracked_industry_geos
 
