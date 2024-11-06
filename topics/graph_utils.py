@@ -61,6 +61,7 @@ def graph_centered_on(start_node, **kwargs):
     combine_same_as_name_only = kwargs.get("combine_same_as_name_only",True)
     source_names = kwargs.get("source_names",Article.core_sources())
     min_date = kwargs.get("min_date",BEGINNING_OF_TIME)
+    max_nodes = kwargs.get("max_nodes",50)
     uris_to_ignore = set()
     nodes_found_so_far = set()
 
@@ -69,16 +70,24 @@ def graph_centered_on(start_node, **kwargs):
         uris_to_ignore = set([x.uri for x in center_node_same_as_name_onlies])
 
     for rel_data in root_node.all_directional_relationships(source_names=source_names,min_date=min_date):
-        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
-                                nodes_found_so_far, combine_same_as_name_only, source_names, min_date)
+        build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, 
+                                uris_to_ignore, nodes_found_so_far, combine_same_as_name_only, 
+                                source_names, min_date, max_nodes)
+        if len(node_data) > max_nodes:
+            logger.warning(f"got {len(node_data)} nodes - more than {max_nodes} - bailing")
+            return None
 
     if combine_same_as_name_only is True:
         for org in center_node_same_as_name_onlies:
             for rel_data in org.all_directional_relationships(override_from_uri=root_uri,source_names=source_names,min_date=min_date):
                 rel_data["other_node"] = keep_or_switch_node(rel_data["other_node"],nodes_found_so_far, combine_same_as_name_only)
                 if rel_data["other_node"] not in center_node_same_as_name_onlies:
-                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
-                                            nodes_found_so_far, combine_same_as_name_only, source_names, min_date)
+                    build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, 
+                                            uris_to_ignore, nodes_found_so_far, combine_same_as_name_only, 
+                                            source_names, min_date, max_nodes)
+                    if len(node_data) > max_nodes:
+                        logger.warning(f"got {len(node_data)} nodes - more than {max_nodes} - bailing")
+                        return None
 
     return node_data, edge_data, node_details, edge_details
 
@@ -97,7 +106,7 @@ def keep_or_switch_node(current_node, nodes_found_so_far, combine_same_as_name_o
     return current_node
 
 def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, uris_to_ignore, 
-                            nodes_found_so_far, combine_same_as_name_only, source_names, min_date):
+                            nodes_found_so_far, combine_same_as_name_only, source_names, min_date, max_nodes):
     other_node = rel_data["other_node"]
     other_node = keep_or_switch_node(other_node, nodes_found_so_far, combine_same_as_name_only)
     logger.debug(f"From {rel_data['from_uri']} to {other_node.uri}")
@@ -128,8 +137,11 @@ def build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_d
     if not isinstance(other_node, Organization) and not isinstance(other_node, IndustryCluster) and not isinstance(other_node, GeoNamesLocation) and not isinstance(other_node, Article):
         for rel_data in other_node.all_directional_relationships(source_names=source_names,min_date=min_date):
             build_out_graph_entries(rel_data, node_data, node_details, edge_data, edge_details, 
-                                    uris_to_ignore, nodes_found_so_far, combine_same_as_name_only, source_names, min_date)
-
+                                    uris_to_ignore, nodes_found_so_far, combine_same_as_name_only, 
+                                    source_names, min_date, max_nodes)
+            if len(node_data) > max_nodes:
+                logger.warning(f"got {len(node_data)} nodes - more than {max_nodes} - bailing")
+                return None
 
 def build_edge_vals(direction, edge_label, source_node_id, target_node_id):
     if direction == "to":

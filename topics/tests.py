@@ -77,6 +77,12 @@ class TestUtilsWithDumpData(TestCase):
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
+    def test_corp_fin_graph_nodes_max_nodes(self):
+        source_uri = "https://1145.am/db/3558745/Jb_Hunt"
+        o = Organization.self_or_ultimate_target_node(source_uri)
+        res = graph_centered_on(o,max_nodes=5)
+        assert res is None
+
     def test_corp_fin_timeline(self):
         source_uri = "https://1145.am/db/3558745/Jb_Hunt"
         o = Organization.self_or_ultimate_target_node(source_uri)
