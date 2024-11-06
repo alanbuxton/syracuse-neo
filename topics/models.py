@@ -196,7 +196,7 @@ class Resource(StructuredNode):
     def find_by_name(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
         name = name.lower()
         cache_key = cache_friendly(f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date.isoformat()}")
-        res = None #cache.get(cache_key)
+        res = cache.get(cache_key)
         if res is not None:
             logger.debug(f"From cache {cache_key}")
             return res
