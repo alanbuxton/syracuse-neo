@@ -951,7 +951,11 @@ class RoleActivity(ActivityMixin, Resource):
 
     @property
     def summary_name(self):
-        return f"{self.longest_activityType.title()}: {self.longest_roleFoundName}"
+        text = self.longest_activityType
+        if text is None:
+            return self.longest_roleFoundName
+        else:
+            return f"{text.title()}: {self.longest_roleFoundName}"
 
     def related_orgs(self):
         query = f"MATCH (n: RoleActivity {{uri:'{self.uri}'}})--(o: Role)--(p: Organization) RETURN p"
