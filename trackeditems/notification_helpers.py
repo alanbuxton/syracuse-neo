@@ -29,12 +29,12 @@ def recents_by_user_min_max_date(user, min_date, max_date):
         return res
     tracked_orgs = TrackedOrganization.by_user(user)
     org_uris = [x.organization_or_merged_uri for x in tracked_orgs]
-    matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=org_uris, max_date=max_date)
+    matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=org_uris, max_date=max_date,limit=100)
     tracked_industry_geos = []
     geo_lookup = geo_dict()
     for industry_name,geo_code in TrackedIndustryGeo.items_by_user(user):
         industry_id = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id)
+        acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id,limit=100)
         matching_activity_orgs.extend(acts)
         geo_name = geo_lookup[geo_code]
         tracked_industry_geos.append( industry_geo_search_str(industry_name, geo_name) )

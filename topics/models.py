@@ -625,7 +625,7 @@ class ActivityMixin:
 
     @property
     def status_as_string(self):
-        if len(self.status) > 1:
+        if self.status is None or len(self.status) > 1:
             return "unknown"
         elif self.status[0] == "has not happened":
             return "unknown"
@@ -731,6 +731,9 @@ class Organization(Resource):
     def based_in_high_clean_names(self):
         vals = set(self.basedInHighClean) if self.basedInHighClean is not None else set()
         for x in self.sameAsHigh:
+            if not hasattr(x, "basedInHighClean"):
+                logger.warning(f"{x.uri} is same_as_high for {self.uri} but is not an Organization, it's a {x.__class__}")
+                continue
             if x.basedInHighClean is None:
                 continue
             vals.update(x.basedInHighClean)
@@ -1111,4 +1114,6 @@ def date_to_cypher_friendly(date):
 def cache_friendly(key):
     no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
     cleaned = re.sub(r"_{2,}","_",no_punct)
+    if len(cleaned) > 230:
+        cleaned = cleaned[:210] + str(hash(cleaned[210:]))
     return cleaned

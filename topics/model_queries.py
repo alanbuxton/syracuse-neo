@@ -40,19 +40,19 @@ def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[s
         activity_articles = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit, combine_same_as_name_only)
     return activity_articles_to_api_results(activity_articles)
 
-def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id):
+def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id, limit=None):
     if industry_id is None:
         allowed_org_uris = None
     else:
         allowed_org_uris = Organization.by_industry_and_or_geo(industry_id,
                             geo_code,uris_only=True,limit=None,allowed_to_set_cache=True)
     geonames_ids = geoname_ids_for_country_region(geo_code)
-    query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids)
+    query = build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids, limit)
     objs, _ = db.cypher_query(query, resolve_objects=True)
     return activity_articles_to_api_results(objs)
 
 
-def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids):
+def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids, limit=None):
     if geonames_ids is None:
         geo_clause = ''
     else:
@@ -62,6 +62,10 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         org_uri_clause = ''
     else:
         org_uri_clause = f"AND o.uri IN {allowed_org_uris}"
+    if limit is None:
+        limit_clause = ''
+    else:
+        limit_clause = f' LIMIT {limit}'
     query = f"""
         MATCH (a: Article)<-[:documentSource]-(x: CorporateFinanceActivity|LocationActivity|PartnershipActivity)--(o: Resource&Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
@@ -70,6 +74,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         {org_uri_clause}
         {geo_clause}
         RETURN x,a
+        {limit_clause}
         UNION
         MATCH (a: Article)<-[:documentSource]-(x: RoleActivity)--(p: Role)--(o: Resource&Organization)
         WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
@@ -78,6 +83,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         {org_uri_clause}
         {geo_clause}
         RETURN x,a
+        {limit_clause}
     """
     return query
 
