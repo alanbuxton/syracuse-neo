@@ -27,6 +27,17 @@ class RecentsBySourceSerializer(serializers.Serializer):
             "count90": instance[3],
         }
         return repres
+    
+class RecentsByIndustrySerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        repres = {
+            "industry_id": instance[0],
+            "industry_name": instance[1],
+            "count7": instance[2],
+            "count30": instance[3],
+            "count90": instance[4],
+        }
+        return repres     
 
 class CountsSerializer(serializers.Serializer):
     def to_representation(self, instance):

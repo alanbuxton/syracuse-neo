@@ -1,16 +1,16 @@
 from django.urls import path, register_converter, include
 from topics import views
-from .converters import DateConverter
-from rest_framework.routers import DefaultRouter
+# from .converters import DateConverter
+# from rest_framework.routers import DefaultRouter
 
-register_converter(DateConverter, 'date')
+# register_converter(DateConverter, 'date')
 
-router = DefaultRouter(trailing_slash=False)
-router.register("v1/industries", views.IndustriesViewSet, basename='api-industry-list')
-router.register("v1/countries_regions", views.CountriesAndRegionsViewSet, basename='api-geo-list')
+# router = DefaultRouter(trailing_slash=False)
+# router.register("v1/industries", views.IndustriesViewSet, basename='api-industry-list')
+# router.register("v1/countries_regions", views.CountriesAndRegionsViewSet, basename='api-geo-list')
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
     path('', views.Index.as_view(), name='index'),
     path('organization/linkages/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationByUri.as_view(), name='organization-linkages'),
     path('organization/timeline/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationTimeline.as_view(), name='organization-timeline'),

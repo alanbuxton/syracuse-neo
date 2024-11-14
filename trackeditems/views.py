@@ -1,20 +1,25 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedOrganization, TrackedIndustryGeo
+from topics.models import IndustryCluster
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
-    TrackedIndustryGeoModelSerializer)
-from topics.model_queries import (get_activities_for_serializer_by_country_and_date_range,
-    get_cached_stats, get_activities_by_date_range_for_api,
-    get_activities_for_serializer_by_source_and_date_range,
-    get_activities_by_date_range_industry_geo_for_api)
+    TrackedIndustryGeoModelSerializer, RecentsByIndustrySerializer)
+from topics.model_queries import (
+    get_activities_for_serializer_by_country_and_date_range,
+    get_cached_stats, 
+    get_activities_by_date_range_for_api,
+    get_activities_for_serializer_by_industry_and_date_range,
+    # get_activities_by_date_range_industry_geo_for_api,
+    get_activities_for_serializer_by_source_and_date_range
+    )
 from datetime import datetime, timezone, timedelta, date
 from topics.geo_utils import country_and_region_code_to_name
 from topics.views import prepare_request_state
@@ -86,6 +91,27 @@ class GeoActivitiesView(APIView):
                             "request_state": request_state,
                             }, status=status.HTTP_200_OK)
         return resp
+    
+class IndustryActivitiesView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tracked_activities.html'
+
+    def get(self, request):
+        min_date, max_date = min_and_max_date(request.GET)
+        industry_id = request.GET.get("industry_id")
+        industry = IndustryCluster.nodes.get_or_none(topicId=industry_id)
+        request_state, _ = prepare_request_state(request)
+        if request_state["cache_last_updated"] is not None:
+            matching_activity_orgs = get_activities_for_serializer_by_industry_and_date_range(industry, min_date, max_date, limit=20)
+        else:
+            matching_activity_orgs = []
+        serializer = ActivitySerializer(matching_activity_orgs, many=True)
+        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "source_name": industry.longest_representative_doc,
+                            "request_state": request_state,
+                             }, status=status.HTTP_200_OK)
+        return resp
+
 
 class SourceActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -112,16 +138,19 @@ class ActivityStats(APIView):
     template_name = 'activity_stats.html'
 
     def get(self, request):
-        max_date, counts, recents_by_geo, recents_by_source = get_cached_stats()
+        max_date, counts, recents_by_geo, recents_by_source, recents_by_industry = get_cached_stats()
         recents_by_geo_serializer = RecentsByGeoSerializer(recents_by_geo, many=True)
         recents_by_source_serializer = RecentsBySourceSerializer(recents_by_source, many=True)
         counts_serializer = CountsSerializer(counts, many=True)
-        request_state, combine_same_as_name_only = prepare_request_state(request)
-        resp = Response({"recents_by_geo":recents_by_geo_serializer.data,"counts":counts_serializer.data,
-                        "recents_by_source":recents_by_source_serializer.data,
-                            "max_date":max_date,
-                            "request_state": request_state,
-                            }, status=status.HTTP_200_OK)
+        request_state, _ = prepare_request_state(request)
+        recents_by_industry_serializer = RecentsByIndustrySerializer(recents_by_industry,many=True)
+        resp = Response({"recents_by_geo": recents_by_geo_serializer.data,
+                         "counts": counts_serializer.data,
+                         "recents_by_source": recents_by_source_serializer.data,
+                         "recents_by_industry": recents_by_industry_serializer.data,
+                         "max_date": max_date,
+                         "request_state": request_state,
+                        }, status=status.HTTP_200_OK)
         return resp
 
 
@@ -153,26 +182,26 @@ class ActivitiesByUriViewSet(viewsets.ReadOnlyModelViewSet):
         results = get_activities_by_date_range_for_api(min_date,uri_or_list=[uri])
         return results
     
-class ActivitiesByIndustryRegionViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = ActivitySerializer
+# class ActivitiesByIndustryRegionViewSet(viewsets.ReadOnlyModelViewSet):
+#     permission_classes = [IsAuthenticated]
+#     authentication_classes = [SessionAuthentication, TokenAuthentication]
+#     serializer_class = ActivitySerializer
 
-    def get_queryset(self):
-        industry_id = self.request.GET.get('industry_id')
-        geo_code = self.request.GET.get('region_code')
-        if industry_id is None and geo_code is None:
-            raise ValueError("Must provide industry id or geo code (or both)")
-        min_date = self.request.GET.get('min_date')
-        min_date = date_from_str(min_date)
-        if min_date is None:
-            min_date = date.today() - timedelta(days=7)
-        max_date = self.request.GET.get('max_date')
-        max_date = date_from_str(max_date)
-        if max_date is None:
-            max_date = date.today()
-        acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id)
-        return acts
+#     def get_queryset(self):
+#         industry_id = self.request.GET.get('industry_id')
+#         geo_code = self.request.GET.get('region_code')
+#         if industry_id is None and geo_code is None:
+#             raise ValueError("Must provide industry id or geo code (or both)")
+#         min_date_str = self.request.GET.get('min_date')
+#         min_date = date_from_str(min_date_str)
+#         if min_date is None:
+#             min_date = date.today() - timedelta(days=7)
+#         max_date = self.request.GET.get('max_date')
+#         max_date = date_from_str(max_date)
+#         if max_date is None:
+#             max_date = date.today()
+#         acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id)
+#         return acts
     
 
 def min_and_max_date(get_params):

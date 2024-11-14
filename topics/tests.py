@@ -147,29 +147,33 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
-        counts, recents_by_geo, recents_by_source = get_stats(max_date)
+        counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
         assert set(counts) == {('PartnershipActivity', 4), ('LocationActivity', 11), ('Organization', 412), 
-                               ('Person', 12), ('Role', 11), ('Article', 192), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
+                                ('Person', 12), ('Role', 11), ('Article', 192), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
         assert len(recents_by_geo) == 33
         assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1), ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), 
-                                          ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
-                                          ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1), ('GB', 'GB', 'United Kingdom', 1, 1, 1), 
-                                          ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1), ('KE', 'KE', 'Kenya', 1, 1, 1), 
-                                          ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), 
-                                          ('US', 'US-CA', 'United States - California', 1, 1, 3), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), 
-                                          ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), 
-                                          ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), 
-                                          ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), 
-                                          ('US', 'US-MD', 'United States - Maryland', 1, 1, 1), ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), 
-                                          ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1), ('US', 'US-NY', 'United States - New York', 4, 4, 10), 
-                                          ('US', 'US-OH', 'United States - Ohio', 1, 1, 1), ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), 
-                                          ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2), ('US', 'US-TX', 'United States - Texas', 2, 2, 9), 
-                                          ('US', 'US-VA', 'United States - Virginia', 1, 1, 2), ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
+                                            ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
+                                            ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1), ('GB', 'GB', 'United Kingdom', 1, 1, 1), 
+                                            ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1), ('KE', 'KE', 'Kenya', 1, 1, 1), 
+                                            ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), 
+                                            ('US', 'US-CA', 'United States - California', 1, 1, 3), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), 
+                                            ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), 
+                                            ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), 
+                                            ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), 
+                                            ('US', 'US-MD', 'United States - Maryland', 1, 1, 1), ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), 
+                                            ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1), ('US', 'US-NY', 'United States - New York', 4, 4, 10), 
+                                            ('US', 'US-OH', 'United States - Ohio', 1, 1, 1), ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), 
+                                            ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2), ('US', 'US-TX', 'United States - Texas', 2, 2, 9), 
+                                            ('US', 'US-VA', 'United States - Virginia', 1, 1, 2), ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
         assert sorted(recents_by_source) == [('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4),
             ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1),
             ('MarketWatch', 4, 4, 4), ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
             ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), 
+                                            (69, 'Architecture, Engineering And Construction', 0, 0, 1), (383, 'Banking & Markets Investment Bank', 1, 1, 1), 
+                                            (154, 'Biomanufacturing Technologies', 0, 0, 3), (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), 
+                                            (36, 'C-Commerce (\\', 1, 1, 1), (443, 'Cancer Diagnostics', 0, 0, 3), (12, 'Cannabis And Hemp', 1, 1, 1), 
+                                            (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2)]
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")

@@ -1,5 +1,7 @@
 from neomodel import db
-from .models import Organization, ActivityMixin, Article, date_to_cypher_friendly
+from .models import (Organization, ActivityMixin, Article, 
+                     date_to_cypher_friendly, IndustryCluster
+)
 from .geo_utils import geoname_ids_for_country_region, geo_select_list
 from datetime import datetime, timezone, timedelta
 from typing import List, Union
@@ -7,7 +9,6 @@ import logging
 from precalculator.models import P
 from .graph_utils import keep_or_switch_node
 from .constants import BEGINNING_OF_TIME
-
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,11 @@ def get_activities_for_serializer_by_source_and_date_range(source_name, min_date
 def get_relevant_org_uris_for_country_region_industry(geo_code, industry_id=None, limit=20):
     uris=Organization.by_industry_and_or_geo(industry_id, geo_code,limit=limit, uris_only=True)
     return uris
+
+def get_activities_for_serializer_by_industry_and_date_range(industry, min_date, max_date, limit=20):
+    matching_activity_orgs = do_get_activities_articles_by_industry_and_date_range_query(industry, min_date=min_date,
+                                max_date=max_date, limit=limit)
+    return activity_articles_to_api_results(matching_activity_orgs)
 
 def get_activities_by_date_range_for_api(min_date, uri_or_list: Union[str,List[str],None] = None,
                                             source_name: Union[str,None] = None,
@@ -51,8 +57,8 @@ def get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_cod
     objs, _ = db.cypher_query(query, resolve_objects=True)
     return activity_articles_to_api_results(objs)
 
-
-def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, geonames_ids, limit=None):
+def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, allowed_org_uris, 
+                                                          geonames_ids, limit=None, counts_only=False):
     if geonames_ids is None:
         geo_clause = ''
     else:
@@ -85,6 +91,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
         RETURN x,a
         {limit_clause}
     """
+    logger.debug(query)
     return query
 
 def activity_articles_to_api_results(activity_articles):
@@ -202,10 +209,10 @@ def build_get_activities_by_org_uri_and_date_range_query(uri_or_uri_list: Union[
 def get_cached_stats():
     latest_date = P.get_last_updated()
     if latest_date is None:
-        return None, None, None, None
+        return None, None, None, None, None
     d = datetime.date(latest_date)
-    counts, recents_by_country_region, recents_by_source = get_stats(d, allowed_to_set_cache=False)
-    return d, counts, recents_by_country_region, recents_by_source
+    counts, recents_by_country_region, recents_by_source, recents_by_industry = get_stats(d, allowed_to_set_cache=False)
+    return d, counts, recents_by_country_region, recents_by_source, recents_by_industry
 
 def get_stats(max_date,allowed_to_set_cache=False):
     res = P.get_stats(max_date)
@@ -218,8 +225,19 @@ def get_stats(max_date,allowed_to_set_cache=False):
                     RETURN COUNT(n)""")
         counts.append( (x , res[0][0]) )
     recents_by_country_region = []
-    ts1 = datetime.utcnow()
+    ts1 = datetime.now(tz=timezone.utc)
+    recents_by_industry = []
+    for industry in sorted(IndustryCluster.leaf_nodes_only(),
+                           key=lambda x: x.longest_representative_doc):
+        logger.info(f"Stats for {industry.longest_representative_doc}")
+        cnt7 = counts_by_timedelta(7,max_date,industry=industry)
+        cnt30 = counts_by_timedelta(30,max_date,industry=industry)
+        cnt90 = counts_by_timedelta(90,max_date,industry=industry)
+        if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
+            recents_by_industry.append( 
+                (industry.topicId, industry.longest_representative_doc,cnt7,cnt30,cnt90) )
     for k,v in geo_select_list():
+        logger.info(f"Stats for {k}")
         if k.strip() == '':
             continue
         cnt7 = counts_by_timedelta(7,max_date,geo_code=k)
@@ -230,32 +248,39 @@ def get_stats(max_date,allowed_to_set_cache=False):
             recents_by_country_region.append( (country_code,k,v,cnt7,cnt30,cnt90) )
     recents_by_source = []
     for source_name in sorted(get_all_source_names()):
+        logger.info(f"Stats for {source_name}")
         cnt7 = counts_by_timedelta(7,max_date,source_name=source_name)
         cnt30 = counts_by_timedelta(30,max_date,source_name=source_name)
         cnt90 = counts_by_timedelta(90,max_date,source_name=source_name)
         if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
             recents_by_source.append( (source_name,cnt7,cnt30,cnt90) )
-    ts2 = datetime.utcnow()
-    logger.debug(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
+    ts2 = datetime.now(tz=timezone.utc)
+    logger.info(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
     if allowed_to_set_cache is True:
-        P.set_stats(max_date, (counts, recents_by_country_region, recents_by_source) )
+        P.set_stats(max_date, (counts, recents_by_country_region, recents_by_source, recents_by_industry) )
     else:
         logger.debug("Not allowed to set cache")
-    return counts, recents_by_country_region, recents_by_source
+    return counts, recents_by_country_region, recents_by_source, recents_by_industry
 
-def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None):
+def counts_by_timedelta(days_ago, max_date, geo_code=None,source_name=None, industry=None):
     min_date = max_date - timedelta(days=days_ago)
     if geo_code is not None:
         res = get_country_region_counts(geo_code,min_date,max_date)
     elif source_name is not None:
         res = get_source_counts(source_name,min_date,max_date)
+    elif industry is not None:
+        res = get_industry_counts(industry,min_date,max_date)
     else:
-        raise ValueError(f"counts_by_timedelta must supply geo_code or source_name")
+        raise ValueError(f"Not a valid breakdown to get stats for")
     return res
 
-def get_source_counts(source_name, min_date,max_date):
+def get_source_counts(source_name, min_date, max_date):
     counts = get_activities_by_source_and_date_range(source_name,min_date,max_date,counts_only=True)
     return count_entries(counts)
+
+def get_industry_counts(industry, min_date, max_date):
+    counts = do_get_activities_articles_by_industry_and_date_range_query(industry, min_date, max_date, limit=None, counts_only=True)
+    return counts
 
 def get_country_region_counts(geo_code,min_date,max_date):
     relevant_uris = get_relevant_org_uris_for_country_region_industry(geo_code,limit=None)
@@ -387,3 +412,40 @@ def org_family_tree(organization_uri, combine_same_as_name_only=True, relationsh
                         override_target_uri=organization_uri))
 
     return parents, siblings, children
+
+
+def do_get_activities_articles_by_industry_and_date_range_query(industry, min_date, max_date, limit=None, counts_only=False):
+    industry_uri = industry.uri
+    if counts_only is True:
+        return_clause = "RETURN distinct(act.uri)"
+    else:
+        return_clause = "RETURN act, art"
+    if limit is not None:
+        limit_clause = f" LIMIT {limit} "
+    else:
+        limit_clause = ""
+    query = f'''MATCH (n: IndustryCluster {{uri:"{industry_uri}"}})--(act: CorporateFinanceActivity)--(art: Article)
+            WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+            AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+            {return_clause}
+            {limit_clause}
+            UNION
+            MATCH (n: IndustryCluster {{uri:"{industry_uri}"}})--(c: Organization)--(art: Article)--(act: CorporateFinanceActivity|LocationActivity|PartnershipActivity)
+            WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+            AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+            {return_clause}
+            {limit_clause}
+            UNION
+            MATCH (n: IndustryCluster {{uri:"{industry_uri}"}})--(o: Organization)--(r: Role)--(act: RoleActivity)--(art: Article)
+            WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+            AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+            {return_clause}
+            {limit_clause}
+            '''
+    res, _ = db.cypher_query(query, resolve_objects=True)
+    if counts_only is True:
+        flattened = [x for sublist in res for x in sublist]
+        return len(set(flattened))
+    else:
+        return res
+

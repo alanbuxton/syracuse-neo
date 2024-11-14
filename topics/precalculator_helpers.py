@@ -2,7 +2,7 @@ from precalculator.models import P
 from topics.models import Organization, ActivityMixin, Person
 from topics.model_queries import get_stats
 import logging
-from datetime import date, timedelta, datetime, timezone
+from datetime import date, datetime, timezone
 from topics.geo_utils import get_geo_data
 logger = logging.getLogger(__name__)
 
