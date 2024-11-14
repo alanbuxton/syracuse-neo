@@ -146,7 +146,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert len(re.findall("Atria Wealth Solutions",email)) == 5
         assert "None" not in email
 
-    def test_does_not_populate_activity_pages_if_cache_not_available(self):
+    def test_does_not_activity_stats_if_cache_not_available(self):
         client = self.client
         P.nuke_all()
 
@@ -155,22 +155,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Site stats calculating, please check later" in content
         assert "Showing updates as at" not in content
 
-        response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
-        content = str(response.content)
-        assert "Activities between" not in content
-        assert "Click on a document link to see the original source document" not in content
-        assert "Site stats calculating, please check later" in content
-        assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" not in content
-
-        response = client.get("/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
-        content = str(response.content)
-        assert "Activities between" not in content
-        assert "Click on a document link to see the original source document" not in content
-        assert "Site stats calculating, please check later" in content
-        assert "largest banks are betting big on weed" not in content
-
-
-    def test_only_populates_activity_pages_if_cache_available(self):
+    def test_only_populates_activity_stats_if_cache_available(self):
         ''' For testing
             from django.test import Client
             client = Client()
@@ -184,6 +169,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "Site stats calculating, please check later" not in content
         assert "Showing updates as at" in content
 
+    def test_always_shows_geo_activities(self):
+        client = self.client
         response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
