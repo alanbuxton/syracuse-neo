@@ -1,0 +1,392 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/10282/Talla> a org:Organization ;
+    ns1:documentSource <https://1145.am/db/10282/apnewscom_1b87240f9a73c763aca4ff6b35856e63> ;
+    ns1:foundName "Talla" ;
+    ns1:industry "artificial intelligence" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/136_ai_automation_intelligence_artificial> ;
+    ns1:industryClusterSecondary <https://1145.am/db/industry/354_ai_analytics_computational_learning> ;
+    ns1:internalDocId 10282 ;
+    ns1:name "Talla" ;
+    ns1:productActivity <https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base> .
+
+<https://1145.am/db/10348/Nvidia> a org:Organization ;
+    ns1:description "computing" ;
+    ns1:documentSource <https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> ;
+    ns1:foundName "NVIDIA" ;
+    ns1:internalDocId 10348 ;
+    ns1:name "NVIDIA" ;
+    ns1:productActivity <https://1145.am/db/10348/Introduces-HGX-2> .
+
+<https://1145.am/db/11702/M_*_Modal> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:description "AI-Powered Clinical Documentation Integrity (CDI) Solutions" ;
+    ns1:documentSource <https://1145.am/db/11702/apnewscom_0cfe3c9e420589c5ded1a051783a3416> ;
+    ns1:foundName "M * Modal" ;
+    ns1:internalDocId 11702 ;
+    ns1:name "M * Modal" ;
+    ns1:productActivity <https://1145.am/db/11702/Announced_Further_Enhancements-Cdi> .
+
+<https://1145.am/db/12170/People_Power> a org:Organization ;
+    ns1:description "Artificial Intelligence" ;
+    ns1:documentSource <https://1145.am/db/12170/apnewscom_08e1cc9a3d09602ce634dbc965be6974> ;
+    ns1:foundName "People Power" ;
+    ns1:industry "Internet of Things" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/254_iot_wireless_sensor_devices> ;
+    ns1:internalDocId 12170 ;
+    ns1:name "People Power" ;
+    ns1:productActivity <https://1145.am/db/12170/New-Home_Occupancy_Status_Microservice> .
+
+<https://1145.am/db/12236/Neura> a org:Organization ;
+    ns1:description "personalization of digital experiences" ;
+    ns1:documentSource <https://1145.am/db/12236/apnewscom_084001b02595eb90b9b8a8905f160369> ;
+    ns1:foundName "Neura" ;
+    ns1:internalDocId 12236 ;
+    ns1:name "Neura" ;
+    ns1:productActivity <https://1145.am/db/12236/Announced-Neura_Moments> .
+
+<https://1145.am/db/12289/Microsoft> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:documentSource <https://1145.am/db/12289/apnewscom_07b638df7d0745b69cf55dad4af6623e> ;
+    ns1:foundName "Microsoft" ;
+    ns1:industry "tech-company" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/132_martech_tech_technology_technologies> ;
+    ns1:internalDocId 12289 ;
+    ns1:name "Microsoft" ;
+    ns1:productActivity <https://1145.am/db/12289/Updates-Bing> .
+
+<https://1145.am/db/12364/Announce-Engagement_Workflow_Five9_Etc> a ns1:ProductActivity ;
+    ns1:documentDate "2018-05-15T12:02:00+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "To connect the dots for the agent and customer, today we announce Five9 Spring Release 2018. This release includes major enhancements across the portfolio, including Five9 Genius TM and Engagement Workflow. Five9 Genius is designed to bring practical AI to the contact center, and is a core layer within the platform enabling pervasive intelligence throughout Five9 applications. includes: :" ;
+    ns1:documentSource <https://1145.am/db/12364/apnewscom_073f26a528f14ea28accd06d919eeb79> ;
+    ns1:foundName "announce" ;
+    ns1:internalDocId 12364 ;
+    ns1:name "announce" ;
+    ns1:product <https://1145.am/db/12364/Engagement_Workflow-Product>,
+        <https://1145.am/db/12364/Five9_Genius-Product> ;
+    ns1:productName "Engagement Workflow",
+        "Five9 Genius" ;
+    ns1:status "completed" ;
+    ns1:whenRaw "2018" .
+
+<https://1145.am/db/8084/Databricks> a org:Organization ;
+    ns1:description "unified analytics" ;
+    ns1:documentSource <https://1145.am/db/8084/apnewscom_37cee932dd7249919c3f837b05e1767f> ;
+    ns1:foundName "Databricks" ;
+    ns1:internalDocId 8084 ;
+    ns1:name "Databricks" ;
+    ns1:productActivity <https://1145.am/db/8084/Introduced-Databricks_Unified_Analytics_Platform_For_Genomics> .
+
+<https://1145.am/db/9206/Appzen> a org:Organization ;
+    ns1:description "business process automation" ;
+    ns1:documentSource <https://1145.am/db/9206/apnewscom_28d422099e9d4ce686845d1714763378> ;
+    ns1:foundName "AppZen" ;
+    ns1:internalDocId 9206 ;
+    ns1:name "AppZen" ;
+    ns1:productActivity <https://1145.am/db/9206/Launches-Insight_Product> .
+
+<https://1145.am/db/9595/Bay_Labs_Echomd_Autoef_Software> a org:Organization ;
+    ns1:description "medical" ;
+    ns1:documentSource <https://1145.am/db/9595/apnewscom_23848ae87adb4a2ab59bac5c1d7dba88> ;
+    ns1:foundName "Bay Labs" ;
+    ns1:internalDocId 9595 ;
+    ns1:name "Bay Labs' EchoMD AutoEF Software" ;
+    ns1:productActivity <https://1145.am/db/9595/New_Study_Demonstrates_Accuracy-Echomd_Autoef> .
+
+<https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base> a ns1:ProductActivity ;
+    ns1:documentDate "2018-08-21T18:27:26+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Talla, a leading B2B, artificial intelligence company, today launched version 2.0 of the Talla Intelligent Knowledge Base - a platform that brings together customer content with automation, chatbots, and machine learning to help customer facing teams move deals through the pipeline faster, decrease churn, and improve customer conversations. This new platform harnesses techniques in natural language processing and AI powered automation to achieve significant benefits for revenue generating teams within companies. Rob May, Founder and CEO Talla said: \"Businesses today are driven by information, but the way that information is written makes it difficult to access simple crisp answers for customers. Talla uses AI to solve that problem. Our A.I." ;
+    ns1:documentSource <https://1145.am/db/10282/apnewscom_1b87240f9a73c763aca4ff6b35856e63> ;
+    ns1:foundName "launched" ;
+    ns1:internalDocId 10282 ;
+    ns1:name "launched" ;
+    ns1:product <https://1145.am/db/10282/Version_20_Of_The_Talla_Intelligent_Knowledge_Base-Product> ;
+    ns1:productName "version 2.0 of the Talla Intelligent Knowledge Base" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/10282/Version_20_Of_The_Talla_Intelligent_Knowledge_Base-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/10282/apnewscom_1b87240f9a73c763aca4ff6b35856e63> ;
+    ns1:feature "platform that brings together customer content with automation, chatbots, and machine learning" ;
+    ns1:foundName "version 2.0 of the Talla Intelligent Knowledge Base" ;
+    ns1:internalDocId 10282 ;
+    ns1:name "version 2.0 of the Talla Intelligent Knowledge Base" ;
+    ns1:useCase "customer facing teams move deals through the pipeline faster, decrease churn, and improve customer conversations" .
+
+<https://1145.am/db/10348/Introduces-HGX-2> a ns1:ProductActivity ;
+    ns1:documentDate "2018-05-30T03:27:13+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "GTC Taiwan-NVIDIA today introduced NVIDIA HGX-2™, the first unified computing platform for both artificial intelligence and high performance computing. The HGX-2 cloud server platform, with multi-precision computing capabilities, provides unique flexibility to support the future of computing. It allows high-precision calculations using FP64 and FP32 for scientific computing and simulations, while also enabling FP16 and Int8 for AI training and inference. This unprecedented versatility meets the requirements of the growing number of applications that combine HPC with AI. A number of leading computer makers today shared plans to bring to market systems based on the NVIDIA HGX-2 platform.",
+        "NVIDIA Introduces HGX-2, Fusing HPC and AI Computing into Unified Architecture." ;
+    ns1:documentSource <https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> ;
+    ns1:foundName "Introduces",
+        "introduced" ;
+    ns1:internalDocId 10348 ;
+    ns1:name "Introduces",
+        "introduced" ;
+    ns1:product <https://1145.am/db/10348/Nvidia_Hgx-2-Product> ;
+    ns1:productName "NVIDIA HGX-2" ;
+    ns1:status "completed",
+        "not happened at date of document" ;
+    ns1:whereClean "Taiwan" ;
+    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1668284> ;
+    ns1:whereRaw "Taiwan" .
+
+<https://1145.am/db/10348/Nvidia_Hgx-2-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> ;
+    ns1:feature "unified computing platform" ;
+    ns1:foundName "HGX-2",
+        "NVIDIA HGX-2" ;
+    ns1:internalDocId 10348 ;
+    ns1:name "NVIDIA HGX-2" ;
+    ns1:useCase "HPC",
+        "both artificial intelligence and high performance computing" .
+
+<https://1145.am/db/11702/Announced_Further_Enhancements-Cdi> a ns1:ProductActivity ;
+    ns1:documentDate "2018-05-23T14:02:20+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "M * Modal, a leading provider of clinical documentation and Speech UnderstandingTM solutions, today announced further enhancements to its artificial intelligence (AI) powered and outcomes-driven CDI solutions. Integrated with over 150 EHRs, M * Modal CDI solutions provide physicians and clinical documentation improvement specialists (CDIS) with a unified and more efficient workflow that closes the loop between physician and CDIS documentation processes. Going beyond traditional inpatient CDI, M * Modal supports risk-adjustment documentation and care management of patient populations with its complete Hierarchical Condition Category (HCC) solution. The M * Modal AI platform applies clinical reasoning and semantic understanding, and delivers high-value insights on over 6,000 clinical conditions. To see how M * Modal solutions can help improve patient care and documentation integrity, visit the M * Modal booth (# 407) at the 2018 Association of Clinical Documentation Improvement Specialists (ACDIS) annual conference being held in San Antonio till May 24." ;
+    ns1:documentSource <https://1145.am/db/11702/apnewscom_0cfe3c9e420589c5ded1a051783a3416> ;
+    ns1:foundName "announced further enhancements" ;
+    ns1:internalDocId 11702 ;
+    ns1:name "announced further enhancements" ;
+    ns1:product <https://1145.am/db/11702/Clinical_Documentation_Improvement-Product> ;
+    ns1:productName "CDI" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/11702/Clinical_Documentation_Improvement-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/11702/apnewscom_0cfe3c9e420589c5ded1a051783a3416> ;
+    ns1:feature "artificial intelligence (AI) powered and outcomes-driven" ;
+    ns1:foundName "CDI" ;
+    ns1:internalDocId 11702 ;
+    ns1:name "Clinical Documentation Improvement" .
+
+<https://1145.am/db/12170/Home_Occupancy_Status_Microservice-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/12170/apnewscom_08e1cc9a3d09602ce634dbc965be6974> ;
+    ns1:foundName "Home Occupancy Status Microservice" ;
+    ns1:internalDocId 12170 ;
+    ns1:name "Home Occupancy Status Microservice" .
+
+<https://1145.am/db/12170/New-Home_Occupancy_Status_Microservice> a ns1:ProductActivity ;
+    ns1:documentDate "2018-07-10T14:02:50+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Adding to the company's growing lineup of Artificial Intelligence-powered (AI) microservices for the smart home, People Power, the Internet of Things (IoT) software company providing white-label solutions for home security, energy and senior care service, today announces its new Home Occupancy Status Microservice. Providing a remedy for poorly performing GPS - based geofencing solutions that require people to carry their phones with them, the new microservice intelligently detects and understands occupancy conditions of a home based on motion patterns derived from activity sensors. Complex occupancy status decisions are made quickly and accurately from sensor data through a combination of patent pending machine learning algorithms, designed to determine the four essential occupancy states of home, away, vacation and sleep along with the transitions between those states. Highly complex algorithms extract several dozen dimensions of occupancy factors in the home from thousands of data points, including the day, time, door activity, motion activity, energy and water use, supporting geofencing data and more. The Home Occupancy Status Microservice is also capable of knowing when people are asleep to deliver advanced automation, senior care and wellness solutions from understanding a person's natural sleep patterns." ;
+    ns1:documentSource <https://1145.am/db/12170/apnewscom_08e1cc9a3d09602ce634dbc965be6974> ;
+    ns1:foundName "new" ;
+    ns1:internalDocId 12170 ;
+    ns1:name "new" ;
+    ns1:product <https://1145.am/db/12170/Home_Occupancy_Status_Microservice-Product> ;
+    ns1:productName "Home Occupancy Status Microservice" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/12236/Announced-Neura_Moments> a ns1:ProductActivity ;
+    ns1:documentDate "2018-06-21T10:07:28+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Today, Neura (http: //www.theneura.com) , the leading Artificial Intelligence (AI) platform for personalization of digital experiences, announced Neura Moments, the synthesis of a user's real-life situation in a specific context, place and time. Neura Moments are situation-aware, predict intent, and actionable. The Neura Engagement Intelligence layer is able to identify which features of an app are used at specific Moments. This enables developers to route specific interactions with consumers through Siri Shortcuts, which further promotes sustainable and intelligent consumer experiences. Neura Moments and the recently announced Neura True Personas combined to uncover new customer engagement opportunities for product companies and apps." ;
+    ns1:documentSource <https://1145.am/db/12236/apnewscom_084001b02595eb90b9b8a8905f160369> ;
+    ns1:foundName "announced" ;
+    ns1:internalDocId 12236 ;
+    ns1:name "announced" ;
+    ns1:product <https://1145.am/db/12236/Neura_Moments-Product> ;
+    ns1:productName "Neura Moments" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/12236/Neura_Moments-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/12236/apnewscom_084001b02595eb90b9b8a8905f160369> ;
+    ns1:feature "synthesis of a user's real-life situation in a specific context, place and time" ;
+    ns1:foundName "Neura Moments" ;
+    ns1:internalDocId 12236 ;
+    ns1:name "Neura Moments" .
+
+<https://1145.am/db/12289/Bing-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/12289/apnewscom_07b638df7d0745b69cf55dad4af6623e> ;
+    ns1:feature "features",
+        "measures how many reputable sources are behind a given answer",
+        "search engine",
+        "search engine powered by artificial intelligence",
+        "summarizes the two opposing sides of contentious questions" ;
+    ns1:foundName "Bing" ;
+    ns1:internalDocId 12289 ;
+    ns1:name "Bing" .
+
+<https://1145.am/db/12289/Updates-Bing> a ns1:ProductActivity ;
+    ns1:documentDate "2017-12-13T22:39:17+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Microsoft on Wednesday rolled out new features on its Bing search engine powered by artificial intelligence, including one that summarizes the two opposing sides of contentious questions, and another that measures how many reputable sources are behind a given answer. Tired of delivering misleading information when their algorithms are gamed by trolls and purveyors of fake news, Microsoft and its tech-company rivals have been going out of their way to show they can be purveyors of good information - either by using better algorithms or hiring more human moderators. Microsoft is also trying to distinguish its 2nd-place search engine from long-dominant Google and position itself as an innovator in finding real-world applications for the latest advances in artificial intelligence. \" As a search engine we have a responsibility to provide answers that are comprehensive and objective ,\" said Jordi Ribas, Microsoft's corporate vice president for AI products. Bing's new capabilities are designed to give users more confidence that an answer is correct and save them time so they do n't have to click through multiple links to validate it themselves.",
+        "Microsoft updates Bing search to highlight reputable results." ;
+    ns1:documentSource <https://1145.am/db/12289/apnewscom_07b638df7d0745b69cf55dad4af6623e> ;
+    ns1:foundName "new",
+        "rolled out",
+        "updates" ;
+    ns1:internalDocId 12289 ;
+    ns1:name "new",
+        "rolled out",
+        "updates" ;
+    ns1:product <https://1145.am/db/12289/Bing-Product> ;
+    ns1:productName "Bing" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/12364/Engagement_Workflow-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/12364/apnewscom_073f26a528f14ea28accd06d919eeb79> ;
+    ns1:feature "Spring Release 2018" ;
+    ns1:foundName "Engagement Workflow" ;
+    ns1:internalDocId 12364 ;
+    ns1:name "Engagement Workflow" ;
+    ns1:useCase "connect the dots for the agent and customer" .
+
+<https://1145.am/db/12364/Five9_Genius-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/12364/apnewscom_073f26a528f14ea28accd06d919eeb79> ;
+    ns1:feature "Spring Release 2018" ;
+    ns1:foundName "Five9",
+        "Five9 Genius" ;
+    ns1:internalDocId 12364 ;
+    ns1:name "Five9 Genius" ;
+    ns1:useCase "connect the dots for the agent and customer" .
+
+<https://1145.am/db/8084/Databricks_Unified_Analytics_Platform_For_Genomics-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/8084/apnewscom_37cee932dd7249919c3f837b05e1767f> ;
+    ns1:foundName "Databricks Unified Analytics Platform for Genomics" ;
+    ns1:internalDocId 8084 ;
+    ns1:name "Databricks Unified Analytics Platform for Genomics" ;
+    ns1:useCase "accelerate the discovery of critical medical treatments" .
+
+<https://1145.am/db/8084/Introduced-Databricks_Unified_Analytics_Platform_For_Genomics> a ns1:ProductActivity ;
+    ns1:documentDate "2018-06-06T16:52:25+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Databricks, the leader in unified analytics and founded by the original creators of Apache Spark™, today introduced the Databricks Unified Analytics Platform for Genomics to help accelerate the discovery of critical medical treatments. With a single platform for genomic data processing, tertiary analytics and artificial intelligence (AI) at massive scale, healthcare and life sciences organizations can make advancements in personalized diagnoses and the discovery and development of potential new treatments. The Unified Analytics Platform for Genomics enables healthcare and life sciences organizations to process and analyze large-scale genomics data up to 100X faster than existing solutions, helping to accelerate critical research. The Databricks Unified Analytics Platform for Genomics was launched today at Spark + AI Summit, an annual gathering of 4,000 data scientists, engineers and analytics leaders. Watch the live keynote now." ;
+    ns1:documentSource <https://1145.am/db/8084/apnewscom_37cee932dd7249919c3f837b05e1767f> ;
+    ns1:foundName "introduced" ;
+    ns1:internalDocId 8084 ;
+    ns1:name "introduced" ;
+    ns1:product <https://1145.am/db/8084/Databricks_Unified_Analytics_Platform_For_Genomics-Product> ;
+    ns1:productName "Databricks Unified Analytics Platform for Genomics" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/9206/Insight_Product-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/9206/apnewscom_28d422099e9d4ce686845d1714763378> ;
+    ns1:foundName "Insight Product" ;
+    ns1:internalDocId 9206 ;
+    ns1:name "Insight Product" ;
+    ns1:useCase "Allow Employee Same-Day Expense Reimbursement" .
+
+<https://1145.am/db/9206/Insights-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/9206/apnewscom_28d422099e9d4ce686845d1714763378> ;
+    ns1:foundName "Insights" ;
+    ns1:internalDocId 9206 ;
+    ns1:name "Insights" ;
+    ns1:useCase "finance executives and team managers from across an organization to step away from the daily churn of expense review cycles with confidence" .
+
+<https://1145.am/db/9206/Launches-Insight_Product> a ns1:ProductActivity ;
+    ns1:documentDate "2018-08-13T12:01:01+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "AppZen Launches Insight Product to Allow Employee Same-Day Expense Reimbursement.",
+        "AppZen, pioneers of artificial intelligence (AI) for business process automation, today announced the launch of Insights, a vanguard product sitting atop its audit platform allowing finance executives and team managers from across an organization to step away from the daily churn of expense review cycles with confidence. The enhanced platform allows managers to monitor and review team behavior and spend, while extracting themselves from mundane approval workflows. Using the combination of AppZen's Insights and existing real-time Expense Audit product, managers no longer need to approve - or even look at - employee expense reports while the company remains compliant with internal and SOX controls. AppZen audits and approves each report in real time, not only saving time for managers but improving the overall employee experience by giving companies the ability to reimburse employees same-day - without compromising controls, accuracy, or peace of mind. \" This is an exciting update for us as it proves how AI can truly disrupt an age-old control and reimbursement process in finance, while massively improving compliance and employee satisfaction ,\" said Anant Kale, Co-founder & CEO of AppZen." ;
+    ns1:documentSource <https://1145.am/db/9206/apnewscom_28d422099e9d4ce686845d1714763378> ;
+    ns1:foundName "Launches",
+        "launch" ;
+    ns1:internalDocId 9206 ;
+    ns1:name "Launches" ;
+    ns1:product <https://1145.am/db/9206/Insight_Product-Product>,
+        <https://1145.am/db/9206/Insights-Product> ;
+    ns1:productName "Insight Product",
+        "Insights" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/9595/Echomd_Autoef-Product> a schema:Product ;
+    ns1:documentSource <https://1145.am/db/9595/apnewscom_23848ae87adb4a2ab59bac5c1d7dba88> ;
+    ns1:feature "Fully-Automated Ejection Fraction Calculation",
+        "Software",
+        "deep learning software" ;
+    ns1:foundName "EchoMD AutoEF" ;
+    ns1:internalDocId 9595 ;
+    ns1:name "EchoMD AutoEF" ;
+    ns1:useCase "less variability in evaluating left ventricular ejection fraction (EF) than the average variability of cardiologists reported in literature" .
+
+<https://1145.am/db/9595/New_Study_Demonstrates_Accuracy-Echomd_Autoef> a ns1:ProductActivity ;
+    ns1:documentDate "2018-06-25T13:01:52+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Bay Labs, a medical technology company at the forefront of applying artificial intelligence (AI) to cardiovascular imaging, today announced its EchoMD AutoEF deep learning software has less variability in evaluating left ventricular ejection fraction (EF) than the average variability of cardiologists reported in literature, as demonstrated in a study conducted with the Minneapolis Heart Institute. Results of the study were presented today at the 2018 American Society of Echocardiography (ASE) Annual Scientific Sessions. Literature shows that the average variability of cardiologist readers using the Simpson's biplane method in estimating EF is 9.2 %. The observed variability of EchoMD AutoEF was superior at 8.29 % (p = 0.002) . The study also demonstrated that EchoMD AutoEF is an accurate and fully automated method of calculating EF from complete echocardiographic patient studies without user intervention.",
+        "Bay Labs, a medical technology company at the forefront of applying artificial intelligence (AI) to cardiovascular imaging, today announced its EchoMD AutoEF deep learning software has less variability in evaluating left ventricular ejection fraction (EF) than the average variability of cardiologists reported in literature, as demonstrated in a study conducted with the Minneapolis Heart Institute. Results of the study were presented today at the 2018 American Society of Echocardiography (ASE) Annual Scientific Sessions. Literature shows that the average variability of cardiologist readers using the Simpson's biplane method in estimating EF is 9.2 %. The observed variability of EchoMD AutoEF was superior at 8.29 % (p = 0.002).",
+        "New Study Demonstrates Accuracy of Fully-Automated Ejection Fraction Calculation Using Bay Labs' EchoMD AutoEF Software." ;
+    ns1:documentSource <https://1145.am/db/9595/apnewscom_23848ae87adb4a2ab59bac5c1d7dba88> ;
+    ns1:foundName "New Study Demonstrates Accuracy",
+        "announced" ;
+    ns1:internalDocId 9595 ;
+    ns1:name "New Study Demonstrates Accuracy",
+        "announced" ;
+    ns1:product <https://1145.am/db/9595/Echomd_Autoef-Product> ;
+    ns1:productName "EchoMD AutoEF" ;
+    ns1:status "completed" ;
+    ns1:whenRaw "2018" .
+
+<https://1145.am/db/geonames_location/1668284> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> ;
+    ns1:geoNamesId 1668284 ;
+    ns1:geoNamesURL <https://sws.geonames.org/1668284> ;
+    ns1:internalDocId 10348 ;
+    ns1:name "Taiwan" .
+
+<https://1145.am/db/10282/apnewscom_1b87240f9a73c763aca4ff6b35856e63> a schema:Article ;
+    ns1:internalDocId 10282 ;
+    schema:datePublished "2018-08-21T18:27:26+00:00"^^xsd:dateTime ;
+    schema:headline "Talla's Intelligent Knowledge Base 2.0 Full of Innovative AI Features" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/1b87240f9a73c763aca4ff6b35856e63> .
+
+<https://1145.am/db/11702/apnewscom_0cfe3c9e420589c5ded1a051783a3416> a schema:Article ;
+    ns1:internalDocId 11702 ;
+    schema:datePublished "2018-05-23T14:02:20+00:00"^^xsd:dateTime ;
+    schema:headline "M*Modal Advances its AI-Powered Clinical Documentation Integrity (CDI) Solutions with Market-Leading Innovation and Client-Focused Functionality" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/0cfe3c9e420589c5ded1a051783a3416> .
+
+<https://1145.am/db/12170/apnewscom_08e1cc9a3d09602ce634dbc965be6974> a schema:Article ;
+    ns1:internalDocId 12170 ;
+    schema:datePublished "2018-07-10T14:02:50+00:00"^^xsd:dateTime ;
+    schema:headline "People Power Introduces Artificial Intelligence-Powered Location Detection Microservice Solving Geofencing Limitations for Smart Home Services" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/08e1cc9a3d09602ce634dbc965be6974> .
+
+<https://1145.am/db/12236/apnewscom_084001b02595eb90b9b8a8905f160369> a schema:Article ;
+    ns1:internalDocId 12236 ;
+    schema:datePublished "2018-06-21T10:07:28+00:00"^^xsd:dateTime ;
+    schema:headline "Neura's Real-life Daily Habit Insights Enable Customer Engagements Complementary to the New Apple Siri Shortcuts" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/084001b02595eb90b9b8a8905f160369> .
+
+<https://1145.am/db/12289/apnewscom_07b638df7d0745b69cf55dad4af6623e> a schema:Article ;
+    ns1:internalDocId 12289 ;
+    schema:datePublished "2017-12-13T22:39:17+00:00"^^xsd:dateTime ;
+    schema:headline "Microsoft updates Bing search to highlight reputable results" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/07b638df7d0745b69cf55dad4af6623e> .
+
+<https://1145.am/db/12364/apnewscom_073f26a528f14ea28accd06d919eeb79> a schema:Article ;
+    ns1:internalDocId 12364 ;
+    schema:datePublished "2018-05-15T12:02:00+00:00"^^xsd:dateTime ;
+    schema:headline "Five9 Spring Release 2018: Practical AI for the Contact Center and Portfolio Wide Enhancements" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/073f26a528f14ea28accd06d919eeb79> .
+
+<https://1145.am/db/8084/apnewscom_37cee932dd7249919c3f837b05e1767f> a schema:Article ;
+    ns1:internalDocId 8084 ;
+    schema:datePublished "2018-06-06T16:52:25+00:00"^^xsd:dateTime ;
+    schema:headline "Databricks Helps Turn Clinical and Genomic Big Data into Insights to Improve Patient Lives" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/37cee932dd7249919c3f837b05e1767f> .
+
+<https://1145.am/db/9595/apnewscom_23848ae87adb4a2ab59bac5c1d7dba88> a schema:Article ;
+    ns1:internalDocId 9595 ;
+    schema:datePublished "2018-06-25T13:01:52+00:00"^^xsd:dateTime ;
+    schema:headline "New Study Demonstrates Accuracy of Fully-Automated Ejection Fraction Calculation Using Bay Labs' EchoMD AutoEF Software" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/23848ae87adb4a2ab59bac5c1d7dba88> .
+
+<https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> a schema:Article ;
+    ns1:internalDocId 10348 ;
+    schema:datePublished "2018-05-30T03:27:13+00:00"^^xsd:dateTime ;
+    schema:headline "NVIDIA Introduces HGX-2, Fusing HPC and AI Computing into Unified Architecture" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/1a78e1a120c0ae9fcb3e389028aea994> .
+
+<https://1145.am/db/9206/apnewscom_28d422099e9d4ce686845d1714763378> a schema:Article ;
+    ns1:internalDocId 9206 ;
+    schema:datePublished "2018-08-13T12:01:01+00:00"^^xsd:dateTime ;
+    schema:headline "AppZen Launches Insight Product to Allow Employee Same-Day Expense Reimbursement" ;
+    schema:sourceOrganization "Associated Press" ;
+    schema:url <https://apnews.com/28d422099e9d4ce686845d1714763378> .
+

@@ -1,5 +1,6 @@
 from topics.models import (Organization, Person, ActivityMixin,
-    Resource, Role, Article, IndustryCluster, GeoNamesLocation, Site)
+    Resource, Role, Article, IndustryCluster, GeoNamesLocation, Site,
+    Product)
 import logging
 from .constants import BEGINNING_OF_TIME
 
@@ -28,6 +29,8 @@ EDGE_COLORS = { "spender": "salmon",
                 "partnership": "salmon",
                 "providedBy": "lightskyblue", 
                 "awarded": "salmon",
+                "productOrganization": "salmon",
+                "withProduct": "burlywood",
                 }
 
 def node_color_shape(node):
@@ -47,6 +50,8 @@ def node_color_shape(node):
         return ("gold","triangleDown")
     elif isinstance(node, Site):
         return ("yellowgreen","triangle")
+    elif isinstance(node, Product):
+        return ("burlywood","square")
     else:
         return ("yellow","square")
 

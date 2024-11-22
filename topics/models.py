@@ -447,7 +447,7 @@ class Article(Resource):
         return self.url[0].uri
 
     def serialize(self):
-        vals = super(Article, self).serialize()
+        vals = super().serialize()
         vals['headline'] = self.best_name
         vals['document_url'] = self.documentURL
         vals['source_organization'] = self.sourceOrganization
@@ -676,7 +676,7 @@ class GeoNamesLocation(Resource):
         return uri
 
     def serialize(self):
-        vals = super(GeoNamesLocation, self).serialize()
+        vals = super().serialize()
         vals['geonames_id'] = self.geoNamesId
         vals['geonames_rdf_url'] = self.geoNamesRDFURL
         vals['geonames_url'] = self.geoNamesURL
@@ -718,6 +718,7 @@ class Organization(Resource):
     providedBy = RelationshipFrom('PartnershipActivity','providedBy')
     basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
+    productOrganization = RelationshipTo('ProductActivity','productActivity')
 
     @property
     def industry_clusters(self):
@@ -815,7 +816,7 @@ class Organization(Resource):
         return len(cleanco.basename(words).split())
 
     def serialize(self):
-        vals = super(Organization, self).serialize()
+        vals = super().serialize()
         org_vals = {"description": self.description,
                     "industry": self.industry_as_string,
                     "based_in_high_raw": self.basedInHighRaw,
@@ -920,7 +921,7 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
         return longest(self.targetDetails)
 
     def serialize(self):
-        vals = super(CorporateFinanceActivity, self).serialize()
+        vals = super().serialize()
         activity_mixin_vals = self.activity_fields
         act_vals = {
                     "target_details": self.targetDetails,
@@ -986,7 +987,7 @@ class RoleActivity(ActivityMixin, Resource):
         return longest(self.roleFoundName)
 
     def serialize(self):
-        vals = super(RoleActivity, self).serialize()
+        vals = super().serialize()
         activity_mixin_vals = self.activity_fields
         act_vals = {
                     "org_found_name": self.orgFoundName,
@@ -1074,6 +1075,36 @@ class Role(Resource):
     orgFoundName = ArrayProperty(StringProperty())
     withRole = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
     hasRole = RelationshipFrom('Organization','hasRole')
+
+
+class ProductActivity(ActivityMixin, Resource):
+    productName = ArrayProperty(StringProperty())
+    withProduct = RelationshipTo('Product','product')
+    productOrganization = RelationshipFrom('Organization','productActivity')
+
+    @property
+    def all_actors(self):
+        return {
+            "product": self.product.all(),
+            "organization": self.product.all(),
+        }
+
+    def serialize(self):
+        vals = super().serialize()
+        activity_fields = self.activity_fields
+        act_vals = {
+                    "product_name": self.productName,
+                    }
+        return {**vals,**act_vals,**activity_fields}
+    
+class Product(Resource):
+    useCase = ArrayProperty(StringProperty())
+    withProduct = RelationshipFrom("ProductActivity","product")
+
+    def serialize(self):
+        vals = super().serialize()
+        vals['use_case'] = self.useCase
+        return vals
 
 class OrganizationSite(Organization, Site):
     __class_name_is_label__ = False

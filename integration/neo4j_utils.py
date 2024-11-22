@@ -35,8 +35,11 @@ def do_n10s_config(overwrite=False):
                 "locationPurpose","locationType","name",
                 "nameClean", "orgName",
                 "orgFoundName",
+                "productName",
                 "roleFoundName","roleHolderFoundName",
-                "status","targetDetails","targetName","valueRaw",
+                "status","targetDetails","targetName",
+                "useCase",
+                "valueRaw",
                 "when","whenRaw","whereGeoName","whereRaw","whereClean",
                 # IndustryCluster
                 "representation","representativeDoc",

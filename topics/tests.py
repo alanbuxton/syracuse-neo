@@ -148,8 +148,8 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        assert set(counts) == {('PartnershipActivity', 4), ('LocationActivity', 11), ('Organization', 412), 
-                                ('Person', 12), ('Role', 11), ('Article', 192), ('RoleActivity', 12), ('CorporateFinanceActivity', 194)}
+        assert set(counts) == {('Organization', 421), ('Article', 202), ('RoleActivity', 12), ('LocationActivity', 11), ('CorporateFinanceActivity', 194), 
+                               ('PartnershipActivity', 4), ('Person', 12), ('Role', 11)}
         assert len(recents_by_geo) == 33
         assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1), ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), 
                                             ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
@@ -636,6 +636,30 @@ class TestUtilsWithDumpData(TestCase):
         data = s.data
         assert len(data["node_data"]) == 7
         assert len(data["edge_data"]) == 9
+
+    def test_product_activity_resource_serializer(self):
+        n = Resource.nodes.get_or_none(uri="https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base")
+        s = ResourceSerializer(n)
+        d = s.data
+        assert d['resource']['product_name'] == ['version 2.0 of the Talla Intelligent Knowledge Base']
+        assert len(d['relationships']) == 3
+
+    def test_product_resource_serializer(self):
+        n = Resource.nodes.get_or_none(uri="https://1145.am/db/10282/Version_20_Of_The_Talla_Intelligent_Knowledge_Base-Product")
+        s = ResourceSerializer(n)
+        d = s.data
+        assert d['resource']['use_case'] == ['customer facing teams move deals through the pipeline faster, decrease churn, and improve customer conversations']
+        assert len(d['relationships']) == 2
+
+    def test_org_with_product_page(self):
+        n = Resource.nodes.get_or_none(uri="https://1145.am/db/10282/Talla")
+        g = OrganizationGraphSerializer(n, context ={"combine_same_as_name_only":True,
+                                                    "source_str":"_all",
+                                                    "earliest_str":"2010-01-01"})
+        data = g.data
+        assert len(data["node_data"]) == 4
+        assert len(data["edge_data"]) == 5
+
 
 class TestFamilyTree(TestCase):
 
