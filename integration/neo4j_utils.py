@@ -40,7 +40,7 @@ def do_n10s_config(overwrite=False):
                 "status","targetDetails","targetName",
                 "useCase",
                 "valueRaw",
-                "when","whenRaw","whereGeoName","whereRaw","whereClean",
+                "when","whenRaw","whereHighGeoName","whereHighRaw","whereHighClean",
                 # IndustryCluster
                 "representation","representativeDoc",
                 ]

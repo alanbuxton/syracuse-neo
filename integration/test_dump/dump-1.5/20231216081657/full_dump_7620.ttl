@@ -213,9 +213,9 @@
     ns1:target <https://1145.am/db/2983995/Petroceltic> ;
     ns1:valueRaw "$ 175m",
         "£115m" ;
-    ns1:whereClean "Irish" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5983801> ;
-    ns1:whereRaw "Irish" .
+    ns1:whereHighClean "Irish" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5983801> ;
+    ns1:whereHighRaw "Irish" .
 
 <https://1145.am/db/2983999/Barclays-Acquisition-Arm-Business-Portfolio> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -235,9 +235,9 @@
         "business",
         "portfolio" ;
     ns1:vendor <https://1145.am/db/2983999/Barclays> ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/2984012/Baidu> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -387,9 +387,9 @@
     ns1:targetDetails "business" ;
     ns1:valueRaw "£4.2bn" ;
     ns1:vendor <https://1145.am/db/2984038/Tesco> ;
-    ns1:whereClean "Republic of Korea" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1835841> ;
-    ns1:whereRaw "South Korea" .
+    ns1:whereHighClean "Republic of Korea" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1835841> ;
+    ns1:whereHighRaw "South Korea" .
 
 <https://1145.am/db/2984039/Canada_Pension_Plan_Investment_Board> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -548,9 +548,9 @@
     ns1:targetDetails "business",
         "portfolio" ;
     ns1:vendor <https://1145.am/db/2984040/Barclays> ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/2984200/Mitsui_Sumitomo> a org:Organization ;
     ns1:basedInHighClean "Japan" ;
@@ -1197,9 +1197,9 @@
     ns1:status "completed" ;
     ns1:when "2008-01-01T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "January 1, 2008" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/2309175/Bernard_Poussot-Starting-President_And_Chief_Executive_Officer> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1216,9 +1216,9 @@
     ns1:status "completed" ;
     ns1:when "2008-01-01T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "January 1, 2008" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/2638674/Richtek_Technology_Corp> a org:Organization ;
     ns1:basedInHighClean "Hsinchu" ;
@@ -1244,9 +1244,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/2638674/Richtek_Technology_Corp> ;
     ns1:targetName "Richtek Technology Corp." ;
-    ns1:whereClean "Taiwan" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1668284> ;
-    ns1:whereRaw "Taiwan" .
+    ns1:whereHighClean "Taiwan" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1668284> ;
+    ns1:whereHighRaw "Taiwan" .
 
 <https://1145.am/db/2660877/Bouygues_Telecom> a org:Organization ;
     ns1:basedInLowRaw "France" ;
@@ -1301,9 +1301,9 @@
     ns1:target <https://1145.am/db/2984012/Uberchina> ;
     ns1:valueRaw "$ 1.2bn",
         "£787m" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/2984012/Uberchina> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -1343,9 +1343,9 @@
     ns1:target <https://1145.am/db/2984033/Market_Engine_Global> ;
     ns1:targetDetails "stake" ;
     ns1:targetName "Market Engine Global" ;
-    ns1:whereClean "Commonwealth of Australia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
-    ns1:whereRaw "Australian" .
+    ns1:whereHighClean "Commonwealth of Australia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
+    ns1:whereHighRaw "Australian" .
 
 <https://1145.am/db/2984039/Homeplus> a org:Organization ;
     ns1:basedInHighClean "Republic of Korea" ;
@@ -1600,9 +1600,9 @@
     ns1:target <https://1145.am/db/2984200/Amlin> ;
     ns1:targetName "Amlin" ;
     ns1:valueRaw "£3.5bn" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "London" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "London" .
 
 <https://1145.am/db/2984213/Rsa_Insurance_Group> a org:Organization ;
     ns1:basedInLowRaw "UK" ;
@@ -1644,8 +1644,8 @@
         "business" ;
     ns1:valueRaw "£403m" ;
     ns1:vendor <https://1145.am/db/2984213/Rsa_Insurance_Group> ;
-    ns1:whereClean "Latin America" ;
-    ns1:whereRaw "Latin America" .
+    ns1:whereHighClean "Latin America" ;
+    ns1:whereHighRaw "Latin America" .
 
 <https://1145.am/db/2984217/Rolls-Royce-Rolls-Royce-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1656,9 +1656,9 @@
     ns1:internalDocId 2984217 ;
     ns1:name "preferred bidder" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/3765463/Davis-Blake-Starting-President> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1685,9 +1685,9 @@
     ns1:roleFoundName "Managing Director, Brokerage Operations" ;
     ns1:roleHolderFoundName "Millis" ;
     ns1:status "completed" ;
-    ns1:whereClean "Las Vegas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5506956> ;
-    ns1:whereRaw "Las Vegas" .
+    ns1:whereHighClean "Las Vegas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5506956> ;
+    ns1:whereHighRaw "Las Vegas" .
 
 <https://1145.am/db/3765621/Millis-None-Senior> a ns1:RoleActivity ;
     ns1:documentDate "2018-02-06T16:00:00+00:00"^^xsd:dateTime ;
@@ -1701,9 +1701,9 @@
     ns1:roleFoundName "Senior" ;
     ns1:roleHolderFoundName "Millis" ;
     ns1:status "completed" ;
-    ns1:whereClean "Las Vegas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5506956> ;
-    ns1:whereRaw "Las Vegas" .
+    ns1:whereHighClean "Las Vegas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5506956> ;
+    ns1:whereHighRaw "Las Vegas" .
 
 <https://1145.am/db/3765621/Wrzesinski-Starting-Senior_Associate> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1747,9 +1747,9 @@
     ns1:status "completed" ;
     ns1:when "2018-02-06T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Feb. 6, 2018" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3765646/Jennifer_Charles-Moving_To-Partner> a ns1:RoleActivity ;
     ns1:activityType "moving to" ;
@@ -1766,9 +1766,9 @@
     ns1:status "completed" ;
     ns1:when "2018-02-06T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Feb. 6, 2018" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3765646/Nicole_Bouchard-Moving_To-Partner> a ns1:RoleActivity ;
     ns1:activityType "moving to" ;
@@ -1785,9 +1785,9 @@
     ns1:status "completed" ;
     ns1:when "2018-02-06T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Feb. 6, 2018" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3765646/Olga_Bischof-Starting-Partner> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1804,9 +1804,9 @@
     ns1:status "completed" ;
     ns1:when "2018-02-06T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Feb. 6, 2018" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3765646/Vincent_Rubino-Starting-Partner> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1823,9 +1823,9 @@
     ns1:status "completed" ;
     ns1:when "2018-02-06T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Feb. 6, 2018" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/geonames_location/1675103> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/2638674/wwwfiercewirelesscom_tech_microsoft-releases-new-skype-messaging-app-overture-expands-nfv-program> ;
@@ -1902,9 +1902,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/1809885/Zomato> ;
     ns1:valueRaw "$ 60 million" ;
-    ns1:whereClean "Republic of India" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1269750> ;
-    ns1:whereRaw "India" .
+    ns1:whereHighClean "Republic of India" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1269750> ;
+    ns1:whereHighRaw "India" .
 
 <https://1145.am/db/2309175/Wyeth-Ceo> a org:Role ;
     ns1:documentSource <https://1145.am/db/2309175/wwwfiercebiotechcom_biotech_press-release-wyeth-announces-election-of-bernard-poussot-as-ceo> ;
@@ -2883,9 +2883,9 @@
     ns1:targetName "Homeplus" ;
     ns1:valueRaw "£4.2bn" ;
     ns1:vendor <https://1145.am/db/2984039/Tesco> ;
-    ns1:whereClean "Republic of Korea" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1835841> ;
-    ns1:whereRaw "Korean" .
+    ns1:whereHighClean "Republic of Korea" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1835841> ;
+    ns1:whereHighRaw "Korean" .
 
 <https://1145.am/db/3765463/wwwprnewswirecom_news-releases_bentley-university-names-michigans-alison-davis-blake-its-8th-president-300594253html> a schema:Article ;
     ns1:dateRetrieved "2024-01-18T17:00:20+00:00"^^xsd:dateTime ;

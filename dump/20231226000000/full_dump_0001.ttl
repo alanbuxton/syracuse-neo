@@ -134,9 +134,9 @@
     ns1:target <https://1145.am/db/1787315/Scape> ;
     ns1:targetDetails "seed" ;
     ns1:valueRaw "$ 8 million" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "London" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "London" .
 
 <https://1145.am/db/1788626/Bakkt-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -150,9 +150,9 @@
     ns1:target <https://1145.am/db/1788626/Bakkt> ;
     ns1:valueRaw "$ 182.5 million" ;
     ns1:whenRaw "New Year's Eve" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "New York" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "New York" .
 
 <https://1145.am/db/2154348/Pear_Therapeutics-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -165,9 +165,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/2154348/Pear_Therapeutics> ;
     ns1:valueRaw "$ 64 million" ;
-    ns1:whereClean "San Francisco" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
-    ns1:whereRaw "SAN FRANCISCO" .
+    ns1:whereHighClean "San Francisco" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:whereHighRaw "SAN FRANCISCO" .
 
 <https://1145.am/db/2364647/Mersana_Therapeutics> a org:Organization ;
     ns1:basedInHighClean "Cambridge" ;
@@ -470,9 +470,9 @@
     ns1:vendor <https://1145.am/db/3469124/Canadian_Solar_Inc> ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Japan" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1861060> ;
-    ns1:whereRaw "Japan" .
+    ns1:whereHighClean "Japan" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1861060> ;
+    ns1:whereHighRaw "Japan" .
 
 <https://1145.am/db/3469136/Aphria_Inc> a org:Organization ;
     ns1:basedInHighClean "Leamington" ;
@@ -743,9 +743,9 @@
     ns1:roleFoundName "Vice President of Biology" ;
     ns1:roleHolderFoundName "Peter U. Park, Ph.D." ;
     ns1:status "completed" ;
-    ns1:whereClean "Cambridge" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4931972> ;
-    ns1:whereRaw "CAMBRIDGE, Mass" .
+    ns1:whereHighClean "Cambridge" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4931972> ;
+    ns1:whereHighRaw "CAMBRIDGE, Mass" .
 
 <https://1145.am/db/2364647/Wayne_Foster-Starting-Vice_President_Of_Finance> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -761,9 +761,9 @@
     ns1:roleFoundName "Vice President of Finance" ;
     ns1:roleHolderFoundName "Wayne Foster" ;
     ns1:status "completed" ;
-    ns1:whereClean "Cambridge" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4931972> ;
-    ns1:whereRaw "CAMBRIDGE, Mass" .
+    ns1:whereHighClean "Cambridge" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4931972> ;
+    ns1:whereHighRaw "CAMBRIDGE, Mass" .
 
 <https://1145.am/db/3029762/Faroe_Petroleum> a org:Organization ;
     ns1:basedInLowRaw "Norwegian" ;
@@ -788,9 +788,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3029762/Faroe_Petroleum> ;
     ns1:targetName "Faroe Petroleum" ;
-    ns1:whereClean "Nkonjeni" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/970370> ;
-    ns1:whereRaw "Norwegian" .
+    ns1:whereHighClean "Nkonjeni" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/970370> ;
+    ns1:whereHighRaw "Norwegian" .
 
 <https://1145.am/db/3467659/E_S_Fitness> a org:Organization ;
     ns1:basedInHighClean "Las Vegas",
@@ -843,9 +843,9 @@
     ns1:target <https://1145.am/db/3467694/Engility_Holdings_Inc> ;
     ns1:targetName "Engility Holdings",
         "Engility Holdings Inc" ;
-    ns1:whereClean "Fort Myers" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4155995> ;
-    ns1:whereRaw "Fort Myers, FL" .
+    ns1:whereHighClean "Fort Myers" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4155995> ;
+    ns1:whereHighRaw "Fort Myers, FL" .
 
 <https://1145.am/db/3468945/Catchon> a org:Organization ;
     ns1:basedInHighClean "Hong Kong Special Administrative Region" ;
@@ -874,9 +874,9 @@
     ns1:targetName "CatchOn" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Hong Kong Special Administrative Region" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1819730> ;
-    ns1:whereRaw "Hong Kong" .
+    ns1:whereHighClean "Hong Kong Special Administrative Region" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1819730> ;
+    ns1:whereHighRaw "Hong Kong" .
 
 <https://1145.am/db/3468972/Halco_Lubricants> a org:Organization ;
     ns1:basedInHighClean "Norcross" ;
@@ -903,9 +903,9 @@
     ns1:target <https://1145.am/db/3468972/Halco_Lubricants> ;
     ns1:targetName "Halco Lubricants" ;
     ns1:whenRaw "December 2018" ;
-    ns1:whereClean "Norcross" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4212888> ;
-    ns1:whereRaw "Norcross, GA" .
+    ns1:whereHighClean "Norcross" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4212888> ;
+    ns1:whereHighRaw "Norcross, GA" .
 
 <https://1145.am/db/3469058/Napajen_Pharma> a org:Organization ;
     ns1:basedInHighRaw "TOKYO and BURLINGAME Calif." ;
@@ -1018,9 +1018,9 @@
     ns1:targetName "CC Pharma" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Federal Republic of Germany" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
-    ns1:whereRaw "Germany" .
+    ns1:whereHighClean "Federal Republic of Germany" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
+    ns1:whereHighRaw "Germany" .
 
 <https://1145.am/db/3470399/Jmi_Equity-Rainfocus-Rainfocus-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1035,9 +1035,9 @@
     ns1:valueRaw "$ 40 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Lehi" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5777224> ;
-    ns1:whereRaw "LEHI" .
+    ns1:whereHighClean "Lehi" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5777224> ;
+    ns1:whereHighRaw "LEHI" .
 
 <https://1145.am/db/3470399/Rainfocus> a org:Organization ;
     ns1:basedInHighClean "Lehi" ;
@@ -1093,9 +1093,9 @@
     ns1:vendor <https://1145.am/db/3470428/Pattern_Energy_Group_Inc> ;
     ns1:when "2018-12-31T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "December 31, 2018" ;
-    ns1:whereClean "Ontario" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6093943> ;
-    ns1:whereRaw "Ontario" .
+    ns1:whereHighClean "Ontario" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6093943> ;
+    ns1:whereHighRaw "Ontario" .
 
 <https://1145.am/db/3470428/Pattern_Energy_Group_Inc> a org:Organization ;
     ns1:basedInHighClean "San Francisco" ;
@@ -1138,9 +1138,9 @@
     ns1:targetDetails "assets" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "U.S." .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "U.S." .
 
 <https://1145.am/db/3557548/Pharmhouse> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -1180,9 +1180,9 @@
     ns1:target <https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery> ;
     ns1:targetName "Cory 1st Choice Home Delivery" ;
     ns1:valueRaw "$ 100 million" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "America" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "America" .
 
 <https://1145.am/db/3617647/Katy_Tx> a org:Site ;
     ns1:basedInHighClean "Texas" ;
@@ -1326,9 +1326,9 @@
     ns1:targetName "EōS Fitness" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3468972/Pugh_Lubricants-Veterans_Oil-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -1338,9 +1338,9 @@
     ns1:internalDocId 3468972 ;
     ns1:status "completed" ;
     ns1:whenRaw "2017" ;
-    ns1:whereClean "North Carolina" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4482348> ;
-    ns1:whereRaw "North Carolina" .
+    ns1:whereHighClean "North Carolina" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4482348> ;
+    ns1:whereHighRaw "North Carolina" .
 
 <https://1145.am/db/3469070/Wetmore_Tool_Engineering-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1353,9 +1353,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/3469070/Wetmore_Tool_Engineering> ;
     ns1:targetName "Wetmore Tool & Engineering" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1371,9 +1371,9 @@
     ns1:target <https://1145.am/db/3557548/Pharmhouse> ;
     ns1:targetDetails "joint venture" ;
     ns1:valueRaw "$ 80 million" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/geonames_location/1819730> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3468945/wwwprnewswirecom_news-releases_finn-partners-expands-in-greater-china-and-continues-the-growth-of-its-global-travel-and-hospitality-practice-with-the-acquisition-of-catchon-300775242html> ;
@@ -1516,9 +1516,9 @@
     ns1:valueRaw "$ 12.4 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Tokyo" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1850147> ;
-    ns1:whereRaw "TOKYO" .
+    ns1:whereHighClean "Tokyo" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1850147> ;
+    ns1:whereHighRaw "TOKYO" .
 
 <https://1145.am/db/3469124/wwwprnewswirecom_news-releases_canadian-solar-announces-jpy6-3-billion-closing-of-solar-equity-securitization-in-japan-300774519html> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T17:06:54+00:00"^^xsd:dateTime ;
@@ -1572,9 +1572,9 @@
     ns1:target <https://1145.am/db/1786805/Bowery_Valuation> ;
     ns1:targetDetails "Series A" ;
     ns1:valueRaw "$ 12 million" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "New York" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "New York" .
 
 <https://1145.am/db/3468945/wwwprnewswirecom_news-releases_finn-partners-expands-in-greater-china-and-continues-the-growth-of-its-global-travel-and-hospitality-practice-with-the-acquisition-of-catchon-300775242html> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T17:06:31+00:00"^^xsd:dateTime ;

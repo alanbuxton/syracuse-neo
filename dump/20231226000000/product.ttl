@@ -129,9 +129,9 @@
     ns1:productName "NVIDIA HGX-2" ;
     ns1:status "completed",
         "not happened at date of document" ;
-    ns1:whereClean "Taiwan" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1668284> ;
-    ns1:whereRaw "Taiwan" .
+    ns1:whereHighClean "Taiwan" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1668284> ;
+    ns1:whereHighRaw "Taiwan" .
 
 <https://1145.am/db/10348/Nvidia_Hgx-2-Product> a schema:Product ;
     ns1:documentSource <https://1145.am/db/10348/apnewscom_1a78e1a120c0ae9fcb3e389028aea994> ;

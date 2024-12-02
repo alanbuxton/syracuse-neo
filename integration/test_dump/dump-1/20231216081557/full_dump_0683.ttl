@@ -505,9 +505,9 @@
     ns1:valueRaw "$ 250,000" ;
     ns1:when "2018-10-03T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Oct. 3, 2018" ;
-    ns1:whereClean "Maryland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
-    ns1:whereRaw "Maryland" .
+    ns1:whereHighClean "Maryland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
+    ns1:whereHighRaw "Maryland" .
 
 <https://1145.am/db/3785698/Showcase_Idx-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -521,9 +521,9 @@
     ns1:target <https://1145.am/db/3785698/Showcase_Idx> ;
     ns1:when "2018-09-28T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "September 28, 2018" ;
-    ns1:whereClean "Atlanta" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
-    ns1:whereRaw "Atlanta" .
+    ns1:whereHighClean "Atlanta" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
+    ns1:whereHighRaw "Atlanta" .
 
 <https://1145.am/db/4151859/Oculis_Holding_Ag> a org:Organization ;
     ns1:basedInHighClean "Switzerland" ;
@@ -640,9 +640,9 @@
     ns1:targetDetails "stake" ;
     ns1:targetName "London Gatwick" ;
     ns1:valueRaw "£1.27bn" ;
-    ns1:whereClean "Republic of France" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
-    ns1:whereRaw "France" .
+    ns1:whereHighClean "Republic of France" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
+    ns1:whereHighRaw "France" .
 
 <https://1145.am/db/4168148/Vinci> a org:Organization ;
     ns1:basedInHighClean "Republic of France" ;
@@ -755,9 +755,9 @@
     ns1:vendor <https://1145.am/db/4168343/Pyrogenesis_Canada_Inc> ;
     ns1:when "2024-04-10T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "April 10, 2024" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/4168398/Newmark> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1494,11 +1494,11 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3785309/Valud_Consulting> ;
     ns1:targetName "ValuD Consulting" ;
-    ns1:whereClean "Republic of India",
+    ns1:whereHighClean "Republic of India",
         "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1269750>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1269750>,
         <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States and India" .
+    ns1:whereHighRaw "United States and India" .
 
 <https://1145.am/db/3785317/Apttus> a org:Organization ;
     ns1:basedInHighClean "Los Angeles" ;
@@ -1545,9 +1545,9 @@
     ns1:targetName "Apttus" ;
     ns1:when "2018-10-03T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Oct. 3, 2018" ;
-    ns1:whereClean "Los Angeles" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
-    ns1:whereRaw "LOS ANGELES" .
+    ns1:whereHighClean "Los Angeles" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:whereHighRaw "LOS ANGELES" .
 
 <https://1145.am/db/3785695/Holy_Cross_Health> a org:Organization ;
     ns1:basedInHighClean "Maryland" ;
@@ -1604,9 +1604,9 @@
     ns1:status "completed" ;
     ns1:when "2024-04-10T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "April 10, 2024" ;
-    ns1:whereClean "Switzerland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
-    ns1:whereRaw "Switzerland" .
+    ns1:whereHighClean "Switzerland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:whereHighRaw "Switzerland" .
 
 <https://1145.am/db/4168148/Edinburgh_Airport> a org:Organization ;
     ns1:basedInHighClean "Scotland" ;
@@ -1652,9 +1652,9 @@
     ns1:status "stopped" ;
     ns1:target <https://1145.am/db/4168197/Ids> ;
     ns1:targetName "IDS" ;
-    ns1:whereClean "Czechia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
-    ns1:whereRaw "Czech" .
+    ns1:whereHighClean "Czechia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereHighRaw "Czech" .
 
 <https://1145.am/db/4168197/Royal_Mail> a org:Organization ;
     ns1:basedInLowRaw "Czech" ;
@@ -1702,9 +1702,9 @@
     ns1:status "stopped" ;
     ns1:target <https://1145.am/db/4168197/Royal_Mail> ;
     ns1:targetName "Royal Mail" ;
-    ns1:whereClean "Europe" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6255148> ;
-    ns1:whereRaw "European" .
+    ns1:whereHighClean "Europe" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6255148> ;
+    ns1:whereHighRaw "European" .
 
 <https://1145.am/db/4168197/Telegraph_Media_Group> a org:Organization ;
     ns1:basedInLowRaw "UK" ;
@@ -1743,9 +1743,9 @@
     ns1:targetName "Telegraph Media Group" ;
     ns1:when "2023-05-20T17:21:29.470645"^^xsd:dateTime ;
     ns1:whenRaw "last year" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/4168343/Hpq_Silicon_Inc> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -1789,9 +1789,9 @@
     ns1:targetDetails "portfolio refinance" ;
     ns1:valueRaw "$ 631.5 million",
         "$ 90 million" ;
-    ns1:whereClean "14/31 Ambohijafy" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11933798> ;
-    ns1:whereRaw "14 states" .
+    ns1:whereHighClean "14/31 Ambohijafy" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/11933798> ;
+    ns1:whereHighRaw "14 states" .
 
 <https://1145.am/db/4169893/Citibank> a org:Organization ;
     ns1:description "commercial mortgage-backed security single-asset single-borrower hotel portfolio refinance" ;
@@ -1872,9 +1872,9 @@
     ns1:target <https://1145.am/db/4170102/Ballymore_Safety_Products> ;
     ns1:targetName "Ballymore Safety Products" ;
     ns1:vendor <https://1145.am/db/4170102/Graycliff_Partners> ;
-    ns1:whereClean "Coatesville" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4557247> ;
-    ns1:whereRaw "Coatesville, PA" .
+    ns1:whereHighClean "Coatesville" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4557247> ;
+    ns1:whereHighRaw "Coatesville, PA" .
 
 <https://1145.am/db/4170102/Graycliff_Partners> a org:Organization ;
     ns1:basedInLowRaw "Coatesville, PA" ;
@@ -1965,9 +1965,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/4170137/Dc_Canada> ;
     ns1:targetName "DC Canada" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/4170138/Silk_Platform> a org:Organization ;
     ns1:description "cyber risk prioritization and remediation" ;
@@ -1992,9 +1992,9 @@
     ns1:target <https://1145.am/db/4170138/Silk_Platform> ;
     ns1:targetName "Silk Platform" ;
     ns1:valueRaw "$ 150M" ;
-    ns1:whereClean "State of Israel" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
-    ns1:whereRaw "Israel" .
+    ns1:whereHighClean "State of Israel" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereHighRaw "Israel" .
 
 <https://1145.am/db/4170166/Moore_Consulting_Engineers> a org:Organization ;
     ns1:basedInHighClean "Chatsworth" ;
@@ -2020,9 +2020,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/4170166/Moore_Consulting_Engineers> ;
     ns1:targetName "Moore Consulting Engineers" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/geonames_location/11933798> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/4169893/wwwhotelmanagementnet_financing_access-point-financial-invests-hotel-portfolio-refinance> ;
@@ -2128,9 +2128,9 @@
     ns1:target <https://1145.am/db/3024715/Locums_Nest> ;
     ns1:valueRaw "£3m",
         "£4.1m" ;
-    ns1:whereClean "England" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6269131> ;
-    ns1:whereRaw "England" .
+    ns1:whereHighClean "England" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6269131> ;
+    ns1:whereHighRaw "England" .
 
 <https://1145.am/db/3619563/California> a org:Site ;
     ns1:basedInLowRaw "United States" ;
@@ -2162,9 +2162,9 @@
     ns1:targetDetails "stake" ;
     ns1:targetName "Edinburgh Airport" ;
     ns1:valueRaw "£1.27bn" ;
-    ns1:whereClean "Scotland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
-    ns1:whereRaw "Scotland" .
+    ns1:whereHighClean "Scotland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
+    ns1:whereHighRaw "Scotland" .
 
 <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2177,9 +2177,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp> ;
     ns1:targetName "Sasquatch Pest Control Corp" ;
-    ns1:whereClean "Oregon" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5744337> ;
-    ns1:whereRaw "Oregon" .
+    ns1:whereHighClean "Oregon" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5744337> ;
+    ns1:whereHighRaw "Oregon" .
 
 <https://1145.am/db/4170175/Berry_Global_Group-Glatfelter_Corporation-Merger-Segment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -2193,7 +2193,7 @@
         "transaction" ;
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "segment" ;
-    ns1:whereRaw "Global" .
+    ns1:whereHighRaw "Global" .
 
 <https://1145.am/db/geonames_location/1269750> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
@@ -2306,9 +2306,9 @@
         "$ 62.5 million" ;
     ns1:when "2024-04-17T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "April 17, 2024" ;
-    ns1:whereClean "Manhattan" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5125771> ;
-    ns1:whereRaw "Manhattan" .
+    ns1:whereHighClean "Manhattan" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5125771> ;
+    ns1:whereHighRaw "Manhattan" .
 
 <https://1145.am/db/4170112/wwwbusinesswirecom_news_home_20240417171574_en_Future-Pak-Confirms-Proposal-to-Acquire-Vanda-Pharmaceuticals-for-725-to-775-Per-Share-in-Cash> a schema:Article ;
     ns1:dateRetrieved "2024-04-18T07:06:04+00:00"^^xsd:dateTime ;

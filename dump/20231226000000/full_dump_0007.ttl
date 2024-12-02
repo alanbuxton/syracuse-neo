@@ -423,9 +423,9 @@
     ns1:targetDetails "Senior Notes" ;
     ns1:valueRaw "$ 200 million" ;
     ns1:vendor <https://1145.am/db/3449412/Hornbeck_Offshore_Services_Inc> ;
-    ns1:whereClean "Covington" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4321005> ;
-    ns1:whereRaw "COVINGTON, La." .
+    ns1:whereHighClean "Covington" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4321005> ;
+    ns1:whereHighRaw "COVINGTON, La." .
 
 <https://1145.am/db/3449415/Rizing_Llc> a org:Organization ;
     ns1:basedInHighClean "Stamford" ;
@@ -779,9 +779,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/2190253/Little_River_Healthcare> ;
     ns1:targetName "Little River Healthcare" ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/2364624/Steve_Kent-Finishing-President> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -796,9 +796,9 @@
     ns1:roleFoundName "president" ;
     ns1:roleHolderFoundName "Steve Kent" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "Boston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
-    ns1:whereRaw "BOSTON" .
+    ns1:whereHighClean "Boston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
+    ns1:whereHighRaw "BOSTON" .
 
 <https://1145.am/db/2364624/Xavier_Flinois-Starting-President> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -813,9 +813,9 @@
     ns1:roleFoundName "president" ;
     ns1:roleHolderFoundName "Xavier Flinois" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "Boston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
-    ns1:whereRaw "BOSTON" .
+    ns1:whereHighClean "Boston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
+    ns1:whereHighRaw "BOSTON" .
 
 <https://1145.am/db/3029694/Wework> a org:Organization ;
     ns1:documentSource <https://1145.am/db/3029694/wwwcityamcom_softbank-shares-up-reports-scale-back-wework-investment_> ;
@@ -1253,9 +1253,9 @@
     ns1:targetName "Shire" ;
     ns1:valueRaw "$ 59bn",
         "£46bn" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "London" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "London" .
 
 <https://1145.am/db/3448439/Eli_Lilly_And_Company> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -1533,9 +1533,9 @@
     ns1:target <https://1145.am/db/3448439/Loxo_Oncology> ;
     ns1:targetName "Loxo Oncology" ;
     ns1:valueRaw "$ 8 billion" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3449351/Core_Medical_Imaging> a org:Organization ;
     ns1:basedInHighClean "Kenmore" ;
@@ -1572,9 +1572,9 @@
     ns1:target <https://1145.am/db/3449402/Discovery_Midstream_Holdings_Ii> ;
     ns1:targetDetails "equity commitment" ;
     ns1:valueRaw "up to $ 1.0 billion" ;
-    ns1:whereClean "North Salt Lake" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
-    ns1:whereRaw "North American" .
+    ns1:whereHighClean "North Salt Lake" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
+    ns1:whereHighRaw "North American" .
 
 <https://1145.am/db/3449412/Hornbeck_Offshore_Services_Inc> a org:Organization ;
     ns1:basedInHighClean "Covington" ;
@@ -1619,9 +1619,9 @@
     ns1:targetName "Synchrony Global" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Republic of Singapore" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
-    ns1:whereRaw "Singapore" .
+    ns1:whereHighClean "Republic of Singapore" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
+    ns1:whereHighRaw "Singapore" .
 
 <https://1145.am/db/3450606/Nevsun_Resources_Ltd> a org:Organization ;
     ns1:basedInHighClean "Vancouver" ;
@@ -1656,9 +1656,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/3450606/Nevsun_Resources_Ltd> ;
     ns1:targetName "Nevsun Resources Ltd." ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/3451375/Hexindai-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1669,9 +1669,9 @@
     ns1:internalDocId 3451375 ;
     ns1:name "investment" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/3451375/Phoenix_Intelligent_Credit> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -1700,9 +1700,9 @@
     ns1:targetName "Phoenix Intelligent Credit" ;
     ns1:valueRaw "RMB200 million",
         "approximately US $ 29 million" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/3451380/Electrifoo> a org:Organization ;
     ns1:basedInLowRaw "Germany" ;
@@ -1816,11 +1816,11 @@
         <https://1145.am/db/3451465/Rosewood_Private_Investments> ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Irvine",
+    ns1:whereHighClean "Irvine",
         "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5359777>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5359777>,
         <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "Irvine, California",
+    ns1:whereHighRaw "Irvine, California",
         "United States" .
 
 <https://1145.am/db/3451465/Renovo_Capital> a org:Organization ;
@@ -2144,9 +2144,9 @@
     ns1:internalDocId 3555070 ;
     ns1:name "bought" ;
     ns1:status "completed" ;
-    ns1:whereClean "Commonwealth of Australia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
-    ns1:whereRaw "Australia" .
+    ns1:whereHighClean "Commonwealth of Australia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
+    ns1:whereHighRaw "Australia" .
 
 <https://1145.am/db/3555070/Bastion_Collective-Bastion_Collective-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2158,9 +2158,9 @@
     ns1:internalDocId 3555070 ;
     ns1:name "buying" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "Commonwealth of Australia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
-    ns1:whereRaw "Australia" .
+    ns1:whereHighClean "Commonwealth of Australia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
+    ns1:whereHighRaw "Australia" .
 
 <https://1145.am/db/3555077/Headset> a org:Organization ;
     ns1:basedInHighClean "Seattle" ;
@@ -2324,9 +2324,9 @@
     ns1:targetName "CORE Medical Imaging" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Kenmore" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5799587> ;
-    ns1:whereRaw "Kenmore, WA" .
+    ns1:whereHighClean "Kenmore" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5799587> ;
+    ns1:whereHighRaw "Kenmore, WA" .
 
 <https://1145.am/db/3451477/Public_Technology_Institute-The_Computing_Technology_Industry_Association-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -2339,9 +2339,9 @@
     ns1:status "completed" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Washington" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
-    ns1:whereRaw "WASHINGTON" .
+    ns1:whereHighClean "Washington" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
+    ns1:whereHighRaw "WASHINGTON" .
 
 <https://1145.am/db/3549221/Loxo_Oncology> a org:Organization ;
     ns1:description "cancer" ;
@@ -2515,9 +2515,9 @@
     ns1:target <https://1145.am/db/3451380/Redovia> ;
     ns1:valueRaw "USD2m",
         "USD4m" ;
-    ns1:whereClean "Republic of Ghana" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2300660> ;
-    ns1:whereRaw "Ghana" .
+    ns1:whereHighClean "Republic of Ghana" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2300660> ;
+    ns1:whereHighRaw "Ghana" .
 
 <https://1145.am/db/3451381/Electrifi-Redavia_Global_Asset_Sca-Responsability_Investments_Ag-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -2532,9 +2532,9 @@
     ns1:target <https://1145.am/db/3451381/Redavia_Global_Asset_Sca> ;
     ns1:valueRaw "USD2m",
         "USD4m" ;
-    ns1:whereClean "Republic of Ghana" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2300660> ;
-    ns1:whereRaw "Ghana" .
+    ns1:whereHighClean "Republic of Ghana" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2300660> ;
+    ns1:whereHighRaw "Ghana" .
 
 <https://1145.am/db/3549221/wwwbusinessinsidercom_eli-lilly-to-buy-loxo-oncology-in-8-billion-cancer-drug-deal-2019-1> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T19:05:37+00:00"^^xsd:dateTime ;
@@ -2557,9 +2557,9 @@
     ns1:target <https://1145.am/db/3555077/Headset> ;
     ns1:targetDetails "Series A" ;
     ns1:valueRaw "$ 12.1 million" ;
-    ns1:whereClean "Seattle" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5809844> ;
-    ns1:whereRaw "Seattle" .
+    ns1:whereHighClean "Seattle" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5809844> ;
+    ns1:whereHighRaw "Seattle" .
 
 <https://1145.am/db/geonames_location/2077456> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3555070/wwwbusinessinsidercom_australian-agency-group-is-planning-to-take-on-the-agency-holding-companies-2019-1> ;

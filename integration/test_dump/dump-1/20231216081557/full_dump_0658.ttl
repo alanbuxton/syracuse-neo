@@ -724,8 +724,8 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/1768712/Nubank> ;
     ns1:valueRaw "$ 180 million" ;
-    ns1:whereClean "Latin America" ;
-    ns1:whereRaw "Latin America" .
+    ns1:whereHighClean "Latin America" ;
+    ns1:whereHighRaw "Latin America" .
 
 <https://1145.am/db/2194924/Cigna> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -877,9 +877,9 @@
     ns1:targetDetails "venture" ;
     ns1:vendor <https://1145.am/db/2194924/Rxadvance> ;
     ns1:whenRaw "Friday" ;
-    ns1:whereClean "Massachusetts" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
-    ns1:whereRaw "Massachusetts" .
+    ns1:whereHighClean "Massachusetts" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:whereHighRaw "Massachusetts" .
 
 <https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners> a org:Organization ;
     ns1:description "venture" ;
@@ -1032,9 +1032,9 @@
     ns1:status "completed" ;
     ns1:valueRaw "$ 12 million" ;
     ns1:vendor <https://1145.am/db/4000217/Beamr> ;
-    ns1:whereClean "State of Israel" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
-    ns1:whereRaw "Israel" .
+    ns1:whereHighClean "State of Israel" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereHighRaw "Israel" .
 
 <https://1145.am/db/4000882/Anthony_Lacavera> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -1187,9 +1187,9 @@
     ns1:targetDetails "Series B" ;
     ns1:valueRaw "$ 54 million",
         "€50 million" ;
-    ns1:whereClean "Kingdom of the Netherlands" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
-    ns1:whereRaw "Netherlands" .
+    ns1:whereHighClean "Kingdom of the Netherlands" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereHighRaw "Netherlands" .
 
 <https://1145.am/db/4010045/Eltek-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -1202,7 +1202,7 @@
     ns1:status "not happened at date of document" ;
     ns1:valueRaw "$ 10 million" ;
     ns1:vendor <https://1145.am/db/4010045/Eltek> ;
-    ns1:whereRaw "NASDAQ" .
+    ns1:whereHighRaw "NASDAQ" .
 
 <https://1145.am/db/4010047/Beamr_Imaging-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -1214,7 +1214,7 @@
     ns1:name "public offering" ;
     ns1:status "not happened at date of document" ;
     ns1:vendor <https://1145.am/db/4010047/Beamr_Imaging> ;
-    ns1:whereRaw "NASDAQ" .
+    ns1:whereHighRaw "NASDAQ" .
 
 <https://1145.am/db/4174501/Silver_Mountain_Resources_Inc-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -1228,9 +1228,9 @@
     ns1:valueRaw "$ 7,502,000",
         "up to $ 9,000,035" ;
     ns1:vendor <https://1145.am/db/4174501/Silver_Mountain_Resources_Inc> ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/4174522/Contextlogic_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1243,9 +1243,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/4174522/Contextlogic_Inc> ;
     ns1:targetName "ContextLogic Inc." ;
-    ns1:whereClean "San Francisco" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
-    ns1:whereRaw "SAN FRANCISCO" .
+    ns1:whereHighClean "San Francisco" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:whereHighRaw "SAN FRANCISCO" .
 
 <https://1145.am/db/4174522/Qoo10> a org:Organization ;
     ns1:buyer <https://1145.am/db/4174522/Qoo10-Acquisition> ;
@@ -1396,9 +1396,9 @@
     ns1:name "investment" ;
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/1768188/Grab> ;
-    ns1:whereClean "Republic of Singapore" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
-    ns1:whereRaw "Singapore" .
+    ns1:whereHighClean "Republic of Singapore" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1880251> ;
+    ns1:whereHighRaw "Singapore" .
 
 <https://1145.am/db/1768712/Nubank> a org:Organization ;
     ns1:basedInHighClean "Federative Republic of Brazil" ;
@@ -1447,9 +1447,9 @@
     ns1:internalDocId 2194924 ;
     ns1:name "purchase" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "Massachusetts" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
-    ns1:whereRaw "Massachusetts" .
+    ns1:whereHighClean "Massachusetts" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:whereHighRaw "Massachusetts" .
 
 <https://1145.am/db/2194924/Rxadvance> a org:Organization ;
     ns1:basedInHighClean "Massachusetts" ;
@@ -1509,9 +1509,9 @@
     ns1:target <https://1145.am/db/3803945/Simkar_Corporation> ;
     ns1:targetName "Simkar Corporation" ;
     ns1:whenRaw "May of 2018" ;
-    ns1:whereClean "Philadelphia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4560349> ;
-    ns1:whereRaw "Philadelphia, PA" .
+    ns1:whereHighClean "Philadelphia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4560349> ;
+    ns1:whereHighRaw "Philadelphia, PA" .
 
 <https://1145.am/db/3804435/Qgog_Constellation-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -1520,9 +1520,9 @@
     ns1:documentSource <https://1145.am/db/3804435/wwwprnewswirecom_news-releases_qgog-constellation-announces-update-on-restructuring-settlement-negotiations-300727288html> ;
     ns1:internalDocId 3804435 ;
     ns1:status "stopped" ;
-    ns1:whereClean "Grand Duchy of Luxembourg" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2960313> ;
-    ns1:whereRaw "LUXEMBOURG" .
+    ns1:whereHighClean "Grand Duchy of Luxembourg" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2960313> ;
+    ns1:whereHighRaw "LUXEMBOURG" .
 
 <https://1145.am/db/3999108/Kemira_Oyj> a org:Organization ;
     ns1:basedInHighClean "Republic of Finland" ;
@@ -1546,9 +1546,9 @@
     ns1:target <https://1145.am/db/3999108/Kemira_Oyj> ;
     ns1:targetName "Kemira Oyj" ;
     ns1:valueRaw "EUR 125 million" ;
-    ns1:whereClean "Republic of Finland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
-    ns1:whereRaw "Finland" .
+    ns1:whereHighClean "Republic of Finland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/660013> ;
+    ns1:whereHighRaw "Finland" .
 
 <https://1145.am/db/4000210/Lancaster_Resources_Inc-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -1559,9 +1559,9 @@
     ns1:internalDocId 4000210 ;
     ns1:name "spin-off" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "British Columbia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
-    ns1:whereRaw "British Columbia" .
+    ns1:whereHighClean "British Columbia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereHighRaw "British Columbia" .
 
 <https://1145.am/db/4000210/Nelson_Lake_Copper_Corp> a org:Organization ;
     ns1:basedInHighClean "British Columbia" ;
@@ -1635,9 +1635,9 @@
     ns1:status "stopped" ;
     ns1:target <https://1145.am/db/4001762/Czech_Parcel_Giant> ;
     ns1:targetName "Czech parcel giant" ;
-    ns1:whereClean "Czechia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
-    ns1:whereRaw "Czech" .
+    ns1:whereHighClean "Czechia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereHighRaw "Czech" .
 
 <https://1145.am/db/4001762/Evri> a org:Organization ;
     ns1:basedInLowRaw "Israel" ;
@@ -1773,9 +1773,9 @@
     ns1:internalDocId 4174522 ;
     ns1:name "acquire" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "Nō" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1855099> ;
-    ns1:whereRaw "no" .
+    ns1:whereHighClean "Nō" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1855099> ;
+    ns1:whereHighRaw "no" .
 
 <https://1145.am/db/4175644/Richmond_Master_Distributors> a org:Organization ;
     ns1:basedInHighClean "South Bend" ;
@@ -1803,9 +1803,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/4175644/Richmond_Master_Distributors> ;
     ns1:targetName "Richmond Master Distributors" ;
-    ns1:whereClean "South Bend" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4926563> ;
-    ns1:whereRaw "South Bend" .
+    ns1:whereHighClean "South Bend" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4926563> ;
+    ns1:whereHighRaw "South Bend" .
 
 <https://1145.am/db/4175671/Eversource> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1852,9 +1852,9 @@
     ns1:targetDetails "interest" ;
     ns1:targetName "Sunrise Wind" ;
     ns1:vendor <https://1145.am/db/4175671/Eversource> ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "New York" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "New York" .
 
 <https://1145.am/db/geonames_location/1855099> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/4174522/wwwglobenewswirecom_news-release_2024_04_19_2866115_0_en_ContextLogic-Announces-Stockholder-Approval-of-Transaction-with-Qoo10html> ;
@@ -1907,9 +1907,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/4000210/Nelson_Lake_Copper_Corp> ;
     ns1:targetName "Nelson Lake Copper Corp." ;
-    ns1:whereClean "British Columbia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
-    ns1:whereRaw "British Columbia" .
+    ns1:whereHighClean "British Columbia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereHighRaw "British Columbia" .
 
 <https://1145.am/db/4001440/Coretrax-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1939,9 +1939,9 @@
         "stopped" ;
     ns1:target <https://1145.am/db/4001762/Yodel> ;
     ns1:targetName "Yodel" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/4003172/Aegir_Insights-Climentum_Capital-Seaya_Andromeda-Investment-Series_A> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -2132,7 +2132,7 @@
     ns1:target <https://1145.am/db/3518892/Ual> ;
     ns1:targetDetails "series B" ;
     ns1:valueRaw "$ 34 million" ;
-    ns1:whereRaw "Argentinian" .
+    ns1:whereHighRaw "Argentinian" .
 
 <https://1145.am/db/3803945/wwwprnewswirecom_news-releases_neo-lights-holdings-inc-enters-negotiations-to-bring-manufacturing-to-india-300727262html> a schema:Article ;
     ns1:dateRetrieved "2024-01-18T19:21:00+00:00"^^xsd:dateTime ;
@@ -2176,9 +2176,9 @@
     ns1:target <https://1145.am/db/4000882/Wealth_One> ;
     ns1:targetName "Wealth One" ;
     ns1:valueRaw "about $ 51-million" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/4001440/wwwbusinesswirecom_news_home_20240212889637_en__C2_A0Expro-to-Enhance-Well-Construction-and-Well-Intervention-Integrity-Offerings-With-Acquisition-of-Aberdeen-Scotland-based-Coretrax> a schema:Article ;
     ns1:dateRetrieved "2024-02-13T07:23:17+00:00"^^xsd:dateTime ;

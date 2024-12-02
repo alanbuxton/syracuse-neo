@@ -369,9 +369,9 @@
     ns1:target <https://1145.am/db/3145650/Dott> ;
     ns1:targetDetails "venture capital" ;
     ns1:valueRaw "$ 23 million" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/3145658/Hard_Yaka> a org:Organization ;
     ns1:basedInHighClean "San Francisco" ;
@@ -543,9 +543,9 @@
     ns1:vendor <https://1145.am/db/3860828/Alliant_Energy_Corporation> ;
     ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 13, 2018" ;
-    ns1:whereClean "Wisconsin" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
-    ns1:whereRaw "Wis." .
+    ns1:whereHighClean "Wisconsin" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
+    ns1:whereHighRaw "Wis." .
 
 <https://1145.am/db/3861965/Ames_Watson_Capital> a org:Organization ;
     ns1:basedInLowRaw "Tenn" ;
@@ -611,9 +611,9 @@
         "US $ 69.0 million" ;
     ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 14, 2018" ;
-    ns1:whereClean "Mexico" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
-    ns1:whereRaw "Mexico" .
+    ns1:whereHighClean "Mexico" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
+    ns1:whereHighRaw "Mexico" .
 
 <https://1145.am/db/3861981/Rexford_Industrial> a org:Organization ;
     ns1:basedInHighClean "Southern California" ;
@@ -1001,9 +1001,9 @@
     ns1:documentSource <https://1145.am/db/2191226/wwwfiercehealthcarecom_payer_cigna-express-scripts-nears-finish-line-approvals-from-california-and-new-york> ;
     ns1:internalDocId 2191226 ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3145650/Dott> a org:Organization ;
     ns1:basedInHighClean "Amsterdam" ;
@@ -1188,9 +1188,9 @@
     ns1:valueRaw "$ 18.2 million" ;
     ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 14, 2018" ;
-    ns1:whereClean "Southern California" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
-    ns1:whereRaw "Southern California" .
+    ns1:whereHighClean "Southern California" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
+    ns1:whereHighRaw "Southern California" .
 
 <https://1145.am/db/4250362/Caleb_Smith-Starting-Managing_Director_North_America_Real_Estate_Services> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1207,9 +1207,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 16, 2024" ;
-    ns1:whereClean "Boston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
-    ns1:whereRaw "Boston" .
+    ns1:whereHighClean "Boston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
+    ns1:whereHighRaw "Boston" .
 
 <https://1145.am/db/4250371/Patricia_Fonseca-Continuing-Cfo> a ns1:RoleActivity ;
     ns1:activityType "continuing" ;
@@ -1226,9 +1226,9 @@
     ns1:status "stopped" ;
     ns1:when "2024-05-13T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 13, 2024" ;
-    ns1:whereClean "Tampa" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4174757> ;
-    ns1:whereRaw "TAMPA, Fla." .
+    ns1:whereHighClean "Tampa" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4174757> ;
+    ns1:whereHighRaw "TAMPA, Fla." .
 
 <https://1145.am/db/4250412/Colin_Mckellar-Starting-Technical_Advisory_Board> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1245,9 +1245,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 16, 2024" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "LONDON" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "LONDON" .
 
 <https://1145.am/db/4250412/Vidya_Chandran_Darbari-Starting-Technical_Advisory_Board> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1264,9 +1264,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 16, 2024" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "LONDON" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "LONDON" .
 
 <https://1145.am/db/4250496/Sarah_Kinnick_Hilty-Starting-Chief_Legal_Officer> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1283,9 +1283,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-16T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 16, 2024" ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/4250529/Walter_Cukier-Starting-Eastern_Seaboard_Sales_Manager> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1300,9 +1300,9 @@
     ns1:roleFoundName "Eastern Seaboard Sales Manager" ;
     ns1:roleHolderFoundName "Walter Cukier" ;
     ns1:status "completed" ;
-    ns1:whereClean "Los Angeles" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
-    ns1:whereRaw "Los Angeles" .
+    ns1:whereHighClean "Los Angeles" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:whereHighRaw "Los Angeles" .
 
 <https://1145.am/db/4251913/Mark_Tainton-Starting-Chief_Customer_Officer> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1377,9 +1377,9 @@
     ns1:roleFoundName "Head of Client Sales" ;
     ns1:roleHolderFoundName "John Maggiacomo" ;
     ns1:status "completed" ;
-    ns1:whereClean "North Salt Lake" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
-    ns1:whereRaw "North America" .
+    ns1:whereHighClean "North Salt Lake" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
+    ns1:whereHighRaw "North America" .
 
 <https://1145.am/db/4251937/Damon_Cates-Finishing-President_Chief_Executive_Officer_(ceo)> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1394,9 +1394,9 @@
     ns1:roleFoundName "President & Chief Executive Officer (CEO)" ;
     ns1:roleHolderFoundName "Damon Cates" ;
     ns1:status "completed" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/4251941/Steve_Tang-Starting-Board_Of_Directors> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1526,9 +1526,9 @@
         <https://1145.am/db/3861965/Genesco_Inc> ;
     ns1:targetName "FanzzLids Holdings" ;
     ns1:valueRaw "$ 100 million" ;
-    ns1:whereClean "Nashville" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
-    ns1:whereRaw "NASHVILLE, Tenn." .
+    ns1:whereHighClean "Nashville" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:whereHighRaw "NASHVILLE, Tenn." .
 
 <https://1145.am/db/3861965/Genesco_Inc> a org:Organization ;
     ns1:basedInHighClean "Nashville" ;
@@ -1565,9 +1565,9 @@
     ns1:targetName "Lids Sports Group" ;
     ns1:valueRaw "$ 100 million" ;
     ns1:vendor <https://1145.am/db/3861965/Genesco_Inc> ;
-    ns1:whereClean "Nashville" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
-    ns1:whereRaw "NASHVILLE, Tenn." .
+    ns1:whereHighClean "Nashville" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:whereHighRaw "NASHVILLE, Tenn." .
 
 <https://1145.am/db/4250362/Gordon_Brothers-Managing_Director_North_America_Real_Estate_Services> a org:Role ;
     ns1:documentSource <https://1145.am/db/4250362/wwwglobenewswirecom_news-release_2024_05_16_2883488_0_en_Caleb-Smith-Joins-Gordon-Brothers-as-Managing-Director-North-America-Real-Estate-Serviceshtml> ;
@@ -1819,9 +1819,9 @@
     ns1:target <https://1145.am/db/3145658/Transfergo> ;
     ns1:targetDetails "series B" ;
     ns1:valueRaw "$ 17.5 million" ;
-    ns1:whereClean "London" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
-    ns1:whereRaw "London" .
+    ns1:whereHighClean "London" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743> ;
+    ns1:whereHighRaw "London" .
 
 <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1838,9 +1838,9 @@
     ns1:valueRaw "multimillion USD" ;
     ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 13, 2018" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/4250371/wwwglobenewswirecom_news-release_2024_05_16_2883503_0_en_Cansortium-Announces-Change-in-Chief-Financial-Officerhtml> a schema:Article ;
     ns1:dateRetrieved "2024-05-17T05:09:10+00:00"^^xsd:dateTime ;

@@ -14,9 +14,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/3454499/Yallacompare> ;
     ns1:valueRaw "USD $ 8 million" ;
-    ns1:whereClean "Middle East" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6269133> ;
-    ns1:whereRaw "Middle East" .
+    ns1:whereHighClean "Middle East" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6269133> ;
+    ns1:whereHighRaw "Middle East" .
 
 <https://1145.am/db/3454511/Hastings_Equity_Partners> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -476,9 +476,9 @@
     ns1:valueRaw "up to $ 15 million" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "State of Israel" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
-    ns1:whereRaw "Israel" .
+    ns1:whereHighClean "State of Israel" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereHighRaw "Israel" .
 
 <https://1145.am/db/3457424/Johnsonm3> a org:Organization ;
     ns1:basedInHighClean "Lawton" ;
@@ -599,9 +599,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3454511/A_L_Industrial_Services> ;
     ns1:targetName "A & L Industrial Services" ;
-    ns1:whereClean "Deer Park" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4685737> ;
-    ns1:whereRaw "Deer Park, Texas" .
+    ns1:whereHighClean "Deer Park" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4685737> ;
+    ns1:whereHighRaw "Deer Park, Texas" .
 
 <https://1145.am/db/3454517/Coastal_Physicians_Medical_Group> a org:Organization ;
     ns1:basedInHighClean "Southern California" ;
@@ -644,9 +644,9 @@
     ns1:targetName "Annexus" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Arizona" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5551752> ;
-    ns1:whereRaw "Ariz" .
+    ns1:whereHighClean "Arizona" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5551752> ;
+    ns1:whereHighRaw "Ariz" .
 
 <https://1145.am/db/3455448/Waller_Todd_Sadler_Architects> a org:Organization ;
     ns1:basedInHighClean "Virginia Beach" ;
@@ -674,9 +674,9 @@
     ns1:targetName "Waller, Todd & Sadler Architects" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Virginia Beach" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4791259> ;
-    ns1:whereRaw "Virginia Beach, Va" .
+    ns1:whereHighClean "Virginia Beach" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4791259> ;
+    ns1:whereHighRaw "Virginia Beach, Va" .
 
 <https://1145.am/db/3455478/Coyote_Ridge_Wind_Farm> a org:Organization ;
     ns1:basedInHighClean "Brookings County" ;
@@ -698,9 +698,9 @@
     ns1:target <https://1145.am/db/3455478/Coyote_Ridge_Wind_Farm> ;
     ns1:targetDetails "ownership interest" ;
     ns1:targetName "Coyote Ridge Wind Farm" ;
-    ns1:whereClean "South Dakota" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5769223> ;
-    ns1:whereRaw "South Dakota" .
+    ns1:whereHighClean "South Dakota" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5769223> ;
+    ns1:whereHighRaw "South Dakota" .
 
 <https://1145.am/db/3455524/Riskcanvas_Holdings> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -743,9 +743,9 @@
     ns1:targetDetails "interest" ;
     ns1:targetName "Firebirds International" ;
     ns1:vendor <https://1145.am/db/3456363/Angelo_Gordon_Co_Lp> ;
-    ns1:whereClean "California" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5332921> ;
-    ns1:whereRaw "California" .
+    ns1:whereHighClean "California" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5332921> ;
+    ns1:whereHighRaw "California" .
 
 <https://1145.am/db/3456990/South_Bay_Partners_Inc-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -758,9 +758,9 @@
     ns1:status "completed" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "California" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5332921> ;
-    ns1:whereRaw "California" .
+    ns1:whereHighClean "California" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5332921> ;
+    ns1:whereHighRaw "California" .
 
 <https://1145.am/db/3457010/Dent_Buddy> a org:Organization ;
     ns1:basedInHighClean "Austin" ;
@@ -880,9 +880,9 @@
     ns1:targetName "Haines Direct" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "North Canton" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5164706> ;
-    ns1:whereRaw "North Canton, Ohio" .
+    ns1:whereHighClean "North Canton" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5164706> ;
+    ns1:whereHighRaw "North Canton, Ohio" .
 
 <https://1145.am/db/3457048/Petrotechnics> a org:Organization ;
     ns1:description "Operational Risk Solution" ;
@@ -909,9 +909,9 @@
     ns1:targetName "Petrotechnics" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Scotland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
-    ns1:whereRaw "Scotland" .
+    ns1:whereHighClean "Scotland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2638360> ;
+    ns1:whereHighRaw "Scotland" .
 
 <https://1145.am/db/3457410/Health_Matrix> a org:Organization ;
     ns1:basedInHighClean "Kingdom of Saudi Arabia" ;
@@ -966,9 +966,9 @@
     ns1:targetName "Clorox® Total 360® System" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Oklahoma City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4544349> ;
-    ns1:whereRaw "Oklahoma" .
+    ns1:whereHighClean "Oklahoma City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4544349> ;
+    ns1:whereHighRaw "Oklahoma" .
 
 <https://1145.am/db/3457431/Firebirds> a org:Organization ;
     ns1:basedInHighClean "Charlotte" ;
@@ -1177,9 +1177,9 @@
     ns1:targetName "Coastal Physicians Medical Group" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Southern California" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
-    ns1:whereRaw "Southern California" .
+    ns1:whereHighClean "Southern California" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/11071615> ;
+    ns1:whereHighRaw "Southern California" .
 
 <https://1145.am/db/3455524/Riskcanvas_Holdings-Acquisition-Subsidiary> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1197,9 +1197,9 @@
     ns1:targetName "riskCanvas Holdings" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3457410/Datix-Datix-Health_Matrix-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1209,9 +1209,9 @@
     ns1:internalDocId 3457410 ;
     ns1:status "not happened at date of document" ;
     ns1:vendor <https://1145.am/db/3457410/Health_Matrix> ;
-    ns1:whereClean "Middle East" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6269133> ;
-    ns1:whereRaw "Middle East" .
+    ns1:whereHighClean "Middle East" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6269133> ;
+    ns1:whereHighRaw "Middle East" .
 
 <https://1145.am/db/3457431/Firebirds-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1226,9 +1226,9 @@
     ns1:targetName "Firebirds" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/geonames_location/11071615> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3454517/wwwprnewswirecom_news-releases_coastal-physicians-medical-group-joins-healthcare-partners-300774337html> ;
@@ -1348,9 +1348,9 @@
     ns1:target <https://1145.am/db/3457038/Freightpop> ;
     ns1:when "2019-01-02T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 2, 2019" ;
-    ns1:whereClean "Lake Forest" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5364514> ;
-    ns1:whereRaw "LAKE FOREST, Calif." .
+    ns1:whereHighClean "Lake Forest" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5364514> ;
+    ns1:whereHighRaw "LAKE FOREST, Calif." .
 
 <https://1145.am/db/geonames_location/5128581> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3455524/wwwprnewswirecom_news-releases_genpact-acquires-riskcanvastm-from-booz-allen-hamilton-to-accelerate-vision-to-build-the-financial-crime-compliance-office-of-the-future-300774608html>,

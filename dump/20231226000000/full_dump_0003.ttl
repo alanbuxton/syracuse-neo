@@ -1120,9 +1120,9 @@
     ns1:roleFoundName "chief operating officer" ;
     ns1:roleHolderFoundName "Keith Rabois" ;
     ns1:status "completed" ;
-    ns1:whereClean "The Valley" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3573374> ;
-    ns1:whereRaw "Valley" .
+    ns1:whereHighClean "The Valley" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3573374> ;
+    ns1:whereHighRaw "Valley" .
 
 <https://1145.am/db/2166549/Play_Sports_Group> a org:Organization ;
     ns1:description "digital sports media" ;
@@ -1208,9 +1208,9 @@
     ns1:target <https://1145.am/db/3460269/Quest_Events> ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "North Salt Lake" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
-    ns1:whereRaw "North America" .
+    ns1:whereHighClean "North Salt Lake" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5779068> ;
+    ns1:whereHighRaw "North America" .
 
 <https://1145.am/db/3460288/Ableto> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1248,9 +1248,9 @@
     ns1:targetDetails "Series D" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3461286/Charles_C_Foti_Jr> a org:Organization ;
     ns1:basedInHighClean "New Orleans" ;
@@ -3074,9 +3074,9 @@
     ns1:targetName "Innovative Architects" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Atlanta" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
-    ns1:whereRaw "Atlanta" .
+    ns1:whereHighClean "Atlanta" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4180439> ;
+    ns1:whereHighRaw "Atlanta" .
 
 <https://1145.am/db/3461322/Celgene> a org:Organization ;
     ns1:basedInHighClean "New Orleans" ;
@@ -5029,9 +5029,9 @@
     ns1:targetName "Evo W12 Inovações Tecnologicas" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Federative Republic of Brazil" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3469034> ;
-    ns1:whereRaw "Brazil" .
+    ns1:whereHighClean "Federative Republic of Brazil" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3469034> ;
+    ns1:whereHighRaw "Brazil" .
 
 <https://1145.am/db/3461395/Salvarx> a org:Organization ;
     ns1:basedInLowRaw "TORONTO" ;
@@ -5063,9 +5063,9 @@
     ns1:targetName "SalvaRx" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Toronto" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6167865> ;
-    ns1:whereRaw "TORONTO" .
+    ns1:whereHighClean "Toronto" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6167865> ;
+    ns1:whereHighRaw "TORONTO" .
 
 <https://1145.am/db/3462518/Ocean_State_Job_Lot-Acquisition-Locations> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -5079,13 +5079,13 @@
     ns1:targetDetails "locations" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Hampshire County",
+    ns1:whereHighClean "Hampshire County",
         "New York City",
         "Pennsylvania" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4938757>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4938757>,
         <https://1145.am/db/geonames_location/5128581>,
         <https://1145.am/db/geonames_location/6254927> ;
-    ns1:whereRaw "New York, New Hampshire, Massachusetts, and Pennsylvania" .
+    ns1:whereHighRaw "New York, New Hampshire, Massachusetts, and Pennsylvania" .
 
 <https://1145.am/db/3462522/First_Agency_Inc> a org:Organization ;
     ns1:basedInHighClean "Kalamazoo" ;
@@ -5113,9 +5113,9 @@
     ns1:targetName "First Agency, Inc" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Kalamazoo" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4997787> ;
-    ns1:whereRaw "Kalamazoo, Michigan" .
+    ns1:whereHighClean "Kalamazoo" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4997787> ;
+    ns1:whereHighRaw "Kalamazoo, Michigan" .
 
 <https://1145.am/db/3462535/Audiokinetic> a org:Organization ;
     ns1:basedInHighClean "Montréal" ;
@@ -5138,9 +5138,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3462535/Audiokinetic> ;
     ns1:targetName "Audiokinetic" ;
-    ns1:whereClean "Montréal" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6077246> ;
-    ns1:whereRaw "Montreal" .
+    ns1:whereHighClean "Montréal" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6077246> ;
+    ns1:whereHighRaw "Montreal" .
 
 <https://1145.am/db/3462659/Thynk_Health> a org:Organization ;
     ns1:basedInHighClean "Lexington" ;
@@ -5181,9 +5181,9 @@
     ns1:targetName "East Cheyenne" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3463554/Alternative_Medical_Solutions> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -5208,9 +5208,9 @@
     ns1:targetName "Alternative Medical Solutions" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3463554/Ams> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -5254,9 +5254,9 @@
     ns1:target <https://1145.am/db/3463554/Ams> ;
     ns1:targetName "AMS" ;
     ns1:valueRaw "CAD $ 12,710,000" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3463554/Hanover_Cpmd_Acquisition_Corp-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -5268,9 +5268,9 @@
     ns1:name "acquired" ;
     ns1:status "completed" ;
     ns1:valueRaw "CAD $ 12,710,000" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3463583/Disc_Graphics> a org:Organization ;
     ns1:basedInHighClean "Hauppauge" ;
@@ -5292,9 +5292,9 @@
     ns1:target <https://1145.am/db/3464606/Redcliff> ;
     ns1:valueRaw "$ 100 million",
         "$ 70 million" ;
-    ns1:whereClean "Oklahoma City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4544349> ;
-    ns1:whereRaw "Oklahoma" .
+    ns1:whereHighClean "Oklahoma City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4544349> ;
+    ns1:whereHighRaw "Oklahoma" .
 
 <https://1145.am/db/3464606/Redcliff> a org:Organization ;
     ns1:basedInHighClean "Woodward County" ;
@@ -5333,9 +5333,9 @@
     ns1:targetName "Intrepid Investment Bankers LLC" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Los Angeles" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
-    ns1:whereRaw "Los Angeles" .
+    ns1:whereHighClean "Los Angeles" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5368361> ;
+    ns1:whereHighRaw "Los Angeles" .
 
 <https://1145.am/db/geonames_location/3573374> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/1824114/techcrunchcom_2013_01_24_keith-rabois-leaves-top-operating-role-at-square_> ;
@@ -5486,9 +5486,9 @@
         "$ 250,000 jobs" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Lexington" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4297983> ;
-    ns1:whereRaw "Lexington, Ky" .
+    ns1:whereHighClean "Lexington" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4297983> ;
+    ns1:whereHighRaw "Lexington, Ky" .
 
 <https://1145.am/db/geonames_location/3469034> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3461340/wwwprnewswirecom_news-releases_abc-financial-services-acquires-brazilian-market-leader-evo-w12-300774874html> ;
@@ -5575,9 +5575,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3461322/Celgene> ;
     ns1:targetName "Celgene" ;
-    ns1:whereClean "New Orleans" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4335045> ;
-    ns1:whereRaw "NEW ORLEANS" .
+    ns1:whereHighClean "New Orleans" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4335045> ;
+    ns1:whereHighRaw "NEW ORLEANS" .
 
 <https://1145.am/db/3461324/E15vc-Home_Bay-Serra_Ventures-Signal_Peak_Ventures-Investment-Series_A-1> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -5593,9 +5593,9 @@
     ns1:valueRaw "$ 13.5 million" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "San Diego" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5391811> ;
-    ns1:whereRaw "SAN DIEGO" .
+    ns1:whereHighClean "San Diego" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5391811> ;
+    ns1:whereHighRaw "SAN DIEGO" .
 
 <https://1145.am/db/3463583/Disc_Graphics-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -5610,9 +5610,9 @@
     ns1:targetName "Disc Graphics" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Hauppauge" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5120228> ;
-    ns1:whereRaw "Hauppauge, NY" .
+    ns1:whereHighClean "Hauppauge" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5120228> ;
+    ns1:whereHighRaw "Hauppauge, NY" .
 
 <https://1145.am/db/geonames_location/5128581> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3460288/wwwprnewswirecom_news-releases_ableto-announces-strategic-investment-from-optum-ventures-300774743html>,
@@ -5649,9 +5649,9 @@
     ns1:internalDocId 3461286 ;
     ns1:name "merger" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "New Orleans" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4335045> ;
-    ns1:whereRaw "NEW ORLEANS" .
+    ns1:whereHighClean "New Orleans" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4335045> ;
+    ns1:whereHighRaw "NEW ORLEANS" .
 
 <https://1145.am/db/3461340/wwwprnewswirecom_news-releases_abc-financial-services-acquires-brazilian-market-leader-evo-w12-300774874html> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T16:53:40+00:00"^^xsd:dateTime ;

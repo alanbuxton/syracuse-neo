@@ -346,9 +346,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/4290319/Zhipu_Ai> ;
     ns1:targetName "Zhipu AI" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "Chinese" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "Chinese" .
 
 <https://1145.am/db/4290421/Pascale_St-Onge> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -380,9 +380,9 @@
     ns1:status "not happened at date of document" ;
     ns1:valueRaw "A $ 2.2 billion" ;
     ns1:vendor <https://1145.am/db/4290457/Gyg> ;
-    ns1:whereClean "Commonwealth of Australia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
-    ns1:whereRaw "Australia" .
+    ns1:whereHighClean "Commonwealth of Australia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2077456> ;
+    ns1:whereHighRaw "Australia" .
 
 <https://1145.am/db/4290459/Banco_Bilbao_Vizcaya_Argentaria> a org:Organization ;
     ns1:basedInHighClean "Kingdom of Spain" ;
@@ -455,9 +455,9 @@
     ns1:targetName "Associated British Foods" ;
     ns1:valueRaw "$ 333.6 million",
         "262 million pounds" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "British" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "British" .
 
 <https://1145.am/db/4290155/Royal_Mail> a org:Organization ;
     ns1:basedInLowRaw "Czech" ;
@@ -508,9 +508,9 @@
     ns1:documentSource <https://1145.am/db/4290170/wwwglobenewswirecom_news-release_2024_06_01_2891798_0_en_CERE-NASDAQ-REMINDER-BFA-Law-Reminds-Cerevel-Shareholders-to-Inquire-About-Ongoing-Investigation-into-the-45-Merger-Offerhtml> ;
     ns1:internalDocId 4290170 ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/4290170/Cerevel_Therapeutics_Holdings_Inc> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -580,9 +580,9 @@
     ns1:internalDocId 4290319 ;
     ns1:name "funding" ;
     ns1:status "completed" ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/4290319/Zhipu_Ai> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -656,9 +656,9 @@
     ns1:valueRaw "$ 12 billion",
         "11.23 billion euros",
         "billion" ;
-    ns1:whereClean "Kingdom of Spain" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2510769> ;
-    ns1:whereRaw "Spain" .
+    ns1:whereHighClean "Kingdom of Spain" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2510769> ;
+    ns1:whereHighRaw "Spain" .
 
 <https://1145.am/db/4290467/Catania_Sicily> a org:Site ;
     ns1:basedInHighClean "Italian Republic" ;
@@ -772,9 +772,9 @@
     ns1:targetName "Royal Mail" ;
     ns1:valueRaw "£3.5 bn",
         "£3.5bn" ;
-    ns1:whereClean "Czechia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
-    ns1:whereRaw "Czech" .
+    ns1:whereHighClean "Czechia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereHighRaw "Czech" .
 
 <https://1145.am/db/4290245/Winnipeg_Sun-Acquisition-Division> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -789,9 +789,9 @@
     ns1:targetDetails "division" ;
     ns1:targetName "Winnipeg Sun" ;
     ns1:vendor <https://1145.am/db/4290245/Postmedia_Network_Inc> ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/4290421/Pascale_St-Onge-Board_Chair> a org:Role ;
     ns1:documentSource <https://1145.am/db/4290421/wwwtheglobeandmailcom_politics_article-national-gallerys-new-board-chair-meant-to-calm-the-waters-at-a-museum_> ;
@@ -817,9 +817,9 @@
     ns1:internalDocId 4290170 ;
     ns1:name "merger" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_> a schema:Article ;
     ns1:dateRetrieved "2024-06-02T05:09:26+00:00"^^xsd:dateTime ;

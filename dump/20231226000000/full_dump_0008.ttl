@@ -98,9 +98,9 @@
     ns1:targetDetails "business" ;
     ns1:valueRaw "$ 31 billion" ;
     ns1:vendor <https://1145.am/db/2543228/Takeda> ;
-    ns1:whereClean "Japan" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1861060> ;
-    ns1:whereRaw "Japan" .
+    ns1:whereHighClean "Japan" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1861060> ;
+    ns1:whereHighRaw "Japan" .
 
 <https://1145.am/db/2693461/Advent_International> a org:Organization ;
     ns1:basedInLowRaw "Global" ;
@@ -1366,9 +1366,9 @@
         "2019-01-03T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "December 20, 2018",
         "January 3, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "New York City" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "New York City" .
 
 <https://1145.am/db/1787762/Guavapass> a org:Organization ;
     ns1:basedInLowRaw "Singapore" ;
@@ -1391,9 +1391,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/1787762/Guavapass> ;
     ns1:targetName "GuavaPass" ;
-    ns1:whereClean "Asia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6255147> ;
-    ns1:whereRaw "Asia" .
+    ns1:whereHighClean "Asia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6255147> ;
+    ns1:whereHighRaw "Asia" .
 
 <https://1145.am/db/2543227/Bristol-Myers-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -1402,9 +1402,9 @@
     ns1:documentSource <https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm> ;
     ns1:internalDocId 2543227 ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "San Francisco" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
-    ns1:whereRaw "SAN FRANCISCO" .
+    ns1:whereHighClean "San Francisco" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5391959> ;
+    ns1:whereHighRaw "SAN FRANCISCO" .
 
 <https://1145.am/db/2543227/Celgene-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1598,9 +1598,9 @@
     ns1:targetName "Aimbridge Hospitality" ;
     ns1:vendor <https://1145.am/db/2693461/General_Atlantic>,
         <https://1145.am/db/2693461/Lee_Equity_Partners> ;
-    ns1:whereClean "Dallas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4684888> ;
-    ns1:whereRaw "Dallas" .
+    ns1:whereHighClean "Dallas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4684888> ;
+    ns1:whereHighRaw "Dallas" .
 
 <https://1145.am/db/2693461/General_Atlantic> a org:Organization ;
     ns1:basedInLowRaw "U.S." ;
@@ -1976,9 +1976,9 @@
         "Loxo Oncology" ;
     ns1:valueRaw "$ 8bn",
         "£6.27bn" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "US" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "US" .
 
 <https://1145.am/db/3029576/Tesaro> a org:Organization ;
     ns1:basedInHighClean "United States" ;
@@ -2029,9 +2029,9 @@
     ns1:targetName "Tesaro" ;
     ns1:valueRaw "$ 5.1bn",
         "of $ 5.1bn" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "US" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "US" .
 
 <https://1145.am/db/3145990/Vaas_International_Holdings> a org:Organization ;
     ns1:basedInHighClean "Fort Worth" ;
@@ -2060,9 +2060,9 @@
     ns1:target <https://1145.am/db/3145990/Vaas_International_Holdings> ;
     ns1:targetName "VaaS International Holdings" ;
     ns1:valueRaw "$ 445 million" ;
-    ns1:whereClean "Fort Worth" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4691930> ;
-    ns1:whereRaw "Fort Worth, Texas" .
+    ns1:whereHighClean "Fort Worth" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4691930> ;
+    ns1:whereHighRaw "Fort Worth, Texas" .
 
 <https://1145.am/db/3443634/Gimbal-Ubermedia-Acquisition-Business_Unit> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2077,9 +2077,9 @@
     ns1:vendor <https://1145.am/db/3443634/Ubermedia> ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Pasadena" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4717782> ;
-    ns1:whereRaw "Pasadena" .
+    ns1:whereHighClean "Pasadena" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4717782> ;
+    ns1:whereHighRaw "Pasadena" .
 
 <https://1145.am/db/3443634/Ubermedia> a org:Organization ;
     ns1:basedInHighClean "Pasadena" ;
@@ -2124,9 +2124,9 @@
     ns1:targetName "Carolina Networks" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Greensboro" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4469146> ;
-    ns1:whereRaw "Greensboro, North Carolina" .
+    ns1:whereHighClean "Greensboro" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4469146> ;
+    ns1:whereHighRaw "Greensboro, North Carolina" .
 
 <https://1145.am/db/3444769/Bonide> a org:Organization ;
     ns1:basedInHighClean "Texas" ;
@@ -2154,9 +2154,9 @@
     ns1:targetName "Bonide" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "US" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "US" .
 
 <https://1145.am/db/3445572/Professional_Medical_Insurance_Services> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -2183,9 +2183,9 @@
     ns1:targetName "Professional Medical Insurance Services" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Houston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4699066> ;
-    ns1:whereRaw "Houston, Texas" .
+    ns1:whereHighClean "Houston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4699066> ;
+    ns1:whereHighRaw "Houston, Texas" .
 
 <https://1145.am/db/3446496/Edgenet> a org:Organization ;
     ns1:basedInHighClean "Nashville" ;
@@ -2249,9 +2249,9 @@
     ns1:vendor <https://1145.am/db/3446501/Newell_Brands> ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3446550/Vista_Brake_Lock> a org:Organization ;
     ns1:basedInHighClean "Sanford" ;
@@ -2276,9 +2276,9 @@
     ns1:targetName "Vista Brake Lock" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3446574/Drive360_Logistics> a org:Organization ;
     ns1:basedInHighClean "Alexandria" ;
@@ -2306,9 +2306,9 @@
     ns1:targetName "Drive360 Logistics" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "U.S." .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "U.S." .
 
 <https://1145.am/db/3447359/Us_Zinc> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -2338,9 +2338,9 @@
     ns1:vendor <https://1145.am/db/3447359/Votorantim_Group> ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3447359/Votorantim_Group> a org:Organization ;
     ns1:basedInLowRaw "Brazil" ;
@@ -2457,9 +2457,9 @@
     ns1:name "merging" ;
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "operations" ;
-    ns1:whereClean "Oak Brook" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4904277> ;
-    ns1:whereRaw "Oak Brook, IL" .
+    ns1:whereHighClean "Oak Brook" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4904277> ;
+    ns1:whereHighRaw "Oak Brook, IL" .
 
 <https://1145.am/db/2543227/Celgene> a org:Organization ;
     ns1:description "cancer" ;
@@ -2705,9 +2705,9 @@
     ns1:internalDocId 3443636 ;
     ns1:name "merger" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3443680/Munck_Wilson_Mandala-The_Hecker_Law_Group-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -2718,9 +2718,9 @@
     ns1:internalDocId 3443680 ;
     ns1:name "joining" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3448272/Propeller_Health-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2737,9 +2737,9 @@
         "$ 41.4 million" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Radnor" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5207490> ;
-    ns1:whereRaw "RADNOR, Pa." .
+    ns1:whereHighClean "Radnor" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5207490> ;
+    ns1:whereHighRaw "RADNOR, Pa." .
 
 <https://1145.am/db/geonames_location/1861060> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/2543228/wwwfiercepharmacom_pharma-asia_takeda-debt-after-shire-buyout-but-don-t-expect-otc-unit-selloff-ceo> ;
@@ -2819,9 +2819,9 @@
     ns1:targetName "Edgenet" ;
     ns1:when "2019-01-07T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 7, 2019" ;
-    ns1:whereClean "Nashville" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
-    ns1:whereRaw "Nashville" .
+    ns1:whereHighClean "Nashville" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4644585> ;
+    ns1:whereHighRaw "Nashville" .
 
 <https://1145.am/db/3448296/wwwprnewswirecom_news-releases_urban-one-inc-announces-expiration-of-its-previously-announced-tender-offer-of-9-25-senior-subordinated-notes-due-2020--300774187html> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T16:28:56+00:00"^^xsd:dateTime ;

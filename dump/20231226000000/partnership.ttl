@@ -137,9 +137,9 @@
         "Royal DSM N.V." ;
     ns1:providedBy <https://1145.am/db/11594/Biomax_Informatics_Ag> ;
     ns1:status "completed" ;
-    ns1:whereClean "Kingdom of the Netherlands" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
-    ns1:whereRaw "Netherlands" .
+    ns1:whereHighClean "Kingdom of the Netherlands" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereHighRaw "Netherlands" .
 
 <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> a ns1:PartnershipActivity ;
     ns1:documentDate "2018-05-15T12:01:45+00:00"^^xsd:dateTime ;
@@ -155,9 +155,9 @@
     ns1:orgName "Biomax",
         "DSM" ;
     ns1:status "completed" ;
-    ns1:whereClean "Kingdom of the Netherlands" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
-    ns1:whereRaw "Netherlands" .
+    ns1:whereHighClean "Kingdom of the Netherlands" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereHighRaw "Netherlands" .
 
 <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> a schema:Article ;
     ns1:internalDocId 11594 ;

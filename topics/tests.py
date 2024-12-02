@@ -73,7 +73,7 @@ class TestUtilsWithDumpData(TestCase):
             'Truckload Freight Services']
         )
         assert len(clean_edge_data) == 7
-        assert set([x['label'] for x in clean_edge_data]) == {'industryClusterPrimary', 'buyer', 'basedInHighGeoNamesLocation', 'whereGeoNamesLocation', 'documentSource', 'target'}
+        assert set([x['label'] for x in clean_edge_data]) == {'industryClusterPrimary', 'buyer', 'basedInHighGeoNamesLocation', 'whereHighGeoNamesLocation', 'documentSource', 'target'}
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 

@@ -140,7 +140,7 @@ class Resource(StructuredNode):
         pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
 
     @property
-    def whereGeoName_as_str(self):
+    def whereHighGeoName_as_str(self):
         pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
 
     @property
@@ -600,18 +600,18 @@ class ActivityMixin:
     when = ArrayProperty(NativeDateTimeProperty())
     whenRaw = ArrayProperty(StringProperty())
     status = ArrayProperty(StringProperty())
-    whereRaw = ArrayProperty(StringProperty())
-    whereClean = ArrayProperty(StringProperty())
-    whereGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereGeoNamesLocation')
+    whereHighRaw = ArrayProperty(StringProperty())
+    whereHighClean = ArrayProperty(StringProperty())
+    whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation')
 
     @property
-    def whereGeoName_as_str(self):
+    def whereHighGeoName_as_str(self):
         cache_key = cache_friendly(f"{self.__class__.__name__}_activity_mixin_{self.uri}")
         names = cache.get(cache_key)
         if names is not None:
             return names
         names = []
-        for x in self.whereGeoNamesLocation:
+        for x in self.whereHighGeoNamesLocation:
             if x.name is None:
                 continue
             names.extend(x.name)
@@ -644,18 +644,18 @@ class ActivityMixin:
             "status": self.status,
             "when": self.when,
             "when_raw": self.whenRaw,
-            "where_raw": self.whereRaw,
-            "where_clean": self.whereClean,
+            "where_high_raw": self.whereHighRaw,
+            "where_high_clean": self.whereHighClean,
         }
 
     @property
-    def whereGeoNameRDFURL(self):
-        return [x.uri for x in self.whereGeoNameRDF]
+    def whereHighGeoNameRDFURL(self):
+        return [x.uri for x in self.whereHighGeoNameRDF]
 
     @property
-    def whereGeoNameURL(self):
+    def whereHighGeoNameURL(self):
         uris = []
-        for x in self.whereGeoNameRDF:
+        for x in self.whereHighGeoNameRDF:
             uri = x.uri.replace("/about.rdf","")
             uris.append(uri)
         return uris

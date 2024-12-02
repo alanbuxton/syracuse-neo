@@ -281,9 +281,9 @@
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "common shares" ;
     ns1:vendor <https://1145.am/db/3453527/Canntrust_Holdings_Inc> ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3453529/Hamlet_Homes-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -298,9 +298,9 @@
     ns1:targetName "Hamlet Homes" ;
     ns1:vendor <https://1145.am/db/3453529/Michael_Brodsky> ;
     ns1:whenRaw "January 2017" ;
-    ns1:whereClean "Salt Lake City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5780993> ;
-    ns1:whereRaw "Salt Lake City, Utah" .
+    ns1:whereHighClean "Salt Lake City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5780993> ;
+    ns1:whereHighRaw "Salt Lake City, Utah" .
 
 <https://1145.am/db/3453531/Nextech_Ar_Solutions_Corp> a org:Organization ;
     ns1:basedInLowRaw "VANCOUVER and TORONTO" ;
@@ -359,9 +359,9 @@
     ns1:vendor <https://1145.am/db/3453558/McM_Energy_Partners> ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/3454378/Sol_Global_Investments_Corp-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -375,9 +375,9 @@
     ns1:target <https://1145.am/db/3454378/Sol_Global_Investments_Corp> ;
     ns1:when "2018-10-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "October 8, 2018" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canadian" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canadian" .
 
 <https://1145.am/db/3454378/Sol_Global_Investments_Corp-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -395,9 +395,9 @@
     ns1:vendor <https://1145.am/db/3454378/Sol_Global_Investments_Corp> ;
     ns1:when "2018-10-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "October 8, 2018" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canadian" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canadian" .
 
 <https://1145.am/db/3454434/Alexandria_Venture_Investments> a org:Organization ;
     ns1:basedInLowRaw "MEDFORD" ;
@@ -804,11 +804,11 @@
     ns1:roleFoundName "Director of Sales" ;
     ns1:roleHolderFoundName "Michael Carattini" ;
     ns1:status "completed" ;
-    ns1:whereClean "New York",
+    ns1:whereHighClean "New York",
         "North Creek" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128638>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128638>,
         <https://1145.am/db/geonames_location/5804953> ;
-    ns1:whereRaw "North Creek, NY" .
+    ns1:whereHighRaw "North Creek, NY" .
 
 <https://1145.am/db/2932938/Ken_Mcmeikan-Finishing-Head> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -856,9 +856,9 @@
         "not happened at date of document" ;
     ns1:target <https://1145.am/db/3029681/Halebury> ;
     ns1:targetName "Halebury" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/3029681/Lexpredict> a org:Organization ;
     ns1:description "legal" ;
@@ -921,9 +921,9 @@
     ns1:vendor <https://1145.am/db/3451511/Golden_Queen_Mining_Co_Ltd> ;
     ns1:when "2019-01-04T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "January 4, 2019" ;
-    ns1:whereClean "Vancouver" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6173331> ;
-    ns1:whereRaw "VANCOUVER" .
+    ns1:whereHighClean "Vancouver" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6173331> ;
+    ns1:whereHighRaw "VANCOUVER" .
 
 <https://1145.am/db/3452608/Avon_Products_Inc> a org:Organization ;
     ns1:basedInHighClean "London" ;
@@ -999,9 +999,9 @@
     ns1:targetName "Consolidated Copier Services" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3452658/Centre_Technologies> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -1032,9 +1032,9 @@
     ns1:targetName "Centre Technologies" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Houston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4699066> ;
-    ns1:whereRaw "HOUSTON" .
+    ns1:whereHighClean "Houston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4699066> ;
+    ns1:whereHighRaw "HOUSTON" .
 
 <https://1145.am/db/3452658/Main_Street_Capital_Corporation-Main_Street_Capital_Corporation-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1044,9 +1044,9 @@
     ns1:internalDocId 3452658 ;
     ns1:status "completed" ;
     ns1:valueRaw "$ 18.1 million" ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/3452774/Cressey_Company-Hhaexchange-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1060,9 +1060,9 @@
     ns1:target <https://1145.am/db/3452774/Hhaexchange> ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3452774/Hhaexchange> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1109,9 +1109,9 @@
     ns1:targetName "Quoizel" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "South Carolina" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
-    ns1:whereRaw "South Carolina" .
+    ns1:whereHighClean "South Carolina" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
+    ns1:whereHighRaw "South Carolina" .
 
 <https://1145.am/db/3453506/Qoros> a org:Organization ;
     ns1:basedInLowRaw "SINGAPORE" ;
@@ -1244,9 +1244,9 @@
     ns1:targetName "Jones Brown" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3454478/Venture_Technologies> a org:Organization ;
     ns1:basedInHighClean "Ridgeland" ;
@@ -1276,9 +1276,9 @@
     ns1:targetName "Venture Technologies" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Ridgeland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4443296> ;
-    ns1:whereRaw "Ridgeland, Mississippi" .
+    ns1:whereHighClean "Ridgeland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4443296> ;
+    ns1:whereHighRaw "Ridgeland, Mississippi" .
 
 <https://1145.am/db/3454498/Hub-Trg_Group_Benefits_And_Pensions_Inc-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1291,7 +1291,7 @@
     ns1:status "completed" ;
     ns1:targetDetails "assets" ;
     ns1:vendor <https://1145.am/db/3454498/Trg_Group_Benefits_And_Pensions_Inc> ;
-    ns1:whereRaw "Inc" .
+    ns1:whereHighRaw "Inc" .
 
 <https://1145.am/db/3454498/Trg_Group_Benefits_And_Pensions_Inc> a org:Organization ;
     ns1:description "Employee benefits and pension solutions",
@@ -1446,9 +1446,9 @@
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "shares" ;
     ns1:vendor <https://1145.am/db/3452608/Avon_Products_Inc> ;
-    ns1:whereClean "People’s Republic of China" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
-    ns1:whereRaw "China" .
+    ns1:whereHighClean "People’s Republic of China" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991> ;
+    ns1:whereHighRaw "China" .
 
 <https://1145.am/db/3453506/Kenon_Holdings_Ltd> a org:Organization ;
     ns1:basedInHighClean "Republic of Singapore" ;
@@ -1494,11 +1494,11 @@
     ns1:valueRaw "RMB 1,560 million",
         "approximately US $ 227 million" ;
     ns1:vendor <https://1145.am/db/3453506/Kenon_Holdings_Ltd> ;
-    ns1:whereClean "People’s Republic of China",
+    ns1:whereHighClean "People’s Republic of China",
         "Republic of Singapore" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/1814991>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/1814991>,
         <https://1145.am/db/geonames_location/1880251> ;
-    ns1:whereRaw "China",
+    ns1:whereHighRaw "China",
         "SINGAPORE" .
 
 <https://1145.am/db/3454378/Sol_Global_Investments_Corp> a org:Organization ;
@@ -1825,9 +1825,9 @@
     ns1:valueRaw "$ 50 Million" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Massachusetts" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
-    ns1:whereRaw "Massachusetts" .
+    ns1:whereHighClean "Massachusetts" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6254926> ;
+    ns1:whereHighRaw "Massachusetts" .
 
 <https://1145.am/db/3029681/wwwcityamcom_us-legal-business-elevate-acquires-uk-new-law-company_> a schema:Article ;
     ns1:dateRetrieved "2023-12-20T04:49:32+00:00"^^xsd:dateTime ;

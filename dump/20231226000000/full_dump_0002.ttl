@@ -1501,9 +1501,9 @@
     ns1:status "not happened at date of document" ;
     ns1:valueRaw "approximately $ 7.2 million" ;
     ns1:vendor <https://1145.am/db/3465879/Mmtec> ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "U.S." .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "U.S." .
 
 <https://1145.am/db/3465883/Cargurus> a org:Organization ;
     ns1:basedInHighClean "Cambridge" ;
@@ -1610,9 +1610,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/1788189/Flowater> ;
     ns1:valueRaw "$ 15 million" ;
-    ns1:whereClean "Burlingame" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5331920> ;
-    ns1:whereRaw "Burlingame, Calif." .
+    ns1:whereHighClean "Burlingame" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5331920> ;
+    ns1:whereHighRaw "Burlingame, Calif." .
 
 <https://1145.am/db/1788189/Flowater> a org:Organization ;
     ns1:basedInHighClean "Burlingame" ;
@@ -1641,9 +1641,9 @@
     ns1:status "completed" ;
     ns1:when "2013-01-23T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan 23, 2013" ;
-    ns1:whereClean "Federal Republic of Germany" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
-    ns1:whereRaw "Germany" .
+    ns1:whereHighClean "Federal Republic of Germany" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
+    ns1:whereHighRaw "Germany" .
 
 <https://1145.am/db/2364649/Ronald_Black-Starting-Chief_Medical_Officer> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1660,9 +1660,9 @@
     ns1:status "completed" ;
     ns1:when "2013-01-23T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan 23, 2013" ;
-    ns1:whereClean "Federal Republic of Germany" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
-    ns1:whereRaw "Germany" .
+    ns1:whereHighClean "Federal Republic of Germany" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
+    ns1:whereHighRaw "Germany" .
 
 <https://1145.am/db/2471436/Anantara_Desaru_Coast_Resort_Villas> a org:Site ;
     ns1:basedInHighClean "Malaysia" ;
@@ -1736,9 +1736,9 @@
     ns1:targetName "Leslie Hindman Auctioneers" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "America" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "America" .
 
 <https://1145.am/db/3464642/Inziv> a org:Organization ;
     ns1:basedInHighClean "State of Israel" ;
@@ -1767,9 +1767,9 @@
     ns1:valueRaw "$ 2.5M" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "State of Israel" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
-    ns1:whereRaw "Israel" .
+    ns1:whereHighClean "State of Israel" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereHighRaw "Israel" .
 
 <https://1145.am/db/3464666/Glasspro> a org:Organization ;
     ns1:basedInHighClean "Charleston" ;
@@ -1797,9 +1797,9 @@
     ns1:vendor <https://1145.am/db/3464666/Glasspro> ;
     ns1:when "2019-01-04T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "January 4, 2019" ;
-    ns1:whereClean "South Carolina" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
-    ns1:whereRaw "South Carolina" .
+    ns1:whereHighClean "South Carolina" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
+    ns1:whereHighRaw "South Carolina" .
 
 <https://1145.am/db/3464715/Loxo_Oncology> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1856,9 +1856,9 @@
     ns1:target <https://1145.am/db/3464748/Rtx_Solutions> ;
     ns1:targetName "RTX Solutions" ;
     ns1:whenRaw "January 2019" ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/3465620/Trilogy_Investors_Llc> a org:Organization ;
     ns1:basedInLowRaw "IRVINE, Calif" ;
@@ -1893,9 +1893,9 @@
     ns1:vendor <https://1145.am/db/3465726/Clique_Brands> ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3465726/Mydomaine> a org:Organization ;
     ns1:description "women" ;
@@ -1947,9 +1947,9 @@
     ns1:status "stopped" ;
     ns1:targetDetails "business" ;
     ns1:vendor <https://1145.am/db/3465775/The_National_Titanium_Dioxide_Company_Limited> ;
-    ns1:whereClean "Stamford" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4843564> ;
-    ns1:whereRaw "STAMFORD, Conn." .
+    ns1:whereHighClean "Stamford" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4843564> ;
+    ns1:whereHighRaw "STAMFORD, Conn." .
 
 <https://1145.am/db/3465815/Hennig_Fahrzeugteile_Group> a org:Organization ;
     ns1:basedInHighClean "Federal Republic of Germany" ;
@@ -1986,9 +1986,9 @@
     ns1:targetName "Pacific Bag" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "U.S." .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "U.S." .
 
 <https://1145.am/db/3465872/Regan_Luxury> a org:Organization ;
     ns1:basedInHighClean "Palm Beach" ;
@@ -2036,9 +2036,9 @@
     ns1:targetName "PistonHeads" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 <https://1145.am/db/3465897/Pan_American_Silver_Corp> a org:Organization ;
     ns1:basedInLowRaw "VANCOUVER" ;
@@ -2089,9 +2089,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3465897/Pan_American_Silver_Corp> ;
     ns1:targetName "Pan American Silver Corp" ;
-    ns1:whereClean "Vancouver" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6173331> ;
-    ns1:whereRaw "VANCOUVER" .
+    ns1:whereHighClean "Vancouver" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6173331> ;
+    ns1:whereHighRaw "VANCOUVER" .
 
 <https://1145.am/db/3467606/Clark_Pest_Control> a org:Organization ;
     ns1:basedInHighClean "Lodi" ;
@@ -2118,9 +2118,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3467606/Clark_Pest_Control> ;
     ns1:targetName "Clark Pest Control" ;
-    ns1:whereClean "Lodi" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5367565> ;
-    ns1:whereRaw "Lodi, CA" .
+    ns1:whereHighClean "Lodi" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5367565> ;
+    ns1:whereHighRaw "Lodi, CA" .
 
 <https://1145.am/db/3467614/Avista> a org:Organization ;
     ns1:basedInHighClean "Washington" ;
@@ -2300,9 +2300,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3464715/Loxo_Oncology> ;
     ns1:targetName "Loxo Oncology" ;
-    ns1:whereClean "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "NEW YORK" .
+    ns1:whereHighClean "New York City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
+    ns1:whereHighRaw "NEW YORK" .
 
 <https://1145.am/db/3465620/Trilogy_Investors_Llc-Investment-Joint_Venture> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -2343,9 +2343,9 @@
     ns1:targetName "Hennig Fahrzeugteile Group" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Federal Republic of Germany" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
-    ns1:whereRaw "Germany" .
+    ns1:whereHighClean "Federal Republic of Germany" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2921044> ;
+    ns1:whereHighRaw "Germany" .
 
 <https://1145.am/db/3465872/Regan_Luxury-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;
@@ -2360,9 +2360,9 @@
     ns1:targetName "Regan Luxury" ;
     ns1:when "2019-01-08T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 8, 2019" ;
-    ns1:whereClean "Palm Beach" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4167505> ;
-    ns1:whereRaw "Palm Beach, Florida" .
+    ns1:whereHighClean "Palm Beach" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4167505> ;
+    ns1:whereHighRaw "Palm Beach, Florida" .
 
 <https://1145.am/db/3467614/Avista-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2375,9 +2375,9 @@
     ns1:status "stopped" ;
     ns1:target <https://1145.am/db/3467614/Avista> ;
     ns1:targetName "Avista" ;
-    ns1:whereClean "Washington" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
-    ns1:whereRaw "Washington" .
+    ns1:whereHighClean "Washington" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4140963> ;
+    ns1:whereHighRaw "Washington" .
 
 <https://1145.am/db/geonames_location/2635167> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3465883/wwwprnewswirecom_news-releases_cargurus-completes-acquisition-of-motoring-website-pistonheads-300774804html> ;

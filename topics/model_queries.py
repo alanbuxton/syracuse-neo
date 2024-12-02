@@ -62,7 +62,7 @@ def build_get_activities_by_date_range_industry_geo_query(min_date, max_date, al
     if geonames_ids is None:
         geo_clause = ''
     else:
-        geo_clause = f"""AND (EXISTS {{ MATCH (x)-[:whereGeoNamesLocation]-(loc:GeoNamesLocation) WHERE loc.geoNamesId IN {list(geonames_ids)} }}
+        geo_clause = f"""AND (EXISTS {{ MATCH (x)-[:whereHighGeoNamesLocation]-(loc:GeoNamesLocation) WHERE loc.geoNamesId IN {list(geonames_ids)} }}
                         OR EXISTS {{ MATCH (o)-[:basedInHighGeoNamesLocation]-(loc:GeoNamesLocation) WHERE loc.geoNamesId in {list(geonames_ids)} }})"""
     if allowed_org_uris is None:
         org_uri_clause = ''
@@ -107,8 +107,8 @@ def activity_articles_to_api_results(activity_articles):
         api_row["archive_org_page_url"] = article.archiveOrgPageURL
         api_row["archive_org_list_url"] = article.archiveOrgListURL
         api_row["activity_uri"] = activity.uri
-        api_row["activity_locations"] = activity.whereGeoNamesLocation
-        api_row["activity_location_as_string"] = activity.whereGeoName_as_str
+        api_row["activity_locations"] = activity.whereHighGeoNamesLocation
+        api_row["activity_location_as_string"] = activity.whereHighGeoName_as_str
         api_row["activity_class"] = activity.__class__.__name__
         api_row["activity_types"] = activity.activityType
         api_row["activity_longest_type"] = activity.longest_activityType

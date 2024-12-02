@@ -79,9 +79,9 @@
     ns1:status "stopped" ;
     ns1:target <https://1145.am/db/4001762/Czech_Parcel_Giant> ;
     ns1:targetName "Czech parcel giant" ;
-    ns1:whereClean "Czechia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
-    ns1:whereRaw "Czech" .
+    ns1:whereHighClean "Czechia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3077311> ;
+    ns1:whereHighRaw "Czech" .
 
 <https://1145.am/db/4001762/Evri> a org:Organization ;
     ns1:basedInLowRaw "Israel" ;
@@ -121,9 +121,9 @@
         "stopped" ;
     ns1:target <https://1145.am/db/4001762/Yodel> ;
     ns1:targetName "Yodel" ;
-    ns1:whereClean "United Kingdom of Great Britain and Northern Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
-    ns1:whereRaw "UK" .
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
 
 
 <https://1145.am/db/4001762/wwwcityamcom_parcel-deliverer-yodel-saved-from-brink-by-fast-growing-rival-shift_> a schema:Article ;

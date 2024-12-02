@@ -207,9 +207,9 @@
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "common shares" ;
     ns1:vendor <https://1145.am/db/3473031/The_Supreme_Cannabis_Company> ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3473092/Nistec_Golan> a org:Organization ;
     ns1:basedInHighClean "State of Israel" ;
@@ -791,9 +791,9 @@
     ns1:target <https://1145.am/db/3471570/NTS> ;
     ns1:targetName "NTS" ;
     ns1:vendor <https://1145.am/db/3471570/Tower_Three_Partners> ;
-    ns1:whereClean "Texas" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
-    ns1:whereRaw "Texas" .
+    ns1:whereHighClean "Texas" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4736286> ;
+    ns1:whereHighRaw "Texas" .
 
 <https://1145.am/db/3471570/Tower_Three_Partners> a org:Organization ;
     ns1:basedInLowRaw "LUBBOCK, Texas" ;
@@ -831,9 +831,9 @@
     ns1:targetName "HouseFax.com" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3471608/Euroflex_Limited> a org:Organization ;
     ns1:basedInHighClean "Republic of Uganda" ;
@@ -860,9 +860,9 @@
     ns1:targetName "Euroflex Limited" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Republic of Uganda" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/226074> ;
-    ns1:whereRaw "Uganda" .
+    ns1:whereHighClean "Republic of Uganda" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/226074> ;
+    ns1:whereHighRaw "Uganda" .
 
 <https://1145.am/db/3472922/Hub_International_Limited-Sheridan_Road_Financial_Llc-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -877,9 +877,9 @@
     ns1:vendor <https://1145.am/db/3472922/Sheridan_Road_Financial_Llc> ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Chicago" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4887398> ;
-    ns1:whereRaw "Chicago, Illinois" .
+    ns1:whereHighClean "Chicago" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4887398> ;
+    ns1:whereHighRaw "Chicago, Illinois" .
 
 <https://1145.am/db/3472922/Sheridan_Road_Financial_Llc> a org:Organization ;
     ns1:basedInHighClean "Chicago" ;
@@ -921,9 +921,9 @@
     ns1:targetName "Ethos Veterinary Health LLC" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc> a org:Organization ;
     ns1:basedInLowRaw "Ireland" ;
@@ -961,9 +961,9 @@
     ns1:vendor <https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc> ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Ireland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2963597> ;
-    ns1:whereRaw "Ireland" .
+    ns1:whereHighClean "Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2963597> ;
+    ns1:whereHighRaw "Ireland" .
 
 <https://1145.am/db/3473031/The_Supreme_Cannabis_Company> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -1014,9 +1014,9 @@
     ns1:target <https://1145.am/db/3473092/Eltek_Ltd> ;
     ns1:valueRaw "NIS 2 million",
         "approximately US $ 530,000" ;
-    ns1:whereClean "State of Israel" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
-    ns1:whereRaw "Israel" .
+    ns1:whereHighClean "State of Israel" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/294640> ;
+    ns1:whereHighRaw "Israel" .
 
 <https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1032,11 +1032,11 @@
     ns1:valueRaw "$ 15 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "London",
+    ns1:whereHighClean "London",
         "New York City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2643743>,
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2643743>,
         <https://1145.am/db/geonames_location/5128581> ;
-    ns1:whereRaw "New York and London" .
+    ns1:whereHighRaw "New York and London" .
 
 <https://1145.am/db/3474027/Gan> a org:Organization ;
     ns1:basedInHighClean "Copenhagen",
@@ -1122,9 +1122,9 @@
     ns1:targetDetails "property" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "U.S." .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "U.S." .
 
 <https://1145.am/db/3475220/Novel_Bellevue> a org:Organization ;
     ns1:basedInHighClean "Nashville" ;
@@ -1151,9 +1151,9 @@
     ns1:targetName "Novel Bellevue" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3475236/Insight_Venture_Partners-Taxjar-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1168,9 +1168,9 @@
     ns1:valueRaw "$ 60 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Boston" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
-    ns1:whereRaw "BOSTON" .
+    ns1:whereHighClean "Boston" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4930956> ;
+    ns1:whereHighRaw "BOSTON" .
 
 <https://1145.am/db/3475236/Taxjar> a org:Organization ;
     ns1:basedInHighClean "Boston" ;
@@ -1213,9 +1213,9 @@
     ns1:targetName "Eldercare Insurance Services" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3475299/Napajen_Pharma> a org:Organization ;
     ns1:basedInHighClean "Burlingame" ;
@@ -1255,9 +1255,9 @@
     ns1:targetName "Advanced C4 Solutions Inc." ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Waianae" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5854189> ;
-    ns1:whereRaw "WAIANAE, Hawaii" .
+    ns1:whereHighClean "Waianae" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5854189> ;
+    ns1:whereHighRaw "WAIANAE, Hawaii" .
 
 <https://1145.am/db/3475312/Rental_History_Reports_And_Trusted_Employees> a org:Organization ;
     ns1:basedInHighClean "Minnesota" ;
@@ -1282,9 +1282,9 @@
     ns1:targetName "Rental History Reports and Trusted Employees" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Minnesota" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5037779> ;
-    ns1:whereRaw "Minnesota" .
+    ns1:whereHighClean "Minnesota" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5037779> ;
+    ns1:whereHighRaw "Minnesota" .
 
 <https://1145.am/db/3475409/Columbia_Helicopters> a org:Organization ;
     ns1:basedInLowRaw "Wis." ;
@@ -1320,9 +1320,9 @@
     ns1:targetName "D'Camera Group" ;
     ns1:when "2019-01-01T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "January 1, 2019" ;
-    ns1:whereClean "Maryland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
-    ns1:whereRaw "Maryland" .
+    ns1:whereHighClean "Maryland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4361885> ;
+    ns1:whereHighRaw "Maryland" .
 
 <https://1145.am/db/geonames_location/192950> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3471608/wwwprnewswirecom_news-releases_stratlink-acted-as-the-exclusive-sell-side-advisor-to-euroflex-limited-in-their-divestiture-to-catalyst-principal-partners-300775528html> ;
@@ -1497,9 +1497,9 @@
     ns1:valueRaw "$ 45 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Jan. 9, 2019" ;
-    ns1:whereClean "Canada" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
-    ns1:whereRaw "Canada" .
+    ns1:whereHighClean "Canada" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6251999> ;
+    ns1:whereHighRaw "Canada" .
 
 <https://1145.am/db/3475409/Columbia_Helicopters-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1514,9 +1514,9 @@
     ns1:status "not happened at date of document" ;
     ns1:target <https://1145.am/db/3475409/Columbia_Helicopters> ;
     ns1:targetName "Columbia Helicopters" ;
-    ns1:whereClean "Wisconsin" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
-    ns1:whereRaw "Wis." .
+    ns1:whereHighClean "Wisconsin" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5279468> ;
+    ns1:whereHighRaw "Wis." .
 
 <https://1145.am/db/geonames_location/226074> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3471608/wwwprnewswirecom_news-releases_stratlink-acted-as-the-exclusive-sell-side-advisor-to-euroflex-limited-in-their-divestiture-to-catalyst-principal-partners-300775528html> ;
@@ -1659,9 +1659,9 @@
         "$ 12.4 million" ;
     ns1:when "2019-01-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "9-Jan-2019" ;
-    ns1:whereClean "Burlingame" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5331920> ;
-    ns1:whereRaw "TOKYO and BURLINGAME, Calif." .
+    ns1:whereHighClean "Burlingame" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5331920> ;
+    ns1:whereHighRaw "TOKYO and BURLINGAME, Calif." .
 
 <https://1145.am/db/3475305/wwwprnewswirecom_news-releases_hui-huliau-acquires-ac4s-300775382html> a schema:Article ;
     ns1:dateRetrieved "2024-01-17T17:17:07+00:00"^^xsd:dateTime ;

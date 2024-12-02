@@ -589,9 +589,9 @@
     ns1:target <https://1145.am/db/2154577/Zymergen> ;
     ns1:targetDetails "series C" ;
     ns1:valueRaw "over $ 400 million" ;
-    ns1:whereClean "Emeryville" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5346462> ;
-    ns1:whereRaw "Emeryville, California" .
+    ns1:whereHighClean "Emeryville" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5346462> ;
+    ns1:whereHighRaw "Emeryville, California" .
 
 <https://1145.am/db/3864986/Astellas_Pharma_Inc> a org:Organization ;
     ns1:basedInHighClean "Tokyo" ;
@@ -1472,9 +1472,9 @@
     ns1:targetName "Potenza" ;
     ns1:when "2018-12-13T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "December 13, 2018" ;
-    ns1:whereClean "Northbrook" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4904056> ;
-    ns1:whereRaw "NORTHBROOK, Ill" .
+    ns1:whereHighClean "Northbrook" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4904056> ;
+    ns1:whereHighRaw "NORTHBROOK, Ill" .
 
 <https://1145.am/db/3865010/Cannon_Truck_Equipment> a org:Organization ;
     ns1:basedInHighClean "Waco" ;
@@ -1499,9 +1499,9 @@
     ns1:targetName "Cannon Truck Equipment" ;
     ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 14, 2018" ;
-    ns1:whereClean "Midwest" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/11887750> ;
-    ns1:whereRaw "Midwest" .
+    ns1:whereHighClean "Midwest" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/11887750> ;
+    ns1:whereHighRaw "Midwest" .
 
 <https://1145.am/db/3865608/Eli_Lilly_And_Company-Hydra_Biosciences-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1514,9 +1514,9 @@
     ns1:status "not happened at date of document" ;
     ns1:targetDetails "assets" ;
     ns1:vendor <https://1145.am/db/3865608/Hydra_Biosciences> ;
-    ns1:whereClean "Indianapolis" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4259418> ;
-    ns1:whereRaw "INDIANAPOLIS" .
+    ns1:whereHighClean "Indianapolis" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4259418> ;
+    ns1:whereHighRaw "INDIANAPOLIS" .
 
 <https://1145.am/db/3865608/Hydra_Biosciences> a org:Organization ;
     ns1:basedInHighClean "Indianapolis" ;
@@ -1558,9 +1558,9 @@
     ns1:targetName "Canyon Bakehouse" ;
     ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 14, 2018" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/3865649/Fibra_Prologis-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1574,9 +1574,9 @@
     ns1:valueRaw "US $ 34.9 million" ;
     ns1:when "2018-12-14T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "Dec. 14, 2018" ;
-    ns1:whereClean "Mexico" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
-    ns1:whereRaw "Mexico" .
+    ns1:whereHighClean "Mexico" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3996063> ;
+    ns1:whereHighRaw "Mexico" .
 
 <https://1145.am/db/4252541/Seppo_Parvi-Finishing-Chief_Financial_Officer_And_Deputy_Ceo> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1592,9 +1592,9 @@
     ns1:roleHolderFoundName "Seppo Parvi" ;
     ns1:status "not happened at date of document" ;
     ns1:whenRaw "the fourth quarter of 2024" ;
-    ns1:whereClean "Helsinki" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/658225> ;
-    ns1:whereRaw "HELSINKI" .
+    ns1:whereHighClean "Helsinki" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/658225> ;
+    ns1:whereHighRaw "HELSINKI" .
 
 <https://1145.am/db/4252806/David_Splett-Finishing-Senior_Vice_President_And_Chief_Financial_Officer> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1628,9 +1628,9 @@
     ns1:status "stopped" ;
     ns1:when "2024-06-12T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "June 12, 2024" ;
-    ns1:whereClean "British Columbia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
-    ns1:whereRaw "British Columbia" .
+    ns1:whereHighClean "British Columbia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereHighRaw "British Columbia" .
 
 <https://1145.am/db/4252806/Omaya_Elguindi-Starting-Board> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1664,9 +1664,9 @@
     ns1:status "stopped" ;
     ns1:when "2024-06-12T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "June 12, 2024" ;
-    ns1:whereClean "British Columbia" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
-    ns1:whereRaw "British Columbia" .
+    ns1:whereHighClean "British Columbia" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5909050> ;
+    ns1:whereHighRaw "British Columbia" .
 
 <https://1145.am/db/4252854/Charlie_Koch-Starting-President> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1683,9 +1683,9 @@
     ns1:status "completed" ;
     ns1:when "2024-06-15T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "June 15, 2024" ;
-    ns1:whereClean "Kansas City" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4393217> ;
-    ns1:whereRaw "Kansas City" .
+    ns1:whereHighClean "Kansas City" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4393217> ;
+    ns1:whereHighRaw "Kansas City" .
 
 <https://1145.am/db/4253854/Jerome_Lambert-Finishing-Chief_Executive_Officer> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1728,9 +1728,9 @@
     ns1:roleFoundName "Executive Chairman" ;
     ns1:roleHolderFoundName "David V. Auld" ;
     ns1:status "stopped" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "America" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "America" .
 
 <https://1145.am/db/4254008/Donald_R_Horton-Finishing-Founder_And_Chairman_Of_The_Board_Of_Directors> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1747,9 +1747,9 @@
     ns1:roleFoundName "Founder and Chairman of the Board of Directors" ;
     ns1:roleHolderFoundName "Donald R. Horton" ;
     ns1:status "completed" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "America" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "America" .
 
 <https://1145.am/db/4254020/Oguz_Erkan-Starting-Chief_Financial_Officer_(cfo)> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1766,9 +1766,9 @@
     ns1:status "not happened at date of document" ;
     ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 17, 2024" ;
-    ns1:whereClean "Republic of Turkey" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/298795> ;
-    ns1:whereRaw "Türkiye" .
+    ns1:whereHighClean "Republic of Turkey" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/298795> ;
+    ns1:whereHighRaw "Türkiye" .
 
 <https://1145.am/db/4254022/Kumar_Gaurav_Gupta-Starting-Chief_Executive_Officer_(ceo)> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1799,9 +1799,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-09T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 9" ;
-    ns1:whereClean "United States" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
-    ns1:whereRaw "United States" .
+    ns1:whereHighClean "United States" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:whereHighRaw "United States" .
 
 <https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1818,9 +1818,9 @@
     ns1:status "completed" ;
     ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 17, 2024" ;
-    ns1:whereClean "North Bethesda" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
-    ns1:whereRaw "NORTH BETHESDA, Md" .
+    ns1:whereHighClean "North Bethesda" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
+    ns1:whereHighRaw "NORTH BETHESDA, Md" .
 
 <https://1145.am/db/4254451/Thomas_B_Hartman-Finishing-President_And_Ceo> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1842,9 +1842,9 @@
     ns1:when "2024-05-17T00:00:00"^^xsd:dateTime ;
     ns1:whenRaw "May 17, 2024",
         "early fall 2024" ;
-    ns1:whereClean "North Bethesda" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
-    ns1:whereRaw "NORTH BETHESDA, Md" .
+    ns1:whereHighClean "North Bethesda" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4363843> ;
+    ns1:whereHighRaw "NORTH BETHESDA, Md" .
 
 <https://1145.am/db/4254796/Robin_Van_Persie-Starting-Head_Coaching> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1860,9 +1860,9 @@
     ns1:roleHolderFoundName "Robin van Persie" ;
     ns1:status "completed" ;
     ns1:whenRaw "Friday" ;
-    ns1:whereClean "Kingdom of the Netherlands" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
-    ns1:whereRaw "Dutch" .
+    ns1:whereHighClean "Kingdom of the Netherlands" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2750405> ;
+    ns1:whereHighRaw "Dutch" .
 
 <https://1145.am/db/geonames_location/11887750> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3865010/wwwprnewswirecom_news-releases_versalift-acquires-cannon-truck-equipment-establishes-versalift-midwest-300765833html> ;
@@ -1979,9 +1979,9 @@
     ns1:internalDocId 3865643 ;
     ns1:name "merger" ;
     ns1:status "not happened at date of document" ;
-    ns1:whereClean "South Carolina" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
-    ns1:whereRaw "South Carolina" .
+    ns1:whereHighClean "South Carolina" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/4597040> ;
+    ns1:whereHighRaw "South Carolina" .
 
 <https://1145.am/db/4252541/Stora_Enso-Chief_Financial_Officer_And_Deputy_Ceo> a org:Role ;
     ns1:documentSource <https://1145.am/db/4252541/wwwprnewswirecom_news-releases_cfo-and-deputy-ceo-seppo-parvi-leaves-stora-enso-during-the-fourth-quarter-of-2024-302148830html> ;
@@ -2240,9 +2240,9 @@
     ns1:status "completed" ;
     ns1:target <https://1145.am/db/1771672/Nexthink> ;
     ns1:valueRaw "$ 85 million" ;
-    ns1:whereClean "Switzerland" ;
-    ns1:whereGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
-    ns1:whereRaw "Switzerland" .
+    ns1:whereHighClean "Switzerland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2658434> ;
+    ns1:whereHighRaw "Switzerland" .
 
 <https://1145.am/db/3864986/wwwprnewswirecom_news-releases_astellas-acquires-potenza-therapeutics-300765809html> a schema:Article ;
     ns1:dateRetrieved "2024-01-18T23:02:04+00:00"^^xsd:dateTime ;
