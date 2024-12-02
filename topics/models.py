@@ -473,6 +473,18 @@ class IndustryCluster(Resource):
     peopleSecondary = RelationshipFrom("Person","industryClusterSecondary")
 
     @property
+    def mergedOrgsPrimary(self):
+        cache_key = f"{self.topicId}_orgs"
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
+        res = []
+        for x in self.orgsPrimary:
+            res.append(Organization.self_or_ultimate_target_node(x))
+        cache.set(cache_key, res)
+        return res
+
+    @property
     def topic_id(self):
         return self.topicId
     
@@ -593,6 +605,17 @@ class IndustryCluster(Resource):
         vals = self.uniqueName.split("_")
         name = ", ".join(vals[1:]).title()
         return name, vals[0]
+
+    @staticmethod
+    def by_representative_doc_words(name):
+        query = f'''CALL db.index.fulltext.queryNodes("industry_cluster_representative_docs", "{name}") YIELD node, score
+            WITH node, score
+            WHERE NOT (node)-[:childLeft|childRight]->(:IndustryCluster) 
+            RETURN node 
+            ''' # getting lots of false positives with fuzzy search e.g. pallets returning wallets
+        res, _ = db.cypher_query(query, resolve_objects=True)
+        flattened =  [x for sublist in res for x in sublist]
+        return flattened
 
 
 class ActivityMixin:
@@ -879,6 +902,18 @@ class Organization(Resource):
             if allowed_to_set_cache is True:
                 cache.set(cache_key,res)
             return res
+
+    @staticmethod
+    def by_industry_text(name):
+        query = f'''CALL db.index.fulltext.queryNodes("organization_industries", "{name}~") YIELD node, score
+                    WITH node, score
+                    WHERE node.internalMergedSameAsHighToUri IS NULL
+                    RETURN node 
+                    '''
+        vals, _ = db.cypher_query(query, resolve_objects=True)
+        flattened = [x for sublist in vals for x in sublist]
+        return flattened
+
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())

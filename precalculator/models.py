@@ -6,7 +6,12 @@ from django.core.cache import cache
 LAST_UPDATED_KEY="last_updated"
 GEO_DATA_KEY="geo_data"
 STATS_PREFIX="stats"
+# INDUSTRY_CLUSTER_GEO_COUNTS_KEY="industry_cluster_geo_counts"
+INDUSTRY_CLUSTER_GEO_ORGS_KEY="industry_cluster_geo_orgs"
 
+def cat_key(root, extra): # to avoid typos
+    return f"{root}-{extra}"
+    
 class CustomEncoder(DjangoJSONEncoder):
     def default(self, o):
         if isinstance(o, set):
@@ -20,6 +25,13 @@ def get_or_none(**kwargs):
     except PrecalculatedData.DoesNotExist:
         return None
 
+def key_exists(key):
+    cnt = PrecalculatedData.objects.filter(key=key).count()
+    if cnt > 0:
+        return True
+    else:
+        return False
+
 class PrecalculatedData(models.Model):
     key = models.TextField(db_index=True,unique=True)
     json_value = models.JSONField(null=True,encoder=CustomEncoder)
@@ -27,7 +39,7 @@ class PrecalculatedData(models.Model):
 
     @staticmethod
     def get_value(key, field):
-        obj = get_or_none(key=key)
+        obj = get_or_none(key=key) 
         if obj is None:
             return None
         return getattr(obj,field)
@@ -52,10 +64,35 @@ class PrecalculatedData(models.Model):
     @staticmethod
     def get_geo_data():
         return P.get_value(GEO_DATA_KEY,"json_value")
+    
+    @staticmethod
+    def has_geo_data():
+        return key_exists(GEO_DATA_KEY)
 
     @staticmethod
     def set_geo_data(data):
         return P.set_value(GEO_DATA_KEY,"json_value",data)
+    
+    @staticmethod
+    def has_industry_cluster_geo_orgs(topic_id):
+        return key_exists(cat_key(INDUSTRY_CLUSTER_GEO_ORGS_KEY,topic_id))
+    
+    # @staticmethod
+    # def set_industry_cluster_geo_counts(topic_id,data):
+    #     return P.set_value(cat_key(INDUSTRY_CLUSTER_GEO_COUNTS_KEY,topic_id),"json_value",data)
+    
+    # @staticmethod
+    # def get_industry_cluster_geo_counts(topic_id):
+    #     return P.get_value(cat_key(INDUSTRY_CLUSTER_GEO_COUNTS_KEY,topic_id),"json_value")
+    
+    @staticmethod
+    def set_industry_cluster_geo_orgs(topic_id, data):
+        return P.set_value(cat_key(INDUSTRY_CLUSTER_GEO_ORGS_KEY,topic_id),"json_value",data) 
+    
+    @staticmethod
+    def get_industry_cluster_geo_orgs(topic_id):
+        return P.get_value(cat_key(INDUSTRY_CLUSTER_GEO_ORGS_KEY,topic_id),"json_value")
+
 
     @staticmethod
     def get_stats(date):

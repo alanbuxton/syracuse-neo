@@ -19,6 +19,7 @@ from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
 from topics.geo_utils import get_geo_data
+from topics.industry_geo_helpers import prepare_industry_table
 
 import logging
 logger = logging.getLogger(__name__)
@@ -119,7 +120,6 @@ class Index(APIView):
                         "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
-
 
 class ShowResource(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -244,6 +244,24 @@ class OrganizationByUri(APIView):
                             "uri_parts": uri_parts,
                             "request_state": request_state,
                             }, status=status.HTTP_200_OK)
+        return resp
+
+
+class IndustryGeoFinder(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'industry_geo_finder.html'
+
+    def get(self, request, *args, **kwargs):
+        industry_search_str = kwargs['industry_search']
+        
+        industry_table_header, industry_table_body  = prepare_industry_table(industry_search_str) 
+        
+        request_state, _ = prepare_request_state(request)
+        resp = Response({"table_body": industry_table_body,
+                         "table_header": industry_table_header,
+                         "search_term": industry_search_str,
+                         "request_state": request_state,
+                        }, status=status.HTTP_200_OK)
         return resp
 
 
