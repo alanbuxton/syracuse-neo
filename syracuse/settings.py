@@ -202,12 +202,12 @@ ACCOUNT_LOGOUT_ON_GET = True
 BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
 
+
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": "/var/tmp/django_cache",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
         "TIMEOUT": 43200, # 60*60*12 = 12 hours
-        "OPTIONS": {"MAX_ENTRIES": 1000},
     }
 }
 
