@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'feedbacks.apps.FeedbacksConfig',
     'trackeditems.apps.TrackeditemsConfig',
     'integration.apps.IntegrationConfig',
-    'precalculator.apps.PrecalculatorConfig',
     'rest_framework',
     'django_bootstrap5',
     'rest_framework.authtoken',
@@ -207,7 +206,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379",
-        "TIMEOUT": 43200, # 60*60*12 = 12 hours
+        "TIMEOUT": None, 
     }
 }
 

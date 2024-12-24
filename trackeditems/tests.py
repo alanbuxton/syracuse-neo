@@ -12,14 +12,13 @@ from trackeditems.notification_helpers import (
 )
 from neomodel import db
 from integration.models import DataImport
-from topics.precalculator_helpers import warm_up_precalculator
-from precalculator.models import P
+from topics.cache_helpers import refresh_geo_data, nuke_cache
 from integration.management.commands.import_ttl import do_import_ttl
 import re
 import os
 from integration.neo4j_utils import delete_all_not_needed_resources
 from topics.models import Article, CorporateFinanceActivity
-from topics.model_queries import activity_articles_to_api_results
+from topics.activity_helpers import activity_articles_to_api_results
 from integration.rdf_post_processor import RDFPostProcessor
 
 '''
@@ -53,12 +52,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() is None # Empty DB
-        P.nuke_all()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
         r.run_all_in_order()
-        warm_up_precalculator()
+        refresh_geo_data()
 
     def setUp(self):
         self.ts = time.time()
@@ -70,7 +68,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         self.ts2 = time.time()
         self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
         tig1 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="Financial Planning And Wealth Management Services",
+                                        industry_name="Private Equity Business",
                                         geo_code="US-TX")
 
         tracked_orgs = TrackedOrganization.by_user(self.user)
@@ -89,7 +87,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         article_uri = "https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_"
         article = Article.self_or_ultimate_target_node(article_uri)
         activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
-        activity_articles = [(activity,article),]
+        activity_articles = [(activity.uri,article.uri,datetime.now(tz=timezone.utc)),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
         email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
         assert len(re.findall("Biomanufacturing Technologies, Oncology Solutions and 1 more",email)) == 1 # Per https://1145.am/db/3029576/Loxo_Oncology
@@ -100,7 +98,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         article_uri = "https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_"
         article = Article.self_or_ultimate_target_node(article_uri)
         activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
-        activity_articles = [(activity,article),]
+        activity_articles = [(activity.uri,article.uri,datetime.now(tz=timezone.utc)),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
         email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
         assert "Loxo Oncology" in email
@@ -140,15 +138,15 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert "<b>Financial Planning And Wealth Management Services</b> in the <b>United States - Texas</b>" in email
+        assert "<b>Private Equity Business</b> in the <b>United States of America - Texas</b>" in email
         assert "We are not tracking any specific organizations for you." in email
         assert activity_notif.num_activities == 2
-        assert len(re.findall("Atria Wealth Solutions",email)) == 5
+        assert len(re.findall("Hastings",email)) == 5
         assert "None" not in email
 
     def test_does_not_activity_stats_if_cache_not_available(self):
         client = self.client
-        P.nuke_all()
+        nuke_cache()
 
         response = client.get("/activity_stats")
         content = str(response.content)
@@ -160,8 +158,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
             from django.test import Client
             client = Client()
         '''
-        P.nuke_all()
-        warm_up_precalculator()
+        refresh_geo_data()
         client = self.client
 
         response = client.get("/activity_stats")
@@ -174,9 +171,14 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content
+        assert "in: United States of America - California." in content
         assert "Site stats calculating, please check later" not in content
-        assert "MUFG Union Bank Completes the Acquisition of Intrepid Investment Bankers" in content
+        assert "Pear Therapeutics raises $64M, launches prescription app for opioid use disorder" in content
+        assert len(re.findall("<b>Region:</b> San Francisco",content)) == 3
+        assert len(re.findall("<b>Region:</b> Ontario",content)) == 2 
 
+    def test_always_show_source_activities(self):
+        client = self.client
         response = client.get("/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
         content = str(response.content)
         assert "Activities between" in content

@@ -79,6 +79,7 @@ class ActivityActorSerializer(serializers.Serializer):
     industry_clusters = IndustryClusterSerializer(many=True)
     based_in_high_geonames_locations = GeoNamesLocationSerializer(many=True)
     based_in_high_clean_names = serializers.ListField()
+    based_in_high_as_string = serializers.CharField()
 
 class ActivitySerializer(serializers.Serializer):
     source_organization = serializers.CharField()

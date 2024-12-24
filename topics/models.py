@@ -2,7 +2,6 @@ from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
     IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
-from topics.geo_utils import get_geoname_uris_for_country_region
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
 from django.core.cache import cache
@@ -12,8 +11,8 @@ from neomodel.cardinality import OneOrMore, One
 from typing import List
 from datetime import datetime
 from .constants import BEGINNING_OF_TIME
-import re
-import string
+from topics.neo4j_utils import date_to_cypher_friendly
+from topics.util import cache_friendly
 
 import logging
 logger = logging.getLogger(__name__)
@@ -136,7 +135,7 @@ class Resource(StructuredNode):
         pass # override in relevant subclass
 
     @property
-    def basedInHighGeoName_as_str(self):
+    def based_in_high_as_string(self):
         pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
 
     @property
@@ -395,7 +394,7 @@ class Article(Resource):
     
     @staticmethod
     def all_sources():
-        return list(Article.available_source_names_dict().values())
+        return sorted(list(Article.available_source_names_dict().values()))
     
     @staticmethod
     def core_sources():
@@ -567,7 +566,7 @@ class IndustryCluster(Resource):
 
     @staticmethod
     def leaf_nodes_only():
-        query = "MATCH (n: IndustryCluster) WHERE NOT (n)-[:childLeft|childRight]->(:IndustryCluster) RETURN n"
+        query = "MATCH (n: IndustryCluster) WHERE NOT (n)-[:childLeft|childRight]->(:IndustryCluster) AND (n)-[:industryClusterPrimary]-() RETURN n"
         results, _ = db.cypher_query(query,resolve_objects=True)
         flattened = [x for sublist in results for x in sublist]
         return flattened
@@ -686,6 +685,10 @@ class ActivityMixin:
 class GeoNamesLocation(Resource):
     geoNamesId = IntegerProperty()
     geoNames = Relationship('Resource','geoNamesURL')
+    countryCode = StringProperty() # added after import
+    admin1Code = StringProperty() # added after import
+    countryList = ArrayProperty(StringProperty()) # added after import
+    featureCode = StringProperty() # added after import
 
     @property
     def geoNamesURL(self):
@@ -705,6 +708,7 @@ class GeoNamesLocation(Resource):
         vals['geonames_url'] = self.geoNamesURL
         return vals
 
+
     @staticmethod
     def uris_by_geo_code(geo_code):
         if geo_code is None or geo_code.strip() == '':
@@ -713,10 +717,15 @@ class GeoNamesLocation(Resource):
         res = cache.get(cache_key)
         if res is not None:
             return res
-        geonames_uris = get_geoname_uris_for_country_region(geo_code)
-        vals, _ = db.cypher_query(f"""MATCH (n: GeoNamesLocation)-[:geoNamesURL]-(r: Resource)
-                                    WHERE r.uri in {geonames_uris} RETURN n""",resolve_objects=True)
-        uris = [x[0].uri for x in vals]
+        splitted = geo_code.split("-")
+        country_code = splitted[0]
+        admin1_code = splitted[1] if len(splitted) > 1 else None
+        query = f"""MATCH (n: GeoNamesLocation) WHERE n.countryCode = '{country_code}' """
+        if admin1_code is not None:
+            query = f"{query} AND n.admin1Code = '{admin1_code}'"
+        query = f"{query} RETURN n.uri"
+        vals, _ = db.cypher_query(query,resolve_objects=True)
+        uris = [x[0] for x in vals]
         cache.set(cache_key, uris)
         return uris
 
@@ -750,6 +759,16 @@ class Organization(Resource):
     @property
     def based_in_high_geonames_locations(self):
         return self.basedInHighGeoNamesLocation
+
+    @property
+    def based_in_high_as_string(self):
+        all_loc_names = [x.name for x in self.basedInHighGeoNamesLocation]
+        flattened = [x for sublist in all_loc_names for x in sublist]
+        if len(flattened) == 0:
+            return None
+        c = Counter(flattened)
+        ordered = [x[0] for x in c.most_common()]
+        return "; ".join(ordered)
     
     @property
     def based_in_high_clean_names(self):
@@ -908,8 +927,24 @@ class Organization(Resource):
         query = f'''CALL db.index.fulltext.queryNodes("organization_industries", "{name}~") YIELD node, score
                     WITH node, score
                     WHERE node.internalMergedSameAsHighToUri IS NULL
-                    RETURN node 
+                    RETURN node.uri 
                     '''
+        vals, _ = db.cypher_query(query, resolve_objects=True)
+        flattened = [x for sublist in vals for x in sublist]
+        return flattened
+
+    @staticmethod
+    def by_industry_text_and_geo(name,country_code,admin1_code=None):
+        query = f'''CALL db.index.fulltext.queryNodes("organization_industries", "{name}~") YIELD node, score
+                    WITH node, score
+                    WHERE node.internalMergedSameAsHighToUri IS NULL
+                    WITH node
+                    MATCH (node)-[:basedInHighGeoNamesLocation]-(r: Resource&GeoNamesLocation)
+                    WHERE r.countryCode = '{country_code}'
+                    '''
+        if admin1_code is not None:
+            query = f"{query} AND r.admin1Code = '{admin1_code}'"
+        query = f"{query} RETURN node.uri"
         vals, _ = db.cypher_query(query, resolve_objects=True)
         flattened = [x for sublist in vals for x in sublist]
         return flattened
@@ -1166,20 +1201,3 @@ def print_friendly(vals, limit = 2):
     if extras > 0:
         val = f"{val} and {extras} more"
     return val
-
-
-def date_for_cypher(a_date):
-    return f"datetime({{ year: {a_date.year}, month: {a_date.month}, day: {a_date.day} }})"
-
-def date_to_cypher_friendly(date):
-    if isinstance(date, str):
-        return datetime.fromisoformat(date).isoformat()
-    else:
-        return date.isoformat()
-
-def cache_friendly(key):
-    no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
-    cleaned = re.sub(r"_{2,}","_",no_punct)
-    if len(cleaned) > 230:
-        cleaned = cleaned[:210] + str(hash(cleaned[210:]))
-    return cleaned

@@ -1,13 +1,14 @@
 from .serializers import ActivitySerializer
-from topics.model_queries import (get_activities_by_date_range_for_api,
-    get_activities_by_date_range_industry_geo_for_api)
+from topics.activity_helpers import (
+    get_activities_by_org_uris_and_date_range,
+    get_activities_by_industry_geo_and_date_range)
 from .models import TrackedOrganization, get_notifiable_users, TrackedIndustryGeo
 from integration.models import DataImport
 from .date_helpers import days_ago
 from django.template.loader import render_to_string
 from .models import ActivityNotification
 from topics.views import industry_geo_search_str
-from topics.geo_utils import geo_dict
+from topics.industry_geo import country_admin_full_name
 from topics.serializers import IndustrySerializer
 from topics.models import cache_friendly
 from django.core.cache import cache
@@ -29,17 +30,16 @@ def recents_by_user_min_max_date(user, min_date, max_date):
         return res
     tracked_orgs = TrackedOrganization.by_user(user)
     org_uris = [x.organization_or_merged_uri for x in tracked_orgs]
-    matching_activity_orgs = get_activities_by_date_range_for_api(min_date, uri_or_list=org_uris, max_date=max_date,limit=100)
+    matching_activity_orgs = get_activities_by_org_uris_and_date_range(org_uris, min_date, max_date,limit=100)
     tracked_industry_geos = []
-    geo_lookup = geo_dict()
     for industry_name,geo_code in TrackedIndustryGeo.items_by_user(user):
         industry_id = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        acts = get_activities_by_date_range_industry_geo_for_api(min_date, max_date,geo_code,industry_id,limit=100)
+        acts = get_activities_by_industry_geo_and_date_range(industry_id,geo_code,min_date,max_date,limit=100)
         matching_activity_orgs.extend(acts)
-        geo_name = geo_lookup[geo_code]
+        geo_name = country_admin_full_name(geo_code)
         tracked_industry_geos.append( industry_geo_search_str(industry_name, geo_name) )
     matching_activity_orgs = sorted(matching_activity_orgs, key = lambda x: x['date_published'], reverse=True)
-    cache.set(cache_key, (matching_activity_orgs, tracked_orgs, tracked_industry_geos) )
+    cache.set(cache_key, (matching_activity_orgs, tracked_orgs, tracked_industry_geos), timeout=60*60 )
     return matching_activity_orgs, tracked_orgs, tracked_industry_geos
 
 def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date):

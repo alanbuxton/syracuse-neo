@@ -1,6 +1,9 @@
 from django.test import TestCase
+from collections import OrderedDict
 from topics.models import *
-from topics.model_queries import *
+from .stats_helpers import get_stats
+from .activity_helpers import get_activities_by_country_and_date_range
+from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
 from topics.timeline_utils import get_timeline_data
 import os
@@ -8,18 +11,21 @@ from integration.management.commands.import_ttl import do_import_ttl
 from integration.models import DataImport
 from neomodel import db
 from datetime import date
-from precalculator.models import P
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
 import json
 import re
-from topics.geo_utils import get_geo_data
 from .serializers import (
     only_valid_relationships, FamilyTreeSerializer, 
     create_earliest_date_pretty_print_data,
 )
+from topics.industry_geo.orgs_by_industry_geo import build_region_hierarchy, prepare_headers
+from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
+from topics.cache_helpers import refresh_geo_data
+from topics.industry_geo import orgs_by_industry_and_or_geo
+
 '''
     Care these tests will delete neodb data
 '''
@@ -34,31 +40,20 @@ class TestUtilsWithDumpData(TestCase):
         db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
         DataImport.objects.all().delete()
         assert DataImport.latest_import() == None # Empty DB
-        P.nuke_all()
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
         r.run_all_in_order()
-        get_geo_data(True)
+        refresh_geo_data()
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()   
         field = geo.fields['country_or_region']
         assert 'United Kingdom of Great Britain and Northern Ireland' in field.choices.keys(), "Great Britain not in field choices"
-        assert 'United Kingdom' in field.choices.keys()
         assert 'United Kingdom of Great Britain and Northern Ireland' in field.choices.values(), "Great Britain not in field choices"
-        assert 'United Kingdom' in field.choices.values()
-
-    def test_returns_us_country_state(self):
-        geo = GeoSerializer(data={"country_or_region":"United States - Oregon"})
-        assert geo.get_country_or_region_id() == 'US-OR'
 
     def test_returns_great_britain_gb(self):
         geo = GeoSerializer(data={"country_or_region":"United Kingdom of Great Britain and Northern Ireland"})
-        assert geo.get_country_or_region_id() == 'GB'
-
-    def test_returns_united_kingdom_gb(self):
-        geo = GeoSerializer(data={"country_or_region":"United Kingdom"})
         assert geo.get_country_or_region_id() == 'GB'
 
     def test_corp_fin_graph_nodes(self):
@@ -148,38 +143,28 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        assert set(counts) == {('Organization', 421), ('Article', 202), ('RoleActivity', 12), ('LocationActivity', 11), ('CorporateFinanceActivity', 194), 
-                               ('PartnershipActivity', 4), ('Person', 12), ('Role', 11)}
-        assert len(recents_by_geo) == 33
-        assert sorted(recents_by_geo) == [('CA', 'CA', 'Canada', 3, 3, 3), ('CA', 'CA-08', 'Canada - Ontario', 1, 1, 1), ('CA', 'CA-10', 'Canada - Québec', 1, 1, 1), 
-                                            ('CN', 'CN', 'China', 1, 1, 1), ('CZ', 'CZ', 'Czechia', 1, 1, 1), ('DK', 'DK', 'Denmark', 1, 1, 1), 
-                                            ('EG', 'EG', 'Egypt', 0, 0, 1), ('ES', 'ES', 'Spain', 1, 1, 1), ('GB', 'GB', 'United Kingdom', 1, 1, 1), 
-                                            ('IL', 'IL', 'Israel', 1, 1, 1), ('JP', 'JP', 'Japan', 0, 0, 1), ('KE', 'KE', 'Kenya', 1, 1, 1), 
-                                            ('UG', 'UG', 'Uganda', 1, 1, 1), ('US', 'US', 'United States', 15, 15, 35), ('US', 'US-AR', 'United States - Arkansas', 1, 1, 1), 
-                                            ('US', 'US-CA', 'United States - California', 1, 1, 3), ('US', 'US-DC', 'United States - District of Columbia', 1, 1, 1), 
-                                            ('US', 'US-FL', 'United States - Florida', 0, 0, 2), ('US', 'US-HI', 'United States - Hawaii', 1, 1, 1), 
-                                            ('US', 'US-ID', 'United States - Idaho', 1, 1, 1), ('US', 'US-IL', 'United States - Illinois', 1, 1, 3), 
-                                            ('US', 'US-LA', 'United States - Louisiana', 1, 1, 3), ('US', 'US-MA', 'United States - Massachusetts', 3, 3, 4), 
-                                            ('US', 'US-MD', 'United States - Maryland', 1, 1, 1), ('US', 'US-MN', 'United States - Minnesota', 1, 1, 1), 
-                                            ('US', 'US-NC', 'United States - North Carolina', 0, 0, 1), ('US', 'US-NY', 'United States - New York', 4, 4, 10), 
-                                            ('US', 'US-OH', 'United States - Ohio', 1, 1, 1), ('US', 'US-PA', 'United States - Pennsylvania', 0, 0, 2), 
-                                            ('US', 'US-TN', 'United States - Tennessee', 1, 1, 2), ('US', 'US-TX', 'United States - Texas', 2, 2, 9), 
-                                            ('US', 'US-VA', 'United States - Virginia', 1, 1, 2), ('US', 'US-WI', 'United States - Wisconsin', 1, 1, 1)]
+        assert set(counts) == {('ProductActivity', 10), ('RoleActivity', 12), ('Article', 202), 
+                               ('Person', 12), ('CorporateFinanceActivity', 194), ('PartnershipActivity', 4), 
+                               ('Role', 11), ('LocationActivity', 11), ('Organization', 421)}
+        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1), ('CZ', 'Czechia', 1, 1, 1), 
+                                          ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1), 
+                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), 
+                                          ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), 
+                                          ('US', 'United States of America', 15, 15, 35)]
         assert sorted(recents_by_source) == [('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4),
             ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1),
             ('MarketWatch', 4, 4, 4), ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
             ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), 
-                                            (69, 'Architecture, Engineering And Construction', 0, 0, 1), (383, 'Banking & Markets Investment Bank', 1, 1, 1), 
-                                            (154, 'Biomanufacturing Technologies', 0, 0, 3), (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), 
-                                            (36, 'C-Commerce (\\', 1, 1, 1), (443, 'Cancer Diagnostics', 0, 0, 3), (12, 'Cannabis And Hemp', 1, 1, 1), 
-                                            (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2)]
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (383, 'Banking & Markets Investment Bank', 1, 1, 1), 
+                                            (154, 'Biomanufacturing Technologies', 0, 0, 1), (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), 
+                                            (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), 
+                                            (74, 'Chip Business', 2, 2, 2), (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1)]
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")
         min_date = date.fromisoformat("2024-05-03")
         country_code = 'US-NY'
-        matching_activity_orgs = get_activities_for_serializer_by_country_and_date_range(country_code,min_date,max_date,limit=20,combine_same_as_name_only=False)
+        matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20)
         assert len(matching_activity_orgs) == 4
         sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
         assert set(sorted_actors) == {('investor', 'target'), ('participant', 'protagonist')}
@@ -197,7 +182,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
         assert len(orgs) == 2
 
     def test_search_by_industry_only(self):
@@ -205,9 +190,12 @@ class TestUtilsWithDumpData(TestCase):
         industry_name = "Biopharmaceutical And Biotech Industry"
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
-        assert industry is not None # Sometimes IndustrySerializer doesn't have choices in so tests will fail
-        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
-        assert len(orgs) == 6
+        assert industry is not None
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
+        assert set(orgs) == set(['https://1145.am/db/2543227/Celgene', 
+                                 'https://1145.am/db/2364624/Parexel_International_Corporation', 
+                                 'https://1145.am/db/2364647/Mersana_Therapeutics', 
+                                 'https://1145.am/db/3473030/Eusa_Pharma'])
 
     def test_search_by_geo_only(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
@@ -215,7 +203,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        orgs = Organization.by_industry_and_or_geo(industry,selected_geo,limit=None)
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
         assert len(orgs) == 7
 
     def test_shows_resource_page(self):
@@ -268,7 +256,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_search_industry_with_geo(self):
         client = self.client
-        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=United+States&earliest_date=-1")
+        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=United+States+of+America&earliest_date=-1")
         content = str(resp.content)
         assert len(re.findall(r"Celgene\s*</a>",content)) == 1
         assert len(re.findall(r"Parexel_International_Corporation\s*</a>",content)) == 1
@@ -661,11 +649,86 @@ class TestUtilsWithDumpData(TestCase):
         assert len(data["edge_data"]) == 5
 
 
+class TestRegionHierarchy(TestCase):
+
+    def test_builds_region_hierarchyy(self):
+        countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
+        admin1s = {"US":["IL","OK","IA","NY"],"CN":["11","04"]}
+
+        country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(countries, admin1s)
+
+        assert country_hierarchy == {'Asia': {'Western Asia': ['AE'], 
+                                                'South-eastern Asia': ['SG'], 
+                                                'Eastern Asia': ['CN']}, 
+                                        'Europe': {'Northern Europe': ['GB']}, 
+                                        'Africa': {'Sub-Saharan Africa': 
+                                                    {'Southern Africa': ['NA', 'SZ', 'ZA']}}, 
+                                        'Americas': {'Northern America': ['CA', 'US']}}
+
+        assert country_widths == {'Asia#Western Asia': 1, 'Asia#South-eastern Asia': 1, 'Asia#Eastern Asia': 1, 
+                                    'Europe#Northern Europe': 1, 
+                                    'Africa#Sub-Saharan Africa#Southern Africa': 3, 
+                                    'Americas#Northern America': 2, 'Americas': 2, 
+                                    'Africa#Sub-Saharan Africa': 3, 'Africa': 3, 'Europe': 1, 'Asia': 3}
+
+        assert admin1_hierarchy == {'US': {'Northeast': 
+                                            {'Mid Atlantic': ['NY']}, 
+                                            'Midwest': 
+                                            {'East North Central': ['IL'], 
+                                                'West North Central': ['IA']}, 
+                                            'South': {'West South Central': ['OK']}}, 
+                                    'CN': ['04', '11']}
+
+        assert admin1_widths == {'US': 
+                                    {'US#Northeast#Mid Atlantic': 1, 'US#Midwest#East North Central': 1, 
+                                    'US#Midwest#West North Central': 1, 'US#South#West South Central': 1, 
+                                    'US#South': 1, 'US': 4, 'US#Midwest': 2, 'US#Northeast': 1}, 
+                                'CN': {'CN': 2}}
+            
+        headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths)
+        assert headers[0] == OrderedDict([('Africa', 3), ('Americas', 6), ('Asia', 5), ('Europe', 1)])
+        assert headers[1] == OrderedDict([('Sub-Saharan Africa', 3), ('Northern America', 6), 
+                                          ('Western Asia', 1), ('South-eastern Asia', 1), ('Eastern Asia', 3), 
+                                          ('Northern Europe', 1)])
+        assert headers[6] == OrderedDict([('REPEATED NA', 1), ('REPEATED SZ', 1), ('REPEATED ZA', 1), 
+                                          ('REPEATED CA', 1), ('US n/a', 1), ('US-IL', 1), ('US-IA', 1), 
+                                          ('US-NY', 1), ('US-OK', 1), ('REPEATED AE', 1), ('REPEATED SG', 1), 
+                                          ('CN n/a', 1), ('CN-04', 1), ('CN-11', 1), ('REPEATED GB', 1)])
+
+        
+    def test_filters_tree(self):
+        data = {
+            "k1": {
+                "k11": {
+                    "k111": ["v3", "v2","v1"],
+                    "k112": ["v4", "v5"]
+                },
+                "k12": ["v9", "v8"]
+            }
+        }
+        filtered = filtered_hierarchy(data,["v8","v9","v1","v3","v5"])
+        assert filtered ==  {'k1': {'k11': {
+                                        'k111': ['v1', 'v3'], 
+                                        'k112': ['v5']}, 
+                                    'k12': ['v8', 'v9']}}
+
+    def test_calculates_width(self):
+        data = {
+            "k1": {
+                "k11": {
+                    "k111": ["v3", "v2","v1"],
+                    "k112": ["v4", "v5"]
+                },
+                "k12": ["v9", "v8"]
+            }
+        }  
+        widths = hierarchy_widths(data)
+        assert widths == {'k1':7, 'k1#k12':2, 'k1#k11':5, 'k1#k11#k111': 3, 'k1#k11#k112':2}
+
 class TestFamilyTree(TestCase):
 
     def setUpTestData():
         clean_db()
-        P.nuke_all() # Company name etc are stored in cache
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
         org_nodes = org_nodes + [make_node(x,y) for x,y in zip(range(200,210),["p1","p2","s1","s2","c1","c2","p3"])]
         org_nodes = sorted(org_nodes, reverse=True)
@@ -827,7 +890,6 @@ class TestFindResultsArticleCounts(TestCase):
 
     def setUpTestData():
         clean_db()
-        P.nuke_all() # Company name etc are stored in cache
         one_year_ago = datetime.now() - timedelta(365)
         five_years_ago = datetime.now() - timedelta(365 * 5)
         node_data = [
@@ -879,7 +941,7 @@ class TestFindResultsArticleCounts(TestCase):
         """
         db.cypher_query(query)
         RDFPostProcessor().run_all_in_order()
-        get_geo_data(True)
+        refresh_geo_data()
 
     def search_by_name_check_counts(self):
         min_date = datetime.now() - timedelta(365 * 2)
@@ -893,7 +955,7 @@ class TestFindResultsArticleCounts(TestCase):
 
     def search_by_geo_counts(self):
         min_date = datetime.now() - timedelta(365 * 2)
-        res = Organization.by_industry_and_or_geo(None, 'US-OH', min_date=min_date)
+        res = orgs_by_industry_and_or_geo(None, 'US-OH', min_date=min_date)
         check_org_and_counts(res, 
                 [ ('https://1145.am/db/102/bar_new_one',1),
                     ('https://1145.am/db/100/foo_new_one',1),
@@ -902,14 +964,14 @@ class TestFindResultsArticleCounts(TestCase):
 
     def search_by_industry_counts(self):
         min_date = datetime.now() - timedelta(365 * 2)
-        res = Organization.by_industry_and_or_geo(23, None, min_date=min_date)
+        res = orgs_by_industry_and_or_geo(23, None, min_date=min_date)
         check_org_and_counts(res,
             [('https://1145.am/db/101/foo_old_one', 0), 
              ('https://1145.am/db/100/foo_new_one', 1)])
         
     def search_by_industry_geo_counts(self):
         min_date = datetime.now() - timedelta(365 * 2)
-        res = Organization.by_industry_and_or_geo(23, 'US-OH', min_date=min_date)
+        res = orgs_by_industry_and_or_geo(23, 'US-OH', min_date=min_date)
         check_org_and_counts(res,
             [('https://1145.am/db/100/foo_new_one', 1)])
         

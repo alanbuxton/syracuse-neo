@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Lower
 from topics.models import Organization
-from topics.geo_utils import geo_select_list
-from topics.views import industry_geo_search_str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -27,13 +25,6 @@ class TrackedIndustryGeo(models.Model):
         rows = TrackedIndustryGeo.by_user(user)
         return [(x.industry_name,x.geo_code) for x in rows]
 
-    @staticmethod
-    def print_friendly_by_user(user):
-        rows = TrackedIndustryGeo.by_user(user)
-        geo_dict = dict(geo_select_list())
-        return [industry_geo_search_str(
-                    x.industry_name,
-                    geo_dict[x.geo_code]) for x in rows]
 
 class TrackedOrganization(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

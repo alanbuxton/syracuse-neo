@@ -14,8 +14,7 @@ from neomodel import db
 from trackeditems.management.commands.send_recent_activities_email import do_send_recent_activities_email
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
-from topics.models import Organization
-from topics.precalculator_helpers import precalculate_all
+from topics.cache_helpers import refresh_geo_data
 from integration.rdf_post_processor import RDFPostProcessor
 
 logger = logging.getLogger(__name__)
@@ -198,6 +197,6 @@ def do_import_ttl(**options):
     else:
         logger.info("No email sending this time")
     if do_post_processing is True:
-        precalculate_all()
+        refresh_geo_data()
     logger.info("re-set cache")
     cleanup(pidfile)

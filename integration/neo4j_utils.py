@@ -24,7 +24,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
     db.cypher_query("CREATE FULLTEXT INDEX organization_industries IF NOT EXISTS FOR (o: Organization) ON EACH [o.industry]")
     db.cypher_query("CREATE FULLTEXT INDEX industry_cluster_representative_docs IF NOT EXISTS FOR (i: IndustryCluster) ON EACH [i.representativeDoc]")
-
+    db.cypher_query("CREATE INDEX geonames_location_country_admin1_index IF NOT EXISTS FOR (n: GeoNamesLocation) on (n.countryCode, n.admin1Code)")
     v, _ = db.cypher_query("call n10s.graphconfig.show")
     if len(v) == 0:
         do_n10s_config()

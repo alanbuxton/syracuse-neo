@@ -7,13 +7,13 @@ from integration.models import DataImport
 from integration.management.commands.import_ttl import ( do_import_ttl,
     load_deletion_file, load_file
 )
-from topics.models import Organization, Resource, Person, ActivityMixin
+from topics.models import Organization, Resource
 from integration.neo4j_utils import (
-    delete_all_not_needed_resources, count_relationships,
+    delete_all_not_needed_resources,
     apoc_del_redundant_same_as,
 )
 from integration.rdf_post_processor import RDFPostProcessor
-from precalculator.models import P
+from topics.cache_helpers import nuke_cache
 import logging
 logger = logging.getLogger(__name__)
 
@@ -161,7 +161,7 @@ class MergeSameAsHighTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         clean_db()
-        P.nuke_all() # Company name etc are stored in cache
+        nuke_cache()
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijk")]
         act_nodes = [make_node(x,y,"CorporateFinanceActivity") for x,y in zip(range(100,200),"mnopqrs")]
         node_list = ", ".join(org_nodes + act_nodes)

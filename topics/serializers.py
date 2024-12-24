@@ -3,13 +3,14 @@ from collections import defaultdict
 from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
-from .geo_utils import geo_select_list
+from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .models import IndustryCluster, Article, cache_friendly
-from .model_queries import org_family_tree
+from .family_tree_helpers import org_family_tree
 from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
+from django.utils.functional import lazy 
 import logging
 logger = logging.getLogger(__name__)
 
@@ -296,6 +297,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         cache.set(cache_key, data)
         return data
 
+
 class NameSearchSerializer(serializers.Serializer):
     name = serializers.CharField(
         max_length=20,
@@ -316,22 +318,22 @@ class DataListChoiceField(serializers.ChoiceField):
         res = self.text_to_id.get(data,None)
         return res
 
+
 class IndustrySerializer(serializers.Serializer):
-    industry =  DataListChoiceField(choices=IndustryCluster.representative_docs_to_industry())
+    industry = DataListChoiceField(choices=IndustryCluster.representative_docs_to_industry() )
 
     def get_industry_id(self):
         self.is_valid()
         return self['industry'].value
 
-    def set_default_value(self, val):
-        self['industry'].value = val
 
 class GeoSerializer(serializers.Serializer):
-    country_or_region = DataListChoiceField(choices=geo_select_list(include_alt_names=True))
+    country_or_region = DataListChoiceField(choices=[("","")] + list(COUNTRY_CODE_TO_NAME.items()))
 
     def get_country_or_region_id(self):
         self.is_valid()
         return self['country_or_region'].value 
+
 
 class OrganizationTimelineSerializer(serializers.BaseSerializer):
 

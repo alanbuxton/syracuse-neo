@@ -12,14 +12,13 @@ from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSer
     CountryRegionSerializer, IndustryClusterSerializer)
 from rest_framework import status, viewsets
 from datetime import date, timedelta
-from precalculator.models import cache_last_updated_date
+from topics.stats_helpers import cached_activity_stats_last_updated_date
 from urllib.parse import urlparse, urlencode
 from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
-from topics.geo_utils import get_geo_data
-from topics.industry_geo_helpers import prepare_industry_table
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -47,7 +46,7 @@ class CountriesAndRegionsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CountryRegionSerializer 
 
     def get_queryset(self):
-        _, vals, _ = get_geo_data()
+        _, vals, _, _ = get_geo_data()
         return [
             {"country_name":x,
              "region_name": y,
@@ -86,7 +85,7 @@ class Index(APIView):
             search_term = org_name
         elif selected_geo or industry:
             orgs = Organization.by_industry_and_or_geo(industry,selected_geo,
-                                                       min_date=min_date_for_article_counts)
+                                                       min_date=min_date_for_article_counts) # needs article date
             num_hits = len(orgs)
             if len(orgs) > 20:
                 orgs = islice(orgs,20)
@@ -286,7 +285,7 @@ def industry_geo_search_str(industry, geo):
         in_str = "in the"
     else:
         in_str = "in"
-    return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str.title()}</b>"
+    return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str}</b>"
 
 
 def prepare_request_state(request):
@@ -301,6 +300,6 @@ def prepare_request_state(request):
     request_state["name_only_current_state"] = "Yes" if combine_same_as_name_only is True else "No"
     request_state["name_only_toggle_name"] = "Off" if combine_same_as_name_only is True else "On"
     request_state["name_only_toggle_url"] = new_url
-    request_state["cache_last_updated"] = cache_last_updated_date()
+    request_state["cache_last_updated"] = cached_activity_stats_last_updated_date()
     request_state["current_page_no_qs"] = current_path
     return request_state, combine_same_as_name_only
