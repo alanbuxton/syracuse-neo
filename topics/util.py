@@ -7,3 +7,10 @@ def cache_friendly(key):
     if len(cleaned) > 230:
         cleaned = cleaned[:210] + str(hash(cleaned[210:]))
     return cleaned
+
+def blank_or_none(val):
+    if val is None:
+        return True
+    if isinstance(val, str) and val.strip() == '':
+        return True
+    return False

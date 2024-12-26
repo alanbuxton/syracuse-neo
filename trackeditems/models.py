@@ -20,11 +20,6 @@ class TrackedIndustryGeo(models.Model):
     def by_user(user):
         return TrackedIndustryGeo.objects.filter(user=user)
 
-    @staticmethod
-    def items_by_user(user):
-        rows = TrackedIndustryGeo.by_user(user)
-        return [(x.industry_name,x.geo_code) for x in rows]
-
 
 class TrackedOrganization(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

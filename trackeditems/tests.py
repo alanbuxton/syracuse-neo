@@ -80,7 +80,44 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert set(org_or_merged_uris) == {'https://1145.am/db/2543227/Celgene',
                                     'https://1145.am/db/3469058/Napajen_Pharma',
                                     'https://1145.am/db/3458127/The_Hilb_Group'}
+        self.ts3 = time.time()
+        self.user3 = get_user_model().objects.create(username=f"test-{self.ts3}")
+        tig3 = TrackedIndustryGeo.objects.create(user=self.user3,
+                                        industry_name="Foo bar industry",
+                                        geo_code = "")
+        tig4 = TrackedIndustryGeo.objects.create(user=self.user3,
+                                        industry_name="",
+                                        geo_code = "AU")
+        
 
+    def shows_tracked_organizations(self):
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get("/tracked_organizations")
+        content = str(resp.content)
+        assert "https://1145.am/db/3029576/Celgene" in content
+        assert "<b>All Industries</b> in <b>Australia</b>" not in content
+        assert "<b>Foo bar industry</b> in <b>All Locations</b>" not in content
+
+    def shows_tracked_industry_geos(self):
+        client = self.client
+        client.force_login(self.user3)
+        resp = client.get("/tracked_organizations")
+        content = str(resp.content)
+        assert "https://1145.am/db/3029576/Celgene" not in content
+        assert "<b>All Industries</b> in <b>Australia</b>" in content
+        assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
+
+    def shows_recent_tracked_activities(self):
+        client = self.client
+        client.force_login(self.user3)
+        resp = client.get("/activities?max_date=2024-05-30")
+        content = str(resp.content)
+        assert "NapaJen Pharma" not in content
+        client.force_login(self.user)
+        resp = client.get("/activities?max_date=2024-05-30")
+        content = str(resp.content)
+        assert "NapaJen Pharma" in content 
 
     def test_creates_email_from_activity_and_article_and_write_x_more_if_many_industries(self):
         activity_uri = "https://1145.am/db/3029576/Loxo_Oncology-Acquisition"

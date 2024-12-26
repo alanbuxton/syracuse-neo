@@ -17,7 +17,7 @@
   <p>We are tracking the following {{ tracked_industry_geos | length }} industry/region combos for you:</p>
   <ul>
     {% for industry_geo in tracked_industry_geos %}
-      <li>{{ industry_geo | safe }}</li>
+      <li><b>{{ industry_geo.industry_str | safe }}</b> {{ industry_geo.in_str }} <b>{{ industry_geo.region_str | safe }}</b></li>
     {% endfor %}
   </ul>
 {% else %}

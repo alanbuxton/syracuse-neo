@@ -22,8 +22,10 @@ def orgs_by_industry_and_or_geo(industry_id,geo_code,limit=None):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
     return orgs_by_industry_cluster_and_geo(ind_uri,ind_topic_id,country_code,admin1_code=admin1_code)
 
-def country_admin_full_name(geo_code):
+def country_admin1_full_name(geo_code):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
+    if country_code is None or country_code == '':
+        return ""
     country_name = COUNTRY_CODE_TO_NAME[country_code]
     if admin1_code is None:
         return country_name

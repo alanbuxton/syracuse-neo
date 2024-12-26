@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import TrackedOrganization, TrackedIndustryGeo
 import pycountry
+from topics.industry_geo import country_admin1_full_name
 
 class RecentsByGeoSerializer(serializers.Serializer):
     def to_representation(self, instance):
@@ -59,6 +60,32 @@ class TrackedIndustryGeoModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrackedIndustryGeo
         fields = "__all__"
+
+class TrackedIndustryGeoSerializer(serializers.Serializer):
+    
+    def to_representation(self, instance):
+        geo_code = instance.geo_code
+        ind = instance.industry_name
+        region_str = "All Locations" if (geo_code is None or 
+                                          geo_code.strip() == '') else country_admin1_full_name(geo_code)
+        industry_str = "All Industries" if (ind is None or ind.strip() == '') else ind
+        in_str = "in the" if region_str.lower().startswith("united") else "in"
+        return {"geo_code":geo_code,
+                "region_str": region_str,
+                "industry_name": ind,
+                "industry_str": industry_str,
+                "in_str": in_str,
+                }   
+    
+
+# def industry_geo_search_str(industry, geo):
+#     industry_str = "all industries" if industry is None or industry.strip() == '' else industry
+#     geo_str = "all locations" if geo is None or geo.strip() == '' else geo
+#     if geo_str.split()[0].lower() == 'united':
+#         in_str = "in the"
+#     else:
+#         in_str = "in"
+#     return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str.title()}</b>"
 
 class GeoNamesLocationSerializer(serializers.Serializer):
     uri = serializers.URLField()

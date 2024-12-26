@@ -11,7 +11,8 @@ from rest_framework import status, viewsets
 from .serializers import (TrackedOrganizationSerializer,
     TrackedOrganizationModelSerializer, ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
-    TrackedIndustryGeoModelSerializer, RecentsByIndustrySerializer)
+    TrackedIndustryGeoModelSerializer, RecentsByIndustrySerializer,
+    TrackedIndustryGeoSerializer)
 from topics.stats_helpers import get_cached_stats
 from topics.activity_helpers import (
     get_activities_by_country_and_date_range,
@@ -21,7 +22,7 @@ from topics.activity_helpers import (
 from datetime import datetime, timezone, timedelta, date
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
-from topics.industry_geo import country_admin_full_name
+from topics.industry_geo import country_admin1_full_name
 
 class TrackedIndustryGeoView(APIView):
     permission_classes = [IsAuthenticated]
@@ -59,11 +60,12 @@ class TrackedOrganizationView(APIView):
     def get(self, request):
         tracked_orgs = self.get_queryset()
         tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
-        tracked_industry_geos = TrackedIndustryGeo.print_friendly_by_user(request.user)
+        tracked_industry_geos = TrackedIndustryGeo.by_user(request.user)
+        tracked_industry_geo_serializer = TrackedIndustryGeoSerializer(tracked_industry_geos, many=True)
         source_page = request.headers.get("Referer")
         request_state, _ = prepare_request_state(request)
         resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page,
-                            "tracked_industry_geos":tracked_industry_geos,
+                            "tracked_industry_geos":tracked_industry_geo_serializer.data,
                             "request_state": request_state,
                             },status=status.HTTP_200_OK)
         return resp
@@ -78,7 +80,7 @@ class GeoActivitiesView(APIView):
         request_state, _ = prepare_request_state(request)
         if request_state["cache_last_updated"] is not None:
             matching_activity_orgs = get_activities_by_country_and_date_range(geo_code,min_date,max_date,limit=20)
-            geo_name = country_admin_full_name(geo_code)
+            geo_name = country_admin1_full_name(geo_code)
         else:
             matching_activity_orgs = []
             geo_name = ''
@@ -162,22 +164,11 @@ class ActivitiesView(APIView):
         user = request.user
         matching_activity_orgs, _, _ = recents_by_user_min_max_date(user, min_date, max_date)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
-        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state, _ = prepare_request_state(request)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                         "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
-
-class ActivitiesByUriViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = ActivitySerializer
-
-    def get_queryset(self):
-        uri = self.request.GET.get('uri')
-        min_date = self.request.GET.get('min_date')
-        results = get_activities_by_date_range_for_api(min_date,uri_or_list=[uri])
-        return results
 
 
 def min_and_max_date(get_params):

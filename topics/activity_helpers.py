@@ -4,7 +4,7 @@ import logging
 from .models import IndustryCluster, Article, ActivityMixin, Resource, Organization
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
-from .util import cache_friendly
+from .util import cache_friendly, blank_or_none
 from .industry_geo import geo_to_country_admin1
 
 ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership"]])
@@ -42,8 +42,16 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine
 
 def get_activities_by_industry_geo_and_date_range(industry_id, geo_code, min_date, max_date,limit=None):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
-    industry = IndustryCluster.nodes.get_or_none(topicId=industry_id)
-    activity_article_uris = activities_by_industry_region(industry,country_code,admin1_code,min_date,max_date)
+    industry = IndustryCluster.nodes.get_or_none(topicId=industry_id) if industry_id is not None else None
+    if blank_or_none(country_code) and blank_or_none(industry):
+        logger.warning(f"No industry or geo found for {industry_id} and {geo_code}")
+        return []
+    elif blank_or_none(country_code):
+        activity_article_uris = activities_by_industry(industry,min_date, max_date, limit=limit)
+    elif blank_or_none(industry):
+        activity_article_uris = activities_by_region(country_code,min_date,max_date,admin1_code=admin1_code, limit=limit)
+    else:
+        activity_article_uris = activities_by_industry_region(industry,country_code,admin1_code,min_date,max_date, limit=limit)
     return activity_articles_to_api_results(activity_article_uris)
 
 
