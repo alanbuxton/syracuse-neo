@@ -232,7 +232,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_does_search_by_industry_region(self):
         client = self.client
-        resp = client.get("/?industry=Hospital+Management+Service&country_or_region=United+States+-+New+York&earliest_date=-1")
+        resp = client.get("/?industry=Hospital+Management+Service&country_or_region=United+States+of+America&earliest_date=-1")
         content = str(resp.content)
         assert "https://1145.am/db/3452774/Hhaexchange" in content
 

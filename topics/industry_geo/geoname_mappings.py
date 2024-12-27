@@ -35,8 +35,6 @@ def prepare_country_mapping(fpath="dump/relevant_geo.csv",
     cnt = 0
     geonameid_data = {}
     country_code_to_admin1 = defaultdict(set)
-    cc_admin1_code_to_admin1_name = {} # key = tuple of cc_code and admin1_code
-    cc_code_admin1_name_to_admin1_code = {} # key = tuple of cc_code and admin1 name
     with open(fpath,"r") as f:
         reader = csv.DictReader(f)
         for row in reader:
