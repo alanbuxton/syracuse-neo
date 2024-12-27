@@ -44,6 +44,8 @@ class RDFPostProcessor(object):
         self.delete_self_relationships()
         write_log_header("add_document_extract_to_relationship")
         self.add_document_extract_to_relationship()
+        write_log_header("Set default weighting to 1")
+        self.add_weighting_to_relationship()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
 
@@ -91,10 +93,9 @@ class RDFPostProcessor(object):
             return False
         Resource.merge_node_connections(source_node,target_node)
         return True
-
-
+    
     def add_document_extract_to_relationship(self):
-        logger.info("Moving document extract to relationship")
+        logger.info("Adding document extract to relationship")
         query = """
             MATCH (n:Resource)-[d:documentSource]->(a:Article)
             WHERE d.documentExtract IS NULL
@@ -105,6 +106,18 @@ class RDFPostProcessor(object):
             }
             IN TRANSACTIONS OF 10000 ROWS;
             """
+        db.cypher_query(query)
+
+    def add_weighting_to_relationship(self):
+        logger.info("Adding weighting to relationship")
+        query = """
+            MATCH (n:Resource)-[rel]-(o:Resource)
+            WHERE rel.weight is NULL
+            CALL {
+                WITH rel
+                SET rel.weight = 1
+            }
+            IN TRANSACTIONS OF 10000 ROWS;"""
         db.cypher_query(query)
 
 def write_log_header(message):

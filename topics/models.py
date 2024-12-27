@@ -9,7 +9,6 @@ from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter, defaultdict
 from neomodel.cardinality import OneOrMore, One
 from typing import List
-from datetime import datetime
 from .constants import BEGINNING_OF_TIME
 from topics.neo4j_utils import date_to_cypher_friendly
 from topics.util import cache_friendly
@@ -36,7 +35,10 @@ def shortest(arr):
         return arr # Don't sort if it's just a string
     return sorted(arr,key=len)[0]
 
-class DocumentSourceRel(StructuredRel):
+class WeightedRel(StructuredRel):
+    weight = IntegerProperty(default=1)
+
+class DocumentSourceRel(WeightedRel):
     documentExtract = StringProperty()
 
 class Resource(StructuredNode):
@@ -46,8 +48,8 @@ class Resource(StructuredNode):
     documentSource = RelationshipTo("Article","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore) # But not for Article or IndustryCluster
     internalDocId = IntegerProperty()
-    sameAsNameOnly = Relationship('Resource','sameAsNameOnly')
-    sameAsHigh = Relationship('Resource','sameAsHigh')
+    sameAsNameOnly = Relationship('Resource','sameAsNameOnly', model=WeightedRel)
+    sameAsHigh = Relationship('Resource','sameAsHigh', model=WeightedRel)
     internalMergedSameAsHighToUri = StringProperty()
 
     @property
@@ -352,19 +354,29 @@ class Resource(StructuredNode):
                 if vals not in all_rels:
                     all_rels.append( vals )
         return all_rels
+    
 
     @staticmethod
     def merge_node_connections(source_node, target_node):
+        '''
+            Copy/Merge relationships from source_node to target_node
+        '''
         for rel_key,_ in source_node.__all_relationships__:
             if rel_key.startswith("sameAs"):
                 logger.debug(f"ignoring {rel_key}")
                 continue
             for other_node in source_node.__dict__[rel_key].all():
-                logger.debug(f"connecting {other_node.uri} to {target_node.uri}")
-                new_rel = target_node.__dict__[rel_key].connect(other_node)
+                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")
                 old_rel = source_node.__dict__[rel_key].relationship(other_node)
-                if hasattr(old_rel, 'documentExtract'):
-                    new_rel.documentExtract = old_rel.documentExtract
+                already_connected = target_node.__dict__[rel_key].relationship(other_node)
+                if already_connected is not None:
+                    already_connected.weight += old_rel.weight
+                    already_connected.save()
+                else:
+                    new_rel = target_node.__dict__[rel_key].connect(other_node)
+                    if hasattr(old_rel, 'documentExtract'):
+                        new_rel.documentExtract = old_rel.documentExtract
+                    new_rel.weight = old_rel.weight
                     new_rel.save()
             source_node.internalMergedSameAsHighToUri = target_node.uri
             source_node.save()
@@ -373,7 +385,7 @@ class Resource(StructuredNode):
 
 class Article(Resource):
     headline = StringProperty(required=True)
-    url = Relationship("Resource","url", cardinality=One)
+    url = Relationship("Resource","url", cardinality=One, model=WeightedRel)
     sourceOrganization = StringProperty(required=True)
     datePublished = NativeDateTimeProperty(required=True)
     dateRetrieved = NativeDateTimeProperty(required=True)
@@ -466,10 +478,10 @@ class IndustryCluster(Resource):
     parentsRight = RelationshipFrom("IndustryCluster","childRight")
     topicId = IntegerProperty()
     uniqueName = StringProperty()
-    orgsPrimary = RelationshipFrom("Organization","industryClusterPrimary")
-    orgsSecondary = RelationshipFrom("Organization","industryClusterSecondary")
-    peoplePrimary = RelationshipFrom("Person","industryClusterPrimary")
-    peopleSecondary = RelationshipFrom("Person","industryClusterSecondary")
+    orgsPrimary = RelationshipFrom("Organization","industryClusterPrimary", model=WeightedRel)
+    orgsSecondary = RelationshipFrom("Organization","industryClusterSecondary", model=WeightedRel)
+    peoplePrimary = RelationshipFrom("Person","industryClusterPrimary", model=WeightedRel)
+    peopleSecondary = RelationshipFrom("Person","industryClusterSecondary", model=WeightedRel)
 
     @property
     def mergedOrgsPrimary(self):
@@ -624,7 +636,7 @@ class ActivityMixin:
     status = ArrayProperty(StringProperty())
     whereHighRaw = ArrayProperty(StringProperty())
     whereHighClean = ArrayProperty(StringProperty())
-    whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation')
+    whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation', model=WeightedRel)
 
     @property
     def whereHighGeoName_as_str(self):
@@ -733,24 +745,24 @@ class GeoNamesLocation(Resource):
 class Organization(Resource):
     description = ArrayProperty(StringProperty())
     industry = ArrayProperty(StringProperty())
-    investor = RelationshipTo('CorporateFinanceActivity','investor')
-    buyer =  RelationshipTo('CorporateFinanceActivity', 'buyer')
-    protagonist = RelationshipTo('CorporateFinanceActivity', 'protagonist')
-    participant = RelationshipTo('CorporateFinanceActivity', 'participant')
-    vendor = RelationshipFrom('CorporateFinanceActivity', 'vendor')
-    target = RelationshipFrom('CorporateFinanceActivity', 'target')
-    hasRole = RelationshipTo('Role','hasRole')
-    locationAdded = RelationshipTo('LocationActivity','locationAdded')
-    locationRemoved = RelationshipTo('LocationActivity','locationRemoved')
-    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
+    investor = RelationshipTo('CorporateFinanceActivity','investor', model=WeightedRel)
+    buyer =  RelationshipTo('CorporateFinanceActivity', 'buyer', model=WeightedRel)
+    protagonist = RelationshipTo('CorporateFinanceActivity', 'protagonist', model=WeightedRel)
+    participant = RelationshipTo('CorporateFinanceActivity', 'participant', model=WeightedRel)
+    vendor = RelationshipFrom('CorporateFinanceActivity', 'vendor', model=WeightedRel)
+    target = RelationshipFrom('CorporateFinanceActivity', 'target', model=WeightedRel)
+    hasRole = RelationshipTo('Role','hasRole', model=WeightedRel)
+    locationAdded = RelationshipTo('LocationActivity','locationAdded', model=WeightedRel)
+    locationRemoved = RelationshipTo('LocationActivity','locationRemoved', model=WeightedRel)
+    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary', model=WeightedRel)
     # industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
-    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
-    partnership = RelationshipTo('PartnershipActivity','partnership')
-    awarded = RelationshipTo('PartnershipActivity','awarded')
-    providedBy = RelationshipFrom('PartnershipActivity','providedBy')
+    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation', model=WeightedRel)
+    partnership = RelationshipTo('PartnershipActivity','partnership', model=WeightedRel)
+    awarded = RelationshipTo('PartnershipActivity','awarded', model=WeightedRel)
+    providedBy = RelationshipFrom('PartnershipActivity','providedBy', model=WeightedRel)
     basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
-    productOrganization = RelationshipTo('ProductActivity','productActivity')
+    productOrganization = RelationshipTo('ProductActivity','productActivity', model=WeightedRel)
 
     @property
     def industry_clusters(self):
@@ -953,13 +965,13 @@ class Organization(Resource):
 class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())
     valueRaw = ArrayProperty(StringProperty())
-    target = RelationshipTo('Organization','target')
+    target = RelationshipTo('Organization','target', model=WeightedRel)
     targetName = ArrayProperty(StringProperty())
-    vendor = RelationshipTo('Organization','vendor')
-    investor = RelationshipFrom('Organization','investor')
-    buyer =  RelationshipFrom('Organization', 'buyer')
-    protagonist = RelationshipFrom('Organization', 'protagonist')
-    participant = RelationshipFrom('Organization', 'participant')
+    vendor = RelationshipTo('Organization','vendor', model=WeightedRel)
+    investor = RelationshipFrom('Organization','investor', model=WeightedRel)
+    buyer =  RelationshipFrom('Organization', 'buyer', model=WeightedRel)
+    protagonist = RelationshipFrom('Organization', 'protagonist', model=WeightedRel)
+    participant = RelationshipFrom('Organization', 'participant', model=WeightedRel)
 
     @property
     def all_actors(self):
@@ -1001,10 +1013,10 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
         return {**vals,**act_vals,**activity_mixin_vals}
 
 class PartnershipActivity(ActivityMixin, Resource):
-    providedBy = RelationshipTo('Organization','providedBy')
+    providedBy = RelationshipTo('Organization','providedBy', model=WeightedRel)
     orgName = ArrayProperty(StringProperty())
-    partnership = RelationshipFrom('Organization','partnership')
-    awarded = RelationshipFrom('Organization','awarded')
+    partnership = RelationshipFrom('Organization','partnership', model=WeightedRel)
+    awarded = RelationshipFrom('Organization','awarded', model=WeightedRel)
 
     @property
     def all_actors(self):
@@ -1025,10 +1037,10 @@ class PartnershipActivity(ActivityMixin, Resource):
 
 class RoleActivity(ActivityMixin, Resource):
     orgFoundName = ArrayProperty(StringProperty())
-    withRole = RelationshipTo('Role','role')
+    withRole = RelationshipTo('Role','role', model=WeightedRel)
     roleFoundName = ArrayProperty(StringProperty())
     roleHolderFoundName = ArrayProperty(StringProperty())
-    roleActivity = RelationshipFrom('Person','roleActivity')
+    roleActivity = RelationshipFrom('Person','roleActivity', model=WeightedRel)
 
     @property
     def summary_name(self):
@@ -1072,9 +1084,9 @@ class LocationActivity(ActivityMixin, Resource):
     locationPurpose = ArrayProperty(StringProperty())
     locationType = ArrayProperty(StringProperty())
     orgFoundName = ArrayProperty(StringProperty())
-    locationAdded = RelationshipFrom('Organization','locationAdded')
-    locationRemoved = RelationshipFrom('Organization','locationRemoved')
-    location = RelationshipTo('Site', 'location')
+    locationAdded = RelationshipFrom('Organization','locationAdded', model=WeightedRel)
+    locationRemoved = RelationshipFrom('Organization','locationRemoved', model=WeightedRel)
+    location = RelationshipTo('Site', 'location', model=WeightedRel)
 
     @property
     def summary_name(self):
@@ -1104,9 +1116,9 @@ class LocationActivity(ActivityMixin, Resource):
 
 class Site(Resource):
     nameClean = StringProperty()
-    location = RelationshipFrom('LocationActivity','location')
-    nameGeoNamesLocation = RelationshipTo('GeoNamesLocation','nameGeoNamesLocation')
-    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation')
+    location = RelationshipFrom('LocationActivity','location', model=WeightedRel)
+    nameGeoNamesLocation = RelationshipTo('GeoNamesLocation','nameGeoNamesLocation', model=WeightedRel)
+    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation', model=WeightedRel)
 
     @property
     def based_in_high_geonames_location(self):
@@ -1136,21 +1148,21 @@ class Site(Resource):
 
 
 class Person(Resource):
-    roleActivity = RelationshipTo('RoleActivity','roleActivity')
-    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary')
-    industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
+    roleActivity = RelationshipTo('RoleActivity','roleActivity', model=WeightedRel)
+    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary', model=WeightedRel)
+    industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary', model=WeightedRel)
 
 
 class Role(Resource):
     orgFoundName = ArrayProperty(StringProperty())
-    withRole = RelationshipFrom("RoleActivity","role") # prefix needed or doesn't pick up related items
-    hasRole = RelationshipFrom('Organization','hasRole')
+    withRole = RelationshipFrom("RoleActivity","role", model=WeightedRel) # prefix needed or doesn't pick up related items
+    hasRole = RelationshipFrom('Organization','hasRole', model=WeightedRel)
 
 
 class ProductActivity(ActivityMixin, Resource):
     productName = ArrayProperty(StringProperty())
-    withProduct = RelationshipTo('Product','product')
-    productOrganization = RelationshipFrom('Organization','productActivity')
+    withProduct = RelationshipTo('Product','product', model=WeightedRel)
+    productOrganization = RelationshipFrom('Organization','productActivity', model=WeightedRel)
 
     @property
     def all_actors(self):
@@ -1169,7 +1181,7 @@ class ProductActivity(ActivityMixin, Resource):
     
 class Product(Resource):
     useCase = ArrayProperty(StringProperty())
-    withProduct = RelationshipFrom("ProductActivity","product")
+    withProduct = RelationshipFrom("ProductActivity","product", model=WeightedRel)
 
     def serialize(self):
         vals = super().serialize()

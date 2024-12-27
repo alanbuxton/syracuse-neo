@@ -1,4 +1,4 @@
-from django.test import SimpleTestCase, TestCase
+from django.test import TestCase
 from neomodel import db
 import time
 import os
@@ -200,13 +200,13 @@ class MergeSameAsHighTestCase(TestCase):
             (ind2: Resource:IndustryCluster {{uri:"https://1145.am/ind2", topicId: 24, representativeDoc:['Bar']}}),
             { ', '.join(ind1_connections + ind2_connections) }
         """
-        res,_ = db.cypher_query(query)
+        db.cypher_query(query)
         R = RDFPostProcessor()
         a = Resource.nodes.get_or_none(uri="https://1145.am/db/100/a")
         assert len(a.buyer) == 1
         assert len(a.investor) == 0
         assert len(a.vendor) == 0
-        R.merge_same_as_high_connections()
+        R.run_all_in_order()
 
     def test_merges_all_same_as_highs(self):
         target_uris = []
@@ -245,6 +245,25 @@ class MergeSameAsHighTestCase(TestCase):
     def test_merges_connections2(self):
         h = Organization.self_or_ultimate_target_node("https://1145.am/db/109/j") # Actually h
         assert len(h.target) == 7
+
+    def test_adds_weight_to_merged_relationships(self):
+        '''
+            Test original state for the network around node `a` with:
+
+            match (n: Organization {uri:"https://1145.am/db/100/a"})-[:sameAsHigh*]-(o)-[:industryClusterPrimary]-(i) 
+            where o.internalMergedSameAsHighToUri is null
+            return *
+
+            2 connections to ind1, 5 connections to ind2
+        '''
+        a = Organization.self_or_ultimate_target_node("https://1145.am/db/100/a")
+        ind1 = Resource.nodes.get_or_none(uri="https://1145.am/ind1")
+        ind2 = Resource.nodes.get_or_none(uri="https://1145.am/ind2")
+        a_ind1 = a.industryClusterPrimary.relationship(ind1)
+        a_ind2 = a.industryClusterPrimary.relationship(ind2)
+        assert a_ind1.weight == 2
+        assert a_ind2.weight == 5
+
 
 def clear_neo():
     db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
