@@ -73,6 +73,8 @@ class TrackedOrganizationView(APIView):
 class GeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -94,6 +96,8 @@ class GeoActivitiesView(APIView):
 class IndustryActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]   
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -115,7 +119,9 @@ class IndustryActivitiesView(APIView):
 class SourceActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
-
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         source_name = request.GET.get("source_name")

@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from trackeditems.serializers import TrackedOrganizationModelSerializer
 from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
 from django.db.utils import IntegrityError
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, date
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
     make_email_notif_from_orgs,
@@ -92,8 +92,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
 
     def shows_tracked_organizations(self):
         client = self.client
+        resp = client.get("/tracked_organizations")
+        assert resp.status_code == 403
         client.force_login(self.user)
         resp = client.get("/tracked_organizations")
+        assert resp.status_code == 200
         content = str(resp.content)
         assert "https://1145.am/db/3029576/Celgene" in content
         assert "<b>All Industries</b> in <b>Australia</b>" not in content
@@ -110,8 +113,11 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
 
     def shows_recent_tracked_activities(self):
         client = self.client
+        resp = client.get("/activities?max_date=2024-05-30")
+        assert resp.status_code == 403
         client.force_login(self.user3)
         resp = client.get("/activities?max_date=2024-05-30")
+        assert resp.status_code == 200
         content = str(resp.content)
         assert "NapaJen Pharma" not in content
         client.force_login(self.user)
@@ -184,7 +190,6 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def test_does_not_activity_stats_if_cache_not_available(self):
         client = self.client
         nuke_cache()
-
         response = client.get("/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" in content
@@ -195,9 +200,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
             from django.test import Client
             client = Client()
         '''
-        refresh_geo_data()
+        refresh_geo_data(max_date=date(2024,5,30))
         client = self.client
-
         response = client.get("/activity_stats")
         content = str(response.content)
         assert "Site stats calculating, please check later" not in content
@@ -205,7 +209,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
 
     def test_always_shows_geo_activities(self):
         client = self.client
-        response = client.get("/geo_activities?geo_code=US-CA&max_date=2019-01-10")
+        path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
+        response = client.get(path)
+        assert response.status_code == 403 
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
         content = str(response.content)
         assert "Activities between" in content
         assert "in: United States of America - California." in content
@@ -216,7 +225,12 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
 
     def test_always_show_source_activities(self):
         client = self.client
-        response = client.get("/source_activities?source_name=Business%20Insider&max_date=2019-01-10")
+        path = "/source_activities?source_name=Business%20Insider&max_date=2019-01-10"
+        response = client.get(path)
+        assert response.status_code == 403
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document link to see the original source document" in content

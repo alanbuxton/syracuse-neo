@@ -7,12 +7,11 @@ class RecentsByGeoSerializer(serializers.Serializer):
     def to_representation(self, instance):
         country_code = instance[0]
         repres = {
-            "geo_name": instance[2],
-            "country_code": country_code,
-            "geo_code": instance[1],
-            "count7": instance[3],
-            "count30": instance[4],
-            "count90": instance[5],
+            "geo_name": instance[1],
+            "geo_code": country_code,
+            "count7": instance[2],
+            "count30": instance[3],
+            "count90": instance[4],
         }
         pyc = pycountry.countries.get(alpha_2=country_code)
         if pyc and pyc.flag:
@@ -77,15 +76,6 @@ class TrackedIndustryGeoSerializer(serializers.Serializer):
                 "in_str": in_str,
                 }   
     
-
-# def industry_geo_search_str(industry, geo):
-#     industry_str = "all industries" if industry is None or industry.strip() == '' else industry
-#     geo_str = "all locations" if geo is None or geo.strip() == '' else geo
-#     if geo_str.split()[0].lower() == 'united':
-#         in_str = "in the"
-#     else:
-#         in_str = "in"
-#     return f"<b>{industry_str.title()}</b> {in_str} <b>{geo_str.title()}</b>"
 
 class GeoNamesLocationSerializer(serializers.Serializer):
     uri = serializers.URLField()

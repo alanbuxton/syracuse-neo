@@ -11,6 +11,8 @@ from integration.management.commands.import_ttl import do_import_ttl
 from integration.models import DataImport
 from neomodel import db
 from datetime import date
+import time
+from django.contrib.auth import get_user_model
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
@@ -45,6 +47,10 @@ class TestUtilsWithDumpData(TestCase):
         r = RDFPostProcessor()
         r.run_all_in_order()
         refresh_geo_data()
+
+    def setUp(self):
+        ts = time.time()
+        self.user = get_user_model().objects.create(username=f"test-{ts}")
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()   
@@ -208,7 +214,12 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_shows_resource_page(self):
         client = self.client
-        resp = client.get("/resource/1145.am/db/3544275/wwwbusinessinsidercom_hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12")
+        path = "/resource/1145.am/db/3544275/wwwbusinessinsidercom_hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12"
+        resp = client.get(path)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(path)
+        assert resp.status_code == 200
         content = str(resp.content)
         assert "https://www.businessinsider.com/hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12" in content
         assert "first female empowerment-themed hotel will open in Washington, DC with a Ruth Bader Ginsburg mural" in content
@@ -218,13 +229,19 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor&earliest_date=-1")
+        path = "/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor&earliest_date=-1"
+        resp = client.get(path)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(path)
+        assert resp.status_code == 200
         content = str(resp.content)
         assert "REDAVIA" in content
         assert "REDOVIA" not in content
 
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1&rels=buyer,investor,vendor&earliest_date=-1")
         content = str(resp.content)
         assert "REDAVIA" in content
@@ -232,7 +249,8 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_does_search_by_industry_region(self):
         client = self.client
-        resp = client.get("/?industry=Hospital+Management+Service&country_or_region=United+States+of+America&earliest_date=-1")
+        path = "/?industry=Hospital+Management+Service&country_or_region=United+States+of+America&earliest_date=-1"
+        resp = client.get(path)
         content = str(resp.content)
         assert "https://1145.am/db/3452774/Hhaexchange" in content
 
@@ -296,7 +314,12 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_timeline_combines_same_as_name_only_on_off(self):
         client = self.client
-        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1")
+        path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1"
+        resp = client.get(path0)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(path0)
+        assert resp.status_code == 200
         content0 = str(resp.content)
         resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1")
         content1 = str(resp.content)
@@ -307,7 +330,12 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_same_as_name_only_on_off_parents(self):
         client = self.client
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1")
+        path0 = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1"
+        resp = client.get(path0)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(path0)
+        assert resp.status_code == 200
         content0 = str(resp.content)
         resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&sources=_all&earliest_date=-1")
         content1 = str(resp.content)
@@ -337,6 +365,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_uris_acquisition(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" in content
@@ -347,6 +376,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_uris_investor(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" not in content
@@ -357,6 +387,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_uris_all(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor%2Cinvestor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" in content
@@ -379,6 +410,10 @@ class TestUtilsWithDumpData(TestCase):
         client = self.client
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(uri)
+        assert resp.status_code == 200
         content = str(resp.content)
         assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
@@ -391,6 +426,10 @@ class TestUtilsWithDumpData(TestCase):
         client = self.client
         uri = "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri,follow=True) # Will be redirected
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(uri,follow=True)
+        assert resp.status_code == 200
         assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1', 302)]
         content = str(resp.content)
         assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
@@ -400,6 +439,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_resource_from_resource_page(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -410,6 +450,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_family_tree_source_page(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -421,6 +462,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_org_from_family_tree(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -432,6 +474,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_activity_from_family_tree(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -442,6 +485,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_timeline_source_page(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -453,6 +497,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_family_tree_source_page(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/organization/family-tree/uri/1145.am/db/2543227/Celgene?source=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -462,6 +507,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_query_strings_in_drill_down_resource_from_timeline_page(self):
         client = self.client
+        client.force_login(self.user)
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
@@ -513,6 +559,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_family_tree_filters_by_document_source_defaults(self):
         client = self.client
         uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
+        client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to all" in content_filtered
@@ -523,6 +570,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_family_tree_filters_by_document_source_all(self):
         client = self.client
         uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
+        client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to core" in content_filtered
@@ -533,6 +581,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_timeline_filters_by_document_source_defaults(self):
         client = self.client
         uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
+        client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to all" in content_filtered
@@ -543,6 +592,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_timeline_filters_by_document_source_all(self):
         client = self.client
         uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
+        client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to core" in content_filtered
@@ -569,6 +619,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_doc_date_range_family_tree_old(self):
         client = self.client
         uri = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2020-08-26"
+        client.force_login(self.user)
         resp = client.get(uri)
         content = str(resp.content)
         assert "MRI Software LLC" in content
@@ -577,6 +628,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_doc_date_range_family_tree_recent(self):
         client = self.client
         uri2 = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2024-08-26"
+        client.force_login(self.user)
         resp2 = client.get(uri2)
         content2 = str(resp2.content)
         assert "MRI Software LLC" in content2
@@ -585,6 +637,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_doc_date_range_timeline_old(self):
         client = self.client
         uri = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2020-08-26"
+        client.force_login(self.user)
         resp = client.get(uri)
         content = str(resp.content)
         assert "MRI Software LLC" in content
@@ -593,6 +646,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_doc_date_range_timeline_recent(self):
         client = self.client
         uri2 = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2024-08-26"
+        client.force_login(self.user)
         resp2 = client.get(uri2)
         content2 = str(resp2.content)
         assert "MRI Software LLC" in content2
@@ -762,6 +816,10 @@ class TestFamilyTree(TestCase):
         """
         db.cypher_query(query)
 
+    def setUp(self):
+        ts = time.time()
+        self.user = get_user_model().objects.create(username=f"test-{ts}")
+
     def test_gets_parent_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"
         parents = get_parent_orgs(uri,combine_same_as_name_only=False)
@@ -827,7 +885,12 @@ class TestFamilyTree(TestCase):
 
     def test_shows_nodes_in_name_order(self):
         client = self.client
-        response = client.get("/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&earliest_date=-1")
+        path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&earliest_date=-1"
+        response = client.get(path)
+        assert response.status_code == 403
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
         content = str(response.content)
         res = re.search(r"var edges = new vis.DataSet\( (.+?) \);",content)
         as_dict = json.loads(res.groups(0)[0].replace("\\'","\""))
@@ -838,7 +901,9 @@ class TestFamilyTree(TestCase):
 
     def test_links_parent_and_child_if_only_linked_via_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1")
+        path = "/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1"
+        client.force_login(self.user)
+        response = client.get(path)
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" in content # link from p1 to s1
         assert "https://1145.am/db/202/s1-buyer-https://1145.am/db/204/c1" in content # link from s1 to c1 (but it was s2 who bought c1)
@@ -848,6 +913,7 @@ class TestFamilyTree(TestCase):
         Looking for s2, which is sameAsNameOnly with s1, so there shouldn't be any reference to s1 here
         '''
         client = self.client
+        client.force_login(self.user)
         response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
@@ -855,6 +921,7 @@ class TestFamilyTree(TestCase):
 
     def test_switches_sibling_if_different_parent_has_same_as_name_only_child(self):
         client = self.client
+        client.force_login(self.user)
         response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
@@ -862,6 +929,7 @@ class TestFamilyTree(TestCase):
 
     def test_updates_sibling_target_if_central_org_is_linked_by_same_only(self):
         client = self.client
+        client.force_login(self.user)
         response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1")
         content = str(response.content)
         # p3 bought s2, but I'm looking at s1 which has sameAsNameOnly with s2, so should only be seeing s1
@@ -870,6 +938,7 @@ class TestFamilyTree(TestCase):
 
     def test_links_multiple_parents_to_same_child(self):
         client = self.client
+        client.force_login(self.user)
         response = client.get("/organization/family-tree/uri/1145.am/db/202/s1")
         content = str(response.content)
         assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content

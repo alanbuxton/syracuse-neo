@@ -123,6 +123,8 @@ class Index(APIView):
 class ShowResource(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'show_resource.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}"
@@ -149,6 +151,8 @@ class ShowResource(APIView):
 class FamilyTree(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_family_tree.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
@@ -194,6 +198,8 @@ class FamilyTree(APIView):
 class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_timeline.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"

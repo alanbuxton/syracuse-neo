@@ -43,7 +43,7 @@ def get_stats(max_date):
             recents_by_industry.append( 
                 (industry.topicId, industry.longest_representative_doc,cnt7,cnt30,cnt90) )
     for country_code,country_name in COUNTRY_CODE_TO_NAME.items():
-        logger.info(f"Stats for {country_code}  ")
+        logger.info(f"Stats for {country_code}")
         if country_code.strip() == '':
             continue
         cnt7 = activities_by_region(country_code,date_minus(max_date,7),max_date,counts_only=True)
