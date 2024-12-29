@@ -14,6 +14,7 @@ from integration.neo4j_utils import (
 )
 from integration.rdf_post_processor import RDFPostProcessor
 from topics.cache_helpers import nuke_cache
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -301,3 +302,5 @@ def all_related_uris(resource):
         rel_lens = [x.uri for x in resource.__dict__[k]]
         vals[k] = set(rel_lens)
     return vals
+
+

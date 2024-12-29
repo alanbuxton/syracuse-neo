@@ -16,6 +16,7 @@ from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
 from topics.cache_helpers import refresh_geo_data
 from integration.rdf_post_processor import RDFPostProcessor
+from auth_extensions.anon_user_utils import create_anon_user
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
@@ -199,4 +200,5 @@ def do_import_ttl(**options):
     if do_post_processing is True:
         refresh_geo_data()
     logger.info("re-set cache")
+    create_anon_user()
     cleanup(pidfile)

@@ -50,9 +50,10 @@
   {% include 'layouts/nav-header-no-homepage.html' %}
 </p>
 {% else %}
- <p>Feel free to browse this database anonymously.
-  You can also set up tracking so we alert you to changes in companies, industries or regions of interest.
-  If you want to set up tracking please <a href="{% url 'account_signup' %}">sign up for a free account</a> first. If you have an existing account, <a href="{% url 'account_login' %}">click here</a> to login.</a></p>
+ <p>Feel free to browse this database anonymously: <a href="{% url 'account_login' %}">Click here for anonymous login</a>.
+  <br/>If you want to set up your own alerts for companies, industries or regions, you'll need to set up your own free account first.
+  <a href="{% url 'account_signup' %}">Click here to sign up</a> | 
+  <a href="{% url 'account_login' %}">Click here to login.</a></p>
 {% endif %}
 
 <h1>Topic Identification: Syracuse from 1145</h1>

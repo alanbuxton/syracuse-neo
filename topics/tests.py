@@ -2,6 +2,7 @@ from django.test import TestCase
 from collections import OrderedDict
 from topics.models import *
 from .stats_helpers import get_stats
+from auth_extensions.anon_user_utils import create_anon_user
 from .activity_helpers import get_activities_by_country_and_date_range
 from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
@@ -51,6 +52,7 @@ class TestUtilsWithDumpData(TestCase):
     def setUp(self):
         ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{ts}")
+        self.anon, _ = create_anon_user()
 
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()   
@@ -131,6 +133,25 @@ class TestUtilsWithDumpData(TestCase):
         assert len(items) == 1
         assert len(item_display_details) >= len(items)
         assert len(org_display_details) == 1
+
+    def test_track_org_button_only_appears_if_logged_in_as_real_user(self):
+        path = "/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&earliest_date=-1"
+        client = self.client
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Track Discovery, Inc" not in content
+        client.force_login(self.anon)
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Track Discovery, Inc" not in content
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Track Discovery, Inc" in content
+
 
     def test_organization_graph_view_with_same_as_name_only(self):
         client = self.client

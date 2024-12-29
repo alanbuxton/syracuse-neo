@@ -1,6 +1,6 @@
 
 <p>
-  {% if request.user.is_authenticated %}
+  {% if is_authenticated_and_not_anon %}
     <form action="{% url 'tracked-organizations' %}" method="post">
         {% csrf_token %}
         <input type="hidden" id="tracked_organization_uri" type="text" name="tracked_organization_uri" value="{{ org_data.uri }}">

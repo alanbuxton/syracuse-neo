@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime, timezone
-
+    
 class DataImport(models.Model):
 
     run_at = models.DateTimeField()

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'feedbacks.apps.FeedbacksConfig',
     'trackeditems.apps.TrackeditemsConfig',
     'integration.apps.IntegrationConfig',
+    'auth_extensions.apps.AuthExtensionsConfig',
     'rest_framework',
     'django_bootstrap5',
     'rest_framework.authtoken',
@@ -87,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
                 'syracuse.context_processors.set_constants',
+                'auth_extensions.context_processors.anon_aware_authentication',
             ],
         },
     },
@@ -209,6 +211,8 @@ CACHES = {
         "TIMEOUT": None, 
     }
 }
+
+ACCOUNT_FORMS = {'login': 'auth_extensions.allauth.AnonAwareLoginForm'}
 
 # TTL integration
 RDF_SLEEP_TIME=int(os.environ.get("RDF_SLEEP_TIME","0"))

@@ -1,6 +1,7 @@
 from django.test import TestCase
 import time
 from django.contrib.auth import get_user_model
+from auth_extensions.anon_user_utils import create_anon_user
 from trackeditems.serializers import TrackedOrganizationModelSerializer
 from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
 from django.db.utils import IntegrityError
@@ -88,14 +89,19 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         tig4 = TrackedIndustryGeo.objects.create(user=self.user3,
                                         industry_name="",
                                         geo_code = "AU")
+        self.anon, _ = create_anon_user()
         
 
     def shows_tracked_organizations(self):
         client = self.client
-        resp = client.get("/tracked_organizations")
+        path = "/tracked_organizations"
+        resp = client.get(path)
+        assert resp.status_code == 403
+        client.force_login(self.anon)
+        resp = client.get(path)
         assert resp.status_code == 403
         client.force_login(self.user)
-        resp = client.get("/tracked_organizations")
+        resp = client.get(path)
         assert resp.status_code == 200
         content = str(resp.content)
         assert "https://1145.am/db/3029576/Celgene" in content
@@ -112,16 +118,20 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
 
     def shows_recent_tracked_activities(self):
+        path = "/activities?max_date=2024-05-30"
         client = self.client
-        resp = client.get("/activities?max_date=2024-05-30")
+        resp = client.get(path)
+        assert resp.status_code == 403
+        client.force_login(self.anon)
+        resp = client.get(path)
         assert resp.status_code == 403
         client.force_login(self.user3)
-        resp = client.get("/activities?max_date=2024-05-30")
+        resp = client.get(path)
         assert resp.status_code == 200
         content = str(resp.content)
         assert "NapaJen Pharma" not in content
         client.force_login(self.user)
-        resp = client.get("/activities?max_date=2024-05-30")
+        resp = client.get(path)
         content = str(resp.content)
         assert "NapaJen Pharma" in content 
 
@@ -212,6 +222,9 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
         response = client.get(path)
         assert response.status_code == 403 
+        client.force_login(self.anon)
+        response = client.get(path)
+        assert response.status_code == 403 
         client.force_login(self.user)
         response = client.get(path)
         assert response.status_code == 200
@@ -226,6 +239,9 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def test_always_show_source_activities(self):
         client = self.client
         path = "/source_activities?source_name=Business%20Insider&max_date=2019-01-10"
+        response = client.get(path)
+        assert response.status_code == 403
+        client.force_login(self.anon)
         response = client.get(path)
         assert response.status_code == 403
         client.force_login(self.user)

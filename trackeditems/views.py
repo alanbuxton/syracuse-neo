@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedOrganization, TrackedIndustryGeo
@@ -25,7 +25,7 @@ from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
 
 class TrackedIndustryGeoView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def post(self, request):
@@ -42,7 +42,7 @@ class TrackedIndustryGeoView(APIView):
 class TrackedOrganizationView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'preferences.html'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get_queryset(self):
@@ -73,7 +73,7 @@ class TrackedOrganizationView(APIView):
 class GeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request):
@@ -96,7 +96,7 @@ class GeoActivitiesView(APIView):
 class IndustryActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]   
 
     def get(self, request):
@@ -119,7 +119,7 @@ class IndustryActivitiesView(APIView):
 class SourceActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     
     def get(self, request):
@@ -162,7 +162,7 @@ class ActivityStats(APIView):
 class ActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedNotAnon]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request):
