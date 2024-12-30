@@ -140,8 +140,11 @@ def combined_industry_geo_results(search_str,counts_only=True):
 
     country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(countries, admin1s)
     headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths)
+    if len(headers) == 0:
+        # No data at all
+        return [], [], []
     empty_value = 0 if counts_only is True else None
-    ind_cluster_rows, text_row = prepare_rows(headers[6], ind_clusters, ind_cluster_by_country, ind_cluster_by_adm1, 
+    ind_cluster_rows, text_row = prepare_rows(headers[-1], ind_clusters, ind_cluster_by_country, ind_cluster_by_adm1, 
                         search_str, text_by_country, text_by_adm1, empty_value)
     
     return headers, ind_cluster_rows, text_row
@@ -151,22 +154,27 @@ def prepare_rows(header_row, ind_clusters, ind_cluster_by_country, ind_cluster_b
     ind_cluster_rows = []
     for ind_cluster in ind_clusters:
         ind_uri = ind_cluster.uri
-        row = [ ind_cluster.uri, ind_cluster.longest_representative_doc ]
+        row = { "uri":ind_cluster.uri, "name": ind_cluster.longest_representative_doc }
+        vals = []
         for loc in header_row:
             val = get_val_for_country_admin1(loc, ind_cluster_by_country[ind_uri],
                                              ind_cluster_by_adm1[ind_uri],empty_value)
-            row.append(val)
-        ind_cluster_rows.append(row)
+            vals.append(val)
+        row['vals'] = vals
+        if sum(vals) > 0:
+            ind_cluster_rows.append(row)
 
-    text_row = [ '', search_str ]
+    text_row = { "uri":"", "name":search_str }
+    vals = []
     for loc in header_row:
         val = get_val_for_country_admin1(loc, text_by_country,text_by_adm1,empty_value)
-        text_row.append(val)
+        vals.append(val)
+    text_row['vals'] = vals
     return ind_cluster_rows, text_row
 
 def get_val_for_country_admin1(loc, country_data, admin1_data, empty_value):
     search_loc = loc.replace("REPEATED","")
-    search_loc = search_loc.replace("n/a","")
+    search_loc = search_loc.replace("(all)","")
     search_loc = search_loc.strip()
     if "-" in search_loc:
         country, admin1 = search_loc.split("-")
@@ -207,9 +215,9 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                             row6[f"REPEATED {country}"] = 1
                             row7[f"REPEATED {country}"] = 1
                             continue
-                        row5[f"{country} n/a"] = 1
-                        row6[f"{country} n/a"] = 1
-                        row7[f"{country} n/a"] = 1
+                        row5[f"{country} (all)"] = 1
+                        row6[f"{country} (all)"] = 1
+                        row7[f"{country} (all)"] = 1
                         if country == "US":
                             us_data = admin1_hierarchy["US"]
                             for us_region,vals in sorted(us_data.items()):
@@ -220,8 +228,8 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                                         row7[f"{country}-{state}"] = 1
                         else:
                             for admin1 in admin1_hierarchy[country]:
-                                row5[f"{country} n/a"] = 1
-                                row6[f"{country} n/a"] = 1
+                                row5[f"{country} (all)"] = 1
+                                row6[f"{country} (all)"] = 1
                                 row7[f"{country}-{admin1}"] = 1
             else:
                 row3[f"REPEATED {region2}"] = col_width
@@ -234,9 +242,9 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                         row6[f"REPEATED {country}"] = 1
                         row7[f"REPEATED {country}"] = 1
                         continue
-                    row5[f"{country} n/a"] = 1
-                    row6[f"{country} n/a"] = 1
-                    row7[f"{country} n/a"] = 1
+                    row5[f"{country} (all)"] = 1
+                    row6[f"{country} (all)"] = 1
+                    row7[f"{country} (all)"] = 1
                         
                     if country == "US":
                         us_data = admin1_hierarchy["US"]
@@ -248,19 +256,30 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                                     row7[f"{country}-{state}"] = 1
                     else:
                         for admin1 in admin1_hierarchy[country]:
-                            row5[f"{country} n/a"] = 1
-                            row6[f"{country} n/a"] = 1
+                            row5[f"{country} (all)"] = 1
+                            row6[f"{country} (all)"] = 1
                             row7[f"{country}-{admin1}"] = 1
 
-    results.append(row1)   
-    results.append(row2)
-    results.append(row3)
-    results.append(row4)
-    results.append(row5)
-    results.append(row6)
-    results.append(row7)
+    if row_has_relevant_content(row1):
+        results.append(row1)   
+    if row_has_relevant_content(row2):
+        results.append(row2)
+    if row_has_relevant_content(row3):
+        results.append(row3)
+    if row_has_relevant_content(row4):
+        results.append(row4)
+    if row_has_relevant_content(row5):
+        results.append(row5)
+    if row_has_relevant_content(row6):
+        results.append(row6)
+    if row_has_relevant_content(row7):
+        results.append(row7)
     return results
 
+def row_has_relevant_content(row):
+    relevant_content = any( [ not(x.startswith("REPEATED")) for x in row.keys()])
+    return relevant_content
+    
 def global_region_width(regions: List, country_widths, admin1_widths):
     width_key = "#".join(regions)
     col_width = country_widths[width_key]
@@ -317,6 +336,3 @@ def build_region_hierarchy(countries, admin1s):
 
     return country_hierarchy, country_widths, admin1_hierarchy, admin1_widths
     
-
-
-

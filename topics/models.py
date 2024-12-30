@@ -526,6 +526,8 @@ class IndustryCluster(Resource):
         if docs is None:
             return None
         val = sorted(docs,key=len)[-1]
+        mappings = {"ott software": "OTT Software"}
+        val = mappings.get(val.lower(),val)
         return val
 
     @staticmethod

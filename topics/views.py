@@ -18,6 +18,7 @@ from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
+from .industry_geo.orgs_by_industry_geo import combined_industry_geo_results
 
 
 import logging
@@ -259,11 +260,12 @@ class IndustryGeoFinder(APIView):
     def get(self, request, *args, **kwargs):
         industry_search_str = kwargs['industry_search']
         
-        industry_table_header, industry_table_body  = prepare_industry_table(industry_search_str) 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str) 
         
         request_state, _ = prepare_request_state(request)
-        resp = Response({"table_body": industry_table_body,
-                         "table_header": industry_table_header,
+        resp = Response({"table_body": ind_cluster_rows,
+                         "text_row": text_row,
+                         "table_header": headers,
                          "search_term": industry_search_str,
                          "request_state": request_state,
                         }, status=status.HTTP_200_OK)

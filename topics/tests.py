@@ -726,7 +726,7 @@ class TestUtilsWithDumpData(TestCase):
 
 class TestRegionHierarchy(TestCase):
 
-    def test_builds_region_hierarchyy(self):
+    def test_builds_region_hierarchy(self):
         countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
         admin1s = {"US":["IL","OK","IA","NY"],"CN":["11","04"]}
 
@@ -766,9 +766,9 @@ class TestRegionHierarchy(TestCase):
                                           ('Western Asia', 1), ('South-eastern Asia', 1), ('Eastern Asia', 3), 
                                           ('Northern Europe', 1)])
         assert headers[6] == OrderedDict([('REPEATED NA', 1), ('REPEATED SZ', 1), ('REPEATED ZA', 1), 
-                                          ('REPEATED CA', 1), ('US n/a', 1), ('US-IL', 1), ('US-IA', 1), 
+                                          ('REPEATED CA', 1), ('US (all)', 1), ('US-IL', 1), ('US-IA', 1), 
                                           ('US-NY', 1), ('US-OK', 1), ('REPEATED AE', 1), ('REPEATED SG', 1), 
-                                          ('CN n/a', 1), ('CN-04', 1), ('CN-11', 1), ('REPEATED GB', 1)])
+                                          ('CN (all)', 1), ('CN-04', 1), ('CN-11', 1), ('REPEATED GB', 1)])
 
         
     def test_filters_tree(self):

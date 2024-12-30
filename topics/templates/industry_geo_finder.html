@@ -6,6 +6,16 @@
 {% load static %}
 {% load topics_extras %}
 
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  text-align: center;
+}
+</style>
+
 <title>Show Resource</title>
 </head>
 <body>
@@ -17,24 +27,53 @@
 
 <p>{% include 'layouts/nav-org.html' %}</p>
 
-<table>
-  <tr>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    {% for header_element in table_header %}
-      <th>{{ header_element }}</th>
+{% if table_header|length > 0 %}
+
+  <table>
+    {% for row in table_header %}
+      <tr>
+        {% if forloop.first %}
+          <th rowspan="{{table_header|length }}">&nbsp;</th>
+        {% endif %}
+        {% for k,v in row.items %}
+          <th colspan="{{v}}">
+            {% if k|slice:"0:6" == 'REPEAT' %}
+              &nbsp;
+            {% else %}
+              {{ k }}
+            {% endif %}
+          </th>
+        {% endfor %}
+      </tr>
     {% endfor %}
-  </tr>
-  {% for row in table_body %}
-    <tr>
-        {% for val in row %}
-          <td>
+    {% for row in table_body %}
+      <tr>
+        <td>
+          {{row.name}}
+        </td>
+        {% for val in row.vals %}
+          <td style="text-align: right;">
             {{ val }}
           </td>
         {% endfor %}
-    </tr>
-  {% endfor %}
-</table>
+      </tr>
+    {% endfor %}
+    {% if table_header|length == 0 %}
+      <tr>
+        <td>
+          {{ text_row.name }} (your search)
+        </td>
+        {% for val in text_row.vals %}
+          <td style="text-align: right;">
+            {{ val }}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endif %}
+  </table>
+{% else %}
+  <p>No results found</p>
+{% endif %}
 
 {% include 'layouts/footer.html' %}
 
