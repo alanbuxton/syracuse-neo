@@ -111,15 +111,10 @@ class RDFPostProcessor(object):
 
     def add_weighting_to_relationship(self):
         logger.info("Adding weighting to relationship")
-        query = """
-            MATCH (n:Resource)-[rel]-(o:Resource)
-            WHERE rel.weight is NULL
-            CALL {
-                WITH rel
-                SET rel.weight = 1
-            }
-            IN TRANSACTIONS OF 10000 ROWS;"""
-        db.cypher_query(query)
+        query = "MATCH (n: Resource)-[rel]-(o:Resource) WHERE rel.weight is NULL RETURN rel"
+        action = "SET rel.weight = 1"
+        apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{}})'
+        db.cypher_query(apoc_query)
 
 def write_log_header(message):
     for row in ["*" * 50, message, "*" * 50]:
