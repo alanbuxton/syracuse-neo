@@ -9,14 +9,24 @@
 <style>
 table, th, td {
   border: 1px solid black;
+  border-collapse: collapse;
 }
 
 th {
   text-align: center;
 }
+
+th.selected, td.selected {
+  background-color: #d3f4d3;
+}
+
+button {
+  margin-top: 10px;
+}
+
 </style>
 
-<title>Show Resource</title>
+<title>Organizations by Industry & Geo Region</title>
 </head>
 <body>
 <p>
@@ -27,45 +37,50 @@ th {
 
 <p>{% include 'layouts/nav-org.html' %}</p>
 
+<p>Select the combinations of industry and country/region that you would like to drill into.
+  <br/>  
+  <span id="sumDisplay">0</span> Organizations selected.
+</p>
+
 {% if table_header|length > 0 %}
 
-  <table>
+  <table id="selectableTable">
     {% for row in table_header %}
       <tr>
         {% if forloop.first %}
           <th rowspan="{{table_header|length }}">&nbsp;</th>
         {% endif %}
-        {% for k,v in row.items %}
-          <th colspan="{{v}}">
-            {% if k|slice:"0:6" == 'REPEAT' %}
+        {% for header_text,vals in row.items %}
+          <th colspan="{{vals.colspan}}" class="isheader {{vals.classes}}">
+            {% if header_text|slice:"0:6" == 'REPEAT' %}
               &nbsp;
             {% else %}
-              {{ k }}
+              {{ header_text }}
             {% endif %}
           </th>
         {% endfor %}
       </tr>
     {% endfor %}
     {% for row in table_body %}
-      <tr>
-        <td>
+      <tr class="isrow row-{{row.industry_id}}">
+        <td class="row-label">
           {{row.name}}
         </td>
         {% for val in row.vals %}
-          <td style="text-align: right;">
-            {{ val }}
+          <td style="text-align: right;" class="iscell row-{{row.industry_id}} col-{{val.region_code}}">
+            {{ val.value }}
           </td>
         {% endfor %}
       </tr>
     {% endfor %}
-    {% if table_header|length == 0 %}
-      <tr>
-        <td>
+    {% if table_header|length == 0 or True %}
+      <tr class="isrow row-search_str">
+        <td class="row-label">
           {{ text_row.name }} (your search)
         </td>
         {% for val in text_row.vals %}
-          <td style="text-align: right;">
-            {{ val }}
+          <td style="text-align: right;" class="iscell row-search_str col-{{val.region_code}}">
+            {{ val.value }}
           </td>
         {% endfor %}
       </tr>
@@ -75,7 +90,124 @@ th {
   <p>No results found</p>
 {% endif %}
 
+<button id="submitBtn">Submit</button>
+<form id="selectedForm" method="POST" action="#">
+  <input type="hidden" name="selectedIndividualCells" id="selectedIndividualCells" value="">
+  <input type="hidden" name="selectedRows" id="selectedRows" value="">
+  <input type="hidden" name="selectedColumns" id="selectedColumns" value="">
+</form>
+
 {% include 'layouts/footer.html' %}
+
+<script>
+  // Mainly ChatGPT!!
+  const table = document.getElementById('selectableTable');
+  const submitBtn = document.getElementById('submitBtn');
+  const selectedIndividualCellsInput = document.getElementById('selectedIndividualCells');
+  const selectedRowsInput = document.getElementById('selectedRows');
+  const selectedColumnsInput = document.getElementById('selectedColumns');
+
+  // Update the sum of selected values
+  function updateSum() {
+    const selectedCells = table.querySelectorAll('td.selected');
+    const sum = Array.from(selectedCells).reduce((total, cell) => total + parseFloat(cell.textContent.trim()), 0);
+    sumDisplay.textContent = sum;
+  }
+
+  // Toggle selection for rows or columns 
+  table.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (target.tagName === 'TD' && target.classList.contains('row-label')) {
+      // Toggle entire row based on the new rules
+      const rowClass = target.parentNode.classList[1];
+      const rowCells = table.querySelectorAll(`.${rowClass} .iscell`);
+      const selectedCount = Array.from(rowCells).filter(cell => cell.classList.contains('selected')).length;
+
+      rowCells.forEach(cell => {
+        cell.classList.toggle('selected', selectedCount !== rowCells.length);
+      });
+    } else if (target.tagName === 'TH' && target.classList.contains('isheader')) {
+      // Toggle entire column based on the new rules
+      const colClasses = Array.from(target.classList).filter(cls => cls.startsWith('col-'));
+      colClasses.forEach(colClass => {
+        const colCells = table.querySelectorAll(`td.${colClass}`);
+        const selectedCount = Array.from(colCells).filter(cell => cell.classList.contains('selected')).length;
+
+        colCells.forEach(cell => {
+          cell.classList.toggle('selected', selectedCount !== colCells.length);
+        });
+      });
+    } else if (target.tagName === 'TD' && target.classList.contains('iscell')) {
+      // Toggle individual cell
+      target.classList.toggle('selected');
+    }
+
+    updateSum()
+  });
+
+  // Check if a whole row is selected
+  function isRowSelected(rowClass) {
+    const rowCells = table.querySelectorAll(`.${rowClass} .iscell`);
+    return Array.from(rowCells).every(cell => cell.classList.contains('selected'));
+  }
+
+  // Check if a whole column is selected
+  function isColumnSelected(colClass) {
+    const colCells = table.querySelectorAll(`td.${colClass}`);
+    return Array.from(colCells).every(cell => cell.classList.contains('selected'));
+  }
+
+  // Example Usage
+  submitBtn.addEventListener('click', () => {
+    const selectedRows = [];
+    const selectedColumns = [];
+    const selectedIndividualCells = [];
+
+    // Check all rows
+    table.querySelectorAll('.isrow').forEach(row => {
+      const rowClass = Array.from(row.classList).find(cls => cls.startsWith('row-'));
+      if (isRowSelected(rowClass)) {
+        selectedRows.push(rowClass);
+      }
+    });
+
+    // Check all headers for columns
+    table.querySelectorAll('th.header_final').forEach(header => {
+      const colClasses = Array.from(header.classList).filter(cls => cls.startsWith('col-'));
+      colClasses.forEach(colClass => {
+        if (isColumnSelected(colClass)) {
+          selectedColumns.push(colClass);
+        }
+      });
+    });
+
+  // Find inidvidually-selected cells
+    const selectedCells = table.querySelectorAll('td.selected');
+    selectedCells.forEach(cell => {
+      const rowClass = Array.from(cell.classList).find(cls => cls.startsWith('row-'));
+      const colClass = Array.from(cell.classList).find(cls => cls.startsWith('col-'));
+
+      if (
+        !(selectedRows.includes(rowClass) ||
+          selectedColumns.includes(colClass))
+      ) {     
+        selectedIndividualCells.push(`${rowClass}#${colClass}`);
+      }
+    });
+
+    selectedIndividualCellsInput.value = JSON.stringify(selectedIndividualCells);
+    selectedRowsInput.value = JSON.stringify(selectedRows);
+    selectedColumnsInput.value = JSON.stringify(selectedColumns);
+
+    console.log(selectedIndividualCellsInput);
+    console.log(selectedRowsInput);
+    console.log(selectedColumnsInput);
+
+    // document.getElementById('selectedForm').submit();
+  });
+
+</script>
 
 </body>
 </html>

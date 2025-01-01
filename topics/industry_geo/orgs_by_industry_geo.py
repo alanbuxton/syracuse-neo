@@ -2,7 +2,9 @@ from topics.models import IndustryCluster, Organization
 from topics.industry_geo.geoname_mappings import (COUNTRIES_WITH_STATE_PROVINCE,
     admin1s_for_country)
 from topics.industry_geo.region_hierarchies import (GLOBAL_REGION_TO_COUNTRY, 
-    COUNTRY_TO_GLOBAL_REGION, US_REGIONS_TO_STATES)
+    COUNTRY_TO_GLOBAL_REGION, US_REGIONS_TO_STATES_HIERARCHY,
+    GLOBAL_REGION_TO_COUNTRIES_FLAT,
+    US_NATIONAL_REGIONS_TO_STATES)
 from neomodel import db
 from django.core.cache import cache
 from collections import defaultdict, OrderedDict
@@ -139,7 +141,8 @@ def combined_industry_geo_results(search_str,counts_only=True):
         admin1s[k].update(v)
 
     country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(countries, admin1s)
-    headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths)
+    headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths,
+                              countries, admin1s)
     if len(headers) == 0:
         # No data at all
         return [], [], []
@@ -154,21 +157,25 @@ def prepare_rows(header_row, ind_clusters, ind_cluster_by_country, ind_cluster_b
     ind_cluster_rows = []
     for ind_cluster in ind_clusters:
         ind_uri = ind_cluster.uri
-        row = { "uri":ind_cluster.uri, "name": ind_cluster.longest_representative_doc }
+        row = { "uri":ind_cluster.uri, "name": ind_cluster.longest_representative_doc,
+               "industry_id":ind_cluster.topicId }
         vals = []
+        all_zeros = True
         for loc in header_row:
-            val = get_val_for_country_admin1(loc, ind_cluster_by_country[ind_uri],
+            val, clean_loc = get_val_for_country_admin1(loc, ind_cluster_by_country[ind_uri],
                                              ind_cluster_by_adm1[ind_uri],empty_value)
-            vals.append(val)
+            vals.append({"value":val,"region_code":clean_loc})
+            if val > 0:
+                all_zeros = False        
         row['vals'] = vals
-        if sum(vals) > 0:
+        if all_zeros is False:
             ind_cluster_rows.append(row)
 
     text_row = { "uri":"", "name":search_str }
     vals = []
     for loc in header_row:
-        val = get_val_for_country_admin1(loc, text_by_country,text_by_adm1,empty_value)
-        vals.append(val)
+        val, clean_loc = get_val_for_country_admin1(loc, text_by_country,text_by_adm1,empty_value)
+        vals.append({"value":val,"region_code":clean_loc})
     text_row['vals'] = vals
     return ind_cluster_rows, text_row
 
@@ -181,9 +188,34 @@ def get_val_for_country_admin1(loc, country_data, admin1_data, empty_value):
         val = admin1_data.get(country,{}).get(admin1,empty_value)
     else:
         val = country_data.get(search_loc,empty_value)
-    return val
+    return val, search_loc
 
-def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths):
+def filtered_region_classes(region_names, relevant_countries, relevant_admin1s, 
+                            regions_to_countries = GLOBAL_REGION_TO_COUNTRIES_FLAT, # region1#region2
+                            ):
+    global_region_str = "#".join(region_names)
+    country_codes = []
+    for potential_country_code in regions_to_countries[global_region_str]:
+        if potential_country_code not in relevant_countries:
+            continue
+        country_codes.append(potential_country_code)
+        for admin1 in relevant_admin1s.get(potential_country_code,[]):
+            country_codes.append(f"{potential_country_code}-{admin1}")
+    region_classes = [f"col-{x}" for x in country_codes]
+    return " ".join(sorted(region_classes))
+
+def get_filtered_us_region_classes(region_name, us_admin1s,
+                               us_regions_to_admin1s = US_NATIONAL_REGIONS_TO_STATES, # each region is its own key
+                               ):
+    admin1_classes = []
+    for state in us_regions_to_admin1s[region_name]:
+        if state in us_admin1s:
+            admin1_classes.append(f"col-US-{state}")
+    return " ".join(sorted(admin1_classes))
+
+
+def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths,
+                    countries, admin1s):
     '''
     Returns:
         headers: list of dicts, one per header row. dict has value and width
@@ -199,66 +231,61 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
     row6 = OrderedDict() # us division 
     row7 = OrderedDict() # state/province
     for region1, region1_vals in sorted(country_hierarchy.items()):
-        row1[region1] = global_region_width( [region1], country_widths, admin1_widths)
-        for region2, region2_vals in region1_vals.items():
-            col_width = global_region_width( [region1,region2], country_widths, admin1_widths)
-            row2[region2] = col_width
+        col_width = global_region_width( [region1], country_widths, admin1_widths)
+        classes = filtered_region_classes( [region1], countries, admin1s)
+        row1[region1] = {"colspan":col_width, "classes":classes}
+        for region2, region2_vals in sorted(region1_vals.items()):
+            col_width = global_region_width( [region1, region2], country_widths, admin1_widths)
+            classes = filtered_region_classes( [region1,region2], countries, admin1s)
+            row2[region2] = {"colspan":col_width,"classes":classes}
             if isinstance(region2_vals, dict):
                 # There is a row3
-                for region3, region3_vals in region2_vals.items():
-                    row3[region3] = global_region_width( [region1,region2, region3], country_widths, admin1_widths)
-                    for country in region3_vals:
+                for region3, region3_vals in sorted(region2_vals.items()):
+                    col_width = global_region_width( [region1,region2, region3], country_widths, admin1_widths)
+                    classes = filtered_region_classes( [region1, region2, region3], countries, admin1s)
+                    row3[region3] = {"colspan":col_width, "classes":classes}
+                    for country in sorted(region3_vals):
                         col_width = admin1_width_for_country(country, admin1_widths)
-                        row4[country] = col_width
+                        classes = f"col-{country}"
+                        row4[country] = {"colspan":col_width, "classes": classes}
                         if col_width == 1:
-                            row5[f"REPEATED {country}"] = 1
-                            row6[f"REPEATED {country}"] = 1
-                            row7[f"REPEATED {country}"] = 1
+                            row5[f"REPEATED {country}"] = {"colspan":1, "classes": classes}
+                            row6[f"REPEATED {country}"] = {"colspan":1, "classes": classes}
+                            row7[f"REPEATED {country}"] = {"colspan":1, "classes": classes}
                             continue
-                        row5[f"{country} (all)"] = 1
-                        row6[f"{country} (all)"] = 1
-                        row7[f"{country} (all)"] = 1
+                        row5[f"{country} (all)"] = {"colspan":1, "classes": classes}
+                        row6[f"{country} (all)"] = {"colspan":1, "classes": classes}
+                        row7[f"{country} (all)"] = {"colspan":1, "classes": classes}
                         if country == "US":
-                            us_data = admin1_hierarchy["US"]
-                            for us_region,vals in sorted(us_data.items()):
-                                row5[us_region] = admin1_widths["US"][f"US#{us_region}"]
-                                for us_division, states in sorted(vals.items()):
-                                    row6[us_division] = admin1_widths["US"][f"US#{us_region}#{us_division}"]
-                                    for state in states:
-                                        row7[f"{country}-{state}"] = 1
+                            add_us_regions(row5,row6,row7,
+                                           admin1_hierarchy.get("US",{}),
+                                           admin1.get("US",[]),admin1_widths)
                         else:
                             for admin1 in admin1_hierarchy[country]:
-                                row5[f"{country} (all)"] = 1
-                                row6[f"{country} (all)"] = 1
-                                row7[f"{country}-{admin1}"] = 1
+                                row5[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                                row6[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                                row7[f"{country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
             else:
-                row3[f"REPEATED {region2}"] = col_width
-                for country in region2_vals:
+                row3[f"REPEATED {region2}"] = {"colspan":col_width, "classes":classes}
+                for country in sorted(region2_vals):
                     col_width = admin1_width_for_country(country, admin1_widths)
-                    row4[country] = col_width
+                    classes = f"col-{country}"
+                    row4[country] = {"colspan":col_width, "classes":classes}
                     if col_width == 1:
-                        row5[f"REPEATED {country}"] = 1
-                        row6[f"REPEATED {country}"] = 1
-                        row6[f"REPEATED {country}"] = 1
-                        row7[f"REPEATED {country}"] = 1
+                        row5[f"REPEATED {country}"] = {"colspan":1, "classes":classes}
+                        row6[f"REPEATED {country}"] = {"colspan":1, "classes":classes}
+                        row7[f"REPEATED {country}"] = {"colspan":1, "classes":classes}
                         continue
-                    row5[f"{country} (all)"] = 1
-                    row6[f"{country} (all)"] = 1
-                    row7[f"{country} (all)"] = 1
-                        
+                    row5[f"{country} (all)"] = {"colspan":1, "classes":classes}
+                    row6[f"{country} (all)"] = {"colspan":1, "classes":classes}
+                    row7[f"{country} (all)"] = {"colspan":1, "classes":classes}
                     if country == "US":
-                        us_data = admin1_hierarchy["US"]
-                        for us_region,vals in sorted(us_data.items()):
-                            row5[us_region] = admin1_widths["US"][f"US#{us_region}"]
-                            for us_division, states in sorted(vals.items()):
-                                row6[us_division] = admin1_widths["US"][f"US#{us_region}#{us_division}"]
-                                for state in states:
-                                    row7[f"{country}-{state}"] = 1
+                        add_us_regions(row5,row6,row7,admin1_hierarchy["US"],admin1s.get("US",[]),admin1_widths)
                     else:
                         for admin1 in admin1_hierarchy[country]:
-                            row5[f"{country} (all)"] = 1
-                            row6[f"{country} (all)"] = 1
-                            row7[f"{country}-{admin1}"] = 1
+                            row5[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                            row6[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                            row7[f"{country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
 
     if row_has_relevant_content(row1):
         results.append(row1)   
@@ -274,7 +301,22 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
         results.append(row6)
     if row_has_relevant_content(row7):
         results.append(row7)
+
+    for val in results[-1].values():
+        val["classes"] = val["classes"] + " header_final"
     return results
+
+def add_us_regions(row5,row6,row7,us_admin1_data,us_admin1s,admin1_widths):
+    for us_region,vals in sorted(us_admin1_data.items()):
+        col_width = admin1_widths["US"][f"US#{us_region}"]
+        classes = get_filtered_us_region_classes(us_region, us_admin1s)
+        row5[us_region] = {"colspan":col_width, "classes":classes}
+        for us_division, states in sorted(vals.items()):
+            col_width = admin1_widths["US"][f"US#{us_region}#{us_division}"]
+            classes = get_filtered_us_region_classes(us_division, us_admin1s)
+            row6[us_division] = {"col_width":col_width, "classes":classes}
+            for state in states:
+                row7[f"US-{state}"] = {"colspan":1, "classes":f"col-US-{state}"}
 
 def row_has_relevant_content(row):
     relevant_content = any( [ not(x.startswith("REPEATED")) for x in row.keys()])
@@ -321,7 +363,7 @@ def build_region_hierarchy(countries, admin1s):
     admin1_widths = {}
     for admin1, provinces in admin1s.items():
         if admin1 == "US":
-            us_hierarchy = filtered_hierarchy(US_REGIONS_TO_STATES,provinces)
+            us_hierarchy = filtered_hierarchy(US_REGIONS_TO_STATES_HIERARCHY,provinces)
             us_widths = hierarchy_widths({"US":us_hierarchy})
             admin1_widths[admin1] = us_widths
             admin1_hierarchy[admin1] = us_hierarchy

@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from collections import defaultdict
 
 # From https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.json
 null = None
@@ -9,7 +10,7 @@ un_regions = [{"name":"Afghanistan","alpha-2":"AF","alpha-3":"AFG","country-code
 
 # See https://en.wikipedia.org/wiki/United_States_Census_Bureau (list below initially created by ChatGPT, but was very wrong)
 
-US_REGIONS_TO_STATES= {
+US_REGIONS_TO_STATES_HIERARCHY = {
     "Northeast": {
         "New England": ["CT", "ME", "MA", "NH", "RI", "VT"],
         "Mid Atlantic": ["NJ", "NY", "PA",],
@@ -29,18 +30,27 @@ US_REGIONS_TO_STATES= {
     }
 }
 
-def us_states_to_national_regions(hierarchy=US_REGIONS_TO_STATES):
-    cache_key = "us_states_to_national_regions"
-    res = cache.get(cache_key)
-    if res is not None:
-        return res
-    res = {}
+def us_states_to_national_regions_and_back(hierarchy=US_REGIONS_TO_STATES_HIERARCHY):
+    cache_key = "us_states_to_national_regions_and_back"
+    states_to_regions_key = "US_STATES_TO_NATIONAL_REGIONS"
+    regions_to_states_key = "US_NATIONAL_REGIONS_TO_STATES"
+    # res = cache.get(cache_key)
+    # if isinstance(res, dict) and len(res) > 1:
+    #     return res[states_to_regions_key], res[regions_to_states_key]
+    state_to_region = {}
+    region_to_states = defaultdict(set)
     for k,v in hierarchy.items():
         for k2,vs in v.items():
             for v in vs:
-                res[v] = {"division":k2, "region":k}
+                state_to_region[v] = {"division":k2, "region":k}
+                region_to_states[k].add(v)
+                region_to_states[k2].add(v)
+    res = {
+        states_to_regions_key: state_to_region,
+        regions_to_states_key: region_to_states,
+    }
     cache.set(cache_key, res)
-    return res
+    return res[states_to_regions_key], res[regions_to_states_key]
 
 
 def get_region_hierarchy(regions=un_regions):
@@ -51,13 +61,16 @@ def get_region_hierarchy(regions=un_regions):
     '''
     cache_key_global_region_to_country = "global_region_to_country"
     cache_key_country_to_global_region = "country_to_global_region"
+    cache_key_global_region_to_countries_flat = "global_region_to_countries_flat"
     res1 = cache.get(cache_key_global_region_to_country)
     res2 = cache.get(cache_key_country_to_global_region)
-    if res1 and res2: 
-        return res1, res2
+    res3 = cache.get(cache_key_global_region_to_countries_flat)
+    if res1 and res2 and res3: 
+        return res1, res2, res3
     
     top_down = {}
     bottom_up = {}
+    flat = defaultdict(set)
     for row in regions:
         region = row['region'] 
         subregion = row['sub-region'] 
@@ -70,12 +83,14 @@ def get_region_hierarchy(regions=un_regions):
             continue
         if region not in top_down:
             top_down[region] = {} 
+        flat[region].add(country_code)
         if intermediate is None or len(intermediate.strip()) == 0:
             # no further region
             if subregion not in top_down[region]:
                  top_down[region][subregion] = []
             top_down[region][subregion].append(country_code)   
-            bottom_up[country_code] = {0:region, 1:subregion}         
+            bottom_up[country_code] = {0:region, 1:subregion}   
+            flat[f"{region}#{subregion}"].add(country_code)      
         else:
             # have to support an extra level
             if subregion not in top_down[region]:
@@ -84,13 +99,18 @@ def get_region_hierarchy(regions=un_regions):
                  top_down[region][subregion][intermediate] = [] 
             top_down[region][subregion][intermediate].append(country_code)
             bottom_up[country_code] = {0:region, 1:subregion, 2:intermediate}
+            flat[f"{region}#{subregion}"].add(country_code)
+            flat[f"{region}#{subregion}#{intermediate}"].add(country_code)
 
     cache.set(cache_key_global_region_to_country,top_down)
     cache.set(cache_key_country_to_global_region,bottom_up)
-    return top_down, bottom_up
+    cache.set(cache_key_global_region_to_countries_flat, flat)
+    return top_down, bottom_up, flat
 
-GLOBAL_REGION_TO_COUNTRY, COUNTRY_TO_GLOBAL_REGION = get_region_hierarchy()
-US_STATES_TO_NATIONAL_REGIONS = us_states_to_national_regions()
+(GLOBAL_REGION_TO_COUNTRY, COUNTRY_TO_GLOBAL_REGION,
+    GLOBAL_REGION_TO_COUNTRIES_FLAT) = get_region_hierarchy()
+(US_STATES_TO_NATIONAL_REGIONS, 
+    US_NATIONAL_REGIONS_TO_STATES) = us_states_to_national_regions_and_back()
 
 COUNTRIES_WITH_STATE_PROVINCE = ["AE","US","CA","CN","IN"] # Countries to be broken down to state/province
  
