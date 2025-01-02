@@ -1169,8 +1169,8 @@ class ProductActivity(ActivityMixin, Resource):
     @property
     def all_actors(self):
         return {
-            "product": self.product.all(),
-            "organization": self.product.all(),
+            "product": self.withProduct.all(),
+            "organization": self.productOrganization.all(),
         }
 
     def serialize(self):

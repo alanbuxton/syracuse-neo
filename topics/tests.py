@@ -723,6 +723,14 @@ class TestUtilsWithDumpData(TestCase):
         assert len(data["node_data"]) == 4
         assert len(data["edge_data"]) == 5
 
+    def test_product_activity_all_actors(self):
+        a = Resource.nodes.get_or_none(uri='https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base')
+        acts = a.all_actors
+        products = [x.uri for x in acts['product']]
+        orgs = [x.uri for x in acts['organization']]
+        assert products == ['https://1145.am/db/10282/Version_20_Of_The_Talla_Intelligent_Knowledge_Base-Product']
+        assert orgs == ['https://1145.am/db/10282/Talla']
+
 
 class TestRegionHierarchy(TestCase):
 
