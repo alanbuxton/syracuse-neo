@@ -773,13 +773,31 @@ class TestRegionHierarchy(TestCase):
                                           ('Eastern Asia', {'colspan': 3, 'classes': 'col-CN col-CN-04 col-CN-11'}), 
                                           ('South-eastern Asia', {'colspan': 1, 'classes': 'col-SG'}), 
                                           ('Western Asia', {'colspan': 1, 'classes': 'col-AE'}), 
-                                          ('Northern Europe', {'colspan': 1, 'classes': 'col-GB'})])
+                                          ('Northern Europe', {'colspan': 1, 'classes': 'col-GB'})])    
+        assert headers[2] == OrderedDict([('Southern Africa', {'colspan': 3, 'classes': 'col-NA col-SZ col-ZA'}), 
+                                          ('REPEATED Northern America', {'colspan': 6, 'classes': 'col-CA col-US col-US-IA col-US-IL col-US-NY col-US-OK'}), 
+                                          ('REPEATED Eastern Asia', {'colspan': 3, 'classes': 'col-CN col-CN-04 col-CN-11'}), 
+                                          ('REPEATED South-eastern Asia', {'colspan': 1, 'classes': 'col-SG'}), 
+                                          ('REPEATED Western Asia', {'colspan': 1, 'classes': 'col-AE'}), 
+                                          ('REPEATED Northern Europe', {'colspan': 1, 'classes': 'col-GB'})])
+        assert headers[3] == OrderedDict([('NA', {'colspan': 1, 'classes': 'col-NA'}), ('SZ', {'colspan': 1, 'classes': 'col-SZ'}), 
+                                          ('ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('CA', {'colspan': 1, 'classes': 'col-CA'}), 
+                                          ('US', {'colspan': 5, 'classes': 'col-US col-US-IA col-US-IL col-US-NY col-US-OK'}), 
+                                          ('CN', {'colspan': 3, 'classes': 'col-CN col-CN-04 col-CN-11'}), 
+                                          ('SG', {'colspan': 1, 'classes': 'col-SG'}), ('AE', {'colspan': 1, 'classes': 'col-AE'}), 
+                                          ('GB', {'colspan': 1, 'classes': 'col-GB'})])
+        assert headers[4] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ'}), 
+                                          ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('REPEATED CA', {'colspan': 1, 'classes': 'col-CA'}), 
+                                          ('US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Midwest', {'colspan': 2, 'classes': 'col-US-IA col-US-IL'}), 
+                                          ('Northeast', {'colspan': 1, 'classes': 'col-US-NY'}), ('South', {'colspan': 1, 'classes': 'col-US-OK'}), 
+                                          ('CN (all)', {'colspan': 1, 'classes': 'col-CN'}), ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), 
+                                          ('REPEATED AE', {'colspan': 1, 'classes': 'col-AE'}), ('REPEATED GB', {'colspan': 1, 'classes': 'col-GB'})])
         assert headers[5] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ'}), 
                                           ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('REPEATED CA', {'colspan': 1, 'classes': 'col-CA'}), 
-                                          ('US (all)', {'colspan': 1, 'classes': 'col-US'}), ('East North Central', {'col_width': 1, 'classes': 'col-US-IL'}), 
-                                          ('West North Central', {'col_width': 1, 'classes': 'col-US-IA'}),
-                                          ('Mid Atlantic', {'col_width': 1, 'classes': 'col-US-NY'}), 
-                                          ('West South Central', {'col_width': 1, 'classes': 'col-US-OK'}), ('CN (all)', {'colspan': 1, 'classes': 'col-CN'}),
+                                          ('US (all)', {'colspan': 1, 'classes': 'col-US'}), ('East North Central', {'colspan': 1, 'classes': 'col-US-IL'}), 
+                                          ('West North Central', {'colspan': 1, 'classes': 'col-US-IA'}),
+                                          ('Mid Atlantic', {'colspan': 1, 'classes': 'col-US-NY'}), 
+                                          ('West South Central', {'colspan': 1, 'classes': 'col-US-OK'}), ('CN (all)', {'colspan': 1, 'classes': 'col-CN'}),
                                           ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), ('REPEATED AE', {'colspan': 1, 'classes': 'col-AE'}), 
                                           ('REPEATED GB', {'colspan': 1, 'classes': 'col-GB'})])
         assert headers[6] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA header_final'}), 

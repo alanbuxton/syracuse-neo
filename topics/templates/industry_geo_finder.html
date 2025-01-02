@@ -119,7 +119,7 @@ button {
     const target = e.target;
 
     if (target.tagName === 'TD' && target.classList.contains('row-label')) {
-      // Toggle entire row based on the new rules
+      // Toggle entire row - if zero or more items are selected (but not all) then toggle all on. Otherwise all off.
       const rowClass = target.parentNode.classList[1];
       const rowCells = table.querySelectorAll(`.${rowClass} .iscell`);
       const selectedCount = Array.from(rowCells).filter(cell => cell.classList.contains('selected')).length;
@@ -128,16 +128,22 @@ button {
         cell.classList.toggle('selected', selectedCount !== rowCells.length);
       });
     } else if (target.tagName === 'TH' && target.classList.contains('isheader')) {
-      // Toggle entire column based on the new rules
+      // Toggle entire column - if zero or more items are selected (but not all) then toggle all on. Otherwise all off.
       const colClasses = Array.from(target.classList).filter(cls => cls.startsWith('col-'));
-      colClasses.forEach(colClass => {
-        const colCells = table.querySelectorAll(`td.${colClass}`);
-        const selectedCount = Array.from(colCells).filter(cell => cell.classList.contains('selected')).length;
-
-        colCells.forEach(cell => {
-          cell.classList.toggle('selected', selectedCount !== colCells.length);
-        });
+      const selector = colClasses.map(className => `td.${className}`).join(',');
+      const colCells = table.querySelectorAll(selector);
+      const selectedCount = Array.from(colCells).filter(cell => cell.classList.contains('selected')).length;
+      colCells.forEach(cell => {
+           cell.classList.toggle('selected', selectedCount !== colCells.length);
       });
+      // colClasses.forEach(colClass => {
+      //   const colCells = table.querySelectorAll(`td.${colClass}`);
+      //   const selectedCount = Array.from(colCells).filter(cell => cell.classList.contains('selected')).length;
+
+      //   colCells.forEach(cell => {
+      //     cell.classList.toggle('selected', selectedCount !== colCells.length);
+      //   });
+      // });
     } else if (target.tagName === 'TD' && target.classList.contains('iscell')) {
       // Toggle individual cell
       target.classList.toggle('selected');
