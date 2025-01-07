@@ -322,21 +322,21 @@
 
 <https://1145.am/db/10282/apnewscom_1b87240f9a73c763aca4ff6b35856e63> a schema:Article ;
     ns1:internalDocId 10282 ;
-    schema:datePublished "2018-08-21T18:27:26+00:00"^^xsd:dateTime ;
+    schema:datePublished "2024-05-30T18:27:26+00:00"^^xsd:dateTime ;
     schema:headline "Talla's Intelligent Knowledge Base 2.0 Full of Innovative AI Features" ;
     schema:sourceOrganization "Associated Press" ;
     schema:url <https://apnews.com/1b87240f9a73c763aca4ff6b35856e63> .
 
 <https://1145.am/db/11702/apnewscom_0cfe3c9e420589c5ded1a051783a3416> a schema:Article ;
     ns1:internalDocId 11702 ;
-    schema:datePublished "2018-05-23T14:02:20+00:00"^^xsd:dateTime ;
+    schema:datePublished "2024-05-30T14:02:20+00:00"^^xsd:dateTime ;
     schema:headline "M*Modal Advances its AI-Powered Clinical Documentation Integrity (CDI) Solutions with Market-Leading Innovation and Client-Focused Functionality" ;
     schema:sourceOrganization "Associated Press" ;
     schema:url <https://apnews.com/0cfe3c9e420589c5ded1a051783a3416> .
 
 <https://1145.am/db/12170/apnewscom_08e1cc9a3d09602ce634dbc965be6974> a schema:Article ;
     ns1:internalDocId 12170 ;
-    schema:datePublished "2018-07-10T14:02:50+00:00"^^xsd:dateTime ;
+    schema:datePublished "2024-05-30T14:02:50+00:00"^^xsd:dateTime ;
     schema:headline "People Power Introduces Artificial Intelligence-Powered Location Detection Microservice Solving Geofencing Limitations for Smart Home Services" ;
     schema:sourceOrganization "Associated Press" ;
     schema:url <https://apnews.com/08e1cc9a3d09602ce634dbc965be6974> .

@@ -1,9 +1,9 @@
 from django.test import TestCase
 from collections import OrderedDict
 from topics.models import *
-from .stats_helpers import get_stats
+from .stats_helpers import get_stats, date_minus
 from auth_extensions.anon_user_utils import create_anon_user
-from .activity_helpers import get_activities_by_country_and_date_range
+from .activity_helpers import get_activities_by_country_and_date_range, activities_by_industry, activities_by_region
 from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
 from topics.timeline_utils import get_timeline_data
@@ -11,7 +11,7 @@ import os
 from integration.management.commands.import_ttl import do_import_ttl
 from integration.models import DataImport
 from neomodel import db
-from datetime import date
+from datetime import date, datetime, timezone
 import time
 from django.contrib.auth import get_user_model
 from topics.serializers import *
@@ -173,35 +173,52 @@ class TestUtilsWithDumpData(TestCase):
         assert set(counts) == {('ProductActivity', 10), ('RoleActivity', 12), ('Article', 202), 
                                ('Person', 12), ('CorporateFinanceActivity', 194), ('PartnershipActivity', 4), 
                                ('Role', 11), ('LocationActivity', 11), ('Organization', 421)}
-        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1), ('CZ', 'Czechia', 1, 1, 1), 
-                                          ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1), 
-                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), 
-                                          ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), 
-                                          ('US', 'United States of America', 15, 15, 35)]
-        assert sorted(recents_by_source) == [('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4),
-            ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1),
-            ('MarketWatch', 4, 4, 4), ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
-            ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (383, 'Banking & Markets Investment Bank', 1, 1, 1), 
-                                            (154, 'Biomanufacturing Technologies', 0, 0, 1), (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), 
-                                            (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), 
-                                            (74, 'Chip Business', 2, 2, 2), (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1)]
+
+        assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
+                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
+                                          ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
+                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
+                                          ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 17, 17, 38)]
+        sample_acts = activities_by_region("AU",date_minus(max_date,7),max_date,counts_only=False)
+        assert sample_acts == [['https://1145.am/db/4290457/Gyg-Ipo', 
+                                'https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_', 
+                                datetime(2024, 5, 31, 5, 12, 37, 320000, tzinfo=timezone.utc)]]
+        sample_acts = activities_by_region("GB",date_minus(max_date,7),max_date,counts_only=False)
+        assert sample_acts == [['https://1145.am/db/4290472/Associated_British_Foods-Ipo', 'https://1145.am/db/4290472/wwwmarketwatchcom_story_ab-foods-majority-shareholder-sells-10-3-mln-shares-for-gbp262-mln-067222fe', datetime(2024, 5, 31, 6, 42, tzinfo=timezone.utc)], 
+                               ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)], 
+                               ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)]]
+        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
+                                             ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), 
+                                             ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 4, 4, 4), 
+                                             ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
+                                             ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 3), 
+                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), 
+                                            (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2), (4, 'Cloud Services', 0, 0, 1), 
+                                            (165, 'Development Banks', 1, 1, 1), (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
+        sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
+        res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
+        assert res == [['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)], 
+                       ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)], 
+                       ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)]]
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")
         min_date = date.fromisoformat("2024-05-03")
         country_code = 'US-NY'
         matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20)
-        assert len(matching_activity_orgs) == 4
+        assert len(matching_activity_orgs) == 6
         sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_actors) == {('investor', 'target'), ('participant', 'protagonist')}
+        assert set(sorted_actors) == {('participant', 'protagonist'), ('buyer',), ('buyer', 'target'), ('investor', 'target')}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
-        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 4)]
-        urls = sorted([x['document_url'] for x in matching_activity_orgs])
-        assert urls == ['https://www.globenewswire.com/news-release/2024/06/01/2891798/0/en/CERE-NASDAQ-REMINDER-BFA-Law-Reminds-Cerevel-Shareholders-to-Inquire-About-Ongoing-Investigation-into-the-45-Merger-Offer.html',
-                        'https://www.prnewswire.com/news-releases/bbh-capital-partners-completes-investment-in-ethos-veterinary-health-llc-300775214.html',
-                        'https://www.prnewswire.com/news-releases/gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390.html',
-                        'https://www.prnewswire.com/news-releases/the-praedium-group-acquires-novel-bellevue-in-nashville-tn-300775104.html']
+        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 6)]
+        uris = sorted([x['activity_uri'] for x in matching_activity_orgs])
+        assert uris == ['https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 
+                        'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 
+                        'https://1145.am/db/3475220/Novel_Bellevue-Investment', 
+                        'https://1145.am/db/4290170/Abbvie_Inc-Acquisition', 
+                        'https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger', 
+                        'https://1145.am/db/4290170/Cerevel_Therapeutics_Holdings_Inc-Acquisition']
 
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"

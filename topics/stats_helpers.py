@@ -35,29 +35,29 @@ def get_stats(max_date):
     recents_by_industry = []
     for industry in sorted(IndustryCluster.leaf_nodes_only(),
                            key=lambda x: x.longest_representative_doc):
-        logger.info(f"Stats for {industry.longest_representative_doc}")
-        cnt7 = activities_by_industry(industry,date_minus(max_date,7),max_date,counts_only=True)
-        cnt30 = activities_by_industry(industry,date_minus(max_date,30),max_date,counts_only=True)
+        logger.info(f"Stats for {industry.uri}")
         cnt90 = activities_by_industry(industry,date_minus(max_date,90),max_date,counts_only=True)
-        if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
+        cnt30 = activities_by_industry(industry,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
+        cnt7 = activities_by_industry(industry,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+        if cnt90 > 0:
             recents_by_industry.append( 
                 (industry.topicId, industry.longest_representative_doc,cnt7,cnt30,cnt90) )
     for country_code,country_name in COUNTRY_CODE_TO_NAME.items():
         logger.info(f"Stats for {country_code}")
         if country_code.strip() == '':
             continue
-        cnt7 = activities_by_region(country_code,date_minus(max_date,7),max_date,counts_only=True)
-        cnt30 = activities_by_region(country_code,date_minus(max_date,30),max_date,counts_only=True)
         cnt90 = activities_by_region(country_code,date_minus(max_date,90),max_date,counts_only=True)
-        if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
+        cnt30 = activities_by_region(country_code,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
+        cnt7 = activities_by_region(country_code,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+        if cnt90 > 0:
             recents_by_country_region.append( (country_code,country_name,cnt7,cnt30,cnt90) )
     recents_by_source = []
     for source_name in Article.all_sources():
         logger.info(f"Stats for {source_name}")
-        cnt7 = activities_by_source(source_name, date_minus(max_date,7), max_date,counts_only=True)
-        cnt30 = activities_by_source(source_name, date_minus(max_date,30), max_date,counts_only=True)
         cnt90 = activities_by_source(source_name, date_minus(max_date,90), max_date,counts_only=True)
-        if cnt7 > 0 or cnt30 > 0 or cnt90 > 0:
+        cnt30 = activities_by_source(source_name, date_minus(max_date,30), max_date,counts_only=True) if cnt90 > 0 else 0
+        cnt7 = activities_by_source(source_name, date_minus(max_date,7), max_date,counts_only=True) if cnt30 > 0 else 0
+        if cnt90 > 0:
             recents_by_source.append( (source_name,cnt7,cnt30,cnt90) )
     ts2 = datetime.now(tz=timezone.utc)
     logger.info(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
