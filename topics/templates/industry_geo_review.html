@@ -1,0 +1,88 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th {
+  text-align: center;
+}
+
+th.selected, td.selected {
+  background-color: #d3f4d3;
+}
+
+button {
+  margin-top: 10px;
+}
+
+</style>
+  <title>Organizations by Industry & Geographical Region</title>
+</head>
+<body>
+    <p>
+        {% include 'layouts/nav-header.html' %}
+    </p>
+
+    <h1>Review Organizations for Tracking</h1>
+    <p>
+        Based on your selections, we'll be tracking the following organizations for you:
+    </p>
+    <form method="post" action="#">
+        {% csrf_token %}
+        <div>
+            <button type="submit">Track Selected Organizations</button>
+        </div>
+        {% for table_row in table_data %}
+            <div>
+                <br/>
+                <h4>{{ table_row.title }}</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select-all-{{ table_row.table_id }}" onclick="toggleSelectAll('{{ table_row.table_id }}')" checked="True"> Select All</th>
+                            <th>URI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for org in table_row.orgs %}
+                        <tr>
+                            <td><input type="checkbox" name="selected_organizations" value="{{ org }}" class="select-org-{{ table_row.table_id }}" checked="True"></td>
+                            <td>{{ org }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    
+        <div>
+            <button type="submit">Track Selected Organizations</button>
+        </div>
+    </form>
+
+    {% include 'layouts/footer.html' %}
+    
+    <script>
+        // Toggle "select all" for each table
+        function toggleSelectAll(tableID) {
+            let checkboxes = document.querySelectorAll(`.select-org-${tableID}`);
+            let selectAllCheckbox = document.getElementById(`select-all-${tableID}`);
+            
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+    </script>
+
+</body>
+</html>

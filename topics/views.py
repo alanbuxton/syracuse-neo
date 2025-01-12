@@ -1,15 +1,16 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
+from rest_framework.generics import  ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from django.shortcuts import redirect
-from topics.models import Organization, Resource, IndustryCluster
+from topics.models import Organization, Resource, IndustryCluster, GeoNamesLocation
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
     NameSearchSerializer, GeoSerializer, 
     IndustrySerializer,OrganizationTimelineSerializer,
-    ResourceSerializer, FamilyTreeSerializer,
-    CountryRegionSerializer, IndustryClusterSerializer)
+    ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
+    OrgsByIndustryGeoSerializer)
 from rest_framework import status, viewsets
 from datetime import date, timedelta
 from topics.stats_helpers import cached_activity_stats_last_updated_date
@@ -19,6 +20,8 @@ from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
 from .industry_geo.orgs_by_industry_geo import combined_industry_geo_results
+import re
+import json
 
 
 import logging
@@ -41,20 +44,7 @@ class IndustriesViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return IndustryCluster.for_external_api()
 
-class CountriesAndRegionsViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = CountryRegionSerializer 
 
-    def get_queryset(self):
-        _, vals, _, _ = get_geo_data()
-        return [
-            {"country_name":x,
-             "region_name": y,
-             "country_region_code": z} for x,y,z in vals
-        ]
-
-    
 class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'index.html'
@@ -252,21 +242,86 @@ class OrganizationByUri(APIView):
                             }, status=status.HTTP_200_OK)
         return resp
 
+class IndustryGeoFinderReview(ListCreateAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'industry_geo_review.html'   
 
+    def post(self, request):
+        search_str = request.POST.get('searchStr')
+        all_industry_ids = request.POST['allIndustryIDs']
+        all_industry_ids = json.loads(all_industry_ids)  
+        selected_cells = request.POST['selectedIndividualCells']
+        indiv_cells = [row_col_data_to_tuple(x) for x in json.loads(selected_cells)]
+        indiv_cells = remove_not_needed_admin1s_from_individual_cells(all_industry_ids,indiv_cells)
+        selected_rows = request.POST['selectedRows']
+        industry_ids = [row_from_request_post_data(x) for x in json.loads(selected_rows) if x != search_str]
+        selected_columns = request.POST['selectedColumns']
+        geo_codes = [col_from_request_post_data(x) for x in json.loads(selected_columns)]
+        geo_codes = remove_not_needed_admin1s(geo_codes)
+
+        table_data = OrgsByIndustryGeoSerializer({
+            "all_industry_ids": all_industry_ids,
+            "industry_ids":industry_ids,
+            "search_str": search_str,
+            "geo_codes": geo_codes,
+            "indiv_cells": indiv_cells,
+            "search_str_in_all_geos": search_str in selected_rows,
+        })
+
+        resp = Response({"table_data":table_data.data}, status=status.HTTP_200_OK)
+        return resp
+    
+def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
+    cells_to_keep_full = []
+    for industry_id in (all_industry_ids + ["search_str"]):
+        relevant_cells = [(x,y) for x,y in cells if x == str(industry_id)]
+        relevant_geos = [x[1] for x in relevant_cells]
+        geos_to_keep = remove_not_needed_admin1s(relevant_geos)
+        industry_cells_to_keep = [(x,y) for x,y in relevant_cells if y in geos_to_keep]
+        cells_to_keep_full.extend(industry_cells_to_keep)
+    return cells_to_keep_full
+        
+def remove_not_needed_admin1s(geo_codes):
+    geo_codes_as_set = set(geo_codes)
+    codes_with_admin1 = filter( lambda x: len(x) > 4, geo_codes)
+    for code_with_admin1 in codes_with_admin1:
+        country = code_with_admin1[:2]
+        if country in geo_codes_as_set:
+            geo_codes_as_set.remove(code_with_admin1)
+    return list(geo_codes_as_set)
+            
+def row_col_data_to_tuple(val):
+    topic_id = row_from_request_post_data(val)
+    geo_code = col_from_request_post_data(val)
+    return (topic_id, geo_code)
+
+def row_from_request_post_data(val):
+    val = re.search("row-(.+?)(?:\b|$|#)",val)
+    if val:
+        return val.groups()[0]
+    else:
+        return None
+
+def col_from_request_post_data(val):
+    val = re.search("col-(.+?)(?:\b|$|#)",val)
+    if val:
+        return val.groups()[0]
+    else:
+        return None 
+    
 class IndustryGeoFinder(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'industry_geo_finder.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, **kwargs):
         industry_search_str = kwargs['industry_search']
-        
         headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str) 
-        
         request_state, _ = prepare_request_state(request)
         resp = Response({"table_body": ind_cluster_rows,
                          "text_row": text_row,
                          "table_header": headers,
                          "search_term": industry_search_str,
+                         "industry_ids": json.dumps([x['industry_id'] for x in ind_cluster_rows]),
                          "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp

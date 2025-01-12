@@ -14,3 +14,12 @@ def blank_or_none(val):
     if isinstance(val, str) and val.strip() == '':
         return True
     return False
+
+def geo_to_country_admin1(geo_code):
+    if geo_code is None: 
+        return None, None
+    splitted = geo_code.split("-")
+    country_code = splitted[0]
+    admin1_code = splitted[1] if len(splitted) > 1 else None
+    return country_code, admin1_code
+

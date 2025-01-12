@@ -18,5 +18,6 @@ urlpatterns = [
     path('about', views.About.as_view(), name="about"),
     path('resource/<str:domain>/<str:path>/<doc_id>/<str:name>', views.ShowResource.as_view(), name='resource-with-doc-id'),
     path('resource/<str:domain>/<str:path>/<str:name>', views.ShowResource.as_view(), name='resource-no-doc-id'),
-    path('industry_geo_finder/<str:industry_search>', views.IndustryGeoFinder.as_view(), name='industry_geo_finder')
+    path('industry_geo_finder/<str:industry_search>', views.IndustryGeoFinder.as_view(), name='industry-geo-finder'),
+    path('industry_geo_finder_review', views.IndustryGeoFinderReview.as_view(), name='industry-geo-finder-review'),
 ]

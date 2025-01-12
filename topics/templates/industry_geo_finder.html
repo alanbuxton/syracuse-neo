@@ -91,10 +91,13 @@ button {
 {% endif %}
 
 <button id="submitBtn">Submit</button>
-<form id="selectedForm" method="POST" action="#">
+<form id="selectedForm" method="POST" action="{% url 'industry-geo-finder-review' %}">
+  {% csrf_token %}
   <input type="hidden" name="selectedIndividualCells" id="selectedIndividualCells" value="">
   <input type="hidden" name="selectedRows" id="selectedRows" value="">
   <input type="hidden" name="selectedColumns" id="selectedColumns" value="">
+  <input type="hidden" name="allIndustryIDs" id="allIndustryIDs" value="{{ industry_ids }}">
+  <input type="hidden" name="searchStr" id="searchStr" value="{{ search_term }}">
 </form>
 
 {% include 'layouts/footer.html' %}
@@ -136,14 +139,6 @@ button {
       colCells.forEach(cell => {
            cell.classList.toggle('selected', selectedCount !== colCells.length);
       });
-      // colClasses.forEach(colClass => {
-      //   const colCells = table.querySelectorAll(`td.${colClass}`);
-      //   const selectedCount = Array.from(colCells).filter(cell => cell.classList.contains('selected')).length;
-
-      //   colCells.forEach(cell => {
-      //     cell.classList.toggle('selected', selectedCount !== colCells.length);
-      //   });
-      // });
     } else if (target.tagName === 'TD' && target.classList.contains('iscell')) {
       // Toggle individual cell
       target.classList.toggle('selected');
@@ -164,7 +159,6 @@ button {
     return Array.from(colCells).every(cell => cell.classList.contains('selected'));
   }
 
-  // Example Usage
   submitBtn.addEventListener('click', () => {
     const selectedRows = [];
     const selectedColumns = [];
@@ -188,7 +182,7 @@ button {
       });
     });
 
-  // Find inidvidually-selected cells
+  // Find individually-selected cells
     const selectedCells = table.querySelectorAll('td.selected');
     selectedCells.forEach(cell => {
       const rowClass = Array.from(cell.classList).find(cls => cls.startsWith('row-'));
@@ -206,11 +200,10 @@ button {
     selectedRowsInput.value = JSON.stringify(selectedRows);
     selectedColumnsInput.value = JSON.stringify(selectedColumns);
 
-    console.log(selectedIndividualCellsInput);
-    console.log(selectedRowsInput);
-    console.log(selectedColumnsInput);
-
-    // document.getElementById('selectedForm').submit();
+    // console.log(selectedIndividualCellsInput);
+    // console.log(selectedRowsInput);
+    // console.log(selectedColumnsInput);
+    document.getElementById('selectedForm').submit();
   });
 
 </script>

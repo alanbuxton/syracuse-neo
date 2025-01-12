@@ -10,7 +10,8 @@ from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
-from django.utils.functional import lazy 
+from .industry_geo import orgs_by_industry_and_or_geo, country_admin1_full_name, orgs_by_industry_text_and_geo_code
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -369,3 +370,84 @@ class IndustryClusterSerializer(serializers.Serializer):
     representative_docs_list = serializers.ListField()
     longest_representative_doc = serializers.CharField()
     industry_id = serializers.IntegerField()
+
+class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
+
+    def to_representation(self,instance):
+        search_str = instance["search_str"]
+        industry_orgs = []
+        for ind in instance["industry_ids"]:
+            orgs = orgs_by_industry_and_or_geo(ind,None)
+            if len(orgs) > 0:
+                industry = IndustryCluster.get_by_industry_id(ind)
+                if industry is not None:
+                    industry_orgs.append( {
+                        "table_id": ind,
+                        "title": f"{industry.best_name} in all Geos",
+                        "orgs": orgs,
+                    })
+                else:
+                    logger.info(f"Industry {ind} doesn't exist")
+        industry_orgs = sorted(industry_orgs, key = lambda x: x["title"])
+        if instance["search_str_in_all_geos"]:
+            orgs = orgs_by_industry_text_and_geo_code(ind,None)
+            if len(orgs) > 0:
+                industry_orgs.append( {
+                    "table_id": "search_str_all_geos",
+                    "title": f'"{search_str}" in all Geos',
+                    "orgs": orgs,
+                })
+
+        geo_orgs = []
+        all_industry_names = []
+        for ind in instance["all_industry_ids"]:
+            tmp_ind = IndustryCluster.get_by_industry_id(ind)
+            if tmp_ind is not None:
+                all_industry_names.append(tmp_ind.best_name)
+        all_industry_names = ", ".join(sorted(all_industry_names))
+        for geo in instance["geo_codes"]:
+            orgs = []
+            for ind in instance["all_industry_ids"]: 
+                orgs = orgs + orgs_by_industry_and_or_geo(int(ind), geo)
+            if len(orgs) > 0:
+                geo_loc = country_admin1_full_name(geo)
+                geo_orgs.append({
+                    "table_id": geo,
+                    "title": f"{all_industry_names} in {geo_loc}",
+                    "orgs": orgs,
+                })
+        geo_orgs = sorted(geo_orgs, key = lambda x: x["title"])
+
+        indiv_cell_ind_cluster_orgs = []
+        indiv_cell_ind_text_orgs = []
+        for ind, geo in instance["indiv_cells"]:
+            orgs = []
+            if ind == 'search_str':
+                orgs = orgs_by_industry_text_and_geo_code(search_str, geo) 
+                ind_id = hash(search_str)
+                ind_desc = f'"{search_str}"'
+                geo_loc = country_admin1_full_name(geo)
+            else:
+                industry = IndustryCluster.get_by_industry_id(ind)
+                if industry is not None:
+                    orgs = orgs_by_industry_and_or_geo(industry, geo)
+                    ind_id = ind
+                    ind_desc = industry.best_name
+                    geo_loc = country_admin1_full_name(geo)
+            if len(orgs) > 0:
+                row = {
+                    "table_id": f"{ind_id}_{geo}",
+                    "title": f"{ind_desc} in {geo_loc}",
+                    "orgs": orgs,
+                }
+                if ind == 'search_str':
+                    indiv_cell_ind_text_orgs.append(row)
+                else:
+                    indiv_cell_ind_cluster_orgs.append(row)
+        indiv_cell_ind_cluster_orgs = sorted(indiv_cell_ind_cluster_orgs, key = lambda x: x["title"])
+        indiv_cell_ind_text_orgs = sorted(indiv_cell_ind_text_orgs, key=lambda x: x["title"])
+
+        data = industry_orgs + geo_orgs + indiv_cell_ind_cluster_orgs + indiv_cell_ind_text_orgs
+        return data
+        
+        

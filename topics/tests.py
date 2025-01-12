@@ -24,10 +24,14 @@ from .serializers import (
     only_valid_relationships, FamilyTreeSerializer, 
     create_earliest_date_pretty_print_data,
 )
-from topics.industry_geo.orgs_by_industry_geo import build_region_hierarchy, prepare_headers
+from topics.industry_geo.orgs_by_industry_geo import (
+    build_region_hierarchy, prepare_headers,
+    combined_industry_geo_results,
+)
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
 from topics.industry_geo import orgs_by_industry_and_or_geo
+from topics.views import remove_not_needed_admin1s_from_individual_cells
 
 '''
     Care these tests will delete neodb data
@@ -226,7 +230,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
         assert len(orgs) == 2
 
     def test_search_by_industry_only(self):
@@ -235,7 +239,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
         assert set(orgs) == set(['https://1145.am/db/2543227/Celgene', 
                                  'https://1145.am/db/2364624/Parexel_International_Corporation', 
                                  'https://1145.am/db/2364647/Mersana_Therapeutics', 
@@ -247,7 +251,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        orgs = orgs_by_industry_and_or_geo(industry,selected_geo,limit=None)
+        orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
         assert len(orgs) == 7
 
     def test_shows_resource_page(self):
@@ -748,6 +752,93 @@ class TestUtilsWithDumpData(TestCase):
         assert products == ['https://1145.am/db/10282/Version_20_Of_The_Talla_Intelligent_Knowledge_Base-Product']
         assert orgs == ['https://1145.am/db/10282/Talla']
 
+    def test_industry_geo_finder_prep_table(self):
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("software") 
+        assert headers == [OrderedDict(
+                                [('Americas', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
+                                 ('Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict(
+                                [('Northern America', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
+                                 ('Northern Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('US', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
+                                         ('DK', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                                         ('Northeast', {'colspan': 1, 'classes': 'col-US-NY'}), 
+                                         ('South', {'colspan': 2, 'classes': 'col-US-NC col-US-TX'}), 
+                                         ('West', {'colspan': 1, 'classes': 'col-US-CA'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                                         ('Mid Atlantic', {'colspan': 1, 'classes': 'col-US-NY'}), 
+                                         ('South Atlantic', {'colspan': 1, 'classes': 'col-US-NC'}), 
+                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), 
+                                         ('Pacific', {'colspan': 1, 'classes': 'col-US-CA'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
+                                         ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
+                                         ('US-NC', {'colspan': 1, 'classes': 'col-US-NC header_final'}), 
+                                         ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
+                                         ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK header_final'})])]
+        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/109_software_tools_applications_development', 'name': 'Software-Development Tools', 'industry_id': 109, 'vals': 
+                                            [{'value': 4, 'region_code': 'US'}, 
+                                             {'value': 1, 'region_code': 'US-NY'}, 
+                                             {'value': 0, 'region_code': 'US-NC'}, 
+                                             {'value': 1, 'region_code': 'US-TX'}, 
+                                             {'value': 0, 'region_code': 'US-CA'}, 
+                                             {'value': 1, 'region_code': 'DK'}]}, 
+                                        {'uri': 'https://1145.am/db/industry/554_software_financial_technology_solutions', 'name': 'Software And Financial Services', 'industry_id': 554, 'vals': 
+                                                [{'value': 1, 'region_code': 'US'}, 
+                                                {'value': 1, 'region_code': 'US-NY'}, 
+                                                {'value': 0, 'region_code': 'US-NC'}, 
+                                                {'value': 1, 'region_code': 'US-TX'}, 
+                                                {'value': 0, 'region_code': 'US-CA'}, 
+                                                {'value': 0, 'region_code': 'DK'}]}]
+        assert text_row == {'uri': '', 'name': 'software', 'vals': [{'value': 5, 'region_code': 'US'}, 
+                                                                    {'value': 1, 'region_code': 'US-NY'}, 
+                                                                    {'value': 0, 'region_code': 'US-NC'}, 
+                                                                    {'value': 1, 'region_code': 'US-TX'}, 
+                                                                    {'value': 1, 'region_code': 'US-CA'}, 
+                                                                    {'value': 1, 'region_code': 'DK'}]}
+
+    def test_remove_not_needed_admin1s_from_individual_cells(self):
+        all_industry_ids = [109, 554, 280, 223, 55, 182, 473]
+        indiv_cells = [('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), ('223', 'US-NY'), 
+                       ('55', 'US'), ('55', 'US-TX'), ('55', 'US-CA'), ('55', 'DK'), ('182', 'US-NY'),
+                       ('search_str', 'US-NY'), ('search_str', 'US-CA')]
+        indiv_cells = remove_not_needed_admin1s_from_individual_cells(all_industry_ids,indiv_cells)
+        assert set(indiv_cells) == set([('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), 
+                                        ('223', 'US-NY'), ('55', 'US'), ('55', 'DK'), ('182', 'US-NY'),
+                                        ('search_str', 'US-NY'), ('search_str', 'US-CA')])
+
+    def test_industry_geo_finder_preview(self):
+        '''
+                                            US (all)	US-NY	US-NC	US-TX	US-CA   DK
+            Software-Development Tools	        4	    1x	    0x	    1	    0	    1
+            Software And Financial Services	    1	    1x	    0x	    1x	    0	    0
+            Restaurant Management	            2	    0x	    1x	    1	    0	    0
+            Software And Experienced Services	1	    0x	    0x	    0	    0	    0 
+            OTT Software	                    1x	    0	    0x	    1x	    0x   	0x
+            Mobile Technology	                1	    0x	    0x	    1	    0	    0
+            Public Safety Technology	        2x	    0x	    0x	    1x	    0x	    0x
+            software (your search)	            5	    1x	    0x	    1	    1x	    1x   
+        '''
+        client = self.client
+        payload = {'selectedIndividualCells': 
+                   ['["row-109#col-US-NY","row-554#col-US-NY","row-554#col-US-TX","row-280#col-US-NY","row-223#col-US-NY","row-55#col-US","row-55#col-US-TX","row-55#col-US-CA","row-55#col-DK","row-182#col-US-NY","row-search_str#col-US-NY","row-search_str#col-US-CA","row-search_str#col-DK"]'], 
+                   'selectedRows': ['["row-473"]'], 'selectedColumns': ['["col-US-NC"]'], 
+                   'allIndustryIDs': ['[109, 554, 280, 223, 55, 182, 473]'], 'searchStr': ['software']}
+        response = client.post("/industry_geo_finder_review",payload)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Public Safety Technology in all Geos" in content
+        assert "Mobile Technology, OTT Software, Public Safety Technology, Restaurant Management, Software And Experienced Services, Software And Financial Services, Software-Development Tools in United States of America - North Carolina" in content
+        assert "OTT Software in United States of America" in content
+        assert "&quot;software&quot; in Denmark" in content
+        # TODO how best to handle case where there are zero orgs in a cell but still want to track it (e.g in this case OTT Software in Denmark)
+        assert len(re.findall("Denmark",content)) == 1
+        assert len(re.findall("New York",content)) == 3
+        assert len(re.findall("North Carolina",content)) == 1
+        
 
 class TestRegionHierarchy(TestCase):
 

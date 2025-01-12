@@ -34,11 +34,13 @@ def warm_up_all_industry_geos(force_update_cache=False):
     for ind in IndustryCluster.leaf_nodes_only():
         logger.info(f"Warming up {ind.uri}")
         for cc in COUNTRY_TO_GLOBAL_REGION.keys():
+            logger.info(f"--> {cc}")
             orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,
                                              cc,force_update_cache=force_update_cache,
                                             )
             if cc in COUNTRIES_WITH_STATE_PROVINCE:
                 for adm1 in (admin1s_for_country(cc) or []):
+                    logger.info(f"----> {adm1}")
                     orgs_by_industry_cluster_and_geo(ind.uri,
                                                      ind.topicId,cc,adm1,
                                                      force_update_cache=force_update_cache,
@@ -61,7 +63,7 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
     country_str = f" AND l.countryCode = '{country_code}' " if country_code else ""
     admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
     limit_str = f" LIMIT {limit} " if limit else ""
-    query = f"""MATCH (l: Resource&GeoNamesLocation)-[basedInHighGeoNamesLocation]-(o:Resource&Organization)-[industryClusterPrimary]-(i: Resource&IndustryCluster)
+    query = f"""MATCH (l: Resource&GeoNamesLocation)<-[basedInHighGeoNamesLocation]-(o:Resource&Organization)-[industryClusterPrimary]->(i: Resource&IndustryCluster)
                 WHERE o.internalMergedSameAsHighToUri IS NULL
                 {industry_str}
                 {country_str}

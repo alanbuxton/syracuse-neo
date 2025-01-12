@@ -11,7 +11,7 @@ from neomodel.cardinality import OneOrMore, One
 from typing import List
 from .constants import BEGINNING_OF_TIME
 from topics.neo4j_utils import date_to_cypher_friendly
-from topics.util import cache_friendly
+from .util import cache_friendly,geo_to_country_admin1
 
 import logging
 logger = logging.getLogger(__name__)
@@ -483,6 +483,17 @@ class IndustryCluster(Resource):
     peoplePrimary = RelationshipFrom("Person","industryClusterPrimary", model=WeightedRel)
     peopleSecondary = RelationshipFrom("Person","industryClusterSecondary", model=WeightedRel)
 
+    @staticmethod
+    def get_by_industry_id(industry_id):
+        if industry_id is None:
+            return None
+        try:
+            industry_id = int(industry_id)
+        except ValueError:
+            logger.warning(f"Couldn't convert {industry_id} to int")
+            return None
+        return IndustryCluster.nodes.get_or_none(topicId=industry_id)
+
     @property
     def mergedOrgsPrimary(self):
         cache_key = f"{self.topicId}_orgs"
@@ -519,6 +530,10 @@ class IndustryCluster(Resource):
         vals['internal_cluster_id'] = self.topicId
         vals['unique_name'] = self.uniqueName
         return vals
+
+    @property
+    def best_name(self):
+        return self.longest_representative_doc
 
     @property
     def longest_representative_doc(self):
@@ -721,8 +736,7 @@ class GeoNamesLocation(Resource):
         vals['geonames_rdf_url'] = self.geoNamesRDFURL
         vals['geonames_url'] = self.geoNamesURL
         return vals
-
-
+    
     @staticmethod
     def uris_by_geo_code(geo_code):
         if geo_code is None or geo_code.strip() == '':
@@ -731,9 +745,7 @@ class GeoNamesLocation(Resource):
         res = cache.get(cache_key)
         if res is not None:
             return res
-        splitted = geo_code.split("-")
-        country_code = splitted[0]
-        admin1_code = splitted[1] if len(splitted) > 1 else None
+        country_code, admin1_code = geo_to_country_admin1(geo_code)
         query = f"""MATCH (n: GeoNamesLocation) WHERE n.countryCode = '{country_code}' """
         if admin1_code is not None:
             query = f"{query} AND n.admin1Code = '{admin1_code}'"
