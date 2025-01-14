@@ -181,16 +181,17 @@ class TestUtilsWithDumpData(TestCase):
         assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
                                           ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
                                           ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
-                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
+                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 2, 2, 2), ('JP', 'Japan', 0, 0, 1), 
                                           ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 17, 17, 38)]
         sample_acts = activities_by_region("AU",date_minus(max_date,7),max_date,counts_only=False)
         assert sample_acts == [['https://1145.am/db/4290457/Gyg-Ipo', 
                                 'https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_', 
                                 datetime(2024, 5, 31, 5, 12, 37, 320000, tzinfo=timezone.utc)]]
         sample_acts = activities_by_region("GB",date_minus(max_date,7),max_date,counts_only=False)
-        assert sample_acts == [['https://1145.am/db/4290472/Associated_British_Foods-Ipo', 'https://1145.am/db/4290472/wwwmarketwatchcom_story_ab-foods-majority-shareholder-sells-10-3-mln-shares-for-gbp262-mln-067222fe', datetime(2024, 5, 31, 6, 42, tzinfo=timezone.utc)], 
-                               ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)], 
-                               ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)]]
+        assert len(sample_acts) == 3
+        assert ['https://1145.am/db/4290472/Associated_British_Foods-Ipo', 'https://1145.am/db/4290472/wwwmarketwatchcom_story_ab-foods-majority-shareholder-sells-10-3-mln-shares-for-gbp262-mln-067222fe', datetime(2024, 5, 31, 6, 42, tzinfo=timezone.utc)] in sample_acts
+        assert ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)] in sample_acts
+        assert ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)] in sample_acts
         assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
                                              ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), 
                                              ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 4, 4, 4), 
@@ -202,9 +203,10 @@ class TestUtilsWithDumpData(TestCase):
                                             (165, 'Development Banks', 1, 1, 1), (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
         sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
         res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
-        assert res == [['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)], 
-                       ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)], 
-                       ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)]]
+        assert len(res) == 3
+        assert ['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
+        assert ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res 
+        assert ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")

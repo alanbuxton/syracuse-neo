@@ -29,23 +29,28 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
     cache.set(cache_key, res)
     return res
 
-def warm_up_all_industry_geos(force_update_cache=False):
-    logger.info("Warming up Industry Geos")
-    for ind in IndustryCluster.leaf_nodes_only():
-        logger.info(f"Warming up {ind.uri}")
-        for cc in COUNTRY_TO_GLOBAL_REGION.keys():
-            logger.info(f"--> {cc}")
-            orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,
-                                             cc,force_update_cache=force_update_cache,
-                                            )
-            if cc in COUNTRIES_WITH_STATE_PROVINCE:
-                for adm1 in (admin1s_for_country(cc) or []):
-                    logger.info(f"----> {adm1}")
-                    orgs_by_industry_cluster_and_geo(ind.uri,
-                                                     ind.topicId,cc,adm1,
-                                                     force_update_cache=force_update_cache,
-                                                     )
-
+def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
+    logger.info("Warming up at country level")
+    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[basedInHighGeoNamesLocation]-(o:Resource&Organization)-[industryClusterPrimary]->(i: Resource&IndustryCluster)
+                        WHERE o.internalMergedSameAsHighToUri IS NULL
+                        RETURN i.uri, l.countryCode, collect(distinct(o.uri))"""
+    country_level, _ = db.cypher_query(country_query)
+    logger.info(f"Caching {len(country_level)} results")
+    for industry_cluster_topic_id, country_code, org_uris in country_level:
+        cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_None_None"
+        cache.set(cache_key, org_uris)
+    
+    logger.info("Warming up at admin1 level")
+    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[basedInHighGeoNamesLocation]-(o:Resource&Organization)-[industryClusterPrimary]->(i: Resource&IndustryCluster)
+                        WHERE o.internalMergedSameAsHighToUri IS NULL
+                        AND l.countryCode in {countries_with_state_province}
+                        AND l.admin1Code <> '00'
+                        RETURN i.uri, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
+    admin1_level, _ = db.cypher_query(admin1_query)
+    logger.info(f"Caching {len(admin1_level)} results")
+    for industry_cluster_topic_id, country_code, admin1_code, org_uris in admin1_level:
+        cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None"
+        cache.set(cache_key, org_uris)
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
     cache_key = f"orgs_industry_text_{hash(industry_text)}_{country_code}"

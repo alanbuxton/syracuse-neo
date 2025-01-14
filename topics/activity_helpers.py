@@ -128,7 +128,7 @@ def activities_by_industry_region(industry,country_code,admin1_code,min_date,max
     """
     return query_and_cache(query, cache_key, counts_only=False)
 
-    
+
 def activities_by_region(country_code, min_date, max_date, admin1_code=None, counts_only=False,limit=None):
     cache_key=cache_friendly(f"activities_{country_code}_{admin1_code}_{min_date}_{max_date}_{limit}")
     res = cache.get(cache_key)
@@ -136,38 +136,20 @@ def activities_by_region(country_code, min_date, max_date, admin1_code=None, cou
         return len(res) if counts_only is True else res
     admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
 
-    query = f"""
-        MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)
-        WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-        AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-        AND 
-        (EXISTS {{
-            MATCH (act)-[:location]->(:Site)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-            WHERE l.countryCode = '{country_code}'
-            {admin1_str}
-        }}
-        OR EXISTS {{
-            MATCH (act)--(org:Organization)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-            WHERE l.countryCode = '{country_code}'
-            AND org.internalMergedSameAsHighToUri IS NULL
-            {admin1_str}
-
-        }} 
-        OR EXISTS {{
-            MATCH (act)-[:whereHighGeoNamesLocation]->(l:GeoNamesLocation)
-            WHERE l.countryCode = '{country_code}'
-            {admin1_str}
-        }}
-        OR EXISTS {{
-            MATCH (art)<-[:documentSource]-(org: Organization)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-            WHERE l.countryCode = '{country_code}'
-            AND org.internalMergedSameAsHighToUri IS NULL
-            {admin1_str}
-        }}
-        )
-        RETURN DISTINCT act.uri, art.uri, art.datePublished
-        ORDER by art.datePublished DESC
-    """
+    query = f"""MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)-[:whereHighGeoNamesLocation]->(l:GeoNamesLocation)
+                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
+                AND l.countryCode = '{country_code}'
+                {admin1_str}
+                RETURN DISTINCT  act.uri, art.uri, art.datePublished
+                UNION
+                MATCH
+                (act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)-[:documentSource]->(art: Article)<-[:documentSource]-(:Organization|Site)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
+                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
+                AND l.countryCode = '{country_code}'
+                {admin1_str}
+                RETURN DISTINCT act.uri, art.uri, art.datePublished"""
     return query_and_cache(query, cache_key, counts_only)
 
 
@@ -179,14 +161,13 @@ def activities_by_industry(industry, min_date, max_date, counts_only=False, limi
     limit_str = f" LIMIT {limit} " if limit else ""
 
     query = f"""
-    MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)
+    MATCH (art:Article)<-[:documentSource]-(org: Organization)-[:industryClusterPrimary]->(i:Resource&IndustryCluster {{uri: "{industry.uri}" }})
+         , (art)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-    AND EXISTS {{
-        MATCH (art)<-[:documentSource]-(org: Organization)-[:industryClusterPrimary]->(i:Resource&IndustryCluster {{uri: "{industry.uri}" }})
-    }}
+    AND org.internalMergedSameAsHighToUri IS NULL
     RETURN DISTINCT act.uri, art.uri, art.datePublished
-    ORDER by art.datePublished DESC
+    ORDER BY art.datePublished DESC
     {limit_str}
     """
     return query_and_cache(query, cache_key, counts_only)

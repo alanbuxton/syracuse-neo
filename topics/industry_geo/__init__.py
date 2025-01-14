@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def update_organization_data():
     update_geonames_locations_with_country_admin1()
-    warm_up_all_industry_geos(force_update_cache=True)
+    warm_up_all_industry_geos()
 
 def orgs_by_industry_and_or_geo(industry_or_id,geo_code):
     if industry_or_id is None:

@@ -22,6 +22,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
+    db.cypher_query("CREATE INDEX article_date_published IF NOT EXISTS FOR (a:Article) ON (a.datePublished)")
     db.cypher_query("CREATE FULLTEXT INDEX organization_industries IF NOT EXISTS FOR (o: Organization) ON EACH [o.industry]")
     db.cypher_query("CREATE FULLTEXT INDEX industry_cluster_representative_docs IF NOT EXISTS FOR (i: IndustryCluster) ON EACH [i.representativeDoc]")
     db.cypher_query("CREATE INDEX geonames_location_country_admin1_index IF NOT EXISTS FOR (n: GeoNamesLocation) on (n.countryCode, n.admin1Code)")
