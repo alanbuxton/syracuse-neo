@@ -268,9 +268,8 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                             row6[f"REPEATED {country}"] = {"colspan":1, "classes": country_only_class}
                             row7[f"REPEATED {country}"] = {"colspan":1, "classes": country_only_class}
                             continue
-                        logger.warning(f"{country} has more a col width more than 1 - not expecting this to be the case")
-                        row5[f"{country} (all)"] = {"colspan":1, "classes": country_only_class}
-                        row6[f"{country} (all)"] = {"colspan":1, "classes": country_only_class}
+                        row5[f"REPEATED {country} (all)"] = {"colspan":1, "classes": country_only_class}
+                        row6[f"REPEATED {country} (all)"] = {"colspan":1, "classes": country_only_class}
                         row7[f"{country} (all)"] = {"colspan":1, "classes": country_only_class}
                         if country == "US":
                             add_us_regions(row5,row6,row7,
@@ -278,8 +277,8 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                                            admin1.get("US",[]),admin1_widths)
                         else:
                             for admin1 in admin1_hierarchy[country]:
-                                row5[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
-                                row6[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                                row5[f"REPEATED {country-admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
+                                row6[f"REPEATED {country-admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
                                 row7[f"{country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
             else:
                 row3[f"REPEATED {region2}"] = {"colspan":col_width, "classes":row2_classes}
@@ -293,15 +292,15 @@ def prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_
                         row6[f"REPEATED {country}"] = {"colspan":1, "classes":country_classes}
                         row7[f"REPEATED {country}"] = {"colspan":1, "classes":country_classes}
                         continue
-                    row5[f"{country} (all)"] = {"colspan":1, "classes":country_classes}
-                    row6[f"{country} (all)"] = {"colspan":1, "classes":country_classes}
+                    row5[f"REPEATED {country} (all)"] = {"colspan":1, "classes":country_classes}
+                    row6[f"REPEATED {country} (all)"] = {"colspan":1, "classes":country_classes}
                     row7[f"{country} (all)"] = {"colspan":1, "classes":country_classes}
                     if country == "US":
                         add_us_regions(row5,row6,row7,admin1_hierarchy["US"],admin1s.get("US",[]),admin1_widths)
                     else:
                         for admin1 in admin1_hierarchy[country]:
-                            row5[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
-                            row6[f"{country} (all)"] = {"colspan":1,"classes":f"col-{country}"}
+                            row5[f"REPEATED {country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
+                            row6[f"REPEATED {country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
                             row7[f"{country}-{admin1}"] = {"colspan":1,"classes":f"col-{country}-{admin1}"}
 
     if row_has_relevant_content(row1):
