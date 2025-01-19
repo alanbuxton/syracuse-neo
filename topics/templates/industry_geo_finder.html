@@ -16,6 +16,16 @@ th {
   text-align: center;
 }
 
+th.nocontent {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+th.hascontent {
+  border-top-style: solid;
+  border-bottom-style: none;
+}
+
 th.selected, td.selected {
   background-color: #d3f4d3;
 }
@@ -51,13 +61,15 @@ button {
           <th rowspan="{{table_header|length }}">&nbsp;</th>
         {% endif %}
         {% for header_text,vals in row.items %}
-          <th colspan="{{vals.colspan}}" class="isheader {{vals.classes}}">
-            {% if header_text|slice:"0:6" == 'REPEAT' %}
+          {% if header_text|slice:"0:6" == 'REPEAT' %}
+            <th colspan="{{vals.colspan}}" class="isheader nocontent {{vals.classes}}">
               &nbsp;
-            {% else %}
+            </th>
+          {% else %}
+            <th colspan="{{vals.colspan}}" class="isheader hascontent {{vals.classes}}">
               {{ header_text }}
-            {% endif %}
-          </th>
+            </th>
+          {% endif %}
         {% endfor %}
       </tr>
     {% endfor %}

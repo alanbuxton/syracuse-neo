@@ -762,7 +762,7 @@ class TestUtilsWithDumpData(TestCase):
                                         ('Northern Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
                             OrderedDict([('US', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
                                          ('DK', {'colspan': 1, 'classes': 'col-DK'})]), 
-                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
                                          ('Northeast', {'colspan': 1, 'classes': 'col-US-NY'}), 
                                          ('South', {'colspan': 2, 'classes': 'col-US-NC col-US-TX'}), 
                                          ('West', {'colspan': 1, 'classes': 'col-US-CA'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
@@ -771,7 +771,7 @@ class TestUtilsWithDumpData(TestCase):
                                          ('South Atlantic', {'colspan': 1, 'classes': 'col-US-NC'}), 
                                          ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), 
                                          ('Pacific', {'colspan': 1, 'classes': 'col-US-CA'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
-                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
+                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
                                          ('US-NC', {'colspan': 1, 'classes': 'col-US-NC header_final'}), ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
                                          ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK header_final'})])]
 
@@ -805,6 +805,38 @@ class TestUtilsWithDumpData(TestCase):
         assert set(indiv_cells) == set([('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), 
                                         ('223', 'US-NY'), ('55', 'US'), ('55', 'DK'), ('182', 'US-NY'),
                                         ('search_str', 'US-NY'), ('search_str', 'US-CA')])
+
+    def test_industry_geo_finder_selection_screen(self):
+        client = self.client
+        resp = client.get("/industry_geo_finder/software")
+        assert resp.status_code == 200
+        content = str(resp.content)
+        table_headers = re.findall(r"\<th.+?\>",content)
+        assert table_headers == ['<th rowspan="6">', 
+                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="1" class="isheader hascontent col-DK">', 
+                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="1" class="isheader hascontent col-DK">', 
+                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="1" class="isheader hascontent col-DK">', 
+                                 '<th colspan="1" class="isheader hascontent col-US">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-NY">', 
+                                 '<th colspan="2" class="isheader hascontent col-US-NC col-US-TX">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-CA">', 
+                                 '<th colspan="1" class="isheader nocontent col-DK">', 
+                                 '<th colspan="1" class="isheader nocontent col-US">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-NY">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-NC">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-TX">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-CA">', 
+                                 '<th colspan="1" class="isheader nocontent col-DK">', 
+                                 '<th colspan="1" class="isheader nocontent col-US header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-NY header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-NC header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-TX header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-CA header_final">', 
+                                 '<th colspan="1" class="isheader nocontent col-DK header_final">']
+
 
     def test_industry_geo_finder_preview(self):
         '''
@@ -891,12 +923,12 @@ class TestRegionHierarchy(TestCase):
                                           ('CN', {'colspan': 3, 'classes': 'col-CN col-CN-04 col-CN-11'}), ('SG', {'colspan': 1, 'classes': 'col-SG'}), 
                                           ('AE', {'colspan': 1, 'classes': 'col-AE'}), ('GB', {'colspan': 1, 'classes': 'col-GB'})])
         assert headers[4] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ'}), 
-                                          ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('REPEATED CA (all)', {'colspan': 1, 'classes': 'col-CA'}), 
-                                          ('REPEATED CA-12', {'colspan': 1, 'classes': 'col-CA-12'}), ('REPEATED CA-13', {'colspan': 1, 'classes': 'col-CA-13'}), 
-                                          ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Midwest', {'colspan': 2, 'classes': 'col-US-IA col-US-IL'}), 
+                                          ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('CA (all)', {'colspan': 1, 'classes': 'col-CA'}), 
+                                          ('CA-12', {'colspan': 1, 'classes': 'col-CA-12'}), ('CA-13', {'colspan': 1, 'classes': 'col-CA-13'}), 
+                                          ('US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Midwest', {'colspan': 2, 'classes': 'col-US-IA col-US-IL'}), 
                                           ('Northeast', {'colspan': 1, 'classes': 'col-US-NY'}), ('South', {'colspan': 1, 'classes': 'col-US-OK'}), 
-                                          ('REPEATED CN (all)', {'colspan': 1, 'classes': 'col-CN'}), ('REPEATED CN-04', {'colspan': 1, 'classes': 'col-CN-04'}), 
-                                          ('REPEATED CN-11', {'colspan': 1, 'classes': 'col-CN-11'}), ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), 
+                                          ('CN (all)', {'colspan': 1, 'classes': 'col-CN'}), ('CN-04', {'colspan': 1, 'classes': 'col-CN-04'}), 
+                                          ('CN-11', {'colspan': 1, 'classes': 'col-CN-11'}), ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), 
                                           ('REPEATED AE', {'colspan': 1, 'classes': 'col-AE'}), ('REPEATED GB', {'colspan': 1, 'classes': 'col-GB'})])
         assert headers[5] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ'}), 
                                           ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA'}), ('REPEATED CA (all)', {'colspan': 1, 'classes': 'col-CA'}), 
@@ -907,13 +939,13 @@ class TestRegionHierarchy(TestCase):
                                           ('REPEATED CN-04', {'colspan': 1, 'classes': 'col-CN-04'}), ('REPEATED CN-11', {'colspan': 1, 'classes': 'col-CN-11'}), 
                                           ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), ('REPEATED AE', {'colspan': 1, 'classes': 'col-AE'}), 
                                           ('REPEATED GB', {'colspan': 1, 'classes': 'col-GB'})])
-        assert headers[6] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA header_final'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ header_final'}),
-                                          ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA header_final'}), ('CA (all)', {'colspan': 1, 'classes': 'col-CA header_final'}), 
-                                          ('CA-12', {'colspan': 1, 'classes': 'col-CA-12 header_final'}), ('CA-13', {'colspan': 1, 'classes': 'col-CA-13 header_final'}), 
-                                          ('US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), ('US-IL', {'colspan': 1, 'classes': 'col-US-IL header_final'}), 
+        assert headers[6] == OrderedDict([('REPEATED NA', {'colspan': 1, 'classes': 'col-NA header_final'}), ('REPEATED SZ', {'colspan': 1, 'classes': 'col-SZ header_final'}), 
+                                          ('REPEATED ZA', {'colspan': 1, 'classes': 'col-ZA header_final'}), ('REPEATED CA (all)', {'colspan': 1, 'classes': 'col-CA header_final'}), 
+                                          ('REPEATED CA-12', {'colspan': 1, 'classes': 'col-CA-12 header_final'}), ('REPEATED CA-13', {'colspan': 1, 'classes': 'col-CA-13 header_final'}), 
+                                          ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), ('US-IL', {'colspan': 1, 'classes': 'col-US-IL header_final'}), 
                                           ('US-IA', {'colspan': 1, 'classes': 'col-US-IA header_final'}), ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
-                                          ('US-OK', {'colspan': 1, 'classes': 'col-US-OK header_final'}), ('CN (all)', {'colspan': 1, 'classes': 'col-CN header_final'}), 
-                                          ('CN-04', {'colspan': 1, 'classes': 'col-CN-04 header_final'}), ('CN-11', {'colspan': 1, 'classes': 'col-CN-11 header_final'}), 
+                                          ('US-OK', {'colspan': 1, 'classes': 'col-US-OK header_final'}), ('REPEATED CN (all)', {'colspan': 1, 'classes': 'col-CN header_final'}), 
+                                          ('REPEATED CN-04', {'colspan': 1, 'classes': 'col-CN-04 header_final'}), ('REPEATED CN-11', {'colspan': 1, 'classes': 'col-CN-11 header_final'}), 
                                           ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG header_final'}), ('REPEATED AE', {'colspan': 1, 'classes': 'col-AE header_final'}), 
                                           ('REPEATED GB', {'colspan': 1, 'classes': 'col-GB header_final'})])
 
