@@ -866,7 +866,15 @@ class TestUtilsWithDumpData(TestCase):
         assert len(re.findall("Denmark",content)) == 1
         assert len(re.findall("New York",content)) == 3
         assert len(re.findall("North Carolina",content)) == 1
-        
+
+    def test_orgs_by_weight(self):
+        uris = ["https://1145.am/db/3461395/Salvarx", "https://1145.am/db/2166549/Synamedia", "https://1145.am/db/3448439/Eli_Lilly_And_Company",
+                "https://1145.am/db/3464614/Mufg_Union_Bank", "https://1145.am/db/3465879/Mmtec", "https://1145.am/db/3463583/Disc_Graphics",
+                "https://1145.am/db/3454466/Arthur_J_Gallagher_Co", "https://1145.am/db/3029576/Celgene", "https://1145.am/db/3461324/Signal_Peak_Ventures"]
+        sorted = orgs_by_weight(uris)
+        assert sorted[0] == {'uri': 'https://1145.am/db/3454466/Arthur_J_Gallagher_Co', 'name': 'Arthur J. Gallagher & Co.', 'sum_of_weights': 10}
+        assert sorted[-1] == {'uri': 'https://1145.am/db/3464614/Mufg_Union_Bank', 'name': 'MUFG Union Bank', 'sum_of_weights': 2}
+        assert len(sorted) == len(uris)
 
 class TestRegionHierarchy(TestCase):
 

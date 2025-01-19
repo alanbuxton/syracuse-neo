@@ -53,6 +53,18 @@ class Resource(StructuredNode):
     internalMergedSameAsHighToUri = StringProperty()
 
     @property
+    def sum_of_weights(self):
+        cache_key = cache_friendly(f"sum_weights_{self.uri}")
+        weight = cache.get(cache_key)
+        if weight:
+            return weight
+        query = f"""MATCH (n: Resource {{uri:'{self.uri}'}})-[x]-() RETURN sum(x.weight)"""
+        res, _ = db.cypher_query(query)
+        weight = res[0][0]
+        cache.set(cache_key, weight)
+        return weight
+
+    @property
     def industry_clusters(self):
         return None # override in subclass
     
@@ -103,7 +115,7 @@ class Resource(StructuredNode):
 
     @staticmethod
     def get_by_uri(uri):
-        return Resource.nodes.get(uri)
+        return Resource.nodes.get(uri=uri)
 
     @classmethod
     def unmerged_or_none_by_uri(cls, uri):

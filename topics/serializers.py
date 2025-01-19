@@ -4,7 +4,7 @@ from .graph_utils import graph_centered_on
 from .converters import CustomSerializer
 from .timeline_utils import get_timeline_data
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
-from .models import IndustryCluster, Article, cache_friendly
+from .models import IndustryCluster, Article, cache_friendly, Organization
 from .family_tree_helpers import org_family_tree
 from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
@@ -384,7 +384,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                     industry_orgs.append( {
                         "table_id": ind,
                         "title": f"{industry.best_name} in all Geos",
-                        "orgs": orgs,
+                        "orgs": orgs_by_weight(orgs),
                     })
                 else:
                     logger.info(f"Industry {ind} doesn't exist")
@@ -395,7 +395,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 industry_orgs.append( {
                     "table_id": "search_str_all_geos",
                     "title": f'"{search_str}" in all Geos',
-                    "orgs": orgs,
+                    "orgs": orgs_by_weight(orgs),
                 })
 
         geo_orgs = []
@@ -414,7 +414,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 geo_orgs.append({
                     "table_id": geo,
                     "title": f"{all_industry_names} in {geo_loc}",
-                    "orgs": orgs,
+                    "orgs": orgs_by_weight(orgs),
                 })
         geo_orgs = sorted(geo_orgs, key = lambda x: x["title"])
 
@@ -438,7 +438,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 row = {
                     "table_id": f"{ind_id}_{geo}",
                     "title": f"{ind_desc} in {geo_loc}",
-                    "orgs": orgs,
+                    "orgs": orgs_by_weight(orgs),
                 }
                 if ind == 'search_str':
                     indiv_cell_ind_text_orgs.append(row)
@@ -450,4 +450,13 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         data = industry_orgs + geo_orgs + indiv_cell_ind_cluster_orgs + indiv_cell_ind_text_orgs
         return data
         
-        
+def orgs_by_weight(org_uris):
+    org_data = []
+    for uri in org_uris:
+        logger.info(uri)
+        o = Organization.get_by_uri(uri)
+        weight = o.sum_of_weights
+        name = o.best_name
+        org_data.append( {"uri":o.uri,"name":name,"sum_of_weights":weight})
+    org_data = sorted(org_data, key=lambda x: x["sum_of_weights"],reverse=True)
+    return org_data
