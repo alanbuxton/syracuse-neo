@@ -1,0 +1,131 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th {
+  text-align: center;
+}
+
+th.selected, td.selected {
+  background-color: #d3f4d3;
+}
+
+button {
+  margin-top: 10px;
+}
+
+</style>
+  <title>Organizations by Industry & Geographical Region</title>
+</head>
+<body>
+    <p>
+        {% include 'layouts/nav-header.html' %}
+    </p>
+
+    <h1>Review Organizations for Tracking</h1>
+    <p>
+        Based on your selections, we'll be tracking the following organizations for you:
+    </p>
+    <form method="post" action="{% url 'update-tracked-org-ind-geo' %}">
+        {% csrf_token %}
+        <div>
+            <button type="submit">Track Selected Organizations</button>
+        </div>
+        {% for table_row in table_data %}
+            <div>
+                <br/>
+                <h4>{{ table_row.title }}</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectall_{{ table_row.table_id }}" value="1"
+                                name="selectall_{{ table_row.table_id }}" onclick="toggleSelectAll('{{ table_row.table_id }}')" 
+                                checked="True"> Track All</th>
+                            <input type="hidden" name="unselectall_{{table_row.table_id}}" value=0
+                                id="unselectall_{{table_row.table_id}}">
+                            <th>URI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for org in table_row.orgs %}
+                        <tr>
+                            <td><input type="checkbox" name="{{table_row.table_id}}_{{ org.uri }}" value=1
+                                class="selectorg_{{ table_row.table_id }}" checked="True" 
+                                id="{{table_row.table_id}}_{{ org.uri }}"
+                                onclick="updateFromTableRow('{{ table_row.table_id }}','{{table_row.table_id}}_{{ org.uri }}')">
+                            </td>
+                            <input type="hidden" name="unselect_{{table_row.table_id}}_{{ org.uri }}" value=0
+                                class="unselectorg_{{ table_row.table_id }}" id="unselect_{{ table_row.table_id }}_{{org.uri}}">
+                            <td>{{ org.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    
+        <div>
+            <button type="submit">Track Selected Organizations</button>
+        </div>
+    </form>
+
+    {% include 'layouts/footer.html' %}
+    
+    <script>
+        function toggleSelectAll(tableID) {
+            let checkboxes = document.querySelectorAll(`.selectorg_${tableID}`);
+            let selectAllCheckbox = document.getElementById(`selectall_${tableID}`);
+            let unSelectAllCheckbox = document.getElementById(`unselectall_${tableID}`);
+            
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+
+            if (selectAllCheckbox.checked === false) {
+                unSelectAllCheckbox.value = 1;
+            } else {
+                unSelectAllCheckbox.value = 0;
+            }
+        }
+
+        function updateFromTableRow(tableID, sourceID ) {
+            // Toggle "Track All" status
+            let checkboxes = document.querySelectorAll(`.selectorg_${tableID}`);
+            let selectAllCheckbox = document.getElementById(`selectall_${tableID}`);
+            let unSelectAllCheckbox = document.getElementById(`unselectall_${tableID}`);
+            
+            let cntSelected = 0;
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    cntSelected += 1;
+                }
+            })
+            
+            selectAllCheckbox.checked = (cntSelected === checkboxes.length);
+            if (cntSelected === 0) {
+                unSelectAllCheckbox.value = 1
+            }
+            else {
+                unSelectAllCheckbox.value = 0
+            }
+
+            let me = document.getElementById(sourceID);
+            let unselect_me = document.getElementById(`unselect_${sourceID}`);
+            unselect_me.value = me.checked ? 0 : 1;
+
+        }
+    </script>
+
+</body>
+</html>

@@ -424,7 +424,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
             orgs = []
             if ind == 'search_str':
                 orgs = orgs_by_industry_text_and_geo_code(search_str, geo) 
-                ind_id = hash(search_str)
+                ind_id = "searchstr"
                 ind_desc = f'"{search_str}"'
                 geo_loc = country_admin1_full_name(geo)
             else:

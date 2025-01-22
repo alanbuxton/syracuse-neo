@@ -244,7 +244,7 @@ class OrganizationByUri(APIView):
 
 class IndustryGeoFinderReview(ListCreateAPIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'industry_geo_review.html'   
+    template_name = 'industry_geo_finder_review.html'   
 
     def post(self, request):
         search_str = request.POST.get('searchStr')

@@ -9,4 +9,5 @@ urlpatterns = [
     path('source_activities', views.SourceActivitiesView.as_view(), name='tracked-source-activities'),
     path('activity_stats', views.ActivityStats.as_view(), name="tracked-activity-stats"),
     path('industry_activities', views.IndustryActivitiesView.as_view(), name="industry-activities"),
+    path('tracked_org_ind_geo', views.TrackedOrgIndGeoView.as_view(), name="update-tracked-org-ind-geo"),
 ]

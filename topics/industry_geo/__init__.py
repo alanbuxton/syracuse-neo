@@ -33,7 +33,9 @@ def country_admin1_full_name(geo_code):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
     if country_code is None or country_code == '':
         return ""
-    country_name = COUNTRY_CODE_TO_NAME[country_code]
+    country_name = COUNTRY_CODE_TO_NAME.get(country_code)
+    if country_name is None:
+        return None
     if admin1_code is None:
         return country_name
     else:
@@ -43,5 +45,3 @@ def country_admin1_full_name(geo_code):
 def orgs_by_industry_text_and_geo_code(industry_text, geo_code):
     country_code, admin1 = geo_to_country_admin1(geo_code)
     return orgs_by_industry_text_and_geo(industry_text, country_code, admin1)
-
-    

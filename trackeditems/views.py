@@ -3,8 +3,9 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
+# from rest_framework.generics import  ListCreateAPIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from .models import TrackedOrganization, TrackedIndustryGeo
+from .models import TrackedOrganization, TrackedIndustryGeo, TrackedItem
 from topics.models import IndustryCluster
 from rest_framework.response import Response
 from rest_framework import status, viewsets
@@ -69,6 +70,16 @@ class TrackedOrganizationView(APIView):
                             "request_state": request_state,
                             },status=status.HTTP_200_OK)
         return resp
+
+class TrackedOrgIndGeoView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tracked_org_ind_geo.html'
+    permission_classes = [IsAuthenticatedNotAnon]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    http_method_names = ['get', 'post']
+
+    def post(self, request):
+        breakpoint()
 
 class GeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -187,3 +198,26 @@ def min_and_max_date(get_params):
     if max_date is not None and min_date is None:
         min_date = max_date - timedelta(days=7)
     return min_date, max_date
+
+def get_entities_to_track(params_dict, search_str):
+    tracked_items = [TrackedItem.text_to_tracked_item_data(x,search_str) 
+            for  x,y in params_dict.items() if y[0] == '1']
+    select_alls = []
+    specific_orgs = []
+    for ti in tracked_items:
+        select_alls.append(ti) if ti['organization_uri'] is None else specific_orgs.append(ti)
+    
+    def is_covered_by_select_all(tracked_item):
+        industry_id = tracked_item['industry_id']
+        industry_search_str = tracked_item['industry_search_str']
+        region = tracked_item['region']
+        for x in select_alls:
+            if (industry_id == x['industry_id'] and
+                industry_search_str == x['industry_search_str'] and
+                region == x['region']):
+                return True
+        return False
+        
+    specific_orgs_to_keep = [x for x in specific_orgs if not is_covered_by_select_all(x)]
+
+    return select_alls + specific_orgs_to_keep
