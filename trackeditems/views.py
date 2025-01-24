@@ -5,15 +5,13 @@ from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
 # from rest_framework.generics import  ListCreateAPIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from .models import TrackedOrganization, TrackedIndustryGeo, TrackedItem
+from .models import TrackedItem
 from topics.models import IndustryCluster
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from .serializers import (TrackedOrganizationSerializer,
-    TrackedOrganizationModelSerializer, ActivitySerializer,
+from .serializers import (ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
-    TrackedIndustryGeoModelSerializer, RecentsByIndustrySerializer,
-    TrackedIndustryGeoSerializer)
+    RecentsByIndustrySerializer, OrgIndGeoSerializer)
 from topics.stats_helpers import get_cached_stats
 from topics.activity_helpers import (
     get_activities_by_country_and_date_range,
@@ -25,52 +23,6 @@ from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
 
-class TrackedIndustryGeoView(APIView):
-    permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-
-    def post(self, request):
-        industry_name = request.data['tracked_industry_name']
-        geo_code = request.data['tracked_geo_code']
-        if industry_name == '' and geo_code == '':
-            return redirect('tracked-organizations')
-        existing_industry_geos = TrackedIndustryGeo.items_by_user(self.request.user)
-        if len(existing_industry_geos) <= 20 and (industry_name,geo_code) not in existing_industry_geos:
-            data = {"user":self.request.user, "industry_name":industry_name,"geo_code":geo_code}
-            _ = TrackedIndustryGeoModelSerializer().create(data)
-        return redirect('tracked-organizations')
-
-class TrackedOrganizationView(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'preferences.html'
-    permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-
-    def get_queryset(self):
-        return TrackedOrganization.objects.filter(user=self.request.user)
-
-    def post(self, request, **kwargs):
-        uri = request.data['tracked_organization_uri']
-        existing_orgs = TrackedOrganization.uris_by_user(request.user)
-        orgs_so_far = len(existing_orgs)
-        if orgs_so_far <= 20 and uri not in existing_orgs:
-            data = {"organization_uri":uri, "user":request.user}
-            _ = TrackedOrganizationModelSerializer().create(data)
-        return redirect('tracked-organizations')
-
-    def get(self, request):
-        tracked_orgs = self.get_queryset()
-        tracked_org_serializer = TrackedOrganizationSerializer(tracked_orgs, many=True)
-        tracked_industry_geos = TrackedIndustryGeo.by_user(request.user)
-        tracked_industry_geo_serializer = TrackedIndustryGeoSerializer(tracked_industry_geos, many=True)
-        source_page = request.headers.get("Referer")
-        request_state, _ = prepare_request_state(request)
-        resp = Response({"tracked_orgs":tracked_org_serializer.data,"source_page":source_page,
-                            "tracked_industry_geos":tracked_industry_geo_serializer.data,
-                            "request_state": request_state,
-                            },status=status.HTTP_200_OK)
-        return resp
-
 class TrackedOrgIndGeoView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_org_ind_geo.html'
@@ -78,8 +30,22 @@ class TrackedOrgIndGeoView(APIView):
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     http_method_names = ['get', 'post']
 
+    def get_queryset(self):
+        return TrackedItem.trackable_by_user(user=self.request.user)
+    
+    def get(self, request):
+        tracked_items = self.get_queryset()
+
+        serialized = OrgIndGeoSerializer(tracked_items, many=True)
+        resp = Response({"tracked_items":serialized.data},
+                        status=status.HTTP_200_OK)
+        return resp
+
     def post(self, request):
-        breakpoint()
+        payload = request.POST
+        trackables = get_entities_to_track(payload, payload["search_str"])
+        TrackedItem.update_or_create_for_user(request.user, trackables)
+        return redirect('tracked-org-ind-geo')
 
 class GeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -138,7 +104,7 @@ class SourceActivitiesView(APIView):
         source_name = request.GET.get("source_name")
         request_state, _ = prepare_request_state(request)
         if request_state["cache_last_updated"] is not None:
-            matching_activity_orgs =  get_activities_by_source_and_date_range(source_name, min_date, max_date, limit=20)
+            matching_activity_orgs = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit=20)
         else:
             matching_activity_orgs = []
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
@@ -179,7 +145,7 @@ class ActivitiesView(APIView):
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
         user = request.user
-        matching_activity_orgs, _, _ = recents_by_user_min_max_date(user, min_date, max_date)
+        matching_activity_orgs, _ = recents_by_user_min_max_date(user, min_date, max_date)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         request_state, _ = prepare_request_state(request)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
@@ -201,7 +167,7 @@ def min_and_max_date(get_params):
 
 def get_entities_to_track(params_dict, search_str):
     tracked_items = [TrackedItem.text_to_tracked_item_data(x,search_str) 
-            for  x,y in params_dict.items() if y[0] == '1']
+            for  x,y in params_dict.items() if x.startswith("track_") and y[0] == '1']
     select_alls = []
     specific_orgs = []
     for ti in tracked_items:
@@ -219,5 +185,10 @@ def get_entities_to_track(params_dict, search_str):
         return False
         
     specific_orgs_to_keep = [x for x in specific_orgs if not is_covered_by_select_all(x)]
+    def clean_specific_org(tracked_item):
+        return {"organization_uri":tracked_item["organization_uri"],
+                "trackable": tracked_item["trackable"],
+                "industry_id": None, "industry_search_str": None, "region": None}
+    specific_orgs_to_keep_cleaned = [clean_specific_org(x) for x in specific_orgs_to_keep]
 
-    return select_alls + specific_orgs_to_keep
+    return select_alls + specific_orgs_to_keep_cleaned

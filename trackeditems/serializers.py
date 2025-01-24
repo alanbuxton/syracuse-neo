@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import TrackedOrganization, TrackedIndustryGeo
+from topics.models import Organization, IndustryCluster
 import pycountry
 from topics.industry_geo import country_admin1_full_name
 
@@ -45,20 +46,6 @@ class CountsSerializer(serializers.Serializer):
             "node_type": instance[0],
             "count": instance[1],
         }
-
-class TrackedOrganizationSerializer(serializers.Serializer):
-    organization_uri = serializers.URLField()
-    organization_name = serializers.CharField()
-
-class TrackedOrganizationModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TrackedOrganization
-        fields = "__all__"
-
-class TrackedIndustryGeoModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TrackedIndustryGeo
-        fields = "__all__"
 
 class TrackedIndustryGeoSerializer(serializers.Serializer):
     
@@ -118,3 +105,32 @@ class ActivitySerializer(serializers.Serializer):
     actors = serializers.DictField(
         child = ActivityActorSerializer(many=True)
     )
+
+class OrgIndGeoSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        org = Organization.self_or_ultimate_target_node(instance.organization_uri)
+        industry_cluster = IndustryCluster.get_by_industry_id(instance.industry_id)
+
+        org_name = 'Any' if org is None else org.best_name
+        industry_search_str = 'n/a' if instance.industry_search_str is None else instance.industry_search_str
+        if industry_cluster is None:
+            industry_name = 'Any' if instance.industry_search_str is None else 'n/a'
+        else:
+            industry_name = industry_cluster.best_name
+        region_name = country_admin1_full_name(instance.region)
+        if region_name == '':
+            region_name = 'Any'
+
+        serialized = {
+            "organization": org,
+            "industry": industry_cluster,
+            "org_name": org_name,
+            "industry_name": industry_name,
+            "industry_search_str": industry_search_str,
+            "region_name": region_name,
+            "tracked_item_id": instance.id,
+        }
+
+        return serialized
+    

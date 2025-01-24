@@ -267,8 +267,8 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "indiv_cells": indiv_cells,
             "search_str_in_all_geos": search_str in selected_rows,
         })
-
-        resp = Response({"table_data":table_data.data}, status=status.HTTP_200_OK)
+        
+        resp = Response({"table_data":table_data.data,"search_str":search_str}, status=status.HTTP_200_OK)
         return resp
     
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):

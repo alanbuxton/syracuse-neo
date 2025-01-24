@@ -9,5 +9,5 @@
 {% else %}
   |  <a href="{% url 'account_login' %}">Log in or Sign Up for full access</a>
 {% endif %}
-| <a href="{% url_with_querystring 'tracked-organizations' qs_params=request_state.qs_params %}">Tracked Organizations</a>
+| <a href="{% url_with_querystring 'tracked-org-ind-geo' qs_params=request_state.qs_params %}">Tracked Industries / Geo / Organizations</a>
 | <a href="{% url_with_querystring 'tracked-activities' qs_params=request_state.qs_params %}">Recent Tracked Activities</a>

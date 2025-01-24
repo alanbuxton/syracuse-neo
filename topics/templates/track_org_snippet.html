@@ -1,9 +1,9 @@
 
 <p>
   {% if is_authenticated_and_not_anon %}
-    <form action="{% url 'tracked-organizations' %}" method="post">
+    <form action="{% url 'tracked-org-ind-geo' %}" method="post">
         {% csrf_token %}
-        <input type="hidden" id="tracked_organization_uri" type="text" name="tracked_organization_uri" value="{{ org_data.uri }}">
+        <input type="hidden" id="tracked_organization_uri" type="text" name="tracked_organization_uri" value="track__{{ org_data.uri }}">
         <input type="submit" value="Track {{ org_data.source_node_name  }}">
     </form>
   {% endif %}

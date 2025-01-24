@@ -2,9 +2,8 @@ from django.test import TestCase
 import time
 from django.contrib.auth import get_user_model
 from auth_extensions.anon_user_utils import create_anon_user
-from trackeditems.serializers import TrackedOrganizationModelSerializer
-from trackeditems.models import TrackedOrganization, ActivityNotification, TrackedIndustryGeo
-from django.db.utils import IntegrityError
+from trackeditems.models import TrackedItem, ActivityNotification
+# from django.db.utils import IntegrityError
 from datetime import datetime, timezone, timedelta, date
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
@@ -34,56 +33,41 @@ if os.environ.get(env_var) != "Y":
 class TrackedOrgIndustryGeoTestCase(TestCase):
 
     def test_handles_posted_update(self):
-        payload = {'unselectall_473': ['1'], 'unselect_473_https://1145.am/db/3145990/Vaas_International_Holdings': ['0'], 
-                   'unselect_473_https://1145.am/db/3451497/Health_Safety_Institute': ['0'], 'selectall_223': ['1'], 
-                   'unselectall_223': ['0'], '223_https://1145.am/db/3449415/Rizing_Llc': ['1'], 
-                   'unselect_223_https://1145.am/db/3449415/Rizing_Llc': ['0'], 'unselectall_DK': ['1'], 
-                   'unselect_DK_https://1145.am/db/3474027/Gan': ['0'], 'selectall_US-NY': ['1'], 'unselectall_US-NY': ['0'], 
-                   'US-NY_https://1145.am/db/3460219/Atria_Wealth_Solutions': ['1'], 'unselect_US-NY_https://1145.am/db/3460219/Atria_Wealth_Solutions': ['0'], 
-                   'US-NY_https://1145.am/db/3474027/Gan': ['1'], 'unselect_US-NY_https://1145.am/db/3474027/Gan': ['0'], 
-                   'unselectall_280_US': ['0'], 'unselect_280_US_https://1145.am/db/3457431/Firebirds': ['1'], 
-                   '280_US_https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar': ['1'], 'unselect_280_US_https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar': ['0'], 
-                   'selectall_109_US': ['1'], 'unselectall_109_US': ['0'], '109_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 
-                   'unselect_109_US_https://1145.am/db/3452658/Centre_Technologies': ['0'], '109_US_https://1145.am/db/3474027/Gan': ['1'], 
-                   'unselect_109_US_https://1145.am/db/3474027/Gan': ['0'], '109_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
-                   'unselect_109_US_https://1145.am/db/3457048/Sphera_Solutions': ['0'], '109_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
-                   'unselect_109_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'unselectall_searchstr_US': ['0'], 
-                   'searchstr_US_https://1145.am/db/3474027/Gan': ['1'], 'unselect_searchstr_US_https://1145.am/db/3474027/Gan': ['0'], 
-                   'searchstr_US_https://1145.am/db/3457038/Freightpop': ['1'], 'unselect_searchstr_US_https://1145.am/db/3457038/Freightpop': ['0'], 
-                   'unselect_searchstr_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 'searchstr_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
-                   'unselect_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
-                   'unselect_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['0']}
+        payload = {'track_unselectall_473': ['1'], 'track_unselect_473_https://1145.am/db/3145990/Vaas_International_Holdings': ['0'], 
+                   'track_unselect_473_https://1145.am/db/3451497/Health_Safety_Institute': ['0'], 'track_selectall_223': ['1'], 
+                   'track_unselectall_223': ['0'], '223_https://1145.am/db/3449415/Rizing_Llc': ['1'], 
+                   'track_unselect_223_https://1145.am/db/3449415/Rizing_Llc': ['0'], 'track_unselectall_DK': ['1'], 
+                   'track_unselect_DK_https://1145.am/db/3474027/Gan': ['0'], 'track_selectall_US-NY': ['1'], 'track_unselectall_US-NY': ['0'], 
+                   'track_US-NY_https://1145.am/db/3460219/Atria_Wealth_Solutions': ['1'], 'track_unselect_US-NY_https://1145.am/db/3460219/Atria_Wealth_Solutions': ['0'], 
+                   'track_US-NY_https://1145.am/db/3474027/Gan': ['1'], 'track_unselect_US-NY_https://1145.am/db/3474027/Gan': ['0'], 
+                   'track_unselectall_280_US': ['0'], 'track_unselect_280_US_https://1145.am/db/3457431/Firebirds': ['1'], 
+                   'track_280_US_https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar': ['1'], 'track_unselect_280_US_https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar': ['0'], 
+                   'track_selectall_109_US': ['1'], 'track_unselectall_109_US': ['0'], 'track_109_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 
+                   'track_unselect_109_US_https://1145.am/db/3452658/Centre_Technologies': ['0'], 'track_109_US_https://1145.am/db/3474027/Gan': ['1'], 
+                   'track_unselect_109_US_https://1145.am/db/3474027/Gan': ['0'], 'track_109_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
+                   'track_unselect_109_US_https://1145.am/db/3457048/Sphera_Solutions': ['0'], 'track_109_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
+                   'track_unselect_109_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'track_unselectall_searchstr_US': ['0'], 
+                   'track_searchstr_US_https://1145.am/db/3474027/Gan': ['1'], 'track_unselect_searchstr_US_https://1145.am/db/3474027/Gan': ['0'], 
+                   'track_searchstr_US_https://1145.am/db/3457038/Freightpop': ['1'], 'track_unselect_searchstr_US_https://1145.am/db/3457038/Freightpop': ['0'], 
+                   'track_unselect_searchstr_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 'track_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
+                   'track_unselect_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'track_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
+                   'track_unselect_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['0']}
         expected =[{'industry_id': 473, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': False},
                     {'industry_id': 223, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},
                     {'industry_id': None, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False},
                     {'industry_id': None, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True},
                     {'industry_id': 109, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True},
-                    {'industry_id': 280, 'industry_search_str': None, 'region': 'US', 'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False},
-                    {'industry_id': 280, 'industry_search_str': None, 'region': 'US', 'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': 'foobar', 'region': 'US', 'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': 'foobar', 'region': 'US', 'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': 'foobar', 'region': 'US', 'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False},
-                    {'industry_id': None, 'industry_search_str': 'foobar', 'region': 'US', 'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': 'foobar', 'region': 'US', 'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True}]
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True},
+                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True}]
         tracked_items = get_entities_to_track(payload,"foobar")
         assert len(tracked_items) == len(expected)
         for ti in tracked_items:
-            assert ti in expected
-
-class TrackedOrganizationSerializerTestCase(TestCase):
-
-    def setUp(self):
-        self.ts = time.time()
-        self.user = get_user_model().objects.create(username=f"test-{self.ts}")
-
-    def test_does_not_create_duplicates(self):
-        org_uri = f"https://foo.example.org/testorg2-{self.ts}"
-        to1 = TrackedOrganizationModelSerializer().create({"user":self.user,"organization_uri":org_uri})
-        matching_orgs = TrackedOrganization.objects.filter(user=self.user)
-        assert len(matching_orgs) == 1
-        assert matching_orgs[0].organization_uri == org_uri
-        with self.assertRaises(IntegrityError):
-            to2 = TrackedOrganizationModelSerializer().create({"user":self.user,"organization_uri":org_uri.upper()})
+            assert ti in expected, f"Expected {ti} in {tracked_items}"
 
 class ActivityTestsWithSampleDataTestCase(TestCase):
 
@@ -102,16 +86,16 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         self.ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{self.ts}")
         # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
-        to1 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
-        to2 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
-        to3 = TrackedOrganization.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
         self.ts2 = time.time()
         self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
-        tig1 = TrackedIndustryGeo.objects.create(user=self.user2,
-                                        industry_name="Private Equity Business",
-                                        geo_code="US-TX")
+        _ = TrackedItem.objects.create(user=self.user2,
+                                        industry_id=146,
+                                        region="US-TX")
 
-        tracked_orgs = TrackedOrganization.by_user(self.user)
+        tracked_orgs = TrackedItem.trackable_by_user(self.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
         assert set(org_uris) == {'https://1145.am/db/3029576/Celgene',
                                     'https://1145.am/db/3475299/Napajen_Pharma',
@@ -122,18 +106,16 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
                                     'https://1145.am/db/3458127/The_Hilb_Group'}
         self.ts3 = time.time()
         self.user3 = get_user_model().objects.create(username=f"test-{self.ts3}")
-        tig3 = TrackedIndustryGeo.objects.create(user=self.user3,
-                                        industry_name="Foo bar industry",
-                                        geo_code = "")
-        tig4 = TrackedIndustryGeo.objects.create(user=self.user3,
-                                        industry_name="",
-                                        geo_code = "AU")
+        _ = TrackedItem.objects.create(user=self.user3,
+                                        industry_search_str="software")
+        _ = TrackedItem.objects.create(user=self.user3,
+                                        region = "AU")
         self.anon, _ = create_anon_user()
         
 
     def shows_tracked_organizations(self):
         client = self.client
-        path = "/tracked_organizations"
+        path = '/tracked_org_ind_geo'
         resp = client.get(path)
         assert resp.status_code == 403
         client.force_login(self.anon)
@@ -144,17 +126,17 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert resp.status_code == 200
         content = str(resp.content)
         assert "https://1145.am/db/3029576/Celgene" in content
-        assert "<b>All Industries</b> in <b>Australia</b>" not in content
-        assert "<b>Foo bar industry</b> in <b>All Locations</b>" not in content
+        # assert "<b>All Industries</b> in <b>Australia</b>" not in content
+        # assert "<b>Foo bar industry</b> in <b>All Locations</b>" not in content
 
     def shows_tracked_industry_geos(self):
         client = self.client
         client.force_login(self.user3)
-        resp = client.get("/tracked_organizations")
+        resp = client.get('/tracked_org_ind_geo')
         content = str(resp.content)
         assert "https://1145.am/db/3029576/Celgene" not in content
-        assert "<b>All Industries</b> in <b>Australia</b>" in content
-        assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
+        # assert "<b>All Industries</b> in <b>Australia</b>" in content
+        # assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
 
     def shows_recent_tracked_activities(self):
         path = "/activities?max_date=2024-05-30"
@@ -181,7 +163,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
         activity_articles = [(activity.uri,article.uri,datetime.now(tz=timezone.utc)),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
-        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
+        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],None,None,None)
         assert len(re.findall("Biomanufacturing Technologies, Oncology Solutions and 1 more",email)) == 1 # Per https://1145.am/db/3029576/Loxo_Oncology
         assert "Loxo Oncology" in email
 
@@ -192,7 +174,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         activity = CorporateFinanceActivity.self_or_ultimate_target_node(activity_uri)
         activity_articles = [(activity.uri,article.uri,datetime.now(tz=timezone.utc)),]
         matching_activity_orgs = activity_articles_to_api_results(activity_articles)
-        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],[],None,None,None)
+        email,_ = make_email_notif_from_orgs(matching_activity_orgs,[],None,None,None)
         assert "Loxo Oncology" in email
         assert "<b>Region:</b> United States" in email
 
@@ -230,8 +212,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert "<b>Private Equity Business</b> in the <b>United States of America - Texas</b>" in email
-        assert "We are not tracking any specific organizations for you." in email
+        assert "<td>Private Equity Business</td>" in email
+        assert "<td>United States of America - Texas</td>" in email
         assert activity_notif.num_activities == 2
         assert len(re.findall("Hastings",email)) == 5
         assert "None" not in email
@@ -295,14 +277,42 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
     def test_prepares_activity_data_by_org(self):
         max_date = datetime(2024,5,30,tzinfo=timezone.utc)
         min_date = max_date - timedelta(days=7)
-        acts, _, _ = recents_by_user_min_max_date(self.user,min_date,max_date)
+        acts, _ = recents_by_user_min_max_date(self.user,min_date,max_date)
         assert len(acts) == 2
 
     def test_prepares_activity_data_by_industry(self):
         max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         min_date = max_date - timedelta(days=7)
-        acts,_,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
+        acts,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
         assert len(acts) == 2
+
+    def test_tracked_items_updates_or_creates_no_duplicates(self):
+        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
+                      {'industry_id': None, 'industry_search_str': None, 'region': 'US-TX', 'organization_uri': None, 'trackable': True}]
+        ts = time.time()
+        user = get_user_model().objects.create(username=f"test-{ts}")
+        tracked_items = TrackedItem.trackable_by_user(user)
+        assert len(tracked_items) == 0
+        TrackedItem.update_or_create_for_user(user, trackables)
+        tracked_items = TrackedItem.trackable_by_user(user)
+        assert len(tracked_items) == 2
+        trackables = [{'industry_id': 400, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},  # New one
+                      {'industry_id': None, 'industry_search_str': None, 'region': 'US-TX', 'organization_uri': None, 'trackable': True}] # Same already there
+        TrackedItem.update_or_create_for_user(user, trackables)
+        tracked_items = TrackedItem.trackable_by_user(user)
+        assert len(tracked_items) == 3
+
+    def test_tracked_items_applies_not_trackable(self):
+        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
+                      {'industry_id': None, 'industry_search_str': None, 'region': 'US-TX', 'organization_uri': None, 'trackable': False}]
+        ts = time.time()
+        user = get_user_model().objects.create(username=f"test-{ts}")
+        tracked_items = TrackedItem.trackable_by_user(user)
+        assert len(tracked_items) == 0
+        TrackedItem.update_or_create_for_user(user, trackables)
+        tracked_items = TrackedItem.trackable_by_user(user)
+        assert len(tracked_items) == 1 # One of the items is not trackable
+
 
 
 

@@ -8,21 +8,25 @@ logger = logging.getLogger(__name__)
 
 class TrackedItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    industry_id = models.IntegerField() # matches neo4j topicId
-    industry_search_str = models.TextField()
-    region = models.TextField() # e.g. US-CA, or Europe
-    organization_uri = models.URLField()
+    industry_id = models.IntegerField(null=True) # matches neo4j topicId
+    industry_search_str = models.TextField(null=True)
+    region = models.TextField(null=True) # e.g. US-CA, or Europe
+    organization_uri = models.URLField(max_length=4096,null=True) # If set then ignore industry/region data
     trackable = models.BooleanField(default=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint("user","industry_id",Lower("region"), name= "trackeditem_unique_user_industry_region"),
-            models.UniqueConstraint("user", Lower("organization_uri"), name="trackeditem_unique_user_organization_uri"),
-            models.UniqueConstraint("user", Lower("industry_search_str"),Lower("region"), name="trackeditem_unique_user_search_str_region"),
-        ]
+    @property
+    def organization_or_merged_uri(self):
+        if self.organization_uri is None:
+            return None
+        org = Organization.self_or_ultimate_target_node(self.organization_uri)
+        if org is not None:
+            return org.uri
 
     @staticmethod
     def text_to_tracked_item_data(text,search_str=""):
+        if not text.startswith("track_"):
+            return None
+        text = re.sub(r"^track_","",text)
         splitted = re.split(r"_(https://.+)$",text)
         organization_uri = splitted[1] if len(splitted) > 1 else None
         elements = splitted[0].split("_")
@@ -48,6 +52,20 @@ class TrackedItem(models.Model):
                 "organization_uri": organization_uri,
                 "trackable": trackable,
                 }
+    
+    @staticmethod
+    def trackable_by_user(user):
+        return TrackedItem.objects.filter(user=user,trackable=True)
+    
+    @staticmethod
+    def update_or_create_for_user(user, trackables):
+        for data in trackables:
+            data["user"] = user
+            _ = TrackedItem.objects.update_or_create(
+                **data,
+                defaults = data
+            )
+
 
 class TrackedIndustryGeo(models.Model):
     '''

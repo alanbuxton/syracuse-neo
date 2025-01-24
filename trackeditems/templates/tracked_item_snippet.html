@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Industry Cluster</th>
+        <th>Industry Keywords</th>
+        <th>Region</th>
+        <th>Organization</th>
+    </tr>
+    {% for row in tracked_items %}
+        <tr>
+            <td>{{ row.industry_name }}</td>
+            <td>{{ row.industry_search_str }}</td>
+            <td>{{ row.region_name }}</td>
+            <td>{{ row.org_name }}</td>
+        </tr>
+    {% endfor %}
+</table>
