@@ -52,14 +52,6 @@ class Index(APIView):
     def get(self,request):
         params = request.query_params
         org_name = params.get("name")
-        selected_geo_name = params.get("country_or_region")
-        industry_name = params.get("industry")
-
-        selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
-        if selected_geo is None:
-            selected_geo_name = None
-
-        industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         request_state, combine_same_as_name_only = prepare_request_state(request)
         min_date_for_article_counts = date.today() - timedelta(days = 365 * 2)
 
@@ -74,17 +66,6 @@ class Index(APIView):
             org_search = NameSearchSerializer({"name":org_name})
             search_type = 'org_name'
             search_term = org_name
-        elif selected_geo or industry:
-            orgs = Organization.by_industry_and_or_geo(industry,selected_geo,
-                                                       min_date=min_date_for_article_counts) # needs article date
-            num_hits = len(orgs)
-            if len(orgs) > 20:
-                orgs = islice(orgs,20)
-            orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
-            org_list = OrganizationWithCountsSerializer(orgs, many=True)
-            org_search = NameSearchSerializer({"name":""})
-            search_type = 'combined_search'
-            search_term = industry_geo_search_str(industry_name, selected_geo_name)
         else:
             orgs = Organization.randomized_active_nodes(10,min_date=min_date_for_article_counts)
             org_list = OrganizationWithCountsSerializer(orgs, many=True)
@@ -93,20 +74,19 @@ class Index(APIView):
             search_term = None
             num_hits = 0
         last_updated = DataImport.latest_import_ts()
-        geo_search = GeoSerializer()
-        industry_search = IndustrySerializer({"industry":industry_name})
+        industry_search = IndustrySerializer()
 
         resp = Response({"organizations":org_list.data,
                         "search_serializer": org_search,
                         "search_term": search_term,
                         "num_hits": num_hits,
                         "industry_search": industry_search,
-                        "geo_search": geo_search,
+                        # "geo_search": geo_search,
                         "search_type": search_type,
                         "motd": MOTD,
                         "last_updated": last_updated,
-                        "search_industry_name": industry_name,
-                        "search_geo_code": selected_geo,
+                        # "search_industry_name": industry_name,
+                        # "search_geo_code": selected_geo,
                         "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
@@ -314,8 +294,8 @@ class IndustryGeoFinder(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'industry_geo_finder.html'
 
-    def get(self, request, **kwargs):
-        industry_search_str = kwargs['industry_search']
+    def get(self, request):
+        industry_search_str = request.GET['industry']
         headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str) 
         request_state, _ = prepare_request_state(request)
         resp = Response({"table_body": ind_cluster_rows,

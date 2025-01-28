@@ -58,7 +58,7 @@
 
 <h1>Topic Identification: Syracuse from 1145</h1>
 
-<h5>Welcome to Syracuse, your database of key events in company lifecycles.
+<h5>Welcome to syracuse.1145.am, your database of key events in company lifecycles.
 Last updated {{ last_updated | localize }}</h5>
 {{ motd | safe }}
 
@@ -70,27 +70,23 @@ Last updated {{ last_updated | localize }}</h5>
   <div id="form_container">
 
     <div id="left_panel">
-      <p>Search by organization name</p>
+      <p>Search by organization name:</p>
       <form class="narrow_form" action="{% url 'index' %}" method="GET" novalidate>
           {% render_form search_serializer template_pack='rest_framework/inline' %}
           <br/><input type="submit" value="Search">
       </form>
     </div>
     <div id="right_panel">
-      <p>or, filter for companies by industry and/or country/region</p>
-      <form class="narrow_form" action="{% url 'index' %}" method="GET" novalidate>
+      <p>or, start browsing by industry:</p>
+      <form class="narrow_form" action="{% url 'industry-geo-finder' %}" method="GET" novalidate>
           {% render_form industry_search template_pack='rest_framework/inline' %}
-          {% render_form geo_search template_pack='rest_framework/inline' %}
           <br/><input type="submit" value="Search">
       </form>
     </div>
   </div>
-  {% if search_type == 'org_name' or search_type == 'combined_search' %}
+  {% if search_type == 'org_name'%}
     <div class="result_list">
       <p>Searched for &quot;{{ search_term | safe }}&quot;.
-        {% if search_type == 'combined_search' %}
-          {% include "track_industry_geo_snippet.html" %}
-        {% endif %}
          Found {{ num_hits }}
         {% if num_hits > 20 %}
          organizations (Max 20 shown for web users):
@@ -100,7 +96,6 @@ Last updated {{ last_updated | localize }}</h5>
       </p>
     {% include "organization_list.html" %}
     </div>
-    <em>This search will only find organizations that are tagged to the respective industry or location: not all organizations have this data available.</em>
   {% else %}
 
   <br/>
@@ -114,7 +109,6 @@ Last updated {{ last_updated | localize }}</h5>
 </div>
 
 {% include 'layouts/footer.html' %}
-
 
 </body>
 </html>

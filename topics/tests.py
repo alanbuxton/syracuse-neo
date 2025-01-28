@@ -291,13 +291,6 @@ class TestUtilsWithDumpData(TestCase):
         assert "REDAVIA" in content
         assert "REDOVIA" in content
 
-    def test_does_search_by_industry_region(self):
-        client = self.client
-        path = "/?industry=Hospital+Management+Service&country_or_region=United+States+of+America&earliest_date=-1"
-        resp = client.get(path)
-        content = str(resp.content)
-        assert "https://1145.am/db/3452774/Hhaexchange" in content
-
     def test_company_search_with_combine_same_as_name_only(self):
         client = self.client
         resp = client.get("/?name=eli&combine_same_as_name_only=1&earliest_date=-1")
@@ -315,22 +308,6 @@ class TestUtilsWithDumpData(TestCase):
         assert "https://1145.am/db/3029576/Eli_Lilly" in content
         assert "Eli Lilly and Company" in content
         assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content
-
-    def test_search_industry_with_geo(self):
-        client = self.client
-        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=United+States+of+America&earliest_date=-1")
-        content = str(resp.content)
-        assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"Parexel_International_Corporation\s*</a>",content)) == 1
-        assert len(re.findall(r"Eusa_Pharma\s*</a>",content)) == 0
-
-    def test_search_industry_no_geo(self):
-        client = self.client
-        resp = client.get("/?industry=Biopharmaceutical+And+Biotech+Industry&country_or_region=&earliest_date=-1")
-        content = str(resp.content)
-        assert len(re.findall(r"Celgene\s*</a>",content)) == 1
-        assert len(re.findall(r"Parexel_International_Corporation\s*</a>",content)) == 1
-        assert len(re.findall(r"Eusa_Pharma\s*</a>",content)) == 1
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
@@ -808,7 +785,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_industry_geo_finder_selection_screen(self):
         client = self.client
-        resp = client.get("/industry_geo_finder/software")
+        resp = client.get("/industry_geo_finder?industry=software")
         assert resp.status_code == 200
         content = str(resp.content)
         table_headers = re.findall(r"\<th.+?\>",content)
