@@ -3,7 +3,6 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
-# from rest_framework.generics import  ListCreateAPIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedItem
 from topics.models import IndustryCluster
@@ -22,6 +21,7 @@ from datetime import datetime, timezone, timedelta, date
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
+import json
 
 class TrackedOrgIndGeoView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -35,7 +35,6 @@ class TrackedOrgIndGeoView(APIView):
     
     def get(self, request):
         tracked_items = self.get_queryset()
-
         serialized = OrgIndGeoSerializer(tracked_items, many=True)
         resp = Response({"tracked_items":serialized.data},
                         status=status.HTTP_200_OK)
@@ -43,7 +42,8 @@ class TrackedOrgIndGeoView(APIView):
 
     def post(self, request):
         payload = request.POST
-        trackables = get_entities_to_track(payload, payload["search_str"])
+        all_industry_ids = json.loads(payload["all_industry_ids"])
+        trackables = get_entities_to_track(payload, payload["search_str"], all_industry_ids)
         TrackedItem.update_or_create_for_user(request.user, trackables)
         return redirect('tracked-org-ind-geo')
 
@@ -165,7 +165,7 @@ def min_and_max_date(get_params):
         min_date = max_date - timedelta(days=7)
     return min_date, max_date
 
-def get_entities_to_track(params_dict, search_str):
+def get_entities_to_track(params_dict, search_str, all_industry_ids):
     tracked_items = [TrackedItem.text_to_tracked_item_data(x,search_str) 
             for  x,y in params_dict.items() if x.startswith("track_") and y[0] == '1']
     select_alls = []
@@ -183,7 +183,7 @@ def get_entities_to_track(params_dict, search_str):
                 region == x['region']):
                 return True
         return False
-        
+    
     specific_orgs_to_keep = [x for x in specific_orgs if not is_covered_by_select_all(x)]
     def clean_specific_org(tracked_item):
         return {"organization_uri":tracked_item["organization_uri"],
@@ -191,4 +191,12 @@ def get_entities_to_track(params_dict, search_str):
                 "industry_id": None, "industry_search_str": None, "region": None}
     specific_orgs_to_keep_cleaned = [clean_specific_org(x) for x in specific_orgs_to_keep]
 
-    return select_alls + specific_orgs_to_keep_cleaned
+    def add_industry_clusters_to_regional_tracked_items(tracked_item):
+        if (tracked_item['region'] is None) or (tracked_item['organization_uri'] is not None):
+            return [tracked_item]
+        return [{**tracked_item,**{"industry_id":x}} for x in all_industry_ids]
+    expanded_select_alls = []
+    for select_all in select_alls:
+        expanded_select_alls.extend(add_industry_clusters_to_regional_tracked_items(select_all))
+
+    return expanded_select_alls + specific_orgs_to_keep_cleaned

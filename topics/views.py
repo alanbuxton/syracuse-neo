@@ -1,6 +1,6 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
-from rest_framework.generics import  ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
@@ -249,7 +249,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
     def post(self, request):
         search_str = request.POST.get('searchStr')
         all_industry_ids = request.POST['allIndustryIDs']
-        all_industry_ids = json.loads(all_industry_ids)  
+        all_industry_ids = json.loads(all_industry_ids) 
         selected_cells = request.POST['selectedIndividualCells']
         indiv_cells = [row_col_data_to_tuple(x) for x in json.loads(selected_cells)]
         indiv_cells = remove_not_needed_admin1s_from_individual_cells(all_industry_ids,indiv_cells)
@@ -268,7 +268,8 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "search_str_in_all_geos": search_str in selected_rows,
         })
         
-        resp = Response({"table_data":table_data.data,"search_str":search_str}, status=status.HTTP_200_OK)
+        resp = Response({"table_data":table_data.data,"search_str":search_str,
+                         "all_industry_ids": all_industry_ids}, status=status.HTTP_200_OK)
         return resp
     
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):

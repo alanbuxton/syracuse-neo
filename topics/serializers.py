@@ -406,9 +406,10 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 all_industry_names.append(tmp_ind.best_name)
         all_industry_names = ", ".join(sorted(all_industry_names))
         for geo in instance["geo_codes"]:
-            orgs = []
+            orgs = set()
             for ind in instance["all_industry_ids"]: 
-                orgs = orgs + orgs_by_industry_and_or_geo(int(ind), geo)
+                orgs.update(orgs_by_industry_and_or_geo(int(ind), geo))
+            orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo))
             if len(orgs) > 0:
                 geo_loc = country_admin1_full_name(geo)
                 geo_orgs.append({
@@ -421,16 +422,16 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         indiv_cell_ind_cluster_orgs = []
         indiv_cell_ind_text_orgs = []
         for ind, geo in instance["indiv_cells"]:
-            orgs = []
+            orgs = set()
             if ind == 'search_str':
-                orgs = orgs_by_industry_text_and_geo_code(search_str, geo) 
+                orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo)) 
                 ind_id = "searchstr"
                 ind_desc = f'"{search_str}"'
                 geo_loc = country_admin1_full_name(geo)
             else:
                 industry = IndustryCluster.get_by_industry_id(ind)
                 if industry is not None:
-                    orgs = orgs_by_industry_and_or_geo(industry, geo)
+                    orgs.update(orgs_by_industry_and_or_geo(industry, geo))
                     ind_id = ind
                     ind_desc = industry.best_name
                     geo_loc = country_admin1_full_name(geo)

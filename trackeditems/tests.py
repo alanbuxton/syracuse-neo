@@ -52,19 +52,26 @@ class TrackedOrgIndustryGeoTestCase(TestCase):
                    'track_unselect_searchstr_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 'track_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
                    'track_unselect_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'track_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
                    'track_unselect_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['0']}
-        expected =[{'industry_id': 473, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': False},
-                    {'industry_id': 223, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False},
-                    {'industry_id': None, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True},
-                    {'industry_id': 109, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True},
-                    {'industry_id': None, 'industry_search_str': None, 'region': None, 'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True}]
-        tracked_items = get_entities_to_track(payload,"foobar")
+        expected = [{'industry_id': 473, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': False}, 
+                    {'industry_id': 223, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 223, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
+                    {'industry_id': 473, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
+                    {'industry_id': 101, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
+                    {'industry_id': 101, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 223, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 473, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 101, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 223, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
+                    {'industry_id': 473, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
+                    {'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
+                    {'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}
+                    ]
+        tracked_items = get_entities_to_track(payload,"foobar",[473,223,101])
         assert len(tracked_items) == len(expected)
         for ti in tracked_items:
             assert ti in expected, f"Expected {ti} in {tracked_items}"
