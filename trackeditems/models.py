@@ -8,10 +8,10 @@ logger = logging.getLogger(__name__)
 
 class TrackedItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    industry_id = models.IntegerField(null=True) # matches neo4j topicId
-    industry_search_str = models.TextField(null=True)
-    region = models.TextField(null=True) # e.g. US-CA, or Europe
-    organization_uri = models.URLField(max_length=4096,null=True) # If set then ignore industry/region data
+    industry_id = models.IntegerField(null=True,blank=True) # matches neo4j topicId
+    industry_search_str = models.TextField(null=True,blank=True)
+    region = models.TextField(null=True,blank=True) # e.g. US-CA, or Europe
+    organization_uri = models.URLField(max_length=4096,null=True,blank=True) # If set then ignore industry/region data
     trackable = models.BooleanField(default=True)
 
     @property
