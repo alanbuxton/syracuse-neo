@@ -1,5 +1,6 @@
 import re
 import string
+from urllib.parse import urlparse
 
 def cache_friendly(key):
     no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
@@ -23,3 +24,15 @@ def geo_to_country_admin1(geo_code):
     admin1_code = splitted[1] if len(splitted) > 1 else None
     return country_code, admin1_code
 
+def elements_from_uri(uri):
+    parsed = urlparse(uri)
+    part_pieces = parsed.path.split("/")
+    path = part_pieces[1]
+    doc_id = part_pieces[2]
+    org_name = "/".join(part_pieces[3:])
+    return {
+        "domain": parsed.netloc,
+        "path": path,
+        "doc_id": doc_id,
+        "name": org_name,
+    }

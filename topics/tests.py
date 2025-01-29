@@ -849,8 +849,10 @@ class TestUtilsWithDumpData(TestCase):
                 "https://1145.am/db/3464614/Mufg_Union_Bank", "https://1145.am/db/3465879/Mmtec", "https://1145.am/db/3463583/Disc_Graphics",
                 "https://1145.am/db/3454466/Arthur_J_Gallagher_Co", "https://1145.am/db/3029576/Celgene", "https://1145.am/db/3461324/Signal_Peak_Ventures"]
         sorted = orgs_by_weight(uris)
-        assert sorted[0] == {'uri': 'https://1145.am/db/3454466/Arthur_J_Gallagher_Co', 'name': 'Arthur J. Gallagher & Co.', 'sum_of_weights': 10}
-        assert sorted[-1] == {'uri': 'https://1145.am/db/3464614/Mufg_Union_Bank', 'name': 'MUFG Union Bank', 'sum_of_weights': 2}
+        assert sorted[0]['uri'] == 'https://1145.am/db/3454466/Arthur_J_Gallagher_Co'
+        assert sorted[0]['name'] == 'Arthur J. Gallagher & Co.'
+        assert sorted[-1]['uri'] == 'https://1145.am/db/3464614/Mufg_Union_Bank'
+        assert sorted[-1]['name'] == 'MUFG Union Bank'
         assert len(sorted) == len(uris)
 
 class TestRegionHierarchy(TestCase):

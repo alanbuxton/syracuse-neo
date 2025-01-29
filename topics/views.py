@@ -7,14 +7,14 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from django.shortcuts import redirect
 from topics.models import Organization, Resource, IndustryCluster, GeoNamesLocation
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
-    NameSearchSerializer, GeoSerializer, 
+    NameSearchSerializer, 
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
     OrgsByIndustryGeoSerializer)
 from rest_framework import status, viewsets
 from datetime import date, timedelta
 from topics.stats_helpers import cached_activity_stats_last_updated_date
-from urllib.parse import urlparse, urlencode
+from urllib.parse import urlencode
 from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
@@ -22,6 +22,7 @@ from itertools import islice
 from .industry_geo.orgs_by_industry_geo import combined_industry_geo_results
 import re
 import json
+from .util import elements_from_uri
 
 
 import logging
@@ -238,6 +239,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
         selected_columns = request.POST['selectedColumns']
         geo_codes = [col_from_request_post_data(x) for x in json.loads(selected_columns)]
         geo_codes = remove_not_needed_admin1s(geo_codes)
+        request_state, _ = prepare_request_state(request)
 
         table_data = OrgsByIndustryGeoSerializer({
             "all_industry_ids": all_industry_ids,
@@ -249,7 +251,8 @@ class IndustryGeoFinderReview(ListCreateAPIView):
         })
         
         resp = Response({"table_data":table_data.data,"search_str":search_str,
-                         "all_industry_ids": all_industry_ids}, status=status.HTTP_200_OK)
+                         "all_industry_ids": all_industry_ids,
+                         "request_state": request_state}, status=status.HTTP_200_OK)
         return resp
     
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
@@ -306,20 +309,6 @@ class IndustryGeoFinder(APIView):
                          "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
-
-
-def elements_from_uri(uri):
-    parsed = urlparse(uri)
-    part_pieces = parsed.path.split("/")
-    path = part_pieces[1]
-    doc_id = part_pieces[2]
-    org_name = "/".join(part_pieces[3:])
-    return {
-        "domain": parsed.netloc,
-        "path": path,
-        "doc_id": doc_id,
-        "name": org_name,
-    }
 
 
 def industry_geo_search_str(industry, geo):

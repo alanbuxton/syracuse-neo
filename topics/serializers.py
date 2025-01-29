@@ -11,6 +11,7 @@ from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
 from .industry_geo import orgs_by_industry_and_or_geo, country_admin1_full_name, orgs_by_industry_text_and_geo_code
+from .util import elements_from_uri
 
 import logging
 logger = logging.getLogger(__name__)
@@ -458,6 +459,8 @@ def orgs_by_weight(org_uris):
         o = Organization.get_by_uri(uri)
         weight = o.sum_of_weights
         name = o.best_name
-        org_data.append( {"uri":o.uri,"name":name,"sum_of_weights":weight})
+        org_vals = {"uri":o.uri,"name":name,"sum_of_weights":weight}
+        org_vals["splitted_uri"] = elements_from_uri(o.uri)
+        org_data.append(org_vals)
     org_data = sorted(org_data, key=lambda x: x["sum_of_weights"],reverse=True)
     return org_data

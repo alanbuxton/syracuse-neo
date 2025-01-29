@@ -67,7 +67,9 @@ button {
                             </td>
                             <input type="hidden" name="track_unselect_{{table_row.table_id}}_{{ org.uri }}" value=0
                                 class="unselectorg_{{ table_row.table_id }}" id="unselect_{{ table_row.table_id }}_{{org.uri}}">
-                            <td>{{ org.name }}</td>
+                            <td>
+                                <a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
+                                {{ org.name }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
