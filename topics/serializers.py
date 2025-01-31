@@ -11,7 +11,7 @@ from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
 from .industry_geo import orgs_by_industry_and_or_geo, country_admin1_full_name, orgs_by_industry_text_and_geo_code
-from .util import elements_from_uri
+from .util import elements_from_uri, cacheable_hash
 
 import logging
 logger = logging.getLogger(__name__)
@@ -88,7 +88,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         clean_rels = only_valid_relationships(rels)
         source_names = source_names_from_str(self.context.get("source_str")) 
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
-        source_names_as_hash = hash(",".join(sorted(source_names)))
+        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         cache_key=cache_friendly(f"familytree_{organization_uri}_{source_names_as_hash}_{combine_same_as_name_only}_{clean_rels}_{earliest_doc_date}")
         res = cache.get(cache_key)
         if res is not None:
@@ -261,7 +261,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
     def to_representation(self, instance, **kwargs):
         source_names = source_names_from_str(self.context.get("source_str"))
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
-        source_names_as_hash = hash(",".join(sorted(source_names)))
+        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         combine_same_as_name_only = self.context.get("combine_same_as_name_only")
         max_nodes = 50
         cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
@@ -343,7 +343,7 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
         combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
         source_names = source_names_from_str(self.context.get("source_str"))
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
-        source_names_as_hash = hash(",".join(sorted(source_names)))
+        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         cache_key=cache_friendly(f"timeline_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
         res = cache.get(cache_key)
         if res is not None:

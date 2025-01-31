@@ -1,12 +1,18 @@
 import re
 import string
 from urllib.parse import urlparse
+import hashlib
+
+def cacheable_hash(input_string):
+    hash_object = hashlib.sha256()
+    hash_object.update(input_string.encode('utf-8'))
+    return hash_object.hexdigest()
 
 def cache_friendly(key):
     no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
     cleaned = re.sub(r"_{2,}","_",no_punct)
     if len(cleaned) > 230:
-        cleaned = cleaned[:210] + str(hash(cleaned[210:]))
+        cleaned = cleaned[:210] + str(cacheable_hash(cleaned[210:]))
     return cleaned
 
 def blank_or_none(val):

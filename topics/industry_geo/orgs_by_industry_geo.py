@@ -10,6 +10,7 @@ from django.core.cache import cache
 from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
+from topics.util import cacheable_hash
 
 import logging
 logger = logging.getLogger(__name__)
@@ -25,6 +26,7 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
         res = cache.get(cache_key)
         if res is not None:
             return res
+    logger.debug(f"cache miss {cache_key}")
     res = do_org_geo_industry_cluster_query(industry_cluster_uri,country_code,admin1_code)
     cache.set(cache_key, res)
     return res
@@ -33,11 +35,12 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
     logger.info("Warming up at country level")
     country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[basedInHighGeoNamesLocation]-(o:Resource&Organization)-[industryClusterPrimary]->(i: Resource&IndustryCluster)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
-                        RETURN i.uri, l.countryCode, collect(distinct(o.uri))"""
+                        RETURN i.topicId, l.countryCode, collect(distinct(o.uri))"""
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
     for industry_cluster_topic_id, country_code, org_uris in country_level:
         cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_None_None"
+        logger.debug(f"caching {cache_key}")
         cache.set(cache_key, org_uris)
     
     logger.info("Warming up at admin1 level")
@@ -45,22 +48,27 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
                         WHERE o.internalMergedSameAsHighToUri IS NULL
                         AND l.countryCode in {countries_with_state_province}
                         AND l.admin1Code <> '00'
-                        RETURN i.uri, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
+                        RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
     admin1_level, _ = db.cypher_query(admin1_query)
-    logger.info(f"Caching {len(admin1_level)} results")
+    logger.debug(f"Caching {len(admin1_level)} results")
     for industry_cluster_topic_id, country_code, admin1_code, org_uris in admin1_level:
         cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None"
         cache.set(cache_key, org_uris)
+    
+    # Now warm up all industry/geo combos
+    all_ids = IndustryCluster.leaf_nodes_only()
+    _ = org_geo_industry_by_clusters(all_ids, counts_only=True)
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
-    cache_key = f"orgs_industry_text_{hash(industry_text)}_{country_code}"
+    cache_key = f"orgs_industry_text_{cacheable_hash(industry_text)}_{country_code}"
     if admin1_code is not None:
         cache_key = f"{cache_key}_{admin1_code}"
     res = cache.get(cache_key)
-    if res:
+    if res is not None:
         return res
+    logger.debug(f"cache miss {cache_key}")
     res = Organization.by_industry_text_and_geo(industry_text, country_code, admin1_code)
-    cache.set(cache_key, res, 60*60) # 1 hour cache timeout
+    cache.set(cache_key, res, 60*60*4) # 4 hour cache timeout
     return res
 
 def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admin1_code: str, limit: int = None):
@@ -82,11 +90,16 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
 
 def org_geo_industry_cluster_query_by_words(search_text: str,counts_only):
     industry_clusters = IndustryCluster.by_representative_doc_words(search_text)
+    return org_geo_industry_by_clusters(industry_clusters, counts_only)
+
+def org_geo_industry_by_clusters(industry_clusters, counts_only):    
+    logger.info(f"org_geo_industry_by_clusters: Got {len(industry_clusters)} industry clusters")
     country_results = {}
     adm1_results = defaultdict(dict)
     relevant_countries = []
     relevant_admin1s = defaultdict(list)
     for ind in industry_clusters:
+        logger.info(f"org_geo_industry_by_clusters: working on {ind.uri}")
         ind_uri = ind.uri
         country_results[ind_uri] = {}
         for cc in COUNTRY_TO_GLOBAL_REGION.keys():
@@ -136,8 +149,11 @@ def org_geo_industry_text_by_words(search_str: str,counts_only):
     return relevant_countries, relevant_admin1s, country_results, adm1_results
 
 def combined_industry_geo_results(search_str,counts_only=True):
+    logger.debug("combined_industry_geo_results started")
     ind_clusters, ind_cluster_countries, ind_cluster_admin1s_tmp, ind_cluster_by_country, ind_cluster_by_adm1 = org_geo_industry_cluster_query_by_words(search_str, counts_only)
+    logger.debug("org_geo_industry_cluster_query_by_words done")
     text_countries, text_admin1s_tmp, text_by_country, text_by_adm1 = org_geo_industry_text_by_words(search_str, counts_only)
+    logger.debug("org_geo_industry_text_by_words done")
 
     countries = set(ind_cluster_countries + text_countries)
 
@@ -150,13 +166,15 @@ def combined_industry_geo_results(search_str,counts_only=True):
     country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(countries, admin1s)
     headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths,
                               countries, admin1s)
+    logger.debug("prepare_headers done")
     if len(headers) == 0:
         # No data at all
         return [], [], []
     empty_value = 0 if counts_only is True else None
     ind_cluster_rows, text_row = prepare_rows(headers[-1], ind_clusters, ind_cluster_by_country, ind_cluster_by_adm1, 
                         search_str, text_by_country, text_by_adm1, empty_value)
-    
+    logger.debug("prepare_rows done")
+
     return headers, ind_cluster_rows, text_row
 
 def prepare_rows(header_row, ind_clusters, ind_cluster_by_country, ind_cluster_by_adm1, 
