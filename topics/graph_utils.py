@@ -31,6 +31,17 @@ EDGE_COLORS = { "spender": "salmon",
                 "awarded": "salmon",
                 "productOrganization": "salmon",
                 "withProduct": "burlywood",
+                "aboutUs": "salmon",
+                "marketing": "salmon",
+                "analystRating": "salmon",
+                "equityAction": "salmon",
+                "financialReporting": "salmon",
+                "financials": "salmon",
+                "incident": "salmon",
+                "marketing": "salmon",
+                "operations": "salmon",
+                "recognition": "salmon",
+                "regulatory": "salmon",
                 }
 
 def node_color_shape(node):

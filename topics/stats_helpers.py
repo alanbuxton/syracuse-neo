@@ -25,7 +25,9 @@ def get_cached_stats():
 
 def get_stats(max_date):
     counts = []
-    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","PartnershipActivity","ProductActivity","Article","Role"]:
+    for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","PartnershipActivity","ProductActivity",
+              "Article","Role","AboutUsActivity","AnalystRatingActivity","EquityActionsActivity","FinancialReportingActivity",
+              "FinancialsActivity","IncidentActivity","MarketingActivity","OperationsActivity","RecognitionActivity","RegulatoryActivity"]:
         res, _ = db.cypher_query(f"""MATCH (n:{x}) WHERE
                     n.internalMergedSameAsHighToUri IS NULL
                     RETURN COUNT(n)""")

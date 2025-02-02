@@ -174,9 +174,12 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        assert set(counts) == {('ProductActivity', 10), ('RoleActivity', 12), ('Article', 202), 
-                               ('Person', 12), ('CorporateFinanceActivity', 194), ('PartnershipActivity', 4), 
-                               ('Role', 11), ('LocationActivity', 11), ('Organization', 421)}
+        assert set(counts) == {('AboutUsActivity', 1), ('Person', 12), ('OperationsActivity', 3), ('IncidentActivity', 1), 
+                               ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4), 
+                               ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
+                               ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 432), ('Article', 213), 
+                               ('CorporateFinanceActivity', 194), 
+                               ('AnalystRatingActivity', 1), ('LocationActivity', 11), ('Role', 11), ('RoleActivity', 12)}
 
         assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
                                           ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
@@ -254,7 +257,12 @@ class TestUtilsWithDumpData(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
         orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
-        assert len(orgs) == 7
+        assert len(orgs) == 8
+        assert set(orgs) == set(['https://1145.am/db/3452608/Avon_Products_Inc', 
+                             'https://1145.am/db/3465815/Alliance_Automotive_Group', 
+                             'https://1145.am/db/1787315/Scape', 'https://1145.am/db/3473030/Eusa_Pharma', 
+                             'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2946625/Cuadrilla_Resources', 
+                             'https://1145.am/db/3029681/Halebury', 'https://1145.am/db/3465883/Pistonheads'])
 
     def test_shows_resource_page(self):
         client = self.client
@@ -733,44 +741,70 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_industry_geo_finder_prep_table(self):
         headers, ind_cluster_rows, text_row  = combined_industry_geo_results("software") 
-        assert headers == [OrderedDict([('Americas', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
+        assert headers == [OrderedDict([('Americas', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT'}), 
                                         ('Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
-                            OrderedDict([('Northern America', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
-                                        ('Northern Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
-                            OrderedDict([('US', {'colspan': 5, 'classes': 'col-US col-US-CA col-US-NC col-US-NY col-US-TX'}), 
+                            OrderedDict([('Northern America', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT'}), 
+                                         ('Northern Europe', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('US', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT'}), 
                                          ('DK', {'colspan': 1, 'classes': 'col-DK'})]), 
                             OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
-                                         ('Northeast', {'colspan': 1, 'classes': 'col-US-NY'}), 
+                                         ('Midwest', {'colspan': 1, 'classes': 'col-US-IL'}), 
+                                         ('Northeast', {'colspan': 2, 'classes': 'col-US-CT col-US-NY'}), 
                                          ('South', {'colspan': 2, 'classes': 'col-US-NC col-US-TX'}), 
-                                         ('West', {'colspan': 1, 'classes': 'col-US-CA'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
+                                         ('West', {'colspan': 3, 'classes': 'col-US-CA col-US-OR col-US-UT'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
                             OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                                         ('East North Central', {'colspan': 1, 'classes': 'col-US-IL'}), 
                                          ('Mid Atlantic', {'colspan': 1, 'classes': 'col-US-NY'}), 
+                                         ('New England', {'colspan': 1, 'classes': 'col-US-CT'}), 
                                          ('South Atlantic', {'colspan': 1, 'classes': 'col-US-NC'}), 
-                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), 
-                                         ('Pacific', {'colspan': 1, 'classes': 'col-US-CA'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
-                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
-                                         ('US-NC', {'colspan': 1, 'classes': 'col-US-NC header_final'}), ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
-                                         ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK header_final'})])]
+                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}),
+                                         ('Mountain', {'colspan': 1, 'classes': 'col-US-UT'}), ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-OR'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'})]), 
+                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
+                                         ('US-IL', {'colspan': 1, 'classes': 'col-US-IL header_final'}), 
+                                         ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
+                                         ('US-CT', {'colspan': 1, 'classes': 'col-US-CT header_final'}), 
+                                         ('US-NC', {'colspan': 1, 'classes': 'col-US-NC header_final'}), 
+                                         ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
+                                         ('US-UT', {'colspan': 1, 'classes': 'col-US-UT header_final'}), 
+                                         ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), 
+                                         ('US-OR', {'colspan': 1, 'classes': 'col-US-OR header_final'}), 
+                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK header_final'})])
+                        ]
 
-        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/109_software_tools_applications_development', 'name': 'Software-Development Tools', 'industry_id': 109, 'vals': 
-                                            [{'value': 4, 'region_code': 'US'}, 
-                                             {'value': 1, 'region_code': 'US-NY'}, 
-                                             {'value': 0, 'region_code': 'US-NC'}, 
-                                             {'value': 1, 'region_code': 'US-TX'}, 
-                                             {'value': 0, 'region_code': 'US-CA'}, 
-                                             {'value': 1, 'region_code': 'DK'}]}, 
-                                        {'uri': 'https://1145.am/db/industry/554_software_financial_technology_solutions', 'name': 'Software And Financial Services', 'industry_id': 554, 'vals': 
-                                                [{'value': 1, 'region_code': 'US'}, 
-                                                {'value': 1, 'region_code': 'US-NY'}, 
-                                                {'value': 0, 'region_code': 'US-NC'}, 
-                                                {'value': 1, 'region_code': 'US-TX'}, 
-                                                {'value': 0, 'region_code': 'US-CA'}, 
-                                                {'value': 0, 'region_code': 'DK'}]}]
+        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/109_software_tools_applications_development', 'name': 'Software-Development Tools', 'industry_id': 109, 
+                                         'vals': [{'value': 4, 'region_code': 'US'}, 
+                                                  {'value': 1, 'region_code': 'US-IL'}, 
+                                                  {'value': 1, 'region_code': 'US-NY'}, 
+                                                  {'value': 0, 'region_code': 'US-CT'}, 
+                                                  {'value': 0, 'region_code': 'US-NC'}, 
+                                                  {'value': 1, 'region_code': 'US-TX'}, 
+                                                  {'value': 1, 'region_code': 'US-UT'}, 
+                                                  {'value': 0, 'region_code': 'US-CA'}, 
+                                                  {'value': 0, 'region_code': 'US-OR'}, 
+                                                  {'value': 1, 'region_code': 'DK'}]}, 
+                                            {'uri': 'https://1145.am/db/industry/554_software_financial_technology_solutions', 'name': 'Software And Financial Services', 'industry_id': 554, 
+                                             'vals': [{'value': 1, 'region_code': 'US'}, 
+                                                      {'value': 0, 'region_code': 'US-IL'}, 
+                                                      {'value': 1, 'region_code': 'US-NY'}, 
+                                                      {'value': 0, 'region_code': 'US-CT'}, 
+                                                      {'value': 0, 'region_code': 'US-NC'}, 
+                                                      {'value': 1, 'region_code': 'US-TX'}, 
+                                                      {'value': 0, 'region_code': 'US-UT'}, 
+                                                      {'value': 0, 'region_code': 'US-CA'}, 
+                                                      {'value': 0, 'region_code': 'US-OR'}, 
+                                                      {'value': 0, 'region_code': 'DK'}]}]
+        
         assert text_row == {'uri': '', 'name': 'software', 'vals': [{'value': 5, 'region_code': 'US'}, 
+                                                                    {'value': 1, 'region_code': 'US-IL'}, 
                                                                     {'value': 1, 'region_code': 'US-NY'}, 
+                                                                    {'value': 0, 'region_code': 'US-CT'}, 
                                                                     {'value': 0, 'region_code': 'US-NC'}, 
                                                                     {'value': 1, 'region_code': 'US-TX'}, 
+                                                                    {'value': 1, 'region_code': 'US-UT'}, 
                                                                     {'value': 1, 'region_code': 'US-CA'}, 
+                                                                    {'value': 0, 'region_code': 'US-OR'}, 
                                                                     {'value': 1, 'region_code': 'DK'}]}
 
     def test_remove_not_needed_admin1s_from_individual_cells(self):
@@ -790,30 +824,38 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         table_headers = re.findall(r"\<th.+?\>",content)
         assert table_headers == ['<th rowspan="6">', 
-                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="9" class="isheader hascontent col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT">', 
                                  '<th colspan="1" class="isheader hascontent col-DK">', 
-                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="9" class="isheader hascontent col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT">', 
                                  '<th colspan="1" class="isheader hascontent col-DK">', 
-                                 '<th colspan="5" class="isheader hascontent col-US col-US-CA col-US-NC col-US-NY col-US-TX">', 
+                                 '<th colspan="9" class="isheader hascontent col-US col-US-CA col-US-CT col-US-IL col-US-NC col-US-NY col-US-OR col-US-TX col-US-UT">', 
                                  '<th colspan="1" class="isheader hascontent col-DK">', 
                                  '<th colspan="1" class="isheader hascontent col-US">', 
-                                 '<th colspan="1" class="isheader hascontent col-US-NY">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-IL">', 
+                                 '<th colspan="2" class="isheader hascontent col-US-CT col-US-NY">',
                                  '<th colspan="2" class="isheader hascontent col-US-NC col-US-TX">', 
-                                 '<th colspan="1" class="isheader hascontent col-US-CA">', 
+                                 '<th colspan="3" class="isheader hascontent col-US-CA col-US-OR col-US-UT">', 
                                  '<th colspan="1" class="isheader nocontent col-DK">', 
                                  '<th colspan="1" class="isheader nocontent col-US">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-IL">', 
                                  '<th colspan="1" class="isheader hascontent col-US-NY">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-CT">', 
                                  '<th colspan="1" class="isheader hascontent col-US-NC">', 
                                  '<th colspan="1" class="isheader hascontent col-US-TX">', 
-                                 '<th colspan="1" class="isheader hascontent col-US-CA">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-UT">', 
+                                 '<th colspan="2" class="isheader hascontent col-US-CA col-US-OR">', 
                                  '<th colspan="1" class="isheader nocontent col-DK">', 
                                  '<th colspan="1" class="isheader nocontent col-US header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-IL header_final">', 
                                  '<th colspan="1" class="isheader hascontent col-US-NY header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-CT header_final">', 
                                  '<th colspan="1" class="isheader hascontent col-US-NC header_final">', 
                                  '<th colspan="1" class="isheader hascontent col-US-TX header_final">', 
+                                 '<th colspan="1" class="isheader hascontent col-US-UT header_final">', 
                                  '<th colspan="1" class="isheader hascontent col-US-CA header_final">', 
-                                 '<th colspan="1" class="isheader nocontent col-DK header_final">']
-
+                                 '<th colspan="1" class="isheader hascontent col-US-OR header_final">', 
+                                 '<th colspan="1" class="isheader nocontent col-DK header_final">'
+                                 ]
 
     def test_industry_geo_finder_preview(self):
         '''

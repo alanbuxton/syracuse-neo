@@ -199,7 +199,7 @@ class OrganizationByUri(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_linkages.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Resource.nodes.get(uri=uri)
         request_state, combine_same_as_name_only = prepare_request_state(request)

@@ -1,0 +1,473 @@
+@prefix ns1: <https://1145.am/db/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://1145.am/db/2946622/Facebook> a org:Organization ;
+    ns1:basedInHighClean "United States" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/6252001> ;
+    ns1:basedInHighRaw "US" ;
+    ns1:description "social networking" ;
+    ns1:documentSource <https://1145.am/db/2946622/wwwcityamcom_brand-index-facebook-craze-brazil-shows-it-has-further-grow> ;
+    ns1:foundName "FACEBOOK" ;
+    ns1:hasMarketingActivity <https://1145.am/db/2946622/Turns_10_Years_Old> ;
+    ns1:industry "social networking" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/61_social_microsocial_microblogging_network> ;
+    ns1:internalDocId 2946622 ;
+    ns1:name "Facebook" ;
+    ns1:sameAsHigh <https://1145.am/db/106983/Facebook_Inc>,
+        <https://1145.am/db/108206/Facebook>,
+        <https://1145.am/db/108597/Facebook_Inc>,
+        <https://1145.am/db/99293/Facebook> .
+
+<https://1145.am/db/geonames_location/6252001> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2946622/wwwcityamcom_brand-index-facebook-craze-brazil-shows-it-has-further-grow>,
+        <https://1145.am/db/2946678/wwwcityamcom_walmarts-500m-canada-growth-plan>,
+        <https://1145.am/db/2946769/wwwcityamcom_hallmark-channel-partnership-leads-blinkx-shares-recovery>,
+        <https://1145.am/db/2948126/wwwcityamcom_barclays-hikes-bonuses-hold-top-staff>,
+        <https://1145.am/db/2948548/wwwcityamcom_towers-watson-suffers-spend-obamacare-platform-rolls>,
+        <https://1145.am/db/2948725/wwwcityamcom_google-puts-pressure-sochi-games-anti-discrimination-logo> ;
+    ns1:geoNamesId 6252001 ;
+    ns1:geoNamesURL <https://sws.geonames.org/6252001> ;
+    ns1:name "United States" .
+
+<https://1145.am/db/2946622/Turns_10_Years_Old> a ns1:MarketingActivity ;
+    ns1:documentDate "2014-02-04T20:04:52+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "FACEBOOK turns 10 years old this week, and much of the conversation around its decadal anniversary has centred on whether its extraordinary rise will continue, or if the social networking behemoth is already on the wane. The most oft-cited argument of the Facebook naysayers is that it is becoming passé among teenagers, who some say are increasingly turning to upstart competitors Snapchat and WhatsApp. However, the company recently posted annual revenues up 55 per cent to £4.8bn, a large portion of which came from its increasingly profitable use of mobile advertising. In order to maintain and accelerate this pace of growth, Facebook would do well to focus on new emerging markets, rather than fickle Western teenagers. This brings us to Brazil, which has embraced social media and is now Facebook's second biggest market after the US." ;
+    ns1:documentSource <https://1145.am/db/2946622/wwwcityamcom_brand-index-facebook-craze-brazil-shows-it-has-further-grow> ;
+    ns1:foundName "turns 10 years old" ;
+    ns1:internalDocId 2946622 ;
+    ns1:name "turns 10 years old" ;
+    ns1:status "completed" ;
+    ns1:whereHighClean "Federative Republic of Brazil" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3469034> ;
+    ns1:whereHighRaw "Brazil" .
+
+<https://1145.am/db/2946622/wwwcityamcom_brand-index-facebook-craze-brazil-shows-it-has-further-grow> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:31:40+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2946622 ;
+    schema:datePublished "2014-02-04T20:04:52+00:00"^^xsd:dateTime ;
+    schema:headline "Brand Index: Facebook craze in Brazil shows it has further to grow" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/brand-index-facebook-craze-brazil-shows-it-has-further-grow/> .
+
+<https://1145.am/db/geonames_location/3469034> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2946622/wwwcityamcom_brand-index-facebook-craze-brazil-shows-it-has-further-grow> ;
+    ns1:geoNamesId 3469034 ;
+    ns1:geoNamesURL <https://sws.geonames.org/3469034> ;
+    ns1:name "Federative Republic of Brazil" .
+
+<https://1145.am/db/2946625/Cuadrilla_Resources> a org:Organization ;
+    ns1:basedInHighClean "Lancashire",
+        "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167>,
+        <https://1145.am/db/geonames_location/2644974> ;
+    ns1:basedInHighRaw "Lancashire",
+        "UK" ;
+    ns1:description "fracking",
+        "oil and gas exploration" ;
+    ns1:documentSource <https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites> ;
+    ns1:foundName "Cuadrilla",
+        "Cuadrilla Resources" ;
+    ns1:hasOperationsActivity <https://1145.am/db/2946625/Start_Fracking_At_Two> ;
+    ns1:industry "energy" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/400_shale_fracking_drilling_gas> ;
+    ns1:internalDocId 2946625 ;
+    ns1:name "Cuadrilla Resources" ;
+    ns1:sameAsHigh <https://1145.am/db/3015228/Cuadrilla_Resources> .
+
+<https://1145.am/db/geonames_location/2635167> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites>,
+        <https://1145.am/db/2946724/wwwcityamcom_hp-audit-finds-profit-shortfall-autonomy>,
+        <https://1145.am/db/2946756/wwwcityamcom_boss-uk-oil-and-gas-company-hurricane-backs-wood-reforms>,
+        <https://1145.am/db/2946856/wwwcityamcom_santander-s-uk-switch-small-loans-takes>,
+        <https://1145.am/db/2946859/wwwcityamcom_investors-back-bskyb-despite-drop-profits>,
+        <https://1145.am/db/2947208/wwwcityamcom_mb-reports-its-biggest-week-sales-over-xmas>,
+        <https://1145.am/db/2948090/wwwcityamcom_thames-water-bucks-trend-inflation-busting-price-hike>,
+        <https://1145.am/db/2948152/wwwcityamcom_malfunctioning-software-sparks-huge-recall-toyota-prius-cars>,
+        <https://1145.am/db/2948476/wwwcityamcom_punch-creditors-say-debt-deal-scaremongering>,
+        <https://1145.am/db/2948664/wwwcityamcom_best-brokers-6-february-2014> ;
+    ns1:geoNamesId 2635167 ;
+    ns1:geoNamesURL <https://sws.geonames.org/2635167> ;
+    ns1:name "United Kingdom of Great Britain and Northern Ireland" .
+
+<https://1145.am/db/geonames_location/2644974> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites> ;
+    ns1:geoNamesId 2644974 ;
+    ns1:geoNamesURL <https://sws.geonames.org/2644974> ;
+    ns1:name "Lancashire" .
+
+<https://1145.am/db/2946625/Start_Fracking_At_Two> a ns1:OperationsActivity ;
+    ns1:documentDate "2014-02-04T20:05:19+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Cuadrilla plans to frack at two Lancashire sites.",
+        "SHALE GAS explorer Cuadrilla Resources yesterday said that it plans to start fracking at two new sites in Lancashire, to the alarm of environmental groups who say it will not solve the UK's energy problems. The company, which has British Gas-owner Centrica as a stakeholder, said that it plans to apply for permission to hydraulically fracture - or frack - for shale gas from up to four wells on the two sites. Critics claim that the fracking technique causes earth tremors.",
+        "SHALE GAS explorer Cuadrilla Resources yesterday said that it plans to start fracking at two new sites in Lancashire, to the alarm of environmental groups who say it will not solve the UK's energy problems. The company, which has British Gas-owner Centrica as a stakeholder, said that it plans to apply for permission to hydraulically fracture - or frack - for shale gas from up to four wells on the two sites. Critics claim that the fracking technique causes earth tremors. Local communities could receive up to £400,000 per site, if four wells are fracked.",
+        "SHALE GAS explorer Cuadrilla Resources yesterday said that it plans to start fracking at two new sites in Lancashire, to the alarm of environmental groups who say it will not solve the UK's energy problems. The company, which has British Gas-owner Centrica as a stakeholder, said that it plans to apply for permission to hydraulically fracture - or frack - for shale gas from up to four wells on the two sites. Critics claim that the fracking technique causes earth tremors. Local communities could receive up to £400,000 per site, if four wells are fracked. The government is hoping that a US-style shale gas boom will improve Britain's energy security, bring down reliance on exports and boost the economy, although business secretary Vince Cable warned earlier this week that shale gas would only play a small role in UK energy policy this decade." ;
+    ns1:documentSource <https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites> ;
+    ns1:foundName "frack",
+        "start fracking at two",
+        "start fracking at two new sites in Lancashire" ;
+    ns1:internalDocId 2946625 ;
+    ns1:name "frack",
+        "start fracking at two new sites in Lancashire" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereHighClean "Lancashire",
+        "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167>,
+        <https://1145.am/db/geonames_location/2644974> ;
+    ns1:whereHighRaw "Lancashire",
+        "UK" .
+
+<https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:31:41+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2946625 ;
+    schema:datePublished "2014-02-04T20:05:19+00:00"^^xsd:dateTime ;
+    schema:headline "Cuadrilla plans to frack at two Lancashire sites" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/cuadrilla-plans-frack-two-lancashire-sites/> .
+
+<https://1145.am/db/2946632/Walker_Greenbank_Group> a org:Organization ;
+    ns1:basedInLowRaw "UK" ;
+    ns1:description "luxury furnishings" ;
+    ns1:documentSource <https://1145.am/db/2946632/wwwcityamcom_walker-greenbank-positive-profit-set-exceed-expectation> ;
+    ns1:foundName "WALKER Greenbank group" ;
+    ns1:hasFinancialReportingActivity <https://1145.am/db/2946632/Annual_Accounts> ;
+    ns1:industry "luxury furnishings" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/458_homeware_homewares_housewares_houseware> ;
+    ns1:internalDocId 2946632 ;
+    ns1:name "WALKER Greenbank group" ;
+    ns1:sameAsHigh <https://1145.am/db/2874049/Walker_Greenbank>,
+        <https://1145.am/db/2939850/Walker_Greenbank>,
+        <https://1145.am/db/2962731/Walker_Greenbank> .
+
+<https://1145.am/db/2946632/Annual_Accounts> a ns1:FinancialReportingActivity ;
+    ns1:documentDate "2014-02-04T20:00:20+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "WALKER Greenbank group says it expects to exceed the expectations of analysts when it releases its annual accounts in April. The luxury furnishings group which owns brands including Sanderson, Harlequin, Zoffany, Morris & Co and Scion said a strong second half to 2013 meant pre-tax profit would be higher than first thought, up 3.4 per cent on the previous year. A spokesman said: \"Encouragingly, brand sales in the UK, the company's largest market, returned to growth in the second half delivering growth of 0.6 per cent during the year .\"",
+        "WALKER Greenbank group says it expects to exceed the expectations of analysts when it releases its annual accounts in April. The luxury furnishings group which owns brands including Sanderson, Harlequin, Zoffany, Morris & Co and Scion said a strong second half to 2013 meant pre-tax profit would be higher than first thought, up 3.4 per cent on the previous year. A spokesman said: \"Encouragingly, brand sales in the UK, the company's largest market, returned to growth in the second half delivering growth of 0.6 per cent during the year .\" Profits were boosted in the second part of the year by licence income from lifestyle brand products, including bedlinen, tableware and rugs.",
+        "WALKER Greenbank group says it expects to exceed the expectations of analysts when it releases its annual accounts in April. The luxury furnishings group which owns brands including Sanderson, Harlequin, Zoffany, Morris & Co and Scion said a strong second half to 2013 meant pre-tax profit would be higher than first thought, up 3.4 per cent on the previous year. A spokesman said: \"Encouragingly, brand sales in the UK, the company's largest market, returned to growth in the second half delivering growth of 0.6 per cent during the year .\" Profits were boosted in the second part of the year by licence income from lifestyle brand products, including bedlinen, tableware and rugs. Over the year sales were up 3.3 per cent, compared to 2.2 per cent in the first part of 2013." ;
+    ns1:documentSource <https://1145.am/db/2946632/wwwcityamcom_walker-greenbank-positive-profit-set-exceed-expectation> ;
+    ns1:foundName "annual accounts" ;
+    ns1:internalDocId 2946632 ;
+    ns1:name "annual accounts" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereLowRaw "UK" .
+
+<https://1145.am/db/2946632/wwwcityamcom_walker-greenbank-positive-profit-set-exceed-expectation> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:31:41+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2946632 ;
+    schema:datePublished "2014-02-04T20:00:20+00:00"^^xsd:dateTime ;
+    schema:headline "Walker Greenbank positive as profit set to exceed expectation" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/walker-greenbank-positive-profit-set-exceed-expectation/> .
+
+<https://1145.am/db/2946634/Kirkland_Lake_Gold> a org:Organization ;
+    ns1:basedInLowRaw "Canada" ;
+    ns1:description "mining" ;
+    ns1:documentSource <https://1145.am/db/2946634/wwwcityamcom_kirkland-lake-gold-cuts-costs> ;
+    ns1:foundName "Kirkland Lake Gold" ;
+    ns1:hasFinancialsActivity <https://1145.am/db/2946634/Operational_Improvements_For_The_Third_Quarter_Of_Its_Fiscal_Year_2014> ;
+    ns1:industry "gold miner" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/460_metals_gold_metal_platinum> ;
+    ns1:internalDocId 2946634 ;
+    ns1:name "Kirkland Lake Gold" ;
+    ns1:sameAsHigh <https://1145.am/db/2945288/Kirkland_Lake_Gold>,
+        <https://1145.am/db/819277/Kirkland_Lake_Gold_Ltd>,
+        <https://1145.am/db/819289/Kirkland_Lake_Gold_Ltd> .
+
+<https://1145.am/db/2946634/Operational_Improvements_For_The_Third_Quarter_Of_Its_Fiscal_Year_2014> a ns1:FinancialsActivity ;
+    ns1:documentDate "2014-02-04T20:02:07+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Kirkland Lake Gold, the Aim - listed gold miner, yesterday said that it has seen operational improvements for the third quarter of its fiscal year 2014, as it cuts costs. It has slashed its workforce and is now mining higher grade ore but less tons, which it says will cut the cost per ounce of gold. \" Work is ongoing but the full extent of these changes will be observed by all shareholders in the current quarter ending 30 April ,\" said chairman Harry Dobson." ;
+    ns1:documentSource <https://1145.am/db/2946634/wwwcityamcom_kirkland-lake-gold-cuts-costs> ;
+    ns1:foundName "operational improvements for the third quarter of its fiscal year 2014" ;
+    ns1:internalDocId 2946634 ;
+    ns1:name "operational improvements for the third quarter of its fiscal year 2014" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereLowRaw "Canada" .
+
+<https://1145.am/db/2946634/wwwcityamcom_kirkland-lake-gold-cuts-costs> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:31:42+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2946634 ;
+    schema:datePublished "2014-02-04T20:02:07+00:00"^^xsd:dateTime ;
+    schema:headline "Kirkland Lake Gold cuts costs" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/kirkland-lake-gold-cuts-costs/> .
+
+<https://1145.am/db/2946644/St_Modwen> a org:Organization ;
+    ns1:basedInLowRaw "England" ;
+    ns1:description "developer" ;
+    ns1:documentSource <https://1145.am/db/2946644/wwwcityamcom_st-modwen-profits-jump-thanks-elephant-and-castle-disposal> ;
+    ns1:foundName "ST MODWEN" ;
+    ns1:hasEquityActionsActivity <https://1145.am/db/2946644/Planning_Application_For_New_Covent_Garden_Market> ;
+    ns1:hasOperationsActivity <https://1145.am/db/2946644/Planning_Application_For_New_Covent_Garden_Market> ;
+    ns1:industry "developer" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/644_developer_developers_app_mobile> ;
+    ns1:internalDocId 2946644 ;
+    ns1:name "ST MODWEN" ;
+    ns1:sameAsHigh <https://1145.am/db/2912070/St_Modwen>,
+        <https://1145.am/db/2912074/St_Modwen>,
+        <https://1145.am/db/2913661/St_Modwen>,
+        <https://1145.am/db/362623/St_Modwen> .
+
+
+<https://1145.am/db/2946644/Planning_Application_For_New_Covent_Garden_Market> a ns1:EquityActionsActivity,
+        ns1:OperationsActivity ;
+    ns1:documentDate "2014-02-04T19:56:10+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "ST MODWEN said yesterday it would submit its planning application for New Covent Garden Market within the next six months as it posted a jump in profits and net asset value (NAV) . The developer and joint venture partner Vinci are redeveloping the 57-acre site to house the market's 200 businesses and completed a £49m share placing last year to help fund the £2bn scheme. They expect to be granted consent next year.",
+        "ST MODWEN said yesterday it would submit its planning application for New Covent Garden Market within the next six months as it posted a jump in profits and net asset value (NAV) . The developer and joint venture partner Vinci are redeveloping the 57-acre site to house the market's 200 businesses and completed a £49m share placing last year to help fund the £2bn scheme. They expect to be granted consent next year. In its annual results for the year to 30 November, St Modwen said pre-tax profits jumped 56 per cent to £82.2m, boosted by the disposal of London's Elephant & Castle Shopping for £80m in December.",
+        "ST MODWEN said yesterday it would submit its planning application for New Covent Garden Market within the next six months as it posted a jump in profits and net asset value (NAV) . The developer and joint venture partner Vinci are redeveloping the 57-acre site to house the market's 200 businesses and completed a £49m share placing last year to help fund the £2bn scheme. They expect to be granted consent next year. In its annual results for the year to 30 November, St Modwen said pre-tax profits jumped 56 per cent to £82.2m, boosted by the disposal of London's Elephant & Castle Shopping for £80m in December. NAV was up 11 per cent to 279p per share, compared to 251p per share in 2012." ;
+    ns1:documentSource <https://1145.am/db/2946644/wwwcityamcom_st-modwen-profits-jump-thanks-elephant-and-castle-disposal> ;
+    ns1:foundName "planning application for New Covent Garden Market" ;
+    ns1:internalDocId 2946644 ;
+    ns1:name "planning application for New Covent Garden Market" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereLowRaw "England",
+        "London" .
+
+<https://1145.am/db/2946644/wwwcityamcom_st-modwen-profits-jump-thanks-elephant-and-castle-disposal> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:31:42+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2946644 ;
+    schema:datePublished "2014-02-04T19:56:10+00:00"^^xsd:dateTime ;
+    schema:headline "St Modwen profits jump thanks to Elephant and Castle disposal" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/st-modwen-profits-jump-thanks-elephant-and-castle-disposal/> .
+
+<https://1145.am/db/2947016/Black_Jacks> a org:Organization ;
+    ns1:basedInLowRaw "British" ;
+    ns1:description "(iii)." ;
+    ns1:documentSource <https://1145.am/db/2947016/wwwcityamcom_pick-n-mix-giant-getting-big-guns> ;
+    ns1:foundName "Tangerine" ;
+    ns1:hasAboutUsActivity <https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> ;
+    ns1:industry "sweets" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary> ;
+    ns1:internalDocId 2947016 ;
+    ns1:name "Black Jacks" .
+
+<https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> a ns1:AboutUsActivity ;
+    ns1:documentDate "2014-02-03T12:45:28+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "Tangerine produces a host of iconic British sweets. Remember Black Jacks ? Well, it makes them. And Fruit Salads ? Yep them too." ;
+    ns1:documentSource <https://1145.am/db/2947016/wwwcityamcom_pick-n-mix-giant-getting-big-guns> ;
+    ns1:foundName "produces a host of iconic British sweets" ;
+    ns1:internalDocId 2947016 ;
+    ns1:name "produces a host of iconic British sweets" ;
+    ns1:status "completed" ;
+    ns1:whereLowRaw "Britain" .
+
+<https://1145.am/db/2947016/wwwcityamcom_pick-n-mix-giant-getting-big-guns> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:32:16+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2947016 ;
+    schema:datePublished "2014-02-03T12:45:28+00:00"^^xsd:dateTime ;
+    schema:headline "This Pick 'n' Mix giant is getting in the big guns" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/pick-n-mix-giant-getting-big-guns/> .
+
+<https://1145.am/db/2948203/Societe_Generale> a org:Organization ;
+    ns1:basedInHighClean "Republic of France" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
+    ns1:basedInHighRaw "France" ;
+    ns1:description "France's second-biggest bank" ;
+    ns1:documentSource <https://1145.am/db/2948203/wwwcityamcom_socgen-hikes-2013-dividend-fourth-quarter-profit> ;
+    ns1:foundName "Societe Generale" ;
+    ns1:hasEquityActionsActivity <https://1145.am/db/2948203/2013_Dividend> ;
+    ns1:industry "bank" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_banker> ;
+    ns1:internalDocId 2948203 ;
+    ns1:name "Societe Generale" ;
+    ns1:sameAsHigh <https://1145.am/db/1025862/Societe_Generale>,
+        <https://1145.am/db/1066408/Societe_Generale>,
+        <https://1145.am/db/1069541/Societe_Generale>,
+        <https://1145.am/db/733620/Soci_T_G_N_Rale>,
+        <https://1145.am/db/836638/Societe_Generale_Sa> .
+
+<https://1145.am/db/geonames_location/3017382> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2948203/wwwcityamcom_socgen-hikes-2013-dividend-fourth-quarter-profit> ;
+    ns1:geoNamesId 3017382 ;
+    ns1:geoNamesURL <https://sws.geonames.org/3017382> ;
+    ns1:name "Republic of France" .
+
+<https://1145.am/db/2948203/2013_Dividend> a ns1:EquityActionsActivity,
+        ns1:FinancialsActivity ;
+    ns1:documentDate "2014-02-12T03:39:55+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "SocGen hikes 2013 dividend on fourth quarter profit. SocGen hikes 2013 dividend on fourth quarter profit.",
+        "SocGen hikes 2013 dividend on fourth quarter profit. Societe Generale, France's second-biggest bank, has said this morning that a strong performance by its domestic retail banking unit helped it turn €322m (£267m) profit in the fourth quarter. A year earlier, SocGen made a loss of €471m. It confirmed that, by mid-May, it 'll present a 'roadmap' for achieving a 10 per cent return on equity by the end of 2015. The bank's better-than-expected results saw it achieve a return on equity of 7.8 per cent on an adjusted basis for the quarter." ;
+    ns1:documentSource <https://1145.am/db/2948203/wwwcityamcom_socgen-hikes-2013-dividend-fourth-quarter-profit> ;
+    ns1:foundName "2013 dividend" ;
+    ns1:internalDocId 2948203 ;
+    ns1:name "2013 dividend" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereHighClean "Republic of France" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/3017382> ;
+    ns1:whereHighRaw "France" .
+
+<https://1145.am/db/2948203/wwwcityamcom_socgen-hikes-2013-dividend-fourth-quarter-profit> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:34:08+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2948203 ;
+    schema:datePublished "2014-02-12T03:39:55+00:00"^^xsd:dateTime ;
+    schema:headline "SocGen hikes 2013 dividend on fourth quarter profit" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/socgen-hikes-2013-dividend-fourth-quarter-profit/> .
+
+<https://1145.am/db/2948152/Recalling_19m_Prius_Cars> a ns1:IncidentActivity ;
+    ns1:documentDate "2014-02-12T20:21:14+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "TOYOTA is recalling 1.9m Prius cars over a software fault that can cause the hybrid cars to stop. The recall affects 30,790 UK-registered Prius manufactured between March 2009 and February 2014. The carmaker has received several reports of a bug in the software controlling part of the car's hybrid power system, meaning switches in the engine can overheat and send the car into failsafe mode or even stop altogether.",
+        "TOYOTA is recalling 1.9m Prius cars over a software fault that can cause the hybrid cars to stop. The recall affects 30,790 UK-registered Prius manufactured between March 2009 and February 2014. The carmaker has received several reports of a bug in the software controlling part of the car's hybrid power system, meaning switches in the engine can overheat and send the car into failsafe mode or even stop altogether. Toyota has asked car owners to bring their vehicles in for a 40-minute software upgrade to fix the problem.",
+        "TOYOTA is recalling 1.9m Prius cars over a software fault that can cause the hybrid cars to stop. The recall affects 30,790 UK-registered Prius manufactured between March 2009 and February 2014. The carmaker has received several reports of a bug in the software controlling part of the car's hybrid power system, meaning switches in the engine can overheat and send the car into failsafe mode or even stop altogether. Toyota has asked car owners to bring their vehicles in for a 40-minute software upgrade to fix the problem. It pointed out that no accidents or injuries have been reported as a result of the glitch." ;
+    ns1:documentSource <https://1145.am/db/2948152/wwwcityamcom_malfunctioning-software-sparks-huge-recall-toyota-prius-cars> ;
+    ns1:foundName "recalling 1.9m Prius cars" ;
+    ns1:internalDocId 2948152 ;
+    ns1:name "recalling 1.9m Prius cars" ;
+    ns1:status "stopped" ;
+    ns1:whereHighClean "United Kingdom of Great Britain and Northern Ireland" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/2635167> ;
+    ns1:whereHighRaw "UK" .
+
+<https://1145.am/db/2948152/Toyota> a org:Organization ;
+    ns1:basedInLowRaw "Japan" ;
+    ns1:description "carmaker" ;
+    ns1:documentSource <https://1145.am/db/2948152/wwwcityamcom_malfunctioning-software-sparks-huge-recall-toyota-prius-cars> ;
+    ns1:foundName "TOYOTA" ;
+    ns1:hasIncidentActivity <https://1145.am/db/2948152/Recalling_19m_Prius_Cars> ;
+    ns1:industry "carmaker" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/170_auto_automotive_autobody_automobile> ;
+    ns1:internalDocId 2948152 ;
+    ns1:name "TOYOTA" ;
+    ns1:sameAsHigh <https://1145.am/db/1101245/Toyota>,
+        <https://1145.am/db/1150324/Toyota>,
+        <https://1145.am/db/4887756/Toyota>,
+        <https://1145.am/db/4906094/Toyota>,
+        <https://1145.am/db/4980937/Toyota>,
+        <https://1145.am/db/5071569/Toyota> .
+
+<https://1145.am/db/2948152/wwwcityamcom_malfunctioning-software-sparks-huge-recall-toyota-prius-cars> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:34:03+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2948152 ;
+    schema:datePublished "2014-02-12T20:21:14+00:00"^^xsd:dateTime ;
+    schema:headline "Malfunctioning software sparks huge recall of Toyota Prius cars" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/malfunctioning-software-sparks-huge-recall-toyota-prius-cars/> .
+
+<https://1145.am/db/2293685/Biosensics> a org:Organization ;
+    ns1:basedInLowRaw "United States" ;
+    ns1:description "research" ;
+    ns1:documentSource <https://1145.am/db/2293685/wwwfiercebiotechcom_medtech_nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> ;
+    ns1:foundName "BioSensics" ;
+    ns1:hasMarketingActivity <https://1145.am/db/2293685/A_Wearable_Device_That> ;
+    ns1:hasRegulatoryActivity <https://1145.am/db/2293685/Huntington-Monitoring_Wearable> ;
+    ns1:internalDocId 2293685 ;
+    ns1:name "BioSensics" ;
+    ns1:sameAsNameOnly <https://1145.am/db/2407266/Biosensics> .
+
+<https://1145.am/db/2293685/A_Wearable_Device_That> a ns1:MarketingActivity ;
+    ns1:documentDate "2017-09-22T13:35:16+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "BioSensics picked up more than $ 2.5 million in an NIH grant to develop a wearable device that monitors the motor symptoms of patients with Huntington disease. The device, dubbed HDWear, is based on the company's PAMSys platform, which uses sensors to detect motion, such as posture, gait, falls and postural changes. Designed for the continuous, real-time, remote monitoring of patients with Huntington disease, HDWear will enable physicians to see quantitative motor symptom scores that were previously only obtainable during in-clinic assessments, BioSensics said in a statement. Huntington, which most commonly appears in adults in their 30s or 40s, is a progressive brain disorder that causes cognitive and motor symptoms.",
+        "BioSensics picked up more than $ 2.5 million in an NIH grant to develop a wearable device that monitors the motor symptoms of patients with Huntington disease. The device, dubbed HDWear, is based on the company's PAMSys platform, which uses sensors to detect motion, such as posture, gait, falls and postural changes. Designed for the continuous, real-time, remote monitoring of patients with Huntington disease, HDWear will enable physicians to see quantitative motor symptom scores that were previously only obtainable during in-clinic assessments, BioSensics said in a statement. Huntington, which most commonly appears in adults in their 30s or 40s, is a progressive brain disorder that causes cognitive and motor symptoms. Early symptoms include involuntary movements, poor coordination, trouble learning new information and irritability, the NIH says." ;
+    ns1:documentSource <https://1145.am/db/2293685/wwwfiercebiotechcom_medtech_nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> ;
+    ns1:foundName "a wearable device that",
+        "a wearable device that monitors the motor symptoms of patients with Huntington disease" ;
+    ns1:internalDocId 2293685 ;
+    ns1:name "a wearable device that monitors the motor symptoms of patients with Huntington disease" ;
+    ns1:status "not happened at date of document" ;
+    ns1:whereLowRaw "NIH" .
+
+<https://1145.am/db/2293685/Huntington-Monitoring_Wearable> a ns1:RegulatoryActivity ;
+    ns1:documentDate "2017-09-22T13:35:16+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "NIH grants BioSensics $ 2.5M+ for Huntington-monitoring wearable." ;
+    ns1:documentSource <https://1145.am/db/2293685/wwwfiercebiotechcom_medtech_nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> ;
+    ns1:foundName "Huntington-monitoring wearable" ;
+    ns1:internalDocId 2293685 ;
+    ns1:name "Huntington-monitoring wearable" ;
+    ns1:status "not happened at date of document" .
+
+<https://1145.am/db/2293685/wwwfiercebiotechcom_medtech_nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> a schema:Article ;
+    ns1:internalDocId 2293685 ;
+    schema:datePublished "2017-09-22T13:35:16+00:00"^^xsd:dateTime ;
+    schema:headline "NIH grants BioSensics $2.5M+ for Huntington-monitoring wearable" ;
+    schema:sourceOrganization "Fierce Biotech" ;
+    schema:url <https://www.fiercebiotech.com/medtech/nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> .
+
+
+<https://1145.am/db/2858242/Mtn_Group> a org:Organization ;
+    ns1:basedInHighClean "South Africa" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/953987> ;
+    ns1:basedInHighRaw "South Africa" ;
+    ns1:basedInLowRaw "South Africa" ;
+    ns1:description "international oriented companies" ;
+    ns1:documentSource <https://1145.am/db/2858242/wwwcityamcom_what-the-other-papers-say-morning-181-2> ;
+    ns1:foundName "MTN",
+        "MTN Group" ;
+    ns1:hasMarketingActivity <https://1145.am/db/2858242/Search_For_New_Chief> ;
+    ns1:hasOperationsActivity <https://1145.am/db/2858242/Search_For_New_Chief> ;
+    ns1:hasRecognitionActivity <https://1145.am/db/2858242/Search_For_New_Chief> ;
+    ns1:industry "telecommunications" ;
+    ns1:internalDocId 2858242 ;
+    ns1:name "MTN Group" ;
+    ns1:sameAsHigh <https://1145.am/db/1209519/MTN>,
+        <https://1145.am/db/1311630/MTN>,
+        <https://1145.am/db/1317538/Mtn_Group>,
+        <https://1145.am/db/4964333/Mtn_Group>,
+        <https://1145.am/db/713538/MTN> .
+    
+<https://1145.am/db/2858242/Search_For_New_Chief> a ns1:MarketingActivity,
+        ns1:OperationsActivity,
+        ns1:RecognitionActivity ;
+    ns1:documentDate "2010-03-01T21:15:04+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "MTN BEGINS SEARCH FOR NEW CHIEF AS NHLEKO STEPS DOWN.",
+        "MTN Group, one of South Africa's most dynamic and internationally oriented companies, said yesterday that its chief executive Phuthuma Nhleko will step down after eight years in the position.",
+        "MTN Group, one of South Africa's most dynamic and internationally oriented companies, said yesterday that its chief executive Phuthuma Nhleko will step down after eight years in the position. MTN has become a prominent player in telecommunications markets across Africa and the Middle East with much of the expansion orchestrated by Nhleko. GM RESISTS BERLIN PRESSURE OVER OPEL. General Motors' European chief said the US carmaker did not plan to increase its contribution to Opel's €3.3bn ($ 4.5bn) restructuring plan, in spite of growing pressure on GM from Germany to put up more of its own money. Nick Reilly also said that he hoped to have the plan agreed with unions and five European countries - from which it is seeking €2.7bn of loans and guarantees - within a month." ;
+    ns1:documentSource <https://1145.am/db/2858242/wwwcityamcom_what-the-other-papers-say-morning-181-2> ;
+    ns1:foundName "SEARCH FOR NEW CHIEF",
+        "step down" ;
+    ns1:internalDocId 2858242 ;
+    ns1:name "SEARCH FOR NEW CHIEF",
+        "step down" ;
+    ns1:status "completed",
+        "not happened at date of document" ;
+    ns1:whereHighClean "South Africa" ;
+    ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/953987> ;
+    ns1:whereHighRaw "South Africa" ;
+    ns1:whereLowRaw "South Africa" .
+
+<https://1145.am/db/2858242/wwwcityamcom_what-the-other-papers-say-morning-181-2> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T00:12:56+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2858242 ;
+    schema:datePublished "2010-03-01T21:15:04+00:00"^^xsd:dateTime ;
+    schema:headline "WHAT THE OTHER PAPERS SAY THIS MORNING" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/what-the-other-papers-say-morning-181-2/> .
+
+<https://1145.am/db/geonames_location/953987> a ns1:GeoNamesLocation ;
+    ns1:documentSource <https://1145.am/db/2858242/wwwcityamcom_what-the-other-papers-say-morning-181-2> ;
+    ns1:geoNamesId 953987 ;
+    ns1:geoNamesURL <https://sws.geonames.org/953987> ;
+    ns1:name "South Africa" .
+
+<https://1145.am/db/2949857/British_Airways> a org:Organization ;
+    ns1:basedInLowRaw "United Kingdom" ;
+    ns1:description "airline" ;
+    ns1:documentSource <https://1145.am/db/2949857/wwwcityamcom_ryanair-gets-credit-rating-it-prepares-tap-bond-market> ;
+    ns1:foundName "British Airways" ;
+    ns1:hasAnalystRatingActivity <https://1145.am/db/2949857/S_P_Has_Given_Ratings_Considered_Junk> ;
+    ns1:industry "airlines" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/124_airline_airlines_airliners_airliner> ;
+    ns1:internalDocId 2949857 ;
+    ns1:name "British Airways" ;
+    ns1:sameAsHigh <https://1145.am/db/1757826/British_Airways>,
+        <https://1145.am/db/1761902/British_Airways>,
+        <https://1145.am/db/1818294/British_Airways>,
+        <https://1145.am/db/4603016/British_Airways> .
+
+<https://1145.am/db/2949857/S_P_Has_Given_Ratings_Considered_Junk> a ns1:AnalystRatingActivity ;
+    ns1:documentDate "2014-03-20T21:01:42+00:00"^^xsd:dateTime ;
+    ns1:documentExtract "S & P has given ratings considered junk, or below investment grade, to airlines including British Airways, Delta and Qantas." ;
+    ns1:documentSource <https://1145.am/db/2949857/wwwcityamcom_ryanair-gets-credit-rating-it-prepares-tap-bond-market> ;
+    ns1:foundName "S & P has given ratings considered junk" ;
+    ns1:internalDocId 2949857 ;
+    ns1:name "S & P has given ratings considered junk" ;
+    ns1:status "completed" .
+
+<https://1145.am/db/2949857/wwwcityamcom_ryanair-gets-credit-rating-it-prepares-tap-bond-market> a schema:Article ;
+    ns1:dateRetrieved "2023-12-20T02:36:45+00:00"^^xsd:dateTime ;
+    ns1:internalDocId 2949857 ;
+    schema:datePublished "2014-03-20T21:01:42+00:00"^^xsd:dateTime ;
+    schema:headline "Ryanair gets a credit rating as it prepares to tap the bond market" ;
+    schema:sourceOrganization "CityAM" ;
+    schema:url <https://www.cityam.com/ryanair-gets-credit-rating-it-prepares-tap-bond-market/> .

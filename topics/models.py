@@ -789,6 +789,16 @@ class Organization(Resource):
     basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
     productOrganization = RelationshipTo('ProductActivity','productActivity', model=WeightedRel)
+    aboutUs = RelationshipTo('AboutUsActivity','hasAboutUsActivity', model=WeightedRel)
+    analystRating = RelationshipTo('AnalystRatingActivity', 'hasAnalystRating', model=WeightedRel)
+    equityAction = RelationshipTo('EquityActionsActivity','hasEquityActionsActivity', model=WeightedRel)
+    finacialReporting = RelationshipTo('FinancialReportingActivity','hasFinancialReportingActivity',model=WeightedRel)
+    financials = RelationshipTo('FinancialsActivity','hasFinancialsActivity', model=WeightedRel)
+    incident = RelationshipTo('IncidentActivity','hasIncidentActivity', model=WeightedRel)
+    marketing = RelationshipTo('MarketingActivity','hasMarketingActivity', model=WeightedRel)
+    operations = RelationshipTo('OperationsActivity','hasOperationsActivity', model=WeightedRel)
+    recognition = RelationshipTo('RecognitionActivity','hasRecognitionActivity', model=WeightedRel)
+    regulatory = RelationshipTo('RegulatoryActivity','hasRegulatoryActivity', model=WeightedRel)
 
     @property
     def industry_clusters(self):
@@ -1214,6 +1224,36 @@ class Product(Resource):
         vals['use_case'] = self.useCase
         return vals
 
+class AboutUsActivity(ActivityMixin, Resource):
+    aboutUs = RelationshipFrom('Organization','hasAboutUsActivity', model=WeightedRel)
+
+class AnalystRatingActivity(ActivityMixin, Resource):
+    analystRating = RelationshipFrom('Organization','hasAnalystRatingActivity', model=WeightedRel) 
+
+class EquityActionsActivity(ActivityMixin, Resource):
+    equityAction = RelationshipFrom('Organization','hasEquityActionsActivity', model=WeightedRel)
+
+class FinancialReportingActivity(ActivityMixin, Resource):
+    financialReporting = RelationshipFrom('Organization','hasFinancialReportingActivity',model=WeightedRel)
+
+class FinancialsActivity(ActivityMixin, Resource):
+    financials = RelationshipFrom('Organization','hasFinancialsActivity',model=WeightedRel)
+
+class IncidentActivity(ActivityMixin, Resource):
+    incident = RelationshipFrom('Organization','hasIncidentActivity',model=WeightedRel) 
+
+class MarketingActivity(ActivityMixin, Resource):
+    marketing = RelationshipFrom('Organization','hasMarketingActivity',model=WeightedRel)
+
+class OperationsActivity(ActivityMixin, Resource):
+    operations = RelationshipFrom('Organization','hasOperationsActivity',model=WeightedRel) 
+
+class RecognitionActivity(ActivityMixin, Resource):
+    recognition = RelationshipFrom('Organization','hasRecognitionActivity',model=WeightedRel)
+
+class RegulatoryActivity(ActivityMixin, Resource):
+    regulatory = RelationshipFrom('Organization','hasRegulatoryActivity',model=WeightedRel)
+
 class OrganizationSite(Organization, Site):
     __class_name_is_label__ = False
 
@@ -1229,6 +1269,14 @@ class OrganizationRolePerson(Organization, Role, Person):
 class OrganizationRole(Organization, Role):
     __class_name_is_label__ = False
 
+class AboutUsMarketingActivity(AboutUsActivity, MarketingActivity):
+    __class_name_is_label__ = False
+
+class MarketingOperationsActivity(MarketingActivity, OperationsActivity):
+    __class_name_is_label__ = False
+
+class FinancialsOperationsActivity(FinancialsActivity, OperationsActivity):
+    __class_name_is_label__ = False
 
 def print_friendly(vals, limit = 2):
     if vals is None:
