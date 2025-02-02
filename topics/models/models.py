@@ -9,9 +9,9 @@ from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
 from collections import Counter, defaultdict
 from neomodel.cardinality import OneOrMore, One
 from typing import List
-from .constants import BEGINNING_OF_TIME
+from topics.constants import BEGINNING_OF_TIME
 from topics.neo4j_utils import date_to_cypher_friendly
-from .util import cache_friendly,geo_to_country_admin1
+from topics.util import cache_friendly,geo_to_country_admin1
 
 import logging
 logger = logging.getLogger(__name__)
@@ -1224,6 +1224,9 @@ class Product(Resource):
         vals['use_case'] = self.useCase
         return vals
 
+
+
+
 class AboutUsActivity(ActivityMixin, Resource):
     aboutUs = RelationshipFrom('Organization','hasAboutUsActivity', model=WeightedRel)
 
@@ -1253,30 +1256,6 @@ class RecognitionActivity(ActivityMixin, Resource):
 
 class RegulatoryActivity(ActivityMixin, Resource):
     regulatory = RelationshipFrom('Organization','hasRegulatoryActivity',model=WeightedRel)
-
-class OrganizationSite(Organization, Site):
-    __class_name_is_label__ = False
-
-class CorporateFinanceActivityOrganization(Organization, CorporateFinanceActivity):
-    __class_name_is_label__ = False
-
-class OrganizationPerson(Organization, Person):
-    __class_name_is_label__ = False
-
-class OrganizationRolePerson(Organization, Role, Person):
-    __class_name_is_label__ = False
-
-class OrganizationRole(Organization, Role):
-    __class_name_is_label__ = False
-
-class AboutUsMarketingActivity(AboutUsActivity, MarketingActivity):
-    __class_name_is_label__ = False
-
-class MarketingOperationsActivity(MarketingActivity, OperationsActivity):
-    __class_name_is_label__ = False
-
-class FinancialsOperationsActivity(FinancialsActivity, OperationsActivity):
-    __class_name_is_label__ = False
 
 def print_friendly(vals, limit = 2):
     if vals is None:
