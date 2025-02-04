@@ -58,6 +58,13 @@ class TestUtilsWithDumpData(TestCase):
         self.user = get_user_model().objects.create(username=f"test-{ts}")
         self.anon, _ = create_anon_user()
 
+    def test_adds_model_classes_with_multiple_labels(self):
+        uri = "https://1145.am/db/2858242/Search_For_New_Chief"
+        res = Resource.nodes.get_or_none(uri=uri)
+        assert res.uri == uri
+        assert res.__class_name_is_label__ == False 
+        assert res.whereHighClean == ['South Africa']
+
     def test_data_list_choice_field_include_great_britain_option(self):
         geo = GeoSerializer()   
         field = geo.fields['country_or_region']
@@ -174,7 +181,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        assert set(counts) == {('AboutUsActivity', 1), ('Person', 12), ('OperationsActivity', 3), ('IncidentActivity', 1), 
+        assert set(counts) == {('AboutUsActivity', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1), 
                                ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4), 
                                ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
                                ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 432), ('Article', 213), 

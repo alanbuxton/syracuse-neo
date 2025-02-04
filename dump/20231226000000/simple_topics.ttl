@@ -368,7 +368,8 @@
     ns1:status "not happened at date of document" ;
     ns1:whereLowRaw "NIH" .
 
-<https://1145.am/db/2293685/Huntington-Monitoring_Wearable> a ns1:RegulatoryActivity ;
+<https://1145.am/db/2293685/Huntington-Monitoring_Wearable> a ns1:RegulatoryActivity,
+        ns1:OperationsActivity ;
     ns1:documentDate "2017-09-22T13:35:16+00:00"^^xsd:dateTime ;
     ns1:documentExtract "NIH grants BioSensics $ 2.5M+ for Huntington-monitoring wearable." ;
     ns1:documentSource <https://1145.am/db/2293685/wwwfiercebiotechcom_medtech_nih-grants-biosensics-2-5m-for-huntington-monitoring-wearable> ;

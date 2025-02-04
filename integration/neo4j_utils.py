@@ -26,6 +26,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE FULLTEXT INDEX organization_industries IF NOT EXISTS FOR (o: Organization) ON EACH [o.industry]")
     db.cypher_query("CREATE FULLTEXT INDEX industry_cluster_representative_docs IF NOT EXISTS FOR (i: IndustryCluster) ON EACH [i.representativeDoc]")
     db.cypher_query("CREATE INDEX geonames_location_country_admin1_index IF NOT EXISTS FOR (n: GeoNamesLocation) on (n.countryCode, n.admin1Code)")
+    db.cypher_query("CREATE VECTOR INDEX organization_industries_vec IF NOT EXISTS FOR (n:Organization) ON n.industry_embedding OPTIONS { indexConfig: { `vector.dimensions`: 768, `vector.similarity_function`: 'cosine' } }")
     v, _ = db.cypher_query("call n10s.graphconfig.show")
     if len(v) == 0:
         do_n10s_config()
@@ -55,7 +56,7 @@ def do_n10s_config(overwrite=False):
     if overwrite is True:
         query = 'CALL n10s.graphconfig.set({' + params + ', force: true })'
     else:
-        query = 'CALL n10s.graphconfig.init({' + params + '})';
+        query = 'CALL n10s.graphconfig.init({' + params + '})'
     logger.info(query)
     db.cypher_query(query)
 

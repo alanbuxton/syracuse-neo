@@ -1,180 +1,39 @@
 '''
     Extra model definitions to ensure we don't have errors when trying to resolve node with multiple labels
-
-    To recreate:
-
-from neomodel import db
-query = "match (n: Resource) where size(labels(n)) > 2 return distinct labels(n)"
-label_sets, _ = db.cypher_query(query)
-
-class_definitions = ""
-
-for labels_arr in label_sets:
-    labels = labels_arr[0]
-    filtered_labels = [label for label in labels if label != "Resource"]
-    if len(filtered_labels) < 2:
-        continue
-    class_name = "".join(filtered_labels)
-    base_classes = ", ".join(filtered_labels) 
-    class_definition = f"class {class_name}({base_classes}):\n    __class_name_is_label__ = False\n\n"
-    class_definitions = class_definitions + class_definition    
 '''
 
+from neomodel import db
+from neomodel.exceptions import NodeClassAlreadyDefined
+import logging
+from django.core.cache import cache
 from .models import *
+logger = logging.getLogger(__name__)
 
-class OrganizationCorporateFinanceActivity(Organization, CorporateFinanceActivity):
-    __class_name_is_label__ = False
+def get_multi_labels():
+    cache_key = "multi_labels_resources"
+    res = cache.get(cache_key)
+    if res is not None:
+        return res
+    query = "match (n: Resource) where size(labels(n)) > 2 return distinct labels(n)"
+    labels_arr, _ = db.cypher_query(query)
+    res = [x[0] for x in labels_arr]
+    cache.set(cache_key, res)
+    return res
 
-class OrganizationSite(Organization, Site):
-    __class_name_is_label__ = False
+def add_dynamic_classes_for_multiple_labels():
+    classes = []
+    labels_list = get_multi_labels()
+    for labels in labels_list:
+        assert "Resource" in labels, f"Expected {labels} to include 'Resource'"
+        labels.remove("Resource")
+        class_name = "".join(labels)
+        parent_classes = tuple([globals()[x] for x in labels])
+        logger.info(f"Defining {class_name}")
+        try:
+            new_class = type(class_name,tuple(parent_classes),{"__class_name_is_label__":False})
+            classes.append(new_class)
+        except NodeClassAlreadyDefined:
+            logger.info(f"{class_name} was already defined")
+    return classes
 
-class OrganizationPerson(Organization, Person):
-    __class_name_is_label__ = False
-
-class OrganizationRole(Organization, Role):
-    __class_name_is_label__ = False
-
-class MarketingActivityAboutUsActivity(MarketingActivity, AboutUsActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivity(MarketingActivity, OperationsActivity):
-    __class_name_is_label__ = False
-
-class OrganizationMarketingActivity(Organization, MarketingActivity):
-    __class_name_is_label__ = False
-
-class OrganizationRegulatoryActivity(Organization, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OrganizationFinancialsActivity(Organization, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityIncidentActivity(OperationsActivity, IncidentActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityEquityActionsActivity(OperationsActivity, EquityActionsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityRegulatoryActivity(OperationsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityEquityActionsActivityRegulatoryActivity(OperationsActivity, EquityActionsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class FinancialsActivityFinancialReportingActivity(FinancialsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityFinancialsActivity(EquityActionsActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityFinancialsActivity(OperationsActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityRegulatoryActivity(EquityActionsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityRegulatoryActivity(MarketingActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OrganizationOperationsActivity(Organization, OperationsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityAboutUsActivity(OperationsActivity, AboutUsActivity):
-    __class_name_is_label__ = False
-
-class OrganizationIncidentActivity(Organization, IncidentActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityFinancialReportingActivity(EquityActionsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class FinancialsActivityRegulatoryActivity(FinancialsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivityRegulatoryActivity(MarketingActivity, OperationsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityFinancialReportingActivity(MarketingActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityFinancialReportingActivity(OperationsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class FinancialsActivityAboutUsActivity(FinancialsActivity, AboutUsActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityEquityActionsActivity(MarketingActivity, EquityActionsActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityFinancialsActivity(MarketingActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityIncidentActivity(MarketingActivity, IncidentActivity):
-    __class_name_is_label__ = False
-
-class IncidentActivityFinancialsActivity(IncidentActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityEquityActionsActivityFinancialsActivity(OperationsActivity, EquityActionsActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityAnalystRatingActivity(OperationsActivity, AnalystRatingActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityIncidentActivity(EquityActionsActivity, IncidentActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityFinancialsActivityRegulatoryActivity(OperationsActivity, FinancialsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityRegulatoryActivityFinancialReportingActivity(OperationsActivity, RegulatoryActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityFinancialsActivityRegulatoryActivity(EquityActionsActivity, FinancialsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityRecognitionActivity(MarketingActivity, RecognitionActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivityEquityActionsActivity(MarketingActivity, OperationsActivity, EquityActionsActivity):
-    __class_name_is_label__ = False
-
-class AboutUsActivityFinancialReportingActivity(AboutUsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class IncidentActivityRegulatoryActivity(IncidentActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OrganizationMarketingActivityOperationsActivity(Organization, MarketingActivity, OperationsActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivityFinancialsActivity(MarketingActivity, OperationsActivity, FinancialsActivity):
-    __class_name_is_label__ = False
-
-class RegulatoryActivityFinancialReportingActivity(RegulatoryActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivityFinancialsActivityRegulatoryActivity(MarketingActivity, OperationsActivity, FinancialsActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class OrganizationEquityActionsActivity(Organization, EquityActionsActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityFinancialsActivityFinancialReportingActivity(OperationsActivity, FinancialsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class OrganizationFinancialReportingActivity(Organization, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityFinancialReportingActivityRecognitionActivity(MarketingActivity, FinancialReportingActivity, RecognitionActivity):
-    __class_name_is_label__ = False
-
-class OperationsActivityIncidentActivityRegulatoryActivity(OperationsActivity, IncidentActivity, RegulatoryActivity):
-    __class_name_is_label__ = False
-
-class EquityActionsActivityFinancialsActivityFinancialReportingActivity(EquityActionsActivity, FinancialsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
-class MarketingActivityOperationsActivityFinancialReportingActivity(MarketingActivity, OperationsActivity, FinancialReportingActivity):
-    __class_name_is_label__ = False
-
+_ = add_dynamic_classes_for_multiple_labels()
