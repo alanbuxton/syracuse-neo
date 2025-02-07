@@ -2,6 +2,7 @@ from topics.models import Resource
 from neomodel import db
 import logging
 from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as
+from integration.vector_search_utils import create_new_embeddings
 logger = logging.getLogger(__name__)
 
 class RDFPostProcessor(object):
@@ -49,6 +50,8 @@ class RDFPostProcessor(object):
         self.add_weighting_to_relationship()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
+        write_log_header("adding embeddings")
+        create_new_embeddings()
 
     def delete_self_relationships(self):
         res, _ = db.cypher_query(self.QUERY_SELF_RELATIONSHIP)

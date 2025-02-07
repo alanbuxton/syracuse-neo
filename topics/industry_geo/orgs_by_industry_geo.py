@@ -18,7 +18,8 @@ logger = logging.getLogger(__name__)
 def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topic_id, 
                                      country_code, admin1_code=None, 
                                      force_update_cache=False,
-                                     limit=None
+                                     limit=None,
+                                     set_none_to_empty_arr=False
                                      ):
     cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_{limit}"
     
@@ -26,6 +27,9 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
         res = cache.get(cache_key)
         if res is not None:
             return res
+        if set_none_to_empty_arr is True:
+            cache.set(cache_key, [])
+            return []
     logger.debug(f"cache miss {cache_key}")
     res = do_org_geo_industry_cluster_query(industry_cluster_uri,country_code,admin1_code)
     cache.set(cache_key, res)
@@ -55,9 +59,8 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
         cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None"
         cache.set(cache_key, org_uris)
     
-    # Now warm up all industry/geo combos
-    all_ids = IndustryCluster.leaf_nodes_only()
-    _ = org_geo_industry_by_clusters(all_ids, counts_only=True)
+    # Now make sure any un-set industry/region combos are set to empty list
+    set_not_found_industry_geo_to_empty_list()
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
     cache_key = f"orgs_industry_text_{cacheable_hash(industry_text)}_{country_code}"
@@ -88,11 +91,15 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
     res, _ = db.cypher_query(query, resolve_objects=True)
     return [x[0] for x in res]
 
+def set_not_found_industry_geo_to_empty_list():
+    industry_clusters = IndustryCluster.leaf_nodes_only()
+    org_geo_industry_by_clusters(industry_clusters,counts_only=True,set_none_to_empty_arr=True)
+
 def org_geo_industry_cluster_query_by_words(search_text: str,counts_only):
     industry_clusters = IndustryCluster.by_representative_doc_words(search_text)
     return org_geo_industry_by_clusters(industry_clusters, counts_only)
 
-def org_geo_industry_by_clusters(industry_clusters, counts_only):    
+def org_geo_industry_by_clusters(industry_clusters, counts_only, set_none_to_empty_arr=False):    
     logger.info(f"org_geo_industry_by_clusters: Got {len(industry_clusters)} industry clusters")
     country_results = {}
     adm1_results = defaultdict(dict)
@@ -103,7 +110,7 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only):
         ind_uri = ind.uri
         country_results[ind_uri] = {}
         for cc in COUNTRY_TO_GLOBAL_REGION.keys():
-            res = orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,cc)
+            res = orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,cc,set_none_to_empty_arr=set_none_to_empty_arr)
             if len(res) > 0:
                 relevant_countries.append(cc)
                 if counts_only:
@@ -115,7 +122,8 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only):
                     adm1_results[ind_uri][cc] = {}
                     for adm1 in admin1_list:
                         res = orgs_by_industry_cluster_and_geo(ind.uri,
-                                                        ind.topicId,cc,adm1)
+                                                        ind.topicId,cc,adm1,
+                                                        set_none_to_empty_arr=set_none_to_empty_arr)
                         if len(res) > 0:
                             if counts_only:
                                 res = len(res)

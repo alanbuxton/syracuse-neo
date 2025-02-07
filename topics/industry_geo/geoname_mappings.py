@@ -5,6 +5,7 @@ from collections import defaultdict
 from .region_hierarchies import COUNTRIES_WITH_STATE_PROVINCE
 from neomodel import db
 from topics.util import cache_friendly
+import pickle
 
 logger = logging.getLogger(__name__)
 

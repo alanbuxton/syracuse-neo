@@ -220,3 +220,6 @@ RDF_DUMP_DIR=os.environ.get("RDF_DUMP_DIR","tmp/dump")
 RDF_ARCHIVE_DIR=os.environ.get("RDF_ARCHIVE_DIR","tmp/archive")
 
 USE_GOOGLE_ANALYTICS=os.environ.get("USE_GOOGLE_ANALYTICS","False").lower() == 'true'
+
+EMBEDDINGS_MODEL=os.environ.get("EMBEDDINGS_MODEL")
+CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() == 'true' # If false then won't create embeddings for new nodes

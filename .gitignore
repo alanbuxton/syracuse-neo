@@ -5,4 +5,5 @@ dump/relevant_geo.csv
 .env
 static
 nohup.out
+**/*.pickle
 

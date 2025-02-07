@@ -28,12 +28,12 @@ def add_dynamic_classes_for_multiple_labels():
         labels.remove("Resource")
         class_name = "".join(labels)
         parent_classes = tuple([globals()[x] for x in labels])
-        logger.info(f"Defining {class_name}")
+        logger.debug(f"Defining {class_name}")
         try:
             new_class = type(class_name,tuple(parent_classes),{"__class_name_is_label__":False})
             classes.append(new_class)
         except NodeClassAlreadyDefined:
-            logger.info(f"{class_name} was already defined")
+            logger.debug(f"{class_name} was already defined")
     return classes
 
 _ = add_dynamic_classes_for_multiple_labels()

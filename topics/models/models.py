@@ -12,6 +12,7 @@ from typing import List
 from topics.constants import BEGINNING_OF_TIME
 from topics.neo4j_utils import date_to_cypher_friendly
 from topics.util import cache_friendly,geo_to_country_admin1
+from integration.vector_search_utils import do_vector_search
 
 import logging
 logger = logging.getLogger(__name__)
@@ -115,6 +116,7 @@ class Resource(StructuredNode):
 
     @staticmethod
     def get_by_uri(uri):
+        assert isinstance(uri, str), f"Expected {uri} to be a string but it's a {type(uri)}"
         return Resource.nodes.get(uri=uri)
 
     @classmethod
@@ -123,6 +125,7 @@ class Resource(StructuredNode):
 
     @classmethod
     def unmerged_or_none(cls,params):
+        assert isinstance(params, dict), f"Expected {params} to be a dict but it's a {type(params)}"
         return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).get_or_none(**params)
 
     @classmethod
@@ -647,15 +650,17 @@ class IndustryCluster(Resource):
         return name, vals[0]
 
     @staticmethod
-    def by_representative_doc_words(name):
-        query = f'''CALL db.index.fulltext.queryNodes("industry_cluster_representative_docs", "{name}") YIELD node, score
-            WITH node, score
-            WHERE NOT (node)-[:childLeft|childRight]->(:IndustryCluster) 
-            RETURN node 
-            ''' # getting lots of false positives with fuzzy search e.g. pallets returning wallets
-        res, _ = db.cypher_query(query, resolve_objects=True)
-        flattened =  [x for sublist in res for x in sublist]
-        return flattened
+    def by_representative_doc_words(name, limit=10, min_score=0.85):
+        query = f''' CALL db.index.vector.queryNodes('industry_cluster_representative_docs_vec', 500, $query_embedding)
+        YIELD node, score
+        WITH node, score
+        WHERE score >= {min_score}
+        RETURN node
+        ORDER BY score DESCENDING
+        '''
+        res = do_vector_search(name, query)
+        flattened = [x[0] for x in res]
+        return flattened[:limit]
 
 
 class ActivityMixin:
@@ -972,30 +977,37 @@ class Organization(Resource):
 
     @staticmethod
     def by_industry_text(name):
-        query = f'''CALL db.index.fulltext.queryNodes("organization_industries", "{name}~") YIELD node, score
-                    WITH node, score
-                    WHERE node.internalMergedSameAsHighToUri IS NULL
-                    RETURN node.uri 
-                    '''
-        vals, _ = db.cypher_query(query, resolve_objects=True)
-        flattened = [x for sublist in vals for x in sublist]
-        return flattened
+        query = ''' CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding)
+        YIELD node, score
+        WITH node, score
+        WHERE score > 0.85
+        RETURN node.uri
+        ORDER BY score DESCENDING
+        '''
+        vals = do_vector_search(name, query)
+        res = set()
+        for val in vals:
+            res.add( Organization.self_or_ultimate_target_node(val[0]).uri)
+        return list(res)
 
     @staticmethod
     def by_industry_text_and_geo(name,country_code,admin1_code=None):
-        query = f'''CALL db.index.fulltext.queryNodes("organization_industries", "{name}~") YIELD node, score
+        query = f'''CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding) 
+                    YIELD node, score
                     WITH node, score
-                    WHERE node.internalMergedSameAsHighToUri IS NULL
-                    WITH node
+                    WHERE score > 0.85
+                    WITH node, score
                     MATCH (node)-[:basedInHighGeoNamesLocation]-(r: Resource&GeoNamesLocation)
                     WHERE r.countryCode = '{country_code}'
                     '''
         if admin1_code is not None:
             query = f"{query} AND r.admin1Code = '{admin1_code}'"
-        query = f"{query} RETURN node.uri"
-        vals, _ = db.cypher_query(query, resolve_objects=True)
-        flattened = [x for sublist in vals for x in sublist]
-        return flattened
+        query = f"{query} RETURN node.uri ORDER BY score DESCENDING"
+        vals = do_vector_search(name, query)
+        res = set()
+        for val in vals:
+            res.add( Organization.self_or_ultimate_target_node(val[0]).uri )
+        return list(res)
 
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
