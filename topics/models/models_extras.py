@@ -9,20 +9,21 @@ from django.core.cache import cache
 from .models import *
 logger = logging.getLogger(__name__)
 
-def get_multi_labels():
+def get_multi_labels(ignore_cache=False):
     cache_key = "multi_labels_resources"
-    res = cache.get(cache_key)
-    if res is not None:
-        return res
+    if ignore_cache is False:
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
     query = "match (n: Resource) where size(labels(n)) > 2 return distinct labels(n)"
     labels_arr, _ = db.cypher_query(query)
     res = [x[0] for x in labels_arr]
     cache.set(cache_key, res)
     return res
 
-def add_dynamic_classes_for_multiple_labels():
+def add_dynamic_classes_for_multiple_labels(ignore_cache=False):
     classes = []
-    labels_list = get_multi_labels()
+    labels_list = get_multi_labels(ignore_cache=ignore_cache)
     for labels in labels_list:
         assert "Resource" in labels, f"Expected {labels} to include 'Resource'"
         labels.remove("Resource")

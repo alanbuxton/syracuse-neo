@@ -165,6 +165,7 @@ def do_import_ttl(**options):
     if options.get("only_post_processing",False) is True:
         logger.info("Only doing post processing")
         R.run_all_in_order()
+        cleanup(pidfile)
         return None
     export_dirs = new_exports_to_import(dump_dir)
     if len(export_dirs) == 0:

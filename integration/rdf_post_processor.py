@@ -1,4 +1,5 @@
 from topics.models import Resource
+from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 from neomodel import db
 import logging
 from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as
@@ -41,6 +42,9 @@ class RDFPostProcessor(object):
     """
 
     def run_all_in_order(self):
+        write_log_header("Creating multi-inheritance classes")
+        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
+        write_log_header("del_redundant_same_as")
         apoc_del_redundant_same_as()
         write_log_header("delete_self_relationships")
         self.delete_self_relationships()
@@ -48,6 +52,8 @@ class RDFPostProcessor(object):
         self.add_document_extract_to_relationship()
         write_log_header("Set default weighting to 1")
         self.add_weighting_to_relationship()
+        write_log_header("Creating multi-inheritance classes")
+        add_dynamic_classes_for_multiple_labels()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
         write_log_header("adding embeddings")
