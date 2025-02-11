@@ -1,16 +1,35 @@
+{% load topics_extras %}
+
+
+<h4>Organizations</h4>
+<ul>
+    {% for row in tracked_items %}
+        {% if row.org_name != 'Any' %}
+            <li>
+                <a href="{% url_with_querystring 'organization-linkages' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">{{ row.org_name }}</a>
+                (<a href="{% url_with_querystring 'org-activities' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities</a>)
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+
+<h4>Industries / Region Combos</h4>
 <table>
     <tr>
         <th>Industry Cluster</th>
         <th>Industry Keywords</th>
         <th>Region</th>
-        <th>Organization</th>
+        <th>&nbsp;</th>
     </tr>
     {% for row in tracked_items %}
-        <tr>
-            <td>{{ row.industry_name }}</td>
-            <td>{{ row.industry_search_str }}</td>
-            <td>{{ row.region_name }}</td>
-            <td>{{ row.org_name }}</td>
-        </tr>
+        {% if row.org_name == 'Any' %}
+            <tr>
+                <td>{{ row.industry_name }}</td>
+                <td>{{ row.industry_search_str }}</td>
+                <td>{{ row.region_name }}</td>
+                <td>(<a href='industry_geo_activities?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}'>View activities</a>)</td>
+            </tr>
+        {% endif %}
     {% endfor %}
 </table>

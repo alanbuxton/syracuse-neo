@@ -16,11 +16,15 @@
 
   {% if request_state.cache_last_updated or 1 %}
     <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
-    {% if geo_name is not None %}
-      in: {{ geo_name }}.
-    {% elif source_name is not None %}
-      from: {{ source_name }}.
+      
+    {% if source_name.org_name %}
+      for <b>{{ source_name.org_name }}</b>.
+    {% elif source_name.source_organization %}
+      from <b>{{ source_name.source_organization }}</b>.
+    {% else %}  
+      {{ source_name.from_str }}  <b>{{ source_name.industry_str }}</b> {{ source_name.in_str }} <b>{{ source_name.region_str }}</b>.
     {% endif %}
+
     </p>
 
     {% include 'activity_list.html' %}

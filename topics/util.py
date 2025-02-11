@@ -31,6 +31,8 @@ def geo_to_country_admin1(geo_code):
     return country_code, admin1_code
 
 def elements_from_uri(uri):
+    if uri is None or uri == '':
+        return {}
     parsed = urlparse(uri)
     part_pieces = parsed.path.split("/")
     path = part_pieces[1]

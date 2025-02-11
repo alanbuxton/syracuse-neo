@@ -134,14 +134,15 @@ class Resource(StructuredNode):
         res = cache.get(cache_key)
         if res is not None:
             return res
-        query = f"""MATCH (n: Resource&{cls.__name__})--(a: Article)
+        query = f"""MATCH (n: Resource&{cls.__name__})-[:documentSource]->(a: Resource&Article)
                     WHERE n.internalMergedSameAsHighToUri IS NULL
-                    AND NOT (n)-[:sameAsNameOnly]-()
+                    AND SIZE(LABELS(n)) = 2
                     AND a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                     WITH n, count(a) as article_count
                     RETURN n,article_count,rand() as r
                     ORDER BY r
                     LIMIT {limit}"""
+        logger.info(query)
         res,_ = db.cypher_query(query, resolve_objects=True)
         vals = [(x[0],x[1]) for x in res]
         cache.set(cache_key, vals)

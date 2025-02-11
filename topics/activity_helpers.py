@@ -4,7 +4,7 @@ import logging
 from .models import IndustryCluster, Article, ActivityMixin, Resource, Organization
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
-from .util import cache_friendly, blank_or_none
+from .util import cache_friendly, blank_or_none, elements_from_uri
 from .industry_geo import geo_to_country_admin1
 
 ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership"]])
@@ -40,11 +40,16 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine
     return activity_articles_to_api_results(activity_article_uris)
 
 
-def get_activities_by_industry_geo_and_date_range(industry_id, geo_code, min_date, max_date,limit=None):
+def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_code, min_date, max_date,limit=None):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
-    industry = IndustryCluster.nodes.get_or_none(topicId=industry_id) if industry_id is not None else None
+    if isinstance(industry_or_industry_id, IndustryCluster):
+        industry = industry_or_industry_id
+    else:
+        industry = IndustryCluster.nodes.get_or_none(topicId=industry_or_industry_id) if (
+            isinstance(industry_or_industry_id, int)
+        ) else None
     if blank_or_none(country_code) and blank_or_none(industry):
-        logger.warning(f"No industry or geo found for {industry_id} and {geo_code}")
+        logger.warning(f"No industry or geo found for {industry_or_industry_id} and {geo_code}")
         return []
     elif blank_or_none(country_code):
         activity_article_uris = activities_by_industry(industry,min_date, max_date, limit=limit)
@@ -210,11 +215,11 @@ def activity_articles_to_api_results(activity_article_uris, limit=None):
         api_row["activity_status_as_string"] = activity.status_as_string
         api_row["source_is_core"] = article.is_core
         actors = {}
-        for actor_role, actor in activity.all_actors.items():
-            if actor is not None and actor != []:
+        for actor_role, actor_list in activity.all_actors.items():
+            if actor_list is not None and actor_list != []:
                 if actors.get(actor_role) is None:
                     actors[actor_role] = set()
-                actors[actor_role].update(actor)
+                actors[actor_role].update(actor_list)
         api_row["actors"] = actors
         api_results.append(api_row)
     return api_results

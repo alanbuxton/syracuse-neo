@@ -258,7 +258,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert response.status_code == 200
         content = str(response.content)
         assert "Activities between" in content
-        assert "in: United States of America - California." in content
+        assert "in the <b>United States of America - California</b>." in content
         assert "Site stats calculating, please check later" not in content
         assert "Pear Therapeutics raises $64M, launches prescription app for opioid use disorder" in content
         assert len(re.findall("<b>Region:</b> San Francisco",content)) == 3

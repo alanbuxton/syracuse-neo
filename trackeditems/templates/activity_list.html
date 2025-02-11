@@ -1,12 +1,13 @@
 {% load trackeditems_extras %}
 {% load l10n %}
+{% load topics_extras %}
 
 <p>Click on a document link to see the original source document.
   Click on the name of an organization to see more organization linkages and timelines.</p>
 
 {% for row in activities %}
   <p>
-    <br/><h4><a href="{{ row.activity_uri }}">{{ row.headline }}</a></h4>
+    <br/><h4><a href="{{ row.activity_uri }}?{{ request_state.qs_params|dict_to_query_string }}">{{ row.headline }}</a></h4>
     <b>Document Date: </b>{{ row.date_published | iso_format_to_date | localize }} / <b>Source: </b>{{ row.source_organization }}
     <br/><b>Activity Class: </b>{{ row.activity_class }}
     {% if row.activity_longest_type %}
@@ -22,7 +23,7 @@
             <b>{{ actor_role | title}}</b>:
             <ul>
             {% for entity in actor_list %}
-                <li><a href="{{ entity.uri }}">{{ entity.best_name }}</a>
+                <li><a href="{% url_with_querystring 'organization-linkages' entity.uri_parts.domain entity.uri_parts.path entity.uri_parts.doc_id entity.uri_parts.name qs_params=request_state.qs_params %}">{{ entity.best_name }}</a>
                 {% if entity.industry_as_string %}
                   / <b>Industry:</b> {{ entity.industry_as_string }}
                 {% endif %}

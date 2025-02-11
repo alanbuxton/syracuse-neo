@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import TrackedOrganization, TrackedIndustryGeo
 from topics.models import Organization, IndustryCluster
 import pycountry
 from topics.industry_geo import country_admin1_full_name
+from topics.util import elements_from_uri
 
 class RecentsByGeoSerializer(serializers.Serializer):
     def to_representation(self, instance):
@@ -45,24 +45,7 @@ class CountsSerializer(serializers.Serializer):
         return {
             "node_type": instance[0],
             "count": instance[1],
-        }
-
-class TrackedIndustryGeoSerializer(serializers.Serializer):
-    
-    def to_representation(self, instance):
-        geo_code = instance.geo_code
-        ind = instance.industry_name
-        region_str = "All Locations" if (geo_code is None or 
-                                          geo_code.strip() == '') else country_admin1_full_name(geo_code)
-        industry_str = "All Industries" if (ind is None or ind.strip() == '') else ind
-        in_str = "in the" if region_str.lower().startswith("united") else "in"
-        return {"geo_code":geo_code,
-                "region_str": region_str,
-                "industry_name": ind,
-                "industry_str": industry_str,
-                "in_str": in_str,
-                }   
-    
+        }    
 
 class GeoNamesLocationSerializer(serializers.Serializer):
     uri = serializers.URLField()
@@ -84,6 +67,11 @@ class ActivityActorSerializer(serializers.Serializer):
     based_in_high_geonames_locations = GeoNamesLocationSerializer(many=True)
     based_in_high_clean_names = serializers.ListField()
     based_in_high_as_string = serializers.CharField()
+
+    def to_representation(self, instance):
+        repres = super().to_representation(instance)
+        repres["uri_parts"] = elements_from_uri(repres["uri"])
+        return repres
 
 class ActivitySerializer(serializers.Serializer):
     source_organization = serializers.CharField()
@@ -130,6 +118,8 @@ class OrgIndGeoSerializer(serializers.Serializer):
             "industry_search_str": industry_search_str,
             "region_name": region_name,
             "tracked_item_id": instance.id,
+            "uri_parts": elements_from_uri(org.uri) if org else {},
+            "geo_code": instance.region or '',
         }
 
         return serialized

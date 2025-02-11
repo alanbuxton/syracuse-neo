@@ -5,9 +5,9 @@ from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedItem
-from topics.models import IndustryCluster
+from topics.models import IndustryCluster, Organization
 from rest_framework.response import Response
-from rest_framework import status, viewsets
+from rest_framework import status
 from .serializers import (ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
     RecentsByIndustrySerializer, OrgIndGeoSerializer)
@@ -15,9 +15,11 @@ from topics.stats_helpers import get_cached_stats
 from topics.activity_helpers import (
     get_activities_by_country_and_date_range,
     get_activities_by_industry_and_date_range,
-    get_activities_by_source_and_date_range
+    get_activities_by_source_and_date_range,
+    get_activities_by_industry_geo_and_date_range,
+    get_activities_by_org_uris_and_date_range,
     )
-from datetime import datetime, timezone, timedelta, date
+from datetime import datetime, timezone, timedelta
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
@@ -36,14 +38,16 @@ class TrackedOrgIndGeoView(APIView):
     def get(self, request):
         tracked_items = self.get_queryset()
         serialized = OrgIndGeoSerializer(tracked_items, many=True)
-        resp = Response({"tracked_items":serialized.data},
+        request_state, _ = prepare_request_state(request)
+        resp = Response({"tracked_items":serialized.data,
+                         "request_state":request_state},
                         status=status.HTTP_200_OK)
         return resp
 
     def post(self, request):
         payload = request.POST
-        all_industry_ids = json.loads(payload["all_industry_ids"])
-        trackables = get_entities_to_track(payload, payload["search_str"], all_industry_ids)
+        all_industry_ids = json.loads(payload.get("all_industry_ids","[]"))
+        trackables = get_entities_to_track(payload, payload.get("search_str",""), all_industry_ids)
         TrackedItem.update_or_create_for_user(request.user, trackables)
         return redirect('tracked-org-ind-geo')
 
@@ -65,9 +69,14 @@ class GeoActivitiesView(APIView):
             geo_name = ''
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "geo_name": geo_name,
+                            "source_name": {
+                                "from_str": "",
+                                "industry_str": "",
+                                "in_str": in_str_for_region_str(geo_name),
+                                "region_str": geo_name,
+                            },
                             "request_state": request_state,
-                            }, status=status.HTTP_200_OK)
+                        }, status=status.HTTP_200_OK)
         return resp
     
 class IndustryActivitiesView(APIView):
@@ -87,10 +96,61 @@ class IndustryActivitiesView(APIView):
             matching_activity_orgs = []
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "source_name": industry.longest_representative_doc,
+                            "source_name": {
+                                "from_str": "from",
+                                "in_str" : "",
+                                "region_str": "",
+                                "industry_str": industry.longest_representative_doc,
+                            },
+                            "request_state": request_state,
+                        }, status=status.HTTP_200_OK)
+        return resp
+    
+class IndustryGeoActivitiesView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tracked_activities.html'
+    permission_classes = [IsAuthenticatedNotAnon]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+
+    def get(self, request):
+        min_date, max_date = min_and_max_date(request.GET)
+        industry_id = request.GET.get("industry_id")
+        if industry_id is None or industry_id.strip() == '' or industry_id == 'None':
+            industry = None
+        else:
+            industry = IndustryCluster.nodes.get_or_none(topicId=industry_id)
+        geo_code = request.GET.get("geo_code")
+        if geo_code == '':
+            geo_code = None
+        request_state, _ = prepare_request_state(request)
+        matching_activity_orgs = get_activities_by_industry_geo_and_date_range(industry, geo_code, min_date, max_date, limit=20)
+        serializer = ActivitySerializer(matching_activity_orgs, many=True)
+        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "source_name": geo_industry_to_string(geo_code, industry),
                             "request_state": request_state,
                              }, status=status.HTTP_200_OK)
-        return resp
+        return resp    
+
+class OrgActivitiesView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tracked_activities.html'
+    permission_classes = [IsAuthenticatedNotAnon]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+
+    def get(self, request, **kwargs):
+        min_date, max_date = min_and_max_date(request.GET)
+        request_state, _ = prepare_request_state(request)
+        org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        org = Organization.self_or_ultimate_target_node(org_uri)
+        matching_activity_orgs = get_activities_by_org_uris_and_date_range([org_uri], min_date, max_date,limit=100)
+        serializer = ActivitySerializer(matching_activity_orgs, many=True)
+        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "source_name": {
+                                "org_name": org.best_name,
+                            },
+                            "request_state": request_state,
+                        }, status=status.HTTP_200_OK)
+        return resp  
 
 
 class SourceActivitiesView(APIView):
@@ -109,9 +169,11 @@ class SourceActivitiesView(APIView):
             matching_activity_orgs = []
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "source_name": source_name,
+                            "source_name": {
+                                "source_organization": source_name,
+                            },
                             "request_state": request_state,
-                             }, status=status.HTTP_200_OK)
+                        }, status=status.HTTP_200_OK)
         return resp
 
 
@@ -200,3 +262,23 @@ def get_entities_to_track(params_dict, search_str, all_industry_ids):
         expanded_select_alls.extend(add_industry_clusters_to_regional_tracked_items(select_all))
 
     return expanded_select_alls + specific_orgs_to_keep_cleaned
+
+def geo_industry_to_string(geo_code, industry):
+    region_str = "All Locations" if (geo_code is None or 
+                                        geo_code.strip() == '') else country_admin1_full_name(geo_code)
+    if isinstance(industry, IndustryCluster):
+        industry_name = industry.longest_representative_doc
+    else:
+        industry_name = None
+    industry_str = "All Industries" if (industry_name is None or industry_name.strip() == '') else industry_name
+    in_str = in_str_for_region_str(region_str)
+    return {"geo_code":geo_code,
+            "from_str": "from",
+            "region_str": region_str,
+            "industry_name": industry_name,
+            "industry_str": industry_str,
+            "in_str": in_str,
+            }   
+
+def in_str_for_region_str(region_str):
+    return "in the" if region_str.lower().startswith("united") else "in"
