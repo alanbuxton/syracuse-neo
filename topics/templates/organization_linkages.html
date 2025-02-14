@@ -42,9 +42,12 @@
   {% include 'layouts/nav-org.html' %}
 </p>
 
+{% include "track_org_snippet.html" %}
+
 {% if data_serializer.too_many_nodes is True %}
   <p>Graph size exceeds limits for web users. Please <a href="mailto:info-syracuse@1145.am?subject=Want%20to%20see%20more%20Syracuse%20data&body=Dear%20Info%0D%0AI%20would%20like%20to%20discuss%20accessing%20{{ source_node }}">contact us</a> for API or bulk data.
   Alternatively, use the links below to narrow down which data sources to use and how far back in time to go, or try the Family Tree or Timeline links above.</p>
+
 {% else %}
   <p><b>Show/Hide: </b>
   {% for entity_type in data_serializer.nodes_by_type.keys %}
@@ -55,8 +58,6 @@
     {% endif %}
   {% endfor %}
   </p>
-
-  {% include "track_org_snippet.html" %}
 
   <div id="main_container">
       <div id="visualization"></div>

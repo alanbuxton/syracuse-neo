@@ -19,10 +19,11 @@ from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
-from .industry_geo.orgs_by_industry_geo import combined_industry_geo_results
+from .industry_geo import country_admin1_full_name
+from .industry_geo.orgs_by_industry_geo import combined_industry_geo_results, orgs_by_industry_cluster_and_geo
 import re
 import json
-from .util import elements_from_uri
+from .util import elements_from_uri, geo_to_country_admin1
 
 
 import logging
@@ -310,6 +311,33 @@ class IndustryGeoFinder(APIView):
                         }, status=status.HTTP_200_OK)
         return resp
 
+
+class IndustryGeoOrgsView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'industry_geo_orgs_list.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+    def get(self, request):
+        geo_code = request.GET.get("geo_code")
+        industry_id = request.GET.get("industry_id")
+        industry_cluster = IndustryCluster.get_by_industry_id(industry_id) 
+        industry_cluster_uri = industry_cluster.uri if industry_cluster else None
+        cc, adm1 = geo_to_country_admin1(geo_code)
+        org_uris = orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_id, cc, adm1)
+        ind_name = industry_cluster.best_name if industry_cluster else None
+        geo_name = country_admin1_full_name(geo_code)
+        organizations = set()
+        for org_uri in org_uris:
+            organization = Organization.self_or_ultimate_target_node(org_uri)
+            organization.splitted_uri = elements_from_uri(organization.uri)
+            organizations.add(organization)
+        request_state, _ = prepare_request_state(request)
+        resp = Response({"organizations": organizations,
+                         "request_state": request_state,
+                         "industry_geo_str": industry_geo_search_str(ind_name, geo_name)
+                         }, status=status.HTTP_200_OK)   
+        return resp     
 
 def industry_geo_search_str(industry, geo):
     industry_str = "all industries" if industry is None or industry.strip() == '' else industry

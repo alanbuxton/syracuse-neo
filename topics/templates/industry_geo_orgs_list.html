@@ -1,0 +1,35 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+
+<title>Organizations: {{ industry_geo_str | striptags }}</title>
+</head>
+<body>
+<p>
+    {% include 'layouts/nav-header.html' %}
+</p>
+<h1>Organizations by Industry / Geo</h1>
+<p>Organization list for {{ industry_geo_str | safe }}.</p>
+{% if organizations|length %}
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        {% for org in organizations %}
+            <tr>
+                <td><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
+                {{ org.best_name }}</a></td>
+            </tr>
+    {% endfor %}
+    </table>
+    <br/>
+{% endif %}
+
+{% include 'layouts/footer.html' %}
+
+</body>
+</html>

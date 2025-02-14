@@ -14,21 +14,22 @@
 </ul>
 
 
-<h4>Industries / Region Combos</h4>
+<h4>Industry / Region Combos</h4>
 <table>
     <tr>
         <th>Industry Cluster</th>
-        <th>Industry Keywords</th>
         <th>Region</th>
         <th>&nbsp;</th>
     </tr>
     {% for row in tracked_items %}
-        {% if row.org_name == 'Any' %}
+        {% if row.org_name == 'Any' and row.industry_search_str == 'n/a' %}
             <tr>
                 <td>{{ row.industry_name }}</td>
-                <td>{{ row.industry_search_str }}</td>
                 <td>{{ row.region_name }}</td>
-                <td>(<a href='industry_geo_activities?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}'>View activities</a>)</td>
+                <td><a href='{% url "industry-geo-orgs" %}?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}''>View organizations</a>
+                    |
+                    <a href='{% url "industry-geo-activities" %}?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}'>View activities</a>
+                </td>
             </tr>
         {% endif %}
     {% endfor %}

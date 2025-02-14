@@ -142,7 +142,7 @@ class Resource(StructuredNode):
                     RETURN n,article_count,rand() as r
                     ORDER BY r
                     LIMIT {limit}"""
-        logger.info(query)
+        logger.debug(query)
         res,_ = db.cypher_query(query, resolve_objects=True)
         vals = [(x[0],x[1]) for x in res]
         cache.set(cache_key, vals)

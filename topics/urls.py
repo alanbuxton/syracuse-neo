@@ -20,4 +20,5 @@ urlpatterns = [
     path('resource/<str:domain>/<str:path>/<str:name>', views.ShowResource.as_view(), name='resource-no-doc-id'),
     path('industry_geo_finder', views.IndustryGeoFinder.as_view(), name='industry-geo-finder'),
     path('industry_geo_finder_review', views.IndustryGeoFinderReview.as_view(), name='industry-geo-finder-review'),
+    path('industry_geo_orgs', views.IndustryGeoOrgsView.as_view(), name='industry-geo-orgs'),
 ]
