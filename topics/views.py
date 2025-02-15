@@ -1,4 +1,4 @@
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from django.shortcuts import redirect
 from topics.models import Organization, Resource, IndustryCluster, GeoNamesLocation
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
-    NameSearchSerializer, 
+    NameSearchSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
     OrgsByIndustryGeoSerializer)
@@ -313,7 +313,7 @@ class IndustryGeoFinder(APIView):
 
 
 class IndustryGeoOrgsView(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
+    renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
     template_name = 'industry_geo_orgs_list.html'
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
@@ -327,16 +327,22 @@ class IndustryGeoOrgsView(APIView):
         org_uris = orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_id, cc, adm1)
         ind_name = industry_cluster.best_name if industry_cluster else None
         geo_name = country_admin1_full_name(geo_code)
-        organizations = set()
+        organizations = []
+        found_uris = set()
         for org_uri in org_uris:
             organization = Organization.self_or_ultimate_target_node(org_uri)
-            organization.splitted_uri = elements_from_uri(organization.uri)
-            organizations.add(organization)
+            if organization.uri in found_uris:
+                continue
+            found_uris.add(organization.uri)
+            serialized_org = organization.serialize()
+            serialized_org["splitted_uri"] = elements_from_uri(organization.uri)
+            organizations.append(serialized_org)
+            
         request_state, _ = prepare_request_state(request)
         resp = Response({"organizations": organizations,
-                         "request_state": request_state,
-                         "industry_geo_str": industry_geo_search_str(ind_name, geo_name)
-                         }, status=status.HTTP_200_OK)   
+                        "request_state": request_state,
+                        "industry_geo_str": industry_geo_search_str(ind_name, geo_name)
+                        }, status=status.HTTP_200_OK)   
         return resp     
 
 def industry_geo_search_str(industry, geo):

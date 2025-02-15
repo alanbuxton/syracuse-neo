@@ -50,10 +50,11 @@
   {% include 'layouts/nav-header-no-homepage.html' %}
 </p>
 {% else %}
- <p>Feel free to browse this database anonymously: <a href="{% url 'account_login' %}">Click here for anonymous login</a>.
-  <br/>If you want to set up your own alerts for companies, industries or regions, you'll need to set up your own free account first.
-  <a href="{% url 'account_signup' %}">Click here to sign up</a> | 
-  <a href="{% url 'account_login' %}">Click here to login.</a></p>
+ <p>This database is free to use for any human individuals. It would be completely open if not for aggressive scraping by dubious bots.
+  As a second best, go to the login page and use the anonymous username and password there to log in. (This password will change from time to time).
+  <br/>You can also use this site to track updates to industries, regions and organizations of interest. For this you will need to sign up with your own id.
+  <a href="{% url 'account_login' %}">Click here to login</a> |
+  <a href="{% url 'account_signup' %}">Click here to sign up</a>. 
 {% endif %}
 
 <h1>Topic Identification: Syracuse from 1145</h1>

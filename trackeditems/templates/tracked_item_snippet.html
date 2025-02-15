@@ -26,7 +26,7 @@
             <tr>
                 <td>{{ row.industry_name }}</td>
                 <td>{{ row.region_name }}</td>
-                <td><a href='{% url "industry-geo-orgs" %}?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}''>View organizations</a>
+                <td><a href='{% url "industry-geo-orgs" %}?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}'>View {{ row.org_count }} organization(s)</a>
                     |
                     <a href='{% url "industry-geo-activities" %}?geo_code={{ row.geo_code }}&industry_id={{ row.industry.topicId}}'>View activities</a>
                 </td>

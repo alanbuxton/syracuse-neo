@@ -52,7 +52,7 @@ button {
   <span id="sumDisplay">0</span> Organizations selected.
 </p>
 
-{% if table_header|length > 0 %}
+{% if table_header|length > 0 and table_body|length > 0 %}
 
   <table id="selectableTable">
     {% for row in table_header %}
@@ -85,6 +85,7 @@ button {
         {% endfor %}
       </tr>
     {% endfor %}
+    {% comment "Remove search str feature for now" %}
     {% if table_header|length == 0 or True %}
       <tr class="isrow row-search_str">
         <td class="row-label">
@@ -97,13 +98,17 @@ button {
         {% endfor %}
       </tr>
     {% endif %}
+    {% endcomment %}
   </table>
+
+  <button id="submitBtn_review">Review Organizations</button>
+  <button id="submitBtn_track">Track Selected Industry / Region Combos</button>
 {% else %}
-  <p>No results found</p>
+  <p><b>No results found</b></p>
 {% endif %}
 
-<button id="submitBtn">Submit</button>
-<form id="selectedForm" method="POST" action="{% url 'industry-geo-finder-review' %}">
+
+<form id="selectedForm" method="POST" action="#">
   {% csrf_token %}
   <input type="hidden" name="selectedIndividualCells" id="selectedIndividualCells" value="">
   <input type="hidden" name="selectedRows" id="selectedRows" value="">
@@ -117,7 +122,8 @@ button {
 <script>
   // Mainly ChatGPT!!
   const table = document.getElementById('selectableTable');
-  const submitBtn = document.getElementById('submitBtn');
+  const submitBtn_review = document.getElementById('submitBtn_review');
+  const submitBtn_track = document.getElementById('submitBtn_track')
   const selectedIndividualCellsInput = document.getElementById('selectedIndividualCells');
   const selectedRowsInput = document.getElementById('selectedRows');
   const selectedColumnsInput = document.getElementById('selectedColumns');
@@ -171,7 +177,18 @@ button {
     return Array.from(colCells).every(cell => cell.classList.contains('selected'));
   }
 
-  submitBtn.addEventListener('click', () => {
+  submitBtn_review.addEventListener('click', submit_for_review);
+  submitBtn_track.addEventListener('click', submit_for_tracking);
+
+  function submit_for_review() {
+    submit_the_form("/industry_geo_finder_review")
+  }
+
+  function submit_for_tracking() {
+    submit_the_form("/tracked_org_ind_geo")
+  }
+  
+  function submit_the_form(action_url) {
     const selectedRows = [];
     const selectedColumns = [];
     const selectedIndividualCells = [];
@@ -215,8 +232,9 @@ button {
     // console.log(selectedIndividualCellsInput);
     // console.log(selectedRowsInput);
     // console.log(selectedColumnsInput);
+    document.getElementById('selectedForm').action = action_url;
     document.getElementById('selectedForm').submit();
-  });
+  }
 
 </script>
 

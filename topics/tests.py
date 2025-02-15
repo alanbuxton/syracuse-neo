@@ -254,10 +254,9 @@ class TestUtilsWithDumpData(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
         orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
-        assert set(orgs) == set(['https://1145.am/db/2543227/Celgene', 
-                                 'https://1145.am/db/2364624/Parexel_International_Corporation', 
-                                 'https://1145.am/db/2364647/Mersana_Therapeutics', 
-                                 'https://1145.am/db/3473030/Eusa_Pharma'])
+        assert set(orgs) == {'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2364624/Parexel_International_Corporation', 
+                             'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 
+                             'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'}
 
     def test_search_by_geo_only(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
@@ -749,97 +748,57 @@ class TestUtilsWithDumpData(TestCase):
         assert orgs == ['https://1145.am/db/10282/Talla']
 
     def test_industry_geo_finder_prep_table(self):
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("software") 
-        assert headers == [OrderedDict([('Americas', {'colspan': 13, 'classes': 'col-CA col-CA-08 col-US col-US-CA col-US-CT col-US-FL col-US-IL col-US-MN col-US-MS col-US-NY col-US-TN col-US-TX col-US-UT'}),
-                                        ('Asia', {'colspan': 2, 'classes': 'col-JP col-SG'}), 
-                                        ('Europe', {'colspan': 2, 'classes': 'col-DE col-DK'})]),
-                            OrderedDict([('Northern America', {'colspan': 13, 'classes': 'col-CA col-CA-08 col-US col-US-CA col-US-CT col-US-FL col-US-IL col-US-MN col-US-MS col-US-NY col-US-TN col-US-TX col-US-UT'}), 
-                                         ('Eastern Asia', {'colspan': 1, 'classes': 'col-JP'}), 
-                                         ('South-eastern Asia', {'colspan': 1, 'classes': 'col-SG'}), 
-                                         ('Northern Europe', {'colspan': 1, 'classes': 'col-DK'}), 
-                                         ('Western Europe', {'colspan': 1, 'classes': 'col-DE'})]), 
-                            OrderedDict([('CA', {'colspan': 2, 'classes': 'col-CA col-CA-08'}), 
-                                         ('US', {'colspan': 11, 'classes': 'col-US col-US-CA col-US-CT col-US-FL col-US-IL col-US-MN col-US-MS col-US-NY col-US-TN col-US-TX col-US-UT'}), 
-                                         ('JP', {'colspan': 1, 'classes': 'col-JP'}), ('SG', {'colspan': 1, 'classes': 'col-SG'}), 
-                                         ('DK', {'colspan': 1, 'classes': 'col-DK'}), ('DE', {'colspan': 1, 'classes': 'col-DE'})]), 
-                            OrderedDict([('CA (all)', {'colspan': 1, 'classes': 'col-CA'}), 
-                                         ('CA-08', {'colspan': 1, 'classes': 'col-CA-08'}), 
-                                         ('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
-                                         ('Midwest', {'colspan': 2, 'classes': 'col-US-IL col-US-MN'}), 
-                                         ('Northeast', {'colspan': 2, 'classes': 'col-US-CT col-US-NY'}), 
-                                         ('South', {'colspan': 4, 'classes': 'col-US-FL col-US-MS col-US-TN col-US-TX'}), 
-                                         ('West', {'colspan': 2, 'classes': 'col-US-CA col-US-UT'}), 
-                                         ('REPEATED JP', {'colspan': 1, 'classes': 'col-JP'}), 
-                                         ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), 
-                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'}), 
-                                         ('REPEATED DE', {'colspan': 1, 'classes': 'col-DE'})]), 
-                            OrderedDict([('REPEATED CA (all)', {'colspan': 1, 'classes': 'col-CA'}), 
-                                         ('REPEATED CA-08', {'colspan': 1, 'classes': 'col-CA-08'}), 
-                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), 
-                                         ('East North Central', {'colspan': 1, 'classes': 'col-US-IL'}), 
-                                         ('West North Central', {'colspan': 1, 'classes': 'col-US-MN'}), 
-                                         ('Mid Atlantic', {'colspan': 1, 'classes': 'col-US-NY'}), 
-                                         ('New England', {'colspan': 1, 'classes': 'col-US-CT'}), 
-                                         ('East South Central', {'colspan': 2, 'classes': 'col-US-MS col-US-TN'}), 
-                                         ('South Atlantic', {'colspan': 1, 'classes': 'col-US-FL'}), 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital") 
+        assert headers == [OrderedDict([('Americas', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                                        ('Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('Northern America', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                                         ('Western Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('US', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                                         ('SA', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                                         ('Northeast', {'colspan': 3, 'classes': 'col-US-MA col-US-NY col-US-PA'}), 
+                                         ('South', {'colspan': 3, 'classes': 'col-US-DC col-US-FL col-US-TX'}), 
+                                         ('West', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
+                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                                         ('Mid Atlantic', {'colspan': 2, 'classes': 'col-US-NY col-US-PA'}), 
+                                         ('New England', {'colspan': 1, 'classes': 'col-US-MA'}), 
+                                         ('South Atlantic', {'colspan': 2, 'classes': 'col-US-DC col-US-FL'}), 
                                          ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), 
-                                         ('Mountain', {'colspan': 1, 'classes': 'col-US-UT'}), 
-                                         ('Pacific', {'colspan': 1, 'classes': 'col-US-CA'}), 
-                                         ('REPEATED JP', {'colspan': 1, 'classes': 'col-JP'}), 
-                                         ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG'}), 
-                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK'}), 
-                                         ('REPEATED DE', {'colspan': 1, 'classes': 'col-DE'})]), 
-                            OrderedDict([('REPEATED CA (all)', {'colspan': 1, 'classes': 'col-CA header_final'}), 
-                                         ('REPEATED CA-08', {'colspan': 1, 'classes': 'col-CA-08 header_final'}), 
-                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}),
-                                         ('US-IL', {'colspan': 1, 'classes': 'col-US-IL header_final'}), 
-                                         ('US-MN', {'colspan': 1, 'classes': 'col-US-MN header_final'}), 
+                                         ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
+                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
                                          ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
-                                         ('US-CT', {'colspan': 1, 'classes': 'col-US-CT header_final'}), 
-                                         ('US-MS', {'colspan': 1, 'classes': 'col-US-MS header_final'}), 
-                                         ('US-TN', {'colspan': 1, 'classes': 'col-US-TN header_final'}), 
+                                         ('US-PA', {'colspan': 1, 'classes': 'col-US-PA header_final'}), 
+                                         ('US-MA', {'colspan': 1, 'classes': 'col-US-MA header_final'}), 
+                                         ('US-DC', {'colspan': 1, 'classes': 'col-US-DC header_final'}), 
                                          ('US-FL', {'colspan': 1, 'classes': 'col-US-FL header_final'}), 
                                          ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
-                                         ('US-UT', {'colspan': 1, 'classes': 'col-US-UT header_final'}),
                                          ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), 
-                                         ('REPEATED JP', {'colspan': 1, 'classes': 'col-JP header_final'}), 
-                                         ('REPEATED SG', {'colspan': 1, 'classes': 'col-SG header_final'}), 
-                                         ('REPEATED DK', {'colspan': 1, 'classes': 'col-DK header_final'}), ('REPEATED DE', {'colspan': 1, 'classes': 'col-DE header_final'})])]
+                                         ('US-WA', {'colspan': 1, 'classes': 'col-US-WA header_final'}), 
+                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA header_final'})])]
 
-
-        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/554_software_financial_technology_solutions', 
-                                         'name': 'Software And Financial Services', 'industry_id': 554, 
-                                         'vals': [{'value': 0, 'region_code': 'CA'}, {'value': 0, 'region_code': 'CA-08'}, 
-                                                  {'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-IL'}, 
-                                                  {'value': 0, 'region_code': 'US-MN'}, {'value': 1, 'region_code': 'US-NY'}, 
-                                                  {'value': 0, 'region_code': 'US-CT'}, {'value': 0, 'region_code': 'US-MS'}, 
-                                                  {'value': 0, 'region_code': 'US-TN'}, {'value': 0, 'region_code': 'US-FL'}, 
-                                                  {'value': 1, 'region_code': 'US-TX'}, {'value': 0, 'region_code': 'US-UT'}, 
-                                                  {'value': 0, 'region_code': 'US-CA'}, {'value': 0, 'region_code': 'JP'}, 
-                                                  {'value': 0, 'region_code': 'SG'}, {'value': 0, 'region_code': 'DK'}, 
-                                                  {'value': 0, 'region_code': 'DE'}]}, 
-                                         {'uri': 'https://1145.am/db/industry/109_software_tools_applications_development', 
-                                          'name': 'Software-Development Tools', 'industry_id': 109, 
-                                          'vals': [{'value': 0, 'region_code': 'CA'}, {'value': 0, 'region_code': 'CA-08'}, 
-                                                   {'value': 4, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-IL'}, 
-                                                   {'value': 0, 'region_code': 'US-MN'}, {'value': 1, 'region_code': 'US-NY'}, 
-                                                   {'value': 0, 'region_code': 'US-CT'}, {'value': 0, 'region_code': 'US-MS'}, 
-                                                   {'value': 0, 'region_code': 'US-TN'}, {'value': 0, 'region_code': 'US-FL'}, 
-                                                   {'value': 1, 'region_code': 'US-TX'}, {'value': 1, 'region_code': 'US-UT'},
-                                                   {'value': 0, 'region_code': 'US-CA'}, {'value': 0, 'region_code': 'JP'}, 
-                                                   {'value': 0, 'region_code': 'SG'}, {'value': 1, 'region_code': 'DK'}, 
-                                                   {'value': 0, 'region_code': 'DE'}]}]
+        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare', 
+                                         'name': 'Hospital Management Service', 'industry_id': 17, 
+                                         'vals': [{'value': 11, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-NY'}, 
+                                                  {'value': 2, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
+                                                  {'value': 0, 'region_code': 'US-DC'}, {'value': 1, 'region_code': 'US-FL'}, 
+                                                  {'value': 1, 'region_code': 'US-TX'}, {'value': 3, 'region_code': 'US-CA'}, 
+                                                  {'value': 1, 'region_code': 'US-WA'}, {'value': 1, 'region_code': 'SA'}]}, 
+                                         {'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 
+                                          'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487, 
+                                          'vals': [{'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'}, 
+                                                   {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
+                                                   {'value': 0, 'region_code': 'US-DC'}, {'value': 0, 'region_code': 'US-FL'}, 
+                                                   {'value': 0, 'region_code': 'US-TX'}, {'value': 1, 'region_code': 'US-CA'}, 
+                                                   {'value': 0, 'region_code': 'US-WA'}, {'value': 0, 'region_code': 'SA'}]}]
         
-        assert text_row == {'uri': '', 'name': 'software', 'vals': 
-                            [{'value': 1, 'region_code': 'CA'}, {'value': 1, 'region_code': 'CA-08'}, 
-                             {'value': 12, 'region_code': 'US'}, {'value': 2, 'region_code': 'US-IL'}, 
-                             {'value': 1, 'region_code': 'US-MN'}, {'value': 1, 'region_code': 'US-NY'}, 
-                             {'value': 1, 'region_code': 'US-CT'}, {'value': 1, 'region_code': 'US-MS'}, 
-                             {'value': 1, 'region_code': 'US-TN'}, {'value': 1, 'region_code': 'US-FL'}, 
-                             {'value': 1, 'region_code': 'US-TX'}, {'value': 1, 'region_code': 'US-UT'}, 
-                             {'value': 2, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'JP'}, 
-                             {'value': 1, 'region_code': 'SG'}, {'value': 1, 'region_code': 'DK'}, 
-                             {'value': 1, 'region_code': 'DE'}]}
+        assert text_row == {'uri': '', 'name': 'hospital', 
+                            'vals': [{'value': 15, 'region_code': 'US'}, {'value': 2, 'region_code': 'US-NY'}, 
+                                     {'value': 2, 'region_code': 'US-PA'}, {'value': 1, 'region_code': 'US-MA'}, 
+                                     {'value': 1, 'region_code': 'US-DC'}, {'value': 1, 'region_code': 'US-FL'}, 
+                                     {'value': 1, 'region_code': 'US-TX'}, {'value': 4, 'region_code': 'US-CA'}, 
+                                     {'value': 1, 'region_code': 'US-WA'}, {'value': 1, 'region_code': 'SA'}]}
 
     def test_remove_not_needed_admin1s_from_individual_cells(self):
         all_industry_ids = [109, 554, 280, 223, 55, 182, 473]
@@ -919,32 +878,24 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_industry_geo_finder_preview(self):
         '''
-                                            US (all)	US-NY	US-NC	US-TX	US-CA   DK
-            Software-Development Tools	        4	    1x	    0x	    1	    0	    1
-            Software And Financial Services	    1	    1x	    0x	    1x	    0	    0
-            Restaurant Management	            2	    0x	    1x	    1	    0	    0
-            Software And Experienced Services	1	    0x	    0x	    0	    0	    0 
-            OTT Software	                    1x	    0	    0x	    1x	    0x   	0x
-            Mobile Technology	                1	    0x	    0x	    1	    0	    0
-            Public Safety Technology	        2x	    0x	    0x	    1x	    0x	    0x
-            software (your search)	            5	    1x	    0x	    1	    1x	    1x   
+            Data shown on industry_geo_finder page in response to search "health". 'x' means entry that was chosen
+                                            CA (all)	CA-08	US (all)    US-IL	US-MI	US-NY	US-PA	US-MA	US-RI	US-FL	US-MD	US-VA	US-AR	US-TX	US-AZ	US-CA	US-OR	US-WA   CN	JP	IL	SA	GB
+            Health- And Beauty	            0x	        0x	    3x	        0x	    0x	    1x	    2x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	0x	0x	0x	1x
+            Senior Living And Health Care	0	        0	    1x	        0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    1	    0	    0	    0	0	0	0	0
+            Behavioral Health Services	    0	        0	    1x	        0	    0	    1x	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	0	0	0	0
+                    
         '''
         client = self.client
-        payload = {'selectedIndividualCells': 
-                   ['["row-109#col-US-NY","row-554#col-US-NY","row-554#col-US-TX","row-280#col-US-NY","row-223#col-US-NY","row-55#col-US","row-55#col-US-TX","row-55#col-US-CA","row-55#col-DK","row-182#col-US-NY","row-search_str#col-US-NY","row-search_str#col-US-CA","row-search_str#col-DK"]'], 
-                   'selectedRows': ['["row-473"]'], 'selectedColumns': ['["col-US-NC"]'], 
-                   'allIndustryIDs': ['[109, 554, 280, 223, 55, 182, 473]'], 'searchStr': ['software']}
+        payload = {'selectedIndividualCells': ['["row-219#col-US-NY"]'], 
+                   'selectedRows': ['["row-0"]'], 'selectedColumns': ['["col-US"]'], 
+                   'allIndustryIDs': ['[0, 75, 219]'], 'searchStr': ['health']}
         response = client.post("/industry_geo_finder_review",payload)
         assert response.status_code == 200
         content = str(response.content)
-        assert "Public Safety Technology in all Geos" in content
-        assert "Mobile Technology, OTT Software, Public Safety Technology, Restaurant Management, Software And Experienced Services, Software And Financial Services, Software-Development Tools in United States of America - North Carolina" in content
-        assert "OTT Software in United States of America" in content
-        assert "&quot;software&quot; in Denmark" in content
-        # TODO how best to handle case where there are zero orgs in a cell but still want to track it (e.g in this case OTT Software in Denmark)
-        assert len(re.findall("Denmark",content)) == 1
-        assert len(re.findall("New York",content)) == 3
-        assert len(re.findall("North Carolina",content)) == 1
+        assert "Health- And Beauty in all Geos" in content
+        assert "Behavioral Health Services, Health- And Beauty, Senior Living And Health Care in United States of America" in content
+        assert "The Hilb Group" in content
+        assert "Behavioral Health Services in United States of America - New York" in content
 
     def test_orgs_by_weight(self):
         uris = ["https://1145.am/db/3461395/Salvarx", "https://1145.am/db/2166549/Synamedia", "https://1145.am/db/3448439/Eli_Lilly_And_Company",
@@ -956,6 +907,19 @@ class TestUtilsWithDumpData(TestCase):
         assert sorted[-1]['uri'] == 'https://1145.am/db/3464614/Mufg_Union_Bank'
         assert sorted[-1]['name'] == 'MUFG Union Bank'
         assert len(sorted) == len(uris)
+
+    def test_orgs_industry_is_only_by_industry_cluster_primary(self):
+        client = self.client
+        client.force_login(self.user)
+        ind_secondary = "/industry_geo_orgs?geo_code=US-OH&industry_id=583&format=json" # indClusterSecondary
+        ind_primary = "/industry_geo_orgs?geo_code=US-OH&industry_id=476&format=json" # indClusterPrimary
+        resp_secondary = client.get(ind_secondary)
+        resp_primary = client.get(ind_primary)
+        secondary = json.loads(resp_secondary.content)
+        primary = json.loads(resp_primary.content)
+        assert len(primary['organizations']) == 1
+        assert primary['organizations'][0]['uri'] == 'https://1145.am/db/3457045/Haines_Direct'
+        assert len(secondary['organizations']) == 0
 
 class TestRegionHierarchy(TestCase):
 

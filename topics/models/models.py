@@ -913,7 +913,8 @@ class Organization(Resource):
 
     def serialize(self):
         vals = super().serialize()
-        org_vals = {"description": self.description,
+        org_vals = {"best_name": self.best_name,
+                    "description": self.description,
                     "industry": self.industry_as_string,
                     "based_in_high_raw": self.basedInHighRaw,
                     "based_in_high_clean": self.basedInHighClean,

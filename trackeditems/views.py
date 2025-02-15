@@ -149,8 +149,8 @@ class OrgActivitiesView(APIView):
                                 "org_name": org.best_name,
                             },
                             "request_state": request_state,
-                        }, status=status.HTTP_200_OK)
-        return resp  
+                        })
+        return Response(resp, status=status.HTTP_200_OK)
 
 
 class SourceActivitiesView(APIView):
