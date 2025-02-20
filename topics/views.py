@@ -7,7 +7,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from django.shortcuts import redirect
 from topics.models import Organization, Resource, IndustryCluster, GeoNamesLocation
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
-    NameSearchSerializer,
+    NameSearchSerializer, OrganizationSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
     OrgsByIndustryGeoSerializer)
@@ -293,6 +293,30 @@ def col_from_request_post_data(val):
         return val.groups()[0]
     else:
         return None 
+    
+
+class SimilarOrganizations(APIView):
+    renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
+    template_name = 'similar_organizations.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    
+    def get(self, request, **kwargs):
+        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        o = Resource.self_or_ultimate_target_node(uri)
+        assert isinstance(o, Organization)
+        org = OrganizationSerializer(o)
+        similar = o.similar_organizations()
+        similar_ind_clusters = {}
+        for k,v in similar["industry_cluster"].items():
+            similar_ind_clusters[k] = sorted(OrganizationSerializer(v, many=True).data, key=lambda x: x["best_name"])
+        similar_ind_text = sorted(OrganizationSerializer(similar["industry_text"],many=True).data, key=lambda x: x["best_name"])
+        request_state, _ = prepare_request_state(request)
+        request_state["hide_link"]="similar_organizations"
+        return Response({"organizations_by_industry_cluster": similar_ind_clusters,
+                         "organizations_by_industry_text": similar_ind_text,
+                         "org": org.data,
+                         "request_state": request_state}, status=status.HTTP_200_OK)
     
 class IndustryGeoFinder(APIView):
     renderer_classes = [TemplateHTMLRenderer]

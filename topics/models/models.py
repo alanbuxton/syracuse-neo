@@ -816,7 +816,7 @@ class Organization(Resource):
 
     @property
     def based_in_high_as_string(self):
-        all_loc_names = [x.name for x in self.basedInHighGeoNamesLocation]
+        all_loc_names = [x.name for x in (self.basedInHighGeoNamesLocation or [])]
         flattened = [x for sublist in all_loc_names for x in sublist]
         if len(flattened) == 0:
             return None
@@ -976,13 +976,62 @@ class Organization(Resource):
             if allowed_to_set_cache is True:
                 cache.set(cache_key,res)
             return res
+        
+    def similar_organizations_flat(self,limit=0.94,uris_only=False):
+        res = self.similar_organizations(limit=limit)
+        if uris_only is True:
+            orgs = [x.uri for x in res["industry_text"]]
+        else:
+            orgs = list(res["industry_text"])
+        for vs in res["industry_cluster"].values():
+            if uris_only is True:
+                orgs.extend([x.uri for x in vs])
+            else:
+                orgs.extend(vs)
+        return orgs
+
+    def similar_organizations(self,limit=0.94):
+        # by industry cluster
+        by_ind_cluster = defaultdict(set)
+        for x in self.industryClusterPrimary:
+            org_uris = Organization.by_industry_and_or_geo(industry_id=x.topicId,geo_code=None,uris_only=True)
+            for org_uri in org_uris:
+                org = Organization.self_or_ultimate_target_node(org_uri)
+                if org.uri != self.uri:
+                    by_ind_cluster[x].add(org)
+        # by industry texts
+        by_ind_text = set()
+        if self.industry is not None:
+            for ind in self.industry:
+                org_uris = Organization.by_industry_text(ind,limit=limit)
+                for org_uri in org_uris:
+                    org = Organization.self_or_ultimate_target_node(org_uri)
+                    if org.uri != self.uri and not any([org in x for x in by_ind_cluster.values()]):
+                        by_ind_text.add(org)
+        for x in self.sameAsHigh:
+            if x.industry is None:
+                continue
+            for ind in x.industry:
+                org_uris = Organization.by_industry_text(ind,limit=limit)
+                for org_uri in org_uris:
+                    org = Organization.self_or_ultimate_target_node(org_uri)
+                    if org.uri != self.uri and not any([org in x for x in by_ind_cluster.values()]):
+                        by_ind_text.add(org)
+        
+        return {"industry_cluster": dict(by_ind_cluster),
+                "industry_text": by_ind_text}
+        
 
     @staticmethod
-    def by_industry_text(name):
-        query = ''' CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding)
+    def by_industry_text(name,limit=0.85):
+        cache_key = cache_friendly(f"org_by_industry_text_{name}_{limit}")
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
+        query = f''' CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding)
         YIELD node, score
         WITH node, score
-        WHERE score > 0.85
+        WHERE score >= {limit}
         RETURN node.uri
         ORDER BY score DESCENDING
         '''
@@ -990,14 +1039,19 @@ class Organization(Resource):
         res = set()
         for val in vals:
             res.add( Organization.self_or_ultimate_target_node(val[0]).uri)
+        cache.set(cache_key, res)
         return list(res)
 
     @staticmethod
-    def by_industry_text_and_geo(name,country_code,admin1_code=None):
+    def by_industry_text_and_geo(name,country_code,admin1_code=None,limit=0.85):
+        cache_key = cache_friendly(f"org_by_industry_text_geo_{name}_{country_code}_{admin1_code}_{limit}")
+        res = cache.get(cache_key)
+        if res is not None:
+            return res
         query = f'''CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding) 
                     YIELD node, score
                     WITH node, score
-                    WHERE score > 0.85
+                    WHERE score >= {limit}
                     WITH node, score
                     MATCH (node)-[:basedInHighGeoNamesLocation]-(r: Resource&GeoNamesLocation)
                     WHERE r.countryCode = '{country_code}'
@@ -1009,6 +1063,7 @@ class Organization(Resource):
         res = set()
         for val in vals:
             res.add( Organization.self_or_ultimate_target_node(val[0]).uri )
+        cache.set(cache_key, res)
         return list(res)
 
 

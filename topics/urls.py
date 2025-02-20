@@ -21,4 +21,5 @@ urlpatterns = [
     path('industry_geo_finder', views.IndustryGeoFinder.as_view(), name='industry-geo-finder'),
     path('industry_geo_finder_review', views.IndustryGeoFinderReview.as_view(), name='industry-geo-finder-review'),
     path('industry_geo_orgs', views.IndustryGeoOrgsView.as_view(), name='industry-geo-orgs'),
+    path('organization/similar/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.SimilarOrganizations.as_view(), name="similar-organizations"),
 ]

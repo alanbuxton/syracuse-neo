@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
@@ -10,20 +11,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import (ActivitySerializer,
     RecentsByGeoSerializer, RecentsBySourceSerializer, CountsSerializer,
-    RecentsByIndustrySerializer, OrgIndGeoSerializer)
+    RecentsByIndustrySerializer, OrgIndGeoSerializer, TrackedItemSerializer)
 from topics.stats_helpers import get_cached_stats
 from topics.activity_helpers import (
     get_activities_by_country_and_date_range,
     get_activities_by_industry_and_date_range,
     get_activities_by_source_and_date_range,
     get_activities_by_industry_geo_and_date_range,
-    get_activities_by_org_uris_and_date_range,
+    get_activities_by_org_and_date_range,
     )
 from datetime import datetime, timezone, timedelta
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
 import json
+from django.shortcuts import get_object_or_404
+import logging
+logger = logging.getLogger(__name__)
 
 class TrackedOrgIndGeoView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -142,15 +146,15 @@ class OrgActivitiesView(APIView):
         request_state, _ = prepare_request_state(request)
         org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         org = Organization.self_or_ultimate_target_node(org_uri)
-        matching_activity_orgs = get_activities_by_org_uris_and_date_range([org_uri], min_date, max_date,limit=100)
+        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100, include_similar_orgs=kwargs.get("include_similar_orgs"))
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
-        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+        resp_dict = {"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                             "source_name": {
                                 "org_name": org.best_name,
                             },
                             "request_state": request_state,
-                        })
-        return Response(resp, status=status.HTTP_200_OK)
+                        }
+        return Response(resp_dict, status=status.HTTP_200_OK)
 
 
 class SourceActivitiesView(APIView):
@@ -282,3 +286,15 @@ def geo_industry_to_string(geo_code, industry):
 
 def in_str_for_region_str(region_str):
     return "in the" if region_str.lower().startswith("united") else "in"
+
+
+class ToggleTrackedItemView(APIView):
+    authentication_classes = [SessionAuthentication] 
+    permission_classes = [IsAuthenticatedNotAnon]
+
+    def patch(self, request, item_id):
+        item = get_object_or_404(TrackedItem, id=item_id)
+        item.and_similar_orgs = not item.and_similar_orgs 
+        item.save()
+        serializer = TrackedItemSerializer(item)
+        return Response(serializer.data, status=status.HTTP_200_OK)

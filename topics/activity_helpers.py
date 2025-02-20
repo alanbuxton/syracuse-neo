@@ -29,6 +29,13 @@ def get_activities_by_industry_and_date_range(industry, min_date, max_date, limi
     return activity_articles_to_api_results(activity_article_uris)
 
 
+def get_activities_by_org_and_date_range(organization,min_date,max_date,include_similar_orgs=False,combine_same_as_name_only=True,limit=None):
+    uri_list = [organization.uri]
+    if include_similar_orgs is True:
+        similar_orgs = organization.similar_organizations_flat(uris_only=True)
+        uri_list.extend(similar_orgs)
+    return get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only,limit)
+
 def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:

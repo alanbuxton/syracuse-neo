@@ -12,16 +12,22 @@ class TrackedItem(models.Model):
     industry_search_str = models.TextField(null=True,blank=True)
     region = models.TextField(null=True,blank=True) # e.g. US-CA, or Europe
     organization_uri = models.URLField(max_length=4096,null=True,blank=True) # If set then ignore industry/region data
+    and_similar_orgs = models.BooleanField(default=False)
     trackable = models.BooleanField(default=True)
-
+    
     @property
     def organization_or_merged_uri(self):
+        org = self.organization_or_merged_org
+        if org is not None:
+            return org.uri
+        
+    @property
+    def organization_or_merged_org(self):
         if self.organization_uri is None:
             return None
         org = Organization.self_or_ultimate_target_node(self.organization_uri)
-        if org is not None:
-            return org.uri
-
+        return org
+        
     @staticmethod
     def text_to_tracked_item_data(text,search_str=""):
         if not text.startswith("track_"):

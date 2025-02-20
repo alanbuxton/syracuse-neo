@@ -27,6 +27,15 @@ class OrganizationWithCountsSerializer(serializers.ModelSerializer):
         repres["article_count"] = instance[1]
         return repres
 
+
+class OrganizationSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        vals = instance.serialize()
+        vals["splitted_uri"] = elements_from_uri(instance.uri)
+        vals["based_in_high_as_string"] = instance.based_in_high_as_string
+        vals["industry_as_string"] = instance.industry_as_string
+        return vals
+
 class ResourceSerializer(serializers.Serializer):
     def to_representation(self, instance):
         related = instance.all_directional_relationships(source_names=Article.all_sources())
@@ -327,7 +336,7 @@ class IndustrySerializer(serializers.Serializer):
     def get_industry_id(self):
         self.is_valid()
         return self['industry'].value
-
+    
 
 class GeoSerializer(serializers.Serializer):
     country_or_region = DataListChoiceField(choices=[("","")] + list(COUNTRY_CODE_TO_NAME.items()))

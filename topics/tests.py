@@ -540,7 +540,7 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "source=_all&earliest_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "source=_all&earliest_date=-1");' in content
-        assert len(re.findall("source=_all&earliest_date=-1",content)) == 13
+        assert len(re.findall("source=_all&earliest_date=-1",content)) == 15
 
     def test_query_strings_in_drill_down_resource_from_timeline_page(self):
         client = self.client
@@ -920,6 +920,26 @@ class TestUtilsWithDumpData(TestCase):
         assert len(primary['organizations']) == 1
         assert primary['organizations'][0]['uri'] == 'https://1145.am/db/3457045/Haines_Direct'
         assert len(secondary['organizations']) == 0
+
+    def test_finds_similar_orgs(self):
+        uri = 'https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc'
+        org = Resource.nodes.get_or_none(uri=uri)
+        similar = org.similar_organizations(limit=0.85)
+        similar_by_ind_cluster = [(x.uri,set([z.uri for z in y])) for x,y in sorted(similar["industry_cluster"].items())]
+        similar_by_ind_text = [x.uri for x in similar["industry_text"]]
+        assert similar_by_ind_cluster == [('https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical', 
+                                           {'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2364624/Parexel_International_Corporation', 
+                                            'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'})]
+        assert set(similar_by_ind_text) == set(['https://1145.am/db/2154356/Alector', 'https://1145.am/db/3469136/Aphria_Inc', 'https://1145.am/db/2154354/Apollomics', 
+                                                'https://1145.am/db/2543227/Bristol-Myers', 'https://1145.am/db/3029576/Bristol-Myers_Squibb', 
+                                                'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc', 'https://1145.am/db/3469136/Cc_Pharma', 
+                                                'https://1145.am/db/3444769/Control_Solutions_Inc', 'https://1145.am/db/11594/DSM', 'https://1145.am/db/3029576/Eli_Lilly', 
+                                                'https://1145.am/db/3467694/Engility_Holdings_Inc', 'https://1145.am/db/3029576/Loxo_Oncology', 
+                                                'https://1145.am/db/3469058/Napajen_Pharma', 'https://1145.am/db/3461286/Neubase', 
+                                                'https://1145.am/db/3461286/Ohr_Pharmaceutical', 'https://1145.am/db/3445572/Professional_Medical_Insurance_Services', 
+                                                'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp', 
+                                                'https://1145.am/db/3029705/Shire', 'https://1145.am/db/2543228/Takeda'])
+
 
 class TestRegionHierarchy(TestCase):
 

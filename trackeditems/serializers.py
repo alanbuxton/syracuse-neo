@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from topics.models import Organization, IndustryCluster
+from .models import TrackedItem
 import pycountry
 from topics.industry_geo import country_admin1_full_name, orgs_by_industry_and_or_geo
 from topics.util import elements_from_uri
@@ -118,7 +119,9 @@ class OrgIndGeoSerializer(serializers.Serializer):
             org_count = None
 
         serialized = {
+            "id": instance.id,
             "organization": org,
+            "and_similar_orgs": instance.and_similar_orgs,
             "industry": industry_cluster,
             "org_name": org_name,
             "industry_name": industry_name,
@@ -132,3 +135,7 @@ class OrgIndGeoSerializer(serializers.Serializer):
 
         return serialized
     
+class TrackedItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrackedItem 
+        fields = "__all__"

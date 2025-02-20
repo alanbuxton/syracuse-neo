@@ -2,17 +2,29 @@
 
 
 <h4>Organizations</h4>
-<ul>
+<table>
+    <tr>
+        <th>Organization Name</th>
+        <th>Also track similar orgs?</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
     {% for row in tracked_items %}
         {% if row.org_name != 'Any' %}
-            <li>
-                <a href="{% url_with_querystring 'organization-linkages' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">{{ row.org_name }}</a>
-                (<a href="{% url_with_querystring 'org-activities' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities</a>)
-            </li>
+            <tr>
+                <td><a href="{% url_with_querystring 'organization-linkages' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">{{ row.org_name }}</a></td>
+                <td align="center">
+                    <input type="checkbox" class="toggle-checkbox" data-id="{{ row.id }}" {% if row.and_similar_orgs %}checked{% endif %}>          
+                </td>
+                <td><a href="{% url_with_querystring 'org-activities' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org only)</a></td>
+                <td><a href="{% url_with_querystring 'similar-organizations' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View similar orgs</a></td>
+                <td><a href="{% url_with_querystring 'org-activities-incl-similar' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org plus similar orgs)</a></td>
+            </tr>
         {% endif %}
     {% endfor %}
-</ul>
+</table>
 
+<p>&nbsp;</p>
 
 <h4>Industry / Region Combos</h4>
 <table>
@@ -34,3 +46,40 @@
         {% endif %}
     {% endfor %}
 </table>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".toggle-checkbox").forEach(toggle => {
+            toggle.addEventListener("change", function() {
+                let itemId = this.getAttribute("data-id");
+                let isChecked = this.checked;
+    
+                fetch(`/toggle_similar_organizations/${itemId}/`, {
+                    method: "PATCH",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => {
+                    if (response.status === 401) {
+                        alert("You must be logged in to do this!");
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && !data.and_similar_orgs && isChecked) {
+                        alert("Update failed!");
+                        this.checked = !isChecked;  // Revert toggle on failure
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
+
+
+    

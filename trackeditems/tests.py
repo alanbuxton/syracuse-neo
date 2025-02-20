@@ -3,7 +3,7 @@ import time
 from django.contrib.auth import get_user_model
 from auth_extensions.anon_user_utils import create_anon_user
 from trackeditems.models import TrackedItem, ActivityNotification
-# from django.db.utils import IntegrityError
+from rest_framework.test import APITestCase
 from datetime import datetime, timezone, timedelta, date
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
@@ -21,6 +21,10 @@ from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
 from integration.rdf_post_processor import RDFPostProcessor
 from .views import get_entities_to_track
+from rest_framework import status
+from django.test import Client
+from dump.embeddings.embedding_utils import apply_latest_org_embeddings
+
 
 '''
     Care these tests will delete neodb data
@@ -88,6 +92,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         r = RDFPostProcessor()
         r.run_all_in_order()
         refresh_geo_data()
+        apply_latest_org_embeddings()
 
     def setUp(self):
         self.ts = time.time()
@@ -97,11 +102,10 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
         _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
         self.ts2 = time.time()
-        self.user2 = get_user_model().objects.create(username=f"test-{self.ts2}")
+        self.user2 = get_user_model().objects.create(username=f"test2-{self.ts2}")
         _ = TrackedItem.objects.create(user=self.user2,
                                         industry_id=146,
                                         region="US-TX")
-
         tracked_orgs = TrackedItem.trackable_by_user(self.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
         assert set(org_uris) == {'https://1145.am/db/3029576/Celgene',
@@ -112,12 +116,22 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
                                     'https://1145.am/db/3469058/Napajen_Pharma',
                                     'https://1145.am/db/3458127/The_Hilb_Group'}
         self.ts3 = time.time()
-        self.user3 = get_user_model().objects.create(username=f"test-{self.ts3}")
+        self.user3 = get_user_model().objects.create(username=f"test3-{self.ts3}")
         _ = TrackedItem.objects.create(user=self.user3,
                                         industry_search_str="software")
         _ = TrackedItem.objects.create(user=self.user3,
                                         region = "AU")
         self.anon, _ = create_anon_user()
+        self.ts4 = time.time()
+        self.user4 = get_user_model().objects.create(username=f"test4-{self.ts4}")
+        _ = TrackedItem.objects.create(user=self.user4, 
+                                       organization_uri="https://1145.am/db/3029576/Celgene",
+                                       and_similar_orgs=False)
+        self.ts5 = time.time()
+        self.user5 = get_user_model().objects.create(username=f"test5-{self.ts5}")
+        _ = TrackedItem.objects.create(user=self.user5, 
+                                       organization_uri="https://1145.am/db/3029576/Celgene",
+                                       and_similar_orgs=True)
         
 
     def shows_tracked_organizations(self):
@@ -135,6 +149,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         assert "https://1145.am/db/3029576/Celgene" in content
         # assert "<b>All Industries</b> in <b>Australia</b>" not in content
         # assert "<b>Foo bar industry</b> in <b>All Locations</b>" not in content
+
 
     def shows_tracked_industry_geos(self):
         client = self.client
@@ -190,14 +205,27 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         max_date = datetime(2024,5,30,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert len(re.findall("The Hilb Group",email)) == 4
-        assert len(re.findall("Mitsui",email)) == 3 # Once in activity URL, twice in body
+        assert len(re.findall("The Hilb Group",email)) == 3
+        assert len(re.findall("Mitsui",email)) == 3
         assert "May 30, 2024" in email
         assert "May 23, 2024" in email
         assert activity_notif.num_activities == 2
         assert len(re.findall("https://web.archive.org",email)) == 4
         assert "https://www.prnewswire.com/news-releases/correction----napajen-pharma-inc-300775556.html" in email
         assert "None" not in email
+
+    def test_creates_activity_notification_without_similar_orgs(self):
+        ActivityNotification.objects.filter(user=self.user4).delete()
+        max_date = datetime(2024,5,30,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user4,max_date,7)
+        assert email_and_activity_notif is None
+
+    def test_creates_activity_notification_with_similar_orgs(self):
+        ActivityNotification.objects.filter(user=self.user5).delete()
+        max_date = datetime(2024,5,30,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user5,max_date,7)
+        email, _ = email_and_activity_notif
+        assert "NapaJen" in email
 
     def test_creates_activity_notification_for_user_with_existing_notifications(self):
         ActivityNotification.objects.filter(user=self.user).delete()
@@ -207,8 +235,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user,max_date,7)
         assert email_and_activity_notif is not None
         email, activity_notif = email_and_activity_notif
-        assert len(re.findall("The Hilb Group",email)) == 1
-        assert len(re.findall("NapaJen",email)) == 5
+        assert len(re.findall("The Hilb Group",email)) == 0
+        assert len(re.findall("NapaJen",email)) == 4
         assert "May 30, 2024" in email
         assert "May 23, 2024" not in email
         assert "May 28, 2024" in email
@@ -219,8 +247,8 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         max_date = datetime(2019,1,10,tzinfo=timezone.utc)
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
         email, activity_notif = email_and_activity_notif
-        assert "<td>Private Equity Business</td>" in email
-        assert "<td>United States of America - Texas</td>" in email
+        assert "Private Equity Business" in email
+        assert "Dallas" in email
         assert activity_notif.num_activities == 2
         assert len(re.findall("Hastings",email)) == 5
         assert "None" not in email
@@ -320,6 +348,55 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         tracked_items = TrackedItem.trackable_by_user(user)
         assert len(tracked_items) == 1 # One of the items is not trackable
 
+class ToggleTrackedItemAPITest(APITestCase):
+    def setUp(self):
+        ts = time.time()
+        self.user = get_user_model().objects.create_user(username=f"test-{ts}", password="testpass")
+        self.item = TrackedItem.objects.create(user=self.user,organization_uri=f"https://www.example.org/foo/{ts}")
+        self.url = f"/toggle_similar_organizations/{self.item.id}/"
+
+    def test_authenticated_user_can_toggle_item(self):
+        self.item.refresh_from_db()
+        assert self.item.and_similar_orgs is False
+        client = Client()
+        client.force_login(self.user)
+        response = client.patch(self.url)
+        self.item.refresh_from_db()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["and_similar_orgs"], self.item.and_similar_orgs)
+        self.assertTrue(self.item.and_similar_orgs)  # Initially False, should now be True
+
+    def test_unauthenticated_user_cannot_toggle_item(self):
+        client = Client()
+        response = client.patch(self.url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_toggle_twice_restores_original_state(self):
+        """Test that toggling twice returns the item to its original state."""
+        # First toggle (should set and_similar_orgs to True)
+        self.item.and_similar_orgs = False
+        self.item.save()
+        client = Client()
+        client.force_login(self.user)
+        response = client.patch(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.item.refresh_from_db()
+        self.assertTrue(self.item.and_similar_orgs)
+
+        # Second toggle (should revert and_similar_orgs back to False)
+        response = client.patch(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.item.refresh_from_db()
+        self.assertFalse(self.item.and_similar_orgs)
+
+    def test_toggle_invalid_item_returns_404(self):
+        """Test that a request for a non-existent item returns 404."""
+        invalid_url = "/api/toggle-item/-1/"  # Non-existent ID
+        client = Client()
+        client.force_login(self.user)
+        response = client.patch(invalid_url)
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
 

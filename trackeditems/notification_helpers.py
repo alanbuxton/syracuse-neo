@@ -10,6 +10,8 @@ from .models import ActivityNotification
 from topics.models import cache_friendly, Organization
 from topics.industry_geo.orgs_by_industry_geo import org_geo_industry_text_by_words
 from django.core.cache import cache
+import logging
+logger = logging.getLogger(__name__)
 
 def prepare_recent_changes_email_notification(user, num_days):
     max_date = DataImport.latest_import_ts()
@@ -31,15 +33,19 @@ def recents_by_user_min_max_date(user, min_date, max_date):
     matching_activity_orgs = []
     for ti in tracked_items:
         if ti.organization_uri is not None:
-            org_uris.append(ti.organization_or_merged_uri)
-            continue
-        if ti.industry_search_str is not None:
+            org = ti.organization_or_merged_org
+            if org is not None:
+                org_uris.append(org.uri)
+                if ti.and_similar_orgs is True:
+                    org_uris.extend(org.similar_organizations_flat(uris_only=True))
+        elif ti.industry_search_str is not None:
             if ti.region is None:
                 org_uris.extend(Organization.by_industry_text(ti.industry_search_str))
             else:
                 org_uris.extend(org_geo_industry_text_by_words(ti.industry_search_str))
-        acts = get_activities_by_industry_geo_and_date_range(ti.industry_id, ti.region,min_date,max_date, limit=100)
-        matching_activity_orgs.extend(acts)
+        elif ti.industry_id is not None or ti.region is not None:
+            acts = get_activities_by_industry_geo_and_date_range(ti.industry_id, ti.region,min_date,max_date, limit=100)
+            matching_activity_orgs.extend(acts)
     org_activities = get_activities_by_org_uris_and_date_range(org_uris, min_date, max_date,limit=100)
     matching_activity_orgs.extend(org_activities)
     matching_activity_orgs = sorted(matching_activity_orgs, key = lambda x: x['date_published'], reverse=True)
