@@ -33,6 +33,7 @@ from topics.cache_helpers import refresh_geo_data, nuke_cache
 from topics.industry_geo import orgs_by_industry_and_or_geo
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
+import pickle
 
 '''
     Care these tests will delete neodb data
@@ -1216,6 +1217,20 @@ class TestFamilyTree(TestCase):
         content = str(response.content)
         assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content
 
+
+class TestDynamicClasses(TestCase):
+
+    def test_can_pickle_dynamic_class(self):
+        # Needed for caching in redis
+        ts = time.time()
+        uri = f"https://example.org/foo/bar/{ts}"
+        query = f"CREATE (n: Resource&Person&Organization {{uri:'{uri}'}})"
+        db.cypher_query(query)
+        class_factory("OrganizationPerson",(Organization, Person, Resource))
+        obj = Resource.nodes.get_or_none(uri=uri)
+        res = pickle.dumps(obj)
+        unpickled = pickle.loads(res)
+        assert obj == unpickled
 
 class TestSerializers(TestCase):
 

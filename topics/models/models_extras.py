@@ -21,6 +21,13 @@ def get_multi_labels(ignore_cache=False):
     cache.set(cache_key, res)
     return res
 
+def class_factory(name, base): # ChatGPT!
+    attrs = {"__class_name_is_label__":False}
+    cls = type(name, base, attrs)
+    cls.__module__ = "topics.models.models_extras" 
+    globals()[name] = cls  
+    return cls
+
 def add_dynamic_classes_for_multiple_labels(ignore_cache=False):
     classes = []
     labels_list = get_multi_labels(ignore_cache=ignore_cache)
@@ -31,7 +38,7 @@ def add_dynamic_classes_for_multiple_labels(ignore_cache=False):
         parent_classes = tuple([globals()[x] for x in labels])
         logger.debug(f"Defining {class_name}")
         try:
-            new_class = type(class_name,tuple(parent_classes),{"__class_name_is_label__":False})
+            new_class = class_factory(class_name,parent_classes)
             classes.append(new_class)
         except NodeClassAlreadyDefined:
             logger.debug(f"{class_name} was already defined")

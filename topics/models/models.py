@@ -512,7 +512,7 @@ class IndustryCluster(Resource):
 
     @property
     def mergedOrgsPrimary(self):
-        cache_key = f"{self.topicId}_orgs"
+        cache_key = cache_friendly(f"{self.topicId}_orgs")
         res = cache.get(cache_key)
         if res is not None:
             return res
@@ -759,7 +759,7 @@ class GeoNamesLocation(Resource):
     def uris_by_geo_code(geo_code):
         if geo_code is None or geo_code.strip() == '':
             return None
-        cache_key = f"geonames_locations_{geo_code}"
+        cache_key = cache_friendly(f"geonames_locations_{geo_code}")
         res = cache.get(cache_key)
         if res is not None:
             return res

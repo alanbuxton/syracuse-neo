@@ -10,7 +10,7 @@ from django.core.cache import cache
 from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
-from topics.util import cacheable_hash
+from topics.util import cacheable_hash, cache_friendly
 
 import logging
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
         country_code = None
     if admin1_code == '':
         admin1_code = None
-    cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_{limit}"
+    cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_{limit}")
     
     if force_update_cache is False:
         res = cache.get(cache_key)
@@ -47,7 +47,7 @@ def warm_up_industries():
     industries, _ = db.cypher_query(query)
     logger.info(f"Caching {len(industries)} results")
     for industry_cluster_topic_id, org_uris in industries:
-        cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_None_None_None"
+        cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_None_None_None")
         logger.debug(f"caching {cache_key}")
         cache.set(cache_key, org_uris)
 
@@ -60,7 +60,7 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE)
     
     logger.info(f"Caching {len(country_level)} results")
     for country_code, org_uris in country_level:
-        cache_key = f"orgs_industry_cluster_geo_None_{country_code}_None_None"
+        cache_key = cache_friendly(f"orgs_industry_cluster_geo_None_{country_code}_None_None")
         logger.debug(f"caching {cache_key}")
         cache.set(cache_key, org_uris)
     logger.info("Warming up at geo-wide orgs at admin1 level")
@@ -73,7 +73,7 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE)
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
     for country_code, admin1_code, org_uris in admin1_level:
-        cache_key = f"orgs_industry_cluster_geo_None_{country_code}_{admin1_code}_None"
+        cache_key = cache_friendly(f"orgs_industry_cluster_geo_None_{country_code}_{admin1_code}_None")
         cache.set(cache_key, org_uris)
 
 def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
@@ -84,7 +84,7 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
     for industry_cluster_topic_id, country_code, org_uris in country_level:
-        cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_None_None"
+        cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_None_None")
         logger.debug(f"caching {cache_key}")
         cache.set(cache_key, org_uris)
     
@@ -97,7 +97,7 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
     for industry_cluster_topic_id, country_code, admin1_code, org_uris in admin1_level:
-        cache_key = f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None"
+        cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None")
         cache.set(cache_key, org_uris)
     
     warm_up_industries()
@@ -109,6 +109,7 @@ def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None)
     cache_key = f"orgs_industry_text_{cacheable_hash(industry_text)}_{country_code}"
     if admin1_code is not None:
         cache_key = f"{cache_key}_{admin1_code}"
+    cache_key = cache_friendly(cache_key)
     res = cache.get(cache_key)
     if res is not None:
         return res
