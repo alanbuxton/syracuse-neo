@@ -4,13 +4,15 @@ from .models import Feedback
 from .serializers import FeedbackSerializer
 from urllib.parse import urlparse
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import action
-import datetime
+from datetime import datetime, timezone
 import re
+import logging
+logger = logging.getLogger(__name__)
 
 class InteractiveFeedbackViewSet(viewsets.ModelViewSet):
     serializer_class = FeedbackSerializer
@@ -35,19 +37,23 @@ class InteractiveFeedbackViewSet(viewsets.ModelViewSet):
             "source_page":source_page}, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class UnprocessedFeedbacksViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Feedback.objects.filter(processed_at__isnull=True).order_by('id').all()
-    serializer_class = FeedbackSerializer
+class MarkAsProcessedViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = FeedbackSerializer
+    renderer_classes = [JSONRenderer]
 
-    @action(detail=False, methods=['post'])
-    def mark_as_processed(self, request):
-        ids = request.data['ids']
-        ts = datetime.datetime.utcnow()
+    def create(self, request):
+        ids = request.data.get('ids') # could be e.g. [1,2,3] or ["1","2","3"]
+        if ids is None:
+            logger.error(f"mark as processed sent but without any ids")
+            return Response([])
+        ids = map(int, ids)
+        ts = datetime.now(tz=timezone.utc)
         feedbacks = Feedback.mark_as_processed(ids, ts)
-        serializer = self.get_serializer(feedbacks, many=True)
-        return Response(serializer.data)
+        serializer = FeedbackSerializer(feedbacks, many=True)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
 
 
 def make_feedback_data(node_or_edge, unique_id, reason):

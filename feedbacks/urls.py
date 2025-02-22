@@ -5,7 +5,7 @@ from feedbacks import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter(trailing_slash=False)
 router.register(r"create", views.InteractiveFeedbackViewSet, basename='interactive-feedbacks')
-router.register(r"v1/unprocessed", views.UnprocessedFeedbacksViewSet, basename='unprocessed-feedbacks')
+router.register(r"v1/unprocessed", views.MarkAsProcessedViewSet, basename='unprocessed-feedbacks')
 
 
 # The API URLs are now determined automatically by the router.
