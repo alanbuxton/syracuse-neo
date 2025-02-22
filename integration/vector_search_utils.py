@@ -10,8 +10,8 @@ from syracuse.settings import (NEOMODEL_NEO4J_SCHEME,
 import logging
 logger = logging.getLogger(__name__)
 
-NEW_ORGANIZATION_INDUSTRY_QUERY = '''MATCH (n:Resource&Organization) 
-WHERE n.industry_embedding IS NULL 
+NEW_ORGANIZATION_INDUSTRY_QUERY = '''MATCH (n:Resource&Organization)
+WHERE n.industry_embedding IS NULL
 AND n.industry IS NOT NULL RETURN n.uri as uri, n.industry as industry'''
 
 NEW_INDUSTRY_REPRESENTATIVE_DOCS_QUERY = '''MATCH (n:Resource&IndustryCluster)
@@ -74,10 +74,13 @@ def create_industry_cluster_representative_doc_embeddings(driver, model):
     with driver.session(database=DB_NAME) as session:
         result = session.run(NEW_INDUSTRY_REPRESENTATIVE_DOCS_QUERY)
         for record in result:
-            joined = "; ".join(sorted(record.get('representative_doc'),key=len))
+            representative_docs = record.get("representative_doc")
+            uri = record.get("uri")
+            joined = "; ".join(sorted(representative_docs,key=len))
+            logger.info(f"Working on {result} - uri {uri} representative_doc {representative_docs} ({joined})")
             embedding = model.encode(joined)
             batch_for_update.append(
-                {'uri':record.get('uri'), 'representative_doc_embedding': embedding}
+                {'uri':uri, 'representative_doc_embedding': embedding}
             )
             # Import when a batch of movies has embeddings ready; flush buffer
             if len(batch_for_update) == batch_size:
@@ -98,5 +101,5 @@ def import_batch(driver, nodes_with_embeddings, batch_n, field):
 def do_vector_search(text, base_query, model=MODEL):
     query_embedding = model.encode(text)
     assert "$query_embedding" in base_query, f"Expected {base_query} to include $query_embedding"
-    res, _ = db.cypher_query(base_query, params={'query_embedding':query_embedding}, resolve_objects=True) 
+    res, _ = db.cypher_query(base_query, params={'query_embedding':query_embedding}, resolve_objects=True)
     return res
