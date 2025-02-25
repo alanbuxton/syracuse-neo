@@ -1,7 +1,7 @@
 import logging
 from neomodel import db
 import re
-from datetime import datetime
+import time
 from topics.models import Resource
 
 logger = logging.getLogger(__name__)
@@ -60,11 +60,14 @@ def do_n10s_config(overwrite=False):
     db.cypher_query(query)
 
 def apoc_del_redundant_same_as():
+    ts = time.time()
     output_same_as_stats("Before delete")
-    apoc_query_high = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsHigh]->(n2:Organization)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
+    apoc_query_high = f'CALL apoc.periodic.iterate("MATCH (n1:Resource)-[r1:sameAsHigh]->(n2:Resource)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) AND n1.deletedRedundantSameAsAt IS NULL AND n2.deletedRedundantSameAsAt IS NULL RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_high)
-    apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Organization)-[r1:sameAsNameOnly]->(n2:Organization)-[r2:sameAsNameOnly]->(n1) where elementId(n1) < elementId(n2) RETURN *","DELETE r2",{{}})'
+    apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Resource)-[r1:sameAsNameOnly]->(n2:Resource)-[r2:sameAsNameOnly]->(n1) where elementId(n1) < elementId(n2) AND n1.deletedRedundantSameAsAt IS NULL AND n2.deletedRedundantSameAsAt IS NULL RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_medium)
+    apoc_query_set_flag = f'''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NULL RETURN *","SET n1.deletedRedundantSameAsAt = {ts}",{{}})'''
+    db.cypher_query(apoc_query_set_flag)
     output_same_as_stats("After Delete sameAsNameOnly")
 
 def delete_all_not_needed_resources():
