@@ -12,7 +12,7 @@ def cache_friendly(key):
     no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
     cleaned = re.sub(r"_{2,}","_",no_punct)
     if len(cleaned) > 230:
-        cleaned = cleaned[:210] + str(cacheable_hash(cleaned[210:]))
+        cleaned = cleaned[:180] + str(cacheable_hash(cleaned[180:]))
     return cleaned
 
 def blank_or_none(val):

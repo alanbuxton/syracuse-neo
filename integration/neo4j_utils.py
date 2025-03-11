@@ -3,6 +3,7 @@ from neomodel import db
 import re
 import time
 from topics.models import Resource
+from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
     db.cypher_query("CREATE INDEX article_date_published IF NOT EXISTS FOR (a:Article) ON (a.datePublished)")
+    db.cypher_query("CREATE INDEX resource_internalMergedActivityWithSimilarRelationshipsToUri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedActivityWithSimilarRelationshipsToUri)")
     db.cypher_query("CREATE INDEX geonames_location_country_admin1_index IF NOT EXISTS FOR (n: GeoNamesLocation) on (n.countryCode, n.admin1Code)")
     db.cypher_query("CREATE VECTOR INDEX industry_cluster_representative_docs_vec IF NOT EXISTS FOR (i: IndustryCluster) ON i.representative_doc_embedding OPTIONS { indexConfig: { `vector.dimensions`: 768, `vector.similarity_function`: 'cosine' } }")
     db.cypher_query("CREATE VECTOR INDEX organization_industries_vec IF NOT EXISTS FOR (n:Organization) ON n.industry_embedding OPTIONS { indexConfig: { `vector.dimensions`: 768, `vector.similarity_function`: 'cosine' } }")
@@ -115,3 +117,75 @@ def count_relationships():
 def count_nodes():
     val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")
     return val[0][0]
+
+def get_potential_duplicate_activities():
+    query = f"""MATCH (a: Resource)-[:documentSource]->(d: Resource&Article)<-[:documentSource]-(b: Resource) 
+        WHERE a.internalDocId = b.internalDocId
+        AND ANY(x in LABELS(a) WHERE x =~ ".+Activity")
+        AND LABELS(b) = LABELS(a)
+        AND (a.internalMergedActivityWithSimilarRelationshipsAt IS NULL AND b.internalMergedActivityWithSimilarRelationshipsAt IS NULL)
+        AND elementID(a) < elementId(b)
+        AND (a.internalMergedActivityWithSimilarRelationshipsToUri IS NULL AND b.internalMergedActivityWithSimilarRelationshipsToUri IS NULL)
+        RETURN DISTINCT a.uri, b.uri, b.internalDocId 
+        """
+    res, _ = db.cypher_query(query)
+    return res
+
+def related_orgs_or_role_query(uri):
+    return f"""MATCH (a: Resource {{uri:'{uri}'}})-[r]-(e)
+                WHERE e:Organization or e:Role
+                AND e.internalMergedSameAsHighToUri IS NULL
+                RETURN distinct type(r), e.uri"""
+
+def superset_node(uri_a, uri_b):
+    '''
+        Returns superset node uri, subset node uri
+        or None, None if neither is a subset
+        If both are the same it treats uri_a as the superset
+        None if neither node is a subseet
+    '''
+    rels_a, _ = db.cypher_query(related_orgs_or_role_query(uri_a))
+    rels_a = set([(t, uri) for (t,uri) in rels_a])
+    rels_b, _ = db.cypher_query(related_orgs_or_role_query(uri_b))
+    rels_b = set([(t, uri) for (t,uri) in rels_b])
+    if rels_b.issubset(rels_a):
+        return uri_a, uri_b
+    elif rels_a.issubset(rels_b):
+        return uri_b, uri_a  
+    return None, None
+
+def get_all_activities_to_merge(seen_doc_ids):
+    '''
+        Returns activities dict and then 
+        either "True" if bailed early so worth trying again or "False" if there's nothing more to see, and
+        list of seen uris
+    '''
+    logger.info("Starting get_all_activities_to_merge")
+    activities_to_merge = defaultdict(set)
+    activities = get_potential_duplicate_activities()
+    logger.info(f"found {len(activities)} activities to potentially merge")
+    seen_subs = set()
+    keep_going = False
+    cnt = 0
+    for uri_a, uri_b, doc_id in activities:
+        seen_doc_ids.add(doc_id)
+        super_n, sub_n = superset_node(uri_a, uri_b)
+        if super_n is not None:
+            if sub_n in seen_subs:
+                logger.debug(f"Want to merge {sub_n} into {super_n} but we've already seen {sub_n}. All activities_to_merge: {activities_to_merge}")
+                keep_going = True
+                continue
+            if super_n in seen_subs:
+                logger.debug(f"Want to merge {sub_n} into {super_n} but {super_n} is already merged elsewhere. All activities_to_merge: {activities_to_merge}")
+                keep_going = True
+                continue
+            activities_to_merge[super_n].add(sub_n)
+            seen_subs.add(sub_n)
+        else:
+            logger.debug(f"No subset/superset relationship between {uri_a} and {uri_b}")
+        cnt += 1
+        if cnt % 1000 == 0:
+            logger.info(f"Processed {cnt} rows")
+    return activities_to_merge, keep_going, seen_doc_ids
+
+

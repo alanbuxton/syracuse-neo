@@ -2,8 +2,9 @@ from topics.models import Resource
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 from neomodel import db
 import logging
-from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as
+from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as, get_all_activities_to_merge
 from integration.vector_search_utils import create_new_embeddings
+import time
 logger = logging.getLogger(__name__)
 
 class RDFPostProcessor(object):
@@ -15,11 +16,7 @@ class RDFPostProcessor(object):
         AND m.internalMergedSameAsHighToUri IS NULL
         AND n.internalMergedSameAsHighToUri IS NULL
         AND LABELS(m) = LABELS(n)
-        AND NOT "CorporateFinanceActivity" IN LABELS(m)
-        AND NOT "RoleActivity" IN LABELS(m)
-        AND NOT "LocationActivity" IN LABELS(m)
-        AND NOT "PartnershipActivity" IN LABELS(m)
-        AND NOT "ProductActivity" IN LABELS(m)
+        AND "Organization" IN LABELS(m)
         RETURN m,n
         ORDER BY m.internalDocId
         LIMIT 1000
@@ -54,10 +51,42 @@ class RDFPostProcessor(object):
         self.add_weighting_to_relationship()
         write_log_header("Creating multi-inheritance classes")
         add_dynamic_classes_for_multiple_labels()
+        write_log_header("merge_equivalent_activities")
+        self.merge_equivalent_activities()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
         write_log_header("adding embeddings")
         create_new_embeddings()
+
+
+    def merge_equivalent_activities(self, seen_doc_ids=set()):
+        acts_to_merge_dict, keep_going, seen_doc_ids = get_all_activities_to_merge(seen_doc_ids)
+        for k_uri, vs in acts_to_merge_dict.items():
+            k = Resource.get_by_uri(k_uri)
+            if len(vs) == 0:
+                logger.warning(f"got {k_uri} for merging into, but nothing to merge into it - unexpected")
+                continue
+            for v_uri in vs:
+                v = Resource.get_by_uri(v_uri)
+                _ = self.merge_nodes(v, k, field_to_update="internalMergedActivityWithSimilarRelationshipsToUri")
+        if keep_going is True:
+            seen_doc_ids = self.merge_equivalent_activities(seen_doc_ids)
+        else:
+            self.mark_as_updated_merge_equivalent_activities(seen_doc_ids)
+
+    def mark_as_updated_merge_equivalent_activities(self,seen_doc_ids):
+        logger.info(f"Marking updated with {len(seen_doc_ids)} internal doc ids")
+        ts = time.time()
+        query = f"""
+            MATCH (n:Resource)
+            WHERE n.internalDocId in {list(seen_doc_ids)} AND ANY(x in LABELS(n) WHERE x =~ ".+Activity")
+            CALL {{
+                WITH n
+                SET n.internalMergedActivityWithSimilarRelationshipsAt = {ts}
+            }}
+            IN TRANSACTIONS OF 10000 ROWS;
+            """
+        db.cypher_query(query)
 
     def delete_self_relationships(self):
         res, _ = db.cypher_query(self.QUERY_SELF_RELATIONSHIP)
@@ -84,7 +113,7 @@ class RDFPostProcessor(object):
 
         log_count_relationships("After merge_same_as_high_connections")
 
-    def merge_nodes(self,source_node_tmp, target_node_tmp):
+    def merge_nodes(self,source_node_tmp, target_node_tmp, field_to_update="internalMergedSameAsHighToUri"):
         source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp.uri)
         target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp.uri)
         logger.info(f"Merging {source_node_tmp.uri} ({source_node2.uri}) into {target_node_tmp.uri} ({target_node2.uri})")
@@ -101,7 +130,7 @@ class RDFPostProcessor(object):
         if source_node.uri == target_node.uri:
             logger.info("Nodes are already merged to the same target, skipping")
             return False
-        Resource.merge_node_connections(source_node,target_node)
+        Resource.merge_node_connections(source_node,target_node,field_to_update=field_to_update)
         return True
     
     def add_document_extract_to_relationship(self):

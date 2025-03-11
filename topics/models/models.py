@@ -359,6 +359,9 @@ class Resource(StructuredNode):
                 if min_date is not None and other_node.is_recent_enough(min_date) is False:
                     logger.debug(f"Skipping {other_node} as it is too old")
                     continue
+                if isinstance(other_node, ActivityMixin) and other_node.internalMergedActivityWithSimilarRelationshipsToUri is not None:
+                    logger.debug(f"Skipping {other_node.uri} because it was merged into {other_node.internalMergedActivityWithSimilarRelationshipsToUri}")
+                    continue
                 logger.debug(f"Working on {other_node.uri}")
                 vals = {"from_uri": from_uri, "label":key, "direction":direction, "other_node":other_node}
                 if isinstance(self, ActivityMixin) and isinstance(x, Article):
@@ -373,7 +376,7 @@ class Resource(StructuredNode):
     
 
     @staticmethod
-    def merge_node_connections(source_node, target_node):
+    def merge_node_connections(source_node, target_node, field_to_update="internalMergedSameAsHighToUri"):
         '''
             Copy/Merge relationships from source_node to target_node
         '''
@@ -394,9 +397,14 @@ class Resource(StructuredNode):
                         new_rel.documentExtract = old_rel.documentExtract
                     new_rel.weight = old_rel.weight
                     new_rel.save()
+        if field_to_update == "internalMergedSameAsHighToUri":
             source_node.internalMergedSameAsHighToUri = target_node.uri
-            source_node.save()
-            target_node.save()
+        elif field_to_update == "internalMergedActivityWithSimilarRelationshipsToUri":
+            source_node.internalMergedActivityWithSimilarRelationshipsToUri = target_node.uri
+        else:
+            raise ValueError(f"Merging but have not selected a valid field to update {field_to_update}")
+        source_node.save()
+        target_node.save()
 
 
 class Article(Resource):
@@ -672,6 +680,7 @@ class ActivityMixin:
     whereHighRaw = ArrayProperty(StringProperty())
     whereHighClean = ArrayProperty(StringProperty())
     whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation', model=WeightedRel)
+    internalMergedActivityWithSimilarRelationshipsToUri = StringProperty() # Merging equivalent activities (can be subset or same rels)
 
     @property
     def whereHighGeoName_as_str(self):
@@ -1292,9 +1301,6 @@ class Product(Resource):
         vals = super().serialize()
         vals['use_case'] = self.useCase
         return vals
-
-
-
 
 class AboutUsActivity(ActivityMixin, Resource):
     aboutUs = RelationshipFrom('Organization','hasAboutUsActivity', model=WeightedRel)

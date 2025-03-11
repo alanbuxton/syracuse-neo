@@ -4,10 +4,11 @@ import logging
 from .models import IndustryCluster, Article, ActivityMixin, Resource, Organization
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
-from .util import cache_friendly, blank_or_none, elements_from_uri
+from .util import cache_friendly, blank_or_none
 from .industry_geo import geo_to_country_admin1
 
-ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership"]])
+ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
+ALL_ACTIVITY_LIST= ORG_ACTIVITY_LIST + "|RoleActivity"
 
 logger = logging.getLogger(__name__)
 
@@ -75,13 +76,14 @@ def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
     where_etc = f"""
         WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')   
+        AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
         AND o.uri in {list(org_uris)}
         RETURN DISTINCT act.uri, art.uri, art.datePublished
         ORDER BY art.datePublished DESC
     """
     limit_str = f" LIMIT {limit} " if limit else ""
     query = f"""
-        MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|LocationActivity|PartnershipActivity)--(o: Resource&Organization)
+        MATCH (art: Article)<-[:documentSource]-(act:{ORG_ACTIVITY_LIST})--(o: Resource&Organization)
         {where_etc}
         {limit_str}
         UNION
@@ -98,10 +100,11 @@ def activities_by_source(source_name, min_date, max_date, counts_only=False,limi
         return len(res) if counts_only is True else res
     limit_str = f" LIMIT {limit} " if limit else ""
     query = f"""
-    MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)
+    MATCH (art: Article)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
     AND art.sourceOrganization = '{source_name}'
+    AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
     AND EXISTS {{
         MATCH (art)<-[:documentSource]-(org: Organization)
         WHERE org.internalMergedSameAsHighToUri IS NULL
@@ -124,6 +127,7 @@ def activities_by_industry_region(industry,country_code,admin1_code,min_date,max
         AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')   
         AND o.internalMergedSameAsHighToUri IS NULL
         AND l.countryCode = '{country_code}'
+        AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
         {admin1_str}
         RETURN DISTINCT act.uri, art.uri, art.datePublished
         ORDER BY art.datePublished DESC
@@ -148,17 +152,19 @@ def activities_by_region(country_code, min_date, max_date, admin1_code=None, cou
         return len(res) if counts_only is True else res
     admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
 
-    query = f"""MATCH (art: Article)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)-[:whereHighGeoNamesLocation]->(l:GeoNamesLocation)
+    query = f"""MATCH (art: Article)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})-[:whereHighGeoNamesLocation]->(l:GeoNamesLocation)
                 WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                 AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
+                AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
                 AND l.countryCode = '{country_code}'
                 {admin1_str}
                 RETURN DISTINCT  act.uri, art.uri, art.datePublished
                 UNION
                 MATCH
-                (act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)-[:documentSource]->(art: Article)<-[:documentSource]-(:Organization|Site)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
+                (act:{ALL_ACTIVITY_LIST})-[:documentSource]->(art: Article)<-[:documentSource]-(:Organization|Site)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
                 WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                 AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
+                AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
                 AND l.countryCode = '{country_code}'
                 {admin1_str}
                 RETURN DISTINCT act.uri, art.uri, art.datePublished"""
@@ -174,10 +180,11 @@ def activities_by_industry(industry, min_date, max_date, counts_only=False, limi
 
     query = f"""
     MATCH (art:Article)<-[:documentSource]-(org: Organization)-[:industryClusterPrimary]->(i:Resource&IndustryCluster {{uri: "{industry.uri}" }})
-         , (art)<-[:documentSource]-(act:CorporateFinanceActivity|ProductActivity|LocationActivity|PartnershipActivity|RoleActivity)
+         , (art)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
     AND org.internalMergedSameAsHighToUri IS NULL
+    AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
     RETURN DISTINCT act.uri, art.uri, art.datePublished
     ORDER BY art.datePublished DESC
     {limit_str}

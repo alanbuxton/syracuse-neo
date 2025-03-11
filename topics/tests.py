@@ -114,8 +114,12 @@ class TestUtilsWithDumpData(TestCase):
         o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o,
                                                             source_names=Article.all_sources())
-        assert len(clean_node_data) == 13
-        assert len(clean_edge_data) == 20
+        assert set([x['id'] for x in clean_node_data]) == set(['https://1145.am/db/1736082/Berlin', 'https://1145.am/db/1736082/Brandenburg', 
+                                    'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla', 'https://1145.am/db/1736082/Tesla-Added-Berlin', 
+                                    'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_', 
+                                    'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159', 
+                                    'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking'])
+        assert len(clean_edge_data) == 16
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
 
@@ -194,8 +198,8 @@ class TestUtilsWithDumpData(TestCase):
         assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
                                           ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
                                           ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
-                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 2, 2, 2), ('JP', 'Japan', 0, 0, 1), 
-                                          ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 17, 17, 38)]
+                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
+                                          ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 16, 16, 37)]
         sample_acts = activities_by_region("AU",date_minus(max_date,7),max_date,counts_only=False)
         assert sample_acts == [['https://1145.am/db/4290457/Gyg-Ipo', 
                                 'https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_', 
@@ -206,14 +210,14 @@ class TestUtilsWithDumpData(TestCase):
         assert ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)] in sample_acts
         assert ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)] in sample_acts
         assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
-                                             ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 3, 3, 3), 
-                                             ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 4, 4, 4), 
+                                             ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2), 
+                                             ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3), 
                                              ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
                                              ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
         assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 3), 
-                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), 
-                                            (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2), (4, 'Cloud Services', 0, 0, 1), 
-                                            (165, 'Development Banks', 1, 1, 1), (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
+                                                (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), 
+                                                (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1), (4, 'Cloud Services', 0, 0, 1), 
+                                                (165, 'Development Banks', 1, 1, 1), (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
         sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
         res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
         assert len(res) == 3
@@ -226,16 +230,15 @@ class TestUtilsWithDumpData(TestCase):
         min_date = date.fromisoformat("2024-05-03")
         country_code = 'US-NY'
         matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20)
-        assert len(matching_activity_orgs) == 6
+        assert len(matching_activity_orgs) == 5
         sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_actors) == {('participant', 'protagonist'), ('buyer',), ('buyer', 'target'), ('investor', 'target')}
+        assert set(sorted_actors) == {('participant', 'protagonist'), ('buyer', 'target'), ('investor', 'target')}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
-        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 6)]
+        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 5)]
         uris = sorted([x['activity_uri'] for x in matching_activity_orgs])
         assert uris == ['https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 
                         'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 
                         'https://1145.am/db/3475220/Novel_Bellevue-Investment', 
-                        'https://1145.am/db/4290170/Abbvie_Inc-Acquisition', 
                         'https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger', 
                         'https://1145.am/db/4290170/Cerevel_Therapeutics_Holdings_Inc-Acquisition']
 

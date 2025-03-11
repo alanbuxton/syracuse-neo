@@ -1,4 +1,4 @@
-from datetime import datetime, date, timezone
+from datetime import datetime, date
 from .stats_helpers import get_stats
 from topics.industry_geo.geoname_mappings import prepare_country_mapping
 from topics.industry_geo import update_organization_data
