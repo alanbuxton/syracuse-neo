@@ -114,11 +114,12 @@ class TestUtilsWithDumpData(TestCase):
         o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o,
                                                             source_names=Article.all_sources())
-        assert set([x['id'] for x in clean_node_data]) == set(['https://1145.am/db/1736082/Berlin', 'https://1145.am/db/1736082/Brandenburg', 
+        clean_uris = set([x['id'] for x in clean_node_data]) 
+        assert clean_uris == set(['https://1145.am/db/1736082/Berlin', 'https://1145.am/db/1736082/Brandenburg', 
                                     'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla', 'https://1145.am/db/1736082/Tesla-Added-Berlin', 
                                     'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_', 
                                     'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159', 
-                                    'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking'])
+                                    'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking']), f"Got {clean_uris}"
         assert len(clean_edge_data) == 16
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)

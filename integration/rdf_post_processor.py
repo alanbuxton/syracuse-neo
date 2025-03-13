@@ -51,10 +51,10 @@ class RDFPostProcessor(object):
         self.add_weighting_to_relationship()
         write_log_header("Creating multi-inheritance classes")
         add_dynamic_classes_for_multiple_labels()
-        write_log_header("merge_equivalent_activities")
-        self.merge_equivalent_activities()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
+        write_log_header("merge_equivalent_activities")
+        self.merge_equivalent_activities()
         write_log_header("adding embeddings")
         create_new_embeddings()
 

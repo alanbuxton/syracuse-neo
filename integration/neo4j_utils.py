@@ -123,6 +123,10 @@ def get_potential_duplicate_activities():
         WHERE a.internalDocId = b.internalDocId
         AND ANY(x in LABELS(a) WHERE x =~ ".+Activity")
         AND LABELS(b) = LABELS(a)
+        AND NOT a: Organization
+        AND NOT a: Person
+        AND NOT a: Role
+        AND NOT a: Site
         AND (a.internalMergedActivityWithSimilarRelationshipsAt IS NULL AND b.internalMergedActivityWithSimilarRelationshipsAt IS NULL)
         AND elementID(a) < elementId(b)
         AND (a.internalMergedActivityWithSimilarRelationshipsToUri IS NULL AND b.internalMergedActivityWithSimilarRelationshipsToUri IS NULL)
@@ -131,11 +135,24 @@ def get_potential_duplicate_activities():
     res, _ = db.cypher_query(query)
     return res
 
-def related_orgs_or_role_query(uri):
-    return f"""MATCH (a: Resource {{uri:'{uri}'}})-[r]-(e)
-                WHERE e:Organization or e:Role
-                AND e.internalMergedSameAsHighToUri IS NULL
+def related_orgs_query(uri):
+    query = f"""MATCH (a: Resource {{uri:'{uri}'}})-[r]-(e: Organization)
+                WHERE e.internalMergedSameAsHighToUri IS NULL
                 RETURN distinct type(r), e.uri"""
+    vals, _ = db.cypher_query(query)
+    return vals
+
+def related_roles_query(uri):
+    query = f"""MATCH (p: Person)-[ra:roleActivity]-(a: Resource {{uri:'{uri}'}})-[r:role]-(e: Role)
+                WHERE e.internalMergedSameAsHighToUri IS NULL
+                RETURN distinct p.uri, e.uri"""
+    vals, _ = db.cypher_query(query)
+    return vals
+
+def related_orgs_or_roles(uri):
+    vals = related_orgs_query(uri) + related_roles_query(uri)
+    vals = set([ (t,uri) for (t,uri) in vals])
+    return vals
 
 def superset_node(uri_a, uri_b):
     '''
@@ -144,10 +161,8 @@ def superset_node(uri_a, uri_b):
         If both are the same it treats uri_a as the superset
         None if neither node is a subseet
     '''
-    rels_a, _ = db.cypher_query(related_orgs_or_role_query(uri_a))
-    rels_a = set([(t, uri) for (t,uri) in rels_a])
-    rels_b, _ = db.cypher_query(related_orgs_or_role_query(uri_b))
-    rels_b = set([(t, uri) for (t,uri) in rels_b])
+    rels_a = related_orgs_or_roles(uri_a)
+    rels_b = related_orgs_or_roles(uri_b)
     if rels_b.issubset(rels_a):
         return uri_a, uri_b
     elif rels_a.issubset(rels_b):
