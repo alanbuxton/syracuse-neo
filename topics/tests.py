@@ -3,7 +3,9 @@ from collections import OrderedDict
 from topics.models import *
 from .stats_helpers import get_stats, date_minus
 from auth_extensions.anon_user_utils import create_anon_user
-from .activity_helpers import get_activities_by_country_and_date_range, activities_by_industry, activities_by_region
+from .activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry, 
+            activities_by_region, get_activities_by_industry_geo_and_date_range
+            )
 from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
 from topics.timeline_utils import get_timeline_data
@@ -944,6 +946,14 @@ class TestUtilsWithDumpData(TestCase):
                                                 'https://1145.am/db/3461286/Ohr_Pharmaceutical', 'https://1145.am/db/3445572/Professional_Medical_Insurance_Services', 
                                                 'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp', 
                                                 'https://1145.am/db/3029705/Shire', 'https://1145.am/db/2543228/Takeda'])
+
+    def test_populates_activity_articles_for_marketing_activity(self):
+        min_date = date.fromisoformat("2014-02-03")
+        max_date = date.fromisoformat("2014-02-05")
+        res = get_activities_by_industry_geo_and_date_range(61, "US", min_date,max_date, limit=100)
+        assert len(res) == 1
+        assert res[0]['activity_class'] == 'MarketingActivity'
+        assert res[0]['activity_uri'] == 'https://1145.am/db/2946622/Turns_10_Years_Old'
 
 
 class TestRegionHierarchy(TestCase):

@@ -1302,35 +1302,80 @@ class Product(Resource):
         vals['use_case'] = self.useCase
         return vals
 
-class AboutUsActivity(ActivityMixin, Resource):
+class AboutUsActivity(Resource):
     aboutUs = RelationshipFrom('Organization','hasAboutUsActivity', model=WeightedRel)
 
 class AnalystRatingActivity(ActivityMixin, Resource):
     analystRating = RelationshipFrom('Organization','hasAnalystRatingActivity', model=WeightedRel) 
 
+    @property
+    def all_actors(self):
+        return {"organization": self.analystRating.all(),
+                }
+
 class EquityActionsActivity(ActivityMixin, Resource):
     equityAction = RelationshipFrom('Organization','hasEquityActionsActivity', model=WeightedRel)
+
+    @property
+    def all_actors(self):
+        return {"organization": self.equityAction.all(),
+                }
 
 class FinancialReportingActivity(ActivityMixin, Resource):
     financialReporting = RelationshipFrom('Organization','hasFinancialReportingActivity',model=WeightedRel)
 
+    @property
+    def all_actors(self):
+        return {"organization": self.financialReporting.all(),
+                }
+
 class FinancialsActivity(ActivityMixin, Resource):
     financials = RelationshipFrom('Organization','hasFinancialsActivity',model=WeightedRel)
 
+    @property
+    def all_actors(self):
+        return {"organization": self.financials.all(),
+                }
+    
 class IncidentActivity(ActivityMixin, Resource):
     incident = RelationshipFrom('Organization','hasIncidentActivity',model=WeightedRel) 
+
+    @property
+    def all_actors(self):
+        return {"organization": self.incident.all(),
+                }
 
 class MarketingActivity(ActivityMixin, Resource):
     marketing = RelationshipFrom('Organization','hasMarketingActivity',model=WeightedRel)
 
+    @property
+    def all_actors(self):
+        return {"organization": self.marketing.all(),
+                }
+
 class OperationsActivity(ActivityMixin, Resource):
     operations = RelationshipFrom('Organization','hasOperationsActivity',model=WeightedRel) 
+
+    @property
+    def all_actors(self):
+        return {"organization": self.operations.all(),
+                }
 
 class RecognitionActivity(ActivityMixin, Resource):
     recognition = RelationshipFrom('Organization','hasRecognitionActivity',model=WeightedRel)
 
+    @property
+    def all_actors(self):
+        return {"organization": self.recognition.all(),
+                }
+
 class RegulatoryActivity(ActivityMixin, Resource):
     regulatory = RelationshipFrom('Organization','hasRegulatoryActivity',model=WeightedRel)
+
+    @property
+    def all_actors(self):
+        return {"organization": self.regulatory.all(),
+                }
 
 def print_friendly(vals, limit = 2):
     if vals is None:
