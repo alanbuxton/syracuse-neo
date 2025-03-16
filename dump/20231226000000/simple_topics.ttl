@@ -236,13 +236,13 @@
     ns1:description "(iii)." ;
     ns1:documentSource <https://1145.am/db/2947016/wwwcityamcom_pick-n-mix-giant-getting-big-guns> ;
     ns1:foundName "Tangerine" ;
-    ns1:hasAboutUsActivity <https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> ;
+    ns1:hasAboutUs <https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> ;
     ns1:industry "sweets" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary> ;
     ns1:internalDocId 2947016 ;
     ns1:name "Black Jacks" .
 
-<https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> a ns1:AboutUsActivity ;
+<https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> a ns1:AboutUs ;
     ns1:documentDate "2014-02-03T12:45:28+00:00"^^xsd:dateTime ;
     ns1:documentExtract "Tangerine produces a host of iconic British sweets. Remember Black Jacks ? Well, it makes them. And Fruit Salads ? Yep them too." ;
     ns1:documentSource <https://1145.am/db/2947016/wwwcityamcom_pick-n-mix-giant-getting-big-guns> ;

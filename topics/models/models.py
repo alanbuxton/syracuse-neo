@@ -804,7 +804,7 @@ class Organization(Resource):
     basedInHighRaw = ArrayProperty(StringProperty())
     basedInHighClean = ArrayProperty(StringProperty())
     productOrganization = RelationshipTo('ProductActivity','productActivity', model=WeightedRel)
-    aboutUs = RelationshipTo('AboutUsActivity','hasAboutUsActivity', model=WeightedRel)
+    aboutUs = RelationshipTo('AboutUs','hasAboutUs', model=WeightedRel)
     analystRating = RelationshipTo('AnalystRatingActivity', 'hasAnalystRating', model=WeightedRel)
     equityAction = RelationshipTo('EquityActionsActivity','hasEquityActionsActivity', model=WeightedRel)
     finacialReporting = RelationshipTo('FinancialReportingActivity','hasFinancialReportingActivity',model=WeightedRel)
@@ -1302,8 +1302,8 @@ class Product(Resource):
         vals['use_case'] = self.useCase
         return vals
 
-class AboutUsActivity(Resource):
-    aboutUs = RelationshipFrom('Organization','hasAboutUsActivity', model=WeightedRel)
+class AboutUs(Resource):
+    aboutUs = RelationshipFrom('Organization','hasAboutUs', model=WeightedRel)
 
 class AnalystRatingActivity(ActivityMixin, Resource):
     analystRating = RelationshipFrom('Organization','hasAnalystRatingActivity', model=WeightedRel) 
