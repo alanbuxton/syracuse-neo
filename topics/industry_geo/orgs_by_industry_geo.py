@@ -11,6 +11,8 @@ from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
 from topics.util import cacheable_hash, cache_friendly
+from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -53,8 +55,12 @@ def warm_up_industries():
 
 def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
     logger.info("Warming up geo-wide orgs")
-    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[:basedInHighGeoNamesLocation]-(o:Resource&Organization)
+    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)
                             WHERE o.internalMergedSameAsHighToUri IS NULL
+                            WITH o, l, b.weight AS weight
+                            MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
+                            WITH o, l, weight, SUM(rAll.weight) AS totalWeight
+                            WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                             RETURN l.countryCode, collect(distinct(o.uri))"""
     country_level, _ = db.cypher_query(country_query)
     
@@ -65,10 +71,14 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE)
         cache.set(cache_key, org_uris)
     logger.info("Warming up at geo-wide orgs at admin1 level")
 
-    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[:basedInHighGeoNamesLocation]-(o:Resource&Organization)
+    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
                         AND l.countryCode in {countries_with_state_province}
                         AND l.admin1Code <> '00'
+                        WITH o, l, b.weight AS weight
+                        MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
+                        WITH o, l, weight, SUM(rAll.weight) AS totalWeight
+                        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                         RETURN l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
@@ -78,8 +88,12 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE)
 
 def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
     logger.info("Warming up at country level")
-    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
+                        WITH o, l, b.weight AS weight, i
+                        MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
+                        WITH o, l, weight, SUM(rAll.weight) AS totalWeight, i
+                        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                         RETURN i.topicId, l.countryCode, collect(distinct(o.uri))"""
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
@@ -89,10 +103,14 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
         cache.set(cache_key, org_uris)
     
     logger.info("Warming up at admin1 level")
-    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
                         AND l.countryCode in {countries_with_state_province}
                         AND l.admin1Code <> '00'
+                        WITH o, l, b.weight AS weight, i
+                        MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
+                        WITH o, l, weight, SUM(rAll.weight) AS totalWeight, i
+                        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                         RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
@@ -123,11 +141,15 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
     country_str = f" AND l.countryCode = '{country_code}' " if country_code else ""
     admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
     limit_str = f" LIMIT {limit} " if limit else ""
-    query = f"""MATCH (l: Resource&GeoNamesLocation)<-[:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
                 WHERE o.internalMergedSameAsHighToUri IS NULL
                 {industry_str}
                 {country_str}
                 {admin1_str}
+                WITH o, b.weight AS weight
+                MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
+                WITH o, weight, SUM(rAll.weight) AS totalWeight
+                WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                 RETURN DISTINCT o.uri
                 {limit_str}
                 """

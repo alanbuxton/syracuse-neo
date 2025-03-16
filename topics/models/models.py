@@ -745,6 +745,8 @@ class GeoNamesLocation(Resource):
     admin1Code = StringProperty() # added after import
     countryList = ArrayProperty(StringProperty()) # added after import
     featureCode = StringProperty() # added after import
+    basedInHighGeoNamesLocation = RelationshipFrom('Resource','basedInHighGeoNamesLocation',model=WeightedRel)
+    whereHighGeoNamesLocation = RelationshipFrom('Resource','whereHighGeoNamesLocation',model=WeightedRel)
 
     @property
     def geoNamesURL(self):
