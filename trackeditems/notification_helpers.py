@@ -29,6 +29,11 @@ def recents_by_user_min_max_date(user, min_date, max_date):
     if res is not None:
         return res
     tracked_items = TrackedItem.trackable_by_user(user)
+    matching_activity_orgs, serialized_data = tracked_items_between(tracked_items, min_date, max_date)
+    cache.set(cache_key, (matching_activity_orgs, tracked_items), timeout=60*60 )
+    return matching_activity_orgs, serialized_data
+
+def tracked_items_between(tracked_items, min_date, max_date):
     org_uris = []
     matching_activity_orgs = []
     for ti in tracked_items:
@@ -49,7 +54,6 @@ def recents_by_user_min_max_date(user, min_date, max_date):
     org_activities = get_activities_by_org_uris_and_date_range(org_uris, min_date, max_date,limit=100)
     matching_activity_orgs.extend(org_activities)
     matching_activity_orgs = sorted(matching_activity_orgs, key = lambda x: x['date_published'], reverse=True)
-    cache.set(cache_key, (matching_activity_orgs, tracked_items), timeout=60*60 )
     serialized = OrgIndGeoSerializer(tracked_items,many=True)
     return matching_activity_orgs, serialized.data
 

@@ -737,6 +737,12 @@ class ActivityMixin:
             uri = x.uri.replace("/about.rdf","")
             uris.append(uri)
         return uris
+    
+    def uniquify(self,d):
+        return {
+            k: Resource.self_or_ultimate_target_node_set(vs) for k,vs in d.items()
+        }
+
 
 class GeoNamesLocation(Resource):
     geoNamesId = IntegerProperty()
@@ -1091,14 +1097,14 @@ class CorporateFinanceActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {
-            "vendor": Resource.self_or_ultimate_target_node_set(self.vendor),
-            "investor": Resource.self_or_ultimate_target_node_set(self.investor),
-            "buyer": Resource.self_or_ultimate_target_node_set(self.buyer),
-            "protagonist": Resource.self_or_ultimate_target_node_set(self.protagonist),
-            "participant": Resource.self_or_ultimate_target_node_set(self.participant),
-            "target": Resource.self_or_ultimate_target_node_set(self.target),
-        }
+        return self.uniquify({
+            "vendor": self.vendor,
+            "investor": self.investor,
+            "buyer": self.buyer,
+            "protagonist": self.protagonist,
+            "participant": self.participant,
+            "target": self.target,
+        })
 
     @property
     def summary_name(self):
@@ -1136,10 +1142,10 @@ class PartnershipActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {"provided_by": self.providedBy.all(),
+        return self.uniquify({"provided_by": self.providedBy.all(),
                 "partnership": self.partnership.all(),
                 "awarded": self.awarded.all(),
-                }
+                })
 
     @property
     def summary_name(self):
@@ -1174,11 +1180,11 @@ class RoleActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {
-        "role": self.withRole.all(),
-        "person": self.roleActivity.all(),
+        return self.uniquify({
+        "role": self.withRole,
+        "person": self.roleActivity,
         "organization": self.related_orgs(),
-        }
+        })
 
     @property
     def longest_roleFoundName(self):
@@ -1210,11 +1216,11 @@ class LocationActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {
-            "location_added_by": self.locationAdded.all(),
-            "location_removed_by": self.locationRemoved.all(),
-            "location": self.location.all(),
-        }
+        return self.uniquify({
+            "location_added_by": self.locationAdded,
+            "location_removed_by": self.locationRemoved,
+            "location": self.location,
+        })
 
     @property
     def longest_locationPurpose(self):
@@ -1282,10 +1288,10 @@ class ProductActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {
-            "product": self.withProduct.all(),
-            "organization": self.productOrganization.all(),
-        }
+        return self.uniquify({
+            "product": self.withProduct,
+            "organization": self.productOrganization,
+        })
 
     def serialize(self):
         vals = super().serialize()
@@ -1312,72 +1318,72 @@ class AnalystRatingActivity(ActivityMixin, Resource):
 
     @property
     def all_actors(self):
-        return {"organization": self.analystRating.all(),
-                }
+        return self.uniquify({"organization": self.analystRating,
+                })
 
 class EquityActionsActivity(ActivityMixin, Resource):
     equityAction = RelationshipFrom('Organization','hasEquityActionsActivity', model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.equityAction.all(),
-                }
+        return self.uniquify({"organization": self.equityAction,
+                })
 
 class FinancialReportingActivity(ActivityMixin, Resource):
     financialReporting = RelationshipFrom('Organization','hasFinancialReportingActivity',model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.financialReporting.all(),
-                }
+        return self.uniquify({"organization": self.financialReporting,
+                })
 
 class FinancialsActivity(ActivityMixin, Resource):
     financials = RelationshipFrom('Organization','hasFinancialsActivity',model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.financials.all(),
-                }
+        return self.uniquify({"organization": self.financials,
+                })
     
 class IncidentActivity(ActivityMixin, Resource):
     incident = RelationshipFrom('Organization','hasIncidentActivity',model=WeightedRel) 
 
     @property
     def all_actors(self):
-        return {"organization": self.incident.all(),
-                }
+        return self.uniquify({"organization": self.incident,
+                })
 
 class MarketingActivity(ActivityMixin, Resource):
     marketing = RelationshipFrom('Organization','hasMarketingActivity',model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.marketing.all(),
-                }
+        return self.uniquify({"organization": self.marketing,
+                })
 
 class OperationsActivity(ActivityMixin, Resource):
     operations = RelationshipFrom('Organization','hasOperationsActivity',model=WeightedRel) 
 
     @property
     def all_actors(self):
-        return {"organization": self.operations.all(),
-                }
+        return self.uniquify({"organization": self.operations,
+                })
 
 class RecognitionActivity(ActivityMixin, Resource):
     recognition = RelationshipFrom('Organization','hasRecognitionActivity',model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.recognition.all(),
-                }
+        return self.uniquify({"organization": self.recognition,
+                })
 
 class RegulatoryActivity(ActivityMixin, Resource):
     regulatory = RelationshipFrom('Organization','hasRegulatoryActivity',model=WeightedRel)
 
     @property
     def all_actors(self):
-        return {"organization": self.regulatory.all(),
-                }
+        return self.uniquify({"organization": self.regulatory,
+                })
 
 def print_friendly(vals, limit = 2):
     if vals is None:

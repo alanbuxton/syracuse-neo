@@ -4,7 +4,8 @@ from topics.models import *
 from .stats_helpers import get_stats, date_minus
 from auth_extensions.anon_user_utils import create_anon_user
 from .activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry, 
-            activities_by_region, get_activities_by_industry_geo_and_date_range
+            activities_by_region, get_activities_by_industry_geo_and_date_range,
+            activity_articles_to_api_results,
             )
 from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
@@ -118,7 +119,7 @@ class TestUtilsWithDumpData(TestCase):
                                                             source_names=Article.all_sources())
         clean_uris = set([x['id'] for x in clean_node_data]) 
         expected = set(['https://1145.am/db/1736082/Berlin', 'https://1145.am/db/1736082/Brandenburg', 
-                                    'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla', 'https://1145.am/db/1736082/Tesla-Added-Brandenburg', 
+                                    'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla', 'https://1145.am/db/1736082/Tesla-Added-Berlin', 
                                     'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_', 
                                     'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159', 
                                     'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking'])
@@ -1423,6 +1424,52 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
                             ('https://1145.am/db/90949/Moderna', 1) }
         ca_uris = orgs_by_industry_and_or_geo(None, "US-CA")
         assert set(ca_uris) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
+
+
+class TestActivityHelpers(TestCase):
+
+    def test_does_not_include_merged_orgs(self):
+        '''
+        based on 
+        call apoc.export.cypher.query('match (o: Resource&Organization)-[t:productActivity]-(n: Resource {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"})-[d:documentSource]-(a: Article), (a)-[:url]-(u) return *',null,{format: "plain", stream:true})
+        '''
+        queries = """CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS  FOR (node:Resource) REQUIRE (node.uri) IS UNIQUE;
+            UNWIND [{uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante", properties:{documentDate:datetime('2025-03-06T20:16:00Z'), deletedRedundantSameAsAt:1.7413416403251095E9, when:[localdatetime('2025-03-06T00:00:00')], whenRaw:["March 6, 2025"], productName:["TABASCO® Brand Salsa Picante"], whereHighRaw:["AVERY ISLAND, La."], whereHighClean:["Avery Island"], internalDocId:5304143, documentExtract:"AVERY ISLAND, La., March 6, 2025 /PRNewswire/ - McIlhenny Company, the makers of TABASCO® Brand Pepper Sauce, brings bold new flavor to the foodservice industry with the launch of TABASCO® Brand Salsa Picante. As the brand's first-ever Mexican-style hot sauce, TABASCO® Salsa Picante delivers a rich, thick texture, a vibrant spice blend, and a subtle kick of heat. Crafted with over 155 years of pepper expertise, this new sauce meets the high standards foodservice operators and their guests have come to expect from TABASCO® Brand. Tabasco Brand Salsa Picante packaging. Available in an easy-to-squeeze 16.2-oz.", foundName:["launch"], name:["launch"], status:["completed"]}}] AS row
+            CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:ProductActivity;
+            UNWIND [{uri:"https://www.prnewswire.com/news-releases/tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079.html", properties:{deletedRedundantSameAsAt:1.7413416403251095E9}}] AS row
+            CREATE (n:Resource{uri: row.uri}) SET n += row.properties;
+            UNWIND [{uri:"https://1145.am/db/2707859/McIlhenny_Company", properties:{internalDocId:2707859, deletedRedundantSameAsAt:1, foundName:["McIlhenny Company"], name:["McIlhenny Company"], basedInLowRaw:["Louisiana"]}}, {uri:"https://1145.am/db/5304143/McIlhenny_Company", properties:{basedInHighClean:["Avery Island"], internalDocId:5304143, deletedRedundantSameAsAt:1.7413416403251095E9, foundName:["McIlhenny Company"], name:["McIlhenny Company"], internalMergedSameAsHighToUri:"https://1145.am/db/2707859/McIlhenny_Company", basedInHighRaw:["AVERY ISLAND, La."]}}] AS row
+            CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Organization;
+            UNWIND [{uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html", properties:{datePublished:datetime('2025-03-06T20:16:00Z'), internalDocId:5304143, deletedRedundantSameAsAt:1.7413416403251095E9, dateRetrieved:datetime('2025-03-06T22:09:18Z'), sourceOrganization:"PR Newswire", headline:"TABASCO® BRAND LAUNCHES NEW MEXICAN-STYLE HOT SAUCE FOR FOODSERVICE"}}] AS row
+            CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Article;
+            UNWIND [{start: {uri:"https://1145.am/db/5304143/McIlhenny_Company"}, end: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2707859/McIlhenny_Company"}, end: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, properties:{weight:1}}] AS row
+            MATCH (start:Resource{uri: row.start.uri})
+            MATCH (end:Resource{uri: row.end.uri})
+            CREATE (start)-[r:productActivity]->(end) SET r += row.properties;
+            UNWIND [{start: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, end: {uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"}, properties:{documentExtract:"AVERY ISLAND, La., March 6, 2025 /PRNewswire/ - McIlhenny Company, the makers of TABASCO® Brand Pepper Sauce, brings bold new flavor to the foodservice industry with the launch of TABASCO® Brand Salsa Picante. As the brand's first-ever Mexican-style hot sauce, TABASCO® Salsa Picante delivers a rich, thick texture, a vibrant spice blend, and a subtle kick of heat. Crafted with over 155 years of pepper expertise, this new sauce meets the high standards foodservice operators and their guests have come to expect from TABASCO® Brand. Tabasco Brand Salsa Picante packaging. Available in an easy-to-squeeze 16.2-oz.", weight:1}}] AS row
+            MATCH (start:Resource{uri: row.start.uri})
+            MATCH (end:Resource{uri: row.end.uri})
+            CREATE (start)-[r:documentSource]->(end) SET r += row.properties;
+            UNWIND [{start: {uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"}, end: {uri:"https://www.prnewswire.com/news-releases/tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079.html"}, properties:{weight: 1}}] AS row
+            MATCH (start:Resource{uri: row.start.uri})
+            MATCH (end:Resource{uri: row.end.uri})
+            CREATE (start)-[r:url]->(end) SET r += row.properties;
+            """.split(";")
+        clean_db()
+        for query in queries:
+            if query is None or query.strip() == "":
+                continue
+            db.cypher_query(query)           
+        activity_uri = "https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"
+        act = Resource.get_by_uri(activity_uri)
+        assert len(act.productOrganization) == 2   
+        article_uri = "https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"
+        pub_date = date.fromisoformat("2025-03-06")
+        act_arts = [(activity_uri, article_uri, pub_date)]
+        res = activity_articles_to_api_results(act_arts)
+        assert len(res[0]['actors']['organization']) == 1
+        val = res[0]['actors']['organization'].pop()
+        assert val.uri == 'https://1145.am/db/2707859/McIlhenny_Company'
 
 
 def check_org_and_counts(results, expected_counts_for_uri):
