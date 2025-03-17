@@ -194,12 +194,11 @@ def do_import_ttl(**options):
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
     if do_post_processing is True:
         R.run_all_in_order()
+        refresh_geo_data()
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:
         logger.info("No email sending this time")
-    if do_post_processing is True:
-        refresh_geo_data()
     logger.info("re-set cache")
     create_anon_user()
     cleanup(pidfile)
