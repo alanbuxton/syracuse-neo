@@ -11,8 +11,7 @@ from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
 from topics.util import cacheable_hash, cache_friendly
-from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION
-
+from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION
 
 import logging
 logger = logging.getLogger(__name__)
@@ -41,10 +40,14 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
     cache.set(cache_key, res)
     return res
 
-def warm_up_industries():
+def warm_up_industries(industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION):
     logger.info("Warming up global industries")
-    query = f"""MATCH (o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    query = f"""MATCH (o:Resource&Organization)-[ic:industryClusterPrimary]->(i: Resource&IndustryCluster)
                             WHERE o.internalMergedSameAsHighToUri IS NULL
+                            WITH o, i, ic.weight as i_weight
+                            MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
+                            WITH o, SUM(rAll.weight) AS totalWeight, i, i_weight
+                            WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
                             RETURN i.topicId, collect(distinct(o.uri))"""
     industries, _ = db.cypher_query(query)
     logger.info(f"Caching {len(industries)} results")
@@ -53,14 +56,15 @@ def warm_up_industries():
         logger.debug(f"caching {cache_key}")
         cache.set(cache_key, org_uris)
 
-def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
+def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
+                    geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION,):
     logger.info("Warming up geo-wide orgs")
     country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)
                             WHERE o.internalMergedSameAsHighToUri IS NULL
                             WITH o, l, b.weight AS weight
                             MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                             WITH o, l, weight, SUM(rAll.weight) AS totalWeight
-                            WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
+                            WHERE weight >= {geo_location_min_weight} * totalWeight
                             RETURN l.countryCode, collect(distinct(o.uri))"""
     country_level, _ = db.cypher_query(country_query)
     
@@ -81,19 +85,25 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE)
                         WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
                         RETURN l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
     admin1_level, _ = db.cypher_query(admin1_query)
-    logger.debug(f"Caching {len(admin1_level)} results")
+    logger.info(f"Caching {len(admin1_level)} results")
     for country_code, admin1_code, org_uris in admin1_level:
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_None_{country_code}_{admin1_code}_None")
         cache.set(cache_key, org_uris)
 
-def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE):
+def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
+                              geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION,
+                              industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION):
     logger.info("Warming up at country level")
-    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    country_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[ic:industryClusterPrimary]->(i: Resource&IndustryCluster)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
-                        WITH o, l, b.weight AS weight, i
+                        WITH o, l, b.weight AS b_weight, i, ic.weight as i_weight
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
-                        WITH o, l, weight, SUM(rAll.weight) AS totalWeight, i
-                        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
+                        WITH o, l, b_weight, SUM(rAll.weight) AS totalWeight, i, i_weight
+                        WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                        WITH o, l, i, i_weight
+                        MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
+                        WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
+                        WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
                         RETURN i.topicId, l.countryCode, collect(distinct(o.uri))"""
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
@@ -103,14 +113,18 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
         cache.set(cache_key, org_uris)
     
     logger.info("Warming up at admin1 level")
-    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[ic:industryClusterPrimary]->(i: Resource&IndustryCluster)
                         WHERE o.internalMergedSameAsHighToUri IS NULL
                         AND l.countryCode in {countries_with_state_province}
                         AND l.admin1Code <> '00'
-                        WITH o, l, b.weight AS weight, i
+                        WITH o, l, b.weight AS b_weight, i, ic.weight as i_weight
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
-                        WITH o, l, weight, SUM(rAll.weight) AS totalWeight, i
-                        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
+                        WITH o, l, b_weight, SUM(rAll.weight) AS totalWeight, i_weight, i
+                        WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                        WITH o, l, i, i_weight
+                        MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
+                        WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
+                        WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
                         RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
@@ -136,20 +150,25 @@ def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None)
     cache.set(cache_key, res, 60*60*4) # 4 hour cache timeout
     return res
 
-def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admin1_code: str, limit: int = None):
+def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admin1_code: str, limit: int = None,
+                                    geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION,
+                                    industry_cluster_min_weight = INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION ):
     industry_str = f" AND i.uri = '{industry_uri}' " if industry_uri else ""
     country_str = f" AND l.countryCode = '{country_code}' " if country_code else ""
     admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
     limit_str = f" LIMIT {limit} " if limit else ""
-    query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[:industryClusterPrimary]->(i: Resource&IndustryCluster)
+    query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[ic:industryClusterPrimary]->(i: Resource&IndustryCluster)
                 WHERE o.internalMergedSameAsHighToUri IS NULL
                 {industry_str}
                 {country_str}
                 {admin1_str}
-                WITH o, b.weight AS weight
+                WITH o, b.weight AS b_weight, ic.weight as i_weight
                 MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
-                WITH o, weight, SUM(rAll.weight) AS totalWeight
-                WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
+                WITH o, b_weight, SUM(rAll.weight) AS totalWeight, i_weight
+                WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
+                WITH o, SUM(rAll.weight) AS totalWeight, i_weight
+                WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
                 RETURN DISTINCT o.uri
                 {limit_str}
                 """

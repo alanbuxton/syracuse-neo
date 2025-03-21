@@ -5,7 +5,9 @@ from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
 import cleanco
 from django.core.cache import cache
-from syracuse.settings import NEOMODEL_NEO4J_BOLT_URL
+from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
+                               GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION,
+                              )
 from collections import Counter, defaultdict
 from neomodel.cardinality import OneOrMore, One
 from typing import List
@@ -159,6 +161,17 @@ class Resource(StructuredNode):
     @property
     def whereHighGeoName_as_str(self):
         pass # override in relevant subclass - if in Mixin make sure Mixin is first https://stackoverflow.com/a/34090986/7414500
+
+    @property
+    def all_relationships(self):
+        '''
+            In the case where something is not a neomodel relationship but we want it to appear in the all_directional_relationships
+        '''
+        return self.__all_relationships__
+    
+    @property
+    def dict_of_attribs(self):
+        return self.__dict__
 
     @property
     def earliestDocumentSource(self):
@@ -343,15 +356,17 @@ class Resource(StructuredNode):
             from_uri = self.uri
         all_rels = []
         logger.debug(f"Source node: {self.uri} - has permitted source with {source_names}? {self.has_permitted_document_source(source_names)}")
-        for key, rel in self.__all_relationships__:
+        for key, rel in self.all_relationships:
             if isinstance(rel, RelationshipTo):
                 direction = "to"
             elif isinstance(rel, RelationshipFrom):
                 direction = "from"
+            elif isinstance(rel, List):
+                direction = "to" # Only applies for now to industryClusterPrimary and basedInHighGeoNamesLocation
             else:
                 continue
 
-            for x in self.__dict__[key]:
+            for x in self.dict_of_attribs[key]:
                 other_node = Resource.self_or_ultimate_target_node(x)
                 if other_node.has_permitted_document_source(source_names) is False:
                     logger.debug(f"Skipping {other_node.uri} due to invalid source_names")
@@ -380,19 +395,23 @@ class Resource(StructuredNode):
         '''
             Copy/Merge relationships from source_node to target_node
         '''
-        for rel_key,_ in source_node.__all_relationships__:
+        for rel_key,_ in source_node.all_relationships:
             if rel_key.startswith("sameAs"):
                 logger.debug(f"ignoring {rel_key}")
                 continue
-            for other_node in source_node.__dict__[rel_key].all():
-                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")
-                old_rel = source_node.__dict__[rel_key].relationship(other_node)
-                already_connected = target_node.__dict__[rel_key].relationship(other_node)
+            for other_node in source_node.dict_of_attribs[rel_key]:
+                if hasattr(source_node,f"internal_{rel_key}"):
+                    tmp_rel_key = f"internal_{rel_key}"
+                else:
+                    tmp_rel_key = rel_key
+                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {tmp_rel_key} from {source_node.uri}")                    
+                old_rel = source_node.dict_of_attribs[tmp_rel_key].relationship(other_node)
+                already_connected = target_node.dict_of_attribs[tmp_rel_key].relationship(other_node)
                 if already_connected is not None:
                     already_connected.weight += old_rel.weight
                     already_connected.save()
                 else:
-                    new_rel = target_node.__dict__[rel_key].connect(other_node)
+                    new_rel = target_node.dict_of_attribs[tmp_rel_key].connect(other_node)
                     if hasattr(old_rel, 'documentExtract'):
                         new_rel.documentExtract = old_rel.documentExtract
                     new_rel.weight = old_rel.weight
@@ -803,9 +822,8 @@ class Organization(Resource):
     hasRole = RelationshipTo('Role','hasRole', model=WeightedRel)
     locationAdded = RelationshipTo('LocationActivity','locationAdded', model=WeightedRel)
     locationRemoved = RelationshipTo('LocationActivity','locationRemoved', model=WeightedRel)
-    industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary', model=WeightedRel)
-    # industryClusterSecondary = RelationshipTo('IndustryCluster','industryClusterSecondary')
-    basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation', model=WeightedRel)
+    internal_industryClusterPrimary = RelationshipTo('IndustryCluster','industryClusterPrimary', model=WeightedRel)
+    internal_basedInHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','basedInHighGeoNamesLocation', model=WeightedRel)
     partnership = RelationshipTo('PartnershipActivity','partnership', model=WeightedRel)
     awarded = RelationshipTo('PartnershipActivity','awarded', model=WeightedRel)
     providedBy = RelationshipFrom('PartnershipActivity','providedBy', model=WeightedRel)
@@ -822,6 +840,49 @@ class Organization(Resource):
     operations = RelationshipTo('OperationsActivity','hasOperationsActivity', model=WeightedRel)
     recognition = RelationshipTo('RecognitionActivity','hasRecognitionActivity', model=WeightedRel)
     regulatory = RelationshipTo('RegulatoryActivity','hasRegulatoryActivity', model=WeightedRel)
+
+    @property
+    def all_relationships(self):
+        tmp_rels = tuple([(label,rel) for label,rel in self.__all_relationships__ if label.startswith("internal_") is False])
+        return tmp_rels + (
+            ("industryClusterPrimary", self.industryClusterPrimary),
+            ("basedInHighGeoNamesLocation", self.basedInHighGeoNamesLocation)
+        )
+    
+    @property
+    def dict_of_attribs(self):
+        vals = self.__dict__.copy()
+        vals["industryClusterPrimary"] = self.industryClusterPrimary
+        vals["basedInHighGeoNamesLocation"] = self.basedInHighGeoNamesLocation
+        return vals
+
+    @property
+    def basedInHighGeoNamesLocation(self,geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION):
+        query = f"""MATCH (o: Resource&Organization {{uri:'{self.uri}'}})-[b:basedInHighGeoNamesLocation]->(l:Resource&GeoNamesLocation)
+                    WITH o, b, l
+                    MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(l2:Resource&GeoNamesLocation)
+                    WITH b, l, SUM(rAll.weight) as total_weight
+                    WHERE b.weight >= {geo_location_min_weight} * total_weight
+                    RETURN l"""
+        res, _ = db.cypher_query(query,resolve_objects=True)
+        vals = []
+        for x in res:
+            vals.extend(x)
+        return vals
+
+    @property
+    def industryClusterPrimary(self,industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION):
+        query = f"""MATCH (o: Resource&Organization {{uri:'{self.uri}'}})-[ic:industryClusterPrimary]->(i:Resource&IndustryCluster)
+                    WITH o, ic, i
+                    MATCH (o)-[rAll:industryClusterPrimary]->(i2:Resource&IndustryCluster)
+                    WITH ic, i, SUM(rAll.weight) as total_weight
+                    WHERE ic.weight >= {industry_cluster_min_weight} * total_weight
+                    return i"""
+        res, _ = db.cypher_query(query,resolve_objects=True)
+        vals = []
+        for x in res:
+            vals.extend(x)
+        return vals    
 
     @property
     def industry_clusters(self):
@@ -859,10 +920,10 @@ class Organization(Resource):
         res = cache.get(cache_key)
         if res is not None:
             return res
-        inds = self.industryClusterPrimary.all()
+        inds = self.industryClusterPrimary
         for x in self.sameAsHigh:
             if hasattr(x, "industryClusterPrimary"):
-                inds.extend(x.industryClusterPrimary.all())
+                inds.extend(x.industryClusterPrimary)
         c = Counter(inds)
         if c == []:
             val = None
@@ -944,100 +1005,6 @@ class Organization(Resource):
             acts = role.withRole.all()
             role_activities.extend([(role,act) for act in acts if act.has_permitted_document_source(source_names)])
         return role_activities
-
-    @staticmethod
-    def by_industry_and_or_geo(industry_id, geo_code,uris_only=False,limit=None,
-                               allowed_to_set_cache=False,min_date=BEGINNING_OF_TIME):
-        '''
-            Returns list of tuples: (org, count)
-            or, if uris_only is True, just a list of uris
-        '''
-        cache_key = cache_friendly(f"organization_by_industry_and_or_geo_{industry_id}_{geo_code}_{uris_only}_{limit}_{min_date.isoformat()}")
-        vals = cache.get(cache_key)
-        if vals is not None:
-            return vals
-        logger.debug(f"Checking Geo Code: {geo_code} Industry ID: {industry_id}")
-        industry_uris = IndustryCluster.with_descendants(industry_id)
-        geo_uris = GeoNamesLocation.uris_by_geo_code(geo_code)
-        if industry_uris is None and geo_uris is None:
-            return None
-        match1 = None
-        match2 = None
-        where1 = None
-        where2 = None
-        if industry_uris is not None:
-            match1 = "(n: Organization)-[:industryClusterPrimary]-(i: IndustryCluster) "
-            where1 = f" i.uri IN {industry_uris} "
-        if geo_uris is not None:
-            match2 = "(n: Organization)-[:basedInHighGeoNamesLocation]-(g: GeoNamesLocation) "
-            where2 = f" g.uri IN {geo_uris} "
-        if industry_uris is None and geo_uris is not None:
-            query = f"MATCH {match2} WHERE {where2} AND n.internalMergedSameAsHighToUri IS NULL "
-        elif industry_uris is not None and geo_uris is None:
-            query = f"MATCH {match1} WHERE {where1} AND n.internalMergedSameAsHighToUri IS NULL "
-        else:
-            query = f"MATCH {match1}, {match2} WHERE {where1} AND {where2} AND n.internalMergedSameAsHighToUri IS NULL "
-        article_clause = f" OPTIONAL MATCH (a:Article)-[]-(n) WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}') "
-        query = f"{query} {article_clause} WITH n, count(a) as cnt_articles RETURN n, cnt_articles "
-        if limit is not None:
-            query = f"{query} LIMIT {limit}"
-        logger.debug(query)
-        vals, _ = db.cypher_query(query, resolve_objects=True)
-        if uris_only is True:
-            res = [x[0].uri for x in vals]
-            if allowed_to_set_cache is True:
-                cache.set(cache_key,res)
-            return res
-        else:
-            res = [(x[0],x[1]) for x in vals]
-            if allowed_to_set_cache is True:
-                cache.set(cache_key,res)
-            return res
-        
-    def similar_organizations_flat(self,limit=0.94,uris_only=False):
-        res = self.similar_organizations(limit=limit)
-        if uris_only is True:
-            orgs = [x.uri for x in res["industry_text"]]
-        else:
-            orgs = list(res["industry_text"])
-        for vs in res["industry_cluster"].values():
-            if uris_only is True:
-                orgs.extend([x.uri for x in vs])
-            else:
-                orgs.extend(vs)
-        return orgs
-
-    def similar_organizations(self,limit=0.94):
-        # by industry cluster
-        by_ind_cluster = defaultdict(set)
-        for x in self.industryClusterPrimary:
-            org_uris = Organization.by_industry_and_or_geo(industry_id=x.topicId,geo_code=None,uris_only=True)
-            for org_uri in org_uris:
-                org = Organization.self_or_ultimate_target_node(org_uri)
-                if org.uri != self.uri:
-                    by_ind_cluster[x].add(org)
-        # by industry texts
-        by_ind_text = set()
-        if self.industry is not None:
-            for ind in self.industry:
-                org_uris = Organization.by_industry_text(ind,limit=limit)
-                for org_uri in org_uris:
-                    org = Organization.self_or_ultimate_target_node(org_uri)
-                    if org.uri != self.uri and not any([org in x for x in by_ind_cluster.values()]):
-                        by_ind_text.add(org)
-        for x in self.sameAsHigh:
-            if x.industry is None:
-                continue
-            for ind in x.industry:
-                org_uris = Organization.by_industry_text(ind,limit=limit)
-                for org_uri in org_uris:
-                    org = Organization.self_or_ultimate_target_node(org_uri)
-                    if org.uri != self.uri and not any([org in x for x in by_ind_cluster.values()]):
-                        by_ind_text.add(org)
-        
-        return {"industry_cluster": dict(by_ind_cluster),
-                "industry_text": by_ind_text}
-        
 
     @staticmethod
     def by_industry_text(name,limit=0.85):

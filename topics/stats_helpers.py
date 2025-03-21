@@ -30,6 +30,7 @@ def get_stats(max_date):
               "FinancialsActivity","IncidentActivity","MarketingActivity","OperationsActivity","RecognitionActivity","RegulatoryActivity"]:
         res, _ = db.cypher_query(f"""MATCH (n:{x}) WHERE
                     n.internalMergedSameAsHighToUri IS NULL
+                    AND n.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
                     RETURN COUNT(n)""")
         counts.append( (x , res[0][0]) )
     recents_by_country_region = []

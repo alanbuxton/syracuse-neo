@@ -224,3 +224,4 @@ USE_GOOGLE_ANALYTICS=os.environ.get("USE_GOOGLE_ANALYTICS","False").lower() == '
 EMBEDDINGS_MODEL=os.environ.get("EMBEDDINGS_MODEL")
 CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() == 'true' # If false then won't create embeddings for new nodes
 GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT_PROPORTION","0.05"))
+INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.05"))

@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from django.shortcuts import redirect
-from topics.models import Organization, Resource, IndustryCluster, GeoNamesLocation
+from topics.models import Organization, Resource, IndustryCluster
+from topics.models.model_helpers import similar_organizations
 from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
     NameSearchSerializer, OrganizationSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
@@ -306,7 +307,7 @@ class SimilarOrganizations(APIView):
         o = Resource.self_or_ultimate_target_node(uri)
         assert isinstance(o, Organization)
         org = OrganizationSerializer(o)
-        similar = o.similar_organizations()
+        similar = similar_organizations(o)
         similar_ind_clusters = {}
         for k,v in similar["industry_cluster"].items():
             similar_ind_clusters[k] = sorted(OrganizationSerializer(v, many=True).data, key=lambda x: x["best_name"])

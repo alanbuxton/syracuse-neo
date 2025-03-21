@@ -260,8 +260,8 @@ class MergeSameAsHighTestCase(TestCase):
         a = Organization.self_or_ultimate_target_node("https://1145.am/db/100/a")
         ind1 = Resource.nodes.get_or_none(uri="https://1145.am/ind1")
         ind2 = Resource.nodes.get_or_none(uri="https://1145.am/ind2")
-        a_ind1 = a.industryClusterPrimary.relationship(ind1)
-        a_ind2 = a.industryClusterPrimary.relationship(ind2)
+        a_ind1 = a.internal_industryClusterPrimary.relationship(ind1)
+        a_ind2 = a.internal_industryClusterPrimary.relationship(ind2)
         assert a_ind1.weight == 2
         assert a_ind2.weight == 5
 
@@ -569,8 +569,8 @@ class MergeSubsetActivitiesTestCase(TestCase):
         assert a2_s.internalMergedActivityWithSimilarRelationshipsToUri is None
         assert a2_t.investor.relationship(Resource.get_by_uri("https://1145.am/db/331244/Seven_I_Holdings")).weight == 1
 
-        self.a3_source_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Lumina_Commons"
-        self.a3_target_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Wilmington"
+        self.a3_source_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Wilmington"
+        self.a3_target_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Lumina_Commons"
         a3_s = Resource.get_by_uri(self.a3_source_uri)
         a3_t = Resource.get_by_uri(self.a3_target_uri)
         a3_t_target = a3_t.locationAdded.filter(internalMergedSameAsHighToUri__isnull=True)[0]
@@ -621,6 +621,7 @@ class MergeSubsetActivitiesTestCase(TestCase):
         a3_t = Resource.get_by_uri(self.a3_target_uri)
         a3_t_target = a3_t.locationAdded.filter(internalMergedSameAsHighToUri__isnull=True)[0]
         assert a3_s.internalMergedActivityWithSimilarRelationshipsToUri == self.a3_target_uri
+        assert a3_t.internalMergedActivityWithSimilarRelationshipsToUri is None
         assert a3_t.locationAdded.relationship(a3_t_target).weight == 2
         assert a3_t.documentSource.relationship(Resource.get_by_uri("https://1145.am/db/5293762/wwwprwebcom_releases_harris-teeter-celebrates-virginia-beach-va-fuel-center-grand-opening-with-0-40-off-per-gallon-fuel-discount-302391894html")).weight == 2
 

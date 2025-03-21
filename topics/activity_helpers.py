@@ -1,6 +1,7 @@
 from django.core.cache import cache
 from neomodel import db
 import logging
+from .models.model_helpers import similar_organizations, similar_organizations_flat
 from .models import IndustryCluster, Article, ActivityMixin, Resource, Organization
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
@@ -33,7 +34,7 @@ def get_activities_by_industry_and_date_range(industry, min_date, max_date, limi
 def get_activities_by_org_and_date_range(organization,min_date,max_date,include_similar_orgs=False,combine_same_as_name_only=True,limit=None):
     uri_list = [organization.uri]
     if include_similar_orgs is True:
-        similar_orgs = organization.similar_organizations_flat(uris_only=True)
+        similar_orgs = similar_organizations_flat(organization)
         uri_list.extend(similar_orgs)
     return get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only,limit)
 

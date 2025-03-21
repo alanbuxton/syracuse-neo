@@ -3,6 +3,7 @@ from topics.activity_helpers import (
     get_activities_by_org_uris_and_date_range,
     get_activities_by_industry_geo_and_date_range)
 from .models import get_notifiable_users, TrackedItem
+from topics.models.model_helpers import similar_organizations_flat
 from integration.models import DataImport
 from .date_helpers import days_ago
 from django.template.loader import render_to_string
@@ -42,7 +43,7 @@ def tracked_items_between(tracked_items, min_date, max_date):
             if org is not None:
                 org_uris.append(org.uri)
                 if ti.and_similar_orgs is True:
-                    org_uris.extend(org.similar_organizations_flat(uris_only=True))
+                    org_uris.extend(similar_organizations_flat(org,uris_only=True))
         elif ti.industry_search_str is not None:
             if ti.region is None:
                 org_uris.extend(Organization.by_industry_text(ti.industry_search_str))

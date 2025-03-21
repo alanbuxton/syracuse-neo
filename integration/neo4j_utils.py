@@ -128,7 +128,7 @@ def get_potential_duplicate_activities():
         AND NOT a: Role
         AND NOT a: Site
         AND (a.internalMergedActivityWithSimilarRelationshipsAt IS NULL AND b.internalMergedActivityWithSimilarRelationshipsAt IS NULL)
-        AND elementID(a) < elementId(b)
+        AND a.uri < b.uri
         AND (a.internalMergedActivityWithSimilarRelationshipsToUri IS NULL AND b.internalMergedActivityWithSimilarRelationshipsToUri IS NULL)
         RETURN DISTINCT a.uri, b.uri, b.internalDocId 
         ORDER BY b.internalDocId, a.uri, b.uri
