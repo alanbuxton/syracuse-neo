@@ -758,7 +758,7 @@ class TestUtilsWithDumpData(TestCase):
         assert orgs == ['https://1145.am/db/10282/Talla']
 
     def test_industry_geo_finder_prep_table(self):
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital") 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital", include_search_by_industry_text=True) 
         assert headers == [OrderedDict([('Americas', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
                                         ('Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
                             OrderedDict([('Northern America', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
@@ -822,7 +822,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_industry_geo_finder_selection_screen(self):
         client = self.client
-        resp = client.get("/industry_geo_finder?industry=software")
+        resp = client.get("/industry_geo_finder?industry=software&include_search_by_industry_text=1")
         assert resp.status_code == 200
         content = str(resp.content)
         table_headers = re.findall(r"\<th.+?\>",content)

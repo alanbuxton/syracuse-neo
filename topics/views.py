@@ -325,7 +325,9 @@ class IndustryGeoFinder(APIView):
 
     def get(self, request):
         industry_search_str = request.GET['industry']
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str) 
+        include_search_by_industry_text = bool(int(request.GET.get('include_search_by_industry_text','0')))
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str, 
+                                                                             include_search_by_industry_text=include_search_by_industry_text) 
         request_state, _ = prepare_request_state(request)
         resp = Response({"table_body": ind_cluster_rows,
                          "text_row": text_row,
