@@ -99,10 +99,10 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
         source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         cache_key=cache_friendly(f"familytree_{organization_uri}_{source_names_as_hash}_{combine_same_as_name_only}_{clean_rels}_{earliest_doc_date}")
-        res = cache.get(cache_key)
-        if res is not None:
-            logger.debug(f"Cache hit {cache_key}: {res}")
-            return res
+        # res = cache.get(cache_key)
+        # if res is not None:
+        #     logger.debug(f"Cache hit {cache_key}: {res}")
+        #     return res
         parents, parents_children, org_children = org_family_tree(organization_uri, 
                                                                   combine_same_as_name_only=combine_same_as_name_only,
                                                                   relationships=clean_rels,
@@ -275,9 +275,9 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         max_nodes = 50
         cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
         res = cache.get(cache_key)
-        if res is not None:
-            logger.debug(f"Cache hit {cache_key}: {res}")
-            return res
+        # if res is not None:
+        #     logger.debug(f"Cache hit {cache_key}: {res}")
+        #     return res
         graph_data = graph_centered_on(instance,source_names=source_names,
                                        min_date=earliest_doc_date,
                                        combine_same_as_name_only=combine_same_as_name_only,

@@ -31,14 +31,13 @@
     ns1:internalDocId 3454511 ;
     ns1:investor <https://1145.am/db/3454511/A_L_Industrial_Services-Investment> ;
     ns1:name "Hastings Equity Partners" ;
+    ns1:internalCleanName "hastings equity partner" ;
+    ns1:internalCleanShortName "hastings equity" ;
     ns1:sameAsHigh <https://1145.am/db/1980438/Hastings_Equity_Partners>,
         <https://1145.am/db/3219216/Hastings_Equity_Partners>,
         <https://1145.am/db/3456278/Hastings_Equity_Partners>,
         <https://1145.am/db/3632917/Hastings_Equity_Partners>,
-        <https://1145.am/db/3838116/Hastings_Equity_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1597427/Hastings_Equity_Partners>,
-        <https://1145.am/db/1676654/Hastings_Equity_Partners>,
-        <https://1145.am/db/1942218/Hastings_Equity_Partners> .
+        <https://1145.am/db/3838116/Hastings_Equity_Partners> .
 
 <https://1145.am/db/3454517/Davita_Inc> a org:Organization ;
     ns1:basedInHighClean "California" ;
@@ -49,29 +48,15 @@
     ns1:foundName "DaVita Inc" ;
     ns1:internalDocId 3454517 ;
     ns1:name "DaVita Inc" ;
+    ns1:internalCleanName "davita inc" ;
+    ns1:internalCleanShortName "davita" ;
     ns1:participant <https://1145.am/db/3454517/Coastal_Physicians_Medical_Group-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1339012/Davita_Inc>,
         <https://1145.am/db/2235258/Davita>,
         <https://1145.am/db/3613574/Davita_Inc>,
         <https://1145.am/db/3881523/Davita_Inc>,
         <https://1145.am/db/462169/Davita_Inc>,
-        <https://1145.am/db/964954/Davita_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2185708/Davita>,
-        <https://1145.am/db/2186554/Davita>,
-        <https://1145.am/db/2189671/Davita>,
-        <https://1145.am/db/2189838/Davita>,
-        <https://1145.am/db/2190142/Davita>,
-        <https://1145.am/db/2227390/Davita_Inc>,
-        <https://1145.am/db/2234949/Davita_Inc>,
-        <https://1145.am/db/2238943/Davita_Inc>,
-        <https://1145.am/db/2239943/Davita_Inc>,
-        <https://1145.am/db/2241773/Davita_Inc>,
-        <https://1145.am/db/2246088/Davita>,
-        <https://1145.am/db/2251771/Davita_Inc>,
-        <https://1145.am/db/2825852/Davita>,
-        <https://1145.am/db/3308872/Davita_Inc>,
-        <https://1145.am/db/3721840/Davita>,
-        <https://1145.am/db/4066354/Davita> .
+        <https://1145.am/db/964954/Davita_Inc> .
 
 <https://1145.am/db/3454517/Healthcare_Partners> a org:Organization ;
     ns1:basedInHighClean "California" ;
@@ -84,43 +69,10 @@
     ns1:industry "HealthCare" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3454517 ;
+    ns1:internalCleanName "healthcare partners" ;
     ns1:name "HealthCare Partners" ;
     ns1:sameAsHigh <https://1145.am/db/2238943/Healthcare_Partners>,
-        <https://1145.am/db/3676999/Healthcare> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2235852/Healthcare_Ventures>,
-        <https://1145.am/db/2304650/Healthcare_Ventures>,
-        <https://1145.am/db/2308148/Healthcare_Ventures>,
-        <https://1145.am/db/2308887/Healthcare_Ventures>,
-        <https://1145.am/db/2309845/Healthcare_Ventures>,
-        <https://1145.am/db/2311069/Healthcare_Ventures>,
-        <https://1145.am/db/2311075/Healthcare_Ventures>,
-        <https://1145.am/db/2312192/Healthcare_Ventures>,
-        <https://1145.am/db/2313405/Healthcare_Ventures>,
-        <https://1145.am/db/2316601/Healthcare_Ventures>,
-        <https://1145.am/db/2316605/Healthcare_Ventures>,
-        <https://1145.am/db/2316823/Healthcare_Ventures>,
-        <https://1145.am/db/2318657/Healthcare_Ventures>,
-        <https://1145.am/db/2321097/Healthcare_Ventures>,
-        <https://1145.am/db/2323586/Healthcare_Ventures>,
-        <https://1145.am/db/2331639/Healthcare_Ventures>,
-        <https://1145.am/db/2338373/Healthcare_Ventures>,
-        <https://1145.am/db/2342269/Healthcare_Ventures>,
-        <https://1145.am/db/2343202/Healthcare_Ventures>,
-        <https://1145.am/db/2343210/Healthcare_Ventures>,
-        <https://1145.am/db/2346204/Healthcare_Ventures>,
-        <https://1145.am/db/2347469/Healthcare_Ventures>,
-        <https://1145.am/db/2348486/Healthcare_Ventures>,
-        <https://1145.am/db/2349717/Healthcare_Ventures>,
-        <https://1145.am/db/2349722/Healthcare_Ventures>,
-        <https://1145.am/db/2352814/Healthcare_Ventures>,
-        <https://1145.am/db/2352820/Healthcare_Ventures>,
-        <https://1145.am/db/2363510/Healthcare_Ventures>,
-        <https://1145.am/db/2365138/Healthcare_Ventures>,
-        <https://1145.am/db/2365171/Healthcare_Ventures>,
-        <https://1145.am/db/2367497/Healthcare_Ventures>,
-        <https://1145.am/db/2443170/Healthcare_Ventures>,
-        <https://1145.am/db/832691/Healthcare_Capital_Corp>,
-        <https://1145.am/db/841123/Healthcare_Capital_Corp> .
+        <https://1145.am/db/3676999/Healthcare> .
 
 <https://1145.am/db/3454522/Blackstone_Tactical_Opportunities> a org:Organization ;
     ns1:basedInLowRaw "Ariz" ;
@@ -131,6 +83,7 @@
     ns1:internalDocId 3454522 ;
     ns1:investor <https://1145.am/db/3454522/Annexus-Investment-Stake> ;
     ns1:name "Blackstone Tactical Opportunities" ;
+    ns1:internalCleanName "blackstone tactical opportuntities" ;
     ns1:sameAsHigh <https://1145.am/db/169801/Blackstone_Tactical_Opportunities>,
         <https://1145.am/db/429350/Blackstone_Tactical_Opportunities>,
         <https://1145.am/db/431155/Blackstone_Tactical_Opportunities>,
@@ -141,10 +94,7 @@
         <https://1145.am/db/666439/Blackstone_Tactical_Opportunities>,
         <https://1145.am/db/666730/Blackstone_Tactical_Opportunities>,
         <https://1145.am/db/881854/Blackstone_Tactical_Opportunities>,
-        <https://1145.am/db/883445/Blackstone_Tactical_Opportunities> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2034097/Blackstone_Tactical_Opportunities>,
-        <https://1145.am/db/663613/Blackstone_Tactical_Opportunities>,
-        <https://1145.am/db/666494/Blackstone_Tactical_Opportunities> .
+        <https://1145.am/db/883445/Blackstone_Tactical_Opportunities> .
 
 <https://1145.am/db/3455448/Woolpert> a org:Organization ;
     ns1:basedInHighClean "Dayton" ;
@@ -159,6 +109,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/69_architects_architecture_engineering_engineers> ;
     ns1:internalDocId 3455448 ;
     ns1:name "Woolpert" ;
+    ns1:internalCleanName "woolpert" ;
     ns1:sameAsHigh <https://1145.am/db/1426366/Woolpert>,
         <https://1145.am/db/2035516/Woolpert>,
         <https://1145.am/db/285049/Woolpert>,
@@ -170,24 +121,7 @@
         <https://1145.am/db/768509/Woolpert>,
         <https://1145.am/db/806847/Woolpert>,
         <https://1145.am/db/812677/Woolpert>,
-        <https://1145.am/db/820490/Woolpert> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1297055/Woolpert>,
-        <https://1145.am/db/1340476/Woolpert>,
-        <https://1145.am/db/138147/Woolpert>,
-        <https://1145.am/db/1520848/Woolpert>,
-        <https://1145.am/db/2052658/Woolpert>,
-        <https://1145.am/db/2060026/Woolpert>,
-        <https://1145.am/db/254892/Woolpert>,
-        <https://1145.am/db/306440/Woolpert>,
-        <https://1145.am/db/3124852/Woolpert>,
-        <https://1145.am/db/358995/Woolpert>,
-        <https://1145.am/db/460010/Woolpert>,
-        <https://1145.am/db/475347/Woolpert>,
-        <https://1145.am/db/531034/Woolpert>,
-        <https://1145.am/db/577580/Woolpert>,
-        <https://1145.am/db/802161/Woolpert>,
-        <https://1145.am/db/862810/Woolpert>,
-        <https://1145.am/db/944125/Woolpert> .
+        <https://1145.am/db/820490/Woolpert>  .
 
 <https://1145.am/db/3455478/Wec_Energy_Group> a org:Organization ;
     ns1:basedInHighClean "Milwaukee" ;
@@ -199,17 +133,10 @@
     ns1:internalDocId 3455478 ;
     ns1:investor <https://1145.am/db/3455478/Coyote_Ridge_Wind_Farm-Investment-Ownership_Interest> ;
     ns1:name "WEC Energy Group" ;
+    ns1:internalCleanName "wec energy group" ;
+    ns1:internalCleanShortName "wec energey" ;
     ns1:sameAsHigh <https://1145.am/db/3675620/Wec_Energy>,
-        <https://1145.am/db/3814035/Wec_Energy_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1583586/Wec_Energy_Group>,
-        <https://1145.am/db/3167706/Wec_Energy_Group>,
-        <https://1145.am/db/3271110/Wec_Energy_Group>,
-        <https://1145.am/db/3506257/Wec_Energy_Group>,
-        <https://1145.am/db/3582370/Wec_Energy_Group>,
-        <https://1145.am/db/3814028/Wec_Energy_Group>,
-        <https://1145.am/db/3880269/Wec_Energy_Group>,
-        <https://1145.am/db/4196228/Wec_Energy_Group>,
-        <https://1145.am/db/4232626/Wec_Energy> .
+        <https://1145.am/db/3814035/Wec_Energy_Group> .
 
 <https://1145.am/db/3455524/Booz_Allen_Hamilton_Holding_Corporation> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -218,9 +145,10 @@
     ns1:foundName "Booz Allen Hamilton Holding Corporation" ;
     ns1:internalDocId 3455524 ;
     ns1:name "Booz Allen Hamilton Holding Corporation" ;
+    ns1:internalCleanName "booz allen hamilton holding corporation" ;
+    ns1:internalCleanShortName "booz allen hamilton holding" ;
     ns1:participant <https://1145.am/db/3455524/Riskcanvas_Holdings-Acquisition-Subsidiary> ;
-    ns1:sameAsHigh <https://1145.am/db/4062001/Booz_Allen_Hamilton_Holding_Corporation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2073097/Booz_Allen_Hamilton_Holding_Corporation> .
+    ns1:sameAsHigh <https://1145.am/db/4062001/Booz_Allen_Hamilton_Holding_Corporation> .
 
 <https://1145.am/db/3455524/Genpact> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -235,6 +163,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/569_investments_investment_investor_diversifying> ;
     ns1:internalDocId 3455524 ;
     ns1:name "Genpact" ;
+    ns1:internalCleanName "genpact" ;
     ns1:sameAsHigh <https://1145.am/db/3132567/Genpact>,
         <https://1145.am/db/3414674/Genpact>,
         <https://1145.am/db/3539881/Genpact>,
@@ -242,10 +171,7 @@
         <https://1145.am/db/3684460/Genpact>,
         <https://1145.am/db/3900400/Genpact>,
         <https://1145.am/db/415425/Genpact>,
-        <https://1145.am/db/735501/Genpact> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2885920/Genpact>,
-        <https://1145.am/db/2910416/Genpact>,
-        <https://1145.am/db/4011070/Genpact> .
+        <https://1145.am/db/735501/Genpact> .
 
 <https://1145.am/db/3456363/Whitney_Capital_Partners_Llc> a org:Organization ;
     ns1:basedInLowRaw "California" ;
@@ -254,14 +180,9 @@
     ns1:documentSource <https://1145.am/db/3456363/wwwprnewswirecom_news-releases_jh-whitney-capital-partners-acquires-firebirds-international-300774374html> ;
     ns1:foundName "Whitney Capital Partners, LLC" ;
     ns1:internalDocId 3456363 ;
-    ns1:name "Whitney Capital Partners, LLC" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1614987/Whitney>,
-        <https://1145.am/db/2025396/Whitney>,
-        <https://1145.am/db/2096818/Whitney_Capital_Partners>,
-        <https://1145.am/db/2241844/Whitney_Capital_Partners>,
-        <https://1145.am/db/2794270/Whitney>,
-        <https://1145.am/db/3234970/Whitney_Capital_Partners_Llc>,
-        <https://1145.am/db/3250542/Whitney_Capital_Partners> .
+    ns1:internalCleanName "whitney capital partners llc" ;
+    ns1:internalCleanShortName "whitney capital" ;
+    ns1:name "Whitney Capital Partners, LLC"  .
 
 <https://1145.am/db/3456990/South_Bay_Partners_Inc> a org:Organization ;
     ns1:basedInHighClean "Irvine" ;
@@ -275,9 +196,9 @@
     ns1:internalDocId 3456990 ;
     ns1:investor <https://1145.am/db/3456990/South_Bay_Partners_Inc-Investment> ;
     ns1:name "South Bay Partners, Inc." ;
-    ns1:sameAsHigh <https://1145.am/db/711392/South_Bay_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3610977/South_Bay_Partners_Inc>,
-        <https://1145.am/db/3862594/South_Bay_Partners_Inc> .
+    ns1:internalCleanName "south bay partners inc" ;
+    ns1:internalCleanShortName "south bay partners" ;
+    ns1:sameAsHigh <https://1145.am/db/711392/South_Bay_Partners>  .
 
 <https://1145.am/db/3457010/Mobitech_International> a org:Organization ;
     ns1:basedInHighClean "Austin" ;
@@ -289,7 +210,8 @@
     ns1:foundName "MobiTech International, Inc." ;
     ns1:internalDocId 3457010 ;
     ns1:name "MobiTech International" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3516824/Mobitech_International> .
+    ns1:internalCleanName "mobitech international" ;
+    ns1:internalCleanShortName "mobitech" .
 
 <https://1145.am/db/3457020/Hope_Scholarship-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -319,6 +241,8 @@
     ns1:internalDocId 3457026 ;
     ns1:investor <https://1145.am/db/3457026/Play_Sports_Group-Investment-Controlling_Stake> ;
     ns1:name "Discovery, Inc." ;
+    ns1:internalCleanName "discovery inc" ;
+    ns1:internalCleanShortName "discovery" ;
     ns1:sameAsHigh <https://1145.am/db/1207995/Discovery_Inc>,
         <https://1145.am/db/2163075/Discovery_Inc>,
         <https://1145.am/db/2177778/Discovery_Inc>,
@@ -340,39 +264,7 @@
         <https://1145.am/db/896308/Discovery_Inc>,
         <https://1145.am/db/897774/Discovery_Inc>,
         <https://1145.am/db/900144/Discovery_Inc>,
-        <https://1145.am/db/966560/Discovery> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1257890/Discovery_Inc>,
-        <https://1145.am/db/1767784/Discovery_Inc>,
-        <https://1145.am/db/1895683/Discovery>,
-        <https://1145.am/db/2157689/Discovery_Inc>,
-        <https://1145.am/db/2161500/Discovery_Inc>,
-        <https://1145.am/db/2162363/Discovery>,
-        <https://1145.am/db/2166549/Discovery_Inc>,
-        <https://1145.am/db/2169549/Discovery_Inc>,
-        <https://1145.am/db/2173534/Discovery>,
-        <https://1145.am/db/2174389/Discovery_Inc>,
-        <https://1145.am/db/2175424/Discovery_Inc>,
-        <https://1145.am/db/2177187/Discovery>,
-        <https://1145.am/db/2177460/Discovery>,
-        <https://1145.am/db/2963461/Discovery>,
-        <https://1145.am/db/3077611/Discovery>,
-        <https://1145.am/db/3080370/Discovery>,
-        <https://1145.am/db/3236461/Discovery>,
-        <https://1145.am/db/3318609/Discovery>,
-        <https://1145.am/db/334907/Discovery_Inc>,
-        <https://1145.am/db/3400851/Discovery_Inc>,
-        <https://1145.am/db/3638164/Discovery>,
-        <https://1145.am/db/3652855/Discovery>,
-        <https://1145.am/db/3655105/Discovery>,
-        <https://1145.am/db/3700991/Discovery>,
-        <https://1145.am/db/3712889/Discovery>,
-        <https://1145.am/db/4042773/Discovery_Inc>,
-        <https://1145.am/db/4051891/Discovery>,
-        <https://1145.am/db/540214/Discovery_Inc>,
-        <https://1145.am/db/566298/Discovery>,
-        <https://1145.am/db/713292/Discovery_Inc>,
-        <https://1145.am/db/715441/Discovery_Inc>,
-        <https://1145.am/db/796295/Discovery_Inc> .
+        <https://1145.am/db/966560/Discovery>  .
 
 <https://1145.am/db/3457038/Avetta> a org:Organization ;
     ns1:basedInLowRaw "Calif" ;
@@ -381,19 +273,14 @@
     ns1:internalDocId 3457038 ;
     ns1:investor <https://1145.am/db/3457038/Avetta-Dealersocket-Freightpop-Telogis-The_Cove_Funds-Investment> ;
     ns1:name "Avetta" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1432842/Avetta>,
-        <https://1145.am/db/1436235/Avetta>,
-        <https://1145.am/db/2073532/Avetta>,
-        <https://1145.am/db/2124043/Avetta>,
-        <https://1145.am/db/381582/Avetta>,
-        <https://1145.am/db/4135479/Avetta>,
-        <https://1145.am/db/4135750/Avetta> .
+    ns1:internalCleanName "avetta" .
 
 <https://1145.am/db/3457038/Dealersocket> a org:Organization ;
     ns1:basedInLowRaw "LAKE FOREST, Calif" ;
     ns1:documentSource <https://1145.am/db/3457038/wwwprnewswirecom_news-releases_freightpop-achieves-a-quick-and-successful-round-of-new-investments-300771862html> ;
     ns1:foundName "DealerSocket" ;
     ns1:internalDocId 3457038 ;
+    ns1:internalCleanName "dealersocket" ;
     ns1:investor <https://1145.am/db/3457038/Avetta-Dealersocket-Freightpop-Telogis-The_Cove_Funds-Investment> ;
     ns1:name "DealerSocket" .
 
@@ -402,20 +289,16 @@
     ns1:documentSource <https://1145.am/db/3457038/wwwprnewswirecom_news-releases_freightpop-achieves-a-quick-and-successful-round-of-new-investments-300771862html> ;
     ns1:foundName "Telogis" ;
     ns1:internalDocId 3457038 ;
+    ns1:internalCleanName "telogis" ;
     ns1:investor <https://1145.am/db/3457038/Avetta-Dealersocket-Freightpop-Telogis-The_Cove_Funds-Investment> ;
-    ns1:name "Telogis" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1798930/Telogis>,
-        <https://1145.am/db/1820979/Telogis>,
-        <https://1145.am/db/1852697/Telogis>,
-        <https://1145.am/db/2625151/Telogis>,
-        <https://1145.am/db/2629026/Telogis>,
-        <https://1145.am/db/3005833/Telogis> .
+    ns1:name "Telogis"  .
 
 <https://1145.am/db/3457038/The_Cove_Funds> a org:Organization ;
     ns1:basedInLowRaw "LAKE FOREST, Calif" ;
     ns1:documentSource <https://1145.am/db/3457038/wwwprnewswirecom_news-releases_freightpop-achieves-a-quick-and-successful-round-of-new-investments-300771862html> ;
     ns1:foundName "The Cove Funds" ;
     ns1:internalDocId 3457038 ;
+    ns1:internalCleanName "the cove funds" ;
     ns1:investor <https://1145.am/db/3457038/Avetta-Dealersocket-Freightpop-Telogis-The_Cove_Funds-Investment> ;
     ns1:name "The Cove Funds" .
 
@@ -432,6 +315,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/583_postal_mail_parcel_delivery> ;
     ns1:internalDocId 3457045 ;
     ns1:name "Allegiance Fundraising Group" ;
+    ns1:internalCleanName "allegiance fundraising group" ;
+    ns1:internalCleanShortName "allegiance fundraising" ;
     ns1:sameAsHigh <https://1145.am/db/3580799/Allegiance_Fundraising_Group>,
         <https://1145.am/db/3869772/Allegiance_Fundraising_Group> .
 
@@ -445,6 +330,8 @@
     ns1:foundName "Sphera",
         "Sphera Solutions" ;
     ns1:industry "software" ;
+    ns1:internalCleanName "sphera solutions" , "sphera" ;
+    ns1:internalCleanShortName "sphera" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3457048 ;
     ns1:name "Sphera",
@@ -461,7 +348,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/433_monitoring_patient_neuromonitoring_healthcare> ;
     ns1:internalDocId 3457410 ;
     ns1:name "Datix" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3612622/Datix> .
+    ns1:internalCleanName "datix"  .
 
 <https://1145.am/db/3457416/Isracann_Biosciences_Inc-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -490,6 +377,7 @@
     ns1:industry "cleaning services" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/40_cleaning_clean_sweeping_janitorial> ;
     ns1:internalDocId 3457424 ;
+    ns1:internalCleanName "johnsonm3" ;
     ns1:investor <https://1145.am/db/3457424/Clorox_Total_360_System-Investment> ;
     ns1:name "JohnsonM3" .
 
@@ -502,42 +390,14 @@
     ns1:foundName "Golub Capital" ;
     ns1:internalDocId 3457431 ;
     ns1:name "Golub Capital" ;
+    ns1:internalCleanName "golub capital" ;
+    ns1:internalCleanShortName "golub" ;
     ns1:participant <https://1145.am/db/3457431/Firebirds-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/3442559/Golub_Capital>,
         <https://1145.am/db/3803322/Golub_Capital>,
         <https://1145.am/db/3808929/Golub_Capital>,
         <https://1145.am/db/3879060/Golub_Capital>,
-        <https://1145.am/db/3926640/Golub_Capital> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1740354/Golub_Capital>,
-        <https://1145.am/db/1765858/Golub_Capital>,
-        <https://1145.am/db/3153394/Golub_Capital>,
-        <https://1145.am/db/3175630/Golub_Company>,
-        <https://1145.am/db/3247926/Golub_Capital>,
-        <https://1145.am/db/3331867/Golub_Capital>,
-        <https://1145.am/db/3364154/Golub_Capital>,
-        <https://1145.am/db/3411758/Golub_Capital>,
-        <https://1145.am/db/3443451/Golub_Capital>,
-        <https://1145.am/db/3558482/Golub_Capital>,
-        <https://1145.am/db/3596086/Golub_Capital>,
-        <https://1145.am/db/3609778/Golub_Capital>,
-        <https://1145.am/db/3614286/Golub_Capital>,
-        <https://1145.am/db/3777299/Golub_Capital>,
-        <https://1145.am/db/3794862/Golub_Capital>,
-        <https://1145.am/db/3795944/Golub_Capital>,
-        <https://1145.am/db/3795961/Golub_Capital>,
-        <https://1145.am/db/3796136/Golub_Capital>,
-        <https://1145.am/db/3887175/Golub_Capital>,
-        <https://1145.am/db/3891946/Golub_Capital>,
-        <https://1145.am/db/3900751/Golub_Capital>,
-        <https://1145.am/db/4021130/Golub_Capital>,
-        <https://1145.am/db/4130516/Golub_Capital>,
-        <https://1145.am/db/531949/Golub_Capital>,
-        <https://1145.am/db/545620/Golub_Capital>,
-        <https://1145.am/db/955688/Golub_Capital>,
-        <https://1145.am/db/961848/Golub_Capital>,
-        <https://1145.am/db/962987/Golub_Capital>,
-        <https://1145.am/db/980316/Golub_Capital>,
-        <https://1145.am/db/982661/Golub_Capital> .
+        <https://1145.am/db/3926640/Golub_Capital>  .
 
 <https://1145.am/db/3457431/Jh> a org:Organization ;
     ns1:basedInLowRaw "North Carolina" ;
@@ -550,6 +410,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/280_restaurant_software_hospitality_catering>,
         <https://1145.am/db/industry/594_reservations_reservation_restaurant_booking> ;
     ns1:internalDocId 3457431 ;
+    ns1:internalCleanName "jh" ;
     ns1:name "J.H" .
 
 <https://1145.am/db/3614166/Contra_Costa_Farms_Llc> a org:Organization ;
@@ -562,6 +423,8 @@
     ns1:industry "Cannabis" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
     ns1:internalDocId 3614166 ;
+    ns1:internalCleanName "contra costa farms llc" ;
+    ns1:internalCleanShortName "contra costa farms" ;
     ns1:locationAdded <https://1145.am/db/3614166/Contra_Costa_Farms_Llc-Added-Antioch> ;
     ns1:name "Contra Costa Farms LLC" .
 
@@ -574,6 +437,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3454499 ;
+    ns1:internalCleanName "yallacompare" ;
     ns1:name "yallacompare" .
 
 <https://1145.am/db/3454511/A_L_Industrial_Services> a org:Organization ;
@@ -586,6 +450,8 @@
     ns1:industry "energy services and equipment" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/385_energy_services_service_infrastructure> ;
     ns1:internalDocId 3454511 ;
+    ns1:internalCleanName "a and l industrial services" ;
+    ns1:internalCleanShortName "a and l industrial" ;
     ns1:name "A & L Industrial Services" .
 
 <https://1145.am/db/3454511/A_L_Industrial_Services-Investment> a ns1:CorporateFinanceActivity ;
@@ -613,6 +479,8 @@
     ns1:industry "Health care" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3454517 ;
+    ns1:internalCleanName "coastal physicians medical group" ;
+    ns1:internalCleanShortName "coastal physicians medical ";
     ns1:name "Coastal Physicians Medical Group" .
 
 <https://1145.am/db/3454522/Annexus> a org:Organization ;
@@ -626,6 +494,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3454522 ;
+    ns1:internalCleanName "annexus" ;
     ns1:name "Annexus" .
 
 <https://1145.am/db/3454522/Annexus-Investment-Stake> a ns1:CorporateFinanceActivity ;
@@ -659,6 +528,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/696_architectural_architecture_architects_design> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/69_architects_architecture_engineering_engineers> ;
     ns1:internalDocId 3455448 ;
+    ns1:internalCleanName "waller todd and sadler architects" ;
     ns1:name "Waller, Todd & Sadler Architects" .
 
 <https://1145.am/db/3455448/Waller_Todd_Sadler_Architects-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -686,6 +556,7 @@
     ns1:documentSource <https://1145.am/db/3455478/wwwprnewswirecom_news-releases_wec-energy-group-acquires-80-percent-ownership-in-coyote-ridge-wind-farm-300774483html> ;
     ns1:foundName "Coyote Ridge Wind Farm" ;
     ns1:internalDocId 3455478 ;
+    ns1:internalCleanName "coyote ridge wind farm" ;
     ns1:name "Coyote Ridge Wind Farm" .
 
 <https://1145.am/db/3455478/Coyote_Ridge_Wind_Farm-Investment-Ownership_Interest> a ns1:CorporateFinanceActivity ;
@@ -708,6 +579,7 @@
     ns1:documentSource <https://1145.am/db/3455524/wwwprnewswirecom_news-releases_genpact-acquires-riskcanvastm-from-booz-allen-hamilton-to-accelerate-vision-to-build-the-financial-crime-compliance-office-of-the-future-300774608html> ;
     ns1:foundName "riskCanvas Holdings, LLC" ;
     ns1:internalDocId 3455524 ;
+    ns1:internalCleanName"riskcanvas holdings" ;
     ns1:name "riskCanvas Holdings" .
 
 <https://1145.am/db/3456363/Angelo_Gordon_Co_Lp> a org:Organization ;
@@ -716,11 +588,8 @@
     ns1:documentSource <https://1145.am/db/3456363/wwwprnewswirecom_news-releases_jh-whitney-capital-partners-acquires-firebirds-international-300774374html> ;
     ns1:foundName "Angelo, Gordon & Co., L.P." ;
     ns1:internalDocId 3456363 ;
-    ns1:name "Angelo, Gordon & Co., L.P." ;
-    ns1:sameAsNameOnly <https://1145.am/db/2066999/Angelo_Gordon_Co_Lp>,
-        <https://1145.am/db/287054/Angelo_Gordon_Co_Lp>,
-        <https://1145.am/db/3172874/Angelo_Gordon_Co_Lp>,
-        <https://1145.am/db/4196488/Angelo_Gordon_Co_Lp> .
+    ns1:internalCleanName "angela gordon and co lp" ;
+    ns1:name "Angelo, Gordon & Co., L.P." .
 
 <https://1145.am/db/3456363/Firebirds_International> a org:Organization ;
     ns1:basedInLowRaw "California" ;
@@ -728,6 +597,8 @@
     ns1:documentSource <https://1145.am/db/3456363/wwwprnewswirecom_news-releases_jh-whitney-capital-partners-acquires-firebirds-international-300774374html> ;
     ns1:foundName "Firebirds International, LLC" ;
     ns1:internalDocId 3456363 ;
+    ns1:internalCleanName "firebirds international llc" ;
+    ns1:internalCleanShortName "firebirds international" ;
     ns1:name "Firebirds International" .
 
 <https://1145.am/db/3456363/Firebirds_International-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
@@ -772,6 +643,7 @@
     ns1:industry "PDR" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/55_ott_technology_rtsm_tmt> ;
     ns1:internalDocId 3457010 ;
+    ns1:internalCleanName "dent buddy" ;
     ns1:name "Dent Buddy" .
 
 <https://1145.am/db/3457010/Dent_Buddy-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -792,6 +664,8 @@
     ns1:documentSource <https://1145.am/db/3457020/wwwprnewswirecom_news-releases_plus-relocation-hits-fundraising-goal-for-children-international-300774539html> ;
     ns1:foundName "Children International" ;
     ns1:internalDocId 3457020 ;
+    ns1:internalCleanName "children international" ;
+    ns1:internalCleanShortName "children" ;
     ns1:name "Children International" .
 
 <https://1145.am/db/3457020/Hope_Scholarship> a org:Organization ;
@@ -800,6 +674,7 @@
     ns1:documentSource <https://1145.am/db/3457020/wwwprnewswirecom_news-releases_plus-relocation-hits-fundraising-goal-for-children-international-300774539html> ;
     ns1:foundName "HOPE Scholarship" ;
     ns1:internalDocId 3457020 ;
+    ns1:internalCleanName "hope scholarship" ;
     ns1:name "HOPE Scholarship" .
 
 <https://1145.am/db/3457020/Plus_Relocation> a org:Organization ;
@@ -811,8 +686,7 @@
     ns1:foundName "Plus Relocation" ;
     ns1:internalDocId 3457020 ;
     ns1:name "Plus Relocation" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3249003/Plus_Relocation>,
-        <https://1145.am/db/3859193/Plus_Relocation> .
+    ns1:internalCleanName "plus relocation" .
 
 <https://1145.am/db/3457026/Play_Sports_Group> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -823,6 +697,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
     ns1:internalDocId 3457026 ;
     ns1:name "Play Sports Group" ;
+    ns1:internalCleanName "play sports group" ;
+    ns1:internalCleanShortName "play sports" ;
     ns1:sameAsHigh <https://1145.am/db/2166549/Play_Sports_Group> .
 
 <https://1145.am/db/3457026/Play_Sports_Group-Investment-Controlling_Stake> a ns1:CorporateFinanceActivity ;
@@ -852,6 +728,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/650_logistics_transportation_transport_trucking> ;
     ns1:internalDocId 3457038 ;
     ns1:name "FreightPOP" ;
+    ns1:internalCleanName "freightpop" ;
     ns1:sameAsHigh <https://1145.am/db/3315114/Freightpop> .
 
 <https://1145.am/db/3457045/Haines_Direct> a org:Organization ;
@@ -865,6 +742,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/476_direct_marketing_advertising_sales> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/583_postal_mail_parcel_delivery> ;
     ns1:internalDocId 3457045 ;
+    ns1:internalCleanName "haines direct" ;
     ns1:name "Haines Direct" .
 
 <https://1145.am/db/3457045/Haines_Direct-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -891,6 +769,7 @@
     ns1:industry "software" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3457048 ;
+    ns1:internalCleanName "pyrotechnics" ;
     ns1:name "Petrotechnics" .
 
 <https://1145.am/db/3457048/Petrotechnics-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -924,6 +803,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3457410 ;
     ns1:name "Health Matrix" ;
+    ns1:internalCleanName "health matrix" ;
     ns1:participant <https://1145.am/db/3457410/Datix-Datix-Health_Matrix-Acquisition> .
 
 <https://1145.am/db/3457416/Isracann_Biosciences_Inc> a org:Organization ;
@@ -937,12 +817,9 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
     ns1:internalDocId 3457416 ;
     ns1:name "Isracann Biosciences Inc" ;
-    ns1:sameAsHigh <https://1145.am/db/440949/Isracann_Biosciences_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1251106/Isracann_Biosciences_Inc>,
-        <https://1145.am/db/1298053/Isracann_Biosciences_Inc>,
-        <https://1145.am/db/936814/Isracann_Biosciences_Inc>,
-        <https://1145.am/db/975183/Isracann_Biosciences_Inc>,
-        <https://1145.am/db/982473/Isracann_Biosciences_Inc> .
+    ns1:internalCleanName "isracann biosciences inc" ;
+    ns1:internalCleanShortName "isracann biosciences" ;
+    ns1:sameAsHigh <https://1145.am/db/440949/Isracann_Biosciences_Inc> .
 
 <https://1145.am/db/3457424/Clorox_Total_360_System> a org:Organization ;
     ns1:basedInLowRaw "Okla" ;
@@ -951,7 +828,7 @@
     ns1:foundName "the Clorox® Total 360® System" ;
     ns1:internalDocId 3457424 ;
     ns1:name "Clorox® Total 360® System" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3477825/Clorox_Total_360_System> .
+    ns1:internalCleanName "clorox total 360 system" .
 
 <https://1145.am/db/3457424/Clorox_Total_360_System-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -983,6 +860,7 @@
         <https://1145.am/db/industry/594_reservations_reservation_restaurant_booking> ;
     ns1:internalDocId 3457431 ;
     ns1:name "Firebirds" ;
+    ns1:internalCleanName "firebirds" ;
     ns1:sameAsHigh <https://1145.am/db/1982522/Firebirds> .
 
 <https://1145.am/db/3614166/Antioch> a org:Site ;

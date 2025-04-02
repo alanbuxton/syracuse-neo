@@ -11,6 +11,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/354_ai_analytics_computational_learning> ;
     ns1:internalDocId 10282 ;
     ns1:name "Talla" ;
+    ns1:internalCleanName "talla" ;
     ns1:productActivity <https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base> .
 
 <https://1145.am/db/10348/Nvidia> a org:Organization ;
@@ -19,6 +20,7 @@
     ns1:foundName "NVIDIA" ;
     ns1:internalDocId 10348 ;
     ns1:name "NVIDIA" ;
+    ns1:internalCleanName "nvidia" ;
     ns1:productActivity <https://1145.am/db/10348/Introduces-HGX-2> .
 
 <https://1145.am/db/11702/M_*_Modal> a org:Organization ;
@@ -28,6 +30,7 @@
     ns1:foundName "M * Modal" ;
     ns1:internalDocId 11702 ;
     ns1:name "M * Modal" ;
+    ns1:internalCleanName "m * modal" ;
     ns1:productActivity <https://1145.am/db/11702/Announced_Further_Enhancements-Cdi> .
 
 <https://1145.am/db/12170/People_Power> a org:Organization ;
@@ -38,6 +41,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/254_iot_wireless_sensor_devices> ;
     ns1:internalDocId 12170 ;
     ns1:name "People Power" ;
+    ns1:internalCleanName "people power" ;
     ns1:productActivity <https://1145.am/db/12170/New-Home_Occupancy_Status_Microservice> .
 
 <https://1145.am/db/12236/Neura> a org:Organization ;
@@ -46,6 +50,7 @@
     ns1:foundName "Neura" ;
     ns1:internalDocId 12236 ;
     ns1:name "Neura" ;
+    ns1:internalCleanName "neura" ;
     ns1:productActivity <https://1145.am/db/12236/Announced-Neura_Moments> .
 
 <https://1145.am/db/12289/Microsoft> a org:Organization ;
@@ -56,6 +61,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/132_martech_tech_technology_technologies> ;
     ns1:internalDocId 12289 ;
     ns1:name "Microsoft" ;
+    ns1:internalCleanName "microsoft" ;
     ns1:productActivity <https://1145.am/db/12289/Updates-Bing> .
 
 <https://1145.am/db/12364/Announce-Engagement_Workflow_Five9_Etc> a ns1:ProductActivity ;
@@ -78,6 +84,7 @@
     ns1:foundName "Databricks" ;
     ns1:internalDocId 8084 ;
     ns1:name "Databricks" ;
+    ns1:internalCleanName "databricks" ;
     ns1:productActivity <https://1145.am/db/8084/Introduced-Databricks_Unified_Analytics_Platform_For_Genomics> .
 
 <https://1145.am/db/9206/Appzen> a org:Organization ;
@@ -86,6 +93,7 @@
     ns1:foundName "AppZen" ;
     ns1:internalDocId 9206 ;
     ns1:name "AppZen" ;
+    ns1:internalCleanName "appzen" ;
     ns1:productActivity <https://1145.am/db/9206/Launches-Insight_Product> .
 
 <https://1145.am/db/9595/Bay_Labs_Echomd_Autoef_Software> a org:Organization ;
@@ -94,6 +102,7 @@
     ns1:foundName "Bay Labs" ;
     ns1:internalDocId 9595 ;
     ns1:name "Bay Labs' EchoMD AutoEF Software" ;
+    ns1:internalCleanName "bay labs echomd autoef software" ;
     ns1:productActivity <https://1145.am/db/9595/New_Study_Demonstrates_Accuracy-Echomd_Autoef> .
 
 <https://1145.am/db/10282/Launched-Version_20_Of_The_Talla_Intelligent_Knowledge_Base> a ns1:ProductActivity ;

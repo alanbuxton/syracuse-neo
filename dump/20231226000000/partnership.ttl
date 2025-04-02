@@ -11,6 +11,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/59_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 9937 ;
     ns1:name "Sync.MD" ;
+    ns1:internalCleanName "syncmd" ;
     ns1:partnership <https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> .
 
 <https://1145.am/db/9937/Veteran_Health_Records_Management> a org:Organization ;
@@ -19,6 +20,7 @@
     ns1:foundName "AMVETS" ;
     ns1:internalDocId 9937 ;
     ns1:name "Veteran Health Records Management" ;
+    ns1:internalCleanName "veteran health records management" ;
     ns1:partnership <https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> .
 
 <https://1145.am/db/9937/Veteran_Health_Records_Management-Syncmd_Veteran_Health_Records_Management> a ns1:PartnershipActivity ;
@@ -56,6 +58,7 @@
     ns1:documentSource <https://1145.am/db/11057/apnewscom_11ce6168a75842c684cf0fc98f2d7cb7> ;
     ns1:foundName "Major League Baseball" ;
     ns1:internalDocId 11057 ;
+    ns1:internalCleanName "major league baseball" ;
     ns1:name "Major League Baseball" .
 
 <https://1145.am/db/11057/Amazon_Web_Services> a org:Organization ;
@@ -65,6 +68,8 @@
     ns1:foundName "Amazon Web Services, Inc." ;
     ns1:internalDocId 11057 ;
     ns1:name "Amazon Web Services" ;
+    ns1:internalCleanName "amazon web services" ;
+    ns1:internalCleanShortName "amazon web" ;
     ns1:sameAsHigh <https://1145.am/db/10739/Amazon_Web_Services>,
         <https://1145.am/db/5971/Amazon_Web_Services> .
 
@@ -98,6 +103,7 @@
         <https://1145.am/db/industry/618_biotech_investor_investments_investment> ;
     ns1:internalDocId 11594 ;
     ns1:name "DSM" ;
+    ns1:internalCleanName "dsm" ;
     ns1:partnership <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> .
 
 <https://1145.am/db/11594/Royal_Dsm_Nv> a org:Organization ;
@@ -107,6 +113,8 @@
     ns1:documentSource <https://1145.am/db/11594/apnewscom_0dd1e9affa1f4dafb5c098bd5c62d0b6> ;
     ns1:foundName "Royal DSM N.V." ;
     ns1:internalDocId 11594 ;
+    ns1:internalCleanName "royal dsm nv";
+    ns1:internalCleanShortName "royal dsm" ;
     ns1:name "Royal DSM N.V." .
 
 
@@ -121,6 +129,8 @@
     ns1:internalDocId 11594 ;
     ns1:name "Biomax",
         "Biomax Informatics AG" ;
+    ns1:internalCleanName "biomax informatics ag", "biomax" ;
+    ns1:internalCleanShortName "biomax informatics" ;
     ns1:partnership <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Dsm> .
 
 <https://1145.am/db/11594/Partnership-Biomax_Informatics_Ag_Royal_Dsm_Nv> a ns1:PartnershipActivity ;

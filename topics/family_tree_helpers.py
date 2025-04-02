@@ -5,6 +5,7 @@ from neomodel import db
 import logging
 from .graph_utils import keep_or_switch_node
 from .neo4j_utils import date_to_cypher_friendly
+from .organization_search_helpers import get_same_as_name_onlies
 
 logger = logging.getLogger(__name__)
 
@@ -69,14 +70,14 @@ def get_child_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ven
     org = Organization.self_or_ultimate_target_node(uri)
     if override_target_uri:
         override_target_org = Organization.self_or_ultimate_target_node(override_target_uri)
-    same_as_uris = [x.uri for x in org.sameAsNameOnly if x.internalMergedSameAsHighToUri is None]
+    same_as_uris = [x.uri for x in get_same_as_name_onlies(org) if x.internalMergedSameAsHighToUri is None]
     res = do_get_child_orgs_query(same_as_uris + [uri], relationships, source_names, earliest_doc_date)
     items_to_keep = []
     for item in res:
         target_node_or_same_as = keep_or_switch_node(item[1], nodes_found_so_far, combine_same_as_name_only)
         if target_node_or_same_as == item[1]:
             item[0] = keep_or_switch_node(item[0], nodes_found_so_far, combine_same_as_name_only)
-            if override_target_uri and override_target_org in item[1].sameAsNameOnly:
+            if override_target_uri and override_target_org in get_same_as_name_onlies(item[1]):
                 item[1] = override_target_org
             items_to_keep.append(item)
     return items_to_keep
@@ -90,7 +91,7 @@ def get_parent_orgs(uri, combine_same_as_name_only=True, relationships="buyer|ve
         return res
 
     org = Organization.self_or_ultimate_target_node(uri)
-    same_as_uris = [x.uri for x in org.sameAsNameOnly if x.internalMergedSameAsHighToUri is None]
+    same_as_uris = [x.uri for x in get_same_as_name_onlies(org) if x.internalMergedSameAsHighToUri is None]
     res = do_get_parent_orgs_query(same_as_uris + [uri], relationships, source_names, earliest_doc_date)
     items_to_keep = []
     for item in res:
@@ -121,5 +122,4 @@ def org_family_tree(organization_uri, combine_same_as_name_only=True, relationsh
                         relationships=relationships,nodes_found_so_far=nodes_found_so_far,
                         source_names=source_names,earliest_doc_date=earliest_doc_date,
                         override_target_uri=organization_uri))
-
     return parents, siblings, children

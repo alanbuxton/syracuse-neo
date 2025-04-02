@@ -12,6 +12,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/60_fitness_workout_gym_exercise> ;
     ns1:internalDocId 1787762 ;
     ns1:name "ClassPass" ;
+    ns1:internalCleanName "classpass" ;
     ns1:sameAsHigh <https://1145.am/db/1735528/Classpass>,
         <https://1145.am/db/1762145/Classpass>,
         <https://1145.am/db/1797016/Classpass>,
@@ -25,10 +26,7 @@
         <https://1145.am/db/3183113/Classpass>,
         <https://1145.am/db/3507119/Classpass>,
         <https://1145.am/db/545724/Classpass>,
-        <https://1145.am/db/551475/Classpass> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1734427/Classpass>,
-        <https://1145.am/db/1774306/Classpass>,
-        <https://1145.am/db/1849660/Classpass> .
+        <https://1145.am/db/551475/Classpass>  .
 
 <https://1145.am/db/2400958/Fgm_Architects> a org:Organization ;
     ns1:basedInHighClean "Oak Brook" ;
@@ -41,6 +39,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/69_architects_architecture_engineering_engineers> ;
     ns1:internalDocId 2400958 ;
     ns1:name "FGM Architects" ;
+    ns1:internalCleanName"fgm architects" ;
     ns1:protagonist <https://1145.am/db/2400958/Fgm_Architects-Jackson_Galloway-Merger-Operations> .
 
 <https://1145.am/db/2400958/Jackson_Galloway> a org:Organization ;
@@ -53,6 +52,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/69_architects_architecture_engineering_engineers> ;
     ns1:internalDocId 2400958 ;
     ns1:name "Jackson Galloway" ;
+    ns1:internalCleanName "jackson galloway" ;
     ns1:protagonist <https://1145.am/db/2400958/Fgm_Architects-Jackson_Galloway-Merger-Operations> .
 
 <https://1145.am/db/2543227/Bristol-Myers> a org:Organization ;
@@ -67,6 +67,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 2543227 ;
     ns1:name "Bristol-Myers" ;
+    ns1:internalCleanName "bristol myers" ;
     ns1:protagonist <https://1145.am/db/2543227/Bristol-Myers-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/2299388/Bristol-Myers>,
         <https://1145.am/db/2300768/Bristol-Myers>,
@@ -82,9 +83,7 @@
         <https://1145.am/db/2597554/Bristol-Myers>,
         <https://1145.am/db/3638989/Bristol-Myers>,
         <https://1145.am/db/3678683/Bristol-Myers>,
-        <https://1145.am/db/3690351/Bristol-Myers> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2367701/Bristol-Myers>,
-        <https://1145.am/db/3727554/Bristol-Myers> .
+        <https://1145.am/db/3690351/Bristol-Myers> .
 
 <https://1145.am/db/2543228/Takeda-Acquisition-Business> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -113,6 +112,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 2693461 ;
     ns1:name "Advent International" ;
+    ns1:internalCleanName "advent international" ;
+    ns1:internalCleanShortName "advent" ;
     ns1:sameAsHigh <https://1145.am/db/102327/Advent_International_Corp>,
         <https://1145.am/db/1028039/Advent_International>,
         <https://1145.am/db/103808/Advent_International_Corp>,
@@ -223,69 +224,7 @@
         <https://1145.am/db/810355/Advent_International>,
         <https://1145.am/db/877488/Advent_International>,
         <https://1145.am/db/92910/Advent_International_Corp>,
-        <https://1145.am/db/963097/Advent_International> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1008613/Advent_International>,
-        <https://1145.am/db/1022373/Advent_International>,
-        <https://1145.am/db/1025752/Advent_International>,
-        <https://1145.am/db/1545392/Advent_International>,
-        <https://1145.am/db/1590520/Advent_International>,
-        <https://1145.am/db/1595363/Advent_International>,
-        <https://1145.am/db/1726546/Advent_International>,
-        <https://1145.am/db/1738378/Advent_International>,
-        <https://1145.am/db/1741557/Advent_International>,
-        <https://1145.am/db/1748133/Advent_International>,
-        <https://1145.am/db/1749559/Advent_International>,
-        <https://1145.am/db/1754003/Advent_International>,
-        <https://1145.am/db/1756330/Advent_International>,
-        <https://1145.am/db/1763417/Advent_International>,
-        <https://1145.am/db/1781390/Advent_International>,
-        <https://1145.am/db/181929/Advent_International>,
-        <https://1145.am/db/1945653/Advent_International>,
-        <https://1145.am/db/1992313/Advent_International>,
-        <https://1145.am/db/2052773/Advent_International>,
-        <https://1145.am/db/2069758/Advent_International>,
-        <https://1145.am/db/2314613/Advent_International>,
-        <https://1145.am/db/2365748/Advent_International>,
-        <https://1145.am/db/2545444/Advent_International>,
-        <https://1145.am/db/2578052/Advent_International>,
-        <https://1145.am/db/2592874/Advent_International>,
-        <https://1145.am/db/2800262/Advent_International_Lp>,
-        <https://1145.am/db/2812268/Advent_International>,
-        <https://1145.am/db/284641/Advent_International>,
-        <https://1145.am/db/2858011/Advent_International>,
-        <https://1145.am/db/2866832/Advent_International>,
-        <https://1145.am/db/2877810/Advent_International>,
-        <https://1145.am/db/2879011/Advent_International>,
-        <https://1145.am/db/2879013/Advent_International>,
-        <https://1145.am/db/2881491/Advent_International>,
-        <https://1145.am/db/2881492/Advent_International>,
-        <https://1145.am/db/2881553/Advent_International>,
-        <https://1145.am/db/2885224/Advent_International>,
-        <https://1145.am/db/2943660/Advent_International>,
-        <https://1145.am/db/2967161/Advent_International>,
-        <https://1145.am/db/2977425/Advent_International>,
-        <https://1145.am/db/2989074/Advent_International>,
-        <https://1145.am/db/3039211/Advent_International>,
-        <https://1145.am/db/3039378/Advent_International>,
-        <https://1145.am/db/3236983/Advent_International>,
-        <https://1145.am/db/3264826/Advent_International>,
-        <https://1145.am/db/3275201/Advent_International>,
-        <https://1145.am/db/3300913/Advent_International>,
-        <https://1145.am/db/3370467/Advent_International>,
-        <https://1145.am/db/353395/Advent_International>,
-        <https://1145.am/db/4049957/Advent_International_Lp>,
-        <https://1145.am/db/4134517/Advent_International>,
-        <https://1145.am/db/4134535/Advent_International>,
-        <https://1145.am/db/4144142/Advent_International>,
-        <https://1145.am/db/4193911/Advent_International>,
-        <https://1145.am/db/601687/Advent_International_Corporation>,
-        <https://1145.am/db/603547/Advent_International_Corporation>,
-        <https://1145.am/db/605223/Advent_International_Corporation>,
-        <https://1145.am/db/635592/Advent_International_Corporation>,
-        <https://1145.am/db/641899/Advent_International>,
-        <https://1145.am/db/644488/Advent_International>,
-        <https://1145.am/db/686863/Advent_International_Corp>,
-        <https://1145.am/db/868617/Advent_International_Corporation> .
+        <https://1145.am/db/963097/Advent_International> .
 
 <https://1145.am/db/3029576/Bristol-Myers_Squibb> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -300,6 +239,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3029576 ;
     ns1:name "Bristol-Myers Squibb" ;
+    ns1:internalCleanName "bristol myers squibb" ;
     ns1:sameAsHigh <https://1145.am/db/1113358/Bristol-Myers_Squibb>,
         <https://1145.am/db/2139540/Bristol-Myers_Squibb>,
         <https://1145.am/db/2140511/Bristol-Myers_Squibb_Company>,
@@ -533,38 +473,7 @@
         <https://1145.am/db/4008041/Bristol-Myers_Squibb_Company>,
         <https://1145.am/db/4015690/Bristol-Myers_Squibb>,
         <https://1145.am/db/831553/Bristol-Myers_Squibb>,
-        <https://1145.am/db/833098/Bristol-Myers_Squibb> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1318775/Bristol-Myers_Squibb>,
-        <https://1145.am/db/1319026/Bristol-Myers_Squibb>,
-        <https://1145.am/db/1822601/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2301461/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2305254/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2326568/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2337743/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2347038/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2360289/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2360963/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2364052/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2365157/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2367085/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2537500/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2543552/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2543648/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2585263/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2589142/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2592024/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2592791/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2595133/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2595843/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2596434/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2597274/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2598626/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3104856/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/3354989/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3851093/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3855832/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3958445/Bristol-Myers_Squibb>,
-        <https://1145.am/db/870410/Bristol-Myers_Squibb> .
+        <https://1145.am/db/833098/Bristol-Myers_Squibb>  .
 
 <https://1145.am/db/3029576/Eli_Lilly> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -577,6 +486,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3029576 ;
     ns1:name "Eli Lilly" ;
+    ns1:internalCleanName "eli lilly" ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
         <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
         <https://1145.am/db/1087869/Eli_Lilly_And_Company>,
@@ -805,34 +715,7 @@
         <https://1145.am/db/4234228/Eli_Lilly>,
         <https://1145.am/db/4240650/Eli_Lilly_And_Company>,
         <https://1145.am/db/461671/Eli_Lilly_And_Company>,
-        <https://1145.am/db/768105/Eli_Lilly> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1121894/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2109798/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2280616/Eli_Lilly>,
-        <https://1145.am/db/2304319/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2310738/Eli_Lilly>,
-        <https://1145.am/db/2315325/Eli_Lilly>,
-        <https://1145.am/db/2317682/Eli_Lilly>,
-        <https://1145.am/db/2325257/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2327587/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2328633/Eli_Lilly>,
-        <https://1145.am/db/2329915/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2349001/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2360338/Eli_Lilly>,
-        <https://1145.am/db/2361510/Eli_Lilly>,
-        <https://1145.am/db/2368321/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2560025/Eli_Lilly>,
-        <https://1145.am/db/2562999/Eli_Lilly>,
-        <https://1145.am/db/2575947/Eli_Lilly>,
-        <https://1145.am/db/2581804/Eli_Lilly>,
-        <https://1145.am/db/2583703/Eli_Lilly>,
-        <https://1145.am/db/2593456/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3195443/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3448439/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3504766/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3536712/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3846248/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3847390/Eli_Lilly_And_Company> .
+        <https://1145.am/db/768105/Eli_Lilly>  .
 
 <https://1145.am/db/3029576/Glaxosmithkleine> a org:Organization ;
     ns1:basedInLowRaw "FTSE 100" ;
@@ -841,6 +724,7 @@
     ns1:documentSource <https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_> ;
     ns1:foundName "GlaxosmithKleine" ;
     ns1:industry "healthcare" ;
+    ns1:internalCleanName "glaxosmithkleine" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3029576 ;
     ns1:name "GlaxosmithKleine" .
@@ -856,58 +740,14 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/97_safety_industry_risk_protection> ;
     ns1:internalDocId 3145990 ;
     ns1:name "Motorola Solutions" ;
+    ns1:internalCleanName "motorola solutions";
+    ns1:internalCleanShortName "motorola" ;
     ns1:sameAsHigh <https://1145.am/db/1442254/Motorola_Solutions>,
         <https://1145.am/db/1442384/Motorola_Solutions>,
         <https://1145.am/db/1787310/Motorola_Solutions>,
         <https://1145.am/db/4014121/Motorola_Solutions>,
         <https://1145.am/db/4029003/Motorola_Solutions>,
-        <https://1145.am/db/992223/Motorola_Solutions> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1051926/Motorola_Solutions>,
-        <https://1145.am/db/1099497/Motorola_Solutions_Inc>,
-        <https://1145.am/db/1578724/Motorola_Solutions>,
-        <https://1145.am/db/1581154/Motorola_Solutions>,
-        <https://1145.am/db/1804903/Motorola_Solutions_Inc>,
-        <https://1145.am/db/1806006/Motorola_Solutions>,
-        <https://1145.am/db/1838857/Motorola_Solutions>,
-        <https://1145.am/db/1838866/Motorola_Solutions>,
-        <https://1145.am/db/1878956/Motorola_Solutions>,
-        <https://1145.am/db/1895968/Motorola_Solutions>,
-        <https://1145.am/db/2438953/Motorola_Solutions>,
-        <https://1145.am/db/2448026/Motorola_Solutions>,
-        <https://1145.am/db/2624668/Motorola_Solutions>,
-        <https://1145.am/db/2625106/Motorola_Solutions>,
-        <https://1145.am/db/2628004/Motorola_Solutions>,
-        <https://1145.am/db/2649782/Motorola_Solutions>,
-        <https://1145.am/db/2650490/Motorola_Solutions>,
-        <https://1145.am/db/2651052/Motorola_Solutions>,
-        <https://1145.am/db/2658836/Motorola_Solutions>,
-        <https://1145.am/db/2659553/Motorola_Solutions>,
-        <https://1145.am/db/2660228/Motorola_Solutions>,
-        <https://1145.am/db/2662347/Motorola_Solutions>,
-        <https://1145.am/db/2663835/Motorola_Solutions>,
-        <https://1145.am/db/2663837/Motorola_Solutions>,
-        <https://1145.am/db/2665980/Motorola_Solutions>,
-        <https://1145.am/db/2666996/Motorola_Solutions>,
-        <https://1145.am/db/2675874/Motorola_Solutions>,
-        <https://1145.am/db/2676312/Motorola_Solutions>,
-        <https://1145.am/db/2684545/Motorola_Solutions>,
-        <https://1145.am/db/2684551/Motorola_Solutions>,
-        <https://1145.am/db/2685124/Motorola_Solutions>,
-        <https://1145.am/db/2685152/Motorola_Solutions>,
-        <https://1145.am/db/2685394/Motorola_Solutions>,
-        <https://1145.am/db/2840030/Motorola_Solutions>,
-        <https://1145.am/db/3695397/Motorola_Solutions>,
-        <https://1145.am/db/3761168/Motorola_Solutions>,
-        <https://1145.am/db/4006762/Motorola_Solutions>,
-        <https://1145.am/db/4008087/Motorola_Solutions>,
-        <https://1145.am/db/4009502/Motorola_Solutions>,
-        <https://1145.am/db/402543/Motorola_Solutions>,
-        <https://1145.am/db/702707/Motorola_Solutions>,
-        <https://1145.am/db/765257/Motorola_Solutions>,
-        <https://1145.am/db/874845/Motorola_Solutions>,
-        <https://1145.am/db/923369/Motorola_Solutions_Inc>,
-        <https://1145.am/db/988529/Motorola_Solutions>,
-        <https://1145.am/db/989936/Motorola_Solutions> .
+        <https://1145.am/db/992223/Motorola_Solutions> .
 
 <https://1145.am/db/3443634/Gimbal> a org:Organization ;
     ns1:basedInHighClean "Los Angeles" ;
@@ -919,6 +759,7 @@
     ns1:foundName "Gimbal" ;
     ns1:internalDocId 3443634 ;
     ns1:name "Gimbal" ;
+    ns1:internalCleanName "gimbal" ;
     ns1:sameAsHigh <https://1145.am/db/3778840/Gimbal> .
 
 <https://1145.am/db/3443636/Aurora_Financial_Advisors> a org:Organization ;
@@ -933,6 +774,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/529_wealthtech_wealth_technology_tech> ;
     ns1:internalDocId 3443636 ;
     ns1:name "Aurora Financial Advisors" ;
+    ns1:internalCleanName "aurora financial advisors" ;
     ns1:protagonist <https://1145.am/db/3443636/Aurora_Financial_Advisors-The_Colony_Group-Merger> .
 
 <https://1145.am/db/3443636/The_Colony_Group> a org:Organization ;
@@ -947,6 +789,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/529_wealthtech_wealth_technology_tech> ;
     ns1:internalDocId 3443636 ;
     ns1:name "The Colony Group" ;
+    ns1:internalCleanName "the colony group" ;
+    ns1:internalCleanShortName "the colony" ;
     ns1:protagonist <https://1145.am/db/3443636/Aurora_Financial_Advisors-The_Colony_Group-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1135533/The_Colony_Group>,
         <https://1145.am/db/1606237/The_Colony_Group>,
@@ -959,8 +803,7 @@
         <https://1145.am/db/4216977/The_Colony_Group_Llc>,
         <https://1145.am/db/536784/The_Colony_Group>,
         <https://1145.am/db/642652/The_Colony_Group>,
-        <https://1145.am/db/809840/The_Colony_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3368543/The_Colony> .
+        <https://1145.am/db/809840/The_Colony_Group> .
 
 <https://1145.am/db/3443680/Munck_Wilson_Mandala> a org:Organization ;
     ns1:basedInHighClean "Dallas" ;
@@ -974,6 +817,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:internalDocId 3443680 ;
     ns1:name "Munck Wilson Mandala" ;
+    ns1:internalCleanName "munck wilson mandala" ;
     ns1:protagonist <https://1145.am/db/3443680/Munck_Wilson_Mandala-The_Hecker_Law_Group-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/3932658/Munck_Wilson_Mandala>,
         <https://1145.am/db/470622/Munck_Wilson_Mandala> .
@@ -990,6 +834,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:internalDocId 3443680 ;
     ns1:name "The Hecker Law Group" ;
+    ns1:internalCleanName "the hecker law group" ;
+    ns1:internalCleanShortName "the hecker law" ;
     ns1:protagonist <https://1145.am/db/3443680/Munck_Wilson_Mandala-The_Hecker_Law_Group-Merger> .
 
 <https://1145.am/db/3444686/Dynamic_Quest> a org:Organization ;
@@ -1004,9 +850,9 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/4_cloud_multicloud_virtualized_computing> ;
     ns1:internalDocId 3444686 ;
     ns1:name "Dynamic Quest" ;
+    ns1:internalCleanName "dynamic quest" ;
     ns1:sameAsHigh <https://1145.am/db/3235558/Dynamic_Quest>,
-        <https://1145.am/db/3804260/Dynamic_Quest> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1102017/Dynamic_Quest> .
+        <https://1145.am/db/3804260/Dynamic_Quest>  .
 
 <https://1145.am/db/3444769/Control_Solutions_Inc> a org:Organization ;
     ns1:basedInHighClean "Pasadena" ;
@@ -1021,8 +867,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/429_distributor_chemicals_ingredients_chemical> ;
     ns1:internalDocId 3444769 ;
     ns1:name "Control Solutions Inc." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1201542/Control_Solutions>,
-        <https://1145.am/db/3925352/Control_Solutions_Inc> .
+    ns1:internalCleanName "control solutions inc" ;
+    ns1:internalCleanShortName "control solutions" .
 
 <https://1145.am/db/3445572/Seeman_Holtz_Property_Casualty> a org:Organization ;
     ns1:basedInHighClean "Boca Raton" ;
@@ -1034,6 +880,7 @@
     ns1:foundName "Seeman Holtz Property & Casualty, LLC" ;
     ns1:internalDocId 3445572 ;
     ns1:name "Seeman Holtz Property & Casualty" ;
+    ns1:internalCleanName "seeman holtz property and casualty" ;
     ns1:sameAsHigh <https://1145.am/db/3454911/Seeman_Holtz_Property_Casualty>,
         <https://1145.am/db/3479444/Seeman_Holtz_Property_Casualty>,
         <https://1145.am/db/3497020/Seeman_Holtz_Property_Casualty>,
@@ -1069,9 +916,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/72_content_platform_technology_digital> ;
     ns1:internalDocId 3446496 ;
     ns1:name "Gladson" ;
+    ns1:internalCleanName "gladson" ;
     ns1:sameAsHigh <https://1145.am/db/3913967/Gladson>,
-        <https://1145.am/db/3913989/Gladson> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3482225/Gladson> .
+        <https://1145.am/db/3913989/Gladson>  .
 
 <https://1145.am/db/3446496/The_Jordan_Company> a org:Organization ;
     ns1:basedInHighClean "Chicago" ;
@@ -1081,43 +928,9 @@
     ns1:foundName "The Jordan Company" ;
     ns1:internalDocId 3446496 ;
     ns1:name "The Jordan Company" ;
-    ns1:participant <https://1145.am/db/3446496/Edgenet-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042219/The_Jordan_Company>,
-        <https://1145.am/db/1420220/The_Jordan_Company>,
-        <https://1145.am/db/1467797/The_Jordan_Company>,
-        <https://1145.am/db/1468490/The_Jordan_Company>,
-        <https://1145.am/db/1469327/The_Jordan_Company>,
-        <https://1145.am/db/1494957/The_Jordan_Company>,
-        <https://1145.am/db/2092127/The_Jordan_Company>,
-        <https://1145.am/db/2794270/The_Jordan_Company>,
-        <https://1145.am/db/3128741/The_Jordan_Company>,
-        <https://1145.am/db/3197171/The_Jordan_Company>,
-        <https://1145.am/db/3215789/The_Jordan_Company>,
-        <https://1145.am/db/3269272/The_Jordan_Company>,
-        <https://1145.am/db/327395/The_Jordan_Company>,
-        <https://1145.am/db/3343586/The_Jordan_Company>,
-        <https://1145.am/db/3362686/The_Jordan_Company>,
-        <https://1145.am/db/3482225/The_Jordan_Company>,
-        <https://1145.am/db/3493552/The_Jordan_Company>,
-        <https://1145.am/db/3606015/The_Jordan_Company>,
-        <https://1145.am/db/3616596/The_Jordan_Company>,
-        <https://1145.am/db/3619013/The_Jordan_Company>,
-        <https://1145.am/db/3913967/The_Jordan_Company>,
-        <https://1145.am/db/3913989/The_Jordan_Company>,
-        <https://1145.am/db/394500/The_Jordan_Company>,
-        <https://1145.am/db/395981/The_Jordan_Company>,
-        <https://1145.am/db/464459/The_Jordan_Company>,
-        <https://1145.am/db/465304/The_Jordan_Company>,
-        <https://1145.am/db/465417/The_Jordan_Company>,
-        <https://1145.am/db/472528/The_Jordan_Company>,
-        <https://1145.am/db/473599/The_Jordan_Company>,
-        <https://1145.am/db/482526/The_Jordan_Company>,
-        <https://1145.am/db/492407/The_Jordan_Company>,
-        <https://1145.am/db/493895/The_Jordan_Company>,
-        <https://1145.am/db/630164/The_Jordan_Company>,
-        <https://1145.am/db/709670/The_Jordan_Company>,
-        <https://1145.am/db/973829/The_Jordan_Company>,
-        <https://1145.am/db/990936/The_Jordan_Company> .
+    ns1:internalCleanName "the jordan company" ;
+    ns1:internalCleanShortName "the jordan" ;
+    ns1:participant <https://1145.am/db/3446496/Edgenet-Acquisition> .
 
 <https://1145.am/db/3446496/Wicks_Capital_Partners> a org:Organization ;
     ns1:basedInLowRaw "Chicago" ;
@@ -1125,11 +938,9 @@
     ns1:foundName "Wicks Capital Partners" ;
     ns1:internalDocId 3446496 ;
     ns1:name "Wicks Capital Partners" ;
-    ns1:participant <https://1145.am/db/3446496/Edgenet-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3028613/Wicks>,
-        <https://1145.am/db/3482225/Wicks_Capital_Partners>,
-        <https://1145.am/db/3913967/Wicks_Capital_Partners>,
-        <https://1145.am/db/3913989/Wicks_Capital_Partners> .
+    ns1:internalCleanName "wicks capital partners";
+    ns1:internalCleanShortName "wicks capital" ;
+    ns1:participant <https://1145.am/db/3446496/Edgenet-Acquisition> .
 
 <https://1145.am/db/3446501/Sycamore_Partners> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1141,63 +952,15 @@
     ns1:foundName "Sycamore Partners" ;
     ns1:internalDocId 3446501 ;
     ns1:name "Sycamore Partners" ;
+    ns1:internalCleanName "sycamore partners" ;
+    ns1:internalCleanShortName "sycamore" ;
     ns1:sameAsHigh <https://1145.am/db/1175897/Sycamore_Partners>,
         <https://1145.am/db/1473776/Sycamore_Partners>,
         <https://1145.am/db/1644018/Sycamore>,
         <https://1145.am/db/2128590/Sycamore_Partners>,
         <https://1145.am/db/3537624/Sycamore_Partners>,
         <https://1145.am/db/517341/Sycamore_Partners>,
-        <https://1145.am/db/912067/Sycamore_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/163581/Sycamore_Partners>,
-        <https://1145.am/db/199799/Sycamore_Partners>,
-        <https://1145.am/db/2076619/Sycamore_Partners>,
-        <https://1145.am/db/2207078/Sycamore_Ventures>,
-        <https://1145.am/db/2343833/Sycamore_Ventures>,
-        <https://1145.am/db/2461670/Sycamore_Partners>,
-        <https://1145.am/db/2492731/Sycamore_Partners>,
-        <https://1145.am/db/2989415/Sycamore_Partners>,
-        <https://1145.am/db/3047382/Sycamore_Partners>,
-        <https://1145.am/db/3050111/Sycamore>,
-        <https://1145.am/db/3083654/Sycamore_Partners>,
-        <https://1145.am/db/3084334/Sycamore_Partners>,
-        <https://1145.am/db/3084863/Sycamore>,
-        <https://1145.am/db/3084888/Sycamore_Partners>,
-        <https://1145.am/db/3085384/Sycamore>,
-        <https://1145.am/db/3316344/Sycamore_Partners>,
-        <https://1145.am/db/3377826/Sycamore_Partners>,
-        <https://1145.am/db/3400770/Sycamore_Partners>,
-        <https://1145.am/db/3418083/Sycamore_Partners>,
-        <https://1145.am/db/3466152/Sycamore_Partners>,
-        <https://1145.am/db/3467988/Sycamore_Partners>,
-        <https://1145.am/db/3518711/Sycamore_Partners>,
-        <https://1145.am/db/3531721/Sycamore_Partners>,
-        <https://1145.am/db/3536952/Sycamore_Partners>,
-        <https://1145.am/db/3631087/Sycamore_Partners>,
-        <https://1145.am/db/3650762/Sycamore_Partners>,
-        <https://1145.am/db/3671110/Sycamore_Partners>,
-        <https://1145.am/db/368426/Sycamore>,
-        <https://1145.am/db/3686675/Sycamore_Partners>,
-        <https://1145.am/db/3981130/Sycamore_Partners>,
-        <https://1145.am/db/4101432/Sycamore_Partners>,
-        <https://1145.am/db/4211454/Sycamore_Partners>,
-        <https://1145.am/db/4238335/Sycamore_Partners>,
-        <https://1145.am/db/4239085/Sycamore_Partners>,
-        <https://1145.am/db/713275/Sycamore_Partners>,
-        <https://1145.am/db/714385/Sycamore_Partners>,
-        <https://1145.am/db/76007/Sycamore_Partners>,
-        <https://1145.am/db/76144/Sycamore_Partners>,
-        <https://1145.am/db/76354/Sycamore_Partners>,
-        <https://1145.am/db/777069/Sycamore_Partners>,
-        <https://1145.am/db/778519/Sycamore_Partners>,
-        <https://1145.am/db/779115/Sycamore_Partners>,
-        <https://1145.am/db/779350/Sycamore_Partners>,
-        <https://1145.am/db/782639/Sycamore_Partners>,
-        <https://1145.am/db/810323/Sycamore_Partners>,
-        <https://1145.am/db/85978/Sycamore_Partners>,
-        <https://1145.am/db/909821/Sycamore_Partners>,
-        <https://1145.am/db/911886/Sycamore_Partners>,
-        <https://1145.am/db/953356/Sycamore>,
-        <https://1145.am/db/975833/Sycamore> .
+        <https://1145.am/db/912067/Sycamore_Partners>  .
 
 <https://1145.am/db/3446550/Ussc_Group> a org:Organization ;
     ns1:basedInHighClean "Exton" ;
@@ -1208,9 +971,9 @@
     ns1:documentSource <https://1145.am/db/3446550/wwwprnewswirecom_news-releases_ussc-group-llc-acquires-vista-brake-lock-llc-300774072html> ;
     ns1:foundName "USSC Group," ;
     ns1:internalDocId 3446550 ;
-    ns1:name "USSC Group" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3460718/Ussc_Group>,
-        <https://1145.am/db/3621309/Ussc_Group> .
+    ns1:internalCleanName "ussc group";
+    ns1:internalCleanShortName "ussc" ;
+    ns1:name "USSC Group"  .
 
 <https://1145.am/db/3446574/Transforce> a org:Organization ;
     ns1:basedInHighClean "Alexandria" ;
@@ -1225,6 +988,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/514_screening_background_checks_testing> ;
     ns1:internalDocId 3446574 ;
     ns1:name "TransForce" ;
+    ns1:internalCleanName "transforce" ;
+    ns1:internalCleanShortName "transforce" ;
     ns1:sameAsHigh <https://1145.am/db/3578135/Transforce_Inc>,
         <https://1145.am/db/3608163/Transforce>,
         <https://1145.am/db/3803635/Transforce>,
@@ -1243,6 +1008,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/76_investment_investor_private_investing> ;
     ns1:internalDocId 3447359 ;
     ns1:name "Aterian Investment Partners" ;
+    ns1:internalCleanName "aterian investment partners" ;
+    ns1:internalCleanShortName "aterian investment" ;
     ns1:sameAsHigh <https://1145.am/db/1050432/Aterian_Investment_Partners>,
         <https://1145.am/db/1101220/Aterian_Investment_Partners>,
         <https://1145.am/db/1103243/Aterian_Investment_Partners>,
@@ -1256,11 +1023,7 @@
         <https://1145.am/db/3766785/Aterian_Investment_Partners>,
         <https://1145.am/db/3774739/Aterian_Investment_Partners>,
         <https://1145.am/db/3903691/Aterian_Investment_Partners>,
-        <https://1145.am/db/4132861/Aterian_Investment_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1047873/Aterian_Investment_Partners>,
-        <https://1145.am/db/1084148/Aterian_Investment_Partners>,
-        <https://1145.am/db/1117238/Aterian_Investment_Partners>,
-        <https://1145.am/db/3292828/Aterian_Investment_Partners> .
+        <https://1145.am/db/4132861/Aterian_Investment_Partners> .
 
 <https://1145.am/db/3448272/Resmed> a org:Organization ;
     ns1:basedInLowRaw "Australia" ;
@@ -1271,6 +1034,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3448272 ;
     ns1:name "ResMed" ;
+    ns1:internalCleanName "resmed" ;
     ns1:sameAsHigh <https://1145.am/db/1132383/Resmed>,
         <https://1145.am/db/1136972/Resmed_Inc>,
         <https://1145.am/db/1166175/Resmed>,
@@ -1280,19 +1044,7 @@
         <https://1145.am/db/2319481/Resmed>,
         <https://1145.am/db/2537878/Resmed>,
         <https://1145.am/db/3489802/Resmed>,
-        <https://1145.am/db/431573/Resmed> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1037308/Resmed>,
-        <https://1145.am/db/1818814/Resmed>,
-        <https://1145.am/db/2186148/Resmed>,
-        <https://1145.am/db/2187168/Resmed>,
-        <https://1145.am/db/2279557/Resmed>,
-        <https://1145.am/db/2285457/Resmed>,
-        <https://1145.am/db/2292310/Resmed>,
-        <https://1145.am/db/2306306/Resmed>,
-        <https://1145.am/db/2316195/Resmed>,
-        <https://1145.am/db/2809733/Resmed>,
-        <https://1145.am/db/632572/Resmed>,
-        <https://1145.am/db/972337/Resmed> .
+        <https://1145.am/db/431573/Resmed> .
 
 <https://1145.am/db/3448272/Safeguard_Scientifics> a org:Organization ;
     ns1:basedInHighClean "Radnor" ;
@@ -1305,49 +1057,11 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3448272 ;
     ns1:name "Safeguard Scientifics" ;
+    ns1:internalCleanName "safeguard scientifics" ;
     ns1:participant <https://1145.am/db/3448272/Propeller_Health-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/2182583/Safeguard_Scientifics>,
         <https://1145.am/db/2305443/Safeguard_Scientifics>,
-        <https://1145.am/db/2436408/Safeguard_Scientifics_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1232627/Safeguard_Scientifics>,
-        <https://1145.am/db/1383287/Safeguard_Scientifics>,
-        <https://1145.am/db/1801934/Safeguard_Scientifics>,
-        <https://1145.am/db/1843216/Safeguard_Scientifics>,
-        <https://1145.am/db/1855887/Safeguard_Scientifics>,
-        <https://1145.am/db/1873156/Safeguard_Scientifics>,
-        <https://1145.am/db/1914893/Safeguard_Scientifics>,
-        <https://1145.am/db/2147446/Safeguard_Scientifics>,
-        <https://1145.am/db/2290453/Safeguard_Scientifics>,
-        <https://1145.am/db/2291872/Safeguard_Scientifics>,
-        <https://1145.am/db/2292039/Safeguard_Scientifics>,
-        <https://1145.am/db/2295945/Safeguard_Scientifics>,
-        <https://1145.am/db/2297604/Safeguard_Scientifics>,
-        <https://1145.am/db/2298535/Safeguard_Scientifics>,
-        <https://1145.am/db/2304598/Safeguard_Scientifics>,
-        <https://1145.am/db/2304605/Safeguard_Scientifics_Inc>,
-        <https://1145.am/db/2305609/Safeguard_Scientifics>,
-        <https://1145.am/db/2307837/Safeguard_Scientifics>,
-        <https://1145.am/db/2316302/Safeguard_Scientifics>,
-        <https://1145.am/db/2317455/Safeguard_Scientifics_Inc>,
-        <https://1145.am/db/2319506/Safeguard_Scientifics>,
-        <https://1145.am/db/2322984/Safeguard_Scientifics>,
-        <https://1145.am/db/2323003/Safeguard_Scientifics>,
-        <https://1145.am/db/2323336/Safeguard_Scientifics>,
-        <https://1145.am/db/2325237/Safeguard_Scientifics>,
-        <https://1145.am/db/2354706/Safeguard_Scientifics>,
-        <https://1145.am/db/2359125/Safeguard_Scientifics>,
-        <https://1145.am/db/2447203/Safeguard_Scientifics_Inc>,
-        <https://1145.am/db/2576460/Safeguard_Scientifics>,
-        <https://1145.am/db/3177601/Safeguard_Scientifics>,
-        <https://1145.am/db/3402266/Safeguard_Scientifics>,
-        <https://1145.am/db/3490977/Safeguard_Scientifics>,
-        <https://1145.am/db/3587508/Safeguard_Scientifics>,
-        <https://1145.am/db/3804347/Safeguard_Scientifics>,
-        <https://1145.am/db/3827750/Safeguard_Scientifics>,
-        <https://1145.am/db/3837694/Safeguard_Scientifics>,
-        <https://1145.am/db/3894717/Safeguard_Scientifics>,
-        <https://1145.am/db/3904094/Safeguard_Scientifics>,
-        <https://1145.am/db/3931818/Safeguard_Scientifics> .
+        <https://1145.am/db/2436408/Safeguard_Scientifics_Inc> .
 
 <https://1145.am/db/3448296/Urban_One-Ipo-Senior_Subordinated_Notes> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -1376,6 +1090,7 @@
     ns1:documentSource <https://1145.am/db/1787762/techcrunchcom_2019_01_06_fitness-marketplace-classpass-acquires-competitor-guavapass_> ;
     ns1:foundName "GuavaPass" ;
     ns1:industry "fitness marketplace" ;
+    ns1:internalCleanName "guavapass" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/60_fitness_workout_gym_exercise> ;
     ns1:internalDocId 1787762 ;
     ns1:name "GuavaPass" .
@@ -1429,6 +1144,7 @@
     ns1:foundName "Takeda",
         "Takeda wo" ;
     ns1:industry "pharmaceutical" ;
+    ns1:internalCleanName "takeda" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 2543228 ;
@@ -1529,14 +1245,7 @@
         <https://1145.am/db/3980800/Takeda>,
         <https://1145.am/db/4121149/Takeda>,
         <https://1145.am/db/4246408/Takeda>,
-        <https://1145.am/db/944999/Takeda> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2298018/Takeda>,
-        <https://1145.am/db/2326444/Takeda>,
-        <https://1145.am/db/2548805/Takeda>,
-        <https://1145.am/db/2562545/Takeda>,
-        <https://1145.am/db/2565955/Takeda>,
-        <https://1145.am/db/4089800/Takeda>,
-        <https://1145.am/db/946330/Takeda> .
+        <https://1145.am/db/944999/Takeda> .
 
 <https://1145.am/db/2693461/Aimbridge_Hospitality> a org:Organization ;
     ns1:basedInHighClean "Dallas" ;
@@ -1550,6 +1259,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/107_hotel_hospitality_investment_lodging> ;
     ns1:internalDocId 2693461 ;
     ns1:name "Aimbridge Hospitality" ;
+    ns1:internalCleanName "aimbridge hospitality" ;
     ns1:sameAsHigh <https://1145.am/db/2155777/Aimbridge_Hospitality>,
         <https://1145.am/db/2371675/Aimbridge_Hospitality>,
         <https://1145.am/db/2492246/Aimbridge_Hospitality>,
@@ -1578,11 +1288,7 @@
         <https://1145.am/db/3903212/Aimbridge_Hospitality>,
         <https://1145.am/db/4045686/Aimbridge_Hospitality>,
         <https://1145.am/db/422863/Aimbridge_Hospitality>,
-        <https://1145.am/db/426167/Aimbridge_Hospitality> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2690395/Aimbridge_Hospitality>,
-        <https://1145.am/db/2691624/Aimbridge_Hospitality>,
-        <https://1145.am/db/2694884/Aimbridge_Hospitality>,
-        <https://1145.am/db/2697646/Aimbridge_Hospitality> .
+        <https://1145.am/db/426167/Aimbridge_Hospitality>  .
 
 <https://1145.am/db/2693461/Aimbridge_Hospitality-Acquisition-Ownership> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1612,6 +1318,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 2693461 ;
     ns1:name "General Atlantic" ;
+    ns1:internalCleanName "general atlantic" ;
     ns1:sameAsHigh <https://1145.am/db/1035291/General_Atlantic>,
         <https://1145.am/db/1036069/General_Atlantic>,
         <https://1145.am/db/1047708/General_Atlantic>,
@@ -1780,96 +1487,7 @@
         <https://1145.am/db/977490/General_Atlantic>,
         <https://1145.am/db/98194/General_Atlantic>,
         <https://1145.am/db/988318/General_Atlantic>,
-        <https://1145.am/db/989392/General_Atlantic> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1632690/General_Atlantic>,
-        <https://1145.am/db/1693741/General_Atlantic>,
-        <https://1145.am/db/1694388/General_Atlantic>,
-        <https://1145.am/db/1697296/General_Atlantic>,
-        <https://1145.am/db/1734901/General_Atlantic>,
-        <https://1145.am/db/1736412/General_Atlantic>,
-        <https://1145.am/db/1736790/General_Atlantic>,
-        <https://1145.am/db/1736811/General_Atlantic>,
-        <https://1145.am/db/1737972/General_Atlantic>,
-        <https://1145.am/db/1740379/General_Atlantic>,
-        <https://1145.am/db/1741040/General_Atlantic>,
-        <https://1145.am/db/1742491/General_Atlantic>,
-        <https://1145.am/db/1744079/General_Atlantic>,
-        <https://1145.am/db/1744159/General_Atlantic>,
-        <https://1145.am/db/1746477/General_Atlantic>,
-        <https://1145.am/db/1747150/General_Atlantic>,
-        <https://1145.am/db/1754241/General_Atlantic>,
-        <https://1145.am/db/1754745/General_Atlantic>,
-        <https://1145.am/db/1756044/General_Atlantic>,
-        <https://1145.am/db/1757802/General_Atlantic>,
-        <https://1145.am/db/1760251/General_Atlantic>,
-        <https://1145.am/db/1762144/General_Atlantic>,
-        <https://1145.am/db/1767814/General_Atlantic>,
-        <https://1145.am/db/1769290/General_Atlantic>,
-        <https://1145.am/db/1773025/General_Atlantic>,
-        <https://1145.am/db/1780267/General_Atlantic>,
-        <https://1145.am/db/1780698/General_Atlantic>,
-        <https://1145.am/db/1784774/General_Atlantic>,
-        <https://1145.am/db/1788382/General_Atlantic>,
-        <https://1145.am/db/1799657/General_Atlantic_Llc>,
-        <https://1145.am/db/1824532/General_Atlantic>,
-        <https://1145.am/db/1839325/General_Atlantic>,
-        <https://1145.am/db/1847939/General_Atlantic>,
-        <https://1145.am/db/1876014/General_Atlantic>,
-        <https://1145.am/db/1882301/General_Atlantic>,
-        <https://1145.am/db/1894026/General_Atlantic>,
-        <https://1145.am/db/1950711/General_Atlantic>,
-        <https://1145.am/db/1989304/General_Atlantic_Lp>,
-        <https://1145.am/db/2014230/General_Atlantic>,
-        <https://1145.am/db/2026695/General_Atlantic>,
-        <https://1145.am/db/2069758/General_Atlantic>,
-        <https://1145.am/db/210226/General_Atlantic>,
-        <https://1145.am/db/2106644/General_Atlantic>,
-        <https://1145.am/db/2148213/General_Atlantic>,
-        <https://1145.am/db/2182885/General_Atlantic>,
-        <https://1145.am/db/2740633/General_Atlantic>,
-        <https://1145.am/db/2787302/General_Atlantic>,
-        <https://1145.am/db/3001808/General_Atlantic>,
-        <https://1145.am/db/3022660/General_Atlantic>,
-        <https://1145.am/db/3128356/General_Atlantic>,
-        <https://1145.am/db/3135482/General_Atlantic_Inc>,
-        <https://1145.am/db/3153209/General_Atlantic>,
-        <https://1145.am/db/3325465/General_Atlantic>,
-        <https://1145.am/db/3426133/General_Atlantic>,
-        <https://1145.am/db/3436455/General_Atlantic>,
-        <https://1145.am/db/3442087/General_Atlantic>,
-        <https://1145.am/db/3443048/General_Atlantic>,
-        <https://1145.am/db/348768/General_Atlantic>,
-        <https://1145.am/db/3489404/General_Atlantic>,
-        <https://1145.am/db/3500698/General_Atlantic>,
-        <https://1145.am/db/3511968/General_Atlantic>,
-        <https://1145.am/db/3581182/General_Atlantic>,
-        <https://1145.am/db/371811/General_Atlantic>,
-        <https://1145.am/db/372639/General_Atlantic>,
-        <https://1145.am/db/393505/General_Atlantic>,
-        <https://1145.am/db/4007322/General_Atlantic>,
-        <https://1145.am/db/4022685/General_Atlantic_Lp>,
-        <https://1145.am/db/4035130/General_Atlantic>,
-        <https://1145.am/db/4092459/General_Atlantic>,
-        <https://1145.am/db/4094955/General_Atlantic>,
-        <https://1145.am/db/4099303/General_Atlantic_Lp>,
-        <https://1145.am/db/4107852/General_Atlantic>,
-        <https://1145.am/db/4117707/General_Atlantic_Lp>,
-        <https://1145.am/db/4122089/General_Atlantic>,
-        <https://1145.am/db/4130414/General_Atlantic>,
-        <https://1145.am/db/4146889/General_Atlantic>,
-        <https://1145.am/db/4154997/General_Atlantic>,
-        <https://1145.am/db/4162469/General_Atlantic>,
-        <https://1145.am/db/4176291/General_Atlantic>,
-        <https://1145.am/db/4193897/General_Atlantic>,
-        <https://1145.am/db/4202270/General_Atlantic>,
-        <https://1145.am/db/4210209/General_Atlantic>,
-        <https://1145.am/db/4241056/General_Atlantic>,
-        <https://1145.am/db/4244517/General_Atlantic>,
-        <https://1145.am/db/4253499/General_Atlantic>,
-        <https://1145.am/db/4254579/General_Atlantic>,
-        <https://1145.am/db/641107/General_Atlantic>,
-        <https://1145.am/db/677552/General_Atlantic>,
-        <https://1145.am/db/783577/General_Atlantic> .
+        <https://1145.am/db/989392/General_Atlantic> .
 
 <https://1145.am/db/2693461/Lee_Equity_Partners> a org:Organization ;
     ns1:basedInHighClean "United States" ;
@@ -1883,6 +1501,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 2693461 ;
     ns1:name "Lee Equity Partners" ;
+    ns1:internalCleanName "lee equity partners" ;
+    ns1:internalCleanShortName "lee equity" ;
     ns1:sameAsHigh <https://1145.am/db/1336994/Lee_Equity>,
         <https://1145.am/db/1453826/Lee_Equity_Partners>,
         <https://1145.am/db/1460705/Lee_Equity_Partners>,
@@ -1895,13 +1515,7 @@
         <https://1145.am/db/471229/Lee_Equity_Partners>,
         <https://1145.am/db/665690/Lee_Equity>,
         <https://1145.am/db/758783/Lee_Equity_Partners>,
-        <https://1145.am/db/758883/Lee_Equity_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1969991/Lee_Equity_Partners>,
-        <https://1145.am/db/2038166/Lee_Equity_Partners>,
-        <https://1145.am/db/2061810/Lee_Equity_Partners_Llc>,
-        <https://1145.am/db/2063091/Lee_Equity_Partners>,
-        <https://1145.am/db/604489/Lee_Equity_Partners>,
-        <https://1145.am/db/605093/Lee_Equity_Partners> .
+        <https://1145.am/db/758883/Lee_Equity_Partners>  .
 
 <https://1145.am/db/3029576/Celgene-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1930,6 +1544,7 @@
     ns1:internalDocId 3029576 ;
     ns1:name "Loxo",
         "Loxo Oncology" ;
+    ns1:internalCleanName "loxo" ,"loxo oncology" ;
     ns1:sameAsHigh <https://1145.am/db/2154037/Loxo_Oncology>,
         <https://1145.am/db/2337250/Loxo_Oncology>,
         <https://1145.am/db/2337254/Loxo_Oncology>,
@@ -1945,15 +1560,11 @@
         <https://1145.am/db/2566845/Loxo_Oncology>,
         <https://1145.am/db/3435240/Loxo_Oncology>,
         <https://1145.am/db/3437629/Loxo_Oncology>,
-        <https://1145.am/db/3448439/Loxo_Oncology>,
-        <https://1145.am/db/3464715/Loxo_Oncology>,
         <https://1145.am/db/3507722/Loxo_Oncology_Inc>,
         <https://1145.am/db/3549221/Loxo_Oncology>,
         <https://1145.am/db/3559924/Loxo_Oncology>,
         <https://1145.am/db/3572250/Loxo_Oncology>,
-        <https://1145.am/db/86786/Loxo_Oncology> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2296074/Loxo_Oncology>,
-        <https://1145.am/db/3560453/Loxo_Oncology> .
+        <https://1145.am/db/86786/Loxo_Oncology> .
 
 <https://1145.am/db/3029576/Loxo_Oncology-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1991,6 +1602,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3029576 ;
     ns1:name "Tesaro" ;
+    ns1:internalCleanName "tesaro" ;
     ns1:sameAsHigh <https://1145.am/db/2152045/Tesaro>,
         <https://1145.am/db/2341508/Tesaro>,
         <https://1145.am/db/2344012/Tesaro>,
@@ -2010,11 +1622,7 @@
         <https://1145.am/db/2566825/Tesaro>,
         <https://1145.am/db/2567009/Tesaro>,
         <https://1145.am/db/3027531/Tesaro>,
-        <https://1145.am/db/446194/Tesaro_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2340777/Tesaro>,
-        <https://1145.am/db/2356889/Tesaro_Inc>,
-        <https://1145.am/db/2552598/Tesaro>,
-        <https://1145.am/db/2566606/Tesaro> .
+        <https://1145.am/db/446194/Tesaro_Inc> .
 
 <https://1145.am/db/3029576/Tesaro-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2045,8 +1653,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/97_safety_industry_risk_protection> ;
     ns1:internalDocId 3145990 ;
     ns1:name "VaaS International Holdings" ;
-    ns1:sameAsHigh <https://1145.am/db/1787310/Vaas_International_Holdings> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3785569/Vaas_International_Holdings> .
+    ns1:internalCleanName "vaas international holdings" ;
+    ns1:internalCleanShortName "vaas international" ;
+    ns1:sameAsHigh <https://1145.am/db/1787310/Vaas_International_Holdings>  .
 
 <https://1145.am/db/3145990/Vaas_International_Holdings-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2092,10 +1701,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/182_mobile_smartphone_technology_devices> ;
     ns1:internalDocId 3443634 ;
     ns1:name "UberMedia" ;
-    ns1:sameAsHigh <https://1145.am/db/1857960/Ubermedia> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1865229/Ubermedia>,
-        <https://1145.am/db/1874440/Ubermedia>,
-        <https://1145.am/db/1885729/Ubermedia> .
+    ns1:internalCleanName "ubermedia" ;
+    ns1:sameAsHigh <https://1145.am/db/1857960/Ubermedia> .
 
 <https://1145.am/db/3444686/Carolina_Networks> a org:Organization ;
     ns1:basedInHighClean "Greensboro" ;
@@ -2105,6 +1712,7 @@
     ns1:documentSource <https://1145.am/db/3444686/wwwprnewswirecom_news-releases_dynamic-quest-acquires-carolina-networks-300773876html> ;
     ns1:foundName "Carolina Networks" ;
     ns1:industry "IT" ;
+    ns1:internalCleanName "carolina networks" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/179_it_solutions_services_service> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/38_consulting_consultancy_consultant_it>,
         <https://1145.am/db/industry/571_infrastructure_it_services_technology> ;
@@ -2139,6 +1747,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/442_pest_termite_control_services> ;
     ns1:internalDocId 3444769 ;
     ns1:name "Bonide" ;
+    ns1:internalCleanName "bonide" ;
     ns1:sameAsHigh <https://1145.am/db/3925352/Bonide> .
 
 <https://1145.am/db/3444769/Bonide-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2168,6 +1777,8 @@
     ns1:industry "Healthcare Industry" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3445572 ;
+    ns1:internalCleanName "professional medical insurance services" ;
+    ns1:internalCleanShortName "professional medical insurance" ;
     ns1:name "Professional Medical Insurance Services" .
 
 <https://1145.am/db/3445572/Professional_Medical_Insurance_Services-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2198,6 +1809,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/672_information_services_solutions_management> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/72_content_platform_technology_digital> ;
     ns1:internalDocId 3446496 ;
+    ns1:internalCleanName "edgenet" ;
     ns1:name "Edgenet" .
 
 <https://1145.am/db/3446501/Newell_Brands> a org:Organization ;
@@ -2207,25 +1819,9 @@
     ns1:foundName "Newell Brands" ;
     ns1:internalDocId 3446501 ;
     ns1:name "Newell Brands" ;
+    ns1:internalCleanName "newell brands" ;
     ns1:sameAsHigh <https://1145.am/db/945612/Newell_Brands_Inc>,
-        <https://1145.am/db/946841/Newell_Brands_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1034366/Newell_Brands_Inc>,
-        <https://1145.am/db/1328348/Newell_Brands>,
-        <https://1145.am/db/1329676/Newell_Brands>,
-        <https://1145.am/db/1546211/Newell_Brands>,
-        <https://1145.am/db/1547824/Newell_Brands>,
-        <https://1145.am/db/1571284/Newell_Brands>,
-        <https://1145.am/db/1572080/Newell_Brands>,
-        <https://1145.am/db/1671547/Newell_Brands_Inc>,
-        <https://1145.am/db/1671690/Newell_Brands>,
-        <https://1145.am/db/3414220/Newell_Brands>,
-        <https://1145.am/db/3653720/Newell_Brands>,
-        <https://1145.am/db/3714997/Newell_Brands>,
-        <https://1145.am/db/3770890/Newell_Brands>,
-        <https://1145.am/db/3777028/Newell_Brands>,
-        <https://1145.am/db/3803508/Newell_Brands>,
-        <https://1145.am/db/4053420/Newell_Brands>,
-        <https://1145.am/db/812424/Newell_Brands_Inc> .
+        <https://1145.am/db/946841/Newell_Brands_Inc> .
 
 <https://1145.am/db/3446501/Pure_Fishing> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -2233,6 +1829,7 @@
     ns1:documentSource <https://1145.am/db/3446501/wwwprnewswirecom_news-releases_sycamore-partners-completes-acquisition-of-pure-fishing-300774034html> ;
     ns1:foundName "Pure Fishing" ;
     ns1:internalDocId 3446501 ;
+    ns1:internalCleanName "pure fishing" ;
     ns1:name "Pure Fishing" .
 
 <https://1145.am/db/3446501/Pure_Fishing-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2261,6 +1858,8 @@
     ns1:documentSource <https://1145.am/db/3446550/wwwprnewswirecom_news-releases_ussc-group-llc-acquires-vista-brake-lock-llc-300774072html> ;
     ns1:foundName "Vista Brake Lock, LLC" ;
     ns1:internalDocId 3446550 ;
+    ns1:internalCleanName "vista brake lock llc";
+    ns1:internalCleanShortName "vista brake lock";
     ns1:name "Vista Brake Lock" .
 
 <https://1145.am/db/3446550/Vista_Brake_Lock-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2288,6 +1887,7 @@
     ns1:documentSource <https://1145.am/db/3446574/wwwprnewswirecom_news-releases_transforce-acquires-drive360-logistics-300774076html> ;
     ns1:foundName "Drive360 Logistics" ;
     ns1:industry "Transportation" ;
+    ns1:internalCleanName "drive360 logistics" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/51_transportation_transport_transit_commuting> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/650_logistics_transportation_transport_trucking> ;
     ns1:internalDocId 3446574 ;
@@ -2317,12 +1917,11 @@
     ns1:description "zinc chemistry and material science" ;
     ns1:documentSource <https://1145.am/db/3447359/wwwprnewswirecom_news-releases_aterian-investment-partners-acquires-us-zinc-300774189html> ;
     ns1:foundName "U.S. Zinc" ;
+    ns1:internalCleanName "us zinc" ;
     ns1:industry "zinc chemistry and material science" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/563_materials_material_technical_engineering> ;
     ns1:internalDocId 3447359 ;
-    ns1:name "U.S. Zinc" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1101220/Us_Zinc>,
-        <https://1145.am/db/1103243/Us_Zinc> .
+    ns1:name "U.S. Zinc"  .
 
 <https://1145.am/db/3447359/Us_Zinc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2347,9 +1946,9 @@
     ns1:documentSource <https://1145.am/db/3447359/wwwprnewswirecom_news-releases_aterian-investment-partners-acquires-us-zinc-300774189html> ;
     ns1:foundName "Votorantim Group" ;
     ns1:internalDocId 3447359 ;
-    ns1:name "Votorantim Group" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1184922/Votorantim_Sa>,
-        <https://1145.am/db/746852/Votorantim_Sa> .
+    ns1:internalCleanName "votorantim group" ;
+    ns1:internalCleanShortName "votorantim" ;
+    ns1:name "Votorantim Group" .
 
 <https://1145.am/db/3448272/Propeller_Health> a org:Organization ;
     ns1:basedInHighClean "Radnor" ;
@@ -2362,10 +1961,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3448272 ;
     ns1:name "Propeller Health" ;
-    ns1:sameAsHigh <https://1145.am/db/2154332/Propeller_Health> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2154725/Propeller_Health>,
-        <https://1145.am/db/2316302/Propeller_Health>,
-        <https://1145.am/db/3894717/Propeller_Health> .
+    ns1:internalCleanName "propeller health" ;
+    ns1:sameAsHigh <https://1145.am/db/2154332/Propeller_Health>  .
 
 <https://1145.am/db/3448296/Urban_One> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -2376,12 +1973,9 @@
     ns1:foundName "Urban One, Inc." ;
     ns1:internalDocId 3448296 ;
     ns1:name "Urban One" ;
+    ns1:internalCleanName "urban one" ;
     ns1:sameAsHigh <https://1145.am/db/3129327/Urban_One>,
-        <https://1145.am/db/3802755/Urban_One> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3193055/Urban_One>,
-        <https://1145.am/db/3565422/Urban_One>,
-        <https://1145.am/db/3762402/Urban_One>,
-        <https://1145.am/db/3898293/Urban_One> .
+        <https://1145.am/db/3802755/Urban_One> .
 
 <https://1145.am/db/geonames_location/361058> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3446574/wwwprnewswirecom_news-releases_transforce-acquires-drive360-logistics-300774076html> ;
@@ -2469,6 +2063,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 2543227 ;
     ns1:name "Celgene" ;
+    ns1:internalCleanName "celgene" ;
     ns1:sameAsHigh <https://1145.am/db/2152096/Celgene>,
         <https://1145.am/db/2197183/Celgene>,
         <https://1145.am/db/2291277/Celgene>,
@@ -2549,33 +2144,7 @@
         <https://1145.am/db/3553039/Celgene>,
         <https://1145.am/db/3598044/Celgene_Corporation>,
         <https://1145.am/db/3618200/Celgene_Corporation>,
-        <https://1145.am/db/3929126/Celgene_Corp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2293123/Celgene_Corporation>,
-        <https://1145.am/db/2304335/Celgene>,
-        <https://1145.am/db/2322317/Celgene_Corporation>,
-        <https://1145.am/db/2322323/Celgene>,
-        <https://1145.am/db/2339707/Celgene_Corporation>,
-        <https://1145.am/db/2340963/Celgene_Corporation>,
-        <https://1145.am/db/2346066/Celgene>,
-        <https://1145.am/db/2347844/Celgene_Corporation>,
-        <https://1145.am/db/2366684/Celgene_Corporation>,
-        <https://1145.am/db/2368721/Celgene>,
-        <https://1145.am/db/2369311/Celgene>,
-        <https://1145.am/db/2369694/Celgene_Corporation>,
-        <https://1145.am/db/2538738/Celgene>,
-        <https://1145.am/db/2558927/Celgene>,
-        <https://1145.am/db/2563139/Celgene>,
-        <https://1145.am/db/2563587/Celgene>,
-        <https://1145.am/db/2567006/Celgene>,
-        <https://1145.am/db/2592040/Celgene>,
-        <https://1145.am/db/2593298/Celgene>,
-        <https://1145.am/db/2593520/Celgene_Corporation>,
-        <https://1145.am/db/2593892/Celgene_Corporation>,
-        <https://1145.am/db/3553449/Celgene>,
-        <https://1145.am/db/3557366/Celgene>,
-        <https://1145.am/db/3587811/Celgene>,
-        <https://1145.am/db/3628646/Celgene_Corporation>,
-        <https://1145.am/db/870410/Celgene> .
+        <https://1145.am/db/3929126/Celgene_Corp> .
 
 <https://1145.am/db/3029576/Celgene> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -2587,6 +2156,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3029576 ;
+    ns1:internalCleanName "celgene" ;
     ns1:name "Celgene" ;
     ns1:sameAsHigh <https://1145.am/db/2152096/Celgene>,
         <https://1145.am/db/2197183/Celgene>,
@@ -2662,39 +2232,7 @@
         <https://1145.am/db/3553449/Celgene>,
         <https://1145.am/db/3598044/Celgene_Corporation>,
         <https://1145.am/db/3618200/Celgene_Corporation>,
-        <https://1145.am/db/3929126/Celgene_Corp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2291277/Celgene>,
-        <https://1145.am/db/2293123/Celgene_Corporation>,
-        <https://1145.am/db/2301048/Celgene>,
-        <https://1145.am/db/2301271/Celgene>,
-        <https://1145.am/db/2302687/Celgene>,
-        <https://1145.am/db/2304335/Celgene>,
-        <https://1145.am/db/2322317/Celgene_Corporation>,
-        <https://1145.am/db/2322323/Celgene>,
-        <https://1145.am/db/2339707/Celgene_Corporation>,
-        <https://1145.am/db/2340963/Celgene_Corporation>,
-        <https://1145.am/db/2346066/Celgene>,
-        <https://1145.am/db/2347566/Celgene_Corporation>,
-        <https://1145.am/db/2347844/Celgene_Corporation>,
-        <https://1145.am/db/2366680/Celgene>,
-        <https://1145.am/db/2366684/Celgene_Corporation>,
-        <https://1145.am/db/2369311/Celgene>,
-        <https://1145.am/db/2369694/Celgene_Corporation>,
-        <https://1145.am/db/2538738/Celgene>,
-        <https://1145.am/db/2543648/Celgene>,
-        <https://1145.am/db/2563139/Celgene>,
-        <https://1145.am/db/2563587/Celgene>,
-        <https://1145.am/db/2566605/Celgene>,
-        <https://1145.am/db/2567006/Celgene>,
-        <https://1145.am/db/2571869/Celgene>,
-        <https://1145.am/db/2592040/Celgene>,
-        <https://1145.am/db/2593298/Celgene>,
-        <https://1145.am/db/2593520/Celgene_Corporation>,
-        <https://1145.am/db/2593892/Celgene_Corporation>,
-        <https://1145.am/db/3557366/Celgene>,
-        <https://1145.am/db/3587811/Celgene>,
-        <https://1145.am/db/3628646/Celgene_Corporation>,
-        <https://1145.am/db/870410/Celgene> .
+        <https://1145.am/db/3929126/Celgene_Corp> .
 
 <https://1145.am/db/3443636/Aurora_Financial_Advisors-The_Colony_Group-Merger> a ns1:CorporateFinanceActivity ;
     ns1:activityType "merger" ;

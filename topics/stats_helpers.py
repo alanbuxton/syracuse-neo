@@ -5,6 +5,7 @@ from .models import Article, IndustryCluster
 from .activity_helpers import activities_by_industry, activities_by_region, activities_by_source
 from .industry_geo import COUNTRY_CODE_TO_NAME
 from django.core.cache import cache
+from topics.industry_geo.orgs_by_industry_geo import orgs_by_industry_cluster_and_geo
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +23,33 @@ def get_cached_stats():
         return None, None, None, None, None
     counts, recents_by_country_region, recents_by_source, recents_by_industry = get_stats(latest_date)
     return latest_date, counts, recents_by_country_region, recents_by_source, recents_by_industry
+
+def industry_orgs_activities_stats(search_str, max_date=None, include_search_by_industry_text=False, counts_only=True):
+    assert include_search_by_industry_text is False, f"include_search_by_industry_text is not supported"
+    logger.debug("industry_orgs_results started")
+    ind_clusters = IndustryCluster.by_representative_doc_words(search_str)
+    orgs_and_activities_by_industry = {}
+    if max_date is None:
+        max_date = cached_activity_stats_last_updated_date()
+    if max_date is None:
+        return None
+    for ind in ind_clusters:
+        orgs_and_activities_by_industry[ind.topicId] = {}
+        orgs_and_activities_by_industry[ind.topicId]['industry'] = ind
+        org_stats = orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,None)
+        if counts_only is True:
+            org_stats = len(org_stats)
+        orgs_and_activities_by_industry[ind.topicId]['orgs'] = org_stats
+        cnt90 = activities_by_industry(ind,date_minus(max_date,90),max_date,counts_only=True)
+        cnt30 = activities_by_industry(ind,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
+        cnt7 = activities_by_industry(ind,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+
+        orgs_and_activities_by_industry[ind.topicId]['activities_7'] = cnt7 
+        orgs_and_activities_by_industry[ind.topicId]['activities_30'] = cnt30
+        orgs_and_activities_by_industry[ind.topicId]['activities_90'] = cnt90
+        
+    return orgs_and_activities_by_industry
+
 
 def get_stats(max_date):
     counts = []

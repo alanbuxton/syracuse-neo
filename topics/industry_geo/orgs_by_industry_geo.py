@@ -252,6 +252,7 @@ def org_geo_industry_text_by_words(search_str: str,counts_only):
                         relevant_admin1s[cc].append(adm1)
     return relevant_countries, relevant_admin1s, country_results, adm1_results
 
+        
 def combined_industry_geo_results(search_str,include_search_by_industry_text=False,counts_only=True):
     logger.debug("combined_industry_geo_results started")
     ind_clusters, ind_cluster_countries, ind_cluster_admin1s_tmp, ind_cluster_by_country, ind_cluster_by_adm1 = org_geo_industry_cluster_query_by_words(search_str, counts_only)

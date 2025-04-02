@@ -13,10 +13,7 @@
     ns1:internalDocId 1786805 ;
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
     ns1:name "Builders" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1817343/Builders>,
-        <https://1145.am/db/581940/Builders>,
-        <https://1145.am/db/944673/Builders>,
-        <https://1145.am/db/947102/Builders> .
+    ns1:internalCleanName"builders" .
 
 <https://1145.am/db/1786805/Camber_Creek> a org:Organization ;
     ns1:basedInLowRaw "New York" ;
@@ -26,19 +23,7 @@
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
     ns1:buyer <https://1145.am/db/3029762/Faroe_Petroleum-Acquisition> ;
     ns1:name "Camber Creek" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1151219/Camber_Creek>,
-        <https://1145.am/db/1736022/Camber_Creek>,
-        <https://1145.am/db/1739503/Camber_Creek>,
-        <https://1145.am/db/1756056/Camber_Creek>,
-        <https://1145.am/db/1779551/Camber_Creek>,
-        <https://1145.am/db/2023596/Camber_Creek>,
-        <https://1145.am/db/3439780/Camber_Creek>,
-        <https://1145.am/db/3554051/Camber_Creek>,
-        <https://1145.am/db/3837406/Camber_Creek>,
-        <https://1145.am/db/3952223/Camber_Creek>,
-        <https://1145.am/db/474872/Camber_Creek>,
-        <https://1145.am/db/525962/Camber_Creek>,
-        <https://1145.am/db/849909/Camber_Creek> .
+    ns1:internalCleanName "camber creek" .
 
 <https://1145.am/db/1786805/Corigin_Ventures> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -49,15 +34,8 @@
     ns1:internalDocId 1786805 ;
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
     ns1:name "Corigin Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1735248/Corigin_Ventures>,
-        <https://1145.am/db/1760003/Corigin_Ventures>,
-        <https://1145.am/db/1775532/Corigin_Ventures>,
-        <https://1145.am/db/1788333/Corigin_Ventures>,
-        <https://1145.am/db/1794486/Corigin_Ventures>,
-        <https://1145.am/db/1798089/Corigin_Ventures>,
-        <https://1145.am/db/1814643/Corigin_Ventures>,
-        <https://1145.am/db/3546889/Corigin_Ventures>,
-        <https://1145.am/db/3767051/Corigin_Ventures> .
+    ns1:internalCleanName "corigin ventures" ;
+    ns1:internalCleanShortName "corigin" .
 
 <https://1145.am/db/1786805/Fika_Ventures> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -68,28 +46,8 @@
     ns1:internalDocId 1786805 ;
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
     ns1:name "Fika Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1030568/Fika_Ventures>,
-        <https://1145.am/db/1072020/Fika_Ventures>,
-        <https://1145.am/db/1175686/Fika_Ventures>,
-        <https://1145.am/db/1707637/Fika_Ventures>,
-        <https://1145.am/db/1735989/Fika_Ventures>,
-        <https://1145.am/db/1741815/Fika_Ventures>,
-        <https://1145.am/db/1753206/Fika_Ventures>,
-        <https://1145.am/db/1780571/Fika_Ventures>,
-        <https://1145.am/db/1785601/Fika_Ventures>,
-        <https://1145.am/db/2766440/Fika_Ventures>,
-        <https://1145.am/db/3155561/Fika_Ventures>,
-        <https://1145.am/db/3316991/Fika_Ventures>,
-        <https://1145.am/db/3325574/Fika_Ventures>,
-        <https://1145.am/db/3344622/Fika_Ventures>,
-        <https://1145.am/db/3353420/Fika_Ventures>,
-        <https://1145.am/db/3614730/Fika_Ventures>,
-        <https://1145.am/db/4014495/Fika_Ventures>,
-        <https://1145.am/db/4112323/Fika>,
-        <https://1145.am/db/4226000/Fika_Ventures>,
-        <https://1145.am/db/490875/Fika_Ventures>,
-        <https://1145.am/db/700171/Fika_Ventures>,
-        <https://1145.am/db/755704/Fika_Ventures> .
+    ns1:internalCleanName "fika ventures" ;
+    ns1:internalCleanShortName "fika" .
 
 <https://1145.am/db/1786805/Navitas_Capital> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -100,27 +58,8 @@
     ns1:internalDocId 1786805 ;
     ns1:investor <https://1145.am/db/1786805/Bowery_Valuation-Builders-Camber_Creek-Corigin_Ventures-Fika_Ventures-Navitas_Capital-Investment-Series_A> ;
     ns1:name "Navitas Capital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1297270/Navitas_Capital>,
-        <https://1145.am/db/1298072/Navitas_Capital>,
-        <https://1145.am/db/1575041/Navitas>,
-        <https://1145.am/db/1575837/Navitas>,
-        <https://1145.am/db/1734462/Navitas>,
-        <https://1145.am/db/1753641/Navitas_Capital>,
-        <https://1145.am/db/1809978/Navitas_Capital>,
-        <https://1145.am/db/1818727/Navitas_Capital>,
-        <https://1145.am/db/1830066/Navitas_Capital>,
-        <https://1145.am/db/3149732/Navitas>,
-        <https://1145.am/db/3177734/Navitas>,
-        <https://1145.am/db/3227759/Navitas_Capital>,
-        <https://1145.am/db/3396196/Navitas_Capital>,
-        <https://1145.am/db/3519330/Navitas_Capital>,
-        <https://1145.am/db/3773300/Navitas_Capital>,
-        <https://1145.am/db/4002381/Navitas_Capital>,
-        <https://1145.am/db/422670/Navitas>,
-        <https://1145.am/db/432277/Navitas>,
-        <https://1145.am/db/448093/Navitas>,
-        <https://1145.am/db/547659/Navitas_Capital>,
-        <https://1145.am/db/560646/Navitas> .
+    ns1:internalCleanName "navitas capital" ;
+    ns1:internalCleanShortName "navitas" .
 
 <https://1145.am/db/1787315/Scape-Investment-Seed> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -190,9 +129,7 @@
         <https://1145.am/db/2571149/Mersana_Therapeutics>,
         <https://1145.am/db/2587938/Mersana_Therapeutics>,
         <https://1145.am/db/410053/Mersana_Therapeutics> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2310425/Mersana_Therapeutics>,
-        <https://1145.am/db/2317505/Mersana_Therapeutics>,
-        <https://1145.am/db/3743929/Mersana_Therapeutics> .
+    ns1:internalCleanName "mersana therapeutics" .
 
 <https://1145.am/db/2364647/Peter_U_Park_Phd> a foaf:Person ;
     ns1:basedInHighClean "Cambridge" ;
@@ -221,8 +158,8 @@
     ns1:foundName "Norwegian DNO" ;
     ns1:internalDocId 3029762 ;
     ns1:name "Norwegian DNO" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2495594/Norwegian>,
-        <https://1145.am/db/2497537/Norwegian> .
+    ns1:internalCleanName "norwegian dno" ; 
+    ns1:internalCleanShortName "norwegian" .
 
 <https://1145.am/db/3467659/BRS> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -238,6 +175,7 @@
     ns1:internalDocId 3467659 ;
     ns1:investor <https://1145.am/db/3467659/E_S_Fitness-Investment> ;
     ns1:name "BRS" ;
+    ns1:internalCleanName "brs" ;
     ns1:participant <https://1145.am/db/3467659/E_S_Fitness-Investment> ;
     ns1:sameAsHigh <https://1145.am/db/1443353/BRS>,
         <https://1145.am/db/3242682/BRS>,
@@ -257,31 +195,8 @@
         <https://1145.am/db/industry/292_healthcare_biosciences_biotechnology_health> ;
     ns1:internalDocId 3467694 ;
     ns1:name "Science Applications International Corp." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1163695/Science_Applications_International_Corp>,
-        <https://1145.am/db/1167254/Science_Applications_International_Corp>,
-        <https://1145.am/db/1272110/Science_Applications_International_Corp>,
-        <https://1145.am/db/1273083/Science_Applications_International_Corp>,
-        <https://1145.am/db/1632003/Science_Applications_International_Corp>,
-        <https://1145.am/db/1678807/Science_Applications_International_Corp>,
-        <https://1145.am/db/1926537/Science_Applications_International_Corp>,
-        <https://1145.am/db/1946723/Science_Applications_International_Corp>,
-        <https://1145.am/db/1997714/Science_Applications_International_Corp>,
-        <https://1145.am/db/2229270/Science_Applications_International_Corporation>,
-        <https://1145.am/db/2229929/Science_Applications_International_Corp>,
-        <https://1145.am/db/2232730/Science_Applications_International_Corporation>,
-        <https://1145.am/db/2241803/Science_Applications_International_Corporation>,
-        <https://1145.am/db/2246142/Science_Applications_International_Corporation>,
-        <https://1145.am/db/2454031/Science_Applications_International_Corp>,
-        <https://1145.am/db/3333572/Science_Applications_International_Corp>,
-        <https://1145.am/db/3670082/Science_Applications_International>,
-        <https://1145.am/db/3800707/Science_Applications_International_Corp>,
-        <https://1145.am/db/4142025/Science_Applications_International_Corp>,
-        <https://1145.am/db/418487/Science_Applications_International_Corp>,
-        <https://1145.am/db/495666/Science_Applications_International_Corp>,
-        <https://1145.am/db/540201/Science_Applications_International_Corp>,
-        <https://1145.am/db/755656/Science_Applications_International_Corp>,
-        <https://1145.am/db/968343/Science_Applications_International_Corp>,
-        <https://1145.am/db/973035/Science_Applications_International_Corp> .
+    ns1:internalCleanName "science applications international corp" ;
+    ns1:internalCleanShortName "science applications" .
 
 <https://1145.am/db/3468945/Finn_Partners> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -295,6 +210,8 @@
     ns1:internalDocId 3468945 ;
     ns1:investor <https://1145.am/db/3468945/Catchon-Investment-Stake> ;
     ns1:name "Finn Partners" ;
+    ns1:internalCleanName "finn partners" ; 
+    ns1:internalCleanShortName "finn" ;
     ns1:sameAsHigh <https://1145.am/db/1008339/Finn_Partners>,
         <https://1145.am/db/1076368/Finn_Partners>,
         <https://1145.am/db/1203236/Finn_Partners>,
@@ -321,15 +238,7 @@
         <https://1145.am/db/705178/Finn_Partners>,
         <https://1145.am/db/800779/Finn_Partners>,
         <https://1145.am/db/955208/Finn_Partners>,
-        <https://1145.am/db/965781/Finn_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1087544/Finn>,
-        <https://1145.am/db/1759555/Finn>,
-        <https://1145.am/db/3113937/Finn>,
-        <https://1145.am/db/3119256/Finn>,
-        <https://1145.am/db/3592410/Finn_Partners>,
-        <https://1145.am/db/3887685/Finn_Partners>,
-        <https://1145.am/db/3917843/Finn_Partners>,
-        <https://1145.am/db/863974/Finn_Partners> .
+        <https://1145.am/db/965781/Finn_Partners> .
 
 <https://1145.am/db/3468972/Pugh-Apollo-Veterans> a org:Organization ;
     ns1:basedInLowRaw "Norcross, GA" ;
@@ -338,6 +247,7 @@
     ns1:documentSource <https://1145.am/db/3468972/wwwprnewswirecom_news-releases_halco-lubricants-joins-forces-with-pugh-lubricants-apollo-oil-and-veterans-oil-300775308html> ;
     ns1:foundName "Pugh-Apollo-Veterans" ;
     ns1:internalDocId 3468972 ;
+    ns1:internalCleanName "pugh-apollo-veterans" ;
     ns1:name "Pugh-Apollo-Veterans" .
 
 <https://1145.am/db/3468972/Pugh_Lubricants> a org:Organization ;
@@ -350,7 +260,7 @@
     ns1:internalDocId 3468972 ;
     ns1:name "Pugh Lubricants" ;
     ns1:protagonist <https://1145.am/db/3468972/Pugh_Lubricants-Veterans_Oil-Merger> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3432957/Pugh_Lubricants> .
+    ns1:internalCleanName "pugh lubricant" .
 
 <https://1145.am/db/3468972/Veterans_Oil> a org:Organization ;
     ns1:basedInLowRaw "N.C" ;
@@ -360,7 +270,7 @@
     ns1:internalDocId 3468972 ;
     ns1:name "Veteran's Oil" ;
     ns1:protagonist <https://1145.am/db/3468972/Pugh_Lubricants-Veterans_Oil-Merger> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3432957/Veterans_Oil> .
+    ns1:internalCleanName "veterans oil" .
 
 <https://1145.am/db/3469058/Global_Investment> a org:Organization ;
     ns1:basedInLowRaw "TOKYO" ;
@@ -369,10 +279,7 @@
     ns1:internalDocId 3469058 ;
     ns1:investor <https://1145.am/db/3469058/Global_Investment-Incj_Ltd-Mitsui_Co-Napajen_Pharma-P_D_Directions_Inc-Investment-Series_C> ;
     ns1:name "Global Investment" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1719352/Global_Investment>,
-        <https://1145.am/db/3475299/Global_Investment>,
-        <https://1145.am/db/4204976/Global_Investment>,
-        <https://1145.am/db/960753/Global_Investment> .
+    ns1:internalCleanName "global investment" .
 
 <https://1145.am/db/3469058/Incj_Ltd> a org:Organization ;
     ns1:basedInHighClean "Tokyo" ;
@@ -383,11 +290,8 @@
     ns1:internalDocId 3469058 ;
     ns1:investor <https://1145.am/db/3469058/Global_Investment-Incj_Ltd-Mitsui_Co-Napajen_Pharma-P_D_Directions_Inc-Investment-Series_C> ;
     ns1:name "INCJ, Ltd." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1307437/Incj_Ltd>,
-        <https://1145.am/db/1777320/Incj>,
-        <https://1145.am/db/2801440/Incj>,
-        <https://1145.am/db/2806661/Incj>,
-        <https://1145.am/db/3475299/Incj> .
+    ns1:internalCleanName "incj ltd" ;
+    ns1:internalCleanShortName "incj" .
 
 <https://1145.am/db/3469058/Mitsui_Co> a org:Organization ;
     ns1:basedInHighClean "Tokyo" ;
@@ -398,27 +302,8 @@
     ns1:internalDocId 3469058 ;
     ns1:investor <https://1145.am/db/3469058/Global_Investment-Incj_Ltd-Mitsui_Co-Napajen_Pharma-P_D_Directions_Inc-Investment-Series_C> ;
     ns1:name "Mitsui & Co." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1154510/Mitsui_Co>,
-        <https://1145.am/db/1275182/Mitsui_Co>,
-        <https://1145.am/db/1344800/Mitsui_Co>,
-        <https://1145.am/db/1719352/Mitsui___Co>,
-        <https://1145.am/db/1734576/Mitsui_Co>,
-        <https://1145.am/db/1815507/Mitsui___Co>,
-        <https://1145.am/db/1866155/Mitsui___Co>,
-        <https://1145.am/db/202793/Mitsui_Co>,
-        <https://1145.am/db/2353283/Mitsui___Co>,
-        <https://1145.am/db/2353285/Mitsui___Co>,
-        <https://1145.am/db/2735404/Mitsui_Co>,
-        <https://1145.am/db/288375/Mitsui_Co>,
-        <https://1145.am/db/3087673/Mitsui_Co>,
-        <https://1145.am/db/3475299/Mitsui_Co>,
-        <https://1145.am/db/349662/Mitsui_Co>,
-        <https://1145.am/db/4141085/Mitsui_Co>,
-        <https://1145.am/db/4141090/Mitsui_Co>,
-        <https://1145.am/db/4180297/Mitsui_Co>,
-        <https://1145.am/db/4204976/Mitsui_Co>,
-        <https://1145.am/db/480979/Mitsui_Co>,
-        <https://1145.am/db/912510/Mitsui_Co> .
+    ns1:internalCleanName "mitsui & co" ;
+    ns1:internalCleanShortName "mitsui" .
 
 <https://1145.am/db/3469058/P_D_Directions_Inc> a org:Organization ;
     ns1:basedInLowRaw "TOKYO" ;
@@ -426,7 +311,9 @@
     ns1:foundName "P & D Directions Inc." ;
     ns1:internalDocId 3469058 ;
     ns1:investor <https://1145.am/db/3469058/Global_Investment-Incj_Ltd-Mitsui_Co-Napajen_Pharma-P_D_Directions_Inc-Investment-Series_C> ;
-    ns1:name "P & D Directions Inc." .
+    ns1:name "P & D Directions Inc.";
+    ns1:internalCleanName "p & d directions inc" ;
+    ns1:internalCleanShortName "p & d directions" .
 
 <https://1145.am/db/3469070/Dormer_Pramet> a org:Organization ;
     ns1:basedInLowRaw "Sweden" ;
@@ -438,6 +325,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/110_aerospace_aviation_aeronautics_aeronautical> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/83_aerospace_defense_defence_usaf> ;
     ns1:internalDocId 3469070 ;
+    ns1:internalCleanName "dormer pramet" ;
     ns1:name "Dormer Pramet" .
 
 <https://1145.am/db/3469070/Sandvik_Machining_Solutions> a org:Organization ;
@@ -450,11 +338,12 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/83_aerospace_defense_defence_usaf> ;
     ns1:internalDocId 3469070 ;
     ns1:name "Sandvik Machining Solutions" ;
+    ns1:internalCleanName "sandvik machining solutions" ;
+    ns1:internalCleanShortName "sandvik machining" ;
     ns1:participant <https://1145.am/db/3469070/Wetmore_Tool_Engineering-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/3160786/Sandvik_Machining_Solutions>,
         <https://1145.am/db/3823695/Sandvik_Machining_Solutions>,
-        <https://1145.am/db/3899686/Sandvik_Machining_Solutions> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3605288/Sandvik_Machining_Solutions> .
+        <https://1145.am/db/3899686/Sandvik_Machining_Solutions> .
 
 <https://1145.am/db/3469124/Canadian_Solar_Inc-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -487,30 +376,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3469136 ;
     ns1:name "Aphria Inc" ;
-    ns1:sameAsHigh <https://1145.am/db/3809214/Aphria_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/141197/Aphria_Inc>,
-        <https://1145.am/db/299751/Aphria_Inc>,
-        <https://1145.am/db/3265349/Aphria>,
-        <https://1145.am/db/3308195/Aphria_Inc>,
-        <https://1145.am/db/3446145/Aphria_Inc>,
-        <https://1145.am/db/3473127/Aphria_Inc>,
-        <https://1145.am/db/3565137/Aphria_Inc>,
-        <https://1145.am/db/3568190/Aphria>,
-        <https://1145.am/db/3570552/Aphria_Inc>,
-        <https://1145.am/db/3576048/Aphria>,
-        <https://1145.am/db/3577344/Aphria_Inc>,
-        <https://1145.am/db/3589759/Aphria_Inc>,
-        <https://1145.am/db/3590601/Aphria_Inc>,
-        <https://1145.am/db/3598352/Aphria_Inc>,
-        <https://1145.am/db/3609141/Aphria>,
-        <https://1145.am/db/3609143/Aphria_Inc>,
-        <https://1145.am/db/3637243/Aphria_Inc>,
-        <https://1145.am/db/3761920/Aphria_Inc>,
-        <https://1145.am/db/3800852/Aphria_Inc>,
-        <https://1145.am/db/3810625/Aphria_Inc>,
-        <https://1145.am/db/3814902/Aphria>,
-        <https://1145.am/db/3909011/Aphria>,
-        <https://1145.am/db/3920353/Aphria> .
+    ns1:internalCleanName "aphria inc" ;
+    ns1:internalCleanShortName "aphria" ;
+    ns1:sameAsHigh <https://1145.am/db/3809214/Aphria_Inc> .
 
 <https://1145.am/db/3470399/Jmi_Equity> a org:Organization ;
     ns1:basedInLowRaw "LEHI, Utah" ;
@@ -520,6 +388,7 @@
     ns1:internalDocId 3470399 ;
     ns1:investor <https://1145.am/db/3470399/Jmi_Equity-Rainfocus-Rainfocus-Investment> ;
     ns1:name "JMI Equity" ;
+    ns1:internalCleanName "jmi equity" ;
     ns1:sameAsHigh <https://1145.am/db/1377624/Jmi_Equity>,
         <https://1145.am/db/1653411/Jmi_Equity>,
         <https://1145.am/db/258284/Jmi_Equity>,
@@ -533,19 +402,7 @@
         <https://1145.am/db/529313/Jmi_Equity>,
         <https://1145.am/db/559773/Jmi_Equity>,
         <https://1145.am/db/677920/Jmi_Equity>,
-        <https://1145.am/db/730696/Jmi_Equity> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1726154/Jmi_Equity>,
-        <https://1145.am/db/1733721/Jmi_Equity>,
-        <https://1145.am/db/1767983/Jmi_Equity>,
-        <https://1145.am/db/1795007/Jmi_Equity>,
-        <https://1145.am/db/1806075/Jmi_Equity>,
-        <https://1145.am/db/1810115/Jmi_Equity>,
-        <https://1145.am/db/1854807/Jmi_Equity>,
-        <https://1145.am/db/1927859/Jmi_Equity>,
-        <https://1145.am/db/3153096/Jmi_Equity>,
-        <https://1145.am/db/3992803/Jmi_Equity>,
-        <https://1145.am/db/410407/Jmi_Equity>,
-        <https://1145.am/db/571602/Jmi_Equity> .
+        <https://1145.am/db/730696/Jmi_Equity> .
 
 <https://1145.am/db/3470428/Axium_Infrastructure> a org:Organization ;
     ns1:basedInLowRaw "SAN FRANCISCO" ;
@@ -553,9 +410,8 @@
     ns1:documentSource <https://1145.am/db/3470428/wwwprnewswirecom_news-releases_pattern-energy-completes-sale-of-k2-wind-facility-300775403html> ;
     ns1:foundName "Axium Infrastructure" ;
     ns1:internalDocId 3470428 ;
-    ns1:name "Axium Infrastructure" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1391108/Axium_Infrastructure>,
-        <https://1145.am/db/3801978/Axium_Infrastructure> .
+    ns1:internalCleanName "axium infrastructure" ;
+    ns1:name "Axium Infrastructure" .
 
 <https://1145.am/db/3471453/Otc_Markets_Group> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -569,6 +425,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/132_data_finance_financial_analytics> ;
     ns1:internalDocId 3471453 ;
     ns1:name "OTC Markets Group" ;
+    ns1:internalCleanName "otc markets group" ;
+    ns1:internalCleanShortName "otc markets" ;
     ns1:sameAsHigh <https://1145.am/db/1024159/Otc_Markets_Group_Inc>,
         <https://1145.am/db/3473221/Otc_Markets_Group>,
         <https://1145.am/db/4063230/Otc_Markets_Group> .
@@ -582,6 +440,7 @@
     ns1:foundName "Bank of Montreal" ;
     ns1:internalDocId 3557548 ;
     ns1:name "Bank of Montreal" ;
+    ns1:internalCleanName "bank of montreal" ;
     ns1:participant <https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment> ;
     ns1:sameAsHigh <https://1145.am/db/1370218/Bank_Of_Montreal>,
         <https://1145.am/db/1370924/Bank_Of_Montreal>,
@@ -589,40 +448,7 @@
         <https://1145.am/db/4146122/Bank_Of_Montreal>,
         <https://1145.am/db/686692/Bank_Of_Montreal>,
         <https://1145.am/db/689575/Bank_Of_Montreal>,
-        <https://1145.am/db/703009/Bank_Of_Montreal> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1023183/Bank_Of_Montreal>,
-        <https://1145.am/db/1024019/Bank_Of_Montreal>,
-        <https://1145.am/db/1439571/Bank_Of_Montreal>,
-        <https://1145.am/db/1457887/Bank_Of_Montreal>,
-        <https://1145.am/db/1547172/Bank_Of_Montreal>,
-        <https://1145.am/db/1592787/Bank_Of_Montreal>,
-        <https://1145.am/db/1596672/Bank_Of_Montreal>,
-        <https://1145.am/db/1651628/Bank_Of_Montreal>,
-        <https://1145.am/db/2142527/Bank_Of_Montreal>,
-        <https://1145.am/db/2719564/Bank_Of_Montreal>,
-        <https://1145.am/db/2951535/Bank_Of_Montreal>,
-        <https://1145.am/db/2951749/Bank_Of_Montreal>,
-        <https://1145.am/db/304867/Bank_Of_Montreal>,
-        <https://1145.am/db/3323507/Bank_Of_Montreal>,
-        <https://1145.am/db/359343/Bank_Of_Montreal>,
-        <https://1145.am/db/3612229/Bank_Of_Montreal>,
-        <https://1145.am/db/3677911/Bank_Of_Montreal>,
-        <https://1145.am/db/3696321/Bank_Of_Montreal>,
-        <https://1145.am/db/3718466/Bank_Of_Montreal>,
-        <https://1145.am/db/3777847/Bank_Of_Montreal>,
-        <https://1145.am/db/3777861/Bank_Of_Montreal>,
-        <https://1145.am/db/3827236/Bank_Of_Montreal>,
-        <https://1145.am/db/3877358/Bank_Of_Montreal>,
-        <https://1145.am/db/3888444/Bank_Of_Montreal>,
-        <https://1145.am/db/3890184/Bank_Of_Montreal>,
-        <https://1145.am/db/3893580/Bank_Of_Montreal>,
-        <https://1145.am/db/429084/Bank_Of_Montreal>,
-        <https://1145.am/db/601573/Bank_Of_Montreal>,
-        <https://1145.am/db/665406/Bank_Of_Montreal>,
-        <https://1145.am/db/667057/Bank_Of_Montreal>,
-        <https://1145.am/db/703953/Bank_Of_Montreal>,
-        <https://1145.am/db/865394/Bank_Of_Montreal>,
-        <https://1145.am/db/926096/Bank_Of_Montreal> .
+        <https://1145.am/db/703009/Bank_Of_Montreal> .
 
 <https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -631,12 +457,11 @@
     ns1:foundName "Canadian Imperial Bank of Commerce" ;
     ns1:internalDocId 3557548 ;
     ns1:name "Canadian Imperial Bank of Commerce" ;
+    ns1:internalCleanName "canadian imperial bank of commerce" ;
     ns1:participant <https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment> ;
     ns1:sameAsHigh <https://1145.am/db/1457887/Canadian_Imperial_Bank_Of_Commerce>,
         <https://1145.am/db/221059/Canadian_Imperial_Bank_Of_Commerce>,
-        <https://1145.am/db/4071841/Canadian_Imperial_Bank_Of_Commerce> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3730086/Canadian_Imperial_Bank_Of_Commerce>,
-        <https://1145.am/db/4072915/Canadian_Imperial_Bank_Of_Commerce> .
+        <https://1145.am/db/4071841/Canadian_Imperial_Bank_Of_Commerce> .
 
 <https://1145.am/db/3558745/Jb_Hunt> a org:Organization ;
     ns1:basedInHighClean "United States" ;
@@ -647,6 +472,7 @@
     ns1:documentSource <https://1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1> ;
     ns1:foundName "J.B. Hunt" ;
     ns1:industry "trucking" ;
+    ns1:internalCleanName "jb hunt" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/700_truckload_trucking_freight_haulage> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/160_freight_freighttech_trucking_logistics>,
         <https://1145.am/db/industry/650_logistics_transportation_transport_trucking> ;
@@ -661,6 +487,7 @@
     ns1:documentSource <https://1145.am/db/3617647/wwwprnewswirecom_news-releases_kura-sushi-usa-inc-opens-fourth-houston-location-revolving-sushi-bar-concept-in-katy-300979933html> ;
     ns1:foundName "\"Kura Revolving Sushi Bar\"" ;
     ns1:industry "restaurant" ;
+    ns1:internalCleanName"kura revolving sushi bar" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/263_restaurant_restaurants_restauranteurs_eatery> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/280_restaurant_software_hospitality_catering>,
         <https://1145.am/db/industry/594_reservations_reservation_restaurant_booking> ;
@@ -676,6 +503,7 @@
     ns1:documentSource <https://1145.am/db/1786805/techcrunchcom_2019_01_08_bowery-valuation-raises-12-million-more-to-automate-the-real-estate-appraisal-process_> ;
     ns1:foundName "Bowery Valuation" ;
     ns1:industry "real estate appraisal" ;
+    ns1:internalCleanName "bowery valuation" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/396_appraisal_appraisals_valuation_valuations> ;
     ns1:internalDocId 1786805 ;
     ns1:name "Bowery Valuation" .
@@ -688,6 +516,8 @@
     ns1:documentSource <https://1145.am/db/1787315/techcrunchcom_2019_01_08_scape_> ;
     ns1:foundName "Scape Technologies" ;
     ns1:industry "computer vision" ;
+    ns1:internalCleanName "scape technologies" ;
+    ns1:internalCleanShortName "scape" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/285_vision_technologies_technology_visual> ;
     ns1:internalDocId 1787315 ;
     ns1:name "Scape" ;
@@ -702,13 +532,7 @@
     ns1:foundName "Bakkt" ;
     ns1:internalDocId 1788626 ;
     ns1:name "Bakkt" ;
-    ns1:sameAsNameOnly <https://1145.am/db/195391/Bakkt>,
-        <https://1145.am/db/342093/Bakkt>,
-        <https://1145.am/db/481664/Bakkt>,
-        <https://1145.am/db/482941/Bakkt>,
-        <https://1145.am/db/483019/Bakkt>,
-        <https://1145.am/db/548471/Bakkt>,
-        <https://1145.am/db/549290/Bakkt> .
+    ns1:internalCleanName "bakkt" .
 
 <https://1145.am/db/2154348/Pear_Therapeutics> a org:Organization ;
     ns1:basedInHighClean "San Francisco" ;
@@ -718,16 +542,7 @@
     ns1:foundName "Pear Therapeutics" ;
     ns1:internalDocId 2154348 ;
     ns1:name "Pear Therapeutics" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1138785/Pear_Therapeutics>,
-        <https://1145.am/db/2282780/Pear_Therapeutics>,
-        <https://1145.am/db/2286665/Pear_Therapeutics>,
-        <https://1145.am/db/2293323/Pear_Therapeutics>,
-        <https://1145.am/db/3426775/Pear_Therapeutics>,
-        <https://1145.am/db/359190/Pear_Therapeutics>,
-        <https://1145.am/db/456330/Pear_Therapeutics>,
-        <https://1145.am/db/619367/Pear_Therapeutics>,
-        <https://1145.am/db/671593/Pear_Therapeutics>,
-        <https://1145.am/db/672793/Pear_Therapeutics> .
+    ns1:internalCleanName"pear therapeutics" .
 
 <https://1145.am/db/2364647/Peter_U_Park_Phd-Starting-Vice_President_Of_Biology> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -772,6 +587,7 @@
     ns1:foundName "Faroe Petroleum" ;
     ns1:internalDocId 3029762 ;
     ns1:name "Faroe Petroleum" ;
+    ns1:internalCleanName "faroe petroleum" ;
     ns1:sameAsHigh <https://1145.am/db/2861875/Faroe_Petroleum>,
         <https://1145.am/db/2953162/Faroe_Petroleum>,
         <https://1145.am/db/3027861/Faroe_Petroleum>,
@@ -807,10 +623,10 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/60_fitness_workout_gym_exercise> ;
     ns1:internalDocId 3467659 ;
     ns1:name "EōS Fitness" ;
+    ns1:internalCleanName "eos fitness" ;
     ns1:sameAsHigh <https://1145.am/db/1963220/Eos_Fitness>,
         <https://1145.am/db/3442559/E_S_Fitness>,
-        <https://1145.am/db/3457900/E_S_Fitness> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3608127/E_S_Fitness> .
+        <https://1145.am/db/3457900/E_S_Fitness> .
 
 <https://1145.am/db/3467694/Engility_Holdings_Inc> a org:Organization ;
     ns1:basedInHighClean "Fort Myers" ;
@@ -821,13 +637,13 @@
     ns1:foundName "Engility Holdings",
         "Engility Holdings Inc" ;
     ns1:industry "Life Sciences" ;
+    ns1:internalCleanName "engility holdings" ;
+    ns1:internalCleanShortName "engility" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/133_lifesciences_lifescience_biosciences_biotech> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/292_healthcare_biosciences_biotechnology_health> ;
     ns1:internalDocId 3467694 ;
     ns1:name "Engility Holdings",
-        "Engility Holdings Inc" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3778336/Engility_Holdings_Inc>,
-        <https://1145.am/db/3800707/Engility_Holdings_Inc> .
+        "Engility Holdings Inc" .
 
 <https://1145.am/db/3467694/Engility_Holdings_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition",
@@ -858,7 +674,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/100_marketing_communications_pr_communication> ;
     ns1:internalDocId 3468945 ;
     ns1:name "CatchOn" ;
-    ns1:sameAsNameOnly <https://1145.am/db/751145/Catchon> .
+    ns1:internalCleanName "catchon"  .
 
 <https://1145.am/db/3468945/Catchon-Investment-Stake> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -889,6 +705,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/478_lubricants_lubricant_lubrication_oils> ;
     ns1:internalDocId 3468972 ;
     ns1:name "Halco Lubricants" ;
+    ns1:internalCleanName "halo lubricants" ;
     ns1:sameAsHigh <https://1145.am/db/3432957/Halco_Lubricants> .
 
 <https://1145.am/db/3468972/Halco_Lubricants-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -917,6 +734,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3469058 ;
     ns1:name "NapaJen Pharma" ;
+    ns1:internalCleanName "napajen pharma" ;
     ns1:sameAsHigh <https://1145.am/db/3475299/Napajen_Pharma> .
 
 <https://1145.am/db/3469070/Wetmore_Tool_Engineering> a org:Organization ;
@@ -927,6 +745,7 @@
     ns1:documentSource <https://1145.am/db/3469070/wwwprnewswirecom_news-releases_sandvik-acquires-us-based-wetmore-tool--engineering-300775452html> ;
     ns1:foundName "Wetmore Tool & Engineering" ;
     ns1:industry "aerospace" ;
+    ns1:internalCleanName "wetmore tool engineering" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/110_aerospace_aviation_aeronautics_aeronautical> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/83_aerospace_defense_defence_usaf> ;
     ns1:internalDocId 3469070 ;
@@ -943,6 +762,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
     ns1:internalDocId 3469124 ;
     ns1:name "Canadian Solar Inc" ;
+    ns1:internalCleanName "canadian solar inc" ;
+    ns1:internalCleanShortName "canadian solar" ;
     ns1:sameAsHigh <https://1145.am/db/2438961/Canadian_Solar_Inc>,
         <https://1145.am/db/2439002/Canadian_Solar_Inc>,
         <https://1145.am/db/2441393/Canadian_Solar_Inc>,
@@ -986,10 +807,7 @@
         <https://1145.am/db/3919220/Canadian_Solar_Inc>,
         <https://1145.am/db/3929727/Canadian_Solar_Inc>,
         <https://1145.am/db/3949137/Canadian_Solar_Inc>,
-        <https://1145.am/db/4227054/Canadian_Solar> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3116122/Canadian_Solar_Inc>,
-        <https://1145.am/db/3117575/Canadian_Solar_Inc>,
-        <https://1145.am/db/3934224/Canadian_Solar_Inc> .
+        <https://1145.am/db/4227054/Canadian_Solar>  .
 
 <https://1145.am/db/3469136/Cc_Pharma> a org:Organization ;
     ns1:basedInHighClean "Federal Republic of Germany" ;
@@ -1003,6 +821,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3469136 ;
     ns1:name "CC Pharma" ;
+    ns1:internalCleanName "cc pharma" ;
     ns1:sameAsHigh <https://1145.am/db/3809214/Cc_Pharma> .
 
 <https://1145.am/db/3469136/Cc_Pharma-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1050,6 +869,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3470399 ;
     ns1:name "RainFocus" ;
+    ns1:internalCleanName "rainfocus" ;
     ns1:sameAsHigh <https://1145.am/db/1200708/Rainfocus>,
         <https://1145.am/db/3403875/Rainfocus>,
         <https://1145.am/db/3554832/Rainfocus>,
@@ -1068,13 +888,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/693_offshore_wind_turbine_energy> ;
     ns1:internalDocId 3470428 ;
     ns1:name "K2" ;
-    ns1:sameAsHigh <https://1145.am/db/3801978/K2> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1253518/K2>,
-        <https://1145.am/db/1258197/K2>,
-        <https://1145.am/db/1739449/K2>,
-        <https://1145.am/db/3126587/K2>,
-        <https://1145.am/db/3176223/K2>,
-        <https://1145.am/db/3906117/K2> .
+    ns1:internalCleanName "k2" ;
+    ns1:sameAsHigh <https://1145.am/db/3801978/K2> .
 
 <https://1145.am/db/3470428/K2-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1104,27 +919,9 @@
     ns1:documentSource <https://1145.am/db/3470428/wwwprnewswirecom_news-releases_pattern-energy-completes-sale-of-k2-wind-facility-300775403html> ;
     ns1:foundName "Pattern Energy Group Inc" ;
     ns1:internalDocId 3470428 ;
-    ns1:name "Pattern Energy Group Inc" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1550055/Pattern_Energy_Group_Lp>,
-        <https://1145.am/db/3178474/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3199448/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3238889/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3308129/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3313006/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3318603/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3334236/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3341603/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3520620/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3801978/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3810390/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3810390/Pattern_Energy_Group_Lp>,
-        <https://1145.am/db/3842794/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3869728/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3886023/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3886023/Pattern_Energy_Group_Lp>,
-        <https://1145.am/db/3899690/Pattern_Energy_Group_Inc>,
-        <https://1145.am/db/3911064/Pattern_Energy>,
-        <https://1145.am/db/4158847/Pattern_Energy_Group_Lp> .
+    ns1:internalCleanName "pattern energy group inc" ;
+    ns1:internalCleanShortName "pattern energey group" ;
+    ns1:name "Pattern Energy Group Inc" .
 
 <https://1145.am/db/3471453/Otc_Markets_Group-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1153,8 +950,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/576_dispensary_dispensaries_cannabis_marijuana> ;
     ns1:internalDocId 3557548 ;
-    ns1:name "PharmHouse" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3275501/Pharmhouse> .
+    ns1:internalCleanName"pharmhouse" ;
+    ns1:name "PharmHouse" .
 
 <https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery> a org:Organization ;
     ns1:basedInHighClean "United States" ;
@@ -1166,6 +963,7 @@
     ns1:industry "Furniture delivery" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/148_furniture_furnishings_furnishing_sofa> ;
     ns1:internalDocId 3558745 ;
+    ns1:internalCleanName "corys 1st choice home delivery" ;
     ns1:name "Cory 1st Choice Home Delivery" .
 
 <https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition> a ns1:CorporateFinanceActivity ;

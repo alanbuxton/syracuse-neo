@@ -10,151 +10,7 @@
     ns1:internalDocId 1770910 ;
     ns1:investor <https://1145.am/db/1770910/Minted-Minted-Permira-T_Rowe_Price-Investment-Series_E> ;
     ns1:name "Permira" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1048903/Permira>,
-        <https://1145.am/db/1077549/Permira>,
-        <https://1145.am/db/1159563/Permira>,
-        <https://1145.am/db/1159912/Permira>,
-        <https://1145.am/db/1160332/Permira>,
-        <https://1145.am/db/1160683/Permira>,
-        <https://1145.am/db/1166713/Permira>,
-        <https://1145.am/db/1241259/Permira>,
-        <https://1145.am/db/1244609/Permira>,
-        <https://1145.am/db/1245131/Permira>,
-        <https://1145.am/db/1311369/Permira>,
-        <https://1145.am/db/1319914/Permira>,
-        <https://1145.am/db/1320716/Permira>,
-        <https://1145.am/db/1333884/Permira>,
-        <https://1145.am/db/1338533/Permira>,
-        <https://1145.am/db/1339990/Permira>,
-        <https://1145.am/db/1352007/Permira>,
-        <https://1145.am/db/1353782/Permira>,
-        <https://1145.am/db/1354354/Permira>,
-        <https://1145.am/db/1523686/Permira>,
-        <https://1145.am/db/1523929/Permira>,
-        <https://1145.am/db/1525260/Permira>,
-        <https://1145.am/db/1655263/Permira>,
-        <https://1145.am/db/1746541/Permira>,
-        <https://1145.am/db/1758834/Permira>,
-        <https://1145.am/db/1761520/Permira>,
-        <https://1145.am/db/1764053/Permira>,
-        <https://1145.am/db/1804060/Permira>,
-        <https://1145.am/db/1824518/Permira>,
-        <https://1145.am/db/186968/Permira>,
-        <https://1145.am/db/1896374/Permira>,
-        <https://1145.am/db/1904886/Permira>,
-        <https://1145.am/db/1927657/Permira>,
-        <https://1145.am/db/195233/Permira>,
-        <https://1145.am/db/195237/Permira>,
-        <https://1145.am/db/2019391/Permira>,
-        <https://1145.am/db/2039123/Permira>,
-        <https://1145.am/db/2071409/Permira>,
-        <https://1145.am/db/2106529/Permira>,
-        <https://1145.am/db/2121631/Permira>,
-        <https://1145.am/db/2122964/Permira>,
-        <https://1145.am/db/2133925/Permira>,
-        <https://1145.am/db/2139424/Permira>,
-        <https://1145.am/db/2157342/Permira>,
-        <https://1145.am/db/2284380/Permira>,
-        <https://1145.am/db/2334963/Permira>,
-        <https://1145.am/db/2562184/Permira>,
-        <https://1145.am/db/2565596/Permira>,
-        <https://1145.am/db/258323/Permira>,
-        <https://1145.am/db/2609645/Permira>,
-        <https://1145.am/db/2612072/Permira>,
-        <https://1145.am/db/2629313/Permira>,
-        <https://1145.am/db/2659745/Permira>,
-        <https://1145.am/db/2667842/Permira>,
-        <https://1145.am/db/2669352/Permira>,
-        <https://1145.am/db/2680827/Permira>,
-        <https://1145.am/db/2682053/Permira>,
-        <https://1145.am/db/2718055/Permira>,
-        <https://1145.am/db/2746226/Permira>,
-        <https://1145.am/db/2816248/Permira>,
-        <https://1145.am/db/2816763/Permira>,
-        <https://1145.am/db/2857791/Permira>,
-        <https://1145.am/db/2861009/Permira>,
-        <https://1145.am/db/2862936/Permira>,
-        <https://1145.am/db/2863129/Permira>,
-        <https://1145.am/db/2864671/Permira>,
-        <https://1145.am/db/2865052/Permira>,
-        <https://1145.am/db/2865105/Permira>,
-        <https://1145.am/db/2870332/Permira>,
-        <https://1145.am/db/2881228/Permira>,
-        <https://1145.am/db/2881231/Permira>,
-        <https://1145.am/db/2902237/Permira>,
-        <https://1145.am/db/2910532/Permira>,
-        <https://1145.am/db/2914866/Permira>,
-        <https://1145.am/db/2914873/Permira>,
-        <https://1145.am/db/2915851/Permira>,
-        <https://1145.am/db/2919919/Permira>,
-        <https://1145.am/db/2920069/Permira>,
-        <https://1145.am/db/2925829/Permira>,
-        <https://1145.am/db/2928011/Permira>,
-        <https://1145.am/db/2932453/Permira>,
-        <https://1145.am/db/2941178/Permira>,
-        <https://1145.am/db/2941420/Permira>,
-        <https://1145.am/db/2942456/Permira>,
-        <https://1145.am/db/2951987/Permira>,
-        <https://1145.am/db/2967161/Permira>,
-        <https://1145.am/db/2970990/Permira>,
-        <https://1145.am/db/2973117/Permira>,
-        <https://1145.am/db/2976045/Permira>,
-        <https://1145.am/db/2978405/Permira>,
-        <https://1145.am/db/2982416/Permira>,
-        <https://1145.am/db/3022391/Permira>,
-        <https://1145.am/db/3032669/Permira>,
-        <https://1145.am/db/3037235/Permira>,
-        <https://1145.am/db/3045945/Permira>,
-        <https://1145.am/db/3077430/Permira>,
-        <https://1145.am/db/3080084/Permira>,
-        <https://1145.am/db/3081830/Permira>,
-        <https://1145.am/db/3153096/Permira>,
-        <https://1145.am/db/3158302/Permira>,
-        <https://1145.am/db/3488288/Permira>,
-        <https://1145.am/db/3627998/Permira>,
-        <https://1145.am/db/3645692/Permira>,
-        <https://1145.am/db/3660270/Permira>,
-        <https://1145.am/db/3675792/Permira>,
-        <https://1145.am/db/3689625/Permira>,
-        <https://1145.am/db/376447/Permira>,
-        <https://1145.am/db/3894206/Permira>,
-        <https://1145.am/db/4059112/Permira>,
-        <https://1145.am/db/4090494/Permira>,
-        <https://1145.am/db/410407/Permira>,
-        <https://1145.am/db/4111904/Permira>,
-        <https://1145.am/db/414406/Permira>,
-        <https://1145.am/db/414463/Permira>,
-        <https://1145.am/db/4147601/Permira>,
-        <https://1145.am/db/4149715/Permira>,
-        <https://1145.am/db/4205211/Permira>,
-        <https://1145.am/db/4240993/Permira>,
-        <https://1145.am/db/4241203/Permira>,
-        <https://1145.am/db/4241274/Permira>,
-        <https://1145.am/db/4242013/Permira>,
-        <https://1145.am/db/4242466/Permira>,
-        <https://1145.am/db/4244164/Permira>,
-        <https://1145.am/db/4246499/Permira>,
-        <https://1145.am/db/4250754/Permira>,
-        <https://1145.am/db/4250998/Permira>,
-        <https://1145.am/db/4254579/Permira>,
-        <https://1145.am/db/540063/Permira>,
-        <https://1145.am/db/605223/Permira>,
-        <https://1145.am/db/625860/Permira>,
-        <https://1145.am/db/626988/Permira>,
-        <https://1145.am/db/629527/Permira>,
-        <https://1145.am/db/635592/Permira>,
-        <https://1145.am/db/677572/Permira>,
-        <https://1145.am/db/687857/Permira>,
-        <https://1145.am/db/696854/Permira>,
-        <https://1145.am/db/697048/Permira>,
-        <https://1145.am/db/702546/Permira>,
-        <https://1145.am/db/733185/Permira>,
-        <https://1145.am/db/740656/Permira>,
-        <https://1145.am/db/799510/Permira>,
-        <https://1145.am/db/831823/Permira>,
-        <https://1145.am/db/868617/Permira>,
-        <https://1145.am/db/898277/Permira>,
-        <https://1145.am/db/95036/Permira> .
+    ns1:internalCleanName "permira" .
 
 <https://1145.am/db/1770910/T_Rowe_Price> a org:Organization ;
     ns1:documentSource <https://1145.am/db/1770910/techcrunchcom_2018_12_13_minted-lands-208m-series-e-from-permira-and-t-rowe-price_> ;
@@ -162,59 +18,7 @@
     ns1:internalDocId 1770910 ;
     ns1:investor <https://1145.am/db/1770910/Minted-Minted-Permira-T_Rowe_Price-Investment-Series_E> ;
     ns1:name "T. Rowe Price" ;
-    ns1:sameAsNameOnly <https://1145.am/db/112384/T_Rowe_Price>,
-        <https://1145.am/db/112397/T_Rowe_Price>,
-        <https://1145.am/db/1188418/T_Rowe_Price>,
-        <https://1145.am/db/1231536/T_Rowe_Price>,
-        <https://1145.am/db/1705750/T_Rowe_Price>,
-        <https://1145.am/db/1739469/T_Rowe_Price>,
-        <https://1145.am/db/1741830/T_Rowe_Price>,
-        <https://1145.am/db/1742668/T_Rowe_Price>,
-        <https://1145.am/db/1744371/T_Rowe_Price>,
-        <https://1145.am/db/1748789/T_Rowe_Price>,
-        <https://1145.am/db/1770312/T_Rowe_Price>,
-        <https://1145.am/db/1779826/T_Rowe_Price>,
-        <https://1145.am/db/1797759/T_Rowe_Price>,
-        <https://1145.am/db/1827503/T_Rowe_Price>,
-        <https://1145.am/db/1829408/T_Rowe_Price>,
-        <https://1145.am/db/1854098/T_Rowe_Price>,
-        <https://1145.am/db/1856811/T_Rowe_Price>,
-        <https://1145.am/db/200040/T_Rowe_Price>,
-        <https://1145.am/db/2198338/T_Rowe_Price>,
-        <https://1145.am/db/221051/T_Rowe_Price>,
-        <https://1145.am/db/2224478/T_Rowe_Price>,
-        <https://1145.am/db/2236068/T_Rowe_Price>,
-        <https://1145.am/db/229855/T_Rowe_Price>,
-        <https://1145.am/db/2307889/T_Rowe_Price>,
-        <https://1145.am/db/2313135/T_Rowe_Price>,
-        <https://1145.am/db/2313143/T_Rowe_Price>,
-        <https://1145.am/db/2557987/T_Rowe_Price>,
-        <https://1145.am/db/2938510/T_Rowe_Price>,
-        <https://1145.am/db/3034358/T_Rowe_Price>,
-        <https://1145.am/db/3052242/T_Rowe_Price>,
-        <https://1145.am/db/3147748/T_Rowe_Price>,
-        <https://1145.am/db/3154607/T_Rowe_Price>,
-        <https://1145.am/db/3381717/T_Rowe_Price>,
-        <https://1145.am/db/3422896/T_Rowe_Price>,
-        <https://1145.am/db/3442960/T_Rowe_Price>,
-        <https://1145.am/db/345025/T_Rowe_Price>,
-        <https://1145.am/db/345083/T_Rowe_Price>,
-        <https://1145.am/db/3467477/T_Rowe_Price>,
-        <https://1145.am/db/3538694/T_Rowe_Price>,
-        <https://1145.am/db/3541745/T_Rowe_Price>,
-        <https://1145.am/db/3559765/T_Rowe_Price>,
-        <https://1145.am/db/3645750/T_Rowe_Price>,
-        <https://1145.am/db/3656121/T_Rowe_Price>,
-        <https://1145.am/db/377391/T_Rowe_Price>,
-        <https://1145.am/db/3840871/T_Rowe_Price>,
-        <https://1145.am/db/387521/T_Rowe_Price>,
-        <https://1145.am/db/472389/T_Rowe_Price>,
-        <https://1145.am/db/473354/T_Rowe_Price>,
-        <https://1145.am/db/579022/T_Rowe_Price>,
-        <https://1145.am/db/582541/T_Rowe_Price>,
-        <https://1145.am/db/582815/T_Rowe_Price>,
-        <https://1145.am/db/607880/T_Rowe_Price>,
-        <https://1145.am/db/711371/T_Rowe_Price> .
+    ns1:internalCleanName "t rowe price" .
 
 <https://1145.am/db/2191226/Cigna> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -226,6 +30,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 2191226 ;
     ns1:name "Cigna" ;
+    ns1:internalCleanName "cigna" ;
     ns1:sameAsHigh <https://1145.am/db/1176577/Cigna_Corporation>,
         <https://1145.am/db/1299951/Cigna_Corporation>,
         <https://1145.am/db/2181552/Cigna>,
@@ -334,28 +139,7 @@
         <https://1145.am/db/533401/Cigna_Corporation>,
         <https://1145.am/db/534105/Cigna_Corp>,
         <https://1145.am/db/534338/Cigna_Corp>,
-        <https://1145.am/db/536997/Cigna_Corporation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2194924/Cigna>,
-        <https://1145.am/db/2198626/Cigna>,
-        <https://1145.am/db/2202333/Cigna_Corporation>,
-        <https://1145.am/db/2206572/Cigna>,
-        <https://1145.am/db/2208946/Cigna>,
-        <https://1145.am/db/2251815/Cigna_Corporation>,
-        <https://1145.am/db/2257160/Cigna_Corporation>,
-        <https://1145.am/db/2260489/Cigna_Corporation>,
-        <https://1145.am/db/2263103/Cigna_Corporation>,
-        <https://1145.am/db/2263119/Cigna_Corporation>,
-        <https://1145.am/db/2266810/Cigna>,
-        <https://1145.am/db/2266833/Cigna>,
-        <https://1145.am/db/2268363/Cigna_Corporation>,
-        <https://1145.am/db/2268395/Cigna_Corporation>,
-        <https://1145.am/db/2275405/Cigna>,
-        <https://1145.am/db/2276996/Cigna>,
-        <https://1145.am/db/2277983/Cigna>,
-        <https://1145.am/db/2595943/Cigna>,
-        <https://1145.am/db/3772251/Cigna_Corporation>,
-        <https://1145.am/db/3831434/Cigna>,
-        <https://1145.am/db/3867873/Cigna> .
+        <https://1145.am/db/536997/Cigna_Corporation> .
 
 <https://1145.am/db/3145650/Dott-Investment-Venture_Capital> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -382,12 +166,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
     ns1:name "Hard Yaka" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1005549/Hard_Yaka>,
-        <https://1145.am/db/1449371/Hard_Yaka>,
-        <https://1145.am/db/1456668/Hard_Yaka>,
-        <https://1145.am/db/1744781/Hard_Yaka>,
-        <https://1145.am/db/1755860/Hard_Yaka>,
-        <https://1145.am/db/3072081/Hard_Yaka> .
+    ns1:internalCleanName "hard yaka" .
 
 <https://1145.am/db/3145658/Practica_Capital> a org:Organization ;
     ns1:description "VC firm" ;
@@ -398,10 +177,7 @@
     ns1:name "Practica Capital" ;
     ns1:sameAsHigh <https://1145.am/db/1802857/Practica_Capital>,
         <https://1145.am/db/1838411/Practica_Capital> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1746487/Practica_Capital>,
-        <https://1145.am/db/1845609/Practica_Capital>,
-        <https://1145.am/db/4030641/Practica_Capital>,
-        <https://1145.am/db/4031854/Practica_Capital> .
+    ns1:internalCleanName "practica capital" .
 
 <https://1145.am/db/3145658/Revo_Capital> a org:Organization ;
     ns1:description "VC firm" ;
@@ -410,14 +186,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
     ns1:name "Revo Capital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1136588/Revo>,
-        <https://1145.am/db/1190032/Revo>,
-        <https://1145.am/db/1744781/Revo_Capital>,
-        <https://1145.am/db/1777489/Revo_Capital>,
-        <https://1145.am/db/3043402/Revo>,
-        <https://1145.am/db/3106360/Revo_Capital>,
-        <https://1145.am/db/329077/Revo>,
-        <https://1145.am/db/538482/Revo_Capital> .
+    ns1:internalCleanName "revo capital" .
 
 <https://1145.am/db/3145658/U-Start_Club> a org:Organization ;
     ns1:documentSource <https://1145.am/db/3145658/venturebeatcom_entrepreneur_transfergo-raises-17-5-million-as-global-remittance-market-heats-up_> ;
@@ -433,12 +202,7 @@
     ns1:internalDocId 3145658 ;
     ns1:investor <https://1145.am/db/3145658/Hard_Yaka-Practica_Capital-Revo_Capital-Transfergo-U-Start_Club-Vostok_Emerging_Finance-Investment-Series_B> ;
     ns1:name "Vostok Emerging Finance" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1744781/Vostok_Emerging_Finance>,
-        <https://1145.am/db/1753805/Vostok_Emerging_Finance>,
-        <https://1145.am/db/1769979/Vostok_Emerging_Finance>,
-        <https://1145.am/db/1776594/Vostok_Emerging_Finance>,
-        <https://1145.am/db/3140015/Vostok_Emerging_Finance>,
-        <https://1145.am/db/3602144/Vostok_Emerging_Finance> .
+    ns1:internalCleanName "vostok emerging finance" .
 
 <https://1145.am/db/3860816/Credito_Capital> a org:Organization ;
     ns1:basedInHighClean "Hong Kong Special Administrative Region" ;
@@ -449,7 +213,8 @@
     ns1:foundName "Credito Capital" ;
     ns1:internalDocId 3860816 ;
     ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
-    ns1:name "Credito Capital" .
+    ns1:name "Credito Capital" ;
+    ns1:internalCleanName "credito capital" .
 
 <https://1145.am/db/3860816/Primitive_Ventures> a org:Organization ;
     ns1:basedInHighClean "Silicon Valley" ;
@@ -472,9 +237,7 @@
     ns1:internalDocId 3860816 ;
     ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
     ns1:name "Sora Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1759900/Sora>,
-        <https://1145.am/db/3566163/Sora>,
-        <https://1145.am/db/4120530/Sora_Ventures> .
+    ns1:internalCleanName "sora ventures" .
 
 <https://1145.am/db/3860816/Spartan_Group> a org:Organization ;
     ns1:basedInHighClean "Republic of Singapore" ;
@@ -486,6 +249,7 @@
     ns1:internalDocId 3860816 ;
     ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
     ns1:name "Spartan Group" ;
+    ns1:internalCleanName "spartan" ;
     ns1:sameAsHigh <https://1145.am/db/1232510/Spartan_Group>,
         <https://1145.am/db/1233681/Spartan_Group>,
         <https://1145.am/db/1272854/Spartan_Capital>,
@@ -496,20 +260,7 @@
         <https://1145.am/db/3158851/Spartan_Group>,
         <https://1145.am/db/561315/Spartan_Capital>,
         <https://1145.am/db/754197/Spartan_Capital>,
-        <https://1145.am/db/866534/Spartan_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1066151/Spartan_Group>,
-        <https://1145.am/db/1748452/Spartan_Group>,
-        <https://1145.am/db/1983189/Spartan_Group>,
-        <https://1145.am/db/2150999/Spartan>,
-        <https://1145.am/db/3126247/Spartan_Group>,
-        <https://1145.am/db/3155620/Spartan_Capital>,
-        <https://1145.am/db/3159952/Spartan>,
-        <https://1145.am/db/375428/Spartan_Group>,
-        <https://1145.am/db/4089853/Spartan_Group>,
-        <https://1145.am/db/4168572/Spartan_Group>,
-        <https://1145.am/db/591625/Spartan_Group>,
-        <https://1145.am/db/767089/Spartan_Group>,
-        <https://1145.am/db/962740/Spartan_Group> .
+        <https://1145.am/db/866534/Spartan_Group> .
 
 <https://1145.am/db/3860816/TRG> a org:Organization ;
     ns1:basedInHighClean "Netherland" ;
@@ -521,15 +272,7 @@
     ns1:internalDocId 3860816 ;
     ns1:investor <https://1145.am/db/3860816/Alphaslot-Credito_Capital-Primitive_Ventures-Sora_Ventures-Spartan_Group-TRG-Investment> ;
     ns1:name "TRG" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1168964/TRG>,
-        <https://1145.am/db/1638792/TRG>,
-        <https://1145.am/db/2112825/TRG>,
-        <https://1145.am/db/2182620/TRG>,
-        <https://1145.am/db/2851759/TRG>,
-        <https://1145.am/db/3025502/TRG>,
-        <https://1145.am/db/3917390/TRG>,
-        <https://1145.am/db/4222905/TRG>,
-        <https://1145.am/db/887475/TRG> .
+    ns1:internalCleanName "trg" .
 
 <https://1145.am/db/3860828/Alliant_Energy_Corporation-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -557,10 +300,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
     ns1:internalDocId 3861965 ;
     ns1:name "Ames Watson Capital" ;
+    ns1:internalCleanName "ames watson" ;
     ns1:participant <https://1145.am/db/3861965/Fanzzlids_Holdings-Investment>,
-        <https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3339333/Ames_Watson>,
-        <https://1145.am/db/786587/Ames_Watson> .
+        <https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> .
 
 <https://1145.am/db/3861965/Fanatics_Inc> a org:Organization ;
     ns1:basedInLowRaw "Tenn" ;
@@ -573,6 +315,7 @@
     ns1:internalDocId 3861965 ;
     ns1:investor <https://1145.am/db/3861965/Fanzzlids_Holdings-Investment> ;
     ns1:name "Fanatics Inc." ;
+    ns1:internalCleanName "fanatics" ;
     ns1:sameAsHigh <https://1145.am/db/1034429/Fanatics>,
         <https://1145.am/db/1454873/Fanatics>,
         <https://1145.am/db/1558864/Fanatics>,
@@ -590,11 +333,7 @@
         <https://1145.am/db/733254/Fanatics>,
         <https://1145.am/db/735493/Fanatics>,
         <https://1145.am/db/844181/Fanatics>,
-        <https://1145.am/db/844185/Fanatics> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1451832/Fanatics>,
-        <https://1145.am/db/3720907/Fanatics>,
-        <https://1145.am/db/735831/Fanatics>,
-        <https://1145.am/db/872508/Fanatics> .
+        <https://1145.am/db/844185/Fanatics> .
 
 <https://1145.am/db/3861980/Canadian_Solar_Inc-Investment-Project> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -628,6 +367,7 @@
     ns1:internalDocId 3861981 ;
     ns1:investor <https://1145.am/db/3861981/Rexford_Industrial-Investment-Property> ;
     ns1:name "Rexford Industrial" ;
+    ns1:internalCleanName "rexford industrial" ;
     ns1:sameAsHigh <https://1145.am/db/3180980/Rexford_Industrial>,
         <https://1145.am/db/3187373/Rexford_Industrial>,
         <https://1145.am/db/3193581/Rexford_Industrial>,
@@ -657,8 +397,7 @@
         <https://1145.am/db/3911074/Rexford_Industrial>,
         <https://1145.am/db/3911532/Rexford_Industrial>,
         <https://1145.am/db/3921591/Rexford_Industrial>,
-        <https://1145.am/db/3922522/Rexford_Industrial> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3749308/Rexford_Industrial> .
+        <https://1145.am/db/3922522/Rexford_Industrial> .
 
 <https://1145.am/db/4250362/Caleb_Smith> a foaf:Person ;
     ns1:basedInHighClean "Nashville" ;
@@ -682,6 +421,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/721_conveyancing_property_services_estate> ;
     ns1:internalDocId 4250362 ;
     ns1:name "Gordon Brothers" ;
+    ns1:internalCleanName "gordon brothers" ;
     ns1:sameAsHigh <https://1145.am/db/1106632/Gordon_Brothers>,
         <https://1145.am/db/1213802/Gordon_Brothers>,
         <https://1145.am/db/1265467/Gordon_Brothers>,
@@ -692,30 +432,7 @@
         <https://1145.am/db/4111285/Gordon_Brothers>,
         <https://1145.am/db/4205651/Gordon_Brothers>,
         <https://1145.am/db/4247224/Gordon_Brothers>,
-        <https://1145.am/db/996815/Gordon_Brothers> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1171898/Gordon_Brothers>,
-        <https://1145.am/db/1195058/Gordon_Brothers>,
-        <https://1145.am/db/1198285/Gordon_Brothers>,
-        <https://1145.am/db/1203749/Gordon_Brothers>,
-        <https://1145.am/db/1359184/Gordon_Brothers>,
-        <https://1145.am/db/1538028/Gordon_Brothers>,
-        <https://1145.am/db/1572256/Gordon_Brothers>,
-        <https://1145.am/db/1579728/Gordon_Brothers>,
-        <https://1145.am/db/1933633/Gordon_Brothers>,
-        <https://1145.am/db/254923/Gordon_Brothers>,
-        <https://1145.am/db/2995455/Gordon_Brothers>,
-        <https://1145.am/db/3049414/Gordon_Brothers>,
-        <https://1145.am/db/3061378/Gordon_Brothers>,
-        <https://1145.am/db/3609243/Gordon_Brothers>,
-        <https://1145.am/db/3820077/Gordon_Brothers>,
-        <https://1145.am/db/3820081/Gordon_Brothers>,
-        <https://1145.am/db/4016572/Gordon_Brothers>,
-        <https://1145.am/db/4118816/Gordon_Brothers>,
-        <https://1145.am/db/4148965/Gordon_Brothers>,
-        <https://1145.am/db/4184105/Gordon_Brothers>,
-        <https://1145.am/db/490118/Gordon_Brothers>,
-        <https://1145.am/db/490128/Gordon_Brothers>,
-        <https://1145.am/db/847161/Gordon_Brothers> .
+        <https://1145.am/db/996815/Gordon_Brothers>  .
 
 <https://1145.am/db/4250371/Cansortium_Inc> a org:Organization ;
     ns1:basedInHighClean "Tampa" ;
@@ -729,6 +446,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
     ns1:internalDocId 4250371 ;
     ns1:name "Cansortium Inc." ;
+    ns1:internalCleanName "cansortium" ;
     ns1:sameAsHigh <https://1145.am/db/3201709/Cansortium_Inc>,
         <https://1145.am/db/3240515/Cansortium_Inc>,
         <https://1145.am/db/3249270/Cansortium_Inc>,
@@ -739,8 +457,7 @@
         <https://1145.am/db/3568559/Cansortium_Inc>,
         <https://1145.am/db/3943916/Cansortium_Inc>,
         <https://1145.am/db/4086396/Cansortium_Inc>,
-        <https://1145.am/db/4142935/Cansortium_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3594374/Cansortium_Inc> .
+        <https://1145.am/db/4142935/Cansortium_Inc> .
 
 <https://1145.am/db/4250371/Patricia_Fonseca> a foaf:Person ;
     ns1:basedInLowRaw "TAMPA, Fla." ;
@@ -760,7 +477,7 @@
     ns1:hasRole <https://1145.am/db/4250412/Axiomise-Technical_Advisory_Board> ;
     ns1:internalDocId 4250412 ;
     ns1:name "Axiomise" ;
-    ns1:sameAsNameOnly <https://1145.am/db/866510/Axiomise> .
+    ns1:internalCleanName "axiomise" .
 
 <https://1145.am/db/4250412/Colin_Mckellar> a foaf:Person ;
     ns1:basedInLowRaw "X-Silicon Inc." ;
@@ -788,13 +505,10 @@
     ns1:hasRole <https://1145.am/db/4250496/Atlas_Technical_Consultants_Inc-Chief_Legal_Officer> ;
     ns1:internalDocId 4250496 ;
     ns1:name "Atlas Technical Consultants, Inc" ;
+    ns1:internalCleanName "atlas technical consultants" ;
     ns1:sameAsHigh <https://1145.am/db/1658600/Atlas_Technical_Consultants_Inc>,
         <https://1145.am/db/906003/Atlas_Technical_Consultants>,
-        <https://1145.am/db/919985/Atlas_Technical_Consultants> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1660214/Atlas_Technical_Consultants_Inc>,
-        <https://1145.am/db/1687282/Atlas_Technical_Consultants_Inc>,
-        <https://1145.am/db/3583885/Atlas_Technical_Consultants>,
-        <https://1145.am/db/3886166/Atlas_Technical_Consultants> .
+        <https://1145.am/db/919985/Atlas_Technical_Consultants>  .
 
 <https://1145.am/db/4250496/Sarah_Kinnick_Hilty> a foaf:Person ;
     ns1:basedInHighClean "Austin" ;
@@ -815,6 +529,7 @@
     ns1:foundName "El Septimo Cigars" ;
     ns1:hasRole <https://1145.am/db/4250529/El_Septimo_Cigars-Eastern_Seaboard_Sales_Manager> ;
     ns1:internalDocId 4250529 ;
+    ns1:internalCleanName "el septimo cigars" ;
     ns1:name "El Septimo Cigars" ;
     ns1:sameAsHigh <https://1145.am/db/4244076/El_Septimo_Cigars> .
 
@@ -841,6 +556,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 4251913 ;
     ns1:name "CLARA Analytics" ;
+    ns1:internalCleanName "clara analytics" ;
     ns1:sameAsHigh <https://1145.am/db/1014424/Clara_Analytics>,
         <https://1145.am/db/10818/Clara_Analytics>,
         <https://1145.am/db/4106013/Clara_Analytics>,
@@ -878,14 +594,14 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/175_advisory_advisor_adviser_advising> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/566_advisory_tech_technology_firm> ;
     ns1:internalDocId 4251920 ;
+    ns1:internalCleanName "crosscountry consulting" ;
     ns1:name "CrossCountry Consulting" ;
     ns1:sameAsHigh <https://1145.am/db/147936/Crosscountry_Consulting>,
         <https://1145.am/db/1981103/Crosscountry_Consulting>,
         <https://1145.am/db/208656/Crosscountry_Consulting>,
         <https://1145.am/db/2100823/Crosscountry_Consulting>,
         <https://1145.am/db/218447/Crosscountry_Consulting>,
-        <https://1145.am/db/4135994/Crosscountry_Consulting> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1567282/Crosscountry_Consulting> .
+        <https://1145.am/db/4135994/Crosscountry_Consulting> .
 
 <https://1145.am/db/4251920/Laura_Adams> a foaf:Person ;
     ns1:basedInHighClean "Washington" ;
@@ -916,6 +632,7 @@
     ns1:hasRole <https://1145.am/db/4251921/Marketaxess_Holdings_Inc-Head_Of_Client_Sales> ;
     ns1:internalDocId 4251921 ;
     ns1:name "MarketAxess Holdings Inc" ;
+    ns1:internalCleanName "marketaxess holdings" ;
     ns1:sameAsHigh <https://1145.am/db/1626281/Marketaxess_Holdings_Inc>,
         <https://1145.am/db/1980025/Marketaxess_Holdings_Inc>,
         <https://1145.am/db/2078243/Marketaxess_Holdings_Inc>,
@@ -925,8 +642,7 @@
         <https://1145.am/db/381044/Marketaxess_Holdings_Inc>,
         <https://1145.am/db/4039073/Marketaxess_Holdings_Inc>,
         <https://1145.am/db/4196902/Marketaxess_Holdings_Inc>,
-        <https://1145.am/db/556088/Marketaxess_Holdings_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3941319/Marketaxess_Holdings> .
+        <https://1145.am/db/556088/Marketaxess_Holdings_Inc> .
 
 <https://1145.am/db/4251937/Damon_Cates> a foaf:Person ;
     ns1:basedInLowRaw "United" ;
@@ -942,6 +658,7 @@
     ns1:foundName "One Hope United (OHU)" ;
     ns1:hasRole <https://1145.am/db/4251937/One_Hope_United-President_Chief_Executive_Officer_(ceo)> ;
     ns1:internalDocId 4251937 ;
+    ns1:internalCleanName "one hope united" ;
     ns1:name "One Hope United" .
 
 <https://1145.am/db/4251941/Iconectiv> a org:Organization ;
@@ -975,14 +692,14 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/179_it_solutions_services_service> ;
     ns1:internalDocId 4251946 ;
     ns1:name "Red River" ;
+    ns1:internalCleanName "red river" ;
     ns1:sameAsHigh <https://1145.am/db/1070624/Red_River>,
         <https://1145.am/db/1073307/Red_River>,
         <https://1145.am/db/1168407/Red_River>,
         <https://1145.am/db/1169615/Red_River>,
         <https://1145.am/db/2053284/Red_River>,
         <https://1145.am/db/2151032/Red_River>,
-        <https://1145.am/db/4179882/Red_River> ;
-    ns1:sameAsNameOnly <https://1145.am/db/121664/Red_River> .
+        <https://1145.am/db/4179882/Red_River>  .
 
 <https://1145.am/db/1770910/Minted> a org:Organization ;
     ns1:description "independent artists" ;
@@ -1018,14 +735,7 @@
         <https://1145.am/db/industry/650_logistics_transportation_transport_trucking> ;
     ns1:internalDocId 3145650 ;
     ns1:name "Dott" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1755676/Dott>,
-        <https://1145.am/db/1770192/Dott>,
-        <https://1145.am/db/1789535/Dott>,
-        <https://1145.am/db/3080392/Dott>,
-        <https://1145.am/db/3112231/Dott>,
-        <https://1145.am/db/3354142/Dott>,
-        <https://1145.am/db/3411956/Dott>,
-        <https://1145.am/db/799379/Dott> .
+    ns1:internalCleanName "dott" .
 
 <https://1145.am/db/3145658/Transfergo> a org:Organization ;
     ns1:basedInHighClean "London" ;
@@ -1064,31 +774,8 @@
     ns1:foundName "Alliant Energy Corporation" ;
     ns1:internalDocId 3860828 ;
     ns1:name "Alliant Energy Corporation" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1270545/Alliant_Energy_Corporation>,
-        <https://1145.am/db/1621460/Alliant_Energy_Corporation>,
-        <https://1145.am/db/1685388/Alliant_Energy_Corporation>,
-        <https://1145.am/db/1686655/Alliant_Energy_Corporation>,
-        <https://1145.am/db/1950815/Alliant_Energy_Corporation>,
-        <https://1145.am/db/2061838/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3465034/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3543527/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3550338/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3553883/Alliant_Energy>,
-        <https://1145.am/db/3576338/Alliant_Energy>,
-        <https://1145.am/db/3586048/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3651019/Alliant_Energy>,
-        <https://1145.am/db/3824426/Alliant_Energy>,
-        <https://1145.am/db/3845296/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3859587/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3859615/Alliant_Energy_Corporation>,
-        <https://1145.am/db/3927881/Alliant_Energy_Corporation>,
-        <https://1145.am/db/4004425/Alliant_Energy>,
-        <https://1145.am/db/4075658/Alliant_Energy>,
-        <https://1145.am/db/4076751/Alliant_Energy_Corporation>,
-        <https://1145.am/db/470377/Alliant_Energy_Corporation>,
-        <https://1145.am/db/629133/Alliant_Energy_Corporation>,
-        <https://1145.am/db/852809/Alliant_Energy_Corporation>,
-        <https://1145.am/db/955071/Alliant_Energy> .
+    ns1:internalCleanName "alliant energy" .
+
 
 <https://1145.am/db/3861965/Fanzzlids_Holdings> a org:Organization ;
     ns1:basedInLowRaw "Tenn" ;
@@ -1101,7 +788,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
     ns1:internalDocId 3861965 ;
     ns1:name "FanzzLids Holdings" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3452794/Fanzzlids_Holdings> .
+    ns1:internalCleanName "fanzzlids holdings" .
 
 <https://1145.am/db/3861965/Lids_Sports_Group> a org:Organization ;
     ns1:basedInHighClean "Nashville" ;
@@ -1127,6 +814,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
     ns1:internalDocId 3861980 ;
     ns1:name "Canadian Solar Inc" ;
+    ns1:internalCleanName "canadian solar" ;
     ns1:sameAsHigh <https://1145.am/db/2438961/Canadian_Solar_Inc>,
         <https://1145.am/db/2439002/Canadian_Solar_Inc>,
         <https://1145.am/db/2441393/Canadian_Solar_Inc>,
@@ -1168,12 +856,7 @@
         <https://1145.am/db/3919220/Canadian_Solar_Inc>,
         <https://1145.am/db/3929727/Canadian_Solar_Inc>,
         <https://1145.am/db/3949137/Canadian_Solar_Inc>,
-        <https://1145.am/db/4227054/Canadian_Solar> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3116122/Canadian_Solar_Inc>,
-        <https://1145.am/db/3117575/Canadian_Solar_Inc>,
-        <https://1145.am/db/3495555/Canadian_Solar_Inc>,
-        <https://1145.am/db/3568583/Canadian_Solar_Inc>,
-        <https://1145.am/db/3934224/Canadian_Solar_Inc> .
+        <https://1145.am/db/4227054/Canadian_Solar>  .
 
 <https://1145.am/db/3861981/Rexford_Industrial-Investment-Property> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1542,15 +1225,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/560_sportswear_retailer_merchandising_merchandise> ;
     ns1:internalDocId 3861965 ;
     ns1:name "Genesco Inc" ;
+    ns1:internalCleanName "genesco" ;
     ns1:sameAsHigh <https://1145.am/db/2102620/Genesco_Inc>,
-        <https://1145.am/db/3249664/Genesco_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3163894/Genesco_Inc>,
-        <https://1145.am/db/3262684/Genesco_Inc>,
-        <https://1145.am/db/3452794/Genesco_Inc>,
-        <https://1145.am/db/3599722/Genesco_Inc>,
-        <https://1145.am/db/3627015/Genesco_Inc>,
-        <https://1145.am/db/3798240/Genesco_Inc>,
-        <https://1145.am/db/3912237/Genesco_Inc> .
+        <https://1145.am/db/3249664/Genesco_Inc> .
 
 <https://1145.am/db/3861965/Lids_Sports_Group-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;

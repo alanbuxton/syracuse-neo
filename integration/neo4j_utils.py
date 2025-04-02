@@ -23,6 +23,8 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
+    db.cypher_query("CREATE FULLTEXT INDEX organization_clean_name IF NOT EXISTS FOR (r:Organization) ON EACH [r.internalCleanName]")
+    db.cypher_query("CREATE FULLTEXT INDEX organization_clean_short_name IF NOT EXISTS FOR (r:Organization) ON EACH [r.internalCleanShortName]")
     db.cypher_query("CREATE INDEX article_date_published IF NOT EXISTS FOR (a:Article) ON (a.datePublished)")
     db.cypher_query("CREATE INDEX resource_internalMergedActivityWithSimilarRelationshipsToUri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedActivityWithSimilarRelationshipsToUri)")
     db.cypher_query("CREATE INDEX geonames_location_country_admin1_index IF NOT EXISTS FOR (n: GeoNamesLocation) on (n.countryCode, n.admin1Code)")
@@ -39,6 +41,7 @@ def do_n10s_config(overwrite=False):
                 "basedInHighGeoName",
                 "basedInHighRaw","basedInLowRaw",
                 "description","foundName","industry",
+                "internalCleanName", "internalCleanShortName",
                 "locationFoundName",
                 "locationPurpose","locationType","name",
                 "nameClean", "orgName",
@@ -63,14 +66,12 @@ def do_n10s_config(overwrite=False):
 
 def apoc_del_redundant_same_as():
     ts = time.time()
-    output_same_as_stats("Before delete")
+    output_same_as_stats("Before apoc_del_redundant_same_as")
     apoc_query_high = f'CALL apoc.periodic.iterate("MATCH (n1:Resource)-[r1:sameAsHigh]->(n2:Resource)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) AND n1.deletedRedundantSameAsAt IS NULL AND n2.deletedRedundantSameAsAt IS NULL RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_high)
-    apoc_query_medium = f'CALL apoc.periodic.iterate("MATCH (n1:Resource)-[r1:sameAsNameOnly]->(n2:Resource)-[r2:sameAsNameOnly]->(n1) where elementId(n1) < elementId(n2) AND n1.deletedRedundantSameAsAt IS NULL AND n2.deletedRedundantSameAsAt IS NULL RETURN *","DELETE r2",{{}})'
-    db.cypher_query(apoc_query_medium)
     apoc_query_set_flag = f'''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NULL RETURN *","SET n1.deletedRedundantSameAsAt = {ts}",{{}})'''
     db.cypher_query(apoc_query_set_flag)
-    output_same_as_stats("After Delete sameAsNameOnly")
+    output_same_as_stats("After apoc_del_redundant_same_as")
 
 def delete_all_not_needed_resources():
     query = """MATCH (n: Resource) WHERE n.uri CONTAINS 'https://1145.am/db/'
@@ -80,10 +81,8 @@ def delete_all_not_needed_resources():
 
 def output_same_as_stats(msg):
     high = "MATCH (n1)-[r:sameAsHigh]-(n2)"
-    medium = "MATCH (n1)-[r:sameAsNameOnly]-(n2)"
     same_as_high_count,_ = db.cypher_query(high + " RETURN COUNT(r)")
-    same_as_medium_count,_ = db.cypher_query(medium + " RETURN COUNT(r)")
-    logger.info(f"{msg} sameAsHigh: {same_as_high_count[0][0]}; sameAsNameOnly: {same_as_medium_count[0][0]}")
+    logger.info(f"{msg} sameAsHigh: {same_as_high_count[0][0]}")
 
 def get_internal_doc_ids_from_rdf_row(row):
     res = re.findall(r"^\s+ns1:internalDocId\s(\d+)", row)
@@ -203,5 +202,3 @@ def get_all_activities_to_merge(seen_doc_ids):
         if cnt % 1000 == 0:
             logger.info(f"Processed {cnt} rows")
     return activities_to_merge, keep_going, seen_doc_ids
-
-

@@ -19,6 +19,7 @@
         <https://1145.am/db/industry/639_entertainment_media_vice_culture> ;
     ns1:internalDocId 2393110 ;
     ns1:name "Creative Stage Lighting" ;
+    ns1:internalCleanName "creative stage lighting" ;
     ns1:sameAsHigh <https://1145.am/db/2374344/Creative_Stage_Lighting>,
         <https://1145.am/db/2380722/Creative_Stage_Lighting>,
         <https://1145.am/db/2384915/Creative_Stage_Lighting>,
@@ -26,9 +27,7 @@
         <https://1145.am/db/2412143/Creative_Stage_Lighting>,
         <https://1145.am/db/2415032/Creative_Stage_Lighting>,
         <https://1145.am/db/2421245/Creative_Stage_Lighting>,
-        <https://1145.am/db/2425231/Creative_Stage_Lighting> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2431851/Creative_Stage_Lighting>,
-        <https://1145.am/db/2433256/Creative_Stage_Lighting> .
+        <https://1145.am/db/2425231/Creative_Stage_Lighting>  .
 
 <https://1145.am/db/2393110/Michael_Carattini> a foaf:Person ;
     ns1:basedInHighClean "New York",
@@ -51,11 +50,11 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/226_bakery_bakeries_bakers_baking> ;
     ns1:internalDocId 2932938 ;
     ns1:name "Greggs" ;
+    ns1:internalCleanName "greggs" ;
     ns1:sameAsHigh <https://1145.am/db/2902220/Greggs>,
         <https://1145.am/db/2929432/Greggs>,
         <https://1145.am/db/328909/Greggs>,
-        <https://1145.am/db/738644/Greggs> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2156597/Greggs> .
+        <https://1145.am/db/738644/Greggs> .
 
 <https://1145.am/db/2932938/Ken_Mcmeikan> a foaf:Person ;
     ns1:basedInLowRaw "Scotland" ;
@@ -76,20 +75,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/5_legaltech_legal_lawyers_law> ;
     ns1:internalDocId 3029681 ;
     ns1:name "Elevate" ;
-    ns1:sameAsHigh <https://1145.am/db/3861506/Elevate> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1484212/Elevate>,
-        <https://1145.am/db/166424/Elevate>,
-        <https://1145.am/db/1752629/Elevate>,
-        <https://1145.am/db/1884870/Elevate>,
-        <https://1145.am/db/1967592/Elevate>,
-        <https://1145.am/db/2003364/Elevate>,
-        <https://1145.am/db/3000229/Elevate>,
-        <https://1145.am/db/3057924/Elevate>,
-        <https://1145.am/db/3568532/Elevate>,
-        <https://1145.am/db/3716898/Elevate>,
-        <https://1145.am/db/619828/Elevate>,
-        <https://1145.am/db/623494/Elevate>,
-        <https://1145.am/db/791817/Elevate> .
+    ns1:internalCleanName "elevate" ;
+    ns1:sameAsHigh <https://1145.am/db/3861506/Elevate>  .
 
 <https://1145.am/db/3029681/Lexpredict-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -128,6 +115,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/473_safety_security_public_solutions> ;
     ns1:internalDocId 3451497 ;
     ns1:name "Health & Safety Institute" ;
+    ns1:internalCleanName "health and safety institute" ;
     ns1:sameAsHigh <https://1145.am/db/3139154/Health_Safety_Institute>,
         <https://1145.am/db/3214514/Health_Safety_Institute>,
         <https://1145.am/db/3478536/Health_Safety_Institute> .
@@ -138,12 +126,8 @@
     ns1:documentSource <https://1145.am/db/3451511/wwwprnewswirecom_news-releases_golden-queen-receives-term-sheet-300774517html> ;
     ns1:foundName "Mr. Thomas M. Clay" ;
     ns1:internalDocId 3451511 ;
-    ns1:name "Thomas M. Clay" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3422572/Thomas_M_Clay>,
-        <https://1145.am/db/3469396/Thomas_M_Clay>,
-        <https://1145.am/db/3503888/Thomas_M_Clay>,
-        <https://1145.am/db/3781002/Thomas_M_Clay>,
-        <https://1145.am/db/3928497/Thomas_M_Clay> .
+    ns1:internalCleanName "thomas m clay" ;
+    ns1:name "Thomas M. Clay" .
 
 <https://1145.am/db/3452608/Lg_Household_Health_Care_Ltd> a org:Organization ;
     ns1:basedInLowRaw "China" ;
@@ -154,11 +138,10 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/135_consumer_products_product_goods> ;
     ns1:internalDocId 3452608 ;
     ns1:name "LG Household & Health Care Ltd." ;
+    ns1:internalCleanName "lg household and health care ltd" ;
+    ns1:internalCleanShortName "lg household and health care" ;
     ns1:participant <https://1145.am/db/3452608/Avon_Products_Inc-Avon_Products_Inc-Lg_Household_Health_Care_Ltd-Thefaceshop-Thefaceshop-Acquisition-Shares> ;
-    ns1:sameAsHigh <https://1145.am/db/3602345/Lg_Household_Health_Care_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1258010/Lg_Household_Health_Care>,
-        <https://1145.am/db/3604094/Lg_Household_Health_Care_Ltd>,
-        <https://1145.am/db/473229/Lg_Household_Health_Care_Ltd> .
+    ns1:sameAsHigh <https://1145.am/db/3602345/Lg_Household_Health_Care_Ltd>  .
 
 <https://1145.am/db/3452608/Thefaceshop> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -170,6 +153,7 @@
     ns1:foundName "TheFaceShop",
         "TheFaceshop Co., Ltd." ;
     ns1:industry "consumer goods and beauty" ;
+    ns1:internalCleanName "thefaceshop";
     ns1:industryClusterPrimary <https://1145.am/db/industry/135_consumer_products_product_goods> ;
     ns1:internalDocId 3452608 ;
     ns1:name "TheFaceShop" .
@@ -187,11 +171,10 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/88_printing_print_printwear_printer> ;
     ns1:internalDocId 3452634 ;
     ns1:name "Novatech" ;
+    ns1:internalCleanName "novatech" ;
     ns1:sameAsHigh <https://1145.am/db/3501174/Novatech>,
         <https://1145.am/db/3834087/Novatech>,
-        <https://1145.am/db/3901556/Novatech> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1999607/Novatech>,
-        <https://1145.am/db/2908998/Novatech> .
+        <https://1145.am/db/3901556/Novatech>  .
 
 <https://1145.am/db/3452658/Main_Street_Capital_Corporation> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -207,6 +190,8 @@
         <https://1145.am/db/3452658/Main_Street_Capital_Corporation-Main_Street_Capital_Corporation-Investment> ;
     ns1:name "Main Street",
         "Main Street Capital Corporation" ;
+    ns1:internalCleanName "main street", "main street capital corporation" ;
+    ns1:internalCleanShortName "main street capital";
     ns1:sameAsHigh <https://1145.am/db/3263377/Main_Street_Capital_Corporation>,
         <https://1145.am/db/3274971/Main_Street_Capital_Corporation>,
         <https://1145.am/db/3320815/Main_Street_Capital_Corporation>,
@@ -221,25 +206,7 @@
         <https://1145.am/db/3914951/Main_Street_Capital_Corporation>,
         <https://1145.am/db/4093477/Main_Street_Bank_Corp>,
         <https://1145.am/db/671493/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/672495/Main_Street_Capital_Corporation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1406384/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3113077/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3174823/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3280298/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3344947/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3576614/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3638857/Main_Street_Capital>,
-        <https://1145.am/db/3648353/Main_Street_Capital>,
-        <https://1145.am/db/3663143/Main_Street_Capital>,
-        <https://1145.am/db/3686345/Main_Street_Capital>,
-        <https://1145.am/db/3704709/Main_Street_Capital>,
-        <https://1145.am/db/3749319/Main_Street_Capital>,
-        <https://1145.am/db/3749388/Main_Street>,
-        <https://1145.am/db/3773046/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3810655/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3868183/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/3890489/Main_Street_Capital_Corporation>,
-        <https://1145.am/db/4025795/Main_Street_Capital> .
+        <https://1145.am/db/672495/Main_Street_Capital_Corporation> .
 
 <https://1145.am/db/3452774/Cressey_Company> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -251,12 +218,11 @@
     ns1:internalDocId 3452774 ;
     ns1:investor <https://1145.am/db/3452774/Cressey_Company-Hhaexchange-Investment> ;
     ns1:name "Cressey & Company" ;
+    ns1:internalCleanName "cressey and company" ;
     ns1:sameAsHigh <https://1145.am/db/1659479/Cressey_Company>,
         <https://1145.am/db/2234675/Cressey___Company>,
         <https://1145.am/db/2585239/Cressey___Company>,
-        <https://1145.am/db/3247267/Cressey> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2581830/Cressey___Company>,
-        <https://1145.am/db/3834118/Cressey> .
+        <https://1145.am/db/3247267/Cressey> .
 
 <https://1145.am/db/3453506/Baoneng> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -267,6 +233,7 @@
     ns1:documentSource <https://1145.am/db/3453506/wwwprnewswirecom_news-releases_kenon-sells-half-of-its-remaining-stake-in-qoros-to-the-majority-shareholder-for-rmb-1-560-million-us-227-million-300774674html> ;
     ns1:foundName "Baoneng" ;
     ns1:internalDocId 3453506 ;
+    ns1:internalCleanName "baoneng" ;
     ns1:investor <https://1145.am/db/3453506/Qoros-Acquisition-Interest> ;
     ns1:name "Baoneng" .
 
@@ -312,6 +279,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/36_commerce_ecommerce_ebusiness_merchant> ;
     ns1:internalDocId 3453531 ;
     ns1:name "NexTech AR Solutions Corp." ;
+    ns1:internalCleanName "nextech ar solutions corp" ;
+    ns1:internalCleanShortName "nextech ar solutions" ;
     ns1:sameAsHigh <https://1145.am/db/1180944/Nextech_Ar_Solutions_Corp>,
         <https://1145.am/db/1181510/Nextech_Ar_Solutions_Corp>,
         <https://1145.am/db/1578170/Nextech_Ar_Solutions_Corp>,
@@ -319,31 +288,7 @@
         <https://1145.am/db/3419185/Nextech_Ar_Solutions>,
         <https://1145.am/db/3521843/Nextech_Ar_Solutions>,
         <https://1145.am/db/3613012/Nextech_Ar_Solutions>,
-        <https://1145.am/db/3875187/Nextech_Ar_Solutions> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1106145/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/1108963/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/1248271/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/1248363/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/1452213/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/1455822/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/3765721/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/3772495/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/3776308/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/3800375/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/428914/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/430588/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/446669/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/509770/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/540006/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/581638/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/586889/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/640863/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/676669/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/713788/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/715556/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/774217/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/782373/Nextech_Ar_Solutions_Corp>,
-        <https://1145.am/db/784545/Nextech_Ar_Solutions_Corp> .
+        <https://1145.am/db/3875187/Nextech_Ar_Solutions>  .
 
 <https://1145.am/db/3453558/McM_Energy_Partners-Acquisition-Leasehold> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -407,6 +352,8 @@
     ns1:internalDocId 3454434 ;
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "Alexandria Venture Investments" ;
+    ns1:internalCleanName "alexandria venture investments" ;
+    ns1:internalCleanShortName "alexandria venture" ;
     ns1:sameAsHigh <https://1145.am/db/1042269/Alexandria_Venture_Investments>,
         <https://1145.am/db/1087327/Alexandria_Venture_Investments>,
         <https://1145.am/db/1089424/Alexandria_Venture_Investments>,
@@ -437,52 +384,7 @@
         <https://1145.am/db/471253/Alexandria_Venture_Investments>,
         <https://1145.am/db/531806/Alexandria_Venture_Investments>,
         <https://1145.am/db/571769/Alexandria_Venture_Investments>,
-        <https://1145.am/db/923059/Alexandria_Venture_Investments> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042080/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1156304/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1202633/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1203099/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1214380/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1214387/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1663572/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1665536/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1754964/Alexandria_Venture_Investments>,
-        <https://1145.am/db/1984721/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2279310/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2280707/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2281211/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2282162/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2285971/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2287244/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2287557/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2294202/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2296113/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2337664/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2341599/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2343592/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2344782/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2347368/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2356456/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2369000/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2369305/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2369549/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2787561/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2817959/Alexandria_Venture_Investments>,
-        <https://1145.am/db/2831750/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3346667/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3403185/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3564736/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3618200/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3796024/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3856746/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3859308/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3866717/Alexandria_Venture_Investments>,
-        <https://1145.am/db/3926323/Alexandria_Venture_Investments>,
-        <https://1145.am/db/504446/Alexandria_Venture_Investments>,
-        <https://1145.am/db/506326/Alexandria_Venture_Investments>,
-        <https://1145.am/db/587045/Alexandria_Venture_Investments>,
-        <https://1145.am/db/591613/Alexandria_Venture_Investments>,
-        <https://1145.am/db/601404/Alexandria_Venture_Investments> .
+        <https://1145.am/db/923059/Alexandria_Venture_Investments>.
 
 <https://1145.am/db/3454434/Baird_Capital> a org:Organization ;
     ns1:basedInLowRaw "Mass" ;
@@ -491,26 +393,15 @@
     ns1:internalDocId 3454434 ;
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "Baird Capital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1320992/Baird_Capital>,
-        <https://1145.am/db/1537849/Baird_Capital>,
-        <https://1145.am/db/1746940/Baird_Capital>,
-        <https://1145.am/db/2081283/Baird_Capital>,
-        <https://1145.am/db/2132414/Baird>,
-        <https://1145.am/db/258284/Baird_Capital>,
-        <https://1145.am/db/2722740/Baird_Capital>,
-        <https://1145.am/db/2985956/Baird>,
-        <https://1145.am/db/3037411/Baird>,
-        <https://1145.am/db/3146642/Baird_Capital>,
-        <https://1145.am/db/367440/Baird_Inc>,
-        <https://1145.am/db/3780196/Baird_Capital>,
-        <https://1145.am/db/3864945/Baird_Capital>,
-        <https://1145.am/db/658651/Baird_Capital> .
+    ns1:internalCleanName "baird capital" ;
+    ns1:internalCleanShortName "baird" .
 
 <https://1145.am/db/3454434/Blue_I_O> a org:Organization ;
     ns1:basedInLowRaw "Mass" ;
     ns1:documentSource <https://1145.am/db/3454434/wwwprnewswirecom_news-releases_greenlight-biosciences-announces-50-million-funding-round-300774458html> ;
     ns1:foundName "Blue I/O" ;
     ns1:internalDocId 3454434 ;
+    ns1:internalCleanName "blue io"; 
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "Blue I/O" .
 
@@ -521,25 +412,8 @@
     ns1:internalDocId 3454434 ;
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "Continental Grain Company" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1226504/Continental_Grain>,
-        <https://1145.am/db/1227965/Continental_Grain>,
-        <https://1145.am/db/1764297/Continental_Grain>,
-        <https://1145.am/db/2823027/Continental_Grain_Company>,
-        <https://1145.am/db/3386913/Continental_Grain_Company>,
-        <https://1145.am/db/3617852/Continental_Grain_Company>,
-        <https://1145.am/db/393654/Continental_Grain>,
-        <https://1145.am/db/393979/Continental_Grain>,
-        <https://1145.am/db/394047/Continental_Grain>,
-        <https://1145.am/db/401391/Continental_Grain>,
-        <https://1145.am/db/401777/Continental_Grain>,
-        <https://1145.am/db/567343/Continental_Grain>,
-        <https://1145.am/db/678020/Continental_Grain_Company>,
-        <https://1145.am/db/766608/Continental_Grain_Company>,
-        <https://1145.am/db/830331/Continental_Grain_Company>,
-        <https://1145.am/db/838648/Continental_Grain_Co>,
-        <https://1145.am/db/863024/Continental_Grain_Company>,
-        <https://1145.am/db/863541/Continental_Grain_Company>,
-        <https://1145.am/db/938108/Continental_Grain_Company> .
+    ns1:internalCleanName "continental grain company" ;
+    ns1:internalCleanShortName "continental grain" .
 
 <https://1145.am/db/3454434/S2g_Ventures> a org:Organization ;
     ns1:basedInLowRaw "MEDFORD, Mass" ;
@@ -548,30 +422,8 @@
     ns1:internalDocId 3454434 ;
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "S2G Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042721/S2g_Ventures>,
-        <https://1145.am/db/1150348/S2g_Ventures>,
-        <https://1145.am/db/1152132/S2g_Ventures>,
-        <https://1145.am/db/1165595/S2g_Ventures>,
-        <https://1145.am/db/1175459/S2g_Ventures>,
-        <https://1145.am/db/1560958/S2g_Ventures>,
-        <https://1145.am/db/1635721/S2g_Ventures>,
-        <https://1145.am/db/1762264/S2g_Ventures>,
-        <https://1145.am/db/1771617/S2g_Ventures>,
-        <https://1145.am/db/1800289/S2g_Ventures>,
-        <https://1145.am/db/1959868/S2g_Ventures>,
-        <https://1145.am/db/2831581/S2g_Ventures>,
-        <https://1145.am/db/3220420/S2g_Ventures>,
-        <https://1145.am/db/3276947/S2g_Ventures>,
-        <https://1145.am/db/3335579/S2g_Ventures>,
-        <https://1145.am/db/3364718/S2g_Ventures>,
-        <https://1145.am/db/3598577/S2g_Ventures>,
-        <https://1145.am/db/3771324/S2g_Ventures>,
-        <https://1145.am/db/3783436/S2g_Ventures>,
-        <https://1145.am/db/3862257/S2g_Ventures>,
-        <https://1145.am/db/492480/S2g_Ventures>,
-        <https://1145.am/db/765182/S2g_Ventures>,
-        <https://1145.am/db/890955/S2g_Ventures>,
-        <https://1145.am/db/907765/S2g_Ventures> .
+    ns1:internalCleanName "s2g ventures" ;
+    ns1:internalCleanShortName "s2g" .
 
 <https://1145.am/db/3454434/Tao_Capital_Partners> a org:Organization ;
     ns1:basedInLowRaw "MEDFORD, Mass" ;
@@ -580,35 +432,8 @@
     ns1:internalDocId 3454434 ;
     ns1:investor <https://1145.am/db/3454434/Alexandria_Venture_Investments-Baird_Capital-Blue_I_O-Continental_Grain_Company-Greenlight_Biosciences_Inc-S2g_Ventures-Tao_Capital_Partners-Investment> ;
     ns1:name "Tao Capital Partners" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1028744/Tao_Capital_Partners>,
-        <https://1145.am/db/1029882/Tao_Capital_Partners>,
-        <https://1145.am/db/1105790/Tao_Capital_Partners>,
-        <https://1145.am/db/1108240/Tao_Capital_Partners>,
-        <https://1145.am/db/1320499/Tao_Capital_Partners>,
-        <https://1145.am/db/1467324/Tao_Capital_Partners>,
-        <https://1145.am/db/1467932/Tao_Capital_Partners>,
-        <https://1145.am/db/1613904/Tao_Capital_Partners>,
-        <https://1145.am/db/1615580/Tao_Capital_Partners>,
-        <https://1145.am/db/1754745/Tao_Capital_Partners>,
-        <https://1145.am/db/1759996/Tao_Capital_Partners>,
-        <https://1145.am/db/1771017/Tao_Capital_Partners>,
-        <https://1145.am/db/1792378/Tao_Capital>,
-        <https://1145.am/db/1800891/Tao_Capital_Partners>,
-        <https://1145.am/db/1896192/Tao_Ventures>,
-        <https://1145.am/db/2002318/Tao_Capital_Partners>,
-        <https://1145.am/db/2155032/Tao_Capital_Partners>,
-        <https://1145.am/db/3064437/Tao_Group>,
-        <https://1145.am/db/3477921/Tao_Capital>,
-        <https://1145.am/db/3493683/Tao_Capital_Partners>,
-        <https://1145.am/db/3615280/Tao_Capital_Partners>,
-        <https://1145.am/db/3723009/Tao_Group>,
-        <https://1145.am/db/3783436/Tao_Capital_Partners>,
-        <https://1145.am/db/3836758/Tao_Capital_Partners>,
-        <https://1145.am/db/433117/Tao_Capital_Partners>,
-        <https://1145.am/db/492480/Tao_Capital_Partners>,
-        <https://1145.am/db/513435/Tao_Capital_Partners>,
-        <https://1145.am/db/666280/Tao_Capital>,
-        <https://1145.am/db/668910/Tao_Capital> .
+    ns1:internalCleanName "tao capital partners";
+    ns1:internalCleanShortName "tao capital" .
 
 <https://1145.am/db/3454466/Arthur_J_Gallagher_Co> a org:Organization ;
     ns1:basedInHighClean "Rolling Meadows" ;
@@ -623,6 +448,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3454466 ;
     ns1:name "Arthur J. Gallagher & Co." ;
+    ns1:internalCleanName "arthur j gallagher and co" ;
+    ns1:internalCleanShortName "arthur j gallagher" ;
     ns1:sameAsHigh <https://1145.am/db/1003769/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/1025618/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/1160496/Arthur_J_Gallagher_Co>,
@@ -730,31 +557,7 @@
         <https://1145.am/db/708537/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/734599/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/965641/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/988306/Arthur_J_Gallagher_Co> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1060599/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1083872/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1217037/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1262253/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1460528/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1595037/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1606194/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1957696/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3263736/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3329075/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3446826/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3490021/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3491512/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3591738/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3765031/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3766593/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/3784862/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3795933/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3827812/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3888616/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3899291/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/3919572/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/585160/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/930438/Arthur_J_Gallagher_Co> .
+        <https://1145.am/db/988306/Arthur_J_Gallagher_Co> .
 
 <https://1145.am/db/3454478/Convergeone> a org:Organization ;
     ns1:basedInHighClean "Eagan" ;
@@ -770,6 +573,7 @@
         <https://1145.am/db/industry/571_infrastructure_it_services_technology> ;
     ns1:internalDocId 3454478 ;
     ns1:name "ConvergeOne" ;
+    ns1:internalCleanName "convergeone" ;
     ns1:sameAsHigh <https://1145.am/db/2610482/Convergeone>,
         <https://1145.am/db/3333688/Convergeone>,
         <https://1145.am/db/3761344/Convergeone>,
@@ -788,8 +592,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/482_benefits_benefit_administration_administrator> ;
     ns1:internalDocId 3454498 ;
     ns1:name "Hub" ;
-    ns1:sameAsHigh <https://1145.am/db/3831971/Hub> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3281493/Hub> .
+    ns1:internalCleanName "hub" ;
+    ns1:sameAsHigh <https://1145.am/db/3831971/Hub> .
 
 <https://1145.am/db/2393110/Michael_Carattini-Starting-Director_Of_Sales> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -834,6 +638,7 @@
     ns1:documentSource <https://1145.am/db/3029681/wwwcityamcom_us-legal-business-elevate-acquires-uk-new-law-company_> ;
     ns1:foundName "Halebury" ;
     ns1:industry "legal" ;
+    ns1:internalCleanName "halebury" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/5_legaltech_legal_lawyers_law> ;
     ns1:internalDocId 3029681 ;
     ns1:name "Halebury" .
@@ -868,6 +673,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/306_ai_automation_intelligence_intelligent> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/392_ai_analytics_computational_learning> ;
     ns1:internalDocId 3029681 ;
+    ns1:internalCleanName "lexpredict" ;
     ns1:name "Lexpredict" .
 
 <https://1145.am/db/3029681/Sumati_Group> a org:Organization ;
@@ -875,6 +681,8 @@
     ns1:documentSource <https://1145.am/db/3029681/wwwcityamcom_us-legal-business-elevate-acquires-uk-new-law-company_> ;
     ns1:foundName "Sumati Group" ;
     ns1:internalDocId 3029681 ;
+    ns1:internalCleanName "sumati group";
+    ns1:internalCleanShortName "sumati" ;
     ns1:name "Sumati Group" .
 
 <https://1145.am/db/3451497/Ems_Safety_Services_Inc> a org:Organization ;
@@ -882,6 +690,8 @@
     ns1:documentSource <https://1145.am/db/3451497/wwwprnewswirecom_news-releases_health--safety-institute-acquires-ems-safety-services-inc-300773067html> ;
     ns1:foundName "EMS Safety Services Inc." ;
     ns1:internalDocId 3451497 ;
+    ns1:internalCleanName "ems safety services inc" ;
+    ns1:internalCleanShortName "ems safety" ;
     ns1:name "EMS Safety Services Inc." .
 
 <https://1145.am/db/3451497/Ems_Safety_Services_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -905,6 +715,8 @@
     ns1:foundName "Golden Queen Mining Co. Ltd" ;
     ns1:internalDocId 3451511 ;
     ns1:name "Golden Queen Mining Co. Ltd" ;
+    ns1:internalCleanName "golden queen mining co ltd" ;
+    ns1:internalCleanShortName "golden queen mining" ;
     ns1:sameAsHigh <https://1145.am/db/3422572/Golden_Queen_Mining_Co_Ltd>,
         <https://1145.am/db/3793696/Golden_Queen_Mining_Co_Ltd>,
         <https://1145.am/db/3837070/Golden_Queen_Mining_Co_Ltd>,
@@ -938,6 +750,7 @@
     ns1:internalDocId 3452608 ;
     ns1:name "Avon Products",
         "Avon Products, Inc." ;
+    ns1:internalCleanName "avon products", "avon products inc";
     ns1:sameAsHigh <https://1145.am/db/3164400/Avon_Products>,
         <https://1145.am/db/3455056/Avon_Products_Inc>,
         <https://1145.am/db/3529406/Avon_Products>,
@@ -962,19 +775,7 @@
         <https://1145.am/db/3931989/Avon_Products>,
         <https://1145.am/db/3932063/Avon_Products>,
         <https://1145.am/db/3932069/Avon_Products>,
-        <https://1145.am/db/3934928/Avon_Products> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2298040/Avon_Products>,
-        <https://1145.am/db/2551464/Avon_Products>,
-        <https://1145.am/db/3430186/Avon_Products>,
-        <https://1145.am/db/3537978/Avon_Products>,
-        <https://1145.am/db/3596418/Avon_Products_Inc>,
-        <https://1145.am/db/3603269/Avon_Products_Inc>,
-        <https://1145.am/db/3605116/Avon_Products_Inc>,
-        <https://1145.am/db/3605167/Avon_Products_Inc>,
-        <https://1145.am/db/3616787/Avon_Products_Inc>,
-        <https://1145.am/db/3831346/Avon_Products_Inc>,
-        <https://1145.am/db/3831368/Avon_Products_Inc>,
-        <https://1145.am/db/3932058/Avon_Products> .
+        <https://1145.am/db/3934928/Avon_Products> .
 
 <https://1145.am/db/3452634/Consolidated_Copier_Services> a org:Organization ;
     ns1:basedInHighClean "Atlanta" ;
@@ -984,6 +785,8 @@
     ns1:documentSource <https://1145.am/db/3452634/wwwprnewswirecom_news-releases_darren-metz-guides-novatech-in-acquisition-of-consolidated-copier-services-300774482html> ;
     ns1:foundName "Consolidated Copier Services" ;
     ns1:internalDocId 3452634 ;
+    ns1:internalCleanName "consolidated copier services" ;
+    ns1:internalCleanShortName "consolidated copier" ;
     ns1:name "Consolidated Copier Services" .
 
 <https://1145.am/db/3452634/Consolidated_Copier_Services-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1014,6 +817,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/179_it_solutions_services_service> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3452658 ;
+    ns1:internalCleanName "centre technologies" ;
     ns1:name "Centre Technologies" .
 
 <https://1145.am/db/3452658/Centre_Technologies-Investment-Portfolio> a ns1:CorporateFinanceActivity ;
@@ -1074,13 +878,8 @@
     ns1:industry "healthcare" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3452774 ;
-    ns1:name "HHAeXchange" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1307156/Hhaexchange>,
-        <https://1145.am/db/1927958/Hhaexchange>,
-        <https://1145.am/db/2014242/Hhaexchange>,
-        <https://1145.am/db/3150748/Hhaexchange>,
-        <https://1145.am/db/4026918/Hhaexchange>,
-        <https://1145.am/db/539178/Hhaexchange> .
+    ns1:internalCleanName "hhaexchange" ;
+    ns1:name "HHAeXchange"  .
 
 <https://1145.am/db/3453490/Quoizel> a org:Organization ;
     ns1:basedInHighClean "Charleston" ;
@@ -1092,6 +891,7 @@
     ns1:foundName "NBG Home",
         "Quoizel" ;
     ns1:industry "decorative lighting" ;
+    ns1:internalCleanName "quoizel" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/8_lighting_light_led_skylights> ;
     ns1:internalDocId 3453490 ;
     ns1:name "Quoizel" .
@@ -1120,6 +920,7 @@
     ns1:foundName "Qoros",
         "Qoros Automobile Co., Ltd." ;
     ns1:industry "Automobile" ;
+    ns1:internalCleanName "qoros" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/702_automotive_automobile_industry_auto> ;
     ns1:internalDocId 3453506 ;
@@ -1136,15 +937,11 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/12_cannabis_hemp_marijuana_thc> ;
     ns1:internalDocId 3453527 ;
     ns1:name "CannTrust Holdings Inc" ;
+    ns1:internalCleanName "canntrust holdings inc" ;
+    ns1:internalCleanShortName "canntrust holdings" ;
     ns1:sameAsHigh <https://1145.am/db/3423327/Canntrust_Holdings_Inc>,
         <https://1145.am/db/3772406/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3926572/Canntrust_Holdings_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3275876/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3388836/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3400114/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3554001/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3588855/Canntrust_Holdings_Inc>,
-        <https://1145.am/db/3632083/Canntrust_Holdings_Inc> .
+        <https://1145.am/db/3926572/Canntrust_Holdings_Inc>  .
 
 <https://1145.am/db/3453529/Hamlet_Homes> a org:Organization ;
     ns1:basedInHighClean "Salt Lake City" ;
@@ -1157,6 +954,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/156_land_development_developers_property> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/423_condominium_luxury_condo_residential> ;
     ns1:internalDocId 3453529 ;
+    ns1:internalCleanName "hamlet homes" ;
     ns1:name "Hamlet Homes" .
 
 <https://1145.am/db/3453529/Michael_Brodsky> a org:Organization ;
@@ -1167,6 +965,7 @@
     ns1:documentSource <https://1145.am/db/3453529/wwwprnewswirecom_news-releases_hamlet-homes-ceo-michael-brodsky-announces-the-sale-of-hamlet-homes-300774450html> ;
     ns1:foundName "Michael Brodsky" ;
     ns1:industry "residential developer" ;
+    ns1:internalCleanName "michael brodsky" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/156_land_development_developers_property> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/423_condominium_luxury_condo_residential> ;
     ns1:internalDocId 3453529 ;
@@ -1180,6 +979,7 @@
     ns1:industry "eCommerce" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/36_commerce_ecommerce_ebusiness_merchant> ;
     ns1:internalDocId 3453531 ;
+    ns1:internalCleanName "ar ecommerce" ;
     ns1:name "AR Ecommerce" .
 
 <https://1145.am/db/3453531/Ar_Ecommerce-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1205,6 +1005,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/35_petroleum_oil_gas_hydrocarbon> ;
     ns1:internalDocId 3453558 ;
     ns1:name "MCM Energy Partners" ;
+    ns1:internalCleanName "mcm energy partners" ;
+    ns1:internalCleanShortName "mcm energy" ;
     ns1:sameAsHigh <https://1145.am/db/2823632/McM_Energy_Partners> .
 
 <https://1145.am/db/3454434/Greenlight_Biosciences_Inc> a org:Organization ;
@@ -1215,6 +1017,8 @@
     ns1:documentSource <https://1145.am/db/3454434/wwwprnewswirecom_news-releases_greenlight-biosciences-announces-50-million-funding-round-300774458html> ;
     ns1:foundName "GreenLight™ Biosciences, Inc." ;
     ns1:internalDocId 3454434 ;
+    ns1:internalCleanName "greenlight biosciences inc" ;
+    ns1:internalCleanShortName "greenlight biosciences" ;
     ns1:name "GreenLight™ Biosciences, Inc." .
 
 <https://1145.am/db/3454466/Jones_Brown> a org:Organization ;
@@ -1225,6 +1029,7 @@
     ns1:documentSource <https://1145.am/db/3454466/wwwprnewswirecom_news-releases_arthur-j-gallagher--co-acquires-jones-brown-inc-300773289html> ;
     ns1:foundName "Jones Brown Inc." ;
     ns1:industry "insurance" ;
+    ns1:internalCleanName "jones brown" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3454466 ;
@@ -1260,7 +1065,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/38_consulting_consultancy_consultant_it>,
         <https://1145.am/db/industry/571_infrastructure_it_services_technology> ;
     ns1:internalDocId 3454478 ;
-    ns1:name "Venture Technologies" ;
+    ns1:name "Venture Technologies"  ;
+    ns1:internalCleanName "venture technologies" ;
     ns1:sameAsHigh <https://1145.am/db/3834217/Venture_Technologies> .
 
 <https://1145.am/db/3454478/Venture_Technologies-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1306,6 +1112,8 @@
         <https://1145.am/db/industry/397_pension_pensions_insurer_insurance> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/482_benefits_benefit_administration_administrator> ;
     ns1:internalDocId 3454498 ;
+    ns1:internalCleanName "trg group benefits and pensions inc" ;
+    ns1:internalCleanShortName "trg grooup benefits and pensions" ;
     ns1:name "TRG Group Benefits and Pensions Inc",
         "TRG Group Benefits and Pensions Inc." .
 
@@ -1463,12 +1271,11 @@
     ns1:internalDocId 3453506 ;
     ns1:name "Kenon",
         "Kenon Holdings Ltd" ;
+    ns1:internalCleanName "kenon holdings ltd", "kenon" ;
+    ns1:internalCleanShortName "kenon holdings" ;
     ns1:sameAsHigh <https://1145.am/db/3610157/Kenon_Holdings_Ltd>,
         <https://1145.am/db/3914319/Kenon_Holdings_Ltd>,
-        <https://1145.am/db/3922016/Kenon_Holdings_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3156684/Kenon_Holdings_Ltd>,
-        <https://1145.am/db/3255284/Kenon_Holdings_Ltd>,
-        <https://1145.am/db/3839780/Kenon_Holdings_Ltd> .
+        <https://1145.am/db/3922016/Kenon_Holdings_Ltd> .
 
 <https://1145.am/db/3453506/Qoros-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition",
@@ -1509,59 +1316,8 @@
     ns1:foundName "SOL Global Investments Corp." ;
     ns1:internalDocId 3454378 ;
     ns1:name "SOL Global Investments Corp." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1003843/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1005065/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/101351/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1024379/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1068524/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1219813/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1312213/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/1313941/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/265774/Sol_Global_Investments>,
-        <https://1145.am/db/271797/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/300771/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/304697/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/317357/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/322153/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3360764/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3382511/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3398118/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3419504/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3425235/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3427521/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3438836/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3462413/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3471994/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3475184/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3507125/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3508452/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3531015/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3543283/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3579717/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3583210/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3603680/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3606600/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3619271/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3621566/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3626629/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3680088/Sol_Global_Investments>,
-        <https://1145.am/db/3810625/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/3844800/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/392775/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/397881/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/464533/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/465693/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/563620/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/658019/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/677935/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/704423/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/716844/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/759344/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/760251/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/962449/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/963289/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/979604/Sol_Global_Investments_Corp>,
-        <https://1145.am/db/979804/Sol_Global_Investments_Corp> .
+    ns1:internalCleanName "sol global investments corp" ;
+    ns1:internalCleanShortName "sol global investments" .
 
 <https://1145.am/db/geonames_location/1880251> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/3453506/wwwprnewswirecom_news-releases_kenon-sells-half-of-its-remaining-stake-in-qoros-to-the-majority-shareholder-for-rmb-1-560-million-us-227-million-300774674html> ;

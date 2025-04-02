@@ -51,8 +51,9 @@
 </p>
 <p>
 {% if request_state.name_only_current_state %}
-  Treat sameAsNameOnly relationship as same? {{ request_state.name_only_current_state }}
+  Treat all organizations with the same name as the same organization? {{ request_state.name_only_current_state }} 
     <a href="{{ request_state.name_only_toggle_url | safe }}">(Turn {{ request_state.name_only_toggle_name }})</a>  
+  (Off means organizations are only combined if both name and industry are similar)
 {% endif %}
 </p>
 </em>
@@ -64,6 +65,6 @@
 {% endif %}
 | <a href="{% url 'about' %}">About (includes privacy and cookie notices)</a>
 <br/> 
-(c) by 1145, 2023-2024. Data licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License</a>.
+(c) by 1145, 2023-2025. Data licensed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License</a>.
   Please <a href="mailto:info-syracuse@1145.am">send an email</a> if you need a non-share-alike license and/or you need API access.
 </p>

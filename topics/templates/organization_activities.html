@@ -1,0 +1,32 @@
+
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+{% load l10n %}
+
+<title>{{ org_data.source_node_name }} (Activities)</title>
+</head>
+<body>
+
+  <p>
+    {% include 'layouts/nav-header.html' %}
+  </p>
+  <h1>{{ org_data.source_node_name }} - Activities</h1>
+
+  <p><b>Showing activities for:</b> 
+    <a href="{{ org_data.uri }}?{{ request_state.qs_params|dict_to_query_string }}">{{ org_data.uri }}</a>
+    {% include 'layouts/nav-org.html' %}
+  </p>
+  <p>Showing activities between {{ min_date | localize }} and {{ max_date | localize }}</p>
+
+  {% include 'activity_list.html' %}
+
+  {% include 'layouts/footer.html' %}
+
+
+</body>
+</html>

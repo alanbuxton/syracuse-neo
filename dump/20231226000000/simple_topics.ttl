@@ -15,6 +15,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/61_social_microsocial_microblogging_network> ;
     ns1:internalDocId 2946622 ;
     ns1:name "Facebook" ;
+    ns1:internalCleanName "facebook" ;
     ns1:sameAsHigh <https://1145.am/db/106983/Facebook_Inc>,
         <https://1145.am/db/108206/Facebook>,
         <https://1145.am/db/108597/Facebook_Inc>,
@@ -69,6 +70,7 @@
     ns1:documentSource <https://1145.am/db/2946625/wwwcityamcom_cuadrilla-plans-frack-two-lancashire-sites> ;
     ns1:foundName "Cuadrilla",
         "Cuadrilla Resources" ;
+    ns1:internalCleanName "cuadrilla" , "cuadrilla resources" ;
     ns1:hasOperationsActivity <https://1145.am/db/2946625/Start_Fracking_At_Two> ;
     ns1:industry "energy" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/400_shale_fracking_drilling_gas> ;
@@ -238,6 +240,7 @@
     ns1:foundName "Tangerine" ;
     ns1:hasAboutUs <https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets> ;
     ns1:industry "sweets" ;
+    ns1:internalCleanName "black jacks" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary> ;
     ns1:internalDocId 2947016 ;
     ns1:name "Black Jacks" .
@@ -272,6 +275,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_banker> ;
     ns1:internalDocId 2948203 ;
     ns1:name "Societe Generale" ;
+    ns1:internalCleanName "societe generale" ;
     ns1:sameAsHigh <https://1145.am/db/1025862/Societe_Generale>,
         <https://1145.am/db/1066408/Societe_Generale>,
         <https://1145.am/db/1069541/Societe_Generale>,
@@ -330,6 +334,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/170_auto_automotive_autobody_automobile> ;
     ns1:internalDocId 2948152 ;
     ns1:name "TOYOTA" ;
+    ns1:internalCleanName "toyota" ;
     ns1:sameAsHigh <https://1145.am/db/1101245/Toyota>,
         <https://1145.am/db/1150324/Toyota>,
         <https://1145.am/db/4887756/Toyota>,
@@ -353,8 +358,7 @@
     ns1:hasMarketingActivity <https://1145.am/db/2293685/A_Wearable_Device_That> ;
     ns1:hasRegulatoryActivity <https://1145.am/db/2293685/Huntington-Monitoring_Wearable> ;
     ns1:internalDocId 2293685 ;
-    ns1:name "BioSensics" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2407266/Biosensics> .
+    ns1:name "BioSensics" .
 
 <https://1145.am/db/2293685/A_Wearable_Device_That> a ns1:MarketingActivity ;
     ns1:documentDate "2017-09-22T13:35:16+00:00"^^xsd:dateTime ;
@@ -401,6 +405,7 @@
     ns1:industry "telecommunications" ;
     ns1:internalDocId 2858242 ;
     ns1:name "MTN Group" ;
+    ns1:internalCleanName "mtn group" ;
     ns1:sameAsHigh <https://1145.am/db/1209519/MTN>,
         <https://1145.am/db/1311630/MTN>,
         <https://1145.am/db/1317538/Mtn_Group>,
@@ -451,6 +456,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/124_airline_airlines_airliners_airliner> ;
     ns1:internalDocId 2949857 ;
     ns1:name "British Airways" ;
+    ns1:internalCleanName "british airways" ;
     ns1:sameAsHigh <https://1145.am/db/1757826/British_Airways>,
         <https://1145.am/db/1761902/British_Airways>,
         <https://1145.am/db/1818294/British_Airways>,

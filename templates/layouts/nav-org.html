@@ -1,14 +1,17 @@
 {% load topics_extras %}
 
 {% if request_state.hide_link != 'organization_linkages' and uri_parts %}
-| <a href="{% url_with_querystring 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Show Linkages</a> 
+| <a href="{% url_with_querystring 'organization-linkages' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Linkages</a> 
 {% endif %}
 {% if request_state.hide_link != 'organization_family_tree' and uri_parts %}
-| <a href="{% url_with_querystring 'organization-family-tree' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Show Family Tree</a> 
+| <a href="{% url_with_querystring 'organization-family-tree' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Family Tree</a> 
 {% endif %}
 {% if request_state.hide_link != 'organization_timeline' and uri_parts %}
-| <a href="{% url_with_querystring 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Show Timeline</a> 
+| <a href="{% url_with_querystring 'organization-timeline' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Timeline</a> 
+{% endif %}
+{% if request_state.hide_link != 'organization_activities' and uri_parts %}
+| <a href="{% url_with_querystring 'organization-activities' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Recent Activities</a>
 {% endif %}
 {% if request_state.hide_link != 'similar_organizations' and uri_parts %}
-| <a href="{% url_with_querystring 'similar-organizations' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Show Similar Organizations</a>
+| <a href="{% url_with_querystring 'similar-organizations' uri_parts.domain uri_parts.path uri_parts.doc_id uri_parts.name qs_params=request_state.qs_params %}">Similar Organizations</a>
 {% endif %}

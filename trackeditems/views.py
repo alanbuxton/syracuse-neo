@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedItem
 from topics.models import IndustryCluster, Organization
+from topics.util import min_and_max_date
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import (ActivitySerializer,
@@ -218,18 +219,6 @@ class ActivitiesView(APIView):
                         "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
-
-
-def min_and_max_date(get_params):
-    min_date = get_params.get("min_date")
-    if isinstance(min_date, str):
-        min_date = datetime.fromisoformat(min_date)
-    max_date = get_params.get("max_date",datetime.now(tz=timezone.utc))
-    if isinstance(max_date, str):
-        max_date = datetime.fromisoformat(max_date)
-    if max_date is not None and min_date is None:
-        min_date = max_date - timedelta(days=7)
-    return min_date, max_date
 
 def get_entities_to_track(params_dict, search_str, all_industry_ids):
     tracked_items = [TrackedItem.text_to_tracked_item_data(x,search_str) 

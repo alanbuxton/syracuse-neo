@@ -51,7 +51,6 @@ class Resource(StructuredNode):
     documentSource = RelationshipTo("Article","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore) # But not for Article or IndustryCluster
     internalDocId = IntegerProperty()
-    sameAsNameOnly = Relationship('Resource','sameAsNameOnly', model=WeightedRel)
     sameAsHigh = Relationship('Resource','sameAsHigh', model=WeightedRel)
     internalMergedSameAsHighToUri = StringProperty()
 
@@ -130,26 +129,6 @@ class Resource(StructuredNode):
         assert isinstance(params, dict), f"Expected {params} to be a dict but it's a {type(params)}"
         return cls.nodes.filter(internalMergedSameAsHighToUri__isnull=True).get_or_none(**params)
 
-    @classmethod
-    def randomized_active_nodes(cls,limit=10,min_date=BEGINNING_OF_TIME):
-        cache_key = "randomized_nodes"
-        res = cache.get(cache_key)
-        if res is not None:
-            return res
-        query = f"""MATCH (n: Resource&{cls.__name__})-[:documentSource]->(a: Resource&Article)
-                    WHERE n.internalMergedSameAsHighToUri IS NULL
-                    AND SIZE(LABELS(n)) = 2
-                    AND a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                    WITH n, count(a) as article_count
-                    RETURN n,article_count,rand() as r
-                    ORDER BY r
-                    LIMIT {limit}"""
-        logger.debug(query)
-        res,_ = db.cypher_query(query, resolve_objects=True)
-        vals = [(x[0],x[1]) for x in res]
-        cache.set(cache_key, vals)
-        return vals
-
     @property
     def industry_as_string(self):
         pass # override in relevant subclass
@@ -221,79 +200,6 @@ class Resource(StructuredNode):
         if self.element_id_property is not None and db.database_version is None:
             # Sometimes seeing "_new_traversal() attempted on unsaved node" even though node is saved
             db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
-
-    @classmethod
-    def find_by_name(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
-        name = name.lower()
-        cache_key = cache_friendly(f"{cls.__name__}_{name}_{combine_same_as_name_only}_{min_date.isoformat()}")
-        res = cache.get(cache_key)
-        if res is not None:
-            logger.debug(f"From cache {cache_key}")
-            return res
-        objs1 = cls.find_by_name_optional_same_as_onlies(name,combine_same_as_name_only,min_date)
-        if combine_same_as_name_only is True:
-            objs2 = cls.get_first_same_as_name_onlies(name,min_date)
-        else:
-            objs2 = []
-        objs = set(objs1 + objs2)
-        cache.set(cache_key, objs)
-        return objs
-
-    @classmethod
-    def find_by_name_optional_same_as_onlies(cls, name, combine_same_as_name_only,min_date=BEGINNING_OF_TIME):
-        query = f'''CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic"}}) YIELD node as n
-                    WITH n
-                    WHERE "{cls.__name__}" IN LABELS(n)
-                    AND n.internalMergedSameAsHighToUri IS NULL 
-                   '''
-        if combine_same_as_name_only is True: # then exclude entries with same_as_name_only here, they will be added later
-            query = f"{query} AND NOT (n)-[:sameAsNameOnly]-() "
-        query = f"""{query}  OPTIONAL MATCH (n)-[]-(a:Article)
-                    WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}') """
-        query = query + " WITH n, count(a) as cnt_artices RETURN n, cnt_artices"
-        logger.debug(query)
-        results, _ = db.cypher_query(query,resolve_objects=True)
-        objs = [(x[0],x[1]) for x in results]
-        return objs
-
-    @classmethod
-    def get_first_same_as_name_onlies(cls, name, min_date=BEGINNING_OF_TIME):
-        '''
-            For any group of nodes connected by sameAsNameOnly return the one with smallest internalDocId
-        '''
-        class_name = cls.__name__
-        query = f"""CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic" }}) YIELD node as n
-                    WITH n
-                    MATCH (n)-[:sameAsNameOnly]-(o: {class_name})
-                    WHERE "{class_name}" in LABELS(n)
-                    AND n.internalMergedSameAsHighToUri IS NULL
-                    AND o.internalMergedSameAsHighToUri IS NULL
-                    AND n.internalDocId <= o.internalDocId
-                    OPTIONAL MATCH (a:Article)--(n)
-                    WHERE a.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                    OPTIONAL MATCH (a2:Article)--(o)
-                    WHERE a2.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                    WITH n, o, count(a) as cnt_articles, count(a2) as cnt_articles2
-                    RETURN n, o, cnt_articles, cnt_articles2 ORDER BY n.internalDocId"""
-        logger.debug(query)
-        results,_ = db.cypher_query(query, resolve_objects=True)
-        '''
-            n: desired value 
-            o: other sameAsNameOnly
-            cnt_articles 
-        '''
-        entities_to_keep = defaultdict(int)
-        seen_orgs = set()
-        for source_node, other_node, cnt_articles, cnt_articles2 in results:
-            logger.debug(f"{source_node.uri} ({cnt_articles}) <-> {other_node.uri} ({cnt_articles2})")
-            if source_node not in seen_orgs:
-                entities_to_keep[source_node] += cnt_articles 
-                seen_orgs.add(source_node)
-            if other_node not in seen_orgs:
-                entities_to_keep[source_node] += cnt_articles2
-                seen_orgs.add(other_node)
-        return list(entities_to_keep.items())
-
 
     @property
     def best_name(self):
@@ -840,7 +746,9 @@ class Organization(Resource):
     operations = RelationshipTo('OperationsActivity','hasOperationsActivity', model=WeightedRel)
     recognition = RelationshipTo('RecognitionActivity','hasRecognitionActivity', model=WeightedRel)
     regulatory = RelationshipTo('RegulatoryActivity','hasRegulatoryActivity', model=WeightedRel)
-
+    internalCleanName = ArrayProperty(StringProperty())
+    internalCleanShortName = ArrayProperty(StringProperty())
+    
     @property
     def all_relationships(self):
         tmp_rels = tuple([(label,rel) for label,rel in self.__all_relationships__ if label.startswith("internal_") is False])

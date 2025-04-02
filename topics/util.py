@@ -2,6 +2,7 @@ import re
 import string
 from urllib.parse import urlparse
 import hashlib
+from datetime import datetime, timedelta, timezone
 
 def cacheable_hash(input_string):
     hash_object = hashlib.sha256()
@@ -44,3 +45,15 @@ def elements_from_uri(uri):
         "doc_id": doc_id,
         "name": org_name,
     }
+
+
+def min_and_max_date(get_params):
+    min_date = get_params.get("min_date")
+    if isinstance(min_date, str):
+        min_date = datetime.fromisoformat(min_date)
+    max_date = get_params.get("max_date",datetime.now(tz=timezone.utc))
+    if isinstance(max_date, str):
+        max_date = datetime.fromisoformat(max_date)
+    if max_date is not None and min_date is None:
+        min_date = max_date - timedelta(days=7)
+    return min_date, max_date

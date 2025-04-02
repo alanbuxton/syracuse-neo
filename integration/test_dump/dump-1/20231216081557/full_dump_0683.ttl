@@ -10,14 +10,7 @@
     ns1:internalDocId 3024715 ;
     ns1:investor <https://1145.am/db/3024715/Albion_Capital-Ido_Investments-Locums_Nest-Investment> ;
     ns1:name "Albion Capital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1814727/Albion_Ventures>,
-        <https://1145.am/db/1834139/Albion>,
-        <https://1145.am/db/1854837/Albion_Ventures>,
-        <https://1145.am/db/2364908/Albion_Ventures>,
-        <https://1145.am/db/2963294/Albion_Ventures>,
-        <https://1145.am/db/3032700/Albion_Vc>,
-        <https://1145.am/db/3039578/Albion_Vc>,
-        <https://1145.am/db/3069335/Albion_Vc> .
+    ns1:internalCleanName "albion" .
 
 <https://1145.am/db/3024715/Ido_Investments> a org:Organization ;
     ns1:basedInLowRaw "London" ;
@@ -26,8 +19,7 @@
     ns1:internalDocId 3024715 ;
     ns1:investor <https://1145.am/db/3024715/Albion_Capital-Ido_Investments-Locums_Nest-Investment> ;
     ns1:name "IDO Investments" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1823826/Ido_Investments>,
-        <https://1145.am/db/2154417/Ido_Investments> .
+    ns1:internalCleanName "ido" .
 
 <https://1145.am/db/3619563/Harvest_Health_Recreation> a org:Organization ;
     ns1:basedInHighClean "Phoenix" ;
@@ -41,6 +33,7 @@
     ns1:internalDocId 3619563 ;
     ns1:locationAdded <https://1145.am/db/3619563/Harvest_Health_Recreation-Added-California> ;
     ns1:name "Harvest Health & Recreation" ;
+    ns1:internalCleanName "harvest health" ;
     ns1:sameAsHigh <https://1145.am/db/3160798/Harvest_Health_Recreation_Inc>,
         <https://1145.am/db/3169263/Harvest_Health_Recreation_Inc>,
         <https://1145.am/db/3169275/Harvest_Health_Recreation_Inc>,
@@ -68,8 +61,7 @@
         <https://1145.am/db/406889/Harvest_Health_Recreation_Inc>,
         <https://1145.am/db/411431/Harvest_Health_Recreation_Inc>,
         <https://1145.am/db/417291/Harvest_Health_Recreation_Inc>,
-        <https://1145.am/db/82209/Harvest_Health_And_Recreation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3348314/Harvest_Health_Recreation_Inc> .
+        <https://1145.am/db/82209/Harvest_Health_And_Recreation>  .
 
 <https://1145.am/db/3619563/Multi-State_Vertically_Integrated_Cannabis_Company> a org:Organization ;
     ns1:basedInHighClean "California" ;
@@ -81,6 +73,7 @@
     ns1:internalDocId 3619563 ;
     ns1:locationAdded <https://1145.am/db/3619563/Multi-State_Vertically_Integrated_Cannabis_Company-Added-California> ;
     ns1:name "Multi-State, Vertically Integrated Cannabis Company" ;
+    ns1:internalCleanName "multi state vertically integrated cannabis company" ;
     ns1:sameAsHigh <https://1145.am/db/3512208/Multi-State_Vertically_Integrated_Cannabis_Company>,
         <https://1145.am/db/3609442/Multi-State_Vertically_Integrated_Cannabis_Company> .
 
@@ -94,6 +87,7 @@
     ns1:foundName "JLL" ;
     ns1:internalDocId 3785309 ;
     ns1:name "JLL" ;
+    ns1:internalCleanName "jll" ;
     ns1:sameAsHigh <https://1145.am/db/1326421/JLL>,
         <https://1145.am/db/1326785/JLL>,
         <https://1145.am/db/2545525/JLL>,
@@ -120,20 +114,7 @@
         <https://1145.am/db/3846272/JLL>,
         <https://1145.am/db/3877745/JLL>,
         <https://1145.am/db/3902124/JLL>,
-        <https://1145.am/db/668624/JLL> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1738089/JLL>,
-        <https://1145.am/db/1764536/JLL>,
-        <https://1145.am/db/1767886/JLL>,
-        <https://1145.am/db/2371883/JLL>,
-        <https://1145.am/db/2575604/JLL>,
-        <https://1145.am/db/2690306/JLL>,
-        <https://1145.am/db/2803820/JLL>,
-        <https://1145.am/db/2960133/JLL>,
-        <https://1145.am/db/2962682/JLL>,
-        <https://1145.am/db/2967122/JLL>,
-        <https://1145.am/db/3018442/JLL>,
-        <https://1145.am/db/3593014/JLL>,
-        <https://1145.am/db/3627041/JLL> .
+        <https://1145.am/db/668624/JLL>  .
 
 <https://1145.am/db/3785317/Thoma_Bravo> a org:Organization ;
     ns1:basedInLowRaw "LOS ANGELES" ;
@@ -145,6 +126,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 3785317 ;
     ns1:name "Thoma Bravo" ;
+    ns1:internalCleanName "thoma bravo" ;
     ns1:sameAsHigh <https://1145.am/db/1007509/Thoma_Bravo>,
         <https://1145.am/db/1010987/Thoma_Bravo>,
         <https://1145.am/db/1057475/Thoma_Bravo>,
@@ -350,146 +332,7 @@
         <https://1145.am/db/971990/Thoma_Bravo>,
         <https://1145.am/db/972213/Thoma_Bravo>,
         <https://1145.am/db/982329/Thoma_Bravo>,
-        <https://1145.am/db/985715/Thoma_Bravo> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1003876/Thoma_Bravo>,
-        <https://1145.am/db/1005175/Thoma_Bravo>,
-        <https://1145.am/db/1011766/Thoma_Bravo>,
-        <https://1145.am/db/1012391/Thoma_Bravo>,
-        <https://1145.am/db/1035158/Thoma_Bravo>,
-        <https://1145.am/db/1038292/Thoma_Bravo>,
-        <https://1145.am/db/1061567/Thoma_Bravo>,
-        <https://1145.am/db/1117537/Thoma_Bravo>,
-        <https://1145.am/db/1120908/Thoma_Bravo>,
-        <https://1145.am/db/1122219/Thoma_Bravo>,
-        <https://1145.am/db/1122241/Thoma_Bravo>,
-        <https://1145.am/db/1123201/Thoma_Bravo>,
-        <https://1145.am/db/1124353/Thoma_Bravo>,
-        <https://1145.am/db/1125302/Thoma_Bravo>,
-        <https://1145.am/db/1137987/Thoma_Bravo>,
-        <https://1145.am/db/1140211/Thoma_Bravo>,
-        <https://1145.am/db/1141774/Thoma_Bravo>,
-        <https://1145.am/db/1142656/Thoma_Bravo>,
-        <https://1145.am/db/1158834/Thoma_Bravo>,
-        <https://1145.am/db/117337/Thoma_Bravo>,
-        <https://1145.am/db/1188266/Thoma_Bravo>,
-        <https://1145.am/db/1229514/Thoma_Bravo>,
-        <https://1145.am/db/1257158/Thoma_Bravo>,
-        <https://1145.am/db/1260258/Thoma_Bravo>,
-        <https://1145.am/db/1261940/Thoma_Bravo>,
-        <https://1145.am/db/1269931/Thoma_Bravo>,
-        <https://1145.am/db/1277670/Thoma_Bravo>,
-        <https://1145.am/db/1324013/Thoma_Bravo>,
-        <https://1145.am/db/1324655/Thoma_Bravo>,
-        <https://1145.am/db/1354525/Thoma_Bravo>,
-        <https://1145.am/db/1355964/Thoma_Bravo>,
-        <https://1145.am/db/1393247/Thoma_Bravo>,
-        <https://1145.am/db/1406480/Thoma_Bravo>,
-        <https://1145.am/db/1407571/Thoma_Bravo>,
-        <https://1145.am/db/1411399/Thoma_Bravo>,
-        <https://1145.am/db/1414277/Thoma_Bravo>,
-        <https://1145.am/db/1420196/Thoma_Bravo>,
-        <https://1145.am/db/1434243/Thoma_Bravo>,
-        <https://1145.am/db/1459628/Thoma_Bravo>,
-        <https://1145.am/db/1461413/Thoma_Bravo>,
-        <https://1145.am/db/1461456/Thoma_Bravo>,
-        <https://1145.am/db/1468368/Thoma_Bravo>,
-        <https://1145.am/db/1513425/Thoma_Bravo>,
-        <https://1145.am/db/1573361/Thoma_Bravo>,
-        <https://1145.am/db/1575691/Thoma_Bravo>,
-        <https://1145.am/db/1575695/Thoma_Bravo>,
-        <https://1145.am/db/1576673/Thoma_Bravo>,
-        <https://1145.am/db/1576674/Thoma_Bravo>,
-        <https://1145.am/db/1595235/Thoma_Bravo>,
-        <https://1145.am/db/1622700/Thoma_Bravo>,
-        <https://1145.am/db/1695849/Thoma_Bravo>,
-        <https://1145.am/db/1697637/Thoma_Bravo>,
-        <https://1145.am/db/1707576/Thoma_Bravo>,
-        <https://1145.am/db/1734845/Thoma_Bravo>,
-        <https://1145.am/db/1736574/Thoma_Bravo>,
-        <https://1145.am/db/1750086/Thoma_Bravo>,
-        <https://1145.am/db/1753093/Thoma_Bravo>,
-        <https://1145.am/db/1762322/Thoma_Bravo>,
-        <https://1145.am/db/1762924/Thoma_Bravo>,
-        <https://1145.am/db/1765923/Thoma_Bravo>,
-        <https://1145.am/db/1782873/Thoma_Bravo>,
-        <https://1145.am/db/1802046/Thoma_Bravo>,
-        <https://1145.am/db/1869110/Thoma_Bravo>,
-        <https://1145.am/db/2034204/Thoma_Bravo>,
-        <https://1145.am/db/2034831/Thoma_Bravo>,
-        <https://1145.am/db/2067907/Thoma_Bravo>,
-        <https://1145.am/db/2141814/Thoma_Bravo>,
-        <https://1145.am/db/2174920/Thoma_Bravo>,
-        <https://1145.am/db/2242028/Thoma_Bravo>,
-        <https://1145.am/db/2254383/Thoma_Bravo>,
-        <https://1145.am/db/2500920/Thoma_Bravo>,
-        <https://1145.am/db/2616680/Thoma_Bravo>,
-        <https://1145.am/db/2809252/Thoma_Bravo>,
-        <https://1145.am/db/3041130/Thoma_Bravo>,
-        <https://1145.am/db/3079350/Thoma_Bravo>,
-        <https://1145.am/db/3160714/Thoma_Bravo>,
-        <https://1145.am/db/3190268/Thoma_Bravo>,
-        <https://1145.am/db/3199053/Thoma_Bravo>,
-        <https://1145.am/db/3200357/Thoma_Bravo>,
-        <https://1145.am/db/3247481/Thoma_Bravo>,
-        <https://1145.am/db/3271834/Thoma_Bravo>,
-        <https://1145.am/db/3275098/Thoma_Bravo>,
-        <https://1145.am/db/3278124/Thoma_Bravo>,
-        <https://1145.am/db/3293271/Thoma_Bravo>,
-        <https://1145.am/db/3308100/Thoma_Bravo>,
-        <https://1145.am/db/3386044/Thoma_Bravo>,
-        <https://1145.am/db/3489979/Thoma_Bravo_Llc>,
-        <https://1145.am/db/3558676/Thoma_Bravo>,
-        <https://1145.am/db/3574633/Thoma_Bravo>,
-        <https://1145.am/db/361437/Thoma_Bravo>,
-        <https://1145.am/db/362693/Thoma_Bravo>,
-        <https://1145.am/db/364926/Thoma_Bravo>,
-        <https://1145.am/db/3651504/Thoma_Bravo>,
-        <https://1145.am/db/3651836/Thoma_Bravo>,
-        <https://1145.am/db/3652510/Thoma_Bravo>,
-        <https://1145.am/db/3655426/Thoma_Bravo>,
-        <https://1145.am/db/3668766/Thoma_Bravo>,
-        <https://1145.am/db/3726376/Thoma_Bravo>,
-        <https://1145.am/db/3734811/Thoma_Bravo>,
-        <https://1145.am/db/3735451/Thoma_Bravo>,
-        <https://1145.am/db/3735699/Thoma_Bravo>,
-        <https://1145.am/db/3735995/Thoma_Bravo>,
-        <https://1145.am/db/3736272/Thoma_Bravo>,
-        <https://1145.am/db/3749782/Thoma_Bravo>,
-        <https://1145.am/db/3805078/Thoma_Bravo>,
-        <https://1145.am/db/3835515/Thoma_Bravo>,
-        <https://1145.am/db/3919794/Thoma_Bravo_Llc>,
-        <https://1145.am/db/3978276/Thoma_Bravo>,
-        <https://1145.am/db/3978547/Thoma_Bravo>,
-        <https://1145.am/db/3980660/Thoma_Bravo>,
-        <https://1145.am/db/3980718/Thoma_Bravo>,
-        <https://1145.am/db/3987229/Thoma_Bravo>,
-        <https://1145.am/db/3997881/Thoma_Bravo>,
-        <https://1145.am/db/400499/Thoma_Bravo>,
-        <https://1145.am/db/4005347/Thoma_Bravo>,
-        <https://1145.am/db/4018074/Thoma_Bravo>,
-        <https://1145.am/db/4052777/Thoma_Bravo>,
-        <https://1145.am/db/4056355/Thoma_Bravo>,
-        <https://1145.am/db/4086807/Thoma_Bravo>,
-        <https://1145.am/db/4122132/Thoma_Bravo>,
-        <https://1145.am/db/4140196/Thoma_Bravo>,
-        <https://1145.am/db/4191876/Thoma_Bravo>,
-        <https://1145.am/db/4232870/Thoma_Bravo_Lp>,
-        <https://1145.am/db/431533/Thoma_Bravo>,
-        <https://1145.am/db/508589/Thoma_Bravo>,
-        <https://1145.am/db/520567/Thoma_Bravo>,
-        <https://1145.am/db/523913/Thoma_Bravo>,
-        <https://1145.am/db/596987/Thoma_Bravo>,
-        <https://1145.am/db/710269/Thoma_Bravo>,
-        <https://1145.am/db/919887/Thoma_Bravo>,
-        <https://1145.am/db/925389/Thoma_Bravo>,
-        <https://1145.am/db/938139/Thoma_Bravo>,
-        <https://1145.am/db/940251/Thoma_Bravo>,
-        <https://1145.am/db/974372/Thoma_Bravo>,
-        <https://1145.am/db/974966/Thoma_Bravo>,
-        <https://1145.am/db/976061/Thoma_Bravo>,
-        <https://1145.am/db/976385/Thoma_Bravo>,
-        <https://1145.am/db/976570/Thoma_Bravo>,
-        <https://1145.am/db/982330/Thoma_Bravo> .
+        <https://1145.am/db/985715/Thoma_Bravo>  .
 
 <https://1145.am/db/3785695/Holy_Cross_Health-Holy_Cross_Hospital-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -537,6 +380,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 4151859 ;
     ns1:name "Oculis Holding AG" ;
+    ns1:internalCleanName "oculis" ;
     ns1:sameAsHigh <https://1145.am/db/3641095/Oculis_Holding>,
         <https://1145.am/db/4154881/Oculis_Holding_Ag> .
 
@@ -556,6 +400,7 @@
     ns1:internalDocId 4168148 ;
     ns1:investor <https://1145.am/db/4168148/Edinburgh_Airport-Investment-Stake> ;
     ns1:name "Global Infrastructure Partners" ;
+    ns1:internalCleanName "global infastructure" ;
     ns1:sameAsHigh <https://1145.am/db/1086294/Global_Infrastructure_Partners>,
         <https://1145.am/db/1086298/Global_Infrastructure_Partners>,
         <https://1145.am/db/1421945/Global_Infrastructure_Partners>,
@@ -578,56 +423,7 @@
         <https://1145.am/db/800916/Global_Infrastructure_Partners>,
         <https://1145.am/db/930281/Global_Infrastructure_Partners>,
         <https://1145.am/db/932790/Global_Infrastructure_Partners>,
-        <https://1145.am/db/961485/Global_Infrastructure_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1581801/Global_Infrastructure_Partners>,
-        <https://1145.am/db/166190/Global_Infrastructure_Partners>,
-        <https://1145.am/db/199148/Global_Infrastructure_Partners>,
-        <https://1145.am/db/199149/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2067395/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2070912/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2087283/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2505917/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2787275/Global_Infrastructure_Partners>,
-        <https://1145.am/db/281136/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2859966/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2872479/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2874045/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2900264/Global_Infrastructure_Partners>,
-        <https://1145.am/db/2914820/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3025275/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3033502/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3058836/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3060974/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3083362/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3119676/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3165923/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3355359/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3535065/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3636516/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3699116/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3702865/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3759009/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3939107/Global_Infrastructure_Partners>,
-        <https://1145.am/db/3980069/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4004436/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4004444/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4157361/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4211028/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4215636/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4216133/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4216337/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4216855/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4235568/Global_Infrastructure_Partners>,
-        <https://1145.am/db/4241265/Global_Infrastructure_Partners>,
-        <https://1145.am/db/601004/Global_Infrastructure_Partners>,
-        <https://1145.am/db/619993/Global_Infrastructure_Partners>,
-        <https://1145.am/db/620251/Global_Infrastructure_Partners>,
-        <https://1145.am/db/620441/Global_Infrastructure_Partners>,
-        <https://1145.am/db/624398/Global_Infrastructure_Partners>,
-        <https://1145.am/db/683588/Global_Infrastructure_Partners>,
-        <https://1145.am/db/912063/Global_Infrastructure_Partners>,
-        <https://1145.am/db/965718/Global_Infrastructure_Partners>,
-        <https://1145.am/db/966307/Global_Infrastructure_Partners> .
+        <https://1145.am/db/961485/Global_Infrastructure_Partners> .
 
 <https://1145.am/db/4168148/London_Gatwick-Acquisition-Stake> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -657,20 +453,14 @@
     ns1:internalDocId 4168148 ;
     ns1:investor <https://1145.am/db/4168148/Edinburgh_Airport-Investment-Stake> ;
     ns1:name "Vinci" ;
+    ns1:internalCleanName "vinci" ;
     ns1:sameAsHigh <https://1145.am/db/1574874/Vinci>,
         <https://1145.am/db/1597085/Vinci>,
         <https://1145.am/db/296990/Vinci>,
         <https://1145.am/db/297443/Vinci>,
         <https://1145.am/db/4216426/Vinci>,
         <https://1145.am/db/727539/Vinci_Sa>,
-        <https://1145.am/db/727564/Vinci_Sa> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1210662/Vinci>,
-        <https://1145.am/db/1243387/Vinci>,
-        <https://1145.am/db/1591964/Vinci>,
-        <https://1145.am/db/1675255/Vinci>,
-        <https://1145.am/db/3028806/Vinci>,
-        <https://1145.am/db/310873/Vinci>,
-        <https://1145.am/db/4214891/Vinci> .
+        <https://1145.am/db/727564/Vinci_Sa>  .
 
 <https://1145.am/db/4168197/Daniel_K_Et_Nsk> a org:Organization ;
     ns1:basedInHighClean "Czechia" ;
@@ -689,46 +479,11 @@
     ns1:internalDocId 4168197 ;
     ns1:name "Daniel Křetínský",
         "Křetínský" ;
+    ns1:internalCleanName "daniel kretinsky" ;
     ns1:sameAsHigh <https://1145.am/db/2073985/Daniel_Kretinsky>,
         <https://1145.am/db/4045272/Daniel_Kretinsky>,
         <https://1145.am/db/4192810/Daniel_Kretinsky>,
-        <https://1145.am/db/4192824/Daniel_Kretinsky> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1368378/Daniel_Kretinsky>,
-        <https://1145.am/db/1462796/Daniel_Kretinsky>,
-        <https://1145.am/db/1682020/Daniel_Kretinsky>,
-        <https://1145.am/db/1689056/Daniel_Kretinsky>,
-        <https://1145.am/db/1943595/Daniel_Kretinsky>,
-        <https://1145.am/db/1966172/Daniel_Kretinsky>,
-        <https://1145.am/db/1974476/Daniel_Kretinsky>,
-        <https://1145.am/db/1979799/Daniel_Kretinsky>,
-        <https://1145.am/db/2015786/Daniel_Kretinsky>,
-        <https://1145.am/db/2032696/Daniel_Kretinsky>,
-        <https://1145.am/db/2036757/Daniel_Kretinsky>,
-        <https://1145.am/db/2048225/Daniel_Kretinsky>,
-        <https://1145.am/db/2055291/Daniel_Kretinsky>,
-        <https://1145.am/db/2055330/Daniel_Kretinsky>,
-        <https://1145.am/db/2063929/Daniel_Kretinsky>,
-        <https://1145.am/db/2087527/Daniel_Kretinsky>,
-        <https://1145.am/db/2094334/Daniel_Kretinsky>,
-        <https://1145.am/db/2128492/Daniel_Kretinsky>,
-        <https://1145.am/db/2141041/Daniel_Kretinsky>,
-        <https://1145.am/db/2149568/Daniel_Kretinsky>,
-        <https://1145.am/db/2765147/Daniel_Kretinsky>,
-        <https://1145.am/db/2790495/Daniel_Kretinsky>,
-        <https://1145.am/db/2792717/Daniel_Kretinsky>,
-        <https://1145.am/db/2825514/Daniel_Kretinsky>,
-        <https://1145.am/db/2852351/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/3069029/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/3074425/Daniel_Kretinsky>,
-        <https://1145.am/db/3111249/Daniel_Kretinsky>,
-        <https://1145.am/db/358843/Daniel_Kretinsky>,
-        <https://1145.am/db/3976357/Daniel_Kretinsky>,
-        <https://1145.am/db/4039873/Daniel_Kretinsky>,
-        <https://1145.am/db/4192562/Daniel_Kretinsky>,
-        <https://1145.am/db/4246777/Daniel_Kretinsky>,
-        <https://1145.am/db/4250239/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/4252342/Daniel_Kretinsky>,
-        <https://1145.am/db/4252434/Daniel_K_Et_Nsk> .
+        <https://1145.am/db/4192824/Daniel_Kretinsky>.
 
 <https://1145.am/db/4168197/West_Ham> a org:Organization ;
     ns1:basedInLowRaw "Czech" ;
@@ -737,11 +492,7 @@
     ns1:foundName "West Ham" ;
     ns1:internalDocId 4168197 ;
     ns1:name "West Ham" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2856020/West_Ham>,
-        <https://1145.am/db/2864717/West_Ham>,
-        <https://1145.am/db/2891457/West_Ham>,
-        <https://1145.am/db/2921427/West_Ham>,
-        <https://1145.am/db/3074425/West_Ham> .
+    ns1:internalCleanName "west ham" .
 
 <https://1145.am/db/4168343/Hpq_Silicon_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -769,6 +520,7 @@
     ns1:internalDocId 4168398 ;
     ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
     ns1:name "Newmark" ;
+    ns1:internalCleanName "newmark" ;
     ns1:sameAsHigh <https://1145.am/db/1072093/Newmark>,
         <https://1145.am/db/1124181/Newmark>,
         <https://1145.am/db/1135018/Newmark>,
@@ -779,15 +531,7 @@
         <https://1145.am/db/3451710/Newmark>,
         <https://1145.am/db/404098/Newmark>,
         <https://1145.am/db/4168416/Newmark>,
-        <https://1145.am/db/818680/Newmark> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1210835/Newmark>,
-        <https://1145.am/db/1238636/Newmark>,
-        <https://1145.am/db/1245562/Newmark>,
-        <https://1145.am/db/1543079/Newmark>,
-        <https://1145.am/db/1549971/Newmark>,
-        <https://1145.am/db/1598845/Newmark>,
-        <https://1145.am/db/1634574/Newmark>,
-        <https://1145.am/db/447772/Newmark> .
+        <https://1145.am/db/818680/Newmark> .
 
 <https://1145.am/db/4168398/Sl_Green_Realty_Corp> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -802,6 +546,7 @@
     ns1:internalDocId 4168398 ;
     ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
     ns1:name "SL Green Realty Corp." ;
+    ns1:internalCleanName "sl green realty" ;
     ns1:sameAsHigh <https://1145.am/db/1334009/Sl_Green_Realty_Corp>,
         <https://1145.am/db/1334021/Sl_Green_Realty_Corp>,
         <https://1145.am/db/2049580/Sl_Green_Realty_Corp>,
@@ -825,18 +570,13 @@
     ns1:internalDocId 4168398 ;
     ns1:investor <https://1145.am/db/4168398/Newmark-Sl_Green_Realty_Corp-Vornado_Realty_Trust-Investment> ;
     ns1:name "Vornado Realty Trust" ;
+    ns1:internalCleanName "vornado realty" ;
     ns1:sameAsHigh <https://1145.am/db/3421766/Vornado_Realty_Trust>,
         <https://1145.am/db/4168396/Vornado_Realty_Trust>,
         <https://1145.am/db/4168412/Vornado_Realty_Trust>,
         <https://1145.am/db/4168416/Vornado_Realty_Trust>,
         <https://1145.am/db/4215901/Vornado_Realty_Trust>,
-        <https://1145.am/db/628882/Vornado_Realty_Trust> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1210268/Vornado_Realty_Trust>,
-        <https://1145.am/db/3402894/Vornado_Realty_Trust>,
-        <https://1145.am/db/3655700/Vornado_Realty_Trust>,
-        <https://1145.am/db/4022678/Vornado_Realty_Trust>,
-        <https://1145.am/db/438235/Vornado_Realty_Trust>,
-        <https://1145.am/db/470345/Vornado_Realty_Trust> .
+        <https://1145.am/db/628882/Vornado_Realty_Trust> .
 
 <https://1145.am/db/4169893/Access_Point_Financial> a org:Organization ;
     ns1:description "hospitality industry" ;
@@ -849,11 +589,8 @@
     ns1:internalDocId 4169893 ;
     ns1:investor <https://1145.am/db/4169893/Access_Point_Financial-Citibank-Investment-Portfolio_Refinance> ;
     ns1:name "Access Point Financial" ;
-    ns1:sameAsHigh <https://1145.am/db/2700875/Access_Point_Financial> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2689494/Access_Point_Financial>,
-        <https://1145.am/db/2694602/Access_Point_Financial>,
-        <https://1145.am/db/2700076/Access_Point_Financial>,
-        <https://1145.am/db/2831974/Access_Point_Financial> .
+    ns1:internalCleanName "access point" ;
+    ns1:sameAsHigh <https://1145.am/db/2700875/Access_Point_Financial>  .
 
 <https://1145.am/db/4170097/Battery_Ventures> a org:Organization ;
     ns1:basedInLowRaw "global" ;
@@ -863,6 +600,7 @@
     ns1:foundName "Battery Ventures" ;
     ns1:internalDocId 4170097 ;
     ns1:name "Battery Ventures" ;
+    ns1:internalCleanName "battery ventures" ;
     ns1:sameAsHigh <https://1145.am/db/1149208/Battery_Ventures>,
         <https://1145.am/db/1151236/Battery_Ventures>,
         <https://1145.am/db/1293880/Battery_Ventures>,
@@ -959,117 +697,7 @@
         <https://1145.am/db/868623/Battery_Ventures>,
         <https://1145.am/db/9640/Battery_Ventures>,
         <https://1145.am/db/995480/Battery_Ventures>,
-        <https://1145.am/db/995701/Battery_Ventures> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1140730/Battery_Ventures>,
-        <https://1145.am/db/1146684/Battery_Ventures>,
-        <https://1145.am/db/1149834/Battery_Ventures>,
-        <https://1145.am/db/1150654/Battery_Ventures>,
-        <https://1145.am/db/1166471/Battery_Ventures>,
-        <https://1145.am/db/1186101/Battery_Ventures>,
-        <https://1145.am/db/1318972/Battery_Ventures>,
-        <https://1145.am/db/1440423/Battery_Ventures>,
-        <https://1145.am/db/1440674/Battery_Ventures>,
-        <https://1145.am/db/1440685/Battery_Ventures>,
-        <https://1145.am/db/1448733/Battery_Ventures>,
-        <https://1145.am/db/1449370/Battery_Ventures>,
-        <https://1145.am/db/1619381/Battery_Ventures>,
-        <https://1145.am/db/1667921/Battery_Ventures>,
-        <https://1145.am/db/1695489/Battery_Ventures>,
-        <https://1145.am/db/1697373/Battery_Ventures>,
-        <https://1145.am/db/1700036/Battery_Ventures>,
-        <https://1145.am/db/1702544/Battery_Ventures>,
-        <https://1145.am/db/1705827/Battery_Ventures>,
-        <https://1145.am/db/1713187/Battery_Ventures>,
-        <https://1145.am/db/1714565/Battery_Ventures>,
-        <https://1145.am/db/1718949/Battery_Ventures>,
-        <https://1145.am/db/1726246/Battery_Ventures>,
-        <https://1145.am/db/1738403/Battery_Ventures>,
-        <https://1145.am/db/1743277/Battery_Ventures>,
-        <https://1145.am/db/1743908/Battery_Ventures>,
-        <https://1145.am/db/1748417/Battery_Ventures>,
-        <https://1145.am/db/1750406/Battery_Ventures>,
-        <https://1145.am/db/1754313/Battery_Ventures>,
-        <https://1145.am/db/1755414/Battery_Ventures>,
-        <https://1145.am/db/1757794/Battery_Ventures>,
-        <https://1145.am/db/1761426/Battery_Ventures>,
-        <https://1145.am/db/1762631/Battery_Ventures>,
-        <https://1145.am/db/1763931/Battery_Ventures>,
-        <https://1145.am/db/1764116/Battery_Ventures>,
-        <https://1145.am/db/1767983/Battery_Ventures>,
-        <https://1145.am/db/1777518/Battery_Ventures>,
-        <https://1145.am/db/1778179/Battery_Ventures>,
-        <https://1145.am/db/1781782/Battery_Ventures>,
-        <https://1145.am/db/1783186/Battery_Ventures>,
-        <https://1145.am/db/1783765/Battery_Ventures>,
-        <https://1145.am/db/1783842/Battery_Ventures>,
-        <https://1145.am/db/1795794/Battery_Ventures>,
-        <https://1145.am/db/1803147/Battery_Ventures>,
-        <https://1145.am/db/1804390/Battery_Ventures>,
-        <https://1145.am/db/1811649/Battery_Ventures>,
-        <https://1145.am/db/1820377/Battery_Ventures>,
-        <https://1145.am/db/1825570/Battery_Ventures>,
-        <https://1145.am/db/1826830/Battery_Ventures>,
-        <https://1145.am/db/1828979/Battery_Ventures>,
-        <https://1145.am/db/1829078/Battery_Ventures>,
-        <https://1145.am/db/1829302/Battery_Ventures>,
-        <https://1145.am/db/1831508/Battery_Ventures>,
-        <https://1145.am/db/1834220/Battery_Ventures>,
-        <https://1145.am/db/1837754/Battery_Ventures>,
-        <https://1145.am/db/1838507/Battery_Ventures>,
-        <https://1145.am/db/1838520/Battery_Ventures>,
-        <https://1145.am/db/1851462/Battery_Ventures>,
-        <https://1145.am/db/1853553/Battery_Ventures>,
-        <https://1145.am/db/1854142/Battery_Ventures>,
-        <https://1145.am/db/1872851/Battery_Ventures>,
-        <https://1145.am/db/1875709/Battery_Ventures>,
-        <https://1145.am/db/1882810/Battery_Ventures>,
-        <https://1145.am/db/1884049/Battery_Ventures>,
-        <https://1145.am/db/1886354/Battery_Ventures>,
-        <https://1145.am/db/1888430/Battery_Ventures>,
-        <https://1145.am/db/1888884/Battery_Ventures>,
-        <https://1145.am/db/1892106/Battery_Ventures>,
-        <https://1145.am/db/1893956/Battery_Ventures>,
-        <https://1145.am/db/1908484/Battery_Ventures>,
-        <https://1145.am/db/2009532/Battery_Ventures>,
-        <https://1145.am/db/2010546/Battery_Ventures>,
-        <https://1145.am/db/2188510/Battery_Ventures>,
-        <https://1145.am/db/2282049/Battery_Ventures>,
-        <https://1145.am/db/3037349/Battery_Ventures>,
-        <https://1145.am/db/3114792/Battery_Ventures>,
-        <https://1145.am/db/3119396/Battery_Ventures>,
-        <https://1145.am/db/3142491/Battery_Ventures>,
-        <https://1145.am/db/3143526/Battery_Ventures>,
-        <https://1145.am/db/3146626/Battery_Ventures>,
-        <https://1145.am/db/3154901/Battery_Ventures>,
-        <https://1145.am/db/3158788/Battery_Ventures>,
-        <https://1145.am/db/3160518/Battery_Ventures>,
-        <https://1145.am/db/323838/Battery_Ventures>,
-        <https://1145.am/db/3412020/Battery_Ventures>,
-        <https://1145.am/db/3463095/Battery_Ventures>,
-        <https://1145.am/db/3465257/Battery_Ventures>,
-        <https://1145.am/db/3495964/Battery_Ventures>,
-        <https://1145.am/db/3501012/Battery_Ventures>,
-        <https://1145.am/db/3529252/Battery_Ventures>,
-        <https://1145.am/db/3565424/Battery_Ventures>,
-        <https://1145.am/db/3591244/Battery_Ventures>,
-        <https://1145.am/db/3595355/Battery_Ventures>,
-        <https://1145.am/db/3599147/Battery_Ventures>,
-        <https://1145.am/db/3628338/Battery_Ventures>,
-        <https://1145.am/db/3628626/Battery_Ventures>,
-        <https://1145.am/db/3767858/Battery_Ventures>,
-        <https://1145.am/db/3806250/Battery_Ventures>,
-        <https://1145.am/db/3810101/Battery_Ventures>,
-        <https://1145.am/db/3850962/Battery_Ventures>,
-        <https://1145.am/db/3877948/Battery_Ventures>,
-        <https://1145.am/db/395877/Battery_Ventures>,
-        <https://1145.am/db/4120163/Battery_Ventures>,
-        <https://1145.am/db/4127694/Battery_Ventures>,
-        <https://1145.am/db/506588/Battery_Ventures>,
-        <https://1145.am/db/888743/Battery_Ventures>,
-        <https://1145.am/db/922144/Battery_Ventures>,
-        <https://1145.am/db/924938/Battery_Ventures>,
-        <https://1145.am/db/979672/Battery_Ventures>,
-        <https://1145.am/db/980168/Battery_Ventures> .
+        <https://1145.am/db/995701/Battery_Ventures> .
 
 <https://1145.am/db/4170102/One_Equity_Partners> a org:Organization ;
     ns1:basedInLowRaw "Coatesville, PA" ;
@@ -1082,6 +710,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 4170102 ;
     ns1:name "One Equity Partners" ;
+    ns1:internalCleanName "one equity" ;
     ns1:sameAsHigh <https://1145.am/db/1006707/One_Equity_Partners>,
         <https://1145.am/db/1007761/One_Equity_Partners>,
         <https://1145.am/db/1114794/One_Equity_Partners>,
@@ -1138,21 +767,7 @@
         <https://1145.am/db/901012/One_Equity_Partners>,
         <https://1145.am/db/901687/One_Equity_Partners>,
         <https://1145.am/db/92671/One_Equity_Partners>,
-        <https://1145.am/db/992915/One_Equity_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1081481/One_Equity_Partners>,
-        <https://1145.am/db/1205259/One_Equity_Partners>,
-        <https://1145.am/db/1265324/One_Equity_Partners>,
-        <https://1145.am/db/1411173/One_Equity_Partners>,
-        <https://1145.am/db/1635902/One_Equity_Partners>,
-        <https://1145.am/db/1636187/One_Equity_Partners>,
-        <https://1145.am/db/1636269/One_Equity_Partners>,
-        <https://1145.am/db/2229231/One_Equity_Partners>,
-        <https://1145.am/db/2289434/One_Equity>,
-        <https://1145.am/db/3636835/One_Equity_Partners>,
-        <https://1145.am/db/3646796/One_Equity_Partners>,
-        <https://1145.am/db/4141975/One_Equity_Partners>,
-        <https://1145.am/db/4170582/One_Equity_Partners>,
-        <https://1145.am/db/901562/One_Equity_Partners> .
+        <https://1145.am/db/992915/One_Equity_Partners>  .
 
 <https://1145.am/db/4170112/Future_Pak> a org:Organization ;
     ns1:basedInLowRaw "Future Pak LLC" ;
@@ -1162,11 +777,7 @@
     ns1:foundName "Future Pak LLC" ;
     ns1:internalDocId 4170112 ;
     ns1:name "Future Pak" ;
-    ns1:sameAsNameOnly <https://1145.am/db/4173116/Future_Pak>,
-        <https://1145.am/db/4174725/Future_Pak>,
-        <https://1145.am/db/4187288/Future_Pak>,
-        <https://1145.am/db/4234466/Future_Pak>,
-        <https://1145.am/db/4235641/Future_Pak> .
+    ns1:internalCleanName "future pak"  .
 
 <https://1145.am/db/4170120/Pestco_Holdings_Llc> a org:Organization ;
     ns1:basedInHighClean "Portland" ;
@@ -1179,6 +790,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/442_pest_termite_control_services> ;
     ns1:internalDocId 4170120 ;
     ns1:name "PestCo Holdings, LLC" ;
+    ns1:internalCleanName "pestco" ;
     ns1:sameAsHigh <https://1145.am/db/1079016/Pestco_Holdings_Llc>,
         <https://1145.am/db/1079209/Pestco_Holdings_Llc>,
         <https://1145.am/db/1196066/Pestco_Holdings_Llc>,
@@ -1189,9 +801,7 @@
         <https://1145.am/db/4045566/Pestco_Holdings_Llc>,
         <https://1145.am/db/581473/Pestco_Holdings_Llc>,
         <https://1145.am/db/607558/Pestco_Holdings_Llc>,
-        <https://1145.am/db/846826/Pestco_Holdings_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1387409/Pestco_Holdings_Llc>,
-        <https://1145.am/db/619175/Pestco_Holdings_Llc> .
+        <https://1145.am/db/846826/Pestco_Holdings_Llc> .
 
 <https://1145.am/db/4170120/Thompson_Street_Capital_Partners> a org:Organization ;
     ns1:basedInHighClean "Saint-Louis" ;
@@ -1205,6 +815,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 4170120 ;
     ns1:name "Thompson Street Capital Partners" ;
+    ns1:internalCleanName "thompson street" ;
     ns1:participant <https://1145.am/db/4170120/Sasquatch_Pest_Control_Corp-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1016038/Thompson_Street_Capital_Partners>,
         <https://1145.am/db/1079016/Thompson_Street_Capital_Partners>,
@@ -1258,9 +869,7 @@
         <https://1145.am/db/867942/Thompson_Street_Capital_Partners>,
         <https://1145.am/db/894004/Thompson_Street_Capital_Partners>,
         <https://1145.am/db/895233/Thompson_Street_Capital_Partners>,
-        <https://1145.am/db/955109/Thompson_Street_Capital_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3502332/Thompson_Street_Capital_Partners>,
-        <https://1145.am/db/3912987/Thompson_Street_Capital_Partners> .
+        <https://1145.am/db/955109/Thompson_Street_Capital_Partners> .
 
 <https://1145.am/db/4170137/Data_Clean> a org:Organization ;
     ns1:basedInHighClean "Ontario" ;
@@ -1272,10 +881,9 @@
     ns1:foundName "Data Clean Corporation" ;
     ns1:internalDocId 4170137 ;
     ns1:name "Data Clean" ;
+    ns1:internalCleanName "data clean" ;
     ns1:sameAsHigh <https://1145.am/db/1484124/Data_Clean>,
-        <https://1145.am/db/2811304/Data_Clean> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4063979/Data_Clean>,
-        <https://1145.am/db/4065136/Data_Clean> .
+        <https://1145.am/db/2811304/Data_Clean> .
 
 <https://1145.am/db/4170138/Armis> a org:Organization ;
     ns1:buyer <https://1145.am/db/4170138/Silk_Platform-Acquisition> ;
@@ -1287,15 +895,14 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/614_cybersecurity_cyber_compliance_security> ;
     ns1:internalDocId 4170138 ;
     ns1:name "Armis" ;
+    ns1:internalCleanName "armis" ;
     ns1:sameAsHigh <https://1145.am/db/3151691/Armis>,
         <https://1145.am/db/3176236/Armis>,
         <https://1145.am/db/3524348/Armis>,
         <https://1145.am/db/3809177/Armis>,
         <https://1145.am/db/3965826/Armis>,
         <https://1145.am/db/4007075/Armis>,
-        <https://1145.am/db/415755/Armis> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3172894/Armis>,
-        <https://1145.am/db/3257787/Armis> .
+        <https://1145.am/db/415755/Armis>  .
 
 <https://1145.am/db/4170166/Bowman_Consulting_Group_Ltd> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -1308,6 +915,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/44_consulting_consultancy_engineers_consultant> ;
     ns1:internalDocId 4170166 ;
     ns1:name "Bowman Consulting Group Ltd." ;
+    ns1:internalCleanName "bowman consulting" ;
     ns1:sameAsHigh <https://1145.am/db/1031622/Bowman_Consulting_Group_Ltd>,
         <https://1145.am/db/1032045/Bowman_Consulting_Group_Ltd>,
         <https://1145.am/db/1050187/Bowman_Consulting_Group_Ltd>,
@@ -1362,23 +970,7 @@
         <https://1145.am/db/819415/Bowman_Consulting_Group_Ltd>,
         <https://1145.am/db/826289/Bowman_Consulting_Group_Ltd>,
         <https://1145.am/db/867349/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/870724/Bowman_Consulting_Group_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1105785/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1108238/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1192120/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1193005/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1290993/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1291475/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1302129/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1304078/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1553093/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/1553204/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/3713719/Bowman_Consulting>,
-        <https://1145.am/db/4209593/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/457456/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/459212/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/714001/Bowman_Consulting_Group_Ltd>,
-        <https://1145.am/db/716871/Bowman_Consulting_Group_Ltd> .
+        <https://1145.am/db/870724/Bowman_Consulting_Group_Ltd> .
 
 <https://1145.am/db/4170175/Berry_Global_Group> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -1392,20 +984,7 @@
         <https://1145.am/db/3990800/Berry_Global_Group>,
         <https://1145.am/db/3997883/Berry_Global_Group>,
         <https://1145.am/db/4154639/Berry_Global> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1526801/Berry_Global_Group>,
-        <https://1145.am/db/1528005/Berry_Global_Group>,
-        <https://1145.am/db/1660574/Berry_Global_Group>,
-        <https://1145.am/db/1969780/Berry_Global_Group>,
-        <https://1145.am/db/3030975/Berry_Global>,
-        <https://1145.am/db/3033658/Berry_Global>,
-        <https://1145.am/db/3388565/Berry_Global>,
-        <https://1145.am/db/3627939/Berry_Global_Group>,
-        <https://1145.am/db/3673878/Berry_Global_Group>,
-        <https://1145.am/db/3960124/Berry_Global_Group>,
-        <https://1145.am/db/3960124/Berry_Global_Inc>,
-        <https://1145.am/db/4003978/Berry_Global>,
-        <https://1145.am/db/4011766/Berry_Global>,
-        <https://1145.am/db/4243032/Berry_Global_Group_Inc> .
+    ns1:internalCleanName "berry global group" .
 
 <https://1145.am/db/4170175/Glatfelter_Corporation> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
@@ -1419,17 +998,10 @@
         <https://1145.am/db/industry/581_ingredients_chemicals_ingredient_additives> ;
     ns1:internalDocId 4170175 ;
     ns1:name "Glatfelter Corporation" ;
+    ns1:internalCleanName "glatfelter" ;
     ns1:protagonist <https://1145.am/db/4170175/Berry_Global_Group-Glatfelter_Corporation-Merger-Segment> ;
     ns1:sameAsHigh <https://1145.am/db/3990800/Glatfelter_Corporation>,
-        <https://1145.am/db/4011766/Glatfelter> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3711557/Glatfelter_Corp>,
-        <https://1145.am/db/3732715/Glatfelter_Corporation>,
-        <https://1145.am/db/3750231/Glatfelter>,
-        <https://1145.am/db/3997883/Glatfelter_Corporation>,
-        <https://1145.am/db/4154639/Glatfelter_Corporation>,
-        <https://1145.am/db/4156604/Glatfelter>,
-        <https://1145.am/db/479620/Glatfelter_Corporation>,
-        <https://1145.am/db/549350/Glatfelter_Corporation> .
+        <https://1145.am/db/4011766/Glatfelter>  .
 
 <https://1145.am/db/3024715/Locums_Nest> a org:Organization ;
     ns1:basedInLowRaw "England" ;
@@ -1439,6 +1011,7 @@
     ns1:industry "Healthtech" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/199_agetech_healthtech_heathtech_caretech> ;
     ns1:internalDocId 3024715 ;
+    ns1:internalCleanName "locums nest" ;
     ns1:name "Locum's Nest" .
 
 <https://1145.am/db/3619563/Harvest_Health_Recreation-Added-California> a ns1:LocationActivity ;
@@ -1481,6 +1054,7 @@
     ns1:documentSource <https://1145.am/db/3785309/wwwprnewswirecom_news-releases_jll-grows-technology-expertise-with-acquisition-of-valud-300723745html> ;
     ns1:foundName "ValuD Consulting" ;
     ns1:internalDocId 3785309 ;
+    ns1:internalCleanName "valud consulting" ;
     ns1:name "ValuD Consulting" .
 
 <https://1145.am/db/3785309/Valud_Consulting-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1511,6 +1085,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3785317 ;
     ns1:name "Apttus" ;
+    ns1:internalCleanName "apttus" ;
     ns1:sameAsHigh <https://1145.am/db/1779104/Apttus>,
         <https://1145.am/db/3443759/Apttus>,
         <https://1145.am/db/3463586/Apttus>,
@@ -1522,14 +1097,7 @@
         <https://1145.am/db/3808842/Apttus>,
         <https://1145.am/db/3810768/Apttus>,
         <https://1145.am/db/3816185/Apttus>,
-        <https://1145.am/db/3859215/Apttus> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1778624/Apttus>,
-        <https://1145.am/db/1782873/Apttus>,
-        <https://1145.am/db/1795198/Apttus>,
-        <https://1145.am/db/1828103/Apttus>,
-        <https://1145.am/db/3796136/Apttus>,
-        <https://1145.am/db/3891618/Apttus>,
-        <https://1145.am/db/941347/Apttus> .
+        <https://1145.am/db/3859215/Apttus> .
 
 <https://1145.am/db/3785317/Apttus-Acquisition-Interest> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1559,6 +1127,7 @@
     ns1:industry "health care" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3785695 ;
+    ns1:internalCleanName "holy cross" ;
     ns1:name "Holy Cross Health" .
 
 <https://1145.am/db/3785695/Holy_Cross_Hospital> a org:Organization ;
@@ -1574,8 +1143,7 @@
         <https://1145.am/db/industry/92_automation_automated_automatic_technologies> ;
     ns1:internalDocId 3785695 ;
     ns1:name "Holy Cross Hospital" ;
-    ns1:sameAsHigh <https://1145.am/db/2231680/Holy_Cross_Hospital>,
-        <https://1145.am/db/2242868/Holy_Cross_Hospital> .
+    ns1:internalCleanName "holy cross" .
 
 <https://1145.am/db/3785698/Showcase_Idx> a org:Organization ;
     ns1:basedInHighClean "Atlanta" ;
@@ -1587,6 +1155,7 @@
     ns1:industry "real estate technology" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/120_proptech_fintech_prop_tech> ;
     ns1:internalDocId 3785698 ;
+    ns1:internalCleanName "showcase idx" ;
     ns1:name "Showcase IDX" .
 
 <https://1145.am/db/4151859/Snehal_Shah-Starting-President_Of_R_D> a ns1:RoleActivity ;
@@ -1616,12 +1185,7 @@
     ns1:foundName "Edinburgh Airport" ;
     ns1:internalDocId 4168148 ;
     ns1:name "Edinburgh Airport" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2901724/Edinburgh_Airport>,
-        <https://1145.am/db/2901726/Edinburgh_Airport>,
-        <https://1145.am/db/2906470/Edinburgh_Airport>,
-        <https://1145.am/db/2914820/Edinburgh_Airport>,
-        <https://1145.am/db/3033502/Edinburgh_Airport>,
-        <https://1145.am/db/4168185/Edinburgh_Airport> .
+    ns1:internalCleanName "edinburgh airport" .
 
 <https://1145.am/db/4168148/London_Gatwick> a org:Organization ;
     ns1:basedInLowRaw "France" ;
@@ -1630,6 +1194,7 @@
     ns1:industry "Airport" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/124_airline_airlines_airliners_airliner> ;
     ns1:internalDocId 4168148 ;
+    ns1:internalCleanName "london gatwick" ;
     ns1:name "London Gatwick" .
 
 <https://1145.am/db/4168197/Ids> a org:Organization ;
@@ -1638,8 +1203,7 @@
     ns1:foundName "IDS" ;
     ns1:internalDocId 4168197 ;
     ns1:name "IDS" ;
-    ns1:sameAsNameOnly <https://1145.am/db/4250239/Ids>,
-        <https://1145.am/db/965768/Ids> .
+    ns1:internalCleanName "ids" .
 
 <https://1145.am/db/4168197/Ids-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1662,36 +1226,9 @@
     ns1:foundName "Royal Mail" ;
     ns1:internalDocId 4168197 ;
     ns1:name "Royal Mail" ;
+    ns1:internalCleanName "royal mail" ;
     ns1:sameAsHigh <https://1145.am/db/4001762/Royal_Mail>,
-        <https://1145.am/db/4290155/Royal_Mail> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
-        <https://1145.am/db/194587/Royal_Mail_Plc>,
-        <https://1145.am/db/194605/Royal_Mail_Plc>,
-        <https://1145.am/db/194606/Royal_Mail_Plc>,
-        <https://1145.am/db/194607/Royal_Mail_Plc>,
-        <https://1145.am/db/1998848/Royal_Mail>,
-        <https://1145.am/db/2005816/Royal_Mail>,
-        <https://1145.am/db/2841455/Royal_Mail>,
-        <https://1145.am/db/2847880/Royal_Mail>,
-        <https://1145.am/db/2864441/Royal_Mail>,
-        <https://1145.am/db/2939544/Royal_Mail>,
-        <https://1145.am/db/2941320/Royal_Mail>,
-        <https://1145.am/db/2945763/Royal_Mail>,
-        <https://1145.am/db/2959107/Royal_Mail>,
-        <https://1145.am/db/2969395/Royal_Mail>,
-        <https://1145.am/db/2977176/Royal_Mail>,
-        <https://1145.am/db/2977364/Royal_Mail>,
-        <https://1145.am/db/2984033/Royal_Mail>,
-        <https://1145.am/db/2988964/Royal_Mail>,
-        <https://1145.am/db/2988998/Royal_Mail>,
-        <https://1145.am/db/3009355/Royal_Mail>,
-        <https://1145.am/db/3023028/Royal_Mail>,
-        <https://1145.am/db/3026949/Royal_Mail>,
-        <https://1145.am/db/3050026/Royal_Mail>,
-        <https://1145.am/db/3058845/Royal_Mail>,
-        <https://1145.am/db/3073967/Royal_Mail>,
-        <https://1145.am/db/4133454/Royal_Mail>,
-        <https://1145.am/db/534151/Royal_Mail> .
+        <https://1145.am/db/4290155/Royal_Mail>  .
 
 <https://1145.am/db/4168197/Royal_Mail-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1713,22 +1250,11 @@
     ns1:foundName "Telegraph Media Group" ;
     ns1:internalDocId 4168197 ;
     ns1:name "Telegraph Media Group" ;
+    ns1:internalCleanName "telegraph media" ;
     ns1:sameAsHigh <https://1145.am/db/2716133/Telegraph_Media_Group>,
         <https://1145.am/db/2828474/Telegraph_Media_Group>,
         <https://1145.am/db/2974323/Telegraph_Media_Group>,
-        <https://1145.am/db/4199873/Telegraph_Media_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1810450/Telegraph_Media_Group>,
-        <https://1145.am/db/2824292/Telegraph_Media_Group>,
-        <https://1145.am/db/2852351/Telegraph_Media_Group>,
-        <https://1145.am/db/2855155/Telegraph_Media_Group>,
-        <https://1145.am/db/3142355/Telegraph_Media_Group>,
-        <https://1145.am/db/3949511/Telegraph_Media_Group>,
-        <https://1145.am/db/3958408/Telegraph_Media_Group>,
-        <https://1145.am/db/4081621/Telegraph_Media_Group>,
-        <https://1145.am/db/4087284/Telegraph_Media_Group>,
-        <https://1145.am/db/4106905/Telegraph_Media_Group>,
-        <https://1145.am/db/4109436/Telegraph_Media_Group>,
-        <https://1145.am/db/4198431/Telegraph_Media_Group> .
+        <https://1145.am/db/4199873/Telegraph_Media_Group>  .
 
 <https://1145.am/db/4168197/Telegraph_Media_Group-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1754,8 +1280,8 @@
     ns1:foundName "HPQ Silicon Inc." ;
     ns1:internalDocId 4168343 ;
     ns1:name "HPQ Silicon Inc." ;
-    ns1:sameAsHigh <https://1145.am/db/4152709/Hpq_Silicon_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4235635/Hpq_Silicon> .
+    ns1:internalCleanName "hpq silicon" ;
+    ns1:sameAsHigh <https://1145.am/db/4152709/Hpq_Silicon_Inc> .
 
 <https://1145.am/db/4168343/Pyrogenesis_Canada_Inc> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -1769,12 +1295,12 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/615_retailers_high_retailer_street> ;
     ns1:internalDocId 4168343 ;
     ns1:name "PyroGenesis Canada Inc." ;
+    ns1:internalCleanName "pyrogenesis" ;
     ns1:sameAsHigh <https://1145.am/db/1431090/Pyrogenesis_Canada_Inc>,
         <https://1145.am/db/405479/Pyrogenesis_Canada_Inc>,
         <https://1145.am/db/4136464/Pyrogenesis_Canada_Inc>,
         <https://1145.am/db/4152709/Pyrogenesis_Canada_Inc>,
-        <https://1145.am/db/472547/Pyrogenesis_Canada_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4235635/Pyrogenesis_Canada_Inc> .
+        <https://1145.am/db/472547/Pyrogenesis_Canada_Inc>  .
 
 <https://1145.am/db/4169893/Access_Point_Financial-Citibank-Investment-Portfolio_Refinance> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1799,29 +1325,14 @@
     ns1:foundName "Citibank" ;
     ns1:internalDocId 4169893 ;
     ns1:name "Citibank" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1026018/Citibank>,
-        <https://1145.am/db/2333351/Citibank>,
-        <https://1145.am/db/2352682/Citibank>,
-        <https://1145.am/db/2352723/Citibank>,
-        <https://1145.am/db/2536552/Citibank>,
-        <https://1145.am/db/2734293/Citibank>,
-        <https://1145.am/db/2783567/Citibank>,
-        <https://1145.am/db/2861060/Citibank>,
-        <https://1145.am/db/2971099/Citibank>,
-        <https://1145.am/db/3093338/Citibank>,
-        <https://1145.am/db/3519521/Citibank>,
-        <https://1145.am/db/3847301/Citibank>,
-        <https://1145.am/db/4229835/Citibank>,
-        <https://1145.am/db/846832/Citibank> .
+    ns1:internalCleanName "citibank" .
 
 <https://1145.am/db/4170097/Holtzbrinck_Digital> a org:Organization ;
     ns1:documentSource <https://1145.am/db/4170097/wwwbusinesswirecom_news_home_20240417562351_en_Labguru-joins-Titian-Software-in-Battery-Ventures-Life-Science-Platform> ;
     ns1:foundName "Holtzbrinck Digital" ;
     ns1:internalDocId 4170097 ;
     ns1:name "Holtzbrinck Digital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1705169/Holtzbrinck_Digital>,
-        <https://1145.am/db/1742188/Holtzbrinck_Digital>,
-        <https://1145.am/db/1860152/Holtzbrinck_Digital> .
+    ns1:internalCleanName "holtzbrinck" .
 
 <https://1145.am/db/4170097/Labguru> a org:Organization ;
     ns1:basedInLowRaw "BioData Inc." ;
@@ -1833,6 +1344,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/257_biosciences_diagnostics_biotech_diagnostic>,
         <https://1145.am/db/industry/292_healthcare_biosciences_biotechnology_health> ;
     ns1:internalDocId 4170097 ;
+    ns1:internalCleanName "labguru" ;
     ns1:name "Labguru" .
 
 <https://1145.am/db/4170097/Labguru-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1857,8 +1369,8 @@
     ns1:foundName "Ballymore Safety Products" ;
     ns1:internalDocId 4170102 ;
     ns1:name "Ballymore Safety Products" ;
-    ns1:sameAsHigh <https://1145.am/db/4168657/Ballymore_Safety_Products> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4170307/Ballymore_Safety_Products> .
+    ns1:internalCleanName "ballymore safety products" ;
+    ns1:sameAsHigh <https://1145.am/db/4168657/Ballymore_Safety_Products>  .
 
 <https://1145.am/db/4170102/Ballymore_Safety_Products-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1885,14 +1397,11 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/675_investors_property_investment_investing> ;
     ns1:internalDocId 4170102 ;
     ns1:name "Graycliff Partners" ;
+    ns1:internalCleanName "graycliff partners" ;
     ns1:sameAsHigh <https://1145.am/db/1385842/Graycliff_Partners_Lp>,
         <https://1145.am/db/1386599/Graycliff_Partners_Lp>,
         <https://1145.am/db/1437070/Graycliff_Capital_Partners>,
-        <https://1145.am/db/490237/Graycliff_Partners_Lp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2786124/Graycliff_Partners>,
-        <https://1145.am/db/3873080/Graycliff_Partners>,
-        <https://1145.am/db/3873088/Graycliff_Partners>,
-        <https://1145.am/db/4168657/Graycliff_Partners> .
+        <https://1145.am/db/490237/Graycliff_Partners_Lp> .
 
 <https://1145.am/db/4170112/Vanda_Pharmaceuticals_Inc> a org:Organization ;
     ns1:basedInLowRaw "Future Pak LLC" ;

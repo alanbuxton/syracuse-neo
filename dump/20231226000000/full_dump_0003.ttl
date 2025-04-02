@@ -23,6 +23,7 @@
         <https://1145.am/db/industry/577_payments_healthcare_payment_patient> ;
     ns1:internalDocId 1824114 ;
     ns1:name "Square" ;
+    ns1:internalCleanName "square" ;
     ns1:sameAsHigh <https://1145.am/db/1814252/Square>,
         <https://1145.am/db/1823940/Square>,
         <https://1145.am/db/1824121/Square>,
@@ -42,61 +43,7 @@
         <https://1145.am/db/3413996/Square>,
         <https://1145.am/db/577322/Square>,
         <https://1145.am/db/593192/Square_Inc>,
-        <https://1145.am/db/668095/Square_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1106670/Square>,
-        <https://1145.am/db/135475/Square_Inc>,
-        <https://1145.am/db/156236/Square>,
-        <https://1145.am/db/157185/Square_Inc>,
-        <https://1145.am/db/1734518/Square>,
-        <https://1145.am/db/1734523/Square>,
-        <https://1145.am/db/1734902/Square>,
-        <https://1145.am/db/1743797/Square>,
-        <https://1145.am/db/1744629/Square>,
-        <https://1145.am/db/1746023/Square>,
-        <https://1145.am/db/1746303/Square>,
-        <https://1145.am/db/1746341/Square>,
-        <https://1145.am/db/1754933/Square>,
-        <https://1145.am/db/1774922/Square>,
-        <https://1145.am/db/1782130/Square>,
-        <https://1145.am/db/1785413/Square>,
-        <https://1145.am/db/1786488/Square>,
-        <https://1145.am/db/1788519/Square>,
-        <https://1145.am/db/1804095/Square>,
-        <https://1145.am/db/1805106/Square>,
-        <https://1145.am/db/1837834/Square>,
-        <https://1145.am/db/1839803/Square>,
-        <https://1145.am/db/1844520/Square>,
-        <https://1145.am/db/1848863/Square>,
-        <https://1145.am/db/1851078/Square>,
-        <https://1145.am/db/1853374/Square>,
-        <https://1145.am/db/1856249/Square>,
-        <https://1145.am/db/1858369/Square>,
-        <https://1145.am/db/1891759/Square>,
-        <https://1145.am/db/1891852/Square>,
-        <https://1145.am/db/243883/Square_Inc>,
-        <https://1145.am/db/3148071/Square>,
-        <https://1145.am/db/3209467/Square>,
-        <https://1145.am/db/334161/Square>,
-        <https://1145.am/db/335633/Square>,
-        <https://1145.am/db/3372576/Square>,
-        <https://1145.am/db/3374378/Square>,
-        <https://1145.am/db/3374398/Square>,
-        <https://1145.am/db/3375348/Square>,
-        <https://1145.am/db/3405750/Square>,
-        <https://1145.am/db/3519143/Square>,
-        <https://1145.am/db/3581810/Square>,
-        <https://1145.am/db/376959/Square>,
-        <https://1145.am/db/388446/Square>,
-        <https://1145.am/db/388881/Square_Inc>,
-        <https://1145.am/db/388999/Square_Inc>,
-        <https://1145.am/db/389439/Square>,
-        <https://1145.am/db/394240/Square_Inc>,
-        <https://1145.am/db/395724/Square_Inc>,
-        <https://1145.am/db/427859/Square>,
-        <https://1145.am/db/455526/Square_Inc>,
-        <https://1145.am/db/505887/Square_Inc>,
-        <https://1145.am/db/667486/Square_Inc>,
-        <https://1145.am/db/769052/Square_Inc> .
+        <https://1145.am/db/668095/Square_Inc> .
 
 <https://1145.am/db/2166549/Discovery_Inc> a org:Organization ;
     ns1:description "digital sports media" ;
@@ -105,6 +52,8 @@
     ns1:internalDocId 2166549 ;
     ns1:investor <https://1145.am/db/2166549/Play_Sports_Group-Investment-Controlling> ;
     ns1:name "Discovery, Inc." ;
+    ns1:internalCleanName "discovery inc" ;
+    ns1:internalCleanShortName "discovery" ;
     ns1:sameAsHigh <https://1145.am/db/1207995/Discovery_Inc>,
         <https://1145.am/db/2169549/Discovery_Inc>,
         <https://1145.am/db/2179877/Discovery>,
@@ -121,44 +70,7 @@
         <https://1145.am/db/817799/Discovery_Inc>,
         <https://1145.am/db/896308/Discovery_Inc>,
         <https://1145.am/db/900144/Discovery_Inc>,
-        <https://1145.am/db/966560/Discovery> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1257890/Discovery_Inc>,
-        <https://1145.am/db/1767784/Discovery_Inc>,
-        <https://1145.am/db/1895683/Discovery>,
-        <https://1145.am/db/2157689/Discovery_Inc>,
-        <https://1145.am/db/2161500/Discovery_Inc>,
-        <https://1145.am/db/2162363/Discovery>,
-        <https://1145.am/db/2163075/Discovery_Inc>,
-        <https://1145.am/db/2173534/Discovery>,
-        <https://1145.am/db/2174389/Discovery_Inc>,
-        <https://1145.am/db/2175424/Discovery_Inc>,
-        <https://1145.am/db/2177187/Discovery>,
-        <https://1145.am/db/2177460/Discovery>,
-        <https://1145.am/db/2177778/Discovery_Inc>,
-        <https://1145.am/db/2963461/Discovery>,
-        <https://1145.am/db/3077611/Discovery>,
-        <https://1145.am/db/3080370/Discovery>,
-        <https://1145.am/db/3236461/Discovery>,
-        <https://1145.am/db/3259091/Discovery>,
-        <https://1145.am/db/3318609/Discovery>,
-        <https://1145.am/db/334907/Discovery_Inc>,
-        <https://1145.am/db/335104/Discovery_Inc>,
-        <https://1145.am/db/3400851/Discovery_Inc>,
-        <https://1145.am/db/3457026/Discovery_Inc>,
-        <https://1145.am/db/3638164/Discovery>,
-        <https://1145.am/db/3652855/Discovery>,
-        <https://1145.am/db/3700991/Discovery>,
-        <https://1145.am/db/3712889/Discovery>,
-        <https://1145.am/db/4042773/Discovery_Inc>,
-        <https://1145.am/db/4051891/Discovery>,
-        <https://1145.am/db/4239594/Discovery>,
-        <https://1145.am/db/540214/Discovery_Inc>,
-        <https://1145.am/db/566298/Discovery>,
-        <https://1145.am/db/713292/Discovery_Inc>,
-        <https://1145.am/db/715099/Discovery>,
-        <https://1145.am/db/715441/Discovery_Inc>,
-        <https://1145.am/db/796295/Discovery_Inc>,
-        <https://1145.am/db/897774/Discovery_Inc> .
+        <https://1145.am/db/966560/Discovery> .
 
 <https://1145.am/db/2166549/Sky> a org:Organization ;
     ns1:basedInLowRaw "UK" ;
@@ -166,67 +78,8 @@
     ns1:foundName "Sky" ;
     ns1:internalDocId 2166549 ;
     ns1:investor <https://1145.am/db/2166549/Synamedia-Investment-Ownership_Stake> ;
-    ns1:name "Sky" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1504218/Sky>,
-        <https://1145.am/db/1751661/Sky>,
-        <https://1145.am/db/1767784/Sky>,
-        <https://1145.am/db/1800101/Sky>,
-        <https://1145.am/db/1809178/Sky>,
-        <https://1145.am/db/1811950/Sky>,
-        <https://1145.am/db/1816423/Sky>,
-        <https://1145.am/db/1888500/Sky>,
-        <https://1145.am/db/2157251/Sky>,
-        <https://1145.am/db/2157375/Sky>,
-        <https://1145.am/db/2157689/Sky>,
-        <https://1145.am/db/2158007/Sky>,
-        <https://1145.am/db/2158009/Sky>,
-        <https://1145.am/db/2159114/Sky>,
-        <https://1145.am/db/2160305/Sky>,
-        <https://1145.am/db/2162939/Sky>,
-        <https://1145.am/db/2163154/Sky>,
-        <https://1145.am/db/2166451/Sky_Plc>,
-        <https://1145.am/db/2168681/Sky>,
-        <https://1145.am/db/2169342/Sky>,
-        <https://1145.am/db/2173956/Sky>,
-        <https://1145.am/db/2174141/Sky>,
-        <https://1145.am/db/2176333/Sky>,
-        <https://1145.am/db/2176341/Sky>,
-        <https://1145.am/db/249513/Sky>,
-        <https://1145.am/db/2866523/Sky>,
-        <https://1145.am/db/2866525/Sky>,
-        <https://1145.am/db/2868611/Sky>,
-        <https://1145.am/db/2868613/Sky>,
-        <https://1145.am/db/2880577/Sky>,
-        <https://1145.am/db/2885660/Sky>,
-        <https://1145.am/db/2957790/Sky>,
-        <https://1145.am/db/2957852/Sky>,
-        <https://1145.am/db/2964698/Sky>,
-        <https://1145.am/db/2969886/Sky>,
-        <https://1145.am/db/2975089/Sky>,
-        <https://1145.am/db/2995724/Sky>,
-        <https://1145.am/db/2997029/Sky>,
-        <https://1145.am/db/3006920/Sky>,
-        <https://1145.am/db/3008300/Sky>,
-        <https://1145.am/db/3013866/Sky>,
-        <https://1145.am/db/3017312/Sky>,
-        <https://1145.am/db/3018021/Sky>,
-        <https://1145.am/db/3024728/Sky>,
-        <https://1145.am/db/3027059/Sky>,
-        <https://1145.am/db/3027078/Sky>,
-        <https://1145.am/db/3046765/Sky>,
-        <https://1145.am/db/3047361/Sky>,
-        <https://1145.am/db/3139282/Sky>,
-        <https://1145.am/db/3230378/Sky>,
-        <https://1145.am/db/3777877/Sky_Unlimited>,
-        <https://1145.am/db/3778243/Sky_Unlimited>,
-        <https://1145.am/db/3859214/Sky_Unlimited_Llc>,
-        <https://1145.am/db/3859840/Sky_Unlimited_Llc>,
-        <https://1145.am/db/3863477/Sky>,
-        <https://1145.am/db/3863503/Sky>,
-        <https://1145.am/db/521327/Sky>,
-        <https://1145.am/db/713831/Sky>,
-        <https://1145.am/db/715834/Sky>,
-        <https://1145.am/db/993480/Sky> .
+    ns1:internalCleanName "sky" ;
+    ns1:name "Sky" .
 
 <https://1145.am/db/3029673/Laing_Orourke> a org:Organization ;
     ns1:basedInLowRaw "Scotland" ;
@@ -237,6 +90,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/686_contractors_contractor_construction_contracting> ;
     ns1:internalDocId 3029673 ;
     ns1:name "Laing O'Rourke" ;
+    ns1:internalCleanName "lang orourke" ;
     ns1:protagonist <https://1145.am/db/3029673/Laing_Orourke-Investment> ;
     ns1:sameAsHigh <https://1145.am/db/3082463/Laing_Orourke> .
 
@@ -248,9 +102,10 @@
     ns1:internalDocId 3460269 ;
     ns1:investor <https://1145.am/db/3460269/Quest_Events-Tzp_Capital_Partners_Iii_Lp-Investment> ;
     ns1:name "TZP Capital Partners III, L.P." ;
+    ns1:internalCleanName "tzp capital partners iii lp";
+    ns1:internalCleanShortName "tzp capital partners iii" ;
     ns1:sameAsHigh <https://1145.am/db/3211343/Tzp_Capital_Partners_Iii_Lp>,
-        <https://1145.am/db/428145/Tzp_Capital_Partners_Iii_Lp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3443311/Tzp_Capital_Partners_Iii_Lp> .
+        <https://1145.am/db/428145/Tzp_Capital_Partners_Iii_Lp> .
 
 <https://1145.am/db/3460288/Optum_Ventures> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -258,85 +113,9 @@
     ns1:foundName "Optum Ventures" ;
     ns1:internalDocId 3460288 ;
     ns1:investor <https://1145.am/db/3460288/Ableto-Optum_Ventures-Investment-Series_D> ;
-    ns1:name "Optum Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1011550/Optum>,
-        <https://1145.am/db/1012420/Optum>,
-        <https://1145.am/db/1022548/Optum>,
-        <https://1145.am/db/1026354/Optum>,
-        <https://1145.am/db/1071370/Optum_Ventures>,
-        <https://1145.am/db/1145057/Optum_Uk>,
-        <https://1145.am/db/1156925/Optum_Ventures>,
-        <https://1145.am/db/1157294/Optum_Ventures>,
-        <https://1145.am/db/1387856/Optum>,
-        <https://1145.am/db/1389781/Optum>,
-        <https://1145.am/db/1528582/Optum_Ventures>,
-        <https://1145.am/db/1743851/Optum_Ventures>,
-        <https://1145.am/db/1756221/Optum_Ventures>,
-        <https://1145.am/db/2027219/Optum>,
-        <https://1145.am/db/2181105/Optum>,
-        <https://1145.am/db/2181373/Optum>,
-        <https://1145.am/db/2181653/Optum>,
-        <https://1145.am/db/2182152/Optum>,
-        <https://1145.am/db/2182352/Optum>,
-        <https://1145.am/db/2182610/Optum>,
-        <https://1145.am/db/2182698/Optum_Ventures>,
-        <https://1145.am/db/2182831/Optum>,
-        <https://1145.am/db/2183137/Optum_Ventures>,
-        <https://1145.am/db/2183352/Optum_Ventures>,
-        <https://1145.am/db/2183702/Optum_Ventures>,
-        <https://1145.am/db/2183796/Optum>,
-        <https://1145.am/db/2184210/Optum>,
-        <https://1145.am/db/2185112/Optum>,
-        <https://1145.am/db/2185560/Optum>,
-        <https://1145.am/db/2186424/Optum_Ventures>,
-        <https://1145.am/db/2187990/Optum>,
-        <https://1145.am/db/2188220/Optum>,
-        <https://1145.am/db/2188790/Optum>,
-        <https://1145.am/db/2189763/Optum>,
-        <https://1145.am/db/2190026/Optum_Ventures>,
-        <https://1145.am/db/2190847/Optum>,
-        <https://1145.am/db/2191220/Optum>,
-        <https://1145.am/db/2191526/Optum>,
-        <https://1145.am/db/2191861/Optum>,
-        <https://1145.am/db/2193677/Optum_Ventures>,
-        <https://1145.am/db/2193817/Optum>,
-        <https://1145.am/db/2197483/Optum>,
-        <https://1145.am/db/2197514/Optum>,
-        <https://1145.am/db/2197606/Optum>,
-        <https://1145.am/db/2197622/Optum>,
-        <https://1145.am/db/2198069/Optum_Ventures>,
-        <https://1145.am/db/2198401/Optum_Ventures>,
-        <https://1145.am/db/2198485/Optum_Ventures>,
-        <https://1145.am/db/2217680/Optum>,
-        <https://1145.am/db/2239312/Optum>,
-        <https://1145.am/db/2259066/Optum>,
-        <https://1145.am/db/2261183/Optum>,
-        <https://1145.am/db/2278450/Optum>,
-        <https://1145.am/db/2294005/Optum>,
-        <https://1145.am/db/2294815/Optum_Ventures>,
-        <https://1145.am/db/2322421/Optum>,
-        <https://1145.am/db/3148084/Optum_Ventures>,
-        <https://1145.am/db/325080/Optum_Ventures>,
-        <https://1145.am/db/3260203/Optum_Ventures>,
-        <https://1145.am/db/3499174/Optum_Ventures>,
-        <https://1145.am/db/3499987/Optum>,
-        <https://1145.am/db/3546718/Optum_Ventures>,
-        <https://1145.am/db/3751074/Optum>,
-        <https://1145.am/db/3751671/Optum>,
-        <https://1145.am/db/3886438/Optum_Ventures>,
-        <https://1145.am/db/3990397/Optum_Ventures>,
-        <https://1145.am/db/410322/Optum_Ventures>,
-        <https://1145.am/db/4123166/Optum>,
-        <https://1145.am/db/4124704/Optum>,
-        <https://1145.am/db/441502/Optum_Ventures>,
-        <https://1145.am/db/854386/Optum_Ventures>,
-        <https://1145.am/db/940652/Optum>,
-        <https://1145.am/db/955035/Optum>,
-        <https://1145.am/db/955045/Optum>,
-        <https://1145.am/db/962644/Optum>,
-        <https://1145.am/db/965169/Optum>,
-        <https://1145.am/db/972786/Optum_Ventures>,
-        <https://1145.am/db/993250/Optum_Ventures> .
+    ns1:internalCleanName "optum ventures" ;
+    ns1:internalCleanShortName "optum" ;
+    ns1:name "Optum Ventures"  .
 
 <https://1145.am/db/3461286/Neubase> a org:Organization ;
     ns1:basedInLowRaw "NEW ORLEANS" ;
@@ -348,6 +127,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3461286 ;
     ns1:name "NeuBase" ;
+    ns1:internalCleanName "neubase" ;
     ns1:protagonist <https://1145.am/db/3461286/Charles_C_Foti_Jr-Kahn_Swick_Foti_Llc-Neubase-Ohr_Pharmaceutical-Merger> .
 
 <https://1145.am/db/3461286/Ohr_Pharmaceutical> a org:Organization ;
@@ -360,6 +140,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3461286 ;
     ns1:name "Ohr Pharmaceutical" ;
+    ns1:internalCleanName"ohr pharmaceutical" ;
     ns1:protagonist <https://1145.am/db/3461286/Charles_C_Foti_Jr-Kahn_Swick_Foti_Llc-Neubase-Ohr_Pharmaceutical-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/2337112/Ohr_Pharmaceutical>,
         <https://1145.am/db/2353250/Ohr_Pharmaceutical_Inc>,
@@ -381,9 +162,8 @@
     ns1:industry "technology consulting" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/38_consulting_consultancy_consultant_it> ;
     ns1:internalDocId 3461292 ;
-    ns1:name "Improving" ;
-    ns1:sameAsNameOnly <https://1145.am/db/479345/Improving>,
-        <https://1145.am/db/867384/Improving> .
+    ns1:internalCleanName "improving" ;
+    ns1:name "Improving" .
 
 <https://1145.am/db/3461322/Bristol-Myers_Squibb> a org:Organization ;
     ns1:basedInLowRaw "NEW ORLEANS" ;
@@ -393,6 +173,7 @@
     ns1:foundName "Bristol-Myers Squibb Company" ;
     ns1:internalDocId 3461322 ;
     ns1:name "Bristol-Myers Squibb" ;
+    ns1:internalCleanName "brystol myers squibb";
     ns1:sameAsHigh <https://1145.am/db/1113358/Bristol-Myers_Squibb>,
         <https://1145.am/db/2139540/Bristol-Myers_Squibb>,
         <https://1145.am/db/2140511/Bristol-Myers_Squibb_Company>,
@@ -621,49 +402,14 @@
         <https://1145.am/db/4008041/Bristol-Myers_Squibb_Company>,
         <https://1145.am/db/4015690/Bristol-Myers_Squibb>,
         <https://1145.am/db/831553/Bristol-Myers_Squibb>,
-        <https://1145.am/db/833098/Bristol-Myers_Squibb> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1318775/Bristol-Myers_Squibb>,
-        <https://1145.am/db/1319026/Bristol-Myers_Squibb>,
-        <https://1145.am/db/1822601/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2301461/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2305254/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2326568/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2336201/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2336567/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2337743/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2347038/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2356340/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2360289/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2360963/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2364052/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2365157/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2367085/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2537500/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2543552/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2543648/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2559407/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2585263/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2589142/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2592024/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2592791/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2595133/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2595843/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/2596434/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2597274/Bristol-Myers_Squibb>,
-        <https://1145.am/db/2598626/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3104856/Bristol-Myers_Squibb_Company>,
-        <https://1145.am/db/3354989/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3666815/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3851093/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3855832/Bristol-Myers_Squibb>,
-        <https://1145.am/db/3958445/Bristol-Myers_Squibb>,
-        <https://1145.am/db/870410/Bristol-Myers_Squibb> .
+        <https://1145.am/db/833098/Bristol-Myers_Squibb> .
 
 <https://1145.am/db/3461324/E15vc> a org:Organization ;
     ns1:basedInLowRaw "SAN DIEGO" ;
     ns1:documentSource <https://1145.am/db/3461324/wwwprnewswirecom_news-releases_home-bay-technologies-raises-13-5m-in-series-a-1-to-drive-geographic-and-market-expansion-300774862html> ;
     ns1:foundName "E15VC" ;
     ns1:internalDocId 3461324 ;
+    ns1:internalCleanName "e15vc" ;
     ns1:investor <https://1145.am/db/3461324/E15vc-Home_Bay-Serra_Ventures-Signal_Peak_Ventures-Investment-Series_A-1> ;
     ns1:name "E15VC" .
 
@@ -674,14 +420,8 @@
     ns1:internalDocId 3461324 ;
     ns1:investor <https://1145.am/db/3461324/E15vc-Home_Bay-Serra_Ventures-Signal_Peak_Ventures-Investment-Series_A-1> ;
     ns1:name "Serra Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1023070/Serra_Ventures>,
-        <https://1145.am/db/1023884/Serra_Ventures>,
-        <https://1145.am/db/1752958/Serra_Ventures>,
-        <https://1145.am/db/3147825/Serra_Ventures>,
-        <https://1145.am/db/3533572/Serra_Ventures>,
-        <https://1145.am/db/3560043/Serra_Ventures>,
-        <https://1145.am/db/738920/Serra_Ventures>,
-        <https://1145.am/db/739538/Serra_Ventures> .
+    ns1:internalCleanName "serra ventures" ;
+    ns1:internalCleanShortName "serra" .
 
 <https://1145.am/db/3461324/Signal_Peak_Ventures> a org:Organization ;
     ns1:basedInHighClean "San Diego" ;
@@ -690,19 +430,10 @@
     ns1:documentSource <https://1145.am/db/3461324/wwwprnewswirecom_news-releases_home-bay-technologies-raises-13-5m-in-series-a-1-to-drive-geographic-and-market-expansion-300774862html> ;
     ns1:foundName "Signal Peak Ventures" ;
     ns1:internalDocId 3461324 ;
+    ns1:internalCleanName "signal peak ventures" ;
+    ns1:internalCleanShortName "signal peak" ;
     ns1:investor <https://1145.am/db/3461324/E15vc-Home_Bay-Serra_Ventures-Signal_Peak_Ventures-Investment-Series_A-1> ;
-    ns1:name "Signal Peak Ventures" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1742446/Signal_Peak_Ventures>,
-        <https://1145.am/db/1744170/Signal_Peak_Ventures>,
-        <https://1145.am/db/1765858/Signal_Peak_Ventures>,
-        <https://1145.am/db/1779384/Signal_Peak_Ventures>,
-        <https://1145.am/db/1785223/Signal_Peak_Ventures>,
-        <https://1145.am/db/1852207/Signal_Peak_Ventures>,
-        <https://1145.am/db/3231907/Signal_Peak_Ventures>,
-        <https://1145.am/db/3609063/Signal_Peak_Ventures>,
-        <https://1145.am/db/3610582/Signal_Peak_Ventures>,
-        <https://1145.am/db/405183/Signal_Peak_Ventures>,
-        <https://1145.am/db/982661/Signal_Peak_Ventures> .
+    ns1:name "Signal Peak Ventures" .
 
 <https://1145.am/db/3461340/Abc_Financial_Services> a org:Organization ;
     ns1:basedInLowRaw "Brazil" ;
@@ -712,8 +443,7 @@
     ns1:foundName "ABC Financial Services, LLC," ;
     ns1:internalDocId 3461340 ;
     ns1:name "ABC Financial Services" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3549533/Abc_Financial_Services_Llc>,
-        <https://1145.am/db/3843983/Abc_Financial_Services> .
+    ns1:internalCleanName "abc financial" .
 
 <https://1145.am/db/3461395/Portage_Biotech_Inc> a org:Organization ;
     ns1:basedInHighClean "Toronto" ;
@@ -723,21 +453,9 @@
     ns1:documentSource <https://1145.am/db/3461395/wwwprnewswirecom_news-releases_shareholders-approve-acquisition-of-salvarx-limited-300774893html> ;
     ns1:foundName "Portage Biotech Inc." ;
     ns1:internalDocId 3461395 ;
-    ns1:name "Portage Biotech Inc." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1189323/Portage_Biotech_Inc>,
-        <https://1145.am/db/1220600/Portage_Biotech_Inc>,
-        <https://1145.am/db/1286832/Portage_Biotech_Inc>,
-        <https://1145.am/db/1304270/Portage_Biotech_Inc>,
-        <https://1145.am/db/2280129/Portage_Biotech>,
-        <https://1145.am/db/3299747/Portage_Biotech_Inc>,
-        <https://1145.am/db/3457230/Portage_Biotech_Inc>,
-        <https://1145.am/db/3509123/Portage_Biotech_Inc>,
-        <https://1145.am/db/3814068/Portage_Biotech_Inc>,
-        <https://1145.am/db/3815234/Portage_Biotech_Inc>,
-        <https://1145.am/db/3835659/Portage_Biotech>,
-        <https://1145.am/db/3890883/Portage_Biotech_Inc>,
-        <https://1145.am/db/3907641/Portage_Biotech_Inc>,
-        <https://1145.am/db/4118750/Portage_Biotech_Inc> .
+    ns1:internalCleanName "portage biotech inc" ;
+    ns1:internalCleanShortName "portage biotech" ;
+    ns1:name "Portage Biotech Inc."  .
 
 <https://1145.am/db/3462518/Ocean_State_Job_Lot> a org:Organization ;
     ns1:basedInHighClean "Rhode Island" ;
@@ -748,6 +466,7 @@
     ns1:documentSource <https://1145.am/db/3462518/wwwprnewswirecom_news-releases_ocean-state-job-lot-inks-deal-to-acquire-seven-toys-r-us-locations-300774909html> ;
     ns1:foundName "Ocean State Job Lot" ;
     ns1:industry "Retail" ;
+    ns1:internalCleanName "ocean state job lot";
     ns1:industryClusterPrimary <https://1145.am/db/industry/344_discount_discounter_retailer_bargain> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/603_automotive_retail_retailing_consumer> ;
     ns1:internalDocId 3462518 ;
@@ -766,6 +485,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3462522 ;
     ns1:name "Arthur J. Gallagher & Co." ;
+    ns1:internalCleanName "arthur j gallagher" ;
     ns1:sameAsHigh <https://1145.am/db/1003769/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/1025618/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/1160496/Arthur_J_Gallagher_Co>,
@@ -873,31 +593,7 @@
         <https://1145.am/db/708537/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/734599/Arthur_J_Gallagher_Co>,
         <https://1145.am/db/965641/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/988306/Arthur_J_Gallagher_Co> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1060599/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1083872/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1217037/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1262253/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1460528/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1595037/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1606194/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/1957696/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3263736/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3329075/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3446826/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3490021/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3491512/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3591738/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3765031/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3766593/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/3784862/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3795933/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3827812/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3888616/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/3899291/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/3919572/Arthur_J_Gallagher___Co>,
-        <https://1145.am/db/585160/Arthur_J_Gallagher_Co>,
-        <https://1145.am/db/930438/Arthur_J_Gallagher_Co> .
+        <https://1145.am/db/988306/Arthur_J_Gallagher_Co> .
 
 <https://1145.am/db/3462535/Sony_Interactive_Entertainment> a org:Organization ;
     ns1:basedInHighClean "San Mateo" ;
@@ -912,6 +608,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/58_gaming_gamer_igaming_videogaming> ;
     ns1:internalDocId 3462535 ;
     ns1:name "Sony Interactive Entertainment" ;
+    ns1:internalCleanName "sony interactive entertainment" ;
     ns1:sameAsHigh <https://1145.am/db/1024960/Sony_Interactive_Entertainment>,
         <https://1145.am/db/1025019/Sony_Interactive_Entertainment>,
         <https://1145.am/db/1301950/Sony_Interactive_Entertainment>,
@@ -942,17 +639,14 @@
         <https://1145.am/db/799510/Sony_Interactive_Entertainment>,
         <https://1145.am/db/917994/Sony_Interactive_Entertainment>,
         <https://1145.am/db/919445/Sony_Interactive_Entertainment>,
-        <https://1145.am/db/920712/Sony_Interactive_Entertainment> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1764921/Sony_Interactive_Entertainment>,
-        <https://1145.am/db/2096284/Sony_Interactive_Entertainment>,
-        <https://1145.am/db/3216442/Sony_Interactive_Entertainment>,
-        <https://1145.am/db/3524707/Sony_Interactive_Entertainment> .
+        <https://1145.am/db/920712/Sony_Interactive_Entertainment> .
 
 <https://1145.am/db/3462659/Bluegrass_Angels> a org:Organization ;
     ns1:basedInLowRaw "KY" ;
     ns1:documentSource <https://1145.am/db/3462659/wwwprnewswirecom_news-releases_thynk-health-raises-2-2-million-and-expands-executive-leadership-300774959html> ;
     ns1:foundName "Bluegrass Angels" ;
     ns1:internalDocId 3462659 ;
+    ns1:internalCleanName "bluegrass angels" ;
     ns1:investor <https://1145.am/db/3462659/Bluegrass_Angels-Lexington_Fayette_Urban_County_Government-Thynk_Health-Investment> ;
     ns1:name "Bluegrass Angels" .
 
@@ -961,6 +655,7 @@
     ns1:documentSource <https://1145.am/db/3462659/wwwprnewswirecom_news-releases_thynk-health-raises-2-2-million-and-expands-executive-leadership-300774959html> ;
     ns1:foundName "Lexington Fayette Urban County Government" ;
     ns1:internalDocId 3462659 ;
+    ns1:internalCleanName "lexington fayette urban county government" ;
     ns1:investor <https://1145.am/db/3462659/Bluegrass_Angels-Lexington_Fayette_Urban_County_Government-Thynk_Health-Investment> ;
     ns1:name "Lexington Fayette Urban County Government" .
 
@@ -975,12 +670,12 @@
     ns1:industry "natural gas storage" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/440_gas_lng_infrastructure_transportation> ;
     ns1:internalDocId 3463516 ;
+    ns1:internalCleanName "enstor" ;
     ns1:name "Enstor" ;
     ns1:sameAsHigh <https://1145.am/db/1049296/Enstor>,
         <https://1145.am/db/1053808/Enstor>,
         <https://1145.am/db/1266267/Enstor>,
-        <https://1145.am/db/1267383/Enstor> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4098651/Enstor> .
+        <https://1145.am/db/1267383/Enstor> .
 
 <https://1145.am/db/3463554/Cannapharmarx_Inc> a org:Organization ;
     ns1:basedInHighClean "Irvine" ;
@@ -991,11 +686,8 @@
     ns1:foundName "Cannapharmarx, Inc" ;
     ns1:internalDocId 3463554 ;
     ns1:name "Cannapharmarx, Inc" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3341302/Cannapharmarx_Inc>,
-        <https://1145.am/db/3610085/Cannapharmarx_Inc>,
-        <https://1145.am/db/3623991/Cannapharmarx_Inc>,
-        <https://1145.am/db/3674761/Cannapharmarx>,
-        <https://1145.am/db/826372/Cannapharmarx_Inc> .
+    ns1:internalCleanName "cannapharmax inc" ;
+    ns1:internalCleanShortName "cannapharmax" .
 
 <https://1145.am/db/3463554/Hanover_Cpmd_Acquisition_Corp> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -1005,6 +697,8 @@
     ns1:documentSource <https://1145.am/db/3463554/wwwprnewswirecom_news-releases_cannapharmarx-announces-the-acquisition-of-alternative-medical-solutions-300775027html> ;
     ns1:foundName "Hanover CPMD Acquisition Corp." ;
     ns1:internalDocId 3463554 ;
+    ns1:internalCleanName "hanover cpmd acquisition corp" ;
+    ns1:internalCleanShortName "hanover cpmd acquisition" ;
     ns1:name "Hanover CPMD Acquisition Corp." .
 
 <https://1145.am/db/3463583/Mesirow_Financial> a org:Organization ;
@@ -1015,32 +709,8 @@
     ns1:foundName "Mesirow Financial" ;
     ns1:internalDocId 3463583 ;
     ns1:name "Mesirow Financial" ;
-    ns1:participant <https://1145.am/db/3463583/Disc_Graphics-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3171624/Mesirow_Financial>,
-        <https://1145.am/db/3205396/Mesirow_Financial>,
-        <https://1145.am/db/3218358/Mesirow_Financial>,
-        <https://1145.am/db/3293989/Mesirow_Financial>,
-        <https://1145.am/db/3374354/Mesirow_Financial>,
-        <https://1145.am/db/3387010/Mesirow_Financial>,
-        <https://1145.am/db/3445143/Mesirow_Financial>,
-        <https://1145.am/db/3456358/Mesirow_Financial>,
-        <https://1145.am/db/3463755/Mesirow_Financial>,
-        <https://1145.am/db/3482828/Mesirow_Financial>,
-        <https://1145.am/db/3502790/Mesirow_Financial>,
-        <https://1145.am/db/3553017/Mesirow_Financial>,
-        <https://1145.am/db/3585246/Mesirow_Financial>,
-        <https://1145.am/db/3598553/Mesirow_Financial>,
-        <https://1145.am/db/3767237/Mesirow_Financial>,
-        <https://1145.am/db/3774398/Mesirow_Financial>,
-        <https://1145.am/db/3796061/Mesirow_Financial>,
-        <https://1145.am/db/3807285/Mesirow_Financial>,
-        <https://1145.am/db/3812236/Mesirow_Financial>,
-        <https://1145.am/db/3816434/Mesirow_Financial>,
-        <https://1145.am/db/3829792/Mesirow_Financial>,
-        <https://1145.am/db/3830168/Mesirow_Financial>,
-        <https://1145.am/db/3862179/Mesirow_Financial>,
-        <https://1145.am/db/3907007/Mesirow_Financial>,
-        <https://1145.am/db/3912519/Mesirow_Financial> .
+    ns1:internalCleanName "mesirow financial" ;
+    ns1:participant <https://1145.am/db/3463583/Disc_Graphics-Acquisition> .
 
 <https://1145.am/db/3463583/Oliver_Printing_Packaging_Company> a org:Organization ;
     ns1:basedInLowRaw "Hauppauge, NY" ;
@@ -1049,6 +719,8 @@
     ns1:documentSource <https://1145.am/db/3463583/wwwprnewswirecom_news-releases_mesirow-financial-advises-disc-graphics-inc-on-its-sale-to-oliver-printing--packaging-company-a-portfolio-company-of-pfingsten-partners-llc-300774956html> ;
     ns1:foundName "Oliver Printing & Packaging Company" ;
     ns1:internalDocId 3463583 ;
+    ns1:internalCleanName "oliver printing and packaging company" ;
+    ns1:internalCleanShortName "oliver printing and packaging" ;
     ns1:name "Oliver Printing & Packaging Company" .
 
 <https://1145.am/db/3463583/Pfingsten_Partners> a org:Organization ;
@@ -1058,6 +730,8 @@
     ns1:foundName "Pfingsten Partners, L.L.C" ;
     ns1:internalDocId 3463583 ;
     ns1:name "Pfingsten Partners" ;
+    ns1:internalCleanName "pfingsten partners" ;
+    ns1:internalCleanShortName "pfingsten" ;
     ns1:participant <https://1145.am/db/3463583/Disc_Graphics-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1006141/Pfingsten_Partners>,
         <https://1145.am/db/1203494/Pfingsten_Partners>,
@@ -1067,9 +741,7 @@
         <https://1145.am/db/1582348/Pfingsten_Partners>,
         <https://1145.am/db/3579399/Pfingsten_Partners>,
         <https://1145.am/db/666167/Pfingsten_Partners>,
-        <https://1145.am/db/738980/Pfingsten_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1307240/Pfingsten_Partners>,
-        <https://1145.am/db/1563925/Pfingsten> .
+        <https://1145.am/db/738980/Pfingsten_Partners> .
 
 <https://1145.am/db/3464606/Canyon_Midstream_Partners_Ii> a org:Organization ;
     ns1:basedInHighClean "Houston" ;
@@ -1080,6 +752,7 @@
     ns1:foundName "Canyon Midstream Partners II, LLC" ;
     ns1:internalDocId 3464606 ;
     ns1:name "Canyon Midstream Partners II" ;
+    ns1:internalCleanName "canyon midstream partners ii" ;
     ns1:participant <https://1145.am/db/3464606/Canyon_Midstream_Partners_Ii-Redcliff-Investment> .
 
 <https://1145.am/db/3464614/Mufg_Union_Bank> a org:Organization ;
@@ -1089,23 +762,9 @@
     ns1:documentSource <https://1145.am/db/3464614/wwwprnewswirecom_news-releases_mufg-union-bank-completes-the-acquisition-of-intrepid-investment-bankers-to-expand-its-middle-market-banking-services-300775075html> ;
     ns1:foundName "MUFG Union Bank, N.A." ;
     ns1:internalDocId 3464614 ;
-    ns1:name "MUFG Union Bank" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042194/Mufg_Union_Bank>,
-        <https://1145.am/db/1044184/Mufg_Union_Bank>,
-        <https://1145.am/db/1411473/Mufg_Union_Bank>,
-        <https://1145.am/db/1412270/Mufg_Union_Bank>,
-        <https://1145.am/db/1417238/Mufg_Union_Bank>,
-        <https://1145.am/db/1418217/Mufg_Union_Bank>,
-        <https://1145.am/db/1527266/Mufg_Union_Bank>,
-        <https://1145.am/db/1545597/Mufg_Union_Bank>,
-        <https://1145.am/db/1546062/Mufg_Union_Bank>,
-        <https://1145.am/db/1546857/Mufg_Union_Bank>,
-        <https://1145.am/db/2074725/Mufg_Union_Bank>,
-        <https://1145.am/db/3531276/Mufg_Union_Bank>,
-        <https://1145.am/db/3545288/Mufg_Union_Bank>,
-        <https://1145.am/db/483544/Mufg_Union_Bank>,
-        <https://1145.am/db/489664/Mufg_Union_Bank>,
-        <https://1145.am/db/543198/Mufg_Union_Bank> .
+    ns1:internalCleanName "mufg union bank" ;
+    ns1:internalCleanShortName "mufg union" ;
+    ns1:name "MUFG Union Bank"  .
 
 <https://1145.am/db/1824114/Keith_Rabois-Finishing-Chief_Operating_Officer> a ns1:RoleActivity ;
     ns1:activityType "finishing" ;
@@ -1132,6 +791,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/63_sports_sport_athletic_teams> ;
     ns1:internalDocId 2166549 ;
     ns1:name "Play Sports Group" ;
+    ns1:internalCleanName "play sports group" ;
+    ns1:internalCleanShortName "play sports" ;
     ns1:sameAsHigh <https://1145.am/db/3457026/Play_Sports_Group> .
 
 <https://1145.am/db/2166549/Play_Sports_Group-Investment-Controlling> a ns1:CorporateFinanceActivity ;
@@ -1154,12 +815,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/105_media_newsroom_news_newstech> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/436_technology_tech_media_digital> ;
     ns1:internalDocId 2166549 ;
-    ns1:name "Synamedia" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1199213/Synamedia>,
-        <https://1145.am/db/2179564/Synamedia>,
-        <https://1145.am/db/3222108/Synamedia>,
-        <https://1145.am/db/3457792/Synamedia>,
-        <https://1145.am/db/400651/Synamedia> .
+    ns1:internalCleanName "synamedia" ;
+    ns1:name "Synamedia" .
 
 <https://1145.am/db/2166549/Synamedia-Investment-Ownership_Stake> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1194,6 +851,7 @@
     ns1:industry "events industry" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/29_event_events_venue_celebration> ;
     ns1:internalDocId 3460269 ;
+    ns1:internalCleanName "quest events" ;
     ns1:name "Quest Events" .
 
 <https://1145.am/db/3460269/Quest_Events-Tzp_Capital_Partners_Iii_Lp-Investment> a ns1:CorporateFinanceActivity ;
@@ -1223,6 +881,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/219_psychiatric_behavioral_psychiatry_healthcare> ;
     ns1:internalDocId 3460288 ;
     ns1:name "AbleTo" ;
+    ns1:internalCleanName "ableto" ;
     ns1:sameAsHigh <https://1145.am/db/2198238/Ableto>,
         <https://1145.am/db/3378736/Ableto>,
         <https://1145.am/db/3498409/Ableto>,
@@ -1230,8 +889,7 @@
         <https://1145.am/db/3560664/Ableto>,
         <https://1145.am/db/3878487/Ableto>,
         <https://1145.am/db/3895630/Ableto>,
-        <https://1145.am/db/3923456/Ableto> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2191526/Ableto> .
+        <https://1145.am/db/3923456/Ableto> .
 
 <https://1145.am/db/3460288/Ableto-Optum_Ventures-Investment-Series_D> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1261,6 +919,7 @@
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
     ns1:internalDocId 3461286 ;
     ns1:name "Charles C. Foti, Jr." ;
+    ns1:internalCleanName "chales c foti jr";
     ns1:participant <https://1145.am/db/3461286/Charles_C_Foti_Jr-Kahn_Swick_Foti_Llc-Neubase-Ohr_Pharmaceutical-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
         <https://1145.am/db/1002420/Charles_C_Foti_Jr>,
@@ -2236,68 +1895,7 @@
         <https://1145.am/db/970012/Charles_C_Foti_Jr>,
         <https://1145.am/db/970013/Charles_C_Foti_Jr>,
         <https://1145.am/db/993648/Charles_C_Foti_Jr>,
-        <https://1145.am/db/994131/Charles_C_Foti_Jr> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1035195/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1036828/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1036929/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038619/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038629/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038632/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1065548/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1066192/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1066217/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1074877/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1121680/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1135266/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1184318/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1196732/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1225977/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1227590/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1227594/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1276165/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1276170/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1308145/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1308654/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1348932/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1361764/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1361768/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1373371/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1382261/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1382320/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1384058/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1418575/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1494318/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1528725/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1541372/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1542103/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1542117/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1560811/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1575692/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1576677/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1660214/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1666397/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1673122/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1686469/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2002428/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2101205/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2101213/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2791868/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2792754/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3633742/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3792989/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3793004/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3869716/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4008094/Charles_C_Foti_Jr>,
-        <https://1145.am/db/401330/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4018074/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4144143/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4230179/Charles_C_Foti_Jr>,
-        <https://1145.am/db/479399/Charles_C_Foti_Jr>,
-        <https://1145.am/db/480447/Charles_C_Foti_Jr>,
-        <https://1145.am/db/895306/Charles_C_Foti_Jr>,
-        <https://1145.am/db/895354/Charles_C_Foti_Jr>,
-        <https://1145.am/db/909777/Charles_C_Foti_Jr>,
-        <https://1145.am/db/960971/Charles_C_Foti_Jr> .
+        <https://1145.am/db/994131/Charles_C_Foti_Jr> .
 
 <https://1145.am/db/3461286/Kahn_Swick_Foti_Llc> a org:Organization ;
     ns1:basedInHighClean "New Orleans" ;
@@ -2308,6 +1906,7 @@
     ns1:foundName "Kahn Swick & Foti, LLC" ;
     ns1:internalDocId 3461286 ;
     ns1:name "Kahn Swick & Foti, LLC" ;
+    ns1:internalCleanName "kahn swich and foti" ;
     ns1:participant <https://1145.am/db/3461286/Charles_C_Foti_Jr-Kahn_Swick_Foti_Llc-Neubase-Ohr_Pharmaceutical-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1034905/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/1036828/Kahn_Swick_Foti_Llc>,
@@ -2412,642 +2011,7 @@
         <https://1145.am/db/962012/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/963659/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/966551/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/967239/Kahn_Swick_Foti_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1002406/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003861/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003873/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003876/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003885/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005173/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005175/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005176/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011282/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011354/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011534/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011544/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011545/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011766/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012242/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012267/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012308/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012312/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012374/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012391/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012420/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1020070/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1034874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1034922/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035154/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035158/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035159/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035186/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035191/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035195/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1036772/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1036929/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038193/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038292/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038329/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038603/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038605/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038632/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065538/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065541/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065548/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065619/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066187/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066192/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066194/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066428/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066447/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1081039/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1081796/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1088522/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1088529/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1089877/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1089878/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1098791/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1103076/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1111460/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1111853/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120688/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120711/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121665/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121683/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121685/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1133769/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1135265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1137674/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1142033/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1157613/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1157615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1158626/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1158644/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1161933/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1162562/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1163844/Kahn_Swick_Foti>,
-        <https://1145.am/db/1167451/Kahn_Swick_Foti>,
-        <https://1145.am/db/1183629/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1183637/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1183641/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184312/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184316/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184320/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1195679/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1196759/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1200853/Kahn_Swick_Foti>,
-        <https://1145.am/db/1202151/Kahn_Swick_Foti>,
-        <https://1145.am/db/1203594/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1204941/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1207269/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1207912/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1210773/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1210777/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1211093/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1211106/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1224491/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1224952/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1225977/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1227590/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1227594/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230095/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230100/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230963/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230964/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235197/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235218/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235246/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1236363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1236365/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1245681/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1245684/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1246253/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1246255/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1249707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257155/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257158/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257159/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260258/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260266/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260267/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260383/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260570/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262539/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262545/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262546/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1265967/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1266692/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270775/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270781/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270859/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274011/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274025/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274029/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274611/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1276165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1285224/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1286830/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1289086/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1289169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1294497/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1295931/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1307077/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308145/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308148/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308177/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308654/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308675/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1312457/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1314663/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323902/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323903/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323930/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324013/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324038/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324636/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324645/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324647/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324655/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324796/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1354525/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1355964/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1360055/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1361195/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1363481/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1365466/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1373371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1373966/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1377169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1380212/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1387493/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1388758/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1394708/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1394711/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1396507/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1396527/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1401519/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1402615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1411399/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1414277/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1417344/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1417348/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418572/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418575/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418576/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1425248/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1425250/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428346/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428348/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428516/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428517/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1431002/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1434284/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1435663/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447270/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447280/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447735/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1458040/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1469788/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1473662/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1484027/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1485104/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1495395/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1497995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1500615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1500616/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1502096/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1502107/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1524293/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1525563/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1528725/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1540435/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541374/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541388/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542087/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542105/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542121/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542157/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1543230/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1553991/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1555307/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575688/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575691/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575693/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575695/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576668/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576673/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576674/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576678/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1582933/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1585482/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1587244/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1590519/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1590520/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1607588/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1608900/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1618623/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622129/Kahn_Swick_Foti>,
-        <https://1145.am/db/1622131/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622566/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622569/Kahn_Swick_Foti>,
-        <https://1145.am/db/1624479/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1625532/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633098/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633102/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633106/Kahn_Swick_Foti>,
-        <https://1145.am/db/1633109/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633124/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633167/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633169/Kahn_Swick_Foti>,
-        <https://1145.am/db/1633173/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633175/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1642223/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1642950/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1652691/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1660214/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1666042/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1670333/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1673120/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1673149/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1674086/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1683121/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686469/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686473/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686491/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931144/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931146/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936264/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936266/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1945651/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1945653/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1959431/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1959801/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1969992/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1977837/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1983380/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1983382/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002417/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002424/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002427/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002432/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002437/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2011325/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020178/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020179/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020180/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023872/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023873/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023876/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2024863/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2029790/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2029825/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2038174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2038202/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045539/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045546/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2055009/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2058865/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065621/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065628/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065629/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065861/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065864/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065991/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068310/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068315/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068328/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068488/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2071886/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2074739/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2074741/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078542/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078583/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078586/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078627/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082075/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082078/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082083/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082120/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2083337/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2083338/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2096786/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2100253/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2100995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101006/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101203/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101204/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101205/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101213/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101214/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2108521/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2111597/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129286/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129342/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129347/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138987/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138993/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138997/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138998/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2139011/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2139015/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2140508/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2140511/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141791/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141804/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141806/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141814/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2144264/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2145989/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2145990/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2147917/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2147923/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2150961/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2150962/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2506152/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2506235/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2507820/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2507821/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2765806/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791868/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791889/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791898/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2792754/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2792755/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2840387/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3101753/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3103602/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104845/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104854/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104856/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3107937/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3112246/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3217521/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3359744/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3359751/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3381051/Kahn_Swick_Foti>,
-        <https://1145.am/db/3381082/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3384680/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3384705/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3436599/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3436621/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3484631/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3508265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3574541/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3574551/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3574552/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3594920/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633547/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633548/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633555/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633556/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633675/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633728/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3761224/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3766814/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3772126/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3773786/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3780312/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3792985/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792987/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792989/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792990/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792996/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3793004/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3794634/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798030/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798912/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798914/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798922/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3799275/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3800707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3805336/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3807589/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381502/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381512/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381517/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381685/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3824651/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3835152/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3835611/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3843786/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3843787/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3843789/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3845048/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3845052/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3845066/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3846678/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3848869/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3848891/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3871844/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3871846/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3872403/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3875910/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3891172/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891177/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891190/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894808/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894811/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894814/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894822/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3898502/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3898509/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3899359/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3899914/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3900397/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3900770/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3900772/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3906485/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912918/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912924/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912930/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3916432/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3919488/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3919491/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3922065/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3922072/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3922077/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3924660/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924669/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924672/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924678/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924829/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3930391/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3933247/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3944376/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3944379/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3944382/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3944383/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959500/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959501/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959523/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959549/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/398199/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/398203/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3988465/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3988467/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998056/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998061/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998064/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998078/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4008041/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4008094/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/401329/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/401330/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018069/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018070/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018074/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018080/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042662/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042670/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042679/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042788/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4056723/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/408072/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4085058/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088216/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088221/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088231/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088238/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088245/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4092237/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4102641/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4109684/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4129618/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4136419/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4144140/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4144143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4171037/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4171038/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4179893/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4179938/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/418570/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4189871/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4193571/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4193580/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4194857/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/420372/Kahn_Swick_Foti>,
-        <https://1145.am/db/4204400/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230149/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230157/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230178/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230179/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230180/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230604/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230617/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230630/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230642/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230744/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230747/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/423571/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/423573/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4246495/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/424888/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/424896/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/426501/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/427363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/454668/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/454676/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/461561/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/461581/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/464512/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/465648/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472528/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472535/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472537/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473599/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473607/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/516867/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/518115/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/518294/Kahn_Swick_Foti>,
-        <https://1145.am/db/526505/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/540874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/541742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/545573/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/546528/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/563962/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/567834/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852745/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852755/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852774/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853005/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853010/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853051/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/858842/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/858854/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/859252/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/859261/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867593/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867595/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867602/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867614/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867617/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867632/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871432/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871433/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871474/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871595/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871601/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871642/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/874192/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/874194/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/875143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/875144/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/893729/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/893742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/895297/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/895306/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/908751/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/909777/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/909802/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/912970/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/912982/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/915317/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/915330/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938131/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938139/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938141/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940030/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940241/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940251/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959618/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959646/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959652/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/960971/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/961029/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/961030/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962530/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962531/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962532/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962644/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965161/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965167/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/966554/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/967211/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/970012/Kahn_Swick_Foti_Llc> .
+        <https://1145.am/db/967239/Kahn_Swick_Foti_Llc>  .
 
 <https://1145.am/db/3461292/Innovative_Architects> a org:Organization ;
     ns1:basedInHighClean "Atlanta" ;
@@ -3059,6 +2023,7 @@
     ns1:industry "technology consulting" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/38_consulting_consultancy_consultant_it> ;
     ns1:internalDocId 3461292 ;
+    ns1:internalCleanName "innovative architects" ;
     ns1:name "Innovative Architects" .
 
 <https://1145.am/db/3461292/Innovative_Architects-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -3087,6 +2052,7 @@
     ns1:foundName "Celgene Corporation" ;
     ns1:internalDocId 3461322 ;
     ns1:name "Celgene" ;
+    ns1:internalCleanName "celgene" ;
     ns1:sameAsHigh <https://1145.am/db/2152096/Celgene>,
         <https://1145.am/db/2197183/Celgene>,
         <https://1145.am/db/2291277/Celgene>,
@@ -3148,52 +2114,7 @@
         <https://1145.am/db/3553039/Celgene>,
         <https://1145.am/db/3553449/Celgene>,
         <https://1145.am/db/3598044/Celgene_Corporation>,
-        <https://1145.am/db/3929126/Celgene_Corp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2293123/Celgene_Corporation>,
-        <https://1145.am/db/2301048/Celgene>,
-        <https://1145.am/db/2301271/Celgene>,
-        <https://1145.am/db/2302687/Celgene>,
-        <https://1145.am/db/2304335/Celgene>,
-        <https://1145.am/db/2322317/Celgene_Corporation>,
-        <https://1145.am/db/2322323/Celgene>,
-        <https://1145.am/db/2323370/Celgene>,
-        <https://1145.am/db/2335769/Celgene>,
-        <https://1145.am/db/2339707/Celgene_Corporation>,
-        <https://1145.am/db/2340634/Celgene>,
-        <https://1145.am/db/2340963/Celgene_Corporation>,
-        <https://1145.am/db/2346066/Celgene>,
-        <https://1145.am/db/2347566/Celgene_Corporation>,
-        <https://1145.am/db/2347844/Celgene_Corporation>,
-        <https://1145.am/db/2349202/Celgene_Corporation>,
-        <https://1145.am/db/2350231/Celgene>,
-        <https://1145.am/db/2361962/Celgene_Corporation>,
-        <https://1145.am/db/2361967/Celgene_Corporation>,
-        <https://1145.am/db/2364468/Celgene_Corporation>,
-        <https://1145.am/db/2366680/Celgene>,
-        <https://1145.am/db/2366684/Celgene_Corporation>,
-        <https://1145.am/db/2366690/Celgene>,
-        <https://1145.am/db/2369311/Celgene>,
-        <https://1145.am/db/2369694/Celgene_Corporation>,
-        <https://1145.am/db/2538738/Celgene>,
-        <https://1145.am/db/2539787/Celgene>,
-        <https://1145.am/db/2543648/Celgene>,
-        <https://1145.am/db/2563139/Celgene>,
-        <https://1145.am/db/2563587/Celgene>,
-        <https://1145.am/db/2566605/Celgene>,
-        <https://1145.am/db/2567006/Celgene>,
-        <https://1145.am/db/2571869/Celgene>,
-        <https://1145.am/db/2571871/Celgene>,
-        <https://1145.am/db/2577644/Celgene>,
-        <https://1145.am/db/2592040/Celgene>,
-        <https://1145.am/db/2593298/Celgene>,
-        <https://1145.am/db/2593520/Celgene_Corporation>,
-        <https://1145.am/db/2593892/Celgene_Corporation>,
-        <https://1145.am/db/3550930/Celgene>,
-        <https://1145.am/db/3557366/Celgene>,
-        <https://1145.am/db/3587811/Celgene>,
-        <https://1145.am/db/3618200/Celgene_Corporation>,
-        <https://1145.am/db/3628646/Celgene_Corporation>,
-        <https://1145.am/db/870410/Celgene> .
+        <https://1145.am/db/3929126/Celgene_Corp>  .
 
 <https://1145.am/db/3461322/Charles_C_Foti_Jr> a org:Organization ;
     ns1:basedInHighClean "New Orleans" ;
@@ -3204,6 +2125,7 @@
     ns1:foundName "Charles C. Foti, Jr., Esq" ;
     ns1:internalDocId 3461322 ;
     ns1:name "Charles C. Foti, Jr." ;
+    ns1:internalCleanName "charles c foti jr" ;
     ns1:participant <https://1145.am/db/3461322/Celgene-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1002406/Charles_C_Foti_Jr>,
         <https://1145.am/db/1002420/Charles_C_Foti_Jr>,
@@ -4179,68 +3101,7 @@
         <https://1145.am/db/970012/Charles_C_Foti_Jr>,
         <https://1145.am/db/970013/Charles_C_Foti_Jr>,
         <https://1145.am/db/993648/Charles_C_Foti_Jr>,
-        <https://1145.am/db/994131/Charles_C_Foti_Jr> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1035195/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1036828/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1036929/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038619/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038629/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1038632/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1065548/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1066192/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1066217/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1074877/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1121680/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1135266/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1184318/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1196732/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1225977/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1227590/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1227594/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1276165/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1276170/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1308145/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1308654/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1348932/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1361764/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1361768/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1373371/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1382261/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1382320/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1384058/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1418575/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1494318/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1528725/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1541372/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1542103/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1542117/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1560811/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1575692/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1576677/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1660214/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1666397/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1673122/Charles_C_Foti_Jr>,
-        <https://1145.am/db/1686469/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2002428/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2101205/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2101213/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2791868/Charles_C_Foti_Jr>,
-        <https://1145.am/db/2792754/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3633742/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3792989/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3793004/Charles_C_Foti_Jr>,
-        <https://1145.am/db/3869716/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4008094/Charles_C_Foti_Jr>,
-        <https://1145.am/db/401330/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4018074/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4144143/Charles_C_Foti_Jr>,
-        <https://1145.am/db/4230179/Charles_C_Foti_Jr>,
-        <https://1145.am/db/479399/Charles_C_Foti_Jr>,
-        <https://1145.am/db/480447/Charles_C_Foti_Jr>,
-        <https://1145.am/db/895306/Charles_C_Foti_Jr>,
-        <https://1145.am/db/895354/Charles_C_Foti_Jr>,
-        <https://1145.am/db/909777/Charles_C_Foti_Jr>,
-        <https://1145.am/db/960971/Charles_C_Foti_Jr> .
+        <https://1145.am/db/994131/Charles_C_Foti_Jr> .
 
 <https://1145.am/db/3461322/Kahn_Swick_Foti_Llc> a org:Organization ;
     ns1:basedInHighClean "New Orleans" ;
@@ -4251,6 +3112,8 @@
     ns1:foundName "Kahn Swick & Foti, LLC" ;
     ns1:internalDocId 3461322 ;
     ns1:name "Kahn Swick & Foti, LLC" ;
+    ns1:internalCleanName "kahn swick and foti llc" ;
+    ns1:internalCleanShortName "kahn swick and foti" ;
     ns1:participant <https://1145.am/db/3461322/Celgene-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/1036828/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/1038619/Kahn_Swick_Foti_Llc>,
@@ -4331,666 +3194,7 @@
         <https://1145.am/db/962012/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/963659/Kahn_Swick_Foti_Llc>,
         <https://1145.am/db/966551/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/967239/Kahn_Swick_Foti_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1002406/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003861/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003873/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003876/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1003885/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005173/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005175/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1005176/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011282/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011354/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011534/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011544/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011545/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1011766/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012242/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012267/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012308/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012312/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012374/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012391/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1012420/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1020070/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1034874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1034905/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1034922/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035154/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035158/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035159/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035186/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035191/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1035195/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1036772/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1036929/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038193/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038292/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038329/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038603/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038605/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1038632/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065538/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065541/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065548/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065601/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1065619/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066187/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066192/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066194/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066424/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066428/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1066447/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1081039/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1081796/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1088522/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1088529/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1089877/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1089878/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1093210/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1095041/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1098791/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1103076/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1111460/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1111853/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120688/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1120711/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121665/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121683/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1121685/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1133769/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1135265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1137674/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1137681/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1142033/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1142036/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1157613/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1157615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1158626/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1158644/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1161933/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1162562/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1163844/Kahn_Swick_Foti>,
-        <https://1145.am/db/1167451/Kahn_Swick_Foti>,
-        <https://1145.am/db/1183629/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1183637/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1183641/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184312/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184316/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1184320/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1195679/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1196759/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1200853/Kahn_Swick_Foti>,
-        <https://1145.am/db/1202151/Kahn_Swick_Foti>,
-        <https://1145.am/db/1203594/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1204941/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1207269/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1207912/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1210773/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1210777/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1211093/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1211106/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1224491/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1224952/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1225977/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1227590/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1227594/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230095/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230100/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230963/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1230964/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235197/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235218/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1235246/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1236363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1236365/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1245681/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1245684/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1246253/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1246255/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1249707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257155/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257158/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1257159/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260258/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260266/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260267/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260383/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1260570/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262539/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262545/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1262546/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1265967/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1266692/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270775/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270781/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1270859/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274011/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274025/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274029/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274611/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1274625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1275270/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1276165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1285224/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1286830/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1289086/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1289169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1294497/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1295931/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1307077/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308145/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308148/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308177/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308654/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1308675/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1312457/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1314663/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323902/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323903/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1323930/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324013/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324038/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324636/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324645/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324647/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324655/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324796/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1324947/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1348932/Kahn_Swick_Foti>,
-        <https://1145.am/db/1354525/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1355964/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1360055/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1361195/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1363481/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1365466/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1373371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1373966/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1377169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1380212/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1382259/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1382261/Kahn_Swick_Foti>,
-        <https://1145.am/db/1384051/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1387464/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1387493/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1388704/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1388758/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1394708/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1394711/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1396507/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1396527/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1401519/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1402615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1411399/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1414277/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1417344/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1417348/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1417349/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418572/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418575/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418576/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1418582/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1425248/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1425250/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428346/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428348/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428516/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1428517/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1431002/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1434284/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1435663/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447270/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447280/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447735/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1447742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1458040/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1469788/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1473662/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1484027/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1485104/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1495383/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1495389/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1495395/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1497991/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1497995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1497999/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1500615/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1500616/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1502096/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1502107/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1524293/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1525563/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1528725/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1540435/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541372/Kahn_Swick_Foti>,
-        <https://1145.am/db/1541374/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1541388/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542087/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542105/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542121/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1542157/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1543230/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1553991/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1555307/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1560811/Kahn_Swick_Foti>,
-        <https://1145.am/db/1575688/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575691/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575693/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1575695/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576668/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576673/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576674/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1576678/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1582933/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1585482/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1587244/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1590519/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1590520/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1607588/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1608900/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1618623/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622129/Kahn_Swick_Foti>,
-        <https://1145.am/db/1622131/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622566/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1622569/Kahn_Swick_Foti>,
-        <https://1145.am/db/1624479/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1625532/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633098/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633102/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633106/Kahn_Swick_Foti>,
-        <https://1145.am/db/1633109/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633124/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633167/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633169/Kahn_Swick_Foti>,
-        <https://1145.am/db/1633173/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1633175/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1642223/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1642950/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1652691/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1660214/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1666042/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1670333/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1673120/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1673149/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1674086/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1683121/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686469/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686473/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1686491/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1687233/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931144/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1931146/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936264/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1936266/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1945651/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1945653/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1959431/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1959801/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1969992/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1977837/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1983380/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/1983382/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002417/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002424/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002427/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002432/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2002437/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2011325/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020178/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020179/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2020180/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023872/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023873/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023876/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2023881/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2024863/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2029790/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2029825/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2038174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2038202/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045539/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045546/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2045550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2055009/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2058865/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065621/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065628/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065629/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065861/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065864/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2065991/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068310/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068315/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068328/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2068488/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2071886/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2074739/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2074741/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078540/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078542/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078583/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078586/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2078627/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082075/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082078/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082083/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2082120/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2083337/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2083338/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2096763/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2096786/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2100253/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2100995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101006/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101203/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101204/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101205/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101213/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2101214/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2108521/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2111597/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129286/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129342/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129347/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2129371/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138987/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138993/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138995/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138997/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2138998/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2139011/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2139015/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2140508/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2140511/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141791/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141804/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141806/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2141814/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2142748/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2144264/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2145989/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2145990/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2147917/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2147923/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2150961/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2150962/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2506152/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2506235/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2507820/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2507821/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2765806/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791868/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791889/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2791898/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2792754/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2792755/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/2840387/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3101753/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3101761/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3103602/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104845/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104854/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3104856/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3107937/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3112246/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3217521/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3359744/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3359751/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3381051/Kahn_Swick_Foti>,
-        <https://1145.am/db/3381082/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3384680/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3384705/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3392171/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3436599/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3436621/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3484631/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3508265/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3574551/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3574552/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3594920/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633547/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633548/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633550/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633555/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633556/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633675/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633728/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3633742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3761224/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3766814/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3773786/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3780312/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3792985/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792987/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792989/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792990/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3792996/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3793004/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3794634/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798912/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798914/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3798922/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3799275/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3800707/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3807589/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381502/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381512/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381517/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/381685/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3824651/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3835152/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3835611/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3843786/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3843787/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3843789/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3845048/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3845066/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3846678/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3848869/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3848891/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3871844/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3871846/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3872403/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891172/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891174/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891177/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3891190/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894808/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894811/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894814/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3894822/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3898502/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3898509/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3899359/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3899914/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3900397/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3900770/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3900772/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3906485/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912918/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912924/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3912930/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3916432/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3919488/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3919491/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3922065/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3922077/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3924660/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924669/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924672/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3924678/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3933247/Kahn_Swick___Foti_Llc>,
-        <https://1145.am/db/3944353/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3944382/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3944383/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959500/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959501/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959502/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959503/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959523/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3959549/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/398199/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/398203/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3988465/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3988467/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998056/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998061/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998064/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/3998078/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4008041/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4008094/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/401329/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/401330/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018069/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018070/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018074/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4018080/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042662/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042670/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042679/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4042788/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4056723/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/408072/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4085058/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088216/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088221/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088231/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088238/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4088245/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4092237/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4102641/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4109684/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4129618/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4136419/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4144140/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4144143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4171037/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4171038/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4179893/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4179938/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/418570/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4189871/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4193571/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4193580/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4194857/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/420372/Kahn_Swick_Foti>,
-        <https://1145.am/db/4204400/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230149/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230157/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230178/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230179/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230180/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230604/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230617/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230630/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230642/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230744/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4230747/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/423571/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/423573/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/4246495/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/424888/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/424896/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/426501/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/427363/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/454668/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/454676/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/461561/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/461581/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/464512/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/465648/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472528/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472535/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/472537/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473599/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473607/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/473612/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/516867/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/518115/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/518294/Kahn_Swick_Foti>,
-        <https://1145.am/db/526505/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/540874/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/541742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/545573/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/546528/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/563962/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/567834/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852745/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852755/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/852774/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853005/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853010/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/853051/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/858842/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/858854/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/859252/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/859261/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867593/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867595/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867602/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867614/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867617/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/867632/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871432/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871433/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871474/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871595/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871601/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/871642/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/874192/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/874194/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/875143/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/875144/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/893729/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/893740/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/893742/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/895297/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/895306/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/908751/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/909777/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/909802/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/912970/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/912982/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/915317/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/915330/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938131/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938139/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/938141/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940030/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940241/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/940251/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959618/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959625/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959646/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/959652/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/960971/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/961029/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/961030/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962530/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962531/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962532/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/962644/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965161/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965165/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965167/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/965169/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/966554/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/967211/Kahn_Swick_Foti_Llc>,
-        <https://1145.am/db/970012/Kahn_Swick_Foti_Llc> .
+        <https://1145.am/db/967239/Kahn_Swick_Foti_Llc>  .
 
 <https://1145.am/db/3461324/Home_Bay> a org:Organization ;
     ns1:basedInHighClean "San Diego" ;
@@ -5003,6 +3207,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/321_property_properties_redevelopment_estate> ;
     ns1:internalDocId 3461324 ;
     ns1:name "Home Bay" ;
+    ns1:internalCleanName "home bay" ;
     ns1:sameAsHigh <https://1145.am/db/3807341/Home_Bay>,
         <https://1145.am/db/3888897/Home_Bay> .
 
@@ -5014,6 +3219,7 @@
     ns1:documentSource <https://1145.am/db/3461340/wwwprnewswirecom_news-releases_abc-financial-services-acquires-brazilian-market-leader-evo-w12-300774874html> ;
     ns1:foundName "Evo W12 Inovações Tecnologicas" ;
     ns1:internalDocId 3461340 ;
+    ns1:internalCleanName "evo w12 invoacoes tecnologicas" ;
     ns1:name "Evo W12 Inovações Tecnologicas" .
 
 <https://1145.am/db/3461340/Evo_W12_Inova_Es_Tecnologicas-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -5042,13 +3248,10 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 3461395 ;
     ns1:name "SalvaRx" ;
+    ns1:internalCleanName "salvarx" ;
     ns1:sameAsHigh <https://1145.am/db/2301082/Salvarx>,
         <https://1145.am/db/3814068/Salvarx>,
-        <https://1145.am/db/3890883/Salvarx_Limited> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2325912/Salvarx>,
-        <https://1145.am/db/3815234/Salvarx_Limited>,
-        <https://1145.am/db/3835659/Salvarx_Limited>,
-        <https://1145.am/db/3835659/Salvarx_Ltd> .
+        <https://1145.am/db/3890883/Salvarx_Limited> .
 
 <https://1145.am/db/3461395/Salvarx-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -5098,6 +3301,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3462522 ;
+    ns1:internalCleanName "first agency inc" ;
+    ns1:internalCleanShortName "first agency" ;
     ns1:name "First Agency, Inc" .
 
 <https://1145.am/db/3462522/First_Agency_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -5127,6 +3332,7 @@
     ns1:industry "gaming" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/58_gaming_gamer_igaming_videogaming> ;
     ns1:internalDocId 3462535 ;
+    ns1:internalCleanName "audiokinetic" ;
     ns1:name "Audiokinetic" .
 
 <https://1145.am/db/3462535/Audiokinetic-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -5151,9 +3357,7 @@
     ns1:foundName "Thynk Health" ;
     ns1:internalDocId 3462659 ;
     ns1:name "Thynk Health" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1063349/Thynk_Health>,
-        <https://1145.am/db/1063351/Thynk_Health>,
-        <https://1145.am/db/1270137/Thynk_Health> .
+    ns1:internalCleanName "thynk health" .
 
 <https://1145.am/db/3463516/East_Cheyenne> a org:Organization ;
     ns1:basedInHighClean "Logan County" ;
@@ -5165,6 +3369,7 @@
     ns1:industry "natural gas storage" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/440_gas_lng_infrastructure_transportation> ;
     ns1:internalDocId 3463516 ;
+    ns1:internalCleanName "east cheyenne" ;
     ns1:name "East Cheyenne" .
 
 <https://1145.am/db/3463516/East_Cheyenne-Acquisition-Facility> a ns1:CorporateFinanceActivity ;
@@ -5193,6 +3398,8 @@
     ns1:foundName "Alternative Medical Solutions, Inc.",
         "Alternative Medical Solutions, Inc.," ;
     ns1:internalDocId 3463554 ;
+    ns1:internalCleanName "alternative medical solutions" ;
+    ns1:internalCleanShortName "alternative medical" ;
     ns1:name "Alternative Medical Solutions" .
 
 <https://1145.am/db/3463554/Alternative_Medical_Solutions-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -5224,23 +3431,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/576_dispensary_dispensaries_cannabis_marijuana> ;
     ns1:internalDocId 3463554 ;
     ns1:name "AMS" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1006651/Ams>,
-        <https://1145.am/db/1007666/Ams>,
-        <https://1145.am/db/137529/Ams>,
-        <https://1145.am/db/166355/Ams>,
-        <https://1145.am/db/2422754/Ams>,
-        <https://1145.am/db/2427324/Ams>,
-        <https://1145.am/db/2450686/Ams_Ag>,
-        <https://1145.am/db/2957179/Ams>,
-        <https://1145.am/db/3138667/Ams>,
-        <https://1145.am/db/3405170/Ams>,
-        <https://1145.am/db/4424/Ams>,
-        <https://1145.am/db/4479/Ams>,
-        <https://1145.am/db/468919/Ams>,
-        <https://1145.am/db/469676/Ams>,
-        <https://1145.am/db/94268/Ams>,
-        <https://1145.am/db/94376/Ams>,
-        <https://1145.am/db/94444/Ams> .
+    ns1:internalCleanName "ams" .
+
 
 <https://1145.am/db/3463554/Ams-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -5280,6 +3472,7 @@
     ns1:documentSource <https://1145.am/db/3463583/wwwprnewswirecom_news-releases_mesirow-financial-advises-disc-graphics-inc-on-its-sale-to-oliver-printing--packaging-company-a-portfolio-company-of-pfingsten-partners-llc-300774956html> ;
     ns1:foundName "Disc Graphics, Inc" ;
     ns1:internalDocId 3463583 ;
+    ns1:internalCleanName "disc graphics" ;
     ns1:name "Disc Graphics" .
 
 <https://1145.am/db/3464606/Canyon_Midstream_Partners_Ii-Redcliff-Investment> a ns1:CorporateFinanceActivity ;
@@ -5304,6 +3497,7 @@
     ns1:documentSource <https://1145.am/db/3464606/wwwprnewswirecom_news-releases_canyon-midstream-announces-upsize-to-existing-credit-facility-and-expansion-of-gas-processing-plant-in-oklahomas-stack-play-300775070html> ;
     ns1:foundName "Redcliff Midstream, LLC" ;
     ns1:internalDocId 3464606 ;
+    ns1:internalCleanName "redcliff" ;
     ns1:name "Redcliff" .
 
 <https://1145.am/db/3464614/Intrepid_Investment_Bankers_Llc> a org:Organization ;
@@ -5317,6 +3511,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/386_banking_financial_finance_industries> ;
     ns1:internalDocId 3464614 ;
+    ns1:internalCleanName "intrepid investment bankers llc" ;
+    ns1:internalCleanShortName "intrepid investment" ;
     ns1:name "Intrepid Investment Bankers LLC" .
 
 <https://1145.am/db/3464614/Intrepid_Investment_Bankers_Llc-Acquisition> a ns1:CorporateFinanceActivity ;

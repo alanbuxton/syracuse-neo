@@ -3,6 +3,7 @@ from topics.models import (Organization, Person, ActivityMixin,
     Product)
 import logging
 from .constants import BEGINNING_OF_TIME
+from .organization_search_helpers import get_same_as_name_onlies
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +83,7 @@ def graph_centered_on(start_node, **kwargs):
     nodes_found_so_far = set()
 
     if combine_same_as_name_only is True:
-        center_node_same_as_name_onlies = root_node.sameAsNameOnly.all()
+        center_node_same_as_name_onlies = get_same_as_name_onlies(root_node)
         uris_to_ignore = set([x.uri for x in center_node_same_as_name_onlies])
 
     for rel_data in root_node.all_directional_relationships(source_names=source_names,min_date=min_date):
@@ -115,7 +116,7 @@ def keep_or_switch_node(current_node, nodes_found_so_far, combine_same_as_name_o
     '''
     if combine_same_as_name_only is False:
         return current_node
-    for same_as in current_node.sameAsNameOnly:
+    for same_as in get_same_as_name_onlies(current_node):
         if same_as in nodes_found_so_far:
             return same_as
     nodes_found_so_far.add(current_node)

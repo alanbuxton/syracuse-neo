@@ -17,6 +17,7 @@
         <https://1145.am/db/1736082/Tesla-Added-Brandenburg>,
         <https://1145.am/db/1736082/Tesla-Added-Gr_Enheide> ;
     ns1:name "Tesla" ;
+    ns1:internalCleanName "tesla" ;
     ns1:sameAsHigh <https://1145.am/db/1093072/Tesla>,
         <https://1145.am/db/1263398/Tesla_Inc>,
         <https://1145.am/db/1343847/Tesla>,
@@ -63,83 +64,7 @@
         <https://1145.am/db/574188/Tesla>,
         <https://1145.am/db/580863/Tesla_Inc>,
         <https://1145.am/db/910858/Tesla_Inc>,
-        <https://1145.am/db/926991/Tesla> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1017913/Tesla_Inc>,
-        <https://1145.am/db/1446807/Tesla_Inc>,
-        <https://1145.am/db/1451697/Tesla>,
-        <https://1145.am/db/1465228/Tesla>,
-        <https://1145.am/db/1675418/Tesla_Inc>,
-        <https://1145.am/db/1688996/Tesla>,
-        <https://1145.am/db/1716065/Tesla>,
-        <https://1145.am/db/1728390/Tesla>,
-        <https://1145.am/db/1739773/Tesla>,
-        <https://1145.am/db/1740391/Tesla>,
-        <https://1145.am/db/1760908/Tesla>,
-        <https://1145.am/db/1771970/Tesla>,
-        <https://1145.am/db/1776632/Tesla>,
-        <https://1145.am/db/1780623/Tesla>,
-        <https://1145.am/db/1781219/Tesla>,
-        <https://1145.am/db/1782329/Tesla>,
-        <https://1145.am/db/1782877/Tesla>,
-        <https://1145.am/db/1786498/Tesla>,
-        <https://1145.am/db/1788656/Tesla>,
-        <https://1145.am/db/1792904/Tesla>,
-        <https://1145.am/db/1804469/Tesla>,
-        <https://1145.am/db/1806754/Tesla>,
-        <https://1145.am/db/1808334/Tesla>,
-        <https://1145.am/db/1823310/Tesla>,
-        <https://1145.am/db/1925180/Tesla>,
-        <https://1145.am/db/1927603/Tesla_Inc>,
-        <https://1145.am/db/1964965/Tesla_Inc>,
-        <https://1145.am/db/2008540/Tesla>,
-        <https://1145.am/db/2067407/Tesla>,
-        <https://1145.am/db/224475/Tesla>,
-        <https://1145.am/db/2424657/Tesla>,
-        <https://1145.am/db/2770771/Tesla_Inc>,
-        <https://1145.am/db/2801531/Tesla>,
-        <https://1145.am/db/2820681/Tesla>,
-        <https://1145.am/db/2850721/Tesla>,
-        <https://1145.am/db/2999963/Tesla>,
-        <https://1145.am/db/3026296/Tesla>,
-        <https://1145.am/db/3030284/Tesla>,
-        <https://1145.am/db/3099265/Tesla>,
-        <https://1145.am/db/3140955/Tesla>,
-        <https://1145.am/db/3292456/Tesla>,
-        <https://1145.am/db/3305122/Tesla>,
-        <https://1145.am/db/3311367/Tesla>,
-        <https://1145.am/db/3366593/Tesla>,
-        <https://1145.am/db/3371163/Tesla>,
-        <https://1145.am/db/3397144/Tesla>,
-        <https://1145.am/db/3417570/Tesla>,
-        <https://1145.am/db/3426222/Tesla>,
-        <https://1145.am/db/3444912/Tesla>,
-        <https://1145.am/db/3473755/Tesla>,
-        <https://1145.am/db/3479852/Tesla>,
-        <https://1145.am/db/3523036/Tesla>,
-        <https://1145.am/db/3523635/Tesla>,
-        <https://1145.am/db/3548726/Tesla>,
-        <https://1145.am/db/3568619/Tesla>,
-        <https://1145.am/db/3571140/Tesla>,
-        <https://1145.am/db/360118/Tesla_Inc>,
-        <https://1145.am/db/3618485/Tesla>,
-        <https://1145.am/db/362830/Tesla_Inc>,
-        <https://1145.am/db/3662141/Tesla>,
-        <https://1145.am/db/3674768/Tesla>,
-        <https://1145.am/db/3738486/Tesla>,
-        <https://1145.am/db/376138/Tesla_Inc>,
-        <https://1145.am/db/376205/Tesla_Inc>,
-        <https://1145.am/db/3914055/Tesla>,
-        <https://1145.am/db/4063034/Tesla>,
-        <https://1145.am/db/4141317/Tesla_Inc>,
-        <https://1145.am/db/4162646/Tesla>,
-        <https://1145.am/db/4172069/Tesla>,
-        <https://1145.am/db/4183990/Tesla>,
-        <https://1145.am/db/4195957/Tesla>,
-        <https://1145.am/db/4225598/Tesla>,
-        <https://1145.am/db/4232072/Tesla>,
-        <https://1145.am/db/533943/Tesla_Inc>,
-        <https://1145.am/db/857548/Tesla_Inc>,
-        <https://1145.am/db/954023/Tesla> .
+        <https://1145.am/db/926991/Tesla> .
 
 <https://1145.am/db/2190253/Ascension> a org:Organization ;
     ns1:basedInLowRaw "Texas" ;
@@ -153,14 +78,14 @@
         <https://1145.am/db/industry/92_automation_automated_automatic_technologies> ;
     ns1:internalDocId 2190253 ;
     ns1:name "Ascension" ;
+    ns1:internalCleanName "ascension" ;
     ns1:sameAsHigh <https://1145.am/db/1764345/Ascension>,
         <https://1145.am/db/2180757/Ascension>,
         <https://1145.am/db/2182580/Ascension>,
         <https://1145.am/db/2186189/Ascension>,
         <https://1145.am/db/2190170/Ascension>,
         <https://1145.am/db/2190380/Ascension>,
-        <https://1145.am/db/2197868/Ascension> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1763084/Ascension> .
+        <https://1145.am/db/2197868/Ascension> .
 
 <https://1145.am/db/2364624/Parexel_International_Corporation> a org:Organization ;
     ns1:basedInHighClean "Boston" ;
@@ -174,6 +99,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 2364624 ;
     ns1:name "PAREXEL International Corporation" ;
+    ns1:internalCleanName "parexcel international corporation" ;
+    ns1:internalCleanShortName "parexcel international" ;
     ns1:sameAsHigh <https://1145.am/db/2199658/Parexel_International_Corporation>,
         <https://1145.am/db/2303338/Parexel_International_Corporation>,
         <https://1145.am/db/2303517/Parexel_International_Corporation>,
@@ -190,25 +117,7 @@
         <https://1145.am/db/2341497/Parexel_International>,
         <https://1145.am/db/2363546/Parexel_International>,
         <https://1145.am/db/2363768/Parexel_International_Corporation>,
-        <https://1145.am/db/2369621/Parexel_International_Corporation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2304174/Parexel_International_Corporation>,
-        <https://1145.am/db/2306929/Parexel_International>,
-        <https://1145.am/db/2307562/Parexel_International>,
-        <https://1145.am/db/2307563/Parexel_International_Corporation>,
-        <https://1145.am/db/2311891/Parexel_International_Corporation>,
-        <https://1145.am/db/2311892/Parexel_International>,
-        <https://1145.am/db/2313712/Parexel_International>,
-        <https://1145.am/db/2324363/Parexel_International>,
-        <https://1145.am/db/2326028/Parexel_International_Corporation>,
-        <https://1145.am/db/2328765/Parexel_International>,
-        <https://1145.am/db/2329315/Parexel_International_Corporation>,
-        <https://1145.am/db/2329321/Parexel_International>,
-        <https://1145.am/db/2329338/Parexel_International>,
-        <https://1145.am/db/2333128/Parexel_International>,
-        <https://1145.am/db/2333396/Parexel_International>,
-        <https://1145.am/db/2360620/Parexel_International_Corporation>,
-        <https://1145.am/db/368319/Parexel_International_Corp>,
-        <https://1145.am/db/369278/Parexel_International_Corp> .
+        <https://1145.am/db/2369621/Parexel_International_Corporation> .
 
 <https://1145.am/db/2364624/Steve_Kent> a foaf:Person ;
     ns1:basedInHighClean "Boston" ;
@@ -249,6 +158,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3029705 ;
     ns1:name "Takeda" ;
+    ns1:internalCleanName "takeda" ;
     ns1:sameAsHigh <https://1145.am/db/1150157/Takeda>,
         <https://1145.am/db/1151492/Takeda>,
         <https://1145.am/db/1574488/Takeda>,
@@ -345,14 +255,7 @@
         <https://1145.am/db/3980800/Takeda>,
         <https://1145.am/db/4121149/Takeda>,
         <https://1145.am/db/4246408/Takeda>,
-        <https://1145.am/db/944999/Takeda> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2298018/Takeda>,
-        <https://1145.am/db/2326444/Takeda>,
-        <https://1145.am/db/2548805/Takeda>,
-        <https://1145.am/db/2562545/Takeda>,
-        <https://1145.am/db/2565955/Takeda>,
-        <https://1145.am/db/4089800/Takeda>,
-        <https://1145.am/db/946330/Takeda> .
+        <https://1145.am/db/944999/Takeda> .
 
 <https://1145.am/db/3449351/Shimadzu_Corporation> a org:Organization ;
     ns1:basedInLowRaw "TORRANCE, Calif" ;
@@ -363,6 +266,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/487_healthcare_investor_investments_investment> ;
     ns1:internalDocId 3449351 ;
     ns1:name "Shimadzu Corporation" ;
+    ns1:internalCleanName "shimadzu corporation" ;
+    ns1:internalCleanShortName "shimadzu" ;
     ns1:participant <https://1145.am/db/3449351/Core_Medical_Imaging-Acquisition> .
 
 <https://1145.am/db/3449351/Shimadzu_Medical_Systems_Usa> a org:Organization ;
@@ -377,6 +282,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/487_healthcare_investor_investments_investment> ;
     ns1:internalDocId 3449351 ;
     ns1:name "Shimadzu Medical Systems USA" ;
+    ns1:internalCleanName "shimadzu medical systems usa" ;
     ns1:sameAsHigh <https://1145.am/db/3162548/Shimadzu_Medical_Systems_Usa> .
 
 <https://1145.am/db/3449402/Stonepeak_Infrastructure_Partners> a org:Organization ;
@@ -390,6 +296,8 @@
     ns1:internalDocId 3449402 ;
     ns1:investor <https://1145.am/db/3449402/Discovery_Midstream_Holdings_Ii-Stonepeak_Infrastructure_Partners-Investment-Equity_Commitment> ;
     ns1:name "Stonepeak Infrastructure Partners" ;
+    ns1:internalCleanName "stonepeak infrastructure partners" ;
+    ns1:internalCleanShortName "stonepeak infrastructure" ;
     ns1:sameAsHigh <https://1145.am/db/137056/Stonepeak_Infrastructure_Partners>,
         <https://1145.am/db/138044/Stonepeak_Infrastructure_Partners>,
         <https://1145.am/db/139607/Stonepeak_Infrastructure_Partners>,
@@ -400,16 +308,7 @@
         <https://1145.am/db/3296420/Stonepeak_Infrastructure_Partners>,
         <https://1145.am/db/3350196/Stonepeak_Infrastructure_Partners>,
         <https://1145.am/db/3592803/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/619809/Stonepeak_Infrastructure_Partners> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2607072/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/2613243/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/2664679/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/302501/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/3184195/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/323184/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/3443923/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/441259/Stonepeak_Infrastructure_Partners>,
-        <https://1145.am/db/529649/Stonepeak_Infrastructure_Partners> .
+        <https://1145.am/db/619809/Stonepeak_Infrastructure_Partners> .
 
 <https://1145.am/db/3449412/Hornbeck_Offshore_Services_Inc-Ipo-Senior_Notes> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -441,13 +340,11 @@
         <https://1145.am/db/industry/235_sap_consulting_consultancy_software> ;
     ns1:internalDocId 3449415 ;
     ns1:name "Rizing, LLC" ;
+    ns1:internalCleanName "rizing llc" ;
+    ns1:internalCleanShortName "rizing" ;
     ns1:sameAsHigh <https://1145.am/db/1006716/Rizing>,
         <https://1145.am/db/1007767/Rizing>,
-        <https://1145.am/db/3841066/Rizing_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1006707/Rizing>,
-        <https://1145.am/db/1007761/Rizing>,
-        <https://1145.am/db/3510918/Rizing_Llc>,
-        <https://1145.am/db/3928488/Rizing> .
+        <https://1145.am/db/3841066/Rizing_Llc>  .
 
 <https://1145.am/db/3450606/Zijin_Mining_Group_Co_Ltd> a org:Organization ;
     ns1:basedInHighClean "People’s Republic of China" ;
@@ -463,6 +360,8 @@
     ns1:internalDocId 3450606 ;
     ns1:name "Zijin Mining Group Co. Ltd",
         "Zijin Mining Group Co. Ltd." ;
+    ns1:internalCleanName "zijin mining group co ltd" ;
+    ns1:internalCleanShortName "zijin mining group" ;
     ns1:sameAsHigh <https://1145.am/db/3503588/Zijin_Mining_Group_Co_Ltd>,
         <https://1145.am/db/3768861/Zijin_Mining_Group_Co_Ltd>,
         <https://1145.am/db/3777160/Zijin_Mining_Group_Co_Ltd>,
@@ -488,6 +387,7 @@
     ns1:investor <https://1145.am/db/3451375/Hexindai-Investment>,
         <https://1145.am/db/3451375/Phoenix_Intelligent_Credit-Investment-Equity_Stake> ;
     ns1:name "Hexindai" ;
+    ns1:internalCleanName "hexindai" ;
     ns1:sameAsHigh <https://1145.am/db/3227567/Hexindai_Inc>,
         <https://1145.am/db/3516974/Hexindai_Inc>,
         <https://1145.am/db/3632335/Hexindai>,
@@ -514,6 +414,8 @@
     ns1:internalDocId 3451465 ;
     ns1:name "Lovell Minnick",
         "Lovell Minnick Partners" ;
+    ns1:internalCleanName "lovell minnick" , "lovell minnick partners" ;
+    ns1:internalCleanShortName "lovell minnick" ;
     ns1:sameAsHigh <https://1145.am/db/1121011/Lovell_Minnick_Partners>,
         <https://1145.am/db/1121940/Lovell_Minnick_Partners>,
         <https://1145.am/db/1614048/Lovell_Minnick_Partners>,
@@ -541,6 +443,7 @@
     ns1:foundName "the Public Technology Institute" ;
     ns1:internalDocId 3451477 ;
     ns1:name "Public Technology Institute" ;
+    ns1:internalCleanName "public technology institute" ;
     ns1:protagonist <https://1145.am/db/3451477/Public_Technology_Institute-The_Computing_Technology_Industry_Association-Merger> .
 
 <https://1145.am/db/3451477/The_Computing_Technology_Industry_Association> a org:Organization ;
@@ -552,6 +455,7 @@
     ns1:foundName "The Computing Technology Industry Association" ;
     ns1:internalDocId 3451477 ;
     ns1:name "The Computing Technology Industry Association" ;
+    ns1:internalCleanName "the computing technology industry association" ;
     ns1:protagonist <https://1145.am/db/3451477/Public_Technology_Institute-The_Computing_Technology_Industry_Association-Merger> .
 
 <https://1145.am/db/3555070/Bastion_Collective> a org:Organization ;
@@ -564,6 +468,7 @@
     ns1:documentSource <https://1145.am/db/3555070/wwwbusinessinsidercom_australian-agency-group-is-planning-to-take-on-the-agency-holding-companies-2019-1> ;
     ns1:foundName "Bastion Collective" ;
     ns1:industry "advertising" ;
+    ns1:internalCleanName "bastion collective" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/14_ad_ads_adtech_advertising> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/578_advertising_network_ad_bidding> ;
     ns1:internalDocId 3555070 ;
@@ -576,8 +481,8 @@
     ns1:internalDocId 3555077 ;
     ns1:investor <https://1145.am/db/3555077/Afi_Capital_Partners-Canopy_Rivers-Headset-Poseidon_Asset_Management-Investment-Series_A> ;
     ns1:name "AFI Capital Partners" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1388901/Afi_Capital_Partners>,
-        <https://1145.am/db/3532315/Afi_Capital> .
+    ns1:internalCleanName "afi capital partners" ;
+    ns1:internalCleanShortName "afi capital" .
 
 <https://1145.am/db/3555077/Canopy_Rivers> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -589,18 +494,11 @@
     ns1:internalDocId 3555077 ;
     ns1:investor <https://1145.am/db/3555077/Afi_Capital_Partners-Canopy_Rivers-Headset-Poseidon_Asset_Management-Investment-Series_A> ;
     ns1:name "Canopy Rivers" ;
+    ns1:internalCleanName "canopy rivers" ;
     ns1:sameAsHigh <https://1145.am/db/3347732/Canopy_Rivers>,
         <https://1145.am/db/3422591/Canopy_Rivers_Inc>,
         <https://1145.am/db/3560491/Canopy_Rivers>,
-        <https://1145.am/db/3631423/Canopy_Rivers_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3224812/Canopy_Rivers_Corporation>,
-        <https://1145.am/db/3224812/Canopy_Rivers_Inc>,
-        <https://1145.am/db/3275501/Canopy_Rivers_Inc>,
-        <https://1145.am/db/3324943/Canopy_Rivers_Inc>,
-        <https://1145.am/db/3390001/Canopy_Rivers_Inc>,
-        <https://1145.am/db/3489661/Canopy_Rivers>,
-        <https://1145.am/db/3551747/Canopy_Rivers>,
-        <https://1145.am/db/3923805/Canopy_Rivers_Inc> .
+        <https://1145.am/db/3631423/Canopy_Rivers_Inc>  .
 
 <https://1145.am/db/3555077/Poseidon_Asset_Management> a org:Organization ;
     ns1:basedInLowRaw "Seattle" ;
@@ -610,12 +508,9 @@
     ns1:internalDocId 3555077 ;
     ns1:investor <https://1145.am/db/3555077/Afi_Capital_Partners-Canopy_Rivers-Headset-Poseidon_Asset_Management-Investment-Series_A> ;
     ns1:name "Poseidon Asset Management" ;
+    ns1:internalCleanName "poseidon asset management" ;
     ns1:sameAsHigh <https://1145.am/db/3347732/Poseidon_Asset_Management>,
-        <https://1145.am/db/3837382/Poseidon_Asset_Management> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1798572/Poseidon_Asset_Management>,
-        <https://1145.am/db/3532894/Poseidon_Asset_Management>,
-        <https://1145.am/db/3551365/Poseidon_Asset_Management>,
-        <https://1145.am/db/3824706/Poseidon_Asset_Management> .
+        <https://1145.am/db/3837382/Poseidon_Asset_Management>  .
 
 <https://1145.am/db/3555101/Buzzy> a org:Organization ;
     ns1:basedInLowRaw "Buzzy" ;
@@ -625,6 +520,7 @@
     ns1:industry "fintech" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/130_fintech_fintechs_banking_bank> ;
     ns1:internalDocId 3555101 ;
+    ns1:internalCleanName "buzzy" ;
     ns1:name "Buzzy" .
 
 <https://1145.am/db/3555101/Plaid> a org:Organization ;
@@ -636,6 +532,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/130_fintech_fintechs_banking_bank> ;
     ns1:internalDocId 3555101 ;
     ns1:name "Plaid" ;
+    ns1:internalCleanName "plaid" ;
     ns1:sameAsHigh <https://1145.am/db/128338/Plaid_Inc>,
         <https://1145.am/db/128638/Plaid_Inc>,
         <https://1145.am/db/1723933/Plaid>,
@@ -663,20 +560,7 @@
         <https://1145.am/db/3562277/Plaid>,
         <https://1145.am/db/362688/Plaid>,
         <https://1145.am/db/3994313/Plaid>,
-        <https://1145.am/db/905570/Plaid> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1120981/Plaid>,
-        <https://1145.am/db/1696291/Plaid>,
-        <https://1145.am/db/1738604/Plaid>,
-        <https://1145.am/db/1749597/Plaid>,
-        <https://1145.am/db/1762472/Plaid>,
-        <https://1145.am/db/1764116/Plaid>,
-        <https://1145.am/db/1771697/Plaid>,
-        <https://1145.am/db/3276749/Plaid>,
-        <https://1145.am/db/3440533/Plaid>,
-        <https://1145.am/db/3518167/Plaid>,
-        <https://1145.am/db/361411/Plaid>,
-        <https://1145.am/db/361433/Plaid>,
-        <https://1145.am/db/854512/Plaid> .
+        <https://1145.am/db/905570/Plaid> .
 
 <https://1145.am/db/1736082/Berlin> a org:Site ;
     ns1:basedInHighClean "Federal Republic of Germany" ;
@@ -766,6 +650,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/345_marketing_healthcare_advertising_health>,
         <https://1145.am/db/industry/92_automation_automated_automatic_technologies> ;
     ns1:internalDocId 2190253 ;
+    ns1:internalCleanName "little river healthcare" ;
     ns1:name "Little River Healthcare" .
 
 <https://1145.am/db/2190253/Little_River_Healthcare-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -824,141 +709,13 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/275_hardtech_deeptech_tech_revtech> ;
     ns1:internalDocId 3029694 ;
     ns1:name "Wework" ;
+    ns1:internalCleanName "wework" ;
     ns1:sameAsHigh <https://1145.am/db/1794963/Wework>,
         <https://1145.am/db/244985/Wework>,
         <https://1145.am/db/3141759/Wework>,
         <https://1145.am/db/3276527/Wework>,
         <https://1145.am/db/937738/Wework>,
-        <https://1145.am/db/941359/Wework> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1090529/Wework_Inc>,
-        <https://1145.am/db/1093116/Wework_Inc>,
-        <https://1145.am/db/1164329/Wework_Inc>,
-        <https://1145.am/db/1165216/Wework_Inc>,
-        <https://1145.am/db/1272659/Wework>,
-        <https://1145.am/db/1389/Wework>,
-        <https://1145.am/db/1549/Wework>,
-        <https://1145.am/db/1550156/Wework>,
-        <https://1145.am/db/1664914/Wework>,
-        <https://1145.am/db/1737868/Wework>,
-        <https://1145.am/db/1738902/Wework>,
-        <https://1145.am/db/1743955/Wework>,
-        <https://1145.am/db/1743965/Wework>,
-        <https://1145.am/db/1767668/Wework>,
-        <https://1145.am/db/1770304/Wework>,
-        <https://1145.am/db/1772626/Wework>,
-        <https://1145.am/db/1773550/Wework>,
-        <https://1145.am/db/1775898/Wework>,
-        <https://1145.am/db/1778801/Wework>,
-        <https://1145.am/db/1780513/Wework>,
-        <https://1145.am/db/1785666/Wework>,
-        <https://1145.am/db/1786513/Wework>,
-        <https://1145.am/db/1789800/Wework>,
-        <https://1145.am/db/1806142/Wework>,
-        <https://1145.am/db/1807667/Wework>,
-        <https://1145.am/db/1811504/Wework>,
-        <https://1145.am/db/1815842/Wework>,
-        <https://1145.am/db/1815848/Wework>,
-        <https://1145.am/db/1818994/Wework>,
-        <https://1145.am/db/1822119/Wework>,
-        <https://1145.am/db/2009746/Wework_Inc>,
-        <https://1145.am/db/2018118/Wework_Inc>,
-        <https://1145.am/db/2079912/Wework>,
-        <https://1145.am/db/2133136/Wework_Inc>,
-        <https://1145.am/db/213555/Wework>,
-        <https://1145.am/db/2147656/Wework_Inc>,
-        <https://1145.am/db/2148006/Wework>,
-        <https://1145.am/db/225797/Wework>,
-        <https://1145.am/db/2512121/Wework>,
-        <https://1145.am/db/2720399/Wework>,
-        <https://1145.am/db/2721995/Wework>,
-        <https://1145.am/db/2731858/Wework>,
-        <https://1145.am/db/2788534/Wework>,
-        <https://1145.am/db/2817468/Wework>,
-        <https://1145.am/db/2829178/Wework_Inc>,
-        <https://1145.am/db/2834463/Wework>,
-        <https://1145.am/db/289088/Wework>,
-        <https://1145.am/db/3026594/Wework>,
-        <https://1145.am/db/3027340/Wework>,
-        <https://1145.am/db/3037402/Wework>,
-        <https://1145.am/db/3038047/Wework>,
-        <https://1145.am/db/3039195/Wework>,
-        <https://1145.am/db/3039432/Wework>,
-        <https://1145.am/db/3039928/Wework>,
-        <https://1145.am/db/3040157/Wework>,
-        <https://1145.am/db/3040525/Wework>,
-        <https://1145.am/db/3040578/Wework>,
-        <https://1145.am/db/3041124/Wework>,
-        <https://1145.am/db/3042027/Wework>,
-        <https://1145.am/db/3042425/Wework>,
-        <https://1145.am/db/3042463/Wework>,
-        <https://1145.am/db/3044572/Wework>,
-        <https://1145.am/db/3045113/Wework>,
-        <https://1145.am/db/3055317/Wework>,
-        <https://1145.am/db/3075016/Wework>,
-        <https://1145.am/db/3075561/Wework>,
-        <https://1145.am/db/3147277/Wework>,
-        <https://1145.am/db/3175455/Wework>,
-        <https://1145.am/db/3276193/Wework>,
-        <https://1145.am/db/3320/Wework>,
-        <https://1145.am/db/3353519/Wework>,
-        <https://1145.am/db/3411229/Wework>,
-        <https://1145.am/db/3428016/Wework>,
-        <https://1145.am/db/3437362/Wework>,
-        <https://1145.am/db/3446299/Wework>,
-        <https://1145.am/db/3458343/Wework>,
-        <https://1145.am/db/3459794/Wework>,
-        <https://1145.am/db/3461697/Wework>,
-        <https://1145.am/db/3462638/Wework>,
-        <https://1145.am/db/3466869/Wework>,
-        <https://1145.am/db/3470227/Wework>,
-        <https://1145.am/db/3470587/Wework>,
-        <https://1145.am/db/3482458/Wework>,
-        <https://1145.am/db/3490841/Wework>,
-        <https://1145.am/db/3491781/Wework>,
-        <https://1145.am/db/3492591/Wework>,
-        <https://1145.am/db/3500898/Wework>,
-        <https://1145.am/db/3509427/Wework>,
-        <https://1145.am/db/3512359/Wework>,
-        <https://1145.am/db/3513041/Wework>,
-        <https://1145.am/db/3518969/Wework>,
-        <https://1145.am/db/3528270/Wework>,
-        <https://1145.am/db/3530772/Wework>,
-        <https://1145.am/db/3532008/Wework>,
-        <https://1145.am/db/3537449/Wework>,
-        <https://1145.am/db/3543974/Wework>,
-        <https://1145.am/db/3552274/Wework>,
-        <https://1145.am/db/3553142/Wework>,
-        <https://1145.am/db/3559224/Wework>,
-        <https://1145.am/db/3643307/Wework>,
-        <https://1145.am/db/3985249/Wework>,
-        <https://1145.am/db/3985435/Wework>,
-        <https://1145.am/db/3987389/Wework>,
-        <https://1145.am/db/3987819/Wework>,
-        <https://1145.am/db/3988972/Wework>,
-        <https://1145.am/db/3992138/Wework>,
-        <https://1145.am/db/4113831/Wework>,
-        <https://1145.am/db/4114904/Wework>,
-        <https://1145.am/db/4114937/Wework>,
-        <https://1145.am/db/4116045/Wework>,
-        <https://1145.am/db/4117578/Wework>,
-        <https://1145.am/db/4117744/Wework_Inc>,
-        <https://1145.am/db/4118108/Wework>,
-        <https://1145.am/db/4170124/Wework>,
-        <https://1145.am/db/4181540/Wework>,
-        <https://1145.am/db/4194542/Wework>,
-        <https://1145.am/db/4195193/Wework>,
-        <https://1145.am/db/4200984/Wework>,
-        <https://1145.am/db/4232402/Wework>,
-        <https://1145.am/db/485569/Wework>,
-        <https://1145.am/db/486725/Wework>,
-        <https://1145.am/db/539547/Wework>,
-        <https://1145.am/db/557324/Wework>,
-        <https://1145.am/db/560491/Wework>,
-        <https://1145.am/db/561842/Wework_Inc>,
-        <https://1145.am/db/563371/Wework_Inc>,
-        <https://1145.am/db/580712/Wework_Inc>,
-        <https://1145.am/db/815495/Wework>,
-        <https://1145.am/db/941922/Wework_Inc> .
+        <https://1145.am/db/941359/Wework>  .
 
 <https://1145.am/db/3029705/Shire> a org:Organization ;
     ns1:basedInLowRaw "Japan" ;
@@ -970,6 +727,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3029705 ;
     ns1:name "Shire" ;
+    ns1:internalCleanName "shire" ;
     ns1:sameAsHigh <https://1145.am/db/142937/Shire_Plc>,
         <https://1145.am/db/2155273/Shire>,
         <https://1145.am/db/2225348/Shire_Plc>,
@@ -1186,58 +944,7 @@
         <https://1145.am/db/3560460/Shire>,
         <https://1145.am/db/3772938/Shire>,
         <https://1145.am/db/3845270/Shire>,
-        <https://1145.am/db/3873506/Shire> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2293472/Shire>,
-        <https://1145.am/db/2297066/Shire>,
-        <https://1145.am/db/2333419/Shire>,
-        <https://1145.am/db/2339117/Shire>,
-        <https://1145.am/db/2339733/Shire_Plc>,
-        <https://1145.am/db/2340560/Shire>,
-        <https://1145.am/db/2340566/Shire_Plc>,
-        <https://1145.am/db/2341068/Shire>,
-        <https://1145.am/db/2341829/Shire>,
-        <https://1145.am/db/2344205/Shire>,
-        <https://1145.am/db/2345096/Shire>,
-        <https://1145.am/db/2345238/Shire>,
-        <https://1145.am/db/2346872/Shire_Plc>,
-        <https://1145.am/db/2347772/Shire>,
-        <https://1145.am/db/2348742/Shire>,
-        <https://1145.am/db/2351734/Shire_Llc>,
-        <https://1145.am/db/2351737/Shire_Llc>,
-        <https://1145.am/db/2353283/Shire_Plc>,
-        <https://1145.am/db/2356384/Shire>,
-        <https://1145.am/db/2357487/Shire>,
-        <https://1145.am/db/2360712/Shire_Plc>,
-        <https://1145.am/db/2362744/Shire>,
-        <https://1145.am/db/2365826/Shire_Plc>,
-        <https://1145.am/db/2366303/Shire>,
-        <https://1145.am/db/2368144/Shire>,
-        <https://1145.am/db/2368885/Shire>,
-        <https://1145.am/db/2368936/Shire>,
-        <https://1145.am/db/2369701/Shire>,
-        <https://1145.am/db/2370358/Shire>,
-        <https://1145.am/db/2370514/Shire>,
-        <https://1145.am/db/2544434/Shire>,
-        <https://1145.am/db/2547575/Shire_Plc>,
-        <https://1145.am/db/2548805/Shire>,
-        <https://1145.am/db/2548979/Shire>,
-        <https://1145.am/db/2552180/Shire>,
-        <https://1145.am/db/2554269/Shire>,
-        <https://1145.am/db/2554294/Shire>,
-        <https://1145.am/db/2558927/Shire>,
-        <https://1145.am/db/2566716/Shire>,
-        <https://1145.am/db/2572113/Shire_Plc>,
-        <https://1145.am/db/2575050/Shire>,
-        <https://1145.am/db/2577114/Shire>,
-        <https://1145.am/db/2577176/Shire_Plc>,
-        <https://1145.am/db/2583624/Shire_Plc>,
-        <https://1145.am/db/2585132/Shire>,
-        <https://1145.am/db/2947369/Shire>,
-        <https://1145.am/db/2958817/Shire>,
-        <https://1145.am/db/2959955/Shire>,
-        <https://1145.am/db/2960282/Shire>,
-        <https://1145.am/db/2964408/Shire>,
-        <https://1145.am/db/3933526/Shire> .
+        <https://1145.am/db/3873506/Shire>  .
 
 <https://1145.am/db/3029705/Shire-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1259,269 +966,15 @@
 
 <https://1145.am/db/3448439/Eli_Lilly_And_Company> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
-    ns1:buyer <https://1145.am/db/3448439/Loxo_Oncology-Acquisition> ;
+    ns1:buyer <https://1145.am/db/3448439/Loxo_Oncology2-Acquisition> ;
     ns1:documentSource <https://1145.am/db/3448439/wwwprnewswirecom_news-releases_alert-rowley-law-pllc-is-investigating-proposed-acquisition-of-loxo-oncology-inc-300774258html> ;
     ns1:foundName "Eli Lilly and Company" ;
     ns1:internalDocId 3448439 ;
     ns1:name "Eli Lilly and Company" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1087869/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1121894/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1217359/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1272276/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1340338/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1425255/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1428583/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1432746/Eli_Lilly>,
-        <https://1145.am/db/1534004/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1534438/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1546070/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1553175/Eli_Lilly_Company>,
-        <https://1145.am/db/1553459/Eli_Lilly_Company>,
-        <https://1145.am/db/1663572/Eli_Lilly_And_Company>,
-        <https://1145.am/db/1979697/Eli_Lilly>,
-        <https://1145.am/db/1984558/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2045539/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2055009/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2058865/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2062260/Eli_Lilly>,
-        <https://1145.am/db/2065629/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2109798/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2139015/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2154037/Eli_Lilly>,
-        <https://1145.am/db/2154391/Eli_Lilly>,
-        <https://1145.am/db/2279118/Eli_Lilly>,
-        <https://1145.am/db/2280616/Eli_Lilly>,
-        <https://1145.am/db/2281211/Eli_Lilly>,
-        <https://1145.am/db/2282739/Eli_Lilly>,
-        <https://1145.am/db/2282930/Eli_Lilly>,
-        <https://1145.am/db/2283595/Eli_Lilly>,
-        <https://1145.am/db/2285156/Eli_Lilly>,
-        <https://1145.am/db/2285189/Eli_Lilly>,
-        <https://1145.am/db/2285525/Eli_Lilly>,
-        <https://1145.am/db/2286126/Eli_Lilly>,
-        <https://1145.am/db/2286379/Eli_Lilly>,
-        <https://1145.am/db/2286402/Eli_Lilly>,
-        <https://1145.am/db/2286404/Eli_Lilly>,
-        <https://1145.am/db/2286617/Eli_Lilly>,
-        <https://1145.am/db/2286911/Eli_Lilly>,
-        <https://1145.am/db/2286998/Eli_Lilly>,
-        <https://1145.am/db/2287005/Eli_Lilly>,
-        <https://1145.am/db/2288158/Eli_Lilly>,
-        <https://1145.am/db/229232/Eli_Lilly>,
-        <https://1145.am/db/2294118/Eli_Lilly>,
-        <https://1145.am/db/2298022/Eli_Lilly>,
-        <https://1145.am/db/2299157/Eli_Lilly>,
-        <https://1145.am/db/2301879/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2302104/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2304319/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2305497/Eli_Lilly>,
-        <https://1145.am/db/2305501/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2306807/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2307651/Eli_Lilly>,
-        <https://1145.am/db/2309473/Eli_Lilly>,
-        <https://1145.am/db/2309599/Eli_Lilly>,
-        <https://1145.am/db/2310738/Eli_Lilly>,
-        <https://1145.am/db/2314412/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2315325/Eli_Lilly>,
-        <https://1145.am/db/2316092/Eli_Lilly>,
-        <https://1145.am/db/2316549/Eli_Lilly>,
-        <https://1145.am/db/2317682/Eli_Lilly>,
-        <https://1145.am/db/2318587/Eli_Lilly>,
-        <https://1145.am/db/2320006/Eli_Lilly>,
-        <https://1145.am/db/2320338/Eli_Lilly>,
-        <https://1145.am/db/2322619/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2323165/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2325257/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2325557/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2327587/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2328522/Eli_Lilly>,
-        <https://1145.am/db/2328527/Eli_Lilly>,
-        <https://1145.am/db/2328554/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2328633/Eli_Lilly>,
-        <https://1145.am/db/2328718/Eli_Lilly>,
-        <https://1145.am/db/2329114/Eli_Lilly>,
-        <https://1145.am/db/2329915/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2334645/Eli_Lilly>,
-        <https://1145.am/db/2335594/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2336074/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2338059/Eli_Lilly>,
-        <https://1145.am/db/2340948/Eli_Lilly>,
-        <https://1145.am/db/2341481/Eli_Lilly>,
-        <https://1145.am/db/2341496/Eli_Lilly>,
-        <https://1145.am/db/2342503/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2343945/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2344800/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2344808/Eli_Lilly>,
-        <https://1145.am/db/2344991/Eli_Lilly>,
-        <https://1145.am/db/2345213/Eli_Lilly>,
-        <https://1145.am/db/2345214/Eli_Lilly>,
-        <https://1145.am/db/2349001/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2349020/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2349300/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2352358/Eli_Lilly>,
-        <https://1145.am/db/2353350/Eli_Lilly>,
-        <https://1145.am/db/2354761/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2354853/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2359240/Eli_Lilly>,
-        <https://1145.am/db/2360338/Eli_Lilly>,
-        <https://1145.am/db/2361027/Eli_Lilly>,
-        <https://1145.am/db/2361510/Eli_Lilly>,
-        <https://1145.am/db/2364605/Eli_Lilly>,
-        <https://1145.am/db/2365178/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2366948/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2366953/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2368321/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2368562/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2369000/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2370162/Eli_Lilly>,
-        <https://1145.am/db/2371016/Eli_Lilly>,
-        <https://1145.am/db/2371058/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2371075/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2536960/Eli_Lilly>,
-        <https://1145.am/db/2537335/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2537665/Eli_Lilly>,
-        <https://1145.am/db/2537666/Eli_Lilly>,
-        <https://1145.am/db/2537817/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2537826/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2539287/Eli_Lilly>,
-        <https://1145.am/db/2539970/Eli_Lilly>,
-        <https://1145.am/db/2543185/Eli_Lilly>,
-        <https://1145.am/db/2545618/Eli_Lilly>,
-        <https://1145.am/db/2549450/Eli_Lilly>,
-        <https://1145.am/db/2550996/Eli_Lilly>,
-        <https://1145.am/db/2551049/Eli_Lilly>,
-        <https://1145.am/db/2551101/Eli_Lilly>,
-        <https://1145.am/db/2553131/Eli_Lilly>,
-        <https://1145.am/db/2553551/Eli_Lilly>,
-        <https://1145.am/db/2556906/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2556969/Eli_Lilly>,
-        <https://1145.am/db/2559125/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2560025/Eli_Lilly>,
-        <https://1145.am/db/2560487/Eli_Lilly>,
-        <https://1145.am/db/2561357/Eli_Lilly>,
-        <https://1145.am/db/2561960/Eli_Lilly>,
-        <https://1145.am/db/2562442/Eli_Lilly>,
-        <https://1145.am/db/2562576/Eli_Lilly>,
-        <https://1145.am/db/2562999/Eli_Lilly>,
-        <https://1145.am/db/2567343/Eli_Lilly>,
-        <https://1145.am/db/2569829/Eli_Lilly>,
-        <https://1145.am/db/2569849/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2572312/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2572711/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2572957/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2573885/Eli_Lilly>,
-        <https://1145.am/db/2574950/Eli_Lilly>,
-        <https://1145.am/db/2575554/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2575909/Eli_Lilly>,
-        <https://1145.am/db/2575947/Eli_Lilly>,
-        <https://1145.am/db/2575972/Eli_Lilly>,
-        <https://1145.am/db/2576086/Eli_Lilly>,
-        <https://1145.am/db/2576171/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2576460/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2576462/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2576892/Eli_Lilly>,
-        <https://1145.am/db/2576933/Eli_Lilly>,
-        <https://1145.am/db/2576939/Eli_Lilly>,
-        <https://1145.am/db/2576944/Eli_Lilly>,
-        <https://1145.am/db/2577171/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2578048/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2578603/Eli_Lilly>,
-        <https://1145.am/db/2578874/Eli_Lilly>,
-        <https://1145.am/db/2578876/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2581257/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2581745/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2581804/Eli_Lilly>,
-        <https://1145.am/db/2583703/Eli_Lilly>,
-        <https://1145.am/db/2584135/Eli_Lilly>,
-        <https://1145.am/db/2584766/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2585144/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2585710/Eli_Lilly>,
-        <https://1145.am/db/2586687/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2587215/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2587605/Eli_Lilly>,
-        <https://1145.am/db/2587690/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2587699/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2587853/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2589156/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2589700/Eli_Lilly>,
-        <https://1145.am/db/2590071/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2590486/Eli_Lilly>,
-        <https://1145.am/db/2590997/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2591001/Eli_Lilly>,
-        <https://1145.am/db/2591708/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2593456/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2593780/Eli_Lilly>,
-        <https://1145.am/db/2594485/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2594494/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2596644/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2597644/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2597855/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2598317/Eli_Lilly>,
-        <https://1145.am/db/2813938/Eli_Lilly>,
-        <https://1145.am/db/2813976/Eli_Lilly>,
-        <https://1145.am/db/2817959/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2831707/Eli_Lilly>,
-        <https://1145.am/db/2934107/Eli_Lilly>,
-        <https://1145.am/db/2953545/Eli_Lilly>,
-        <https://1145.am/db/3029576/Eli_Lilly>,
-        <https://1145.am/db/3102250/Eli_Lilly>,
-        <https://1145.am/db/3183251/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3193785/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3195443/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3195889/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3216723/Eli_Lilly>,
-        <https://1145.am/db/3220525/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3243719/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3264085/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3310505/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3343553/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3360026/Eli_Lilly>,
-        <https://1145.am/db/3389295/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3412602/Eli_Lilly>,
-        <https://1145.am/db/3435240/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3437629/Eli_Lilly>,
-        <https://1145.am/db/3450156/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3464715/Eli_Lilly_Company>,
-        <https://1145.am/db/3504766/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3507722/Eli_Lilly_Company>,
-        <https://1145.am/db/3536712/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3549221/Eli_Lilly>,
-        <https://1145.am/db/3553449/Eli_Lilly>,
-        <https://1145.am/db/3559924/Eli_Lilly>,
-        <https://1145.am/db/3572250/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3592210/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3648607/Eli_Lilly>,
-        <https://1145.am/db/3652366/Eli_Lilly>,
-        <https://1145.am/db/3662656/Eli_Lilly>,
-        <https://1145.am/db/3664111/Eli_Lilly>,
-        <https://1145.am/db/3681304/Eli_Lilly>,
-        <https://1145.am/db/3681533/Eli_Lilly>,
-        <https://1145.am/db/3703094/Eli_Lilly>,
-        <https://1145.am/db/3704092/Eli_Lilly>,
-        <https://1145.am/db/3727087/Eli_Lilly>,
-        <https://1145.am/db/3741122/Eli_Lilly>,
-        <https://1145.am/db/3745203/Eli_Lilly>,
-        <https://1145.am/db/3748271/Eli_Lilly>,
-        <https://1145.am/db/3792776/Eli_Lilly>,
-        <https://1145.am/db/3802207/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3817396/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3846248/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3847390/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3865608/Eli_Lilly_And_Company>,
-        <https://1145.am/db/4003917/Eli_Lilly>,
-        <https://1145.am/db/4051844/Eli_Lilly>,
-        <https://1145.am/db/4058269/Eli_Lilly>,
-        <https://1145.am/db/4087876/Eli_Lilly_Company>,
-        <https://1145.am/db/4103069/Eli_Lilly>,
-        <https://1145.am/db/4105662/Eli_Lilly_And_Company>,
-        <https://1145.am/db/4234228/Eli_Lilly>,
-        <https://1145.am/db/4240650/Eli_Lilly_And_Company>,
-        <https://1145.am/db/461671/Eli_Lilly_And_Company>,
-        <https://1145.am/db/768105/Eli_Lilly> .
+    ns1:internalCleanName "eli lilly and company" ;
+    ns1:internalCleanShortName "eli lilly" .
 
-<https://1145.am/db/3448439/Loxo_Oncology-Acquisition> a ns1:CorporateFinanceActivity ;
+<https://1145.am/db/3448439/Loxo_Oncology2-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
     ns1:documentDate "2019-01-07T22:12:00+00:00"^^xsd:dateTime ;
     ns1:documentExtract "NEW YORK, Jan. 7, 2019 /PRNewswire/ - Rowley Law PLLC is investigating potential claims against Loxo Oncology, Inc. (NASDAQ: LOXO) and its board of directors for breach of fiduciary duty concerning the proposed acquisition of the company by Eli Lilly and Company (NYSE: LLY) ." ;
@@ -1530,8 +983,8 @@
     ns1:internalDocId 3448439 ;
     ns1:name "acquisition" ;
     ns1:status "not happened at date of document" ;
-    ns1:target <https://1145.am/db/3448439/Loxo_Oncology> ;
-    ns1:targetName "Loxo Oncology" ;
+    ns1:target <https://1145.am/db/3448439/Loxo_Oncology2> ;
+    ns1:targetName "Loxo Oncology Two" ;
     ns1:valueRaw "$ 8 billion" ;
     ns1:whereHighClean "New York City" ;
     ns1:whereHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
@@ -1548,6 +1001,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3449351 ;
     ns1:name "CORE Medical Imaging" ;
+    ns1:internalCleanName "core medical imaging" ;
     ns1:sameAsHigh <https://1145.am/db/3162548/Core_Medical_Imaging_Inc> .
 
 <https://1145.am/db/3449402/Discovery_Midstream_Holdings_Ii> a org:Organization ;
@@ -1560,6 +1014,7 @@
     ns1:industry "midstream" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/412_midstream_upstream_downstream_industry> ;
     ns1:internalDocId 3449402 ;
+    ns1:internalCleanName "discovery midstream holdings ii";
     ns1:name "Discovery Midstream Holdings II" .
 
 <https://1145.am/db/3449402/Discovery_Midstream_Holdings_Ii-Stonepeak_Infrastructure_Partners-Investment-Equity_Commitment> a ns1:CorporateFinanceActivity ;
@@ -1585,13 +1040,9 @@
     ns1:foundName "Hornbeck Offshore Services, Inc." ;
     ns1:internalDocId 3449412 ;
     ns1:name "Hornbeck Offshore Services, Inc." ;
-    ns1:sameAsNameOnly <https://1145.am/db/3204932/Hornbeck_Offshore_Services>,
-        <https://1145.am/db/3278704/Hornbeck_Offshore_Services>,
-        <https://1145.am/db/3343999/Hornbeck_Offshore_Services>,
-        <https://1145.am/db/3376918/Hornbeck_Offshore_Services>,
-        <https://1145.am/db/3454621/Hornbeck_Offshore_Services_Inc>,
-        <https://1145.am/db/3581502/Hornbeck_Offshore_Services_Inc>,
-        <https://1145.am/db/3629407/Hornbeck_Offshore_Services> .
+    ns1:internalCleanName "hornbeck offshore services inc" ;
+    ns1:internalCleanShortName "hornbeck offshore" ;
+.
 
 <https://1145.am/db/3449415/Synchrony_Global> a org:Organization ;
     ns1:basedInHighClean "Republic of Singapore" ;
@@ -1603,6 +1054,7 @@
     ns1:industry "SAP" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/235_sap_consulting_consultancy_software> ;
     ns1:internalDocId 3449415 ;
+    ns1:internalCleanName "synchrony global" ;
     ns1:name "Synchrony Global" .
 
 <https://1145.am/db/3449415/Synchrony_Global-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1632,6 +1084,8 @@
     ns1:foundName "Nevsun" ;
     ns1:internalDocId 3450606 ;
     ns1:name "Nevsun Resources Ltd." ;
+    ns1:internalCleanName "nevsun resources ltd" ;
+    ns1:internalCleanShortName "nevsun resources" ;
     ns1:sameAsHigh <https://1145.am/db/3503588/Nevsun_Resources_Ltd>,
         <https://1145.am/db/3768861/Nevsun_Resources_Ltd>,
         <https://1145.am/db/3777160/Nevsun_Resources_Ltd>,
@@ -1642,8 +1096,7 @@
         <https://1145.am/db/3883123/Nevsun_Resources_Ltd>,
         <https://1145.am/db/3888642/Nevsun_Resources_Ltd>,
         <https://1145.am/db/3903371/Nevsun_Resources_Ltd>,
-        <https://1145.am/db/3910666/Nevsun_Resources_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3929873/Nevsun_Resources_Ltd> .
+        <https://1145.am/db/3910666/Nevsun_Resources_Ltd>  .
 
 <https://1145.am/db/3450606/Nevsun_Resources_Ltd-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1684,6 +1137,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/526_lending_p2p_lender_loans> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/552_p2p_peer_sharing_network> ;
     ns1:internalDocId 3451375 ;
+    ns1:internalCleanName "phoenix intelligence credit" ;
     ns1:name "Phoenix Intelligent Credit" .
 
 <https://1145.am/db/3451375/Phoenix_Intelligent_Credit-Investment-Equity_Stake> a ns1:CorporateFinanceActivity ;
@@ -1711,7 +1165,7 @@
     ns1:internalDocId 3451380 ;
     ns1:investor <https://1145.am/db/3451380/Electrifoo-Redavia-Responsability_Investments_Ag-Investment> ;
     ns1:name "ElectriFI" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3451381/Electrifi> .
+    ns1:internalCleanName "electrifi" .
 
 <https://1145.am/db/3451380/Redovia> a org:Organization ;
     ns1:basedInHighClean "Federal Republic of Germany" ;
@@ -1724,6 +1178,7 @@
     ns1:industry "Solar technology" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
     ns1:internalDocId 3451380 ;
+    ns1:internalCleanName "redovia", "redovia global asset sca" ;
     ns1:investor <https://1145.am/db/3451380/Electrifoo-Redavia-Responsability_Investments_Ag-Investment> ;
     ns1:name "REDOVIA" .
 
@@ -1732,18 +1187,17 @@
     ns1:documentSource <https://1145.am/db/3451380/wwwprnewswirecom_news-releases_electrifi-supports-redavias-expansion-in-ghanas-ci-sector-300773242html> ;
     ns1:foundName "responsAbility Investments AG" ;
     ns1:internalDocId 3451380 ;
+    ns1:internalCleanName "responsability investments ag" ;
+    ns1:internalCleanShortName "responsability investments" ;
     ns1:investor <https://1145.am/db/3451380/Electrifoo-Redavia-Responsability_Investments_Ag-Investment> ;
-    ns1:name "responsAbility Investments AG" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1355029/Responsability_Investments>,
-        <https://1145.am/db/1772830/Responsability_Investments>,
-        <https://1145.am/db/3451381/Responsability_Investments_Ag>,
-        <https://1145.am/db/789187/Responsability_Investments> .
+    ns1:name "responsAbility Investments AG"  .
 
 <https://1145.am/db/3451381/Electrifi> a org:Organization ;
     ns1:basedInLowRaw "Ghana" ;
     ns1:documentSource <https://1145.am/db/3451381/wwwprnewswirecom_news-releases_electrifi-supports-redavia-s-expansion-in-ghana-s-c-amp-i-sector-871958562html> ;
     ns1:foundName "ElectriFI" ;
     ns1:internalDocId 3451381 ;
+    ns1:internalCleanName "electrifi" ;
     ns1:investor <https://1145.am/db/3451381/Electrifi-Redavia_Global_Asset_Sca-Responsability_Investments_Ag-Investment> ;
     ns1:name "ElectriFI"  .
 
@@ -1755,6 +1209,7 @@
         "REDAVIA Global Asset SCA" ;
     ns1:industry "Solar technology",
         "leasing of solar assets" ;
+    ns1:internalCleanName "redavaia" , "redavia global asset sca" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/118_leasing_leaseback_rental_financing>,
         <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/33_solar_photovoltaic_photovoltaics_agrivoltaics> ;
@@ -1768,12 +1223,10 @@
     ns1:documentSource <https://1145.am/db/3451381/wwwprnewswirecom_news-releases_electrifi-supports-redavia-s-expansion-in-ghana-s-c-amp-i-sector-871958562html> ;
     ns1:foundName "responsAbility Investments AG" ;
     ns1:internalDocId 3451381 ;
+    ns1:internalCleanName "responsability investments ag";
+    ns1:internalCleanShortName "responsability investments" ;
     ns1:investor <https://1145.am/db/3451381/Electrifi-Redavia_Global_Asset_Sca-Responsability_Investments_Ag-Investment> ;
-    ns1:name "responsAbility Investments AG" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1355029/Responsability_Investments>,
-        <https://1145.am/db/1772830/Responsability_Investments>,
-        <https://1145.am/db/3451380/Responsability_Investments_Ag>,
-        <https://1145.am/db/789187/Responsability_Investments> .
+    ns1:name "responsAbility Investments AG" .
 
 <https://1145.am/db/3451465/Attom_Data_Solutions> a org:Organization ;
     ns1:basedInHighClean "Irvine",
@@ -1796,6 +1249,8 @@
     ns1:internalDocId 3451465 ;
     ns1:name "ATTOM",
         "ATTOM Data Solutions" ;
+    ns1:internalCleanName "attom data solutions" ;
+    ns1:internalCleanShortName "attom", "attom data" ;
     ns1:sameAsHigh <https://1145.am/db/3808605/Attom_Data_Solutions> .
 
 <https://1145.am/db/3451465/Attom_Data_Solutions-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1828,20 +1283,9 @@
     ns1:documentSource <https://1145.am/db/3451465/wwwprnewswirecom_news-releases_lovell-minnick-partners-acquires-attom-data-solutions-leading-provider-of-real-estate-data-and-analytics-300774431html> ;
     ns1:foundName "Renovo Capital and" ;
     ns1:internalDocId 3451465 ;
-    ns1:name "Renovo Capital" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1107174/Renovo>,
-        <https://1145.am/db/1110812/Renovo>,
-        <https://1145.am/db/1183893/Renovo>,
-        <https://1145.am/db/1188836/Renovo>,
-        <https://1145.am/db/1245481/Renovo>,
-        <https://1145.am/db/1553228/Renovo_Capital>,
-        <https://1145.am/db/1553686/Renovo_Capital>,
-        <https://1145.am/db/1808083/Renovo>,
-        <https://1145.am/db/2327288/Renovo>,
-        <https://1145.am/db/3077275/Renovo>,
-        <https://1145.am/db/3536436/Renovo>,
-        <https://1145.am/db/505281/Renovo>,
-        <https://1145.am/db/507855/Renovo> .
+    ns1:internalCleanName "renovo capital" ;
+    ns1:internalCleanShortName "renovo capital" ;
+    ns1:name "Renovo Capital" .
 
 <https://1145.am/db/3451465/Rosewood_Private_Investments> a org:Organization ;
     ns1:basedInLowRaw "U.S" ;
@@ -1849,11 +1293,8 @@
     ns1:foundName "Rosewood Private Investments" ;
     ns1:internalDocId 3451465 ;
     ns1:name "Rosewood Private Investments" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1381994/Rosewood_Private_Investments>,
-        <https://1145.am/db/1383161/Rosewood_Private_Investments>,
-        <https://1145.am/db/2075675/Rosewood_Private_Investments>,
-        <https://1145.am/db/3127980/Rosewood_Private_Investments>,
-        <https://1145.am/db/764681/Rosewood_Private_Investments> .
+    ns1:internalCleanName "rosewood private investments" ;
+    ns1:internalCleanShortName "rosewood private" .
 
 <https://1145.am/db/3549221/Eli_Lilly> a org:Organization ;
     ns1:buyer <https://1145.am/db/3549221/Loxo_Oncology-Acquisition> ;
@@ -1865,6 +1306,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 3549221 ;
     ns1:name "Eli Lilly" ;
+    ns1:internalCleanName "eli lilly" ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
         <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
         <https://1145.am/db/1087869/Eli_Lilly_And_Company>,
@@ -2088,39 +1530,7 @@
         <https://1145.am/db/4234228/Eli_Lilly>,
         <https://1145.am/db/4240650/Eli_Lilly_And_Company>,
         <https://1145.am/db/461671/Eli_Lilly_And_Company>,
-        <https://1145.am/db/768105/Eli_Lilly> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1121894/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2109798/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2280616/Eli_Lilly>,
-        <https://1145.am/db/2304319/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2310738/Eli_Lilly>,
-        <https://1145.am/db/2315325/Eli_Lilly>,
-        <https://1145.am/db/2317682/Eli_Lilly>,
-        <https://1145.am/db/2325257/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2327587/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2328633/Eli_Lilly>,
-        <https://1145.am/db/2329915/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2360338/Eli_Lilly>,
-        <https://1145.am/db/2361510/Eli_Lilly>,
-        <https://1145.am/db/2368321/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2537335/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2537817/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2537826/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2560025/Eli_Lilly>,
-        <https://1145.am/db/2562999/Eli_Lilly>,
-        <https://1145.am/db/2569849/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2574950/Eli_Lilly>,
-        <https://1145.am/db/2575947/Eli_Lilly>,
-        <https://1145.am/db/2576939/Eli_Lilly>,
-        <https://1145.am/db/2581745/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2581804/Eli_Lilly>,
-        <https://1145.am/db/2583703/Eli_Lilly>,
-        <https://1145.am/db/3195443/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3448439/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3504766/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3536712/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3846248/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3847390/Eli_Lilly_And_Company> .
+        <https://1145.am/db/768105/Eli_Lilly> .
 
 <https://1145.am/db/3549221/Loxo_Oncology-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2174,6 +1584,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/576_dispensary_dispensaries_cannabis_marijuana> ;
     ns1:internalDocId 3555077 ;
     ns1:name "Headset" ;
+    ns1:internalCleanName "headset" ;
     ns1:sameAsHigh <https://1145.am/db/3347732/Headset>,
         <https://1145.am/db/3546903/Headset>,
         <https://1145.am/db/3560491/Headset> .
@@ -2186,6 +1597,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/130_fintech_fintechs_banking_bank> ;
     ns1:internalDocId 3555101 ;
     ns1:name "Quovo" ;
+    ns1:internalCleanName "quovo" ;
     ns1:sameAsHigh <https://1145.am/db/1786832/Quovo>,
         <https://1145.am/db/1812752/Quovo> .
 
@@ -2277,39 +1689,16 @@
     schema:sourceOrganization "CityAM" ;
     schema:url <https://www.cityam.com/softbank-shares-up-reports-scale-back-wework-investment/> .
 
-<https://1145.am/db/3448439/Loxo_Oncology> a org:Organization ;
+<https://1145.am/db/3448439/Loxo_Oncology2> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
     ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
     ns1:basedInHighRaw "NEW YORK" ;
     ns1:description "cancer" ;
     ns1:documentSource <https://1145.am/db/3448439/wwwprnewswirecom_news-releases_alert-rowley-law-pllc-is-investigating-proposed-acquisition-of-loxo-oncology-inc-300774258html> ;
-    ns1:foundName "Loxo Oncology, Inc" ;
+    ns1:foundName "Loxo Oncology Two, Inc" ;
     ns1:internalDocId 3448439 ;
-    ns1:name "Loxo Oncology" ;
-    ns1:sameAsHigh <https://1145.am/db/2348784/Loxo_Oncology>,
-        <https://1145.am/db/2356297/Loxo_Oncology>,
-        <https://1145.am/db/2543220/Loxo_Oncology>,
-        <https://1145.am/db/2566845/Loxo_Oncology>,
-        <https://1145.am/db/3029576/Loxo_Oncology>,
-        <https://1145.am/db/3435240/Loxo_Oncology>,
-        <https://1145.am/db/3464715/Loxo_Oncology>,
-        <https://1145.am/db/3507722/Loxo_Oncology_Inc>,
-        <https://1145.am/db/3549221/Loxo_Oncology>,
-        <https://1145.am/db/3572250/Loxo_Oncology> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2154037/Loxo_Oncology>,
-        <https://1145.am/db/2296074/Loxo_Oncology>,
-        <https://1145.am/db/2337250/Loxo_Oncology>,
-        <https://1145.am/db/2337254/Loxo_Oncology>,
-        <https://1145.am/db/2342630/Loxo_Oncology>,
-        <https://1145.am/db/2352892/Loxo_Oncology>,
-        <https://1145.am/db/2355997/Loxo_Oncology>,
-        <https://1145.am/db/2367656/Loxo_Oncology>,
-        <https://1145.am/db/2368844/Loxo_Oncology>,
-        <https://1145.am/db/2543185/Loxo_Oncology>,
-        <https://1145.am/db/3437629/Loxo_Oncology>,
-        <https://1145.am/db/3559924/Loxo_Oncology>,
-        <https://1145.am/db/3560453/Loxo_Oncology>,
-        <https://1145.am/db/86786/Loxo_Oncology> .
+    ns1:name "Loxo Oncology Two" ;
+    ns1:internalCleanName "loxo oncology two".
 
 <https://1145.am/db/3449351/Core_Medical_Imaging-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2352,6 +1741,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 3549221 ;
     ns1:name "Loxo Oncology" ;
+    ns1:internalCleanName "loxo oncology" ;
     ns1:sameAsHigh <https://1145.am/db/2154037/Loxo_Oncology>,
         <https://1145.am/db/2337250/Loxo_Oncology>,
         <https://1145.am/db/2337254/Loxo_Oncology>,
@@ -2368,14 +1758,9 @@
         <https://1145.am/db/3029576/Loxo_Oncology>,
         <https://1145.am/db/3435240/Loxo_Oncology>,
         <https://1145.am/db/3437629/Loxo_Oncology>,
-        <https://1145.am/db/3448439/Loxo_Oncology>,
-        <https://1145.am/db/3464715/Loxo_Oncology>,
         <https://1145.am/db/3507722/Loxo_Oncology_Inc>,
         <https://1145.am/db/3560453/Loxo_Oncology>,
-        <https://1145.am/db/3572250/Loxo_Oncology> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2296074/Loxo_Oncology>,
-        <https://1145.am/db/3559924/Loxo_Oncology>,
-        <https://1145.am/db/86786/Loxo_Oncology> .
+        <https://1145.am/db/3572250/Loxo_Oncology> .
 
 <https://1145.am/db/3555101/Quovo-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -2599,7 +1984,7 @@
     ns1:internalDocId 3448439 ;
     schema:datePublished "2019-01-07T22:12:00+00:00"^^xsd:dateTime ;
     schema:headline "ALERT: Rowley Law PLLC is Investigating Proposed Acquisition of Loxo Oncology, Inc." ;
-    schema:sourceOrganization "PR Newswire" ;
+    schema:sourceOrganization "PR Newswire - FOO TEST" ;
     schema:url <https://www.prnewswire.com/news-releases/alert-rowley-law-pllc-is-investigating-proposed-acquisition-of-loxo-oncology-inc-300774258.html> .
 
 <https://1145.am/db/3451477/wwwprnewswirecom_news-releases_comptia-expands-public-sector-practice-with-addition-of-public-technology-institute-pti-300774440html> a schema:Article ;

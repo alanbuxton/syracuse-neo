@@ -17,9 +17,8 @@
     ns1:hasRole <https://1145.am/db/1824329/Rebelmouse-Director_Of_Content>,
         <https://1145.am/db/1824329/Rebelmouse-Director_Of_Partnerships> ;
     ns1:internalDocId 1824329 ;
-    ns1:name "RebelMouse" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1794055/Rebelmouse>,
-        <https://1145.am/db/1825928/Rebelmouse> .
+    ns1:internalCleanName "rebelmouse" ;
+    ns1:name "RebelMouse"  .
 
 <https://1145.am/db/1824329/Stephanie_Bagley> a foaf:Person ;
     ns1:documentSource <https://1145.am/db/1824329/techcrunchcom_2013_01_24_rebelmouse-hires-former-cnnmoney-and-vaynermedia-talent-to-build-out-its-content-and-partnerships_> ;
@@ -35,23 +34,8 @@
     ns1:internalDocId 2154354 ;
     ns1:name "China Merchants Bank" ;
     ns1:participant <https://1145.am/db/2154354/Apollomics-Cmb_International-China_Merchants_Bank-Investment-Series_B> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1776576/China_Merchants_Capital>,
-        <https://1145.am/db/1780319/China_Merchants_Capital>,
-        <https://1145.am/db/1781572/China_Merchants_Capital>,
-        <https://1145.am/db/1793781/China_Merchants_Bank>,
-        <https://1145.am/db/1808152/China_Merchants_Bank_Co>,
-        <https://1145.am/db/2060148/China_Merchants_Group>,
-        <https://1145.am/db/2060821/China_Merchants_Group>,
-        <https://1145.am/db/2741165/China_Merchants_Bank>,
-        <https://1145.am/db/2752050/China_Merchants_Group>,
-        <https://1145.am/db/2756487/China_Merchants_Group>,
-        <https://1145.am/db/2758122/China_Merchants_Bank>,
-        <https://1145.am/db/279510/China_Merchants_Bank>,
-        <https://1145.am/db/2997351/China_Merchants_Group>,
-        <https://1145.am/db/3475794/China_Merchants_Capital>,
-        <https://1145.am/db/3640794/China_Merchants_Group_Ltd>,
-        <https://1145.am/db/3862818/China_Merchants_Group>,
-        <https://1145.am/db/3901582/China_Merchants_Group> .
+    ns1:internalCleanName "china merchants bank" ;
+    ns1:internalCleanShortName "china merchants" .
 
 <https://1145.am/db/2154354/Cmb_International> a org:Organization ;
     ns1:basedInLowRaw "China" ;
@@ -61,8 +45,8 @@
     ns1:internalDocId 2154354 ;
     ns1:investor <https://1145.am/db/2154354/Apollomics-Cmb_International-China_Merchants_Bank-Investment-Series_B> ;
     ns1:name "CMB International" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1743749/Cmb_International>,
-        <https://1145.am/db/3160898/Cmb_International> .
+    ns1:internalCleanName "cmb international" ;
+    ns1:internalCleanShortName "cmb" .
 
 <https://1145.am/db/2154356/Alector-Investment-Series_E> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -90,6 +74,8 @@
     ns1:industry "optometry" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/147_ophthalmic_ophthalmologic_ophthalmology_eyecare> ;
     ns1:internalDocId 3457747 ;
+    ns1:internalCleanName "acuity eyecare group" ;
+    ns1:internalCleanShortName "acuity eyecare" ;
     ns1:name "Acuity Eyecare Group" .
 
 <https://1145.am/db/3457747/Riata_Capital_Group> a org:Organization ;
@@ -101,6 +87,8 @@
     ns1:foundName "Riata Capital Group" ;
     ns1:internalDocId 3457747 ;
     ns1:name "Riata Capital Group" ;
+    ns1:internalCleanName "riata capital group" ;
+    ns1:internalCleanShortName "riata capital" ;
     ns1:participant <https://1145.am/db/3457747/Acuity_Eyecare_Group-Riata_Capital_Group-Acquisition-Groups> ;
     ns1:sameAsHigh <https://1145.am/db/1572016/Riata_Capital_Group> .
 
@@ -111,8 +99,9 @@
     ns1:foundName "Houghton International" ;
     ns1:internalDocId 3457764 ;
     ns1:name "Houghton International" ;
-    ns1:protagonist <https://1145.am/db/3457764/Houghton_International-Quaker_Chemical_Corporation-Merger> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3833464/Houghton_International> .
+    ns1:internalCleanName "houghton international" ;
+    ns1:internalCleanShortName "houghton" ;
+    ns1:protagonist <https://1145.am/db/3457764/Houghton_International-Quaker_Chemical_Corporation-Merger> .
 
 <https://1145.am/db/3457764/Quaker_Chemical_Corporation> a org:Organization ;
     ns1:basedInHighClean "Conshohocken" ;
@@ -122,8 +111,9 @@
     ns1:foundName "Quaker Chemical Corporation" ;
     ns1:internalDocId 3457764 ;
     ns1:name "Quaker Chemical Corporation" ;
-    ns1:protagonist <https://1145.am/db/3457764/Houghton_International-Quaker_Chemical_Corporation-Merger> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3833464/Quaker_Chemical_Corporation> .
+    ns1:internalCleanName "quaker chemical corporation" ;
+    ns1:internalCleanShortName "quaker chemical" ;
+    ns1:protagonist <https://1145.am/db/3457764/Houghton_International-Quaker_Chemical_Corporation-Merger> .
 
 <https://1145.am/db/3457792/Synamedia-Investment-Stake> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -154,6 +144,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/47_traveltech_travel_destination_technology> ;
     ns1:internalDocId 3457800 ;
     ns1:name "Yatra Online" ;
+    ns1:internalCleanName "yatra online" ;
     ns1:sameAsHigh <https://1145.am/db/3392211/Yatra_Online>,
         <https://1145.am/db/3409977/Yatra_Online>,
         <https://1145.am/db/3590709/Yatra_Online>,
@@ -173,6 +164,7 @@
     ns1:industry "healthcare" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3458126 ;
+    ns1:internalCleanName "carestream america" ;
     ns1:name "CAREstream America" .
 
 <https://1145.am/db/3458127/The_Hilb_Group> a org:Organization ;
@@ -188,6 +180,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3458127 ;
     ns1:name "The Hilb Group" ;
+    ns1:internalCleanName "the hilb group" ;
+    ns1:internalCleanShortName "the hilb" ;
     ns1:sameAsHigh <https://1145.am/db/1038240/The_Hilb_Group>,
         <https://1145.am/db/1087441/The_Hilb_Group>,
         <https://1145.am/db/1208586/The_Hilb_Group>,
@@ -223,18 +217,7 @@
         <https://1145.am/db/3905889/The_Hilb_Group>,
         <https://1145.am/db/3923172/The_Hilb_Group>,
         <https://1145.am/db/559309/The_Hilb_Group>,
-        <https://1145.am/db/888545/The_Hilb_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1442698/The_Hilb_Group>,
-        <https://1145.am/db/1594168/The_Hilb_Group>,
-        <https://1145.am/db/3471184/The_Hilb_Group_Llc>,
-        <https://1145.am/db/3494698/The_Hilb_Group_Llc>,
-        <https://1145.am/db/3514248/The_Hilb_Group_Llc>,
-        <https://1145.am/db/3584792/The_Hilb_Group_Llc>,
-        <https://1145.am/db/3598999/The_Hilb_Group_Llc>,
-        <https://1145.am/db/3851002/The_Hilb_Group>,
-        <https://1145.am/db/3877553/The_Hilb_Group>,
-        <https://1145.am/db/544856/The_Hilb_Group>,
-        <https://1145.am/db/818083/The_Hilb_Group> .
+        <https://1145.am/db/888545/The_Hilb_Group>  .
 
 <https://1145.am/db/3458138/Orora_Limited> a org:Organization ;
     ns1:basedInLowRaw "Australia" ;
@@ -244,8 +227,9 @@
     ns1:foundName "Orora Limited" ;
     ns1:internalDocId 3458138 ;
     ns1:name "Orora Limited" ;
-    ns1:sameAsHigh <https://1145.am/db/2107041/Orora_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2100760/Orora_Ltd> .
+    ns1:internalCleanName "orora limited" ;
+    ns1:internalCleanShortName "orora" ;
+    ns1:sameAsHigh <https://1145.am/db/2107041/Orora_Ltd>  .
 
 <https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc> a org:Organization ;
     ns1:basedInHighClean "United States" ;
@@ -260,13 +244,14 @@
     ns1:internalDocId 3458145 ;
     ns1:investor <https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment> ;
     ns1:name "Cannabics Pharmaceuticals Inc." ;
+    ns1:internalCleanName "cannabics pharmaceuticals inc" ;
+    ns1:internalCleanShortName "cannabics pharmaceuticals" ;
     ns1:sameAsHigh <https://1145.am/db/3269821/Cannabics_Pharmaceuticals_Inc>,
         <https://1145.am/db/3500498/Cannabics_Pharmaceuticals_Inc>,
         <https://1145.am/db/3619009/Cannabics_Pharmaceuticals_Inc>,
         <https://1145.am/db/3832500/Cannabics_Pharmaceuticals_Inc>,
         <https://1145.am/db/3855451/Cannabics_Pharmaceuticals_Inc>,
-        <https://1145.am/db/3883326/Cannabics_Pharmaceuticals_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3841261/Cannabics_Pharmaceuticals_Inc> .
+        <https://1145.am/db/3883326/Cannabics_Pharmaceuticals_Inc> .
 
 <https://1145.am/db/3458147/Dorae_Inc-Investment-Series_B> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -298,6 +283,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/0_beauty_cosmetics_skincare_cosmetic> ;
     ns1:internalDocId 3458170 ;
     ns1:name "Schweiger Dermatology Group" ;
+    ns1:internalCleanName "schweiger dermatology group" ;
+    ns1:internalCleanShortName "schweiger dermatology" ;
     ns1:sameAsHigh <https://1145.am/db/3269618/Schweiger_Dermatology_Group>,
         <https://1145.am/db/3303837/Schweiger_Dermatology_Group>,
         <https://1145.am/db/3458565/Schweiger_Dermatology_Group>,
@@ -316,26 +303,26 @@
     ns1:internalDocId 3458175 ;
     ns1:investor <https://1145.am/db/3458175/Altus_Power_America-Investment> ;
     ns1:name "Altus Power America" ;
+    ns1:internalCleanName "altus power america" ;
     ns1:sameAsHigh <https://1145.am/db/3139657/Altus_Power_America>,
-        <https://1145.am/db/3830534/Altus_Power_America> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3797109/Altus_Power_America> .
+        <https://1145.am/db/3830534/Altus_Power_America> .
 
 <https://1145.am/db/3459089/Spring_Lake_Equity_Partners> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
     ns1:documentSource <https://1145.am/db/3459089/wwwprnewswirecom_news-releases_forefront-telecare-closes-series-a-funding-announces-new-chief-executive-officer-300774620html> ;
     ns1:foundName "Spring Lake Equity Partners" ;
     ns1:internalDocId 3459089 ;
+    ns1:internalCleanName "spring lake equity partner" ;
+    ns1:internalCleanShortName "spring lake equity" ;
     ns1:investor <https://1145.am/db/3459089/Forefront_Telecare_Inc-Spring_Lake_Equity_Partners-Ziegler_Link_Age_Fund-Investment-Series_A> ;
-    ns1:name "Spring Lake Equity Partners" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2110317/Spring_Lake_Equity_Partners>,
-        <https://1145.am/db/3147007/Spring_Lake_Equity_Partners>,
-        <https://1145.am/db/416849/Spring_Lake_Equity_Partners> .
+    ns1:name "Spring Lake Equity Partners"  .
 
 <https://1145.am/db/3459089/Ziegler_Link_Age_Fund> a org:Organization ;
     ns1:basedInLowRaw "United States" ;
     ns1:documentSource <https://1145.am/db/3459089/wwwprnewswirecom_news-releases_forefront-telecare-closes-series-a-funding-announces-new-chief-executive-officer-300774620html> ;
     ns1:foundName "Ziegler Link●Age Fund" ;
     ns1:internalDocId 3459089 ;
+    ns1:internalCleanName "ziegler linkage fund" ;
     ns1:investor <https://1145.am/db/3459089/Forefront_Telecare_Inc-Spring_Lake_Equity_Partners-Ziegler_Link_Age_Fund-Investment-Series_A> ;
     ns1:name "Ziegler Link●Age Fund" .
 
@@ -351,6 +338,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/83_aerospace_defense_defence_usaf> ;
     ns1:internalDocId 3459222 ;
     ns1:name "Parsons" ;
+    ns1:internalCleanName "parsons" ;
     ns1:sameAsHigh <https://1145.am/db/1121874/Parsons_Corporation>,
         <https://1145.am/db/3265582/Parsons_Corporation>,
         <https://1145.am/db/3324611/Parsons_Corporation>,
@@ -362,19 +350,7 @@
         <https://1145.am/db/3612835/Parsons_Corporation>,
         <https://1145.am/db/3633404/Parsons_Corporation>,
         <https://1145.am/db/3709695/Parsons>,
-        <https://1145.am/db/3844746/Parsons> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1079311/Parsons_Corporation>,
-        <https://1145.am/db/1229154/Parsons_Corporation>,
-        <https://1145.am/db/2902252/Parsons_Corp>,
-        <https://1145.am/db/3194373/Parsons_Corporation>,
-        <https://1145.am/db/3243520/Parsons_Corporation>,
-        <https://1145.am/db/3279683/Parsons_Corporation>,
-        <https://1145.am/db/3479472/Parsons_Corporation>,
-        <https://1145.am/db/3505841/Parsons_Corporation>,
-        <https://1145.am/db/3629334/Parsons_Corporation>,
-        <https://1145.am/db/3649118/Parsons>,
-        <https://1145.am/db/4027537/Parsons_Corporation>,
-        <https://1145.am/db/505447/Parsons_Corporation> .
+        <https://1145.am/db/3844746/Parsons> .
 
 <https://1145.am/db/3460191/Bp_Energy_Partners> a org:Organization ;
     ns1:basedInHighClean "Dallas" ;
@@ -389,8 +365,9 @@
     ns1:internalDocId 3460191 ;
     ns1:investor <https://1145.am/db/3460191/Cryopeak-Investment-Interest> ;
     ns1:name "BP Energy Partners" ;
-    ns1:sameAsHigh <https://1145.am/db/3581968/Bp_Energy_Partners_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3147015/Bp_Energy_Partners_Llc> .
+    ns1:internalCleanName "bp energy partners" ;
+    ns1:internalCleanShortName "bp energy" ;
+    ns1:sameAsHigh <https://1145.am/db/3581968/Bp_Energy_Partners_Llc> .
 
 <https://1145.am/db/3460219/Atria_Wealth_Solutions> a org:Organization ;
     ns1:basedInHighClean "Houston",
@@ -415,6 +392,8 @@
     ns1:internalDocId 3460219 ;
     ns1:name "Atria",
         "Atria Wealth Solutions" ;
+    ns1:internalCleanName "atria" , "atria wealth solutions" ;
+    ns1:internalCleanShortName "atria wealth" ;
     ns1:sameAsHigh <https://1145.am/db/1538604/Atria_Wealth_Solutions>,
         <https://1145.am/db/3601535/Atria_Wealth_Solutions>,
         <https://1145.am/db/9750/Atria_Wealth_Solutions> .
@@ -430,6 +409,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/303_hoteliers_hotel_hotels_hospitality> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/107_hotel_hospitality_investment_lodging> ;
     ns1:internalDocId 3544275 ;
+    ns1:internalCleanName "viceroys" ;
     ns1:locationAdded <https://1145.am/db/3544275/Viceroys-Added-Washington_Dc> ;
     ns1:name "Viceroy's" .
 
@@ -444,9 +424,10 @@
     ns1:internalDocId 3614570 ;
     ns1:locationAdded <https://1145.am/db/3614570/Phoenix_Rehabilitation_And_Health_Services-Added-Smithfield_Va> ;
     ns1:name "PHOENIX Rehabilitation and Health Services" ;
+    ns1:internalCleanName "phoenix rehabilitation and health services" ;
+    ns1:internalCleanShortName "phoenix rehabilitation and health" ;
     ns1:sameAsHigh <https://1145.am/db/3219102/Phoenix_Rehabilitation_And_Health_Services>,
-        <https://1145.am/db/3868316/Phoenix_Rehabilitation_And_Health_Services> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3159265/Phoenix_Rehabilitation_And_Health_Services> .
+        <https://1145.am/db/3868316/Phoenix_Rehabilitation_And_Health_Services>  .
 
 <https://1145.am/db/1824329/Niketa_Patel-Starting-Director_Of_Content> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -488,14 +469,12 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/714_pharmaceutical_pharmaceuticals_pharma_services> ;
     ns1:internalDocId 2154354 ;
     ns1:name "Apollomics" ;
+    ns1:internalCleanName "apollomics" ;
     ns1:sameAsHigh <https://1145.am/db/1341258/Apollomics_Inc>,
         <https://1145.am/db/4059653/Apollomics_Inc>,
         <https://1145.am/db/4061618/Apollomics>,
         <https://1145.am/db/4062645/Apollomics>,
-        <https://1145.am/db/4222528/Apollomics_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2278932/Apollomics>,
-        <https://1145.am/db/3655001/Apollomics>,
-        <https://1145.am/db/3676840/Apollomics> .
+        <https://1145.am/db/4222528/Apollomics_Inc> .
 
 <https://1145.am/db/2154356/Alector> a org:Organization ;
     ns1:documentSource <https://1145.am/db/2154356/wwwfiercebiotechcom_biotech_ipo-bonanza-as-biotechs-get-while-iron-s-hot-or-before-it-cools> ;
@@ -505,6 +484,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical> ;
     ns1:internalDocId 2154356 ;
     ns1:name "Alector" ;
+    ns1:internalCleanName "alector" ;
     ns1:sameAsHigh <https://1145.am/db/2292895/Alector>,
         <https://1145.am/db/2370208/Alector>,
         <https://1145.am/db/2370295/Alector>,
@@ -524,11 +504,11 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/109_software_tools_applications_development> ;
     ns1:internalDocId 3457792 ;
     ns1:name "Synamedia" ;
+    ns1:internalCleanName "synamedia" ;
     ns1:sameAsHigh <https://1145.am/db/1199213/Synamedia>,
         <https://1145.am/db/2179564/Synamedia>,
         <https://1145.am/db/3222108/Synamedia>,
-        <https://1145.am/db/400651/Synamedia> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2166549/Synamedia> .
+        <https://1145.am/db/400651/Synamedia>  .
 
 <https://1145.am/db/3457800/Pl_Worldways-Acquisition-Business> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -571,6 +551,7 @@
     ns1:industry "healthcare" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3458126 ;
+    ns1:internalCleanName "axiom therapies" ;
     ns1:name "Axiom Therapies" .
 
 <https://1145.am/db/3458126/Axiom_Therapies-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -598,6 +579,7 @@
     ns1:industry "Healthcare" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3458126 ;
+    ns1:internalCleanName "catalyst sales and marketing" ;
     ns1:name "Catalyst Sales & Marketing" .
 
 <https://1145.am/db/3458126/Catalyst_Sales_Marketing-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -622,6 +604,8 @@
     ns1:documentSource <https://1145.am/db/3458127/wwwprnewswirecom_news-releases_the-hilb-group-llc-adds-aloisio-insurance-associates-inc-300773794html> ;
     ns1:foundName "Aloisio Insurance Associates, Inc." ;
     ns1:industry "Insurance" ;
+    ns1:internalCleanName "aloisio insurance associates inc" ;
+    ns1:internalCleanShortName "aloisio insurance" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 3458127 ;
@@ -652,6 +636,8 @@
     ns1:documentSource <https://1145.am/db/3458138/wwwprnewswirecom_news-releases_bgl-announces-the-sale-of-pollock-to-orora-limited-300774744html> ;
     ns1:foundName "Brown Gibbons Lang & Company" ;
     ns1:internalDocId 3458138 ;
+    ns1:internalCleanName "browns gibbons lang and company" ;
+    ns1:internalCleanShortName "browns gibbons" ;
     ns1:name "Brown Gibbons Lang & Company" ;
     ns1:sameAsHigh <https://1145.am/db/1081481/Brown_Gibbons_Lang>,
         <https://1145.am/db/1163368/Brown_Gibbons_Lang_Company>,
@@ -691,32 +677,7 @@
         <https://1145.am/db/809411/Brown_Gibbons_Lang_Company>,
         <https://1145.am/db/839007/Brown_Gibbons_Lang_Company>,
         <https://1145.am/db/843060/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/976584/Brown_Gibbons_Lang_Company> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1029337/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1092253/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1114072/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1190493/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1384044/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1430426/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/1529343/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3153067/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3170908/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3185521/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3206745/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3251170/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3476467/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3571837/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3595266/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3863409/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3885528/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/3910405/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/517573/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/533200/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/542774/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/624462/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/715510/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/757876/Brown_Gibbons_Lang_Company>,
-        <https://1145.am/db/940328/Brown_Gibbons_Lang_Company> .
+        <https://1145.am/db/976584/Brown_Gibbons_Lang_Company> .
 
 <https://1145.am/db/3458138/Pollock_Investments_Inc> a org:Organization ;
     ns1:basedInLowRaw "Australia",
@@ -728,6 +689,8 @@
     ns1:industry "manufacturer and distributor of packaging and facilities supplies and equipment" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/363_distributor_distributors_distribution_wholesale> ;
     ns1:internalDocId 3458138 ;
+    ns1:internalCleanName "pollock investments inc" ;
+    ns1:internalCleanShortName "pollock investments" ;
     ns1:name "Pollock Investments Inc",
         "Pollock Investments Inc." .
 
@@ -787,10 +750,9 @@
     ns1:internalDocId 3458145 ;
     ns1:name "Seedo",
         "Seedo Corp." ;
-    ns1:sameAsHigh <https://1145.am/db/3360783/Seedo> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3396753/Seedo_Corp>,
-        <https://1145.am/db/3397671/Seedo_Corp>,
-        <https://1145.am/db/3614781/Seedo_Corp> .
+    ns1:internalCleanName "seedo corp", "seedo" ;
+    ns1:internalCleanShortName "seedo" ;
+    ns1:sameAsHigh <https://1145.am/db/3360783/Seedo> .
 
 <https://1145.am/db/3458147/Dorae_Inc> a org:Organization ;
     ns1:basedInLowRaw "North American and European" ;
@@ -798,8 +760,9 @@
     ns1:documentSource <https://1145.am/db/3458147/wwwprnewswirecom_news-releases_dorae-inc-completes-series-b-financing-860022218html> ;
     ns1:foundName "Dorae Inc." ;
     ns1:internalDocId 3458147 ;
-    ns1:name "Dorae Inc." ;
-    ns1:sameAsNameOnly <https://1145.am/db/3839822/Dorae> .
+    ns1:internalCleanName "dorae inc" ;
+    ns1:internalCleanShortName "dorae" ;
+    ns1:name "Dorae Inc." .
 
 <https://1145.am/db/3458170/Lynn_Klein> a org:Organization ;
     ns1:basedInHighClean "Bala Cynwyd" ;
@@ -811,6 +774,7 @@
     ns1:industry "Dermatology" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/0_beauty_cosmetics_skincare_cosmetic> ;
     ns1:internalDocId 3458170 ;
+    ns1:internalCleanName "lynn klein" ;
     ns1:name "Lynn Klein" .
 
 <https://1145.am/db/3458170/Lynn_Klein-Acquisition-Practices> a ns1:CorporateFinanceActivity ;
@@ -855,6 +819,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare> ;
     ns1:internalDocId 3459089 ;
     ns1:name "Forefront Telecare Inc" ;
+    ns1:internalCleanName "forefront telecare inc" ;
+    ns1:internalCleanShortName "forefront telecare" ;
     ns1:sameAsHigh <https://1145.am/db/3171944/Forefront_Telecare> .
 
 <https://1145.am/db/3459222/Ogsystems> a org:Organization ;
@@ -865,6 +831,7 @@
     ns1:documentSource <https://1145.am/db/3459222/wwwprnewswirecom_news-releases_parsons-acquires-ogsystems-300774301html> ;
     ns1:foundName "OGSystems" ;
     ns1:industry "defense and intelligence" ;
+    ns1:internalCleanName"ogsystems" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/80_defence_defense_security_military> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/83_aerospace_defense_defence_usaf> ;
     ns1:internalDocId 3459222 ;
@@ -897,6 +864,7 @@
     ns1:foundName "Cryopeak LNG Solutions Corp" ;
     ns1:internalDocId 3460191 ;
     ns1:name "Cryopeak" ;
+    ns1:internalCleanName "cryopeak" ;
     ns1:sameAsHigh <https://1145.am/db/3170514/Cryopeak> .
 
 <https://1145.am/db/3460191/Cryopeak-Investment-Interest> a ns1:CorporateFinanceActivity ;
@@ -928,6 +896,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/262_investing_financial_wealth_planning> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/529_wealthtech_wealth_technology_tech> ;
     ns1:internalDocId 3460219 ;
+    ns1:internalCleanName "next financial group" ;
+    ns1:internalCleanShortName "next financial" ;
     ns1:name "NEXT Financial Group" .
 
 <https://1145.am/db/3460219/Next_Financial_Group-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -951,6 +921,8 @@
     ns1:documentSource <https://1145.am/db/3460219/wwwprnewswirecom_news-releases_atria-wealth-solutions-acquires-independent-wealth-management-firm-next-financial-group-inc-300774747html> ;
     ns1:foundName "NEXT" ;
     ns1:internalDocId 3460219 ;
+    ns1:internalCleanName "next financial insurance services company" ;
+    ns1:internalCleanShortName "next financial insurance" ;
     ns1:name "Next Financial Insurance Services Company" .
 
 <https://1145.am/db/3460219/Next_Financial_Insurance_Services_Company-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1206,6 +1178,7 @@
     ns1:industry "travel services" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/47_traveltech_travel_destination_technology> ;
     ns1:internalDocId 3457800 ;
+    ns1:internalCleanName "pl worldways" ;
     ns1:name "PL Worldways" .
 
 <https://1145.am/db/3459089/Forefront_Telecare_Inc-Spring_Lake_Equity_Partners-Ziegler_Link_Age_Fund-Investment-Series_A> a ns1:CorporateFinanceActivity ;

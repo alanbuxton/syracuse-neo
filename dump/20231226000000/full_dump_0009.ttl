@@ -14,53 +14,14 @@
     ns1:foundName "Daniel Kretinsky" ;
     ns1:internalDocId 4290155 ;
     ns1:name "Daniel Kretinsky" ;
+    ns1:internalCleanName "daniel kretinsky" ;
     ns1:sameAsHigh <https://1145.am/db/1974476/Daniel_Kretinsky>,
         <https://1145.am/db/2063929/Daniel_Kretinsky>,
         <https://1145.am/db/2128492/Daniel_Kretinsky>,
         <https://1145.am/db/2149568/Daniel_Kretinsky>,
         <https://1145.am/db/2790495/Daniel_Kretinsky>,
         <https://1145.am/db/4246777/Daniel_Kretinsky>,
-        <https://1145.am/db/4284335/Daniel_K_Et_Nsk> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1368378/Daniel_Kretinsky>,
-        <https://1145.am/db/1462796/Daniel_Kretinsky>,
-        <https://1145.am/db/1682020/Daniel_Kretinsky>,
-        <https://1145.am/db/1689056/Daniel_Kretinsky>,
-        <https://1145.am/db/1943595/Daniel_Kretinsky>,
-        <https://1145.am/db/1966172/Daniel_Kretinsky>,
-        <https://1145.am/db/1979799/Daniel_Kretinsky>,
-        <https://1145.am/db/2015786/Daniel_Kretinsky>,
-        <https://1145.am/db/2032696/Daniel_Kretinsky>,
-        <https://1145.am/db/2036757/Daniel_Kretinsky>,
-        <https://1145.am/db/2048225/Daniel_Kretinsky>,
-        <https://1145.am/db/2055291/Daniel_Kretinsky>,
-        <https://1145.am/db/2055330/Daniel_Kretinsky>,
-        <https://1145.am/db/2073985/Daniel_Kretinsky>,
-        <https://1145.am/db/2087527/Daniel_Kretinsky>,
-        <https://1145.am/db/2094334/Daniel_Kretinsky>,
-        <https://1145.am/db/2141041/Daniel_Kretinsky>,
-        <https://1145.am/db/2765147/Daniel_Kretinsky>,
-        <https://1145.am/db/2792717/Daniel_Kretinsky>,
-        <https://1145.am/db/2825514/Daniel_Kretinsky>,
-        <https://1145.am/db/2852351/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/3069029/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/3074425/Daniel_Kretinsky>,
-        <https://1145.am/db/3111249/Daniel_Kretinsky>,
-        <https://1145.am/db/358843/Daniel_Kretinsky>,
-        <https://1145.am/db/3976357/Daniel_Kretinsky>,
-        <https://1145.am/db/4039873/Daniel_Kretinsky>,
-        <https://1145.am/db/4045272/Daniel_Kretinsky>,
-        <https://1145.am/db/4168197/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/4192562/Daniel_Kretinsky>,
-        <https://1145.am/db/4192810/Daniel_Kretinsky>,
-        <https://1145.am/db/4192824/Daniel_Kretinsky>,
-        <https://1145.am/db/4250239/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/4252342/Daniel_Kretinsky>,
-        <https://1145.am/db/4252434/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/4280010/Daniel_Kretinsky>,
-        <https://1145.am/db/4280022/Daniel_K_Et_Nsk>,
-        <https://1145.am/db/4282728/Daniel_Kretinsky>,
-        <https://1145.am/db/4283778/Daniel_Kretinsky>,
-        <https://1145.am/db/4284279/Daniel_Kretinsky> .
+        <https://1145.am/db/4284335/Daniel_K_Et_Nsk>.
 
 <https://1145.am/db/4290155/Ep_Group> a org:Organization ;
     ns1:basedInHighClean "Czechia" ;
@@ -72,11 +33,9 @@
     ns1:foundName "EP Group" ;
     ns1:internalDocId 4290155 ;
     ns1:name "EP Group" ;
-    ns1:sameAsHigh <https://1145.am/db/4284335/Ep_Group> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4250239/Ep_Group>,
-        <https://1145.am/db/4280010/Ep_Group>,
-        <https://1145.am/db/4280022/Ep_Group>,
-        <https://1145.am/db/4282728/Ep_Group> .
+    ns1:internalCleanName "ep group";
+    ns1:internalCleanShortName "ep" ;
+    ns1:sameAsHigh <https://1145.am/db/4284335/Ep_Group> .
 
 <https://1145.am/db/4290170/Abbvie_Inc> a org:Organization ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -89,6 +48,8 @@
     ns1:internalDocId 4290170 ;
     ns1:name "AbbVie",
         "AbbVie, Inc" ;
+    ns1:internalCleanName "abbvie", "abbvie inc" ;
+    ns1:internalCleanShortName "abbvie" ;
     ns1:protagonist <https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/1428452/Abbvie>,
         <https://1145.am/db/1433467/Abbvie>,
@@ -252,26 +213,7 @@
         <https://1145.am/db/4258385/Abbvie_Inc>,
         <https://1145.am/db/4266377/Abbvie_Inc>,
         <https://1145.am/db/4280639/Abbvie_Inc>,
-        <https://1145.am/db/80587/Abbvie_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2286189/Abbvie>,
-        <https://1145.am/db/2293662/Abbvie>,
-        <https://1145.am/db/2339733/Abbvie_Inc>,
-        <https://1145.am/db/2362638/Abbvie_Inc>,
-        <https://1145.am/db/2362641/Abbvie>,
-        <https://1145.am/db/2363364/Abbvie>,
-        <https://1145.am/db/2369000/Abbvie>,
-        <https://1145.am/db/2549367/Abbvie>,
-        <https://1145.am/db/2585132/Abbvie>,
-        <https://1145.am/db/2788920/Abbvie_Inc>,
-        <https://1145.am/db/2958817/Abbvie>,
-        <https://1145.am/db/2959955/Abbvie>,
-        <https://1145.am/db/3527865/Abbvie>,
-        <https://1145.am/db/3620378/Abbvie_Inc>,
-        <https://1145.am/db/3762766/Abbvie>,
-        <https://1145.am/db/3892462/Abbvie>,
-        <https://1145.am/db/3894727/Abbvie>,
-        <https://1145.am/db/4102123/Abbvie>,
-        <https://1145.am/db/4116326/Abbvie> .
+        <https://1145.am/db/80587/Abbvie_Inc> .
 
 <https://1145.am/db/4290170/Bleichmar_Fonti_Auld_Llp> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -285,6 +227,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:internalDocId 4290170 ;
     ns1:name "Bleichmar Fonti & Auld LLP" ;
+    ns1:internalCleanName "bleichmar fonti and auld llp" ;
+    ns1:internalCleanShortName "bleichmar fonti and auld" ;
     ns1:participant <https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/4258385/Bleichmar_Fonti_Auld_Llp>,
         <https://1145.am/db/4266377/Bleichmar_Fonti_Auld_Llp>,
@@ -298,10 +242,8 @@
     ns1:foundName "Klein Group Ltd" ;
     ns1:internalDocId 4290245 ;
     ns1:name "Klein Group Ltd" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1631436/Klein>,
-        <https://1145.am/db/1695850/Klein>,
-        <https://1145.am/db/3215543/Klein_Group>,
-        <https://1145.am/db/4279432/Klein_Group_Ltd> .
+    ns1:internalCleanName "klein group ltd" ;
+    ns1:internalCleanShortName "klein group"  .
 
 <https://1145.am/db/4290245/Postmedia_Network_Canada_Corp> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -312,18 +254,11 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/105_media_newsroom_news_newstech> ;
     ns1:internalDocId 4290245 ;
     ns1:name "Postmedia Network Canada Corp." ;
+    ns1:internalCleanName "postmedia network canada corp" ;
+    ns1:internalCleanShortName "postmedia network canada" ;
     ns1:participant <https://1145.am/db/4290245/Winnipeg_Sun-Acquisition-Division> ;
     ns1:sameAsHigh <https://1145.am/db/2058745/Postmedia_Network_Canada>,
-        <https://1145.am/db/837880/Postmedia_Network_Canada_Corp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1463934/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/2050975/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/2058272/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/3726292/Postmedia_Network_Canada>,
-        <https://1145.am/db/4279432/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/4279662/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/843593/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/930047/Postmedia_Network_Canada_Corp>,
-        <https://1145.am/db/931852/Postmedia_Network_Canada_Corp> .
+        <https://1145.am/db/837880/Postmedia_Network_Canada_Corp>  .
 
 <https://1145.am/db/4290319/Prosperity7> a org:Organization ;
     ns1:basedInLowRaw "Saudi Arabia" ;
@@ -332,8 +267,7 @@
     ns1:internalDocId 4290319 ;
     ns1:investor <https://1145.am/db/4290319/Prosperity7-Investment> ;
     ns1:name "Prosperity7" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1734522/Prosperity7>,
-        <https://1145.am/db/2073127/Prosperity7> .
+    ns1:internalCleanName "prosperity7" .
 
 <https://1145.am/db/4290319/Zhipu_Ai-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -357,6 +291,7 @@
     ns1:foundName "Pascale St-Onge" ;
     ns1:hasRole <https://1145.am/db/4290421/Pascale_St-Onge-Board_Chair> ;
     ns1:internalDocId 4290421 ;
+    ns1:internalCleanName "pascal st onge" ;
     ns1:name "Pascale St-Onge" .
 
 <https://1145.am/db/4290421/Paul_Genest> a foaf:Person ;
@@ -393,6 +328,7 @@
     ns1:documentSource <https://1145.am/db/4290459/wwwmarketwatchcom_story_bbva-calls-shareholder-vote-on-capital-increase-for-12-bln-sabadell-bid-f6af5231> ;
     ns1:foundName "Banco Bilbao Vizcaya Argentaria" ;
     ns1:industry "bank" ;
+    ns1:internalCleanName "banco bilbao vizcaya argentaria" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:internalDocId 4290459 ;
@@ -405,11 +341,7 @@
         <https://1145.am/db/4221360/Banco_Bilbao_Vizcaya_Argentaria>,
         <https://1145.am/db/4226500/Banco_Bilbao_Vizcaya_Argentaria>,
         <https://1145.am/db/4240187/Banco_Bilbao_Vizcaya_Argentaria>,
-        <https://1145.am/db/4274486/Banco_Bilbao_Vizcaya_Argentaria> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1968344/Banco_Bilbao_Vizcaya_Argentaria>,
-        <https://1145.am/db/4206835/Banco_Bilbao_Vizcaya_Argentaria>,
-        <https://1145.am/db/4218315/Banco_Bilbao_Vizcaya_Argentaria>,
-        <https://1145.am/db/4223103/Banco_Bilbao_Vizcaya_Argentaria> .
+        <https://1145.am/db/4274486/Banco_Bilbao_Vizcaya_Argentaria>  .
 
 <https://1145.am/db/4290467/Stmicroelectronics> a org:Organization ;
     ns1:basedInLowRaw "Europe" ;
@@ -423,24 +355,14 @@
     ns1:locationAdded <https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily>,
         <https://1145.am/db/4290467/Stmicroelectronics-Added-Italy> ;
     ns1:name "STMicroelectronics" ;
+    ns1:internalCleanName "stmicroelectronics" ;
     ns1:sameAsHigh <https://1145.am/db/2028301/Stmicroelectronics>,
         <https://1145.am/db/2417207/Stmicroelectronics>,
         <https://1145.am/db/2666624/Stmicroelectronics>,
         <https://1145.am/db/2670399/Stmicroelectronics>,
         <https://1145.am/db/2670417/Stmicroelectronics>,
         <https://1145.am/db/337783/Stmicroelectronics>,
-        <https://1145.am/db/337802/Stmicroelectronics> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1393666/Stmicroelectronics>,
-        <https://1145.am/db/1393870/Stmicroelectronics>,
-        <https://1145.am/db/2166458/Stmicroelectronics>,
-        <https://1145.am/db/2411677/Stmicroelectronics>,
-        <https://1145.am/db/2446431/Stmicroelectronics>,
-        <https://1145.am/db/2670700/Stmicroelectronics>,
-        <https://1145.am/db/2677181/Stmicroelectronics>,
-        <https://1145.am/db/3699902/Stmicroelectronics>,
-        <https://1145.am/db/3735785/Stmicroelectronics>,
-        <https://1145.am/db/4249834/Stmicroelectronics>,
-        <https://1145.am/db/4288302/Stmicroelectronics> .
+        <https://1145.am/db/337802/Stmicroelectronics>  .
 
 <https://1145.am/db/4290472/Associated_British_Foods-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -466,40 +388,11 @@
     ns1:foundName "Royal Mail" ;
     ns1:internalDocId 4290155 ;
     ns1:name "Royal Mail" ;
+    ns1:internalCleanName "royal mail"; 
     ns1:sameAsHigh <https://1145.am/db/2959107/Royal_Mail>,
         <https://1145.am/db/2984033/Royal_Mail>,
         <https://1145.am/db/3073967/Royal_Mail>,
-        <https://1145.am/db/4284279/Royal_Mail> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
-        <https://1145.am/db/194587/Royal_Mail_Plc>,
-        <https://1145.am/db/194605/Royal_Mail_Plc>,
-        <https://1145.am/db/194606/Royal_Mail_Plc>,
-        <https://1145.am/db/194607/Royal_Mail_Plc>,
-        <https://1145.am/db/1998848/Royal_Mail>,
-        <https://1145.am/db/2005816/Royal_Mail>,
-        <https://1145.am/db/2841455/Royal_Mail>,
-        <https://1145.am/db/2847880/Royal_Mail>,
-        <https://1145.am/db/2864441/Royal_Mail>,
-        <https://1145.am/db/2939544/Royal_Mail>,
-        <https://1145.am/db/2941320/Royal_Mail>,
-        <https://1145.am/db/2945763/Royal_Mail>,
-        <https://1145.am/db/2969395/Royal_Mail>,
-        <https://1145.am/db/2977176/Royal_Mail>,
-        <https://1145.am/db/2977364/Royal_Mail>,
-        <https://1145.am/db/2988964/Royal_Mail>,
-        <https://1145.am/db/2988998/Royal_Mail>,
-        <https://1145.am/db/3009355/Royal_Mail>,
-        <https://1145.am/db/3023028/Royal_Mail>,
-        <https://1145.am/db/3026949/Royal_Mail>,
-        <https://1145.am/db/3050026/Royal_Mail>,
-        <https://1145.am/db/3058845/Royal_Mail>,
-        <https://1145.am/db/4001762/Royal_Mail>,
-        <https://1145.am/db/4133454/Royal_Mail>,
-        <https://1145.am/db/4168197/Royal_Mail>,
-        <https://1145.am/db/4280010/Royal_Mail>,
-        <https://1145.am/db/4280022/Royal_Mail>,
-        <https://1145.am/db/4283778/Royal_Mail>,
-        <https://1145.am/db/534151/Royal_Mail> .
+        <https://1145.am/db/4284279/Royal_Mail> .
 
 <https://1145.am/db/4290170/Abbvie_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -521,12 +414,12 @@
     ns1:internalDocId 4290170 ;
     ns1:name "Cerevel",
         "Cerevel Therapeutics Holdings, Inc." ;
+    ns1:internalCleanName "cerevel" , "cerevel therapeutics holdings inc" ;
+    ns1:internalCleanShortName "cereval therapeutics" ;
     ns1:protagonist <https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger> ;
     ns1:sameAsHigh <https://1145.am/db/4258385/Cerevel_Therapeutics_Holdings_Inc>,
         <https://1145.am/db/4266377/Cerevel_Therapeutics_Holdings_Inc>,
-        <https://1145.am/db/4280639/Cerevel_Therapeutics_Holdings_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1266868/Cerevel_Therapeutics_Holdings_Inc>,
-        <https://1145.am/db/3949995/Cerevel_Therapeutics_Holdings> .
+        <https://1145.am/db/4280639/Cerevel_Therapeutics_Holdings_Inc>.
 
 <https://1145.am/db/4290170/Cerevel_Therapeutics_Holdings_Inc-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -552,10 +445,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/105_media_newsroom_news_newstech> ;
     ns1:internalDocId 4290245 ;
     ns1:name "Postmedia Network Inc." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1571680/Postmedia_Network_Inc>,
-        <https://1145.am/db/1572741/Postmedia_Network_Inc>,
-        <https://1145.am/db/1572775/Postmedia_Network_Inc>,
-        <https://1145.am/db/4279662/Postmedia_Network_Inc> .
+    ns1:internalCleanName "postmedia network inc" ;
+    ns1:internalCleanShortName "postmedia network" .
 
 <https://1145.am/db/4290245/Winnipeg_Sun> a org:Organization ;
     ns1:basedInHighClean "Canada" ;
@@ -568,8 +459,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/105_media_newsroom_news_newstech> ;
     ns1:internalDocId 4290245 ;
     ns1:name "Winnipeg Sun" ;
-    ns1:sameAsHigh <https://1145.am/db/4279662/Winnipeg_Sun> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4279432/Winnipeg_Sun> .
+    ns1:internalCleanName "winnipeg sun" ;
+    ns1:sameAsHigh <https://1145.am/db/4279662/Winnipeg_Sun>  .
 
 <https://1145.am/db/4290319/Prosperity7-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -593,7 +484,7 @@
     ns1:foundName "Zhipu AI" ;
     ns1:internalDocId 4290319 ;
     ns1:name "Zhipu AI" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2764146/Zhipu_Ai> .
+    ns1:internalCleanName "zhipu ai" .
 
 <https://1145.am/db/4290421/Paul_Genest-Starting-Board_Chair> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -619,6 +510,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/49_logistics_supply_procurement_technology>,
         <https://1145.am/db/industry/653_consulting_consultancy_supply_services> ;
     ns1:internalDocId 4290457 ;
+    ns1:internalCleanName "gyg" ;
     ns1:name "GYG" .
 
 <https://1145.am/db/4290459/Banco_De_Sabadell> a org:Organization ;
@@ -632,13 +524,12 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:internalDocId 4290459 ;
     ns1:name "Banco de Sabadell" ;
+    ns1:internalCleanName "banco de sabadell" ;
     ns1:sameAsHigh <https://1145.am/db/2973108/Banco_De_Sabadell>,
         <https://1145.am/db/3058614/Banco_De_Sabadell>,
         <https://1145.am/db/4200831/Banco_De_Sabadell>,
         <https://1145.am/db/4226500/Banco_De_Sabadell>,
-        <https://1145.am/db/570989/Banco_De_Sabadell> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4206835/Banco_De_Sabadell>,
-        <https://1145.am/db/4223103/Banco_De_Sabadell> .
+        <https://1145.am/db/570989/Banco_De_Sabadell>  .
 
 <https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -718,11 +609,7 @@
     ns1:foundName "Associated British Foods" ;
     ns1:internalDocId 4290472 ;
     ns1:name "Associated British Foods" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2028453/Associated_British_Foods>,
-        <https://1145.am/db/2848219/Associated_British_Foods>,
-        <https://1145.am/db/2998654/Associated_British_Foods>,
-        <https://1145.am/db/3091315/Associated_British_Foods>,
-        <https://1145.am/db/820225/Associated_British_Foods> .
+    ns1:internalCleanName "associated british foods" .
 
 <https://1145.am/db/geonames_location/2077456> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_> ;

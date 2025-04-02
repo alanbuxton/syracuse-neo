@@ -25,11 +25,10 @@
     ns1:foundName "Royal Mail" ;
     ns1:internalDocId 4001762 ;
     ns1:name "Royal Mail" ;
+    ns1:internalCleanName "royal mail" ;
     ns1:sameAsHigh <https://1145.am/db/4168197/Royal_Mail>,
         <https://1145.am/db/2984033/Royal_Mail>,
-        <https://1145.am/db/4290155/Royal_Mail> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
-        <https://1145.am/db/534151/Royal_Mail> .
+        <https://1145.am/db/4290155/Royal_Mail> .
 
 <https://1145.am/db/4001762/Solano_Partners> a org:Organization ;
     ns1:basedInLowRaw "UK" ;
@@ -40,6 +39,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/165_banks_bank_banking_bankers> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:internalDocId 4001762 ;
+    ns1:internalCleanName "solano" ;
     ns1:name "Solano Partners" ;
     ns1:protagonist <https://1145.am/db/4001762/Yodel-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/4001774/Solano_Partners> .
@@ -54,8 +54,8 @@
         <https://1145.am/db/industry/707_logistics_property_reit_properties> ;
     ns1:internalDocId 4001762 ;
     ns1:name "YDLGP" ;
-    ns1:protagonist <https://1145.am/db/4001762/Yodel-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/4001774/Ydlgp_Limited> .
+    ns1:internalCleanName "ydglp" ;
+    ns1:protagonist <https://1145.am/db/4001762/Yodel-Acquisition> .
 
 
 <https://1145.am/db/4001762/Czech_Parcel_Giant> a org:Organization ;
@@ -66,7 +66,7 @@
     ns1:foundName "Packeta" ;
     ns1:internalDocId 4001762 ;
     ns1:name "Czech parcel giant" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2841455/Czech_Parcel_Giant> .
+    ns1:internalCleanName "packeta" .
 
 <https://1145.am/db/4001762/Czech_Parcel_Giant-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -89,8 +89,7 @@
     ns1:foundName "Evri" ;
     ns1:internalDocId 4001762 ;
     ns1:name "Evri" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1725824/Evri>,
-        <https://1145.am/db/3997687/Evri> .
+    ns1:internalCleanName "evri" .
 
 <https://1145.am/db/4001762/Yodel> a org:Organization ;
     ns1:basedInHighClean "United Kingdom of Great Britain and Northern Ireland" ;
@@ -103,6 +102,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/447_parcel_parcels_delivery_couriers> ;
     ns1:internalDocId 4001762 ;
     ns1:name "Yodel" ;
+    ns1:internalCleanName "yodel" ;
     ns1:sameAsHigh <https://1145.am/db/3988607/Yodel> .
 
 

@@ -7,6 +7,7 @@ from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
 from .util import cache_friendly, blank_or_none
 from .industry_geo import geo_to_country_admin1
+from .organization_search_helpers import get_same_as_name_onlies
 
 ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
 ALL_ACTIVITY_LIST= ORG_ACTIVITY_LIST + "|RoleActivity"
@@ -43,7 +44,7 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine
     if combine_same_as_name_only is True:
         orgs = Organization.nodes.filter(uri__in=uri_list)
         for org in orgs:
-            new_uris = [x.uri for x in org.sameAsNameOnly]
+            new_uris = [x.uri for x in get_same_as_name_onlies(org)]
             uris_to_check.update(new_uris)
     activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,limit)
     return activity_articles_to_api_results(activity_article_uris)

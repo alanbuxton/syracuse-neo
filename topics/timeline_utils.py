@@ -1,4 +1,5 @@
 from topics.models import Article
+from .organization_search_helpers import get_same_as_name_onlies
 
 def get_timeline_data(org,combine_same_as_name_only, 
                       source_names = Article.core_sources(),
@@ -37,7 +38,7 @@ def get_timeline_data(org,combine_same_as_name_only,
     provided_by.extend(allowable_entities(org.providedBy, source_names))
 
     if combine_same_as_name_only is True:
-        for x in org.sameAsNameOnly:
+        for x in get_same_as_name_onlies(org):
             vendor.extend(allowable_entities(x.vendor,source_names))
             participant.extend(allowable_entities(x.participant,source_names))
             buyer.extend(allowable_entities(x.buyer,source_names))

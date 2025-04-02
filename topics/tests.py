@@ -21,6 +21,7 @@ from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
+from topics.organization_search_helpers import get_same_as_name_onlies, search_by_internal_clean_names
 import json
 import re
 from .serializers import (
@@ -124,7 +125,7 @@ class TestUtilsWithDumpData(TestCase):
                                     'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_', 
                                     'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159', 
                                     'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking'])
-        assert clean_uris == expected, f"Got {clean_uris} - diff = {clean_uris.symmetric_difference(expected_1)}"
+        assert clean_uris == expected, f"Got {clean_uris} - diff = {clean_uris.symmetric_difference(expected)}"
         assert len(clean_edge_data) == 16
         assert len(node_details) >= len(clean_node_data)
         assert len(edge_details) >= len(clean_edge_data)
@@ -194,18 +195,43 @@ class TestUtilsWithDumpData(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        assert set(counts) == {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1), 
-                               ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4), 
-                               ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
-                               ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 432), ('Article', 213), 
-                               ('CorporateFinanceActivity', 189), 
-                               ('AnalystRatingActivity', 1), ('LocationActivity', 7), ('Role', 11), ('RoleActivity', 12)}
+        expected = {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1), 
+                                ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4), 
+                                ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
+                                ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 434), ('Article', 213), 
+                                ('CorporateFinanceActivity', 189), 
+                                ('AnalystRatingActivity', 1), ('LocationActivity', 7), ('Role', 11), ('RoleActivity', 12)}
 
+        counts_set = set(counts)
+        assert counts_set == expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}"
         assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
-                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
-                                          ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
-                                          ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
-                                          ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 16, 16, 37)]
+                                            ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
+                                            ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
+                                            ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
+                                            ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 16, 16, 37)]
+
+        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
+                                                ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2), 
+                                                ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3), 
+                                                ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
+                                                ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 3), 
+                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), 
+                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1), 
+                                            (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1), 
+                                            (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
+
+    def test_recent_activies_by_industry(self):
+        max_date = date.fromisoformat("2024-06-02")
+        sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
+        res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
+        assert len(res) == 3
+        assert ['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
+        assert ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res 
+        assert ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
+
+    def test_recent_activities_by_region(self):
+        max_date = date.fromisoformat("2024-06-02")
         sample_acts = activities_by_region("AU",date_minus(max_date,7),max_date,counts_only=False)
         assert sample_acts == [['https://1145.am/db/4290457/Gyg-Ipo', 
                                 'https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_', 
@@ -215,21 +241,7 @@ class TestUtilsWithDumpData(TestCase):
         assert ['https://1145.am/db/4290472/Associated_British_Foods-Ipo', 'https://1145.am/db/4290472/wwwmarketwatchcom_story_ab-foods-majority-shareholder-sells-10-3-mln-shares-for-gbp262-mln-067222fe', datetime(2024, 5, 31, 6, 42, tzinfo=timezone.utc)] in sample_acts
         assert ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)] in sample_acts
         assert ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)] in sample_acts
-        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
-                                             ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2), 
-                                             ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3), 
-                                             ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
-                                             ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 3), 
-                                                (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), (12, 'Cannabis And Hemp', 1, 1, 1), 
-                                                (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1), (4, 'Cloud Services', 0, 0, 1), 
-                                                (165, 'Development Banks', 1, 1, 1), (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
-        sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
-        res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
-        assert len(res) == 3
-        assert ['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
-        assert ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res 
-        assert ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
+
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")
@@ -335,47 +347,73 @@ class TestUtilsWithDumpData(TestCase):
         assert "Eli Lilly and Company" in content
         assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content
 
+    def test_same_as_search_with_two_words(self):
+        uri = "https://1145.am/db/3029576/Eli_Lilly"
+        o = Organization.self_or_ultimate_target_node(uri)
+        res = get_same_as_name_onlies(o)
+        assert len(res) == 1
+        assert res.pop().uri == 'https://1145.am/db/3448439/Eli_Lilly_And_Company'
+
+    def test_same_as_search_with_one_word1(self):
+        term1 = "loxo"
+        res1 = search_by_internal_clean_names([term1])
+        assert len(res1) == 1
+        assert res1[0][0].uri == 'https://1145.am/db/3029576/Loxo_Oncology'
+        
+    def test_same_as_search_with_one_word2(self):
+        term2 = "loxo oncology"
+        res2 = search_by_internal_clean_names([term2])
+        assert len(res2) == 3
+        assert set([x[0].uri for x in res2]) == set(['https://1145.am/db/3029576/Loxo_Oncology', 
+                                                     'https://1145.am/db/3464715/Loxo_Oncology', 
+                                                     'https://1145.am/db/3549221/Loxo_Oncology'])
+
+    def test_same_as_search_with_one_word3(self):
+        term3 = "loxo oncology two"
+        res3 = search_by_internal_clean_names([term3])
+        assert len(res3) == 1
+        assert res3[0][0].uri == 'https://1145.am/db/3448439/Loxo_Oncology2'
+
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
         resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&earliest_date=-1")
         content0 = str(resp.content)
-        activities0 = len(re.findall("Acquisition",content0))
-        eli_lillies0 = len(re.findall("Eli Lilly",content0))
+        inds0 = len(re.findall("IndustryCluster",content0))
         resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&earliest_date=-1")
         content1 = str(resp.content)
-        activities1 = len(re.findall("Acquisition",content1))
-        eli_lillies1 = len(re.findall("Eli Lilly",content1))
-        assert activities0 == activities1
-        assert eli_lillies0 > eli_lillies1 # when combined same as name only have fewer orgs
+        inds1 = len(re.findall("IndustryCluster",content1))
+        assert "Drug R & D/Manufacturing" not in content0
+        assert "Drug R & D/Manufacturing" in content1 # comes from https://1145.am/db/3464715/Loxo_Oncology 
+        assert inds1 > inds0 
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_central_node(self):
         client = self.client
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1&sources=_all")
         content0 = str(resp.content)
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1&sources=_all")
         content1 = str(resp.content)
         assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content0
         assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content1
-        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" not in content0
-        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" in content1
+        assert "https://1145.am/db/3448439/Loxo_Oncology2-Acquisition" not in content0
+        assert "https://1145.am/db/3448439/Loxo_Oncology2-Acquisition" in content1
 
     def test_timeline_combines_same_as_name_only_on_off(self):
         client = self.client
-        path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1"
+        path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1&sources=_all"
         resp = client.get(path0)
         assert resp.status_code == 403
         client.force_login(self.user)
         resp = client.get(path0)
         assert resp.status_code == 200
         content0 = str(resp.content)
-        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1")
+        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1&sources=_all")
         content1 = str(resp.content)
         assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content0
         assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content1
-        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" not in content0
-        assert "https://1145.am/db/3448439/Loxo_Oncology-Acquisition" in content1
+        assert "https://1145.am/db/3448439/Loxo_Oncology2-Acquisition" not in content0
+        assert "https://1145.am/db/3448439/Loxo_Oncology2-Acquisition" in content1
 
-    def test_family_tree_same_as_name_only_on_off_parents(self):
+    def test_family_tree_only_available_if_logged_in(self):
         client = self.client
         path0 = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1"
         resp = client.get(path0)
@@ -383,18 +421,32 @@ class TestUtilsWithDumpData(TestCase):
         client.force_login(self.user)
         resp = client.get(path0)
         assert resp.status_code == 200
+
+    def test_family_tree_combine_same_as_name_only_off(self):
+        client = self.client
+        path = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1"
+        client.force_login(self.user)
+        resp = client.get(path)
         content0 = str(resp.content)
+        assert "https://1145.am/db/3029576/Eli_Lilly" in content0
+        assert "https://1145.am/db/3029576/Loxo_Oncology" in content0 # two orgs with no sameAsHigh relationship
+        assert "https://1145.am/db/3464715/Loxo_Oncology" in content0 
+        assert "Buyer (CityAM Mar 2024)" in content0
+        assert "Buyer (PR Newswire Jan 2019)" in content0
+        assert "Buyer (PR Newswire - FOO TEST Jan 2019)" not in content0
+
+    def test_family_tree_combine_same_as_name_only_on(self):
+        client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&sources=_all&earliest_date=-1")
         content1 = str(resp.content)
 
-        assert "https://1145.am/db/3029576/Eli_Lilly" in content0
         assert "https://1145.am/db/3029576/Eli_Lilly" in content1
-        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content0
-        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" not in content1
-        assert "Buyer (CityAM Mar 2024)" in content0
+        assert "https://1145.am/db/3029576/Loxo_Oncology" in content1 # merged the 3029576/346715
+        assert "https://1145.am/db/3448439/Loxo_Oncology2" in content1 # matches name
         assert "Buyer (CityAM Mar 2024)" in content1
-        assert "Buyer (PR Newswire Jan 2019)" in content0
         assert "Buyer (PR Newswire Jan 2019)" not in content1
+        assert "Buyer (PR Newswire - FOO TEST Jan 2019)" in content1
 
     def test_family_tree_serializer_sorts_edges(self):
         uri = "https://1145.am/db/2543227/Celgene"
@@ -448,7 +500,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/organization/linkages/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Cory 1st Choice Home Delivery - Linkages</h1>" in content
         assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -462,7 +514,7 @@ class TestUtilsWithDumpData(TestCase):
         resp = client.get(uri)
         assert resp.status_code == 200
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
         assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
@@ -479,7 +531,7 @@ class TestUtilsWithDumpData(TestCase):
         assert resp.status_code == 200
         assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1', 302)]
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>J.B. Hunt - Linkages</h1>" in content
         assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -490,7 +542,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Resource: https://1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1</h1>" in content
         assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -501,7 +553,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "<h1>Cory 1st Choice Home Delivery - Family Tree</h1>" in content
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
@@ -513,7 +565,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "<h1>J.B. Hunt - Family Tree</h1>" in content
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
@@ -525,7 +577,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
@@ -536,7 +588,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>J.B. Hunt - Timeline</h1>" in content
         assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
@@ -550,7 +602,7 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "source=_all&earliest_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "source=_all&earliest_date=-1");' in content
-        assert len(re.findall("source=_all&earliest_date=-1",content)) == 15
+        assert len(re.findall("source=_all&earliest_date=-1",content)) == 16
 
     def test_query_strings_in_drill_down_resource_from_timeline_page(self):
         client = self.client
@@ -558,7 +610,7 @@ class TestUtilsWithDumpData(TestCase):
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat sameAsNameOnly relationship as same? No" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
@@ -610,9 +662,10 @@ class TestUtilsWithDumpData(TestCase):
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to all" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to all","",content_filtered)
-        assert "PR Newswire" in content_filtered # CityAM story is newer but not included
-        assert "CityAM" not in content_filtered # Not available in core
+        assert "Switch to core" not in content_filtered
+        assert "PR Newswire" in content_filtered
+        assert "PR Newswire - FOO TEST" not in content_filtered
+        assert "Loxo Oncology Two" not in content_filtered
 
     def test_family_tree_filters_by_document_source_all(self):
         client = self.client
@@ -620,10 +673,11 @@ class TestUtilsWithDumpData(TestCase):
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
+        assert "Switch to all" not in content_filtered
         assert "Switch to core" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to core","",content_filtered)
-        assert "PR Newswire" not in content_filtered # Was shown in the Document sources list but not in body of the graph
-        assert "CityAM" in content_filtered # Newest dated version
+        assert "PR Newswire" in content_filtered
+        assert "PR Newswire - FOO TEST" in content_filtered
+        assert "Loxo Oncology Two" in content_filtered
 
     def test_timeline_filters_by_document_source_defaults(self):
         client = self.client
@@ -632,9 +686,10 @@ class TestUtilsWithDumpData(TestCase):
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "Switch to all" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to all","",content_filtered)
-        assert "PR Newswire" in content_filtered 
-        assert "CityAM" not in content_filtered # Not available in core
+        assert "Switch to core" not in content_filtered
+        assert "PR Newswire" in content_filtered
+        assert "PR Newswire - FOO TEST" not in content_filtered
+        assert "Loxo Oncology Two" not in content_filtered
 
     def test_timeline_filters_by_document_source_all(self):
         client = self.client
@@ -642,10 +697,11 @@ class TestUtilsWithDumpData(TestCase):
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
+        assert "Switch to all" not in content_filtered
         assert "Switch to core" in content_filtered
-        content_filtered = re.sub(r"Document sources:.+Switch to core","",content_filtered)
-        assert "PR Newswire" in content_filtered 
-        assert "CityAM" in content_filtered
+        assert "PR Newswire" in content_filtered
+        assert "PR Newswire - FOO TEST" in content_filtered
+        assert "Loxo Oncology Two" in content_filtered
 
     def test_doc_date_range_linkages_old(self):
         client = self.client
@@ -1085,25 +1141,32 @@ class TestFamilyTree(TestCase):
             (a)-[:investor]->(r)-[:target]->(c),
             (b)-[:buyer]->(s)-[:target]->(d),
 
-            (a)-[:sameAsNameOnly]->(e),
             (e)-[:buyer]->(o)-[:target]->(f),
-            (b)-[:sameAsNameOnly]->(g),
             (g)-[:investor]->(p)-[:target]->(h),
-            (z)-[:sameAsNameOnly]->(d),
 
             (i)-[:buyer]->(w)-[:target]->(j),
             (i)-[:investor]->(t)-[:target]->(k),
             (j)-[:buyer]->(u)-[:target]->(l),
 
-            (l)-[:sameAsNameOnly]->(n),
             (m)-[:buyer]->(v)-[:target]->(n),
 
             (p1)-[:buyer]->(a1)-[:target]->(s1),
-            (s1)-[:sameAsNameOnly]->(s2),
             (s2)-[:buyer]->(a2)-[:target]->(c1),
-            (p1)-[:sameAsNameOnly]->(p2),
             (p2)-[:buyer]->(a3)-[:target]->(c2),
             (p3)-[:buyer]->(a4)-[:target]->(s1)
+
+            SET a.internalCleanName = ['foo']
+            SET e.internalCleanName = ['foo']
+            SET b.internalCleanName = ['bar']
+            SET g.internalCleanName = ['bar']
+            SET z.internalCleanShortName = ['baz']
+            SET d.internalCleanShortName = ['baz']
+            SET l.internalCleanName = ['qux']
+            SET n.internalCleanName = ['qux']
+            SET s1.internalCleanName = ['qoz']
+            SET s2.internalCleanName = ['qoz']
+            SET p1.internalCleanName = ['huy']
+            SET p2.internalCleanName = ['huy']
         """
         db.cypher_query(query)
 

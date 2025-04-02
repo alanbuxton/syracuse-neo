@@ -23,6 +23,7 @@
     ns1:internalDocId 1809885 ;
     ns1:investor <https://1145.am/db/1809885/Temasek-Vy_Capital-Zomato-Investment> ;
     ns1:name "Vy Capital" ;
+    ns1:internalCleanName "vy" ;
     ns1:sameAsHigh <https://1145.am/db/1760375/Vy_Capital>,
         <https://1145.am/db/1765550/Vy_Capital>,
         <https://1145.am/db/1774599/Vy_Capital>,
@@ -32,12 +33,7 @@
         <https://1145.am/db/284996/Vy_Capital>,
         <https://1145.am/db/3848432/Vy_Capital>,
         <https://1145.am/db/387972/Vy_Capital>,
-        <https://1145.am/db/387992/Vy_Capital> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1762035/Vy_Capital>,
-        <https://1145.am/db/1844474/Vy_Capital>,
-        <https://1145.am/db/3903765/Vy_Capital>,
-        <https://1145.am/db/4177968/Vy_Capital>,
-        <https://1145.am/db/995137/Vy_Capital> .
+        <https://1145.am/db/387992/Vy_Capital>.
 
 <https://1145.am/db/1811042/Blackberry> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -47,51 +43,12 @@
     ns1:foundName "BlackBerry" ;
     ns1:internalDocId 1811042 ;
     ns1:name "BlackBerry" ;
+    ns1:internalCleanName "blackberry" ;
     ns1:sameAsHigh <https://1145.am/db/1850698/Blackberry>,
         <https://1145.am/db/2786734/Blackberry>,
         <https://1145.am/db/2940063/Blackberry>,
         <https://1145.am/db/3026893/Blackberry>,
-        <https://1145.am/db/3030603/Blackberry_Limited> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1779043/Blackberry>,
-        <https://1145.am/db/1814383/Blackberry>,
-        <https://1145.am/db/1816730/Blackberry>,
-        <https://1145.am/db/1838842/Blackberry>,
-        <https://1145.am/db/1848217/Blackberry>,
-        <https://1145.am/db/1990298/Blackberry>,
-        <https://1145.am/db/2098356/Blackberry_Ltd>,
-        <https://1145.am/db/2203750/Blackberry_Ltd>,
-        <https://1145.am/db/2275341/Blackberry>,
-        <https://1145.am/db/2608115/Blackberry>,
-        <https://1145.am/db/2643859/Blackberry>,
-        <https://1145.am/db/2651356/Blackberry>,
-        <https://1145.am/db/2653474/Blackberry>,
-        <https://1145.am/db/2654259/Blackberry>,
-        <https://1145.am/db/2654828/Blackberry>,
-        <https://1145.am/db/2655153/Blackberry>,
-        <https://1145.am/db/2656027/Blackberry>,
-        <https://1145.am/db/2656049/Blackberry>,
-        <https://1145.am/db/2657055/Blackberry>,
-        <https://1145.am/db/2659028/Blackberry>,
-        <https://1145.am/db/2660881/Blackberry>,
-        <https://1145.am/db/2663334/Blackberry>,
-        <https://1145.am/db/2664675/Blackberry>,
-        <https://1145.am/db/2669013/Blackberry>,
-        <https://1145.am/db/2673373/Blackberry>,
-        <https://1145.am/db/2678056/Blackberry>,
-        <https://1145.am/db/2683079/Blackberry>,
-        <https://1145.am/db/2683080/Blackberry>,
-        <https://1145.am/db/2684131/Blackberry>,
-        <https://1145.am/db/2961400/Blackberry>,
-        <https://1145.am/db/2961511/Blackberry>,
-        <https://1145.am/db/2994796/Blackberry>,
-        <https://1145.am/db/3031559/Blackberry>,
-        <https://1145.am/db/3118247/Blackberry_Limited>,
-        <https://1145.am/db/3465507/Blackberry_Limited>,
-        <https://1145.am/db/3601221/Blackberry_Limited>,
-        <https://1145.am/db/3604578/Blackberry_Limited>,
-        <https://1145.am/db/4010979/Blackberry>,
-        <https://1145.am/db/799471/Blackberry_Ltd>,
-        <https://1145.am/db/799510/Blackberry_Ltd> .
+        <https://1145.am/db/3030603/Blackberry_Limited>.
 
 <https://1145.am/db/2309175/Bernard_Poussot> a foaf:Person ;
     ns1:basedInHighClean "Madison" ;
@@ -115,6 +72,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/671_products_medical_product_healthcare> ;
     ns1:internalDocId 2309175 ;
     ns1:name "Wyeth" ;
+    ns1:internalCleanName "wyeth" ;
     ns1:sameAsHigh <https://1145.am/db/2221589/Wyeth>,
         <https://1145.am/db/2309172/Wyeth>,
         <https://1145.am/db/2309520/Wyeth>,
@@ -146,18 +104,7 @@
         <https://1145.am/db/2561231/Wyeth>,
         <https://1145.am/db/2564032/Wyeth>,
         <https://1145.am/db/2575575/Wyeth>,
-        <https://1145.am/db/2595253/Wyeth_Llc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2304919/Wyeth>,
-        <https://1145.am/db/2310975/Wyeth>,
-        <https://1145.am/db/2312350/Wyeth>,
-        <https://1145.am/db/2315252/Wyeth>,
-        <https://1145.am/db/2319797/Wyeth>,
-        <https://1145.am/db/2320072/Wyeth>,
-        <https://1145.am/db/2320987/Wyeth>,
-        <https://1145.am/db/2322620/Wyeth>,
-        <https://1145.am/db/2326394/Wyeth>,
-        <https://1145.am/db/2540126/Wyeth>,
-        <https://1145.am/db/2549673/Wyeth> .
+        <https://1145.am/db/2595253/Wyeth_Llc> .
 
 <https://1145.am/db/2638674/Mediatek> a org:Organization ;
     ns1:basedInHighClean "Taiwan" ;
@@ -172,19 +119,9 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/281_designer_designers_chip_semiconductor> ;
     ns1:internalDocId 2638674 ;
     ns1:name "MediaTek" ;
+    ns1:internalCleanName "mediatek" ;
     ns1:sameAsHigh <https://1145.am/db/2630099/Mediatek>,
-        <https://1145.am/db/443280/Mediatek> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1034818/Mediatek_Inc>,
-        <https://1145.am/db/1751393/Mediatek>,
-        <https://1145.am/db/2424645/Mediatek>,
-        <https://1145.am/db/2641630/Mediatek>,
-        <https://1145.am/db/3153472/Mediatek>,
-        <https://1145.am/db/3193535/Mediatek>,
-        <https://1145.am/db/3333202/Mediatek>,
-        <https://1145.am/db/4079281/Mediatek>,
-        <https://1145.am/db/4166004/Mediatek>,
-        <https://1145.am/db/4235912/Mediatek_Inc>,
-        <https://1145.am/db/525690/Mediatek> .
+        <https://1145.am/db/443280/Mediatek> .
 
 <https://1145.am/db/2660877/Bouygues_Telecom-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -251,6 +188,7 @@
     ns1:internalDocId 2984012 ;
     ns1:investor <https://1145.am/db/2984012/Baidu-Uberchina-Uberchina-Investment> ;
     ns1:name "Baidu" ;
+    ns1:internalCleanName "baidu" ;
     ns1:sameAsHigh <https://1145.am/db/151763/Baidu_Inc>,
         <https://1145.am/db/151791/Baidu_Inc>,
         <https://1145.am/db/1785748/Baidu>,
@@ -270,71 +208,7 @@
         <https://1145.am/db/3726820/Baidu>,
         <https://1145.am/db/4225586/Baidu>,
         <https://1145.am/db/4226784/Baidu>,
-        <https://1145.am/db/498566/Baidu> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1125592/Baidu_Inc>,
-        <https://1145.am/db/1133949/Baidu>,
-        <https://1145.am/db/1138249/Baidu>,
-        <https://1145.am/db/1608442/Baidu>,
-        <https://1145.am/db/1754905/Baidu>,
-        <https://1145.am/db/1762024/Baidu>,
-        <https://1145.am/db/1774116/Baidu>,
-        <https://1145.am/db/1779900/Baidu>,
-        <https://1145.am/db/1780698/Baidu>,
-        <https://1145.am/db/1791481/Baidu>,
-        <https://1145.am/db/1794040/Baidu>,
-        <https://1145.am/db/1797214/Baidu>,
-        <https://1145.am/db/1798186/Baidu>,
-        <https://1145.am/db/1803896/Baidu>,
-        <https://1145.am/db/1807724/Baidu>,
-        <https://1145.am/db/1810271/Baidu>,
-        <https://1145.am/db/1813344/Baidu>,
-        <https://1145.am/db/1820765/Baidu>,
-        <https://1145.am/db/1823001/Baidu>,
-        <https://1145.am/db/1827871/Baidu>,
-        <https://1145.am/db/1834217/Baidu>,
-        <https://1145.am/db/1834989/Baidu>,
-        <https://1145.am/db/1835811/Baidu>,
-        <https://1145.am/db/1845325/Baidu>,
-        <https://1145.am/db/1850451/Baidu>,
-        <https://1145.am/db/1856992/Baidu>,
-        <https://1145.am/db/1865549/Baidu>,
-        <https://1145.am/db/1890948/Baidu>,
-        <https://1145.am/db/1900236/Baidu>,
-        <https://1145.am/db/1908267/Baidu>,
-        <https://1145.am/db/1947677/Baidu_Inc>,
-        <https://1145.am/db/2080945/Baidu>,
-        <https://1145.am/db/232969/Baidu>,
-        <https://1145.am/db/240071/Baidu>,
-        <https://1145.am/db/2627560/Baidu>,
-        <https://1145.am/db/2634849/Baidu>,
-        <https://1145.am/db/2672736/Baidu>,
-        <https://1145.am/db/2729601/Baidu>,
-        <https://1145.am/db/2729901/Baidu>,
-        <https://1145.am/db/2816875/Baidu>,
-        <https://1145.am/db/282579/Baidu>,
-        <https://1145.am/db/2936198/Baidu>,
-        <https://1145.am/db/2968527/Baidu>,
-        <https://1145.am/db/2968569/Baidu>,
-        <https://1145.am/db/3105408/Baidu>,
-        <https://1145.am/db/3134250/Baidu>,
-        <https://1145.am/db/3135070/Baidu>,
-        <https://1145.am/db/3141700/Baidu>,
-        <https://1145.am/db/3142272/Baidu>,
-        <https://1145.am/db/3145111/Baidu>,
-        <https://1145.am/db/3166486/Baidu>,
-        <https://1145.am/db/3352461/Baidu>,
-        <https://1145.am/db/3639337/Baidu>,
-        <https://1145.am/db/3805827/Baidu>,
-        <https://1145.am/db/3807616/Baidu>,
-        <https://1145.am/db/3815343/Baidu>,
-        <https://1145.am/db/3818287/Baidu>,
-        <https://1145.am/db/3825863/Baidu>,
-        <https://1145.am/db/3835212/Baidu>,
-        <https://1145.am/db/3842945/Baidu>,
-        <https://1145.am/db/3911578/Baidu>,
-        <https://1145.am/db/411522/Baidu>,
-        <https://1145.am/db/503171/Baidu>,
-        <https://1145.am/db/784764/Baidu> .
+        <https://1145.am/db/498566/Baidu> .
 
 <https://1145.am/db/2984033/Royal_Mail> a org:Organization ;
     ns1:basedInLowRaw "Australia" ;
@@ -344,36 +218,10 @@
     ns1:internalDocId 2984033 ;
     ns1:investor <https://1145.am/db/2984033/Market_Engine_Global-Investment-Stake> ;
     ns1:name "Royal Mail" ;
+    ns1:internalCleanName "royal mail" ;
     ns1:sameAsHigh <https://1145.am/db/2959107/Royal_Mail>,
         <https://1145.am/db/4001762/Royal_Mail>,
-        <https://1145.am/db/3073967/Royal_Mail> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1330912/Royal_Mail>,
-        <https://1145.am/db/194587/Royal_Mail_Plc>,
-        <https://1145.am/db/194605/Royal_Mail_Plc>,
-        <https://1145.am/db/194606/Royal_Mail_Plc>,
-        <https://1145.am/db/194607/Royal_Mail_Plc>,
-        <https://1145.am/db/1998848/Royal_Mail>,
-        <https://1145.am/db/2005816/Royal_Mail>,
-        <https://1145.am/db/2841455/Royal_Mail>,
-        <https://1145.am/db/2847880/Royal_Mail>,
-        <https://1145.am/db/2864441/Royal_Mail>,
-        <https://1145.am/db/2939544/Royal_Mail>,
-        <https://1145.am/db/2941320/Royal_Mail>,
-        <https://1145.am/db/2945763/Royal_Mail>,
-        <https://1145.am/db/2969395/Royal_Mail>,
-        <https://1145.am/db/2977176/Royal_Mail>,
-        <https://1145.am/db/2977364/Royal_Mail>,
-        <https://1145.am/db/2988964/Royal_Mail>,
-        <https://1145.am/db/2988998/Royal_Mail>,
-        <https://1145.am/db/3009355/Royal_Mail>,
-        <https://1145.am/db/3023028/Royal_Mail>,
-        <https://1145.am/db/3026949/Royal_Mail>,
-        <https://1145.am/db/3050026/Royal_Mail>,
-        <https://1145.am/db/3058845/Royal_Mail>,
-        <https://1145.am/db/4001762/Royal_Mail>,
-        <https://1145.am/db/4133454/Royal_Mail>,
-        <https://1145.am/db/4168197/Royal_Mail>,
-        <https://1145.am/db/534151/Royal_Mail> .
+        <https://1145.am/db/3073967/Royal_Mail> .
 
 <https://1145.am/db/2984038/Tesco-Acquisition-Business> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -398,88 +246,7 @@
     ns1:foundName "the Canada Pension Plan Investment Board" ;
     ns1:internalDocId 2984039 ;
     ns1:name "Canada Pension Plan Investment Board" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1120274/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1243417/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1310509/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1359667/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1419775/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1656574/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1687792/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1711796/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1739674/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1750883/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1766164/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1776036/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1924169/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1934784/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1935098/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1935846/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/1959372/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2051590/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2138407/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2180168/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2198066/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2654874/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2746/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2797532/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2937271/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2939152/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2985233/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2990213/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/2998536/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3025275/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3027725/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3031618/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3079163/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3089900/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3152743/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3153772/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3236326/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3238889/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3308129/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3313006/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3318603/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3334236/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3341603/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3458948/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3495563/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3520620/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3626575/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/372357/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3820221/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3858899/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/387819/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3900702/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3938098/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/3951502/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4040696/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4075112/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4132194/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4132907/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4215636/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4216052/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4216337/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4216855/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4217657/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4220544/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4225837/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4230364/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4241265/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4249380/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/4249593/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/478149/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/579156/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/605223/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/635592/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/677492/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/683624/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/689107/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/709582/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/80541/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/824503/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/868617/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/961073/Canada_Pension_Plan_Investment_Board>,
-        <https://1145.am/db/996815/Canada_Pension_Plan_Investment_Board> .
+    ns1:internalCleanName "canada pension plan investment board" .
 
 <https://1145.am/db/2984039/Mbk_Partners> a org:Organization ;
     ns1:basedInHighClean "Republic of Korea" ;
@@ -494,17 +261,7 @@
     ns1:internalDocId 2984039 ;
     ns1:name "MBK",
         "MBK Partners" ;
-    ns1:sameAsNameOnly <https://1145.am/db/160311/Mbk_Partners>,
-        <https://1145.am/db/1658270/Mbk_Partners>,
-        <https://1145.am/db/242660/Mbk_Partners>,
-        <https://1145.am/db/2721798/Mbk_Partners>,
-        <https://1145.am/db/2737463/Mbk_Partners>,
-        <https://1145.am/db/274697/Mbk_Partners>,
-        <https://1145.am/db/2789783/Mbk_Partners>,
-        <https://1145.am/db/2937974/Mbk_Partners>,
-        <https://1145.am/db/2984604/Mbk_Partners>,
-        <https://1145.am/db/3591689/Mbk_Partners>,
-        <https://1145.am/db/3786190/Mbk_Partners> .
+    ns1:internalCleanName "mbk" .
 
 <https://1145.am/db/2984039/Public_Sector_Pension_Investment_Board> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
@@ -513,24 +270,7 @@
     ns1:foundName "the Public Sector Pension Investment Board" ;
     ns1:internalDocId 2984039 ;
     ns1:name "Public Sector Pension Investment Board" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1224384/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/1567282/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/1630237/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/1689185/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/1774767/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/2080018/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/2093502/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3041096/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3119104/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3715374/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3782156/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3786221/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3810390/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3932077/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/3932106/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/4126035/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/713772/Public_Sector_Pension_Investment_Board>,
-        <https://1145.am/db/80541/Public_Sector_Pension_Investment_Board> .
+    ns1:internalCleanName "public sector pension investment board" .
 
 <https://1145.am/db/2984040/Barclays-Acquisition-Business> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -562,10 +302,7 @@
     ns1:foundName "Mitsui Sumitomo" ;
     ns1:internalDocId 2984200 ;
     ns1:name "Mitsui Sumitomo" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1744548/Mitsui_Sumitomo>,
-        <https://1145.am/db/2908540/Mitsui_Sumitomo>,
-        <https://1145.am/db/2984139/Mitsui_Sumitomo>,
-        <https://1145.am/db/2985375/Mitsui_Sumitomo> .
+    ns1:internalCleanName "mitsui sumitomo" .
 
 <https://1145.am/db/2984213/Suramericana> a org:Organization ;
     ns1:basedInLowRaw "Chile" ;
@@ -578,6 +315,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 2984213 ;
     ns1:name "Suramericana" ;
+    ns1:internalCleanName "suramericana" ;
     ns1:sameAsHigh <https://1145.am/db/2996439/Suramericana> .
 
 <https://1145.am/db/2984217/Rolls-Royce> a org:Organization ;
@@ -591,6 +329,7 @@
     ns1:internalDocId 2984217 ;
     ns1:investor <https://1145.am/db/2984217/Rolls-Royce-Rolls-Royce-Investment> ;
     ns1:name "Rolls-Royce" ;
+    ns1:internalCleanName "rolls royce" ;
     ns1:sameAsHigh <https://1145.am/db/127098/Rolls-Royce>,
         <https://1145.am/db/222855/Rolls-Royce>,
         <https://1145.am/db/264006/Rolls-Royce>,
@@ -611,54 +350,7 @@
         <https://1145.am/db/390663/Rolls-Royce>,
         <https://1145.am/db/4194600/Rolls-Royce>,
         <https://1145.am/db/467144/Rolls-Royce>,
-        <https://1145.am/db/853713/Rolls-Royce> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1218945/Rolls-Royce>,
-        <https://1145.am/db/1231770/Rolls-Royce>,
-        <https://1145.am/db/1250558/Rolls-Royce>,
-        <https://1145.am/db/150820/Rolls-Royce>,
-        <https://1145.am/db/1954877/Rolls-Royce>,
-        <https://1145.am/db/263782/Rolls-Royce>,
-        <https://1145.am/db/264714/Rolls-Royce>,
-        <https://1145.am/db/283671/Rolls-Royce>,
-        <https://1145.am/db/2845054/Rolls-Royce>,
-        <https://1145.am/db/2845738/Rolls-Royce>,
-        <https://1145.am/db/2900501/Rolls-Royce>,
-        <https://1145.am/db/2900504/Rolls-Royce>,
-        <https://1145.am/db/2918902/Rolls-Royce>,
-        <https://1145.am/db/2933518/Rolls-Royce>,
-        <https://1145.am/db/2946009/Rolls-Royce>,
-        <https://1145.am/db/2952998/Rolls-Royce>,
-        <https://1145.am/db/2956448/Rolls-Royce>,
-        <https://1145.am/db/2976284/Rolls-Royce>,
-        <https://1145.am/db/2989613/Rolls-Royce>,
-        <https://1145.am/db/2996337/Rolls-Royce>,
-        <https://1145.am/db/3005304/Rolls-Royce>,
-        <https://1145.am/db/3010005/Rolls-Royce>,
-        <https://1145.am/db/3013174/Rolls-Royce>,
-        <https://1145.am/db/3013320/Rolls-Royce>,
-        <https://1145.am/db/3052633/Rolls-Royce>,
-        <https://1145.am/db/3055153/Rolls-Royce>,
-        <https://1145.am/db/3058038/Rolls-Royce>,
-        <https://1145.am/db/3060861/Rolls-Royce>,
-        <https://1145.am/db/3062096/Rolls-Royce>,
-        <https://1145.am/db/3063282/Rolls-Royce>,
-        <https://1145.am/db/3067075/Rolls-Royce>,
-        <https://1145.am/db/3069476/Rolls-Royce>,
-        <https://1145.am/db/3072302/Rolls-Royce>,
-        <https://1145.am/db/3072922/Rolls-Royce>,
-        <https://1145.am/db/3074228/Rolls-Royce>,
-        <https://1145.am/db/3077914/Rolls-Royce>,
-        <https://1145.am/db/3090592/Rolls-Royce>,
-        <https://1145.am/db/3092295/Rolls-Royce>,
-        <https://1145.am/db/314530/Rolls-Royce>,
-        <https://1145.am/db/349896/Rolls-Royce>,
-        <https://1145.am/db/349938/Rolls-Royce>,
-        <https://1145.am/db/3561491/Rolls-Royce>,
-        <https://1145.am/db/389574/Rolls-Royce>,
-        <https://1145.am/db/4035948/Rolls-Royce>,
-        <https://1145.am/db/503316/Rolls-Royce>,
-        <https://1145.am/db/603185/Rolls-Royce>,
-        <https://1145.am/db/705535/Rolls-Royce> .
+        <https://1145.am/db/853713/Rolls-Royce> .
 
 <https://1145.am/db/3765463/Bentley_University> a org:Organization ;
     ns1:basedInLowRaw "the country" ;
@@ -667,16 +359,7 @@
     ns1:hasRole <https://1145.am/db/3765463/Bentley_University-President> ;
     ns1:internalDocId 3765463 ;
     ns1:name "Bentley University" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1124388/Bentley_University>,
-        <https://1145.am/db/3274060/Bentley_University>,
-        <https://1145.am/db/3584463/Bentley_University>,
-        <https://1145.am/db/3606134/Bentley_University>,
-        <https://1145.am/db/3841708/Bentley_University>,
-        <https://1145.am/db/3842640/Bentley_University>,
-        <https://1145.am/db/3880138/Bentley_University>,
-        <https://1145.am/db/679787/Bentley_University>,
-        <https://1145.am/db/883829/Bentley_University>,
-        <https://1145.am/db/961063/Bentley_University> .
+    ns1:internalCleanName "bentley university" .
 
 <https://1145.am/db/3765463/Davis-Blake> a foaf:Person ;
     ns1:basedInLowRaw "the country" ;
@@ -701,6 +384,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/321_property_properties_redevelopment_estate> ;
     ns1:internalDocId 3765621 ;
     ns1:name "Avison Young" ;
+    ns1:internalCleanName "avison young" ;
     ns1:sameAsHigh <https://1145.am/db/3193998/Avison_Young>,
         <https://1145.am/db/3207763/Avison_Young>,
         <https://1145.am/db/3359915/Avison_Young>,
@@ -734,6 +418,7 @@
     ns1:industry "commercial real estate" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/321_property_properties_redevelopment_estate> ;
     ns1:internalDocId 3765621 ;
+    ns1:internalCleanName "david jewkes" ;
     ns1:name "David Jewkes" .
 
 <https://1145.am/db/3765621/Millis> a foaf:Person ;
@@ -778,6 +463,7 @@
     ns1:industry "technology" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/275_hardtech_deeptech_tech_revtech> ;
     ns1:internalDocId 3765641 ;
+    ns1:internalCleanName "premise data" ;
     ns1:name "Premise Data" .
 
 <https://1145.am/db/3765646/Brown_Rudnick> a org:Organization ;
@@ -792,6 +478,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/5_legaltech_legal_lawyers_law> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/647_insurance_risk_industry_distribution> ;
     ns1:internalDocId 3765646 ;
+    ns1:internalCleanName "brown rudnick" ;
     ns1:name "Brown Rudnick" ;
     ns1:sameAsHigh <https://1145.am/db/1115907/Brown_Rudnick>,
         <https://1145.am/db/1312562/Brown_Rudnick>,
@@ -802,10 +489,7 @@
         <https://1145.am/db/3219229/Brown_Rudnick>,
         <https://1145.am/db/3275603/Brown_Rudnick>,
         <https://1145.am/db/3307217/Brown_Rudnick_Llp>,
-        <https://1145.am/db/3480106/Brown_Rudnick_Llp> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1134777/Brown_Rudnick>,
-        <https://1145.am/db/1136184/Brown_Rudnick>,
-        <https://1145.am/db/3626803/Brown_Rudnick_Llp> .
+        <https://1145.am/db/3480106/Brown_Rudnick_Llp> .
 
 <https://1145.am/db/3765646/Cameron_Moxley> a foaf:Person ;
     ns1:basedInLowRaw "NEW YORK" ;
@@ -883,210 +567,7 @@
     ns1:internalDocId 1809885 ;
     ns1:investor <https://1145.am/db/1809885/Temasek-Vy_Capital-Zomato-Investment> ;
     ns1:name "Temasek" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042545/Temasek>,
-        <https://1145.am/db/1066315/Temasek>,
-        <https://1145.am/db/1066322/Temasek>,
-        <https://1145.am/db/1066323/Temasek>,
-        <https://1145.am/db/1066333/Temasek>,
-        <https://1145.am/db/1067524/Temasek>,
-        <https://1145.am/db/1067526/Temasek>,
-        <https://1145.am/db/1067529/Temasek>,
-        <https://1145.am/db/1067530/Temasek>,
-        <https://1145.am/db/1068016/Temasek>,
-        <https://1145.am/db/1155304/Temasek>,
-        <https://1145.am/db/1185911/Temasek>,
-        <https://1145.am/db/1187636/Temasek>,
-        <https://1145.am/db/1208698/Temasek>,
-        <https://1145.am/db/1260744/Temasek>,
-        <https://1145.am/db/1264889/Temasek>,
-        <https://1145.am/db/1279018/Temasek>,
-        <https://1145.am/db/1280577/Temasek>,
-        <https://1145.am/db/1327131/Temasek>,
-        <https://1145.am/db/1329147/Temasek>,
-        <https://1145.am/db/1331421/Temasek>,
-        <https://1145.am/db/1355546/Temasek>,
-        <https://1145.am/db/1356171/Temasek>,
-        <https://1145.am/db/1371212/Temasek>,
-        <https://1145.am/db/1403851/Temasek>,
-        <https://1145.am/db/1403897/Temasek>,
-        <https://1145.am/db/1448485/Temasek>,
-        <https://1145.am/db/1451672/Temasek>,
-        <https://1145.am/db/1648491/Temasek>,
-        <https://1145.am/db/165056/Temasek>,
-        <https://1145.am/db/1668144/Temasek>,
-        <https://1145.am/db/1694304/Temasek>,
-        <https://1145.am/db/1695864/Temasek>,
-        <https://1145.am/db/1696327/Temasek>,
-        <https://1145.am/db/1696600/Temasek>,
-        <https://1145.am/db/1714212/Temasek>,
-        <https://1145.am/db/1715669/Temasek>,
-        <https://1145.am/db/1722609/Temasek>,
-        <https://1145.am/db/1729336/Temasek>,
-        <https://1145.am/db/1734422/Temasek>,
-        <https://1145.am/db/1734427/Temasek>,
-        <https://1145.am/db/1734560/Temasek>,
-        <https://1145.am/db/1734901/Temasek>,
-        <https://1145.am/db/1739120/Temasek>,
-        <https://1145.am/db/1739125/Temasek>,
-        <https://1145.am/db/1739282/Temasek>,
-        <https://1145.am/db/1739488/Temasek>,
-        <https://1145.am/db/1742532/Temasek>,
-        <https://1145.am/db/1742981/Temasek>,
-        <https://1145.am/db/1744957/Temasek>,
-        <https://1145.am/db/1746577/Temasek>,
-        <https://1145.am/db/1746725/Temasek>,
-        <https://1145.am/db/1747400/Temasek>,
-        <https://1145.am/db/1749304/Temasek>,
-        <https://1145.am/db/1750488/Temasek>,
-        <https://1145.am/db/1753962/Temasek>,
-        <https://1145.am/db/1754241/Temasek>,
-        <https://1145.am/db/1755004/Temasek>,
-        <https://1145.am/db/1755209/Temasek>,
-        <https://1145.am/db/1755370/Temasek>,
-        <https://1145.am/db/1756768/Temasek>,
-        <https://1145.am/db/1757382/Temasek>,
-        <https://1145.am/db/1757977/Temasek>,
-        <https://1145.am/db/1758916/Temasek>,
-        <https://1145.am/db/1761247/Temasek>,
-        <https://1145.am/db/1762240/Temasek>,
-        <https://1145.am/db/1763411/Temasek>,
-        <https://1145.am/db/1765718/Temasek>,
-        <https://1145.am/db/1766255/Temasek>,
-        <https://1145.am/db/1766628/Temasek>,
-        <https://1145.am/db/1770353/Temasek>,
-        <https://1145.am/db/1774306/Temasek>,
-        <https://1145.am/db/1778032/Temasek>,
-        <https://1145.am/db/1784230/Temasek>,
-        <https://1145.am/db/1785263/Temasek>,
-        <https://1145.am/db/1787892/Temasek>,
-        <https://1145.am/db/1788297/Temasek>,
-        <https://1145.am/db/1790374/Temasek>,
-        <https://1145.am/db/1790917/Temasek>,
-        <https://1145.am/db/1791158/Temasek>,
-        <https://1145.am/db/1799293/Temasek>,
-        <https://1145.am/db/1806810/Temasek>,
-        <https://1145.am/db/1809072/Temasek>,
-        <https://1145.am/db/1814854/Temasek>,
-        <https://1145.am/db/1814941/Temasek>,
-        <https://1145.am/db/1815556/Temasek>,
-        <https://1145.am/db/1816262/Temasek>,
-        <https://1145.am/db/1820911/Temasek>,
-        <https://1145.am/db/1821833/Temasek>,
-        <https://1145.am/db/1847010/Temasek>,
-        <https://1145.am/db/1896735/Temasek>,
-        <https://1145.am/db/1964151/Temasek>,
-        <https://1145.am/db/1965165/Temasek>,
-        <https://1145.am/db/2052170/Temasek>,
-        <https://1145.am/db/2067811/Temasek>,
-        <https://1145.am/db/2074897/Temasek>,
-        <https://1145.am/db/2083550/Temasek>,
-        <https://1145.am/db/2109233/Temasek>,
-        <https://1145.am/db/2110114/Temasek>,
-        <https://1145.am/db/2110248/Temasek>,
-        <https://1145.am/db/2111111/Temasek>,
-        <https://1145.am/db/2111428/Temasek>,
-        <https://1145.am/db/2133719/Temasek>,
-        <https://1145.am/db/2151983/Temasek>,
-        <https://1145.am/db/2152526/Temasek>,
-        <https://1145.am/db/2196875/Temasek>,
-        <https://1145.am/db/2279864/Temasek>,
-        <https://1145.am/db/2286245/Temasek>,
-        <https://1145.am/db/2294195/Temasek>,
-        <https://1145.am/db/2299918/Temasek>,
-        <https://1145.am/db/2340305/Temasek>,
-        <https://1145.am/db/2540991/Temasek>,
-        <https://1145.am/db/2625686/Temasek>,
-        <https://1145.am/db/278394/Temasek>,
-        <https://1145.am/db/2785350/Temasek>,
-        <https://1145.am/db/2828543/Temasek>,
-        <https://1145.am/db/283135/Temasek>,
-        <https://1145.am/db/2840337/Temasek>,
-        <https://1145.am/db/2861598/Temasek>,
-        <https://1145.am/db/2870314/Temasek>,
-        <https://1145.am/db/2870316/Temasek>,
-        <https://1145.am/db/2871284/Temasek>,
-        <https://1145.am/db/2873963/Temasek>,
-        <https://1145.am/db/2873966/Temasek>,
-        <https://1145.am/db/2893529/Temasek>,
-        <https://1145.am/db/2893540/Temasek>,
-        <https://1145.am/db/2901809/Temasek>,
-        <https://1145.am/db/2915489/Temasek>,
-        <https://1145.am/db/2924183/Temasek>,
-        <https://1145.am/db/2924184/Temasek>,
-        <https://1145.am/db/2924639/Temasek>,
-        <https://1145.am/db/2944103/Temasek>,
-        <https://1145.am/db/2984039/Temasek>,
-        <https://1145.am/db/3021862/Temasek>,
-        <https://1145.am/db/3029448/Temasek>,
-        <https://1145.am/db/3040478/Temasek>,
-        <https://1145.am/db/3042482/Temasek>,
-        <https://1145.am/db/3042535/Temasek>,
-        <https://1145.am/db/3064357/Temasek>,
-        <https://1145.am/db/3068984/Temasek>,
-        <https://1145.am/db/3079163/Temasek>,
-        <https://1145.am/db/3080899/Temasek>,
-        <https://1145.am/db/3087754/Temasek>,
-        <https://1145.am/db/3140187/Temasek>,
-        <https://1145.am/db/3141339/Temasek>,
-        <https://1145.am/db/3153457/Temasek>,
-        <https://1145.am/db/3153772/Temasek>,
-        <https://1145.am/db/3183113/Temasek>,
-        <https://1145.am/db/3183514/Temasek>,
-        <https://1145.am/db/3218682/Temasek>,
-        <https://1145.am/db/323290/Temasek>,
-        <https://1145.am/db/3246965/Temasek>,
-        <https://1145.am/db/328689/Temasek>,
-        <https://1145.am/db/3313224/Temasek>,
-        <https://1145.am/db/3313812/Temasek>,
-        <https://1145.am/db/3417035/Temasek>,
-        <https://1145.am/db/341818/Temasek>,
-        <https://1145.am/db/3487937/Temasek>,
-        <https://1145.am/db/3499398/Temasek>,
-        <https://1145.am/db/359190/Temasek>,
-        <https://1145.am/db/3606984/Temasek>,
-        <https://1145.am/db/371811/Temasek>,
-        <https://1145.am/db/372639/Temasek>,
-        <https://1145.am/db/3770558/Temasek>,
-        <https://1145.am/db/3776154/Temasek>,
-        <https://1145.am/db/3806477/Temasek>,
-        <https://1145.am/db/386669/Temasek>,
-        <https://1145.am/db/3878512/Temasek>,
-        <https://1145.am/db/3890915/Temasek>,
-        <https://1145.am/db/3893669/Temasek>,
-        <https://1145.am/db/4031851/Temasek>,
-        <https://1145.am/db/4066058/Temasek>,
-        <https://1145.am/db/406679/Temasek>,
-        <https://1145.am/db/406744/Temasek>,
-        <https://1145.am/db/4123640/Temasek>,
-        <https://1145.am/db/4163397/Temasek>,
-        <https://1145.am/db/4188668/Temasek>,
-        <https://1145.am/db/4197200/Temasek>,
-        <https://1145.am/db/4197214/Temasek>,
-        <https://1145.am/db/466426/Temasek>,
-        <https://1145.am/db/474783/Temasek>,
-        <https://1145.am/db/525170/Temasek>,
-        <https://1145.am/db/579051/Temasek>,
-        <https://1145.am/db/588995/Temasek>,
-        <https://1145.am/db/620653/Temasek>,
-        <https://1145.am/db/676716/Temasek>,
-        <https://1145.am/db/684583/Temasek>,
-        <https://1145.am/db/711928/Temasek>,
-        <https://1145.am/db/716886/Temasek>,
-        <https://1145.am/db/717634/Temasek>,
-        <https://1145.am/db/755411/Temasek>,
-        <https://1145.am/db/782551/Temasek>,
-        <https://1145.am/db/786455/Temasek>,
-        <https://1145.am/db/817162/Temasek>,
-        <https://1145.am/db/817705/Temasek>,
-        <https://1145.am/db/834864/Temasek>,
-        <https://1145.am/db/848318/Temasek>,
-        <https://1145.am/db/852005/Temasek>,
-        <https://1145.am/db/882299/Temasek>,
-        <https://1145.am/db/882636/Temasek>,
-        <https://1145.am/db/968382/Temasek>,
-        <https://1145.am/db/973671/Temasek>,
-        <https://1145.am/db/976348/Temasek>,
-        <https://1145.am/db/999577/Temasek> .
+    ns1:internalCleanName "temasek" .
 
 <https://1145.am/db/1809885/Zomato> a org:Organization ;
     ns1:basedInHighClean "Republic of India" ;
@@ -1100,6 +581,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/629_discovery_research__> ;
     ns1:internalDocId 1809885 ;
     ns1:name "Zomato" ;
+    ns1:internalCleanName "zomato" ;
     ns1:sameAsHigh <https://1145.am/db/1160298/Zomato_Ltd>,
         <https://1145.am/db/1741215/Zomato>,
         <https://1145.am/db/1756477/Zomato>,
@@ -1108,46 +590,7 @@
         <https://1145.am/db/1806635/Zomato>,
         <https://1145.am/db/1815982/Zomato>,
         <https://1145.am/db/1816688/Zomato>,
-        <https://1145.am/db/905430/Zomato_Ltd> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1228752/Zomato>,
-        <https://1145.am/db/1250346/Zomato>,
-        <https://1145.am/db/1250525/Zomato>,
-        <https://1145.am/db/1250565/Zomato_Ltd>,
-        <https://1145.am/db/1516955/Zomato_Ltd>,
-        <https://1145.am/db/1540063/Zomato>,
-        <https://1145.am/db/1613159/Zomato_Ltd>,
-        <https://1145.am/db/1701075/Zomato>,
-        <https://1145.am/db/1706166/Zomato>,
-        <https://1145.am/db/1722478/Zomato>,
-        <https://1145.am/db/1722543/Zomato>,
-        <https://1145.am/db/1736976/Zomato>,
-        <https://1145.am/db/1738067/Zomato>,
-        <https://1145.am/db/1738166/Zomato>,
-        <https://1145.am/db/1739282/Zomato>,
-        <https://1145.am/db/1743018/Zomato>,
-        <https://1145.am/db/1747009/Zomato>,
-        <https://1145.am/db/1747754/Zomato>,
-        <https://1145.am/db/1750544/Zomato>,
-        <https://1145.am/db/1751526/Zomato>,
-        <https://1145.am/db/1755190/Zomato>,
-        <https://1145.am/db/1756479/Zomato>,
-        <https://1145.am/db/1765712/Zomato>,
-        <https://1145.am/db/1793847/Zomato>,
-        <https://1145.am/db/2062785/Zomato>,
-        <https://1145.am/db/2099887/Zomato>,
-        <https://1145.am/db/2102084/Zomato>,
-        <https://1145.am/db/2795057/Zomato>,
-        <https://1145.am/db/2825787/Zomato>,
-        <https://1145.am/db/3044706/Zomato>,
-        <https://1145.am/db/3045047/Zomato>,
-        <https://1145.am/db/3068752/Zomato>,
-        <https://1145.am/db/318112/Zomato>,
-        <https://1145.am/db/373569/Zomato>,
-        <https://1145.am/db/377767/Zomato>,
-        <https://1145.am/db/377781/Zomato>,
-        <https://1145.am/db/377807/Zomato>,
-        <https://1145.am/db/385575/Zomato>,
-        <https://1145.am/db/385581/Zomato> .
+        <https://1145.am/db/905430/Zomato_Ltd> .
 
 <https://1145.am/db/1811042/Good_Technology> a org:Organization ;
     ns1:description "mobile device management" ;
@@ -1155,19 +598,12 @@
     ns1:foundName "Good Technology" ;
     ns1:internalDocId 1811042 ;
     ns1:name "Good Technology" ;
+    ns1:internalCleanName "good technology" ;
     ns1:sameAsHigh <https://1145.am/db/1836715/Good_Technology>,
         <https://1145.am/db/1850226/Good_Technology>,
         <https://1145.am/db/2275341/Good_Technology>,
         <https://1145.am/db/2634924/Good_Technology>,
-        <https://1145.am/db/2644470/Good_Technology> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1732253/Good_Technology>,
-        <https://1145.am/db/1920468/Good_Technology>,
-        <https://1145.am/db/2629861/Good_Technology>,
-        <https://1145.am/db/2634920/Good_Technology>,
-        <https://1145.am/db/2640401/Good_Technology>,
-        <https://1145.am/db/2642127/Good_Technology>,
-        <https://1145.am/db/2660881/Good_Technology_Corp>,
-        <https://1145.am/db/2681081/Good_Technology> .
+        <https://1145.am/db/2644470/Good_Technology> .
 
 <https://1145.am/db/1811042/Good_Technology-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
@@ -1231,6 +667,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/74_chip_chips_chipmakers_chipmaker> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/281_designer_designers_chip_semiconductor> ;
     ns1:internalDocId 2638674 ;
+    ns1:internalCleanName "richtek technology" ;
     ns1:name "Richtek Technology Corp." .
 
 <https://1145.am/db/2638674/Richtek_Technology_Corp-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1254,27 +691,7 @@
     ns1:foundName "Bouygues Telecom" ;
     ns1:internalDocId 2660877 ;
     ns1:name "Bouygues Telecom" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1817981/Bouygues_Telecom>,
-        <https://1145.am/db/2604558/Bouygues_Telecom>,
-        <https://1145.am/db/2614862/Bouygues_Telecom>,
-        <https://1145.am/db/2624490/Bouygues_Telecom>,
-        <https://1145.am/db/2652384/Bouygues_Telecom>,
-        <https://1145.am/db/2654924/Bouygues_Telecom>,
-        <https://1145.am/db/2656802/Bouygues_Telecom>,
-        <https://1145.am/db/2656807/Bouygues_Telecom>,
-        <https://1145.am/db/2660014/Bouygues_Telecom>,
-        <https://1145.am/db/2662050/Bouygues_Telecom>,
-        <https://1145.am/db/2664210/Bouygues_Telecom>,
-        <https://1145.am/db/2665258/Bouygues_Telecom>,
-        <https://1145.am/db/2665318/Bouygues_Telecom>,
-        <https://1145.am/db/2666278/Bouygues_Telecom>,
-        <https://1145.am/db/2667341/Bouygues_Telecom>,
-        <https://1145.am/db/2669683/Bouygues_Telecom>,
-        <https://1145.am/db/2676541/Bouygues_Telecom>,
-        <https://1145.am/db/2679060/Bouygues_Telecom>,
-        <https://1145.am/db/2680115/Bouygues_Telecom>,
-        <https://1145.am/db/2680805/Bouygues_Telecom>,
-        <https://1145.am/db/2978746/Bouygues_Telecom> .
+    ns1:internalCleanName "bouygues telecom" .
 
 <https://1145.am/db/2983995/Petroceltic> a org:Organization ;
     ns1:basedInLowRaw "Irish" ;
@@ -1284,10 +701,10 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/35_petroleum_oil_gas_hydrocarbon> ;
     ns1:internalDocId 2983995 ;
     ns1:name "Petroceltic" ;
+    ns1:internalCleanName "petroceltic" ;
     ns1:sameAsHigh <https://1145.am/db/2986398/Petroceltic>,
         <https://1145.am/db/2992743/Petroceltic>,
-        <https://1145.am/db/2995583/Petroceltic> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2972533/Petroceltic> .
+        <https://1145.am/db/2995583/Petroceltic> .
 
 <https://1145.am/db/2984012/Baidu-Uberchina-Uberchina-Investment> a ns1:CorporateFinanceActivity ;
     ns1:activityType "investment" ;
@@ -1314,6 +731,7 @@
     ns1:foundName "Uber China",
         "UberChina" ;
     ns1:internalDocId 2984012 ;
+    ns1:internalCleanName "uberchina" ;
     ns1:name "UberChina" .
 
 <https://1145.am/db/2984033/Market_Engine_Global> a org:Organization ;
@@ -1326,6 +744,7 @@
     ns1:industry "technology" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/275_hardtech_deeptech_tech_revtech> ;
     ns1:internalDocId 2984033 ;
+    ns1:internalCleanName "market engine global" ;
     ns1:name "Market Engine Global" .
 
 <https://1145.am/db/2984033/Market_Engine_Global-Investment-Stake> a ns1:CorporateFinanceActivity ;
@@ -1358,6 +777,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/435_grocery_supermarket_ecommerce_grocer> ;
     ns1:internalDocId 2984039 ;
     ns1:name "Homeplus" ;
+    ns1:internalCleanName "homeplus" ;
     ns1:sameAsHigh <https://1145.am/db/2979487/Homeplus>,
         <https://1145.am/db/2982783/Homeplus>,
         <https://1145.am/db/2984168/Homeplus>,
@@ -1370,210 +790,7 @@
     ns1:foundName "Temasek" ;
     ns1:internalDocId 2984039 ;
     ns1:name "Temasek" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1042545/Temasek>,
-        <https://1145.am/db/1066315/Temasek>,
-        <https://1145.am/db/1066322/Temasek>,
-        <https://1145.am/db/1066323/Temasek>,
-        <https://1145.am/db/1066333/Temasek>,
-        <https://1145.am/db/1067524/Temasek>,
-        <https://1145.am/db/1067526/Temasek>,
-        <https://1145.am/db/1067529/Temasek>,
-        <https://1145.am/db/1067530/Temasek>,
-        <https://1145.am/db/1068016/Temasek>,
-        <https://1145.am/db/1155304/Temasek>,
-        <https://1145.am/db/1185911/Temasek>,
-        <https://1145.am/db/1187636/Temasek>,
-        <https://1145.am/db/1208698/Temasek>,
-        <https://1145.am/db/1260744/Temasek>,
-        <https://1145.am/db/1264889/Temasek>,
-        <https://1145.am/db/1279018/Temasek>,
-        <https://1145.am/db/1280577/Temasek>,
-        <https://1145.am/db/1327131/Temasek>,
-        <https://1145.am/db/1329147/Temasek>,
-        <https://1145.am/db/1331421/Temasek>,
-        <https://1145.am/db/1355546/Temasek>,
-        <https://1145.am/db/1356171/Temasek>,
-        <https://1145.am/db/1371212/Temasek>,
-        <https://1145.am/db/1403851/Temasek>,
-        <https://1145.am/db/1403897/Temasek>,
-        <https://1145.am/db/1448485/Temasek>,
-        <https://1145.am/db/1451672/Temasek>,
-        <https://1145.am/db/1648491/Temasek>,
-        <https://1145.am/db/165056/Temasek>,
-        <https://1145.am/db/1668144/Temasek>,
-        <https://1145.am/db/1694304/Temasek>,
-        <https://1145.am/db/1695864/Temasek>,
-        <https://1145.am/db/1696327/Temasek>,
-        <https://1145.am/db/1696600/Temasek>,
-        <https://1145.am/db/1714212/Temasek>,
-        <https://1145.am/db/1715669/Temasek>,
-        <https://1145.am/db/1722609/Temasek>,
-        <https://1145.am/db/1729336/Temasek>,
-        <https://1145.am/db/1734422/Temasek>,
-        <https://1145.am/db/1734427/Temasek>,
-        <https://1145.am/db/1734560/Temasek>,
-        <https://1145.am/db/1734901/Temasek>,
-        <https://1145.am/db/1739120/Temasek>,
-        <https://1145.am/db/1739125/Temasek>,
-        <https://1145.am/db/1739282/Temasek>,
-        <https://1145.am/db/1739488/Temasek>,
-        <https://1145.am/db/1742532/Temasek>,
-        <https://1145.am/db/1742981/Temasek>,
-        <https://1145.am/db/1744957/Temasek>,
-        <https://1145.am/db/1746577/Temasek>,
-        <https://1145.am/db/1746725/Temasek>,
-        <https://1145.am/db/1747400/Temasek>,
-        <https://1145.am/db/1749304/Temasek>,
-        <https://1145.am/db/1750488/Temasek>,
-        <https://1145.am/db/1753962/Temasek>,
-        <https://1145.am/db/1754241/Temasek>,
-        <https://1145.am/db/1755004/Temasek>,
-        <https://1145.am/db/1755209/Temasek>,
-        <https://1145.am/db/1755370/Temasek>,
-        <https://1145.am/db/1756768/Temasek>,
-        <https://1145.am/db/1757382/Temasek>,
-        <https://1145.am/db/1757977/Temasek>,
-        <https://1145.am/db/1758916/Temasek>,
-        <https://1145.am/db/1761247/Temasek>,
-        <https://1145.am/db/1762240/Temasek>,
-        <https://1145.am/db/1763411/Temasek>,
-        <https://1145.am/db/1765718/Temasek>,
-        <https://1145.am/db/1766255/Temasek>,
-        <https://1145.am/db/1766628/Temasek>,
-        <https://1145.am/db/1770353/Temasek>,
-        <https://1145.am/db/1774306/Temasek>,
-        <https://1145.am/db/1778032/Temasek>,
-        <https://1145.am/db/1784230/Temasek>,
-        <https://1145.am/db/1785263/Temasek>,
-        <https://1145.am/db/1787892/Temasek>,
-        <https://1145.am/db/1788297/Temasek>,
-        <https://1145.am/db/1790374/Temasek>,
-        <https://1145.am/db/1790917/Temasek>,
-        <https://1145.am/db/1791158/Temasek>,
-        <https://1145.am/db/1799293/Temasek>,
-        <https://1145.am/db/1806810/Temasek>,
-        <https://1145.am/db/1809072/Temasek>,
-        <https://1145.am/db/1809885/Temasek>,
-        <https://1145.am/db/1814854/Temasek>,
-        <https://1145.am/db/1814941/Temasek>,
-        <https://1145.am/db/1815556/Temasek>,
-        <https://1145.am/db/1816262/Temasek>,
-        <https://1145.am/db/1820911/Temasek>,
-        <https://1145.am/db/1821833/Temasek>,
-        <https://1145.am/db/1847010/Temasek>,
-        <https://1145.am/db/1896735/Temasek>,
-        <https://1145.am/db/1964151/Temasek>,
-        <https://1145.am/db/1965165/Temasek>,
-        <https://1145.am/db/2052170/Temasek>,
-        <https://1145.am/db/2067811/Temasek>,
-        <https://1145.am/db/2074897/Temasek>,
-        <https://1145.am/db/2083550/Temasek>,
-        <https://1145.am/db/2109233/Temasek>,
-        <https://1145.am/db/2110114/Temasek>,
-        <https://1145.am/db/2110248/Temasek>,
-        <https://1145.am/db/2111111/Temasek>,
-        <https://1145.am/db/2111428/Temasek>,
-        <https://1145.am/db/2133719/Temasek>,
-        <https://1145.am/db/2151983/Temasek>,
-        <https://1145.am/db/2152526/Temasek>,
-        <https://1145.am/db/2196875/Temasek>,
-        <https://1145.am/db/2279864/Temasek>,
-        <https://1145.am/db/2286245/Temasek>,
-        <https://1145.am/db/2294195/Temasek>,
-        <https://1145.am/db/2299918/Temasek>,
-        <https://1145.am/db/2340305/Temasek>,
-        <https://1145.am/db/2540991/Temasek>,
-        <https://1145.am/db/2625686/Temasek>,
-        <https://1145.am/db/278394/Temasek>,
-        <https://1145.am/db/2785350/Temasek>,
-        <https://1145.am/db/2828543/Temasek>,
-        <https://1145.am/db/283135/Temasek>,
-        <https://1145.am/db/2840337/Temasek>,
-        <https://1145.am/db/2861598/Temasek>,
-        <https://1145.am/db/2870314/Temasek>,
-        <https://1145.am/db/2870316/Temasek>,
-        <https://1145.am/db/2871284/Temasek>,
-        <https://1145.am/db/2873963/Temasek>,
-        <https://1145.am/db/2873966/Temasek>,
-        <https://1145.am/db/2893529/Temasek>,
-        <https://1145.am/db/2893540/Temasek>,
-        <https://1145.am/db/2901809/Temasek>,
-        <https://1145.am/db/2915489/Temasek>,
-        <https://1145.am/db/2924183/Temasek>,
-        <https://1145.am/db/2924184/Temasek>,
-        <https://1145.am/db/2924639/Temasek>,
-        <https://1145.am/db/2944103/Temasek>,
-        <https://1145.am/db/3021862/Temasek>,
-        <https://1145.am/db/3029448/Temasek>,
-        <https://1145.am/db/3040478/Temasek>,
-        <https://1145.am/db/3042482/Temasek>,
-        <https://1145.am/db/3042535/Temasek>,
-        <https://1145.am/db/3064357/Temasek>,
-        <https://1145.am/db/3068984/Temasek>,
-        <https://1145.am/db/3079163/Temasek>,
-        <https://1145.am/db/3080899/Temasek>,
-        <https://1145.am/db/3087754/Temasek>,
-        <https://1145.am/db/3140187/Temasek>,
-        <https://1145.am/db/3141339/Temasek>,
-        <https://1145.am/db/3153457/Temasek>,
-        <https://1145.am/db/3153772/Temasek>,
-        <https://1145.am/db/3183113/Temasek>,
-        <https://1145.am/db/3183514/Temasek>,
-        <https://1145.am/db/3218682/Temasek>,
-        <https://1145.am/db/323290/Temasek>,
-        <https://1145.am/db/3246965/Temasek>,
-        <https://1145.am/db/328689/Temasek>,
-        <https://1145.am/db/3313224/Temasek>,
-        <https://1145.am/db/3313812/Temasek>,
-        <https://1145.am/db/3417035/Temasek>,
-        <https://1145.am/db/341818/Temasek>,
-        <https://1145.am/db/3487937/Temasek>,
-        <https://1145.am/db/3499398/Temasek>,
-        <https://1145.am/db/359190/Temasek>,
-        <https://1145.am/db/3606984/Temasek>,
-        <https://1145.am/db/371811/Temasek>,
-        <https://1145.am/db/372639/Temasek>,
-        <https://1145.am/db/3770558/Temasek>,
-        <https://1145.am/db/3776154/Temasek>,
-        <https://1145.am/db/3806477/Temasek>,
-        <https://1145.am/db/386669/Temasek>,
-        <https://1145.am/db/3878512/Temasek>,
-        <https://1145.am/db/3890915/Temasek>,
-        <https://1145.am/db/3893669/Temasek>,
-        <https://1145.am/db/4031851/Temasek>,
-        <https://1145.am/db/4066058/Temasek>,
-        <https://1145.am/db/406679/Temasek>,
-        <https://1145.am/db/406744/Temasek>,
-        <https://1145.am/db/4123640/Temasek>,
-        <https://1145.am/db/4163397/Temasek>,
-        <https://1145.am/db/4188668/Temasek>,
-        <https://1145.am/db/4197200/Temasek>,
-        <https://1145.am/db/4197214/Temasek>,
-        <https://1145.am/db/466426/Temasek>,
-        <https://1145.am/db/474783/Temasek>,
-        <https://1145.am/db/525170/Temasek>,
-        <https://1145.am/db/579051/Temasek>,
-        <https://1145.am/db/588995/Temasek>,
-        <https://1145.am/db/620653/Temasek>,
-        <https://1145.am/db/676716/Temasek>,
-        <https://1145.am/db/684583/Temasek>,
-        <https://1145.am/db/711928/Temasek>,
-        <https://1145.am/db/716886/Temasek>,
-        <https://1145.am/db/717634/Temasek>,
-        <https://1145.am/db/755411/Temasek>,
-        <https://1145.am/db/782551/Temasek>,
-        <https://1145.am/db/786455/Temasek>,
-        <https://1145.am/db/817162/Temasek>,
-        <https://1145.am/db/817705/Temasek>,
-        <https://1145.am/db/834864/Temasek>,
-        <https://1145.am/db/848318/Temasek>,
-        <https://1145.am/db/852005/Temasek>,
-        <https://1145.am/db/882299/Temasek>,
-        <https://1145.am/db/882636/Temasek>,
-        <https://1145.am/db/968382/Temasek>,
-        <https://1145.am/db/973671/Temasek>,
-        <https://1145.am/db/976348/Temasek>,
-        <https://1145.am/db/999577/Temasek> .
+    ns1:internalCleanName "temasek" .
 
 <https://1145.am/db/2984200/Amlin> a org:Organization ;
     ns1:basedInLowRaw "British" ;
@@ -1585,6 +802,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 2984200 ;
     ns1:name "Amlin" ;
+    ns1:internalCleanName "amlin" ;
     ns1:sameAsHigh <https://1145.am/db/2890025/Amlin>,
         <https://1145.am/db/2905719/Amlin>,
         <https://1145.am/db/2984139/Amlin>,
@@ -1615,6 +833,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/401_insurance_insuretech_insurer_insurers> ;
     ns1:internalDocId 2984213 ;
     ns1:name "RSA Insurance Group" ;
+    ns1:internalCleanName "rsa insurance" ;
     ns1:sameAsHigh <https://1145.am/db/2869967/Rsa_Insurance>,
         <https://1145.am/db/2942437/Rsa_Insurance>,
         <https://1145.am/db/2942633/Rsa_Insurance>,
@@ -1939,6 +1158,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:internalDocId 2983999 ;
     ns1:name "Barclays" ;
+    ns1:internalCleanName "barclays" ;
     ns1:sameAsHigh <https://1145.am/db/1052007/Barclays>,
         <https://1145.am/db/1119958/Barclays_Plc>,
         <https://1145.am/db/1138209/Barclays>,
@@ -2121,68 +1341,7 @@
         <https://1145.am/db/905833/Barclays>,
         <https://1145.am/db/935939/Barclays>,
         <https://1145.am/db/937286/Barclays>,
-        <https://1145.am/db/943889/Barclays_Plc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1158639/Barclays>,
-        <https://1145.am/db/1318729/Barclays>,
-        <https://1145.am/db/1398305/Barclays>,
-        <https://1145.am/db/1560681/Barclays>,
-        <https://1145.am/db/1561709/Barclays>,
-        <https://1145.am/db/1711849/Barclays>,
-        <https://1145.am/db/1757788/Barclays>,
-        <https://1145.am/db/1782187/Barclays>,
-        <https://1145.am/db/2006859/Barclays>,
-        <https://1145.am/db/2048950/Barclays>,
-        <https://1145.am/db/2079516/Barclays>,
-        <https://1145.am/db/2507499/Barclays>,
-        <https://1145.am/db/2663114/Barclays>,
-        <https://1145.am/db/2822701/Barclays>,
-        <https://1145.am/db/2824292/Barclays>,
-        <https://1145.am/db/2844419/Barclays>,
-        <https://1145.am/db/2848038/Barclays>,
-        <https://1145.am/db/2868659/Barclays>,
-        <https://1145.am/db/2868660/Barclays>,
-        <https://1145.am/db/2897797/Barclays>,
-        <https://1145.am/db/2902026/Barclays>,
-        <https://1145.am/db/2902308/Barclays>,
-        <https://1145.am/db/2902310/Barclays>,
-        <https://1145.am/db/2905351/Barclays>,
-        <https://1145.am/db/2906690/Barclays>,
-        <https://1145.am/db/2906692/Barclays>,
-        <https://1145.am/db/2914984/Barclays>,
-        <https://1145.am/db/2917012/Barclays>,
-        <https://1145.am/db/2917135/Barclays>,
-        <https://1145.am/db/2917598/Barclays>,
-        <https://1145.am/db/2918523/Barclays>,
-        <https://1145.am/db/2924196/Barclays>,
-        <https://1145.am/db/2927555/Barclays>,
-        <https://1145.am/db/2927559/Barclays>,
-        <https://1145.am/db/2937204/Barclays>,
-        <https://1145.am/db/2944449/Barclays>,
-        <https://1145.am/db/3000772/Barclays>,
-        <https://1145.am/db/3024651/Barclays>,
-        <https://1145.am/db/3033013/Barclays>,
-        <https://1145.am/db/3044105/Barclays>,
-        <https://1145.am/db/3090885/Barclays>,
-        <https://1145.am/db/3198288/Barclays>,
-        <https://1145.am/db/3238322/Barclays>,
-        <https://1145.am/db/3268462/Barclays>,
-        <https://1145.am/db/3473441/Barclays>,
-        <https://1145.am/db/3788482/Barclays>,
-        <https://1145.am/db/3935012/Barclays>,
-        <https://1145.am/db/400742/Barclays>,
-        <https://1145.am/db/400782/Barclays>,
-        <https://1145.am/db/4146122/Barclays>,
-        <https://1145.am/db/4200662/Barclays>,
-        <https://1145.am/db/4231850/Barclays>,
-        <https://1145.am/db/440744/Barclays>,
-        <https://1145.am/db/442259/Barclays>,
-        <https://1145.am/db/472446/Barclays>,
-        <https://1145.am/db/473489/Barclays>,
-        <https://1145.am/db/526031/Barclays>,
-        <https://1145.am/db/543219/Barclays>,
-        <https://1145.am/db/623014/Barclays>,
-        <https://1145.am/db/626235/Barclays>,
-        <https://1145.am/db/913573/Barclays> .
+        <https://1145.am/db/943889/Barclays_Plc>  .
 
 <https://1145.am/db/2984038/Tesco> a org:Organization ;
     ns1:basedInLowRaw "South Korea" ;
@@ -2194,6 +1353,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/435_grocery_supermarket_ecommerce_grocer> ;
     ns1:internalDocId 2984038 ;
     ns1:name "Tesco" ;
+    ns1:internalCleanName "tesco" ;
     ns1:sameAsHigh <https://1145.am/db/143977/Tesco>,
         <https://1145.am/db/165695/Tesco>,
         <https://1145.am/db/1658470/Tesco>,
@@ -2300,27 +1460,7 @@
         <https://1145.am/db/3057941/Tesco>,
         <https://1145.am/db/3059570/Tesco>,
         <https://1145.am/db/306688/Tesco_Plc>,
-        <https://1145.am/db/4071994/Tesco_Plc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/180289/Tesco>,
-        <https://1145.am/db/180673/Tesco>,
-        <https://1145.am/db/1869331/Tesco>,
-        <https://1145.am/db/2650894/Tesco>,
-        <https://1145.am/db/2822678/Tesco>,
-        <https://1145.am/db/2849387/Tesco>,
-        <https://1145.am/db/2890459/Tesco>,
-        <https://1145.am/db/2890460/Tesco>,
-        <https://1145.am/db/2923537/Tesco>,
-        <https://1145.am/db/2937629/Tesco>,
-        <https://1145.am/db/2954729/Tesco>,
-        <https://1145.am/db/2960377/Tesco>,
-        <https://1145.am/db/2965873/Tesco>,
-        <https://1145.am/db/2966016/Tesco>,
-        <https://1145.am/db/2967578/Tesco>,
-        <https://1145.am/db/2983357/Tesco>,
-        <https://1145.am/db/2986513/Tesco>,
-        <https://1145.am/db/3003998/Tesco>,
-        <https://1145.am/db/3017081/Tesco>,
-        <https://1145.am/db/4070598/Tesco> .
+        <https://1145.am/db/4071994/Tesco_Plc> .
 
 <https://1145.am/db/2984039/Tesco> a org:Organization ;
     ns1:basedInLowRaw "Korea" ;
@@ -2332,6 +1472,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/435_grocery_supermarket_ecommerce_grocer> ;
     ns1:internalDocId 2984039 ;
     ns1:name "Tesco" ;
+    ns1:internalCleanName "tesco" ;
     ns1:sameAsHigh <https://1145.am/db/143977/Tesco>,
         <https://1145.am/db/165695/Tesco>,
         <https://1145.am/db/1658470/Tesco>,
@@ -2438,27 +1579,7 @@
         <https://1145.am/db/3057941/Tesco>,
         <https://1145.am/db/3059570/Tesco>,
         <https://1145.am/db/306688/Tesco_Plc>,
-        <https://1145.am/db/4071994/Tesco_Plc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/180289/Tesco>,
-        <https://1145.am/db/180673/Tesco>,
-        <https://1145.am/db/1869331/Tesco>,
-        <https://1145.am/db/2650894/Tesco>,
-        <https://1145.am/db/2822678/Tesco>,
-        <https://1145.am/db/2849387/Tesco>,
-        <https://1145.am/db/2887230/Tesco>,
-        <https://1145.am/db/2923537/Tesco>,
-        <https://1145.am/db/2937629/Tesco>,
-        <https://1145.am/db/2960377/Tesco>,
-        <https://1145.am/db/2965873/Tesco>,
-        <https://1145.am/db/2966016/Tesco>,
-        <https://1145.am/db/2967578/Tesco>,
-        <https://1145.am/db/2975798/Tesco>,
-        <https://1145.am/db/2977422/Tesco>,
-        <https://1145.am/db/2986513/Tesco>,
-        <https://1145.am/db/3003998/Tesco>,
-        <https://1145.am/db/3016590/Tesco>,
-        <https://1145.am/db/3017081/Tesco>,
-        <https://1145.am/db/4070598/Tesco> .
+        <https://1145.am/db/4071994/Tesco_Plc>  .
 
 <https://1145.am/db/2984040/Barclays> a org:Organization ;
     ns1:basedInLowRaw "UK" ;
@@ -2470,6 +1591,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/383_bank_banking_banks_bankers> ;
     ns1:internalDocId 2984040 ;
     ns1:name "Barclays" ;
+    ns1:internalCleanName "barclays" ;
     ns1:sameAsHigh <https://1145.am/db/1052007/Barclays>,
         <https://1145.am/db/1119958/Barclays_Plc>,
         <https://1145.am/db/1138209/Barclays>,
@@ -2652,68 +1774,7 @@
         <https://1145.am/db/905833/Barclays>,
         <https://1145.am/db/935939/Barclays>,
         <https://1145.am/db/937286/Barclays>,
-        <https://1145.am/db/943889/Barclays_Plc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1158639/Barclays>,
-        <https://1145.am/db/1318729/Barclays>,
-        <https://1145.am/db/1398305/Barclays>,
-        <https://1145.am/db/1560681/Barclays>,
-        <https://1145.am/db/1561709/Barclays>,
-        <https://1145.am/db/1711849/Barclays>,
-        <https://1145.am/db/1757788/Barclays>,
-        <https://1145.am/db/1782187/Barclays>,
-        <https://1145.am/db/2006859/Barclays>,
-        <https://1145.am/db/2048950/Barclays>,
-        <https://1145.am/db/2079516/Barclays>,
-        <https://1145.am/db/2507499/Barclays>,
-        <https://1145.am/db/2663114/Barclays>,
-        <https://1145.am/db/2822701/Barclays>,
-        <https://1145.am/db/2824292/Barclays>,
-        <https://1145.am/db/2844419/Barclays>,
-        <https://1145.am/db/2848038/Barclays>,
-        <https://1145.am/db/2868659/Barclays>,
-        <https://1145.am/db/2868660/Barclays>,
-        <https://1145.am/db/2897797/Barclays>,
-        <https://1145.am/db/2902026/Barclays>,
-        <https://1145.am/db/2902308/Barclays>,
-        <https://1145.am/db/2902310/Barclays>,
-        <https://1145.am/db/2905351/Barclays>,
-        <https://1145.am/db/2906690/Barclays>,
-        <https://1145.am/db/2906692/Barclays>,
-        <https://1145.am/db/2914984/Barclays>,
-        <https://1145.am/db/2917012/Barclays>,
-        <https://1145.am/db/2917135/Barclays>,
-        <https://1145.am/db/2917598/Barclays>,
-        <https://1145.am/db/2918523/Barclays>,
-        <https://1145.am/db/2924196/Barclays>,
-        <https://1145.am/db/2927555/Barclays>,
-        <https://1145.am/db/2927559/Barclays>,
-        <https://1145.am/db/2937204/Barclays>,
-        <https://1145.am/db/2944449/Barclays>,
-        <https://1145.am/db/3000772/Barclays>,
-        <https://1145.am/db/3024651/Barclays>,
-        <https://1145.am/db/3033013/Barclays>,
-        <https://1145.am/db/3044105/Barclays>,
-        <https://1145.am/db/3090885/Barclays>,
-        <https://1145.am/db/3198288/Barclays>,
-        <https://1145.am/db/3238322/Barclays>,
-        <https://1145.am/db/3268462/Barclays>,
-        <https://1145.am/db/3473441/Barclays>,
-        <https://1145.am/db/3788482/Barclays>,
-        <https://1145.am/db/3935012/Barclays>,
-        <https://1145.am/db/400742/Barclays>,
-        <https://1145.am/db/400782/Barclays>,
-        <https://1145.am/db/4146122/Barclays>,
-        <https://1145.am/db/4200662/Barclays>,
-        <https://1145.am/db/4231850/Barclays>,
-        <https://1145.am/db/440744/Barclays>,
-        <https://1145.am/db/442259/Barclays>,
-        <https://1145.am/db/472446/Barclays>,
-        <https://1145.am/db/473489/Barclays>,
-        <https://1145.am/db/526031/Barclays>,
-        <https://1145.am/db/543219/Barclays>,
-        <https://1145.am/db/623014/Barclays>,
-        <https://1145.am/db/626235/Barclays>,
-        <https://1145.am/db/913573/Barclays> .
+        <https://1145.am/db/943889/Barclays_Plc> .
 
 <https://1145.am/db/3765463/Bentley_University-President> a org:Role ;
     ns1:documentSource <https://1145.am/db/3765463/wwwprnewswirecom_news-releases_bentley-university-names-michigans-alison-davis-blake-its-8th-president-300594253html> ;

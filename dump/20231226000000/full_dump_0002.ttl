@@ -8,6 +8,7 @@
     ns1:documentSource <https://1145.am/db/1786818/techcrunchcom_2019_01_08_managed-by-q-ends-2018-with-a-fresh-25-million-in-funding_> ;
     ns1:foundName "DivCo West" ;
     ns1:internalDocId 1786818 ;
+    ns1:internalCleanName "divco west" ;
     ns1:investor <https://1145.am/db/1786818/Divco_West-Google_Ventures-Managed_By_Q-Oxford_Properties-Rre-Investment-Series_C> ;
     ns1:name "DivCo West" .
 
@@ -18,6 +19,8 @@
     ns1:internalDocId 1786818 ;
     ns1:investor <https://1145.am/db/1786818/Divco_West-Google_Ventures-Managed_By_Q-Oxford_Properties-Rre-Investment-Series_C> ;
     ns1:name "Google Ventures" ;
+    ns1:internalCleanName "google ventures" ;
+    ns1:internalCleanShortName "google" ;
     ns1:sameAsHigh <https://1145.am/db/1150887/Google_Ventures>,
         <https://1145.am/db/1153184/Google_Ventures>,
         <https://1145.am/db/1202509/Google_Ventures>,
@@ -81,694 +84,15 @@
         <https://1145.am/db/773684/Google_Ventures>,
         <https://1145.am/db/8080/Google_Ventures>,
         <https://1145.am/db/823763/Google_Ventures>,
-        <https://1145.am/db/923065/Google_Ventures> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1106670/Google>,
-        <https://1145.am/db/1114979/Google_Ventures>,
-        <https://1145.am/db/112896/Google>,
-        <https://1145.am/db/1156925/Google_Ventures>,
-        <https://1145.am/db/1157294/Google_Ventures>,
-        <https://1145.am/db/1187183/Google_Ventures>,
-        <https://1145.am/db/1189383/Google_Ventures>,
-        <https://1145.am/db/1202633/Google_Ventures>,
-        <https://1145.am/db/1203099/Google_Ventures>,
-        <https://1145.am/db/1218545/Google>,
-        <https://1145.am/db/1323515/Google>,
-        <https://1145.am/db/1336111/Google_Llc>,
-        <https://1145.am/db/1397630/Google_Ventures>,
-        <https://1145.am/db/1425239/Google_Ventures>,
-        <https://1145.am/db/1427745/Google_Ventures>,
-        <https://1145.am/db/1462007/Google>,
-        <https://1145.am/db/1632690/Google_Ventures>,
-        <https://1145.am/db/1677491/Google>,
-        <https://1145.am/db/1695636/Google>,
-        <https://1145.am/db/1697158/Google>,
-        <https://1145.am/db/1697208/Google>,
-        <https://1145.am/db/1697634/Google>,
-        <https://1145.am/db/1697695/Google>,
-        <https://1145.am/db/1700956/Google>,
-        <https://1145.am/db/1702905/Google>,
-        <https://1145.am/db/1703059/Google>,
-        <https://1145.am/db/1703789/Google>,
-        <https://1145.am/db/1704398/Google>,
-        <https://1145.am/db/1704767/Google>,
-        <https://1145.am/db/1705792/Google>,
-        <https://1145.am/db/1706457/Google>,
-        <https://1145.am/db/1707415/Google_Inc>,
-        <https://1145.am/db/1708232/Google>,
-        <https://1145.am/db/1710376/Google>,
-        <https://1145.am/db/1714555/Google_Ventures>,
-        <https://1145.am/db/1717957/Google>,
-        <https://1145.am/db/1718244/Google>,
-        <https://1145.am/db/1719418/Google>,
-        <https://1145.am/db/1720718/Google>,
-        <https://1145.am/db/1720864/Google>,
-        <https://1145.am/db/1721364/Google>,
-        <https://1145.am/db/1724856/Google>,
-        <https://1145.am/db/1728038/Google>,
-        <https://1145.am/db/1729557/Google>,
-        <https://1145.am/db/1730099/Google>,
-        <https://1145.am/db/1731064/Google>,
-        <https://1145.am/db/1734054/Google>,
-        <https://1145.am/db/1736673/Google>,
-        <https://1145.am/db/1737025/Google>,
-        <https://1145.am/db/1737156/Google>,
-        <https://1145.am/db/1737526/Google>,
-        <https://1145.am/db/1738139/Google>,
-        <https://1145.am/db/1738867/Google>,
-        <https://1145.am/db/1739125/Google_Ventures>,
-        <https://1145.am/db/1739221/Google>,
-        <https://1145.am/db/1739522/Google>,
-        <https://1145.am/db/1742225/Google>,
-        <https://1145.am/db/1743102/Google>,
-        <https://1145.am/db/1744789/Google>,
-        <https://1145.am/db/1745775/Google>,
-        <https://1145.am/db/1746459/Google>,
-        <https://1145.am/db/1746725/Google>,
-        <https://1145.am/db/1748902/Google>,
-        <https://1145.am/db/1748912/Google>,
-        <https://1145.am/db/1748945/Google>,
-        <https://1145.am/db/1749554/Google>,
-        <https://1145.am/db/1751204/Google>,
-        <https://1145.am/db/1751390/Google>,
-        <https://1145.am/db/1752062/Google>,
-        <https://1145.am/db/1752659/Google_Ventures>,
-        <https://1145.am/db/1755918/Google>,
-        <https://1145.am/db/1757953/Google>,
-        <https://1145.am/db/1758152/Google>,
-        <https://1145.am/db/1758222/Google>,
-        <https://1145.am/db/1758466/Google>,
-        <https://1145.am/db/1758684/Google>,
-        <https://1145.am/db/1758703/Google>,
-        <https://1145.am/db/1758916/Google_Ventures>,
-        <https://1145.am/db/1760788/Google>,
-        <https://1145.am/db/1760954/Google_Ventures>,
-        <https://1145.am/db/1760999/Google_Ventures>,
-        <https://1145.am/db/1762615/Google>,
-        <https://1145.am/db/1764012/Google_Ventures>,
-        <https://1145.am/db/1767376/Google>,
-        <https://1145.am/db/1767407/Google>,
-        <https://1145.am/db/1767820/Google>,
-        <https://1145.am/db/1768021/Google_Ventures>,
-        <https://1145.am/db/1768511/Google_Ventures>,
-        <https://1145.am/db/1769091/Google>,
-        <https://1145.am/db/1769482/Google>,
-        <https://1145.am/db/1769528/Google_Ventures>,
-        <https://1145.am/db/1769940/Google>,
-        <https://1145.am/db/1770726/Google>,
-        <https://1145.am/db/1770813/Google>,
-        <https://1145.am/db/1772295/Google>,
-        <https://1145.am/db/1772305/Google>,
-        <https://1145.am/db/1772373/Google>,
-        <https://1145.am/db/1772778/Google_Ventures>,
-        <https://1145.am/db/1773437/Google>,
-        <https://1145.am/db/1773605/Google_Ventures>,
-        <https://1145.am/db/1773703/Google_Ventures>,
-        <https://1145.am/db/1774154/Google>,
-        <https://1145.am/db/1775616/Google>,
-        <https://1145.am/db/1776165/Google>,
-        <https://1145.am/db/1776355/Google>,
-        <https://1145.am/db/1776575/Google_Ventures>,
-        <https://1145.am/db/1778164/Google>,
-        <https://1145.am/db/1778465/Google>,
-        <https://1145.am/db/1779223/Google>,
-        <https://1145.am/db/1779277/Google_Ventures>,
-        <https://1145.am/db/1779285/Google>,
-        <https://1145.am/db/1779669/Google>,
-        <https://1145.am/db/1780470/Google_Ventures>,
-        <https://1145.am/db/1780554/Google>,
-        <https://1145.am/db/1780582/Google_Ventures>,
-        <https://1145.am/db/1780932/Google>,
-        <https://1145.am/db/1786028/Google>,
-        <https://1145.am/db/1786716/Google_Ventures>,
-        <https://1145.am/db/1791967/Google>,
-        <https://1145.am/db/1792401/Google_Capital>,
-        <https://1145.am/db/1792698/Google>,
-        <https://1145.am/db/1792910/Google>,
-        <https://1145.am/db/1793129/Google_Ventures>,
-        <https://1145.am/db/1793825/Google>,
-        <https://1145.am/db/1794049/Google_Ventures>,
-        <https://1145.am/db/1794080/Google_Capital>,
-        <https://1145.am/db/1795057/Google>,
-        <https://1145.am/db/1795099/Google>,
-        <https://1145.am/db/1795360/Google>,
-        <https://1145.am/db/1798124/Google>,
-        <https://1145.am/db/1798130/Google>,
-        <https://1145.am/db/1798739/Google>,
-        <https://1145.am/db/1798836/Google_Ventures>,
-        <https://1145.am/db/1799129/Google>,
-        <https://1145.am/db/1799162/Google_Ventures>,
-        <https://1145.am/db/1800114/Google>,
-        <https://1145.am/db/1801884/Google>,
-        <https://1145.am/db/1802109/Google>,
-        <https://1145.am/db/1802418/Google>,
-        <https://1145.am/db/1803296/Google_Ventures>,
-        <https://1145.am/db/1804887/Google_Ventures>,
-        <https://1145.am/db/1805764/Google_Ventures>,
-        <https://1145.am/db/1805871/Google>,
-        <https://1145.am/db/1807465/Google_Capital>,
-        <https://1145.am/db/1808224/Google>,
-        <https://1145.am/db/1808484/Google_Ventures>,
-        <https://1145.am/db/1808959/Google>,
-        <https://1145.am/db/1809694/Google>,
-        <https://1145.am/db/1810106/Google_Capital>,
-        <https://1145.am/db/1811332/Google>,
-        <https://1145.am/db/1811851/Google_Ventures>,
-        <https://1145.am/db/1813266/Google_Ventures>,
-        <https://1145.am/db/1813540/Google>,
-        <https://1145.am/db/1814186/Google_Ventures>,
-        <https://1145.am/db/1815058/Google>,
-        <https://1145.am/db/1815094/Google>,
-        <https://1145.am/db/1815217/Google>,
-        <https://1145.am/db/1816707/Google_Ventures>,
-        <https://1145.am/db/181730/Google>,
-        <https://1145.am/db/1817588/Google>,
-        <https://1145.am/db/1817652/Google>,
-        <https://1145.am/db/1817857/Google_Capital>,
-        <https://1145.am/db/1818255/Google>,
-        <https://1145.am/db/1819728/Google>,
-        <https://1145.am/db/1820065/Google>,
-        <https://1145.am/db/1820380/Google_Ventures>,
-        <https://1145.am/db/1821549/Google>,
-        <https://1145.am/db/1821752/Google_Ventures>,
-        <https://1145.am/db/1822360/Google>,
-        <https://1145.am/db/1823609/Google>,
-        <https://1145.am/db/1824018/Google>,
-        <https://1145.am/db/1824026/Google_Ventures>,
-        <https://1145.am/db/1824305/Google>,
-        <https://1145.am/db/1826007/Google_Ventures>,
-        <https://1145.am/db/1826478/Google>,
-        <https://1145.am/db/1826800/Google>,
-        <https://1145.am/db/1827824/Google>,
-        <https://1145.am/db/1828072/Google_Ventures>,
-        <https://1145.am/db/1828337/Google>,
-        <https://1145.am/db/1829772/Google>,
-        <https://1145.am/db/1830066/Google_Ventures>,
-        <https://1145.am/db/1830101/Google_Ventures>,
-        <https://1145.am/db/1830114/Google>,
-        <https://1145.am/db/1830120/Google_Capital>,
-        <https://1145.am/db/1830201/Google>,
-        <https://1145.am/db/1830452/Google_Ventures>,
-        <https://1145.am/db/1831764/Google_Ventures>,
-        <https://1145.am/db/1831926/Google>,
-        <https://1145.am/db/1832133/Google_Ventures>,
-        <https://1145.am/db/1833010/Google_Ventures>,
-        <https://1145.am/db/1833042/Google>,
-        <https://1145.am/db/1833091/Google>,
-        <https://1145.am/db/1833657/Google_Ventures>,
-        <https://1145.am/db/1833931/Google_Ventures>,
-        <https://1145.am/db/1834481/Google_Ventures>,
-        <https://1145.am/db/1834503/Google_Ventures>,
-        <https://1145.am/db/1834517/Google>,
-        <https://1145.am/db/1834744/Google>,
-        <https://1145.am/db/1835259/Google_Capital>,
-        <https://1145.am/db/1837426/Google>,
-        <https://1145.am/db/1837499/Google_Ventures>,
-        <https://1145.am/db/1837821/Google>,
-        <https://1145.am/db/1838256/Google>,
-        <https://1145.am/db/1838888/Google>,
-        <https://1145.am/db/1839678/Google>,
-        <https://1145.am/db/1839704/Google>,
-        <https://1145.am/db/1840331/Google>,
-        <https://1145.am/db/1840663/Google_Ventures>,
-        <https://1145.am/db/1840731/Google>,
-        <https://1145.am/db/1841061/Google_Ventures>,
-        <https://1145.am/db/1841458/Google_Inc>,
-        <https://1145.am/db/1842342/Google_Ventures>,
-        <https://1145.am/db/1842817/Google_Ventures>,
-        <https://1145.am/db/1843250/Google>,
-        <https://1145.am/db/1843360/Google_Ventures>,
-        <https://1145.am/db/1844180/Google_Ventures>,
-        <https://1145.am/db/1844551/Google_Ventures>,
-        <https://1145.am/db/1844820/Google>,
-        <https://1145.am/db/1845023/Google_Ventures>,
-        <https://1145.am/db/1846050/Google>,
-        <https://1145.am/db/1846267/Google>,
-        <https://1145.am/db/1847479/Google>,
-        <https://1145.am/db/1847630/Google>,
-        <https://1145.am/db/1847774/Google>,
-        <https://1145.am/db/1848084/Google_Ventures>,
-        <https://1145.am/db/1848585/Google_Ventures>,
-        <https://1145.am/db/1849179/Google>,
-        <https://1145.am/db/1849311/Google>,
-        <https://1145.am/db/1849967/Google_Ventures>,
-        <https://1145.am/db/1850562/Google>,
-        <https://1145.am/db/1851706/Google>,
-        <https://1145.am/db/1852147/Google_Inc>,
-        <https://1145.am/db/1853116/Google>,
-        <https://1145.am/db/1853307/Google>,
-        <https://1145.am/db/1853335/Google_Ventures>,
-        <https://1145.am/db/1853649/Google>,
-        <https://1145.am/db/1854208/Google_Ventures>,
-        <https://1145.am/db/1854279/Google_Ventures>,
-        <https://1145.am/db/1854797/Google_Ventures>,
-        <https://1145.am/db/1854923/Google_Capital>,
-        <https://1145.am/db/1857130/Google>,
-        <https://1145.am/db/1857240/Google_Ventures>,
-        <https://1145.am/db/1857572/Google>,
-        <https://1145.am/db/1858212/Google>,
-        <https://1145.am/db/1858297/Google>,
-        <https://1145.am/db/1858438/Google_Ventures>,
-        <https://1145.am/db/1858590/Google>,
-        <https://1145.am/db/1858646/Google_Ventures>,
-        <https://1145.am/db/1858692/Google>,
-        <https://1145.am/db/1858956/Google>,
-        <https://1145.am/db/1859504/Google>,
-        <https://1145.am/db/1859740/Google>,
-        <https://1145.am/db/1859841/Google>,
-        <https://1145.am/db/1860878/Google_Ventures>,
-        <https://1145.am/db/1861342/Google_Ventures>,
-        <https://1145.am/db/1862377/Google>,
-        <https://1145.am/db/1863462/Google>,
-        <https://1145.am/db/1865114/Google>,
-        <https://1145.am/db/1865788/Google>,
-        <https://1145.am/db/1867553/Google>,
-        <https://1145.am/db/1868489/Google>,
-        <https://1145.am/db/1869561/Google>,
-        <https://1145.am/db/1869712/Google>,
-        <https://1145.am/db/1871344/Google+>,
-        <https://1145.am/db/1871611/Google>,
-        <https://1145.am/db/1871915/Google>,
-        <https://1145.am/db/1873505/Google_Ventures>,
-        <https://1145.am/db/1873704/Google>,
-        <https://1145.am/db/1876848/Google_Ventures>,
-        <https://1145.am/db/1877246/Google>,
-        <https://1145.am/db/1877348/Google>,
-        <https://1145.am/db/1877354/Google>,
-        <https://1145.am/db/1877356/Google>,
-        <https://1145.am/db/1877357/Google>,
-        <https://1145.am/db/1877473/Google_Ventures>,
-        <https://1145.am/db/1879028/Google>,
-        <https://1145.am/db/1879716/Google_Ventures>,
-        <https://1145.am/db/1881522/Google>,
-        <https://1145.am/db/1881903/Google>,
-        <https://1145.am/db/1882463/Google>,
-        <https://1145.am/db/1882810/Google_Ventures>,
-        <https://1145.am/db/1884438/Google>,
-        <https://1145.am/db/1884486/Google>,
-        <https://1145.am/db/1885182/Google>,
-        <https://1145.am/db/1885243/Google>,
-        <https://1145.am/db/1885998/Google_Ventures>,
-        <https://1145.am/db/1886030/Google>,
-        <https://1145.am/db/1886541/Google>,
-        <https://1145.am/db/1886978/Google_Ventures>,
-        <https://1145.am/db/1887769/Google>,
-        <https://1145.am/db/1887780/Google>,
-        <https://1145.am/db/1887823/Google>,
-        <https://1145.am/db/1887836/Google>,
-        <https://1145.am/db/1887982/Google_Ventures>,
-        <https://1145.am/db/1888219/Google>,
-        <https://1145.am/db/1888284/Google>,
-        <https://1145.am/db/1889055/Google>,
-        <https://1145.am/db/1889259/Google>,
-        <https://1145.am/db/1889867/Google>,
-        <https://1145.am/db/1890160/Google>,
-        <https://1145.am/db/1890192/Google>,
-        <https://1145.am/db/1890424/Google>,
-        <https://1145.am/db/1891853/Google>,
-        <https://1145.am/db/1892482/Google>,
-        <https://1145.am/db/1894569/Google>,
-        <https://1145.am/db/1896336/Google>,
-        <https://1145.am/db/1896364/Google_Ventures>,
-        <https://1145.am/db/1896565/Google>,
-        <https://1145.am/db/1898576/Google>,
-        <https://1145.am/db/1899822/Google>,
-        <https://1145.am/db/1900317/Google_Inc>,
-        <https://1145.am/db/1902108/Google>,
-        <https://1145.am/db/1902687/Google>,
-        <https://1145.am/db/1906416/Google>,
-        <https://1145.am/db/1907859/Google>,
-        <https://1145.am/db/1908799/Google>,
-        <https://1145.am/db/1908800/Google>,
-        <https://1145.am/db/1909430/Google>,
-        <https://1145.am/db/1910432/Google>,
-        <https://1145.am/db/1911314/Google_Ventures>,
-        <https://1145.am/db/1911348/Google>,
-        <https://1145.am/db/1915046/Google>,
-        <https://1145.am/db/1915624/Google>,
-        <https://1145.am/db/1916204/Google>,
-        <https://1145.am/db/1917060/Google>,
-        <https://1145.am/db/1917642/Google>,
-        <https://1145.am/db/1918520/Google>,
-        <https://1145.am/db/1923676/Google>,
-        <https://1145.am/db/1925079/Google>,
-        <https://1145.am/db/1925850/Google>,
-        <https://1145.am/db/1951121/Google>,
-        <https://1145.am/db/197394/Google>,
-        <https://1145.am/db/199411/Google>,
-        <https://1145.am/db/2052555/Google>,
-        <https://1145.am/db/2052989/Google>,
-        <https://1145.am/db/2101918/Google>,
-        <https://1145.am/db/2154341/Google_Ventures>,
-        <https://1145.am/db/2157766/Google>,
-        <https://1145.am/db/2159950/Google>,
-        <https://1145.am/db/2160798/Google>,
-        <https://1145.am/db/2162077/Google>,
-        <https://1145.am/db/2162792/Google>,
-        <https://1145.am/db/2164099/Google>,
-        <https://1145.am/db/2164941/Google>,
-        <https://1145.am/db/2168612/Google>,
-        <https://1145.am/db/2168618/Google>,
-        <https://1145.am/db/2168633/Google>,
-        <https://1145.am/db/2169255/Google>,
-        <https://1145.am/db/2169256/Google>,
-        <https://1145.am/db/2170078/Google>,
-        <https://1145.am/db/2170088/Google>,
-        <https://1145.am/db/2170124/Google>,
-        <https://1145.am/db/2170852/Google>,
-        <https://1145.am/db/2172445/Google>,
-        <https://1145.am/db/2172598/Google>,
-        <https://1145.am/db/2173392/Google>,
-        <https://1145.am/db/2174085/Google>,
-        <https://1145.am/db/2174887/Google>,
-        <https://1145.am/db/2175293/Google>,
-        <https://1145.am/db/2175679/Google>,
-        <https://1145.am/db/2175876/Google>,
-        <https://1145.am/db/2175906/Google>,
-        <https://1145.am/db/2176439/Google>,
-        <https://1145.am/db/2177262/Google>,
-        <https://1145.am/db/2177610/Google>,
-        <https://1145.am/db/2178519/Google>,
-        <https://1145.am/db/2179004/Google>,
-        <https://1145.am/db/2180867/Google_Ventures>,
-        <https://1145.am/db/2182718/Google>,
-        <https://1145.am/db/2185365/Google>,
-        <https://1145.am/db/2187497/Google>,
-        <https://1145.am/db/2189110/Google>,
-        <https://1145.am/db/2189690/Google>,
-        <https://1145.am/db/2190148/Google>,
-        <https://1145.am/db/2191086/Google>,
-        <https://1145.am/db/2191183/Google_Ventures>,
-        <https://1145.am/db/2193606/Google>,
-        <https://1145.am/db/2194249/Google_Ventures>,
-        <https://1145.am/db/2196786/Google_Ventures>,
-        <https://1145.am/db/2198042/Google_Ventures>,
-        <https://1145.am/db/2200229/Google>,
-        <https://1145.am/db/222159/Google>,
-        <https://1145.am/db/2249658/Google_Ventures>,
-        <https://1145.am/db/2267849/Google_Capital>,
-        <https://1145.am/db/2269634/Google_Ventures>,
-        <https://1145.am/db/2272691/Google>,
-        <https://1145.am/db/2286291/Google_Ventures>,
-        <https://1145.am/db/2291187/Google>,
-        <https://1145.am/db/2292675/Google_Ventures>,
-        <https://1145.am/db/2307494/Google_Ventures>,
-        <https://1145.am/db/2308700/Google_Ventures>,
-        <https://1145.am/db/2319338/Google_Ventures>,
-        <https://1145.am/db/2333119/Google_Ventures>,
-        <https://1145.am/db/2342724/Google_Ventures>,
-        <https://1145.am/db/2342725/Google_Ventures>,
-        <https://1145.am/db/2349008/Google_Ventures>,
-        <https://1145.am/db/2349426/Google_Ventures>,
-        <https://1145.am/db/2350327/Google_Ventures>,
-        <https://1145.am/db/2356396/Google_Ventures>,
-        <https://1145.am/db/2367201/Google_Ventures>,
-        <https://1145.am/db/2367681/Google_Ventures>,
-        <https://1145.am/db/2370208/Google_Ventures>,
-        <https://1145.am/db/2370240/Google_Ventures>,
-        <https://1145.am/db/2370295/Google>,
-        <https://1145.am/db/2422695/Google>,
-        <https://1145.am/db/2524835/Google>,
-        <https://1145.am/db/2524836/Google>,
-        <https://1145.am/db/2526804/Google>,
-        <https://1145.am/db/2526840/Google>,
-        <https://1145.am/db/2527805/Google>,
-        <https://1145.am/db/2527814/Google>,
-        <https://1145.am/db/2529473/Google>,
-        <https://1145.am/db/2573984/Google>,
-        <https://1145.am/db/2583442/Google_Ventures>,
-        <https://1145.am/db/2604772/Google>,
-        <https://1145.am/db/2604783/Google>,
-        <https://1145.am/db/2608334/Google>,
-        <https://1145.am/db/2609095/Google>,
-        <https://1145.am/db/2611906/Google>,
-        <https://1145.am/db/2612470/Google>,
-        <https://1145.am/db/2614160/Google>,
-        <https://1145.am/db/2623391/Google>,
-        <https://1145.am/db/2623692/Google>,
-        <https://1145.am/db/2624673/Google>,
-        <https://1145.am/db/2625283/Google>,
-        <https://1145.am/db/2625598/Google>,
-        <https://1145.am/db/2626062/Google>,
-        <https://1145.am/db/2627016/Google>,
-        <https://1145.am/db/2627999/Google>,
-        <https://1145.am/db/2632002/Google>,
-        <https://1145.am/db/2632674/Google>,
-        <https://1145.am/db/2633301/Google>,
-        <https://1145.am/db/2639636/Google>,
-        <https://1145.am/db/2641504/Google>,
-        <https://1145.am/db/2642235/Google>,
-        <https://1145.am/db/2643391/Google>,
-        <https://1145.am/db/2643947/Google>,
-        <https://1145.am/db/2646085/Google>,
-        <https://1145.am/db/2650594/Google>,
-        <https://1145.am/db/2650814/Google>,
-        <https://1145.am/db/2652107/Google>,
-        <https://1145.am/db/2652313/Google>,
-        <https://1145.am/db/2652344/Google>,
-        <https://1145.am/db/2653149/Google>,
-        <https://1145.am/db/2653764/Google>,
-        <https://1145.am/db/2654442/Google>,
-        <https://1145.am/db/2654863/Google>,
-        <https://1145.am/db/2655692/Google>,
-        <https://1145.am/db/2655699/Google>,
-        <https://1145.am/db/2657713/Google>,
-        <https://1145.am/db/2658031/Google>,
-        <https://1145.am/db/2658037/Google>,
-        <https://1145.am/db/2658152/Google>,
-        <https://1145.am/db/2658673/Google_Inc>,
-        <https://1145.am/db/2658696/Google>,
-        <https://1145.am/db/2659042/Google>,
-        <https://1145.am/db/2659387/Google>,
-        <https://1145.am/db/2661233/Google>,
-        <https://1145.am/db/2661238/Google>,
-        <https://1145.am/db/2661287/Google>,
-        <https://1145.am/db/2661289/Google>,
-        <https://1145.am/db/2661290/Google>,
-        <https://1145.am/db/2661298/Google>,
-        <https://1145.am/db/2661302/Google>,
-        <https://1145.am/db/2661307/Google>,
-        <https://1145.am/db/2661315/Google>,
-        <https://1145.am/db/2662204/Google>,
-        <https://1145.am/db/2663334/Google>,
-        <https://1145.am/db/2663792/Google>,
-        <https://1145.am/db/2664460/Google>,
-        <https://1145.am/db/2664505/Google>,
-        <https://1145.am/db/2664557/Google>,
-        <https://1145.am/db/2664675/Google>,
-        <https://1145.am/db/2664847/Google>,
-        <https://1145.am/db/2664986/Google>,
-        <https://1145.am/db/2665530/Google>,
-        <https://1145.am/db/2665583/Google>,
-        <https://1145.am/db/2665685/Google>,
-        <https://1145.am/db/2666538/Google>,
-        <https://1145.am/db/2666652/Google>,
-        <https://1145.am/db/2667309/Google>,
-        <https://1145.am/db/2667642/Google>,
-        <https://1145.am/db/2667768/Google>,
-        <https://1145.am/db/2667803/Google>,
-        <https://1145.am/db/2667823/Google>,
-        <https://1145.am/db/2669172/Google>,
-        <https://1145.am/db/2669647/Google>,
-        <https://1145.am/db/2670335/Google>,
-        <https://1145.am/db/2670351/Google>,
-        <https://1145.am/db/2670741/Google>,
-        <https://1145.am/db/2670872/Google>,
-        <https://1145.am/db/2671693/Google>,
-        <https://1145.am/db/2672934/Google>,
-        <https://1145.am/db/2673032/Google>,
-        <https://1145.am/db/2674324/Google>,
-        <https://1145.am/db/2675505/Google>,
-        <https://1145.am/db/2675758/Google>,
-        <https://1145.am/db/2676995/Google>,
-        <https://1145.am/db/2677426/Google>,
-        <https://1145.am/db/2677514/Google>,
-        <https://1145.am/db/2677517/Google>,
-        <https://1145.am/db/2677662/Google>,
-        <https://1145.am/db/2678139/Google>,
-        <https://1145.am/db/2678181/Google>,
-        <https://1145.am/db/2679193/Google>,
-        <https://1145.am/db/2681250/Google>,
-        <https://1145.am/db/2682016/Google>,
-        <https://1145.am/db/2683123/Google>,
-        <https://1145.am/db/2683129/Google>,
-        <https://1145.am/db/2683133/Google>,
-        <https://1145.am/db/2684336/Google>,
-        <https://1145.am/db/2684516/Google>,
-        <https://1145.am/db/2684668/Google>,
-        <https://1145.am/db/2685515/Google>,
-        <https://1145.am/db/2686013/Google>,
-        <https://1145.am/db/2686075/Google>,
-        <https://1145.am/db/2686285/Google>,
-        <https://1145.am/db/2686301/Google>,
-        <https://1145.am/db/2686399/Google>,
-        <https://1145.am/db/2686449/Google>,
-        <https://1145.am/db/2723493/Google>,
-        <https://1145.am/db/2745983/Google>,
-        <https://1145.am/db/2784669/Google>,
-        <https://1145.am/db/2868908/Google>,
-        <https://1145.am/db/2881927/Google>,
-        <https://1145.am/db/2881930/Google>,
-        <https://1145.am/db/2887822/Google>,
-        <https://1145.am/db/2897246/Google>,
-        <https://1145.am/db/2897252/Google>,
-        <https://1145.am/db/2909920/Google>,
-        <https://1145.am/db/2917823/Google>,
-        <https://1145.am/db/2920747/Google>,
-        <https://1145.am/db/2922252/Google>,
-        <https://1145.am/db/2930995/Google>,
-        <https://1145.am/db/2933852/Google>,
-        <https://1145.am/db/2939480/Google>,
-        <https://1145.am/db/2942970/Google>,
-        <https://1145.am/db/2945620/Google>,
-        <https://1145.am/db/2946795/Google>,
-        <https://1145.am/db/2946815/Google>,
-        <https://1145.am/db/2946829/Google>,
-        <https://1145.am/db/2947180/Google>,
-        <https://1145.am/db/2947911/Google>,
-        <https://1145.am/db/2953779/Google>,
-        <https://1145.am/db/2955970/Google>,
-        <https://1145.am/db/2957640/Google_Ventures>,
-        <https://1145.am/db/2969941/Google>,
-        <https://1145.am/db/2969964/Google>,
-        <https://1145.am/db/2972380/Google>,
-        <https://1145.am/db/2972479/Google>,
-        <https://1145.am/db/2972623/Google>,
-        <https://1145.am/db/2978405/Google>,
-        <https://1145.am/db/2985934/Google>,
-        <https://1145.am/db/2988595/Google>,
-        <https://1145.am/db/3001632/Google>,
-        <https://1145.am/db/301432/Google>,
-        <https://1145.am/db/3028105/Google>,
-        <https://1145.am/db/3030832/Google>,
-        <https://1145.am/db/303111/Google>,
-        <https://1145.am/db/3043140/Google>,
-        <https://1145.am/db/3045794/Google>,
-        <https://1145.am/db/3053278/Google>,
-        <https://1145.am/db/3053451/Google>,
-        <https://1145.am/db/3058744/Google>,
-        <https://1145.am/db/306767/Google>,
-        <https://1145.am/db/3078288/Google>,
-        <https://1145.am/db/3078619/Google>,
-        <https://1145.am/db/3113851/Google_Ventures>,
-        <https://1145.am/db/3115917/Google>,
-        <https://1145.am/db/3125728/Google>,
-        <https://1145.am/db/3132363/Google>,
-        <https://1145.am/db/3133418/Google_Ventures>,
-        <https://1145.am/db/3133435/Google_Ventures>,
-        <https://1145.am/db/3133669/Google>,
-        <https://1145.am/db/3134653/Google>,
-        <https://1145.am/db/3137252/Google>,
-        <https://1145.am/db/3137393/Google>,
-        <https://1145.am/db/3137774/Google>,
-        <https://1145.am/db/3139103/Google>,
-        <https://1145.am/db/3139165/Google>,
-        <https://1145.am/db/3140037/Google>,
-        <https://1145.am/db/3141739/Google>,
-        <https://1145.am/db/3142166/Google>,
-        <https://1145.am/db/3143045/Google>,
-        <https://1145.am/db/3148248/Google>,
-        <https://1145.am/db/3149333/Google>,
-        <https://1145.am/db/3153986/Google_Ventures>,
-        <https://1145.am/db/3169887/Google_Ventures>,
-        <https://1145.am/db/3209021/Google>,
-        <https://1145.am/db/3273012/Google>,
-        <https://1145.am/db/3284489/Google>,
-        <https://1145.am/db/3296984/Google>,
-        <https://1145.am/db/3315048/Google>,
-        <https://1145.am/db/3320422/Google>,
-        <https://1145.am/db/3321504/Google>,
-        <https://1145.am/db/3336057/Google>,
-        <https://1145.am/db/3373766/Google>,
-        <https://1145.am/db/3384886/Google>,
-        <https://1145.am/db/3388596/Google>,
-        <https://1145.am/db/3397446/Google>,
-        <https://1145.am/db/3397776/Google>,
-        <https://1145.am/db/3417035/Google_Ventures>,
-        <https://1145.am/db/3417166/Google>,
-        <https://1145.am/db/3419386/Google>,
-        <https://1145.am/db/3424214/Google>,
-        <https://1145.am/db/3451833/Google>,
-        <https://1145.am/db/3462215/Google>,
-        <https://1145.am/db/3463695/Google>,
-        <https://1145.am/db/3466869/Google_Ventures>,
-        <https://1145.am/db/3481174/Google>,
-        <https://1145.am/db/3498467/Google>,
-        <https://1145.am/db/3498937/Google>,
-        <https://1145.am/db/3500039/Google>,
-        <https://1145.am/db/3501375/Google>,
-        <https://1145.am/db/3514094/Google>,
-        <https://1145.am/db/3523576/Google_Ventures>,
-        <https://1145.am/db/3525391/Google>,
-        <https://1145.am/db/3535530/Google>,
-        <https://1145.am/db/3536311/Google>,
-        <https://1145.am/db/3541739/Google>,
-        <https://1145.am/db/3545849/Google>,
-        <https://1145.am/db/3554855/Google>,
-        <https://1145.am/db/3567129/Google>,
-        <https://1145.am/db/3568852/Google_Ventures>,
-        <https://1145.am/db/3572516/Google>,
-        <https://1145.am/db/3586308/Google>,
-        <https://1145.am/db/3605654/Google_Ventures>,
-        <https://1145.am/db/3620304/Google_Llc>,
-        <https://1145.am/db/3657005/Google>,
-        <https://1145.am/db/3672174/Google>,
-        <https://1145.am/db/3674627/Google>,
-        <https://1145.am/db/3720878/Google>,
-        <https://1145.am/db/3735628/Google>,
-        <https://1145.am/db/3764485/Google_Ventures>,
-        <https://1145.am/db/3778582/Google_Ventures>,
-        <https://1145.am/db/3791663/Google_Ventures>,
-        <https://1145.am/db/3806250/Google_Ventures>,
-        <https://1145.am/db/3818841/Google>,
-        <https://1145.am/db/3820275/Google_Ventures>,
-        <https://1145.am/db/3926189/Google>,
-        <https://1145.am/db/3937715/Google>,
-        <https://1145.am/db/3938445/Google>,
-        <https://1145.am/db/3939319/Google>,
-        <https://1145.am/db/3940494/Google>,
-        <https://1145.am/db/3976005/Google>,
-        <https://1145.am/db/4032984/Google>,
-        <https://1145.am/db/4074831/Google>,
-        <https://1145.am/db/4137002/Google>,
-        <https://1145.am/db/4159403/Google>,
-        <https://1145.am/db/4192950/Google>,
-        <https://1145.am/db/4193929/Google>,
-        <https://1145.am/db/4214906/Google>,
-        <https://1145.am/db/4232903/Google>,
-        <https://1145.am/db/4238185/Google>,
-        <https://1145.am/db/4238347/Google>,
-        <https://1145.am/db/489758/Google>,
-        <https://1145.am/db/490110/Google_Ventures>,
-        <https://1145.am/db/494237/Google>,
-        <https://1145.am/db/531962/Google>,
-        <https://1145.am/db/587644/Google>,
-        <https://1145.am/db/608499/Google>,
-        <https://1145.am/db/658803/Google_Ventures>,
-        <https://1145.am/db/781794/Google>,
-        <https://1145.am/db/884422/Google>,
-        <https://1145.am/db/884534/Google_Llc>,
-        <https://1145.am/db/886026/Google>,
-        <https://1145.am/db/886172/Google>,
-        <https://1145.am/db/890581/Google>,
-        <https://1145.am/db/908751/Google_Llc>,
-        <https://1145.am/db/909802/Google_Llc>,
-        <https://1145.am/db/94376/Google>,
-        <https://1145.am/db/962870/Google_Ventures> .
+        <https://1145.am/db/923065/Google_Ventures> .
 
 <https://1145.am/db/1786818/Oxford_Properties> a org:Organization ;
     ns1:documentSource <https://1145.am/db/1786818/techcrunchcom_2019_01_08_managed-by-q-ends-2018-with-a-fresh-25-million-in-funding_> ;
     ns1:foundName "Oxford Properties" ;
     ns1:internalDocId 1786818 ;
+    ns1:internalCleanName "oxford properties" ;
     ns1:investor <https://1145.am/db/1786818/Divco_West-Google_Ventures-Managed_By_Q-Oxford_Properties-Rre-Investment-Series_C> ;
-    ns1:name "Oxford Properties" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2455888/Oxford_Properties>,
-        <https://1145.am/db/3018730/Oxford_Properties>,
-        <https://1145.am/db/3094533/Oxford_Properties>,
-        <https://1145.am/db/3549006/Oxford_Properties>,
-        <https://1145.am/db/413799/Oxford_Properties>,
-        <https://1145.am/db/594657/Oxford_Properties>,
-        <https://1145.am/db/598284/Oxford_Properties>,
-        <https://1145.am/db/994226/Oxford_Properties> .
+    ns1:name "Oxford Properties" .
 
 <https://1145.am/db/1786818/Rre> a org:Organization ;
     ns1:documentSource <https://1145.am/db/1786818/techcrunchcom_2019_01_08_managed-by-q-ends-2018-with-a-fresh-25-million-in-funding_> ;
@@ -776,22 +100,7 @@
     ns1:internalDocId 1786818 ;
     ns1:investor <https://1145.am/db/1786818/Divco_West-Google_Ventures-Managed_By_Q-Oxford_Properties-Rre-Investment-Series_C> ;
     ns1:name "RRE" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1415790/Rre>,
-        <https://1145.am/db/1419390/Rre>,
-        <https://1145.am/db/1720841/Rre>,
-        <https://1145.am/db/1739120/Rre>,
-        <https://1145.am/db/1794870/Rre>,
-        <https://1145.am/db/1827904/Rre>,
-        <https://1145.am/db/1829422/Rre>,
-        <https://1145.am/db/1835740/Rre>,
-        <https://1145.am/db/1843031/Rre>,
-        <https://1145.am/db/1856712/Rre>,
-        <https://1145.am/db/1859754/Rre>,
-        <https://1145.am/db/1870590/Rre>,
-        <https://1145.am/db/1871221/Rre>,
-        <https://1145.am/db/2196875/Rre>,
-        <https://1145.am/db/3582272/Rre>,
-        <https://1145.am/db/687418/Rre> .
+    ns1:internalCleanName "rre" .
 
 <https://1145.am/db/1788189/Bluewater> a org:Organization ;
     ns1:basedInHighClean "Kingdom of Sweden" ;
@@ -802,21 +111,7 @@
     ns1:internalDocId 1788189 ;
     ns1:investor <https://1145.am/db/1788189/Bluewater-Flowater-Investment> ;
     ns1:name "Bluewater" ;
-    ns1:sameAsNameOnly <https://1145.am/db/130787/Bluewater>,
-        <https://1145.am/db/1333803/Bluewater>,
-        <https://1145.am/db/1432574/Bluewater>,
-        <https://1145.am/db/2956810/Bluewater>,
-        <https://1145.am/db/2957235/Bluewater>,
-        <https://1145.am/db/2957279/Bluewater>,
-        <https://1145.am/db/2960715/Bluewater>,
-        <https://1145.am/db/2960762/Bluewater>,
-        <https://1145.am/db/3255687/Bluewater>,
-        <https://1145.am/db/340865/Bluewater>,
-        <https://1145.am/db/429258/Bluewater>,
-        <https://1145.am/db/476086/Bluewater>,
-        <https://1145.am/db/662868/Bluewater>,
-        <https://1145.am/db/958538/Bluewater>,
-        <https://1145.am/db/960301/Bluewater> .
+    ns1:internalCleanName "bluewater" .
 
 <https://1145.am/db/2364649/Inge_Lues> a foaf:Person ;
     ns1:basedInHighClean "Federal Republic of Germany" ;
@@ -839,12 +134,8 @@
         <https://1145.am/db/2364649/Probiodrug_Ag-Chief_Medical_Officer> ;
     ns1:internalDocId 2364649 ;
     ns1:name "Probiodrug AG" ;
-    ns1:sameAsNameOnly <https://1145.am/db/2325831/Probiodrug>,
-        <https://1145.am/db/2336250/Probiodrug>,
-        <https://1145.am/db/2342722/Probiodrug>,
-        <https://1145.am/db/2353607/Probiodrug_Ag>,
-        <https://1145.am/db/2353610/Probiodrug_Ag>,
-        <https://1145.am/db/2367149/Probiodrug_Ag> .
+    ns1:internalCleanName "probiodrug ag" ;
+    ns1:internalCleanShortName "probiodrug" .
 
 <https://1145.am/db/2364649/Ronald_Black> a foaf:Person ;
     ns1:basedInHighClean "United States" ;
@@ -865,17 +156,14 @@
     ns1:locationAdded <https://1145.am/db/2471436/Anantara_Hotels_Resorts_Spas-Added-Anantara_Desaru_Coast_Resort_Villas>,
         <https://1145.am/db/2471436/Anantara_Hotels_Resorts_Spas-Added-Malaysian> ;
     ns1:name "Anantara Hotels, Resorts & Spas" ;
+    ns1:internalCleanName "anantara hotels resorts spas" ;
     ns1:sameAsHigh <https://1145.am/db/2457458/Anantara_Hotels_Resorts_Spas>,
         <https://1145.am/db/2463150/Anantara_Hotels_Resorts_Spas>,
         <https://1145.am/db/2471783/Anantara_Hotels_Resorts_Spas>,
         <https://1145.am/db/2474625/Anantara_Hotels_Resorts_Spas>,
         <https://1145.am/db/2475043/Anantara_Hotels_Resorts_Spas>,
         <https://1145.am/db/2691772/Anantara_Hotels_Resorts_Spas>,
-        <https://1145.am/db/3163537/Anantara_Hotels_Resorts_Spas> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2463870/Anantara_Hotels_Resorts___Spas>,
-        <https://1145.am/db/2469706/Anantara_Hotels_Resorts_Spas>,
-        <https://1145.am/db/2687401/Anantara_Hotels_Resorts___Spas>,
-        <https://1145.am/db/2700029/Anantara_Hotels_Resorts_Spas> .
+        <https://1145.am/db/3163537/Anantara_Hotels_Resorts_Spas> .
 
 <https://1145.am/db/3464628/Hindman_Llc> a org:Organization ;
     ns1:basedInHighClean "Chicago" ;
@@ -889,6 +177,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/161_auction_auctions_auctioneers_auctioneer> ;
     ns1:internalDocId 3464628 ;
     ns1:name "Hindman LLC" ;
+    ns1:internalCleanName "hindman llc" ;
+    ns1:internalCleanShortName "hindman" ;
     ns1:sameAsHigh <https://1145.am/db/1629845/Hindman> .
 
 <https://1145.am/db/3464642/Maverick_Ventures_Israel> a org:Organization ;
@@ -900,11 +190,7 @@
     ns1:internalDocId 3464642 ;
     ns1:investor <https://1145.am/db/3464642/Inziv-Maverick_Ventures_Israel-Investment-Series_A> ;
     ns1:name "Maverick Ventures Israel" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1695801/Maverick_Ventures_Israel>,
-        <https://1145.am/db/3296853/Maverick_Ventures_Israel>,
-        <https://1145.am/db/3382838/Maverick_Ventures_Israel>,
-        <https://1145.am/db/3795849/Maverick_Ventures_Israel>,
-        <https://1145.am/db/830181/Maverick_Ventures_Israel> .
+    ns1:internalCleanName "maverick ventures israel" .
 
 <https://1145.am/db/3464666/Safelite_Group> a org:Organization ;
     ns1:basedInHighClean "Columbus" ;
@@ -919,6 +205,8 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/426_glass_industry_industries_manufacturers> ;
     ns1:internalDocId 3464666 ;
     ns1:name "Safelite® Group" ;
+    ns1:internalCleanName "safelite group" ;
+    ns1:internalCleanShortName "safelite" ;
     ns1:sameAsHigh <https://1145.am/db/3555739/Safelite_Group> .
 
 <https://1145.am/db/3464715/Eli_Lilly_Company> a org:Organization ;
@@ -929,6 +217,8 @@
     ns1:foundName "Eli Lilly Company" ;
     ns1:internalDocId 3464715 ;
     ns1:name "Eli Lilly Company" ;
+    ns1:internalCleanName "eli lilly company" ;
+    ns1:internalCleanShortName "eli lilly" ;
     ns1:sameAsHigh <https://1145.am/db/1038901/Eli_Lilly_And_Company>,
         <https://1145.am/db/1072187/Eli_Lilly_And_Company>,
         <https://1145.am/db/1087869/Eli_Lilly_And_Company>,
@@ -1157,34 +447,7 @@
         <https://1145.am/db/4234228/Eli_Lilly>,
         <https://1145.am/db/4240650/Eli_Lilly_And_Company>,
         <https://1145.am/db/461671/Eli_Lilly_And_Company>,
-        <https://1145.am/db/768105/Eli_Lilly> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1121894/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2109798/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2280616/Eli_Lilly>,
-        <https://1145.am/db/2304319/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2310738/Eli_Lilly>,
-        <https://1145.am/db/2315325/Eli_Lilly>,
-        <https://1145.am/db/2317682/Eli_Lilly>,
-        <https://1145.am/db/2325257/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2327587/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2328633/Eli_Lilly>,
-        <https://1145.am/db/2329915/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2349001/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2360338/Eli_Lilly>,
-        <https://1145.am/db/2361510/Eli_Lilly>,
-        <https://1145.am/db/2368321/Eli_Lilly_And_Company>,
-        <https://1145.am/db/2560025/Eli_Lilly>,
-        <https://1145.am/db/2562999/Eli_Lilly>,
-        <https://1145.am/db/2575947/Eli_Lilly>,
-        <https://1145.am/db/2581804/Eli_Lilly>,
-        <https://1145.am/db/2583703/Eli_Lilly>,
-        <https://1145.am/db/2593456/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3195443/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3448439/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3504766/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3536712/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3846248/Eli_Lilly_And_Company>,
-        <https://1145.am/db/3847390/Eli_Lilly_And_Company> .
+        <https://1145.am/db/768105/Eli_Lilly> .
 
 <https://1145.am/db/3464715/Weisslaw_Llp> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1194,79 +457,9 @@
     ns1:foundName "WeissLaw LLP" ;
     ns1:internalDocId 3464715 ;
     ns1:name "WeissLaw LLP" ;
-    ns1:participant <https://1145.am/db/3464715/Loxo_Oncology-Acquisition> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3130276/Weisslaw_Llp>,
-        <https://1145.am/db/3130280/Weisslaw_Llp>,
-        <https://1145.am/db/3130308/Weisslaw_Llp>,
-        <https://1145.am/db/3135237/Weisslaw_Llp>,
-        <https://1145.am/db/3135286/Weisslaw_Llp>,
-        <https://1145.am/db/3148323/Weisslaw_Llp>,
-        <https://1145.am/db/3153108/Weisslaw_Llp>,
-        <https://1145.am/db/3179203/Weisslaw_Llp>,
-        <https://1145.am/db/3179211/Weisslaw_Llp>,
-        <https://1145.am/db/3186980/Weisslaw_Llp>,
-        <https://1145.am/db/3217480/Weisslaw_Llp>,
-        <https://1145.am/db/3227903/Weisslaw_Llp>,
-        <https://1145.am/db/3276510/Weisslaw_Llp>,
-        <https://1145.am/db/3285191/Weisslaw_Llp>,
-        <https://1145.am/db/3285192/Weisslaw_Llp>,
-        <https://1145.am/db/3316349/Weisslaw_Llp>,
-        <https://1145.am/db/3346225/Weisslaw_Llp>,
-        <https://1145.am/db/3346232/Weisslaw_Llp>,
-        <https://1145.am/db/3346242/Weisslaw_Llp>,
-        <https://1145.am/db/3346293/Weisslaw_Llp>,
-        <https://1145.am/db/3348711/Weisslaw_Llp>,
-        <https://1145.am/db/3365322/Weisslaw_Llp>,
-        <https://1145.am/db/3394216/Weisslaw_Llp>,
-        <https://1145.am/db/3394801/Weisslaw_Llp>,
-        <https://1145.am/db/3403974/Weisslaw_Llp>,
-        <https://1145.am/db/3403976/Weisslaw_Llp>,
-        <https://1145.am/db/3404059/Weisslaw_Llp>,
-        <https://1145.am/db/3412157/Weisslaw_Llp>,
-        <https://1145.am/db/3446355/Weisslaw_Llp>,
-        <https://1145.am/db/3479744/Weisslaw_Llp>,
-        <https://1145.am/db/3482331/Weisslaw_Llp>,
-        <https://1145.am/db/3499927/Weisslaw_Llp>,
-        <https://1145.am/db/3500010/Weisslaw_Llp>,
-        <https://1145.am/db/3509029/Weisslaw_Llp>,
-        <https://1145.am/db/3538622/Weisslaw_Llp>,
-        <https://1145.am/db/3564201/Weisslaw_Llp>,
-        <https://1145.am/db/3597958/Weisslaw_Llp>,
-        <https://1145.am/db/3600463/Weisslaw_Llp>,
-        <https://1145.am/db/3604774/Weisslaw_Llp>,
-        <https://1145.am/db/3605496/Weisslaw_Llp>,
-        <https://1145.am/db/3609120/Weisslaw_Llp>,
-        <https://1145.am/db/3620378/Weisslaw_Llp>,
-        <https://1145.am/db/3627308/Weisslaw_Llp>,
-        <https://1145.am/db/3631457/Weisslaw_Llp>,
-        <https://1145.am/db/3631601/Weisslaw_Llp>,
-        <https://1145.am/db/3762612/Weisslaw>,
-        <https://1145.am/db/3770337/Weisslaw>,
-        <https://1145.am/db/3778336/Weisslaw_Llp>,
-        <https://1145.am/db/3785747/Weisslaw>,
-        <https://1145.am/db/3797152/Weisslaw_Llp>,
-        <https://1145.am/db/3798881/Weisslaw_Llp>,
-        <https://1145.am/db/3806392/Weisslaw>,
-        <https://1145.am/db/3806428/Weisslaw>,
-        <https://1145.am/db/3812488/Weisslaw_Llp>,
-        <https://1145.am/db/3822019/Weisslaw>,
-        <https://1145.am/db/3825229/Weisslaw>,
-        <https://1145.am/db/3835515/Weisslaw_Llp>,
-        <https://1145.am/db/3835525/Weisslaw_Llp>,
-        <https://1145.am/db/3850615/Weisslaw_Llp>,
-        <https://1145.am/db/3856576/Weisslaw_Llp>,
-        <https://1145.am/db/3857021/Weisslaw>,
-        <https://1145.am/db/3860741/Weisslaw>,
-        <https://1145.am/db/3884260/Weisslaw>,
-        <https://1145.am/db/3884548/Weisslaw>,
-        <https://1145.am/db/3898126/Weisslaw>,
-        <https://1145.am/db/3899975/Weisslaw_Llp>,
-        <https://1145.am/db/3907322/Weisslaw_Llp>,
-        <https://1145.am/db/3915604/Weisslaw>,
-        <https://1145.am/db/3929121/Weisslaw>,
-        <https://1145.am/db/3929127/Weisslaw>,
-        <https://1145.am/db/3930396/Weisslaw>,
-        <https://1145.am/db/3930397/Weisslaw> .
+    ns1:internalCleanName "weisslaw llp" ;
+    ns1:internalCleanShortName "weisslaw" ;
+    ns1:participant <https://1145.am/db/3464715/Loxo_Oncology-Acquisition>  .
 
 <https://1145.am/db/3464748/Routetrst> a org:Organization ;
     ns1:basedInHighClean "Texas" ;
@@ -1276,6 +469,7 @@
     ns1:documentSource <https://1145.am/db/3464748/wwwprnewswirecom_news-releases_routetrst-inc-acquires-rtx-solutions-llc-300775152html> ;
     ns1:foundName "RouteTrst, Inc" ;
     ns1:internalDocId 3464748 ;
+    ns1:internalCleanName "routetrst" ;
     ns1:name "RouteTrst" .
 
 <https://1145.am/db/3465620/American_Healthcare_Investors> a org:Organization ;
@@ -1292,6 +486,7 @@
     ns1:internalDocId 3465620 ;
     ns1:investor <https://1145.am/db/3465620/Trilogy_Investors_Llc-Investment-Joint_Venture> ;
     ns1:name "American Healthcare Investors" ;
+    ns1:internalCleanName "american healthcare investors" ;
     ns1:sameAsHigh <https://1145.am/db/3296231/American_Healthcare_Investors>,
         <https://1145.am/db/3764309/American_Healthcare_Investors>,
         <https://1145.am/db/3781876/American_Healthcare_Investors>,
@@ -1300,9 +495,7 @@
         <https://1145.am/db/3833767/American_Healthcare_Investors>,
         <https://1145.am/db/3836646/American_Healthcare_Investors>,
         <https://1145.am/db/3900664/American_Healthcare_Investors>,
-        <https://1145.am/db/3935781/American_Healthcare_Investors> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3618407/American_Healthcare_Investors>,
-        <https://1145.am/db/3816824/American_Healthcare_Investors> .
+        <https://1145.am/db/3935781/American_Healthcare_Investors> .
 
 <https://1145.am/db/3465620/Griffin_Capital_Company> a org:Organization ;
     ns1:basedInLowRaw "IRVINE, Calif" ;
@@ -1311,35 +504,9 @@
     ns1:foundName "Griffin Capital Company, LLC" ;
     ns1:internalDocId 3465620 ;
     ns1:investor <https://1145.am/db/3465620/Trilogy_Investors_Llc-Investment-Joint_Venture> ;
-    ns1:name "Griffin Capital Company" ;
-    ns1:sameAsNameOnly <https://1145.am/db/1024445/Griffin_Capital>,
-        <https://1145.am/db/1216145/Griffin_Capital>,
-        <https://1145.am/db/1301076/Griffin>,
-        <https://1145.am/db/1614356/Griffin>,
-        <https://1145.am/db/1616007/Griffin>,
-        <https://1145.am/db/1795142/Griffin>,
-        <https://1145.am/db/2848152/Griffin>,
-        <https://1145.am/db/3186817/Griffin>,
-        <https://1145.am/db/3271499/Griffin>,
-        <https://1145.am/db/3276595/Griffin>,
-        <https://1145.am/db/3573559/Griffin>,
-        <https://1145.am/db/3764309/Griffin_Capital_Company>,
-        <https://1145.am/db/3781876/Griffin_Capital_Company>,
-        <https://1145.am/db/3794243/Griffin_Capital_Company>,
-        <https://1145.am/db/3805753/Griffin_Capital_Company>,
-        <https://1145.am/db/3833767/Griffin_Capital_Company>,
-        <https://1145.am/db/3836646/Griffin_Capital_Company>,
-        <https://1145.am/db/3900664/Griffin_Capital_Company>,
-        <https://1145.am/db/3935781/Griffin_Capital_Company>,
-        <https://1145.am/db/4078348/Griffin>,
-        <https://1145.am/db/4078575/Griffin>,
-        <https://1145.am/db/457825/Griffin_Capital_Company>,
-        <https://1145.am/db/461392/Griffin_Capital>,
-        <https://1145.am/db/667969/Griffin_Capital>,
-        <https://1145.am/db/745724/Griffin_Capital>,
-        <https://1145.am/db/747635/Griffin_Capital>,
-        <https://1145.am/db/869397/Griffin_Capital>,
-        <https://1145.am/db/910918/Griffin> .
+    ns1:internalCleanName "griffin capital company" ;
+    ns1:internalCleanShortName "griffin capital" ;
+    ns1:name "Griffin Capital Company" .
 
 <https://1145.am/db/3465726/Dotdash> a org:Organization ;
     ns1:basedInHighClean "New York City" ;
@@ -1352,10 +519,9 @@
     ns1:foundName "Dotdash" ;
     ns1:internalDocId 3465726 ;
     ns1:name "Dotdash" ;
+    ns1:internalCleanName "dotdash" ;
     ns1:sameAsHigh <https://1145.am/db/3363292/Dotdash>,
-        <https://1145.am/db/530361/Dotdash> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3219171/Dotdash>,
-        <https://1145.am/db/3390853/Dotdash> .
+        <https://1145.am/db/530361/Dotdash> .
 
 <https://1145.am/db/3465775/Tronox_Limited> a org:Organization ;
     ns1:basedInHighClean "Stamford" ;
@@ -1369,6 +535,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/200_mining_exploration_biomining_minerals> ;
     ns1:internalDocId 3465775 ;
     ns1:name "Tronox Limited" ;
+    ns1:internalCleanName "tronox limited" ;
+    ns1:internalCleanShortName "tronox" ;
     ns1:sameAsHigh <https://1145.am/db/3388430/Tronox_Limited>,
         <https://1145.am/db/3417250/Tronox_Limited>,
         <https://1145.am/db/3457568/Tronox_Limited>,
@@ -1384,15 +552,7 @@
         <https://1145.am/db/3836203/Tronox_Limited>,
         <https://1145.am/db/3848029/Tronox_Limited>,
         <https://1145.am/db/3878416/Tronox_Limited>,
-        <https://1145.am/db/3932164/Tronox_Limited> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2611321/Tronox_Inc>,
-        <https://1145.am/db/3255278/Tronox_Incorporated>,
-        <https://1145.am/db/3265162/Tronox_Incorporated>,
-        <https://1145.am/db/3372161/Tronox>,
-        <https://1145.am/db/3669117/Tronox>,
-        <https://1145.am/db/3770735/Tronox>,
-        <https://1145.am/db/3878413/Tronox_Limited>,
-        <https://1145.am/db/470144/Tronox> .
+        <https://1145.am/db/3932164/Tronox_Limited> .
 
 <https://1145.am/db/3465815/Alliance_Automotive_Group> a org:Organization ;
     ns1:basedInHighClean "London" ;
@@ -1406,6 +566,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/363_distributor_distributors_distribution_wholesale> ;
     ns1:internalDocId 3465815 ;
     ns1:name "Alliance Automotive Group" ;
+    ns1:internalCleanName "alliance automotive group" ;
+    ns1:internalCleanShortName "alliance automotive" ;
     ns1:sameAsHigh <https://1145.am/db/2958684/Alliance_Automotive>,
         <https://1145.am/db/3372305/Alliance_Automotive_Group>,
         <https://1145.am/db/3795906/Alliance_Automotive_Group> .
@@ -1421,6 +583,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/363_distributor_distributors_distribution_wholesale> ;
     ns1:internalDocId 3465815 ;
     ns1:name "Genuine Parts Company" ;
+    ns1:internalCleanName "geniune parts company" ;
+    ns1:internalCleanShortName "genuine parts" ;
     ns1:participant <https://1145.am/db/3465815/Hennig_Fahrzeugteile_Group-Acquisition> ;
     ns1:sameAsHigh <https://1145.am/db/3255851/Genuine_Parts_Company>,
         <https://1145.am/db/3313353/Genuine_Parts_Company>,
@@ -1431,14 +595,7 @@
         <https://1145.am/db/3820807/Genuine_Parts_Company>,
         <https://1145.am/db/3859595/Genuine_Parts_Company>,
         <https://1145.am/db/4213149/Genuine_Parts_Company>,
-        <https://1145.am/db/767147/Genuine_Parts_Company> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3174834/Genuine_Parts_Company>,
-        <https://1145.am/db/3353983/Genuine_Parts_Company>,
-        <https://1145.am/db/3416349/Genuine_Parts_Company>,
-        <https://1145.am/db/3435233/Genuine_Parts_Company>,
-        <https://1145.am/db/3553213/Genuine_Parts_Company>,
-        <https://1145.am/db/3591838/Genuine_Parts_Company>,
-        <https://1145.am/db/3838337/Genuine_Parts_Company> .
+        <https://1145.am/db/767147/Genuine_Parts_Company> .
 
 <https://1145.am/db/3465854/Tricorbraun> a org:Organization ;
     ns1:basedInLowRaw "U.S." ;
@@ -1451,6 +608,7 @@
     ns1:industryClusterSecondary <https://1145.am/db/industry/425_packaging_pharmaceutical_pharma_formulation> ;
     ns1:internalDocId 3465854 ;
     ns1:name "TricorBraun" ;
+    ns1:internalCleanName "tricorbraun" ;
     ns1:sameAsHigh <https://1145.am/db/1042521/Tricorbraun>,
         <https://1145.am/db/1162552/Tricorbraun>,
         <https://1145.am/db/1360807/Tricorbraun>,
@@ -1475,6 +633,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/100_marketing_communications_pr_communication> ;
     ns1:internalDocId 3465872 ;
     ns1:name "Luxury PR Group" ;
+    ns1:internalCleanName "luxury pr group" ;
+    ns1:internalCleanShortName "luxury pr" ;
     ns1:protagonist <https://1145.am/db/3465872/Regan_Luxury-Merger> .
 
 <https://1145.am/db/3465872/Regan_Communications_Group> a org:Organization ;
@@ -1488,6 +648,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/100_marketing_communications_pr_communication> ;
     ns1:internalDocId 3465872 ;
     ns1:name "Regan Communications Group" ;
+    ns1:internalCleanName "regan communications group" ;
+    ns1:internalCleanShortName "regan communications" ;
     ns1:protagonist <https://1145.am/db/3465872/Regan_Luxury-Merger> .
 
 <https://1145.am/db/3465879/Mmtec-Ipo> a ns1:CorporateFinanceActivity ;
@@ -1517,6 +679,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/71_car_used_cars_vehicles> ;
     ns1:internalDocId 3465883 ;
     ns1:name "CarGurus" ;
+    ns1:internalCleanName "cargurus" ;
     ns1:sameAsHigh <https://1145.am/db/1236126/Cargurus>,
         <https://1145.am/db/3484007/Cargurus>,
         <https://1145.am/db/3553884/Cargurus>,
@@ -1534,6 +697,8 @@
     ns1:foundName "Rollins, Inc" ;
     ns1:internalDocId 3467606 ;
     ns1:name "Rollins, Inc" ;
+    ns1:internalCleanName "rollins inc" ;
+    ns1:internalCleanShortName "rollins" ;
     ns1:sameAsHigh <https://1145.am/db/3251433/Rollins_Inc>,
         <https://1145.am/db/3289878/Rollins_Inc>,
         <https://1145.am/db/3306509/Rollins_Inc>,
@@ -1541,8 +706,7 @@
         <https://1145.am/db/3624296/Rollins_Inc>,
         <https://1145.am/db/3805009/Rollins>,
         <https://1145.am/db/3827226/Rollins_Inc>,
-        <https://1145.am/db/3907502/Rollins_Inc> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3739536/Rollins> .
+        <https://1145.am/db/3907502/Rollins_Inc>  .
 
 <https://1145.am/db/3467614/Hydro_One> a org:Organization ;
     ns1:basedInHighClean "Washington" ;
@@ -1555,34 +719,12 @@
         "Hydro One Limited" ;
     ns1:internalDocId 3467614 ;
     ns1:name "Hydro One" ;
+    ns1:internalCleanName "hydro one" ;
     ns1:sameAsHigh <https://1145.am/db/3303800/Hydro_One_Limited>,
         <https://1145.am/db/3360488/Hydro_One>,
         <https://1145.am/db/3429346/Hydro_One_Limited>,
         <https://1145.am/db/3911824/Hydro_One>,
-        <https://1145.am/db/3931576/Hydro_One_Limited> ;
-    ns1:sameAsNameOnly <https://1145.am/db/3516978/Hydro_One_Limited>,
-        <https://1145.am/db/3537754/Hydro_One>,
-        <https://1145.am/db/3594925/Hydro_One>,
-        <https://1145.am/db/3609384/Hydro_One>,
-        <https://1145.am/db/3705014/Hydro_One>,
-        <https://1145.am/db/3745808/Hydro_One>,
-        <https://1145.am/db/3774026/Hydro_One>,
-        <https://1145.am/db/3778465/Hydro_One>,
-        <https://1145.am/db/3780149/Hydro_One>,
-        <https://1145.am/db/3780163/Hydro_One_Limited>,
-        <https://1145.am/db/3792097/Hydro_One_Limited>,
-        <https://1145.am/db/3794530/Hydro_One>,
-        <https://1145.am/db/3813789/Hydro_One_Limited>,
-        <https://1145.am/db/3830641/Hydro_One_Inc>,
-        <https://1145.am/db/3832129/Hydro_One>,
-        <https://1145.am/db/3834860/Hydro_One>,
-        <https://1145.am/db/3841749/Hydro_One>,
-        <https://1145.am/db/3844869/Hydro_One_Limited>,
-        <https://1145.am/db/3850411/Hydro_One>,
-        <https://1145.am/db/3866665/Hydro_One_Inc>,
-        <https://1145.am/db/3872816/Hydro_One>,
-        <https://1145.am/db/3878097/Hydro_One>,
-        <https://1145.am/db/3916614/Hydro_One_Limited> .
+        <https://1145.am/db/3931576/Hydro_One_Limited> .
 
 <https://1145.am/db/1786818/Managed_By_Q> a org:Organization ;
     ns1:description "office management" ;
@@ -1590,6 +732,7 @@
     ns1:foundName "Managed by Q" ;
     ns1:internalDocId 1786818 ;
     ns1:name "Managed by Q" ;
+    ns1:internalCleanName "managed by q" ;
     ns1:sameAsHigh <https://1145.am/db/1769022/Managed_By_Q>,
         <https://1145.am/db/1772749/Managed_By_Q>,
         <https://1145.am/db/1777590/Managed_By_Q>,
@@ -1622,9 +765,8 @@
     ns1:documentSource <https://1145.am/db/1788189/techcrunchcom_2019_01_03_flowater-just-raised-15-million-to-put-bottled-water-out-of-business_> ;
     ns1:foundName "FloWater" ;
     ns1:internalDocId 1788189 ;
-    ns1:name "FloWater" ;
-    ns1:sameAsNameOnly <https://1145.am/db/958538/Flowater>,
-        <https://1145.am/db/960301/Flowater> .
+    ns1:internalCleanName "flowater" ;
+    ns1:name "FloWater"  .
 
 <https://1145.am/db/2364649/Inge_Lues-Starting-Chief_Development_Officer> a ns1:RoleActivity ;
     ns1:activityType "starting" ;
@@ -1720,6 +862,7 @@
     ns1:industry "Auction" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/161_auction_auctions_auctioneers_auctioneer> ;
     ns1:internalDocId 3464628 ;
+    ns1:internalCleanName "leslie hindman auctioneers" ;
     ns1:name "Leslie Hindman Auctioneers" .
 
 <https://1145.am/db/3464628/Leslie_Hindman_Auctioneers-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1748,6 +891,7 @@
     ns1:documentSource <https://1145.am/db/3464642/wwwprnewswirecom_news-releases_inziv-raises-2-5m-in-series-a-funding-to-address-emerging-defects-in-newest-high-resolution-displays-300774965html> ;
     ns1:foundName "InZiv" ;
     ns1:industry "display inspection equipment" ;
+    ns1:internalCleanName "inziv" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/347_displays_display_screen_oled> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/16_inspection_certification_inspections_testing> ;
     ns1:internalDocId 3464642 ;
@@ -1782,6 +926,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/170_auto_automotive_autobody_automobile> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/426_glass_industry_industries_manufacturers> ;
     ns1:internalDocId 3464666 ;
+    ns1:internalCleanName "glasspro" ;
     ns1:name "Glasspro" .
 
 <https://1145.am/db/3464666/Glasspro-Safelite_Group-Acquisition-Assets> a ns1:CorporateFinanceActivity ;
@@ -1810,30 +955,15 @@
     ns1:foundName "Loxo Oncology, Inc" ;
     ns1:internalDocId 3464715 ;
     ns1:name "Loxo Oncology" ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma> ;
+    ns1:internalCleanName "loxo oncology" ;
     ns1:sameAsHigh <https://1145.am/db/2348784/Loxo_Oncology>,
         <https://1145.am/db/2356297/Loxo_Oncology>,
         <https://1145.am/db/2543220/Loxo_Oncology>,
         <https://1145.am/db/2566845/Loxo_Oncology>,
-        <https://1145.am/db/3029576/Loxo_Oncology>,
         <https://1145.am/db/3435240/Loxo_Oncology>,
-        <https://1145.am/db/3448439/Loxo_Oncology>,
         <https://1145.am/db/3507722/Loxo_Oncology_Inc>,
-        <https://1145.am/db/3549221/Loxo_Oncology>,
-        <https://1145.am/db/3572250/Loxo_Oncology> ;
-    ns1:sameAsNameOnly <https://1145.am/db/2154037/Loxo_Oncology>,
-        <https://1145.am/db/2296074/Loxo_Oncology>,
-        <https://1145.am/db/2337250/Loxo_Oncology>,
-        <https://1145.am/db/2337254/Loxo_Oncology>,
-        <https://1145.am/db/2342630/Loxo_Oncology>,
-        <https://1145.am/db/2352892/Loxo_Oncology>,
-        <https://1145.am/db/2355997/Loxo_Oncology>,
-        <https://1145.am/db/2367656/Loxo_Oncology>,
-        <https://1145.am/db/2368844/Loxo_Oncology>,
-        <https://1145.am/db/2543185/Loxo_Oncology>,
-        <https://1145.am/db/3437629/Loxo_Oncology>,
-        <https://1145.am/db/3559924/Loxo_Oncology>,
-        <https://1145.am/db/3560453/Loxo_Oncology>,
-        <https://1145.am/db/86786/Loxo_Oncology> .
+        <https://1145.am/db/3572250/Loxo_Oncology>  .
 
 <https://1145.am/db/3464748/Rtx_Solutions> a org:Organization ;
     ns1:basedInHighClean "Austin" ;
@@ -1842,6 +972,7 @@
     ns1:documentSource <https://1145.am/db/3464748/wwwprnewswirecom_news-releases_routetrst-inc-acquires-rtx-solutions-llc-300775152html> ;
     ns1:foundName "RTX Solutions, LLC" ;
     ns1:internalDocId 3464748 ;
+    ns1:internalCleanName "rtx solutions" ;
     ns1:name "RTX Solutions" .
 
 <https://1145.am/db/3464748/Rtx_Solutions-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -1865,6 +996,8 @@
     ns1:documentSource <https://1145.am/db/3465620/wwwprnewswirecom_news-releases_griffin-american-healthcare-reit-iv-completed-acquisitions-totaling-more-than-200-million-during-the-fourth-quarter-2018-300775123html> ;
     ns1:foundName "Trilogy Investors, LLC" ;
     ns1:internalDocId 3465620 ;
+    ns1:internalCleanName "trilogy investors llc" ;
+    ns1:internalCleanShortName "trilogy investors" ;
     ns1:name "Trilogy Investors, LLC" .
 
 <https://1145.am/db/3465726/Byrdie> a org:Organization ;
@@ -1875,6 +1008,7 @@
     ns1:documentSource <https://1145.am/db/3465726/wwwprnewswirecom_news-releases_dotdash-enters-beauty-space-with-byrdie-acquisition-300775156html> ;
     ns1:foundName "Byrdie" ;
     ns1:industry "beauty" ;
+    ns1:internalCleanName "byrdie" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/0_beauty_cosmetics_skincare_cosmetic> ;
     ns1:internalDocId 3465726 ;
     ns1:name "Byrdie" .
@@ -1902,6 +1036,7 @@
     ns1:documentSource <https://1145.am/db/3465726/wwwprnewswirecom_news-releases_dotdash-enters-beauty-space-with-byrdie-acquisition-300775156html> ;
     ns1:foundName "MyDomaine" ;
     ns1:industry "women's lifestyle" ;
+    ns1:internalCleanName "mydomaine" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/592_lifestyle_living_services_home> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/155_fertility_reproductive_ivf_reproduction> ;
     ns1:internalDocId 3465726 ;
@@ -1931,6 +1066,8 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/200_mining_exploration_biomining_minerals> ;
     ns1:internalDocId 3465775 ;
     ns1:name "The National Titanium Dioxide Company Limited" ;
+    ns1:internalCleanName "the national titanium dioxide company limited" ;
+    ns1:internalCleanShortName "the national titanium dioxide" ;
     ns1:sameAsHigh <https://1145.am/db/3531177/The_National_Titanium_Dioxide_Company_Limited>,
         <https://1145.am/db/3806363/The_National_Titanium_Dioxide_Company_Limited>,
         <https://1145.am/db/3827290/The_National_Titanium_Dioxide_Company_Limited>,
@@ -1961,6 +1098,8 @@
     ns1:industry "automotive distribution" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/363_distributor_distributors_distribution_wholesale> ;
     ns1:internalDocId 3465815 ;
+    ns1:internalCleanName "hennig fahrzeugteile group" ;
+    ns1:internalCleanShortName "hennig fahrzeughteile" ;
     ns1:name "Hennig Fahrzeugteile Group" .
 
 <https://1145.am/db/3465854/Pacific_Bag> a org:Organization ;
@@ -1971,6 +1110,7 @@
     ns1:industryClusterPrimary <https://1145.am/db/industry/81_packaging_containers_cartons_container> ;
     ns1:industryClusterSecondary <https://1145.am/db/industry/425_packaging_pharmaceutical_pharma_formulation> ;
     ns1:internalDocId 3465854 ;
+    ns1:internalCleanName "pacific bag" ;
     ns1:name "Pacific Bag" .
 
 <https://1145.am/db/3465854/Pacific_Bag-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2000,6 +1140,7 @@
     ns1:industry "public relations" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/100_marketing_communications_pr_communication> ;
     ns1:internalDocId 3465872 ;
+    ns1:internalCleanName "regan luxury" ;
     ns1:name "Regan Luxury" .
 
 <https://1145.am/db/3465879/Mmtec> a org:Organization ;
@@ -2009,6 +1150,7 @@
     ns1:documentSource <https://1145.am/db/3465879/wwwprnewswirecom_news-releases_mmtec-inc-announces-pricing-of-a-1-8-million-share-firm-commitment-initial-public-offering-300775204html> ;
     ns1:foundName "MMTec, Inc" ;
     ns1:internalDocId 3465879 ;
+    ns1:internalCleanName "mmtec" ;
     ns1:name "MMTec" .
 
 <https://1145.am/db/3465883/Pistonheads> a org:Organization ;
@@ -2021,6 +1163,7 @@
     ns1:industry "automotive marketplace" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/71_car_used_cars_vehicles> ;
     ns1:internalDocId 3465883 ;
+    ns1:internalCleanName "pistonheads" ;
     ns1:name "PistonHeads" .
 
 <https://1145.am/db/3465883/Pistonheads-Acquisition> a ns1:CorporateFinanceActivity ;
@@ -2049,36 +1192,8 @@
     ns1:internalDocId 3465897 ;
     ns1:name "Pan American Silver Corp",
         "Pan American Silver Corp." ;
-    ns1:sameAsNameOnly <https://1145.am/db/1476611/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1476625/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1478105/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1488162/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1488236/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1522048/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1642443/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1674059/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1948615/Pan_American_Silver_Corp>,
-        <https://1145.am/db/1955389/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2011232/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2072469/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2072981/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2123979/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2130046/Pan_American_Silver_Corp>,
-        <https://1145.am/db/2850130/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3419995/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3504540/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3575274/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3603096/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3652488/Pan_American_Silver>,
-        <https://1145.am/db/3668292/Pan_American_Silver>,
-        <https://1145.am/db/3690243/Pan_American_Silver>,
-        <https://1145.am/db/3819759/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3844975/Pan_American_Silver_Corp>,
-        <https://1145.am/db/3901976/Pan_American_Silver_Corp>,
-        <https://1145.am/db/4041491/Pan_American_Silver_Corp>,
-        <https://1145.am/db/4061021/Pan_American_Silver_Corp>,
-        <https://1145.am/db/4157491/Pan_American_Silver_Corp>,
-        <https://1145.am/db/4203154/Pan_American_Silver_Corp> .
+    ns1:internalCleanName "pan american silver corp" ;
+    ns1:internalCleanShortName "pan american silver" .
 
 <https://1145.am/db/3465897/Pan_American_Silver_Corp-Ipo> a ns1:CorporateFinanceActivity ;
     ns1:activityType "ipo" ;
@@ -2103,6 +1218,7 @@
     ns1:industry "pest management" ;
     ns1:industryClusterPrimary <https://1145.am/db/industry/442_pest_termite_control_services> ;
     ns1:internalDocId 3467606 ;
+    ns1:internalCleanName "clark pest control" ;
     ns1:name "Clark Pest Control" ;
     ns1:sameAsHigh <https://1145.am/db/585145/Clark_Pest_Control>,
         <https://1145.am/db/803980/Clark_Pest_Control> .
@@ -2133,27 +1249,9 @@
         "Avista Corporation" ;
     ns1:internalDocId 3467614 ;
     ns1:name "Avista" ;
+    ns1:internalCleanName "avista" ;
     ns1:sameAsHigh <https://1145.am/db/3537754/Avista_Corporation>,
-        <https://1145.am/db/3832129/Avista_Corporation> ;
-    ns1:sameAsNameOnly <https://1145.am/db/1647470/Avista>,
-        <https://1145.am/db/2546294/Avista>,
-        <https://1145.am/db/2585953/Avista>,
-        <https://1145.am/db/3429346/Avista_Corporation>,
-        <https://1145.am/db/3522855/Avista>,
-        <https://1145.am/db/3588094/Avista_Corporation>,
-        <https://1145.am/db/3594925/Avista_Corporation>,
-        <https://1145.am/db/3774026/Avista_Corporation>,
-        <https://1145.am/db/3778465/Avista>,
-        <https://1145.am/db/3794530/Avista_Corporation>,
-        <https://1145.am/db/3813789/Avista>,
-        <https://1145.am/db/3834860/Avista_Corporation>,
-        <https://1145.am/db/3841749/Avista>,
-        <https://1145.am/db/3850411/Avista>,
-        <https://1145.am/db/3872816/Avista_Corporation>,
-        <https://1145.am/db/3878097/Avista>,
-        <https://1145.am/db/3911824/Avista>,
-        <https://1145.am/db/3916614/Avista_Corporation>,
-        <https://1145.am/db/403438/Avista_Corp> .
+        <https://1145.am/db/3832129/Avista_Corporation> .
 
 <https://1145.am/db/geonames_location/1733045> a ns1:GeoNamesLocation ;
     ns1:documentSource <https://1145.am/db/2471436/wwwluxurytraveladvisorcom_hotels_anantara-opens-first-hotel-malaysia> ;
@@ -2328,7 +1426,7 @@
     ns1:internalDocId 3465726 ;
     ns1:name "Clique",
         "Clique Brands" ;
-    ns1:sameAsNameOnly <https://1145.am/db/3086292/Clique_Brands> .
+    ns1:internalCleanName "clique brands", "clique" .
 
 <https://1145.am/db/3465815/Hennig_Fahrzeugteile_Group-Acquisition> a ns1:CorporateFinanceActivity ;
     ns1:activityType "acquisition" ;
