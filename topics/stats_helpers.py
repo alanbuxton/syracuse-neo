@@ -33,6 +33,9 @@ def industry_orgs_activities_stats(search_str, max_date=None, include_search_by_
         max_date = cached_activity_stats_last_updated_date()
     if max_date is None:
         return None
+    days_ago_90 = date_minus(max_date,90)
+    days_ago_30 = date_minus(max_date,30)
+    days_ago_7 = date_minus(max_date,7)
     for ind in ind_clusters:
         orgs_and_activities_by_industry[ind.topicId] = {}
         orgs_and_activities_by_industry[ind.topicId]['industry'] = ind
@@ -40,15 +43,16 @@ def industry_orgs_activities_stats(search_str, max_date=None, include_search_by_
         if counts_only is True:
             org_stats = len(org_stats)
         orgs_and_activities_by_industry[ind.topicId]['orgs'] = org_stats
-        cnt90 = activities_by_industry(ind,date_minus(max_date,90),max_date,counts_only=True)
-        cnt30 = activities_by_industry(ind,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
-        cnt7 = activities_by_industry(ind,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+        cnt90 = activities_by_industry(ind,days_ago_90,max_date,counts_only=True)
+        cnt30 = activities_by_industry(ind,days_ago_30,max_date,counts_only=True) if cnt90 > 0 else 0
+        cnt7 = activities_by_industry(ind,days_ago_7,max_date,counts_only=True) if cnt30 > 0 else 0
 
         orgs_and_activities_by_industry[ind.topicId]['activities_7'] = cnt7 
         orgs_and_activities_by_industry[ind.topicId]['activities_30'] = cnt30
         orgs_and_activities_by_industry[ind.topicId]['activities_90'] = cnt90
         
-    return orgs_and_activities_by_industry
+    dates =  {"max_date":max_date, "7": days_ago_7, "30": days_ago_30, "90": days_ago_90}
+    return orgs_and_activities_by_industry, dates
 
 
 def get_stats(max_date):

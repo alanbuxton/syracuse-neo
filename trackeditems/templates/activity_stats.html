@@ -4,6 +4,7 @@
 {% include 'layouts/main-styling.html' %}
 {% load rest_framework %}
 {% load l10n %}
+{% load topics_extras %}
 
 <title>Syracuse - Stats</title>
 
@@ -38,7 +39,7 @@
       {% for recent in recents_by_geo %}
         <tr>
           <td>{{ recent.flag }}</td>
-          <td><a href='geo_activities?geo_code={{ recent.geo_code }}'>{{ recent.geo_name }}</a></td>
+          <td><a href="{% url 'tracked-geo-activities' %}?geo_code={{ recent.geo_code }}&{{ request_state.qs_params|dict_to_query_string }}">{{ recent.geo_name }}</a></td>
           <td>{{ recent.geo_code }}</td>
           <td align="right">{{ recent.count7 | localize }}</td>
           <td align="right">{{ recent.count30 | localize }}</td>
@@ -66,7 +67,7 @@
       </tr>
       {% for recent in recents_by_source %}
         <tr>
-          <td><a href='source_activities?source_name={{ recent.source_name }}'>{{ recent.source_name }}</a></td>
+          <td><a href="{% url 'tracked-source-activities' %}?source_name={{ recent.source_name }}&{{ request_state.qs_params|dict_to_query_string }}">{{ recent.source_name }}</a></td>
           <td align="right">{{ recent.count7 | localize }}</td>
           <td align="right">{{ recent.count30 | localize }}</td>
           <td align="right">{{ recent.count90 | localize }}</td>
@@ -86,7 +87,7 @@
       </tr>
       {% for recent in recents_by_industry %}
         <tr>
-          <td><a href='industry_activities?industry_id={{ recent.industry_id }}'>{{ recent.industry_name }}</a></td>
+          <td><a href="{% url 'industry-activities' %}?industry_id={{ recent.industry_id }}&{{ request_state.qs_params|dict_to_query_string }}">{{ recent.industry_name }}</a></td>
           <td align="right">{{ recent.count7 | localize }}</td>
           <td align="right">{{ recent.count30 | localize }}</td>
           <td align="right">{{ recent.count90 | localize }}</td>

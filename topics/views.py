@@ -230,7 +230,35 @@ class OrganizationByUri(APIView):
 
 class IndustryGeoFinderReview(ListCreateAPIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'industry_geo_finder_review.html'   
+    template_name = 'industry_geo_finder_review.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+    def get(self, request):
+        # Simplified to call if only using one industry id
+        industry_id = request.GET['industry_id']
+        geo_codes = []
+        all_industry_ids = [int(industry_id)]
+        industry_ids = [str(industry_id)]
+        search_str = 'BAR'
+        indiv_cells = []
+        search_str_in_all_geos = 'FOO'
+        request_state, _ = prepare_request_state(request)
+
+        table_data = OrgsByIndustryGeoSerializer({
+            "all_industry_ids": all_industry_ids,
+            "industry_ids":industry_ids,
+            "search_str": search_str,
+            "geo_codes": geo_codes,
+            "indiv_cells": indiv_cells,
+            "search_str_in_all_geos": search_str_in_all_geos,
+        })
+        
+        resp = Response({"table_data":table_data.data,"search_str":search_str,
+                         "all_industry_ids": all_industry_ids,
+                         "request_state": request_state}, status=status.HTTP_200_OK)
+        return resp
+
 
     def post(self, request):
         search_str = request.POST.get('searchStr')
@@ -354,18 +382,18 @@ class IndustryOrgsActivities(APIView):
 
     def get(self, request):
         industry_search_str = request.GET['industry']
+        _, max_date = min_and_max_date(request.GET)
         include_search_by_industry_text = False # explicitly not supported for now
-        headers, ind_cluster_rows, text_row  = industry_orgs_activities_stats(industry_search_str, 
-                                                                             include_search_by_industry_text=include_search_by_industry_text,
+        orgs_and_activities_by_industry, dates = industry_orgs_activities_stats(industry_search_str, 
+                                                                             include_search_by_industry_text=include_search_by_industry_text,                                                       
                                                                              counts_only=True,
-                                                                             max_date=None) 
+                                                                             max_date=max_date) 
+        dates = {k:v.strftime("%Y-%m-%d") for k,v in dates.items()}
         request_state, _ = prepare_request_state(request)
-        resp = Response({"table_body": ind_cluster_rows,
-                         "text_row": text_row,
-                         "table_header": headers,
+        resp = Response({"orgs_and_activities_by_industry": orgs_and_activities_by_industry,
                          "search_term": industry_search_str,
-                         "industry_ids": json.dumps([x['industry_id'] for x in ind_cluster_rows]),
                          "request_state": request_state,
+                         "dates": dates, # max date *may* be in request_state or not, so could end up being duplicated in URL
                         }, status=status.HTTP_200_OK)
         return resp
 

@@ -956,6 +956,9 @@ class TestUtilsWithDumpData(TestCase):
                    'selectedRows': ['["row-0"]'], 'selectedColumns': ['["col-US"]'], 
                    'allIndustryIDs': ['[0, 75, 219]'], 'searchStr': ['health']}
         response = client.post("/industry_geo_finder_review",payload)
+        assert response.status_code == 403
+        client.force_login(self.user)
+        response = client.post("/industry_geo_finder_review",payload)
         assert response.status_code == 200
         content = str(response.content)
         assert "Health- And Beauty in all Geos" in content
@@ -1014,6 +1017,14 @@ class TestUtilsWithDumpData(TestCase):
         assert res[0]['activity_class'] == 'MarketingActivity'
         assert res[0]['activity_uri'] == 'https://1145.am/db/2946622/Turns_10_Years_Old'
 
+    def test_shows_org_and_activity_counts_by_industry_search_string(self):
+        client = self.client
+        resp = client.get("/industry_orgs_activities?industry=building&max_date=2024-04-02")
+        content = str(resp.content)
+        assert "Architecture, Engineering And Construction" in content
+        assert "Retail Property And Place Making" in content
+        assert '<a href="/industry_geo_finder_review?industry_id=686&industry=building&max_date=2024-04-02">1</a>' in content
+        assert '<a href="/industry_activities?industry_id=696&min_date=2024-03-03&max_date=2024-04-02&industry=building&max_date=2024-04-02">1</a>' in content
 
 class TestRegionHierarchy(TestCase):
 

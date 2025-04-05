@@ -1,0 +1,44 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+
+<title>Industry counts for: {{ search_term }}</title>
+
+</head>
+<body>
+<h1>Industry Counts for: {{ search_term }}</h1>
+
+<table>
+
+    <tr>
+        <th>Industry</th>
+        <th># Orgs</th>
+        <th># Activities (last 7 days)</th>
+        <th># Activities (last 30 days)</th>
+        <th># Activities (last 90 days)</th>
+    </tr>
+    {% for k,vs in orgs_and_activities_by_industry.items %}
+        <tr>
+            <td>{{ vs.industry.best_name }}</td>
+            <td align="right"><a href="{% url 'industry-geo-finder-review' %}?industry_id={{k}}&{{ request_state.qs_params|dict_to_query_string }}">{{ vs.orgs }}</a></td>
+            <td align="right"><a href="{% url 'industry-activities' %}?industry_id={{ k }}&min_date={{ dates.7 }}&max_date={{ dates.max_date}}&{{ request_state.qs_params|dict_to_query_string }}">{{ vs.activities_7 }}</a></td>
+            <td align="right"><a href="{% url 'industry-activities' %}?industry_id={{ k }}&min_date={{ dates.30 }}&max_date={{ dates.max_date}}&{{ request_state.qs_params|dict_to_query_string }}">{{ vs.activities_30 }}</a></td>
+            <td align="right"><a href="{% url 'industry-activities' %}?industry_id={{ k }}&min_date={{ dates.90 }}&max_date={{ dates.max_date}}&{{ request_state.qs_params|dict_to_query_string }}">{{ vs.activities_90 }}</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br/>
+<form class="narrow_form" action="{% url 'industry-geo-finder' %}" method="GET" novalidate>
+    <input type="hidden" name="industry" value="{{ search_term }}">
+    <input type="submit" value="Narrow search by region">
+</form>
+
+{% include 'layouts/footer.html' %}
+
+</body>
+</html>

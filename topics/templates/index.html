@@ -79,10 +79,11 @@ Last updated {{ last_updated | localize }}</h5>
     </div>
     <div id="right_panel">
       <p>or, start browsing by industry:</p>
-      <form class="narrow_form" action="{% url 'industry-geo-finder' %}" method="GET" novalidate>
+      <form class="narrow_form" action="{% url 'industry-orgs-activities' %}" method="GET" novalidate>
           {% render_form industry_search template_pack='rest_framework/inline' %}
           <br/><input type="submit" value="Search">
       </form>
+      <em style="font-size:10px;">You can choose an industry from the dropdown, or just type the industry you want to search for and we will find the closest matches.</em>
     </div>
   </div>
   {% if search_type == 'org_name'%}
