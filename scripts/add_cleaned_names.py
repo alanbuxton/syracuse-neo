@@ -16,7 +16,7 @@ def main(input_file="tmp/cleaned_names.pickle"):
         r = Resource.nodes.get_or_none(uri=uri)
         if r is None:
             logger.info(f"Couldn't find {uri}")
-        if hasattr(r,"internalCleanedName") and r.internalCleanedName is not None:
+        if hasattr(r,"internalCleanName") and r.internalCleanName is not None:
             logger.info(f"{uri} already set")
             continue
         params = {"cleaned_name":vals['cleaned_name'],"cleaned_short_name":vals['cleaned_name_short']}
