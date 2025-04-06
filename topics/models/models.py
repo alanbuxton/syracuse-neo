@@ -374,6 +374,7 @@ class Article(Resource):
             'PR Newswire',
             'PR Newswire UK',
             'PR Web',
+            'Reuters',
             'Sifted',
             'South China Morning Post',
             'TechCrunch',
