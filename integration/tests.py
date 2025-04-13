@@ -10,6 +10,7 @@ from topics.models import Organization, Resource
 from integration.neo4j_utils import (
     delete_all_not_needed_resources,
     apoc_del_redundant_same_as,
+    delete_and_clean_up_nodes_by_doc_id,
 )
 from integration.rdf_post_processor import RDFPostProcessor
 from topics.cache_helpers import nuke_cache
@@ -618,6 +619,32 @@ class MergeSubsetActivitiesTestCase(TestCase):
         people = set([x for sublist in people for x in sublist])
         assert len(people) == 5
 
+class DeleteNodesAfterIntegrationTestCase(TestCase):
+
+    def test_deletes_with_same_internal_doc_id_and_merged_as(self):
+        '''
+            If one doc has multiple orgs to delete and which are all in the 
+        '''
+        clean_db()
+        node_data = [
+            {"doc_id":10000, "identifier":"orga","node_type":"Organization"},
+            {"doc_id":10000, "identifier":"orgb","node_type":"Organization"},
+            {"doc_id":10000, "identifier":"orgc","node_type":"Organization"},
+            {"doc_id":10000, "identifier":"orgd","node_type":"Organization"},
+        ]
+
+        nodes = [make_node(**x) for x in node_data]
+        node_list = ", ".join(nodes)
+
+        query = f"""CREATE {node_list}
+        SET orga.internalMergedSameAsHighToUri = 'https://1145.am/db/10000/orgb'
+        SET orgb.internalMergedSameAsHighToUri = 'https://1145.am/db/10000/orgc'
+        SET orgc.internalMergedSameAsHighToUri = 'https://1145.am/db/10000/orgd'
+        """
+        db.cypher_query(query)
+        assert len(Organization.nodes.all()) == 4
+        delete_and_clean_up_nodes_by_doc_id(10000)
+        assert len(Organization.nodes.all()) == 0
 
 def make_node(doc_id,identifier,node_type="Organization",doc_extract=None,datestamp=datetime.now(tz=timezone.utc)):
     if node_type == "Organization":

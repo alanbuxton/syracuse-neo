@@ -99,14 +99,9 @@ def get_node_name_from_rdf_row(row):
         return None
 
 def delete_and_clean_up_nodes_by_doc_id(doc_id):
-    nodes_to_delete = Resource.nodes.filter(internalDocId=doc_id)
-    uris_to_delete = [x.uri for x in nodes_to_delete]
-    merged_nodes = Resource.nodes.filter(internalMergedSameAsHighToUri__in=uris_to_delete)
-    for n in nodes_to_delete:
-        n.delete()
-    for m in merged_nodes:
-        m.internalMergedSameAsHighToUri = None
-        m.save()
+    nodes_to_delete = Resource.nodes.filter(internalDocId=doc_id).order_by('internalMergedSameAsHighToUri') # Null is at end
+    for node in nodes_to_delete:
+        node.delete_node_and_related()
 
 def count_relationships():
     vals, _ = db.cypher_query("MATCH ()-[x]-() RETURN COUNT(x);")

@@ -243,6 +243,46 @@ class Resource(StructuredNode):
             "doc_id": splitted_uri[2],
             "name": splitted_uri[3],
         }
+    
+    def delete_node_and_related(self):
+        logger.info(f"delete_node_and_related {self.uri}")
+        related_nodes_with_weights, _ = db.cypher_query(f"MATCH (n: Resource {{uri:'{self.uri}'}})-[rel]-(other: Resource) RETURN n.uri, type(rel), rel.weight, other.uri")
+        extra_rels_to_delete = []
+        for source_uri, rel_type, weight, other_uri in related_nodes_with_weights:
+            if rel_type != "sameAsHigh":
+                extra_rels_to_delete.append( (rel_type, weight, other_uri))
+        merged_nodes = Resource.nodes.filter(internalMergedSameAsHighToUri=self.uri)
+        for m in merged_nodes:
+            m.internalMergedSameAsHighToUri = None
+            m.save()
+        if self.internalMergedSameAsHighToUri is not None:
+            next_node = Resource.get_by_uri(self.internalMergedSameAsHighToUri)
+            next_node.recursively_remove_weighted_relationships(extra_rels_to_delete)
+        self.delete()
+        
+    def recursively_remove_weighted_relationships(self, extra_rels_to_delete):
+        logger.info(f"recursively_remove_weighted_relationships for {self.uri} - {extra_rels_to_delete}")
+        for rel_type, weight, other_uri in extra_rels_to_delete:
+            if rel_type == 'sameAsHigh' or rel_type == 'sameAsNameOnly':
+                continue
+            core_query = f"MATCH (n: Resource {{uri:'{self.uri}'}})-[rel:{rel_type}]-(other: Resource {{uri:'{other_uri}'}})"
+            existing_weight_rels,_ = db.cypher_query(f"{core_query} RETURN rel.weight")
+            if len(existing_weight_rels) == 0: # No matching entity found
+                continue
+            assert (len(existing_weight_rels) == 1), f"Found {existing_weight_rels} for {self.uri}, {rel_type}, {weight}, {other_uri}. Query was {core_query}"
+            existing_weight = existing_weight_rels[0][0]
+            new_weight = existing_weight - weight
+            assert new_weight >= 0, f"new weight is {new_weight} for {self.uri}, {rel_type}, {weight}, {other_uri}"
+            if new_weight == 0:
+                delete_query = f"{core_query} DELETE rel"
+            else:
+                delete_query = f"{core_query} SET rel.weight = {new_weight}"
+            logger.info(delete_query)
+            db.cypher_query(delete_query)
+        if self.internalMergedSameAsHighToUri is not None:
+            next_node = Resource.get_by_uri(self.internalMergedSameAsHighToUri)
+            next_node.recursively_remove_weighted_relationships(extra_rels_to_delete)
+
 
     def all_directional_relationships(self, **kwargs):
         '''

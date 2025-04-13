@@ -1618,6 +1618,93 @@ class TestActivityHelpers(TestCase):
         val = res[0]['actors']['organization'].pop()
         assert val.uri == 'https://1145.am/db/2707859/McIlhenny_Company'
 
+class TestUnmergesAfterDeleteNode(TestCase):
+
+    # testing with real data from https://1145.am/db/geonames_location/1142500
+
+    def test_unmerges_self_and_subsequent_nodes(self):
+        '''
+        wrong_loc linked to Node A
+        ops x linked to Node A
+        ops y linked to Node B
+        ops z linked to Node C
+        Node A is merged into Node B
+        Node B is merged into Node C
+        Node C is merged into Node D
+
+        If we are deleting Node B then
+        Need to know weights of all relationships with node B (except sameAsHigh)
+        And remove that count of weights from node B, and also from C and D
+        If weight drops to zero then delete
+        weight should never be negative
+        '''
+        clean_db()
+        node_data = [
+            {"doc_id":10000,"identifier":"orga","node_type":"Organization"},
+            {"doc_id":9999, "identifier":"orgb","node_type":"Organization"},
+            {"doc_id":9998, "identifier":"orgc","node_type":"Organization"},
+            {"doc_id":9997, "identifier":"orgd","node_type":"Organization"},
+            {"doc_id":10000,"identifier":"acta","node_type":"OperationsActivity"},
+            {"doc_id":9999, "identifier":"actb","node_type":"OperationsActivity"},            
+            {"doc_id":9998, "identifier":"actc","node_type":"OperationsActivity"},
+            {"doc_id":9997, "identifier":"actd","node_type":"OperationsActivity"},
+            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},
+            {"doc_id":34,   "identifier":"loc2","node_type":"GeoNamesLocation"},
+        ]
+
+        nodes = [make_node(**x) for x in node_data]
+        node_list = ", ".join(nodes)
+
+        query = f"""CREATE {node_list},
+            (orga)-[:sameAsHigh]->(orgb),
+            (orgb)<-[:sameAsHigh]-(orgc),
+            (orgc)-[:sameAsHigh]->(orga),
+            (orgc)-[:sameAsHigh]->(orgd),
+
+            (orga)-[:hasOperationsActivity]->(acta),
+            (orgb)-[:hasOperationsActivity]->(actb),
+            (orgc)-[:hasOperationsActivity]->(actc),
+            (orgd)-[:hasOperationsActivity]->(actd),
+
+            (orga)-[:basedInHighGeoNamesLocation]->(loc1),
+            (orgb)-[:basedInHighGeoNamesLocation]->(loc2),
+            (orgc)-[:basedInHighGeoNamesLocation]->(loc1),
+            (orgd)-[:basedInHighGeoNamesLocation]->(loc2)
+        """
+
+        db.cypher_query(query)
+        RDFPostProcessor().run_all_in_order()
+
+        target_uri = "https://1145.am/db/9997/orgd"
+        target_node = Resource.get_by_uri(target_uri)
+
+        uri_to_delete = "https://1145.am/db/9999/orgb"
+        node_to_delete = Resource.get_by_uri(uri_to_delete)
+
+        ''' Expected before
+        orgd connects to all 4 acts
+        orgd connects to both locs with weight 2 each        
+        '''
+        assert len(target_node.operations) == 4
+        weights_query = f"MATCH (r: Resource {{uri:'{target_uri}'}})-[rel:basedInHighGeoNamesLocation]-(x) return x.uri, rel.weight"
+        vals,_ = db.cypher_query(weights_query)
+        assert len(vals) == 2
+        assert ['https://1145.am/db/33/loc1', 2] in vals
+        assert ['https://1145.am/db/34/loc2', 2] in vals
+
+        ''' Expect afterwards:
+        orgd connects to acta,actc,actd
+        orgd connects to loc1 with weight 2
+        orgd connects to loc2 with weight 1
+        '''
+        node_to_delete.delete_node_and_related()
+
+        assert len(target_node.operations) == 3
+        vals,_ = db.cypher_query(weights_query)
+        assert len(vals) == 2
+        assert ['https://1145.am/db/33/loc1', 2] in vals
+        assert ['https://1145.am/db/34/loc2', 1] in vals
+
 
 def check_org_and_counts(results, expected_counts_for_uri):
     vals = [ (x[0].uri,x[1]) for x in results]
