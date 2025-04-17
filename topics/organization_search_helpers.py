@@ -36,7 +36,7 @@ def get_same_as_name_onlies(org):
                 vals.add(node)
         return vals
     except AttributeError as ae:
-        logger.warning(f"{ae} : not looking for any same names")
+        logger.debug(f"{ae} : not looking for any same names")
         return []
 
 def search_by_internal_clean_names(clean_names: List[str]):
