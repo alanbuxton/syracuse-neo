@@ -666,7 +666,7 @@ def make_node(doc_id,identifier,node_type="Organization",doc_extract=None,datest
         doc_extract = doc_extract.replace("'","")
         doc_extract_text = f"documentExtract: '{doc_extract}''"
     doc_source = f"""(docsource_{identifier}:Resource:Article {{uri: 'https://1145.am/db/article_{identifier}',
-                        headline: 'Headline {identifier}', sourceOrganization:'prweb', datePublished: datetime('{datestamp.isoformat()}') }})"""
+                        headline: 'Headline {identifier}', internalDocId: {doc_id}, sourceOrganization:'prweb', datePublished: datetime('{datestamp.isoformat()}') }})"""
     doc_extract_str = ""
     if "Activity" in node_type:
         doc_extract_str = f"{{ documentExtract: 'Doc Extract {doc_extract_text}' }}"

@@ -1618,9 +1618,7 @@ class TestActivityHelpers(TestCase):
         val = res[0]['actors']['organization'].pop()
         assert val.uri == 'https://1145.am/db/2707859/McIlhenny_Company'
 
-class TestUnmergesAfterDeleteNode(TestCase):
-
-    # testing with real data from https://1145.am/db/geonames_location/1142500
+class TestDisentanglingMergedCells(TestCase):
 
     def test_unmerges_self_and_subsequent_nodes(self):
         '''
@@ -1705,6 +1703,101 @@ class TestUnmergesAfterDeleteNode(TestCase):
         assert ['https://1145.am/db/33/loc1', 2] in vals
         assert ['https://1145.am/db/34/loc2', 1] in vals
 
+    def test_finds_source_articles_for_org_industry(self):
+        clean_db()
+        node_data = [
+            {"doc_id":10000,"identifier":"orga","node_type":"Organization"},
+            {"doc_id":9999, "identifier":"orgb","node_type":"Organization"},
+            {"doc_id":9998, "identifier":"orgc","node_type":"Organization"},
+            {"doc_id":9997, "identifier":"orgd","node_type":"Organization"},
+            {"doc_id":9996, "identifier":"orge","node_type":"Organization"},
+            {"doc_id":33,   "identifier":"ind1","node_type":"IndustryCluster"},
+            {"doc_id":34,   "identifier":"ind2","node_type":"IndustryCluster"},
+        ]
+        nodes = [make_node(**x) for x in node_data]
+        node_list = ", ".join(nodes)
+        query = f"""CREATE {node_list},
+            (orga)-[:sameAsHigh]->(orgb),
+            (orgb)<-[:sameAsHigh]-(orgc),
+            (orgc)-[:sameAsHigh]->(orga),
+            (orgc)-[:sameAsHigh]->(orgd),
+            (orgb)-[:sameAsHigh]->(orge),
+
+            (orga)-[:industryClusterPrimary]->(ind1),
+            (orgb)-[:industryClusterPrimary]->(ind1),
+            (orgc)-[:industryClusterPrimary]->(ind2),
+            (orgd)-[:industryClusterPrimary]->(ind2),
+            (orge)-[:industryClusterPrimary]->(ind2)
+        """
+        db.cypher_query(query)
+        RDFPostProcessor().run_all_in_order()
+        orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
+        orgb = Resource.get_by_uri('https://1145.am/db/9999/orgb')
+        orgc = Resource.get_by_uri('https://1145.am/db/9998/orgc')
+        orgd = Resource.get_by_uri('https://1145.am/db/9997/orgd')
+        orge = Resource.get_by_uri('https://1145.am/db/9996/orge')
+        ind1 = Resource.get_by_uri('https://1145.am/db/33/ind1')
+        ind2 = Resource.get_by_uri('https://1145.am/db/34/ind2')
+        ind1_orgs = orge.get_source_orgs_for_ind_or_geo(ind1)
+        assert ind1_orgs == { (orga,1), (orgb,1 )}
+        ind1_sources = orge.get_source_orgs_articles_for(ind1)
+        assert set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources]) == {
+            ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'),
+            ('https://1145.am/db/9999/orgb',  1, 'https://1145.am/db/article_orgb')
+        }
+        ind2_orgs = orge.get_source_orgs_for_ind_or_geo(ind2)
+        assert ind2_orgs == { (orge,3),(orgd,2),(orgc,1)} # orgs d and e were linked to the industry cluster but also had extra data merged into them
+        ind2_sources = orge.get_source_orgs_articles_for(ind2)
+        assert set([(o.uri, weight,a.uri) for o,weight,a in ind2_sources]) == {
+            ('https://1145.am/db/9996/orge', 3, 'https://1145.am/db/article_orge'), 
+            ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
+            ('https://1145.am/db/9997/orgd', 2, 'https://1145.am/db/article_orgd')
+        }
+
+    def test_finds_source_articles_for_org_location(self):
+        clean_db()
+        node_data = [
+            {"doc_id":10000,"identifier":"orga","node_type":"Organization"},
+            {"doc_id":9999, "identifier":"orgb","node_type":"Organization"},
+            {"doc_id":9998, "identifier":"orgc","node_type":"Organization"},
+            {"doc_id":9997, "identifier":"orgd","node_type":"Organization"},
+            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},
+            {"doc_id":34,   "identifier":"loc2","node_type":"GeoNamesLocation"},
+        ]
+        nodes = [make_node(**x) for x in node_data]
+        node_list = ", ".join(nodes)
+        query = f"""CREATE {node_list},
+            (orga)-[:sameAsHigh]->(orgb),
+            (orgb)<-[:sameAsHigh]-(orgc),
+            (orgc)-[:sameAsHigh]->(orga),
+            (orgc)-[:sameAsHigh]->(orgd),
+
+            (orga)-[:basedInHighGeoNamesLocation]->(loc1),
+            (orgc)-[:basedInHighGeoNamesLocation]->(loc2),
+            (orgd)-[:basedInHighGeoNamesLocation]->(loc2)
+        """
+        db.cypher_query(query)
+        RDFPostProcessor().run_all_in_order()
+        orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
+        orgc = Resource.get_by_uri('https://1145.am/db/9998/orgc')
+        orgd = Resource.get_by_uri('https://1145.am/db/9997/orgd')
+        loc1 = Resource.get_by_uri('https://1145.am/db/33/loc1')
+        loc2 = Resource.get_by_uri('https://1145.am/db/34/loc2')
+
+        loc1_orgs = orgd.get_source_orgs_for_ind_or_geo(loc1)
+        assert loc1_orgs == { (orga,1) }
+        loc1_sources = orgd.get_source_orgs_articles_for(loc1)
+        assert set([(o.uri,weight,a.uri) for o,weight,a in loc1_sources]) == {
+            ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga')
+        }
+
+        loc2_orgs = orgd.get_source_orgs_for_ind_or_geo(loc2)
+        assert loc2_orgs == { (orgd,2),(orgc,1)} 
+        loc2_sources = orgd.get_source_orgs_articles_for(loc2)
+        assert set([(o.uri, weight,a.uri) for o,weight,a in loc2_sources]) == {
+            ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
+            ('https://1145.am/db/9997/orgd', 2, 'https://1145.am/db/article_orgd')
+        }
 
 def check_org_and_counts(results, expected_counts_for_uri):
     vals = [ (x[0].uri,x[1]) for x in results]

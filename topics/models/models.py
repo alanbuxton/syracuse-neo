@@ -3,16 +3,14 @@ from neomodel import (StructuredNode, StringProperty,
     IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
-import cleanco
 from django.core.cache import cache
 from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
                                GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION,
                               )
-from collections import Counter, defaultdict
+from collections import Counter
 from neomodel.cardinality import OneOrMore, One
 from typing import List
-from topics.constants import BEGINNING_OF_TIME
-from topics.neo4j_utils import date_to_cypher_friendly
+import cleanco
 from topics.util import cache_friendly,geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 
@@ -65,7 +63,7 @@ class Resource(StructuredNode):
         weight = res[0][0]
         cache.set(cache_key, weight)
         return weight
-
+    
     @property
     def industry_clusters(self):
         return None # override in subclass
@@ -261,7 +259,7 @@ class Resource(StructuredNode):
         self.delete()
         
     def recursively_remove_weighted_relationships(self, extra_rels_to_delete):
-        logger.info(f"recursively_remove_weighted_relationships for {self.uri} - {extra_rels_to_delete}")
+        logger.debug(f"recursively_remove_weighted_relationships for {self.uri} - {extra_rels_to_delete}")
         for rel_type, weight, other_uri in extra_rels_to_delete:
             if rel_type == 'sameAsHigh' or rel_type == 'sameAsNameOnly':
                 continue
@@ -277,7 +275,7 @@ class Resource(StructuredNode):
                 delete_query = f"{core_query} DELETE rel"
             else:
                 delete_query = f"{core_query} SET rel.weight = {new_weight}"
-            logger.info(delete_query)
+            logger.debug(delete_query)
             db.cypher_query(delete_query)
         if self.internalMergedSameAsHighToUri is not None:
             next_node = Resource.get_by_uri(self.internalMergedSameAsHighToUri)
@@ -756,7 +754,6 @@ class GeoNamesLocation(Resource):
         cache.set(cache_key, uris)
         return uris
 
-
 class Organization(Resource):
     description = ArrayProperty(StringProperty())
     industry = ArrayProperty(StringProperty())
@@ -947,13 +944,67 @@ class Organization(Resource):
                     "based_in_high_clean": self.basedInHighClean,
                     }
         return {**vals,**org_vals}
+    
+    def source_orgs_and_weights(self, other_object):
+        other_class_name = other_object.__class__.__name__
+        other_relationship = self.get_relationship_name_for(other_class_name)
+        query = f"""MATCH (n: {other_object.__class__.__name__} {{uri:'{other_object.uri}'}})-
+        [r:{other_relationship}]-
+        (o: Resource&Organization {{internalMergedSameAsHighToUri:'{self.uri}'}})
+        RETURN o, r.weight
+        """
+        logger.debug(query)
+        orgs_and_weights, _ = db.cypher_query(query,resolve_objects=True)
+        return orgs_and_weights
+    
+    def get_relationship_name_for(self,class_name):
+        return {
+            "IndustryCluster": "industryClusterPrimary",
+            "GeoNamesLocation": "basedInHighGeoNamesLocation",
+        }[class_name]
 
-    def get_role_activities(self,source_names=Article.core_sources()):
+    def get_source_orgs_for_ind_or_geo(self, other_object, my_weight = None, leaf_orgs=None):
+        assert isinstance(other_object, IndustryCluster) or isinstance(other_object, GeoNamesLocation), f"Unexpected object {other_object}"
+        if leaf_orgs is None:
+            leaf_orgs = set()
+        other_class = other_object.__class__.__name__
+        if my_weight is None: # Start off finding my weight
+            other_rel = self.get_relationship_name_for(other_class)
+            my_weight_arr, _ = db.cypher_query(f"MATCH (n: Resource {{uri:'{other_object.uri}'}})-[rel:{other_rel}]-(ind: Resource {{uri:'{self.uri}'}}) RETURN rel.weight")
+            if len(my_weight_arr) == 0:
+                logger.warning(f"{self} is not connected to {other_object}")
+                return leaf_orgs
+            my_weight = my_weight_arr[0][0]
+            logger.debug(f"Target Org {self.uri} weight = {my_weight}")
+        logger.debug(f"Working on items merged into {self.uri}, leaf_orgs = {leaf_orgs}")
+
+        source_weights = 0
+        for source_org, weight in self.source_orgs_and_weights(other_object):
+            logger.debug(f"Source Org {source_org.uri} weight = {weight}")
+            source_weights += weight
+            if weight == 1 and len(source_org.source_orgs_and_weights(other_object)) == 0:   
+                leaf_orgs.add((source_org, weight))           
+                logger.debug(f"Adding leaf node {source_org.uri} - currently have {len(leaf_orgs)} leaves")
+            else:
+                leaf_orgs = source_org.get_source_orgs_for_ind_or_geo(other_object, weight, leaf_orgs)
+        if source_weights < my_weight:
+            logger.debug(f"Source weights add up to {source_weights}, my weight = {my_weight} - so adding {self.uri} as another source")
+            leaf_orgs.add((self,my_weight))
+        return leaf_orgs
+
+    def get_source_orgs_articles_for(self, other_object):
+        leaf_orgs = self.get_source_orgs_for_ind_or_geo(other_object)
+        return [(x[0],x[1],x[0].documentSource.filter(internalDocId=x[0].internalDocId)[0]) for x in leaf_orgs]
+    
+    def get_role_activities(self,source_names=None):
+        if source_names is None:
+            source_names = Article.core_sources()
         role_activities = []
         for role in self.hasRole:
             acts = role.withRole.all()
             role_activities.extend([(role,act) for act in acts if act.has_permitted_document_source(source_names)])
         return role_activities
+    
 
     @staticmethod
     def by_industry_text(name,limit=0.85):
