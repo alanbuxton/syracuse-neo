@@ -35,6 +35,7 @@ from topics.industry_geo.orgs_by_industry_geo import (
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
 from topics.industry_geo import orgs_by_industry_and_or_geo
+from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_or_geo
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
@@ -1738,16 +1739,16 @@ class TestDisentanglingMergedCells(TestCase):
         orge = Resource.get_by_uri('https://1145.am/db/9996/orge')
         ind1 = Resource.get_by_uri('https://1145.am/db/33/ind1')
         ind2 = Resource.get_by_uri('https://1145.am/db/34/ind2')
-        ind1_orgs = orge.get_source_orgs_for_ind_or_geo(ind1)
+        ind1_orgs = get_source_orgs_for_ind_or_geo(orge,ind1)
         assert ind1_orgs == { (orga,1), (orgb,1 )}
-        ind1_sources = orge.get_source_orgs_articles_for(ind1)
+        ind1_sources = get_source_orgs_articles_for(orge,ind1)
         assert set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources]) == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'),
             ('https://1145.am/db/9999/orgb',  1, 'https://1145.am/db/article_orgb')
         }
-        ind2_orgs = orge.get_source_orgs_for_ind_or_geo(ind2)
+        ind2_orgs = get_source_orgs_for_ind_or_geo(orge, ind2)
         assert ind2_orgs == { (orge,3),(orgd,2),(orgc,1)} # orgs d and e were linked to the industry cluster but also had extra data merged into them
-        ind2_sources = orge.get_source_orgs_articles_for(ind2)
+        ind2_sources = get_source_orgs_articles_for(orge, ind2)
         assert set([(o.uri, weight,a.uri) for o,weight,a in ind2_sources]) == {
             ('https://1145.am/db/9996/orge', 3, 'https://1145.am/db/article_orge'), 
             ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
@@ -1784,16 +1785,16 @@ class TestDisentanglingMergedCells(TestCase):
         loc1 = Resource.get_by_uri('https://1145.am/db/33/loc1')
         loc2 = Resource.get_by_uri('https://1145.am/db/34/loc2')
 
-        loc1_orgs = orgd.get_source_orgs_for_ind_or_geo(loc1)
+        loc1_orgs = get_source_orgs_for_ind_or_geo(orgd, loc1)
         assert loc1_orgs == { (orga,1) }
-        loc1_sources = orgd.get_source_orgs_articles_for(loc1)
+        loc1_sources = get_source_orgs_articles_for(orgd, loc1)
         assert set([(o.uri,weight,a.uri) for o,weight,a in loc1_sources]) == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga')
         }
 
-        loc2_orgs = orgd.get_source_orgs_for_ind_or_geo(loc2)
+        loc2_orgs = get_source_orgs_for_ind_or_geo(orgd, loc2)
         assert loc2_orgs == { (orgd,2),(orgc,1)} 
-        loc2_sources = orgd.get_source_orgs_articles_for(loc2)
+        loc2_sources = get_source_orgs_articles_for(orgd, loc2)
         assert set([(o.uri, weight,a.uri) for o,weight,a in loc2_sources]) == {
             ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
             ('https://1145.am/db/9997/orgd', 2, 'https://1145.am/db/article_orgd')

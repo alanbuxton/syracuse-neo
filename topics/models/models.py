@@ -945,57 +945,6 @@ class Organization(Resource):
                     }
         return {**vals,**org_vals}
     
-    def source_orgs_and_weights(self, other_object):
-        other_class_name = other_object.__class__.__name__
-        other_relationship = self.get_relationship_name_for(other_class_name)
-        query = f"""MATCH (n: {other_object.__class__.__name__} {{uri:'{other_object.uri}'}})-
-        [r:{other_relationship}]-
-        (o: Resource&Organization {{internalMergedSameAsHighToUri:'{self.uri}'}})
-        RETURN o, r.weight
-        """
-        logger.debug(query)
-        orgs_and_weights, _ = db.cypher_query(query,resolve_objects=True)
-        return orgs_and_weights
-    
-    def get_relationship_name_for(self,class_name):
-        return {
-            "IndustryCluster": "industryClusterPrimary",
-            "GeoNamesLocation": "basedInHighGeoNamesLocation",
-        }[class_name]
-
-    def get_source_orgs_for_ind_or_geo(self, other_object, my_weight = None, leaf_orgs=None):
-        assert isinstance(other_object, IndustryCluster) or isinstance(other_object, GeoNamesLocation), f"Unexpected object {other_object}"
-        if leaf_orgs is None:
-            leaf_orgs = set()
-        other_class = other_object.__class__.__name__
-        if my_weight is None: # Start off finding my weight
-            other_rel = self.get_relationship_name_for(other_class)
-            my_weight_arr, _ = db.cypher_query(f"MATCH (n: Resource {{uri:'{other_object.uri}'}})-[rel:{other_rel}]-(ind: Resource {{uri:'{self.uri}'}}) RETURN rel.weight")
-            if len(my_weight_arr) == 0:
-                logger.warning(f"{self} is not connected to {other_object}")
-                return leaf_orgs
-            my_weight = my_weight_arr[0][0]
-            logger.debug(f"Target Org {self.uri} weight = {my_weight}")
-        logger.debug(f"Working on items merged into {self.uri}, leaf_orgs = {leaf_orgs}")
-
-        source_weights = 0
-        for source_org, weight in self.source_orgs_and_weights(other_object):
-            logger.debug(f"Source Org {source_org.uri} weight = {weight}")
-            source_weights += weight
-            if weight == 1 and len(source_org.source_orgs_and_weights(other_object)) == 0:   
-                leaf_orgs.add((source_org, weight))           
-                logger.debug(f"Adding leaf node {source_org.uri} - currently have {len(leaf_orgs)} leaves")
-            else:
-                leaf_orgs = source_org.get_source_orgs_for_ind_or_geo(other_object, weight, leaf_orgs)
-        if source_weights < my_weight:
-            logger.debug(f"Source weights add up to {source_weights}, my weight = {my_weight} - so adding {self.uri} as another source")
-            leaf_orgs.add((self,my_weight))
-        return leaf_orgs
-
-    def get_source_orgs_articles_for(self, other_object):
-        leaf_orgs = self.get_source_orgs_for_ind_or_geo(other_object)
-        return [(x[0],x[1],x[0].documentSource.filter(internalDocId=x[0].internalDocId)[0]) for x in leaf_orgs]
-    
     def get_role_activities(self,source_names=None):
         if source_names is None:
             source_names = Article.core_sources()
@@ -1004,7 +953,6 @@ class Organization(Resource):
             acts = role.withRole.all()
             role_activities.extend([(role,act) for act in acts if act.has_permitted_document_source(source_names)])
         return role_activities
-    
 
     @staticmethod
     def by_industry_text(name,limit=0.85):
