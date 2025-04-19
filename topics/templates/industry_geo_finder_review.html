@@ -54,7 +54,8 @@ button {
                                 checked="True"> Track All</th>
                             <input type="hidden" name="track_unselectall_{{table_row.table_id}}" value=0
                                 id="unselectall_{{table_row.table_id}}">
-                            <th>URI</th>
+                            <th>Name</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,9 +68,14 @@ button {
                             </td>
                             <input type="hidden" name="track_unselect_{{table_row.table_id}}_{{ org.uri }}" value=0
                                 class="unselectorg_{{ table_row.table_id }}" id="unselect_{{ table_row.table_id }}_{{org.uri}}">
-                            <td>
-                                <a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
-                                {{ org.name }}</a></td>
+                            <td><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
+                                {{ org.name }}</a></td>                            
+                            <td><a href="{% url_with_querystring 'organization-industry-geo-sources' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params extra_params=table_row.industry_geo_params%}">
+                                Sources</a> / 
+                                <a href="{% url_with_querystring 'organization-activities' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params extra_params=table_row.industry_geo_params%}">
+                                Recent Activities</a>  
+                            </td>
+
                         </tr>
                         {% endfor %}
                     </tbody>

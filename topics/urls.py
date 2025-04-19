@@ -16,6 +16,7 @@ urlpatterns = [
     path('organization/timeline/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationTimeline.as_view(), name='organization-timeline'),
     path('organization/family-tree/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.FamilyTree.as_view(), name='organization-family-tree'),
     path('organization/activities/uri/<str:domain>/<str:path>/<doc_id>/<str:name>', views.OrganizationActivities.as_view(), name='organization-activities'),
+    path('organization/industry_geo_sources/uri/<str:domain>/<str:path>/<doc_id>/<str:name>',  views.OrganizationIndustryGeoSources.as_view(), name='organization-industry-geo-sources'),
     path('about', views.About.as_view(), name="about"),
     path('resource/<str:domain>/<str:path>/<doc_id>/<str:name>', views.ShowResource.as_view(), name='resource-with-doc-id'),
     path('resource/<str:domain>/<str:path>/<str:name>', views.ShowResource.as_view(), name='resource-no-doc-id'),

@@ -49,8 +49,12 @@ def dict_to_query_string(data):
     return mark_safe(urlencode(data))
 
 @register.simple_tag
-def url_with_querystring(viewname, *args, qs_params={}):
+def url_with_querystring(viewname, *args, qs_params={}, extra_params={}):
     url = reverse(viewname, args=args)
+    qs_params = {k:v for k,v in qs_params.items() if v is not None}
+    for k,v in extra_params.items():
+        if v is not None:
+            qs_params[k] = v
     if qs_params is not None and len(qs_params) > 0:
         return mark_safe(f"{url}?{ urlencode(qs_params) }")
     else:

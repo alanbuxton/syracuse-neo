@@ -1,0 +1,48 @@
+<html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load topics_extras %}
+{% load l10n %}
+
+<title>{{ org_data.source_node_name }} (Linkages)</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+<p>
+    {% include 'layouts/nav-header.html' %}
+</p>
+        
+<h1>{{ org_data.source_node_name }} - Industry / Geo Sources</h1>
+
+<p>Audit trail of which articles were used to link this organization to this industry and/or location. 
+    If the same article relates to both industry and location it will be shown in both the industry and location list.</p>
+
+{% for ind_geo_name, values in data.items %}
+
+<h5>{{ ind_geo_name }}</h5>
+<p>
+    <ul>
+        {% for val in values %}
+        <li><b><a href="{{ val.document_url }}">{{ val.headline }}</a></b>
+            - <i>{{val.source_organization }}</i>
+            - Date published: {{val.date_published | localize}}
+            - <a href="{{ val.uri }}?{{ request_state.qs_params|dict_to_query_string }}"><i>Internal link for more details</i></a>
+        </li>
+        {% endfor %}
+    </ul>
+</p>
+
+{% endfor %}
+
+{% include 'layouts/footer.html' %}
+
+</body>
+</html>

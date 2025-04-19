@@ -35,7 +35,7 @@ from topics.industry_geo.orgs_by_industry_geo import (
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
 from topics.industry_geo import orgs_by_industry_and_or_geo
-from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_or_geo
+from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
@@ -1027,6 +1027,18 @@ class TestUtilsWithDumpData(TestCase):
         assert '<a href="/industry_geo_finder_review?industry_id=686&industry=building&max_date=2024-04-02">1</a>' in content
         assert '<a href="/industry_activities?industry_id=696&min_date=2024-03-03&max_date=2024-04-02&industry=building&max_date=2024-04-02">1</a>' in content
 
+    def test_shows_source_documents(self):
+        url = "/organization/industry_geo_sources/uri/1145.am/db/3469058/Napajen_Pharma?industry_id=32&geo_code=US"
+        client = self.client
+        resp = client.get(url)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(url)
+        assert resp.status_code == 200
+        content = str(resp.content)
+        assert len(re.findall("/CORRECTION/ - NapaJen Pharma, Inc./", content)) == 2
+        assert len(re.findall("NapaJen Pharma Closes \$12.4 Million Series C Financing", content)) == 1
+
 class TestRegionHierarchy(TestCase):
 
     def setUpTestData():
@@ -1648,7 +1660,7 @@ class TestDisentanglingMergedCells(TestCase):
             {"doc_id":9998, "identifier":"actc","node_type":"OperationsActivity"},
             {"doc_id":9997, "identifier":"actd","node_type":"OperationsActivity"},
             {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},
-            {"doc_id":34,   "identifier":"loc2","node_type":"GeoNamesLocation"},
+            {"doc_id":340,   "identifier":"loc2","node_type":"GeoNamesLocation"},
         ]
 
         nodes = [make_node(**x) for x in node_data]
@@ -1689,7 +1701,7 @@ class TestDisentanglingMergedCells(TestCase):
         vals,_ = db.cypher_query(weights_query)
         assert len(vals) == 2
         assert ['https://1145.am/db/33/loc1', 2] in vals
-        assert ['https://1145.am/db/34/loc2', 2] in vals
+        assert ['https://1145.am/db/340/loc2', 2] in vals
 
         ''' Expect afterwards:
         orgd connects to acta,actc,actd
@@ -1702,7 +1714,7 @@ class TestDisentanglingMergedCells(TestCase):
         vals,_ = db.cypher_query(weights_query)
         assert len(vals) == 2
         assert ['https://1145.am/db/33/loc1', 2] in vals
-        assert ['https://1145.am/db/34/loc2', 1] in vals
+        assert ['https://1145.am/db/340/loc2', 1] in vals
 
     def test_finds_source_articles_for_org_industry(self):
         clean_db()
@@ -1739,14 +1751,14 @@ class TestDisentanglingMergedCells(TestCase):
         orge = Resource.get_by_uri('https://1145.am/db/9996/orge')
         ind1 = Resource.get_by_uri('https://1145.am/db/33/ind1')
         ind2 = Resource.get_by_uri('https://1145.am/db/34/ind2')
-        ind1_orgs = get_source_orgs_for_ind_or_geo(orge,ind1)
+        ind1_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge,ind1)
         assert ind1_orgs == { (orga,1), (orgb,1 )}
         ind1_sources = get_source_orgs_articles_for(orge,ind1)
         assert set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources]) == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'),
             ('https://1145.am/db/9999/orgb',  1, 'https://1145.am/db/article_orgb')
         }
-        ind2_orgs = get_source_orgs_for_ind_or_geo(orge, ind2)
+        ind2_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge, ind2)
         assert ind2_orgs == { (orge,3),(orgd,2),(orgc,1)} # orgs d and e were linked to the industry cluster but also had extra data merged into them
         ind2_sources = get_source_orgs_articles_for(orge, ind2)
         assert set([(o.uri, weight,a.uri) for o,weight,a in ind2_sources]) == {
@@ -1762,8 +1774,8 @@ class TestDisentanglingMergedCells(TestCase):
             {"doc_id":9999, "identifier":"orgb","node_type":"Organization"},
             {"doc_id":9998, "identifier":"orgc","node_type":"Organization"},
             {"doc_id":9997, "identifier":"orgd","node_type":"Organization"},
-            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},
-            {"doc_id":34,   "identifier":"loc2","node_type":"GeoNamesLocation"},
+            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},  # US-PA
+            {"doc_id":340,   "identifier":"loc2","node_type":"GeoNamesLocation"}, # US-NY
         ]
         nodes = [make_node(**x) for x in node_data]
         node_list = ", ".join(nodes)
@@ -1783,21 +1795,30 @@ class TestDisentanglingMergedCells(TestCase):
         orgc = Resource.get_by_uri('https://1145.am/db/9998/orgc')
         orgd = Resource.get_by_uri('https://1145.am/db/9997/orgd')
         loc1 = Resource.get_by_uri('https://1145.am/db/33/loc1')
-        loc2 = Resource.get_by_uri('https://1145.am/db/34/loc2')
+        loc2 = Resource.get_by_uri('https://1145.am/db/340/loc2')
 
-        loc1_orgs = get_source_orgs_for_ind_or_geo(orgd, loc1)
-        assert loc1_orgs == { (orga,1) }
-        loc1_sources = get_source_orgs_articles_for(orgd, loc1)
-        assert set([(o.uri,weight,a.uri) for o,weight,a in loc1_sources]) == {
+        uspa_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orgd, 'US-PA')
+        assert uspa_orgs == { (orga,1) }
+        uspa_sources = get_source_orgs_articles_for(orgd, 'US-PA')
+        assert set([(o.uri,weight,a.uri) for o,weight,a in uspa_sources]) == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga')
         }
 
-        loc2_orgs = get_source_orgs_for_ind_or_geo(orgd, loc2)
-        assert loc2_orgs == { (orgd,2),(orgc,1)} 
-        loc2_sources = get_source_orgs_articles_for(orgd, loc2)
-        assert set([(o.uri, weight,a.uri) for o,weight,a in loc2_sources]) == {
+        usny_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orgd, 'US-NY')
+        assert usny_orgs == { (orgd,2),(orgc,1)} 
+        usny_sources = get_source_orgs_articles_for(orgd, 'US-NY')
+        assert set([(o.uri, weight,a.uri) for o,weight,a in usny_sources]) == {
             ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
             ('https://1145.am/db/9997/orgd', 2, 'https://1145.am/db/article_orgd')
+        }
+
+        us_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orgd, 'US')
+        assert us_orgs == { (orga, 1), (orgc,1), (orgd, 3) }
+        us_sources = get_source_orgs_articles_for(orgd, 'US')
+        assert set([(o.uri, weight,a.uri) for o,weight,a in us_sources]) == {
+            ('https://1145.am/db/9998/orgc',  1, 'https://1145.am/db/article_orgc'), 
+            ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'), 
+            ('https://1145.am/db/9997/orgd',  3, 'https://1145.am/db/article_orgd')
         }
 
 def check_org_and_counts(results, expected_counts_for_uri):

@@ -656,10 +656,19 @@ def make_node(doc_id,identifier,node_type="Organization",doc_extract=None,datest
         status_str = "status: ['some status'], "
     else:
         status_str = ""
+    if "GeoNamesLocation" in node_type:
+        geo_str = f" countryCode: 'US', "
+        if doc_id < 100:
+            admin1_str = f" admin1Code: 'PA', "
+        else:
+            admin1_str = f" admin1Code: 'NY', "
+        geo_str = f"{geo_str} {admin1_str}"
+    else:
+        geo_str = ""
 
     friendly_name = identifier.replace("_"," ")
 
-    node = f"({identifier}:Resource:{node_type} {{uri: 'https://1145.am/db/{doc_id}/{identifier}', name: ['Name {friendly_name.upper()}'], {industry_str} {status_str} internalDocId: {doc_id}}})"
+    node = f"({identifier}:Resource:{node_type} {{uri: 'https://1145.am/db/{doc_id}/{identifier}', name: ['Name {friendly_name.upper()}'], {industry_str} {status_str} {geo_str} internalDocId: {doc_id}}})"
     if doc_extract is None:
         doc_extract_text = ''
     else:

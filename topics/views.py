@@ -11,7 +11,7 @@ from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSer
     NameSearchSerializer, OrganizationSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
-    OrgsByIndustryGeoSerializer)
+    OrgsByIndustryGeoSerializer, OrgIndustryGeoSourcesSerializer)
 from rest_framework import status, viewsets
 from datetime import date, timedelta
 from topics.stats_helpers import cached_activity_stats_last_updated_date
@@ -125,13 +125,37 @@ class ShowResource(APIView):
                             }, status=status.HTTP_200_OK)
             return resp
 
+class OrganizationIndustryGeoSources(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'organization_industry_geo_sources.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+    def get(self, request, **kwargs):
+        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+        o = Organization.self_or_ultimate_target_node(uri)
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
+        uri_parts = elements_from_uri(o.uri)
+        industry_id = request.GET.get("industry_id")
+        geo_code = request.GET.get("geo_code")
+
+        serializer = OrgIndustryGeoSourcesSerializer(o,context = {"industry_id":industry_id,
+                                                                   "geo_code":geo_code})
+
+        return Response({"data":serializer.data,
+                            "requested_uri": uri,
+                            "org_data": org_data,
+                            "uri_parts": uri_parts,
+                            "request_state": request_state}, status=status.HTTP_200_OK)
+
 class FamilyTree(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_family_tree.html'
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request,**kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_family_tree"
@@ -287,6 +311,8 @@ class IndustryGeoFinderReview(ListCreateAPIView):
                          "all_industry_ids": all_industry_ids,
                          "request_state": request_state}, status=status.HTTP_200_OK)
         return resp
+    
+
     
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
     cells_to_keep_full = []

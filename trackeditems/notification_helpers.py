@@ -71,6 +71,7 @@ def make_email_notif_from_orgs(matching_activity_orgs, tracked_items,
     merge_data = {"activities":activity_serializer.data,"min_date":min_date,
                     "max_date":max_date,"user":user,
                     "tracked_items": tracked_items,
+                    "request_state": {"qs_params": {},},
                     }
     html_body = render_to_string("activity_email_notif.html", merge_data)
     activity_notification = ActivityNotification(

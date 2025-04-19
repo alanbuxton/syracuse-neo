@@ -10,6 +10,7 @@ from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
+from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for
 from .industry_geo import orgs_by_industry_and_or_geo, country_admin1_full_name, orgs_by_industry_text_and_geo_code
 from .util import elements_from_uri, cacheable_hash
 
@@ -99,10 +100,10 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         earliest_doc_date = date_from_str_with_default(self.context.get("earliest_str"))
         source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         cache_key=cache_friendly(f"familytree_{organization_uri}_{source_names_as_hash}_{combine_same_as_name_only}_{clean_rels}_{earliest_doc_date}")
-        # res = cache.get(cache_key)
-        # if res is not None:
-        #     logger.debug(f"Cache hit {cache_key}: {res}")
-        #     return res
+        res = cache.get(cache_key)
+        if res is not None:
+            logger.debug(f"Cache hit {cache_key}: {res}")
+            return res
         parents, parents_children, org_children = org_family_tree(organization_uri, 
                                                                   combine_same_as_name_only=combine_same_as_name_only,
                                                                   relationships=clean_rels,
@@ -381,6 +382,28 @@ class IndustryClusterSerializer(serializers.Serializer):
     longest_representative_doc = serializers.CharField()
     industry_id = serializers.IntegerField()
 
+class OrgIndustryGeoSourcesSerializer(serializers.BaseSerializer):
+
+    def to_representation(self, instance):
+        geo_code = self.context["geo_code"]
+        industry_id = self.context["industry_id"]
+        limit = int(self.context.get("limit","10"))
+        results = {}
+        if industry_id is not None:
+            industry = IndustryCluster.get_by_industry_id(int(industry_id))
+            vals = get_source_orgs_articles_for(instance, industry, limit)
+            arts = [x[2].serialize() for x in vals]
+            if len(arts) > 0:
+                results[industry.best_name] = arts
+        if geo_code is not None:
+            vals = get_source_orgs_articles_for(instance, geo_code, limit)
+            arts = [x[2].serialize() for x in vals]
+            if len(arts) > 0:
+                results[country_admin1_full_name(geo_code)] = arts
+        return results
+
+        
+
 class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
 
     def to_representation(self,instance):
@@ -395,6 +418,8 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                         "table_id": ind,
                         "title": f"{industry.best_name} in all Geos",
                         "orgs": orgs_by_weight(orgs),
+                        "industry_geo_params": {"industry_id": ind,
+                                                "geo_code": None},
                     })
                 else:
                     logger.info(f"Industry {ind} doesn't exist")
@@ -406,6 +431,8 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                     "table_id": "search_str_all_geos",
                     "title": f'"{search_str}" in all Geos',
                     "orgs": orgs_by_weight(orgs),
+                    "industry_geo_params": {"industry_id": None,
+                                            "geo_code": None},
                 })
 
         geo_orgs = []
@@ -426,6 +453,8 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                     "table_id": geo,
                     "title": f"{all_industry_names} in {geo_loc}",
                     "orgs": orgs_by_weight(orgs),
+                    "industry_geo_params": {"industry_id": None, 
+                                            "geo_code": geo},
                 })
         geo_orgs = sorted(geo_orgs, key = lambda x: x["title"])
 
@@ -450,6 +479,8 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                     "table_id": f"{ind_id}_{geo}",
                     "title": f"{ind_desc} in {geo_loc}",
                     "orgs": orgs_by_weight(orgs),
+                    "industry_geo_params": {"industry_id": ind_id,
+                                            "geo_code": geo},
                 }
                 if ind == 'search_str':
                     indiv_cell_ind_text_orgs.append(row)
