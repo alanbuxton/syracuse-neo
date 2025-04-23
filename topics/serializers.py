@@ -276,9 +276,9 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         max_nodes = 50
         cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{earliest_doc_date}")
         res = cache.get(cache_key)
-        # if res is not None:
-        #     logger.debug(f"Cache hit {cache_key}: {res}")
-        #     return res
+        if res is not None:
+            logger.debug(f"Cache hit {cache_key}: {res}")
+            return res
         graph_data = graph_centered_on(instance,source_names=source_names,
                                        min_date=earliest_doc_date,
                                        combine_same_as_name_only=combine_same_as_name_only,
@@ -410,14 +410,14 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         search_str = instance["search_str"]
         industry_orgs = []
         for ind in instance["industry_ids"]:
-            orgs = orgs_by_industry_and_or_geo(ind,None)
+            orgs = orgs_by_industry_and_or_geo(ind,None,return_orgs_only=True)
             if len(orgs) > 0:
                 industry = IndustryCluster.get_by_industry_id(ind)
                 if industry is not None:
                     industry_orgs.append( {
                         "table_id": ind,
                         "title": f"{industry.best_name} in all Geos",
-                        "orgs": orgs_by_weight(orgs),
+                        "orgs": orgs_by_connection_count(orgs),
                         "industry_geo_params": {"industry_id": ind,
                                                 "geo_code": None},
                     })
@@ -430,7 +430,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 industry_orgs.append( {
                     "table_id": "search_str_all_geos",
                     "title": f'"{search_str}" in all Geos',
-                    "orgs": orgs_by_weight(orgs),
+                    "orgs": orgs_by_connection_count(orgs),
                     "industry_geo_params": {"industry_id": None,
                                             "geo_code": None},
                 })
@@ -445,14 +445,14 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         for geo in instance["geo_codes"]:
             orgs = set()
             for ind in instance["all_industry_ids"]: 
-                orgs.update(orgs_by_industry_and_or_geo(int(ind), geo))
-            orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo))
+                orgs.update(orgs_by_industry_and_or_geo(int(ind), geo,return_orgs_only=True))
+            orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True))
             if len(orgs) > 0:
                 geo_loc = country_admin1_full_name(geo)
                 geo_orgs.append({
                     "table_id": geo,
                     "title": f"{all_industry_names} in {geo_loc}",
-                    "orgs": orgs_by_weight(orgs),
+                    "orgs": orgs_by_connection_count(orgs),
                     "industry_geo_params": {"industry_id": None, 
                                             "geo_code": geo},
                 })
@@ -463,14 +463,14 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         for ind, geo in instance["indiv_cells"]:
             orgs = set()
             if ind == 'search_str':
-                orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo)) 
+                orgs.update(orgs_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True)) 
                 ind_id = "searchstr"
                 ind_desc = f'"{search_str}"'
                 geo_loc = country_admin1_full_name(geo)
             else:
                 industry = IndustryCluster.get_by_industry_id(ind)
                 if industry is not None:
-                    orgs.update(orgs_by_industry_and_or_geo(industry, geo))
+                    orgs.update(orgs_by_industry_and_or_geo(industry, geo,return_orgs_only=True))
                     ind_id = ind
                     ind_desc = industry.best_name
                     geo_loc = country_admin1_full_name(geo)
@@ -478,7 +478,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 row = {
                     "table_id": f"{ind_id}_{geo}",
                     "title": f"{ind_desc} in {geo_loc}",
-                    "orgs": orgs_by_weight(orgs),
+                    "orgs": orgs_by_connection_count(orgs),
                     "industry_geo_params": {"industry_id": ind_id,
                                             "geo_code": geo},
                 }
@@ -492,15 +492,15 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         data = industry_orgs + geo_orgs + indiv_cell_ind_cluster_orgs + indiv_cell_ind_text_orgs
         return data
         
-def orgs_by_weight(org_uris):
+def orgs_by_connection_count(org_uris):
     org_data = []
     for uri in org_uris:
         logger.info(uri)
         o = Organization.get_by_uri(uri)
-        weight = o.sum_of_weights
-        name = o.best_name
-        org_vals = {"uri":o.uri,"name":name,"sum_of_weights":weight}
+        org_vals = {"uri":o.uri,"name":o.best_name,
+                    "connection_count":o.connection_count}
         org_vals["splitted_uri"] = elements_from_uri(o.uri)
         org_data.append(org_vals)
-    org_data = sorted(org_data, key=lambda x: x["sum_of_weights"],reverse=True)
+    org_data = sorted(org_data, key=lambda x: x["connection_count"],reverse=True)
     return org_data
+

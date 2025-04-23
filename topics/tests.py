@@ -21,12 +21,12 @@ from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
-from topics.organization_search_helpers import get_same_as_name_onlies, search_by_internal_clean_names
+from topics.organization_search_helpers import get_same_as_name_onlies, get_by_internal_clean_name
 import json
 import re
-from .serializers import (
+from topics.serializers import (
     only_valid_relationships, FamilyTreeSerializer, 
-    create_earliest_date_pretty_print_data,
+    create_earliest_date_pretty_print_data, orgs_by_connection_count,
 )
 from topics.industry_geo.orgs_by_industry_geo import (
     build_region_hierarchy, prepare_headers,
@@ -40,6 +40,8 @@ from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
 import pickle
+from topics.organization_search_helpers import search_organizations_by_name
+
 
 '''
     Care these tests will delete neodb data
@@ -267,8 +269,9 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        org_uris = orgs_by_industry_and_or_geo(industry,selected_geo)
-        assert set(org_uris) == {'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2364647/Mersana_Therapeutics'}
+        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        assert org_data == [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
+                           ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
@@ -276,10 +279,11 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
-        assert set(orgs) == {'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2364624/Parexel_International_Corporation', 
-                             'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 
-                             'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'}
+        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        expected = [('https://1145.am/db/2543227/Celgene', 12), ('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
+                            ('https://1145.am/db/2364624/Parexel_International_Corporation', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4), 
+                            ('https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 3), ('https://1145.am/db/3473030/Sylvant', 3)]
+        assert org_data == expected, f"Got {org_data}, expected {expected}"
 
     def test_search_by_geo_only(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
@@ -287,13 +291,12 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        orgs = orgs_by_industry_and_or_geo(industry,selected_geo)
-        assert len(orgs) == 8
-        assert set(orgs) == set(['https://1145.am/db/3452608/Avon_Products_Inc', 
-                             'https://1145.am/db/3465815/Alliance_Automotive_Group', 
-                             'https://1145.am/db/1787315/Scape', 'https://1145.am/db/3473030/Eusa_Pharma', 
-                             'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2946625/Cuadrilla_Resources', 
-                             'https://1145.am/db/3029681/Halebury', 'https://1145.am/db/3465883/Pistonheads'])
+        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), ('https://1145.am/db/2946625/Cuadrilla_Resources', 5), 
+                    ('https://1145.am/db/1787315/Scape', 4), ('https://1145.am/db/3029681/Halebury', 4), 
+                    ('https://1145.am/db/3452608/Avon_Products_Inc', 4), ('https://1145.am/db/3465815/Alliance_Automotive_Group', 4), 
+                    ('https://1145.am/db/3465883/Pistonheads', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
+        assert org_data == expected, f"Got {org_data}, expected {expected}"
 
     def test_shows_resource_page(self):
         client = self.client
@@ -357,23 +360,22 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_same_as_search_with_one_word1(self):
         term1 = "loxo"
-        res1 = search_by_internal_clean_names([term1])
+        res1 = get_by_internal_clean_name(term1)
         assert len(res1) == 1
-        assert res1[0][0].uri == 'https://1145.am/db/3029576/Loxo_Oncology'
+        assert list(res1.keys())[0].uri == 'https://1145.am/db/3029576/Loxo_Oncology'
         
     def test_same_as_search_with_one_word2(self):
         term2 = "loxo oncology"
-        res2 = search_by_internal_clean_names([term2])
-        assert len(res2) == 3
-        assert set([x[0].uri for x in res2]) == set(['https://1145.am/db/3029576/Loxo_Oncology', 
-                                                     'https://1145.am/db/3464715/Loxo_Oncology', 
-                                                     'https://1145.am/db/3549221/Loxo_Oncology'])
+        res2 = get_by_internal_clean_name(term2)
+        assert len(res2) == 2
+        assert [(x.uri,y) for x,y in res2.items()] == [('https://1145.am/db/3029576/Loxo_Oncology', 10), 
+                                                       ('https://1145.am/db/3464715/Loxo_Oncology', 4)]
 
     def test_same_as_search_with_one_word3(self):
         term3 = "loxo oncology two"
-        res3 = search_by_internal_clean_names([term3])
+        res3 = get_by_internal_clean_name(term3)
         assert len(res3) == 1
-        assert res3[0][0].uri == 'https://1145.am/db/3448439/Loxo_Oncology2'
+        assert list(res3.keys())[0].uri == 'https://1145.am/db/3448439/Loxo_Oncology2'
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
@@ -971,7 +973,7 @@ class TestUtilsWithDumpData(TestCase):
         uris = ["https://1145.am/db/3461395/Salvarx", "https://1145.am/db/2166549/Synamedia", "https://1145.am/db/3448439/Eli_Lilly_And_Company",
                 "https://1145.am/db/3464614/Mufg_Union_Bank", "https://1145.am/db/3465879/Mmtec", "https://1145.am/db/3463583/Disc_Graphics",
                 "https://1145.am/db/3454466/Arthur_J_Gallagher_Co", "https://1145.am/db/3029576/Celgene", "https://1145.am/db/3461324/Signal_Peak_Ventures"]
-        sorted = orgs_by_weight(uris)
+        sorted = orgs_by_connection_count(uris)
         assert sorted[0]['uri'] == 'https://1145.am/db/3454466/Arthur_J_Gallagher_Co'
         assert sorted[0]['name'] == 'Arthur J. Gallagher & Co.'
         assert sorted[-1]['uri'] == 'https://1145.am/db/3464614/Mufg_Union_Bank'
@@ -1347,17 +1349,17 @@ class TestSerializers(TestCase):
         assert val == "investor|buyer|vendor"
 
 
-class TestFindResultsArticleCounts(TestCase):
+class TestFindResultsWithNodeDegreeCount(TestCase):
 
     def setUpTestData():
         clean_db()
         one_year_ago = datetime.now() - timedelta(365)
         five_years_ago = datetime.now() - timedelta(365 * 5)
         node_data = [
-            {"doc_id":100,"identifier":"foo_new_one","datestamp": one_year_ago},
-            {"doc_id":101,"identifier":"foo_old_one","datestamp": five_years_ago},
-            {"doc_id":102,"identifier":"bar_new_one","datestamp": one_year_ago},
-            {"doc_id":103,"identifier":"bar_old_one","datestamp": five_years_ago},
+            {"doc_id":100,"identifier":"foo_newone","datestamp": one_year_ago},
+            {"doc_id":101,"identifier":"foo_oldone","datestamp": five_years_ago},
+            {"doc_id":102,"identifier":"bar_newone","datestamp": one_year_ago},
+            {"doc_id":103,"identifier":"bar_oldone","datestamp": five_years_ago},
             {"doc_id":200,"identifier":"same_as_one","datestamp": one_year_ago},
             {"doc_id":201,"identifier":"same_as_two","datestamp": one_year_ago},
             {"doc_id":202,"identifier":"same_as_three","datestamp": five_years_ago},
@@ -1377,72 +1379,73 @@ class TestFindResultsArticleCounts(TestCase):
             (loc1: Resource:GeoNamesLocation {{uri:"https://1145.am/loc1", geoNamesId: 4509884}}), // In US-Ohio
             (loc2: Resource:GeoNamesLocation {{uri:"https://1145.am/loc2", geoNamesId: 4791259}}), // In US-Virginia 
             
-            (foo_new_one)-[:industryClusterPrimary]->(ind1),
-            (foo_old_one)-[:industryClusterPrimary]->(ind1),
-            (foo_new_one)-[:basedInHighGeoNamesLocation]->(loc1),
-            (bar_new_one)-[:basedInHighGeoNamesLocation]->(loc1),
-            (bar_old_one)-[:basedInHighGeoNamesLocation]->(loc1),
+            (foo_newone)-[:industryClusterPrimary]->(ind1),
+            (foo_oldone)-[:industryClusterPrimary]->(ind1),
+            (foo_newone)-[:basedInHighGeoNamesLocation]->(loc1),
+            (bar_newone)-[:basedInHighGeoNamesLocation]->(loc1),
+            (bar_oldone)-[:basedInHighGeoNamesLocation]->(loc1),
             (loc1)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4509884",sourceOrganization:"source_org_foo"}}),
-            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}}),
+            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}})
 
-            (same_as_one)-[:sameAsNameOnly]->(same_as_two),
-            (same_as_one)-[:sameAsNameOnly]->(same_as_three),
-            (same_as_one)-[:sameAsNameOnly]->(same_as_four),
-            (same_as_one)-[:sameAsNameOnly]->(same_as_five),
-            (same_as_two)-[:sameAsNameOnly]->(same_as_three),
-            (same_as_two)-[:sameAsNameOnly]->(same_as_four),
-            (same_as_two)-[:sameAsNameOnly]->(same_as_five),
-            (same_as_three)-[:sameAsNameOnly]->(same_as_four),
-            (same_as_three)-[:sameAsNameOnly]->(same_as_five),
-            (same_as_four)-[:sameAsNameOnly]->(same_as_five),
+            SET same_as_one.internalCleanName = ['same_as_one']
+            SET same_as_two.internalCleanName = ['same_as_one']
+            SET same_as_three.internalCleanName = ['same_as_one']
+            SET same_as_four.internalCleanName = ['same_as_one']
+            SET same_as_five.internalCleanName = ['same_as_one']
 
-            (same_as_b_one)-[:sameAsNameOnly]->(same_as_b_two),
-            (same_as_b_one)-[:sameAsNameOnly]->(same_as_b_three),
-            (same_as_b_two)-[:sameAsNameOnly]->(same_as_b_three)
-        """
+            SET same_as_b_one.internalCleanName = ['same_as_b']
+            SET same_as_b_two.internalCleanName = ['same_as_b']
+            SET same_as_b_three.internalCleanName = ['same_as_b']
+
+            SET foo_oldone.internalCleanName = ['foo']
+            SET foo_newone.internalCleanName = ['foo']
+        """            
         db.cypher_query(query)
         RDFPostProcessor().run_all_in_order()
         refresh_geo_data()
 
-    def search_by_name_check_counts(self):
-        min_date = datetime.now() - timedelta(365 * 2)
-        res = Organization.find_by_name("foo",True,min_date)
-        sorted_res = sorted(res, key=lambda x: x[1],reverse=True)
-        assert sorted_res[0][0].uri == 'https://1145.am/db/100/foo_new_one'
-        assert sorted_res[0][1] == 1
-        assert sorted_res[1][0].uri == 'https://1145.am/db/101/foo_old_one'
-        assert sorted_res[1][1] == 0 # Doc is more than 2 years old
-        assert 1 == 2
+    def test_search_by_name_check_counts_without_same_as_name_only(self):
+        sorted_res = search_organizations_by_name("foo",True)
+        assert sorted_res[0][0].uri == 'https://1145.am/db/100/foo_newone'
+        assert sorted_res[0][1] == 3
 
-    def search_by_geo_counts(self):
-        min_date = datetime.now() - timedelta(365 * 2)
-        res = orgs_by_industry_and_or_geo(None, 'US-OH', min_date=min_date)
-        check_org_and_counts(res, 
-                [ ('https://1145.am/db/102/bar_new_one',1),
-                    ('https://1145.am/db/100/foo_new_one',1),
-                    ('https://1145.am/db/103/bar_old_one',0),
-                ])
 
-    def search_by_industry_counts(self):
-        min_date = datetime.now() - timedelta(365 * 2)
-        res = orgs_by_industry_and_or_geo(23, None, min_date=min_date)
-        check_org_and_counts(res,
-            [('https://1145.am/db/101/foo_old_one', 0), 
-             ('https://1145.am/db/100/foo_new_one', 1)])
+    def test_search_by_name_check_counts_with_same_as_name_only(self):
+        sorted_res = search_organizations_by_name("foo",False)
+        assert sorted_res[0][0].uri == 'https://1145.am/db/100/foo_newone'
+        assert sorted_res[0][1] == 3
+        assert sorted_res[1][0].uri == 'https://1145.am/db/101/foo_oldone'
+        assert sorted_res[1][1] == 2
+
+
+    def test_search_by_geo_counts(self):
+        res = orgs_by_industry_and_or_geo(None, 'US-OH')
+        expected = [('https://1145.am/db/100/foo_newone', 3), 
+                       ('https://1145.am/db/102/bar_newone', 2), 
+                       ('https://1145.am/db/103/bar_oldone', 2)]
+        assert res == expected, f"Got {res}, expected {expected}"
+
+    def test_search_by_industry_counts(self):
+        res = orgs_by_industry_and_or_geo(23, None)
+        assert res == [('https://1145.am/db/100/foo_newone', 3), 
+                       ('https://1145.am/db/101/foo_oldone', 2)]
         
-    def search_by_industry_geo_counts(self):
-        min_date = datetime.now() - timedelta(365 * 2)
-        res = orgs_by_industry_and_or_geo(23, 'US-OH', min_date=min_date)
-        check_org_and_counts(res,
-            [('https://1145.am/db/100/foo_new_one', 1)])
+    def test_search_by_industry_geo_counts(self):
+        res = orgs_by_industry_and_or_geo(23, 'US-OH')
+        assert res == [('https://1145.am/db/100/foo_newone', 3)]
         
-    def search_by_same_as_name_only(self):
-        min_date =  datetime.now() - timedelta(365 * 2)
-        res = Organization.find_by_name("same",combine_same_as_name_only=True,min_date=min_date)
-        check_org_and_counts(res,
-            [('https://1145.am/db/300/same_as_b_one', 2), 
-             ('https://1145.am/db/200/same_as_one', 3)]
-        )
+    def test_search_by_same_as_name_only(self):
+        res = search_organizations_by_name("same_as_one",combine_same_as_name_only=True)
+        assert [(x[0].uri,x[1]) for x in res] == [('https://1145.am/db/200/same_as_one', 1), 
+                                                  ('https://1145.am/db/300/same_as_b_one', 1)]
+    
+    def test_search_without_same_as_name_only(self):
+        res = search_organizations_by_name("same_as_one",combine_same_as_name_only=False)
+        assert [(x[0].uri,x[1]) for x in res] == [('https://1145.am/db/200/same_as_one', 1),
+                    ('https://1145.am/db/300/same_as_b_one', 1), ('https://1145.am/db/201/same_as_two', 1), 
+                    ('https://1145.am/db/203/same_as_four', 1), ('https://1145.am/db/204/same_as_five', 1), 
+                    ('https://1145.am/db/202/same_as_three', 1), ('https://1145.am/db/301/same_as_b_two', 1), 
+                    ('https://1145.am/db/302/same_as_b_three', 1)]
 
 
 class TestIgnoreLowRelativeWeightIndustryCluster(TestCase):
@@ -1489,7 +1492,7 @@ class TestIgnoreLowRelativeWeightIndustryCluster(TestCase):
         as_set = set( [tuple(x) for x in res])
         assert as_set == {('https://1145.am/db/2349/Johnson_Johnson', 2), ('https://1145.am/db/870/Capital_Rx', 3)} # J&J sum weight = 1277
         caretech_uris = orgs_by_industry_and_or_geo(235, None)
-        assert set(caretech_uris) == {'https://1145.am/db/870/Capital_Rx'}               
+        assert set([x[0] for x in caretech_uris]) == {'https://1145.am/db/870/Capital_Rx'}               
         
     def test_org_does_not_include_low_weight_industries(self):
         query="MATCH (o: Resource&Organization {uri:'https://1145.am/db/2349/Johnson_Johnson'})-[ic:industryClusterPrimary]->(i:IndustryCluster) RETURN o.uri, ic.weight, i.uri"
@@ -1571,7 +1574,7 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
                             ('https://1145.am/db/88496/Exelixis_Inc', 34), ('https://1145.am/db/88496/Exelixis_Inc', 7), 
                             ('https://1145.am/db/90949/Moderna', 1) }
         ca_uris = orgs_by_industry_and_or_geo(None, "US-CA")
-        assert set(ca_uris) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
+        assert set([x[0] for x in ca_uris]) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
 
     def test_org_does_not_include_low_relative_weight_locs(self):
         query="MATCH (o: Resource&Organization {uri:'https://1145.am/db/90949/Moderna'})-[b:basedInHighGeoNamesLocation]->(l:GeoNamesLocation) RETURN o.uri, b.weight, l.uri"
@@ -1821,7 +1824,7 @@ class TestDisentanglingMergedCells(TestCase):
             ('https://1145.am/db/9997/orgd',  3, 'https://1145.am/db/article_orgd')
         }
 
-def check_org_and_counts(results, expected_counts_for_uri):
-    vals = [ (x[0].uri,x[1]) for x in results]
-    assert set(vals) == set(expected_counts_for_uri)
+# def check_org_and_counts(results, expected_counts_for_uri):
+#     vals = [ (x[0].uri,x[1]) for x in results]
+#     assert set(vals) == set(expected_counts_for_uri)
         

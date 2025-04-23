@@ -276,8 +276,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "geo_codes": geo_codes,
             "indiv_cells": indiv_cells,
             "search_str_in_all_geos": search_str_in_all_geos,
-        })
-        
+        })       
         resp = Response({"table_data":table_data.data,"search_str":search_str,
                          "all_industry_ids": all_industry_ids,
                          "request_state": request_state}, status=status.HTTP_200_OK)
@@ -313,7 +312,6 @@ class IndustryGeoFinderReview(ListCreateAPIView):
         return resp
     
 
-    
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
     cells_to_keep_full = []
     for industry_id in (all_industry_ids + ["search_str"]):
@@ -456,12 +454,12 @@ class IndustryGeoOrgsView(APIView):
         industry_cluster = IndustryCluster.get_by_industry_id(industry_id) 
         industry_cluster_uri = industry_cluster.uri if industry_cluster else None
         cc, adm1 = geo_to_country_admin1(geo_code)
-        org_uris = orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_id, cc, adm1)
+        org_uris_and_counts = orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_id, cc, adm1)
         ind_name = industry_cluster.best_name if industry_cluster else None
         geo_name = country_admin1_full_name(geo_code)
         organizations = []
         found_uris = set()
-        for org_uri in org_uris:
+        for org_uri, _ in org_uris_and_counts:
             organization = Organization.self_or_ultimate_target_node(org_uri)
             if organization.uri in found_uris:
                 continue

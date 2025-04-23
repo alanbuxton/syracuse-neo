@@ -2,16 +2,15 @@ from collections import defaultdict
 from topics.models import Organization
 from topics.industry_geo import orgs_by_industry_and_or_geo
 
-
 def similar_organizations(organization,limit=0.94,uris_only=False):
         # by industry cluster
         by_ind_cluster = defaultdict(set)
         for x in organization.industryClusterPrimary:
-            org_uris = orgs_by_industry_and_or_geo(industry_or_id=x.topicId,geo_code=None)
+            org_uris_and_conn_counts = orgs_by_industry_and_or_geo(industry_or_id=x.topicId,geo_code=None)
             if uris_only is True:
-                by_ind_cluster[x].update(org_uris)
+                by_ind_cluster[x].update([x[0] for x in org_uris_and_conn_counts])
             else:
-                for org_uri in org_uris:
+                for org_uri, _ in org_uris_and_conn_counts:
                     org = Organization.self_or_ultimate_target_node(org_uri)
                     if org.uri != organization.uri:
                         by_ind_cluster[x].add(org)
@@ -19,11 +18,11 @@ def similar_organizations(organization,limit=0.94,uris_only=False):
         by_ind_text = set()
         if organization.industry is not None:
             for ind in organization.industry:
-                org_uris = Organization.by_industry_text(ind,limit=limit)
+                org_uris_and_conn_counts = Organization.by_industry_text(ind,limit=limit)
                 if uris_only is True:
-                    by_ind_text.update(org_uris)
+                    by_ind_text.update([x[0] for x in org_uris_and_conn_counts])
                 else:
-                    for org_uri in org_uris:
+                    for org_uri in org_uris_and_conn_counts:
                         org = Organization.self_or_ultimate_target_node(org_uri)
                         if org.uri != organization.uri and not any([org in x for x in by_ind_cluster.values()]):
                             by_ind_text.add(org)
@@ -31,11 +30,11 @@ def similar_organizations(organization,limit=0.94,uris_only=False):
             if x.industry is None:
                 continue
             for ind in x.industry:
-                org_uris = Organization.by_industry_text(ind,limit=limit)
+                org_uris_and_conn_counts = Organization.by_industry_text(ind,limit=limit)
                 if uris_only is True:
-                    by_ind_text.update(org_uris)
+                    by_ind_text.update([x[0] for x in org_uris_and_conn_counts])
                 else:
-                    for org_uri in org_uris:
+                    for org_uri, _ in org_uris_and_conn_counts:
                         org = Organization.self_or_ultimate_target_node(org_uri)
                         if org.uri != organization.uri and not any([org in x for x in by_ind_cluster.values()]):
                             by_ind_text.add(org)

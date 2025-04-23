@@ -14,7 +14,7 @@ def update_organization_data():
     update_geonames_locations_with_country_admin1()
     warm_up_all_industry_geos()
 
-def orgs_by_industry_and_or_geo(industry_or_id,geo_code):
+def orgs_by_industry_and_or_geo(industry_or_id,geo_code,return_orgs_only=False):
     if industry_or_id is None:
         ind_uri = None
         ind_topic_id = None
@@ -26,8 +26,11 @@ def orgs_by_industry_and_or_geo(industry_or_id,geo_code):
         ind_uri = ind.uri if ind else None
         ind_topic_id = ind.topicId if ind else None
     country_code, admin1_code = geo_to_country_admin1(geo_code)
-    orgs = orgs_by_industry_cluster_and_geo(ind_uri,ind_topic_id,country_code,admin1_code=admin1_code)
-    return orgs
+    orgs_with_rel_counts = orgs_by_industry_cluster_and_geo(ind_uri,ind_topic_id,country_code,admin1_code=admin1_code)
+    if return_orgs_only is True:
+        return [x[0] for x in orgs_with_rel_counts]
+    else:
+        return orgs_with_rel_counts
 
 def country_admin1_full_name(geo_code):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
@@ -42,6 +45,10 @@ def country_admin1_full_name(geo_code):
         admin1_name = cache.get(f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{geo_code}")
         return f"{country_name} - {admin1_name}"
     
-def orgs_by_industry_text_and_geo_code(industry_text, geo_code):
+def orgs_by_industry_text_and_geo_code(industry_text, geo_code,return_orgs_only=False):
     country_code, admin1 = geo_to_country_admin1(geo_code)
-    return orgs_by_industry_text_and_geo(industry_text, country_code, admin1)
+    res = orgs_by_industry_text_and_geo(industry_text, country_code, admin1)
+    if return_orgs_only is True:
+        return [x[0] for x in res]
+    else:
+        return res

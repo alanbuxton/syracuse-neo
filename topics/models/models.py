@@ -53,6 +53,12 @@ class Resource(StructuredNode):
     internalMergedSameAsHighToUri = StringProperty()
 
     @property
+    def connection_count(self):
+        query = f"MATCH (n: Resource {{uri:'{self.uri}'}}) RETURN apoc.node.degree(n)"
+        res, _ = db.cypher_query(query)
+        return res[0][0]
+
+    @property
     def sum_of_weights(self):
         cache_key = cache_friendly(f"sum_weights_{self.uri}")
         weight = cache.get(cache_key)
@@ -169,8 +175,12 @@ class Resource(StructuredNode):
     def self_or_ultimate_target_node(uri_or_object):
         if isinstance(uri_or_object, str):
             r = Resource.nodes.get_or_none(uri=uri_or_object)
-        else:
+        elif isinstance(uri_or_object, Resource):
             r = uri_or_object
+        elif uri_or_object is None:
+            return None
+        else:
+            raise ValueError(f"Don't know how to handle {uri_or_object}")
         if r is None:
             return None
         elif r.internalMergedSameAsHighToUri is None:
@@ -955,7 +965,7 @@ class Organization(Resource):
         return role_activities
 
     @staticmethod
-    def by_industry_text(name,limit=0.85):
+    def by_industry_text(name,limit=0.87):
         cache_key = cache_friendly(f"org_by_industry_text_{name}_{limit}")
         res = cache.get(cache_key)
         if res is not None:
@@ -964,7 +974,7 @@ class Organization(Resource):
         YIELD node, score
         WITH node, score
         WHERE score >= {limit}
-        RETURN node.uri
+        RETURN node.uri, apoc.node.degree(node)
         ORDER BY score DESCENDING
         '''
         vals = do_vector_search(name, query)
@@ -990,11 +1000,9 @@ class Organization(Resource):
                     '''
         if admin1_code is not None:
             query = f"{query} AND r.admin1Code = '{admin1_code}'"
-        query = f"{query} RETURN node.uri ORDER BY score DESCENDING"
+        query = f"{query} RETURN node.uri, apoc.node.degree(node) ORDER BY score DESCENDING"
         vals = do_vector_search(name, query)
-        res = set()
-        for val in vals:
-            res.add( Organization.self_or_ultimate_target_node(val[0]).uri )
+        res = [tuple(row) for row in vals]
         cache.set(cache_key, res)
         return list(res)
 

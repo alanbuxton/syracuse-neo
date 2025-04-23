@@ -32,8 +32,8 @@ def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topi
         res = cache.get(cache_key)
         if res is not None:
             return res
-        if set_none_to_empty_arr is True:
-            cache.set(cache_key, [])
+        if res is None and set_none_to_empty_arr is True: # If there is nothing cached and we know this mean it's empty then set to empty arr
+            cache.set(cache_key, [])  
             return []
     logger.debug(f"cache miss {cache_key}")
     res = do_org_geo_industry_cluster_query(industry_cluster_uri,country_code,admin1_code)
@@ -48,13 +48,14 @@ def warm_up_industries(industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_P
                             MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                             WITH o, SUM(rAll.weight) AS totalWeight, i, i_weight
                             WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
-                            RETURN i.topicId, collect(distinct(o.uri))"""
+                            RETURN i.topicId, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     industries, _ = db.cypher_query(query)
     logger.info(f"Caching {len(industries)} results")
-    for industry_cluster_topic_id, org_uris in industries:
+    for industry_cluster_topic_id, org_data_l in industries:
+        org_data = [tuple(x[:2]) for x in sorted(org_data_l, key=lambda v: (-v[1], v[2], v[0]))]
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_None_None_None")
         logger.debug(f"caching {cache_key}")
-        cache.set(cache_key, org_uris)
+        cache.set(cache_key, org_data)
 
 def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                     geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION,):
@@ -65,14 +66,15 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                             MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                             WITH o, l, weight, SUM(rAll.weight) AS totalWeight
                             WHERE weight >= {geo_location_min_weight} * totalWeight
-                            RETURN l.countryCode, collect(distinct(o.uri))"""
+                            RETURN l.countryCode, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     country_level, _ = db.cypher_query(country_query)
     
     logger.info(f"Caching {len(country_level)} results")
-    for country_code, org_uris in country_level:
+    for country_code, org_data_l in country_level:
+        org_data = [tuple(x[:2]) for x in sorted(org_data_l, key=lambda v: (-v[1], v[2], v[0]))]
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_None_{country_code}_None_None")
         logger.debug(f"caching {cache_key}")
-        cache.set(cache_key, org_uris)
+        cache.set(cache_key, org_data)
     logger.info("Warming up at geo-wide orgs at admin1 level")
 
     admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)
@@ -83,12 +85,13 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                         WITH o, l, weight, SUM(rAll.weight) AS totalWeight
                         WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
-                        RETURN l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
+                        RETURN l.countryCode, l.admin1Code, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.info(f"Caching {len(admin1_level)} results")
-    for country_code, admin1_code, org_uris in admin1_level:
+    for country_code, admin1_code, org_data_l in admin1_level:
+        org_data = [tuple(x[:2]) for x in sorted(org_data_l, key=lambda v: (-v[1], v[2], v[0]))]
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_None_{country_code}_{admin1_code}_None")
-        cache.set(cache_key, org_uris)
+        cache.set(cache_key, org_data)
 
 def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                               geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION,
@@ -104,13 +107,14 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
                         MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                         WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
                         WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
-                        RETURN i.topicId, l.countryCode, collect(distinct(o.uri))"""
+                        RETURN i.topicId, l.countryCode, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
-    for industry_cluster_topic_id, country_code, org_uris in country_level:
+    for industry_cluster_topic_id, country_code, org_data_l in country_level:
+        org_data = [tuple(x[:2]) for x in sorted(org_data_l, key=lambda v: (-v[1], v[2], v[0]))]
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_None_None")
         logger.debug(f"caching {cache_key}")
-        cache.set(cache_key, org_uris)
+        cache.set(cache_key, org_data)
     
     logger.info("Warming up at admin1 level")
     admin1_query = f"""MATCH (l: Resource&GeoNamesLocation)<-[b:basedInHighGeoNamesLocation]-(o:Resource&Organization)-[ic:industryClusterPrimary]->(i: Resource&IndustryCluster)
@@ -125,12 +129,13 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
                         MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                         WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
                         WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
-                        RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct(o.uri))"""
+                        RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
-    for industry_cluster_topic_id, country_code, admin1_code, org_uris in admin1_level:
+    for industry_cluster_topic_id, country_code, admin1_code, org_data_l in admin1_level:
+        org_data = [tuple(x[:2]) for x in sorted(org_data_l, key=lambda v: (-v[1], v[2], v[0]))]
         cache_key = cache_friendly(f"orgs_industry_cluster_geo_{industry_cluster_topic_id}_{country_code}_{admin1_code}_None")
-        cache.set(cache_key, org_uris)
+        cache.set(cache_key, org_data)
     
     warm_up_industries()
     warm_up_regions()
@@ -169,12 +174,13 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
                 MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                 WITH o, SUM(rAll.weight) AS totalWeight, i_weight
                 WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
-                RETURN DISTINCT o.uri
+                RETURN DISTINCT o.uri, apoc.node.degree(o) as rel_count, o.internalDocId
+                ORDER BY rel_count DESC, o.internalDocId ASC, o.uri ASC
                 {limit_str}
                 """
     logger.debug(query)
     res, _ = db.cypher_query(query, resolve_objects=True)
-    return [x[0] for x in res]
+    return [tuple([x,y]) for (x,y,_) in res]
 
 def set_not_found_industry_geo_to_empty_list():
     industry_clusters = IndustryCluster.leaf_nodes_only()
@@ -227,7 +233,7 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only, set_none_to_emp
                             relevant_admin1s[cc].append(adm1)
     return industry_clusters, relevant_countries, relevant_admin1s, country_results, adm1_results
 
-def org_geo_industry_text_by_words(search_str: str,counts_only):
+def org_geo_industry_text_by_words(search_str: str,counts_only=False):
     country_results = {}
     adm1_results = defaultdict(dict)
     relevant_countries = []

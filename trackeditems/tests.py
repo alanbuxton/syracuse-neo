@@ -134,7 +134,7 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
                                        and_similar_orgs=True)
         
 
-    def shows_tracked_organizations(self):
+    def test_shows_tracked_organizations(self):
         client = self.client
         path = '/tracked_org_ind_geo'
         resp = client.get(path)
@@ -146,21 +146,21 @@ class ActivityTestsWithSampleDataTestCase(TestCase):
         resp = client.get(path)
         assert resp.status_code == 200
         content = str(resp.content)
-        assert "https://1145.am/db/3029576/Celgene" in content
+        assert "1145.am/db/2543227/Celgene" in content
         # assert "<b>All Industries</b> in <b>Australia</b>" not in content
         # assert "<b>Foo bar industry</b> in <b>All Locations</b>" not in content
 
 
-    def shows_tracked_industry_geos(self):
+    def test_shows_tracked_industry_geos(self):
         client = self.client
         client.force_login(self.user3)
         resp = client.get('/tracked_org_ind_geo')
         content = str(resp.content)
-        assert "https://1145.am/db/3029576/Celgene" not in content
+        assert "1145.am/db/2543227/Celgene" not in content
         # assert "<b>All Industries</b> in <b>Australia</b>" in content
         # assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
 
-    def shows_recent_tracked_activities(self):
+    def test_shows_recent_tracked_activities(self):
         path = "/activities?max_date=2024-05-30"
         client = self.client
         resp = client.get(path)
