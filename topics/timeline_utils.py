@@ -104,7 +104,7 @@ def get_timeline_data(org,combine_same_as_name_only,
                     current_item = v
                 if current_item.uri in seen_uris:
                     continue
-                item_start = current_item.earliestDatePublished
+                item_start = current_item.oldestDatePublished
                 if min_date is not None and item_start.date() < min_date:
                     continue
                 l2_id = f"{idx}-{activity_to_subgroup[activity_type]}"

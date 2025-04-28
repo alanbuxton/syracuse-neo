@@ -158,12 +158,12 @@ class Resource(StructuredNode):
         return self.__dict__
 
     @property
-    def earliestDocumentSource(self):
+    def oldestDocumentSource(self):
         return self.documentSource.order_by("datePublished")[0]
 
     @property
-    def earliestDatePublished(self):
-        return self.earliestDocumentSource.datePublished
+    def oldestDatePublished(self):
+        return self.oldestDocumentSource.datePublished
 
     @property
     def latestDatePublished(self):
@@ -693,7 +693,7 @@ class ActivityMixin:
             activityType_title = self.longest_activityType.title()
         return {
             "activity_type": activityType_title,
-            "label": f"{activityType_title} ({self.sourceName}: {self.earliestDatePublished.strftime('%b %Y')})",
+            "label": f"{activityType_title} ({self.sourceName}: {self.oldestDatePublished.strftime('%b %Y')})",
             "status": self.status,
             "when": self.when,
             "when_raw": self.whenRaw,

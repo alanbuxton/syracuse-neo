@@ -26,7 +26,7 @@ import json
 import re
 from topics.serializers import (
     only_valid_relationships, FamilyTreeSerializer, 
-    create_earliest_date_pretty_print_data, orgs_by_connection_count,
+    create_min_date_pretty_print_data, orgs_by_connection_count,
 )
 from topics.industry_geo.orgs_by_industry_geo import (
     build_region_hierarchy, prepare_headers,
@@ -163,7 +163,7 @@ class TestUtilsWithDumpData(TestCase):
         assert len(org_display_details) == 1
 
     def test_track_org_button_only_appears_if_logged_in_as_real_user(self):
-        path = "/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&earliest_date=-1"
+        path = "/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&min_date=-1"
         client = self.client
         response = client.get(path)
         assert response.status_code == 200
@@ -183,14 +183,14 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_organization_graph_view_with_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&earliest_date=-1")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&min_date=-1")
         content = str(response.content)
         assert len(re.findall("https://1145.am/db",content)) == 114
         assert "technologies" in content # from sameAsNameOnly's industry
 
     def test_organization_graph_view_without_same_as_name_only(self):
         client = self.client
-        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=0&sources=_all&earliest_date=-1")
+        response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=0&sources=_all&min_date=-1")
         content = str(response.content)
         assert len(re.findall("https://1145.am/db",content)) == 50
         assert "technologies" not in content
@@ -315,7 +315,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_shows_direct_parent_child_rels(self):
         client = self.client
-        path = "/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor&earliest_date=-1"
+        path = "/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor&min_date=-1"
         resp = client.get(path)
         assert resp.status_code == 403
         client.force_login(self.user)
@@ -328,14 +328,14 @@ class TestUtilsWithDumpData(TestCase):
     def test_shows_parent_child_rels_via_same_as_name_only(self):
         client = self.client
         client.force_login(self.user)
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1&rels=buyer,investor,vendor&earliest_date=-1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=1&rels=buyer,investor,vendor&min_date=-1")
         content = str(resp.content)
         assert "REDAVIA" in content
         assert "REDOVIA" in content
 
     def test_company_search_with_combine_same_as_name_only(self):
         client = self.client
-        resp = client.get("/?name=eli&combine_same_as_name_only=1&earliest_date=-1")
+        resp = client.get("/?name=eli&combine_same_as_name_only=1&min_date=-1")
         content = str(resp.content)
         assert "Eli Lilly" in content
         assert "https://1145.am/db/3029576/Eli_Lilly" in content
@@ -344,7 +344,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_company_search_without_combine_same_as_name_only(self):
         client = self.client
-        resp = client.get("/?name=eli&combine_same_as_name_only=0&earliest_date=-1")
+        resp = client.get("/?name=eli&combine_same_as_name_only=0&min_date=-1")
         content = str(resp.content)
         assert "Eli Lilly" in content
         assert "https://1145.am/db/3029576/Eli_Lilly" in content
@@ -379,10 +379,10 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&earliest_date=-1")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&min_date=-1")
         content0 = str(resp.content)
         inds0 = len(re.findall("IndustryCluster",content0))
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&earliest_date=-1")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&min_date=-1")
         content1 = str(resp.content)
         inds1 = len(re.findall("IndustryCluster",content1))
         assert "Drug R & D/Manufacturing" not in content0
@@ -391,9 +391,9 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_central_node(self):
         client = self.client
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1&sources=_all")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&min_date=-1&sources=_all")
         content0 = str(resp.content)
-        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1&sources=_all")
+        resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&min_date=-1&sources=_all")
         content1 = str(resp.content)
         assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content0
         assert "https://1145.am/db/3464715/Loxo_Oncology-Acquisition" in content1
@@ -402,14 +402,14 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_timeline_combines_same_as_name_only_on_off(self):
         client = self.client
-        path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&earliest_date=-1&sources=_all"
+        path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&min_date=-1&sources=_all"
         resp = client.get(path0)
         assert resp.status_code == 403
         client.force_login(self.user)
         resp = client.get(path0)
         assert resp.status_code == 200
         content0 = str(resp.content)
-        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&earliest_date=-1&sources=_all")
+        resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&min_date=-1&sources=_all")
         content1 = str(resp.content)
         assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content0
         assert "https://1145.am/db/3549221/Loxo_Oncology-Acquisition" in content1
@@ -418,7 +418,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_only_available_if_logged_in(self):
         client = self.client
-        path0 = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1"
+        path0 = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&min_date=-1"
         resp = client.get(path0)
         assert resp.status_code == 403
         client.force_login(self.user)
@@ -427,7 +427,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_combine_same_as_name_only_off(self):
         client = self.client
-        path = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&earliest_date=-1"
+        path = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&min_date=-1"
         client.force_login(self.user)
         resp = client.get(path)
         content0 = str(resp.content)
@@ -441,7 +441,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_family_tree_combine_same_as_name_only_on(self):
         client = self.client
         client.force_login(self.user)
-        resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&sources=_all&earliest_date=-1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=1&sources=_all&min_date=-1")
         content1 = str(resp.content)
 
         assert "https://1145.am/db/3029576/Eli_Lilly" in content1
@@ -468,49 +468,49 @@ class TestUtilsWithDumpData(TestCase):
     def test_family_tree_uris_acquisition(self):
         client = self.client
         client.force_login(self.user)
-        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" in content
         assert "Bowery Valuation" not in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Acquisitions",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">Investments</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&min_date=-1">Investments</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content 
 
     def test_family_tree_uris_investor(self):
         client = self.client
         client.force_login(self.user)
-        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&min_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" not in content
         assert "Bowery Valuation" in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Investments",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">Acquisitions</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content 
 
     def test_family_tree_uris_all(self):
         client = self.client
         client.force_login(self.user)
-        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor%2Cinvestor&combine_same_as_name_only=0&sources=_all&earliest_date=-1")
+        resp = client.get("/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor%2Cinvestor&combine_same_as_name_only=0&sources=_all&min_date=-1")
         content = str(resp.content)
         assert "Faroe Petroleum" in content
         assert "Bowery Valuation" in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*All",content) is not None
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">Acquisitions</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&earliest_date=-1">Investments</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">Acquisitions</a>""" in content
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&min_date=-1">Investments</a>""" in content
 
     def test_query_strings_in_drill_down_linkages_source_page(self):
         client = self.client
-        uri = "/organization/linkages/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/organization/linkages/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Cory 1st Choice Home Delivery - Linkages</h1>" in content
-        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1")' in content
+        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_activity_resource_page(self):
         client = self.client
-        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         assert resp.status_code == 403
         client.force_login(self.user)
@@ -519,109 +519,109 @@ class TestUtilsWithDumpData(TestCase):
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
-        assert "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
-        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
-        assert "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
+        assert "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
+        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
+        assert "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_linkages_from_resource_page(self):
         client = self.client
-        uri = "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri,follow=True) # Will be redirected
         assert resp.status_code == 403
         client.force_login(self.user)
         resp = client.get(uri,follow=True)
         assert resp.status_code == 200
-        assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1', 302)]
+        assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1', 302)]
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>J.B. Hunt - Linkages</h1>" in content
-        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1")' in content
+        assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_resource_from_resource_page(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
         assert "<h1>Resource: https://1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1</h1>" in content
-        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
+        assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_family_tree_source_page(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "<h1>Cory 1st Choice Home Delivery - Family Tree</h1>" in content
-        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
-        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_org_from_family_tree(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "<h1>J.B. Hunt - Family Tree</h1>" in content
-        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
-        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
 
     def test_query_strings_in_drill_down_activity_from_family_tree(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
-        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
+        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
 
     def test_query_strings_in_drill_down_timeline_source_page(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>J.B. Hunt - Timeline</h1>" in content
-        assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
-        assert 'drillIntoUri(item_vals.uri, "/organization/timeline/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1");' in content
+        assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
+        assert 'drillIntoUri(item_vals.uri, "/organization/timeline/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
 
     def test_query_strings_in_drill_down_family_tree_source_page(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/organization/family-tree/uri/1145.am/db/2543227/Celgene?source=_all&earliest_date=-1"
+        uri = "/organization/family-tree/uri/1145.am/db/2543227/Celgene?source=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "source=_all&earliest_date=-1");' in content
-        assert 'drillIntoUri(activity_uri, "/resource/", "source=_all&earliest_date=-1");' in content
-        assert len(re.findall("source=_all&earliest_date=-1",content)) == 16
+        assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "source=_all&min_date=-1");' in content
+        assert 'drillIntoUri(activity_uri, "/resource/", "source=_all&min_date=-1");' in content
+        assert len(re.findall("source=_all&min_date=-1",content)) == 16
 
     def test_query_strings_in_drill_down_resource_from_timeline_page(self):
         client = self.client
         client.force_login(self.user)
-        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1"
+        uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content 
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
-        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
+        assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
 
     def test_org_graph_filters_by_document_source_organization_defaults(self):
         client = self.client
         # Get with core sources by default
-        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
+        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         resp_all = client.get(uri_all)
         content_all = str(resp_all.content)
         assert "PR Newswire" in content_all
@@ -631,7 +631,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_org_graph_filters_by_document_source_organization_all(self):
         client = self.client
         # Get with all sources - if _all is in the list then all will be chosen
-        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=foo,_all&earliest_date=-1"
+        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=foo,_all&min_date=-1"
         resp_all = client.get(uri_all)
         content_all = str(resp_all.content)
         assert "PR Newswire" in content_all
@@ -641,7 +641,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_org_graph_filters_by_document_source_organization_named_sources(self):
         client = self.client
         # And now with 2 specified
-        uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=CityAM,PR%20Newswire&earliest_date=-1"
+        uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=CityAM,PR%20Newswire&min_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "PR Newswire" in content_filtered
@@ -651,7 +651,7 @@ class TestUtilsWithDumpData(TestCase):
     def test_org_graph_filters_by_document_source_organization_core_plus(self):
         client = self.client
         # And now with core plus an addition
-        uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=cityam,_core&earliest_date=-1"
+        uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=cityam,_core&min_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
         assert "PR Newswire" in content_filtered
@@ -660,7 +660,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
+        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -672,7 +672,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_family_tree_filters_by_document_source_all(self):
         client = self.client
-        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
+        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -684,7 +684,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_timeline_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
+        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -696,7 +696,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_timeline_filters_by_document_source_all(self):
         client = self.client
-        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&earliest_date=-1"
+        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -708,7 +708,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_doc_date_range_linkages_old(self):
         client = self.client
-        uri = "/organization/linkages/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2020-08-26"
+        uri = "/organization/linkages/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2020-08-26"
         resp = client.get(uri)
         content = str(resp.content)
         assert "MRI Software LLC" in content
@@ -716,7 +716,7 @@ class TestUtilsWithDumpData(TestCase):
     
     def test_doc_date_range_linkages_recent(self):
         client = self.client
-        uri2 = "/organization/linkages/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2024-08-26"
+        uri2 = "/organization/linkages/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
         resp2 = client.get(uri2)
         content2 = str(resp2.content)
         assert "MRI Software LLC" in content2
@@ -724,7 +724,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_doc_date_range_family_tree_old(self):
         client = self.client
-        uri = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2020-08-26"
+        uri = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2020-08-26"
         client.force_login(self.user)
         resp = client.get(uri)
         content = str(resp.content)
@@ -733,7 +733,7 @@ class TestUtilsWithDumpData(TestCase):
     
     def test_doc_date_range_family_tree_recent(self):
         client = self.client
-        uri2 = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2024-08-26"
+        uri2 = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
         client.force_login(self.user)
         resp2 = client.get(uri2)
         content2 = str(resp2.content)
@@ -742,7 +742,7 @@ class TestUtilsWithDumpData(TestCase):
 
     def test_doc_date_range_timeline_old(self):
         client = self.client
-        uri = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2020-08-26"
+        uri = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2020-08-26"
         client.force_login(self.user)
         resp = client.get(uri)
         content = str(resp.content)
@@ -751,26 +751,26 @@ class TestUtilsWithDumpData(TestCase):
     
     def test_doc_date_range_timeline_recent(self):
         client = self.client
-        uri2 = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&earliest_date=2024-08-26"
+        uri2 = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
         client.force_login(self.user)
         resp2 = client.get(uri2)
         content2 = str(resp2.content)
         assert "MRI Software LLC" in content2
         assert "Rental History Reports and Trusted Employees" not in content2
 
-    def test_create_earliest_date_pretty_print_data_does_not_include_unecessary_dates(self):
+    def test_create_min_date_pretty_print_data_does_not_include_unecessary_dates(self):
         test_date_str = "2021-01-01"
         test_today = date(2024,1,1)
-        res = create_earliest_date_pretty_print_data(test_date_str,test_today)
+        res = create_min_date_pretty_print_data(test_date_str,test_today)
         assert res == {'min_date': date(2021, 1, 1), 'one_year_ago': date(2023, 1, 1), 
                     'one_year_ago_fmt': '2023-01-01', 'three_years_ago': None, 
                     'three_years_ago_fmt': None, 'five_years_ago': date(2020, 1, 2), 
                     'five_years_ago_fmt': '2020-01-02', 'all_time_flag': False}
     
-    def test_create_earliest_date_pretty_print_data_with_all_time(self):
+    def test_create_min_date_pretty_print_data_with_all_time(self):
         test_date_str = "-1"
         test_today = date(2024,1,1)
-        res = create_earliest_date_pretty_print_data(test_date_str,test_today)
+        res = create_min_date_pretty_print_data(test_date_str,test_today)
         assert res == {'min_date': BEGINNING_OF_TIME, 'one_year_ago': date(2023, 1, 1), 
                        'one_year_ago_fmt': '2023-01-01', 'three_years_ago': date(2021, 1, 1), 
                        'three_years_ago_fmt': '2021-01-01', 'five_years_ago': date(2020, 1, 2), 
@@ -780,7 +780,7 @@ class TestUtilsWithDumpData(TestCase):
         o = Resource.nodes.get_or_none(uri='https://1145.am/db/11594/Biomax_Informatics_Ag')
         s = OrganizationGraphSerializer(o, context={"combine_same_as_name_only":True,
                                                     "source_str":"_all",
-                                                    "earliest_str":"2010-01-01"})
+                                                    "min_date_str":"2010-01-01"})
         data = s.data
         assert len(data["node_data"]) == 7
         assert len(data["edge_data"]) == 9
@@ -803,7 +803,7 @@ class TestUtilsWithDumpData(TestCase):
         n = Resource.nodes.get_or_none(uri="https://1145.am/db/10282/Talla")
         g = OrganizationGraphSerializer(n, context ={"combine_same_as_name_only":True,
                                                     "source_str":"_all",
-                                                    "earliest_str":"2010-01-01"})
+                                                    "min_date_str":"2010-01-01"})
         data = g.data
         assert len(data["node_data"]) == 4
         assert len(data["edge_data"]) == 5
@@ -1276,7 +1276,7 @@ class TestFamilyTree(TestCase):
 
     def test_shows_nodes_in_name_order(self):
         client = self.client
-        path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&earliest_date=-1"
+        path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&min_date=-1"
         response = client.get(path)
         assert response.status_code == 403
         client.force_login(self.user)
@@ -1292,7 +1292,7 @@ class TestFamilyTree(TestCase):
 
     def test_links_parent_and_child_if_only_linked_via_same_as_name_only(self):
         client = self.client
-        path = "/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1"
+        path = "/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&min_date=-1&combine_same_as_name_only=1"
         client.force_login(self.user)
         response = client.get(path)
         content = str(response.content)
@@ -1305,7 +1305,7 @@ class TestFamilyTree(TestCase):
         '''
         client = self.client
         client.force_login(self.user)
-        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
@@ -1313,7 +1313,7 @@ class TestFamilyTree(TestCase):
     def test_switches_sibling_if_different_parent_has_same_as_name_only_child(self):
         client = self.client
         client.force_login(self.user)
-        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?earliest_date=-1")
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
@@ -1321,7 +1321,7 @@ class TestFamilyTree(TestCase):
     def test_updates_sibling_target_if_central_org_is_linked_by_same_only(self):
         client = self.client
         client.force_login(self.user)
-        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&earliest_date=-1&combine_same_as_name_only=1")
+        response = client.get("/organization/family-tree/uri/1145.am/db/202/s1?rels=buyer,vendor&min_date=-1&combine_same_as_name_only=1")
         content = str(response.content)
         # p3 bought s2, but I'm looking at s1 which has sameAsNameOnly with s2, so should only be seeing s1
         assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/203/s2' not in content

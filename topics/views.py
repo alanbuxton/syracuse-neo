@@ -164,17 +164,17 @@ class FamilyTree(APIView):
         uri_parts = elements_from_uri(o.uri)
         relationships = request_state["qs_params"].get("rels","buyer,vendor")
         source_str = request_state["qs_params"].get("sources","_core")
-        earliest_str = request_state["qs_params"].get("earliest_date","")
+        min_date_str = request_state["qs_params"].get("min_date","")
         nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                 "relationship_str":relationships,
                                                                 "source_str":source_str,
-                                                                "earliest_str":earliest_str})
+                                                                "min_date_str":min_date_str})
 
         relationship_vals = set(relationships.split(","))  
         relationship_link_data = self.create_relationship_links(request_state, relationship_vals)    
         nodes_edges_data = nodes_edges.data
         request_state["document_sources"]=nodes_edges_data.pop("document_sources")
-        request_state["earliest_doc_date"]=nodes_edges_data.pop("earliest_doc_date")
+        request_state["min_doc_date"]=nodes_edges_data.pop("min_doc_date")
         return Response({"nodes_edges":nodes_edges_data,
                             "requested_uri": uri,
                             "org_data": org_data,
@@ -208,15 +208,15 @@ class OrganizationTimeline(APIView):
         request_state["hide_link"]="organization_timeline"
         o = Resource.nodes.get(uri=uri)
         source_str = request_state["qs_params"].get("sources","_core")
-        earliest_str = request_state["qs_params"].get("earliest_date","")
+        min_date_str = request_state["qs_params"].get("min_date","")
         org_serializer = OrganizationTimelineSerializer(o, context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                     "source_str":source_str,
-                                                                    "earliest_str":earliest_str})
+                                                                    "min_date_str":min_date_str})
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"] = org_serializer_data.pop("document_sources")
-        request_state["earliest_doc_date"] = org_serializer_data.pop("earliest_doc_date")
+        request_state["min_doc_date"] = org_serializer_data.pop("min_doc_date")
         resp = Response({"timeline_serializer": org_serializer_data,
                             "org_data": org_data,
                             "request_state": request_state,
@@ -234,17 +234,17 @@ class OrganizationByUri(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_linkages"
         source_str = request_state["qs_params"].get("sources","_core")
-        earliest_str = request_state["qs_params"].get("earliest_date","")
+        min_date_str = request_state["qs_params"].get("min_date","")
         org_serializer = OrganizationGraphSerializer(o,context=
                                     {"combine_same_as_name_only":combine_same_as_name_only,
                                      "source_str":source_str,
-                                     "earliest_str":earliest_str,
+                                     "min_date_str":min_date_str,
                                      })
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"]=org_serializer_data.pop("document_sources")
-        request_state["earliest_doc_date"] = org_serializer_data.pop("earliest_doc_date") 
+        request_state["min_doc_date"] = org_serializer_data.pop("min_doc_date") 
         resp = Response({"data_serializer": org_serializer_data,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
