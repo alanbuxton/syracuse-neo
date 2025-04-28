@@ -12,7 +12,7 @@ from integration.neo4j_utils import (
     apoc_del_redundant_same_as,
     delete_and_clean_up_nodes_by_doc_id,
 )
-from integration.rdf_post_processor import RDFPostProcessor
+from integration.rdf_post_processor import RDFPostProcessor, update_duplicated_resource_ids
 from topics.cache_helpers import nuke_cache
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 
@@ -52,6 +52,37 @@ class TurtleLoadingTestCase(TestCase):
         clean_db_and_load_files("integration/test_dump/dump-3")
         assert len(DataImport.objects.all()) == 2
         assert DataImport.latest_import() == 20231224180800
+
+    def test_handles_duplicate_internal_ids(self):
+        clean_db_and_load_files("integration/test_dump/dump-1")
+        RDFPostProcessor().run_all_in_order()
+        uri_source = "https://1145.am/db/3518892/Goldman_Sachs_Investment_Partners"
+        uri_dup_1 = "https://1145.am/db/4001440/Coretrax"
+        uri_dup_2 = "https://1145.am/db/4001762/Evri"
+
+        org_source = Resource.nodes.get_or_none(uri=uri_source)
+        internal_id = org_source.internalId 
+
+        for uri in [uri_dup_1,uri_dup_2]:
+            org = Resource.nodes.get_or_none(uri=uri)
+            org.internalId = internal_id
+            org.save()
+
+        assert len(Resource.nodes.filter(internalId=internal_id)) == 3
+
+        update_duplicated_resource_ids()
+
+        org_source = Resource.nodes.get_or_none(uri=uri_source)
+        assert org_source.internalId == internal_id # hasn't changed the original source
+
+        for uri in [uri_dup_1,uri_dup_2]:
+            org = Resource.nodes.get_or_none(uri=uri)
+            assert org.internalId > internal_id # has been reset to a larger value
+
+        dup_query = "MATCH (n:Resource) WITH n.internalId AS internalId, count(*) AS count WHERE count > 1 RETURN internalId, count"
+        dups, _ = db.cypher_query(dup_query)
+        assert len(dups) == 0, f"Expected {dups} to be empty list"
+
 
     def test_loads_deletion_and_recreation_step_by_step(self):
         clean_db_and_load_files("integration/test_dump/dump-1",do_post_processing=True)

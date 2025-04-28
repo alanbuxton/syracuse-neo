@@ -49,6 +49,7 @@ class Resource(StructuredNode):
     documentSource = RelationshipTo("Article","documentSource",
             model=DocumentSourceRel, cardinality=OneOrMore) # But not for Article or IndustryCluster
     internalDocId = IntegerProperty()
+    internalId = IntegerProperty() # Unique ID for this entity, in case people need a unique Integer rather than URI (string)
     sameAsHigh = Relationship('Resource','sameAsHigh', model=WeightedRel)
     internalMergedSameAsHighToUri = StringProperty()
 

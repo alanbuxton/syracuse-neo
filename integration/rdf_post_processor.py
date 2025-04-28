@@ -57,6 +57,8 @@ class RDFPostProcessor(object):
         self.merge_equivalent_activities()
         write_log_header("adding embeddings")
         create_new_embeddings()
+        write_log_header("adding unique resource ids")
+        add_resource_ids()
 
 
     def merge_equivalent_activities(self, seen_doc_ids=set()):
@@ -161,3 +163,43 @@ def write_log_header(message):
 def log_count_relationships(text):
     cnt = count_relationships()
     logger.info(f"{text}: {cnt} relationships")
+
+
+def add_resource_ids():
+    '''
+    In case data consumers don't want to store URIs will create a unique ID for each node
+    '''
+    query = "MATCH (n: Resource) WHERE n.internalId IS NULL RETURN n"
+    action = "SET n.internalId = ID(n)"
+    apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{batchSize:1000, parallel:true}})'
+    db.cypher_query(apoc_query)
+    # Now see if there are any duplicates
+    logger.info("Set initial ids, checking for duplicates")
+    update_duplicated_resource_ids()
+
+def update_duplicated_resource_ids():
+    dup_query = "MATCH (n:Resource) WHERE n.internalId IS NOT NULL WITH n.internalId AS internalId, count(*) AS count WHERE count > 1 RETURN internalId, count"
+    dups, _ = db.cypher_query(dup_query,resolve_objects=True)
+    if (len(dups) == 0):
+        return # No real duplicates
+    max_id,_ = db.cypher_query("MATCH (n: Resource) WHERE n.internalId IS NOT NULL RETURN MAX(n.internalId)")
+    current_max_id = max_id[0][0]
+    if current_max_id is None:
+        current_max_id = 0
+    for dup in dups:
+        dup_id = dup[0]
+        if dup_id is None:
+            continue # catch-all for non-dups
+        query = f"MATCH (n: Resource) WHERE n.internalId = {dup_id} RETURN n.uri ORDER BY n.internalDocId, n.uri "
+        vals, _ = db.cypher_query(query)
+        for row in vals[1:]:
+            current_max_id += 1
+            uri = row[0]
+            query = f"MATCH (n: Resource {{uri:'{uri}'}}) SET n.internalId = {current_max_id}"
+            db.cypher_query(query)
+    
+
+
+
+    
+    

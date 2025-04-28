@@ -21,6 +21,7 @@ def delete_and_clean_up_nodes_from_doc_id_file(doc_id_file):
 def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
+    db.cypher_query("CREATE INDEX resource_internal_id IF NOT EXISTS FOR (n:Resource) on (n.internalId)")
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
     db.cypher_query("CREATE FULLTEXT INDEX organization_clean_name IF NOT EXISTS FOR (r:Organization) ON EACH [r.internalCleanName]")
