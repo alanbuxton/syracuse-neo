@@ -28,7 +28,7 @@ import json
 from .util import elements_from_uri, geo_to_country_admin1, min_and_max_date
 from .stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
-from topics.activity_helpers import get_activities_by_org_uris_and_date_range
+from topics.activity_helpers import get_activities_by_org_and_date_range
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list
 
 import logging
@@ -373,32 +373,7 @@ class SimilarOrganizations(APIView):
                          "organizations_by_industry_text": similar_ind_text,
                          "org": org.data,
                          "request_state": request_state}, status=status.HTTP_200_OK)
-    
 
-class OrganizationActivities(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'organization_activities.html'
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-
-    def get(self, request, **kwargs):
-        uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        request_state, combine_same_as_name_only = prepare_request_state(request)
-        request_state["hide_link"]="organization_activities"
-        min_date, max_date = min_and_max_date(request.GET)
-        matching_activity_orgs = get_activities_by_org_uris_and_date_range([uri], min_date, max_date)
-        serializer = ActivitySerializer(matching_activity_orgs, many=True)
-        request_state, _ = prepare_request_state(request)
-        o = Resource.nodes.get(uri=uri)
-        uri_parts = elements_from_uri(o.uri)
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
-
-        resp = Response({"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                        "request_state": request_state,
-                        "uri_parts": uri_parts,
-                        "org_data": org_data,
-                        }, status=status.HTTP_200_OK)
-        return resp
 
 class IndustryOrgsActivities(APIView):
     renderer_classes = [TemplateHTMLRenderer] 
@@ -473,7 +448,34 @@ class IndustryGeoOrgsView(APIView):
                         "request_state": request_state,
                         "industry_geo_str": industry_geo_search_str(ind_name, geo_name)
                         }, status=status.HTTP_200_OK)   
-        return resp     
+        return resp   
+
+
+class OrgActivitiesView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'organization_activities.html'
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+
+    def get(self, request, **kwargs):
+        min_date, max_date = min_and_max_date(request.GET)
+        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state["hide_link"]="organization_activities"
+        org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
+        org = Organization.self_or_ultimate_target_node(org_uri)
+        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100, 
+                                                                      combine_same_as_name_only=combine_same_as_name_only,
+                                                                      include_similar_orgs=kwargs.get("include_similar_orgs"))
+        serializer = ActivitySerializer(matching_activity_orgs, many=True)
+        uri_parts = elements_from_uri(org.uri)
+        org_data = {**kwargs, **{"uri":org.uri,"source_node_name":org.best_name}}
+        resp_dict = {"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "uri_parts": uri_parts,
+                            "org_data": org_data,
+                            "request_state": request_state,
+                        }
+        return Response(resp_dict, status=status.HTTP_200_OK)
+      
 
 def industry_geo_search_str(industry, geo):
     industry_str = "all industries" if industry is None or industry.strip() == '' else industry

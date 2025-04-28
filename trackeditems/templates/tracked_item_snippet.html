@@ -16,9 +16,9 @@
                 <td align="center">
                     <input type="checkbox" class="toggle-checkbox" data-id="{{ row.id }}" {% if row.and_similar_orgs %}checked{% endif %}>          
                 </td>
-                <td><a href="{% url_with_querystring 'org-activities' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org only)</a></td>
+                <td><a href="{% url_with_querystring 'organization-activities' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org only)</a></td>
                 <td><a href="{% url_with_querystring 'similar-organizations' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View similar orgs</a></td>
-                <td><a href="{% url_with_querystring 'org-activities-incl-similar' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org plus similar orgs)</a></td>
+                <td><a href="{% url_with_querystring 'organization-activities-incl-similar' row.uri_parts.domain row.uri_parts.path row.uri_parts.doc_id row.uri_parts.name qs_params=request_state.qs_params %}">View activities (this org plus similar orgs)</a></td>
             </tr>
         {% endif %}
     {% endfor %}

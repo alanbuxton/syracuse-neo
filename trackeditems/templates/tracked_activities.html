@@ -14,7 +14,7 @@
   </p>
   <h1>Recent Activities</h1>
 
-  {% if request_state.cache_last_updated or 1 %}
+  {% if request_state.cache_last_updated %}
     <p>Activities between {{ min_date |  localize }} and  {{ max_date | localize }}
       
     {% if source_name.org_name %}

@@ -5,7 +5,7 @@ from .stats_helpers import get_stats, date_minus
 from auth_extensions.anon_user_utils import create_anon_user
 from .activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry, 
             activities_by_region, get_activities_by_industry_geo_and_date_range,
-            activity_articles_to_api_results,
+            activity_articles_to_api_results, get_activities_by_org_and_date_range,
             )
 from .family_tree_helpers import get_parent_orgs, get_child_orgs
 from topics.graph_utils import graph_centered_on
@@ -618,7 +618,7 @@ class TestUtilsWithDumpData(TestCase):
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&earliest_date=-1" in content
 
-    def test_org_graph_filters_by_documennt_source_organization_defaults(self):
+    def test_org_graph_filters_by_document_source_organization_defaults(self):
         client = self.client
         # Get with core sources by default
         uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?earliest_date=-1"
@@ -1019,6 +1019,17 @@ class TestUtilsWithDumpData(TestCase):
         assert len(res) == 1
         assert res[0]['activity_class'] == 'MarketingActivity'
         assert res[0]['activity_uri'] == 'https://1145.am/db/2946622/Turns_10_Years_Old'
+
+    def test_shows_activity_articles_for_org(self):
+        min_date = date.fromisoformat("2019-01-07")
+        max_date = date.fromisoformat("2019-01-10")
+        uri = "https://1145.am/db/2166549/Play_Sports_Group"
+        org = Resource.nodes.get_or_none(uri=uri)
+        res = get_activities_by_org_and_date_range(org, min_date, max_date)
+        assert len(res) == 2
+        assert res[0]['activity_uri'] == 'https://1145.am/db/2166549/Play_Sports_Group-Investment-Controlling'
+        assert res[1]['activity_uri'] == 'https://1145.am/db/3457026/Play_Sports_Group-Investment-Controlling_Stake'
+        assert res[0]['date_published'] > res[1]['date_published']
 
     def test_shows_org_and_activity_counts_by_industry_search_string(self):
         client = self.client

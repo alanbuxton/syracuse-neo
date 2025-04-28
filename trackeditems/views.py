@@ -19,7 +19,6 @@ from topics.activity_helpers import (
     get_activities_by_industry_and_date_range,
     get_activities_by_source_and_date_range,
     get_activities_by_industry_geo_and_date_range,
-    get_activities_by_org_and_date_range,
     )
 from datetime import datetime, timezone, timedelta
 from topics.views import prepare_request_state
@@ -135,28 +134,6 @@ class IndustryGeoActivitiesView(APIView):
                             "request_state": request_state,
                              }, status=status.HTTP_200_OK)
         return resp    
-
-class OrgActivitiesView(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'tracked_activities.html'
-    permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]   
-
-    def get(self, request, **kwargs):
-        min_date, max_date = min_and_max_date(request.GET)
-        request_state, _ = prepare_request_state(request)
-        org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        org = Organization.self_or_ultimate_target_node(org_uri)
-        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100, include_similar_orgs=kwargs.get("include_similar_orgs"))
-        serializer = ActivitySerializer(matching_activity_orgs, many=True)
-        resp_dict = {"activities":serializer.data,"min_date":min_date,"max_date":max_date,
-                            "source_name": {
-                                "org_name": org.best_name,
-                            },
-                            "request_state": request_state,
-                        }
-        return Response(resp_dict, status=status.HTTP_200_OK)
-
 
 class SourceActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
