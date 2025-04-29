@@ -63,7 +63,7 @@ class Index(APIView):
 
         if org_name:
             orgs = search_organizations_by_name(org_name, combine_same_as_name_only, 
-                                            limit=21)
+                                            limit=500)
             orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
             num_hits = len(orgs)
             if len(orgs) > 20:
@@ -267,7 +267,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
         search_str = 'BAR'
         indiv_cells = []
         search_str_in_all_geos = 'FOO'
-        request_state, _ = prepare_request_state(request)
+        request_state, combine_same_as_name_only = prepare_request_state(request)
 
         table_data = OrgsByIndustryGeoSerializer({
             "all_industry_ids": all_industry_ids,
@@ -276,6 +276,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "geo_codes": geo_codes,
             "indiv_cells": indiv_cells,
             "search_str_in_all_geos": search_str_in_all_geos,
+            "combine_same_as_name_only": combine_same_as_name_only, 
         })       
         resp = Response({"table_data":table_data.data,"search_str":search_str,
                          "all_industry_ids": all_industry_ids,
@@ -295,7 +296,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
         selected_columns = request.POST['selectedColumns']
         geo_codes = [col_from_request_post_data(x) for x in json.loads(selected_columns)]
         geo_codes = remove_not_needed_admin1s(geo_codes)
-        request_state, _ = prepare_request_state(request)
+        request_state, combine_same_as_name_only = prepare_request_state(request)
 
         table_data = OrgsByIndustryGeoSerializer({
             "all_industry_ids": all_industry_ids,
@@ -304,6 +305,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "geo_codes": geo_codes,
             "indiv_cells": indiv_cells,
             "search_str_in_all_geos": search_str in selected_rows,
+            "combine_same_as_name_only": combine_same_as_name_only,
         })
         
         resp = Response({"table_data":table_data.data,"search_str":search_str,

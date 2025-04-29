@@ -1436,11 +1436,15 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
                        ('https://1145.am/db/103/bar_oldone', 2)]
         assert res == expected, f"Got {res}, expected {expected}"
 
-    def test_search_by_industry_counts(self):
-        res = orgs_by_industry_and_or_geo(23, None)
+    def test_search_by_industry_counts_same_as_name_only_false(self):
+        res = orgs_by_industry_and_or_geo(23, None, combine_same_as_name_only=False)
         assert res == [('https://1145.am/db/100/foo_newone', 3), 
                        ('https://1145.am/db/101/foo_oldone', 2)]
-        
+
+    def test_search_by_industry_counts_same_as_name_only_true(self):
+        res = orgs_by_industry_and_or_geo(23, None, combine_same_as_name_only=True)
+        assert res == [('https://1145.am/db/100/foo_newone', 3)]
+
     def test_search_by_industry_geo_counts(self):
         res = orgs_by_industry_and_or_geo(23, 'US-OH')
         assert res == [('https://1145.am/db/100/foo_newone', 3)]

@@ -1,8 +1,9 @@
 from neomodel import db
 from topics.models import *
-from typing import Dict, Tuple
+from typing import Dict
 import logging
 from collections import defaultdict
+
 logger = logging.getLogger(__name__)
 
 def search_organizations_by_name(name, combine_same_as_name_only=True, limit=20):
@@ -88,23 +89,6 @@ def do_search_by_clean_name(clean_name, index_name):
     vals, _ = db.cypher_query(query2,resolve_objects=True)
     return vals
 
-
-# def search_by_internal_clean_names(clean_names: List[str]):
-#     if len(clean_names) == 1:
-#         clean_names = clean_names + clean_names
-#     query1 = """WITH $clean_names as terms
-#             CALL db.index.fulltext.queryNodes("organization_clean_name", apoc.text.join(terms, " OR "),{analyzer:"keyword"}) YIELD node, score
-#             WHERE ANY(term IN node.internalCleanName WHERE term IN terms)
-#             RETURN node"""
-#     res1,_ = db.cypher_query(query1,params={"clean_names":clean_names},resolve_objects=True)
-#     query2 = """WITH $clean_names as terms
-#             CALL db.index.fulltext.queryNodes("organization_clean_short_name", apoc.text.join(terms, " OR "),{analyzer:"keyword"}) YIELD node, score
-#             WHERE ANY(term IN node.internalCleanShortName WHERE term IN terms)
-#             RETURN node"""
-#     res2,_ = db.cypher_query(query2,params={"clean_names":clean_names},resolve_objects=True)
-#     return res1 + res2
-
-
 def search_by_name(name):
     query = f'''CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic"}}) YIELD node as n
         WITH n
@@ -124,14 +108,16 @@ def remove_same_as_name_onlies(reference_org_list):
     to_keep = defaultdict(int)
     found_names = []
     for org, count in reference_org_list:
+        logger.info(f"Checking {org.uri} - {org.best_name}")
         clean_names = org.internalCleanName or []
         clean_short_names = org.internalCleanShortName or []
         if any(x in found_names for x in org.name + 
                                 clean_names + clean_short_names):
+            logger.info(f"Already found, skipping")
             continue
         found_names.extend(org.name)
         found_names.extend(clean_names)
         found_names.extend(clean_short_names)
         to_keep[org] += count
-    
+
     return list(to_keep.items())
