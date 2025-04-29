@@ -26,6 +26,7 @@ from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name
 import json
 from django.shortcuts import get_object_or_404
+from django.http import QueryDict
 import logging
 logger = logging.getLogger(__name__)
 
@@ -50,8 +51,12 @@ class TrackedOrgIndGeoView(APIView):
 
     def post(self, request):
         payload = request.POST
-        all_industry_ids = json.loads(payload.get("all_industry_ids","[]"))
-        trackables = get_entities_to_track(payload, payload.get("search_str",""), all_industry_ids)
+        # This endpoint can be called from two sources, each with different payload structure
+        payload_for_trackables = standardize_payload(payload)
+        all_industry_ids = json.loads(payload_for_trackables.get("all_industry_ids","[]"))
+        trackables = get_entities_to_track(payload_for_trackables, 
+                                           payload_for_trackables.get("search_str",""), 
+                                           all_industry_ids)
         TrackedItem.update_or_create_for_user(request.user, trackables)
         return redirect('tracked-org-ind-geo')
 
@@ -224,13 +229,35 @@ def get_entities_to_track(params_dict, search_str, all_industry_ids):
     specific_orgs_to_keep_cleaned = [clean_specific_org(x) for x in specific_orgs_to_keep]
 
     def add_industry_clusters_to_regional_tracked_items(tracked_item):
-        if (tracked_item['region'] is None) or (tracked_item['organization_uri'] is not None):
+        if (tracked_item['region'] is not None) and (tracked_item['industry_id'] is None) and (tracked_item['organization_uri'] is None):
+            return [{**tracked_item,**{"industry_id":x}} for x in all_industry_ids]
+        else:
             return [tracked_item]
-        return [{**tracked_item,**{"industry_id":x}} for x in all_industry_ids]
+        
+    def more_generic_version_exists(tracked_item):
+        if tracked_item['industry_id'] is None or tracked_item['region'] is None or tracked_item['organization_uri'] is not None:
+            return False
+        for x in expanded_select_alls:
+            if tracked_item['trackable'] != x['trackable']:
+                continue
+            if tracked_item['industry_id'] == x['industry_id'] and (
+                x['region'] is None or (len(x['region']) == 2 and 
+                    len(tracked_item['region']) > 2 and
+                    tracked_items['region'][:2] == x['region'])):
+                return True
+            if x['industry_id'] is None and (
+                tracked_item['region'] == x['region'] or (
+                    len(x['region']) == 2 and len(tracked_item['region']) > 2 and
+                    tracked_item['region'][:2] == x['region'])):
+                return True            
+        return False
+
     expanded_select_alls = []
     for select_all in select_alls:
         expanded_select_alls.extend(add_industry_clusters_to_regional_tracked_items(select_all))
 
+    expanded_select_alls = [x for x in expanded_select_alls if not more_generic_version_exists(x)]
+        
     return expanded_select_alls + specific_orgs_to_keep_cleaned
 
 def geo_industry_to_string(geo_code, industry):
@@ -264,3 +291,34 @@ class ToggleTrackedItemView(APIView):
         item.save()
         serializer = TrackedItemSerializer(item)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+def standardize_payload(payload):
+    '''
+    If payload is in format from industry_geo_finder then convert it into format
+    from industry_geo_finder_review 
+    '''
+    new_payload = QueryDict('',mutable=True)
+    new_payload.update(payload)
+    selected_rows = payload.get('selectedRows','[]')
+    rows = json.loads(selected_rows)
+    for row in rows:
+        row_id = row.replace("row-","")
+        new_payload[f"track_selectall_{row_id}"] = '1'
+
+    selected_columns = payload.get('selectedColumns','[]')
+    cols = json.loads(selected_columns)
+    for col in cols:
+        col_id = col.replace("col-","")
+        new_payload[f"track_selectall_{col_id}"] = '1'
+
+    selected_cells = payload.get('selectedIndividualCells','[]')
+    cells = json.loads(selected_cells)
+    for cell in cells:
+        row,col = cell.split("#")
+        row_id = row.replace("row-","")
+        col_id = col.replace("col-","")
+        new_payload[f"track_selectall_{row_id}_{col_id}"] = '1'
+
+    new_payload["all_industry_ids"] = payload["allIndustryIDs"]
+
+    return new_payload

@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.http import QueryDict
 import time
 from django.contrib.auth import get_user_model
 from auth_extensions.anon_user_utils import create_anon_user
@@ -20,7 +21,7 @@ from integration.neo4j_utils import delete_all_not_needed_resources
 from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
 from integration.rdf_post_processor import RDFPostProcessor
-from .views import get_entities_to_track
+from .views import get_entities_to_track, standardize_payload
 from rest_framework import status
 from django.test import Client
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
@@ -56,29 +57,40 @@ class TrackedOrgIndustryGeoTestCase(TestCase):
                    'track_unselect_searchstr_US_https://1145.am/db/3452658/Centre_Technologies': ['1'], 'track_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['1'], 
                    'track_unselect_searchstr_US_https://1145.am/db/3470399/Rainfocus': ['0'], 'track_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['1'], 
                    'track_unselect_searchstr_US_https://1145.am/db/3457048/Sphera_Solutions': ['0']}
-        expected = [{'industry_id': 473, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': False}, 
-                    {'industry_id': 223, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 223, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
-                    {'industry_id': 473, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
-                    {'industry_id': 101, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False}, 
-                    {'industry_id': 101, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 223, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 473, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 101, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 223, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
-                    {'industry_id': 473, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True}, 
-                    {'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}, 
-                    {'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None}
+        expected = [{'industry_id': 473, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': False},
+                    {'industry_id': 223, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},
+                    {'industry_id': 223, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False},
+                    {'industry_id': 101, 'industry_search_str': None, 'region': 'DK', 'organization_uri': None, 'trackable': False},
+                    {'industry_id': 473, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True},
+                    {'industry_id': 101, 'industry_search_str': None, 'region': 'US-NY', 'organization_uri': None, 'trackable': True},
+                    {'industry_id': 109, 'industry_search_str': None, 'region': 'US', 'organization_uri': None, 'trackable': True},
+                    {'organization_uri': 'https://1145.am/db/3457431/Firebirds', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3617647/Kura_Revolving_Sushi_Bar', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3474027/Gan', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3457038/Freightpop', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3452658/Centre_Technologies', 'trackable': False, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3470399/Rainfocus', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None},
+                    {'organization_uri': 'https://1145.am/db/3457048/Sphera_Solutions', 'trackable': True, 'industry_id': None, 'industry_search_str': None, 'region': None},
                     ]
         tracked_items = get_entities_to_track(payload,"foobar",[473,223,101])
         assert len(tracked_items) == len(expected)
         for ti in tracked_items:
             assert ti in expected, f"Expected {ti} in {tracked_items}"
+
+    def test_converts_industry_geo_finder_format_to_industry_geo_finder_review_format(self):
+        source_dict = {'selectedIndividualCells': '["row-59#col-JM"]', 
+                   'selectedRows': '["row-294"]', 
+                   'selectedColumns': '["col-EG","col-MA"]', 
+                   'allIndustryIDs': '[59, 749, 671, 81, 365, 74, 294, 680, 281, 207]', 
+                   'searchStr': ['hospital']}
+        qd = QueryDict("",mutable=True)
+        qd.update(source_dict)
+        res = standardize_payload(qd)
+        assert res['track_selectall_294'] == '1'
+        assert res['track_selectall_EG'] == '1'
+        assert res['track_selectall_MA'] == '1'
+        assert res['track_selectall_59_JM'] == '1'
+
 
 class ActivityTestsWithSampleDataTestCase(TestCase):
 
