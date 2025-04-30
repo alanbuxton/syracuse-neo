@@ -46,8 +46,7 @@ class Resource(StructuredNode):
     uri = StringProperty(unique_index=True, required=True)
     foundName = ArrayProperty(StringProperty())
     name = ArrayProperty(StringProperty())
-    documentSource = RelationshipTo("Article","documentSource",
-            model=DocumentSourceRel, cardinality=OneOrMore) # But not for Article or IndustryCluster
+    documentSource = RelationshipTo("Article","documentSource", model=DocumentSourceRel)
     internalDocId = IntegerProperty()
     internalId = IntegerProperty() # Unique ID for this entity, in case people need a unique Integer rather than URI (string)
     sameAsHigh = Relationship('Resource','sameAsHigh', model=WeightedRel)

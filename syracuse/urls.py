@@ -23,4 +23,5 @@ urlpatterns = [
     path('feedbacks/', include('feedbacks.urls')),
     path('', include('trackeditems.urls')),
     path('', include('topics.urls')),
+    path('', include('api.urls')),
 ]

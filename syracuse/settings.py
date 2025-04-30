@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'feedbacks.apps.FeedbacksConfig',
     'trackeditems.apps.TrackeditemsConfig',
     'integration.apps.IntegrationConfig',
+    'api.apps.ApiConfig',
     'auth_extensions.apps.AuthExtensionsConfig',
     'rest_framework',
     'django_bootstrap5',
@@ -203,6 +204,11 @@ ACCOUNT_LOGOUT_ON_GET = True
 BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
 
+REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+}
 
 CACHES = {
     "default": {
@@ -225,3 +231,4 @@ EMBEDDINGS_MODEL=os.environ.get("EMBEDDINGS_MODEL")
 CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() == 'true' # If false then won't create embeddings for new nodes
 GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT_PROPORTION","0.05"))
 INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.05"))
+
