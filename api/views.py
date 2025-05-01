@@ -1,12 +1,12 @@
-from django.contrib.auth.models import Group, User
-from rest_framework import permissions, viewsets, status
 from rest_framework.response import Response
 from topics.models import IndustryCluster
 import api.serializers as serializers
 import logging 
+from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from topics.industry_geo import GEO_PARENT_CHILDREN
 
 logger = logging.getLogger(__name__)
 
@@ -64,5 +64,26 @@ class IndustryClusterViewSet(NeomodelViewSet):
                          "internalMergedSameAsToHighUri","documentSource","sameAsHigh",
                          "orgsPrimary","orgsSecondary","peoplePrimary","peopleSecondary"]
 
+
+class GeosViewSet(GenericViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    serializer_class = serializers.GeoDictSerializer
+
+    def get_queryset(self):
+        return GEO_PARENT_CHILDREN.values()
+
+    def get_object(self):
+        return GEO_PARENT_CHILDREN.get(self.kwargs["pk"])
+
+    def list(self, request):
+        serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
+        return Response(serializer.data)
     
-    
+    def retrieve(self, request, pk=None):
+        item = self.get_object()
+        if item is None:
+            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = self.serializer_class(item, context={'request': request})
+        return Response(serializer.data)

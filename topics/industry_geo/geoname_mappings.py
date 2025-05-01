@@ -2,10 +2,10 @@ import csv
 import logging
 from django.core.cache import cache
 from collections import defaultdict
-from .region_hierarchies import COUNTRIES_WITH_STATE_PROVINCE
+from topics.industry_geo.region_hierarchies import (COUNTRIES_WITH_STATE_PROVINCE, US_REGIONS_TO_STATES_HIERARCHY, 
+    COUNTRY_TO_GLOBAL_REGION, GLOBAL_REGION_TO_COUNTRY)
 from neomodel import db
 from topics.util import cache_friendly
-import pickle
 
 logger = logging.getLogger(__name__)
 
@@ -69,3 +69,42 @@ def prepare_country_mapping(fpath="dump/relevant_geo.csv",
     logger.info(f"Processed: {cnt} records.")
     return geonameid_data, country_code_to_admin1
 
+
+def region_parent_child():
+    parent_child = {}
+
+    def iterate_through_global_regions(parent_region,current_region_and_lower):
+        for region, lower_region_or_countries in current_region_and_lower.items():
+            parent_child[region] = {"parent":parent_region,"me":region, "children":set()}
+            if parent_region is not None:
+                parent_child[parent_region]["children"].add(region)
+            if isinstance(lower_region_or_countries, dict):
+                iterate_through_global_regions(region, lower_region_or_countries)
+            else:
+                parent_child[region]["children"] = lower_region_or_countries
+                for child in lower_region_or_countries:
+                    parent_child[child] = {"parent":region, "me":child, "children":set()}
+
+    iterate_through_global_regions(None, GLOBAL_REGION_TO_COUNTRY)
+
+    for us_region, sub_region_and_states in US_REGIONS_TO_STATES_HIERARCHY.items():
+        parent_child["US"]["children"].add(us_region)
+        parent_child[us_region] = {"parent":"US","me": us_region, "children":set()}
+        for sub_region, states in sub_region_and_states.items():
+            state_strs = [f"US-{x}" for x in states]
+            parent_child[sub_region] = {"parent": us_region, "me":sub_region, "children": state_strs}
+            parent_child[us_region]["children"].add(sub_region)
+            for state in state_strs:
+                parent_child[state] = {"parent": sub_region, "me": state, "children": set()}
+
+    for country in COUNTRIES_WITH_STATE_PROVINCE:
+        if country == 'US':
+            continue
+        state_strs = [f"{country}-{x}" for x in (admin1s_for_country(country) or [])]
+        for state in state_strs:
+            parent_child[country]["children"].add(state)
+            parent_child[state] = {"parent":country,"me":state, "children":set()}
+            
+    return parent_child
+
+GEO_PARENT_CHILDREN = region_parent_child()

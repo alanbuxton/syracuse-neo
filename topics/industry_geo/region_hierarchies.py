@@ -34,9 +34,9 @@ def us_states_to_national_regions_and_back(hierarchy=US_REGIONS_TO_STATES_HIERAR
     cache_key = "us_states_to_national_regions_and_back"
     states_to_regions_key = "US_STATES_TO_NATIONAL_REGIONS"
     regions_to_states_key = "US_NATIONAL_REGIONS_TO_STATES"
-    # res = cache.get(cache_key)
-    # if isinstance(res, dict) and len(res) > 1:
-    #     return res[states_to_regions_key], res[regions_to_states_key]
+    res = cache.get(cache_key)
+    if isinstance(res, dict) and len(res) > 1:
+        return res[states_to_regions_key], res[regions_to_states_key]
     state_to_region = {}
     region_to_states = defaultdict(set)
     for k,v in hierarchy.items():
@@ -71,6 +71,7 @@ def get_region_hierarchy(regions=un_regions):
     top_down = {}
     bottom_up = {}
     flat = defaultdict(set)
+
     for row in regions:
         region = row['region'] 
         subregion = row['sub-region'] 
@@ -81,6 +82,9 @@ def get_region_hierarchy(regions=un_regions):
             subregion = 'Eastern Asia'
         elif country_code == 'AQ': # Antarctica
             continue
+        elif country_code == 'CY': # Cyprus
+            region = 'Europe'
+            subregion = "Southern Europe"
         if region not in top_down:
             top_down[region] = {} 
         flat[region].add(country_code)
@@ -90,7 +94,7 @@ def get_region_hierarchy(regions=un_regions):
                  top_down[region][subregion] = []
             top_down[region][subregion].append(country_code)   
             bottom_up[country_code] = {0:region, 1:subregion}   
-            flat[f"{region}#{subregion}"].add(country_code)      
+            flat[f"{region}#{subregion}"].add(country_code)
         else:
             # have to support an extra level
             if subregion not in top_down[region]:

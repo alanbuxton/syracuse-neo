@@ -34,7 +34,7 @@ from topics.industry_geo.orgs_by_industry_geo import (
 )
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
-from topics.industry_geo import orgs_by_industry_and_or_geo
+from topics.industry_geo import orgs_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
@@ -1052,16 +1052,26 @@ class TestUtilsWithDumpData(TestCase):
         assert len(re.findall("/CORRECTION/ - NapaJen Pharma, Inc./", content)) == 2
         assert len(re.findall("NapaJen Pharma Closes \$12.4 Million Series C Financing", content)) == 1
 
+    def test_self_or_states_for_country(self):
+        # Needs Dump Data for the relevant CN provinces to be defined
+        assert geo_codes_for_region("GB") == {'GB'}
+        cn = geo_codes_for_region("CN")
+        assert len(cn) > 1
+        assert all([re.match(r"^CN-\d\d",x) for x in cn]), f"Got {cn} but expected of the form CN-01, CN-02 etc"
+    
+
 class TestRegionHierarchy(TestCase):
 
     def setUpTestData():
         nuke_cache()
 
-    def test_builds_region_hierarchy(self):
-        countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
-        admin1s = {"US":["IL","OK","IA","NY"],"CA":["12","13"],"CN":["11","04"]}
+    def setUp(self):
+        self.countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
+        self.admin1s = {"US":["IL","OK","IA","NY"],"CA":["12","13"],"CN":["11","04"]}
 
-        country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(countries, admin1s)
+    def test_builds_region_hierarchy(self):
+
+        country_hierarchy, country_widths, admin1_hierarchy, admin1_widths = build_region_hierarchy(self.countries, self.admin1s)
 
         assert country_hierarchy == {'Asia': {'Western Asia': ['AE'], 
                                               'South-eastern Asia': ['SG'],
@@ -1086,7 +1096,7 @@ class TestRegionHierarchy(TestCase):
                                         'US#South': 1, 'US': 4, 'US#Midwest': 2, 'US#Northeast': 1}, 
                                         'CA': {'CA': 2}, 'CN': {'CN': 2}}
             
-        headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths, countries, admin1s)
+        headers = prepare_headers(country_hierarchy, country_widths, admin1_hierarchy, admin1_widths, self.countries, self.admin1s)
         assert headers[0] == OrderedDict([('Africa', {'colspan': 3, 'classes': 'col-NA col-SZ col-ZA'}), 
                                           ('Americas', {'colspan': 8, 'classes': 'col-CA col-CA-12 col-CA-13 col-US col-US-IA col-US-IL col-US-NY col-US-OK'}), 
                                           ('Asia', {'colspan': 5, 'classes': 'col-AE col-CN col-CN-04 col-CN-11 col-SG'}), 
@@ -1162,6 +1172,44 @@ class TestRegionHierarchy(TestCase):
         }  
         widths = hierarchy_widths(data)
         assert widths == {'k1':7, 'k1#k12':2, 'k1#k11':5, 'k1#k11#k111': 3, 'k1#k11#k112':2}
+
+    def test_parent_children_for_us_state(self):
+        assert GEO_PARENT_CHILDREN['US-CA'] == {'parent': 'Pacific', 'me': 'US-CA', 'children': set()}
+
+    def test_parent_children_for_european_country(self):
+        assert GEO_PARENT_CHILDREN['NL'] == {'parent': 'Western Europe', 'me': 'NL', 'children': set()}
+
+    def test_parent_children_for_us_region(self):
+        assert GEO_PARENT_CHILDREN['South'] == {'parent': 'US', 
+                                                'me': 'South',
+                                                'children': {'West South Central', 
+                                                             'East South Central', 'South Atlantic'}}
+        
+    def test_parent_children_for_un_region(self):
+        assert GEO_PARENT_CHILDREN["Latin America and the Caribbean"] == {'parent': 'Americas',
+                                                                          'me': 'Latin America and the Caribbean', 
+                                                                          'children': {'Central America', 
+                                                                                       'South America', 'Caribbean'}}
+
+
+    def test_gets_country_codes_for_lower_region(self):
+        af = geo_codes_for_region("Africa")
+        ssa = geo_codes_for_region("Sub-Saharan Africa")
+        ma = geo_codes_for_region("Middle Africa")
+        assert ma == set(['AO', 'CD', 'CF', 'CG', 'CM', 'GA', 'GQ', 'ST', 'TD'])
+        assert len(ssa) > len(ma)
+        assert len(af) > len(ssa)
+        assert ma.issubset(ssa)
+        assert ssa.issubset(af)
+
+    def test_midwest_are_inside_us(self):
+        mw = geo_codes_for_region("Midwest")
+        us = geo_codes_for_region("US")
+        assert mw == set(['US-IA', 'US-IL', 'US-IN', 'US-KS', 'US-MI', 'US-MN', 'US-MO', 
+                          'US-ND', 'US-NE', 'US-OH', 'US-SD', 'US-WI'])
+        assert len(us) > len(mw)
+        assert mw.issubset(us)   
+
 
 class TestFamilyTree(TestCase):
 

@@ -1,5 +1,5 @@
 from .region_hierarchies import COUNTRY_CODE_TO_NAME
-from .geoname_mappings import CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX
+from .geoname_mappings import CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX, GEO_PARENT_CHILDREN
 from .orgs_by_industry_geo import (warm_up_all_industry_geos, 
                                    orgs_by_industry_cluster_and_geo,
                                    orgs_by_industry_text_and_geo)
@@ -61,3 +61,18 @@ def orgs_by_industry_text_and_geo_code(industry_text, geo_code,return_orgs_only=
         return [x[0] for x in orgs_with_rel_counts]
     else:
         return orgs_with_rel_counts
+
+def geo_codes_for_region(start_region, parent_child=GEO_PARENT_CHILDREN):
+    country_admin1s = set()
+    def gather_country_admin1s(label):
+        node = parent_child[label]
+        children = node["children"]
+        if len(children) == 0:
+            country_admin1s.add(label)
+        for child in children:
+            if len(child) == 2:
+                country_admin1s.add(child) # We started higher than country and got to country code no need to go further
+            else:
+                gather_country_admin1s(child)
+    gather_country_admin1s(start_region)
+    return country_admin1s

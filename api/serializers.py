@@ -1,6 +1,7 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
-from django.urls import reverse, NoReverseMatch
+from django.urls import NoReverseMatch
+from rest_framework.reverse import reverse
 from .fields import HyperlinkedRelationshipField
 import logging
 
@@ -36,3 +37,22 @@ class HyperlinkedNeomodelSerializer(serializers.Serializer):
                 data[rel_name] = [x.uri for x in related_nodes]
 
         return data
+
+class GeoDictSerializer(serializers.Serializer):
+    me = serializers.CharField()
+    parent = serializers.SerializerMethodField()
+    children = serializers.SerializerMethodField()
+
+    def get_parent(self, obj):
+        request = self.context.get('request')
+        field = obj['parent']
+        if field is None:
+            return None
+        return reverse('api-geos-detail', kwargs={'pk': obj['parent']}, request=request)
+    
+    def get_children(self, obj):
+        request = self.context.get('request')
+        return [
+            reverse('api-geos-detail', kwargs={'pk': rid}, request=request)
+            for rid in obj.get('children', [])
+        ]
