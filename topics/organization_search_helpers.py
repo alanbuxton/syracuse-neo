@@ -119,5 +119,5 @@ def remove_same_as_name_onlies(reference_org_list):
         found_names.extend(clean_names)
         found_names.extend(clean_short_names)
         to_keep[org] += count
-
+    logger.info(f"Got {len(to_keep)} items")
     return list(to_keep.items())

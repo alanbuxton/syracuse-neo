@@ -1,12 +1,12 @@
 from collections import defaultdict
 from topics.models import Organization
-from topics.industry_geo import orgs_by_industry_and_or_geo
+from topics.industry_geo import org_uris_by_industry_and_or_geo
 
 def similar_organizations(organization,limit=0.94,uris_only=False):
         # by industry cluster
         by_ind_cluster = defaultdict(set)
         for x in organization.industryClusterPrimary:
-            org_uris_and_conn_counts = orgs_by_industry_and_or_geo(industry_or_id=x.topicId,geo_code=None)
+            org_uris_and_conn_counts = org_uris_by_industry_and_or_geo(industry_or_id=x.topicId,geo_code=None)
             if uris_only is True:
                 by_ind_cluster[x].update([x[0] for x in org_uris_and_conn_counts])
             else:

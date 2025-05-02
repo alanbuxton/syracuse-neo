@@ -16,7 +16,7 @@ from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUST
 import logging
 logger = logging.getLogger(__name__)
 
-def orgs_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topic_id, 
+def org_uris_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_topic_id, 
                                      country_code, admin1_code=None, 
                                      force_update_cache=False,
                                      limit=None,
@@ -187,14 +187,14 @@ def set_not_found_industry_geo_to_empty_list():
     org_geo_industry_by_clusters(industry_clusters,counts_only=True,set_none_to_empty_arr=True) # all combos of industry/geo
     
     for ind in industry_clusters:
-        orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,None,set_none_to_empty_arr=True)
+        org_uris_by_industry_cluster_and_geo(ind.uri,ind.topicId,None,set_none_to_empty_arr=True)
     
     for cc in COUNTRY_TO_GLOBAL_REGION.keys():
-        orgs_by_industry_cluster_and_geo(None,None,cc,set_none_to_empty_arr=True)
+        org_uris_by_industry_cluster_and_geo(None,None,cc,set_none_to_empty_arr=True)
         if cc in COUNTRIES_WITH_STATE_PROVINCE:
             admin1_list = admin1s_for_country(cc)
             for adm1 in admin1_list:
-                    res = orgs_by_industry_cluster_and_geo(None, None,cc,adm1,
+                    res = org_uris_by_industry_cluster_and_geo(None, None,cc,adm1,
                                                     set_none_to_empty_arr=True)
 
 def org_geo_industry_cluster_query_by_words(search_text: str,counts_only):
@@ -212,7 +212,7 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only, set_none_to_emp
         ind_uri = ind.uri
         country_results[ind_uri] = {}
         for cc in COUNTRY_TO_GLOBAL_REGION.keys():
-            res = orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,cc,set_none_to_empty_arr=set_none_to_empty_arr)
+            res = org_uris_by_industry_cluster_and_geo(ind.uri,ind.topicId,cc,set_none_to_empty_arr=set_none_to_empty_arr)
             if len(res) > 0:
                 relevant_countries.append(cc)
                 if counts_only:
@@ -223,7 +223,7 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only, set_none_to_emp
                     assert admin1_list is not None, f"No admin1 found for {cc}"
                     adm1_results[ind_uri][cc] = {}
                     for adm1 in admin1_list:
-                        res = orgs_by_industry_cluster_and_geo(ind.uri,
+                        res = org_uris_by_industry_cluster_and_geo(ind.uri,
                                                         ind.topicId,cc,adm1,
                                                         set_none_to_empty_arr=set_none_to_empty_arr)
                         if len(res) > 0:

@@ -34,7 +34,7 @@ from topics.industry_geo.orgs_by_industry_geo import (
 )
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
-from topics.industry_geo import orgs_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
+from topics.industry_geo import org_uris_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
@@ -269,7 +269,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
         assert org_data == [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
                            ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
 
@@ -279,7 +279,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
         expected = [('https://1145.am/db/2543227/Celgene', 12), ('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
                             ('https://1145.am/db/2364624/Parexel_International_Corporation', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4), 
                             ('https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 3), ('https://1145.am/db/3473030/Sylvant', 3)]
@@ -291,7 +291,7 @@ class TestUtilsWithDumpData(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        org_data = orgs_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
         expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), ('https://1145.am/db/2946625/Cuadrilla_Resources', 5), 
                     ('https://1145.am/db/1787315/Scape', 4), ('https://1145.am/db/3029681/Halebury', 4), 
                     ('https://1145.am/db/3452608/Avon_Products_Inc', 4), ('https://1145.am/db/3465815/Alliance_Automotive_Group', 4), 
@@ -1055,10 +1055,23 @@ class TestUtilsWithDumpData(TestCase):
     def test_self_or_states_for_country(self):
         # Needs Dump Data for the relevant CN provinces to be defined
         assert geo_codes_for_region("GB") == {'GB'}
+
+    def test_geo_codes_for_region_stops_when_it_gets_to_country(self):
+        '''
+        purpose of geo_codes_for_region is to convert a location to something to use in a query.
+        If we've got CN as our country then it's not useful to replace that with several CN-XX because
+        we'll want to look at all of CN, not just items tagged to the specific provinces.
+        '''
         cn = geo_codes_for_region("CN")
-        assert len(cn) > 1
-        assert all([re.match(r"^CN-\d\d",x) for x in cn]), f"Got {cn} but expected of the form CN-01, CN-02 etc"
-    
+        assert cn == {'CN'} # No need to go lower
+        children = GEO_PARENT_CHILDREN['CN']['children']
+        assert len(children) > 0
+        assert all([re.match(r"^CN-\d\d",x) for x in children])
+
+    def test_geo_codes_for_region_stops_when_it_gets_to_us(self):
+        assert geo_codes_for_region("US") == {'US'} # Not going any deeper, even though has children
+        children = GEO_PARENT_CHILDREN['US']['children']
+        assert children == {'South', 'Midwest', 'Northeast', 'West'}
 
 class TestRegionHierarchy(TestCase):
 
@@ -1174,20 +1187,21 @@ class TestRegionHierarchy(TestCase):
         assert widths == {'k1':7, 'k1#k12':2, 'k1#k11':5, 'k1#k11#k111': 3, 'k1#k11#k112':2}
 
     def test_parent_children_for_us_state(self):
-        assert GEO_PARENT_CHILDREN['US-CA'] == {'parent': 'Pacific', 'me': 'US-CA', 'children': set()}
+        assert GEO_PARENT_CHILDREN['US-CA'] == {'parent': 'Pacific', 'id': 'US-CA', 'children': set()}
 
     def test_parent_children_for_european_country(self):
-        assert GEO_PARENT_CHILDREN['NL'] == {'parent': 'Western Europe', 'me': 'NL', 'children': set()}
+        assert GEO_PARENT_CHILDREN['NL'] == {'parent': 'Western Europe', 'id': 'NL', 'children': set()}
 
     def test_parent_children_for_us_region(self):
-        assert GEO_PARENT_CHILDREN['South'] == {'parent': 'US', 
-                                                'me': 'South',
-                                                'children': {'West South Central', 
-                                                             'East South Central', 'South Atlantic'}}
+        res = GEO_PARENT_CHILDREN['South']
+        assert res == {'parent': 'US', 
+                        'id': 'South',
+                        'children': {'West South Central', 
+                                        'East South Central', 'South Atlantic'}}, f"Got {res}"
         
     def test_parent_children_for_un_region(self):
         assert GEO_PARENT_CHILDREN["Latin America and the Caribbean"] == {'parent': 'Americas',
-                                                                          'me': 'Latin America and the Caribbean', 
+                                                                          'id': 'Latin America and the Caribbean', 
                                                                           'children': {'Central America', 
                                                                                        'South America', 'Caribbean'}}
 
@@ -1202,13 +1216,11 @@ class TestRegionHierarchy(TestCase):
         assert ma.issubset(ssa)
         assert ssa.issubset(af)
 
-    def test_midwest_are_inside_us(self):
+    def test_finds_midwest_states(self):
         mw = geo_codes_for_region("Midwest")
-        us = geo_codes_for_region("US")
         assert mw == set(['US-IA', 'US-IL', 'US-IN', 'US-KS', 'US-MI', 'US-MN', 'US-MO', 
                           'US-ND', 'US-NE', 'US-OH', 'US-SD', 'US-WI'])
-        assert len(us) > len(mw)
-        assert mw.issubset(us)   
+        
 
 
 class TestFamilyTree(TestCase):
@@ -1478,23 +1490,23 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
 
 
     def test_search_by_geo_counts(self):
-        res = orgs_by_industry_and_or_geo(None, 'US-OH')
+        res = org_uris_by_industry_and_or_geo(None, 'US-OH')
         expected = [('https://1145.am/db/100/foo_newone', 3), 
                        ('https://1145.am/db/102/bar_newone', 2), 
                        ('https://1145.am/db/103/bar_oldone', 2)]
         assert res == expected, f"Got {res}, expected {expected}"
 
     def test_search_by_industry_counts_same_as_name_only_false(self):
-        res = orgs_by_industry_and_or_geo(23, None, combine_same_as_name_only=False)
+        res = org_uris_by_industry_and_or_geo(23, None, combine_same_as_name_only=False)
         assert res == [('https://1145.am/db/100/foo_newone', 3), 
                        ('https://1145.am/db/101/foo_oldone', 2)]
 
     def test_search_by_industry_counts_same_as_name_only_true(self):
-        res = orgs_by_industry_and_or_geo(23, None, combine_same_as_name_only=True)
+        res = org_uris_by_industry_and_or_geo(23, None, combine_same_as_name_only=True)
         assert res == [('https://1145.am/db/100/foo_newone', 3)]
 
     def test_search_by_industry_geo_counts(self):
-        res = orgs_by_industry_and_or_geo(23, 'US-OH')
+        res = org_uris_by_industry_and_or_geo(23, 'US-OH')
         assert res == [('https://1145.am/db/100/foo_newone', 3)]
         
     def test_search_by_same_as_name_only(self):
@@ -1554,7 +1566,7 @@ class TestIgnoreLowRelativeWeightIndustryCluster(TestCase):
         res, _ = db.cypher_query(query)
         as_set = set( [tuple(x) for x in res])
         assert as_set == {('https://1145.am/db/2349/Johnson_Johnson', 2), ('https://1145.am/db/870/Capital_Rx', 3)} # J&J sum weight = 1277
-        caretech_uris = orgs_by_industry_and_or_geo(235, None)
+        caretech_uris = org_uris_by_industry_and_or_geo(235, None)
         assert set([x[0] for x in caretech_uris]) == {'https://1145.am/db/870/Capital_Rx'}               
         
     def test_org_does_not_include_low_weight_industries(self):
@@ -1636,7 +1648,7 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
         assert as_set == {('https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc', 10), ('https://1145.am/db/88496/Exelixis_Inc', 5), 
                             ('https://1145.am/db/88496/Exelixis_Inc', 34), ('https://1145.am/db/88496/Exelixis_Inc', 7), 
                             ('https://1145.am/db/90949/Moderna', 1) }
-        ca_uris = orgs_by_industry_and_or_geo(None, "US-CA")
+        ca_uris = org_uris_by_industry_and_or_geo(None, "US-CA")
         assert set([x[0] for x in ca_uris]) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
 
     def test_org_does_not_include_low_relative_weight_locs(self):

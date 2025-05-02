@@ -2,7 +2,7 @@ from rest_framework import serializers
 from topics.models import Organization, IndustryCluster
 from .models import TrackedItem
 import pycountry
-from topics.industry_geo import country_admin1_full_name, orgs_by_industry_and_or_geo
+from topics.industry_geo import country_admin1_full_name, org_uris_by_industry_and_or_geo
 from topics.util import elements_from_uri
 
 class RecentsByGeoSerializer(serializers.Serializer):
@@ -113,7 +113,7 @@ class OrgIndGeoSerializer(serializers.Serializer):
             region_name = 'Any'
 
         if industry_cluster is not None or instance.region is not None:
-            orgs = orgs_by_industry_and_or_geo(industry_cluster,instance.region)
+            orgs = org_uris_by_industry_and_or_geo(industry_cluster,instance.region)
             org_count = len(orgs)
         else:
             org_count = None

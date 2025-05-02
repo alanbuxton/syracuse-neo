@@ -5,7 +5,7 @@ from .models import Article, IndustryCluster
 from .activity_helpers import activities_by_industry, activities_by_region, activities_by_source
 from .industry_geo import COUNTRY_CODE_TO_NAME
 from django.core.cache import cache
-from topics.industry_geo.orgs_by_industry_geo import orgs_by_industry_cluster_and_geo
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_cluster_and_geo
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def industry_orgs_activities_stats(search_str, max_date=None, include_search_by_
     for ind in ind_clusters:
         orgs_and_activities_by_industry[ind.topicId] = {}
         orgs_and_activities_by_industry[ind.topicId]['industry'] = ind
-        org_stats = orgs_by_industry_cluster_and_geo(ind.uri,ind.topicId,None)
+        org_stats = org_uris_by_industry_cluster_and_geo(ind.uri,ind.topicId,None)
         if counts_only is True:
             org_stats = len(org_stats)
         orgs_and_activities_by_industry[ind.topicId]['orgs'] = org_stats
