@@ -8,7 +8,7 @@ from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
                                GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION,
                               )
 from collections import Counter
-from neomodel.cardinality import OneOrMore, One
+from neomodel.cardinality import OneOrMore, One, ZeroOrOne
 from typing import List
 import cleanco
 from topics.util import cache_friendly,geo_to_country_admin1
@@ -51,6 +51,10 @@ class Resource(StructuredNode):
     internalId = IntegerProperty() # Unique ID for this entity, in case people need a unique Integer rather than URI (string)
     sameAsHigh = Relationship('Resource','sameAsHigh', model=WeightedRel)
     internalMergedSameAsHighToUri = StringProperty()
+
+    @property
+    def pk(self):
+        return self.internalId
 
     @property
     def connection_count(self):
@@ -470,10 +474,10 @@ class Article(Resource):
 class IndustryCluster(Resource):
     representation = ArrayProperty(StringProperty())
     representativeDoc = ArrayProperty(StringProperty())
-    childRight = RelationshipTo("IndustryCluster","childRight")
-    childLeft = RelationshipTo("IndustryCluster","childLeft")
-    parentsLeft = RelationshipFrom("IndustryCluster","childLeft")
-    parentsRight = RelationshipFrom("IndustryCluster","childRight")
+    childRight = RelationshipTo("IndustryCluster","childRight", cardinality=ZeroOrOne)
+    childLeft = RelationshipTo("IndustryCluster","childLeft", cardinality=ZeroOrOne)
+    parentLeft = RelationshipFrom("IndustryCluster","childLeft", cardinality=ZeroOrOne)
+    parentRight = RelationshipFrom("IndustryCluster","childRight", cardinality=ZeroOrOne) 
     topicId = IntegerProperty()
     uniqueName = StringProperty()
     orgsPrimary = RelationshipFrom("Organization","industryClusterPrimary", model=WeightedRel)
@@ -481,6 +485,10 @@ class IndustryCluster(Resource):
     peoplePrimary = RelationshipFrom("Person","industryClusterPrimary", model=WeightedRel)
     peopleSecondary = RelationshipFrom("Person","industryClusterSecondary", model=WeightedRel)
 
+    @property
+    def pk(self):
+        return self.topicId
+    
     @staticmethod
     def get_by_industry_id(industry_id):
         if industry_id is None:

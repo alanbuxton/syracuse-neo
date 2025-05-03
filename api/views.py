@@ -2,11 +2,13 @@ from rest_framework.response import Response
 from topics.models import IndustryCluster
 import api.serializers as serializers
 import logging 
+from topics.util import min_and_max_date
 from rest_framework import status
+from topics.activity_helpers import get_activities_by_org_uris_and_date_range
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from topics.industry_geo import GEO_PARENT_CHILDREN
+from topics.industry_geo import GEO_PARENT_CHILDREN, geo_codes_for_region, org_uris_by_industry_and_or_geo
 
 logger = logging.getLogger(__name__)
 
@@ -15,25 +17,24 @@ class NeomodelViewSet(GenericViewSet):
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     node_class = None
-    serializer_class = None
+    serializer_class = serializers.HyperlinkedNeomodelSerializer
 
     def get_queryset(self):
         return self.node_class.nodes.all()
 
     def get_object(self):
-        return self.node_class.nodes.get(internalId=self.kwargs["pk"])
+        return self.node_class.nodes.get(uri=self.kwargs["pk"])
 
     def get_serializer_context(self):
         node_class_name = self.node_class.__name__.lower()
         return {
             "request": self.request,
             "view_name": f"api-{node_class_name}-detail",
-            "attribs_to_ignore": self.attribs_to_ignore,
         }
 
     def retrieve(self, request, pk=None):
         instance = self.get_object()
-        serializer = serializers.HyperlinkedNeomodelSerializer(
+        serializer = self.serializer_class(
             instance,
             context=self.get_serializer_context()
         )
@@ -43,27 +44,27 @@ class NeomodelViewSet(GenericViewSet):
         nodes = self.get_queryset()
         page = self.paginate_queryset(nodes)
         if page is not None:
-            serializer = serializers.HyperlinkedNeomodelSerializer(
+            serializer = self.serializer_class(
                 page,
                 context=self.get_serializer_context(),
                 many=True,
             )
             return self.get_paginated_response(serializer.data)
         
-        serializer = serializers.HyperlinkedNeomodelSerializer(
+        serializer = self.serializer_class(
                 nodes,
                 context=self.get_serializer_context(),
                 many=True,
             )
         return Response(serializer.data)
+    
         
 class IndustryClusterViewSet(NeomodelViewSet):
     node_class = IndustryCluster  
-
-    attribs_to_ignore = ["foundName","name","internalDocId",
-                         "internalMergedSameAsToHighUri","documentSource","sameAsHigh",
-                         "orgsPrimary","orgsSecondary","peoplePrimary","peopleSecondary"]
-
+    serializer_class = serializers.IndustryClusterSerializer
+    
+    def get_object(self):
+        return self.node_class.nodes.get(topicId=self.kwargs["pk"])
 
 class GeosViewSet(GenericViewSet):
     permission_classes = [IsAuthenticated]
@@ -87,3 +88,53 @@ class GeosViewSet(GenericViewSet):
         
         serializer = self.serializer_class(item, context={'request': request})
         return Response(serializer.data)
+
+
+class ActivitiesViewSet(NeomodelViewSet):
+
+    def get_queryset(self):
+        industry_ids = self.request.query_params.getlist('industry_id',[None])
+        locations = self.request.query_params.getlist('location_id',[])
+        min_date, max_date = min_and_max_date(self.request.GET)
+        geo_codes = set()
+        for loc in locations:
+            geo_codes.update(geo_codes_for_region(loc))
+        if len(geo_codes) == 0:
+            geo_codes = [None]
+        activities = []
+        for industry_id_str in industry_ids:
+            if industry_id_str is not None:
+                industry_id = int(industry_id_str)
+            else:
+                industry_id = industry_id_str
+            for geo_code in geo_codes:
+                uri_list = org_uris_by_industry_and_or_geo(industry_id, geo_code, return_orgs_only=True)
+                acts = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None)
+                activities.extend(acts)
+        acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
+        return acts
+    
+    def get_serializer_context(self):
+         return {
+            "request": self.request,
+            "view_name": f"api-activities-detail",
+        }
+
+    def list(self, request):
+        activities = self.get_queryset()
+        page = self.paginate_queryset(activities)
+        if page is not None:
+            serializer = serializers.ActivitySerializer(
+                page,
+                context=self.get_serializer_context(),
+                many=True,
+            )
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = serializers.ActivitySerializer(
+                activities,
+                context=self.get_serializer_context(),
+                many=True,
+            )
+        return Response(serializer.data)
+
