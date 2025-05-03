@@ -93,14 +93,22 @@ class GeosViewSet(GenericViewSet):
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
-        industry_ids = self.request.query_params.getlist('industry_id',[None])
         locations = self.request.query_params.getlist('location_id',[])
+        industry_search_str = self.request.query_params.getlist('industry_name',[])
+        if len(industry_search_str) > 0:
+            industry_ids = set()
+            for search_str in industry_search_str:
+                inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str)]
+                industry_ids.update(inds)
+        else:
+            industry_ids = self.request.query_params.getlist('industry_id',[None])
         min_date, max_date = min_and_max_date(self.request.GET)
         geo_codes = set()
         for loc in locations:
             geo_codes.update(geo_codes_for_region(loc))
         if len(geo_codes) == 0:
             geo_codes = [None]
+        logger.info(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
         activities = []
         for industry_id_str in industry_ids:
             if industry_id_str is not None:

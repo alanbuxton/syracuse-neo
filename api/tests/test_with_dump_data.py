@@ -1313,7 +1313,7 @@ class EndToEndTests(TestCase):
         tracked_items = TrackedItem.trackable_by_user(user)
         assert len(tracked_items) == 1 # One of the items is not trackable
 
-    def api_finds_by_multiple_country_and_industry(self):
+    def test_api_finds_by_multiple_country_and_industry(self):
         client = self.client
         path = "/api/v1/activities/?industry_id=12&location_id=CA&location_id=IL&max_date=2019-01-10"
         resp = client.get(path)
@@ -1322,18 +1322,30 @@ class EndToEndTests(TestCase):
         resp = client.get(path)
         assert resp.status_code == 200
         j = json.loads(resp.content)
-        assert j['count'] == 5
+        assert j['count'] == 5, f"Found {j['count']}"
         assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
                             'https://1145.am/db/3463554/Ams-Acquisition', 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment', 
                             'https://1145.am/db/3457416/Isracann_Biosciences_Inc-Investment', 'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
 
-    def api_finds_by_single_country_and_industry(self):
+    def test_api_finds_by_single_country_and_industry(self):
         client = self.client
         path = "/api/v1/activities/?industry_id=12&location_id=CA&max_date=2019-01-10"
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
-        assert j['count'] == 3
+        assert j['count'] == 3, f"Found {j['count']}"
         assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
                                                              'https://1145.am/db/3463554/Ams-Acquisition', 
                                                              'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
+
+    def test_api_finds_by_industry_name(self):
+        client = self.client
+        path = "/api/v1/activities/?industry_name=legal&industry_name=insurance&location_id=US&max_date=2024-06-02"
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 4
+        assert [x['activity_uri'] for x in j['results']] == ["https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger",
+                      "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
+                      "https://1145.am/db/3472922/Hub_International_Limited-Sheridan_Road_Financial_Llc-Acquisition-Assets",
+                      "https://1145.am/db/3476441/Dcamera_Group-Acquisition"]
