@@ -1349,3 +1349,23 @@ class EndToEndTests(TestCase):
                       "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
                       "https://1145.am/db/3472922/Hub_International_Limited-Sheridan_Road_Financial_Llc-Acquisition-Assets",
                       "https://1145.am/db/3476441/Dcamera_Group-Acquisition"]
+        
+    def test_api_finds_by_org_name(self):
+        path = "/api/v1/activities/?org_name=Postmedia&max_date=2024-06-02"
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 1, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris[0] == "https://1145.am/db/4290245/Winnipeg_Sun-Acquisition-Division", f"Got {act_uris}"
+
+    def test_api_finds_by_org_uri(self):
+        path = "/api/v1/activities/?org_uri=https://1145.am/db/4290459/Banco_De_Sabadell&max_date=2024-06-02"
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 1, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris[0] == "https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition", f"Got {act_uris}"

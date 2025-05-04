@@ -9,6 +9,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from topics.industry_geo import GEO_PARENT_CHILDREN, geo_codes_for_region, org_uris_by_industry_and_or_geo
+from topics.organization_search_helpers import search_organizations_by_name 
 
 logger = logging.getLogger(__name__)
 
@@ -93,32 +94,42 @@ class GeosViewSet(GenericViewSet):
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
-        locations = self.request.query_params.getlist('location_id',[])
-        industry_search_str = self.request.query_params.getlist('industry_name',[])
-        if len(industry_search_str) > 0:
-            industry_ids = set()
-            for search_str in industry_search_str:
-                inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str)]
-                industry_ids.update(inds)
-        else:
-            industry_ids = self.request.query_params.getlist('industry_id',[None])
         min_date, max_date = min_and_max_date(self.request.GET)
-        geo_codes = set()
-        for loc in locations:
-            geo_codes.update(geo_codes_for_region(loc))
-        if len(geo_codes) == 0:
-            geo_codes = [None]
-        logger.info(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
-        activities = []
-        for industry_id_str in industry_ids:
-            if industry_id_str is not None:
-                industry_id = int(industry_id_str)
-            else:
-                industry_id = industry_id_str
-            for geo_code in geo_codes:
-                uri_list = org_uris_by_industry_and_or_geo(industry_id, geo_code, return_orgs_only=True)
-                acts = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None)
-                activities.extend(acts)
+        org_uri = self.request.query_params.get("org_uri",None)
+        org_name = self.request.query_params.get("org_name",None)
+        if org_uri is not None:
+            logger.info(f"Uri: {org_uri}")
+            activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
+        elif org_name is not None:
+            orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, limit=20)
+            uris = [x.uri for x,_ in orgs_and_counts]
+            logger.info(f"Uris: {uris}")
+            activities = get_activities_by_org_uris_and_date_range(uris,min_date,max_date,combine_same_as_name_only=True,limit=None)
+        else:
+            locations = self.request.query_params.getlist('location_id',[])
+            industry_search_str = self.request.query_params.getlist('industry_name',[])
+            industry_ids = self.request.query_params.getlist('industry_id',[None])
+            if len(industry_search_str) > 0:
+                industry_ids = set()
+                for search_str in industry_search_str:
+                    inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str)]
+                    industry_ids.update(inds)
+            geo_codes = set()
+            for loc in locations:
+                geo_codes.update(geo_codes_for_region(loc))
+            if len(geo_codes) == 0:
+                geo_codes = [None]
+            logger.info(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
+            activities = []
+            for industry_id_str in industry_ids:
+                if industry_id_str is not None:
+                    industry_id = int(industry_id_str)
+                else:
+                    industry_id = industry_id_str
+                for geo_code in geo_codes:
+                    uri_list = org_uris_by_industry_and_or_geo(industry_id, geo_code, return_orgs_only=True)
+                    acts = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None)
+                    activities.extend(acts)
         acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
         return acts
     
@@ -145,4 +156,3 @@ class ActivitiesViewSet(NeomodelViewSet):
                 many=True,
             )
         return Response(serializer.data)
-
