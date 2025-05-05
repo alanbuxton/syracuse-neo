@@ -37,6 +37,7 @@ def get_activities_by_org_and_date_range(organization,min_date,max_date,include_
     return get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only,limit)
 
 def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
+    logger.debug(f"get_activities_by_org_uris_and_date_range: org uris {len(uri_list)} {min_date} {max_date}, combine_same_as_name_only {combine_same_as_name_only} limit {limit}")
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:
         orgs = Organization.nodes.filter(uri__in=uri_list)
@@ -69,10 +70,13 @@ def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_c
 
 def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
     logger.info("activities_by_org_uris")
+    org_uris = sorted(org_uris)
     cache_key = cache_friendly(f"activities_{org_uris}_{min_date}_{max_date}_{limit}")
     res = cache.get(cache_key)
     if res is not None:
+        logger.debug(f"{cache_key} cache hit")
         return res
+    logger.debug(f"{cache_key} cache miss")
     where_etc = f"""
         WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')   

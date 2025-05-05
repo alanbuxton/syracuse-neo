@@ -4,6 +4,7 @@ from topics.industry_geo.geoname_mappings import prepare_country_mapping
 from topics.industry_geo import update_organization_data
 from django.core.cache import cache
 import redis
+from topics.util import end_of_day
 
 import logging
 logger = logging.getLogger(__name__)
@@ -11,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 def refresh_geo_data(max_date = date.today()):
     t1 = datetime.now()
+    max_date = end_of_day(max_date)
+    logger.info(f"Resetting cache as at {max_date}")
     nuke_cache()
     res0 = prepare_country_mapping()
     update_organization_data()

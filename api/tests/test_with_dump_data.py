@@ -26,7 +26,7 @@ from topics.serializers import (FamilyTreeSerializer,
     create_min_date_pretty_print_data, orgs_by_connection_count,
 )
 from topics.industry_geo.orgs_by_industry_geo import combined_industry_geo_results
-from topics.cache_helpers import refresh_geo_data, nuke_cache
+from topics.cache_helpers import refresh_geo_data
 from topics.industry_geo import org_uris_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
@@ -304,8 +304,9 @@ class EndToEndTests(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
         org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
-        assert org_data == [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
+        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
                            ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
+        assert org_data == expected, f"Got {org_data} expected {expected}"
 
     def test_search_by_industry_only(self):
         selected_geo_name = ""
@@ -1344,7 +1345,7 @@ class EndToEndTests(TestCase):
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
-        assert j['count'] == 4
+        assert j['count'] == 4, f"Got {j['count']}"
         assert [x['activity_uri'] for x in j['results']] == ["https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger",
                       "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
                       "https://1145.am/db/3472922/Hub_International_Limited-Sheridan_Road_Financial_Llc-Acquisition-Assets",

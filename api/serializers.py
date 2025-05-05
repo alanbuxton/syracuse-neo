@@ -80,8 +80,13 @@ class GeoDictSerializer(serializers.Serializer):
 
 class GeoNamesLocationSerializer(serializers.Serializer):
     uri = serializers.URLField()
-    geoNamesURL = serializers.IntegerField
-    name = serializers.ListField()
+    geoNamesURL = serializers.URLField()
+    name = serializers.SerializerMethodField()
+
+    def get_name(self, obj):
+        name = obj.name
+        name = name[0] if isinstance(name, list) and len(name) > 0 else ''
+        return name
 
 
 class ActivityActorSerializer(serializers.Serializer):
@@ -92,10 +97,13 @@ class ActivityActorSerializer(serializers.Serializer):
 
     def get_industries(self, obj):
         request = self.context.get('request')
-        return [
-            reverse('api-industrycluster-detail', kwargs={'pk': rid.topicId}, request=request)
-            for rid in obj.industryClusterPrimary
-        ]
+        try:
+            return [
+                reverse('api-industrycluster-detail', kwargs={'pk': rid.topicId}, request=request)
+                for rid in obj.industryClusterPrimary
+            ]
+        except AttributeError: # Might not have industryClusterPrimary
+            return []
 
 class ActivitySerializer(serializers.Serializer):
     activity_class = serializers.CharField()
@@ -105,7 +113,6 @@ class ActivitySerializer(serializers.Serializer):
     document_extract = serializers.CharField()
     document_url = serializers.URLField()
     activity_uri = serializers.URLField()
-    activity_status_as_string = serializers.CharField()
     activity_locations = GeoNamesLocationSerializer(many=True)
     actors = serializers.DictField(
         child = ActivityActorSerializer(many=True)

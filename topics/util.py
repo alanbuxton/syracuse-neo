@@ -2,7 +2,8 @@ import re
 import string
 from urllib.parse import urlparse
 import hashlib
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, time, date
+from django.core.cache import cache
 
 def cacheable_hash(input_string):
     hash_object = hashlib.sha256()
@@ -50,10 +51,20 @@ def elements_from_uri(uri):
 def min_and_max_date(get_params):
     min_date = get_params.get("min_date")
     if isinstance(min_date, str):
-        min_date = datetime.fromisoformat(min_date)
-    max_date = get_params.get("max_date",datetime.now(tz=timezone.utc))
+        min_date = date.fromisoformat(min_date)
+    max_date = get_params.get("max_date")
+    if max_date is None:
+        max_date = cache.get("activity_stats_last_updated")
     if isinstance(max_date, str):
-        max_date = datetime.fromisoformat(max_date)
+        max_date = date.fromisoformat(max_date)
+        max_date = end_of_day(max_date)
     if max_date is not None and min_date is None:
         min_date = max_date - timedelta(days=7)
+    min_date = start_of_day(min_date)
     return min_date, max_date
+
+def end_of_day(d):
+    return datetime.combine(d, time.max)
+
+def start_of_day(d):
+    return datetime.combine(d, time.min)

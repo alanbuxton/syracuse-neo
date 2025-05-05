@@ -48,8 +48,9 @@ def get_by_internal_clean_name(clean_name: str) -> Dict:
     cache_key = cache_friendly(f"sano_{clean_name}") # sano = same_as_name_only
     res = cache.get(cache_key)
     if res is not None:
-        logger.info(f"cache hit with {cache_key}")
+        logger.debug(f"get_by_internal_clean_name: cache hit with {cache_key}")
         return res
+    logger.debug(f"get_by_internal_clean_name: cache miss with {cache_key}")
     equivalent_orgs_for_this_clean_name = defaultdict(int)
     search_results_1 = do_search_by_clean_name(clean_name, "organization_clean_name")
     search_results_2 = do_search_by_clean_name(clean_name, "organization_clean_short_name")
@@ -108,16 +109,16 @@ def remove_same_as_name_onlies(reference_org_list):
     to_keep = defaultdict(int)
     found_names = []
     for org, count in reference_org_list:
-        logger.info(f"Checking {org.uri} - {org.best_name}")
+        logger.debug(f"Checking {org.uri} - {org.best_name}")
         clean_names = org.internalCleanName or []
         clean_short_names = org.internalCleanShortName or []
         if any(x in found_names for x in org.name + 
                                 clean_names + clean_short_names):
-            logger.info(f"Already found, skipping")
+            logger.debug(f"Already found, skipping")
             continue
         found_names.extend(org.name)
         found_names.extend(clean_names)
         found_names.extend(clean_short_names)
         to_keep[org] += count
-    logger.info(f"Got {len(to_keep)} items")
+    logger.debug(f"Got {len(to_keep)} items")
     return list(to_keep.items())
