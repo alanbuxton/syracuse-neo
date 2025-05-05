@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from topics.models import IndustryCluster
+from topics.models import IndustryCluster, GeoNamesLocation
 import api.serializers as serializers
 import logging 
 from topics.util import min_and_max_date
@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from topics.industry_geo import GEO_PARENT_CHILDREN, geo_codes_for_region, org_uris_by_industry_and_or_geo
 from topics.organization_search_helpers import search_organizations_by_name 
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -67,10 +68,10 @@ class IndustryClusterViewSet(NeomodelViewSet):
     def get_object(self):
         return self.node_class.nodes.get(topicId=self.kwargs["pk"])
 
-class GeosViewSet(GenericViewSet):
+class RegionsViewSet(GenericViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
-    serializer_class = serializers.GeoDictSerializer
+    serializer_class = serializers.RegionsDictSerializer
 
     def get_queryset(self):
         return GEO_PARENT_CHILDREN.values()
@@ -90,6 +91,12 @@ class GeosViewSet(GenericViewSet):
         serializer = self.serializer_class(item, context={'request': request})
         return Response(serializer.data)
 
+class GeoNamesViewSet(NeomodelViewSet):
+    node_class = GeoNamesLocation
+    serializer_class = serializers.GeoNamesSerializer
+
+    def get_object(self):
+        return self.node_class.nodes.get(geoNamesId=int(self.kwargs["pk"]))
 
 class ActivitiesViewSet(NeomodelViewSet):
 
@@ -97,6 +104,7 @@ class ActivitiesViewSet(NeomodelViewSet):
         min_date, max_date = min_and_max_date(self.request.GET)
         org_uri = self.request.query_params.get("org_uri",None)
         org_name = self.request.query_params.get("org_name",None)
+        types_to_keep = self.request.query_params.getlist("type",[])
         if org_uri is not None:
             logger.info(f"Uri: {org_uri}")
             activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
@@ -112,7 +120,7 @@ class ActivitiesViewSet(NeomodelViewSet):
             if len(industry_search_str) > 0:
                 industry_ids = set()
                 for search_str in industry_search_str:
-                    inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str)]
+                    inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str,limit=3)]
                     industry_ids.update(inds)
             geo_codes = set()
             for loc in locations:
@@ -131,12 +139,14 @@ class ActivitiesViewSet(NeomodelViewSet):
                     acts = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None)
                     activities.extend(acts)
         acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
+        if len(types_to_keep) > 0:
+            acts = filter_activity_types(acts, types_to_keep)
         return acts
     
     def get_serializer_context(self):
          return {
             "request": self.request,
-            "view_name": f"api-activities-detail",
+            "view_name": f"api-activity-detail",
         }
 
     def list(self, request):
@@ -156,3 +166,15 @@ class ActivitiesViewSet(NeomodelViewSet):
                 many=True,
             )
         return Response(serializer.data)
+
+
+def filter_activity_types(activities, activity_types_to_keep):
+    if not isinstance(activity_types_to_keep, list) and len(activity_types_to_keep) == 0:
+        return activities
+    activities_to_keep = []
+    for act in activities:
+        if any( [ re.match(
+                        x.lower(),act["activity_class"].lower()) 
+                        for x in activity_types_to_keep ] ):
+                activities_to_keep.append(act)
+    return activities_to_keep

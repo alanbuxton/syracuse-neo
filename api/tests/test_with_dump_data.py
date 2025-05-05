@@ -107,7 +107,7 @@ class EndToEndTests(TestCase):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
         res = Resource.nodes.get_or_none(uri=uri)
         assert res.uri == uri
-        assert res.__class_name_is_label__ == False 
+        assert res.__class_name_is_label__ is False 
         assert res.whereHighClean == ['South Africa']
 
     def test_data_list_choice_field_include_great_britain_option(self):
@@ -1341,7 +1341,7 @@ class EndToEndTests(TestCase):
 
     def test_api_finds_by_industry_name(self):
         client = self.client
-        path = "/api/v1/activities/?industry_name=legal&industry_name=insurance&location_id=US&max_date=2024-06-02"
+        path = "/api/v1/activities/?industry_name=legal&industry_name=insurance&industry_name=risk&location_id=US&max_date=2024-06-02"
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
@@ -1370,3 +1370,28 @@ class EndToEndTests(TestCase):
         assert j['count'] == 1, f"Found {j['count']}"
         act_uris = [x['activity_uri'] for x in j['results']]
         assert act_uris[0] == "https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition", f"Got {act_uris}"
+
+    def test_api_filters_by_activity_type(self):
+        path = "/api/v1/activities/?industry_name=social network&industry_name=fracking&industry_name=homeware&max_date=2014-02-05"
+        client = self.client 
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 3, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
+                               "https://1145.am/db/2946622/Turns_10_Years_Old",
+                               "https://1145.am/db/2946632/Annual_Accounts"]
+        path2 = path + "&type=Marketing&type=Operations"
+        resp = client.get(path2)
+        j = json.loads(resp.content)
+        assert j['count'] == 2, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
+                            "https://1145.am/db/2946622/Turns_10_Years_Old"]
+        path3 = path + "&type=Financial"
+        resp = client.get(path3)
+        j = json.loads(resp.content)
+        assert j['count'] == 1, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946632/Annual_Accounts"]

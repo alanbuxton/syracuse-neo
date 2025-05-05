@@ -737,6 +737,10 @@ class GeoNamesLocation(Resource):
     whereHighGeoNamesLocation = RelationshipFrom('Resource','whereHighGeoNamesLocation',model=WeightedRel)
 
     @property
+    def pk(self):
+        return self.geoNamesId
+    
+    @property
     def geoNamesURL(self):
         return uri_from_related(self.geoNames)
 

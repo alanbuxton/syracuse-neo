@@ -68,3 +68,8 @@ def end_of_day(d):
 
 def start_of_day(d):
     return datetime.combine(d, time.min)
+
+def camel_case_to_snake_case(text):
+    text = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', text))
+    text = re.sub(r'\s+','_', text)
+    return text.lower()

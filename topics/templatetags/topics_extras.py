@@ -3,6 +3,7 @@ from django.utils.html import escape, mark_safe
 from django.urls import reverse
 import re
 from urllib.parse import urlencode
+from topics.util import camel_case_to_snake_case
 
 register = template.Library()
 
@@ -40,8 +41,8 @@ def prettify_snake_case(text):
 
 def prettify_camel_case(text):
     # https://stackoverflow.com/a/37697078/7414500
-    text = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', text))
-    return text.title()
+    text = camel_case_to_snake_case(text)
+    return prettify_snake_case(text)
     
 def dict_to_query_string(data):
     if data is None or data == []:
