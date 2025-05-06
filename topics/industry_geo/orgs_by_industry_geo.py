@@ -31,6 +31,7 @@ def org_uris_by_industry_cluster_and_geo(industry_cluster_uri, industry_cluster_
     if force_update_cache is False:
         res = cache.get(cache_key)
         if res is not None:
+            logger.debug(f"cache hit {cache_key}")
             return res
         if res is None and set_none_to_empty_arr is True: # If there is nothing cached and we know this mean it's empty then set to empty arr
             cache.set(cache_key, [])  

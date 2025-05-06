@@ -17,7 +17,7 @@ def update_organization_data():
 
 def org_uris_by_industry_and_or_geo(industry_or_id,geo_code,return_orgs_only=False,
                                 combine_same_as_name_only=True):
-    logger.info("org_uris_by_industry_and_or_geo")
+    logger.debug(f"org_uris_by_industry_and_or_geo Ind: {industry_or_id} Geo: {geo_code} Orgs only: {return_orgs_only} Combine sano: {combine_same_as_name_only}")
     if industry_or_id is None:
         ind_uri = None
         ind_topic_id = None

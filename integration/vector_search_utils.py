@@ -77,7 +77,7 @@ def create_industry_cluster_representative_doc_embeddings(driver, model):
             representative_docs = record.get("representative_doc")
             uri = record.get("uri")
             joined = "; ".join(sorted(representative_docs,key=len))
-            logger.info(f"Working on {result} - uri {uri} representative_doc {representative_docs} ({joined})")
+            logger.debug(f"Working on {result} - uri {uri} representative_doc {representative_docs} ({joined})")
             embedding = model.encode(joined)
             batch_for_update.append(
                 {'uri':uri, 'representative_doc_embedding': embedding}

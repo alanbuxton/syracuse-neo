@@ -3,6 +3,7 @@ from topics.models import *
 from typing import Dict
 import logging
 from collections import defaultdict
+from topics.util import clean_punct
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,7 @@ def get_same_as_name_onlies(org):
         return []
     
 def get_by_internal_clean_name(clean_name: str) -> Dict:
+    logger.debug(f"get_by_internal_clean_name {clean_name}")
     cache_key = cache_friendly(f"sano_{clean_name}") # sano = same_as_name_only
     res = cache.get(cache_key)
     if res is not None:
@@ -73,14 +75,14 @@ def do_search_by_clean_name(clean_name, index_name):
         attribute = 'internalCleanShortName'
     else:
         raise ValueError(f"Don't know how to handle index {index_name}")
-    query = f"""CALL db.index.fulltext.queryNodes($index_name, $repeated_clean_name, {{analyzer:"keyword"}}) YIELD node, score
+    query = f"""CALL db.index.fulltext.queryNodes($index_name, $clean_name_no_punct) YIELD node, score
             WHERE $clean_name IN node.{attribute}
             RETURN node"""   
     logger.debug(query)
-    repeated_clean_name = f"{clean_name} OR {clean_name}" # yes, weird huh.
+    clean_name_no_punct = clean_punct(clean_name)
     vals, _ = db.cypher_query(query,params={"clean_name":clean_name,
                                             "index_name":index_name,
-                                            "repeated_clean_name":repeated_clean_name}, resolve_objects=True)
+                                            "clean_name_no_punct":clean_name_no_punct}, resolve_objects=True)
     merged_node_uris = set()
     for row in vals:
         merged_node = Resource.self_or_ultimate_target_node(row[0])
@@ -106,6 +108,7 @@ def remove_same_as_name_onlies(reference_org_list):
     Each row is tuple of Org and number of relationships,
     Return is the same
     '''
+    logger.debug(f"remove_same_as_name_onlies {len(reference_org_list)}")
     to_keep = defaultdict(int)
     found_names = []
     for org, count in reference_org_list:

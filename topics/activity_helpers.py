@@ -40,12 +40,16 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine
     logger.debug(f"get_activities_by_org_uris_and_date_range: org uris {len(uri_list)} {min_date} {max_date}, combine_same_as_name_only {combine_same_as_name_only} limit {limit}")
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:
-        orgs = Organization.nodes.filter(uri__in=uri_list)
+        orgs = Resource.nodes.filter(uri__in=uri_list)
         for org in orgs:
             new_uris = [x.uri for x in get_same_as_name_onlies(org)]
             uris_to_check.update(new_uris)
+    logger.debug(f"same-as-name-only updated. going to kick off query")
     activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,limit)
-    return activity_articles_to_api_results(activity_article_uris)
+    logger.debug(f"query done")
+    res = activity_articles_to_api_results(activity_article_uris)
+    logger.debug(f"activity articles prepared")
+    return res
 
 
 def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_code, min_date, max_date,limit=None):
@@ -69,14 +73,14 @@ def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_c
 
 
 def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
-    logger.info("activities_by_org_uris")
+    logger.debug(f"activities_by_org_uris {len(org_uris)} org_uris, {min_date} - {max_date}")
     org_uris = sorted(org_uris)
     cache_key = cache_friendly(f"activities_{org_uris}_{min_date}_{max_date}_{limit}")
     res = cache.get(cache_key)
     if res is not None:
-        logger.debug(f"{cache_key} cache hit")
+        logger.debug(f"activities_by_org_uris {cache_key} cache hit")
         return res
-    logger.debug(f"{cache_key} cache miss")
+    logger.debug(f"activities_by_org_uris {cache_key} cache miss")
     where_etc = f"""
         WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
         AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')   

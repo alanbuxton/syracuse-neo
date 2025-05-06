@@ -10,8 +10,11 @@ def cacheable_hash(input_string):
     hash_object.update(input_string.encode('utf-8'))
     return hash_object.hexdigest()
 
+def clean_punct(text,replacement=' '):
+    return re.sub(rf"[{string.punctuation} ]",replacement,text)
+
 def cache_friendly(key):
-    no_punct = re.sub(rf"[{string.punctuation} ]","_",key)
+    no_punct = clean_punct(key,"_")
     cleaned = re.sub(r"_{2,}","_",no_punct)
     if len(cleaned) > 230:
         cleaned = cleaned[:180] + str(cacheable_hash(cleaned[180:]))

@@ -1,9 +1,11 @@
 import logging
 from neomodel import db
 from datetime import datetime, timezone, timedelta
-from .models import Article, IndustryCluster
-from .activity_helpers import activities_by_industry, activities_by_region, activities_by_source
-from .industry_geo import COUNTRY_CODE_TO_NAME
+from topics.models import Article, IndustryCluster
+from topics.activity_helpers import (activities_by_industry, activities_by_region, 
+    activities_by_source, get_activities_by_org_uris_and_date_range
+)
+from topics.industry_geo import COUNTRY_CODE_TO_NAME, org_uris_by_industry_and_or_geo
 from django.core.cache import cache
 from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_cluster_and_geo
 
@@ -16,6 +18,13 @@ def cached_activity_stats_last_updated_date():
 def date_minus(to_date, days):
     return to_date - timedelta(days=days)
 
+
+def warm_up_activities_by_org(min_date,max_date):
+    for industry in IndustryCluster.leaf_nodes_only():
+        for country in COUNTRY_CODE_TO_NAME.keys():
+            uri_list = org_uris_by_industry_and_or_geo(industry.topicId, country, return_orgs_only=True, combine_same_as_name_only=False)
+            if len(uri_list) > 10: # Just do the more popular ones
+                _ = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None) 
 
 def get_cached_stats():
     latest_date = cached_activity_stats_last_updated_date()
