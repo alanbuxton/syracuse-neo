@@ -61,7 +61,7 @@ class EndToEndTests(TestCase):
         r = RDFPostProcessor()
         r.run_all_in_order()
         refresh_geo_data(max_date=date(2024,6,2))
-        apply_latest_org_embeddings()
+        apply_latest_org_embeddings(force_recreate=True)
 
     def setUp(self):
         ts = time.time()

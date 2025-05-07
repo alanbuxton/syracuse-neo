@@ -209,7 +209,7 @@ def org_geo_industry_by_clusters(industry_clusters, counts_only, set_none_to_emp
     relevant_countries = []
     relevant_admin1s = defaultdict(list)
     for ind in industry_clusters:
-        logger.info(f"org_geo_industry_by_clusters: working on {ind.uri}")
+        logger.debug(f"org_geo_industry_by_clusters: working on {ind.uri}")
         ind_uri = ind.uri
         country_results[ind_uri] = {}
         for cc in COUNTRY_TO_GLOBAL_REGION.keys():

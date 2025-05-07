@@ -38,6 +38,12 @@ def get_activities_by_org_and_date_range(organization,min_date,max_date,include_
 
 def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
     logger.debug(f"get_activities_by_org_uris_and_date_range: org uris {len(uri_list)} {min_date} {max_date}, combine_same_as_name_only {combine_same_as_name_only} limit {limit}")
+    activity_article_uris = activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_as_name_only,limit)
+    res = activity_articles_to_api_results(activity_article_uris)
+    logger.debug(f"activity articles prepared")
+    return res
+
+def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:
         orgs = Resource.nodes.filter(uri__in=uri_list)
@@ -47,10 +53,7 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine
     logger.debug(f"same-as-name-only updated. going to kick off query")
     activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,limit)
     logger.debug(f"query done")
-    res = activity_articles_to_api_results(activity_article_uris)
-    logger.debug(f"activity articles prepared")
-    return res
-
+    return activity_article_uris
 
 def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_code, min_date, max_date,limit=None):
     country_code, admin1_code = geo_to_country_admin1(geo_code)

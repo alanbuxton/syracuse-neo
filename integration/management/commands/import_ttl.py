@@ -14,7 +14,7 @@ from neomodel import db
 from trackeditems.management.commands.send_recent_activities_email import do_send_recent_activities_email
 from syracuse.settings import RDF_SLEEP_TIME, RDF_DUMP_DIR, RDF_ARCHIVE_DIR
 from pathlib import Path
-from topics.cache_helpers import refresh_geo_data
+from topics.cache_helpers import refresh_geo_data, do_warm_up_activities_by_org
 from integration.rdf_post_processor import RDFPostProcessor
 from auth_extensions.anon_user_utils import create_anon_user
 
@@ -194,11 +194,13 @@ def do_import_ttl(**options):
     logger.info(f"Loaded {total_creations} creations and {total_deletions} deletions from {len(export_dirs)} directories")
     if do_post_processing is True:
         R.run_all_in_order()
-        refresh_geo_data()
+        max_date = refresh_geo_data(also_warm_up_activities=False)
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:
         logger.info("No email sending this time")
+    if do_post_processing is True:
+       do_warm_up_activities_by_org(max_date)
     logger.info("re-set cache")
     create_anon_user()
     cleanup(pidfile)

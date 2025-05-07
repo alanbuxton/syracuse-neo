@@ -56,17 +56,19 @@ def min_and_max_date(get_params):
     if isinstance(min_date, str):
         min_date = date.fromisoformat(min_date)
     max_date = get_params.get("max_date")
-    if max_date is None:
-        max_date = cache.get("activity_stats_last_updated")
     if isinstance(max_date, str):
         max_date = date.fromisoformat(max_date)
-        max_date = end_of_day(max_date)
+    max_date = end_of_day(max_date)
+    if max_date is None:
+        max_date = cache.get("activity_stats_last_updated")
     if max_date is not None and min_date is None:
         min_date = max_date - timedelta(days=7)
     min_date = start_of_day(min_date)
     return min_date, max_date
 
 def end_of_day(d):
+    if d is None:
+        return None
     return datetime.combine(d, time.max)
 
 def start_of_day(d):

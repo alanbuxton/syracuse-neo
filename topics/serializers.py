@@ -501,7 +501,7 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
 def orgs_by_connection_count(org_uris):
     org_data = []
     for uri in org_uris:
-        logger.info(uri)
+        logger.debug(uri)
         o = Organization.get_by_uri(uri)
         org_vals = {"uri":o.uri,"name":o.best_name,
                     "connection_count":o.connection_count}
