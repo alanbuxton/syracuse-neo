@@ -8,6 +8,7 @@ from syracuse.settings import (NEOMODEL_NEO4J_SCHEME,
     NEOMODEL_NEO4J_HOSTNAME,NEOMODEL_NEO4J_PORT,
     EMBEDDINGS_MODEL, CREATE_NEW_EMBEDDINGS)
 import logging
+import re
 logger = logging.getLogger(__name__)
 
 NEW_ORGANIZATION_INDUSTRY_QUERY = '''MATCH (n:Resource&Organization)
@@ -76,13 +77,13 @@ def create_industry_cluster_representative_doc_embeddings(driver, model):
         for record in result:
             representative_docs = record.get("representative_doc")
             uri = record.get("uri")
-            joined = "; ".join(sorted(representative_docs,key=len))
-            logger.debug(f"Working on {result} - uri {uri} representative_doc {representative_docs} ({joined})")
-            embedding = model.encode(joined)
+            representative_docs = [re.sub( re.compile(r"industry",re.IGNORECASE), "", x) for x in representative_docs]
+            for_embedding = " and ".join(sorted(representative_docs,key=len)[:2]).lower()
+            logger.debug(f"Working on uri {uri} representative_doc {representative_docs} ({for_embedding})")
+            embedding = model.encode(for_embedding)
             batch_for_update.append(
                 {'uri':uri, 'representative_doc_embedding': embedding}
             )
-            # Import when a batch of movies has embeddings ready; flush buffer
             if len(batch_for_update) == batch_size:
                 batch_n = import_batch(driver, batch_for_update, batch_n, 'representative_doc_embedding')
                 batch_for_update = []

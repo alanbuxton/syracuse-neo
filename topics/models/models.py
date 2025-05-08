@@ -649,6 +649,7 @@ class IndustryCluster(Resource):
         RETURN node
         ORDER BY score DESCENDING
         '''
+        name = name.lower()
         res = do_vector_search(name, query)
         flattened = [x[0] for x in res]
         return flattened[:limit]

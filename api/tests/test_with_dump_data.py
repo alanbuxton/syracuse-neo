@@ -60,14 +60,14 @@ class EndToEndTests(TestCase):
         delete_all_not_needed_resources()
         r = RDFPostProcessor()
         r.run_all_in_order()
-        refresh_geo_data(max_date=date(2024,6,2))
         apply_latest_org_embeddings(force_recreate=True)
+        refresh_geo_data(max_date=date(2024,6,2))
 
     def setUp(self):
         ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{ts}")
         self.anon, _ = create_anon_user()
-                # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
+        # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
         _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
         _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
         _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
@@ -852,57 +852,64 @@ class EndToEndTests(TestCase):
         assert orgs == ['https://1145.am/db/10282/Talla']
 
     def test_industry_geo_finder_prep_table(self):
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital", include_search_by_industry_text=True) 
-        assert headers == [OrderedDict([('Americas', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital management, healthcare-dedicated investment firm", include_search_by_industry_text=True) 
+        assert headers == [OrderedDict([('Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}), 
+                                        ('Americas', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
                                         ('Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('Northern America', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                            OrderedDict([('Sub-Saharan Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}), 
+                                         ('Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
                                          ('Western Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('US', {'colspan': 9, 'classes': 'col-US col-US-CA col-US-DC col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                            OrderedDict([('Eastern Africa', {'colspan': 1, 'classes': 'col-KE'}), 
+                                         ('Western Africa', {'colspan': 1, 'classes': 'col-NG'}), 
+                                         ('REPEATED Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
+                                         ('REPEATED Western Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
+                            OrderedDict([('KE', {'colspan': 1, 'classes': 'col-KE'}), ('NG', {'colspan': 1, 'classes': 'col-NG'}), 
+                                         ('US', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
                                          ('SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}), 
+                                         ('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
                                          ('Northeast', {'colspan': 3, 'classes': 'col-US-MA col-US-NY col-US-PA'}), 
-                                         ('South', {'colspan': 3, 'classes': 'col-US-DC col-US-FL col-US-TX'}), 
+                                         ('South', {'colspan': 2, 'classes': 'col-US-FL col-US-TX'}), 
                                          ('West', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
                                          ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), 
-                                         ('Mid Atlantic', {'colspan': 2, 'classes': 'col-US-NY col-US-PA'}), 
-                                         ('New England', {'colspan': 1, 'classes': 'col-US-MA'}), 
-                                         ('South Atlantic', {'colspan': 2, 'classes': 'col-US-DC col-US-FL'}), 
-                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), 
-                                         ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}), 
+                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Mid Atlantic', {'colspan': 2, 'classes': 'col-US-NY col-US-PA'}), 
+                                         ('New England', {'colspan': 1, 'classes': 'col-US-MA'}), ('South Atlantic', {'colspan': 1, 'classes': 'col-US-FL'}), 
+                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
                                          ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE header_final'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG header_final'}), 
+                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
                                          ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
                                          ('US-PA', {'colspan': 1, 'classes': 'col-US-PA header_final'}), 
                                          ('US-MA', {'colspan': 1, 'classes': 'col-US-MA header_final'}), 
-                                         ('US-DC', {'colspan': 1, 'classes': 'col-US-DC header_final'}), 
                                          ('US-FL', {'colspan': 1, 'classes': 'col-US-FL header_final'}), 
                                          ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
                                          ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), 
                                          ('US-WA', {'colspan': 1, 'classes': 'col-US-WA header_final'}), 
                                          ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA header_final'})])]
 
-        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare', 
-                                         'name': 'Hospital Management Service', 'industry_id': 17, 
-                                         'vals': [{'value': 11, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-NY'}, 
+        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487, 
+                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'}, 
+                                                  {'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'}, 
+                                                  {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
+                                                  {'value': 0, 'region_code': 'US-FL'}, {'value': 0, 'region_code': 'US-TX'}, 
+                                                  {'value': 1, 'region_code': 'US-CA'}, {'value': 0, 'region_code': 'US-WA'}, 
+                                                  {'value': 0, 'region_code': 'SA'}]}, 
+                                        {'uri': 'https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare', 'name': 'Hospital Management Service', 'industry_id': 17, 
+                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'}, 
+                                                  {'value': 11, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-NY'}, 
                                                   {'value': 2, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
-                                                  {'value': 0, 'region_code': 'US-DC'}, {'value': 1, 'region_code': 'US-FL'}, 
-                                                  {'value': 1, 'region_code': 'US-TX'}, {'value': 3, 'region_code': 'US-CA'}, 
-                                                  {'value': 1, 'region_code': 'US-WA'}, {'value': 1, 'region_code': 'SA'}]}, 
-                                         {'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 
-                                          'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487, 
-                                          'vals': [{'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'}, 
-                                                   {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
-                                                   {'value': 0, 'region_code': 'US-DC'}, {'value': 0, 'region_code': 'US-FL'}, 
-                                                   {'value': 0, 'region_code': 'US-TX'}, {'value': 1, 'region_code': 'US-CA'}, 
-                                                   {'value': 0, 'region_code': 'US-WA'}, {'value': 0, 'region_code': 'SA'}]}]
+                                                  {'value': 1, 'region_code': 'US-FL'}, {'value': 1, 'region_code': 'US-TX'}, 
+                                                  {'value': 3, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'}, 
+                                                  {'value': 1, 'region_code': 'SA'}]}]
         
-        assert text_row == {'uri': '', 'name': 'hospital', 
-                            'vals': [{'value': 15, 'region_code': 'US'}, {'value': 2, 'region_code': 'US-NY'}, 
-                                     {'value': 2, 'region_code': 'US-PA'}, {'value': 1, 'region_code': 'US-MA'}, 
-                                     {'value': 1, 'region_code': 'US-DC'}, {'value': 1, 'region_code': 'US-FL'}, 
-                                     {'value': 1, 'region_code': 'US-TX'}, {'value': 4, 'region_code': 'US-CA'}, 
-                                     {'value': 1, 'region_code': 'US-WA'}, {'value': 1, 'region_code': 'SA'}]}
+        assert text_row == {'uri': '', 'name': 'hospital management, healthcare-dedicated investment firm', 
+                            'vals': [{'value': 1, 'region_code': 'KE'}, {'value': 1, 'region_code': 'NG'}, 
+                                     {'value': 27, 'region_code': 'US'}, {'value': 5, 'region_code': 'US-NY'}, 
+                                     {'value': 3, 'region_code': 'US-PA'}, {'value': 2, 'region_code': 'US-MA'}, 
+                                     {'value': 1, 'region_code': 'US-FL'}, {'value': 5, 'region_code': 'US-TX'}, 
+                                     {'value': 7, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'}, 
+                                     {'value': 1, 'region_code': 'SA'}]}
 
     def test_remove_not_needed_admin1s_from_individual_cells(self):
         all_industry_ids = [109, 554, 280, 223, 55, 182, 473]
@@ -1071,7 +1078,7 @@ class EndToEndTests(TestCase):
         resp = client.get("/industry_orgs_activities?industry=building&max_date=2024-04-02")
         content = str(resp.content)
         assert "Architecture, Engineering And Construction" in content
-        assert "Retail Property And Place Making" in content
+        assert "Residential Homebuilder" in content
         assert '<a href="/industry_geo_finder_review?industry_id=686&industry=building&max_date=2024-04-02">1</a>' in content
         assert '<a href="/industry_activities?industry_id=696&min_date=2024-03-03&max_date=2024-04-02&industry=building&max_date=2024-04-02">1</a>' in content
 
@@ -1341,14 +1348,13 @@ class EndToEndTests(TestCase):
 
     def test_api_finds_by_industry_name(self):
         client = self.client
-        path = "/api/v1/activities/?industry_name=legal&industry_name=insurance&industry_name=risk&location_id=US&max_date=2024-06-02"
+        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&location_id=US&max_date=2024-06-02"
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
-        assert j['count'] == 4, f"Got {j['count']}"
+        assert j['count'] == 3, f"Got {j['count']}"
         assert [x['activity_uri'] for x in j['results']] == ["https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger",
                       "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
-                      "https://1145.am/db/3472922/Hub_International_Limited-Sheridan_Road_Financial_Llc-Acquisition-Assets",
                       "https://1145.am/db/3476441/Dcamera_Group-Acquisition"]
         
     def test_api_finds_by_org_name(self):
