@@ -407,14 +407,18 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
             (ind2: Resource:IndustryCluster {{uri:"https://1145.am/ind2", topicId: 24, representativeDoc:['computers','server hardware']}}),
             (loc1: Resource:GeoNamesLocation {{uri:"https://1145.am/loc1", geoNamesId: 4509884}}), // In US-Ohio
             (loc2: Resource:GeoNamesLocation {{uri:"https://1145.am/loc2", geoNamesId: 4791259}}), // In US-Virginia 
+            (loc3: Resource:GeoNamesLocation {{uri:"https://1145.am/loc3", geoNamesId: 4776222}}), // In US-Virginia 
+
+            (foo_newone)-[:industryClusterPrimary {{weight:2}}]->(ind1),
+            (foo_oldone)-[:industryClusterPrimary {{weight:2}}]->(ind1),
+            (foo_newone)-[:basedInHighGeoNamesLocation {{weight:2}}]->(loc1),
+            (bar_newone)-[:basedInHighGeoNamesLocation {{weight:2}}]->(loc1),
+            (bar_oldone)-[:basedInHighGeoNamesLocation {{weight:2}}]->(loc1),
+            (bar_newone)-[:basedInHighGeoNamesLocation {{weight:1}}]->(loc3),
             
-            (foo_newone)-[:industryClusterPrimary]->(ind1),
-            (foo_oldone)-[:industryClusterPrimary]->(ind1),
-            (foo_newone)-[:basedInHighGeoNamesLocation]->(loc1),
-            (bar_newone)-[:basedInHighGeoNamesLocation]->(loc1),
-            (bar_oldone)-[:basedInHighGeoNamesLocation]->(loc1),
             (loc1)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4509884",sourceOrganization:"source_org_foo"}}),
-            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}})
+            (loc2)-[:geoNamesURL]->(:Resource {{uri:"https://sws.geonames.org/4791259",sourceOrganization:"source_org_foo"}}),
+            (loc3)-[:geonamesURL]->(:Resource {{uri:"https://sws.geonames.org/4776222",sourceOrganization:"source_org_foo"}})
 
             SET same_as_one.internalCleanName = ['same_as_one']
             SET same_as_two.internalCleanName = ['same_as_one']
@@ -450,9 +454,13 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
     def test_search_by_geo_counts(self):
         res = org_uris_by_industry_and_or_geo(None, 'US-OH')
         expected = [('https://1145.am/db/100/foo_newone', 3), 
-                       ('https://1145.am/db/102/bar_newone', 2), 
+                       ('https://1145.am/db/102/bar_newone', 3), 
                        ('https://1145.am/db/103/bar_oldone', 2)]
         assert res == expected, f"Got {res}, expected {expected}"
+
+    def test_ignores_weight_1(self):
+        res = org_uris_by_industry_and_or_geo(None, 'US-VA')
+        assert res == [] # Only one org is linked to a US-VA location and that is with weight = 1
 
     def test_search_by_industry_counts_same_as_name_only_false(self):
         res = org_uris_by_industry_and_or_geo(23, None, combine_same_as_name_only=False)

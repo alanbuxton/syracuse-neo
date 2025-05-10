@@ -49,6 +49,7 @@ def warm_up_industries(industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_P
                             MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                             WITH o, SUM(rAll.weight) AS totalWeight, i, i_weight
                             WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
+                            AND i_weight > 1
                             RETURN i.topicId, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     industries, _ = db.cypher_query(query)
     logger.info(f"Caching {len(industries)} results")
@@ -67,6 +68,7 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                             MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                             WITH o, l, weight, SUM(rAll.weight) AS totalWeight
                             WHERE weight >= {geo_location_min_weight} * totalWeight
+                            AND weight > 1
                             RETURN l.countryCode, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     country_level, _ = db.cypher_query(country_query)
     
@@ -86,6 +88,7 @@ def warm_up_regions(countries_with_state_province=COUNTRIES_WITH_STATE_PROVINCE,
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                         WITH o, l, weight, SUM(rAll.weight) AS totalWeight
                         WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
+                        AND weight > 1
                         RETURN l.countryCode, l.admin1Code, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.info(f"Caching {len(admin1_level)} results")
@@ -104,10 +107,12 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                         WITH o, l, b_weight, SUM(rAll.weight) AS totalWeight, i, i_weight
                         WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                        AND b_weight > 1
                         WITH o, l, i, i_weight
                         MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                         WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
                         WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
+                        AND i_weight > 1
                         RETURN i.topicId, l.countryCode, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     country_level, _ = db.cypher_query(country_query)
     logger.info(f"Caching {len(country_level)} results")
@@ -126,10 +131,12 @@ def warm_up_all_industry_geos(countries_with_state_province=COUNTRIES_WITH_STATE
                         MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                         WITH o, l, b_weight, SUM(rAll.weight) AS totalWeight, i_weight, i
                         WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                        AND b_weight > 1
                         WITH o, l, i, i_weight
                         MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                         WITH o, l, SUM(rAll.weight) AS totalWeight, i, i_weight
                         WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
+                        AND i_weight > 1
                         RETURN i.topicId, l.countryCode, l.admin1Code, collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId]))"""
     admin1_level, _ = db.cypher_query(admin1_query)
     logger.debug(f"Caching {len(admin1_level)} results")
@@ -172,9 +179,11 @@ def do_org_geo_industry_cluster_query(industry_uri: str, country_code: str, admi
                 MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
                 WITH o, b_weight, SUM(rAll.weight) AS totalWeight, i_weight
                 WHERE b_weight >= {geo_location_min_weight} * totalWeight
+                AND b_weight > 1
                 MATCH (o)-[rAll:industryClusterPrimary]->(:Resource&IndustryCluster)
                 WITH o, SUM(rAll.weight) AS totalWeight, i_weight
                 WHERE i_weight >= {industry_cluster_min_weight} * totalWeight
+                AND i_weight > 1
                 RETURN DISTINCT o.uri, apoc.node.degree(o) as rel_count, o.internalDocId
                 ORDER BY rel_count DESC, o.internalDocId ASC, o.uri ASC
                 {limit_str}

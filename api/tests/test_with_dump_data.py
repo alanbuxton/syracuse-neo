@@ -58,6 +58,7 @@ class EndToEndTests(TestCase):
         assert DataImport.latest_import() == None # Empty DB
         do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
         delete_all_not_needed_resources()
+        set_weights()
         r = RDFPostProcessor()
         r.run_all_in_order()
         apply_latest_org_embeddings(force_recreate=True)
@@ -1401,3 +1402,12 @@ class EndToEndTests(TestCase):
         assert j['count'] == 1, f"Found {j['count']}"
         act_uris = [x['activity_uri'] for x in j['results']]
         assert act_uris == ["https://1145.am/db/2946632/Annual_Accounts"]
+
+
+def set_weights():
+    # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2
+    logger.info("Adding weighting to relationship")
+    query = "MATCH (n: Resource)-[rel]-(o:Resource) WHERE rel.weight IS NULL RETURN rel"
+    action = "SET rel.weight = 2"
+    apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{}})'
+    db.cypher_query(apoc_query)
