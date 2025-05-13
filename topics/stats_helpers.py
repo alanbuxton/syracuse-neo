@@ -2,31 +2,13 @@ import logging
 from neomodel import db
 from datetime import datetime, timezone, timedelta
 from topics.models import Article, IndustryCluster
-from topics.activity_helpers import (activities_by_industry, activities_by_region, 
-    activities_by_source, activities_by_org_uris_incl_same_as
-)
-from topics.industry_geo import COUNTRY_CODE_TO_NAME, org_uris_by_industry_and_or_geo
+from topics.activity_helpers import activities_by_source
+from topics.industry_geo import COUNTRY_CODE_TO_NAME, org_uris_by_industry_id_country_admin1
 from django.core.cache import cache
-from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_cluster_and_geo
+from topics.industry_geo.orgs_by_industry_geo import get_org_activity_counts, cached_activity_stats_last_updated_date
+from topics.util import date_minus, min_and_max_date
 
 logger = logging.getLogger(__name__)
-
-
-def cached_activity_stats_last_updated_date():
-    return cache.get("activity_stats_last_updated")
-
-def date_minus(to_date, days):
-    return to_date - timedelta(days=days)
-
-
-def warm_up_activities_by_org(min_date,max_date):
-    logger.info(f"warm_up_activities_by_org {min_date} - {max_date}")
-    for industry in IndustryCluster.leaf_nodes_only():
-        for country in COUNTRY_CODE_TO_NAME.keys():
-            uri_list = org_uris_by_industry_and_or_geo(industry.topicId, country, return_orgs_only=True, combine_same_as_name_only=False)
-            if len(uri_list) > 10: # Just do the more popular ones
-                _ = activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None) 
-    
 
 def get_cached_stats():
     latest_date = cached_activity_stats_last_updated_date()
@@ -35,38 +17,48 @@ def get_cached_stats():
     counts, recents_by_country_region, recents_by_source, recents_by_industry = get_stats(latest_date)
     return latest_date, counts, recents_by_country_region, recents_by_source, recents_by_industry
 
-def industry_orgs_activities_stats(search_str, max_date=None, include_search_by_industry_text=False, counts_only=True):
-    assert include_search_by_industry_text is False, f"include_search_by_industry_text is not supported"
-    logger.debug("industry_orgs_results started")
-    ind_clusters = IndustryCluster.by_representative_doc_words(search_str)
-    orgs_and_activities_by_industry = {}
-    if max_date is None:
-        max_date = cached_activity_stats_last_updated_date()
+def industry_orgs_activities_stats(search_str):
+    max_date = cached_activity_stats_last_updated_date()
     if max_date is None:
         return None
+    logger.debug("industry_orgs_results started")
+    ind_clusters = IndustryCluster.by_representative_doc_words(search_str)
+    orgs_and_activity_counts_by_industry = {}
     days_ago_90 = date_minus(max_date,90)
     days_ago_30 = date_minus(max_date,30)
     days_ago_7 = date_minus(max_date,7)
     for ind in ind_clusters:
-        orgs_and_activities_by_industry[ind.topicId] = {}
-        orgs_and_activities_by_industry[ind.topicId]['industry'] = ind
-        org_stats = org_uris_by_industry_cluster_and_geo(ind.uri,ind.topicId,None)
-        if counts_only is True:
-            org_stats = len(org_stats)
-        orgs_and_activities_by_industry[ind.topicId]['orgs'] = org_stats
-        cnt90 = activities_by_industry(ind,days_ago_90,max_date,counts_only=True)
-        cnt30 = activities_by_industry(ind,days_ago_30,max_date,counts_only=True) if cnt90 > 0 else 0
-        cnt7 = activities_by_industry(ind,days_ago_7,max_date,counts_only=True) if cnt30 > 0 else 0
-
-        orgs_and_activities_by_industry[ind.topicId]['activities_7'] = cnt7 
-        orgs_and_activities_by_industry[ind.topicId]['activities_30'] = cnt30
-        orgs_and_activities_by_industry[ind.topicId]['activities_90'] = cnt90
+        orgs_and_activity_counts_by_industry[ind.topicId] = {}
+        orgs_and_activity_counts_by_industry[ind.topicId]['industry'] = ind
+        org_counts = len(org_uris_by_industry_id_country_admin1(ind.topicId,None,None))
+        orgs_and_activity_counts_by_industry[ind.topicId]['orgs'] = org_counts
+        cnt90 = activity_counts_by_industry(ind,days_ago_90,max_date)
+        cnt30 = activity_counts_by_industry(ind,days_ago_30,max_date) if cnt90 > 0 else 0
+        cnt7 = activity_counts_by_industry(ind,days_ago_7,max_date) if cnt30 > 0 else 0
+        orgs_and_activity_counts_by_industry[ind.topicId]['activities_7'] = cnt7 
+        orgs_and_activity_counts_by_industry[ind.topicId]['activities_30'] = cnt30
+        orgs_and_activity_counts_by_industry[ind.topicId]['activities_90'] = cnt90
         
     dates =  {"max_date":max_date, "7": days_ago_7, "30": days_ago_30, "90": days_ago_90}
-    return orgs_and_activities_by_industry, dates
+    return orgs_and_activity_counts_by_industry, dates
 
+
+def activity_counts_by_industry(industry,min_date,max_date):
+    if isinstance(industry, IndustryCluster):
+        industry = industry.topicId
+    results = get_org_activity_counts(min_date,max_date,industry,None,None)
+    return results
+
+def activity_counts_by_region(country_code,min_date,max_date):
+    results = get_org_activity_counts(min_date,max_date,None,country_code,None)
+    return results
+
+def activity_counts_by_source(source_name,min_date,max_date):
+    results = activities_by_source(source_name, min_date, max_date)
+    return len(results)
 
 def get_stats(max_date):
+    _, max_date = min_and_max_date({"max_date":max_date})
     counts = []
     for x in ["Organization","Person","CorporateFinanceActivity","RoleActivity","LocationActivity","PartnershipActivity","ProductActivity",
               "Article","Role","AboutUs","AnalystRatingActivity","EquityActionsActivity","FinancialReportingActivity",
@@ -80,12 +72,12 @@ def get_stats(max_date):
     ts1 = datetime.now(tz=timezone.utc)
     recents_by_industry = []
     logger.info("Stats by industry")
-    for industry in sorted(IndustryCluster.leaf_nodes_only(),
+    for industry in sorted(IndustryCluster.used_leaf_nodes_only(),
                            key=lambda x: x.longest_representative_doc):
         logger.debug(f"Stats for {industry.uri}")
-        cnt90 = activities_by_industry(industry,date_minus(max_date,90),max_date,counts_only=True)
-        cnt30 = activities_by_industry(industry,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
-        cnt7 = activities_by_industry(industry,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+        cnt90 = activity_counts_by_industry(industry.topicId,date_minus(max_date,90),max_date)
+        cnt30 = activity_counts_by_industry(industry.topicId,date_minus(max_date,30),max_date) if cnt90 > 0 else 0
+        cnt7 = activity_counts_by_industry(industry.topicId,date_minus(max_date,7),max_date) if cnt30 > 0 else 0
         if cnt90 > 0:
             recents_by_industry.append( 
                 (industry.topicId, industry.longest_representative_doc,cnt7,cnt30,cnt90) )
@@ -94,18 +86,18 @@ def get_stats(max_date):
         logger.debug(f"Stats for {country_code}")
         if country_code.strip() == '':
             continue
-        cnt90 = activities_by_region(country_code,date_minus(max_date,90),max_date,counts_only=True)
-        cnt30 = activities_by_region(country_code,date_minus(max_date,30),max_date,counts_only=True) if cnt90 > 0 else 0
-        cnt7 = activities_by_region(country_code,date_minus(max_date,7),max_date,counts_only=True) if cnt30 > 0 else 0
+        cnt90 = activity_counts_by_region(country_code,date_minus(max_date,90),max_date)
+        cnt30 = activity_counts_by_region(country_code,date_minus(max_date,30),max_date) if cnt90 > 0 else 0
+        cnt7 = activity_counts_by_region(country_code,date_minus(max_date,7),max_date) if cnt30 > 0 else 0
         if cnt90 > 0:
             recents_by_country_region.append( (country_code,country_name,cnt7,cnt30,cnt90) )
     recents_by_source = []
     logger.info("Stats by source organization")
     for source_name in Article.all_sources():
         logger.debug(f"Stats for {source_name}")
-        cnt90 = activities_by_source(source_name, date_minus(max_date,90), max_date,counts_only=True)
-        cnt30 = activities_by_source(source_name, date_minus(max_date,30), max_date,counts_only=True) if cnt90 > 0 else 0
-        cnt7 = activities_by_source(source_name, date_minus(max_date,7), max_date,counts_only=True) if cnt30 > 0 else 0
+        cnt90 = activity_counts_by_source(source_name, date_minus(max_date,90), max_date)
+        cnt30 = activity_counts_by_source(source_name, date_minus(max_date,30), max_date) if cnt90 > 0 else 0
+        cnt7 = activity_counts_by_source(source_name, date_minus(max_date,7), max_date) if cnt30 > 0 else 0
         if cnt90 > 0:
             recents_by_source.append( (source_name,cnt7,cnt30,cnt90) )
     ts2 = datetime.now(tz=timezone.utc)

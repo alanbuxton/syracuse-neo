@@ -13,8 +13,13 @@ def neo4j_date_converter(vals):
         new_row = []
         for item in row:
             if isinstance(item, neo4j.time.DateTime):
-                new_row.append(datetime.fromisoformat(item.isoformat()))
+                new_row.append(neo4j_to_datetime(item))
             else:
                 new_row.append(item)
         new_vals.append(new_row)
     return new_vals
+
+def neo4j_to_datetime(item):
+    if item is None:
+        return None
+    return datetime.fromisoformat(item.isoformat())

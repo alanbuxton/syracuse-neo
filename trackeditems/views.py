@@ -19,7 +19,7 @@ from topics.activity_helpers import (
     get_activities_by_industry_and_date_range,
     get_activities_by_source_and_date_range,
     get_activities_by_industry_geo_and_date_range,
-    )
+)
 from datetime import datetime, timezone, timedelta
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date

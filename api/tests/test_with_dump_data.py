@@ -1,10 +1,11 @@
 from django.test import TestCase
+from django.http import QueryDict
 from collections import OrderedDict
 from topics.models import *
-from topics.stats_helpers import get_stats, date_minus
+from topics.stats_helpers import get_stats
 from auth_extensions.anon_user_utils import create_anon_user
 from topics.activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry, 
-            activities_by_region, get_activities_by_industry_geo_and_date_range,
+            get_activities_by_industry_geo_and_date_range,
             get_activities_by_org_and_date_range,
             )
 from topics.graph_utils import graph_centered_on
@@ -27,7 +28,7 @@ from topics.serializers import (FamilyTreeSerializer,
 )
 from topics.industry_geo.orgs_by_industry_geo import combined_industry_geo_results
 from topics.cache_helpers import refresh_geo_data
-from topics.industry_geo import org_uris_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
+from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, geo_codes_for_region, geo_parent_children
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings
@@ -39,7 +40,7 @@ from trackeditems.notification_helpers import (
 from trackeditems.models import TrackedItem, ActivityNotification
 from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
-
+from topics.util import date_minus, min_and_max_date
 
 '''
     Care these tests will delete neodb data
@@ -50,19 +51,162 @@ if os.environ.get(env_var) != "Y":
     exit(0)
 
 
-class EndToEndTests(TestCase):
+class EndToEndTests20140205(TestCase):
 
     def setUpTestData():
-        db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
-        DataImport.objects.all().delete()
-        assert DataImport.latest_import() == None # Empty DB
-        do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
-        delete_all_not_needed_resources()
-        set_weights()
-        r = RDFPostProcessor()
-        r.run_all_in_order()
-        apply_latest_org_embeddings(force_recreate=True)
-        refresh_geo_data(max_date=date(2024,6,2))
+        do_setup_test_data(date(2014,2,5),fill_blanks=True)
+
+    def setUp(self):
+        ts = time.time()
+        self.user = get_user_model().objects.create(username=f"test-{ts}")
+        # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+
+    def test_populates_activity_articles_for_marketing_activity(self):
+        min_date, max_date = min_and_max_date({"max_date":"2014-02-05"})
+        res = get_activities_by_industry_geo_and_date_range(61, "US", min_date,max_date, limit=100)
+        assert len(res) == 1
+        assert res[0]['activity_class'] == 'MarketingActivity'
+        assert res[0]['activity_uri'] == 'https://1145.am/db/2946622/Turns_10_Years_Old'
+
+    def test_api_filters_by_activity_type(self):
+        path = "/api/v1/activities/?industry_name=social network&industry_name=fracking&industry_name=homeware&max_date=2014-02-05"
+        client = self.client 
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 3, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
+                               "https://1145.am/db/2946622/Turns_10_Years_Old",
+                               "https://1145.am/db/2946632/Annual_Accounts"]
+        path2 = path + "&type=Marketing&type=Operations"
+        resp = client.get(path2)
+        j = json.loads(resp.content)
+        assert j['count'] == 2, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
+                            "https://1145.am/db/2946622/Turns_10_Years_Old"]
+        path3 = path + "&type=Financial"
+        resp = client.get(path3)
+        j = json.loads(resp.content)
+        assert j['count'] == 1, f"Found {j['count']}"
+        act_uris = [x['activity_uri'] for x in j['results']]
+        assert act_uris == ["https://1145.am/db/2946632/Annual_Accounts"]
+
+class EndToEndTests20190110(TestCase):
+
+    def setUpTestData():
+        do_setup_test_data(date(2019,1,10),fill_blanks=False)
+
+    def setUp(self):
+        self.anon, _ = create_anon_user()
+        ts = time.time()
+        self.user = get_user_model().objects.create(username=f"test-{ts}")
+        # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+        self.ts2 = time.time()
+        self.user2 = get_user_model().objects.create(username=f"test2-{self.ts2}")
+        _ = TrackedItem.objects.create(user=self.user2,
+                                        industry_id=146,
+                                        region="US-TX")
+        
+    def test_api_finds_by_multiple_country_and_industry(self):
+        client = self.client
+        path = "/api/v1/activities/?industry_id=12&location_id=CA&location_id=IL&max_date=2019-01-10"
+        resp = client.get(path)
+        assert resp.status_code == 403
+        client.force_login(self.user)
+        resp = client.get(path)
+        assert resp.status_code == 200
+        j = json.loads(resp.content)
+        assert j['count'] == 5, f"Found {j['count']}"
+        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
+                            'https://1145.am/db/3463554/Ams-Acquisition', 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment', 
+                            'https://1145.am/db/3457416/Isracann_Biosciences_Inc-Investment', 'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
+
+    def test_api_finds_by_single_country_and_industry(self):
+        client = self.client
+        path = "/api/v1/activities/?industry_id=12&location_id=CA&max_date=2019-01-10"
+        client.force_login(self.user)
+        resp = client.get(path)
+        j = json.loads(resp.content)
+        assert j['count'] == 3, f"Found {j['count']}"
+        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
+                                                             'https://1145.am/db/3463554/Ams-Acquisition', 
+                                                             'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
+
+    def test_shows_activity_articles_for_org(self):
+        min_date, max_date = min_and_max_date({"max_date":"2019-01-10"})
+        uri = "https://1145.am/db/2166549/Play_Sports_Group"
+        org = Resource.nodes.get_or_none(uri=uri)
+        res = get_activities_by_org_and_date_range(org, min_date, max_date)
+        assert len(res) == 2
+        assert res[0]['activity_uri'] == 'https://1145.am/db/2166549/Play_Sports_Group-Investment-Controlling'
+        assert res[1]['activity_uri'] == 'https://1145.am/db/3457026/Play_Sports_Group-Investment-Controlling_Stake'
+        assert res[0]['date_published'] > res[1]['date_published']
+
+    def test_always_shows_geo_activities(self):
+        client = self.client
+        path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
+        response = client.get(path)
+        assert response.status_code == 403 
+        client.force_login(self.anon)
+        response = client.get(path)
+        assert response.status_code == 403 
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Activities between" in content
+        assert "in the <b>United States of America - California</b>." in content
+        assert "Site stats calculating, please check later" not in content
+        assert "Pear Therapeutics raises $64M, launches prescription app for opioid use disorder" in content
+        assert len(re.findall("<b>Region:</b> San Francisco",content)) == 3
+        assert len(re.findall("<b>Region:</b> Ontario",content)) == 2 
+
+    def test_always_show_source_activities(self):
+        client = self.client
+        path = "/source_activities?source_name=Business%20Insider&max_date=2019-01-10"
+        response = client.get(path)
+        assert response.status_code == 403
+        client.force_login(self.anon)
+        response = client.get(path)
+        assert response.status_code == 403
+        client.force_login(self.user)
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
+        assert "Activities between" in content
+        assert "Click on a document link to see the original source document" in content
+        assert "Site stats calculating, please check later" not in content
+        assert "largest banks are betting big on weed" in content
+
+    def test_creates_geo_industry_notification_for_new_user(self):
+        ActivityNotification.objects.filter(user=self.user2).delete()
+        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
+        email, activity_notif = email_and_activity_notif
+        assert "Private Equity Business" in email
+        assert "Dallas" in email
+        assert activity_notif.num_activities == 2
+        assert len(re.findall("Hastings",email)) == 5
+        assert "None" not in email
+
+    def test_prepares_activity_data_by_industry(self):
+        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
+        min_date = max_date - timedelta(days=7)
+        acts,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
+        assert len(acts) == 2
+
+class EndToEndTests20240602(TestCase):
+
+    def setUpTestData():
+        do_setup_test_data(date(2024,6,2),fill_blanks=True)
 
     def setUp(self):
         ts = time.time()
@@ -242,61 +386,55 @@ class EndToEndTests(TestCase):
 
         counts_set = set(counts)
         assert counts_set == expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}"
-        assert sorted(recents_by_geo) == [('AU', 'Australia', 1, 1, 1), ('CA', 'Canada', 3, 3, 3), ('CN', 'China', 2, 2, 2), 
-                                            ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), ('EG', 'Egypt', 0, 0, 1), 
-                                            ('ES', 'Spain', 1, 1, 1), ('GB', 'United Kingdom of Great Britain and Northern Ireland', 3, 3, 3), 
-                                            ('IE', 'Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), ('IT', 'Italy', 1, 1, 1), ('JP', 'Japan', 0, 0, 1), 
-                                            ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), ('US', 'United States of America', 16, 16, 37)]
+        # recents by geo now does not include activities with "where" in - in case of false positives. TODO review this in future
+        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1), 
+                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), 
+                                          ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1), 
+                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), 
+                                          ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), 
+                                          ('US', 'United States of America', 14, 14, 33)]
 
         assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
                                                 ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2), 
                                                 ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3), 
                                                 ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
                                                 ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 3), 
-                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 6), (36, 'C-Commerce (\\', 1, 1, 1), 
-                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1), 
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1), 
+                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1), 
+                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2), 
                                             (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1), 
                                             (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
 
-    def test_recent_activies_by_industry(self):
+    def test_recent_activities_by_industry(self):
         max_date = date.fromisoformat("2024-06-02")
-        sample_ind = IndustryCluster.nodes.get_or_none(topicId=154)
-        res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date,counts_only=False)
-        assert len(res) == 3
-        assert ['https://1145.am/db/3029576/Tesaro-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
-        assert ['https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res 
-        assert ['https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)] in res
-
-    def test_recent_activities_by_region(self):
-        max_date = date.fromisoformat("2024-06-02")
-        sample_acts = activities_by_region("AU",date_minus(max_date,7),max_date,counts_only=False)
-        assert sample_acts == [['https://1145.am/db/4290457/Gyg-Ipo', 
-                                'https://1145.am/db/4290457/wwwreuterscom_markets_deals_australian-fast-food-chain-guzman-y-gomez-seeks-raise-161-mln-june-ipo-2024-05-31_', 
-                                datetime(2024, 5, 31, 5, 12, 37, 320000, tzinfo=timezone.utc)]]
-        sample_acts = activities_by_region("GB",date_minus(max_date,7),max_date,counts_only=False)
-        assert len(sample_acts) == 3
-        assert ['https://1145.am/db/4290472/Associated_British_Foods-Ipo', 'https://1145.am/db/4290472/wwwmarketwatchcom_story_ab-foods-majority-shareholder-sells-10-3-mln-shares-for-gbp262-mln-067222fe', datetime(2024, 5, 31, 6, 42, tzinfo=timezone.utc)] in sample_acts
-        assert ['https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 'https://1145.am/db/3474027/wwwprnewswirecom_news-releases_gan-integrity-raises-15-million-to-accelerate-global-compliance-solution-300775390html', datetime(2024, 5, 29, 13, 15, tzinfo=timezone.utc)] in sample_acts
-        assert ['https://1145.am/db/3473030/Sylvant-Acquisition-Rights', 'https://1145.am/db/3473030/wwwprnewswirecom_news-releases_eusa-pharma-completes-acquisition-of-global-rights-to-sylvant-siltuximab--and-presents-company-update-at-37th-jp-morgan-healthcare-conference-300775508html', datetime(2024, 5, 29, 13, 0, tzinfo=timezone.utc)] in sample_acts
-
+        _, max_date = min_and_max_date({"max_date":max_date})
+        sample_ind = IndustryCluster.nodes.get_or_none(topicId=32)
+        res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date)
+        assert len(res) == 6, f"got {res}"
+        assert res == [('https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 'https://1145.am/db/3475299/wwwprnewswirecom_news-releases_correction----napajen-pharma-inc-300775556html', datetime(2024, 5, 29, 13, 52, tzinfo=timezone.utc)), 
+                        ('https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)), 
+                        ('https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)), 
+                        ('https://1145.am/db/2543228/Takeda-Acquisition-Business', 'https://1145.am/db/2543228/wwwfiercepharmacom_pharma-asia_takeda-debt-after-shire-buyout-but-don-t-expect-otc-unit-selloff-ceo', datetime(2024, 3, 7, 17, 12, 27, tzinfo=timezone.utc)), 
+                        ('https://1145.am/db/2543227/Bristol-Myers-Merger', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc)),
+                        ('https://1145.am/db/2543227/Celgene-Acquisition', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc))
+        ]
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")
-        min_date = date.fromisoformat("2024-05-03")
+        min_date = date_minus(max_date, 90)
+        min_date, max_date = min_and_max_date({"min_date":min_date,"max_date":max_date})
         country_code = 'US-NY'
         matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20)
-        assert len(matching_activity_orgs) == 5
+        assert len(matching_activity_orgs) == 8, f"got {matching_activity_orgs}"
         sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_actors) == {('participant', 'protagonist'), ('buyer', 'target'), ('investor', 'target')}
+        assert set(sorted_actors) == {('buyer', 'target'), ('vendor',), ('buyer', 'target', 'vendor'), ('investor', 'target')}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
-        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 5)]
-        uris = sorted([x['activity_uri'] for x in matching_activity_orgs])
-        assert uris == ['https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 
-                        'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 
-                        'https://1145.am/db/3475220/Novel_Bellevue-Investment', 
-                        'https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger', 
-                        'https://1145.am/db/4290170/Cerevel_Therapeutics_Holdings_Inc-Acquisition']
+        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 8)]
+        uris = [x['activity_uri'] for x in matching_activity_orgs]
+        assert uris == ['https://1145.am/db/3475220/Novel_Bellevue-Investment', 'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 
+                        'https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 'https://1145.am/db/3448296/Urban_One-Ipo-Senior_Subordinated_Notes', 
+                        'https://1145.am/db/3447359/Us_Zinc-Acquisition', 'https://1145.am/db/3446501/Pure_Fishing-Acquisition', 
+                        'https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/2543227/Celgene-Acquisition']
 
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
@@ -304,7 +442,7 @@ class EndToEndTests(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
         expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
                            ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
         assert org_data == expected, f"Got {org_data} expected {expected}"
@@ -315,7 +453,7 @@ class EndToEndTests(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
-        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
         expected = [('https://1145.am/db/2543227/Celgene', 12), ('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
                             ('https://1145.am/db/2364624/Parexel_International_Corporation', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4), 
                             ('https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 3), ('https://1145.am/db/3473030/Sylvant', 3)]
@@ -327,7 +465,7 @@ class EndToEndTests(TestCase):
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
-        org_data = org_uris_by_industry_and_or_geo(industry,selected_geo)
+        org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
         expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), ('https://1145.am/db/2946625/Cuadrilla_Resources', 5), 
                     ('https://1145.am/db/1787315/Scape', 4), ('https://1145.am/db/3029681/Halebury', 4), 
                     ('https://1145.am/db/3452608/Avon_Products_Inc', 4), ('https://1145.am/db/3465815/Alliance_Automotive_Group', 4), 
@@ -990,17 +1128,19 @@ class EndToEndTests(TestCase):
 
     def test_industry_geo_finder_preview(self):
         '''
-            Data shown on industry_geo_finder page in response to search "health". 'x' means entry that was chosen
-                                            CA (all)	CA-08	US (all)    US-IL	US-MI	US-NY	US-PA	US-MA	US-RI	US-FL	US-MD	US-VA	US-AR	US-TX	US-AZ	US-CA	US-OR	US-WA   CN	JP	IL	SA	GB
-            Health- And Beauty	            0x	        0x	    3x	        0x	    0x	    1x	    2x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	    0x	0x	0x	0x	1x
-            Senior Living And Health Care	0	        0	    1x	        0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    1	    0	    0	    0	0	0	0	0
-            Behavioral Health Services	    0	        0	    1x	        0	    0	    1x	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	    0	0	0	0	0
+            Data shown on industry_geo_finder page in response to search "beauty+insurance". 'x' means entry that was chosen
+                                                CA 	 US(all)	US-IL	US-MI	US-NY	US-PA	US-RI	US-MD	US-VA	US-AR	US-TX	US-AZ	GB 
+            Health- And Beauty	                0x	    3x	    0x	    0x	    1x	    2x	    0x	    0x	    0x	    0x	    0x	    0x	    1x
+            Insurance Brokerage And Services	0	    1	    1x   	0	    0	    0	    0	    0	    0	    0	    0	    0	    0
+            Insurance And Risk Management	    1	    8	    1x  	1	    0	    0	    1	    1	    1x	    1	    1	    1	    0
                     
         '''
         client = self.client
-        payload = {'selectedIndividualCells': ['["row-219#col-US-NY"]'], 
-                   'selectedRows': ['["row-0"]'], 'selectedColumns': ['["col-US"]'], 
-                   'allIndustryIDs': ['[0, 75, 219]'], 'searchStr': ['health']}
+        payload = {'selectedIndividualCells': '["row-647#col-US-VA"]', 'selectedRows': '["row-0"]', 
+                   'selectedColumns': '["col-US-IL"]', 'allIndustryIDs': '[0, 313, 647]', 
+                   'searchStr': 'beauty insurance'} # from request.POST.dict() 
+        qd = QueryDict("",mutable=True)
+        qd.update(payload)
         response = client.post("/industry_geo_finder_review",payload)
         assert response.status_code == 403
         client.force_login(self.user)
@@ -1008,9 +1148,23 @@ class EndToEndTests(TestCase):
         assert response.status_code == 200
         content = str(response.content)
         assert "Health- And Beauty in all Geos" in content
-        assert "Behavioral Health Services, Health- And Beauty, Senior Living And Health Care in United States of America" in content
+        assert "Health- And Beauty, Insurance And Risk Management, Insurance Brokerage And Services in United States of America - Illinois" in content
+        assert "Insurance And Risk Management in United States of America - Virginia" in content
+        assert "1145.am/db/3452608/Avon_Products_Inc" in content
+        assert "1145.am/db/3472922/Hub_International_Limited" in content
+        assert "1145.am/db/3458127/The_Hilb_Group" in content
+
+    def test_shows_orgs_from_industry_orgs_activities_page(self):
+        client = self.client
+        client.force_login(self.user)
+        path = "/industry_geo_finder_review?industry_id=647&industry=beauty+insurance"
+        response = client.get(path)
+        assert response.status_code == 200
+        content = str(response.content)
         assert "The Hilb Group" in content
-        assert "Behavioral Health Services in United States of America - New York" in content
+        assert "uri/1145.am/db/3458127/The_Hilb_Group" in content
+        assert "yallacompare" in content
+        assert "uri/1145.am/db/3454499/Yallacompare" in content
 
     def test_orgs_by_weight(self):
         uris = ["https://1145.am/db/3461395/Salvarx", "https://1145.am/db/2166549/Synamedia", "https://1145.am/db/3448439/Eli_Lilly_And_Company",
@@ -1055,33 +1209,15 @@ class EndToEndTests(TestCase):
                                                 'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp', 
                                                 'https://1145.am/db/3029705/Shire', 'https://1145.am/db/2543228/Takeda'])
 
-    def test_populates_activity_articles_for_marketing_activity(self):
-        min_date = date.fromisoformat("2014-02-03")
-        max_date = date.fromisoformat("2014-02-05")
-        res = get_activities_by_industry_geo_and_date_range(61, "US", min_date,max_date, limit=100)
-        assert len(res) == 1
-        assert res[0]['activity_class'] == 'MarketingActivity'
-        assert res[0]['activity_uri'] == 'https://1145.am/db/2946622/Turns_10_Years_Old'
-
-    def test_shows_activity_articles_for_org(self):
-        min_date = date.fromisoformat("2019-01-07")
-        max_date = date.fromisoformat("2019-01-10")
-        uri = "https://1145.am/db/2166549/Play_Sports_Group"
-        org = Resource.nodes.get_or_none(uri=uri)
-        res = get_activities_by_org_and_date_range(org, min_date, max_date)
-        assert len(res) == 2
-        assert res[0]['activity_uri'] == 'https://1145.am/db/2166549/Play_Sports_Group-Investment-Controlling'
-        assert res[1]['activity_uri'] == 'https://1145.am/db/3457026/Play_Sports_Group-Investment-Controlling_Stake'
-        assert res[0]['date_published'] > res[1]['date_published']
 
     def test_shows_org_and_activity_counts_by_industry_search_string(self):
         client = self.client
-        resp = client.get("/industry_orgs_activities?industry=building&max_date=2024-04-02")
+        resp = client.get("/industry_orgs_activities?industry=building&max_date=2024-06-02")
         content = str(resp.content)
         assert "Architecture, Engineering And Construction" in content
         assert "Residential Homebuilder" in content
-        assert '<a href="/industry_geo_finder_review?industry_id=686&industry=building&max_date=2024-04-02">1</a>' in content
-        assert '<a href="/industry_activities?industry_id=696&min_date=2024-03-03&max_date=2024-04-02&industry=building&max_date=2024-04-02">1</a>' in content
+        assert '<a href="/industry_geo_finder_review?industry_id=686&industry=building&max_date=2024-06-02">1</a>' in content
+        assert '<a href="/industry_activities?industry_id=696&min_date=2024-03-04&max_date=2024-06-02&industry=building&max_date=2024-06-02">1</a>' in content
 
     def test_shows_source_documents(self):
         url = "/organization/industry_geo_sources/uri/1145.am/db/3469058/Napajen_Pharma?industry_id=32&geo_code=US"
@@ -1107,13 +1243,13 @@ class EndToEndTests(TestCase):
         '''
         cn = geo_codes_for_region("CN")
         assert cn == {'CN'} # No need to go lower
-        children = GEO_PARENT_CHILDREN['CN']['children']
+        children = geo_parent_children()['CN']['children']
         assert len(children) > 0
         assert all([re.match(r"^CN-\d\d",x) for x in children])
 
     def test_geo_codes_for_region_stops_when_it_gets_to_us(self):
         assert geo_codes_for_region("US") == {'US'} # Not going any deeper, even though has children
-        children = GEO_PARENT_CHILDREN['US']['children']
+        children = geo_parent_children()['US']['children']
         assert children == {'South', 'Midwest', 'Northeast', 'West'}
 
     
@@ -1144,7 +1280,7 @@ class EndToEndTests(TestCase):
         # assert "<b>Foo bar industry</b> in <b>All Locations</b>" in content
 
     def test_shows_recent_tracked_activities(self):
-        path = "/activities?max_date=2024-05-30"
+        path = "/activities?max_date=2024-06-02"
         client = self.client
         resp = client.get(path)
         assert resp.status_code == 403
@@ -1225,17 +1361,6 @@ class EndToEndTests(TestCase):
         assert "May 28, 2024" in email
         assert activity_notif.num_activities == 1
 
-    def test_creates_geo_industry_notification_for_new_user(self):
-        ActivityNotification.objects.filter(user=self.user2).delete()
-        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
-        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
-        email, activity_notif = email_and_activity_notif
-        assert "Private Equity Business" in email
-        assert "Dallas" in email
-        assert activity_notif.num_activities == 2
-        assert len(re.findall("Hastings",email)) == 5
-        assert "None" not in email
-
     def test_only_populates_activity_stats_if_cache_available(self):
         ''' 
             See trackeditems.tests.ActivityListTest.does_not_show_site_stats_if_no_cache
@@ -1247,52 +1372,10 @@ class EndToEndTests(TestCase):
         assert "Site stats calculating, please check later" not in content
         assert "Showing updates as at" in content
 
-    def test_always_shows_geo_activities(self):
-        client = self.client
-        path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
-        response = client.get(path)
-        assert response.status_code == 403 
-        client.force_login(self.anon)
-        response = client.get(path)
-        assert response.status_code == 403 
-        client.force_login(self.user)
-        response = client.get(path)
-        assert response.status_code == 200
-        content = str(response.content)
-        assert "Activities between" in content
-        assert "in the <b>United States of America - California</b>." in content
-        assert "Site stats calculating, please check later" not in content
-        assert "Pear Therapeutics raises $64M, launches prescription app for opioid use disorder" in content
-        assert len(re.findall("<b>Region:</b> San Francisco",content)) == 3
-        assert len(re.findall("<b>Region:</b> Ontario",content)) == 2 
-
-    def test_always_show_source_activities(self):
-        client = self.client
-        path = "/source_activities?source_name=Business%20Insider&max_date=2019-01-10"
-        response = client.get(path)
-        assert response.status_code == 403
-        client.force_login(self.anon)
-        response = client.get(path)
-        assert response.status_code == 403
-        client.force_login(self.user)
-        response = client.get(path)
-        assert response.status_code == 200
-        content = str(response.content)
-        assert "Activities between" in content
-        assert "Click on a document link to see the original source document" in content
-        assert "Site stats calculating, please check later" not in content
-        assert "largest banks are betting big on weed" in content
-
     def test_prepares_activity_data_by_org(self):
         max_date = datetime(2024,5,30,tzinfo=timezone.utc)
         min_date = max_date - timedelta(days=7)
         acts, _ = recents_by_user_min_max_date(self.user,min_date,max_date)
-        assert len(acts) == 2
-
-    def test_prepares_activity_data_by_industry(self):
-        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
-        min_date = max_date - timedelta(days=7)
-        acts,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
         assert len(acts) == 2
 
     def test_tracked_items_updates_or_creates_no_duplicates(self):
@@ -1322,41 +1405,21 @@ class EndToEndTests(TestCase):
         tracked_items = TrackedItem.trackable_by_user(user)
         assert len(tracked_items) == 1 # One of the items is not trackable
 
-    def test_api_finds_by_multiple_country_and_industry(self):
-        client = self.client
-        path = "/api/v1/activities/?industry_id=12&location_id=CA&location_id=IL&max_date=2019-01-10"
-        resp = client.get(path)
-        assert resp.status_code == 403
-        client.force_login(self.user)
-        resp = client.get(path)
-        assert resp.status_code == 200
-        j = json.loads(resp.content)
-        assert j['count'] == 5, f"Found {j['count']}"
-        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
-                            'https://1145.am/db/3463554/Ams-Acquisition', 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment', 
-                            'https://1145.am/db/3457416/Isracann_Biosciences_Inc-Investment', 'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
-
-    def test_api_finds_by_single_country_and_industry(self):
-        client = self.client
-        path = "/api/v1/activities/?industry_id=12&location_id=CA&max_date=2019-01-10"
-        client.force_login(self.user)
-        resp = client.get(path)
-        j = json.loads(resp.content)
-        assert j['count'] == 3, f"Found {j['count']}"
-        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
-                                                             'https://1145.am/db/3463554/Ams-Acquisition', 
-                                                             'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
-
     def test_api_finds_by_industry_name(self):
         client = self.client
-        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&location_id=US&max_date=2024-06-02"
+        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&max_date=2024-06-02"
+        # No legal results because matching legal firms are only participants, not buyers etc
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
-        assert j['count'] == 3, f"Got {j['count']}"
-        assert [x['activity_uri'] for x in j['results']] == ["https://1145.am/db/4290170/Abbvie_Inc-Bleichmar_Fonti_Auld_Llp-Cerevel_Therapeutics_Holdings_Inc-Merger",
-                      "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
-                      "https://1145.am/db/3476441/Dcamera_Group-Acquisition"]
+        assert j['count'] == 5, f"Got {j['count']}"
+        res = [x['activity_uri'] for x in j['results']]
+        assert res == [
+            "https://1145.am/db/3475312/Rental_History_Reports_And_Trusted_Employees-Acquisition",
+            "https://1145.am/db/3475220/Novel_Bellevue-Investment",
+            "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
+            "https://1145.am/db/3471595/Housefaxcom-Acquisition",
+            "https://1145.am/db/3476441/Dcamera_Group-Acquisition"], f"Got {res}"
         
     def test_api_finds_by_org_name(self):
         path = "/api/v1/activities/?org_name=Postmedia&max_date=2024-06-02"
@@ -1378,30 +1441,6 @@ class EndToEndTests(TestCase):
         act_uris = [x['activity_uri'] for x in j['results']]
         assert act_uris[0] == "https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition", f"Got {act_uris}"
 
-    def test_api_filters_by_activity_type(self):
-        path = "/api/v1/activities/?industry_name=social network&industry_name=fracking&industry_name=homeware&max_date=2014-02-05"
-        client = self.client 
-        client.force_login(self.user)
-        resp = client.get(path)
-        j = json.loads(resp.content)
-        assert j['count'] == 3, f"Found {j['count']}"
-        act_uris = [x['activity_uri'] for x in j['results']]
-        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
-                               "https://1145.am/db/2946622/Turns_10_Years_Old",
-                               "https://1145.am/db/2946632/Annual_Accounts"]
-        path2 = path + "&type=Marketing&type=Operations"
-        resp = client.get(path2)
-        j = json.loads(resp.content)
-        assert j['count'] == 2, f"Found {j['count']}"
-        act_uris = [x['activity_uri'] for x in j['results']]
-        assert act_uris == ["https://1145.am/db/2946625/Start_Fracking_At_Two",
-                            "https://1145.am/db/2946622/Turns_10_Years_Old"]
-        path3 = path + "&type=Financial"
-        resp = client.get(path3)
-        j = json.loads(resp.content)
-        assert j['count'] == 1, f"Found {j['count']}"
-        act_uris = [x['activity_uri'] for x in j['results']]
-        assert act_uris == ["https://1145.am/db/2946632/Annual_Accounts"]
 
 
 def set_weights():
@@ -1411,3 +1450,16 @@ def set_weights():
     action = "SET rel.weight = 2"
     apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{}})'
     db.cypher_query(apoc_query)
+
+
+def do_setup_test_data(max_date,fill_blanks):
+    db.cypher_query("MATCH (n) CALL {WITH n DETACH DELETE n} IN TRANSACTIONS OF 10000 ROWS;")
+    DataImport.objects.all().delete()
+    assert DataImport.latest_import() == None # Empty DB
+    do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
+    delete_all_not_needed_resources()
+    set_weights()
+    r = RDFPostProcessor()
+    r.run_all_in_order()
+    apply_latest_org_embeddings(force_recreate=False)
+    refresh_geo_data(max_date=max_date,fill_blanks=fill_blanks)

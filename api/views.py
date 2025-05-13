@@ -2,13 +2,13 @@ from rest_framework.response import Response
 from topics.models import IndustryCluster, GeoNamesLocation
 import api.serializers as serializers
 import logging 
-from topics.util import min_and_max_date
+from topics.util import min_and_max_date, geo_to_country_admin1
 from rest_framework import status
-from topics.activity_helpers import get_activities_by_org_uris_and_date_range
+from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from topics.industry_geo import GEO_PARENT_CHILDREN, geo_codes_for_region, org_uris_by_industry_and_or_geo
+from topics.industry_geo import geo_parent_children, geo_codes_for_region
 from topics.organization_search_helpers import search_organizations_by_name 
 import re
 
@@ -74,10 +74,10 @@ class RegionsViewSet(GenericViewSet):
     serializer_class = serializers.RegionsDictSerializer
 
     def get_queryset(self):
-        return GEO_PARENT_CHILDREN.values()
+        return geo_parent_children().values()
 
     def get_object(self):
-        return GEO_PARENT_CHILDREN.get(self.kwargs["pk"])
+        return geo_parent_children().get(self.kwargs["pk"])
 
     def list(self, request):
         serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
@@ -135,12 +135,12 @@ class ActivitiesViewSet(NeomodelViewSet):
                 else:
                     industry_id = industry_id_str
                 for geo_code in geo_codes:
-                    uri_list = org_uris_by_industry_and_or_geo(industry_id, geo_code, return_orgs_only=True)
-                    acts = get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None)
+                    country_code, admin1 = geo_to_country_admin1(geo_code)
+                    acts = get_activities_by_industry_country_admin1_and_date_range(industry_id, country_code, admin1, min_date, max_date)
                     activities.extend(acts)
-        acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
         if len(types_to_keep) > 0:
-            acts = filter_activity_types(acts, types_to_keep)
+            activities = filter_activity_types(activities, types_to_keep)
+        acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
         return acts
     
     def get_serializer_context(self):

@@ -5,6 +5,9 @@ import hashlib
 from datetime import datetime, timedelta, time, date
 from django.core.cache import cache
 
+ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
+ALL_ACTIVITY_LIST= ORG_ACTIVITY_LIST + "|RoleActivity"
+
 def cacheable_hash(input_string):
     hash_object = hashlib.sha256()
     hash_object.update(input_string.encode('utf-8'))
@@ -74,7 +77,13 @@ def end_of_day(d):
 def start_of_day(d):
     return datetime.combine(d, time.min)
 
+def date_minus(to_date, days):
+    prev_date =  to_date - timedelta(days=days)
+    return start_of_day(prev_date)
+
 def camel_case_to_snake_case(text):
     text = re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', text))
     text = re.sub(r'\s+','_', text)
     return text.lower()
+
+

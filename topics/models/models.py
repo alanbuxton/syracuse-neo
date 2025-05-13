@@ -157,8 +157,20 @@ class Resource(StructuredNode):
         return self.__all_relationships__
     
     @property
+    def all_raw_relationships(self):
+        '''
+        Normally basedInHighGeonamesLocation and industryClusterPrimary will be filtered out based on weight when
+        looking at all relationships. Except when merging new records.
+        '''
+        return self.all_relationships
+    
+    @property
     def dict_of_attribs(self):
         return self.__dict__
+    
+    @property
+    def dict_of_raw_attribs(self):
+        return self.dict_of_attribs
 
     @property
     def oldestDocumentSource(self):
@@ -353,23 +365,22 @@ class Resource(StructuredNode):
         '''
             Copy/Merge relationships from source_node to target_node
         '''
-        for rel_key,_ in source_node.all_relationships:
+        for rel_key,_ in source_node.all_raw_relationships:
             if rel_key.startswith("sameAs"):
                 logger.debug(f"ignoring {rel_key}")
                 continue
             for other_node in source_node.dict_of_attribs[rel_key]:
                 if hasattr(source_node,f"internal_{rel_key}"):
-                    tmp_rel_key = f"internal_{rel_key}"
-                else:
-                    tmp_rel_key = rel_key
-                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {tmp_rel_key} from {source_node.uri}")                    
-                old_rel = source_node.dict_of_attribs[tmp_rel_key].relationship(other_node)
-                already_connected = target_node.dict_of_attribs[tmp_rel_key].relationship(other_node)
+                    logger.info("internal key, skipping")
+                    continue
+                logger.info(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
+                old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
+                already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
                     already_connected.weight += old_rel.weight
                     already_connected.save()
                 else:
-                    new_rel = target_node.dict_of_attribs[tmp_rel_key].connect(other_node)
+                    new_rel = target_node.dict_of_attribs[rel_key].connect(other_node)
                     if hasattr(old_rel, 'documentExtract'):
                         new_rel.documentExtract = old_rel.documentExtract
                     new_rel.weight = old_rel.weight
@@ -583,7 +594,7 @@ class IndustryCluster(Resource):
         if res is not None and ignore_cache is False:
             return res
         keywords = {}
-        for node in IndustryCluster.leaf_nodes_only():
+        for node in IndustryCluster.used_leaf_nodes_only():
             words = node.uniqueName.split("_")
             idx = words[0]
             for word in words[1:]:
@@ -600,8 +611,16 @@ class IndustryCluster(Resource):
         return results[0][0]
 
     @staticmethod
-    def leaf_nodes_only():
+    def used_leaf_nodes_only():
+        # Only used leaf nodes
         query = "MATCH (n: IndustryCluster) WHERE NOT (n)-[:childLeft|childRight]->(:IndustryCluster) AND (n)-[:industryClusterPrimary]-() RETURN n"
+        results, _ = db.cypher_query(query,resolve_objects=True)
+        flattened = [x for sublist in results for x in sublist]
+        return flattened
+    
+    @staticmethod
+    def all_leaf_nodes():
+        query = "MATCH (n: IndustryCluster) WHERE NOT (n)-[:childLeft|childRight]->(:IndustryCluster) AND n.topicId <> -1 return n"
         results, _ = db.cypher_query(query,resolve_objects=True)
         flattened = [x for sublist in results for x in sublist]
         return flattened
@@ -617,7 +636,7 @@ class IndustryCluster(Resource):
 
     @staticmethod
     def first_parents():
-        return IndustryCluster.parents_of(IndustryCluster.leaf_nodes_only())
+        return IndustryCluster.parents_of(IndustryCluster.used_leaf_nodes_only())
 
     @staticmethod
     def second_parents():
@@ -817,7 +836,19 @@ class Organization(Resource):
             ("industryClusterPrimary", self.industryClusterPrimary),
             ("basedInHighGeoNamesLocation", self.basedInHighGeoNamesLocation)
         )
+
+    @property
+    def all_raw_relationships(self):
+        tmp_rels = tuple([(label,rel) for label,rel in self.__all_relationships__ ])
+        return tmp_rels
     
+    @property
+    def dict_of_raw_attribs(self):
+        vals = self.__dict__.copy()
+        vals["industryClusterPrimary"] = self.internal_industryClusterPrimary
+        vals["basedInHighGeoNamesLocation"] = self.internal_basedInHighGeoNamesLocation
+        return vals
+
     @property
     def dict_of_attribs(self):
         vals = self.__dict__.copy()
@@ -832,6 +863,7 @@ class Organization(Resource):
                     MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(l2:Resource&GeoNamesLocation)
                     WITH b, l, SUM(rAll.weight) as total_weight
                     WHERE b.weight >= {geo_location_min_weight} * total_weight
+                    AND b.weight > 1
                     RETURN l"""
         res, _ = db.cypher_query(query,resolve_objects=True)
         vals = []
@@ -846,6 +878,7 @@ class Organization(Resource):
                     MATCH (o)-[rAll:industryClusterPrimary]->(i2:Resource&IndustryCluster)
                     WITH ic, i, SUM(rAll.weight) as total_weight
                     WHERE ic.weight >= {industry_cluster_min_weight} * total_weight
+                    AND ic.weight > 1
                     return i"""
         res, _ = db.cypher_query(query,resolve_objects=True)
         vals = []

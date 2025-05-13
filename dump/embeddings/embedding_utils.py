@@ -42,9 +42,6 @@ def ind_embeddings_exist():
     return len(inds) > 0
 
 def apply_latest_org_embeddings(force_recreate=False,org_fname=ORG_FNAME, ind_fname=IND_FNAME):
-    if org_embeddings_exist() and ind_embeddings_exist():
-        logger.info("Embeddings already exist, no need to update")
-        return
     if force_recreate is False and (os.path.exists(org_fname) and os.path.exists(ind_fname)):
         logger.info("Loading embeddings from file")
         update_embeddings(org_fname, ind_fname)

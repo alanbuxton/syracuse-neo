@@ -108,4 +108,13 @@ def region_parent_child():
             
     return parent_child
 
-GEO_PARENT_CHILDREN = region_parent_child()
+def geo_parent_children():
+    cache_key = "geo_parent_children"
+    res = cache.get(cache_key)
+    if res is not None:
+        return res
+    res = region_parent_child()
+    cache.set(cache_key, res)
+    return res
+
+

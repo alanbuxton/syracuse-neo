@@ -119,7 +119,7 @@ def get_region_hierarchy(regions=un_regions):
 COUNTRIES_WITH_STATE_PROVINCE = ["AE","US","CA","CN","IN"] # Countries to be broken down to state/province
  
 def country_code_to_name(country_data=un_regions):
-    vals = {x['alpha-2']:x['name'] for x in country_data}
+    vals = {x['alpha-2']:x['name'] for x in country_data if x['alpha-2'] != 'AQ'}
     return vals
 
 COUNTRY_CODE_TO_NAME = country_code_to_name()

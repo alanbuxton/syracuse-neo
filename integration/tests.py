@@ -256,8 +256,8 @@ class MergeSameAsHighTestCase(TestCase):
 
     def test_attributes_for_ultimate_target(self):
         a = Organization.self_or_ultimate_target_node("https://1145.am/db/100/a")
-        assert a.best_name == 'Name A'
-        assert a.industry_as_string == 'Bar, Baz'
+        assert a.best_name == 'Name A', f"Got {a.best_name}"
+        assert a.industry_as_string == 'Bar, Baz', f"Got {a.industry_as_string}"
 
     def test_gets_ultimate_target(self):
         o = Organization.self_or_ultimate_target_node("https://1145.am/db/105/f")
@@ -290,8 +290,8 @@ class MergeSameAsHighTestCase(TestCase):
         ind2 = Resource.nodes.get_or_none(uri="https://1145.am/ind2")
         a_ind1 = a.internal_industryClusterPrimary.relationship(ind1)
         a_ind2 = a.internal_industryClusterPrimary.relationship(ind2)
-        assert a_ind1.weight == 2
-        assert a_ind2.weight == 5
+        assert a_ind1.weight == 2, f"Got {a_ind1.weight}"
+        assert a_ind2.weight == 5, f"Got {a_ind2.weight}"
 
 
 class MergeSubsetActivitiesTestCase(TestCase):

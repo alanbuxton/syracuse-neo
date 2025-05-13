@@ -1,13 +1,11 @@
 from .serializers import ActivitySerializer, OrgIndGeoSerializer
-from topics.activity_helpers import (
-    get_activities_by_org_uris_and_date_range,
-    get_activities_by_industry_geo_and_date_range)
-from .models import get_notifiable_users, TrackedItem
+from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
+from trackeditems.models import get_notifiable_users, TrackedItem, ActivityNotification
 from topics.models.model_helpers import similar_organizations_flat
 from integration.models import DataImport
-from .date_helpers import days_ago
+from topics.util import geo_to_country_admin1, min_and_max_date
+from trackeditems.date_helpers import days_ago
 from django.template.loader import render_to_string
-from .models import ActivityNotification
 from topics.models import cache_friendly, Organization
 from topics.industry_geo.orgs_by_industry_geo import org_geo_industry_text_by_words
 from django.core.cache import cache
@@ -37,6 +35,7 @@ def recents_by_user_min_max_date(user, min_date, max_date):
 def tracked_items_between(tracked_items, min_date, max_date):
     org_uris = []
     matching_activity_orgs = []
+    min_date, max_date = min_and_max_date({"min_date":min_date,"max_date":max_date})
     for ti in tracked_items:
         if ti.organization_uri is not None:
             org = ti.organization_or_merged_org
@@ -50,7 +49,9 @@ def tracked_items_between(tracked_items, min_date, max_date):
             else:
                 org_uris.extend(org_geo_industry_text_by_words(ti.industry_search_str))
         elif ti.industry_id is not None or ti.region is not None:
-            acts = get_activities_by_industry_geo_and_date_range(ti.industry_id, ti.region,min_date,max_date, limit=100)
+            country_code, admin1_code = geo_to_country_admin1(ti.region)
+            acts = get_activities_by_industry_country_admin1_and_date_range(ti.industry_id, 
+                            country_code, admin1_code, min_date, max_date)
             matching_activity_orgs.extend(acts)
     org_activities = get_activities_by_org_uris_and_date_range(org_uris, min_date, max_date,limit=100)
     matching_activity_orgs.extend(org_activities)

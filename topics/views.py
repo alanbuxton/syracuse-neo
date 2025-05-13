@@ -13,8 +13,7 @@ from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSer
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
     OrgsByIndustryGeoSerializer, OrgIndustryGeoSourcesSerializer)
 from rest_framework import status, viewsets
-from datetime import date, timedelta
-from topics.stats_helpers import cached_activity_stats_last_updated_date
+from topics.industry_geo.orgs_by_industry_geo import cached_activity_stats_last_updated_date
 from urllib.parse import urlencode
 from syracuse.settings import MOTD
 from integration.models import DataImport
@@ -22,13 +21,12 @@ from topics.faq import FAQ
 from itertools import islice
 from .industry_geo import country_admin1_full_name
 from .industry_geo.orgs_by_industry_geo import (combined_industry_geo_results, 
-        org_uris_by_industry_cluster_and_geo)
+        org_uris_by_industry_id_country_admin1)
 import re
 import json
 from .util import elements_from_uri, geo_to_country_admin1, min_and_max_date
-from .stats_helpers import industry_orgs_activities_stats
+from topics.stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
-from topics.activity_helpers import get_activities_by_org_and_date_range
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list
 
 import logging
@@ -383,12 +381,7 @@ class IndustryOrgsActivities(APIView):
 
     def get(self, request):
         industry_search_str = request.GET['industry']
-        _, max_date = min_and_max_date(request.GET)
-        include_search_by_industry_text = False # explicitly not supported for now
-        orgs_and_activities_by_industry, dates = industry_orgs_activities_stats(industry_search_str, 
-                                                                             include_search_by_industry_text=include_search_by_industry_text,                                                       
-                                                                             counts_only=True,
-                                                                             max_date=max_date) 
+        orgs_and_activities_by_industry, dates = industry_orgs_activities_stats(industry_search_str) 
         dates = {k:v.strftime("%Y-%m-%d") for k,v in dates.items()}
         request_state, _ = prepare_request_state(request)
         resp = Response({"orgs_and_activities_by_industry": orgs_and_activities_by_industry,
@@ -431,12 +424,13 @@ class IndustryGeoOrgsView(APIView):
         industry_cluster = IndustryCluster.get_by_industry_id(industry_id) 
         industry_cluster_uri = industry_cluster.uri if industry_cluster else None
         cc, adm1 = geo_to_country_admin1(geo_code)
-        org_uris_and_counts = org_uris_by_industry_cluster_and_geo(industry_cluster_uri, industry_id, cc, adm1)
+        org_uris_and_counts = org_uris_by_industry_id_country_admin1(industry_id, cc, adm1)
         ind_name = industry_cluster.best_name if industry_cluster else None
         geo_name = country_admin1_full_name(geo_code)
         organizations = []
         found_uris = set()
-        for org_uri, _ in org_uris_and_counts:
+        for row in org_uris_and_counts:
+            org_uri = row[0]
             organization = Organization.self_or_ultimate_target_node(org_uri)
             if organization.uri in found_uris:
                 continue

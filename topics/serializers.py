@@ -11,7 +11,7 @@ from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for
-from .industry_geo import org_uris_by_industry_and_or_geo, country_admin1_full_name, org_uris_by_industry_text_and_geo_code
+from .industry_geo import org_uris_by_industry_id_and_or_geo_code, country_admin1_full_name 
 from .util import elements_from_uri, cacheable_hash
 
 import logging
@@ -406,11 +406,11 @@ class OrgIndustryGeoSourcesSerializer(serializers.BaseSerializer):
 class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
 
     def to_representation(self,instance):
-        search_str = instance["search_str"]
+        # search_str = instance["search_str"]
         combine_same_as_name_only = instance["combine_same_as_name_only"]
         industry_orgs = []
         for ind in instance["industry_ids"]:
-            orgs = org_uris_by_industry_and_or_geo(ind,None,return_orgs_only=True,
+            orgs = org_uris_by_industry_id_and_or_geo_code(ind,None,return_orgs_only=True,
                                                combine_same_as_name_only=combine_same_as_name_only)
             if len(orgs) > 0:
                 industry = IndustryCluster.get_by_industry_id(ind)
@@ -425,17 +425,17 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
                 else:
                     logger.info(f"Industry {ind} doesn't exist")
         industry_orgs = sorted(industry_orgs, key = lambda x: x["title"])
-        if instance["search_str_in_all_geos"]:
-            orgs = org_uris_by_industry_text_and_geo_code(ind,None,
-                                                      combine_same_as_name_only=combine_same_as_name_only)
-            if len(orgs) > 0:
-                industry_orgs.append( {
-                    "table_id": "search_str_all_geos",
-                    "title": f'"{search_str}" in all Geos',
-                    "orgs": orgs_by_connection_count(orgs),
-                    "industry_geo_params": {"industry_id": None,
-                                            "geo_code": None},
-                })
+        # if instance["search_str_in_all_geos"]:
+        #     orgs = org_uris_by_industry_text_and_geo_code(ind,None,
+        #                                               combine_same_as_name_only=combine_same_as_name_only)
+        #     if len(orgs) > 0:
+        #         industry_orgs.append( {
+        #             "table_id": "search_str_all_geos",
+        #             "title": f'"{search_str}" in all Geos',
+        #             "orgs": orgs_by_connection_count(orgs),
+        #             "industry_geo_params": {"industry_id": None,
+        #                                     "geo_code": None},
+        #         })
 
         geo_orgs = []
         all_industry_names = []
@@ -447,10 +447,10 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         for geo in instance["geo_codes"]:
             orgs = set()
             for ind in instance["all_industry_ids"]: 
-                orgs.update(org_uris_by_industry_and_or_geo(int(ind), geo,return_orgs_only=True,
+                orgs.update(org_uris_by_industry_id_and_or_geo_code(int(ind), geo,return_orgs_only=True,
                                                         combine_same_as_name_only=combine_same_as_name_only))
-            orgs.update(org_uris_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True,
-                                                           combine_same_as_name_only=combine_same_as_name_only))
+            # orgs.update(org_uris_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True,
+            #                                                combine_same_as_name_only=combine_same_as_name_only))
             if len(orgs) > 0:
                 geo_loc = country_admin1_full_name(geo)
                 geo_orgs.append({
@@ -467,15 +467,16 @@ class OrgsByIndustryGeoSerializer(serializers.BaseSerializer):
         for ind, geo in instance["indiv_cells"]:
             orgs = set()
             if ind == 'search_str':
-                orgs.update(org_uris_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True,
-                                                               combine_same_as_name_only=combine_same_as_name_only)) 
-                ind_id = "searchstr"
-                ind_desc = f'"{search_str}"'
-                geo_loc = country_admin1_full_name(geo)
+                pass
+            #     orgs.update(org_uris_by_industry_text_and_geo_code(search_str, geo,return_orgs_only=True,
+            #                                                    combine_same_as_name_only=combine_same_as_name_only)) 
+            #     ind_id = "searchstr"
+            #     ind_desc = f'"{search_str}"'
+            #     geo_loc = country_admin1_full_name(geo)
             else:
                 industry = IndustryCluster.get_by_industry_id(ind)
                 if industry is not None:
-                    orgs.update(org_uris_by_industry_and_or_geo(industry, geo,return_orgs_only=True,
+                    orgs.update(org_uris_by_industry_id_and_or_geo_code(industry, geo,return_orgs_only=True,
                                                             combine_same_as_name_only=combine_same_as_name_only))
                     ind_id = ind
                     ind_desc = industry.best_name

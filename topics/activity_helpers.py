@@ -1,36 +1,50 @@
 from django.core.cache import cache
 from neomodel import db
 import logging
-from .models.model_helpers import similar_organizations, similar_organizations_flat
-from .models import IndustryCluster, Article, ActivityMixin, Resource, Organization
+from topics.models import IndustryCluster, Article, ActivityMixin, Resource
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
+from topics.industry_geo.orgs_by_industry_geo import get_org_activities
 from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
 from .util import cache_friendly, blank_or_none
 from .industry_geo import geo_to_country_admin1
 from .organization_search_helpers import get_same_as_name_onlies
-
-ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
-ALL_ACTIVITY_LIST= ORG_ACTIVITY_LIST + "|RoleActivity"
+from topics.util import ALL_ACTIVITY_LIST, ORG_ACTIVITY_LIST
 
 logger = logging.getLogger(__name__)
 
 def get_activities_by_country_and_date_range(geo_code,min_date,max_date,limit=20):
-    country, admin1_code = geo_to_country_admin1(geo_code)
-    activity_article_uris = activities_by_region(country,min_date,max_date,
-                                             admin1_code=admin1_code,counts_only=False,limit=limit)
-    return activity_articles_to_api_results(activity_article_uris)
-
+    country_code, admin1_code = geo_to_country_admin1(geo_code)
+    activity_article_uris = get_org_activities(min_date,max_date,None,country_code,admin1_code)
+    return activity_articles_to_api_results(activity_article_uris,limit)
 
 def get_activities_by_source_and_date_range(source_name, min_date, max_date, limit=20):
-    activity_article_uris = activities_by_source(source_name, min_date, max_date, limit=limit)
-    return activity_articles_to_api_results(activity_article_uris)
-
+    activity_article_uris = activities_by_source(source_name, min_date, max_date, limit)
+    return activity_articles_to_api_results(activity_article_uris,limit)
 
 def get_activities_by_industry_and_date_range(industry, min_date, max_date, limit=20):
-    activity_article_uris = activities_by_industry(industry, min_date=min_date,
-                                max_date=max_date, limit=limit)
-    return activity_articles_to_api_results(activity_article_uris)
+    if isinstance(industry, IndustryCluster):
+        industry = industry.topicId
+    activity_article_uris = get_org_activities(min_date,max_date,industry,None,None)
+    return activity_articles_to_api_results(activity_article_uris,limit)
 
+def get_activities_by_industry_geo_and_date_range(industry, geo_code, min_date, max_date,limit=None):
+    if isinstance(industry, IndustryCluster):
+        industry = industry.topicId
+    country_code, admin1_code = geo_to_country_admin1(geo_code)
+    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code)
+    return activity_articles_to_api_results(activity_article_uris,limit)
+
+def get_activities_by_industry_country_admin1_and_date_range(industry, country_code, admin1_code, min_date, max_date,limit=None):
+    if isinstance(industry, IndustryCluster):
+        industry = industry.topicId
+    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code)
+    return activity_articles_to_api_results(activity_article_uris,limit)
+
+def activities_by_industry(industry, min_date, max_date, limit=None):
+    if isinstance(industry, IndustryCluster):
+        industry = industry.topicId
+    activity_article_uris = get_org_activities(min_date,max_date,industry,None, None)
+    return activity_article_uris[:limit]
 
 def get_activities_by_org_and_date_range(organization,min_date,max_date,include_similar_orgs=False,combine_same_as_name_only=True,limit=None):
     uri_list = [organization.uri]
@@ -54,26 +68,6 @@ def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_
     activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,limit)
     logger.debug(f"query done")
     return activity_article_uris
-
-def get_activities_by_industry_geo_and_date_range(industry_or_industry_id, geo_code, min_date, max_date,limit=None):
-    country_code, admin1_code = geo_to_country_admin1(geo_code)
-    if isinstance(industry_or_industry_id, IndustryCluster):
-        industry = industry_or_industry_id
-    else:
-        industry = IndustryCluster.nodes.get_or_none(topicId=industry_or_industry_id) if (
-            isinstance(industry_or_industry_id, int)
-        ) else None
-    if blank_or_none(country_code) and blank_or_none(industry):
-        logger.warning(f"No industry or geo found for {industry_or_industry_id} and {geo_code}")
-        return []
-    elif blank_or_none(country_code):
-        activity_article_uris = activities_by_industry(industry,min_date, max_date, limit=limit)
-    elif blank_or_none(industry):
-        activity_article_uris = activities_by_region(country_code,min_date,max_date,admin1_code=admin1_code, limit=limit)
-    else:
-        activity_article_uris = activities_by_industry_region(industry,country_code,admin1_code,min_date,max_date, limit=limit)
-    return activity_articles_to_api_results(activity_article_uris)
-
 
 def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
     logger.debug(f"activities_by_org_uris {len(org_uris)} org_uris, {min_date} - {max_date}")
@@ -102,14 +96,14 @@ def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
         {where_etc}
         {limit_str}
     """
-    return query_and_cache(query, cache_key, False)
+    return query_and_cache(query, cache_key)
 
-def activities_by_source(source_name, min_date, max_date, counts_only=False,limit=None):
+def activities_by_source(source_name, min_date, max_date, limit=None):
     cache_key = cache_friendly(f"activities_{source_name}_{min_date}_{max_date}_{limit}")
     res = cache.get(cache_key)
     if res is not None:
-        return len(res) if counts_only is True else res
-    limit_str = f" LIMIT {limit} " if limit else ""
+        return res
+    limit_str = f" LIMIT {limit} " if limit is not None else ""
     query = f"""
     MATCH (art: Article)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
@@ -124,93 +118,15 @@ def activities_by_source(source_name, min_date, max_date, counts_only=False,limi
     ORDER by art.datePublished DESC
     {limit_str}
     """
-    return query_and_cache(query, cache_key, counts_only)
-
-def activities_by_industry_region(industry,country_code,admin1_code,min_date,max_date,limit=None):
-    cache_key = cache_friendly(f"activities_{industry.topicId}_{country_code}_{admin1_code}_{min_date}_{max_date}_{limit}")
-    res = cache.get(cache_key)
-    if res is not None:
-        return res
-    admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else "" 
-    limit_str = f" LIMIT {limit} " if limit else ""
-    where_etc = f"""
-        WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-        AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')   
-        AND o.internalMergedSameAsHighToUri IS NULL
-        AND l.countryCode = '{country_code}'
-        AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-        {admin1_str}
-        RETURN DISTINCT act.uri, art.uri, art.datePublished
-        ORDER BY art.datePublished DESC
-    """
-    query = f"""MATCH (art: Article)<-[:documentSource]-(act:{ORG_ACTIVITY_LIST})--(o:Organization)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-    , (o)-[:industryClusterPrimary]->(ind:Resource&IndustryCluster {{uri: "{industry.uri}" }})
-    {where_etc}
-    {limit_str}
-    UNION
-    MATCH (art: Article)<-[:documentSource]-(act:RoleActivity)-[:withRole]->(Role)<-[:hasRole]-(o:Organization)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-    , (o)-[:industryClusterPrimary]->(ind:Resource&IndustryCluster {{uri: "{industry.uri}" }})
-    {where_etc}
-    {limit_str}
-    """
-    return query_and_cache(query, cache_key, counts_only=False)
+    return query_and_cache(query, cache_key)
 
 
-def activities_by_region(country_code, min_date, max_date, admin1_code=None, counts_only=False,limit=None):
-    cache_key=cache_friendly(f"activities_{country_code}_{admin1_code}_{min_date}_{max_date}_{limit}")
-    res = cache.get(cache_key)
-    if res is not None:
-        return len(res) if counts_only is True else res
-    admin1_str = f" AND l.admin1Code = '{admin1_code}' " if admin1_code else ""
-
-    query = f"""MATCH (art: Article)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})-[:whereHighGeoNamesLocation]->(l:GeoNamesLocation)
-                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-                AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-                AND l.countryCode = '{country_code}'
-                {admin1_str}
-                RETURN DISTINCT  act.uri, art.uri, art.datePublished
-                UNION
-                MATCH
-                (act:{ALL_ACTIVITY_LIST})-[:documentSource]->(art: Article)<-[:documentSource]-(:Organization|Site)-[:basedInHighGeoNamesLocation]->(l:GeoNamesLocation)
-                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-                AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-                AND l.countryCode = '{country_code}'
-                {admin1_str}
-                RETURN DISTINCT act.uri, art.uri, art.datePublished"""
-    return query_and_cache(query, cache_key, counts_only)
-
-
-def activities_by_industry(industry, min_date, max_date, counts_only=False, limit=None):
-    cache_key = cache_friendly(f"activities_{industry.topicId}_{min_date}_{max_date}_{limit}")
-    res = cache.get(cache_key)
-    if res is not None:
-        return len(res) if counts_only is True else res
-    limit_str = f" LIMIT {limit} " if limit else ""
-
-    query = f"""
-    MATCH (art:Article)<-[:documentSource]-(org: Organization)-[:industryClusterPrimary]->(i:Resource&IndustryCluster {{uri: "{industry.uri}" }})
-         , (art)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})
-    WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-    AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-    AND org.internalMergedSameAsHighToUri IS NULL
-    AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-    RETURN DISTINCT act.uri, art.uri, art.datePublished
-    ORDER BY art.datePublished DESC
-    {limit_str}
-    """
-    return query_and_cache(query, cache_key, counts_only)
-
-def query_and_cache(query, cache_key, counts_only):
+def query_and_cache(query, cache_key):
     logger.debug(query)
     vals, _ = db.cypher_query(query)
     vals = neo4j_date_converter(vals)
     cache.set(cache_key, vals)
-    if counts_only is True:
-        return len(vals)
-    else:
-        return vals
+    return vals
 
 
 def activity_articles_to_api_results(activity_article_uris, limit=None):

@@ -17,7 +17,7 @@ from topics.serializers import only_valid_relationships, FamilyTreeSerializer
 from topics.industry_geo.orgs_by_industry_geo import build_region_hierarchy, prepare_headers
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data, nuke_cache
-from topics.industry_geo import org_uris_by_industry_and_or_geo, geo_codes_for_region, GEO_PARENT_CHILDREN
+from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, geo_codes_for_region, geo_parent_children
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 import pickle
 from topics.organization_search_helpers import search_organizations_by_name
@@ -145,20 +145,20 @@ class TestRegionHierarchy(TestCase):
         assert widths == {'k1':7, 'k1#k12':2, 'k1#k11':5, 'k1#k11#k111': 3, 'k1#k11#k112':2}
 
     def test_parent_children_for_us_state(self):
-        assert GEO_PARENT_CHILDREN['US-CA'] == {'parent': 'Pacific', 'id': 'US-CA', 'children': set()}
+        assert geo_parent_children()['US-CA'] == {'parent': 'Pacific', 'id': 'US-CA', 'children': set()}
 
     def test_parent_children_for_european_country(self):
-        assert GEO_PARENT_CHILDREN['NL'] == {'parent': 'Western Europe', 'id': 'NL', 'children': set()}
+        assert geo_parent_children()['NL'] == {'parent': 'Western Europe', 'id': 'NL', 'children': set()}
 
     def test_parent_children_for_us_region(self):
-        res = GEO_PARENT_CHILDREN['South']
+        res = geo_parent_children()['South']
         assert res == {'parent': 'US', 
                         'id': 'South',
                         'children': {'West South Central', 
                                         'East South Central', 'South Atlantic'}}, f"Got {res}"
         
     def test_parent_children_for_un_region(self):
-        assert GEO_PARENT_CHILDREN["Latin America and the Caribbean"] == {'parent': 'Americas',
+        assert geo_parent_children()["Latin America and the Caribbean"] == {'parent': 'Americas',
                                                                           'id': 'Latin America and the Caribbean', 
                                                                           'children': {'Central America', 
                                                                                        'South America', 'Caribbean'}}
@@ -435,7 +435,7 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
         """            
         db.cypher_query(query)
         RDFPostProcessor().run_all_in_order()
-        refresh_geo_data()
+        refresh_geo_data(fill_blanks=True)
 
     def test_search_by_name_check_counts_without_same_as_name_only(self):
         sorted_res = search_organizations_by_name("foo",True)
@@ -452,27 +452,27 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
 
 
     def test_search_by_geo_counts(self):
-        res = org_uris_by_industry_and_or_geo(None, 'US-OH')
+        res = org_uris_by_industry_id_and_or_geo_code(None, 'US-OH')
         expected = [('https://1145.am/db/100/foo_newone', 3), 
                        ('https://1145.am/db/102/bar_newone', 3), 
                        ('https://1145.am/db/103/bar_oldone', 2)]
         assert res == expected, f"Got {res}, expected {expected}"
 
     def test_ignores_weight_1(self):
-        res = org_uris_by_industry_and_or_geo(None, 'US-VA')
+        res = org_uris_by_industry_id_and_or_geo_code(None, 'US-VA')
         assert res == [] # Only one org is linked to a US-VA location and that is with weight = 1
 
     def test_search_by_industry_counts_same_as_name_only_false(self):
-        res = org_uris_by_industry_and_or_geo(23, None, combine_same_as_name_only=False)
-        assert res == [('https://1145.am/db/100/foo_newone', 3), 
-                       ('https://1145.am/db/101/foo_oldone', 2)]
+        res = org_uris_by_industry_id_and_or_geo_code(23, None, combine_same_as_name_only=False)
+        assert res == [('https://1145.am/db/100/foo_newone', 3, 100, [[None, None, None]]), 
+                       ('https://1145.am/db/101/foo_oldone', 2, 101, [[None, None, None]])], f"Got {res}"
 
     def test_search_by_industry_counts_same_as_name_only_true(self):
-        res = org_uris_by_industry_and_or_geo(23, None, combine_same_as_name_only=True)
+        res = org_uris_by_industry_id_and_or_geo_code(23, None, combine_same_as_name_only=True)
         assert res == [('https://1145.am/db/100/foo_newone', 3)]
 
     def test_search_by_industry_geo_counts(self):
-        res = org_uris_by_industry_and_or_geo(23, 'US-OH')
+        res = org_uris_by_industry_id_and_or_geo_code(23, 'US-OH')
         assert res == [('https://1145.am/db/100/foo_newone', 3)]
         
     def test_search_by_same_as_name_only(self):
@@ -524,7 +524,7 @@ class TestIgnoreLowRelativeWeightIndustryCluster(TestCase):
             db.cypher_query(query)
         R = RDFPostProcessor()
         R.run_all_in_order()
-        refresh_geo_data()
+        refresh_geo_data(fill_blanks=False)
 
     def test_does_not_find_org_with_low_relative_weight(self):
         ind_id = 235 #"https://1145.am/db/industry/235_agetech_caretech_heathtech_tech"
@@ -532,7 +532,7 @@ class TestIgnoreLowRelativeWeightIndustryCluster(TestCase):
         res, _ = db.cypher_query(query)
         as_set = set( [tuple(x) for x in res])
         assert as_set == {('https://1145.am/db/2349/Johnson_Johnson', 2), ('https://1145.am/db/870/Capital_Rx', 3)} # J&J sum weight = 1277
-        caretech_uris = org_uris_by_industry_and_or_geo(235, None)
+        caretech_uris = org_uris_by_industry_id_and_or_geo_code(235, None)
         assert set([x[0] for x in caretech_uris]) == {'https://1145.am/db/870/Capital_Rx'}               
         
     def test_org_does_not_include_low_weight_industries(self):
@@ -604,7 +604,7 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
             db.cypher_query(query)
         R = RDFPostProcessor()
         R.run_all_in_order()
-        refresh_geo_data()
+        refresh_geo_data(fill_blanks=False)
 
     def test_does_not_find_org_with_low_relative_weight(self):
         query = """MATCH (o: Resource&Organization)-[b:basedInHighGeoNamesLocation]-(x:GeoNamesLocation) where x.admin1Code = 'CA' and x.countryCode = 'US' return o.uri, b.weight"""
@@ -614,7 +614,7 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
         assert as_set == {('https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc', 10), ('https://1145.am/db/88496/Exelixis_Inc', 5), 
                             ('https://1145.am/db/88496/Exelixis_Inc', 34), ('https://1145.am/db/88496/Exelixis_Inc', 7), 
                             ('https://1145.am/db/90949/Moderna', 1) }
-        ca_uris = org_uris_by_industry_and_or_geo(None, "US-CA")
+        ca_uris = org_uris_by_industry_id_and_or_geo_code(None, "US-CA")
         assert set([x[0] for x in ca_uris]) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
 
     def test_org_does_not_include_low_relative_weight_locs(self):
@@ -743,7 +743,7 @@ class TestDisentanglingMergedCells(TestCase):
         assert len(target_node.operations) == 4
         weights_query = f"MATCH (r: Resource {{uri:'{target_uri}'}})-[rel:basedInHighGeoNamesLocation]-(x) return x.uri, rel.weight"
         vals,_ = db.cypher_query(weights_query)
-        assert len(vals) == 2
+        assert len(vals) == 2, f"Got {vals} (expected 2 entries)"
         assert ['https://1145.am/db/33/loc1', 2] in vals
         assert ['https://1145.am/db/340/loc2', 2] in vals
 
@@ -796,12 +796,13 @@ class TestDisentanglingMergedCells(TestCase):
         ind1 = Resource.get_by_uri('https://1145.am/db/33/ind1')
         ind2 = Resource.get_by_uri('https://1145.am/db/34/ind2')
         ind1_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge,ind1)
-        assert ind1_orgs == { (orga,1), (orgb,1 )}
+        assert ind1_orgs == { (orga,1), (orgb,1 )}, f"Got {ind1_orgs}"
         ind1_sources = get_source_orgs_articles_for(orge,ind1)
-        assert set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources]) == {
+        res = set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources])
+        assert res == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'),
             ('https://1145.am/db/9999/orgb',  1, 'https://1145.am/db/article_orgb')
-        }
+        }, f"Got {res}"
         ind2_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge, ind2)
         assert ind2_orgs == { (orge,3),(orgd,2),(orgc,1)} # orgs d and e were linked to the industry cluster but also had extra data merged into them
         ind2_sources = get_source_orgs_articles_for(orge, ind2)
@@ -842,7 +843,7 @@ class TestDisentanglingMergedCells(TestCase):
         loc2 = Resource.get_by_uri('https://1145.am/db/340/loc2')
 
         uspa_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orgd, 'US-PA')
-        assert uspa_orgs == { (orga,1) }
+        assert uspa_orgs == { (orga,1) }, f"Got {uspa_orgs}"
         uspa_sources = get_source_orgs_articles_for(orgd, 'US-PA')
         assert set([(o.uri,weight,a.uri) for o,weight,a in uspa_sources]) == {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga')
