@@ -53,6 +53,10 @@ class Resource(StructuredNode):
     internalMergedSameAsHighToUri = StringProperty()
 
     @property
+    def basedInHighGeoNamesLocation(self):
+        return [] # override in sub-classes
+
+    @property
     def pk(self):
         return self.internalId
 
