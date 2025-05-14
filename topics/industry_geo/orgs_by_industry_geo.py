@@ -34,9 +34,10 @@ def get_org_activity_counts(min_date,max_date,industry,country_code,admin1):
     return len(acts)
 
 def get_org_activities(min_date,max_date,industry,country_code,admin1):
-    org_datas = cache.get(get_org_activities_cache_key(min_date,max_date,industry,country_code,admin1))
+    cache_key = get_org_activities_cache_key(min_date,max_date,industry,country_code,admin1)
+    org_datas = cache.get(cache_key)
     if org_datas is None:
-        raise ValueError(f"No cached stats for {min_date} {max_date} {industry} {country_code} {admin1}")
+        raise ValueError(f"No cached stats for {min_date} {max_date} {industry} {country_code} {admin1} (key {cache_key})")
     acts = set()
     for row in org_datas:
         act_datas = row[-1]

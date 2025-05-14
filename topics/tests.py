@@ -613,9 +613,13 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
         # DB has Moderna in US-CA with weight of 1
         assert as_set == {('https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc', 10), ('https://1145.am/db/88496/Exelixis_Inc', 5), 
                             ('https://1145.am/db/88496/Exelixis_Inc', 34), ('https://1145.am/db/88496/Exelixis_Inc', 7), 
-                            ('https://1145.am/db/90949/Moderna', 1) }
+                            ('https://1145.am/db/90949/Moderna', 1) }, f"Got {as_set}"
         ca_uris = org_uris_by_industry_id_and_or_geo_code(None, "US-CA")
-        assert set([x[0] for x in ca_uris]) == {'https://1145.am/db/88496/Exelixis_Inc', 'https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc'}
+        us_ca_as_set = set([x[0] for x in ca_uris])
+        assert us_ca_as_set == {'https://1145.am/db/88496/Exelixis_Inc'}, f"Got {us_ca_as_set}"
+        ie_uris = org_uris_by_industry_id_and_or_geo_code(None, "IE")
+        ie_as_set = set([x[0] for x in ie_uris])
+        assert ie_as_set == {"https://1145.am/db/88387/Jazz_Pharmaceuticals_Plc"}, f"Got {ie_as_set}"
 
     def test_org_does_not_include_low_relative_weight_locs(self):
         query="MATCH (o: Resource&Organization {uri:'https://1145.am/db/90949/Moderna'})-[b:basedInHighGeoNamesLocation]->(l:GeoNamesLocation) RETURN o.uri, b.weight, l.uri"

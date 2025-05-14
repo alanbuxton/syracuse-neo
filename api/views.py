@@ -101,7 +101,11 @@ class GeoNamesViewSet(NeomodelViewSet):
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
-        min_date, max_date = min_and_max_date(self.request.GET)
+        days_ago = self.request.query_params.get("days_ago","90")
+        days_ago = int(days_ago)
+        if days_ago not in [7,30]:
+            days_ago = 90
+        min_date, max_date = min_and_max_date(self.request.GET, days_diff=days_ago)
         org_uri = self.request.query_params.get("org_uri",None)
         org_name = self.request.query_params.get("org_name",None)
         types_to_keep = self.request.query_params.getlist("type",[])

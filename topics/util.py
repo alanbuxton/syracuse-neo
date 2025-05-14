@@ -54,7 +54,7 @@ def elements_from_uri(uri):
     }
 
 
-def min_and_max_date(get_params):
+def min_and_max_date(get_params, days_diff=7):
     min_date = get_params.get("min_date")
     if isinstance(min_date, str):
         min_date = date.fromisoformat(min_date)
@@ -65,7 +65,7 @@ def min_and_max_date(get_params):
     if max_date is None:
         max_date = cache.get("activity_stats_last_updated")
     if max_date is not None and min_date is None:
-        min_date = max_date - timedelta(days=7)
+        min_date = max_date - timedelta(days=days_diff)
     min_date = start_of_day(min_date)
     return min_date, max_date
 

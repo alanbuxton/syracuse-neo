@@ -1407,7 +1407,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_api_finds_by_industry_name(self):
         client = self.client
-        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&max_date=2024-06-02"
+        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&max_date=2024-06-02&days_ago=7"
         # No legal results because matching legal firms are only participants, not buyers etc
         client.force_login(self.user)
         resp = client.get(path)
