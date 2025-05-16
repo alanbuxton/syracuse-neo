@@ -35,7 +35,7 @@ from dump.embeddings.embedding_utils import apply_latest_org_embeddings
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
     make_email_notif_from_orgs,
-    recents_by_user_min_max_date
+    recents_by_user_min_max_date, tracked_items_between,
 )
 from trackeditems.models import TrackedItem, ActivityNotification
 from topics.models import Article, CorporateFinanceActivity
@@ -247,6 +247,7 @@ class EndToEndTests20240602(TestCase):
         _ = TrackedItem.objects.create(user=self.user5, 
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
+        self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
 
     def test_adds_model_classes_with_multiple_labels(self):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
@@ -1440,6 +1441,23 @@ class EndToEndTests20240602(TestCase):
         assert j['count'] == 1, f"Found {j['count']}"
         act_uris = [x['activity_uri'] for x in j['results']]
         assert act_uris[0] == "https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition", f"Got {act_uris}"
+
+    def test_api_handles_min_date_newer_than_cache_min_date(self):
+        max_date = self.max_date
+        min_date = self.min_date
+        min_date_for_activities = min_date + timedelta(days=2)
+        tis = [
+            TrackedItem(industry_id=32),
+            TrackedItem(industry_id=647)
+        ]
+        acts, _ = tracked_items_between(tis, min_date, max_date)
+        assert [x['activity_uri'] for x in acts] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 
+                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition', 
+                                                        'https://1145.am/db/3476441/Dcamera_Group-Acquisition']
+        acts2, _ = tracked_items_between(tis, min_date_for_activities, max_date)
+        assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 
+                                                       'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
+
 
 
 

@@ -2,7 +2,7 @@ import re
 import string
 from urllib.parse import urlparse
 import hashlib
-from datetime import datetime, timedelta, time, date
+from datetime import datetime, timedelta, time, date, timezone
 from django.core.cache import cache
 
 ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
@@ -53,7 +53,6 @@ def elements_from_uri(uri):
         "name": org_name,
     }
 
-
 def min_and_max_date(get_params, days_diff=7):
     min_date = get_params.get("min_date")
     if isinstance(min_date, str):
@@ -62,6 +61,8 @@ def min_and_max_date(get_params, days_diff=7):
     if isinstance(max_date, str):
         max_date = date.fromisoformat(max_date)
     max_date = end_of_day(max_date)
+    if max_date and max_date.tzinfo is None:
+        max_date = max_date.replace(tzinfo=timezone.utc)
     if max_date is None:
         max_date = cache.get("activity_stats_last_updated")
     if max_date is not None and min_date is None:
@@ -72,10 +73,16 @@ def min_and_max_date(get_params, days_diff=7):
 def end_of_day(d):
     if d is None:
         return None
-    return datetime.combine(d, time.max)
+    combined = datetime.combine(d, time.max)
+    if combined.tzinfo is None:
+        combined = combined.replace(tzinfo=timezone.utc)
+    return combined
 
 def start_of_day(d):
-    return datetime.combine(d, time.min)
+    combined = datetime.combine(d, time.min)
+    if combined.tzinfo is None:
+        combined = combined.replace(tzinfo=timezone.utc)
+    return combined
 
 def date_minus(to_date, days):
     prev_date =  to_date - timedelta(days=days)

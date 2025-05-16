@@ -35,7 +35,10 @@ def recents_by_user_min_max_date(user, min_date, max_date):
 def tracked_items_between(tracked_items, min_date, max_date):
     org_uris = []
     matching_activity_orgs = []
-    min_date, max_date = min_and_max_date({"min_date":min_date,"max_date":max_date})
+    # min_date will always be less than 7 days
+    seven_days_ago, max_date = min_and_max_date({"max_date":max_date},days_diff=7)
+    assert seven_days_ago <= min_date, f"Expected {seven_days_ago} to be same or older than {min_date} (compared to {max_date})"
+
     for ti in tracked_items:
         if ti.organization_uri is not None:
             org = ti.organization_or_merged_org
@@ -51,10 +54,11 @@ def tracked_items_between(tracked_items, min_date, max_date):
         elif ti.industry_id is not None or ti.region is not None:
             country_code, admin1_code = geo_to_country_admin1(ti.region)
             acts = get_activities_by_industry_country_admin1_and_date_range(ti.industry_id, 
-                            country_code, admin1_code, min_date, max_date)
+                            country_code, admin1_code, seven_days_ago, max_date)
             matching_activity_orgs.extend(acts)
-    org_activities = get_activities_by_org_uris_and_date_range(org_uris, min_date, max_date,limit=100)
+    org_activities = get_activities_by_org_uris_and_date_range(org_uris, seven_days_ago, max_date,limit=100)
     matching_activity_orgs.extend(org_activities)
+    matching_activity_orgs = filter(lambda x: x["date_published"] >= min_date, matching_activity_orgs)
     matching_activity_orgs = sorted(matching_activity_orgs, key = lambda x: x['date_published'], reverse=True)
     serialized = OrgIndGeoSerializer(tracked_items,many=True)
     return matching_activity_orgs, serialized.data
