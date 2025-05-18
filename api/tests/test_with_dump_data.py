@@ -4,7 +4,7 @@ from collections import OrderedDict
 from topics.models import *
 from topics.stats_helpers import get_stats
 from auth_extensions.anon_user_utils import create_anon_user
-from topics.activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry, 
+from topics.activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry,
             get_activities_by_industry_geo_and_date_range,
             get_activities_by_org_and_date_range,
             )
@@ -23,7 +23,7 @@ from integration.rdf_post_processor import RDFPostProcessor
 from topics.organization_search_helpers import get_same_as_name_onlies, get_by_internal_clean_name
 import json
 import re
-from topics.serializers import (FamilyTreeSerializer, 
+from topics.serializers import (FamilyTreeSerializer,
     create_min_date_pretty_print_data, orgs_by_connection_count,
 )
 from topics.industry_geo.orgs_by_industry_geo import combined_industry_geo_results
@@ -73,7 +73,7 @@ class EndToEndTests20140205(TestCase):
 
     def test_api_filters_by_activity_type(self):
         path = "/api/v1/activities/?industry_name=social network&industry_name=fracking&industry_name=homeware&max_date=2014-02-05"
-        client = self.client 
+        client = self.client
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
@@ -96,6 +96,15 @@ class EndToEndTests20140205(TestCase):
         act_uris = [x['activity_uri'] for x in j['results']]
         assert act_uris == ["https://1145.am/db/2946632/Annual_Accounts"]
 
+    def test_shows_recent_activities_for_org(self):
+        path = "/organization/activities/uri/1145.am/db/2946625/Cuadrilla_Resources"
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get(path)
+        assert resp.status_code == 200
+        content = str(resp.content)
+        assert "https://1145.am/db/2946625/Start_Fracking_At_Two" in content
+
 class EndToEndTests20190110(TestCase):
 
     def setUpTestData():
@@ -114,7 +123,7 @@ class EndToEndTests20190110(TestCase):
         _ = TrackedItem.objects.create(user=self.user2,
                                         industry_id=146,
                                         region="US-TX")
-        
+
     def test_api_finds_by_multiple_country_and_industry(self):
         client = self.client
         path = "/api/v1/activities/?industry_id=12&location_id=CA&location_id=IL&max_date=2019-01-10"
@@ -125,8 +134,8 @@ class EndToEndTests20190110(TestCase):
         assert resp.status_code == 200
         j = json.loads(resp.content)
         assert j['count'] == 5, f"Found {j['count']}"
-        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
-                            'https://1145.am/db/3463554/Ams-Acquisition', 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment', 
+        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment',
+                            'https://1145.am/db/3463554/Ams-Acquisition', 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc-Seedo_Corp-Seedo_Corp-Investment',
                             'https://1145.am/db/3457416/Isracann_Biosciences_Inc-Investment', 'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
 
     def test_api_finds_by_single_country_and_industry(self):
@@ -136,8 +145,8 @@ class EndToEndTests20190110(TestCase):
         resp = client.get(path)
         j = json.loads(resp.content)
         assert j['count'] == 3, f"Found {j['count']}"
-        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment', 
-                                                             'https://1145.am/db/3463554/Ams-Acquisition', 
+        assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment',
+                                                             'https://1145.am/db/3463554/Ams-Acquisition',
                                                              'https://1145.am/db/3453527/Canntrust_Holdings_Inc-Ipo-Common_Shares']
 
     def test_shows_activity_articles_for_org(self):
@@ -154,10 +163,10 @@ class EndToEndTests20190110(TestCase):
         client = self.client
         path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
         response = client.get(path)
-        assert response.status_code == 403 
+        assert response.status_code == 403
         client.force_login(self.anon)
         response = client.get(path)
-        assert response.status_code == 403 
+        assert response.status_code == 403
         client.force_login(self.user)
         response = client.get(path)
         assert response.status_code == 200
@@ -167,7 +176,7 @@ class EndToEndTests20190110(TestCase):
         assert "Site stats calculating, please check later" not in content
         assert "Pear Therapeutics raises $64M, launches prescription app for opioid use disorder" in content
         assert len(re.findall("<b>Region:</b> San Francisco",content)) == 3
-        assert len(re.findall("<b>Region:</b> Ontario",content)) == 2 
+        assert len(re.findall("<b>Region:</b> Ontario",content)) == 2
 
     def test_always_show_source_activities(self):
         client = self.client
@@ -239,12 +248,12 @@ class EndToEndTests20240602(TestCase):
         self.anon, _ = create_anon_user()
         self.ts4 = time.time()
         self.user4 = get_user_model().objects.create(username=f"test4-{self.ts4}")
-        _ = TrackedItem.objects.create(user=self.user4, 
+        _ = TrackedItem.objects.create(user=self.user4,
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=False)
         self.ts5 = time.time()
         self.user5 = get_user_model().objects.create(username=f"test5-{self.ts5}")
-        _ = TrackedItem.objects.create(user=self.user5, 
+        _ = TrackedItem.objects.create(user=self.user5,
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
         self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
@@ -253,11 +262,11 @@ class EndToEndTests20240602(TestCase):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
         res = Resource.nodes.get_or_none(uri=uri)
         assert res.uri == uri
-        assert res.__class_name_is_label__ is False 
+        assert res.__class_name_is_label__ is False
         assert res.whereHighClean == ['South Africa']
 
     def test_data_list_choice_field_include_great_britain_option(self):
-        geo = GeoSerializer()   
+        geo = GeoSerializer()
         field = geo.fields['country_or_region']
         assert 'United Kingdom of Great Britain and Northern Ireland' in field.choices.keys(), "Great Britain not in field choices"
         assert 'United Kingdom of Great Britain and Northern Ireland' in field.choices.values(), "Great Britain not in field choices"
@@ -302,11 +311,11 @@ class EndToEndTests20240602(TestCase):
         o = Organization.self_or_ultimate_target_node(source_uri)
         clean_node_data, clean_edge_data, node_details, edge_details = graph_centered_on(o,
                                                             source_names=Article.all_sources())
-        clean_uris = set([x['id'] for x in clean_node_data]) 
+        clean_uris = set([x['id'] for x in clean_node_data])
         expected = set(['https://1145.am/db/1736082/Berlin', 'https://1145.am/db/1736082/Brandenburg', 'https://1145.am/db/1736082/Tesla-Added-Berlin',
-                                    'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla', 
-                                    'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_', 
-                                    'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159', 
+                                    'https://1145.am/db/1736082/Gr_Enheide', 'https://1145.am/db/1736082/Tesla',
+                                    'https://1145.am/db/1736082/techcrunchcom_2019_12_21_tesla-nears-land-deal-for-german-gigafactory-outside-of-berlin_',
+                                    'https://1145.am/db/geonames_location/2921044', 'https://1145.am/db/geonames_location/2945356', 'https://1145.am/db/geonames_location/2950159',
                                     'https://1145.am/db/geonames_location/553898', 'https://1145.am/db/industry/302_automakers_carmakers_automaker_automaking'])
         assert clean_uris == expected, f"Got {clean_uris} - diff = {clean_uris.symmetric_difference(expected)}"
         assert len(clean_edge_data) == 16
@@ -378,32 +387,32 @@ class EndToEndTests20240602(TestCase):
     def test_stats(self):
         max_date = date.fromisoformat("2024-06-02")
         counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
-        expected = {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1), 
-                                ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4), 
+        expected = {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1),
+                                ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4),
                                 ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
-                                ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 434), ('Article', 213), 
-                                ('CorporateFinanceActivity', 189), 
+                                ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 434), ('Article', 213),
+                                ('CorporateFinanceActivity', 189),
                                 ('AnalystRatingActivity', 1), ('LocationActivity', 7), ('Role', 11), ('RoleActivity', 12)}
 
         counts_set = set(counts)
         assert counts_set == expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}"
         # recents by geo now does not include activities with "where" in - in case of false positives. TODO review this in future
-        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1), 
-                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1), 
-                                          ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1), 
-                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1), 
-                                          ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1), 
+        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1),
+                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1),
+                                          ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1),
+                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
+                                          ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
                                           ('US', 'United States of America', 14, 14, 33)]
 
-        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1), 
-                                                ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2), 
-                                                ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3), 
-                                                ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1), 
+        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1),
+                                                ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2),
+                                                ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3),
+                                                ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
                                                 ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1), 
-                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1), 
-                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2), 
-                                            (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1), 
+        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1),
+                                            (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1),
+                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2),
+                                            (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1),
                                             (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
 
     def test_recent_activities_by_industry(self):
@@ -412,10 +421,10 @@ class EndToEndTests20240602(TestCase):
         sample_ind = IndustryCluster.nodes.get_or_none(topicId=32)
         res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date)
         assert len(res) == 6, f"got {res}"
-        assert res == [('https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 'https://1145.am/db/3475299/wwwprnewswirecom_news-releases_correction----napajen-pharma-inc-300775556html', datetime(2024, 5, 29, 13, 52, tzinfo=timezone.utc)), 
-                        ('https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)), 
-                        ('https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)), 
-                        ('https://1145.am/db/2543228/Takeda-Acquisition-Business', 'https://1145.am/db/2543228/wwwfiercepharmacom_pharma-asia_takeda-debt-after-shire-buyout-but-don-t-expect-otc-unit-selloff-ceo', datetime(2024, 3, 7, 17, 12, 27, tzinfo=timezone.utc)), 
+        assert res == [('https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 'https://1145.am/db/3475299/wwwprnewswirecom_news-releases_correction----napajen-pharma-inc-300775556html', datetime(2024, 5, 29, 13, 52, tzinfo=timezone.utc)),
+                        ('https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)),
+                        ('https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)),
+                        ('https://1145.am/db/2543228/Takeda-Acquisition-Business', 'https://1145.am/db/2543228/wwwfiercepharmacom_pharma-asia_takeda-debt-after-shire-buyout-but-don-t-expect-otc-unit-selloff-ceo', datetime(2024, 3, 7, 17, 12, 27, tzinfo=timezone.utc)),
                         ('https://1145.am/db/2543227/Bristol-Myers-Merger', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc)),
                         ('https://1145.am/db/2543227/Celgene-Acquisition', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc))
         ]
@@ -432,9 +441,9 @@ class EndToEndTests20240602(TestCase):
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
         assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 8)]
         uris = [x['activity_uri'] for x in matching_activity_orgs]
-        assert uris == ['https://1145.am/db/3475220/Novel_Bellevue-Investment', 'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B', 
-                        'https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 'https://1145.am/db/3448296/Urban_One-Ipo-Senior_Subordinated_Notes', 
-                        'https://1145.am/db/3447359/Us_Zinc-Acquisition', 'https://1145.am/db/3446501/Pure_Fishing-Acquisition', 
+        assert uris == ['https://1145.am/db/3475220/Novel_Bellevue-Investment', 'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B',
+                        'https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 'https://1145.am/db/3448296/Urban_One-Ipo-Senior_Subordinated_Notes',
+                        'https://1145.am/db/3447359/Us_Zinc-Acquisition', 'https://1145.am/db/3446501/Pure_Fishing-Acquisition',
                         'https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/2543227/Celgene-Acquisition']
 
     def test_search_by_industry_and_geo(self):
@@ -444,7 +453,7 @@ class EndToEndTests20240602(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
         org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
-        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
+        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5),
                            ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
         assert org_data == expected, f"Got {org_data} expected {expected}"
 
@@ -455,8 +464,8 @@ class EndToEndTests20240602(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
         org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
-        expected = [('https://1145.am/db/2543227/Celgene', 12), ('https://1145.am/db/2364647/Mersana_Therapeutics', 5), 
-                            ('https://1145.am/db/2364624/Parexel_International_Corporation', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4), 
+        expected = [('https://1145.am/db/2543227/Celgene', 12), ('https://1145.am/db/2364647/Mersana_Therapeutics', 5),
+                            ('https://1145.am/db/2364624/Parexel_International_Corporation', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4),
                             ('https://1145.am/db/3473030/Janssen_Sciences_Ireland_Uc', 3), ('https://1145.am/db/3473030/Sylvant', 3)]
         assert org_data == expected, f"Got {org_data}, expected {expected}"
 
@@ -467,9 +476,9 @@ class EndToEndTests20240602(TestCase):
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is None
         org_data = org_uris_by_industry_id_and_or_geo_code(industry,selected_geo)
-        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), ('https://1145.am/db/2946625/Cuadrilla_Resources', 5), 
-                    ('https://1145.am/db/1787315/Scape', 4), ('https://1145.am/db/3029681/Halebury', 4), 
-                    ('https://1145.am/db/3452608/Avon_Products_Inc', 4), ('https://1145.am/db/3465815/Alliance_Automotive_Group', 4), 
+        expected = [('https://1145.am/db/2364647/Mersana_Therapeutics', 5), ('https://1145.am/db/2946625/Cuadrilla_Resources', 5),
+                    ('https://1145.am/db/1787315/Scape', 4), ('https://1145.am/db/3029681/Halebury', 4),
+                    ('https://1145.am/db/3452608/Avon_Products_Inc', 4), ('https://1145.am/db/3465815/Alliance_Automotive_Group', 4),
                     ('https://1145.am/db/3465883/Pistonheads', 4), ('https://1145.am/db/3473030/Eusa_Pharma', 4)]
         assert org_data == expected, f"Got {org_data}, expected {expected}"
 
@@ -538,12 +547,12 @@ class EndToEndTests20240602(TestCase):
         res1 = get_by_internal_clean_name(term1)
         assert len(res1) == 1
         assert list(res1.keys())[0].uri == 'https://1145.am/db/3029576/Loxo_Oncology'
-        
+
     def test_same_as_search_with_one_word2(self):
         term2 = "loxo oncology"
         res2 = get_by_internal_clean_name(term2)
         assert len(res2) == 2
-        assert [(x.uri,y) for x,y in res2.items()] == [('https://1145.am/db/3029576/Loxo_Oncology', 10), 
+        assert [(x.uri,y) for x,y in res2.items()] == [('https://1145.am/db/3029576/Loxo_Oncology', 10),
                                                        ('https://1145.am/db/3464715/Loxo_Oncology', 4)]
 
     def test_same_as_search_with_one_word3(self):
@@ -561,8 +570,8 @@ class EndToEndTests20240602(TestCase):
         content1 = str(resp.content)
         inds1 = len(re.findall("IndustryCluster",content1))
         assert "Drug R & D/Manufacturing" not in content0
-        assert "Drug R & D/Manufacturing" in content1 # comes from https://1145.am/db/3464715/Loxo_Oncology 
-        assert inds1 > inds0 
+        assert "Drug R & D/Manufacturing" in content1 # comes from https://1145.am/db/3464715/Loxo_Oncology
+        assert inds1 > inds0
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_central_node(self):
         client = self.client
@@ -608,7 +617,7 @@ class EndToEndTests20240602(TestCase):
         content0 = str(resp.content)
         assert "https://1145.am/db/3029576/Eli_Lilly" in content0
         assert "https://1145.am/db/3029576/Loxo_Oncology" in content0 # two orgs with no sameAsHigh relationship
-        assert "https://1145.am/db/3464715/Loxo_Oncology" in content0 
+        assert "https://1145.am/db/3464715/Loxo_Oncology" in content0
         assert "Buyer (CityAM Mar 2024)" in content0
         assert "Buyer (PR Newswire Jan 2019)" in content0
         assert "Buyer (PR Newswire - FOO TEST Jan 2019)" not in content0
@@ -633,11 +642,11 @@ class EndToEndTests20240602(TestCase):
                                                                 "relationship_str":"buyer,vendor",
                                                                 "source_str":"_all"})
         vals = nodes_edges.data
-        assert vals["edges"] == [{'id': 'https://1145.am/db/2543227/Bristol-Myers-buyer-https://1145.am/db/2543227/Celgene', 
+        assert vals["edges"] == [{'id': 'https://1145.am/db/2543227/Bristol-Myers-buyer-https://1145.am/db/2543227/Celgene',
                                     'from': 'https://1145.am/db/2543227/Bristol-Myers', 'to': 'https://1145.am/db/2543227/Celgene',
-                                    'color': 'blue', 'label': 'Buyer (Fierce Pharma Mar 2024)', 'arrows': 'to'}, 
-                                 {'id': 'https://1145.am/db/3029576/Bristol-Myers_Squibb-buyer-https://1145.am/db/2543227/Celgene', 
-                                    'from': 'https://1145.am/db/3029576/Bristol-Myers_Squibb', 'to': 'https://1145.am/db/2543227/Celgene', 
+                                    'color': 'blue', 'label': 'Buyer (Fierce Pharma Mar 2024)', 'arrows': 'to'},
+                                 {'id': 'https://1145.am/db/3029576/Bristol-Myers_Squibb-buyer-https://1145.am/db/2543227/Celgene',
+                                    'from': 'https://1145.am/db/3029576/Bristol-Myers_Squibb', 'to': 'https://1145.am/db/2543227/Celgene',
                                     'color': 'blue', 'label': 'Buyer (CityAM Mar 2024)', 'arrows': 'to'}]
 
     def test_family_tree_uris_acquisition(self):
@@ -649,7 +658,7 @@ class EndToEndTests20240602(TestCase):
         assert "Bowery Valuation" not in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Acquisitions",content) is not None
         assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=investor&combine_same_as_name_only=0&sources=_all&min_date=-1">Investments</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content
 
     def test_family_tree_uris_investor(self):
         client = self.client
@@ -660,7 +669,7 @@ class EndToEndTests20240602(TestCase):
         assert "Bowery Valuation" in content
         assert re.search(r"Family tree relationships:<\/strong>\\n\s*Investments",content) is not None
         assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">Acquisitions</a>""" in content
-        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content 
+        assert """<a href="/organization/family-tree/uri/1145.am/db/1786805/Camber_Creek?rels=buyer%2Cinvestor%2Cvendor&combine_same_as_name_only=0&sources=_all&min_date=-1">All</a>""" in content
 
     def test_family_tree_uris_all(self):
         client = self.client
@@ -678,7 +687,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/organization/linkages/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
         assert "<h1>Cory 1st Choice Home Delivery - Linkages</h1>" in content
         assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -692,7 +701,7 @@ class EndToEndTests20240602(TestCase):
         resp = client.get(uri)
         assert resp.status_code == 200
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
         assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
@@ -709,7 +718,7 @@ class EndToEndTests20240602(TestCase):
         assert resp.status_code == 200
         assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1', 302)]
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
         assert "<h1>J.B. Hunt - Linkages</h1>" in content
         assert 'drillIntoUri(uri, root_path, "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1")' in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -720,7 +729,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/resource/1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied 
+        assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
         assert "<h1>Resource: https://1145.am/db/3558745/wwwbusinessinsidercom_jb-hunt-cory-last-mile-furniture-delivery-service-2019-1</h1>" in content
         assert "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
@@ -731,7 +740,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content
         assert "<h1>Cory 1st Choice Home Delivery - Family Tree</h1>" in content
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
@@ -743,7 +752,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/organization/family-tree/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content
         assert "<h1>J.B. Hunt - Family Tree</h1>" in content
         assert 'drillIntoUri(org_uri, "/organization/family-tree/uri/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
         assert 'drillIntoUri(activity_uri, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
@@ -755,7 +764,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
@@ -766,7 +775,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/organization/timeline/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>J.B. Hunt - Timeline</h1>" in content
         assert 'drillIntoUri(properties.item, "/resource/", "abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1");' in content
@@ -788,7 +797,7 @@ class EndToEndTests20240602(TestCase):
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
         content = str(resp.content)
-        assert "Treat all organizations with the same name as the same organization? Off" in content 
+        assert "Treat all organizations with the same name as the same organization? Off" in content
         assert "&amp;combine" not in content # Ensure & in query string is not escaped anywhere
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
@@ -888,7 +897,7 @@ class EndToEndTests20240602(TestCase):
         content = str(resp.content)
         assert "MRI Software LLC" in content
         assert "Rental History Reports and Trusted Employees" in content
-    
+
     def test_doc_date_range_linkages_recent(self):
         client = self.client
         uri2 = "/organization/linkages/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
@@ -905,7 +914,7 @@ class EndToEndTests20240602(TestCase):
         content = str(resp.content)
         assert "MRI Software LLC" in content
         assert "Rental History Reports and Trusted Employees" in content
-    
+
     def test_doc_date_range_family_tree_recent(self):
         client = self.client
         uri2 = "/organization/family-tree/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
@@ -923,7 +932,7 @@ class EndToEndTests20240602(TestCase):
         content = str(resp.content)
         assert "MRI Software LLC" in content
         assert "Rental History Reports and Trusted Employees" in content
-    
+
     def test_doc_date_range_timeline_recent(self):
         client = self.client
         uri2 = "/organization/timeline/uri/1145.am/db/3475312/Mri_Software_Llc?sources=_all&min_date=2024-08-26"
@@ -937,18 +946,18 @@ class EndToEndTests20240602(TestCase):
         test_date_str = "2021-01-01"
         test_today = date(2024,1,1)
         res = create_min_date_pretty_print_data(test_date_str,test_today)
-        assert res == {'min_date': date(2021, 1, 1), 'one_year_ago': date(2023, 1, 1), 
-                    'one_year_ago_fmt': '2023-01-01', 'three_years_ago': None, 
-                    'three_years_ago_fmt': None, 'five_years_ago': date(2020, 1, 2), 
+        assert res == {'min_date': date(2021, 1, 1), 'one_year_ago': date(2023, 1, 1),
+                    'one_year_ago_fmt': '2023-01-01', 'three_years_ago': None,
+                    'three_years_ago_fmt': None, 'five_years_ago': date(2020, 1, 2),
                     'five_years_ago_fmt': '2020-01-02', 'all_time_flag': False}
-    
+
     def test_create_min_date_pretty_print_data_with_all_time(self):
         test_date_str = "-1"
         test_today = date(2024,1,1)
         res = create_min_date_pretty_print_data(test_date_str,test_today)
-        assert res == {'min_date': BEGINNING_OF_TIME, 'one_year_ago': date(2023, 1, 1), 
-                       'one_year_ago_fmt': '2023-01-01', 'three_years_ago': date(2021, 1, 1), 
-                       'three_years_ago_fmt': '2021-01-01', 'five_years_ago': date(2020, 1, 2), 
+        assert res == {'min_date': BEGINNING_OF_TIME, 'one_year_ago': date(2023, 1, 1),
+                       'one_year_ago_fmt': '2023-01-01', 'three_years_ago': date(2021, 1, 1),
+                       'three_years_ago_fmt': '2021-01-01', 'five_years_ago': date(2020, 1, 2),
                        'five_years_ago_fmt': '2020-01-02', 'all_time_flag': True}
 
     def test_partnership_graph_data(self):
@@ -992,72 +1001,72 @@ class EndToEndTests20240602(TestCase):
         assert orgs == ['https://1145.am/db/10282/Talla']
 
     def test_industry_geo_finder_prep_table(self):
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital management, healthcare-dedicated investment firm", include_search_by_industry_text=True) 
-        assert headers == [OrderedDict([('Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}), 
-                                        ('Americas', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
-                                        ('Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('Sub-Saharan Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}), 
-                                         ('Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
-                                         ('Western Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('Eastern Africa', {'colspan': 1, 'classes': 'col-KE'}), 
-                                         ('Western Africa', {'colspan': 1, 'classes': 'col-NG'}), 
-                                         ('REPEATED Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
-                                         ('REPEATED Western Asia', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('KE', {'colspan': 1, 'classes': 'col-KE'}), ('NG', {'colspan': 1, 'classes': 'col-NG'}), 
-                                         ('US', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}), 
-                                         ('SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}), 
-                                         ('US (all)', {'colspan': 1, 'classes': 'col-US'}), 
-                                         ('Northeast', {'colspan': 3, 'classes': 'col-US-MA col-US-NY col-US-PA'}), 
-                                         ('South', {'colspan': 2, 'classes': 'col-US-FL col-US-TX'}), 
-                                         ('West', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
-                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}), 
-                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Mid Atlantic', {'colspan': 2, 'classes': 'col-US-NY col-US-PA'}), 
-                                         ('New England', {'colspan': 1, 'classes': 'col-US-MA'}), ('South Atlantic', {'colspan': 1, 'classes': 'col-US-FL'}), 
-                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}), 
-                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]), 
-                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE header_final'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG header_final'}), 
-                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}), 
-                                         ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}), 
-                                         ('US-PA', {'colspan': 1, 'classes': 'col-US-PA header_final'}), 
-                                         ('US-MA', {'colspan': 1, 'classes': 'col-US-MA header_final'}), 
-                                         ('US-FL', {'colspan': 1, 'classes': 'col-US-FL header_final'}), 
-                                         ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}), 
-                                         ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}), 
-                                         ('US-WA', {'colspan': 1, 'classes': 'col-US-WA header_final'}), 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital management, healthcare-dedicated investment firm", include_search_by_industry_text=True)
+        assert headers == [OrderedDict([('Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}),
+                                        ('Americas', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}),
+                                        ('Asia', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('Sub-Saharan Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}),
+                                         ('Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}),
+                                         ('Western Asia', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('Eastern Africa', {'colspan': 1, 'classes': 'col-KE'}),
+                                         ('Western Africa', {'colspan': 1, 'classes': 'col-NG'}),
+                                         ('REPEATED Northern America', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}),
+                                         ('REPEATED Western Asia', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('KE', {'colspan': 1, 'classes': 'col-KE'}), ('NG', {'colspan': 1, 'classes': 'col-NG'}),
+                                         ('US', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}),
+                                         ('SA', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}),
+                                         ('US (all)', {'colspan': 1, 'classes': 'col-US'}),
+                                         ('Northeast', {'colspan': 3, 'classes': 'col-US-MA col-US-NY col-US-PA'}),
+                                         ('South', {'colspan': 2, 'classes': 'col-US-FL col-US-TX'}),
+                                         ('West', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}),
+                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG'}),
+                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US'}), ('Mid Atlantic', {'colspan': 2, 'classes': 'col-US-NY col-US-PA'}),
+                                         ('New England', {'colspan': 1, 'classes': 'col-US-MA'}), ('South Atlantic', {'colspan': 1, 'classes': 'col-US-FL'}),
+                                         ('West South Central', {'colspan': 1, 'classes': 'col-US-TX'}), ('Pacific', {'colspan': 2, 'classes': 'col-US-CA col-US-WA'}),
+                                         ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA'})]),
+                            OrderedDict([('REPEATED KE', {'colspan': 1, 'classes': 'col-KE header_final'}), ('REPEATED NG', {'colspan': 1, 'classes': 'col-NG header_final'}),
+                                         ('REPEATED US (all)', {'colspan': 1, 'classes': 'col-US header_final'}),
+                                         ('US-NY', {'colspan': 1, 'classes': 'col-US-NY header_final'}),
+                                         ('US-PA', {'colspan': 1, 'classes': 'col-US-PA header_final'}),
+                                         ('US-MA', {'colspan': 1, 'classes': 'col-US-MA header_final'}),
+                                         ('US-FL', {'colspan': 1, 'classes': 'col-US-FL header_final'}),
+                                         ('US-TX', {'colspan': 1, 'classes': 'col-US-TX header_final'}),
+                                         ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}),
+                                         ('US-WA', {'colspan': 1, 'classes': 'col-US-WA header_final'}),
                                          ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA header_final'})])]
 
-        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487, 
-                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'}, 
-                                                  {'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'}, 
-                                                  {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
-                                                  {'value': 0, 'region_code': 'US-FL'}, {'value': 0, 'region_code': 'US-TX'}, 
-                                                  {'value': 1, 'region_code': 'US-CA'}, {'value': 0, 'region_code': 'US-WA'}, 
-                                                  {'value': 0, 'region_code': 'SA'}]}, 
-                                        {'uri': 'https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare', 'name': 'Hospital Management Service', 'industry_id': 17, 
-                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'}, 
-                                                  {'value': 11, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-NY'}, 
-                                                  {'value': 2, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'}, 
-                                                  {'value': 1, 'region_code': 'US-FL'}, {'value': 1, 'region_code': 'US-TX'}, 
-                                                  {'value': 3, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'}, 
+        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487,
+                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'},
+                                                  {'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'},
+                                                  {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'},
+                                                  {'value': 0, 'region_code': 'US-FL'}, {'value': 0, 'region_code': 'US-TX'},
+                                                  {'value': 1, 'region_code': 'US-CA'}, {'value': 0, 'region_code': 'US-WA'},
+                                                  {'value': 0, 'region_code': 'SA'}]},
+                                        {'uri': 'https://1145.am/db/industry/17_hospital_hospitals_hospitalist_healthcare', 'name': 'Hospital Management Service', 'industry_id': 17,
+                                         'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'},
+                                                  {'value': 11, 'region_code': 'US'}, {'value': 1, 'region_code': 'US-NY'},
+                                                  {'value': 2, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'},
+                                                  {'value': 1, 'region_code': 'US-FL'}, {'value': 1, 'region_code': 'US-TX'},
+                                                  {'value': 3, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'},
                                                   {'value': 1, 'region_code': 'SA'}]}]
-        
-        assert text_row == {'uri': '', 'name': 'hospital management, healthcare-dedicated investment firm', 
-                            'vals': [{'value': 1, 'region_code': 'KE'}, {'value': 1, 'region_code': 'NG'}, 
-                                     {'value': 27, 'region_code': 'US'}, {'value': 5, 'region_code': 'US-NY'}, 
-                                     {'value': 3, 'region_code': 'US-PA'}, {'value': 2, 'region_code': 'US-MA'}, 
-                                     {'value': 1, 'region_code': 'US-FL'}, {'value': 5, 'region_code': 'US-TX'}, 
-                                     {'value': 7, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'}, 
+
+        assert text_row == {'uri': '', 'name': 'hospital management, healthcare-dedicated investment firm',
+                            'vals': [{'value': 1, 'region_code': 'KE'}, {'value': 1, 'region_code': 'NG'},
+                                     {'value': 27, 'region_code': 'US'}, {'value': 5, 'region_code': 'US-NY'},
+                                     {'value': 3, 'region_code': 'US-PA'}, {'value': 2, 'region_code': 'US-MA'},
+                                     {'value': 1, 'region_code': 'US-FL'}, {'value': 5, 'region_code': 'US-TX'},
+                                     {'value': 7, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'},
                                      {'value': 1, 'region_code': 'SA'}]}
 
     def test_remove_not_needed_admin1s_from_individual_cells(self):
         all_industry_ids = [109, 554, 280, 223, 55, 182, 473]
-        indiv_cells = [('109', 'US-NY'),('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), ('223', 'US-NY'), 
+        indiv_cells = [('109', 'US-NY'),('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), ('223', 'US-NY'),
                        ('55', 'US'), ('55', 'US-TX'), ('55', 'US-CA'), ('55', 'DK'), ('182', 'US-NY'),
                        ('search_str', 'US-NY'), ('search_str', 'US-CA')]
         indiv_cells = remove_not_needed_admin1s_from_individual_cells(all_industry_ids,indiv_cells)
-        assert set(indiv_cells) == set([('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'), 
+        assert set(indiv_cells) == set([('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'),
                                         ('223', 'US-NY'), ('55', 'US'), ('55', 'DK'), ('182', 'US-NY'),
                                         ('search_str', 'US-NY'), ('search_str', 'US-CA')])
 
@@ -1130,16 +1139,16 @@ class EndToEndTests20240602(TestCase):
     def test_industry_geo_finder_preview(self):
         '''
             Data shown on industry_geo_finder page in response to search "beauty+insurance". 'x' means entry that was chosen
-                                                CA 	 US(all)	US-IL	US-MI	US-NY	US-PA	US-RI	US-MD	US-VA	US-AR	US-TX	US-AZ	GB 
+                                                CA 	 US(all)	US-IL	US-MI	US-NY	US-PA	US-RI	US-MD	US-VA	US-AR	US-TX	US-AZ	GB
             Health- And Beauty	                0x	    3x	    0x	    0x	    1x	    2x	    0x	    0x	    0x	    0x	    0x	    0x	    1x
             Insurance Brokerage And Services	0	    1	    1x   	0	    0	    0	    0	    0	    0	    0	    0	    0	    0
             Insurance And Risk Management	    1	    8	    1x  	1	    0	    0	    1	    1	    1x	    1	    1	    1	    0
-                    
+
         '''
         client = self.client
-        payload = {'selectedIndividualCells': '["row-647#col-US-VA"]', 'selectedRows': '["row-0"]', 
-                   'selectedColumns': '["col-US-IL"]', 'allIndustryIDs': '[0, 313, 647]', 
-                   'searchStr': 'beauty insurance'} # from request.POST.dict() 
+        payload = {'selectedIndividualCells': '["row-647#col-US-VA"]', 'selectedRows': '["row-0"]',
+                   'selectedColumns': '["col-US-IL"]', 'allIndustryIDs': '[0, 313, 647]',
+                   'searchStr': 'beauty insurance'} # from request.POST.dict()
         qd = QueryDict("",mutable=True)
         qd.update(payload)
         response = client.post("/industry_geo_finder_review",payload)
@@ -1197,17 +1206,17 @@ class EndToEndTests20240602(TestCase):
         similar = similar_organizations(org,limit=0.85)
         similar_by_ind_cluster = [(x.uri,set([z.uri for z in y])) for x,y in sorted(similar["industry_cluster"].items())]
         similar_by_ind_text = [x.uri for x in similar["industry_text"]]
-        assert similar_by_ind_cluster == [('https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical', 
-                                           {'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2364624/Parexel_International_Corporation', 
+        assert similar_by_ind_cluster == [('https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical',
+                                           {'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2364624/Parexel_International_Corporation',
                                             'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'})]
-        assert set(similar_by_ind_text) == set(['https://1145.am/db/2154356/Alector', 'https://1145.am/db/3469136/Aphria_Inc', 'https://1145.am/db/2154354/Apollomics', 
-                                                'https://1145.am/db/2543227/Bristol-Myers', 'https://1145.am/db/3029576/Bristol-Myers_Squibb', 
-                                                'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc', 'https://1145.am/db/3469136/Cc_Pharma', 
-                                                'https://1145.am/db/3444769/Control_Solutions_Inc', 'https://1145.am/db/11594/DSM', 'https://1145.am/db/3029576/Eli_Lilly', 
-                                                'https://1145.am/db/3467694/Engility_Holdings_Inc', 'https://1145.am/db/3029576/Loxo_Oncology', 
-                                                'https://1145.am/db/3469058/Napajen_Pharma', 'https://1145.am/db/3461286/Neubase', 
-                                                'https://1145.am/db/3461286/Ohr_Pharmaceutical', 'https://1145.am/db/3445572/Professional_Medical_Insurance_Services', 
-                                                'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp', 
+        assert set(similar_by_ind_text) == set(['https://1145.am/db/2154356/Alector', 'https://1145.am/db/3469136/Aphria_Inc', 'https://1145.am/db/2154354/Apollomics',
+                                                'https://1145.am/db/2543227/Bristol-Myers', 'https://1145.am/db/3029576/Bristol-Myers_Squibb',
+                                                'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc', 'https://1145.am/db/3469136/Cc_Pharma',
+                                                'https://1145.am/db/3444769/Control_Solutions_Inc', 'https://1145.am/db/11594/DSM', 'https://1145.am/db/3029576/Eli_Lilly',
+                                                'https://1145.am/db/3467694/Engility_Holdings_Inc', 'https://1145.am/db/3029576/Loxo_Oncology',
+                                                'https://1145.am/db/3469058/Napajen_Pharma', 'https://1145.am/db/3461286/Neubase',
+                                                'https://1145.am/db/3461286/Ohr_Pharmaceutical', 'https://1145.am/db/3445572/Professional_Medical_Insurance_Services',
+                                                'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp',
                                                 'https://1145.am/db/3029705/Shire', 'https://1145.am/db/2543228/Takeda'])
 
 
@@ -1253,7 +1262,7 @@ class EndToEndTests20240602(TestCase):
         children = geo_parent_children()['US']['children']
         assert children == {'South', 'Midwest', 'Northeast', 'West'}
 
-    
+
     def test_shows_tracked_organizations(self):
         client = self.client
         path = '/tracked_org_ind_geo'
@@ -1296,7 +1305,7 @@ class EndToEndTests20240602(TestCase):
         client.force_login(self.user)
         resp = client.get(path)
         content = str(resp.content)
-        assert "NapaJen Pharma" in content 
+        assert "NapaJen Pharma" in content
 
     def test_creates_email_from_activity_and_article_and_write_x_more_if_many_industries(self):
         activity_uri = "https://1145.am/db/3029576/Loxo_Oncology-Acquisition"
@@ -1363,7 +1372,7 @@ class EndToEndTests20240602(TestCase):
         assert activity_notif.num_activities == 1
 
     def test_only_populates_activity_stats_if_cache_available(self):
-        ''' 
+        '''
             See trackeditems.tests.ActivityListTest.does_not_show_site_stats_if_no_cache
             for version without cache
         '''
@@ -1380,7 +1389,7 @@ class EndToEndTests20240602(TestCase):
         assert len(acts) == 2
 
     def test_tracked_items_updates_or_creates_no_duplicates(self):
-        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
+        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},
                       {'industry_id': None, 'industry_search_str': None, 'region': 'US-TX', 'organization_uri': None, 'trackable': True}]
         ts = time.time()
         user = get_user_model().objects.create(username=f"test-{ts}")
@@ -1396,7 +1405,7 @@ class EndToEndTests20240602(TestCase):
         assert len(tracked_items) == 3
 
     def test_tracked_items_applies_not_trackable(self):
-        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True}, 
+        trackables = [{'industry_id': 401, 'industry_search_str': None, 'region': None, 'organization_uri': None, 'trackable': True},
                       {'industry_id': None, 'industry_search_str': None, 'region': 'US-TX', 'organization_uri': None, 'trackable': False}]
         ts = time.time()
         user = get_user_model().objects.create(username=f"test-{ts}")
@@ -1421,7 +1430,7 @@ class EndToEndTests20240602(TestCase):
             "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
             "https://1145.am/db/3471595/Housefaxcom-Acquisition",
             "https://1145.am/db/3476441/Dcamera_Group-Acquisition"], f"Got {res}"
-        
+
     def test_api_finds_by_org_name(self):
         path = "/api/v1/activities/?org_name=Postmedia&max_date=2024-06-02"
         client = self.client
@@ -1451,11 +1460,11 @@ class EndToEndTests20240602(TestCase):
             TrackedItem(industry_id=647)
         ]
         acts, _ = tracked_items_between(tis, min_date, max_date)
-        assert [x['activity_uri'] for x in acts] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 
-                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition', 
+        assert [x['activity_uri'] for x in acts] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
+                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition',
                                                         'https://1145.am/db/3476441/Dcamera_Group-Acquisition']
         acts2, _ = tracked_items_between(tis, min_date_for_activities, max_date)
-        assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 
+        assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
 
 

@@ -20,7 +20,7 @@ from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
 from .industry_geo import country_admin1_full_name
-from .industry_geo.orgs_by_industry_geo import (combined_industry_geo_results, 
+from .industry_geo.orgs_by_industry_geo import (combined_industry_geo_results,
         org_uris_by_industry_id_country_admin1)
 import re
 import json
@@ -28,6 +28,7 @@ from .util import elements_from_uri, geo_to_country_admin1, min_and_max_date
 from topics.stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list
+from topics.activity_helpers import get_activities_by_org_and_date_range
 
 import logging
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ class About(APIView):
 
     def get(self,request):
         return Response({"faqs": FAQ}, status=status.HTTP_200_OK)
-    
+
 
 class IndustriesViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -60,7 +61,7 @@ class Index(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
 
         if org_name:
-            orgs = search_organizations_by_name(org_name, combine_same_as_name_only, 
+            orgs = search_organizations_by_name(org_name, combine_same_as_name_only,
                                             limit=500)
             orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
             num_hits = len(orgs)
@@ -168,8 +169,8 @@ class FamilyTree(APIView):
                                                                 "source_str":source_str,
                                                                 "min_date_str":min_date_str})
 
-        relationship_vals = set(relationships.split(","))  
-        relationship_link_data = self.create_relationship_links(request_state, relationship_vals)    
+        relationship_vals = set(relationships.split(","))
+        relationship_link_data = self.create_relationship_links(request_state, relationship_vals)
         nodes_edges_data = nodes_edges.data
         request_state["document_sources"]=nodes_edges_data.pop("document_sources")
         request_state["min_doc_date"]=nodes_edges_data.pop("min_doc_date")
@@ -179,8 +180,8 @@ class FamilyTree(APIView):
                             "uri_parts": uri_parts,
                             "relationship_link_data": relationship_link_data,
                             "request_state": request_state}, status=status.HTTP_200_OK)
-    
-    def create_relationship_links(self, request_state, rels):       
+
+    def create_relationship_links(self, request_state, rels):
         options = [set(["buyer","vendor"]),
                     set(["investor"]),
                     set(["buyer","investor","vendor"])]
@@ -192,8 +193,8 @@ class FamilyTree(APIView):
             if tmp_idx == idx:
                 continue
             next_vals.append( {"name":row_name, "query_string_params": {**request_state["qs_params"],**{"rels":",".join(sorted(row_opts))}} } )
-        return {"selected_name":selected_name, "next_vals": next_vals}            
-            
+        return {"selected_name":selected_name, "next_vals": next_vals}
+
 class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_timeline.html'
@@ -242,7 +243,7 @@ class OrganizationByUri(APIView):
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"]=org_serializer_data.pop("document_sources")
-        request_state["min_doc_date"] = org_serializer_data.pop("min_doc_date") 
+        request_state["min_doc_date"] = org_serializer_data.pop("min_doc_date")
         resp = Response({"data_serializer": org_serializer_data,
                             "org_data": org_data,
                             "uri_parts": uri_parts,
@@ -274,8 +275,8 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "geo_codes": geo_codes,
             "indiv_cells": indiv_cells,
             "search_str_in_all_geos": search_str_in_all_geos,
-            "combine_same_as_name_only": combine_same_as_name_only, 
-        })       
+            "combine_same_as_name_only": combine_same_as_name_only,
+        })
         resp = Response({"table_data":table_data.data,"search_str":search_str,
                          "all_industry_ids": all_industry_ids,
                          "request_state": request_state}, status=status.HTTP_200_OK)
@@ -285,7 +286,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
     def post(self, request):
         search_str = request.POST.get('searchStr')
         all_industry_ids = request.POST['allIndustryIDs']
-        all_industry_ids = json.loads(all_industry_ids) 
+        all_industry_ids = json.loads(all_industry_ids)
         selected_cells = request.POST['selectedIndividualCells']
         indiv_cells = [row_col_data_to_tuple(x) for x in json.loads(selected_cells)]
         indiv_cells = remove_not_needed_admin1s_from_individual_cells(all_industry_ids,indiv_cells)
@@ -305,12 +306,12 @@ class IndustryGeoFinderReview(ListCreateAPIView):
             "search_str_in_all_geos": search_str in selected_rows,
             "combine_same_as_name_only": combine_same_as_name_only,
         })
-        
+
         resp = Response({"table_data":table_data.data,"search_str":search_str,
                          "all_industry_ids": all_industry_ids,
                          "request_state": request_state}, status=status.HTTP_200_OK)
         return resp
-    
+
 
 def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
     cells_to_keep_full = []
@@ -321,7 +322,7 @@ def remove_not_needed_admin1s_from_individual_cells(all_industry_ids, cells):
         industry_cells_to_keep = [(x,y) for x,y in relevant_cells if y in geos_to_keep]
         cells_to_keep_full.extend(industry_cells_to_keep)
     return cells_to_keep_full
-        
+
 def remove_not_needed_admin1s(geo_codes):
     geo_codes_as_set = set(geo_codes)
     codes_with_admin1 = filter( lambda x: len(x) > 4, geo_codes)
@@ -330,7 +331,7 @@ def remove_not_needed_admin1s(geo_codes):
         if country in geo_codes_as_set:
             geo_codes_as_set.remove(code_with_admin1)
     return list(geo_codes_as_set)
-            
+
 def row_col_data_to_tuple(val):
     topic_id = row_from_request_post_data(val)
     geo_code = col_from_request_post_data(val)
@@ -348,15 +349,15 @@ def col_from_request_post_data(val):
     if val:
         return val.groups()[0]
     else:
-        return None 
-    
+        return None
+
 
 class SimilarOrganizations(APIView):
     renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
     template_name = 'similar_organizations.html'
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
-    
+
     def get(self, request, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         o = Resource.self_or_ultimate_target_node(uri)
@@ -376,12 +377,12 @@ class SimilarOrganizations(APIView):
 
 
 class IndustryOrgsActivities(APIView):
-    renderer_classes = [TemplateHTMLRenderer] 
+    renderer_classes = [TemplateHTMLRenderer]
     template_name = 'industry_orgs_activities_list.html'
 
     def get(self, request):
         industry_search_str = request.GET['industry']
-        orgs_and_activities_by_industry, dates = industry_orgs_activities_stats(industry_search_str) 
+        orgs_and_activities_by_industry, dates = industry_orgs_activities_stats(industry_search_str)
         dates = {k:v.strftime("%Y-%m-%d") for k,v in dates.items()}
         request_state, _ = prepare_request_state(request)
         resp = Response({"orgs_and_activities_by_industry": orgs_and_activities_by_industry,
@@ -399,8 +400,8 @@ class IndustryGeoFinder(APIView):
     def get(self, request):
         industry_search_str = request.GET['industry']
         include_search_by_industry_text = bool(int(request.GET.get('include_search_by_industry_text','0')))
-        headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str, 
-                                                                             include_search_by_industry_text=include_search_by_industry_text) 
+        headers, ind_cluster_rows, text_row  = combined_industry_geo_results(industry_search_str,
+                                                                             include_search_by_industry_text=include_search_by_industry_text)
         request_state, _ = prepare_request_state(request)
         resp = Response({"table_body": ind_cluster_rows,
                          "text_row": text_row,
@@ -421,7 +422,7 @@ class IndustryGeoOrgsView(APIView):
     def get(self, request):
         geo_code = request.GET.get("geo_code")
         industry_id = request.GET.get("industry_id")
-        industry_cluster = IndustryCluster.get_by_industry_id(industry_id) 
+        industry_cluster = IndustryCluster.get_by_industry_id(industry_id)
         industry_cluster_uri = industry_cluster.uri if industry_cluster else None
         cc, adm1 = geo_to_country_admin1(geo_code)
         org_uris_and_counts = org_uris_by_industry_id_country_admin1(industry_id, cc, adm1)
@@ -438,20 +439,20 @@ class IndustryGeoOrgsView(APIView):
             serialized_org = organization.serialize()
             serialized_org["splitted_uri"] = elements_from_uri(organization.uri)
             organizations.append(serialized_org)
-            
+
         request_state, _ = prepare_request_state(request)
         resp = Response({"organizations": organizations,
                         "request_state": request_state,
                         "industry_geo_str": industry_geo_search_str(ind_name, geo_name)
-                        }, status=status.HTTP_200_OK)   
-        return resp   
+                        }, status=status.HTTP_200_OK)
+        return resp
 
 
 class OrgActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_activities.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, **kwargs):
         min_date, max_date = min_and_max_date(request.GET)
@@ -459,7 +460,7 @@ class OrgActivitiesView(APIView):
         request_state["hide_link"]="organization_activities"
         org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         org = Organization.self_or_ultimate_target_node(org_uri)
-        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100, 
+        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100,
                                                                       combine_same_as_name_only=combine_same_as_name_only,
                                                                       include_similar_orgs=kwargs.get("include_similar_orgs"))
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
@@ -471,7 +472,7 @@ class OrgActivitiesView(APIView):
                             "request_state": request_state,
                         }
         return Response(resp_dict, status=status.HTTP_200_OK)
-      
+
 
 def industry_geo_search_str(industry, geo):
     industry_str = "all industries" if industry is None or industry.strip() == '' else industry
