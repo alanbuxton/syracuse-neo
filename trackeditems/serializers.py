@@ -29,7 +29,7 @@ class RecentsBySourceSerializer(serializers.Serializer):
             "count90": instance[3],
         }
         return repres
-    
+
 class RecentsByIndustrySerializer(serializers.Serializer):
     def to_representation(self, instance):
         repres = {
@@ -39,14 +39,14 @@ class RecentsByIndustrySerializer(serializers.Serializer):
             "count30": instance[3],
             "count90": instance[4],
         }
-        return repres     
+        return repres
 
 class CountsSerializer(serializers.Serializer):
     def to_representation(self, instance):
         return {
             "node_type": instance[0],
             "count": instance[1],
-        }    
+        }
 
 class GeoNamesLocationSerializer(serializers.Serializer):
     uri = serializers.URLField()
@@ -107,7 +107,7 @@ class OrgIndGeoSerializer(serializers.Serializer):
             industry_name = 'Any' if instance.industry_search_str is None else 'n/a'
         else:
             industry_name = industry_cluster.best_name
-        
+
         region_name = country_admin1_full_name(instance.region)
         if region_name == '':
             region_name = 'Any'
@@ -135,8 +135,8 @@ class OrgIndGeoSerializer(serializers.Serializer):
         }
 
         return serialized
-    
+
 class TrackedItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TrackedItem 
+        model = TrackedItem
         fields = "__all__"

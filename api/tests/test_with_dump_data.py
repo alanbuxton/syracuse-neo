@@ -105,6 +105,7 @@ class EndToEndTests20140205(TestCase):
         content = str(resp.content)
         assert "https://1145.am/db/2946625/Start_Fracking_At_Two" in content
 
+
 class EndToEndTests20190110(TestCase):
 
     def setUpTestData():
@@ -211,6 +212,21 @@ class EndToEndTests20190110(TestCase):
         min_date = max_date - timedelta(days=7)
         acts,_ = recents_by_user_min_max_date(self.user2,min_date,max_date)
         assert len(acts) == 2
+
+    def test_org_uris_by_industry_id_and_or_geo_code_needs_at_least_one_of_those(self):
+        res = org_uris_by_industry_id_and_or_geo_code('', None)
+        assert res == []
+        res = org_uris_by_industry_id_and_or_geo_code(None, '')
+        assert res == []
+        res = org_uris_by_industry_id_and_or_geo_code('', '')
+        assert res == []
+
+    def test_notif_does_not_process_tracked_item_with_blank_region_and_industry(self):
+        min_date, max_date = min_and_max_date({})
+        ti = TrackedItem(industry_id=None,industry_search_str=None,region='',organization_uri=None)
+        res = tracked_items_between([ti],min_date,max_date)
+        assert res[0] == [], f"Got {res}"
+
 
 class EndToEndTests20240602(TestCase):
 

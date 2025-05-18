@@ -51,9 +51,9 @@ def tracked_items_between(tracked_items, min_date, max_date):
                 org_uris.extend(Organization.by_industry_text(ti.industry_search_str))
             else:
                 org_uris.extend(org_geo_industry_text_by_words(ti.industry_search_str))
-        elif ti.industry_id is not None or ti.region is not None:
+        elif (ti.industry_id is not None and ti.industry_id != '') or (ti.region is not None and ti.region != ''):
             country_code, admin1_code = geo_to_country_admin1(ti.region)
-            acts = get_activities_by_industry_country_admin1_and_date_range(ti.industry_id, 
+            acts = get_activities_by_industry_country_admin1_and_date_range(ti.industry_id,
                             country_code, admin1_code, seven_days_ago, max_date)
             matching_activity_orgs.extend(acts)
     org_activities = get_activities_by_org_uris_and_date_range(org_uris, seven_days_ago, max_date,limit=100)

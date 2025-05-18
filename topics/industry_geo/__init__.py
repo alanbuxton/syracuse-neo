@@ -15,6 +15,9 @@ def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,return_or
                                 combine_same_as_name_only=True):
     if isinstance(industry_topic_id, IndustryCluster):
         industry_topic_id = industry_topic_id.topicId
+    if ( industry_topic_id is None or industry_topic_id == '') and ( geo_code is None or geo_code == ''):
+        logger.warning(f"Called org_uris_by_industry_id_and_or_geo_code without either one of industry_topic_id or geo_code")
+        return []
     logger.debug(f"org_uris_by_industry_id_and_or_geo_code Ind: {industry_topic_id} Geo: {geo_code} Orgs only: {return_orgs_only} Combine sano: {combine_same_as_name_only}")
     country_code, admin1_code = geo_to_country_admin1(geo_code)
     orgs_with_rel_counts = org_uris_by_industry_id_country_admin1(industry_topic_id,country_code,admin1_code=admin1_code)
@@ -38,7 +41,7 @@ def country_admin1_full_name(geo_code):
     else:
         admin1_name = cache.get(f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{geo_code}")
         return f"{country_name} - {admin1_name}"
-    
+
 # def org_uris_by_industry_text_and_geo_code(industry_text, geo_code,return_orgs_only=False,
 #                                        combine_same_as_name_only=True):
 #     country_code, admin1 = geo_to_country_admin1(geo_code)
@@ -59,7 +62,7 @@ def geo_codes_for_region(start_region, parent_child=None):
         if len(label) == 2: # At country level so no need to go further
             country_admin1s.add(label)
             return
-        node = parent_child[label] 
+        node = parent_child[label]
         children = node["children"]
         if len(children) == 0:
             country_admin1s.add(label)
