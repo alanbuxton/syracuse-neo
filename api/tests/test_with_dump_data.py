@@ -20,7 +20,8 @@ from django.contrib.auth import get_user_model
 from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
-from topics.organization_search_helpers import get_same_as_name_onlies, get_by_internal_clean_name
+from topics.organization_search_helpers import (get_same_as_name_onlies, 
+        get_by_internal_clean_name, search_organizations_by_name)
 import json
 import re
 from topics.serializers import (FamilyTreeSerializer,
@@ -53,7 +54,8 @@ if os.environ.get(env_var) != "Y":
 
 class EndToEndTests20140205(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         do_setup_test_data(date(2014,2,5),fill_blanks=True)
 
     def setUp(self):
@@ -108,7 +110,8 @@ class EndToEndTests20140205(TestCase):
 
 class EndToEndTests20190110(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         do_setup_test_data(date(2019,1,10),fill_blanks=False)
 
     def setUp(self):
@@ -227,10 +230,24 @@ class EndToEndTests20190110(TestCase):
         res = tracked_items_between([ti],min_date,max_date)
         assert res[0] == [], f"Got {res}"
 
+    def test_search_org_names(self):
+        name = "Tao Capital Partners LLC"
+        res = search_organizations_by_name(name, limit=100)
+        assert len(res) == 32
+        uris = [(x.uri,y) for x,y in res]
+        assert ('https://1145.am/db/3454434/Tao_Capital_Partners', 2) in uris
+
+    def test_search_on_org_names_top_1_strict(self):
+        name = "Tao Capital Partners LLC"
+        res = search_organizations_by_name(name, top_1_strict=True)
+        assert len(res) == 1
+        assert res[0][0].uri == 'https://1145.am/db/3454434/Tao_Capital_Partners'
+
 
 class EndToEndTests20240602(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
 
     def setUp(self):
@@ -1085,6 +1102,14 @@ class EndToEndTests20240602(TestCase):
         assert set(indiv_cells) == set([('109', 'US-NY'), ('554', 'US-NY'), ('554', 'US-TX'), ('280', 'US-NY'),
                                         ('223', 'US-NY'), ('55', 'US'), ('55', 'DK'), ('182', 'US-NY'),
                                         ('search_str', 'US-NY'), ('search_str', 'US-CA')])
+
+    def test_api_uses_strict_org_name_search(self):
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get("/api/v1/activities/?org_name=Banco%20de%20Sabadell")
+        results = resp.json()['results']
+        uris = [x['activity_uri'] for x in results]
+        assert uris == ['https://1145.am/db/4290459/Banco_De_Sabadell-Acquisition'], f"Got {uris}"
 
     def test_industry_geo_finder_selection_screen(self):
         client = self.client

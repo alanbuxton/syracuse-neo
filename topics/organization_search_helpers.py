@@ -1,20 +1,32 @@
 from neomodel import db
 from topics.models import *
-from typing import Dict
+from typing import Dict, List, Tuple, Union
 import logging
 from collections import defaultdict
-from topics.util import clean_punct
+from topics.util import clean_punct, standardize_name
+import re
 
 logger = logging.getLogger(__name__)
 
-def search_organizations_by_name(name, combine_same_as_name_only=True, limit=20):
+def search_organizations_by_name(name, combine_same_as_name_only=True, 
+                                 top_1_strict=False, limit: int = 20) -> List[Tuple[Organization, int]]:
+    name = standardize_name(name)
     res = search_by_name(name)
     if combine_same_as_name_only is True:
         res = remove_same_as_name_onlies(res)
     sorted_res = sorted(res, key=lambda x: x[1], reverse=True)
+    if top_1_strict is True:
+        return top_1_strict_search(name, sorted_res)
     return sorted_res[:limit]
 
-
+def top_1_strict_search(name: str, results: List) -> List[Tuple[Organization, int]]:
+    name = name.replace(" ","")
+    for org,vals in results:
+        for target_org_name in [standardize_name(x).replace(" ","") for x in org.name]:
+            if target_org_name.startswith(name):
+                return [(org, vals)]
+    return []
+    
 def random_org_list(limit=10):
     query = f"""MATCH (n: Resource&Organization)
             WHERE n.internalMergedSameAsHighToUri IS NULL
@@ -92,7 +104,10 @@ def do_search_by_clean_name(clean_name, index_name):
     vals, _ = db.cypher_query(query2,resolve_objects=True)
     return vals
 
-def search_by_name(name):
+def search_by_name(name) -> list:
+    '''
+        Returns tuple of Organization, Count of Relationships
+    '''
     query = f'''CALL db.index.fulltext.queryNodes("resource_names", "{name}",{{ analyzer: "classic"}}) YIELD node as n
         WITH n
         WHERE "Organization" IN LABELS(n)

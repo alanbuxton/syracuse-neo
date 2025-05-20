@@ -110,12 +110,12 @@ class ActivitiesViewSet(NeomodelViewSet):
         org_name = self.request.query_params.get("org_name",None)
         types_to_keep = self.request.query_params.getlist("type",[])
         if org_uri is not None:
-            logger.info(f"Uri: {org_uri}")
+            logger.debug(f"Uri: {org_uri}")
             activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
         elif org_name is not None:
-            orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, limit=20)
+            orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, top_1_strict=True)
             uris = [x.uri for x,_ in orgs_and_counts]
-            logger.info(f"Uris: {uris}")
+            logger.debug(f"Uris: {uris}")
             activities = get_activities_by_org_uris_and_date_range(uris,min_date,max_date,combine_same_as_name_only=True,limit=None)
         else:
             locations = self.request.query_params.getlist('location_id',[])
@@ -131,7 +131,7 @@ class ActivitiesViewSet(NeomodelViewSet):
                 geo_codes.update(geo_codes_for_region(loc))
             if len(geo_codes) == 0:
                 geo_codes = [None]
-            logger.info(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
+            logger.debug(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
             activities = []
             for industry_id_str in industry_ids:
                 if industry_id_str is not None:

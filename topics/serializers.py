@@ -283,7 +283,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
                                        min_date=min_doc_date,
                                        combine_same_as_name_only=combine_same_as_name_only,
                                        max_nodes=max_nodes)
-        logger.info(f"Collected graph_data for {instance.uri}")
+        logger.debug(f"Collected graph_data for {instance.uri}")
         data = {"source_node": instance.uri,
                 "source_node_name": instance.longest_name,
                 }

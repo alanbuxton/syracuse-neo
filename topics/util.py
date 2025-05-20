@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 import hashlib
 from datetime import datetime, timedelta, time, date, timezone
 from django.core.cache import cache
+import cleanco
 
 ORG_ACTIVITY_LIST="|".join([f"{x}Activity" for x in ["CorporateFinance","Product","Location","Partnership","AnalystRating","EquityActions","EquityActions","FinancialReporting","Financials","Incident","Marketing","Operations","Recognition","Regulatory"]])
 ALL_ACTIVITY_LIST= ORG_ACTIVITY_LIST + "|RoleActivity"
@@ -15,6 +16,13 @@ def cacheable_hash(input_string):
 
 def clean_punct(text,replacement=' '):
     return re.sub(rf"[{string.punctuation} ]",replacement,text)
+
+def standardize_name(name):
+    name = cleanco.basename(name)
+    name = clean_punct(name)
+    name = re.sub(r"\s{2,}", "", name)
+    name = name.lower()
+    return name
 
 def cache_friendly(key):
     no_punct = clean_punct(key,"_")
