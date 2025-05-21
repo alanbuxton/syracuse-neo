@@ -17,7 +17,7 @@ from topics.neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
 from topics.industry_geo.geoname_mappings import COUNTRIES_WITH_STATE_PROVINCE, admin1s_for_country
 from topics.industry_geo.region_hierarchies import COUNTRY_TO_GLOBAL_REGION
 import logging
-from datetime import datetime, date
+from datetime import date
 
 logger = logging.getLogger(__name__)
 
@@ -214,10 +214,10 @@ def build_article_section(min_date, max_date):
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
     AND TYPE(rel) <> 'participant'
+    AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
     RETURN collect([act.uri, art.uri, art.datePublished]) AS articleData
     }}
     """
-
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
     cache_key = cache_friendly(f"orgs_ind_text_{cacheable_hash(industry_text)}_{country_code}")

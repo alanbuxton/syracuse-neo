@@ -402,7 +402,6 @@ class EndToEndTests20240602(TestCase):
         content = str(response.content)
         assert "Track Discovery, Inc" in content
 
-
     def test_organization_graph_view_with_same_as_name_only(self):
         client = self.client
         response = client.get("/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&min_date=-1")
@@ -426,27 +425,40 @@ class EndToEndTests20240602(TestCase):
                                 ('MarketingActivity', 3), ('FinancialsActivity', 2), ('Organization', 434), ('Article', 213),
                                 ('CorporateFinanceActivity', 189),
                                 ('AnalystRatingActivity', 1), ('LocationActivity', 7), ('Role', 11), ('RoleActivity', 12)}
-
         counts_set = set(counts)
         assert counts_set == expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}"
         # recents by geo now does not include activities with "where" in - in case of false positives. TODO review this in future
         assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1),
-                                          ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1),
-                                          ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1),
-                                          ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
-                                          ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
-                                          ('US', 'United States of America', 14, 14, 33)]
-
+                                            ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1),
+                                            ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1),
+                                            ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
+                                            ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
+                                            ('US', 'United States of America', 14, 14, 33)]
         assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1),
                                                 ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2),
                                                 ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3),
                                                 ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
-                                                ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]
+                                                ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]        
         assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1),
                                             (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1),
-                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 2, 2, 2),
+                                            (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1),
                                             (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1),
                                             (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
+
+    def test_similar_activities_are_merged(self):
+        query = """match (a: Resource)-[x]-(t) where a.uri in ["https://1145.am/db/4290467/Stmicroelectronics-Added-Italy",
+                    "https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily"] return a.uri, x.weight, t.uri
+                """
+        res, _ = db.cypher_query(query)
+        res = sorted(res)
+        expected = [['https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily', 2, 'https://1145.am/db/4290467/Catania_Sicily'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily', 2, 'https://1145.am/db/4290467/Italy'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily', 4, 'https://1145.am/db/4290467/Stmicroelectronics'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Catania_Sicily', 4, 'https://1145.am/db/4290467/wwwmarketwatchcom_story_stmicroelectronics-to-build-5-4-bln-chip-plant-in-italy-with-state-support-88f996a1'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Italy', 2, 'https://1145.am/db/4290467/Italy'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Italy', 2, 'https://1145.am/db/4290467/Stmicroelectronics'], 
+                    ['https://1145.am/db/4290467/Stmicroelectronics-Added-Italy', 2, 'https://1145.am/db/4290467/wwwmarketwatchcom_story_stmicroelectronics-to-build-5-4-bln-chip-plant-in-italy-with-state-support-88f996a1']]
+        assert res == expected
 
     def test_recent_activities_by_industry(self):
         max_date = date.fromisoformat("2024-06-02")
@@ -596,6 +608,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&min_date=-1")
         content0 = str(resp.content)
         inds0 = len(re.findall("IndustryCluster",content0))
@@ -608,6 +621,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_central_node(self):
         client = self.client
+        client.force_login(self.user)
         resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&min_date=-1&sources=_all")
         content0 = str(resp.content)
         resp = client.get("/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&min_date=-1&sources=_all")
@@ -835,20 +849,20 @@ class EndToEndTests20240602(TestCase):
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
         assert "/resource/1145.am/db/geonames_location/6252001?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1" in content
 
-    def test_org_graph_filters_by_document_source_organization_defaults(self):
+    def test_org_graph_filters_by_document_source_organization_core(self):
         client = self.client
         # Get with core sources by default
-        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
+        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=foo,_core&min_date=-1"
         resp_all = client.get(uri_all)
         content_all = str(resp_all.content)
         assert "PR Newswire" in content_all
         assert "CityAM" not in content_all
         assert "Business Insider" in content_all
 
-    def test_org_graph_filters_by_document_source_organization_all(self):
+    def test_org_graph_filters_by_document_source_organization_defaults(self):
         client = self.client
         # Get with all sources - if _all is in the list then all will be chosen
-        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=foo,_all&min_date=-1"
+        uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         resp_all = client.get(uri_all)
         content_all = str(resp_all.content)
         assert "PR Newswire" in content_all
@@ -875,9 +889,9 @@ class EndToEndTests20240602(TestCase):
         assert "CityAM" in content_filtered
         assert "Business Insider" in content_filtered
 
-    def test_family_tree_filters_by_document_source_defaults(self):
+    def test_family_tree_filters_by_document_source_core(self):
         client = self.client
-        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
+        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1&sources=_core"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -887,9 +901,9 @@ class EndToEndTests20240602(TestCase):
         assert "PR Newswire - FOO TEST" not in content_filtered
         assert "Loxo Oncology Two" not in content_filtered
 
-    def test_family_tree_filters_by_document_source_all(self):
+    def test_family_tree_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&min_date=-1"
+        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?&min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -899,9 +913,9 @@ class EndToEndTests20240602(TestCase):
         assert "PR Newswire - FOO TEST" in content_filtered
         assert "Loxo Oncology Two" in content_filtered
 
-    def test_timeline_filters_by_document_source_defaults(self):
+    def test_timeline_filters_by_document_source_core(self):
         client = self.client
-        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
+        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_core&min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -911,9 +925,9 @@ class EndToEndTests20240602(TestCase):
         assert "PR Newswire - FOO TEST" not in content_filtered
         assert "Loxo Oncology Two" not in content_filtered
 
-    def test_timeline_filters_by_document_source_all(self):
+    def test_timeline_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?sources=_all&min_date=-1"
+        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -997,7 +1011,9 @@ class EndToEndTests20240602(TestCase):
         o = Resource.nodes.get_or_none(uri='https://1145.am/db/11594/Biomax_Informatics_Ag')
         s = OrganizationGraphSerializer(o, context={"combine_same_as_name_only":True,
                                                     "source_str":"_all",
-                                                    "min_date_str":"2010-01-01"})
+                                                    "min_date_str":"2010-01-01",
+                                                    "max_nodes": 10,
+                                                    })
         data = s.data
         assert len(data["node_data"]) == 7
         assert len(data["edge_data"]) == 9
@@ -1020,7 +1036,9 @@ class EndToEndTests20240602(TestCase):
         n = Resource.nodes.get_or_none(uri="https://1145.am/db/10282/Talla")
         g = OrganizationGraphSerializer(n, context ={"combine_same_as_name_only":True,
                                                     "source_str":"_all",
-                                                    "min_date_str":"2010-01-01"})
+                                                    "min_date_str":"2010-01-01",
+                                                    "max_nodes": 10,
+                                                    })
         data = g.data
         assert len(data["node_data"]) == 4
         assert len(data["edge_data"]) == 5
@@ -1507,8 +1525,6 @@ class EndToEndTests20240602(TestCase):
         acts2, _ = tracked_items_between(tis, min_date_for_activities, max_date)
         assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
-
-
 
 
 def set_weights():

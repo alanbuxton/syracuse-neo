@@ -273,8 +273,8 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
         min_doc_date = date_from_str_with_default(self.context.get("min_date_str"))
         source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
         combine_same_as_name_only = self.context.get("combine_same_as_name_only")
-        max_nodes = 50
-        cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{min_doc_date}")
+        max_nodes = self.context["max_nodes"]
+        cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{min_doc_date}_{max_nodes}")
         res = cache.get(cache_key)
         if res is not None:
             logger.debug(f"Cache hit {cache_key}: {res}")

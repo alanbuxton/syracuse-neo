@@ -33,7 +33,8 @@ if os.environ.get(env_var) != "Y":
 
 class TestRegionHierarchy(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         nuke_cache()
 
     def setUp(self):
@@ -183,7 +184,8 @@ class TestRegionHierarchy(TestCase):
 
 class TestFamilyTree(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         clean_db()
         org_nodes = [make_node(x,y) for x,y in zip(range(100,200),"abcdefghijklmnz")]
         org_nodes = org_nodes + [make_node(x,y) for x,y in zip(range(200,210),["p1","p2","s1","s2","c1","c2","p3"])]
@@ -224,6 +226,7 @@ class TestFamilyTree(TestCase):
             SET p2.internalCleanName = ['huy']
         """
         db.cypher_query(query)
+        nuke_cache()
 
     def setUp(self):
         ts = time.time()
@@ -304,9 +307,10 @@ class TestFamilyTree(TestCase):
         res = re.search(r"var edges = new vis.DataSet\( (.+?) \);",content)
         as_dict = json.loads(res.groups(0)[0].replace("\\'","\""))
         target_ids = [x['to'] for x in as_dict]
-        assert target_ids == ['https://1145.am/db/101/b', 'https://1145.am/db/102/c', 
-                              'https://1145.am/db/105/f', 'https://1145.am/db/103/d', 
-                              'https://1145.am/db/107/h']
+        expected_ids = ['https://1145.am/db/101/b', 'https://1145.am/db/102/c', 
+                          'https://1145.am/db/105/f', 'https://1145.am/db/103/d', 
+                          'https://1145.am/db/107/h']
+        assert expected_ids == target_ids, f"Got {target_ids} expected {expected_ids}"
 
     def test_links_parent_and_child_if_only_linked_via_same_as_name_only(self):
         client = self.client
@@ -350,7 +354,7 @@ class TestFamilyTree(TestCase):
         client.force_login(self.user)
         response = client.get("/organization/family-tree/uri/1145.am/db/202/s1")
         content = str(response.content)
-        assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content
+        assert 'https://1145.am/db/206/p3-buyer-https://1145.am/db/202/s1' in content, f"Got {len(content)} content"
 
 
 class TestDynamicClasses(TestCase):
@@ -380,7 +384,8 @@ class TestSerializers(TestCase):
 
 class TestFindResultsWithNodeDegreeCount(TestCase):
 
-    def setUpTestData():
+    @classmethod
+    def setUpTestData(cls):
         clean_db()
         one_year_ago = datetime.now() - timedelta(365)
         five_years_ago = datetime.now() - timedelta(365 * 5)

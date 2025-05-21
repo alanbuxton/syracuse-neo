@@ -162,7 +162,7 @@ class FamilyTree(APIView):
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
         relationships = request_state["qs_params"].get("rels","buyer,vendor")
-        source_str = request_state["qs_params"].get("sources","_core")
+        source_str = request_state["qs_params"].get("sources","_all")
         min_date_str = request_state["qs_params"].get("min_date","")
         nodes_edges = FamilyTreeSerializer(o,context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                 "relationship_str":relationships,
@@ -206,7 +206,7 @@ class OrganizationTimeline(APIView):
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_timeline"
         o = Resource.nodes.get(uri=uri)
-        source_str = request_state["qs_params"].get("sources","_core")
+        source_str = request_state["qs_params"].get("sources","_all")
         min_date_str = request_state["qs_params"].get("min_date","")
         org_serializer = OrganizationTimelineSerializer(o, context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                     "source_str":source_str,
@@ -232,12 +232,14 @@ class OrganizationByUri(APIView):
         o = Resource.nodes.get(uri=uri)
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_linkages"
-        source_str = request_state["qs_params"].get("sources","_core")
+        source_str = request_state["qs_params"].get("sources","_all")
         min_date_str = request_state["qs_params"].get("min_date","")
+        max_nodes = 100 if self.request.user.is_authenticated else 10
         org_serializer = OrganizationGraphSerializer(o,context=
                                     {"combine_same_as_name_only":combine_same_as_name_only,
                                      "source_str":source_str,
                                      "min_date_str":min_date_str,
+                                     "max_nodes": max_nodes,
                                      })
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
         uri_parts = elements_from_uri(o.uri)
