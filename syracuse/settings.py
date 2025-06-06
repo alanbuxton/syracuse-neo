@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'auth_extensions.apps.AuthExtensionsConfig',
     'rest_framework',
+    'drf_spectacular',
     'django_bootstrap5',
     'rest_framework.authtoken',
 ]
@@ -205,6 +206,7 @@ BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
@@ -232,3 +234,10 @@ CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() ==
 GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT_PROPORTION","0.2"))
 INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.2"))
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Syracuse from 1145',
+    'DESCRIPTION': 'Company data emerges from the primordial data goo',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': True,
+    'SCHEMA_PATH_PREFIX_TRIMMING': True,
+}

@@ -16,6 +16,7 @@ cleanco = "*"
 sib-api-v3-sdk = {git = "git+https://github.com/sendinblue/APIv3-python-library.git"}
 redis = {extras = ["hiredis"], version = "*"}
 sentence-transformers = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 

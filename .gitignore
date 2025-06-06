@@ -6,4 +6,5 @@ dump/relevant_geo.csv
 static
 nohup.out
 **/*.pickle
+pyrightconfig.json
 

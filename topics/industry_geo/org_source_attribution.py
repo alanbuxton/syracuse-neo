@@ -4,7 +4,7 @@
 
 import logging
 from neomodel import db
-from topics.models import IndustryCluster, GeoNamesLocation
+from topics.models import IndustryCluster
 from topics.util import geo_to_country_admin1
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ def get_source_orgs_and_weights(source_org, other_type, other_entity):
         query = f"""MATCH (n: Resource&GeoNamesLocation)-
                 [r: basedInHighGeoNamesLocation]-
                 (o: Resource&Organization {{internalMergedSameAsHighToUri:'{source_org.uri}'}})
-                WHERE n.countryCode = '{country}' 
+                WHERE n.countryCode = '{country}'
                 {admin1_str}
                 RETURN o, sum(r.weight)
                 """
@@ -45,7 +45,7 @@ def get_my_geo_weight(org, country, admin1):
     admin1_str = f" AND geo.admin1Code = '{admin1}' " if admin1 is not None else ""
     query = f"""MATCH (n: Resource {{uri:'{org.uri}'}})-
             [rel:basedInHighGeoNamesLocation]-
-            (geo: Resource&GeoNamesLocation) 
+            (geo: Resource&GeoNamesLocation)
             WHERE geo.countryCode = '{country}'
             {admin1_str}
             RETURN rel.weight"""
@@ -77,7 +77,7 @@ def get_source_orgs_for_ind_cluster_or_geo_code(self, other_entity, my_weight = 
             logger.warning(f"{self} is not connected to {other_entity}")
             return leaf_orgs
         logger.debug(f"Target Org {self.uri} weight = {my_weight}")
-            
+
     logger.debug(f"Working on items merged into {self.uri}, leaf_orgs = {leaf_orgs}")
 
     source_weights = 0
@@ -89,8 +89,8 @@ def get_source_orgs_for_ind_cluster_or_geo_code(self, other_entity, my_weight = 
     for source_org, weight in source_orgs_and_weights:
         logger.debug(f"Source Org {source_org.uri} weight = {weight}")
         source_weights += weight
-        if weight == 1 and len(get_source_orgs_and_weights(source_org, other_type, ind_or_country_admin1)) == 0:   
-            leaf_orgs.add((source_org, weight))           
+        if weight == 1 and len(get_source_orgs_and_weights(source_org, other_type, ind_or_country_admin1)) == 0:
+            leaf_orgs.add((source_org, weight))
             logger.debug(f"Adding leaf node {source_org.uri} - currently have {len(leaf_orgs)} leaves")
         else:
             leaf_orgs = get_source_orgs_for_ind_cluster_or_geo_code(source_org, other_entity, weight, leaf_orgs)
