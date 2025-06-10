@@ -4,8 +4,8 @@ import logging
 from topics.models import IndustryCluster, Article, ActivityMixin, Resource
 from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from topics.industry_geo.orgs_by_industry_geo import get_org_activities
-from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
-from .util import cache_friendly, blank_or_none
+from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter, clean_str
+from .util import cache_friendly
 from .industry_geo import geo_to_country_admin1
 from .organization_search_helpers import get_same_as_name_onlies
 from topics.util import ALL_ACTIVITY_LIST, ORG_ACTIVITY_LIST
@@ -108,7 +108,7 @@ def activities_by_source(source_name, min_date, max_date, limit=None):
     MATCH (art: Article)<-[:documentSource]-(act:{ALL_ACTIVITY_LIST})
     WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}') 
-    AND art.sourceOrganization = '{source_name}'
+    AND art.sourceOrganization = '{clean_str(source_name)}'
     AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
     AND EXISTS {{
         MATCH (art)<-[:documentSource]-(org: Organization)

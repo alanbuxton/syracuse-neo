@@ -1,8 +1,8 @@
 from django.test import TestCase
 from collections import OrderedDict
 from topics.models import *
-from .activity_helpers import activity_articles_to_api_results
-from .family_tree_helpers import get_parent_orgs, get_child_orgs
+from topics.activity_helpers import activity_articles_to_api_results, activities_by_source
+from topics.family_tree_helpers import get_parent_orgs, get_child_orgs
 import os
 from neomodel import db
 from datetime import date, datetime
@@ -641,7 +641,8 @@ class TestIgnoreLowRelativeWeightGeoLocations(TestCase):
 
 class TestActivityHelpers(TestCase):
 
-    def test_does_not_include_merged_orgs(self):
+    @classmethod
+    def setUpTestData(cls) -> None:
         '''
         based on 
         call apoc.export.cypher.query('match (o: Resource&Organization)-[t:productActivity]-(n: Resource {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"})-[d:documentSource]-(a: Article), (a)-[:url]-(u) return *',null,{format: "plain", stream:true})
@@ -653,13 +654,13 @@ class TestActivityHelpers(TestCase):
             CREATE (n:Resource{uri: row.uri}) SET n += row.properties;
             UNWIND [{uri:"https://1145.am/db/2707859/McIlhenny_Company", properties:{internalDocId:2707859, deletedRedundantSameAsAt:1, foundName:["McIlhenny Company"], name:["McIlhenny Company"], basedInLowRaw:["Louisiana"]}}, {uri:"https://1145.am/db/5304143/McIlhenny_Company", properties:{basedInHighClean:["Avery Island"], internalDocId:5304143, deletedRedundantSameAsAt:1.7413416403251095E9, foundName:["McIlhenny Company"], name:["McIlhenny Company"], internalMergedSameAsHighToUri:"https://1145.am/db/2707859/McIlhenny_Company", basedInHighRaw:["AVERY ISLAND, La."]}}] AS row
             CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Organization;
-            UNWIND [{uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html", properties:{datePublished:datetime('2025-03-06T20:16:00Z'), internalDocId:5304143, deletedRedundantSameAsAt:1.7413416403251095E9, dateRetrieved:datetime('2025-03-06T22:09:18Z'), sourceOrganization:"PR Newswire", headline:"TABASCO® BRAND LAUNCHES NEW MEXICAN-STYLE HOT SAUCE FOR FOODSERVICE"}}] AS row
+            UNWIND [{uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html", properties:{datePublished:datetime('2025-03-06T20:16:00Z'), internalDocId:5304143, deletedRedundantSameAsAt:1.7413416403251095E9, dateRetrieved:datetime('2025-03-06T22:09:18Z'), sourceOrganization:"Hawai\\'i \\"Public] (Radio", headline:"TABASCO® BRAND LAUNCHES NEW MEXICAN-STYLE HOT SAUCE FOR FOODSERVICE"}}] AS row
             CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Article;
             UNWIND [{start: {uri:"https://1145.am/db/5304143/McIlhenny_Company"}, end: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2707859/McIlhenny_Company"}, end: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, properties:{weight:1}}] AS row
             MATCH (start:Resource{uri: row.start.uri})
             MATCH (end:Resource{uri: row.end.uri})
             CREATE (start)-[r:productActivity]->(end) SET r += row.properties;
-            UNWIND [{start: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, end: {uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"}, properties:{documentExtract:"AVERY ISLAND, La., March 6, 2025 /PRNewswire/ - McIlhenny Company, the makers of TABASCO® Brand Pepper Sauce, brings bold new flavor to the foodservice industry with the launch of TABASCO® Brand Salsa Picante. As the brand's first-ever Mexican-style hot sauce, TABASCO® Salsa Picante delivers a rich, thick texture, a vibrant spice blend, and a subtle kick of heat. Crafted with over 155 years of pepper expertise, this new sauce meets the high standards foodservice operators and their guests have come to expect from TABASCO® Brand. Tabasco Brand Salsa Picante packaging. Available in an easy-to-squeeze 16.2-oz.", weight:1}}] AS row
+            UNWIND [{start: {uri:"https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"}, end: {uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"}, properties:{documentExtract:"AVERY ISLAND, La., March 6, 2025 /PRNewswire/ - McIlhenny Company, the makers of TABASCO® Brand Pepper Sauce, brings bold new flavor to the foodservice industry with the launch of TABASCO® Brand Salsa Picante. As the brand's first-ever Mexican-style hot sauce, TABASCO® Salsa Picante delivers a rich, thick texture, a vibrant spice blend, and a subtle kick of heat. Crafted with over 155 years of pepper expertise, this new sauce meets the high standards foodservice operators and their guests have come to expect from TABASCO® Brand. Tabasco Brand Salsa Picante packaging. Available in an easy-to-squeeze 16.2-oz.", weight:1}}, {start: {uri:"https://1145.am/db/2707859/McIlhenny_Company"}, end: {uri:"https://1145.am/db/5304143/wwwprnewswirecom_news-releases_tabasco-brand-launches-new-mexican-style-hot-sauce-for-foodservice-302395079html"}, properties:{weight: 1}}] AS row
             MATCH (start:Resource{uri: row.start.uri})
             MATCH (end:Resource{uri: row.end.uri})
             CREATE (start)-[r:documentSource]->(end) SET r += row.properties;
@@ -669,10 +670,13 @@ class TestActivityHelpers(TestCase):
             CREATE (start)-[r:url]->(end) SET r += row.properties;
             """.split(";")
         clean_db()
+        nuke_cache()
         for query in queries:
             if query is None or query.strip() == "":
                 continue
             db.cypher_query(query)           
+
+    def test_does_not_include_merged_orgs(self):
         activity_uri = "https://1145.am/db/5304143/Launch-Tabasco_Brand_Salsa_Picante"
         act = Resource.get_by_uri(activity_uri)
         assert len(act.productOrganization) == 2   
@@ -683,6 +687,11 @@ class TestActivityHelpers(TestCase):
         assert len(res[0]['actors']['organization']) == 1
         val = res[0]['actors']['organization'].pop()
         assert val.uri == 'https://1145.am/db/2707859/McIlhenny_Company'
+
+    def test_handles_quote_in_source_name(self):
+        source_name = """Hawai'i "Public] (Radio"""
+        acts = activities_by_source(source_name, date(2025,3,1), date(2025,3,10))
+        assert len(acts) == 1 
 
 class TestDisentanglingMergedCells(TestCase):
 

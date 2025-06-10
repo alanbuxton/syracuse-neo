@@ -1,5 +1,6 @@
 from datetime import datetime
 import neo4j
+import re
 
 def date_to_cypher_friendly(date):
     if isinstance(date, str):
@@ -23,3 +24,6 @@ def neo4j_to_datetime(item):
     if item is None:
         return None
     return datetime.fromisoformat(item.isoformat())
+
+def clean_str(text):
+    return re.sub(r"""(['"])""", r"\\\1", text)
