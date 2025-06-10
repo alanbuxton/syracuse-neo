@@ -10,11 +10,12 @@ from topics.util import date_minus, min_and_max_date
 
 logger = logging.getLogger(__name__)
 
-def get_cached_stats():
+def get_cached_stats(max_sources=100):
     latest_date = cached_activity_stats_last_updated_date()
     if latest_date is None:
         return None, None, None, None, None
     counts, recents_by_country_region, recents_by_source, recents_by_industry = get_stats(latest_date)
+    recents_by_source = sorted(recents_by_source, key=lambda x: (-x[1],x[0]) )[:max_sources]
     return latest_date, counts, recents_by_country_region, recents_by_source, recents_by_industry
 
 def industry_orgs_activities_stats(search_str):

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.http import QueryDict
 from collections import OrderedDict
 from topics.models import *
-from topics.stats_helpers import get_stats
+from topics.stats_helpers import get_cached_stats
 from auth_extensions.anon_user_utils import create_anon_user
 from topics.activity_helpers import (get_activities_by_country_and_date_range, activities_by_industry,
             get_activities_by_industry_geo_and_date_range,
@@ -417,8 +417,7 @@ class EndToEndTests20240602(TestCase):
         assert "technologies" not in content
 
     def test_stats(self):
-        max_date = date.fromisoformat("2024-06-02")
-        counts, recents_by_geo, recents_by_source, recents_by_industry = get_stats(max_date)
+        _, counts, recents_by_geo, recents_by_source, recents_by_industry = get_cached_stats()
         expected = {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1),
                                 ('RecognitionActivity', 1), ('EquityActionsActivity', 2), ('PartnershipActivity', 4),
                                 ('ProductActivity', 10), ('RegulatoryActivity', 1), ('FinancialReportingActivity', 1),
@@ -434,11 +433,11 @@ class EndToEndTests20240602(TestCase):
                                             ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
                                             ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
                                             ('US', 'United States of America', 14, 14, 33)]
-        assert sorted(recents_by_source) == [('Associated Press', 3, 3, 3), ('Business Insider', 2, 2, 2), ('Business Wire', 1, 1, 1),
-                                                ('CityAM', 1, 1, 4), ('Fierce Pharma', 0, 0, 3), ('GlobeNewswire', 2, 2, 2),
-                                                ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), ('MarketWatch', 3, 3, 3),
-                                                ('PR Newswire', 20, 20, 33), ('Reuters', 1, 1, 1), ('TechCrunch', 0, 0, 1),
-                                                ('The Globe and Mail', 1, 1, 1), ('VentureBeat', 0, 0, 1)]        
+        assert recents_by_source == [ ('PR Newswire', 20, 20, 33), ('Associated Press', 3, 3, 3), ('MarketWatch', 3, 3, 3), 
+                                                ('Business Insider', 2, 2, 2), ('GlobeNewswire', 2, 2, 2),
+                                                ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4), ('Reuters', 1, 1, 1), ('The Globe and Mail', 1, 1, 1),
+                                                ('Fierce Pharma', 0, 0, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), 
+                                                ('TechCrunch', 0, 0, 1), ('VentureBeat', 0, 0, 1)]        
         assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1),
                                             (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1),
                                             (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1),
