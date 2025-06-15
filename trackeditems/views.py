@@ -169,7 +169,8 @@ class ActivityStats(APIView):
     template_name = 'activity_stats.html'
 
     def get(self, request):
-        max_date, counts, recents_by_geo, recents_by_source, recents_by_industry = get_cached_stats()
+        max_sources = int(request.GET.get("max_sources","100"))
+        max_date, counts, recents_by_geo, recents_by_source, recents_by_industry = get_cached_stats(max_sources=max_sources)
         recents_by_geo_serializer = RecentsByGeoSerializer(recents_by_geo, many=True)
         recents_by_source_serializer = RecentsBySourceSerializer(recents_by_source, many=True)
         counts_serializer = CountsSerializer(counts, many=True)
@@ -181,6 +182,7 @@ class ActivityStats(APIView):
                          "recents_by_industry": recents_by_industry_serializer.data,
                          "max_date": max_date,
                          "request_state": request_state,
+                         "sources_cnt": max_sources,
                         }, status=status.HTTP_200_OK)
         return resp
 

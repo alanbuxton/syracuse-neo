@@ -8,6 +8,7 @@
 {% load topics_extras %}
 
 <title>Show Resource</title>
+
 </head>
 <body>
 <p>
@@ -44,6 +45,16 @@
     </ul>
   {% endfor %}
 </p>
+
+<form method='post' action='/feedbacks/create' class='form-inline'>
+  <p>See something unexpected or wrong about this item? If so please use the form below to notify us of the issue:</p>
+  <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}'/>
+  <input type='hidden' name='node_or_edge' value='node'/>
+  <input type='hidden' value='{{ data_serializer.resource.uri }}' name='idval'/>
+  <div class='mb-3'><label for='reasonTextArea' class='form-label'><strong>Reason:</strong></label>
+  <textarea name='reason' id='reasonTextArea' class='form-control' rows='3'></textarea></div>
+  <input type='submit' value='Submit Suggestion'/>
+</form>
 
 {% include 'layouts/footer.html' %}
 

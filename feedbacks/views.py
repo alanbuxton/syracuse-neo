@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets, status
 from .models import Feedback
 from .serializers import FeedbackSerializer
@@ -6,9 +5,8 @@ from urllib.parse import urlparse
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.decorators import action
+from topics.views import prepare_request_state
 from datetime import datetime, timezone
 import re
 import logging
@@ -27,6 +25,7 @@ class InteractiveFeedbackViewSet(viewsets.ModelViewSet):
         feedback_data = make_feedback_data(node_or_edge, unique_id, reason)
         source_page = request.headers.get("Referer")
         serializer = self.get_serializer(data=feedback_data)
+        request_state, _ = prepare_request_state(request)
         serializer.is_valid()
         if serializer.errors:
             return Response({"errors":serializer.errors, "source_page": source_page})
@@ -34,7 +33,8 @@ class InteractiveFeedbackViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
         return Response({"feedback":serializer.data,
-            "source_page":source_page}, status=status.HTTP_201_CREATED, headers=headers)
+            "source_page":source_page,
+            "request_state":request_state}, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class MarkAsProcessedViewSet(viewsets.ModelViewSet):

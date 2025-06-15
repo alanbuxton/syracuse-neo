@@ -23,7 +23,7 @@
 
   {% if request_state.cache_last_updated %}
 
-    <p>Showing updates as at {{ max_date | localize }}</p>
+    <p >Showing updates as at {{ max_date | localize }}</p>
 
     <h2>Updates by Country/Region</h2>
     <p>
@@ -75,6 +75,8 @@
       {% endfor %}
     </table>
     </p>
+    <p><em><div class="small-text">Showing max {{ sources_cnt }} sources.</div></em></p>
+
 
     <h2>Updates by Industry</h2>
     <p>

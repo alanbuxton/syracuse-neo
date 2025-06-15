@@ -51,6 +51,8 @@ def dict_to_query_string(data):
 
 @register.simple_tag
 def url_with_querystring(viewname, *args, qs_params={}, extra_params={}):
+    if qs_params is None or qs_params == '':
+        qs_params = {}
     url = reverse(viewname, args=args)
     qs_params = {k:v for k,v in qs_params.items() if v is not None}
     for k,v in extra_params.items():

@@ -7,8 +7,6 @@
 
 </head>
 <body>
-    <p>{% include 'layouts/nav-header.html' %} |
-    <a href=" {{ source_page }}">Back to organization page</a>
     </p>
 
     <h1>Feedback submitted</h1>
@@ -17,7 +15,7 @@
       Feedback could not be saved because of the following issues: <br/>
       {% for field, error in errors.items %}
         <strong>Field:</strong> {{ field }} <br/>
-        <strong>Error:</strong> {{ error}}  <br/>
+        <strong>Error:</strong> {{ error }} <br/>
       {% endfor %}
     {% else %}
       {% for k,v in feedback.items %}
@@ -26,6 +24,7 @@
     {% endif %}
     </p>
 
+    <a href="{{ source_page }}">Back to previous page</a>
 
 </body>
 </html>

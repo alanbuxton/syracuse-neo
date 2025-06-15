@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.http import QueryDict
 from collections import OrderedDict
 from topics.models import *
 from topics.stats_helpers import get_cached_stats
@@ -42,6 +41,7 @@ from trackeditems.models import TrackedItem, ActivityNotification
 from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
 from topics.util import date_minus, min_and_max_date
+from feedbacks.models import Feedback
 
 '''
     Care these tests will delete neodb data
@@ -106,6 +106,31 @@ class EndToEndTests20140205(TestCase):
         assert resp.status_code == 200
         content = str(resp.content)
         assert "https://1145.am/db/2946625/Start_Fracking_At_Two" in content
+
+    def test_has_feedback_form_on_resource_page(self):
+        path = "/resource/1145.am/db/2946625/Start_Fracking_At_Two?foo=bar&baz=qux"
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get(path)
+        assert resp.status_code == 200
+        content = str(resp.content)
+        assert "See something unexpected or wrong about this item" in content
+        assert "Submit Suggestion" in content
+
+    def test_submits_feedack_and_links_to_originating_page(self):
+        client = self.client
+        uri = "https://1145.am/db/2946625/Start_Fracking_At_Two"
+        path = "https://example.com/resource/1145.am/db/2946625/Start_Fracking_At_Two?foo=bar&baz=qux"
+        feedback_cnt = Feedback.objects.count()
+        payload = {'node_or_edge': 'node', 'idval': uri, 
+                    'reason': 'foo bar foo bar'}
+        headers = {'Referer':path}
+        response = client.post("/feedbacks/create", payload, headers=headers)
+        content = str(response.content)
+        assert uri in content
+        assert re.sub("&","&amp;",path) in content
+        feedback_new_cnt = Feedback.objects.count()
+        assert feedback_new_cnt == feedback_cnt + 1
 
 
 class EndToEndTests20190110(TestCase):
@@ -1207,8 +1232,6 @@ class EndToEndTests20240602(TestCase):
         payload = {'selectedIndividualCells': '["row-647#col-US-VA"]', 'selectedRows': '["row-0"]',
                    'selectedColumns': '["col-US-IL"]', 'allIndustryIDs': '[0, 313, 647]',
                    'searchStr': 'beauty insurance'} # from request.POST.dict()
-        qd = QueryDict("",mutable=True)
-        qd.update(payload)
         response = client.post("/industry_geo_finder_review",payload)
         assert response.status_code == 403
         client.force_login(self.user)
