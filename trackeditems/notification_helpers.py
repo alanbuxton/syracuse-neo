@@ -13,14 +13,17 @@ import logging
 logger = logging.getLogger(__name__)
 
 def prepare_recent_changes_email_notification(user, num_days):
-    max_date = DataImport.latest_import_ts()
-    return prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days)
+    max_date_for_email = DataImport.latest_import_ts()
+    max_date = cache.get("activity_stats_last_updated")
+    return prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days, max_date_for_email)
 
-def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days):
+def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days, max_date_for_email=None):
+    if max_date_for_email is None:
+        max_date_for_email = max_date
     min_date = ActivityNotification.most_recent(user)
     if min_date is None:
         min_date = days_ago(num_days, max_date)
-    return prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date)
+    return prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date, max_date_for_email)
 
 def recents_by_user_min_max_date(user, min_date, max_date):
     cache_key = cache_friendly(f"recents_{user.id}_{min_date}_{max_date}")
@@ -63,12 +66,12 @@ def tracked_items_between(tracked_items, min_date, max_date):
     serialized = OrgIndGeoSerializer(tracked_items,many=True)
     return matching_activity_orgs, serialized.data
 
-def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date):
+def prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date, max_date_for_email):
     matching_activity_orgs, tracked_items = recents_by_user_min_max_date(user, min_date, max_date)
     if len(matching_activity_orgs) == 0:
         return None
     return make_email_notif_from_orgs(matching_activity_orgs, tracked_items,
-                                    min_date, max_date, user)
+                                    min_date, max_date_for_email, user)
 
 def make_email_notif_from_orgs(matching_activity_orgs, tracked_items,
                                 min_date, max_date, user):

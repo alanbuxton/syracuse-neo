@@ -226,13 +226,16 @@ class EndToEndTests20190110(TestCase):
 
     def test_creates_geo_industry_notification_for_new_user(self):
         ActivityNotification.objects.filter(user=self.user2).delete()
-        max_date = datetime(2019,1,10,tzinfo=timezone.utc)
-        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7)
+        max_date_for_email = datetime(2019,1,10,13,14,0,tzinfo=timezone.utc)
+        max_date = cache.get("activity_stats_last_updated")
+        assert max_date > max_date_for_email
+        email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7,max_date_for_email)
         email, activity_notif = email_and_activity_notif
         assert "Private Equity Business" in email
         assert "Dallas" in email
         assert activity_notif.num_activities == 2
         assert len(re.findall("Hastings",email)) == 5
+        assert "Jan. 10, 2019, 1:14 p.m." in email # max_date_for_email
         assert "None" not in email
 
     def test_prepares_activity_data_by_industry(self):
