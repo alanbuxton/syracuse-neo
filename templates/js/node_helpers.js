@@ -54,7 +54,6 @@ function showItemDetails(item_id, lookup_dict, node_or_edge, query_string) {
 }
 
 function error_form(node_or_edge, unique_id) {
-  alert('foo');
   text = "<form method='post' action='/feedbacks/create' class='form-inline'>";
   text = text + "See something unexpected or wrong about this item? If so please use the form below to notify us of the issue:</p>";
   text = text + "<input type='hidden' name='csrfmiddlewaretoken' value='" + Cookies.get('csrftoken') + "'>"
