@@ -61,9 +61,11 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'django_bootstrap5',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -245,3 +247,5 @@ SPECTACULAR_SETTINGS = {
         'syracuse.schema_hooks.filter_paths',
     ],
 }
+
+CORS_ALLOW_ALL_ORIGINS = True 
