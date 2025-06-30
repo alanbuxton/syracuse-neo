@@ -207,12 +207,19 @@ ACCOUNT_LOGOUT_ON_GET = True
 BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
 
+THROTTLES = {
+    'unverified_user': 10,
+    'verified_user': 100,
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_VERSION': 'v1',  
+    'DEFAULT_THROTTLE_CLASSES': ['api.throttling.ScopedTieredThrottle'],
+    'DEFAULT_THROTTLE_RATES': {'api': f"{THROTTLES['verified_user']}/month" },
 }
 
 CACHES = {
