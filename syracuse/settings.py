@@ -210,6 +210,7 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
+    'DEFAULT_VERSION': 'v1',  
 }
 
 CACHES = {
@@ -240,4 +241,7 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': True,
     'SCHEMA_PATH_PREFIX_TRIMMING': True,
+    'PREPROCESSING_HOOKS': [
+        'syracuse.schema_hooks.filter_paths',
+    ],
 }

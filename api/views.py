@@ -10,7 +10,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from topics.industry_geo import geo_parent_children, geo_codes_for_region
 from topics.organization_search_helpers import search_organizations_by_name 
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 import re
+
 
 logger = logging.getLogger(__name__)
 
@@ -152,7 +155,60 @@ class ActivitiesViewSet(NeomodelViewSet):
             "request": self.request,
             "view_name": f"api-activity-detail",
         }
-
+    
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='days_ago',
+                description='Show activities this many days old. Optional, but if provided must be one of: 7 (default), 30, 90.',
+                required=False,
+                type=OpenApiTypes.INT,
+                location=OpenApiParameter.QUERY
+            ),
+            OpenApiParameter(
+                name='org_uri',
+                description='Filter by organization URI (optional).',
+                required=False,
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY
+            ),
+            OpenApiParameter(
+                name='org_name',
+                description='Filter by organization name (optional, partial match).',
+                required=False,
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY
+            ),
+            OpenApiParameter(
+                name='location_id',
+                description=('List of location identifiers (e.g., "Southern Asia", "BT", "US-CA"). Accepts multiple values.'
+                    ' They must each match an id from the [regions](#/regions/regions_list) endpoint.'            
+                ),
+                required=False,
+                type=OpenApiTypes.STR,
+                many=True,
+                location=OpenApiParameter.QUERY
+            ),
+            OpenApiParameter(
+                name='industry_name',
+                description=('List of industry names to filter by. Accepts multiple values.'
+                    ' They must each match a topic_id from the [industry_clusters](#/industry_clusters/industry_clusters_list) endpoint.'             
+                ),
+                required=False,
+                type=OpenApiTypes.STR,
+                many=True,
+                location=OpenApiParameter.QUERY
+            ),
+            OpenApiParameter(
+                name='industry_id',
+                description='List of industry IDs (topic IDs) to filter by. Accepts multiple values.',
+                required=False,
+                type=OpenApiTypes.INT,
+                many=True,
+                location=OpenApiParameter.QUERY
+            ),
+        ]
+    )
     def list(self, request):
         activities = self.get_queryset()
         page = self.paginate_queryset(activities)
