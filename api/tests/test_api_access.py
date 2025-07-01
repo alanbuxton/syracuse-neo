@@ -1,10 +1,15 @@
 from django.test import TestCase
 from django.urls import reverse
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 from allauth.account.models import EmailAddress
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from django.conf import settings
+from time import time
+from logging import getLogger 
+from django.core.cache import cache
+logger = getLogger(__name__)
 
 class CORSTest(TestCase):
 
@@ -61,3 +66,54 @@ class RegisterAndGetKeyViewTests(APITestCase):
         response = self.client.post(self.url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("detail", response.data)
+
+class TieredThrottleTests(APITestCase):
+
+    def setUp(self):
+        self.url = reverse('v1:api-region-list')
+        cache.clear()
+
+        # Unverified user
+        email_u = f'unverified-{time()}@example.com'
+        self.unverified_user = User.objects.create(username=email_u, email=email_u)
+        self.unverified_token = Token.objects.create(user=self.unverified_user)
+        EmailAddress.objects.create(user=self.unverified_user, email=self.unverified_user.email, verified=False)
+
+        # Verified user
+        email_v = f'verified-{time()}@example.com'
+        self.verified_user = User.objects.create(username=email_v, email=email_v)
+        self.verified_token = Token.objects.create(user=self.verified_user)
+        EmailAddress.objects.create(user=self.verified_user, email=self.verified_user.email, verified=True)
+
+    def test_throttle_for_unverified_user(self):
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION=f'Token {self.unverified_token.key}')
+        for i in range(settings.THROTTLES['unverified_user']):
+            response = client.get(self.url, {}, format='json')
+            logger.warning(response)
+            self.assertEqual(response.status_code, status.HTTP_200_OK, f"Failed on request {i+1}")
+
+        # 11th request should be throttled
+        response = client.get(self.url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
+
+    def test_throttle_for_verified_user(self):
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION=f'Token {self.verified_token.key}')
+        for i in range(settings.THROTTLES['verified_user']):
+            response = client.get(self.url, {}, format='json')
+            self.assertEqual(response.status_code, status.HTTP_200_OK, f"Failed on request {i+1}")
+
+        # 101st request should be throttled
+        response = client.get(self.url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
+
+    def test_no_throttle_for_non_api_views(self):
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION=f'Token {self.unverified_token.key}')
+        for i in range(settings.THROTTLES['unverified_user']):
+            response = client.get(reverse('swagger-ui'))
+            self.assertEqual(response.status_code, status.HTTP_200_OK, f"Failed on request {i+1}")
+
+        response = client.get(reverse('swagger-ui'))  
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

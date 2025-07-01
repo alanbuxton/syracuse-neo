@@ -61,5 +61,5 @@ class RegisterAndGetKeyView(APIView):
             "token": token.key,
             "detail": ("Email verification sent. You may use the token now with limited access "
                        f"({settings.THROTTLES['unverified_user']}/month). After verifying your email, " 
-                       f"the token will upgrade to the free access tier ({settings.THROTTLES['verified_user']}/month).")
+                       f"the token will upgrade to the free access tier ({settings.THROTTLES['verified_user']}/month). ")
         }, status=200)

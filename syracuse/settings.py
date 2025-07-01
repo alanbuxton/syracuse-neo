@@ -219,7 +219,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20,
     'DEFAULT_VERSION': 'v1',  
     'DEFAULT_THROTTLE_CLASSES': ['api.throttling.ScopedTieredThrottle'],
-    'DEFAULT_THROTTLE_RATES': {'api': f"{THROTTLES['verified_user']}/month" },
+    'DEFAULT_THROTTLE_RATES': {'api': '1/month' },
 }
 
 CACHES = {
