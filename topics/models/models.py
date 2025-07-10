@@ -377,7 +377,10 @@ class Resource(StructuredNode):
                 if hasattr(source_node,f"internal_{rel_key}"):
                     logger.debug("internal key, skipping")
                     continue
-                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
+                if hasattr(other_node, "internalMergedActivityWithSimilarRelationshipsToUri") and (other_node.internalMergedActivityWithSimilarRelationshipsToUri is not None):
+                    logger.debug(f"{other_node}.uri was already merged, ignoring")
+                    continue
+                logger.info(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:

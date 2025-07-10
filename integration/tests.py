@@ -184,6 +184,53 @@ class TurtleLoadingTestCase(TestCase):
                 break
         assert doc_id_in_uri is False # Should be no occurrence of the deleted doc id in Royal Mail's relationships
 
+class DeleteMergedOrgsWithMergedActivitiesTestCase(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        clean_db()
+        nuke_cache()
+        org_nodes = [make_node(x,y) for x,y in [(100,"a"),(101,"b")]]
+        doc_source_m = """(docsource_m:Resource:Article {uri: 'https://1145.am/db/article_m',
+                        headline: 'Headline m', internalDocId: 200, sourceOrganization:'prweb', 
+                        datePublished: datetime('2025-07-10T11:56:25.992116+00:00') }), 
+                        (docsource_m)-[:url]->(ext_m:Resource { uri: 'https://example.org/external/art_m' })"""
+        act_node_0 = """(m:Resource:MarketingActivity {uri: 'https://1145.am/db/200/m', name: ['Name M'],  
+                        status: ['some status'],   internalDocId: 200})-
+                        [:documentSource { documentExtract: 'Doc Extract ' }]->(docsource_m)"""
+        act_node_1 = """(n:Resource:MarketingActivity {uri: 'https://1145.am/db/200/n', name: ['Name N'],  
+                        status: ['some other status'],   internalDocId: 200})-
+                        [:documentSource { documentExtract: 'Doc Extract 2' }]->(docsource_m)"""
+        act_node_for_target = make_node(202,"p","MarketingActivity")
+        node_list = ", ".join(org_nodes + [doc_source_m,act_node_0,act_node_1,act_node_for_target])
+        query = f"""
+            CREATE {node_list},
+            (b)-[:hasMarketingActivity]->(m),
+            (b)-[:hasMarketingActivity]->(n),
+            (b)-[:hasMarketingActivity]->(p),
+            (a)-[:sameAsHigh]->(b),
+            (a)-[:hasMarketingActivity]->(p)
+        """
+        db.cypher_query(query)
+        R = RDFPostProcessor()
+        R.run_all_in_order()
+        node_a = Resource.nodes.get_or_none(uri="https://1145.am/db/100/a")
+
+        assert len(node_a.marketing) == 2
+        p_act = Resource.nodes.get_or_none(uri="https://1145.am/db/202/p")
+        m_act = Resource.nodes.get_or_none(uri="https://1145.am/db/200/m")
+        assert node_a.marketing.relationship(p_act).weight == 2 # p is added via 2 different nodes
+        assert node_a.marketing.relationship(m_act).weight == 2 # m is a combination of n and m which a inherits from b
+        
+    def test_deletes_source_node_with_merged_activities(self):
+        node_a = Resource.nodes.get_or_none(uri="https://1145.am/db/100/a")
+        node_b = Resource.nodes.get_or_none(uri="https://1145.am/db/101/b")
+        node_b.delete_node_and_related()
+        p_act = Resource.nodes.get_or_none(uri="https://1145.am/db/202/p")
+        m_act = Resource.nodes.get_or_none(uri="https://1145.am/db/200/m")
+        assert node_a.marketing.relationship(p_act).weight == 1 # Node B contributed 1 of this weight and has been deleted
+        assert node_a.marketing.relationship(m_act) is None # Node b was deleted so should be removed from downstream
+
 
 class MergeSameAsHighTestCase(TestCase):
 
