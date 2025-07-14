@@ -21,8 +21,9 @@ def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_da
     if max_date_for_email is None:
         max_date_for_email = max_date
     min_date = ActivityNotification.most_recent(user)
-    if min_date is None:
-        min_date = days_ago(num_days, max_date)
+    oldest_allowed_date = days_ago(num_days, max_date)
+    if min_date is None or min_date < oldest_allowed_date:
+        min_date = oldest_allowed_date
     return prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date, max_date_for_email)
 
 def recents_by_user_min_max_date(user, min_date, max_date):
