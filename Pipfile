@@ -18,6 +18,7 @@ redis = {extras = ["hiredis"], version = "*"}
 sentence-transformers = "*"
 drf-spectacular = "*"
 django-cors-headers = "*"
+django-magic-link = "*"
 
 [dev-packages]
 

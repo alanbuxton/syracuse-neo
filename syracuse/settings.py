@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'rest_framework.authtoken',
     'corsheaders',
+    'magic_link',
 ]
 
 MIDDLEWARE = [
@@ -186,6 +187,19 @@ LOGGING = {
     }
 }
 
+# Email
+
+# Email backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Brevo SMTP configuration
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT","587"))
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
+
 # Neomodel
 
 NEOMODEL_NEO4J_SCHEME = os.environ.get('NEO4J_SCHEME','bolt')
@@ -200,7 +214,6 @@ if neomodel.db.url is None:
 
 # all-auth
 SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
 

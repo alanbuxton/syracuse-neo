@@ -9,6 +9,9 @@ from django.conf import settings
 from time import time
 from logging import getLogger 
 from django.core.cache import cache
+from django.core import mail
+import re 
+
 logger = getLogger(__name__)
 
 class CORSTest(TestCase):
@@ -53,6 +56,21 @@ class RegisterAndGetKeyViewTests(APITestCase):
         response = self.client.post(self.url, {"email": email}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["token"],token.key)
+
+    def test_register_existing_verified_user_sends_already_registered_email(self):
+        email = "verified1@example.com"
+        user = User.objects.create(username=email, email=email)
+        current_mbox_size = len(mail.outbox)
+        EmailAddress.objects.create(user=user, email=email, verified=True)
+
+        _ = self.client.post(self.url, {"email": email}, format='json')
+        new_mbox_size = len(mail.outbox)
+        self.assertEqual(current_mbox_size + 1,  new_mbox_size)
+        self.assertEqual(mail.outbox[0].subject, '[Syracuse] Email already registered')
+        self.assertRegex(mail.outbox[0].body , re.compile(r"Someone.+testserver/magic_link/",
+                                                          re.DOTALL))
+        self.assertEqual(mail.outbox[0].from_email, settings.DEFAULT_FROM_EMAIL)
+
 
     def test_register_existing_verified_user_returns_403(self):
         email = "verified@example.com"

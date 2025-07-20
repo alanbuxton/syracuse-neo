@@ -7,6 +7,8 @@ from allauth.account.utils import send_email_confirmation
 from allauth.account.models import EmailAddress
 from drf_spectacular.utils import extend_schema
 from django.conf import settings # import the settings file
+from django.core.mail import send_mail
+from magic_link.models import MagicLink
 
 @extend_schema(
     methods=["POST"],
@@ -28,7 +30,7 @@ from django.conf import settings # import the settings file
             }
         },
         400: {"description": "Missing or invalid input"},
-        403: {"description": "Email already registered but not verified"},
+        403: {"description": "Email already registered"},
     },
     description=("Creates a user account with the given email, sends a verification email, and returns an API token. "
                 f"Unverified users are limited to {settings.THROTTLES['unverified_user']} queries/month; "
@@ -52,10 +54,12 @@ class RegisterAndGetKeyView(APIView):
                 send_email_confirmation(request, user)
 
         is_verified = EmailAddress.objects.filter(user=user, verified=True).exists()
-        if is_verified is True:
-            return Response({"detail": "Already registered"}, status=403)
-
         token, _ = Token.objects.get_or_create(user=user)
+        if is_verified is True:
+            magic_link = magic_link_for_request(request, user)
+            send_already_registered_email(email, magic_link)
+            return Response({"detail": "Already registered. Please check your mail for your key"}, status=403)
+
         return Response({
             "email": email,
             "token": token.key,
@@ -63,3 +67,17 @@ class RegisterAndGetKeyView(APIView):
                        f"({settings.THROTTLES['unverified_user']}/month). After verifying your email, " 
                        f"the token will upgrade to the free access tier ({settings.THROTTLES['verified_user']}/month). ")
         }, status=200)
+
+def magic_link_for_request(request,user):
+    link = MagicLink.objects.create(user=user, redirect_to="/api-usage")
+    url = request.build_absolute_uri(link.get_absolute_url())
+    return url
+
+def send_already_registered_email(email_address, magic_link):
+    send_mail(
+        "[Syracuse] Email already registered",
+        f"Someone (hopefully you) tried to register your email account for a new key.\n\nIf it was you, and you want to review your key and usage, follow this link: {magic_link}.",
+        None,
+        [email_address],
+        fail_silently=False,
+    )

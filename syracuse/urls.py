@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from magic_link import urls as magic_link_urls
 
 urlpatterns = [
+    path('magic_link/', include(magic_link_urls)),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('feedbacks/', include('feedbacks.urls')),
