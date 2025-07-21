@@ -1,6 +1,5 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from allauth.account.utils import send_email_confirmation
@@ -69,7 +68,7 @@ class RegisterAndGetKeyView(APIView):
         }, status=200)
 
 def magic_link_for_request(request,user):
-    link = MagicLink.objects.create(user=user, redirect_to="/api-usage")
+    link = MagicLink.objects.create(user=user, redirect_to="/api/usage")
     url = request.build_absolute_uri(link.get_absolute_url())
     return url
 

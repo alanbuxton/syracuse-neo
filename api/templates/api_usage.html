@@ -1,0 +1,23 @@
+<html></html>
+<head>
+
+{% include 'layouts/main-styling.html' %}
+{% load rest_framework %}
+{% load static %}
+
+<title>Syracuse - API Usage</title>
+</head>
+
+<body>
+<p>
+  {% include 'layouts/nav-header.html' %}
+</p>
+
+<h1>API Tokens</h1>
+
+<p>See your API token below:</p>
+
+<p>{{ tokens }}</p>
+
+</body>
+</html>

@@ -71,7 +71,6 @@ class RegisterAndGetKeyViewTests(APITestCase):
                                                           re.DOTALL))
         self.assertEqual(mail.outbox[0].from_email, settings.DEFAULT_FROM_EMAIL)
 
-
     def test_register_existing_verified_user_returns_403(self):
         email = "verified@example.com"
         user = User.objects.create(username=email, email=email)
@@ -84,6 +83,20 @@ class RegisterAndGetKeyViewTests(APITestCase):
         response = self.client.post(self.url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("detail", response.data)
+
+class APIUsageTests(APITestCase):
+
+    def test_shows_api_key(self):
+        client = self.client
+        url = reverse("api-usage-list")
+        email = "foobar01@example.com"
+        user, _ = User.objects.get_or_create(username=email, email=email)
+        token, _ = Token.objects.get_or_create(user=user)       
+        client.force_login(user)
+        resp = client.get(url)
+        assert resp.status_code == 200
+        assert token.key in resp.text
+
 
 class TieredThrottleTests(APITestCase):
 

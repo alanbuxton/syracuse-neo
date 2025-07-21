@@ -1,12 +1,11 @@
 from django.shortcuts import redirect
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from .models import TrackedItem
-from topics.models import IndustryCluster, Organization
+from topics.models import IndustryCluster
 from topics.util import min_and_max_date
 from rest_framework.response import Response
 from rest_framework import status
@@ -20,7 +19,6 @@ from topics.activity_helpers import (
     get_activities_by_source_and_date_range,
     get_activities_by_industry_geo_and_date_range,
 )
-from datetime import datetime, timezone, timedelta
 from topics.views import prepare_request_state
 from .notification_helpers import recents_by_user_min_max_date
 from topics.industry_geo import country_admin1_full_name

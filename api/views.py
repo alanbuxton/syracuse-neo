@@ -1,11 +1,13 @@
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
+from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from topics.models import IndustryCluster, GeoNamesLocation
 import api.serializers as serializers
 import logging 
 from topics.util import min_and_max_date, geo_to_country_admin1
 from rest_framework import status
 from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from topics.industry_geo import geo_parent_children, geo_codes_for_region
@@ -13,7 +15,7 @@ from topics.organization_search_helpers import search_organizations_by_name
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 import re
-
+from rest_framework.authtoken.models import Token
 
 logger = logging.getLogger(__name__)
 
@@ -228,6 +230,20 @@ class ActivitiesViewSet(NeomodelViewSet):
         return Response(serializer.data)
 
 
+class APIUsageViewSet(ReadOnlyModelViewSet):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'api_usage.html'
+    permission_classes = [IsAuthenticatedNotAnon]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
+    def get_queryset(self):
+        return Token.objects.get(user=self.request.user)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response({'tokens': queryset},status=status.HTTP_200_OK)
+
+ 
 def filter_activity_types(activities, activity_types_to_keep):
     if not isinstance(activity_types_to_keep, list) and len(activity_types_to_keep) == 0:
         return activities
