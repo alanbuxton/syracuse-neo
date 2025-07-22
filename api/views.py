@@ -9,7 +9,8 @@ from rest_framework import status
 from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
 from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authentication import SessionAuthentication
+from syracuse.authentication import FlexibleTokenAuthentication
 from topics.industry_geo import geo_parent_children, geo_codes_for_region
 from topics.organization_search_helpers import search_organizations_by_name 
 from drf_spectacular.utils import extend_schema, OpenApiParameter
@@ -21,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 class NeomodelViewSet(GenericViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     node_class = None
     serializer_class = serializers.HyperlinkedNeomodelSerializer
@@ -75,7 +76,7 @@ class IndustryClusterViewSet(NeomodelViewSet):
 
 class RegionsViewSet(GenericViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     serializer_class = serializers.RegionsDictSerializer
 
     def get_queryset(self):
@@ -234,7 +235,7 @@ class APIUsageViewSet(ReadOnlyModelViewSet):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'api_usage.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get_queryset(self):
         return Token.objects.get(user=self.request.user)

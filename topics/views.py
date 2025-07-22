@@ -3,7 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authentication import SessionAuthentication
+from syracuse.authentication import FlexibleTokenAuthentication
 from django.shortcuts import redirect
 from topics.models import Organization, Resource, IndustryCluster
 from topics.models.model_helpers import similar_organizations
@@ -44,7 +45,7 @@ class About(APIView):
 
 class IndustriesViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     serializer_class = IndustryClusterSerializer
 
     def get_queryset(self):
@@ -100,7 +101,7 @@ class ShowResource(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'show_resource.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}"
@@ -128,7 +129,7 @@ class OrganizationIndustryGeoSources(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_industry_geo_sources.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
@@ -152,7 +153,7 @@ class FamilyTree(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_family_tree.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request,**kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
@@ -199,7 +200,7 @@ class OrganizationTimeline(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_timeline.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, *args, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
@@ -257,7 +258,7 @@ class IndustryGeoFinderReview(ListCreateAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'industry_geo_finder_review.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request):
         # Simplified to call if only using one industry id
@@ -358,7 +359,7 @@ class SimilarOrganizations(APIView):
     renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
     template_name = 'similar_organizations.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
@@ -419,7 +420,7 @@ class IndustryGeoOrgsView(APIView):
     renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
     template_name = 'industry_geo_orgs_list.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request):
         geo_code = request.GET.get("geo_code")
@@ -454,7 +455,7 @@ class OrgActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'organization_activities.html'
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, **kwargs):
         min_date, max_date = min_and_max_date(request.GET)

@@ -5,7 +5,8 @@ from urllib.parse import urlparse
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authentication import SessionAuthentication
+from syracuse.authentication import FlexibleTokenAuthentication
 from topics.views import prepare_request_state
 from datetime import datetime, timezone
 import re
@@ -39,7 +40,7 @@ class InteractiveFeedbackViewSet(viewsets.ModelViewSet):
 
 class MarkAsProcessedViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     serializer_class = FeedbackSerializer
     renderer_classes = [JSONRenderer]
 

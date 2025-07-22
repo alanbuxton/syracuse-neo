@@ -3,7 +3,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authentication import SessionAuthentication
+from syracuse.authentication import FlexibleTokenAuthentication
 from .models import TrackedItem
 from topics.models import IndustryCluster
 from topics.util import min_and_max_date
@@ -32,7 +33,7 @@ class TrackedOrgIndGeoView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_org_ind_geo.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     http_method_names = ['get', 'post']
 
     def get_queryset(self):
@@ -62,7 +63,7 @@ class GeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -90,7 +91,7 @@ class IndustryActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]   
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -117,7 +118,7 @@ class IndustryGeoActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]   
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]   
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -142,7 +143,7 @@ class SourceActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
@@ -189,7 +190,7 @@ class ActivitiesView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'tracked_activities.html'
     permission_classes = [IsAuthenticatedNotAnon]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request):
         min_date, max_date = min_and_max_date(request.GET)
