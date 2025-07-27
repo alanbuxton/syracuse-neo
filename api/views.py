@@ -13,7 +13,7 @@ from rest_framework.authentication import SessionAuthentication
 from syracuse.authentication import FlexibleTokenAuthentication
 from topics.industry_geo import geo_parent_children, geo_codes_for_region
 from topics.organization_search_helpers import search_organizations_by_name 
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from drf_spectacular.types import OpenApiTypes
 import re
 from rest_framework.authtoken.models import Token
@@ -40,6 +40,11 @@ class NeomodelViewSet(GenericViewSet):
             "view_name": f"api-{node_class_name}-detail",
         }
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter("id", OpenApiTypes.URI, OpenApiParameter.PATH)
+        ]
+    )   
     def retrieve(self, request, pk=None):
         instance = self.get_object()
         serializer = self.serializer_class(
@@ -89,6 +94,11 @@ class RegionsViewSet(GenericViewSet):
         serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
         return Response(serializer.data)
     
+    @extend_schema(
+        parameters=[
+            OpenApiParameter("id", OpenApiTypes.STR, OpenApiParameter.PATH)
+        ]
+    )      
     def retrieve(self, request, pk=None):
         item = self.get_object()
         if item is None:
@@ -210,7 +220,13 @@ class ActivitiesViewSet(NeomodelViewSet):
                 many=True,
                 location=OpenApiParameter.QUERY
             ),
-        ]
+        ],
+        responses={
+            200:OpenApiResponse(
+            response=serializers.ActivitySerializer,
+            description='Paginated list of activities'
+        )
+        }
     )
     def list(self, request):
         activities = self.get_queryset()
