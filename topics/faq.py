@@ -12,6 +12,8 @@ FAQ = {
 
     "How does this offering differ from &lt;any other business news aggregator&gt;?": "The key difference is that this is highly automated with machine learning together with some rules and heuristics. Historically, the tech for doing this sort of thing suffered from what we used to call the <a href=\"https://alanbuxton.wordpress.com/2023/01/02/revisiting-entity-extraction/\">Bloomberg problem</a>. Briefly, there is plenty of tech available that will tell you what company names a document contains, but figuring out what these companies are doing with each other is a lot harder to do automatically. A lot of articles mention Bloomberg, but only a small proportion of them are about Bloomberg the company. The providers out there who are doing this sort of thing rely heavily on human analysts to work around the Bloomberg problem. Doing this via machine, which 1145 does, makes it viable to offer it for free as open data.",
 
+    "How does this offering differ from AI sites like Perplexity?": "Syracuse is tuned for company searches. The well-known AI companies are much more general-purpose. Here's some code you can use to compare: <a href=\"https://github.com/alanbuxton/news-comparison\">https://github.com/alanbuxton/news-comparison</a>.",
+
     "What's 1145?": "This was a domain I bought a long time ago for a company idea that never got off the ground. A lot of programmers collect domain names for side projects and <a href=\"https://www.reddit.com/r/ProgrammerHumor/comments/hp5q56/here_i_go_again/\">we rarely, if ever, part with them</a>. I like the idea of technology making your life easier so that you get your day's work done by lunchtime. So 1145.am is the domain being used to host this application and the umbrella term for all the associated components that feed into the Syracuse application which you're browsing right now.",
 
     "There are other components to this?": "Yep: Heraklion scrapes data, Alexandria classifies it, Massalia is used to label example texts for machine learning and Corinth takes the Massalia data and adds further synthetic data for machine learning training. Neapolis uses machine learning to extract relevant information from the documents and structures them into an RDF format for Syracuse to ingest and display.",
@@ -30,7 +32,7 @@ FAQ = {
      
     "What about if the share-alike license isn't for me?": "Drop me a line and we can discuss. I'm more than happy to charge people for API access or bulk data in order to fund the future development of this project. Very similar to the OpenCorporates approach which I admire greatly.",
 
-    "I love this, can I access it via API?": "Of course. Drop me a line and we can get something set up.",
+    "I love this, can I access it via API?": "Of course. <a href=\"https://syracuse.1145.am/api/schema/swagger-ui\">Schema docs are here</a>. You will need to register for an API key using <pre>register-and-get-key</pre>. If you like it and want more access, <a href=\"mailto:info-syracuse@1145.am\">send me an email</a>.",
 
     "This fails <a href=\"https://opendefinition.org/od/2.1/en/\">condition 1.2 of the Open Definition</a> so how can you represent it as open data?": "Bored. Next. ..... In all seriousness, this is why I am calling it open-ish data. The important point is that anyone can browse this data for free and I'm more than happy to give the underlying data to people working in the public benefit either via API or via a data dump. Please <a href=\"mailto:info-syracuse@1145.am\">send a mail</a> if you'd like to discuss.",
 

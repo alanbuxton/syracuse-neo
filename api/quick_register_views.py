@@ -33,7 +33,8 @@ from magic_link.models import MagicLink
     },
     description=("Creates a user account with the given email, sends a verification email, and returns an API token. "
                 f"Unverified users are limited to {settings.THROTTLES['unverified_user']} queries/month; "
-                f"verified users can make {settings.THROTTLES['verified_user']}/month."
+                f"verified users can make {settings.THROTTLES['verified_user']}/month for free. "
+                "Drop us an email to tell us how you found the service and if you want more queries (see website footer)"
                 )
 )
 class RegisterAndGetKeyView(APIView):

@@ -5,9 +5,11 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 class ScopedTieredThrottle(UserRateThrottle):
-    scope = 'api'
+    scope = 'default_scope'
 
     def allow_request(self, request, view):
+        if "/api/" not in request.path:
+            return True
         if not request.user.is_authenticated:
             self.rate = "1/month"
         else:

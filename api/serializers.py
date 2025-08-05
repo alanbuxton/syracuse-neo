@@ -86,13 +86,13 @@ class RegionsDictSerializer(serializers.Serializer):
 
 
 class GeoNamesSerializer(serializers.Serializer):
-    geonames_id = serializers.IntegerField(source="geoNamesId", help_text="GeoNames numeric ID")
+    geonames_id = serializers.IntegerField(source="geoNamesId", help_text="GeoNames numeric ID (see geonames.org)")
     uri = serializers.URLField(help_text="Unique URI within the 1145 namespace")
-    name = serializers.SerializerMethodField(help_text="Name (first if list)")
+    name = serializers.SerializerMethodField(help_text="Name")
     geonames_url = serializers.URLField(source="geoNamesURL", help_text="Original GeoNames URL")
     country_code = serializers.CharField(source="countryCode", help_text="ISO country code")
-    admin1_code = serializers.SerializerMethodField(help_text="Administrative region code")
-    region = serializers.SerializerMethodField(help_text="Region URL based on country/admin code")
+    admin1_code = serializers.SerializerMethodField(help_text="State or Province. This is the GeoNames admin1_code which is a combination of ISO and FIPS codes. It is not always available")
+    region = serializers.SerializerMethodField(help_text="URL for this region entity")
 
     @extend_schema_field(serializers.CharField())
     def get_name(self, obj):
@@ -141,32 +141,74 @@ class ActivityActorSerializer(serializers.Serializer):
 
 class ActorRolesSerializer(serializers.Serializer):
     awarded	= ActivityActorSerializer(many=True, required=False)
-    buyer	= ActivityActorSerializer(many=True, required=False)
-    investor	= ActivityActorSerializer(many=True, required=False)
-    location	= ActivityActorSerializer(many=True, required=False)
-    location_added_by	= ActivityActorSerializer(many=True, required=False)
-    location_removed_by	= ActivityActorSerializer(many=True, required=False)
-    organization	= ActivityActorSerializer(many=True, required=False)
-    participant	= ActivityActorSerializer(many=True, required=False)
-    partnership	= ActivityActorSerializer(many=True, required=False)
-    person	= ActivityActorSerializer(many=True, required=False)
-    product	= ActivityActorSerializer(many=True, required=False)
-    protagonist	= ActivityActorSerializer(many=True, required=False)
-    provided_by	= ActivityActorSerializer(many=True, required=False)
-    role	= ActivityActorSerializer(many=True, required=False)
-    target	= ActivityActorSerializer(many=True, required=False)
-    vendor	= ActivityActorSerializer(many=True, required=False)
+    buyer = ActivityActorSerializer(many=True, required=False)
+    investor = ActivityActorSerializer(many=True, required=False)
+    location = ActivityActorSerializer(many=True, required=False)
+    location_added_by = ActivityActorSerializer(many=True, required=False)
+    location_removed_by	= ActivityActorSerializer(many=True, required=False, help_text="Organization that is removing a location (e.g. shutting down a factory). Used in **LocationActivity**")
+    organization = ActivityActorSerializer(many=True, required=False, help_text="Generic term for an involved organization. Used across many activity types.")
+    participant	= ActivityActorSerializer(many=True, required=False, help_text="An organization involved in a story but not who the story is about. For example a legal firm in an M&A transaction. Used in **CorporateFinanceActivity**")
+    partnership	= ActivityActorSerializer(many=True, required=False, help_text="When two or more organizations partner together. Used in **PartnershipActivity**")
+    person = ActivityActorSerializer(many=True, required=False, help_text="A human being. Used in **RoleActivity**")
+    product	= ActivityActorSerializer(many=True, required=False, help_text="A product or service. Used in **ProductActivity**")
+    protagonist	= ActivityActorSerializer(many=True, required=False, help_text="Organization that is involved in a merger where there is no obvious buyer or seller. Used in **CorporateFinanceActivity**")
+    provided_by	= ActivityActorSerializer(many=True, required=False, help_text="Provider of goods and services. Used in **PartnershipActivity** where the partnership looks more like someone buying something from a supplier")
+    role = ActivityActorSerializer(many=True, required=False, help_text="A senior role (e.g. Director, VP, CEO). Used in **RoleActivity**")
+    target = ActivityActorSerializer(many=True, required=False, help_text="The entity that is being bought or sold or invested in. Used in **CorporateFinanceActivity**")
+    vendor = ActivityActorSerializer(many=True, required=False, help_text="Seller of all or part of another organization. Used in **CorporateFinanceActivity**")
 
 class ActivitySerializer(serializers.Serializer):
-    activity_class = serializers.CharField(help_text="Activity classification label")
-    headline = serializers.CharField(help_text="Short headline or summary")
+    activity_class = serializers.CharField(
+        help_text=("Activity classification label. One of:\n"
+                    " - **CorporateFinanceActivity**: M&A, investments, stock purchases\n"
+                    " - **PartnershipActivity**: Partnership between 2 or more organizations. Often, companies describe their customers as their partners. This type of activity covers both genuine partnerships and customer/supplier relationships"
+                    " - **RoleActivity**: Key change in senior personnel, e.g. replacing CEO\n"
+                    " - **LocationActivity**: Opening or closing a new location (e.g. setting up in EMEA or shutting down a factory in a particular town)\n"
+                    " - **ProductActivity**: New product launches\n"
+                    " - **AnalystRatingActivity**: Updates from industry analysts\n"
+                    " - **EquityActionsActivity**: Stock repurchases, dividends etc"
+                    " - **FinancialReportingActivity**: Notice that an organization is going to announce its financials\n"
+                    " - **FinancialsActivity**: Information about company financials, e.g. revenue or EBITDA\n"
+                    " - **IncidentActivity**: Adverse incidents e.g. safety\n"
+                    " - **MarketingActivity**: e.g. launching a new advertising campaign\n"
+                    " - **OperationsActivity**: Company operations news, e.g. we are investing in a new product, or we have just completed an security audit\n"
+                    " - **RecognitionActivity**: e.g. we are delighted to announce that we won Agency of the Year\n"
+                    " - **RegulatoryActivity**: Legal or regulatory activity affecting this organizationg e.g. permit for drilling, or regulatory filing \n" 
+        )
+    )
+    headline = serializers.CharField(help_text="Source document headline")
     date_published = serializers.DateTimeField(help_text="Date of publication")
-    source_organization = serializers.CharField(help_text="Source organization name")
-    document_extract = serializers.CharField(help_text="Extract of the source document")
-    document_url = serializers.URLField(help_text="URL of the full document")
-    activity_uri = serializers.URLField(help_text="Unique URI for the activity")
+    source_organization = serializers.CharField(help_text="Organization that produced or published the source document (e.g. news provider, analyst firm)")
+    document_extract = serializers.CharField(help_text="Extract from the source document")
+    document_url = serializers.URLField(help_text="Source document URL")
+    activity_uri = serializers.URLField(help_text="Unique URI for this activity within the 1145 namespace")
     activity_locations = GeoNamesSerializer(many=True, help_text="Geographic locations")
     actors = ActorRolesSerializer(
-        help_text="Actors grouped by role (e.g. 'buyer', 'seller', 'investor')",
+        help_text=("Entities involveed in this activity, grouped by their role. The types of entity and types of role depend on the type of activity:"
+                    "\n\n## CorporateFinanceActivity:\n\n"
+                    " - **buyer**: An organization that is buying all or part of another organization (in practice has overlap with investor)\n"
+                    " - **investor**: An organization that is investing in another organization (in practice has overlap with investor)\n"
+                    " - **target**: The organization that is being bought or invested in\n"
+                    " - **vendor**: The organization that is selling the target\n"
+                    " - **protagonist**: If it's not clear who is the buyer or the seller, e.g. in a merger, all parties are referred to as protagonists\n"
+                    " - **participant**: Another related organization in the transaction, e.g. a law firm or investment bank\n"
+                    "\n\n## PartnershipActivity:\n\n"
+                    " - **awarded**: Where a partnership looks like buying goods or services (e.g. we partnered with such and such a CRM provider for our CRM needs), awarded means the organization that is receiving the goods or services\n" 
+                    " - **partnership**: Other organization(s) that the partnership is with\n"
+                    " - **provided_by**: Where a partnership looks like buying goods or services (e.g. we partnered with such and such a CRM provider for our CRM needs), awarded means the organization that is providing the goods or services\n" 
+                    "\n\n## RoleActivity:\n\n" 
+                    " - **role**: The role that relates to this activity\n"
+                    " - **person**: The person who has either starting or stopping in this role\n"
+                    " - **organization**: The organization where this activity is taking place\n"
+                    "\n\n## LocationActivity:\n\n"
+                    " - **location_added_by**: This organization has opened up in the related location\n"
+                    " - **location_removed_by**: This organization has shut down the related location (e.g. shut down a factory)\n"
+                    " - **location**: A geographical location (e.g. country, city, region)\n"
+                    "\n\n## ProductActivity:\n\n"
+                    " - **product**: Name of the product that was launched\n"
+                    " - **organization**: Organization which launched this product\n"
+                    "\n\n## AnalystRatingActivity, EquityActionsActivity, FinancialReportingActivity, FinancialsActivity, IncidentActivity, MarketingActivity, OperationsActivity, RecognitionActivity, RegulatoryActivity:\n\n"
+                    " - **organization**: An organization that this activity relates to\n"
+        )
     )
-    archive_org_list_url = serializers.URLField(help_text="Link to archived organization list")
+    archive_org_list_url = serializers.URLField(help_text="Link to the source document on archive.org (will only work if archive.org has crawled this page)")
