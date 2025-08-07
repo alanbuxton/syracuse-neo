@@ -11,6 +11,10 @@ from logging import getLogger
 from django.core.cache import cache
 from django.core import mail
 import re 
+from django.test import TestCase, RequestFactory
+from django.contrib.auth.models import User, AnonymousUser
+from api.middleware.api_usage import APIUsageMiddleware
+from api.models import APIRequestLog
 
 logger = getLogger(__name__)
 
@@ -148,3 +152,111 @@ class TieredThrottleTests(APITestCase):
 
         response = client.get(reverse('swagger-ui'))  
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class APIUsageMiddlewareTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.middleware = APIUsageMiddleware(get_response=self.get_response)
+        self.user = User.objects.create_user(username='tester', password='pass')
+
+    def get_response(self, request):
+        # Dummy view just returns a simple response with status 200
+        from django.http import HttpResponse
+        return HttpResponse("OK")
+
+    def test_middleware_logs_authenticated_user(self):
+        request = self.factory.get('/api/data?industry=energy&region=eu&region=asia')
+        request.user = self.user
+        request.META['REMOTE_ADDR'] = '127.0.0.1'
+
+        response = self.middleware(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        log = APIRequestLog.objects.last()
+        self.assertIsNotNone(log)
+        self.assertEqual(log.user, self.user)
+        self.assertEqual(log.method, 'GET')
+        self.assertEqual(log.path, '/api/data')
+        self.assertEqual(log.ip, '127.0.0.1')
+        self.assertEqual(log.status_code, 200)
+
+        # query_params should preserve multiple values for region
+        self.assertIn('industry', log.query_params)
+        self.assertEqual(log.query_params['industry'], 'energy')
+        self.assertIn('region', log.query_params)
+        self.assertEqual(log.query_params['region'], ['eu', 'asia'])
+
+        self.assertTrue(log.duration >= 0)
+
+    def test_middleware_does_not_log_anonymous_user(self):
+        request = self.factory.get('/api/data')
+        request.user = AnonymousUser()
+        request.META['REMOTE_ADDR'] = '127.0.0.1'
+
+        response = self.middleware(request)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(APIRequestLog.objects.exists())
+
+    def test_sensitive_query_params_are_filtered(self):
+        request = self.factory.get('/api/data?token=secret_token&password=1234&foo=bar')
+        request.user = self.user
+        request.META['REMOTE_ADDR'] = '127.0.0.1'
+
+        response = self.middleware(request)
+
+        log = APIRequestLog.objects.last()
+        self.assertIsNotNone(log)
+        self.assertIn('foo', log.query_params)
+        self.assertNotIn('token', log.query_params)
+        self.assertNotIn('password', log.query_params)
+
+
+class APIRequestLogQueryParamsTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="tester", password="pass")
+
+        # Create some logs with different query_params
+        APIRequestLog.objects.create(
+            user=self.user,
+            path="/api/data",
+            method="GET",
+            status_code=200,
+            duration=0.1,
+            ip="127.0.0.1",
+            query_params={"region": ["eu", "asia"], "industry": "energy"},
+        )
+        APIRequestLog.objects.create(
+            user=self.user,
+            path="/api/data",
+            method="GET",
+            status_code=200,
+            duration=0.2,
+            ip="127.0.0.1",
+            query_params={"region": ["us", "ca"], "industry": "tech"},
+        )
+        APIRequestLog.objects.create(
+            user=self.user,
+            path="/api/data",
+            method="GET",
+            status_code=200,
+            duration=0.3,
+            ip="127.0.0.1",
+            query_params={"region": "eu", "industry": "finance"},
+        )
+
+    def test_filter_query_params_region_contains(self):
+        # Find logs where query_params.region contains 'eu'
+        qs = APIRequestLog.objects.filter(query_params__region__contains="eu")
+
+        self.assertEqual(qs.count(), 2)
+
+        # Verify the correct logs are returned
+        for log in qs:
+            region = log.query_params.get("region", [])
+            if isinstance(region, str):
+                self.assertIn("eu", region)
+            else:
+                self.assertIn("eu", region)
