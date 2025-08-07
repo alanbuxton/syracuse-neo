@@ -191,7 +191,7 @@ LOGGING = {
 # Email
 
 # Email backend
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'syracuse.email_backend.BrevoEmailBackend'
 
 # Brevo SMTP configuration
 EMAIL_HOST = os.environ["EMAIL_HOST"]

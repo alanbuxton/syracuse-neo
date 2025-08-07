@@ -8,6 +8,9 @@ from drf_spectacular.utils import extend_schema
 from django.conf import settings # import the settings file
 from django.core.mail import send_mail
 from magic_link.models import MagicLink
+import logging
+
+logger = logging.getLogger(__name__)
 
 @extend_schema(
     methods=["POST"],
@@ -48,10 +51,10 @@ class RegisterAndGetKeyView(APIView):
 
         user, created = User.objects.get_or_create(username=email, defaults={"email": email})
         if created:
-            send_email_confirmation(request, user)
+            send_email_confirmation_inline(request, user)
         else:
             if not EmailAddress.objects.filter(user=user, verified=True).exists():
-                send_email_confirmation(request, user)
+                send_email_confirmation_inline(request, user)
 
         is_verified = EmailAddress.objects.filter(user=user, verified=True).exists()
         token, _ = Token.objects.get_or_create(user=user)
@@ -81,3 +84,12 @@ def send_already_registered_email(email_address, magic_link):
         [email_address],
         fail_silently=False,
     )
+
+def send_email_confirmation_inline(request, user):
+    try:
+        logger.info(f"[Email] Starting confirmation email for user {user.pk}")
+        send_email_confirmation(request, user)
+        logger.info(f"[Email] Successfully sent confirmation email for user {user.pk}")
+    except Exception as e:
+        logger.exception(f"[Email] Failed to send confirmation email for user {user.pk}: {e}")
+        raise
