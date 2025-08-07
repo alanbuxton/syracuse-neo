@@ -8,7 +8,7 @@ class ScopedTieredThrottle(UserRateThrottle):
     scope = 'default_scope'
 
     def allow_request(self, request, view):
-        if "/api/" not in request.path:
+        if "/api/v" not in request.path:
             return True
         if not request.user.is_authenticated:
             self.rate = "1/month"

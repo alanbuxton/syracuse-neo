@@ -4,6 +4,7 @@
   {{ user.username }}, you're logged in, great stuff.
    <a href="{% url_with_querystring 'tracked-org-ind-geo' qs_params=request_state.qs_params %}">Tracked Industries / Geo / Organizations</a>
 |  <a href="{% url_with_querystring 'tracked-activities' qs_params=request_state.qs_params %}">Recent Tracked Activities</a>
+|  <a href="{% url 'api-usage-list' %}">API Stats</a>
 |  <a href="{% url 'account_logout' %}">Log out</a>.
 {% else %}
 |  <a href="{% url 'account_login' %}">Log in or Sign Up for full access</a>

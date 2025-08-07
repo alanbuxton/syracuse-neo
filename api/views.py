@@ -16,7 +16,10 @@ from topics.organization_search_helpers import search_organizations_by_name
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from drf_spectacular.types import OpenApiTypes
 import re
-from rest_framework.authtoken.models import Token
+from api.models import APIRequestLog
+from django.utils.dateparse import parse_date
+from django.core.paginator import Paginator
+from rest_framework.views import APIView
 
 logger = logging.getLogger(__name__)
 
@@ -254,11 +257,45 @@ class APIUsageViewSet(ReadOnlyModelViewSet):
     authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get_queryset(self):
-        return Token.objects.get(user=self.request.user)
-    
+        return APIRequestLog.objects.filter(user=self.request.user)
+
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response({'tokens': queryset},status=status.HTTP_200_OK)
+        logs = self.get_queryset()
+
+        # Date filtering
+        start_date = request.GET.get('start')
+        end_date = request.GET.get('end')
+        if start_date:
+            logs = logs.filter(timestamp__gte=parse_date(start_date))
+        if end_date:
+            logs = logs.filter(timestamp__lte=parse_date(end_date))
+
+        # Sorting
+        order_by = request.GET.get('sort', '-timestamp')
+        if order_by.lstrip('-') in ['timestamp', 'path', 'method', 'status_code', 'duration']:
+            logs = logs.order_by(order_by)
+
+        # Pagination
+        paginator = Paginator(logs, 25)  # 25 per page
+        page = request.GET.get('page')
+        page_obj = paginator.get_page(page)
+
+        return Response({
+            'token': request.user.auth_token.key if hasattr(request.user, 'auth_token') else None,
+            'page_obj': page_obj,
+            'order_by': order_by,
+            'start_date': start_date or '',
+            'end_date': end_date or '',
+        }, status=status.HTTP_200_OK)
+    
+
+class APITokenView(APIView):
+    authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        token_key = request.user.auth_token.key
+        return Response({'token': token_key})
 
  
 def filter_activity_types(activities, activity_types_to_keep):

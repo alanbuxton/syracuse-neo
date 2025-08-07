@@ -90,16 +90,19 @@ class RegisterAndGetKeyViewTests(APITestCase):
 
 class APIUsageTests(APITestCase):
 
-    def test_shows_api_key(self):
+    def test_shows_get_api_key_button(self):
         client = self.client
         url = reverse("api-usage-list")
         email = "foobar01@example.com"
         user, _ = User.objects.get_or_create(username=email, email=email)
         token, _ = Token.objects.get_or_create(user=user)       
         client.force_login(user)
+        api_call = client.get("/api/v1/geonames/")
         resp = client.get(url)
-        assert resp.status_code == 200
-        assert token.key in resp.text
+        self.assertEqual(resp.status_code,200)
+        self.assertNotIn(token.key, resp.text)
+        self.assertRegex(resp.text,r"<button.+Load API Token.+button>")
+        self.assertIn("/api/v1/geonames", resp.text, )
 
 
 class TieredThrottleTests(APITestCase):
@@ -166,7 +169,7 @@ class APIUsageMiddlewareTests(TestCase):
         return HttpResponse("OK")
 
     def test_middleware_logs_authenticated_user(self):
-        request = self.factory.get('/api/data?industry=energy&region=eu&region=asia')
+        request = self.factory.get('/api/v-test/data?industry=energy&region=eu&region=asia')
         request.user = self.user
         request.META['REMOTE_ADDR'] = '127.0.0.1'
 
@@ -178,7 +181,7 @@ class APIUsageMiddlewareTests(TestCase):
         self.assertIsNotNone(log)
         self.assertEqual(log.user, self.user)
         self.assertEqual(log.method, 'GET')
-        self.assertEqual(log.path, '/api/data')
+        self.assertEqual(log.path, '/api/v-test/data')
         self.assertEqual(log.ip, '127.0.0.1')
         self.assertEqual(log.status_code, 200)
 
@@ -191,7 +194,7 @@ class APIUsageMiddlewareTests(TestCase):
         self.assertTrue(log.duration >= 0)
 
     def test_middleware_does_not_log_anonymous_user(self):
-        request = self.factory.get('/api/data')
+        request = self.factory.get('/api/v-test/data')
         request.user = AnonymousUser()
         request.META['REMOTE_ADDR'] = '127.0.0.1'
 
@@ -201,7 +204,7 @@ class APIUsageMiddlewareTests(TestCase):
         self.assertFalse(APIRequestLog.objects.exists())
 
     def test_sensitive_query_params_are_filtered(self):
-        request = self.factory.get('/api/data?token=secret_token&password=1234&foo=bar')
+        request = self.factory.get('/api/v-test/data?token=secret_token&password=1234&foo=bar')
         request.user = self.user
         request.META['REMOTE_ADDR'] = '127.0.0.1'
 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('api/schema/redoc/', no_throttle_views.NoThrottleSpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path("docs/", no_throttle_views.NoThrottleSpectacularSwaggerView.as_view(url_name="schema")),
     path('api/', include(router.urls)), 
+    path('api-token/', views.APITokenView.as_view(), name='api-token'),
 ]

@@ -1,23 +1,94 @@
-<html></html>
+<html>
 <head>
-
-{% include 'layouts/main-styling.html' %}
-{% load rest_framework %}
-{% load static %}
-
-<title>Syracuse - API Usage</title>
+  {% include 'layouts/main-styling.html' %}
+  {% load static %}
+  <title>Syracuse - API Usage</title>
 </head>
-
 <body>
-<p>
   {% include 'layouts/nav-header.html' %}
-</p>
 
-<h1>API Tokens</h1>
+  <h1>API Usage Dashboard</h1>
 
-<p>See your API token below:</p>
+  <p>
+    <strong>Your API token:</strong>
+    <button id="load-token-btn">Load API Token</button>
+    <code id="api-token"></code>
+  </p>
 
-<p>{{ tokens }}</p>
+  <script>
+    document.getElementById("load-token-btn").addEventListener("click", function () {
+      fetch("{% url 'api-token' %}", {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to load token");
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById("api-token").textContent = data.token;
+        this.style.display = "none"; // hide button after loading
+      })
+      .catch(err => {
+        document.getElementById("api-token").textContent = "Error loading token.";
+      });
+    });
+  </script>
 
+  <p>
+    <form method="get">
+      <label>Start date:
+        <input type="date" name="start" value="{{ start_date }}">
+      </label>
+      <label>End date:
+        <input type="date" name="end" value="{{ end_date }}">
+      </label>
+      <input type="submit" value="Filter">
+    </form>
+  </p>
+
+  <p>
+    <table>
+      <thead>
+        <tr>
+          <th><a href="?sort=timestamp">Time</a></th>
+          <th><a href="?sort=path">Path</a></th>
+          <th><a href="?sort=method">Method</a></th>
+          <th><a href="?sort=status_code">Status</a></th>
+          <th><a href="?sort=duration">Duration</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in page_obj %}
+        <tr>
+          <td>{{ log.timestamp }}</td>
+          <td>{{ log.path }}</td>
+          <td>{{ log.method }}</td>
+          <td>{{ log.status_code }}</td>
+          <td>{{ log.duration }}s</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No API calls in this period.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+
+  <p>
+    <div>
+      <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&sort={{ order_by }}&start={{ start_date }}&end={{ end_date }}">Previous</a>
+      {% endif %}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&sort={{ order_by }}&start={{ start_date }}&end={{ end_date }}">Next</a>
+      {% endif %}
+    </div>
+  </p>
 </body>
 </html>
