@@ -259,7 +259,7 @@ GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT
 INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.2"))
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Syracuse from 1145',
+    'TITLE': 'Syracuse Company News',
     'DESCRIPTION': ('\n> *Company data emerges from the primordial data goo*\n\n'
                     'Nicely-structured news for companies (organizations) worldwide. '
                     "It's tuned specifically for company data and so:\n\n - offers a solution "
