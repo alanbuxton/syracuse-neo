@@ -14,6 +14,26 @@ fi
 ORG_NAME=$1
 SCHEME_HOST_AND_PORT=${2:-https://syracuse.1145.am}
 
+urlencode() {
+    local str="$1"
+    local length=${#str}
+    local encoded=""
+
+    for (( i = 0; i < length; i++ )); do
+        local c="${str:i:1}"
+        case "$c" in
+            [a-zA-Z0-9.~_-]) encoded+="$c" ;;
+            ' ') encoded+='%20' ;;
+            *) printf -v hex '%%%02X' "'$c"
+               encoded+="$hex"
+               ;;
+        esac
+    done
+    echo "$encoded"
+}
+
+ENCODED_ORG=$(urlencode "$ORG_NAME")
+
 curl -X 'GET' \
-  "$SCHEME_HOST_AND_PORT/api/v1/activities/?org_name=$ORG_NAME" \
+  "$SCHEME_HOST_AND_PORT/api/v1/activities/?org_name=$ENCODED_ORG" \
   -H "Accept: */*" -H "Authorization: Token $SYRACUSE_API_KEY"
