@@ -258,16 +258,17 @@ CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() ==
 GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT_PROPORTION","0.2"))
 INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.2"))
 
+API_BASE_URL = os.environ.get("API_BASE_URL", "http://localhost:8000")
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Syracuse Company News',
+    'TITLE': 'Syracuse (Company News) API',
     'DESCRIPTION': ('\n> *Company data emerges from the primordial data goo*\n\n'
                     'Nicely-structured news for companies (organizations) worldwide. '
                     "It's tuned specifically for company data and so:\n\n - offers a solution "
                     'to the <a href="https://alanbuxton.wordpress.com/2023/01/02/revisiting-entity-extraction/">The Bloomberg Problem</a>\n'
                     " - doesn't suffer from the same sorts of hallucinations as pure GenAI tools.\n\n"
                     'Log in for free to have a look around at <a href="https://syracuse.1145.am">syracuse.1145.am</a>\n\n'
-                    'Quick start: Get an api key by POSTing to `/api/v1/register-and-get-key`'
-                    'Then check out e.g. a GET to `/api/v1/activities/?org_name=apple`\n\n'
+                    'Quick start: Get an api key by POSTing to `/api/v1/register-and-get-key` (needs email to register) '
+                    'then check out a GET to `/api/v1/activities/?org_name=apple`\n\n'
                     "Nerds may be interested in Syracuse's novel graph architecture. Instead of a company having a canonical record that keeps getting updated, company records are built from the ground up by combining related nodes. "
                     "This has the benefit of being more flexible (e.g. in case of backing out wrong data) while still being consistent enough to be reliably usable."
     ),
@@ -277,6 +278,14 @@ SPECTACULAR_SETTINGS = {
     'PREPROCESSING_HOOKS': [
         'syracuse.schema_hooks.filter_paths',
     ],
+    'SERVERS': [
+        {
+            "url": API_BASE_URL,
+            "description": "API endpoint",
+        }
+    ]
 }
 
 CORS_ALLOW_ALL_ORIGINS = True 
+
+WELL_KNOWN_DIR = BASE_DIR / "static" / "well-known"

@@ -1,0 +1,20 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "syracuse_api",
+  "name_for_human": "Syracuse Company News",
+  "description_for_model": "Up-to-date company news from thousands of sources around the world. Structured into M&A, investments, stock purchases (CorporateFinanceActivity), partnerships (PartnershipActivity), adding or remove new senior roles (RoleActivity), opening or closing new locations (LocationActivity), launching new products (ProductActivity), updates from analysts (AnalystRatingActivity), share buybacks and dividends (EquityActionsActivity), notifications of earnings calls (FinancialsReportingActivity), revenue, profit and other financial updates (FinancialsActivity), major adverse incidents (IncidentActivity), launching new marketing campaigns etc (MarketingActivity), day to day business operations updates (OperationsActivity), industry awards (RecognitionActivity), legal and regulatory issues (RegulatoryActivity)",
+  "description_for_human": "Use this plugin to search and retrieve news about organizational activity from thousands of sources worldwide. Find structured news on M&A, new product launches, key hires, opening up in new regions, adverse incidents, financials and many more. Comprehensive, neatly-structured, up to date and fully automated news gathering system with less risk of hallucinations than the generic GenAI services.",
+  "auth": {
+    "type": "user_http",
+    "authorization_type": "bearer",
+    "verification_tokens": {}
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://syracuse.1145.am/.well-known/mcp.json",
+    "is_user_authenticated": true
+  },
+  "logo_url": "https://syracuse.1145.am/static/images/favicon.jpg",
+  "contact_email": "support@syracuse.1145.am",
+  "legal_info_url": "https://syracuse.1145.am/about"
+}

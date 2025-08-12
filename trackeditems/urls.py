@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
     path('activities', views.ActivitiesView.as_view(), name='tracked-activities'),
     path('geo_activities', views.GeoActivitiesView.as_view(), name='tracked-geo-activities'),

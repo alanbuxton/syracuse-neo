@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from magic_link import urls as magic_link_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('magic_link/', include(magic_link_urls)),
@@ -27,3 +29,7 @@ urlpatterns = [
     path('', include('topics.urls')),
     path('', include('api.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static("/.well-known/", document_root=settings.WELL_KNOWN_DIR)
