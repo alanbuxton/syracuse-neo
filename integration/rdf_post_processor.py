@@ -17,9 +17,9 @@ class RDFPostProcessor(object):
         AND n.internalMergedSameAsHighToUri IS NULL
         AND LABELS(m) = LABELS(n)
         AND "Organization" IN LABELS(m)
-        RETURN m,n
+        RETURN m.uri,n.uri
         ORDER BY m.internalDocId
-        LIMIT 1000
+        LIMIT 500
     """
 
     QUERY_SAME_AS_HIGH_FOR_MERGE_COUNT = f"""
@@ -51,11 +51,11 @@ class RDFPostProcessor(object):
         self.add_weighting_to_relationship()
         write_log_header("Creating multi-inheritance classes")
         add_dynamic_classes_for_multiple_labels()
-        write_log_header("merge_same_as_high_connections")
-        self.merge_equivalent_activities()
-        write_log_header("adding embeddings")
-        self.merge_same_as_high_connections()
         write_log_header("merge_equivalent_activities")
+        self.merge_equivalent_activities()
+        write_log_header("merge_same_as_high_connections")
+        self.merge_same_as_high_connections()
+        write_log_header("adding embeddings")
         create_new_embeddings()
         write_log_header("adding unique resource ids")
         add_resource_ids()
@@ -64,13 +64,11 @@ class RDFPostProcessor(object):
     def merge_equivalent_activities(self, seen_doc_ids=set()):
         acts_to_merge_dict, keep_going, seen_doc_ids = get_all_activities_to_merge(seen_doc_ids)
         for k_uri, vs in acts_to_merge_dict.items():
-            k = Resource.get_by_uri(k_uri)
             if len(vs) == 0:
                 logger.warning(f"got {k_uri} for merging into, but nothing to merge into it - unexpected")
                 continue
             for v_uri in vs:
-                v = Resource.get_by_uri(v_uri)
-                _ = self.merge_nodes(v, k, field_to_update="internalMergedActivityWithSimilarRelationshipsToUri")
+                _ = self.merge_nodes(v_uri, k_uri, field_to_update="internalMergedActivityWithSimilarRelationshipsToUri")
         if keep_going is True:
             seen_doc_ids = self.merge_equivalent_activities(seen_doc_ids)
         else:
@@ -103,8 +101,8 @@ class RDFPostProcessor(object):
                                         resolve_objects=True)
             if len(vals) == 0:
                 break
-            for target_node_tmp, source_node_tmp in vals:
-                res = self.merge_nodes(source_node_tmp, target_node_tmp)
+            for target_node_tmp_uri, source_node_tmp_uri in vals:
+                res = self.merge_nodes(source_node_tmp_uri, target_node_tmp_uri)
                 if res is False:
                     break
                 cnt += 1
@@ -115,10 +113,10 @@ class RDFPostProcessor(object):
 
         log_count_relationships("After merge_same_as_high_connections")
 
-    def merge_nodes(self,source_node_tmp, target_node_tmp, field_to_update="internalMergedSameAsHighToUri"):
-        source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp.uri)
-        target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp.uri)
-        logger.info(f"Merging {source_node_tmp.uri} ({source_node2.uri}) into {target_node_tmp.uri} ({target_node2.uri})")
+    def merge_nodes(self,source_node_tmp_uri, target_node_tmp_uri, field_to_update="internalMergedSameAsHighToUri"):
+        source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp_uri)
+        target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp_uri)
+        logger.info(f"Merging {source_node_tmp_uri} ({source_node2.uri}) into {target_node_tmp_uri} ({target_node2.uri})")
         if source_node2.internalMergedSameAsHighToUri is not None:
             logger.info(f"{source_node2.uri} is already merged into {source_node2.internalMergedSameAsHighToUri}, not merging again")
             return False
@@ -151,9 +149,14 @@ class RDFPostProcessor(object):
 
     def add_weighting_to_relationship(self):
         logger.info("Adding weighting to relationship")
-        query = "MATCH (n: Resource)-[rel]-(o:Resource) WHERE rel.weight is NULL RETURN rel"
-        action = "SET rel.weight = 1"
-        apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{}})'
+        apoc_query = """
+        CALL apoc.periodic.iterate(
+            "MATCH ()-[rel]-() 
+            WHERE rel.weight IS NULL 
+            RETURN rel",
+            "SET rel.weight = 1",
+            {batchSize:1000, parallel:true, retries: 5})
+        """
         db.cypher_query(apoc_query)
 
 def write_log_header(message):
@@ -171,7 +174,7 @@ def add_resource_ids():
     '''
     query = "MATCH (n: Resource) WHERE n.internalId IS NULL RETURN n"
     action = "SET n.internalId = ID(n)"
-    apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{batchSize:1000, parallel:true}})'
+    apoc_query = f'CALL apoc.periodic.iterate("{query}","{action}",{{batchSize:1000, parallel:true, retries: 5}})'
     db.cypher_query(apoc_query)
     # Now see if there are any duplicates
     logger.info("Set initial ids, checking for duplicates")

@@ -380,7 +380,7 @@ class Resource(StructuredNode):
                 if hasattr(other_node, "internalMergedActivityWithSimilarRelationshipsToUri") and (other_node.internalMergedActivityWithSimilarRelationshipsToUri is not None):
                     logger.debug(f"{other_node}.uri was already merged, ignoring")
                     continue
-                logger.info(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
+                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
@@ -835,7 +835,8 @@ class Organization(Resource):
     regulatory = RelationshipTo('RegulatoryActivity','hasRegulatoryActivity', model=WeightedRel)
     internalCleanName = ArrayProperty(StringProperty())
     internalCleanShortName = ArrayProperty(StringProperty())
-    
+    mentionedIn = RelationshipTo('IndustrySectorUpdate', 'mentionedIn', model=WeightedRel)
+
     @property
     def all_relationships(self):
         tmp_rels = tuple([(label,rel) for label,rel in self.__all_relationships__ if label.startswith("internal_") is False])
@@ -1370,3 +1371,10 @@ def print_friendly(vals, limit = 2):
     if extras > 0:
         val = f"{val} and {extras} more"
     return val
+
+class IndustrySectorUpdate(Resource):
+    mentionedIn = RelationshipFrom('Organization', 'mentionedIn', model=WeightedRel)
+    highlight = ArrayProperty(StringProperty())
+    documentExtract = StringProperty()
+    industry = ArrayProperty(StringProperty())
+    industrySubsector = ArrayProperty(StringProperty())
