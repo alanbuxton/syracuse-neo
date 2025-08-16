@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple, Union
 import logging
 from collections import defaultdict
 from topics.util import clean_punct, standardize_name
-import re
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ def random_org_list(limit=10):
     cleaned = remove_same_as_name_onlies(vals)
     return cleaned[:limit]
     
-def get_same_as_name_onlies(org):
+def get_same_as_name_onlies(org, version=None):
     try:
         clean_names = (org.internalCleanName or []) + (org.internalCleanShortName or [])
         if len(clean_names) == 0:
@@ -48,7 +48,7 @@ def get_same_as_name_onlies(org):
             return []
         vals = []
         for clean_name in clean_names:
-            new_vals = get_by_internal_clean_name(clean_name)
+            new_vals = get_by_internal_clean_name(clean_name, version)
             for k in new_vals.keys():
                 if k != org:
                     vals.append(k)
@@ -57,10 +57,10 @@ def get_same_as_name_onlies(org):
         logger.debug(f"{ae} : not looking for any same names")
         return []
     
-def get_by_internal_clean_name(clean_name: str) -> Dict:
+def get_by_internal_clean_name(clean_name: str, version=None) -> Dict:
     logger.debug(f"get_by_internal_clean_name {clean_name}")
-    cache_key = cache_friendly(f"sano_{clean_name}") # sano = same_as_name_only
-    res = cache.get(cache_key)
+    cache_key = f"sano_{clean_name}" # sano = same_as_name_only
+    res = get_versionable_cache(cache_key, version)
     if res is not None:
         logger.debug(f"get_by_internal_clean_name: cache hit with {cache_key}")
         return res
@@ -71,7 +71,7 @@ def get_by_internal_clean_name(clean_name: str) -> Dict:
     update_equivalent_orgs(equivalent_orgs_for_this_clean_name, search_results_1)
     update_equivalent_orgs(equivalent_orgs_for_this_clean_name, search_results_2)
     equivalent_orgs_for_this_clean_name = {k: v for k, v in sorted(equivalent_orgs_for_this_clean_name.items(), key=lambda x: x[1], reverse=True)}
-    cache.set(cache_key, equivalent_orgs_for_this_clean_name)
+    set_versionable_cache(cache_key, equivalent_orgs_for_this_clean_name, version)
     return equivalent_orgs_for_this_clean_name
 
 def update_equivalent_orgs(equivalent_orgs_for_this_clean_name, search_results):

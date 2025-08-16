@@ -1,9 +1,9 @@
 from neomodel import db
-from .geoname_mappings import get_geo_data
+from topics.industry_geo.geoname_mappings import get_geo_data
 import logging
 logger = logging.getLogger(__name__)
 
-def update_geonames_locations_with_country_admin1():
+def update_geonames_locations_with_country_admin1(version):
     '''
         Add country code and admin1 (state/province) into node for easier querying
     '''
@@ -20,7 +20,7 @@ def update_geonames_locations_with_country_admin1():
         for objs in res:
             obj = objs[0]
             geonamesid = obj.geoNamesId
-            res = get_geo_data(geonamesid)
+            res = get_geo_data(geonamesid, version)
             if res is None:
                 raise ValueError(f"No cached geo data for {geonamesid}")
             else:        

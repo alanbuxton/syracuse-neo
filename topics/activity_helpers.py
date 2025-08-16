@@ -2,62 +2,65 @@ from django.core.cache import cache
 from neomodel import db
 import logging
 from topics.models import IndustryCluster, Article, ActivityMixin, Resource
-from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
+from topics.industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
 from topics.industry_geo.orgs_by_industry_geo import get_org_activities
-from .neo4j_utils import date_to_cypher_friendly, neo4j_date_converter, clean_str
-from .util import cache_friendly
-from .industry_geo import geo_to_country_admin1
-from .organization_search_helpers import get_same_as_name_onlies
+from topics.neo4j_utils import date_to_cypher_friendly, neo4j_date_converter, clean_str
+from topics.industry_geo import geo_to_country_admin1
+from topics.organization_search_helpers import get_same_as_name_onlies
 from topics.util import ALL_ACTIVITY_LIST, ORG_ACTIVITY_LIST
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
 logger = logging.getLogger(__name__)
 
-def get_activities_by_country_and_date_range(geo_code,min_date,max_date,limit=20):
+def get_activities_by_country_and_date_range(geo_code,min_date,max_date,cache_version=None,limit=20):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
-    activity_article_uris = get_org_activities(min_date,max_date,None,country_code,admin1_code)
+    activity_article_uris = get_org_activities(min_date,max_date,None,country_code,admin1_code,cache_version)
     return activity_articles_to_api_results(activity_article_uris,limit)
 
-def get_activities_by_source_and_date_range(source_name, min_date, max_date, limit=20):
-    activity_article_uris = activities_by_source(source_name, min_date, max_date, limit)
+def get_activities_by_source_and_date_range(source_name, min_date, max_date, cache_version=None, limit=20):
+    activity_article_uris = activities_by_source(source_name, min_date, max_date, cache_version, limit)
     return activity_articles_to_api_results(activity_article_uris,limit)
 
-def get_activities_by_industry_and_date_range(industry, min_date, max_date, limit=20):
+def get_activities_by_industry_and_date_range(industry, min_date, max_date, cache_version=None, limit=20):
     if isinstance(industry, IndustryCluster):
         industry = industry.topicId
-    activity_article_uris = get_org_activities(min_date,max_date,industry,None,None)
+    activity_article_uris = get_org_activities(min_date,max_date,industry,None,None, cache_version)
     return activity_articles_to_api_results(activity_article_uris,limit)
 
-def get_activities_by_industry_geo_and_date_range(industry, geo_code, min_date, max_date,limit=None):
+def get_activities_by_industry_geo_and_date_range(industry, geo_code, min_date, max_date, cache_version=None, limit=None):
     if isinstance(industry, IndustryCluster):
         industry = industry.topicId
     country_code, admin1_code = geo_to_country_admin1(geo_code)
-    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code)
+    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code, cache_version)
     return activity_articles_to_api_results(activity_article_uris,limit)
 
-def get_activities_by_industry_country_admin1_and_date_range(industry, country_code, admin1_code, min_date, max_date,limit=None):
+def get_activities_by_industry_country_admin1_and_date_range(industry, country_code, admin1_code, min_date, max_date, cache_version=None,limit=None):
     if isinstance(industry, IndustryCluster):
         industry = industry.topicId
-    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code)
+    activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code, cache_version)
     return activity_articles_to_api_results(activity_article_uris,limit)
 
-def activities_by_industry(industry, min_date, max_date, limit=None):
+def activities_by_industry(industry, min_date, max_date, cache_version=None, limit=None):
     if isinstance(industry, IndustryCluster):
         industry = industry.topicId
-    activity_article_uris = get_org_activities(min_date,max_date,industry,None, None)
+    activity_article_uris = get_org_activities(min_date,max_date,industry,None, None, cache_version)
     return activity_article_uris[:limit]
 
-def get_activities_by_org_and_date_range(organization,min_date,max_date,include_similar_orgs=False,combine_same_as_name_only=True,limit=None):
+def get_activities_by_org_and_date_range(organization,min_date,max_date,cache_version=None,
+                                         include_similar_orgs=False, # TODO implement me (see topics.models.model_helpers)
+                                         combine_same_as_name_only=True,limit=None):
     uri_list = [organization.uri]
-    return get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only,limit)
+    return get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,cache_version,combine_same_as_name_only,limit)
 
-def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
+def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,cache_version=None,combine_same_as_name_only=True,limit=None):
     logger.debug(f"get_activities_by_org_uris_and_date_range: org uris {len(uri_list)} {min_date} {max_date}, combine_same_as_name_only {combine_same_as_name_only} limit {limit}")
-    activity_article_uris = activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_as_name_only,limit)
+    activity_article_uris = activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,cache_version,
+                                                                combine_same_as_name_only=combine_same_as_name_only,limit=limit)
     res = activity_articles_to_api_results(activity_article_uris)
     logger.debug(f"activity articles prepared")
     return res
 
-def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_as_name_only=True,limit=None):
+def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,cache_version=None,combine_same_as_name_only=True,limit=None):
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:
         orgs = Resource.nodes.filter(uri__in=uri_list)
@@ -65,15 +68,15 @@ def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,combine_same_
             new_uris = [x.uri for x in get_same_as_name_onlies(org)]
             uris_to_check.update(new_uris)
     logger.debug(f"same-as-name-only updated. going to kick off query")
-    activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,limit)
+    activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,cache_version=cache_version,limit=limit)
     logger.debug(f"query done")
     return activity_article_uris
 
-def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
+def activities_by_org_uris(org_uris, min_date, max_date, cache_version=None, limit=None):
     logger.debug(f"activities_by_org_uris {len(org_uris)} org_uris, {min_date} - {max_date}")
     org_uris = sorted(org_uris)
-    cache_key = cache_friendly(f"activities_{org_uris}_{min_date}_{max_date}_{limit}")
-    res = cache.get(cache_key)
+    cache_key = f"activities_{org_uris}_{min_date}_{max_date}_{limit}"
+    res = get_versionable_cache(cache_key, cache_version)
     if res is not None:
         logger.debug(f"activities_by_org_uris {cache_key} cache hit")
         return res
@@ -96,11 +99,11 @@ def activities_by_org_uris(org_uris, min_date, max_date, limit=None):
         {where_etc}
         {limit_str}
     """
-    return query_and_cache(query, cache_key)
+    return query_and_cache(query, cache_key, cache_version)
 
-def activities_by_source(source_name, min_date, max_date, limit=None):
-    cache_key = cache_friendly(f"activities_{source_name}_{min_date}_{max_date}_{limit}")
-    res = cache.get(cache_key)
+def activities_by_source(source_name, min_date, max_date, cache_version=None, limit=None):
+    cache_key = f"activities_{source_name}_{min_date}_{max_date}_{limit}"
+    res = get_versionable_cache(cache_key, cache_version)
     if res is not None:
         return res
     limit_str = f" LIMIT {limit} " if limit is not None else ""
@@ -118,14 +121,14 @@ def activities_by_source(source_name, min_date, max_date, limit=None):
     ORDER by art.datePublished DESC
     {limit_str}
     """
-    return query_and_cache(query, cache_key)
+    return query_and_cache(query, cache_key, cache_version)
 
 
-def query_and_cache(query, cache_key):
+def query_and_cache(query, cache_key, cache_version):
     logger.debug(query)
     vals, _ = db.cypher_query(query)
     vals = neo4j_date_converter(vals)
-    cache.set(cache_key, vals)
+    set_versionable_cache(cache_key, vals, cache_version)
     return vals
 
 

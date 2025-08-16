@@ -19,6 +19,7 @@ sentence-transformers = "*"
 drf-spectacular = "*"
 django-cors-headers = "*"
 django-magic-link = "*"
+django-redis = "*"
 
 [dev-packages]
 

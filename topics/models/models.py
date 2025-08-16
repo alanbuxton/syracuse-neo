@@ -3,7 +3,6 @@ from neomodel import (StructuredNode, StringProperty,
     IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
-from django.core.cache import cache
 from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
                                GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION,
                               )
@@ -11,8 +10,9 @@ from collections import Counter
 from neomodel.cardinality import OneOrMore, One, ZeroOrOne
 from typing import List
 import cleanco
-from topics.util import cache_friendly,geo_to_country_admin1
+from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
 import logging
 logger = logging.getLogger(__name__)
@@ -68,14 +68,14 @@ class Resource(StructuredNode):
 
     @property
     def sum_of_weights(self):
-        cache_key = cache_friendly(f"sum_weights_{self.uri}")
-        weight = cache.get(cache_key)
+        cache_key = f"sum_weights_{self.uri}"
+        weight = get_versionable_cache(cache_key)
         if weight:
             return weight
         query = f"""MATCH (n: Resource {{uri:'{self.uri}'}})-[x]-() RETURN sum(x.weight)"""
         res, _ = db.cypher_query(query)
         weight = res[0][0]
-        cache.set(cache_key, weight)
+        set_versionable_cache(cache_key, weight)
         return weight
     
     @property
@@ -92,15 +92,15 @@ class Resource(StructuredNode):
 
     @property
     def related_articles(self):
-        cache_key = cache_friendly(f"{self.uri}_related_articles")
-        arts = cache.get(cache_key)
+        cache_key = f"{self.uri}_related_articles"
+        arts = get_versionable_cache(cache_key)
         if arts is not None:
             return arts
         if isinstance(self, Article) is True or isinstance(self, IndustryCluster) is True:
             arts = None
         else:
             arts = self.documentSource.all()
-        cache.set(cache_key,arts)
+        set_versionable_cache(cache_key,arts)
         return arts
     
     def has_permitted_document_source(self,source_names):
@@ -414,13 +414,13 @@ class Article(Resource):
     @staticmethod
     def available_source_names_dict():
         cache_key = "available_source_names"
-        sources = cache.get(cache_key)
+        sources = get_versionable_cache(cache_key)
         if sources is not None:
             return sources
         res = db.cypher_query("MATCH (n: Resource:Article) RETURN DISTINCT(n.sourceOrganization)")
         sources = {x[0].lower():x[0] for x in res[0]}
         assert None not in sources, f"We have an Article with None sourceOrganization"
-        cache.set(cache_key,sources)
+        set_versionable_cache(cache_key,sources)
         return sources
     
     @staticmethod
@@ -520,14 +520,14 @@ class IndustryCluster(Resource):
 
     @property
     def mergedOrgsPrimary(self):
-        cache_key = cache_friendly(f"{self.topicId}_orgs")
-        res = cache.get(cache_key)
+        cache_key = f"{self.topicId}_orgs"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             return res
         res = []
         for x in self.orgsPrimary:
             res.append(Organization.self_or_ultimate_target_node(x))
-        cache.set(cache_key, res)
+        set_versionable_cache(cache_key, res)
         return res
 
     @property
@@ -597,7 +597,7 @@ class IndustryCluster(Resource):
     @staticmethod
     def leaf_keywords(ignore_cache=False):
         cache_key = "industry_leaf_keywords"
-        res = cache.get(cache_key)
+        res = get_versionable_cache(cache_key)
         if res is not None and ignore_cache is False:
             return res
         keywords = {}
@@ -608,7 +608,7 @@ class IndustryCluster(Resource):
                 if word not in keywords.keys():
                     keywords[word] = set()
                 keywords[word].add(idx)
-        cache.set(cache_key, keywords)
+        set_versionable_cache(cache_key, keywords)
         return keywords
 
     @staticmethod
@@ -693,8 +693,8 @@ class ActivityMixin:
 
     @property
     def whereHighGeoName_as_str(self):
-        cache_key = cache_friendly(f"{self.__class__.__name__}_activity_mixin_{self.uri}")
-        names = cache.get(cache_key)
+        cache_key = f"{self.__class__.__name__}_activity_mixin_{self.uri}"
+        names = get_versionable_cache(cache_key)
         if names is not None:
             return names
         names = []
@@ -703,7 +703,7 @@ class ActivityMixin:
                 continue
             names.extend(x.name)
         name = print_friendly(names)
-        cache.set(cache_key,name)
+        set_versionable_cache(cache_key,name)
         return name
 
     @property
@@ -789,8 +789,8 @@ class GeoNamesLocation(Resource):
     def uris_by_geo_code(geo_code):
         if geo_code is None or geo_code.strip() == '':
             return None
-        cache_key = cache_friendly(f"geonames_locations_{geo_code}")
-        res = cache.get(cache_key)
+        cache_key = f"geonames_locations_{geo_code}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             return res
         country_code, admin1_code = geo_to_country_admin1(geo_code)
@@ -800,7 +800,7 @@ class GeoNamesLocation(Resource):
         query = f"{query} RETURN n.uri"
         vals, _ = db.cypher_query(query,resolve_objects=True)
         uris = [x[0] for x in vals]
-        cache.set(cache_key, uris)
+        set_versionable_cache(cache_key, uris)
         return uris
 
 class Organization(Resource):
@@ -926,8 +926,8 @@ class Organization(Resource):
     
     @property
     def industry_list(self):
-        cache_key = cache_friendly(f"industry_list_{self.uri}")
-        res = cache.get(cache_key)
+        cache_key = f"industry_list_{self.uri}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             return res
         inds = self.industryClusterPrimary
@@ -940,7 +940,7 @@ class Organization(Resource):
         else:
             by_popularity = c.most_common()
             val = [x[0] for x in by_popularity]
-        cache.set(cache_key,val)
+        set_versionable_cache(cache_key,val)
         return val
 
     @property
@@ -965,8 +965,8 @@ class Organization(Resource):
 
     @property
     def best_name(self):
-        cache_key = cache_friendly(f"org_name_{self.uri}")
-        name = cache.get(cache_key)
+        cache_key = f"org_name_{self.uri}"
+        name = get_versionable_cache(cache_key)
         if name is not None:
             return name
         name_cands = (self.name or []) + [] # Ensure name_cands is a copy
@@ -975,7 +975,7 @@ class Organization(Resource):
                 name_cands.extend(x.name)
         name_counter = Counter(name_cands)
         top_name = name_counter.most_common(1)[0][0]
-        cache.set(cache_key, top_name)
+        set_versionable_cache(cache_key, top_name)
         return top_name
 
     @staticmethod
@@ -1020,8 +1020,8 @@ class Organization(Resource):
 
     @staticmethod
     def by_industry_text(name,limit=0.87):
-        cache_key = cache_friendly(f"org_by_industry_text_{name}_{limit}")
-        res = cache.get(cache_key)
+        cache_key = f"org_by_industry_text_{name}_{limit}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             return res
         query = f''' CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding)
@@ -1035,13 +1035,13 @@ class Organization(Resource):
         res = set()
         for val in vals:
             res.add( Organization.self_or_ultimate_target_node(val[0]).uri)
-        cache.set(cache_key, res)
+        set_versionable_cache(cache_key, res)
         return list(res)
 
     @staticmethod
     def by_industry_text_and_geo(name,country_code,admin1_code=None,limit=0.85):
-        cache_key = cache_friendly(f"org_by_industry_text_geo_{name}_{country_code}_{admin1_code}_{limit}")
-        res = cache.get(cache_key)
+        cache_key = f"org_by_industry_text_geo_{name}_{country_code}_{admin1_code}_{limit}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             return res
         query = f'''CALL db.index.vector.queryNodes('organization_industries_vec', 500, $query_embedding) 
@@ -1057,7 +1057,7 @@ class Organization(Resource):
         query = f"{query} RETURN node.uri, apoc.node.degree(node) ORDER BY score DESCENDING"
         vals = do_vector_search(name, query)
         res = [tuple(row) for row in vals]
-        cache.set(cache_key, res)
+        set_versionable_cache(cache_key, res)
         return list(res)
 
 

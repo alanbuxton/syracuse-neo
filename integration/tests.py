@@ -13,7 +13,7 @@ from integration.neo4j_utils import (
     delete_and_clean_up_nodes_by_doc_id,
 )
 from integration.rdf_post_processor import RDFPostProcessor, update_duplicated_resource_ids
-from topics.cache_helpers import nuke_cache
+from syracuse.cache_util import nuke_cache
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 
 import logging

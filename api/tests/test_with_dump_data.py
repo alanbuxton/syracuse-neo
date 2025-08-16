@@ -40,8 +40,8 @@ from trackeditems.notification_helpers import (
 from trackeditems.models import TrackedItem, ActivityNotification
 from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
-from topics.util import date_minus, min_and_max_date
 from feedbacks.models import Feedback
+from syracuse.date_util import min_and_max_date, date_minus
 
 '''
     Care these tests will delete neodb data
@@ -227,8 +227,8 @@ class EndToEndTests20190110(TestCase):
     def test_creates_geo_industry_notification_for_new_user(self):
         ActivityNotification.objects.filter(user=self.user2).delete()
         max_date_for_email = datetime(2019,1,10,13,14,0,tzinfo=timezone.utc)
-        max_date = cache.get("activity_stats_last_updated")
-        assert max_date > max_date_for_email
+        max_date = get_versionable_cache("activity_stats_last_updated")
+        assert max_date > max_date_for_email, f"Expected {max_date} to be larger than {max_date_for_email}"
         email_and_activity_notif = prepare_recent_changes_email_notification_by_max_date(self.user2,max_date,7,max_date_for_email)
         email, activity_notif = email_and_activity_notif
         assert "Private Equity Business" in email

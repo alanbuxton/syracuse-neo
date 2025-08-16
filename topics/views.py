@@ -8,7 +8,7 @@ from syracuse.authentication import FlexibleTokenAuthentication
 from django.shortcuts import redirect
 from topics.models import Organization, Resource, IndustryCluster
 from topics.models.model_helpers import similar_organizations
-from .serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
+from topics.serializers import (OrganizationGraphSerializer, OrganizationWithCountsSerializer,
     NameSearchSerializer, OrganizationSerializer,
     IndustrySerializer,OrganizationTimelineSerializer,
     ResourceSerializer, FamilyTreeSerializer, IndustryClusterSerializer,
@@ -20,12 +20,13 @@ from syracuse.settings import MOTD
 from integration.models import DataImport
 from topics.faq import FAQ
 from itertools import islice
-from .industry_geo import country_admin1_full_name
-from .industry_geo.orgs_by_industry_geo import (combined_industry_geo_results,
+from topics.industry_geo import country_admin1_full_name
+from topics.industry_geo.orgs_by_industry_geo import (combined_industry_geo_results,
         org_uris_by_industry_id_country_admin1)
 import re
 import json
-from .util import elements_from_uri, geo_to_country_admin1, min_and_max_date
+from topics.util import elements_from_uri, geo_to_country_admin1
+from syracuse.date_util import min_and_max_date
 from topics.stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list

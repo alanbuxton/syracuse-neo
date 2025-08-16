@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "be2dec901d43d9dafd3c6792b9ab5f9b97589bf653b099d4c822b9f37cb0de7c"
+            "sha256": "dce06e39f94ef76bff7180f0583ac6c0328a6c30ec493024b308f91edbfada96"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -261,12 +261,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:60c35bd96201b10c6e7a78121bd0da51084733efa303cc19ead021ab179cef5e",
-                "sha256:a1228c384f8fa13eebc015196db7b3e08722c5058d4758d20cb287503a540d8f"
+                "sha256:0745b25681b129a77aae3d4f6549b62d3913d74407831abaa0d9021a03954bae",
+                "sha256:2b2ada0ee8a5ff743a40e2b9820d1f8e24c11bac9ae6469cd548f0057ea6ddcd"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==5.2.4"
+            "version": "==5.2.5"
         },
         "django-allauth": {
             "hashes": [
@@ -307,6 +307,15 @@
             "git": "https://github.com/alanbuxton/django-neomodel.git",
             "markers": "python_version >= '3.8'",
             "ref": "d524f028dcb84b779d35f9ea0ba405b55e756764"
+        },
+        "django-redis": {
+            "hashes": [
+                "sha256:20bf0063a8abee567eb5f77f375143c32810c8700c0674ced34737f8de4e36c0",
+                "sha256:2d9cb12a20424a4c4dde082c6122f486628bae2d9c2bee4c0126a4de7fda00dd"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==6.0.0"
         },
         "djangorestframework": {
             "hashes": [
@@ -1012,11 +1021,11 @@
                 "hiredis"
             ],
             "hashes": [
-                "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f",
-                "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4"
+                "sha256:b01bc7282b8444e28ec36b261df5375183bb47a07eb9c603f284e89cbc5ef010",
+                "sha256:f0544fa9604264e9464cdf4814e7d4830f74b165d52f2a330a760a88dd248b7f"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==5.2.1"
+            "markers": "python_version >= '3.9'",
+            "version": "==6.4.0"
         },
         "referencing": {
             "hashes": [

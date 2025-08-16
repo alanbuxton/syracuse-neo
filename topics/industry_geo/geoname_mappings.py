@@ -1,36 +1,36 @@
 import csv
 import logging
-from django.core.cache import cache
 from collections import defaultdict
 from topics.industry_geo.region_hierarchies import (COUNTRIES_WITH_STATE_PROVINCE, 
     US_REGIONS_TO_STATES_HIERARCHY, GLOBAL_REGION_TO_COUNTRY
 )
 from neomodel import db
-from topics.util import cache_friendly
+from syracuse.cache_util import set_versionable_cache, get_versionable_cache
 
 logger = logging.getLogger(__name__)
 
 COUNTRY_TO_ADMIN1_PREFIX = "country_to_admin1_" 
 GEO_DATA_PREFIX = "geodata_"
-CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX = "country_admin1_to_name_" # key = US-TX etc
-CC_ADMIN1_NAME_TO_ADMIN1_CODE_PREFIX = "country_to_name_admin1_" # key = USTexas
+CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX = "cc_adm1code_to_adm1name_" # key = US-TX etc
+CC_ADMIN1_NAME_TO_ADMIN1_CODE_PREFIX = "cc_adm1name_to_adm1code_" #  key = US_Texas
 
 
-def get_geo_data(geonameid):
+def get_geo_data(geonameid,version=None):
     '''
         Returns: dict of country, admin1, feature, country_list
-    '''
-    return cache.get(f"{GEO_DATA_PREFIX}{geonameid}")
+    ''' 
+    return get_versionable_cache(f"{GEO_DATA_PREFIX}{geonameid}", version)
 
-def admin1s_for_country(country_code):
-    return cache.get(f"{COUNTRY_TO_ADMIN1_PREFIX}{country_code}")
+def admin1s_for_country(country_code, version=None):
+    return get_versionable_cache(f"{COUNTRY_TO_ADMIN1_PREFIX}{country_code}", version)
 
 def get_available_geoname_ids():
     res, _ = db.cypher_query("MATCH (n: GeoNamesLocation) RETURN DISTINCT(n.geoNamesId)")
     flattened = [x for sublist in res for x in sublist]
     return set(flattened)
 
-def prepare_country_mapping(fpath="dump/relevant_geo.csv", 
+def prepare_country_mapping(version=None,
+                            fpath="dump/relevant_geo.csv", 
                             countries_for_admin1=COUNTRIES_WITH_STATE_PROVINCE):
     logger.info("Started loading geonames")
     existing_geonames = get_available_geoname_ids()
@@ -59,19 +59,19 @@ def prepare_country_mapping(fpath="dump/relevant_geo.csv",
                     "admin1": admin1,
                     "country_list": cc_list,
                 }
-                cache.set(f"{GEO_DATA_PREFIX}{geo_id}",geonameid_data[geo_id])               
+                set_versionable_cache(f"{GEO_DATA_PREFIX}{geo_id}",geonameid_data[geo_id], version)               
             if fc == 'ADM1' and cc in countries_for_admin1 and admin1 != '' and admin1 != '00': # The code '00' stands for 'we don't know the official code'. https://forum.geonames.org/gforum/posts/list/703.page
                 country_code_to_admin1[cc].add(admin1)
                 admin1_name = row['name']
-                cache.set( f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{cc}-{admin1}", admin1_name)                
-                cache.set( cache_friendly( f"{CC_ADMIN1_NAME_TO_ADMIN1_CODE_PREFIX}{cc}-{admin1_name}"), admin1)
+                set_versionable_cache( f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{cc}-{admin1}", admin1_name, version)                
+                set_versionable_cache( f"{CC_ADMIN1_NAME_TO_ADMIN1_CODE_PREFIX}{cc}-{admin1_name}", admin1, version)
     for k,vs in country_code_to_admin1.items():
-        cache.set(f"{COUNTRY_TO_ADMIN1_PREFIX}{k}",list(vs))
+        set_versionable_cache(f"{COUNTRY_TO_ADMIN1_PREFIX}{k}",list(vs),version)
     logger.info(f"Processed: {cnt} records.")
     return geonameid_data, country_code_to_admin1
 
 
-def region_parent_child():
+def region_parent_child(version):
     parent_child = {}
 
     def iterate_through_global_regions(parent_region,current_region_and_lower):
@@ -101,20 +101,20 @@ def region_parent_child():
     for country in COUNTRIES_WITH_STATE_PROVINCE:
         if country == 'US':
             continue
-        state_strs = [f"{country}-{x}" for x in (admin1s_for_country(country) or [])]
+        state_strs = [f"{country}-{x}" for x in (admin1s_for_country(country, version) or [])]
         for state in state_strs:
             parent_child[country]["children"].add(state)
             parent_child[state] = {"parent":country,"id":state, "children":set()}
             
     return parent_child
 
-def geo_parent_children():
+def geo_parent_children(version=None):
     cache_key = "geo_parent_children"
-    res = cache.get(cache_key)
+    res = get_versionable_cache(cache_key,version)
     if res is not None:
         return res
-    res = region_parent_child()
-    cache.set(cache_key, res)
+    res = region_parent_child(version)
+    set_versionable_cache(cache_key, res, version)
     return res
 
 

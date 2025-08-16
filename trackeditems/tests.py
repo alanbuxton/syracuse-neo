@@ -8,7 +8,7 @@ from .views import get_entities_to_track, standardize_payload
 from rest_framework import status
 from django.test import Client
 from trackeditems.models import TrackedItem
-from topics.cache_helpers import nuke_cache
+from syracuse.cache_util import nuke_cache
 
 '''
     Care these tests will delete neodb data

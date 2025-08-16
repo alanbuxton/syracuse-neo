@@ -7,7 +7,7 @@ from rest_framework.authentication import SessionAuthentication
 from syracuse.authentication import FlexibleTokenAuthentication
 from .models import TrackedItem
 from topics.models import IndustryCluster
-from topics.util import min_and_max_date
+from syracuse.date_util import min_and_max_date
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import (ActivitySerializer,
@@ -150,7 +150,8 @@ class SourceActivitiesView(APIView):
         source_name = request.GET.get("source_name")
         request_state, _ = prepare_request_state(request)
         if request_state["cache_last_updated"] is not None:
-            matching_activity_orgs = get_activities_by_source_and_date_range(source_name, min_date, max_date, limit=20)
+            matching_activity_orgs = get_activities_by_source_and_date_range(source_name, min_date, max_date, 
+                                                                            limit=20)
         else:
             matching_activity_orgs = []
         serializer = ActivitySerializer(matching_activity_orgs, many=True)

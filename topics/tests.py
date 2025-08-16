@@ -9,6 +9,7 @@ from datetime import date, datetime
 import time
 from django.contrib.auth import get_user_model
 from topics.serializers import *
+from topics.activity_helpers import get_activities_by_country_and_date_range
 from integration.rdf_post_processor import RDFPostProcessor
 from integration.tests import make_node, clean_db
 import json
@@ -16,12 +17,14 @@ import re
 from topics.serializers import only_valid_relationships, FamilyTreeSerializer
 from topics.industry_geo.orgs_by_industry_geo import build_region_hierarchy, prepare_headers
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
-from topics.cache_helpers import refresh_geo_data, nuke_cache
+from topics.cache_helpers import refresh_geo_data
 from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, geo_codes_for_region, geo_parent_children
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 import pickle
 from topics.organization_search_helpers import search_organizations_by_name
-
+from syracuse.cache_util import nuke_cache, get_active_version, count_keys, get_inactive_version
+from syracuse.date_util import min_and_max_date
+import copy
 
 '''
     Care these tests will delete neodb data
@@ -692,6 +695,121 @@ class TestActivityHelpers(TestCase):
         source_name = """Hawai'i "Public] (Radio"""
         acts = activities_by_source(source_name, date(2025,3,1), date(2025,3,10))
         assert len(acts) == 1 
+
+class TestVersionableCache(TestCase):
+
+    # node_data1 = [
+    #     {"doc_id":95, "identifier":"uspa1","node_type":"Organization","datestamp":datestamp}, # US-PA
+    #     {"doc_id":96, "identifier":"uspa2","node_type":"Organization","datestamp":datestamp}, # US-PA
+    #     {"doc_id":95, "identifier":"act1","node_type":"OperationsActivity","datestamp":datestamp},
+    #     {"doc_id":96, "identifier":"act2","node_type":"OperationsActivity","datestamp":datestamp},
+    #     {"doc_id":99, "identifier":"uspaloc","node_type":"GeoNamesLocation","datestamp":datestamp},
+    # ]
+    # nodes1 = ", ".join([make_node(**x) for x in node_data1])
+    # query = f"""CREATE {nodes1},
+    # (uspa1)-[:hasOperationsActivity {{weight:2}}]->(act1),
+    # (uspa2)-[:hasOperationsActivity {{weight:2}}]->(act2),
+    # (uspa1)-[:basedInHighGeoNamesLocation {{weight:2}}]->(uspaloc),
+    # (uspa2)-[:basedInHighGeoNamesLocation {{weight:2}}]->(uspaloc),
+    # (act1)-[:whereHighGeoNamesLocation {{weight:2}}]->(uspaloc),
+    # (act2)-[:whereHighGeoNamesLocation {{weight:2}}]->(uspaloc)"""
+    # Above was used to generate query1, but each node has its own Article source. The org search functions
+    # need Org and Activity to share the same Article, so manually updated the query as below:
+    query1 = """CREATE
+        (uspa1:Resource:Organization {uri: 'https://1145.am/db/95/uspa1', name: ['Name USPA1'], industry: ['baz'],   internalDocId: 95})-[:documentSource ]->(docsource_uspa1:Resource:Article {uri: 'https://1145.am/db/article_uspa1',
+                        headline: 'Headline uspa1', internalDocId: 95, sourceOrganization:'prweb', datePublished: datetime('2025-08-15T23:59:59.999999+00:00') }), (docsource_uspa1)-[:url]->(ext_uspa1:Resource { uri: 'https://example.org/external/art_uspa1' }), 
+                        (act1:Resource:OperationsActivity {uri: 'https://1145.am/db/95/act1', name: ['Name ACT1'],  status: ['some status'],   internalDocId: 95})-[:documentSource { documentExtract: 'Doc Extract ' }]->(docsource_uspa1),
+                        
+        (uspa2:Resource:Organization {uri: 'https://1145.am/db/96/uspa2', name: ['Name USPA2'], industry: ['baz'],   internalDocId: 96})-[:documentSource ]->(docsource_uspa2:Resource:Article {uri: 'https://1145.am/db/article_uspa2',
+                        headline: 'Headline uspa2', internalDocId: 96, sourceOrganization:'prweb', datePublished: datetime('2025-08-15T23:59:59.999999+00:00') }), (docsource_uspa2)-[:url]->(ext_uspa2:Resource { uri: 'https://example.org/external/art_uspa2' }), 
+                        (act2:Resource:OperationsActivity {uri: 'https://1145.am/db/96/act2', name: ['Name ACT2'],  status: ['some status'],   internalDocId: 96})-[:documentSource { documentExtract: 'Doc Extract ' }]->(docsource_uspa2), 
+                        
+        (uspaloc:Resource:GeoNamesLocation {uri: 'https://1145.am/db/99/uspaloc', name: ['Name USPALOC'],    countryCode: 'US',   admin1Code: 'PA',  internalDocId: 99})-[:documentSource ]->(docsource_uspaloc:Resource:Article {uri: 'https://1145.am/db/article_uspaloc',
+                        headline: 'Headline uspaloc', internalDocId: 99, sourceOrganization:'prweb', datePublished: datetime('2025-08-15T23:59:59.999999+00:00') }), (docsource_uspaloc)-[:url]->(ext_uspaloc:Resource { uri: 'https://example.org/external/art_uspaloc' }),
+        (uspa1)-[:hasOperationsActivity {weight:2}]->(act1),
+        (uspa2)-[:hasOperationsActivity {weight:2}]->(act2),
+        (uspa1)-[:basedInHighGeoNamesLocation {weight:2}]->(uspaloc),
+        (uspa2)-[:basedInHighGeoNamesLocation {weight:2}]->(uspaloc),
+        (act1)-[:whereHighGeoNamesLocation {weight:2}]->(uspaloc),
+        (act2)-[:whereHighGeoNamesLocation {weight:2}]->(uspaloc)
+        """
+    
+    # node_data2 = [
+        #     {"doc_id":101, "identifier":"usny1","node_type":"Organization"}, # US-NY
+        #     {"doc_id":101, "identifier":"actny1","node_type":"OperationsActivity","datestamp":datestamp},
+        #     {"doc_id":102, "identifier":"usnyloc","node_type":"GeoNamesLocation","datestamp":datestamp},
+        # ]
+    query2 = """CREATE
+        (usny1:Resource:Organization {uri: 'https://1145.am/db/101/usny1', name: ['Name USNY1'], industry: ['baz'],   internalDocId: 101})-[:documentSource ]->(docsource_usny1:Resource:Article {uri: 'https://1145.am/db/article_usny1',
+                        headline: 'Headline usny1', internalDocId: 101, sourceOrganization:'prweb', datePublished: datetime('2025-08-16T00:49:22.487877+00:00') }), (docsource_usny1)-[:url]->(ext_usny1:Resource { uri: 'https://example.org/external/art_usny1' }), 
+                        (actny1:Resource:OperationsActivity {uri: 'https://1145.am/db/101/actny1', name: ['Name ACTNY1'],  status: ['some status'],   internalDocId: 101})-[:documentSource { documentExtract: 'Doc Extract ' }]->(docsource_usny1), 
+                        
+        (usnyloc:Resource:GeoNamesLocation {uri: 'https://1145.am/db/102/usnyloc', name: ['Name USNYLOC'],    countryCode: 'US',   admin1Code: 'NY',  internalDocId: 102})-[:documentSource ]->(docsource_usnyloc:Resource:Article {uri: 'https://1145.am/db/article_usnyloc',
+                        headline: 'Headline usnyloc', internalDocId: 102, sourceOrganization:'prweb', datePublished: datetime('2025-08-15T23:59:59.999999+00:00') }), (docsource_usnyloc)-[:url]->(ext_usnyloc:Resource { uri: 'https://example.org/external/art_usnyloc' }),
+
+        (usny1)-[:hasMarketingActivity {weight:2}]->(actny1),
+        (usny1)-[:basedInHighGeoNamesLocation {weight:2}]->(usnyloc),
+        (actny1)-[:whereHighGeoNamesLocation {weight:2}]->(usnyloc)
+
+        """
+    
+    def normalize_for_test(self, acts):
+        """
+        Normalize neomodel objects inside acts so dict comparison works.
+        """
+        norm = copy.deepcopy(acts)
+        for d in norm:
+            if "activity_locations" in d:
+                d["activity_locations"] = len(d["activity_locations"])
+        return norm
+
+    def test_updates_active_cache_version_and_clears_previous_version_keys(self):
+        clean_db()
+        nuke_cache()
+        _,max_date = min_and_max_date({"max_date":date(2025,8,16)})
+        db.cypher_query(self.query1)
+        RDFPostProcessor().run_all_in_order()
+        refresh_geo_data(fill_blanks=False,max_date=max_date)
+        v1 = get_active_version()
+        v2 = get_inactive_version()
+        self.assertGreater( count_keys(f"*{v1}*orgs*"),0 ) # At least one active orgs key
+        self.assertEqual( count_keys(f"*{v2}*orgs*"),0 )
+
+        refresh_geo_data(fill_blanks=False,max_date=max_date)
+        # now the versions should be switched around
+        self.assertEqual( get_inactive_version(), v1)
+        self.assertEqual( get_active_version(), v2 )
+        self.assertEqual( count_keys(f"*{v1}*orgs*"),0 )
+        self.assertGreater( count_keys(f"*{v2}*orgs*"),0 ) # At least one active orgs key
+
+    def test_updates_next_cache_version(self):
+        clean_db()
+        nuke_cache()
+        min_date,max_date = min_and_max_date({"max_date":date(2025,8,16)})
+        
+        db.cypher_query(self.query1)
+        RDFPostProcessor().run_all_in_order()
+        refresh_geo_data(fill_blanks=False,max_date=max_date)
+
+        acts_pa1 = get_activities_by_country_and_date_range("US-PA",min_date,max_date)
+        self.assertEqual(len(acts_pa1), 2) # uspa1 and uspa2
+        with self.assertRaises(ValueError):
+            _ = get_activities_by_country_and_date_range("US-NY",min_date,max_date)
+
+        db.cypher_query(self.query2)
+        RDFPostProcessor().run_all_in_order()
+        with self.assertRaises(ValueError):
+            get_activities_by_country_and_date_range("US-NY",min_date,max_date) # No results until refresh_geo_data
+       
+        refresh_geo_data(fill_blanks=False,max_date=max_date)
+
+        acts_pa2 = get_activities_by_country_and_date_range("US-PA",min_date,max_date)
+        self.assertEqual(
+            self.normalize_for_test(acts_pa2), 
+            self.normalize_for_test(acts_pa1)) # These have not changed
+        
+        acts_ny2 = get_activities_by_country_and_date_range("US-NY",min_date,max_date)
+        self.assertEqual( len(acts_ny2), 1)
 
 class TestDisentanglingMergedCells(TestCase):
 

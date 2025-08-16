@@ -1,17 +1,15 @@
-from .region_hierarchies import COUNTRY_CODE_TO_NAME
-from .geoname_mappings import CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX, geo_parent_children
+from topics.industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
+from topics.industry_geo.geoname_mappings import CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX, geo_parent_children
 from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_country_admin1
 from topics.models import IndustryCluster, Resource
-from topics.industry_geo.orgs_by_industry_geo import do_all_precalculations
 from topics.util import geo_to_country_admin1
-from .geo_rdf_post_processor import update_geonames_locations_with_country_admin1
 import logging
 from topics.organization_search_helpers import remove_same_as_name_onlies
-from django.core.cache import cache
+from syracuse.cache_util import get_versionable_cache
 logger = logging.getLogger(__name__)
 
 
-def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,return_orgs_only=False,
+def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,version=None,return_orgs_only=False,
                                 combine_same_as_name_only=True):
     if isinstance(industry_topic_id, IndustryCluster):
         industry_topic_id = industry_topic_id.topicId
@@ -29,7 +27,7 @@ def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,return_or
     else:
         return orgs_with_rel_counts
 
-def country_admin1_full_name(geo_code):
+def country_admin1_full_name(geo_code, version=None):
     country_code, admin1_code = geo_to_country_admin1(geo_code)
     if country_code is None or country_code == '':
         return ""
@@ -39,20 +37,9 @@ def country_admin1_full_name(geo_code):
     if admin1_code is None:
         return country_name
     else:
-        admin1_name = cache.get(f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{geo_code}")
+        admin1_name = get_versionable_cache(f"{CC_ADMIN1_CODE_TO_ADMIN1_NAME_PREFIX}{geo_code}", version)
         return f"{country_name} - {admin1_name}"
 
-# def org_uris_by_industry_text_and_geo_code(industry_text, geo_code,return_orgs_only=False,
-#                                        combine_same_as_name_only=True):
-#     country_code, admin1 = geo_to_country_admin1(geo_code)
-#     orgs_with_rel_counts = orgs_by_industry_text_and_geo(industry_text, country_code, admin1)
-#     if combine_same_as_name_only is True:
-#         orgs_with_rel_counts = remove_same_as_name_onlies([(Resource.get_by_uri(x),y) for x,y in orgs_with_rel_counts])
-#         orgs_with_rel_counts = [(x.uri, y) for x, y in orgs_with_rel_counts]
-#     if return_orgs_only is True:
-#         return [x[0] for x in orgs_with_rel_counts]
-#     else:
-#         return orgs_with_rel_counts
 
 def geo_codes_for_region(start_region, parent_child=None):
     if parent_child is None:

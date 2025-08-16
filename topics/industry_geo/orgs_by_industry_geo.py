@@ -6,38 +6,38 @@ from topics.industry_geo.region_hierarchies import (GLOBAL_REGION_TO_COUNTRY,
     GLOBAL_REGION_TO_COUNTRIES_FLAT,
     US_NATIONAL_REGIONS_TO_STATES)
 from neomodel import db
-from django.core.cache import cache
 from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
-from topics.util import date_minus, cacheable_hash
-from topics.util import ALL_ACTIVITY_LIST, cache_friendly, min_and_max_date
+from syracuse.date_util import date_minus, min_and_max_date
+from topics.util import ALL_ACTIVITY_LIST
 from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION
 from topics.neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
 from topics.industry_geo.geoname_mappings import COUNTRIES_WITH_STATE_PROVINCE, admin1s_for_country
 from topics.industry_geo.region_hierarchies import COUNTRY_TO_GLOBAL_REGION
 import logging
 from datetime import date
+from syracuse.cache_util import set_versionable_cache, get_versionable_cache
 
 logger = logging.getLogger(__name__)
 
 
 def cached_activity_stats_last_updated_date():
-    return cache.get("activity_stats_last_updated")
+    return get_versionable_cache("activity_stats_last_updated")
 
-def get_org_activities_cache_key(min_date,max_date,industry,country,admin1):
-    name = f"orgs_acts_{min_date}_{max_date}_{industry}_{country}_{admin1}"
-    return cache_friendly(name)
+def get_org_activities_cache_key(min_date,max_date,industry_id,country,admin1):
+    name = f"orgs_acts_{min_date}_{max_date}_{industry_id}_{country}_{admin1}"
+    return name
 
-def get_org_activity_counts(min_date,max_date,industry,country_code,admin1):
-    acts = get_org_activities(min_date,max_date,industry,country_code,admin1)
+def get_org_activity_counts(min_date,max_date,industry,country_code,admin1, cache_version):
+    acts = get_org_activities(min_date,max_date,industry,country_code,admin1, cache_version)
     return len(acts)
 
-def get_org_activities(min_date,max_date,industry,country_code,admin1):
+def get_org_activities(min_date,max_date,industry,country_code,admin1, cache_version):
     cache_key = get_org_activities_cache_key(min_date,max_date,industry,country_code,admin1)
-    org_datas = cache.get(cache_key)
+    org_datas = get_versionable_cache(cache_key, cache_version)
     if org_datas is None:
-        raise ValueError(f"No cached stats for {min_date} {max_date} {industry} {country_code} {admin1} (key {cache_key})")
+        raise ValueError(f"No cached stats for {cache_version} {min_date} {max_date} {industry} {country_code} {admin1} (key {cache_key})")
     acts = set()
     for row in org_datas:
         act_datas = row[-1]
@@ -47,7 +47,8 @@ def get_org_activities(min_date,max_date,industry,country_code,admin1):
     return sorted(acts, key=lambda x: ( -(x[2].timestamp()), x[0]))
 
 def org_uris_by_industry_id_country_admin1(industry_cluster_topic_id, 
-                                     country_code, admin1_code=None,min_date=None, max_date=None):
+                                     country_code, admin1_code=None,min_date=None, max_date=None,
+                                     cache_version=None):
     if country_code == '':
         country_code = None
     if admin1_code == '':
@@ -56,12 +57,12 @@ def org_uris_by_industry_id_country_admin1(industry_cluster_topic_id,
         industry_cluster_topic_id = None
     min_date, max_date = min_and_max_date({"min_date":min_date,"max_date":max_date})  # None max date will use latest cached data 
     cache_key = get_org_activities_cache_key(min_date,max_date,industry_cluster_topic_id,country_code,admin1_code)
-    res = cache.get(cache_key)
+    res = get_versionable_cache(cache_key,cache_version)
     if res is None:
         raise ValueError(f"No result for {cache_key}")
     return res
 
-def convert_and_cache_org_results(org_data_l,cache_key):
+def convert_and_cache_org_results(org_data_l, cache_version,cache_key):
     '''
     org_data_l is: o.uri, apoc.node.degree(o), o.internalDocId, articleData
     and each articleData is: act.uri, art.uri, art.datePublished
@@ -74,11 +75,11 @@ def convert_and_cache_org_results(org_data_l,cache_key):
         (uri,rel_count,doc_id, neo4j_date_converter(article_data))
         for uri,rel_count,doc_id,article_data in org_data
     ]
-    cache.set(cache_key, converted)
+    set_versionable_cache(cache_key, converted, cache_version)
     return converted
 
 
-def do_all_precalculations(max_date=date.today(),fill_blanks=True):
+def do_all_precalculations(cache_version, max_date=date.today(), fill_blanks=True):
     days_ago_90 = date_minus(max_date,90)
     days_ago_30 = date_minus(max_date,30)
     days_ago_7 = date_minus(max_date,7)
@@ -88,34 +89,34 @@ def do_all_precalculations(max_date=date.today(),fill_blanks=True):
         res = build_and_run_query(min_date, max_date, include_industry=True, include_geo=False)
         for industry_topic_id, org_data_l in res:
             cache_key = get_org_activities_cache_key(min_date,max_date,industry_topic_id,None,None)
-            _ = convert_and_cache_org_results(org_data_l, cache_key)
+            _ = convert_and_cache_org_results(org_data_l, cache_version, cache_key)
         logger.debug("Industry done")
         res = build_and_run_query(min_date, max_date, include_industry=False, include_geo=True)
         for country_code, org_data_l in res:
             cache_key = get_org_activities_cache_key(min_date,max_date,None,country_code,None)
-            _ = convert_and_cache_org_results(org_data_l, cache_key)
+            _ = convert_and_cache_org_results(org_data_l, cache_version, cache_key)
         logger.debug("Country done")
         res = build_and_run_query(min_date, max_date, include_industry=True, include_geo=True)
         for industry_topic_id, country_code, org_data_l in res:
             cache_key = get_org_activities_cache_key(min_date,max_date,industry_topic_id,country_code,None)
-            _ = convert_and_cache_org_results(org_data_l, cache_key)
+            _ = convert_and_cache_org_results(org_data_l, cache_version, cache_key)
         logger.debug("Industry & Country done")
         res = build_and_run_query(min_date, max_date, include_industry=True, include_geo=True, include_admin1=True)
         for industry_topic_id, country_code, admin1_code, org_data_l in res:
             cache_key = get_org_activities_cache_key(min_date,max_date,industry_topic_id,country_code,admin1_code)
-            _ = convert_and_cache_org_results(org_data_l, cache_key)
+            _ = convert_and_cache_org_results(org_data_l, cache_version, cache_key)
         logger.debug("Industry, Country, Admin1 Done")
         res = build_and_run_query(min_date, max_date, include_industry=False, include_geo=True, include_admin1=True)
         cache_key = get_org_activities_cache_key(min_date,max_date,False,True,True)
         for country_code, admin1_code, org_data_l in res:
             cache_key = get_org_activities_cache_key(min_date,max_date,None,country_code,admin1_code)
-            _ = convert_and_cache_org_results(org_data_l, cache_key)
+            _ = convert_and_cache_org_results(org_data_l, cache_version, cache_key)
         logger.info("Existing industry/country/admin1 done")
         if fill_blanks is True:
-            set_not_found_industry_geo_to_empty_list(min_date, max_date)
+            set_not_found_industry_geo_to_empty_list(min_date, max_date, cache_version)
             logger.info("Set not found to [] done")
 
-def set_not_found_industry_geo_to_empty_list(min_date, max_date):
+def set_not_found_industry_geo_to_empty_list(min_date, max_date, cache_version):
     industry_topic_ids = [None] + [x.topicId for x in IndustryCluster.all_leaf_nodes()]
     country_codes = [None] + list(COUNTRY_TO_GLOBAL_REGION.keys())
     for topic_id in industry_topic_ids:
@@ -123,16 +124,14 @@ def set_not_found_industry_geo_to_empty_list(min_date, max_date):
             if topic_id is None and country_code is None:
                 continue # Not allowed
             cache_key = get_org_activities_cache_key(min_date,max_date,topic_id,country_code,None)
-            res = cache.get(cache_key)
-            if res is None:
-                cache.set(cache_key, [])
+            if get_versionable_cache(cache_key, cache_version) is None:
+                set_versionable_cache(cache_key, [], cache_version)
             if country_code in COUNTRIES_WITH_STATE_PROVINCE:
-                admin1_list = admin1s_for_country(country_code)
+                admin1_list = admin1s_for_country(country_code, cache_version)
                 for adm1 in admin1_list:
                     cache_key = get_org_activities_cache_key(min_date,max_date,topic_id,country_code,adm1)
-                    res = cache.get(cache_key)
-                    if res is None:
-                       cache.set(cache_key, [])
+                    if get_versionable_cache(cache_key,cache_version) is None:
+                       set_versionable_cache(cache_key, [], cache_version)
 
 def build_and_run_query(min_date, max_date, include_industry=True, include_geo=True, include_admin1=False):
     query = build_query(min_date, max_date, include_industry, include_geo, include_admin1)
@@ -220,16 +219,16 @@ def build_article_section(min_date, max_date):
     """
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
-    cache_key = cache_friendly(f"orgs_ind_text_{cacheable_hash(industry_text)}_{country_code}")
+    cache_key = f"orgs_ind_text_{country_code}"
     if admin1_code is not None:
         cache_key = f"{cache_key}_{admin1_code}"
-    cache_key = cache_friendly(cache_key)
-    res = cache.get(cache_key)
+    cache_key = f"{cache_key}_{industry_text}"
+    res = get_versionable_cache(cache_key)
     if res is not None:
         return res
     logger.debug(f"cache miss {cache_key}")
     res = Organization.by_industry_text_and_geo(industry_text, country_code, admin1_code)
-    cache.set(cache_key, res, 60*60*4) # 4 hour cache timeout
+    set_versionable_cache(cache_key, res, timeout=60*60*4) # 4 hour cache timeout
     return res
 
 def org_geo_industry_cluster_query_by_words(search_text: str,counts_only):

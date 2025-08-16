@@ -1,18 +1,19 @@
 from rest_framework import serializers
 from collections import defaultdict
-from .graph_utils import graph_centered_on
-from .converters import CustomSerializer
-from .timeline_utils import get_timeline_data
-from .industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
-from .models import IndustryCluster, Article, cache_friendly, Organization
-from .family_tree_helpers import org_family_tree
-from .constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
+from topics.graph_utils import graph_centered_on
+from topics.converters import CustomSerializer
+from topics.timeline_utils import get_timeline_data
+from topics.industry_geo.region_hierarchies import COUNTRY_CODE_TO_NAME
+from topics.models import IndustryCluster, Article, Organization
+from topics.family_tree_helpers import org_family_tree
+from topics.constants import BEGINNING_OF_TIME, ALL_TIME_MAGIC_NUMBER
 from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for
-from .industry_geo import org_uris_by_industry_id_and_or_geo_code, country_admin1_full_name 
-from .util import elements_from_uri, cacheable_hash
+from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, country_admin1_full_name 
+from topics.util import elements_from_uri
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
 import logging
 logger = logging.getLogger(__name__)
@@ -98,9 +99,9 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
         clean_rels = only_valid_relationships(rels)
         source_names = source_names_from_str(self.context.get("source_str")) 
         min_doc_date = date_from_str_with_default(self.context.get("min_date_str"))
-        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
-        cache_key=cache_friendly(f"familytree_{organization_uri}_{source_names_as_hash}_{combine_same_as_name_only}_{clean_rels}_{min_doc_date}")
-        res = cache.get(cache_key)
+        source_names_as_list = ",".join(sorted(source_names))
+        cache_key=f"familytree_{organization_uri}_{combine_same_as_name_only}_{clean_rels}_{min_doc_date}_{source_names_as_list}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             logger.debug(f"Cache hit {cache_key}: {res}")
             return res
@@ -149,7 +150,7 @@ class FamilyTreeSerializer(serializers.BaseSerializer):
             "min_doc_date": create_min_date_pretty_print_data(self.context.get("min_date_str")),
         }
         
-        cache.set(cache_key, res)
+        set_versionable_cache(cache_key, res)
         return res
 
 
@@ -269,13 +270,13 @@ def sort_edges(edges, nodes):
 class OrganizationGraphSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
-        source_names = source_names_from_str(self.context.get("source_str"))
+        source_names_as_list = source_names_from_str(self.context.get("source_str"))
         min_doc_date = date_from_str_with_default(self.context.get("min_date_str"))
-        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
+        source_names = ",".join(sorted(source_names_as_list))
         combine_same_as_name_only = self.context.get("combine_same_as_name_only")
         max_nodes = self.context["max_nodes"]
-        cache_key=cache_friendly(f"graph_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{min_doc_date}_{max_nodes}")
-        res = cache.get(cache_key)
+        cache_key=f"graph_{instance.uri}_{combine_same_as_name_only}_{min_doc_date}_{max_nodes}_{source_names}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             logger.debug(f"Cache hit {cache_key}: {res}")
             return res
@@ -306,7 +307,7 @@ class OrganizationGraphSerializer(serializers.BaseSerializer):
                 nodes_by_type[node_type] = []
             nodes_by_type[node_type].append(node_row['id'])
         data["nodes_by_type"] = nodes_by_type
-        cache.set(cache_key, data)
+        set_versionable_cache(cache_key, data)
         return data
 
 
@@ -351,11 +352,11 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance, **kwargs):
         combine_same_as_name_only = self.context.get("combine_same_as_name_only",True)
-        source_names = source_names_from_str(self.context.get("source_str"))
+        source_names_list = source_names_from_str(self.context.get("source_str"))
         min_doc_date = date_from_str_with_default(self.context.get("min_date_str"))
-        source_names_as_hash = cacheable_hash(",".join(sorted(source_names)))
-        cache_key=cache_friendly(f"timeline_{instance.uri}_{source_names_as_hash}_{combine_same_as_name_only}_{min_doc_date}")
-        res = cache.get(cache_key)
+        source_names= ",".join(sorted(source_names_list))
+        cache_key=f"timeline_{instance.uri}_{combine_same_as_name_only}_{min_doc_date}_{source_names}"
+        res = get_versionable_cache(cache_key)
         if res is not None:
             logger.debug(f"Cache hit {cache_key}: {res}")
             return res
@@ -369,7 +370,7 @@ class OrganizationTimelineSerializer(serializers.BaseSerializer):
             "document_sources": create_source_pretty_print_data(self.context.get("source_str")),
             "min_doc_date": create_min_date_pretty_print_data(self.context.get("min_date_str")),
             }
-        cache.set(cache_key,resp)
+        set_versionable_cache(cache_key,resp)
         return resp
 
 class CountryRegionSerializer(serializers.Serializer):

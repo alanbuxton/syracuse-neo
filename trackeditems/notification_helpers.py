@@ -3,10 +3,12 @@ from topics.activity_helpers import get_activities_by_org_uris_and_date_range, g
 from trackeditems.models import get_notifiable_users, TrackedItem, ActivityNotification
 from topics.models.model_helpers import similar_organizations_flat
 from integration.models import DataImport
-from topics.util import geo_to_country_admin1, min_and_max_date
+from topics.util import geo_to_country_admin1
+from syracuse.date_util import min_and_max_date
 from trackeditems.date_helpers import days_ago
 from django.template.loader import render_to_string
-from topics.models import cache_friendly, Organization
+from topics.models import Organization
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from topics.industry_geo.orgs_by_industry_geo import org_geo_industry_text_by_words
 from django.core.cache import cache
 import logging
@@ -14,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def prepare_recent_changes_email_notification(user, num_days):
     max_date_for_email = DataImport.latest_import_ts()
-    max_date = cache.get("activity_stats_last_updated")
+    max_date = get_versionable_cache("activity_stats_last_updated")
     return prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days, max_date_for_email)
 
 def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_days, max_date_for_email=None):
@@ -27,13 +29,13 @@ def prepare_recent_changes_email_notification_by_max_date(user, max_date, num_da
     return prepare_recent_changes_email_notification_by_min_max_date(user, min_date, max_date, max_date_for_email)
 
 def recents_by_user_min_max_date(user, min_date, max_date):
-    cache_key = cache_friendly(f"recents_{user.id}_{min_date}_{max_date}")
-    res = cache.get(cache_key)
+    cache_key = f"recents_{user.id}_{min_date}_{max_date}"
+    res = get_versionable_cache(cache_key)
     if res is not None:
         return res
     tracked_items = TrackedItem.trackable_by_user(user)
     matching_activity_orgs, serialized_data = tracked_items_between(tracked_items, min_date, max_date)
-    cache.set(cache_key, (matching_activity_orgs, tracked_items), timeout=60*60 )
+    set_versionable_cache(cache_key, (matching_activity_orgs, tracked_items), timeout=60*60 )
     return matching_activity_orgs, serialized_data
 
 def tracked_items_between(tracked_items, min_date, max_date):

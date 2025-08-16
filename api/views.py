@@ -4,7 +4,7 @@ from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from topics.models import IndustryCluster, GeoNamesLocation
 import api.serializers as serializers
 import logging 
-from topics.util import min_and_max_date, geo_to_country_admin1
+from topics.util import geo_to_country_admin1
 from rest_framework import status
 from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
 from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
@@ -20,6 +20,7 @@ from api.models import APIRequestLog
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from rest_framework.views import APIView
+from syracuse.date_util import min_and_max_date
 
 logger = logging.getLogger(__name__)
 
