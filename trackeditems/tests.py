@@ -96,7 +96,7 @@ class ToggleTrackedItemAPITest(APITestCase):
     def test_unauthenticated_user_cannot_toggle_item(self):
         client = Client()
         response = client.patch(self.url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_toggle_twice_restores_original_state(self):
         """Test that toggling twice returns the item to its original state."""

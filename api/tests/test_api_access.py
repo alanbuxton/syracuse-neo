@@ -128,7 +128,6 @@ class TieredThrottleTests(APITestCase):
         client.credentials(HTTP_AUTHORIZATION=f'Token {self.unverified_token.key}')
         for i in range(settings.THROTTLES['unverified_user']):
             response = client.get(self.url, {}, format='json')
-            logger.warning(response)
             self.assertEqual(response.status_code, status.HTTP_200_OK, f"Failed on request {i+1}")
 
         # 11th request should be throttled

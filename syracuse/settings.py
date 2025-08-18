@@ -222,8 +222,8 @@ BREVO_API_KEY = os.environ['BREVO_API_KEY']
 TRACKED_ORG_ACTIVITIES_DAYS = int(os.environ.get('TRACKED_ORG_ACTIVITIES_DAYS',"7"))
 
 THROTTLES = {
-    'unverified_user': 10,
-    'verified_user': 100,
+    'unverified_user': 30,
+    'verified_user': 300,
 }
 
 REST_FRAMEWORK = {
@@ -234,6 +234,7 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSION': 'v1',  
     'DEFAULT_THROTTLE_CLASSES': ['api.throttling.ScopedTieredThrottle'],
     'DEFAULT_THROTTLE_RATES': {'default_scope': '1/month' },
+    'EXCEPTION_HANDLER': 'syracuse.authentication.custom_exception_handler',
 }
 
 CACHES = {

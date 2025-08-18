@@ -21,6 +21,9 @@ from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from rest_framework.views import APIView
 from syracuse.date_util import min_and_max_date
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
+from neomodel import DoesNotExist
 
 logger = logging.getLogger(__name__)
 
@@ -32,10 +35,17 @@ class NeomodelViewSet(GenericViewSet):
     serializer_class = serializers.HyperlinkedNeomodelSerializer
 
     def get_queryset(self):
+        if self.node_class is None:
+            raise Http404("Not found")
         return self.node_class.nodes.all()
 
     def get_object(self):
-        return self.node_class.nodes.get(uri=self.kwargs["pk"])
+        if self.node_class is None:
+            raise Http404("Not found")
+        try:
+            return self.node_class.nodes.get(uri=self.kwargs["pk"])
+        except (Http404, DoesNotExist, ObjectDoesNotExist):
+            raise Http404(f"No object found for {self.kwargs['pk']}")
 
     def get_serializer_context(self):
         node_class_name = self.node_class.__name__.lower()
@@ -50,15 +60,15 @@ class NeomodelViewSet(GenericViewSet):
         ]
     )   
     def retrieve(self, request, pk=None):
-        instance = self.get_object()
+        instance = self.get_object()      
         serializer = self.serializer_class(
             instance,
             context=self.get_serializer_context()
         )
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def list(self, request):
-        nodes = self.get_queryset()
+        nodes = self.get_queryset()        
         page = self.paginate_queryset(nodes)
         if page is not None:
             serializer = self.serializer_class(
@@ -73,7 +83,7 @@ class NeomodelViewSet(GenericViewSet):
                 context=self.get_serializer_context(),
                 many=True,
             )
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
         
 class IndustryClusterViewSet(NeomodelViewSet):
@@ -81,7 +91,10 @@ class IndustryClusterViewSet(NeomodelViewSet):
     serializer_class = serializers.IndustryClusterSerializer
     
     def get_object(self):
-        return self.node_class.nodes.get(topicId=self.kwargs["pk"])
+        try:
+            return self.node_class.nodes.get(topicId=self.kwargs["pk"])
+        except (Http404, DoesNotExist, ObjectDoesNotExist):
+            raise Http404(f"No IndustryCluster found for {self.kwargs['pk']} (must be numeric)")
 
 class RegionsViewSet(GenericViewSet):
     permission_classes = [IsAuthenticated]
@@ -92,11 +105,15 @@ class RegionsViewSet(GenericViewSet):
         return geo_parent_children().values()
 
     def get_object(self):
-        return geo_parent_children().get(self.kwargs["pk"])
+        pk = self.kwargs["pk"]
+        obj = geo_parent_children().get(pk)
+        if obj is None:
+            raise Http404(f"No Region found for {pk}")
+        return obj
 
     def list(self, request):
         serializer = self.get_serializer(self.get_queryset(), many=True, context={'request': request})
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     @extend_schema(
         parameters=[
@@ -105,18 +122,25 @@ class RegionsViewSet(GenericViewSet):
     )      
     def retrieve(self, request, pk=None):
         item = self.get_object()
-        if item is None:
-            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
-        
-        serializer = self.serializer_class(item, context={'request': request})
-        return Response(serializer.data)
+        serializer = self.get_serializer(item, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class GeoNamesViewSet(NeomodelViewSet):
     node_class = GeoNamesLocation
     serializer_class = serializers.GeoNamesSerializer
 
     def get_object(self):
-        return self.node_class.nodes.get(geoNamesId=int(self.kwargs["pk"]))
+        pk = self.kwargs["pk"]
+        try:
+            pk = int(pk)
+        except ValueError:
+            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID, e.g. 2523083 for Syracuse)")
+        
+        try:
+            return self.node_class.nodes.get(geoNamesId=pk)
+        except (Http404, ObjectDoesNotExist, DoesNotExist):
+            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID), e.g. 2523083 for Syracuse)")
+        
 
 class ActivitiesViewSet(NeomodelViewSet):
 
@@ -129,6 +153,13 @@ class ActivitiesViewSet(NeomodelViewSet):
         org_uri = self.request.query_params.get("org_uri",None)
         org_name = self.request.query_params.get("org_name",None)
         types_to_keep = self.request.query_params.getlist("type",[])
+        locations = self.request.query_params.getlist('location_id',[])
+        industry_search_str = self.request.query_params.getlist('industry_name',[])
+        industry_ids = self.request.query_params.getlist('industry_id',[None])
+
+        if org_uri is None and org_name is None and len(locations) == 0 and len(industry_search_str) == 0 and industry_ids == [None]:
+            return None 
+
         if org_uri is not None:
             logger.debug(f"Uri: {org_uri}")
             activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
@@ -138,9 +169,6 @@ class ActivitiesViewSet(NeomodelViewSet):
             logger.debug(f"Uris: {uris}")
             activities = get_activities_by_org_uris_and_date_range(uris,min_date,max_date,combine_same_as_name_only=True,limit=None)
         else:
-            locations = self.request.query_params.getlist('location_id',[])
-            industry_search_str = self.request.query_params.getlist('industry_name',[])
-            industry_ids = self.request.query_params.getlist('industry_id',[None])
             if len(industry_search_str) > 0:
                 industry_ids = set()
                 for search_str in industry_search_str:
@@ -234,6 +262,11 @@ class ActivitiesViewSet(NeomodelViewSet):
     )
     def list(self, request):
         activities = self.get_queryset()
+        if activities is None:
+            msg = "Must include at least one of org_uri, org_name, location_id, industry_name, industry_id (location_id, industry_name and industry_id can be specified multiple times)"
+            resp = Response({"message":msg},status=status.HTTP_400_BAD_REQUEST)
+            return resp
+
         page = self.paginate_queryset(activities)
         if page is not None:
             serializer = serializers.ActivitySerializer(
@@ -248,8 +281,8 @@ class ActivitiesViewSet(NeomodelViewSet):
                 context=self.get_serializer_context(),
                 many=True,
             )
-        return Response(serializer.data)
-
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
 class APIUsageViewSet(ReadOnlyModelViewSet):
     renderer_classes = [TemplateHTMLRenderer]
@@ -296,7 +329,7 @@ class APITokenView(APIView):
 
     def get(self, request):
         token_key = request.user.auth_token.key
-        return Response({'token': token_key})
+        return Response({'token': token_key}, status=status.HTTP_200_OK)
 
  
 def filter_activity_types(activities, activity_types_to_keep):

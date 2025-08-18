@@ -25,6 +25,7 @@ from topics.organization_search_helpers import search_organizations_by_name
 from syracuse.cache_util import nuke_cache, get_active_version, count_keys, get_inactive_version
 from syracuse.date_util import min_and_max_date
 import copy
+from rest_framework import status
 
 '''
     Care these tests will delete neodb data
@@ -302,10 +303,10 @@ class TestFamilyTree(TestCase):
         client = self.client
         path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&min_date=-1"
         response = client.get(path)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         res = re.search(r"var edges = new vis.DataSet\( (.+?) \);",content)
         as_dict = json.loads(res.groups(0)[0].replace("\\'","\""))

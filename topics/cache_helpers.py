@@ -3,7 +3,6 @@ from .stats_helpers import get_stats
 from topics.industry_geo.geoname_mappings import prepare_country_mapping
 from topics.industry_geo.geo_rdf_post_processor import update_geonames_locations_with_country_admin1
 from topics.industry_geo.orgs_by_industry_geo import do_all_precalculations
-from django.core.cache import cache
 from syracuse.cache_util import get_inactive_version, set_active_version, set_versionable_cache, nuke_cache
 from syracuse.date_util import min_and_max_date
 

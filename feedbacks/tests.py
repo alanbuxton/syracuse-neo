@@ -17,7 +17,7 @@ class TestFeedbacks(APITestCase):
 
     def test_not_available_if_not_logged_in(self):
         res = self.view(self.request1)
-        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_handles_ids_as_text(self):
         force_authenticate(self.request2, self.user)

@@ -42,6 +42,7 @@ from topics.models import Article, CorporateFinanceActivity
 from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
+from rest_framework import status
 
 '''
     Care these tests will delete neodb data
@@ -103,7 +104,7 @@ class EndToEndTests20140205(TestCase):
         client = self.client
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "https://1145.am/db/2946625/Start_Fracking_At_Two" in content
 
@@ -112,7 +113,7 @@ class EndToEndTests20140205(TestCase):
         client = self.client
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "See something unexpected or wrong about this item" in content
         assert "Submit Suggestion" in content
@@ -157,10 +158,10 @@ class EndToEndTests20190110(TestCase):
         client = self.client
         path = "/api/v1/activities/?industry_id=12&location_id=CA&location_id=IL&max_date=2019-01-10"
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         j = json.loads(resp.content)
         assert j['count'] == 5, f"Found {j['count']}"
         assert [x['activity_uri'] for x in j['results']] == ['https://1145.am/db/3557548/Canadian_Imperial_Bank_Of_Commerce-Pharmhouse-Investment',
@@ -192,13 +193,13 @@ class EndToEndTests20190110(TestCase):
         client = self.client
         path = "/geo_activities?geo_code=US-CA&max_date=2019-01-10"
         response = client.get(path)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.anon)
         response = client.get(path)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Activities between" in content
         assert "in the <b>United States of America - California</b>." in content
@@ -211,13 +212,13 @@ class EndToEndTests20190110(TestCase):
         client = self.client
         path = "/source_activities?source_name=Business%20Insider&max_date=2019-01-10"
         response = client.get(path)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.anon)
         response = client.get(path)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Activities between" in content
         assert "Click on a document link to see the original source document" in content
@@ -277,6 +278,7 @@ class EndToEndTests20240602(TestCase):
     @classmethod
     def setUpTestData(cls):
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
+        
 
     def setUp(self):
         ts = time.time()
@@ -318,6 +320,7 @@ class EndToEndTests20240602(TestCase):
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
         self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
+
 
     def test_adds_model_classes_with_multiple_labels(self):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
@@ -416,17 +419,17 @@ class EndToEndTests20240602(TestCase):
         path = "/organization/linkages/uri/1145.am/db/2166549/Discovery_Inc?combine_same_as_name_only=1&sources=_all&min_date=-1"
         client = self.client
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Track Discovery, Inc" not in content
         client.force_login(self.anon)
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Track Discovery, Inc" not in content
         client.force_login(self.user)
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Track Discovery, Inc" in content
 
@@ -558,10 +561,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path = "/resource/1145.am/db/3544275/wwwbusinessinsidercom_hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12"
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "https://www.businessinsider.com/hotel-zena-rbg-mural-female-women-hotel-travel-washington-dc-2019-12" in content
         assert "first female empowerment-themed hotel will open in Washington, DC with a Ruth Bader Ginsburg mural" in content
@@ -573,10 +576,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path = "/organization/family-tree/uri/1145.am/db/3451381/Responsability_Investments_Ag?combine_same_as_name_only=0&rels=buyer,investor,vendor&min_date=-1"
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "REDAVIA" in content
         assert "REDOVIA" not in content
@@ -662,10 +665,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path0 = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=0&min_date=-1&sources=_all"
         resp = client.get(path0)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path0)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content0 = str(resp.content)
         resp = client.get("/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?combine_same_as_name_only=1&min_date=-1&sources=_all")
         content1 = str(resp.content)
@@ -678,10 +681,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path0 = "/organization/family-tree/uri/1145.am/db/3029576/Loxo_Oncology?combine_same_as_name_only=0&sources=_all&min_date=-1"
         resp = client.get(path0)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path0)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
 
     def test_family_tree_combine_same_as_name_only_off(self):
         client = self.client
@@ -770,10 +773,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         uri = "/resource/1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(uri)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
         assert "<h1>Resource: https://1145.am/db/3558745/Cory_1st_Choice_Home_Delivery-Acquisition</h1>" in content
@@ -786,10 +789,10 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         uri = "/resource/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1"
         resp = client.get(uri,follow=True) # Will be redirected
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(uri,follow=True)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         assert resp.redirect_chain == [('/organization/linkages/uri/1145.am/db/3558745/Jb_Hunt?abc=def&ged=123&combine_same_as_name_only=0&rels=buyer%2Cvendor&sources=_all&min_date=-1', 302)]
         content = str(resp.content)
         assert "Treat all organizations with the same name as the same organization? Off" in content # confirm that combine_same_as_name_only=0 is being applied
@@ -1159,7 +1162,7 @@ class EndToEndTests20240602(TestCase):
     def test_industry_geo_finder_selection_screen(self):
         client = self.client
         resp = client.get("/industry_geo_finder?industry=software&include_search_by_industry_text=1")
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         table_headers = re.findall(r"\<th.+?\>",content)
         assert table_headers == ['<th rowspan="6">',
@@ -1236,10 +1239,10 @@ class EndToEndTests20240602(TestCase):
                    'selectedColumns': '["col-US-IL"]', 'allIndustryIDs': '[0, 313, 647]',
                    'searchStr': 'beauty insurance'} # from request.POST.dict()
         response = client.post("/industry_geo_finder_review",payload)
-        assert response.status_code == 403
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         response = client.post("/industry_geo_finder_review",payload)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "Health- And Beauty in all Geos" in content
         assert "Health- And Beauty, Insurance And Risk Management, Insurance Brokerage And Services in United States of America - Illinois" in content
@@ -1253,7 +1256,7 @@ class EndToEndTests20240602(TestCase):
         client.force_login(self.user)
         path = "/industry_geo_finder_review?industry_id=647&industry=beauty+insurance"
         response = client.get(path)
-        assert response.status_code == 200
+        assert response.status_code == status.HTTP_200_OK
         content = str(response.content)
         assert "The Hilb Group" in content
         assert "uri/1145.am/db/3458127/The_Hilb_Group" in content
@@ -1317,10 +1320,10 @@ class EndToEndTests20240602(TestCase):
         url = "/organization/industry_geo_sources/uri/1145.am/db/3469058/Napajen_Pharma?industry_id=32&geo_code=US"
         client = self.client
         resp = client.get(url)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(url)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert len(re.findall("/CORRECTION/ - NapaJen Pharma, Inc./", content)) == 2
         assert len(re.findall("NapaJen Pharma Closes \$12.4 Million Series C Financing", content)) == 1
@@ -1351,13 +1354,13 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path = '/tracked_org_ind_geo'
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.anon)
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "1145.am/db/2543227/Celgene" in content
         # assert "<b>All Industries</b> in <b>Australia</b>" not in content
@@ -1377,13 +1380,13 @@ class EndToEndTests20240602(TestCase):
         path = "/activities?max_date=2024-06-02"
         client = self.client
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.anon)
         resp = client.get(path)
-        assert resp.status_code == 403
+        assert resp.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user3)
         resp = client.get(path)
-        assert resp.status_code == 200
+        assert resp.status_code == status.HTTP_200_OK
         content = str(resp.content)
         assert "NapaJen Pharma" not in content
         client.force_login(self.user)

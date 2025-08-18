@@ -66,6 +66,11 @@ class IndustryClusterSerializer(HyperlinkedNeomodelSerializer):
 
 
 class RegionsDictSerializer(serializers.Serializer):
+    """
+        Regions are a hierarchy of geographical locations using the United Nations M49 standard (Region/Sub-Region/Intermediate Region)
+        The US is further broken down United States Census Bureau regions (e.g. East/West etc) and then into individual states
+        Certain other countries are also broken down into their states/provinces: AE, CA, CN, IN
+    """
     id = serializers.CharField(help_text="Region ID or code")
     parent = serializers.SerializerMethodField(help_text="Parent region URL")
     children = serializers.SerializerMethodField(help_text="List of child region URLs")
@@ -80,12 +85,17 @@ class RegionsDictSerializer(serializers.Serializer):
     def get_children(self, obj):
         request = self.context.get('request')
         return [
-            reverse('api-region-detail', kwargs={'pk': rid}, request=request)
+            reverse('v1:api-region-detail', kwargs={'pk': rid}, request=request)
             for rid in obj.get('children', [])
         ]
 
 
 class GeoNamesSerializer(serializers.Serializer):
+    """
+       Represents a GeoNames location. See https://www.geonames.org for more details. Each GeoNames location
+       will have a country code, and some may also have a state/province (admin1 code). GeoNames locations
+       are grouped within the Regions hierarchy
+    """
     geonames_id = serializers.IntegerField(source="geoNamesId", help_text="GeoNames numeric ID (see geonames.org)")
     uri = serializers.URLField(help_text="Unique URI within the 1145 namespace")
     name = serializers.SerializerMethodField(help_text="Name")
