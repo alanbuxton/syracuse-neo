@@ -268,9 +268,9 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': ('\n> *Company data emerges from the primordial data goo*\n\n'
                     'Nicely-structured news for companies (organizations) worldwide. '
                     "It's tuned specifically for company data and so:\n\n - offers a solution "
-                    'to the <a href="https://alanbuxton.wordpress.com/2023/01/02/revisiting-entity-extraction/">The Bloomberg Problem</a>\n'
+                    'to the Bloomberg Problem (see "https://alanbuxton.wordpress.com/2023/01/02/revisiting-entity-extraction/)\n'
                     " - doesn't suffer from the same sorts of hallucinations as pure GenAI tools.\n\n"
-                    'Log in for free to have a look around at <a href="https://syracuse.1145.am">syracuse.1145.am</a>\n\n'
+                    'Log in for free to have a look around at syracuse.1145.am\n\n'
                     'Quick start: Get an api key by POSTing to `/api/v1/register-and-get-key` (needs email to register) '
                     'then check out a GET to `/api/v1/activities/?org_name=apple`\n\n'
                     "Nerds may be interested in Syracuse's novel graph architecture. Instead of a company having a canonical record that keeps getting updated, company records are built from the ground up by combining related nodes. "

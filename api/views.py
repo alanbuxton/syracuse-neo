@@ -1,7 +1,7 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
-from topics.models import IndustryCluster, GeoNamesLocation
+from topics.models import IndustryCluster, GeoNamesLocation, Resource
 import api.serializers as serializers
 import logging 
 from topics.util import geo_to_country_admin1
@@ -24,6 +24,7 @@ from syracuse.date_util import min_and_max_date
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from neomodel import DoesNotExist
+from api.docstrings import activity_docstring_raw
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,8 @@ class NeomodelViewSet(GenericViewSet):
 
     node_class = None
     serializer_class = serializers.HyperlinkedNeomodelSerializer
+    lookup_field = "uri"
+    lookup_url_kwarg = "uri"
 
     def get_queryset(self):
         if self.node_class is None:
@@ -40,12 +43,14 @@ class NeomodelViewSet(GenericViewSet):
         return self.node_class.nodes.all()
 
     def get_object(self):
-        if self.node_class is None:
+        pk = self.kwargs.get('pk') or self.kwargs.get('uri')
+        if pk is None:
             raise Http404("Not found")
+        uri = pk.rstrip("/")
         try:
-            return self.node_class.nodes.get(uri=self.kwargs["pk"])
+            return Resource.nodes.get(uri=uri)
         except (Http404, DoesNotExist, ObjectDoesNotExist):
-            raise Http404(f"No object found for {self.kwargs['pk']}")
+            raise Http404(f"No object found for {uri}")
 
     def get_serializer_context(self):
         node_class_name = self.node_class.__name__.lower()
@@ -54,12 +59,7 @@ class NeomodelViewSet(GenericViewSet):
             "view_name": f"api-{node_class_name}-detail",
         }
 
-    @extend_schema(
-        parameters=[
-            OpenApiParameter("id", OpenApiTypes.URI, OpenApiParameter.PATH)
-        ]
-    )   
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, **kwargs):
         instance = self.get_object()      
         serializer = self.serializer_class(
             instance,
@@ -90,16 +90,41 @@ class IndustryClusterViewSet(NeomodelViewSet):
     node_class = IndustryCluster  
     serializer_class = serializers.IndustryClusterSerializer
     
+    lookup_field = "pk"
+    lookup_url_kwarg = None
+    
     def get_object(self):
         try:
             return self.node_class.nodes.get(topicId=self.kwargs["pk"])
         except (Http404, DoesNotExist, ObjectDoesNotExist):
             raise Http404(f"No IndustryCluster found for {self.kwargs['pk']} (must be numeric)")
+        
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='id',
+                description='Unique ID for this IndustryCluster - also referred to as topic_id',
+                type=OpenApiTypes.INT,
+                location=OpenApiParameter.PATH
+            ),
+        ]
+    )
+    def retrieve(self, request, **kwargs):
+        return super().retrieve(request, **kwargs)
 
 class RegionsViewSet(GenericViewSet):
+    """
+        Regions groups ISO-3166 country codes using the United Nations M49 standard (Region/Sub-Region/Intermediate Region).
+        The US is further broken down United States Census Bureau regions (e.g. East/West etc) and then into individual states.
+        Certain other countries are also broken down into their states/provinces: AE, CA, CN, IN. Individual GeoNames locations are
+        linked to a country and/or state/province.
+    """
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
     serializer_class = serializers.RegionsDictSerializer
+
+    lookup_field = "pk"
+    lookup_url_kwarg = None
 
     def get_queryset(self):
         return geo_parent_children().values()
@@ -117,7 +142,12 @@ class RegionsViewSet(GenericViewSet):
     
     @extend_schema(
         parameters=[
-            OpenApiParameter("id", OpenApiTypes.STR, OpenApiParameter.PATH)
+            OpenApiParameter(
+                name='id',
+                description='Unique ID for this Region (e.g. Americas, Northern America, US, New England, US-MA). Case matters.',
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.PATH
+            ),
         ]
     )      
     def retrieve(self, request, pk=None):
@@ -126,22 +156,49 @@ class RegionsViewSet(GenericViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class GeoNamesViewSet(NeomodelViewSet):
+    """
+       GeoNames Locations are from https://www.geonames.org. They are grouped within the Regions hierarchy and are linked by
+       ISO-3166 country code. For AE, CA, CN, IN, US country codes, GeoNames are also grouped by state/province, if available.
+       GeoNames uses a mix of FIPS and ISO codes for state/province, and those are stored in the admin1_code field. An admin1_code
+       of 00 means "not applicable".
+    """
+        
     node_class = GeoNamesLocation
     serializer_class = serializers.GeoNamesSerializer
+
+    lookup_field = "pk"
+    lookup_url_kwarg = None
 
     def get_object(self):
         pk = self.kwargs["pk"]
         try:
             pk = int(pk)
         except ValueError:
-            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID, e.g. 2523083 for Syracuse)")
+            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID, e.g. 5128581 for New York City)")
         
         try:
             return self.node_class.nodes.get(geoNamesId=pk)
         except (Http404, ObjectDoesNotExist, DoesNotExist):
-            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID), e.g. 2523083 for Syracuse)")
+            raise Http404(f"No GeoName found for {pk} (must be a numeric GeoNames ID), e.g. 5128581 for New York City)")
         
+    @extend_schema(    
+        parameters=[
+            OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)
+        ],
+        responses={
+            200:OpenApiResponse(
+            description='GeoNames entity'
+        )
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+    
 
+@extend_schema(
+        summary="Activities",
+        description=activity_docstring_raw
+)
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
@@ -205,7 +262,7 @@ class ActivitiesViewSet(NeomodelViewSet):
         parameters=[
             OpenApiParameter(
                 name='days_ago',
-                description='Show activities this many days old. Optional, but if provided must be one of: 7 (default), 30, 90.',
+                description='Show activities this many days old. Optional, but if provided must be one of: 7, 30, or 90 (default). Any other number will be treated as 90.',
                 required=False,
                 type=OpenApiTypes.INT,
                 location=OpenApiParameter.QUERY
@@ -225,8 +282,8 @@ class ActivitiesViewSet(NeomodelViewSet):
                 location=OpenApiParameter.QUERY
             ),
             OpenApiParameter(
-                name='location_id',
-                description=('List of location identifiers (e.g., "Southern Asia", "BT", "US-CA"). Accepts multiple values.'
+                name='region_id',
+                description=('List of region identifiers (e.g., "Southern Asia", "BT", "US-CA"). Accepts multiple values.'
                     ' They must each match an id from the [regions](#/regions/regions_list) endpoint.'            
                 ),
                 required=False,
@@ -236,9 +293,7 @@ class ActivitiesViewSet(NeomodelViewSet):
             ),
             OpenApiParameter(
                 name='industry_name',
-                description=('List of industry names to filter by. Accepts multiple values.'
-                    ' They must each match a topic_id from the [industry_clusters](#/industry_clusters/industry_clusters_list) endpoint.'             
-                ),
+                description='List of industry names to filter by. Accepts multiple values.',         
                 required=False,
                 type=OpenApiTypes.STR,
                 many=True,
@@ -246,7 +301,9 @@ class ActivitiesViewSet(NeomodelViewSet):
             ),
             OpenApiParameter(
                 name='industry_id',
-                description='List of industry IDs (topic IDs) to filter by. Accepts multiple values.',
+                description=('List of industry IDs (topic IDs) to filter by. Accepts multiple values.'
+                             ' They must each match a topic_id from the [industry_clusters](#/industry_clusters/industry_clusters_list) endpoint.'          
+                ),
                 required=False,
                 type=OpenApiTypes.INT,
                 many=True,
@@ -261,9 +318,16 @@ class ActivitiesViewSet(NeomodelViewSet):
         }
     )
     def list(self, request):
+        """
+            List recent relevant activities.
+
+            Must provide at least one of `org_name`, `org_uri`, `region_id`, `industry_name` or `industry_id`
+
+            By default shows activities over the last 90 days, but you can also request 7 or 30 days.
+        """
         activities = self.get_queryset()
         if activities is None:
-            msg = "Must include at least one of org_uri, org_name, location_id, industry_name, industry_id (location_id, industry_name and industry_id can be specified multiple times)"
+            msg = "Must include at least one of org_uri, org_name, region_id, industry_name, industry_id (location_id, industry_name and industry_id can be specified multiple times)"
             resp = Response({"message":msg},status=status.HTTP_400_BAD_REQUEST)
             return resp
 
@@ -282,6 +346,23 @@ class ActivitiesViewSet(NeomodelViewSet):
                 many=True,
             )
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @extend_schema(
+        parameters=[
+            OpenApiParameter("uri", OpenApiTypes.URI, OpenApiParameter.PATH)
+        ],   
+        responses={
+               200: OpenApiResponse(
+                response=serializers.ActivitySerializer,
+                description='Activity details'
+            )
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        """
+            Returns one Activity. Use URI as the primary key (e.g. https://syracuse.1145.am/api/v1/activities/https://1145.am/db/12345/activity_uri)
+        """
+        return super().retrieve(request, *args, **kwargs)
     
 
 class APIUsageViewSet(ReadOnlyModelViewSet):

@@ -20,5 +20,7 @@ class HyperlinkedRelationshipField(HyperlinkedRelatedField):
         return self.get_url(value, self.view_name, self.context["request"], self.format)
 
     def get_url(self, obj, view_name, request, format):
+        if obj is None:
+            return self.reverse(view_name, request=request, format=format)
         kwargs = {"pk": obj.pk}
         return self.reverse(view_name, kwargs=kwargs, request=request, format=format)

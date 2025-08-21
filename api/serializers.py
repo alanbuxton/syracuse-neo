@@ -5,6 +5,7 @@ from .fields import HyperlinkedRelationshipField
 import logging
 from topics.util import camel_case_to_snake_case
 from drf_spectacular.utils import extend_schema_field
+from api.docstrings import activity_docstring_markdown
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ class HyperlinkedNeomodelSerializer(serializers.Serializer):
                 assert len(related_nodes) <= 1
                 related_nodes = related_nodes[0] if related_nodes else None
                 many = False
-
+                
             try:
                 field = HyperlinkedRelationshipField(view_name=view_name, many=many)
                 field.bind(field_name=rel_name, parent=self)
@@ -57,6 +58,17 @@ class HyperlinkedNeomodelSerializer(serializers.Serializer):
 
 
 class IndustryClusterSerializer(HyperlinkedNeomodelSerializer):
+    # Add explicit fields so drf-spectacular can see them
+    uri = serializers.URLField(read_only=True, help_text = "Unique URI for this industry cluster within the 1145 namespace")
+    representation = serializers.ListField(child=serializers.CharField(), help_text="List of representative words")
+    representative_doc = serializers.ListField(child=serializers.CharField(), help_text="List of representative docs")
+    topic_id = serializers.IntegerField(read_only=True, help_text="Unique ID for this industry, also referred to as industry_id elsewhere")
+    child_left = serializers.URLField(read_only=True, allow_null=True, help_text="URI for child industry within 1145 namespace (if available)")
+    child_right = serializers.URLField(read_only=True, allow_null=True, help_text="URI for child industry within 1145 namespace (if available)")
+    parent_left = serializers.URLField(read_only=True, allow_null=True, help_text="URI for child industry within 1145 namespace (if available)")
+    parent_right = serializers.URLField(read_only=True, allow_null=True, help_text="URI for child industry within 1145 namespace (if available)")
+    
+
     single_rels = ["parentLeft", "parentRight", "childLeft", "childRight"]
     attribs_to_ignore = [
         "foundName", "name", "internalDocId", "internalId",
@@ -66,11 +78,6 @@ class IndustryClusterSerializer(HyperlinkedNeomodelSerializer):
 
 
 class RegionsDictSerializer(serializers.Serializer):
-    """
-        Regions are a hierarchy of geographical locations using the United Nations M49 standard (Region/Sub-Region/Intermediate Region)
-        The US is further broken down United States Census Bureau regions (e.g. East/West etc) and then into individual states
-        Certain other countries are also broken down into their states/provinces: AE, CA, CN, IN
-    """
     id = serializers.CharField(help_text="Region ID or code")
     parent = serializers.SerializerMethodField(help_text="Parent region URL")
     children = serializers.SerializerMethodField(help_text="List of child region URLs")
@@ -91,17 +98,12 @@ class RegionsDictSerializer(serializers.Serializer):
 
 
 class GeoNamesSerializer(serializers.Serializer):
-    """
-       Represents a GeoNames location. See https://www.geonames.org for more details. Each GeoNames location
-       will have a country code, and some may also have a state/province (admin1 code). GeoNames locations
-       are grouped within the Regions hierarchy
-    """
     geonames_id = serializers.IntegerField(source="geoNamesId", help_text="GeoNames numeric ID (see geonames.org)")
     uri = serializers.URLField(help_text="Unique URI within the 1145 namespace")
     name = serializers.SerializerMethodField(help_text="Name")
     geonames_url = serializers.URLField(source="geoNamesURL", help_text="Original GeoNames URL")
     country_code = serializers.CharField(source="countryCode", help_text="ISO country code")
-    admin1_code = serializers.SerializerMethodField(help_text="State or Province. This is the GeoNames admin1_code which is a combination of ISO and FIPS codes. It is not always available")
+    admin1_code = serializers.SerializerMethodField(help_text="State or Province. This is the GeoNames admin1_code which is a mix of ISO and FIPS codes. It is not always available")
     region = serializers.SerializerMethodField(help_text="URL for this region entity")
 
     @extend_schema_field(serializers.CharField())
@@ -168,24 +170,7 @@ class ActorRolesSerializer(serializers.Serializer):
     vendor = ActivityActorSerializer(many=True, required=False, help_text="Seller of all or part of another organization. Used in **CorporateFinanceActivity**")
 
 class ActivitySerializer(serializers.Serializer):
-    activity_class = serializers.CharField(
-        help_text=("Activity classification label. One of:\n"
-                    " - **CorporateFinanceActivity**: M&A, investments, stock purchases\n"
-                    " - **PartnershipActivity**: Partnership between 2 or more organizations. Often, companies describe their customers as their partners. This type of activity covers both genuine partnerships and customer/supplier relationships"
-                    " - **RoleActivity**: Key change in senior personnel, e.g. replacing CEO\n"
-                    " - **LocationActivity**: Opening or closing a new location (e.g. setting up in EMEA or shutting down a factory in a particular town)\n"
-                    " - **ProductActivity**: New product launches\n"
-                    " - **AnalystRatingActivity**: Updates from industry analysts\n"
-                    " - **EquityActionsActivity**: Stock repurchases, dividends etc"
-                    " - **FinancialReportingActivity**: Notice that an organization is going to announce its financials\n"
-                    " - **FinancialsActivity**: Information about company financials, e.g. revenue or EBITDA\n"
-                    " - **IncidentActivity**: Adverse incidents e.g. safety\n"
-                    " - **MarketingActivity**: e.g. launching a new advertising campaign\n"
-                    " - **OperationsActivity**: Company operations news, e.g. we are investing in a new product, or we have just completed an security audit\n"
-                    " - **RecognitionActivity**: e.g. we are delighted to announce that we won Agency of the Year\n"
-                    " - **RegulatoryActivity**: Legal or regulatory activity affecting this organizationg e.g. permit for drilling, or regulatory filing \n" 
-        )
-    )
+    activity_class = serializers.CharField(help_text=activity_docstring_markdown)
     headline = serializers.CharField(help_text="Source document headline")
     date_published = serializers.DateTimeField(help_text="Date of publication")
     source_organization = serializers.CharField(help_text="Organization that produced or published the source document (e.g. news provider, analyst firm)")
