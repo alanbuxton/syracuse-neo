@@ -38,8 +38,9 @@ def get_versionable_cache(cache_key, version=None):
     return cache.get(key)
 
 def cache_friendly(key):
-    no_punct = clean_punct(key,"_")
-    cleaned = re.sub(r"_{2,}","_",no_punct)
+    # no_punct = clean_punct(key,"_")
+    # cleaned = re.sub(r"_{2,}","_",no_punct)
+    cleaned = key + ""
     if len(cleaned) > 230:
         cleaned = cleaned[:180] + str(cacheable_hash(cleaned[180:]))
     return cleaned

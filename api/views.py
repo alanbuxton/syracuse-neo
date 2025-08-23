@@ -25,6 +25,7 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from neomodel import DoesNotExist
 from api.docstrings import activity_docstring_raw
+from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
 logger = logging.getLogger(__name__)
 
@@ -216,6 +217,11 @@ class ActivitiesViewSet(NeomodelViewSet):
 
         if org_uri is None and org_name is None and len(locations) == 0 and len(industry_search_str) == 0 and industry_ids == [None]:
             return None 
+        
+        cache_key = f"{min_date}_{max_date}_{org_uri}_{org_name}_{types_to_keep}_{locations}_{industry_search_str}_{industry_ids}"
+        res = get_versionable_cache(cache_key)
+        if res:
+            return res
 
         if org_uri is not None:
             logger.debug(f"Uri: {org_uri}")
@@ -250,6 +256,7 @@ class ActivitiesViewSet(NeomodelViewSet):
         if len(types_to_keep) > 0:
             activities = filter_activity_types(activities, types_to_keep)
         acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
+        set_versionable_cache(cache_key, acts, timeout=3600)
         return acts
     
     def get_serializer_context(self):
@@ -330,7 +337,6 @@ class ActivitiesViewSet(NeomodelViewSet):
             msg = "Must include at least one of org_uri, org_name, region_id, industry_name, industry_id (location_id, industry_name and industry_id can be specified multiple times)"
             resp = Response({"message":msg},status=status.HTTP_400_BAD_REQUEST)
             return resp
-
         page = self.paginate_queryset(activities)
         if page is not None:
             serializer = serializers.ActivitySerializer(
@@ -338,7 +344,8 @@ class ActivitiesViewSet(NeomodelViewSet):
                 context=self.get_serializer_context(),
                 many=True,
             )
-            return self.get_paginated_response(serializer.data)
+            resp = self.get_paginated_response(serializer.data)
+            return resp
         
         serializer = serializers.ActivitySerializer(
                 activities,
