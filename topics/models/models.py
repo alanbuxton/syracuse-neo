@@ -4,7 +4,7 @@ from neomodel import (StructuredNode, StringProperty,
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
 from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
-                               GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION,
+                               GEO_LOCATION_MIN_WEIGHT_PROPORTION,
                               )
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One, ZeroOrOne
@@ -13,6 +13,7 @@ import cleanco
 from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
+from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in_high_geo_names_locations_for_org
 
 import logging
 logger = logging.getLogger(__name__)
@@ -865,34 +866,12 @@ class Organization(Resource):
         return vals
 
     @property
-    def basedInHighGeoNamesLocation(self,geo_location_min_weight=GEO_LOCATION_MIN_WEIGHT_PROPORTION):
-        query = f"""MATCH (o: Resource&Organization {{uri:'{self.uri}'}})-[b:basedInHighGeoNamesLocation]->(l:Resource&GeoNamesLocation)
-                    WITH o, b, l
-                    MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(l2:Resource&GeoNamesLocation)
-                    WITH b, l, SUM(rAll.weight) as total_weight
-                    WHERE b.weight >= {geo_location_min_weight} * total_weight
-                    AND b.weight > 1
-                    RETURN l"""
-        res, _ = db.cypher_query(query,resolve_objects=True)
-        vals = []
-        for x in res:
-            vals.extend(x)
-        return vals
+    def basedInHighGeoNamesLocation(self):
+        return based_in_high_geo_names_locations_for_org(self.uri)
 
     @property
-    def industryClusterPrimary(self,industry_cluster_min_weight=INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION):
-        query = f"""MATCH (o: Resource&Organization {{uri:'{self.uri}'}})-[ic:industryClusterPrimary]->(i:Resource&IndustryCluster)
-                    WITH o, ic, i
-                    MATCH (o)-[rAll:industryClusterPrimary]->(i2:Resource&IndustryCluster)
-                    WITH ic, i, SUM(rAll.weight) as total_weight
-                    WHERE ic.weight >= {industry_cluster_min_weight} * total_weight
-                    AND ic.weight > 1
-                    return i"""
-        res, _ = db.cypher_query(query,resolve_objects=True)
-        vals = []
-        for x in res:
-            vals.extend(x)
-        return vals    
+    def industryClusterPrimary(self):
+        return industries_for_org(self.uri)
 
     @property
     def industry_clusters(self):
@@ -931,29 +910,21 @@ class Organization(Resource):
         if res is not None:
             return res
         inds = self.industryClusterPrimary
-        for x in self.sameAsHigh:
-            if hasattr(x, "industryClusterPrimary"):
-                inds.extend(x.industryClusterPrimary)
-        c = Counter(inds)
-        if c == []:
-            val = None
-        else:
-            by_popularity = c.most_common()
-            val = [x[0] for x in by_popularity]
-        set_versionable_cache(cache_key,val)
-        return val
+        set_versionable_cache(cache_key,inds)
+        return inds
 
     @property
     def top_industry(self):
         inds = self.industry_list
-        if inds is None:
+        if inds:
+            return inds[0]
+        else:
             return None
-        return inds[0]
 
     @property
     def industry_as_string(self):
         inds = self.industry_list
-        if inds is None or len(inds) == 0:
+        if not inds:
             return None
         sorted_inds = sorted([x.longest_representative_doc for x in inds])
         top_inds = sorted_inds[:2]
@@ -987,10 +958,6 @@ class Organization(Resource):
     @staticmethod
     def by_uris(uris):
         return Organization.nodes.filter(uri__in=uris)
-
-    @staticmethod
-    def get_random():
-        return Organization.nodes.order_by('?')[0]
 
     @property
     def shortest_name_length(self):

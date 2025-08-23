@@ -345,7 +345,8 @@ class ActivitiesViewSet(NeomodelViewSet):
                 context=self.get_serializer_context(),
                 many=True,
             )
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        resp = Response(serializer.data, status=status.HTTP_200_OK)
+        return resp
     
     @extend_schema(
         parameters=[

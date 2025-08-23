@@ -83,7 +83,8 @@ class Index(APIView):
         last_updated = DataImport.latest_import_ts()
         industry_search = IndustrySerializer()
 
-        resp = Response({"organizations":org_list.data,
+        org_list_data = org_list.data 
+        resp = Response({"organizations":org_list_data,
                         "search_serializer": org_search,
                         "search_term": search_term,
                         "num_hits": num_hits,

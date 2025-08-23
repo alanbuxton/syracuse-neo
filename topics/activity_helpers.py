@@ -38,7 +38,8 @@ def get_activities_by_industry_country_admin1_and_date_range(industry, country_c
     if isinstance(industry, IndustryCluster):
         industry = industry.topicId
     activity_article_uris = get_org_activities(min_date,max_date,industry,country_code, admin1_code, cache_version)
-    return activity_articles_to_api_results(activity_article_uris,limit)
+    results = activity_articles_to_api_results(activity_article_uris,limit)
+    return results
 
 def activities_by_industry(industry, min_date, max_date, cache_version=None, limit=None):
     if isinstance(industry, IndustryCluster):

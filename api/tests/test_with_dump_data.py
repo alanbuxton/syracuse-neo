@@ -28,7 +28,8 @@ from topics.serializers import (FamilyTreeSerializer,
 )
 from topics.industry_geo.orgs_by_industry_geo import combined_industry_geo_results
 from topics.cache_helpers import refresh_geo_data
-from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, geo_codes_for_region, geo_parent_children
+from topics.industry_geo import geo_codes_for_region, geo_parent_children
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
 from dump.embeddings.embedding_utils import apply_latest_org_embeddings

@@ -1,4 +1,4 @@
-from topics.models import IndustryCluster, Organization
+from topics.models import IndustryCluster, Organization, Resource
 from topics.industry_geo.geoname_mappings import (COUNTRIES_WITH_STATE_PROVINCE,
     admin1s_for_country)
 from topics.industry_geo.region_hierarchies import (GLOBAL_REGION_TO_COUNTRY, 
@@ -10,20 +10,40 @@ from collections import defaultdict, OrderedDict
 from .hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from typing import List
 from syracuse.date_util import date_minus, min_and_max_date
-from topics.util import ALL_ACTIVITY_LIST
-from syracuse.settings import GEO_LOCATION_MIN_WEIGHT_PROPORTION, INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION
-from topics.neo4j_utils import date_to_cypher_friendly, neo4j_date_converter
+from topics.neo4j_utils import neo4j_date_converter
 from topics.industry_geo.geoname_mappings import COUNTRIES_WITH_STATE_PROVINCE, admin1s_for_country
 from topics.industry_geo.region_hierarchies import COUNTRY_TO_GLOBAL_REGION
 import logging
 from datetime import date
 from syracuse.cache_util import set_versionable_cache, get_versionable_cache
+from topics.industry_geo.industry_geo_cypher import build_and_run_query
+from topics.organization_search_helpers import remove_same_as_name_onlies
+from topics.industry_geo import geo_to_country_admin1
 
 logger = logging.getLogger(__name__)
 
 
 def cached_activity_stats_last_updated_date():
     return get_versionable_cache("activity_stats_last_updated")
+
+
+def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,return_orgs_only=False,
+                                combine_same_as_name_only=True):
+    if isinstance(industry_topic_id, IndustryCluster):
+        industry_topic_id = industry_topic_id.topicId
+    if ( industry_topic_id is None or industry_topic_id == '') and ( geo_code is None or geo_code == ''):
+        logger.warning(f"Called org_uris_by_industry_id_and_or_geo_code without either one of industry_topic_id or geo_code")
+        return []
+    logger.debug(f"org_uris_by_industry_id_and_or_geo_code Ind: {industry_topic_id} Geo: {geo_code} Orgs only: {return_orgs_only} Combine sano: {combine_same_as_name_only}")
+    country_code, admin1_code = geo_to_country_admin1(geo_code)
+    orgs_with_rel_counts = org_uris_by_industry_id_country_admin1(industry_topic_id,country_code,admin1_code=admin1_code)
+    if combine_same_as_name_only is True:
+        orgs_with_rel_counts = remove_same_as_name_onlies([(Resource.get_by_uri(x),y) for x,y,_,_ in orgs_with_rel_counts])
+        orgs_with_rel_counts = [(x.uri, y) for x, y in orgs_with_rel_counts]
+    if return_orgs_only is True:
+        return [x[0] for x in orgs_with_rel_counts]
+    else:
+        return orgs_with_rel_counts
 
 def get_org_activities_cache_key(min_date,max_date,industry_id,country,admin1):
     name = f"orgs_acts_{min_date}_{max_date}_{industry_id}_{country}_{admin1}"
@@ -133,90 +153,6 @@ def set_not_found_industry_geo_to_empty_list(min_date, max_date, cache_version):
                     if get_versionable_cache(cache_key,cache_version) is None:
                        set_versionable_cache(cache_key, [], cache_version)
 
-def build_and_run_query(min_date, max_date, include_industry=True, include_geo=True, include_admin1=False):
-    query = build_query(min_date, max_date, include_industry, include_geo, include_admin1)
-    logger.debug(query)
-    vals, _ = db.cypher_query(query)
-    return vals
-
-def build_query(min_date, max_date, include_industry, include_geo, include_admin1):
-    if include_industry is False and include_geo is False:
-        raise ValueError(f"Must use industry or geo")
-    if include_geo is False and include_admin1 is True:
-        raise ValueError("If include_admin1 is set then also need to have include_geo set")
-    industry_section = build_industry_section() if include_industry else ""
-    geo_section = build_geo_section(include_admin1) if include_geo else ""
-    query = f"""
-        MATCH (o:Resource&Organization)
-        WHERE o.internalMergedSameAsHighToUri IS NULL
-        {industry_section}
-        {geo_section}
-        {build_article_section(min_date,max_date)}
-        {build_return_stmt(include_industry, include_geo, include_admin1)}
-    """
-    return query
-
-def build_return_stmt(include_industry, include_geo, include_admin1):
-    to_return = []
-    if include_industry:
-        to_return.append("ic.topicId")
-    if include_geo:
-        to_return.append("loc.countryCode")
-    if include_admin1:
-        to_return.append("loc.admin1Code")
-    assert len(to_return) > 0, f"{to_return} has to have at least one item to return"
-    stmt = f"RETURN {', '.join(to_return)} , collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId, articleData]))"
-    return stmt
-
-
-def build_industry_section():
-    return f"""CALL {{
-        WITH o
-        MATCH (o)-[r:industryClusterPrimary]->(ic:IndustryCluster)
-        WITH o, ic, r.weight AS weight
-        MATCH (o)-[rAll:industryClusterPrimary]->(:IndustryCluster)
-        WITH o, ic, weight, SUM(rAll.weight) AS totalWeight
-        WHERE weight >= {INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION} * totalWeight
-        AND weight > 1
-        RETURN ic
-    }}
-    """
-
-def build_geo_section(include_admin1=False):
-    admin1_section = build_admin1_section() if include_admin1 else ""
-    return f"""CALL {{
-        WITH o
-        MATCH (o)-[r:basedInHighGeoNamesLocation]->(loc:GeoNamesLocation)
-        {admin1_section}
-        WITH o, loc, r.weight AS weight
-        MATCH (o)-[rAll:basedInHighGeoNamesLocation]->(:GeoNamesLocation)
-        WITH o, loc, weight, SUM(rAll.weight) AS totalWeight
-        WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
-        AND weight > 1
-        RETURN loc
-    }}
-    """
-        
-def build_admin1_section():
-    return f"""WHERE loc.countryCode in {COUNTRIES_WITH_STATE_PROVINCE}
-               AND loc.admin1Code <> '00'"""
-
-def build_article_section(min_date, max_date):
-    '''
-        Any activities related to this org where the org wasn't a participant. E.g. legal firms will often be participants
-        but the industry of the buyer/seller is something completely different.
-    '''
-    return f"""
-    CALL {{
-    WITH o
-    OPTIONAL MATCH (act:{ALL_ACTIVITY_LIST})-[rel]-(o)-[:documentSource]->(art: Article)<-[:documentSource]-(act)
-    WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-    AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
-    AND TYPE(rel) <> 'participant'
-    AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-    RETURN collect([act.uri, art.uri, art.datePublished]) AS articleData
-    }}
-    """
 
 def orgs_by_industry_text_and_geo(industry_text, country_code, admin1_code=None):
     cache_key = f"orgs_ind_text_{country_code}"

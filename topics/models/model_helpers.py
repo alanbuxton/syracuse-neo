@@ -1,6 +1,6 @@
 from collections import defaultdict
 from topics.models import Organization
-from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 
 def similar_organizations(organization,limit=0.94,uris_only=False):
         # by industry cluster

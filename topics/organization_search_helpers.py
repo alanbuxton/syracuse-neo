@@ -28,6 +28,10 @@ def top_1_strict_search(name: str, results: List) -> List[Tuple[Organization, in
     return []
     
 def random_org_list(limit=10):
+    cache_key = "random_org_list"
+    res = get_versionable_cache(cache_key)
+    if res is not None:
+        return res
     query = f"""MATCH (n: Resource&Organization)
             WHERE n.internalMergedSameAsHighToUri IS NULL
             AND SIZE(LABELS(n)) = 2
@@ -38,7 +42,9 @@ def random_org_list(limit=10):
             ORDER BY relationship_count DESC"""
     vals, _ = db.cypher_query(query, resolve_objects=True)
     cleaned = remove_same_as_name_onlies(vals)
-    return cleaned[:limit]
+    cleaned = cleaned[:limit]
+    set_versionable_cache(cache_key, cleaned)
+    return cleaned
     
 def get_same_as_name_onlies(org, version=None):
     try:

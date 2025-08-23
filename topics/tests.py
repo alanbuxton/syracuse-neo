@@ -18,7 +18,8 @@ from topics.serializers import only_valid_relationships, FamilyTreeSerializer
 from topics.industry_geo.orgs_by_industry_geo import build_region_hierarchy, prepare_headers
 from topics.industry_geo.hierarchy_utils import filtered_hierarchy, hierarchy_widths
 from topics.cache_helpers import refresh_geo_data
-from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, geo_codes_for_region, geo_parent_children
+from topics.industry_geo import geo_codes_for_region, geo_parent_children
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for, get_source_orgs_for_ind_cluster_or_geo_code
 import pickle
 from topics.organization_search_helpers import search_organizations_by_name
@@ -26,6 +27,7 @@ from syracuse.cache_util import nuke_cache, get_active_version, count_keys, get_
 from syracuse.date_util import min_and_max_date
 import copy
 from rest_framework import status
+from topics.industry_geo.industry_geo_cypher import INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION
 
 '''
     Care these tests will delete neodb data

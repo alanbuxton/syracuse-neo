@@ -13,6 +13,8 @@ def min_and_max_date(get_params, days_diff=7, cache_version=None):
         max_date = max_date.replace(tzinfo=timezone.utc)
     if max_date is None:
         max_date = get_versionable_cache("activity_stats_last_updated", version=cache_version)
+    if max_date is None:
+        raise ValueError(f"max_date is still None from get_params {get_params}")
     if max_date is not None and min_date is None:
         min_date = max_date - timedelta(days=days_diff)
     min_date = start_of_day(min_date)

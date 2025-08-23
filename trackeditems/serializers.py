@@ -2,7 +2,8 @@ from rest_framework import serializers
 from topics.models import Organization, IndustryCluster
 from .models import TrackedItem
 import pycountry
-from topics.industry_geo import country_admin1_full_name, org_uris_by_industry_id_and_or_geo_code
+from topics.industry_geo import country_admin1_full_name
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 from topics.util import elements_from_uri
 
 class RecentsByGeoSerializer(serializers.Serializer):

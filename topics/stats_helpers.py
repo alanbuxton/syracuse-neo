@@ -3,7 +3,8 @@ from neomodel import db
 from datetime import datetime, timezone
 from topics.models import Article, IndustryCluster
 from topics.activity_helpers import activities_by_source
-from topics.industry_geo import COUNTRY_CODE_TO_NAME, org_uris_by_industry_id_country_admin1
+from topics.industry_geo import COUNTRY_CODE_TO_NAME
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_country_admin1
 from topics.industry_geo.orgs_by_industry_geo import get_org_activity_counts, cached_activity_stats_last_updated_date
 from syracuse.date_util import date_minus, min_and_max_date
 

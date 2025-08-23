@@ -11,7 +11,8 @@ from typing import Union, List
 from datetime import date, timedelta
 from django.core.cache import cache
 from topics.industry_geo.org_source_attribution import get_source_orgs_articles_for
-from topics.industry_geo import org_uris_by_industry_id_and_or_geo_code, country_admin1_full_name 
+from topics.industry_geo import country_admin1_full_name 
+from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 from topics.util import elements_from_uri
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 
