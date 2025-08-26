@@ -104,7 +104,7 @@ class GeoNamesSerializer(serializers.Serializer):
     geonames_url = serializers.URLField(source="geoNamesURL", help_text="Original GeoNames URL")
     country_code = serializers.CharField(source="countryCode", help_text="ISO country code")
     admin1_code = serializers.SerializerMethodField(help_text="State or Province. This is the GeoNames admin1_code which is a mix of ISO and FIPS codes. It is not always available")
-    region = serializers.SerializerMethodField(help_text="URL for this region entity")
+    region_api_url = serializers.SerializerMethodField(help_text="Link to Region in Syracuse API")
 
     @extend_schema_field(serializers.CharField())
     def get_name(self, obj):
@@ -116,7 +116,7 @@ class GeoNamesSerializer(serializers.Serializer):
         return None if obj.admin1Code == '00' else obj.admin1Code
 
     @extend_schema_field(serializers.URLField())
-    def get_region(self, obj):
+    def get_region_api_url(self, obj):
         admin1 = self.get_admin1_code(obj)
         region_code = obj.countryCode
         if admin1:
@@ -134,10 +134,10 @@ class ShortIndustryClusterSerializer(serializers.Serializer):
         source="representativeDoc",
         help_text="List of representative document URIs or IDs"
     )
-    details = serializers.SerializerMethodField(help_text="API link to full cluster")
+    industry_api_url = serializers.SerializerMethodField(help_text="Link to Industry Cluster in Syracuse API")
 
     @extend_schema_field(serializers.URLField())
-    def get_details(self, obj):
+    def get_industry_api_url(self, obj):
         request = self.context.get('request')
         return reverse('api-industrycluster-detail', kwargs={'pk': obj.pk}, request=request)
 
