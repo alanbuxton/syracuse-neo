@@ -122,6 +122,8 @@ class GeoNamesSerializer(serializers.Serializer):
         if admin1:
             region_code = f"{region_code}-{admin1}"
         request = self.context.get('request')
+        if region_code is None or region_code.strip() == '':
+            return None
         return reverse('api-region-detail', kwargs={'pk': region_code}, request=request)
 
 
