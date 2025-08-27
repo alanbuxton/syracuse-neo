@@ -233,7 +233,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20,
     'DEFAULT_VERSION': 'v1',  
     'DEFAULT_THROTTLE_CLASSES': ['api.throttling.ScopedTieredThrottle'],
-    'DEFAULT_THROTTLE_RATES': {'default_scope': '1/month' },
+    'DEFAULT_THROTTLE_RATES': {'default_api_scope': '1/month' },
     'EXCEPTION_HANDLER': 'syracuse.authentication.custom_exception_handler',
 }
 

@@ -5,23 +5,27 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 class ScopedTieredThrottle(UserRateThrottle):
-    scope = 'default_scope'
+    scope = 'default_api_scope'
 
     def allow_request(self, request, view):
         if "/api/v" not in request.path:
             return True
-        if not request.user.is_authenticated:
+        
+        user = request.user
+
+        if not user.is_authenticated:
             self.rate = "1/month"
         else:
-            user = request.user
-            if EmailAddress.objects.filter(user=user, verified=True).exists():
+            api_limit = user.userprofile.monthly_api_limit
+            if api_limit is not None:
+                self.rate = f"{api_limit}/month"
+            elif EmailAddress.objects.filter(user=user, verified=True).exists():
                 self.rate = f"{settings.THROTTLES['verified_user']}/month"
             else:
                 self.rate = f"{settings.THROTTLES['unverified_user']}/month"
         self.num_requests, self.duration = self.parse_rate(self.rate)
-        logger.debug(f"[Throttle] Authenticated: {request.user.is_authenticated}")
-        logger.debug(f"[Throttle] User: {request.user}")
-        logger.debug(f"[Throttle] View: {view.__module__}")
+        logger.debug(f"[Throttle] Authenticated: {user.is_authenticated}")
+        logger.debug(f"[Throttle] User: {user}")
         logger.debug(f"[Throttle] {self.num_requests} {self.duration}")
         logger.debug(f"[Throttle] {self.get_cache_key(request, view)}")
         return super().allow_request(request, view)
@@ -57,4 +61,3 @@ class ScopedTieredThrottle(UserRateThrottle):
             raise ValueError(f"Invalid throttle period: {period}")
 
         return num_requests, duration
-

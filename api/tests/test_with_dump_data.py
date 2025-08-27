@@ -525,6 +525,7 @@ class EndToEndTests20240602(TestCase):
     def test_search_by_industry_and_geo(self):
         selected_geo_name = "United Kingdom of Great Britain and Northern Ireland"
         industry_name = "Biopharmaceutical And Biotech Industry"
+        assert len(IndustryCluster.nodes) > 0
         selected_geo = GeoSerializer(data={"country_or_region":selected_geo_name}).get_country_or_region_id()
         industry = IndustrySerializer(data={"industry":industry_name}).get_industry_id()
         assert industry is not None
