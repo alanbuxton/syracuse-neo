@@ -27,7 +27,7 @@ from syracuse.cache_util import nuke_cache, get_active_version, count_keys, get_
 from syracuse.date_util import min_and_max_date
 import copy
 from rest_framework import status
-from topics.industry_geo.industry_geo_cypher import INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION
+from topics.industry_geo.industry_geo_cypher import INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION, GEO_LOCATION_MIN_WEIGHT_PROPORTION
 
 '''
     Care these tests will delete neodb data

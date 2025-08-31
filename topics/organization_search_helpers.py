@@ -5,6 +5,7 @@ import logging
 from collections import defaultdict
 from topics.util import clean_punct, standardize_name
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
+from topics.services.typesense_service import TypesenseService
 
 logger = logging.getLogger(__name__)
 
@@ -123,6 +124,17 @@ def search_by_name(name) -> list:
         ORDER BY relationship_count DESCENDING;'''
     vals, _ = db.cypher_query(query,resolve_objects=True)
     return vals # List of items and number of relationships
+
+def search_by_name_typesense(name) -> list:
+    ts = TypesenseService()
+    ts_vals = ts.search(name,collection_name=Organization.typesense_collection) or []
+    ids = [x['document']['uri'] for x in ts_vals]
+    query = f'''MATCH (n: Resource) WHERE n.uri IN {ids}
+                AND n.internalMergedSameAsHighToUri IS NULL
+                RETURN n, apoc.node.degree(n) as relationship_count
+                ORDER BY relationship_count DESCENDING;'''
+    vals, _ = db.cypher_query(query, resolve_objects=True)
+    return vals
 
 def remove_same_as_name_onlies(reference_org_list):
     '''

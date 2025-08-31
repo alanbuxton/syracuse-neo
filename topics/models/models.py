@@ -3,19 +3,19 @@ from neomodel import (StructuredNode, StringProperty,
     IntegerProperty, StructuredRel)
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
-from syracuse.settings import (NEOMODEL_NEO4J_BOLT_URL,
-                               GEO_LOCATION_MIN_WEIGHT_PROPORTION,
-                              )
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One, ZeroOrOne
 from typing import List
 import cleanco
+from django.conf import settings
 from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in_high_geo_names_locations_for_org
-
+import typesense
 import logging
+from integration.vector_search_utils import create_embeddings_for_strings, do_vector_search_typesense
+from typing import Union
 logger = logging.getLogger(__name__)
 
 def uri_from_related(rel):
@@ -228,7 +228,7 @@ class Resource(StructuredNode):
     def ensure_connection(self):
         if self.element_id_property is not None and db.database_version is None:
             # Sometimes seeing "_new_traversal() attempted on unsaved node" even though node is saved
-            db.set_connection(NEOMODEL_NEO4J_BOLT_URL)
+            db.set_connection(settings.NEOMODEL_NEO4J_BOLT_URL)
 
     @property
     def best_name(self):
@@ -401,6 +401,36 @@ class Resource(StructuredNode):
             raise ValueError(f"Merging but have not selected a valid field to update {field_to_update}")
         source_node.save()
         target_node.save()
+
+    def to_typesense_doc(self) -> Union[list,dict]:
+        return {}
+    
+    typesense_collection = ""
+    
+    def index_in_typesense(self):
+        client = typesense.Client(settings.TYPESENSE_CONFIG)
+        documents = self.to_typesense_doc()
+        try:
+            if isinstance(documents, dict):
+                # Single document upsert
+                return client.collections[self.typesense_collection].documents.upsert(documents)
+            elif isinstance(documents, list):
+                # Bulk upsert
+                return client.collections[self.typesense_collection].documents.import_(
+                    documents,
+                    {"action": "upsert"}
+                )
+            else:
+                raise ValueError("to_typesense_doc() must return a dict or list of dicts")
+        except Exception as e:
+            logger.error(f"Error indexing into Typesense: {e}")
+            return None
+
+    def save(self):
+        super().save()
+        if self.typesense_collection:
+            self.index_in_typesense()
+        return self
 
 
 class Article(Resource):
@@ -680,6 +710,65 @@ class IndustryCluster(Resource):
         res = do_vector_search(name, query)
         flattened = [x[0] for x in res]
         return flattened[:limit]
+    
+    @staticmethod
+    def by_embeddings_typesense(name, limit=10):
+        hits = do_vector_search_typesense(name, IndustryCluster.typesense_collection, limit=limit)
+        # returned_vals may have multiple matches per industry - if so then the entry with most matches wins
+        topic_ids = [x['document']['topic_id'] for x in hits]
+        c = Counter(topic_ids).most_common()
+        ordered_topic_ids = [x[0] for x in c]
+        query = f"""MATCH (n: Resource&IndustryCluster) WHERE n.topicId IN {ordered_topic_ids}
+                    RETURN n
+                    ORDER BY apoc.coll.indexOf({ordered_topic_ids}, n.topicId)"""
+        vals, _ = db.cypher_query(query, resolve_objects=True)
+        flattened = [x[0] for x in vals]
+        return flattened
+    
+    def to_typesense_doc(self):
+        docs = []
+
+        # Representative Docs
+        rep_docs = self.representativeDoc or []
+        rep_embeddings = create_embeddings_for_strings(rep_docs)
+        for idx, (text, embedding) in enumerate(zip(rep_docs, rep_embeddings)):
+            docs.append({
+                "id": f"{self.internalId}_rep_{idx}",   # unique per embedding
+                "topic_id": self.topicId,
+                "uri": self.uri,
+                "source_type": "representative_doc",
+                "text": text,
+                "embedding": embedding,
+            })
+
+        # Representations
+        reps = self.representation or []
+        rep_embeddings = create_embeddings_for_strings(reps)
+        for idx, (text, embedding) in enumerate(zip(reps, rep_embeddings)):
+            docs.append({
+                "id": f"{self.internalId}_repr_{idx}",
+                "topic_id": self.topicId,
+                "uri": self.uri,
+                "source_type": "representation",
+                "text": text,
+                "embedding": embedding,
+            })
+
+        return docs
+
+    typesense_collection = "industry_clusters" 
+    
+    @classmethod
+    def typesense_schema(cls):
+        schema = {
+            'name': cls.typesense_collection,
+            'fields': [
+                {'name': 'topic_id', 'type': 'int32' },
+                {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
+            ],
+            'default_sorting_field': 'topic_id',
+        }
+        return schema
 
 
 class ActivityMixin:
@@ -1026,7 +1115,31 @@ class Organization(Resource):
         res = [tuple(row) for row in vals]
         set_versionable_cache(cache_key, res)
         return list(res)
+    
+    def to_typesense_doc(self):
+        document = {
+            'id': str(self.internalId),
+            'internal_doc_id': self.internalDocId,
+            'uri': self.uri,
+            'name': self.name,
+            'industry': self.industry or [],
+        }
+        return document
 
+    typesense_collection = "organizations" 
+    
+    @classmethod
+    def typesense_schema(cls):
+        schema = {
+            'name': cls.typesense_collection,
+            'fields': [
+                {'name': 'name', 'type': 'string[]'},
+                {'name': 'industry', 'type': 'string[]'},
+                {'name': 'internal_doc_id', 'type': 'int64' }
+            ],
+            'default_sorting_field': 'internal_doc_id'
+        }
+        return schema
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())

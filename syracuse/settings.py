@@ -293,3 +293,13 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = True 
 
 WELL_KNOWN_DIR = BASE_DIR / "static" / "well-known"
+
+TYPESENSE_CONFIG = {
+    'nodes': [{
+        'host': 'localhost',
+        'port': '8108',
+        'protocol': 'http'
+    }],
+    'api_key': os.environ.get("TYPESENSE_API_KEY","my_secret_key"),
+    'connection_timeout_seconds': 2
+}

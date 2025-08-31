@@ -20,6 +20,7 @@ drf-spectacular = "*"
 django-cors-headers = "*"
 django-magic-link = "*"
 django-redis = "*"
+typesense = "*"
 
 [dev-packages]
 

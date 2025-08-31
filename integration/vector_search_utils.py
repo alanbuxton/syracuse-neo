@@ -9,6 +9,8 @@ from syracuse.settings import (NEOMODEL_NEO4J_SCHEME,
     EMBEDDINGS_MODEL, CREATE_NEW_EMBEDDINGS)
 import logging
 import re
+from topics.services.typesense_service import TypesenseService
+
 logger = logging.getLogger(__name__)
 
 NEW_ORGANIZATION_INDUSTRY_QUERY = '''MATCH (n:Resource&Organization)
@@ -104,3 +106,14 @@ def do_vector_search(text, base_query, model=MODEL):
     assert "$query_embedding" in base_query, f"Expected {base_query} to include $query_embedding"
     res, _ = db.cypher_query(base_query, params={'query_embedding':query_embedding}, resolve_objects=True)
     return res
+
+def create_embeddings_for_strings(strings: list[str], model=MODEL):
+    if strings is None:
+        return []
+    return [x.tolist() for x in model.encode(strings)]
+
+def do_vector_search_typesense(text: str, collection_name, model=MODEL, limit=100):
+    query_embedding = model.encode(text)
+    ts = TypesenseService()
+    ts_vals = ts.vector_search(query_embedding,collection_name=collection_name) or []
+    return ts_vals

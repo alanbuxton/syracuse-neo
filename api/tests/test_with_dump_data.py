@@ -20,7 +20,8 @@ from topics.serializers import *
 from integration.neo4j_utils import delete_all_not_needed_resources
 from integration.rdf_post_processor import RDFPostProcessor
 from topics.organization_search_helpers import (get_same_as_name_onlies, 
-        get_by_internal_clean_name, search_organizations_by_name)
+        get_by_internal_clean_name, search_organizations_by_name,
+        search_by_name_typesense)
 import json
 import re
 from topics.serializers import (FamilyTreeSerializer,
@@ -44,6 +45,8 @@ from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
+from topics.management.commands.refresh_typesense import Command as RefreshTypesense
+from integration.vector_search_utils import do_vector_search_typesense
 
 '''
     Care these tests will delete neodb data
@@ -279,6 +282,11 @@ class EndToEndTests20240602(TestCase):
     @classmethod
     def setUpTestData(cls):
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
+        opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False}
+        org_opts = opts | {"model_class": "topics.models.Organization"}
+        ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
+        RefreshTypesense().handle(**org_opts)
+        RefreshTypesense().handle(**ind_opts)
         
 
     def setUp(self):
@@ -1556,6 +1564,22 @@ class EndToEndTests20240602(TestCase):
         assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
 
+    def test_typesense_org_search_1(self):
+        vals = search_by_name_typesense("Hub")
+        assert len(vals) == 2
+        assert vals[0][0].uri == 'https://1145.am/db/3472922/Hub_International_Limited'
+        assert vals[1][0].uri == 'https://1145.am/db/3454498/Hub'
+        assert vals[0][1] == 5
+        assert vals[1][1] == 4 # ordered by number of connections desc
+
+    def test_typesense_ind_cluster_search(self):
+        vals = IndustryCluster.by_embeddings_typesense("print")
+        uris = [x.uri for x in vals]
+        assert uris == ['https://1145.am/db/industry/88_printing_print_printwear_printer', 
+                        'https://1145.am/db/industry/229_3d_printing_printers_manufacturing', 
+                        'https://1145.am/db/industry/332_labels_label_labeling_packaging', 
+                        'https://1145.am/db/industry/502_copier_document_digitization_scanning', 
+                        'https://1145.am/db/industry/663_stationery_supplies_office_supply']
 
 def set_weights():
     # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2
