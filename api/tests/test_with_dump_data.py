@@ -45,8 +45,7 @@ from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
-from topics.management.commands.refresh_typesense import Command as RefreshTypesense
-from integration.vector_search_utils import do_vector_search_typesense
+from topics.services.typesense_service import reload_typesense
 
 '''
     Care these tests will delete neodb data
@@ -282,11 +281,7 @@ class EndToEndTests20240602(TestCase):
     @classmethod
     def setUpTestData(cls):
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
-        opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False}
-        org_opts = opts | {"model_class": "topics.models.Organization"}
-        ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
-        RefreshTypesense().handle(**org_opts)
-        RefreshTypesense().handle(**ind_opts)
+        reload_typesense()
         
 
     def setUp(self):

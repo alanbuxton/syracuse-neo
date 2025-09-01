@@ -219,15 +219,19 @@ class ActivitiesViewSet(NeomodelViewSet):
             return None 
         
         cache_key = f"{min_date}_{max_date}_{org_uri}_{org_name}_{types_to_keep}_{locations}_{industry_search_str}_{industry_ids}"
-        res = get_versionable_cache(cache_key)
-        if res:
-            return res
+
+        if self.request.query_params.get("no_cache"):
+            logger.info("Bypassing cache")
+        else:
+            res = get_versionable_cache(cache_key)
+            if res:
+                return res
 
         if org_uri is not None:
             logger.debug(f"Uri: {org_uri}")
             activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
         elif org_name is not None:
-            orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, top_1_strict=True)
+            orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, top_1_strict=True, request=self.request)
             uris = [x.uri for x,_ in orgs_and_counts]
             logger.debug(f"Uris: {uris}")
             activities = get_activities_by_org_uris_and_date_range(uris,min_date,max_date,combine_same_as_name_only=True,limit=None)
@@ -235,7 +239,7 @@ class ActivitiesViewSet(NeomodelViewSet):
             if len(industry_search_str) > 0:
                 industry_ids = set()
                 for search_str in industry_search_str:
-                    inds = [x.topicId for x in IndustryCluster.by_representative_doc_words(search_str,limit=3)]
+                    inds = [x.topicId for x in IndustryCluster.by_name(search_str,limit=3,request=self.request)]
                     industry_ids.update(inds)
             geo_codes = set()
             for loc in locations:

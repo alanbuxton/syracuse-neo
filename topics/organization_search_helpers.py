@@ -1,18 +1,20 @@
 from neomodel import db
 from topics.models import *
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Tuple
 import logging
 from collections import defaultdict
 from topics.util import clean_punct, standardize_name
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from topics.services.typesense_service import TypesenseService
+from flags.state import flag_enabled
 
 logger = logging.getLogger(__name__)
 
 def search_organizations_by_name(name, combine_same_as_name_only=True, 
-                                 top_1_strict=False, limit: int = 20) -> List[Tuple[Organization, int]]:
+                                 top_1_strict=False, limit: int = 20,
+                                 request=None) -> List[Tuple[Organization, int]]:
     name = standardize_name(name)
-    res = search_by_name(name)
+    res = search_by_name(name, request)
     if combine_same_as_name_only is True:
         res = remove_same_as_name_onlies(res)
     sorted_res = sorted(res, key=lambda x: x[1], reverse=True)
@@ -111,7 +113,15 @@ def do_search_by_clean_name(clean_name, index_name):
     vals, _ = db.cypher_query(query2,resolve_objects=True)
     return vals
 
-def search_by_name(name) -> list:
+def search_by_name(name, request) -> list:
+    if flag_enabled("FEATURE_TYPESENSE",request=request):
+        logger.info("Using FEATURE_TYPESENSE")
+        return search_by_name_typesense(name)
+    else:
+        return search_by_name_neo4j(name)
+
+
+def search_by_name_neo4j(name) -> list:
     '''
         Returns tuple of Organization, Count of Relationships
     '''
@@ -134,7 +144,7 @@ def search_by_name_typesense(name) -> list:
                 RETURN n, apoc.node.degree(n) as relationship_count
                 ORDER BY relationship_count DESCENDING;'''
     vals, _ = db.cypher_query(query, resolve_objects=True)
-    return vals
+    return vals # List of items and number of relationships
 
 def remove_same_as_name_onlies(reference_org_list):
     '''

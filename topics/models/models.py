@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One, ZeroOrOne
-from typing import List
+from typing import List, Union
 import cleanco
 from django.conf import settings
 from topics.util import geo_to_country_admin1
@@ -15,7 +15,8 @@ from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in
 import typesense
 import logging
 from integration.vector_search_utils import create_embeddings_for_strings, do_vector_search_typesense
-from typing import Union
+from flags.state import flag_enabled 
+
 logger = logging.getLogger(__name__)
 
 def uri_from_related(rel):
@@ -696,6 +697,15 @@ class IndustryCluster(Resource):
         vals = self.uniqueName.split("_")
         name = ", ".join(vals[1:]).title()
         return name, vals[0]
+    
+    @staticmethod
+    def by_name(name, limit=10, request=None):
+        if flag_enabled("FEATURE_TYPESENSE", request=request):
+            logger.info("Using FEATURE_TYPESENSE")
+            res = IndustryCluster.by_embeddings_typesense(name)
+            return res[:limit]
+        else:
+            return IndustryCluster.by_representative_doc_words(name, limit=limit)
 
     @staticmethod
     def by_representative_doc_words(name, limit=10, min_score=0.85):
@@ -723,7 +733,7 @@ class IndustryCluster(Resource):
                     ORDER BY apoc.coll.indexOf({ordered_topic_ids}, n.topicId)"""
         vals, _ = db.cypher_query(query, resolve_objects=True)
         flattened = [x[0] for x in vals]
-        return flattened
+        return flattened[:limit]
     
     def to_typesense_doc(self):
         docs = []
@@ -763,6 +773,7 @@ class IndustryCluster(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
+                {'name': 'uri', 'type': 'string'},
                 {'name': 'topic_id', 'type': 'int32' },
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
@@ -1133,9 +1144,10 @@ class Organization(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
+                {'name': 'uri', 'type': 'string'},
                 {'name': 'name', 'type': 'string[]'},
                 {'name': 'industry', 'type': 'string[]'},
-                {'name': 'internal_doc_id', 'type': 'int64' }
+                {'name': 'internal_doc_id', 'type': 'int64'},
             ],
             'default_sorting_field': 'internal_doc_id'
         }

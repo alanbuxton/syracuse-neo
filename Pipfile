@@ -21,6 +21,7 @@ django-cors-headers = "*"
 django-magic-link = "*"
 django-redis = "*"
 typesense = "*"
+django-flags = "*"
 
 [dev-packages]
 

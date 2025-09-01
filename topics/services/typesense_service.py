@@ -1,7 +1,15 @@
 import typesense
 from django.conf import settings
 import logging
+from topics.management.commands.refresh_typesense import Command as RefreshTypesense
 logger = logging.getLogger(__name__)
+
+def reload_typesense():
+    opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False}
+    org_opts = opts | {"model_class": "topics.models.Organization"}
+    ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
+    RefreshTypesense().handle(**org_opts)
+    RefreshTypesense().handle(**ind_opts) 
 
 class TypesenseService:
     def __init__(self):
@@ -17,11 +25,11 @@ class TypesenseService:
                 logger.warning(f"Couldn't create {collection_name} - might already exist: {e}")
 
 
-    def search(self, name, collection_name, query_by="name"): 
+    def search(self, name, collection_name, query_by="name",limit=100): 
         search_result = self.client.collections[collection_name].documents.search({
             'q': name,
             'query_by': query_by,
-            'limit': 10,
+            'limit': limit,
         })
         results = search_result['hits']
         return results
@@ -42,3 +50,24 @@ class TypesenseService:
         res = self.client.multi_search.perform(multi_search_queries)
         results = res['results']
         return results[0]['hits']
+    
+    def search_by_uri(self, uri):
+        searches = [
+            {'collection': coll_name,
+             'q': uri,
+             'query_by': 'uri'}
+            for coll_name in self.all_collection_names()
+        ]
+        multi_search_queries = {
+            'searches': searches
+        }
+        res = self.client.multi_search.perform(multi_search_queries)
+        matches = []
+        for val in res['results']:
+            if val['found'] > 0:
+                matches.extend(val['hits'])
+        return matches
+
+    def all_collection_names(self):
+        colls = self.client.collections.retrieve()
+        return [x['name'] for x in colls]

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'magic_link',
+    'flags',
 ]
 
 MIDDLEWARE = [
@@ -302,4 +303,8 @@ TYPESENSE_CONFIG = {
     }],
     'api_key': os.environ.get("TYPESENSE_API_KEY","my_secret_key"),
     'connection_timeout_seconds': 2
+}
+
+FLAGS = {
+    'FEATURE_TYPESENSE': [],
 }
