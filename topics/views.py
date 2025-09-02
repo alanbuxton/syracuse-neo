@@ -26,7 +26,7 @@ from topics.industry_geo.orgs_by_industry_geo import (combined_industry_geo_resu
 import re
 import json
 from topics.util import elements_from_uri, geo_to_country_admin1
-from syracuse.date_util import min_and_max_date
+from syracuse.date_util import min_and_max_date_based_on_days_ago
 from topics.stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list
@@ -64,7 +64,7 @@ class Index(APIView):
 
         if org_name:
             orgs = search_organizations_by_name(org_name, combine_same_as_name_only,
-                                            limit=500)
+                                            limit=500,request=request)
             orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
             num_hits = len(orgs)
             if len(orgs) > 20:
@@ -89,12 +89,9 @@ class Index(APIView):
                         "search_term": search_term,
                         "num_hits": num_hits,
                         "industry_search": industry_search,
-                        # "geo_search": geo_search,
                         "search_type": search_type,
                         "motd": MOTD,
                         "last_updated": last_updated,
-                        # "search_industry_name": industry_name,
-                        # "search_geo_code": selected_geo,
                         "request_state": request_state,
                         }, status=status.HTTP_200_OK)
         return resp
@@ -460,7 +457,7 @@ class OrgActivitiesView(APIView):
     authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, **kwargs):
-        min_date, max_date = min_and_max_date(request.GET)
+        min_date, max_date = min_and_max_date_based_on_days_ago(request.GET)
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_activities"
         org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"

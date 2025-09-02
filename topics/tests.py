@@ -10,7 +10,7 @@ import time
 from django.contrib.auth import get_user_model
 from topics.serializers import *
 from topics.activity_helpers import get_activities_by_country_and_date_range
-from integration.rdf_post_processor import RDFPostProcessor
+from integration.rdf_post_processor import RDFPostProcessor, add_dynamic_classes_for_multiple_labels
 from integration.tests import make_node, clean_db
 import json
 import re
@@ -364,6 +364,10 @@ class TestFamilyTree(TestCase):
 
 
 class TestDynamicClasses(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
 
     def test_can_pickle_dynamic_class(self):
         # Needed for caching in redis

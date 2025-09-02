@@ -224,7 +224,7 @@ class RegionsViewSetTests(BaseAuthenticatedAPITestCase):
 
 class ActivitiesViewSetTests(BaseAuthenticatedAPITestCase):
 
-    @patch("api.views.min_and_max_date")
+    @patch("api.views.min_and_max_date_based_on_days_ago")
     def test_activities_missing_required_params_returns_400(self, mock_min_max_date):
         mock_min_max_date.return_value = (datetime(2025,1,1,0,0,0,tzinfo=timezone.utc), 
                                           datetime(2025,5,31,23,59,59,tzinfo=timezone.utc))
@@ -238,7 +238,7 @@ class ActivitiesViewSetTests(BaseAuthenticatedAPITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    @patch("api.views.min_and_max_date")
+    @patch("api.views.min_and_max_date_based_on_days_ago")
     @patch("api.views.get_activities_by_org_uris_and_date_range")
     def test_activities_happy_path_returns_200(self, mock_get_acts, mock_min_max_dates):
         mock_get_acts.return_value = [

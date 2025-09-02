@@ -7,6 +7,7 @@ from topics.industry_geo import COUNTRY_CODE_TO_NAME
 from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_country_admin1
 from topics.industry_geo.orgs_by_industry_geo import get_org_activity_counts, cached_activity_stats_last_updated_date
 from syracuse.date_util import date_minus, min_and_max_date
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,7 @@ def get_cached_stats(max_sources=100):
     if latest_date is None:
         return None, None, None, None, None
     counts, recents_by_country_region, recents_by_source, recents_by_industry = get_stats(latest_date)
-    recents_by_source = sorted(recents_by_source, key=lambda x: (-x[1],x[0]) )[:max_sources]
+    recents_by_source = recents_by_source[:max_sources]
     return latest_date, counts, recents_by_country_region, recents_by_source, recents_by_industry
 
 def industry_orgs_activities_stats(search_str):
@@ -94,13 +95,14 @@ def get_stats(max_date, cache_version=None):
             recents_by_country_region.append( (country_code,country_name,cnt7,cnt30,cnt90) )
     recents_by_source = []
     logger.info("Stats by source organization")
-    for source_name in Article.all_sources():
+    for source_name, _ in Article.sources_with_more_than_n_articles(settings.MIN_DOC_COUNT_FOR_ARTICLE_STATS).items():
         logger.debug(f"Stats for {source_name}")
         cnt90 = activity_counts_by_source(source_name, date_minus(max_date,90), max_date, cache_version)
         cnt30 = activity_counts_by_source(source_name, date_minus(max_date,30), max_date, cache_version) if cnt90 > 0 else 0
         cnt7 = activity_counts_by_source(source_name, date_minus(max_date,7), max_date, cache_version) if cnt30 > 0 else 0
         if cnt90 > 0:
             recents_by_source.append( (source_name,cnt7,cnt30,cnt90) )
+    recents_by_source = sorted(recents_by_source, key=lambda x: (-x[1],x[0]) )
     ts2 = datetime.now(tz=timezone.utc)
     logger.info(f"counts_by_timedelta up to {max_date}: {ts2 - ts1}")
     return counts, recents_by_country_region, recents_by_source, recents_by_industry

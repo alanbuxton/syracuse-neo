@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from collections import OrderedDict
 from topics.models import *
 from topics.stats_helpers import get_cached_stats
@@ -275,7 +275,7 @@ class EndToEndTests20190110(TestCase):
         assert len(res) == 1
         assert res[0][0].uri == 'https://1145.am/db/3454434/Tao_Capital_Partners'
 
-
+@override_settings(MIN_DOC_COUNT_FOR_ARTICLE_STATS=2)
 class EndToEndTests20240602(TestCase):
 
     @classmethod
@@ -450,7 +450,7 @@ class EndToEndTests20240602(TestCase):
         content = str(response.content)
         assert len(re.findall("https://1145.am/db",content)) == 50
         assert "technologies" not in content
-
+        
     def test_stats(self):
         _, counts, recents_by_geo, recents_by_source, recents_by_industry = get_cached_stats()
         expected = {('AboutUs', 1), ('Person', 12), ('OperationsActivity', 4), ('IncidentActivity', 1),
@@ -460,24 +460,24 @@ class EndToEndTests20240602(TestCase):
                                 ('CorporateFinanceActivity', 189),
                                 ('AnalystRatingActivity', 1), ('LocationActivity', 7), ('Role', 11), ('RoleActivity', 12)}
         counts_set = set(counts)
-        assert counts_set == expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}"
+        self.assertEqual(counts_set, expected, f"Got {counts_set} - diff = {counts_set.symmetric_difference(expected)}")
         # recents by geo now does not include activities with "where" in - in case of false positives. TODO review this in future
-        assert sorted(recents_by_geo) == [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1),
+        self.assertEqual(sorted(recents_by_geo), [('CA', 'Canada', 3, 3, 3), ('CN', 'China', 1, 1, 1),
                                             ('CZ', 'Czechia', 1, 1, 1), ('DK', 'Denmark', 1, 1, 1),
                                             ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1),
                                             ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
                                             ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
-                                            ('US', 'United States of America', 14, 14, 33)]
-        assert recents_by_source == [ ('PR Newswire', 20, 20, 33), ('Associated Press', 3, 3, 3), ('MarketWatch', 3, 3, 3), 
-                                                ('Business Insider', 2, 2, 2), ('GlobeNewswire', 2, 2, 2),
-                                                ('Business Wire', 1, 1, 1), ('CityAM', 1, 1, 4), ('Reuters', 1, 1, 1), ('The Globe and Mail', 1, 1, 1),
-                                                ('Fierce Pharma', 0, 0, 3), ('Hotel Management', 0, 0, 1), ('Live Design Online', 0, 0, 1), 
-                                                ('TechCrunch', 0, 0, 1), ('VentureBeat', 0, 0, 1)]        
-        assert recents_by_industry[:10] == [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1),
+                                            ('US', 'United States of America', 14, 14, 33)])
+        self.assertEqual(recents_by_source, [ ('PR Newswire', 20, 20, 33), ('Associated Press', 3, 3, 3), ('MarketWatch', 3, 3, 3), 
+                                                ('Business Insider', 2, 2, 2),
+                                                ('CityAM', 1, 1, 4), 
+                                                ('Fierce Pharma', 0, 0, 3), ('Live Design Online', 0, 0, 1), 
+                                                ('TechCrunch', 0, 0, 1) ]   )     
+        self.assertEqual(recents_by_industry[:10], [(696, 'Architectural And Design', 0, 0, 1), (154, 'Biomanufacturing Technologies', 0, 0, 1),
                                             (26, 'Biopharmaceutical And Biotech Industry', 1, 1, 3), (36, 'C-Commerce (\\', 1, 1, 1),
                                             (12, 'Cannabis And Hemp', 1, 1, 1), (236, 'Chemical And Technology', 0, 0, 1), (74, 'Chip Business', 1, 1, 1),
                                             (4, 'Cloud Services', 0, 0, 1), (165, 'Development Banks', 1, 1, 1),
-                                            (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)]
+                                            (134, 'Electronic Manufacturing Services And Printed Circuit Board Assembly', 1, 1, 1)])
 
     def test_similar_activities_are_merged(self):
         query = """match (a: Resource)-[x]-(t) where a.uri in ["https://1145.am/db/4290467/Stmicroelectronics-Added-Italy",
@@ -900,9 +900,10 @@ class EndToEndTests20240602(TestCase):
         uri_all = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
         resp_all = client.get(uri_all)
         content_all = str(resp_all.content)
-        assert "PR Newswire" in content_all
-        assert "CityAM" in content_all
-        assert "Business Insider" in content_all
+        assert "All Sources" in content_all
+        assert "PR Newswire" not in content_all
+        assert "CityAM" not in content_all
+        assert "Business Insider" not in content_all
 
     def test_org_graph_filters_by_document_source_organization_named_sources(self):
         client = self.client
@@ -910,6 +911,7 @@ class EndToEndTests20240602(TestCase):
         uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=CityAM,PR%20Newswire&min_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
+        assert "All Sources" not in content_filtered
         assert "PR Newswire" in content_filtered
         assert "CityAM" in content_filtered
         assert "Business Insider" not in content_filtered
@@ -920,6 +922,7 @@ class EndToEndTests20240602(TestCase):
         uri_filtered = "/organization/linkages/uri/1145.am/db/3029576/Eli_Lilly?sources=cityam,_core&min_date=-1"
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
+        assert "All Sources" not in content_filtered
         assert "PR Newswire" in content_filtered
         assert "CityAM" in content_filtered
         assert "Business Insider" in content_filtered

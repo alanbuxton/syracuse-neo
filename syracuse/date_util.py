@@ -1,6 +1,14 @@
 from syracuse.cache_util import get_versionable_cache
 from datetime import date, datetime, time, timezone, timedelta
 
+
+def min_and_max_date_based_on_days_ago(params={}):
+    days_ago = params.get("days_ago","90")
+    days_ago = int(days_ago)
+    if days_ago not in [7,30]:
+        days_ago = 90
+    return min_and_max_date({}, days_diff=days_ago)
+
 def min_and_max_date(get_params, days_diff=7, cache_version=None):
     min_date = get_params.get("min_date")
     if isinstance(min_date, str):

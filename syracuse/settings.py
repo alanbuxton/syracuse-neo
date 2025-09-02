@@ -305,6 +305,8 @@ TYPESENSE_CONFIG = {
     'connection_timeout_seconds': 2
 }
 
+MIN_DOC_COUNT_FOR_ARTICLE_STATS=50
+
 FLAGS = {
     'FEATURE_TYPESENSE': [],
 }

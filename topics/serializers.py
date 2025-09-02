@@ -167,8 +167,8 @@ def create_source_pretty_print_data(text):
     available_names = Article.available_source_names_dict()
     for x in vals:
         if x.lower() == "_all":
-            sorted_all_sources = ", ".join(sorted(Article.all_sources()))
-            result_entries.append(f"All Sources ({sorted_all_sources})")
+            # sorted_all_sources = ", ".join(sorted(Article.all_sources()))
+            result_entries.append(f"All Sources")
             has_all = True
         elif x.lower() == "_core":
             result_entries.append(core_entries)

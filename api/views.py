@@ -20,7 +20,7 @@ from api.models import APIRequestLog
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from rest_framework.views import APIView
-from syracuse.date_util import min_and_max_date
+from syracuse.date_util import min_and_max_date_based_on_days_ago
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from neomodel import DoesNotExist
@@ -203,11 +203,7 @@ class GeoNamesViewSet(NeomodelViewSet):
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
-        days_ago = self.request.query_params.get("days_ago","90")
-        days_ago = int(days_ago)
-        if days_ago not in [7,30]:
-            days_ago = 90
-        min_date, max_date = min_and_max_date(self.request.GET, days_diff=days_ago)
+        min_date, max_date = min_and_max_date_based_on_days_ago(self.request.GET)
         org_uri = self.request.query_params.get("org_uri",None)
         org_name = self.request.query_params.get("org_name",None)
         types_to_keep = self.request.query_params.getlist("type",[])

@@ -10,7 +10,7 @@
         {% for org in organizations %}
             <tr>
                 <td><b>{{ org.label }}</b></td>
-                <td><a href="{% url_with_querystring 'organization-linkages' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
+                <td><a href="{% url_with_querystring 'organization-activities' org.splitted_uri.domain org.splitted_uri.path org.splitted_uri.doc_id org.splitted_uri.name qs_params=request_state.qs_params %}">
                 {{ org.uri }}</a></td>
                 <td align="right">{{ org.article_count }}</td>
             </tr>

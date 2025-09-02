@@ -460,6 +460,21 @@ class Article(Resource):
         return sorted(list(Article.available_source_names_dict().values()))
     
     @staticmethod
+    def sources_with_more_than_n_articles(limit=10):
+        cache_key=f"sources_with_more_than_{limit}"
+        res = get_versionable_cache(cache_key)
+        if res:
+            return res
+        query = f"""MATCH (a: Article)
+                    WITH a.sourceOrganization AS source_org, COUNT(a.sourceOrganization) AS count_of_org
+                    WHERE count_of_org >= {limit}
+                    RETURN source_org, count_of_org ORDER BY count_of_org DESC"""
+        vals, _ = db.cypher_query(query)
+        return {k: v for k,v in vals}
+        
+        
+
+    @staticmethod
     def core_sources():
         '''
             Generic, high quality sources that we get good results with.
