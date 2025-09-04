@@ -6,7 +6,8 @@ import api.serializers as serializers
 import logging 
 from topics.util import geo_to_country_admin1
 from rest_framework import status
-from topics.activity_helpers import get_activities_by_org_uris_and_date_range, get_activities_by_industry_country_admin1_and_date_range
+from topics.activity_helpers import (get_activities_by_industry_country_admin1_and_date_range,
+                                     get_activities_by_org_with_fixed_or_expanding_date_range)
 from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
@@ -20,12 +21,12 @@ from api.models import APIRequestLog
 from django.utils.dateparse import parse_date
 from django.core.paginator import Paginator
 from rest_framework.views import APIView
-from syracuse.date_util import min_and_max_date_based_on_days_ago
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from neomodel import DoesNotExist
 from api.docstrings import activity_docstring_raw
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
+from syracuse.date_util import min_and_max_date_based_on_days_ago
 
 logger = logging.getLogger(__name__)
 
@@ -203,7 +204,9 @@ class GeoNamesViewSet(NeomodelViewSet):
 class ActivitiesViewSet(NeomodelViewSet):
 
     def get_queryset(self):
-        min_date, max_date = min_and_max_date_based_on_days_ago(self.request.GET)
+        days_ago = int(self.request.query_params.get("days_ago","0"))
+        if days_ago not in [7,30,90]:
+            days_ago = None
         org_uri = self.request.query_params.get("org_uri",None)
         org_name = self.request.query_params.get("org_name",None)
         types_to_keep = self.request.query_params.getlist("type",[])
@@ -214,7 +217,7 @@ class ActivitiesViewSet(NeomodelViewSet):
         if org_uri is None and org_name is None and len(locations) == 0 and len(industry_search_str) == 0 and industry_ids == [None]:
             return None 
         
-        cache_key = f"{min_date}_{max_date}_{org_uri}_{org_name}_{types_to_keep}_{locations}_{industry_search_str}_{industry_ids}"
+        cache_key = f"{org_uri}_{org_name}_{days_ago}_{types_to_keep}_{locations}_{industry_search_str}_{industry_ids}"
 
         if self.request.query_params.get("no_cache"):
             logger.info("Bypassing cache")
@@ -225,12 +228,14 @@ class ActivitiesViewSet(NeomodelViewSet):
 
         if org_uri is not None:
             logger.debug(f"Uri: {org_uri}")
-            activities = get_activities_by_org_uris_and_date_range([org_uri],min_date,max_date,combine_same_as_name_only=True,limit=None)
+            activities, days_ago, min_date, max_date = get_activities_by_org_with_fixed_or_expanding_date_range([org_uri], days_ago,
+                                                                                                               combine_same_as_name_only=True,
+                                                                                                               limit=100)
         elif org_name is not None:
             orgs_and_counts = search_organizations_by_name(org_name, combine_same_as_name_only=False, top_1_strict=True, request=self.request)
             uris = [x.uri for x,_ in orgs_and_counts]
             logger.debug(f"Uris: {uris}")
-            activities = get_activities_by_org_uris_and_date_range(uris,min_date,max_date,combine_same_as_name_only=True,limit=None)
+            activities, days_ago, min_date, max_date = get_activities_by_org_with_fixed_or_expanding_date_range(uris,days_ago,combine_same_as_name_only=True,limit=100)
         else:
             if len(industry_search_str) > 0:
                 industry_ids = set()
@@ -242,6 +247,9 @@ class ActivitiesViewSet(NeomodelViewSet):
                 geo_codes.update(geo_codes_for_region(loc))
             if len(geo_codes) == 0:
                 geo_codes = [None]
+            if days_ago is None:
+                days_ago = 30
+            min_date, max_date = min_and_max_date_based_on_days_ago(days_ago)
             logger.debug(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
             activities = []
             for industry_id_str in industry_ids:
@@ -269,7 +277,11 @@ class ActivitiesViewSet(NeomodelViewSet):
         parameters=[
             OpenApiParameter(
                 name='days_ago',
-                description='Show activities this many days old. Optional, but if provided must be one of: 7, 30, or 90 (default). Any other number will be treated as 90.',
+                description=('Show activities up to this many days old. Optional, but if provided must be one of: 7, 30, or 90. '
+                             'If not provided then: \n'
+                             ' - when searching by organization, start with 7 days and then search for older stories if there are insufficient found (will try to find at least 3 stories)\n '
+                             ' - when searching by industry, default it to 30 days'
+                            ),
                 required=False,
                 type=OpenApiTypes.INT,
                 location=OpenApiParameter.QUERY
@@ -329,8 +341,6 @@ class ActivitiesViewSet(NeomodelViewSet):
             List recent relevant activities.
 
             Must provide at least one of `org_name`, `org_uri`, `region_id`, `industry_name` or `industry_id`
-
-            By default shows activities over the last 90 days, but you can also request 7 or 30 days.
         """
         activities = self.get_queryset()
         if activities is None:

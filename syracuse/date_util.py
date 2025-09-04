@@ -1,9 +1,12 @@
 from syracuse.cache_util import get_versionable_cache
 from datetime import date, datetime, time, timezone, timedelta
 
+def latest_cache_date(cache_version=None):
+    return get_versionable_cache("activity_stats_last_updated", version=cache_version)
 
-def min_and_max_date_based_on_days_ago(params={}):
-    days_ago = params.get("days_ago","90")
+def min_and_max_date_based_on_days_ago(days_ago):
+    if days_ago is None:
+        days_ago = 90
     days_ago = int(days_ago)
     if days_ago not in [7,30]:
         days_ago = 90
@@ -20,7 +23,7 @@ def min_and_max_date(get_params, days_diff=7, cache_version=None):
     if max_date and max_date.tzinfo is None:
         max_date = max_date.replace(tzinfo=timezone.utc)
     if max_date is None:
-        max_date = get_versionable_cache("activity_stats_last_updated", version=cache_version)
+        max_date = latest_cache_date(cache_version=cache_version)
     if max_date is None:
         raise ValueError(f"max_date is still None from get_params {get_params}")
     if max_date is not None and min_date is None:

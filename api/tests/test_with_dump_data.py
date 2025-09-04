@@ -641,6 +641,27 @@ class EndToEndTests20240602(TestCase):
         assert len(res3) == 1
         assert list(res3.keys())[0].uri == 'https://1145.am/db/3448439/Loxo_Oncology2'
 
+    def test_activities_extends_up_to_90_days_to_find_articles(self):
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get("/organization/activities/uri/1145.am/db/3448272/Propeller_Health")
+        content = str(resp.content)
+        self.assertIn("Safeguard Scientifics Partner Company Propeller Health Acquired By ResMed", content)
+        self.assertNotIn("Showing activities for the last 7 days", content)
+        self.assertIn("Showing activities for the last 90 days", content)
+        self.assertNotIn("(Show last 90 days)", content)
+
+    def test_activities_does_not_change_number_of_days_if_specified(self):
+        client = self.client
+        client.force_login(self.user)
+        resp = client.get("/organization/activities/uri/1145.am/db/3448272/Propeller_Health?days_ago=7")
+        content = str(resp.content)
+        self.assertNotIn("Safeguard Scientifics Partner Company Propeller Health Acquired By ResMed", content)
+        self.assertIn("Showing activities for the last 7 days", content)
+        self.assertNotIn("Showing activities for the last 90 days", content)
+        self.assertIn("(Show last 90 days)", content)
+
+
     def test_graph_combines_same_as_name_only_off_vs_on_based_on_target_node(self):
         client = self.client
         client.force_login(self.user)
@@ -1512,7 +1533,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_api_finds_by_industry_name(self):
         client = self.client
-        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&max_date=2024-06-02&days_ago=7"
+        path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&days_ago=7"
         # No legal results because matching legal firms are only participants, not buyers etc
         client.force_login(self.user)
         resp = client.get(path)
@@ -1527,7 +1548,7 @@ class EndToEndTests20240602(TestCase):
             "https://1145.am/db/3476441/Dcamera_Group-Acquisition"], f"Got {res}"
 
     def test_api_finds_by_org_name(self):
-        path = "/api/v1/activities/?org_name=Postmedia&max_date=2024-06-02"
+        path = "/api/v1/activities/?org_name=Postmedia"
         client = self.client
         client.force_login(self.user)
         resp = client.get(path)
@@ -1537,7 +1558,7 @@ class EndToEndTests20240602(TestCase):
         assert act_uris[0] == "https://1145.am/db/4290245/Winnipeg_Sun-Acquisition-Division", f"Got {act_uris}"
 
     def test_api_finds_by_org_uri(self):
-        path = "/api/v1/activities/?org_uri=https://1145.am/db/4290459/Banco_De_Sabadell&max_date=2024-06-02"
+        path = "/api/v1/activities/?org_uri=https://1145.am/db/4290459/Banco_De_Sabadell"
         client = self.client
         client.force_login(self.user)
         resp = client.get(path)

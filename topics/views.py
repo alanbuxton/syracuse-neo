@@ -26,11 +26,10 @@ from topics.industry_geo.orgs_by_industry_geo import (combined_industry_geo_resu
 import re
 import json
 from topics.util import elements_from_uri, geo_to_country_admin1
-from syracuse.date_util import min_and_max_date_based_on_days_ago
 from topics.stats_helpers import industry_orgs_activities_stats
 from trackeditems.serializers import ActivitySerializer
 from topics.organization_search_helpers import search_organizations_by_name, random_org_list
-from topics.activity_helpers import get_activities_by_org_and_date_range
+from topics.activity_helpers import get_activities_by_org_with_fixed_or_expanding_date_range
 
 import logging
 logger = logging.getLogger(__name__)
@@ -457,18 +456,21 @@ class OrgActivitiesView(APIView):
     authentication_classes = [SessionAuthentication, FlexibleTokenAuthentication]
 
     def get(self, request, **kwargs):
-        min_date, max_date = min_and_max_date_based_on_days_ago(request.GET)
         request_state, combine_same_as_name_only = prepare_request_state(request)
         request_state["hide_link"]="organization_activities"
         org_uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
         org = Organization.self_or_ultimate_target_node(org_uri)
-        matching_activity_orgs = get_activities_by_org_and_date_range(org, min_date, max_date,limit=100,
-                                                                      combine_same_as_name_only=combine_same_as_name_only,
-                                                                      include_similar_orgs=kwargs.get("include_similar_orgs"))
+        days_ago = request.query_params.get("days_ago",None)
+        if days_ago:
+            days_ago = int(days_ago)
+        matching_activity_orgs, days_ago, min_date, max_date = get_activities_by_org_with_fixed_or_expanding_date_range([org.uri],days_ago,
+                                                                                                               combine_same_as_name_only=combine_same_as_name_only,
+                                                                                                               limit=100)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         uri_parts = elements_from_uri(org.uri)
         org_data = {**kwargs, **{"uri":org.uri,"source_node_name":org.best_name}}
         resp_dict = {"activities":serializer.data,"min_date":min_date,"max_date":max_date,
+                            "days_ago": int(days_ago),
                             "uri_parts": uri_parts,
                             "org_data": org_data,
                             "request_state": request_state,

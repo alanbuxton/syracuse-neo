@@ -21,7 +21,14 @@
     <a href="{{ org_data.uri }}?{{ request_state.qs_params|dict_to_query_string }}">{{ org_data.uri }}</a>
     {% include 'layouts/nav-org.html' %}
   </p>
-  <p>Showing activities between {{ min_date | localize }} and {{ max_date | localize }}</p>
+  <p>Showing activities for the last {{ days_ago }} days between {{ min_date | localize }} and {{ max_date | localize }}
+  
+  {% if days_ago < 90 %}
+    <a href="{% url_with_extra_querystring_param request_state.current_page_no_qs qs_args1=request_state.qs_params qs_arg2='days_ago' qs_val2='90' %}">(Show last 90 days)</a>
+  {% endif %}
+
+
+  </p>
 
   {% include 'activity_list.html' %}
 

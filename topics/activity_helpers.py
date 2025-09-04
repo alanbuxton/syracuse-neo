@@ -1,4 +1,3 @@
-from django.core.cache import cache
 from neomodel import db
 import logging
 from topics.models import IndustryCluster, Article, ActivityMixin, Resource
@@ -9,6 +8,7 @@ from topics.industry_geo import geo_to_country_admin1
 from topics.organization_search_helpers import get_same_as_name_onlies
 from topics.util import ALL_ACTIVITY_LIST, ORG_ACTIVITY_LIST
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
+from syracuse.date_util import date_minus, latest_cache_date, min_and_max_date_based_on_days_ago
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,31 @@ def activities_by_industry(industry, min_date, max_date, cache_version=None, lim
         industry = industry.topicId
     activity_article_uris = get_org_activities(min_date,max_date,industry,None, None, cache_version)
     return activity_article_uris[:limit]
+
+def get_activities_by_org_with_fixed_or_expanding_date_range(org_uris: list[str], days_ago=None, combine_same_as_name_only=True,
+                                                             limit=100):
+    if days_ago is None:
+        return get_activities_by_org_with_expanding_date_range(org_uris, combine_same_as_name_only=combine_same_as_name_only,
+                                                               limit=limit)
+    min_date, max_date = min_and_max_date_based_on_days_ago(days_ago)
+    res = get_activities_by_org_uris_and_date_range(org_uris,min_date,max_date,cache_version=None,
+                                                    combine_same_as_name_only=combine_same_as_name_only,limit=limit)
+    return res, days_ago, min_date, max_date
+
+def get_activities_by_org_with_expanding_date_range(org_uris: list[str], combine_same_as_name_only,limit=None,
+                                                    min_articles=3):
+    max_date = latest_cache_date()
+    acts = []
+    min_date = None
+    days_ago = None
+    for days_ago in [7,30,90]:
+        min_date = date_minus(max_date, days_ago)
+        acts = get_activities_by_org_uris_and_date_range(org_uris,min_date,max_date,
+                                                  combine_same_as_name_only=combine_same_as_name_only,
+                                                  limit=limit)
+        if len(acts) >= min_articles:
+            return acts, days_ago, min_date, max_date
+    return acts, days_ago, min_date, max_date
 
 def get_activities_by_org_and_date_range(organization,min_date,max_date,cache_version=None,
                                          include_similar_orgs=False, # TODO implement me (see topics.models.model_helpers)

@@ -239,17 +239,19 @@ class ActivitiesViewSetTests(BaseAuthenticatedAPITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     @patch("api.views.min_and_max_date_based_on_days_ago")
-    @patch("api.views.get_activities_by_org_uris_and_date_range")
+    @patch("api.views.get_activities_by_org_with_fixed_or_expanding_date_range")
     def test_activities_happy_path_returns_200(self, mock_get_acts, mock_min_max_dates):
-        mock_get_acts.return_value = [
+        mock_get_acts.return_value = ([
             {"date_published": "2025-01-01", "activity_class": "Event",
              "headline": "foo", "source_organization": "bar", "document_extract": "baz",
              "document_url": "http://example.org/1", "activity_uri": "http://example.org/2",
              "activity_locations": [], "actors": {}, "archive_org_list_url": "http://example.org/3"}
-        ]
+        ],
+             None, None, None
+        )
         mock_min_max_dates.return_value = (datetime(2025,1,1,0,0,0,tzinfo=timezone.utc), 
                                           datetime(2025,5,31,23,59,59,tzinfo=timezone.utc))
-        url = reverse("v1:api-activity-list") + "?org_uri=org:1"
+        url = reverse("v1:api-activity-list") + "?org_uri=org:1&days_ago=90"
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['results'][0]["activity_uri"], "http://example.org/2")
