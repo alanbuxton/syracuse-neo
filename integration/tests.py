@@ -836,7 +836,7 @@ class MergeUnmergedIntegrationTestCase(TestCase):
         assert rel_to_be_created in after_rels
         
 
-class RecursivelyReMergeNodes(TestCase):
+class RecursivelyReMergeNodesTestCase(TestCase):
 
     def setUp(self):
         clean_db()
@@ -846,6 +846,10 @@ class RecursivelyReMergeNodes(TestCase):
             {"doc_id":10002, "identifier":"orgc","node_type":"Organization"},
             {"doc_id":10003, "identifier":"act1","node_type":"OperationsActivity"},
             {"doc_id":10004, "identifier":"act2","node_type":"MarketingActivity"},
+            {"doc_id":20000, "identifier":"orgm","node_type":"Organization"},
+            {"doc_id":20001, "identifier":"orgn","node_type":"Organization"},
+            {"doc_id":20002, "identifier":"orgo","node_type":"Organization"},
+            {"doc_id":20003, "identifier":"orgp","node_type":"Organization"},
         ]
 
         nodes = [make_node(**x) for x in node_data]
@@ -854,17 +858,33 @@ class RecursivelyReMergeNodes(TestCase):
         query = f"""CREATE {node_list},
         (orga)-[:hasOperationsActivity {{weight: 1}}]->(act1),
         (orga)-[:hasMarketingActivity {{weight: 1}}]->(act2),
-        (orgc)-[:hasMarketingActivity {{weight: 1}}]->(act2)
+        (orgc)-[:hasMarketingActivity {{weight: 1}}]->(act2),
+        (orgm)-[:hasOperationsActivity {{weight: 1}}]->(act1),
+        (orgm)-[:hasMarketingActivity {{weight: 1}}]->(act2),
+        (orgo)-[:hasOperationsActivity {{weight: 1}}]->(act1),
+        (orgo)-[:hasMarketingActivity {{weight: 1}}]->(act2)
         SET orga.internalMergedSameAsHighToUri = 'https://1145.am/db/10001/orgb'
         SET orgb.internalMergedSameAsHighToUri = 'https://1145.am/db/10002/orgc'
+        SET orgm.internalMergedSameAsHighToUri = 'https://1145.am/db/20001/orgn'
+        SET orgn.internalMergedSameAsHighToUri = 'https://1145.am/db/20002/orgo'
+        SET orgo.internalMergedSameAsHighToUri = 'https://1145.am/db/20003/orgp'
         """
         db.cypher_query(query)
         self.orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
         self.orgb = Resource.get_by_uri('https://1145.am/db/10001/orgb')
         self.orgc = Resource.get_by_uri('https://1145.am/db/10002/orgc')
-        
+        self.orgm = Resource.get_by_uri('https://1145.am/db/20000/orgm')
+        self.orgn = Resource.get_by_uri('https://1145.am/db/20001/orgn')
+        self.orgo = Resource.get_by_uri('https://1145.am/db/20002/orgo')
+        self.orgp = Resource.get_by_uri('https://1145.am/db/20003/orgp')
+        artm = Resource.get_by_uri('https://1145.am/db/article_orgm')
+        artn = Resource.get_by_uri('https://1145.am/db/article_orgn')
+        self.orgo.documentSource.connect(artm)
+        self.orgo.documentSource.connect(artn)
 
+        
     def test_recursively_re_merges(self):
+        # A -> B -> C
         recursively_re_merge_node_via_same_as(self.orga)
         vals_b = relationship_summary(self.orgb)
         assert ('https://1145.am/db/10001/orgb', 'https://1145.am/db/10003/act1', 
@@ -876,6 +896,27 @@ class RecursivelyReMergeNodes(TestCase):
                 'hasOperationsActivity', 1) in vals_c
         assert ('https://1145.am/db/10002/orgc', 'https://1145.am/db/10004/act2', 
                 'hasMarketingActivity', 1) in vals_c
+        
+    def test_does_not_continue_if_node_unchanged(self):
+        # M -> N -> O -> P
+        # If O already has the same links then it won't continue to P
+        # even if P doesn't have the same links. This is because it's not M's
+        # job to fix any problems between O and P, that will be dealt with when 
+        # O is updated
+        recursively_re_merge_node_via_same_as(self.orgm)
+        vals_n = relationship_summary(self.orgn)
+        assert vals_n == {('https://1145.am/db/20001/orgn', 'https://1145.am/db/10004/act2', 'hasMarketingActivity', 1), 
+                          ('https://1145.am/db/20001/orgn', 'https://1145.am/db/article_orgn', 'documentSource', None), 
+                          ('https://1145.am/db/20001/orgn', 'https://1145.am/db/article_orgm', 'documentSource', 1),
+                          ('https://1145.am/db/20001/orgn', 'https://1145.am/db/10003/act1', 'hasOperationsActivity', 1)}
+        vals_o = relationship_summary(self.orgo)
+        assert vals_o == {('https://1145.am/db/20002/orgo', 'https://1145.am/db/10004/act2', 'hasMarketingActivity', 1), 
+                          ('https://1145.am/db/20002/orgo', 'https://1145.am/db/article_orgo', 'documentSource', None), 
+                          ('https://1145.am/db/20002/orgo', 'https://1145.am/db/10003/act1', 'hasOperationsActivity', 1), 
+                          ('https://1145.am/db/20002/orgo', 'https://1145.am/db/article_orgm', 'documentSource', 1), 
+                          ('https://1145.am/db/20002/orgo', 'https://1145.am/db/article_orgn', 'documentSource', 1)}
+        vals_p = relationship_summary(self.orgp)
+        assert len(vals_p) == 1 # Didn't go any further than orgo because N -> O didn't add any new connections to O
         
     def test_re_merging_does_not_stack(self):
         recursively_re_merge_node_via_same_as(self.orga)
