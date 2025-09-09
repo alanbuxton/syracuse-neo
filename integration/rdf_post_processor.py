@@ -116,23 +116,25 @@ class RDFPostProcessor(object):
     def merge_nodes(self,source_node_tmp_uri, target_node_tmp_uri, field_to_update="internalMergedSameAsHighToUri"):
         source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp_uri)
         target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp_uri)
-        logger.info(f"Merging {source_node_tmp_uri} ({source_node2.uri}) into {target_node_tmp_uri} ({target_node2.uri})")
+        if source_node2 is None or target_node2 is None:
+            raise ValueError(f"source: {source_node2} or target: {target_node2} is None")
+        logger.debug(f"Merging {source_node_tmp_uri} ({source_node2.uri}) into {target_node_tmp_uri} ({target_node2.uri})")
         if source_node2.internalMergedSameAsHighToUri is not None:
-            logger.info(f"{source_node2.uri} is already merged into {source_node2.internalMergedSameAsHighToUri}, not merging again")
+            logger.debug(f"{source_node2.uri} is already merged into {source_node2.internalMergedSameAsHighToUri}, not merging again")
             return False
-        if target_node2.internalDocId <= source_node2.internalDocId:
+        if target_node2.internalDocId <= source_node2.internalDocId: # type: ignore
             source_node = source_node2
             target_node = target_node2
         else:
-            logger.info(f"Flipping them round because {source_node2.internalDocId} is lower then {target_node2.internalDocId}")
+            logger.debug(f"Flipping them round because {source_node2.internalDocId} is lower then {target_node2.internalDocId}")
             source_node = target_node2
             target_node = source_node2
         if source_node.uri == target_node.uri:
-            logger.info("Nodes are already merged to the same target, skipping")
+            logger.debug("Nodes are already merged to the same target, skipping")
             return False
         Resource.merge_node_connections(source_node,target_node,field_to_update=field_to_update)
         return True
-    
+        
     def add_document_extract_to_relationship(self):
         logger.info("Adding document extract to relationship")
         query = """
@@ -201,8 +203,34 @@ def update_duplicated_resource_ids():
             query = f"MATCH (n: Resource {{uri:'{uri}'}}) SET n.internalId = {current_max_id}"
             db.cypher_query(query)
     
+def recursively_re_merge_node_via_same_as(source_node,live_mode=False):
+    target_uri = source_node.internalMergedSameAsHighToUri
+    if target_uri is None:
+        return
+    target_node = Resource.get_by_uri(target_uri)
+    if target_node is None:
+        return None
+    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=True, live_mode=live_mode)
+    if res is True:
+        recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode)
 
 
+def re_merge_all_orgs(live_mode=False, start_from=0, limit=1000):
+    logger.info(f"Re-merging orgs starting from {start_from}")
+    org_query = f"MATCH (n: Resource&Organization) WHERE n.internalId >= {start_from} AND n.internalMergedSameAsHighToUri IS NOT NULL RETURN n ORDER BY n.internalId LIMIT {limit}"
+    orgs, _ = db.cypher_query(org_query, resolve_objects=True)
+    if len(orgs) == 0:
+        return
+    max_id = start_from
+    cnt = 0
+    for org_row in orgs:
+        org = org_row[0]
+        assert org.internalId >= max_id, f"Working on {org.uri} with internal id {org.internalId} - expected to be higher than {max_id}"
+        max_id = org.internalId
+        recursively_re_merge_node_via_same_as(org,live_mode=live_mode)
+        cnt += 1
+    logger.info(f"Processed {cnt} orgs")
+    re_merge_all_orgs(live_mode=live_mode,start_from=max_id + 1)
 
     
     

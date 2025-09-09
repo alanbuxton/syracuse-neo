@@ -367,10 +367,15 @@ class Resource(StructuredNode):
     
 
     @staticmethod
-    def merge_node_connections(source_node, target_node, field_to_update="internalMergedSameAsHighToUri"):
+    def merge_node_connections(source_node, target_node, field_to_update="internalMergedSameAsHighToUri",
+                               run_as_re_merge:bool =False,live_mode: bool=True):
         '''
             Copy/Merge relationships from source_node to target_node
+
+            re-merge is needed if we've reloaded an existing node A that was already merged into node B
+            This will copy any new relationships, but won't increment weight for existing ones
         '''
+        was_changed = False
         for rel_key,_ in source_node.all_raw_relationships:
             if rel_key.startswith("sameAs"):
                 logger.debug(f"ignoring {rel_key}")
@@ -386,23 +391,32 @@ class Resource(StructuredNode):
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
-                    already_connected.weight += old_rel.weight
-                    already_connected.save()
+                    if run_as_re_merge is False: # if re-merging don't update existing nodes. This does mean we could have some nodes with lower weight than usual, but I'm assuming it's not material
+                        already_connected.weight += old_rel.weight
+                        already_connected.save()
+                        was_changed = True
                 else:
+                    if run_as_re_merge is True:
+                        logger.debug(f"{source_node.uri} -> {target_node.uri}: {rel_key} {other_node.uri}")
                     new_rel = target_node.dict_of_attribs[rel_key].connect(other_node)
                     if hasattr(old_rel, 'documentExtract'):
                         new_rel.documentExtract = old_rel.documentExtract
                     new_rel.weight = old_rel.weight
                     new_rel.save()
-        if field_to_update == "internalMergedSameAsHighToUri":
-            source_node.internalMergedSameAsHighToUri = target_node.uri
-        elif field_to_update == "internalMergedActivityWithSimilarRelationshipsToUri":
-            source_node.internalMergedActivityWithSimilarRelationshipsToUri = target_node.uri
-        else:
-            raise ValueError(f"Merging but have not selected a valid field to update {field_to_update}")
-        source_node.save()
-        target_node.save()
-
+                    was_changed = True
+        if was_changed is True and live_mode is True: 
+            logger.debug(f"LIVE MODE - SAVING CHANGES")
+            target_node.save()
+            if run_as_re_merge is False:
+                if field_to_update == "internalMergedSameAsHighToUri":
+                    source_node.internalMergedSameAsHighToUri = target_node.uri
+                elif field_to_update == "internalMergedActivityWithSimilarRelationshipsToUri":
+                    source_node.internalMergedActivityWithSimilarRelationshipsToUri = target_node.uri
+                else:
+                    raise ValueError(f"Merging but have not selected a valid field to update {field_to_update}")
+                source_node.save()
+        return was_changed
+   
     def to_typesense_doc(self) -> Union[list,dict]:
         return {}
     

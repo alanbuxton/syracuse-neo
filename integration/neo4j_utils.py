@@ -67,6 +67,12 @@ def do_n10s_config(overwrite=False):
     logger.info(query)
     db.cypher_query(query)
 
+def rerun_all_redundant_same_as():
+    apoc_query_unset_flag = '''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NOT NULL RETURN *","REMOVE n1.deletedRedundantSameAsAt",{})'''
+    logger.info("Unsetting all deletedRedundantSameAsAt flags")
+    db.cypher_query(apoc_query_unset_flag)
+    apoc_del_redundant_same_as()
+
 def apoc_del_redundant_same_as():
     ts = time.time()
     output_same_as_stats("Before apoc_del_redundant_same_as")
