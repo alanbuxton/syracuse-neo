@@ -423,6 +423,9 @@ class Resource(StructuredNode):
     typesense_collection = ""
     
     def index_in_typesense(self):
+        use_typesense = settings.INDEX_IN_TYPESENSE_ON_SAVE
+        if use_typesense is False:
+            return
         client = typesense.Client(settings.TYPESENSE_CONFIG)
         documents = self.to_typesense_doc()
         try:

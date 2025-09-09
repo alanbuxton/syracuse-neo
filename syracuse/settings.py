@@ -310,3 +310,5 @@ MIN_DOC_COUNT_FOR_ARTICLE_STATS=50
 FLAGS = {
     'FEATURE_TYPESENSE': [],
 }
+
+INDEX_IN_TYPESENSE_ON_SAVE=os.environ.get('INDEX_IN_TYPESENSE_ON_SAVE', 'True').lower() in ('t', 'true', '1', 'yes', 'on')
