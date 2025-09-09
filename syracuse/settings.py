@@ -195,11 +195,6 @@ LOGGING = {
 EMAIL_BACKEND = 'syracuse.email_backend.BrevoEmailBackend'
 
 # Brevo SMTP configuration
-EMAIL_HOST = os.environ["EMAIL_HOST"]
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT","587"))
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
 
 # Neomodel
