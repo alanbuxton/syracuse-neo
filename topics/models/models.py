@@ -397,7 +397,7 @@ class Resource(StructuredNode):
                         was_changed = True
                 else:
                     if run_as_re_merge is True:
-                        logger.debug(f"{source_node.uri} -> {target_node.uri}: {rel_key} {other_node.uri}")
+                        logger.info(f"{source_node.uri} -> {target_node.uri}: {rel_key} {other_node.uri}")
                     new_rel = target_node.dict_of_attribs[rel_key].connect(other_node)
                     if hasattr(old_rel, 'documentExtract'):
                         new_rel.documentExtract = old_rel.documentExtract

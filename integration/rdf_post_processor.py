@@ -214,23 +214,29 @@ def recursively_re_merge_node_via_same_as(source_node,live_mode=False):
     if res is True:
         recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode)
 
+def re_merge_all_orgs_apoc(live_mode=False):
+    logger.info("Started re-merge")
+    apoc_query = '''CALL apoc.periodic.iterate(
+                        "MATCH (a: Resource&Organization)-[:sameAsHigh]-(b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri RETURN a, b",
+                        "MATCH (a)-[r]-(other) 
+                        WHERE type(r) <> 'sameAsHigh'
+                        AND NOT EXISTS {(b)-[r]-(other)}
+                        SET a.re_merge_candidate = true",
+                        {batchSize: 100, parallel: true}
+                        )
+                        '''   
+    _ = db.cypher_query(apoc_query)
+    logger.info("Finished apoc query")
+    process_batch_of_re_merge_candidates(live_mode=live_mode)
 
-def re_merge_all_orgs(live_mode=False, start_from=0, limit=1000):
-    logger.info(f"Re-merging orgs starting from {start_from}")
-    org_query = f"MATCH (n: Resource&Organization) WHERE n.internalId >= {start_from} AND n.internalMergedSameAsHighToUri IS NOT NULL RETURN n ORDER BY n.internalId LIMIT {limit}"
-    orgs, _ = db.cypher_query(org_query, resolve_objects=True)
-    if len(orgs) == 0:
-        return
-    max_id = start_from
-    cnt = 0
+def process_batch_of_re_merge_candidates(live_mode=False, limit=1000):
+    orgs, _ = db.cypher_query(f"MATCH (a) WHERE a.re_merge_candidate = true RETURN a ORDER BY a.internalId DESC LIMIT {limit}", resolve_objects=True)
+    uris = []
     for org_row in orgs:
         org = org_row[0]
-        assert org.internalId >= max_id, f"Working on {org.uri} with internal id {org.internalId} - expected to be higher than {max_id}"
-        max_id = org.internalId
+        uris.append(org.uri)
         recursively_re_merge_node_via_same_as(org,live_mode=live_mode)
-        cnt += 1
-    logger.info(f"Processed {cnt} orgs")
-    re_merge_all_orgs(live_mode=live_mode,start_from=max_id + 1)
-
-    
-    
+    _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.uri in {uris} REMOVE a.re_merge_candidate")
+    logger.info(f"Processed {limit} records")
+    if len(orgs) > 0:
+        process_batch_of_re_merge_candidates(live_mode=live_mode, limit=limit)

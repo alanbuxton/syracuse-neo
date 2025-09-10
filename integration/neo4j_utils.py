@@ -68,7 +68,7 @@ def do_n10s_config(overwrite=False):
     db.cypher_query(query)
 
 def rerun_all_redundant_same_as():
-    apoc_query_unset_flag = '''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NOT NULL RETURN *","REMOVE n1.deletedRedundantSameAsAt",{})'''
+    apoc_query_unset_flag = '''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NOT NULL RETURN *","REMOVE n1.deletedRedundantSameAsAt",{batchSize: 1000, parallel: true})'''
     logger.info("Unsetting all deletedRedundantSameAsAt flags")
     db.cypher_query(apoc_query_unset_flag)
     apoc_del_redundant_same_as()
@@ -78,7 +78,7 @@ def apoc_del_redundant_same_as():
     output_same_as_stats("Before apoc_del_redundant_same_as")
     apoc_query_high = f'CALL apoc.periodic.iterate("MATCH (n1:Resource)-[r1:sameAsHigh]->(n2:Resource)-[r2:sameAsHigh]->(n1) where elementId(n1) < elementId(n2) AND n1.deletedRedundantSameAsAt IS NULL AND n2.deletedRedundantSameAsAt IS NULL RETURN *","DELETE r2",{{}})'
     db.cypher_query(apoc_query_high)
-    apoc_query_set_flag = f'''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NULL RETURN *","SET n1.deletedRedundantSameAsAt = {ts}",{{}})'''
+    apoc_query_set_flag = f'''CALL apoc.periodic.iterate("MATCH (n1:Resource) WHERE n1.deletedRedundantSameAsAt IS NULL RETURN *","SET n1.deletedRedundantSameAsAt = {ts}",{{batchSize: 1000, parallel: true}})'''
     db.cypher_query(apoc_query_set_flag)
     output_same_as_stats("After apoc_del_redundant_same_as")
 
