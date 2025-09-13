@@ -15,14 +15,14 @@ class TypesenseService:
     def __init__(self):
         self.client = typesense.Client(settings.TYPESENSE_CONFIG)
     
-    def create_collections(self, collection_names: list[str]):
+    def create_collections(self, collection_schemas: list[dict]):
         """Create Typesense collections for indexing"""     
-        for collection_name in collection_names:
+        for collection_schema in collection_schemas:
             try:
-                self.client.collections.create(collection_name)
-                logger.info(f"Created {collection_name} collection")
+                self.client.collections.create(collection_schema)
+                logger.info(f"Created {collection_schema['name']} collection")
             except Exception as e:
-                logger.warning(f"Couldn't create {collection_name} - might already exist: {e}")
+                logger.warning(f"Couldn't create {collection_schema['name']} - might already exist: {e}")
 
 
     def search(self, name, collection_name, query_by="name",limit=100): 
@@ -34,23 +34,40 @@ class TypesenseService:
         results = search_result['hits']
         return results
 
-
-    def vector_search(self, query_vector, collection_name, query_field="embedding", limit=100):
-        # Use multi-search for vector-only queries
+    def vector_search_multi(self, query_vector, collection_names, query_field="embedding", limit=100):
         multi_search_queries = {
+            'union': True, # Currently not used see https://github.com/typesense/typesense-python/pull/96#event-19083778984
             'searches': [
-                {
+                self.build_query(query_vector, x, query_field, limit) for x in collection_names
+            ]
+        }
+        return self.perform_multi_search(multi_search_queries)
+
+    def build_query(self, query_vector, collection_name, query_field, limit):
+        return  {
                     'collection': collection_name,
                     'q': '*',
                     'vector_query': f'{query_field}:([{",".join(map(str, query_vector))}], k:{limit})',
                     'exclude_fields': 'embedding'  # Don't return the vector in results
                 }
+
+    def vector_search(self, query_vector, collection_name, query_field="embedding", limit=100):
+        # Use multi-search for vector-only queries
+        multi_search_queries = {
+            'searches': [
+                self. build_query(query_vector, collection_name, query_field, limit)
             ]
         }
+        return self.perform_multi_search(multi_search_queries)
+
+    def perform_multi_search(self, multi_search_queries):
         res = self.client.multi_search.perform(multi_search_queries)
-        results = res['results']
-        return results[0]['hits']
-    
+        matches = []
+        for val in res['results']:
+            if val['found'] > 0:
+                matches.extend(val['hits'])
+        return matches
+
     def search_by_uri(self, uri):
         searches = [
             {'collection': coll_name,
@@ -59,14 +76,10 @@ class TypesenseService:
             for coll_name in self.all_collection_names()
         ]
         multi_search_queries = {
+            'union': True,
             'searches': searches
         }
-        res = self.client.multi_search.perform(multi_search_queries)
-        matches = []
-        for val in res['results']:
-            if val['found'] > 0:
-                matches.extend(val['hits'])
-        return matches
+        return self.perform_multi_search(multi_search_queries)
 
     def all_collection_names(self):
         colls = self.client.collections.retrieve()

@@ -13,6 +13,16 @@ from topics.services.typesense_service import TypesenseService
 
 logger = logging.getLogger(__name__)
 
+ABOUT_US_QUERY = '''MATCH (n:Resource&AboutUs)
+WHERE n.name_embedding_json IS NULL
+AND n.name IS NOT NULL
+RETURN n.uri as uri, n.name as name'''
+
+INDUSTRY_SECTOR_UPDATE_QUERY = '''MATCH (n:Resource&IndustrySectorUpdate)
+WHERE n.industry_embedding_json IS NULL
+AND n.industry IS NOT NULL
+RETURN n.uri as uri, n.industry as industry'''
+
 NEW_ORGANIZATION_INDUSTRY_QUERY = '''MATCH (n:Resource&Organization)
 WHERE n.industry_embedding IS NULL
 AND n.industry IS NOT NULL RETURN n.uri as uri, n.industry as industry'''
@@ -45,11 +55,40 @@ def create_new_embeddings(uri=URI, auth=AUTH, model=MODEL, really_run_me=CREATE_
     driver = setup(uri, auth)
     create_industry_cluster_representative_doc_embeddings(driver,model)
     create_organization_industry_embeddings(driver,model)
+    create_entity_embeddings(driver, model, ABOUT_US_QUERY, 'name' )
+    create_entity_embeddings(driver, model, INDUSTRY_SECTOR_UPDATE_QUERY, 'industry', min_words=1)
+
 
 def setup(uri=URI, auth=AUTH):
     driver = neo4j.GraphDatabase.driver(uri, auth=auth)
     driver.verify_connectivity()
     return driver
+
+def create_entity_embeddings(driver, model, query, fieldname, limit_per_query=10000, min_words=2):
+    batch_size = 100
+    batch_n = 1
+    batch_for_update = []
+    embedding_field = f'{fieldname}_embedding_json'
+    query_with_limit = f"{query} LIMIT {limit_per_query}"
+    logger.info(f"create_entity_embeddings with {fieldname} and query {query_with_limit[:100]}")
+    got_records = False
+    with driver.session(database=DB_NAME) as session:
+        result = session.run(query_with_limit)
+        for record in result:
+            got_records = True
+            source_vals = record.get(fieldname) 
+            embeddable_vals = [x for x in source_vals if len(x.split()) >= min_words]
+            embedding = model.encode(embeddable_vals)
+            batch_for_update.append(
+                {'uri':record.get('uri'), embedding_field: embedding}
+            )  
+            if len(batch_for_update) == batch_size:
+                batch_n = import_batch_json(driver, batch_for_update, batch_n, embedding_field)
+                batch_for_update = []
+        import_batch_json(driver, batch_for_update, batch_n, embedding_field)
+    if got_records:
+        create_entity_embeddings(driver, model, query, fieldname, limit_per_query)
+    
 
 def create_organization_industry_embeddings(driver, model):
     batch_size = 100
@@ -91,6 +130,14 @@ def create_industry_cluster_representative_doc_embeddings(driver, model):
                 batch_for_update = []
         import_batch(driver, batch_for_update, batch_n, 'representative_doc_embedding')
 
+def import_batch_json(driver, nodes_with_embeddings, batch_n, field):
+    driver.execute_query(f'''
+    UNWIND $nodes AS node
+    MATCH (n:Resource {{uri: node.uri}})
+    SET n.{field} = apoc.convert.toJson(node.{field})                 
+    ''', nodes=nodes_with_embeddings)
+    logger.info(f'Processed batch {batch_n}.')
+    return batch_n + 1
 
 def import_batch(driver, nodes_with_embeddings, batch_n, field):
     driver.execute_query(f'''
@@ -112,8 +159,15 @@ def create_embeddings_for_strings(strings: list[str], model=MODEL):
         return []
     return [x.tolist() for x in model.encode(strings)]
 
-def do_vector_search_typesense(text: str, collection_name, model=MODEL, limit=100):
+def do_vector_search_typesense(text: str, collection_name: str, model=MODEL, limit=100):
     query_embedding = model.encode(text)
     ts = TypesenseService()
-    ts_vals = ts.vector_search(query_embedding,collection_name=collection_name) or []
+    ts_vals = ts.vector_search(query_embedding, collection_name=collection_name, limit=limit) or []
     return ts_vals
+
+def do_vector_search_typesense_multi_collection(text: str, collection_names: list, model=MODEL, limit=100):
+    query_embedding = model.encode(text)
+    ts = TypesenseService()
+    ts_vals = ts.vector_search_multi(query_embedding, collection_names=collection_names, limit=limit) or []
+    return ts_vals
+

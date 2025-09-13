@@ -1,6 +1,6 @@
 from neomodel import (StructuredNode, StringProperty,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
-    IntegerProperty, StructuredRel)
+    IntegerProperty, StructuredRel, JSONProperty)
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
 from collections import Counter
@@ -769,7 +769,6 @@ class IndustryCluster(Resource):
     
     def to_typesense_doc(self):
         docs = []
-
         # Representative Docs
         rep_docs = self.representativeDoc or []
         rep_embeddings = create_embeddings_for_strings(rep_docs)
@@ -778,24 +777,8 @@ class IndustryCluster(Resource):
                 "id": f"{self.internalId}_rep_{idx}",   # unique per embedding
                 "topic_id": self.topicId,
                 "uri": self.uri,
-                "source_type": "representative_doc",
-                "text": text,
                 "embedding": embedding,
             })
-
-        # Representations
-        reps = self.representation or []
-        rep_embeddings = create_embeddings_for_strings(reps)
-        for idx, (text, embedding) in enumerate(zip(reps, rep_embeddings)):
-            docs.append({
-                "id": f"{self.internalId}_repr_{idx}",
-                "topic_id": self.topicId,
-                "uri": self.uri,
-                "source_type": "representation",
-                "text": text,
-                "embedding": embedding,
-            })
-
         return docs
 
     typesense_collection = "industry_clusters" 
@@ -805,8 +788,7 @@ class IndustryCluster(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
-                {'name': 'uri', 'type': 'string'},
-                {'name': 'topic_id', 'type': 'int32' },
+                {'name': 'topic_id', 'type': 'int32'},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
             'default_sorting_field': 'topic_id',
@@ -1176,7 +1158,6 @@ class Organization(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
-                {'name': 'uri', 'type': 'string'},
                 {'name': 'name', 'type': 'string[]'},
                 {'name': 'industry', 'type': 'string[]'},
                 {'name': 'internal_doc_id', 'type': 'int64'},
@@ -1413,6 +1394,35 @@ class Product(Resource):
 
 class AboutUs(Resource):
     aboutUs = RelationshipFrom('Organization','hasAboutUs', model=WeightedRel)
+    name_embedding_json = JSONProperty()
+    
+    def to_typesense_doc(self) -> Union[list,dict]:
+        docs = []
+        jsons = self.name_embedding_json or []
+        for idx, embedding in enumerate(jsons):
+            docs.append({
+                "id": f"{self.internalId}_about_{idx}",
+                "internal_id": self.internalId,
+                "uri": self.uri,
+                "embedding": embedding,
+            })
+        return docs
+    
+    typesense_collection = "about_us"
+
+    @classmethod
+    def typesense_schema(cls):
+        schema = {
+            'name': cls.typesense_collection,
+            'fields': [
+                {'name': 'uri', 'type': 'string'},
+                {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
+            ],
+            'default_sorting_field': 'internal_id',
+        }
+        return schema
+
 
 class AnalystRatingActivity(ActivityMixin, Resource):
     analystRating = RelationshipFrom('Organization','hasAnalystRatingActivity', model=WeightedRel) 
@@ -1502,3 +1512,31 @@ class IndustrySectorUpdate(Resource):
     documentExtract = StringProperty()
     industry = ArrayProperty(StringProperty())
     industrySubsector = ArrayProperty(StringProperty())
+    industry_embedding_json = JSONProperty()
+    
+    def to_typesense_doc(self) -> Union[list,dict]:
+        docs = []
+        jsons = self.industry_embedding_json or []
+        for idx, embedding in enumerate(jsons):
+            docs.append({
+                "id": f"{self.internalId}_about_{idx}",
+                "uri": self.uri,
+                "internal_id": self.internalId,
+                "embedding": embedding,
+            })
+        return docs
+    
+    typesense_collection = "industry_sector_update"
+
+    @classmethod
+    def typesense_schema(cls):
+        schema = {
+            'name': cls.typesense_collection,
+            'fields': [
+                {'name': 'uri', 'type': 'string'},
+                {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
+            ],
+            'default_sorting_field': 'internal_id',
+        }
+        return schema

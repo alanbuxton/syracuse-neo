@@ -4,6 +4,7 @@ import typesense
 import importlib
 import logging
 from neomodel import db
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +24,8 @@ class Command(BaseCommand):
         parser.add_argument(
             '--batch-size',
             type=int,
-            default=1000,
-            help='Number of entities to process in each batch (default: 1000)'
+            default=40, # default per https://typesense.org/docs/29.0/api/documents.html#index-multiple-documents
+            help='Number of entities to process in each batch (default: 40)'
         )
         parser.add_argument(
             '--recreate-collection',
@@ -41,6 +42,18 @@ class Command(BaseCommand):
             action='store_true',
             help='Skip confirmation prompt'
         )
+        parser.add_argument(
+            '--limit',
+            type=int,
+            default=0,
+            help='Max docs to process (0 means no limit)'
+        )
+        parser.add_argument(
+            '--sleep',
+            type=int,
+            default=0,
+            help="Sleep time between batches"
+        )
 
 
     def handle(self, *args, **options):
@@ -49,6 +62,8 @@ class Command(BaseCommand):
         recreate_collection = options['recreate_collection']
         dry_run = options['dry_run']
         force = options['force']
+        limit = options['limit']
+        sleep_time = options['sleep']
 
         # Import the model class
         try:
@@ -100,21 +115,28 @@ class Command(BaseCommand):
             logger.info(f"DRY RUN complete. Would have refreshed {total_count} documents.")
             return
 
+        if limit == 0:
+            max_items = total_count
+        else:
+            max_items = limit if total_count > limit else total_count
+
         # Execute the refresh
         self.refresh_typesense_collection(
             client, model_class, collection_name, label, 
-            batch_size, total_count, recreate_collection
+            batch_size, max_items, recreate_collection,
+            sleep_time
         )
 
     def get_typesense_client(self):
         """Initialize Typesense client from Django settings"""
         # Adjust these settings based on your configuration
-        typesense_config = settings.TYPESENSE_CONFIG
+        typesense_config = settings.TYPESENSE_CONFIG | {'connection_timeout_seconds':60}
         return typesense.Client(typesense_config)
 
 
     def refresh_typesense_collection(self, client, model_class, collection_name, 
-                                   label, batch_size, total_count, recreate_collection):
+                                   label, batch_size, total_count, recreate_collection,
+                                   sleep_time):
         """Main refresh logic"""
         
         # Handle collection creation/recreation
@@ -203,6 +225,7 @@ class Command(BaseCommand):
                 
                 processed += batch_processed
                 logger.info(f"Processed {processed}/{total_count} documents")
+                time.sleep(sleep_time)
                 
             except Exception as e:
                 logger.error(f"Error processing batch: {e}")

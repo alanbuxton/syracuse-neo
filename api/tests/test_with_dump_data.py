@@ -45,7 +45,7 @@ from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
-from topics.services.typesense_service import reload_typesense
+from topics.management.commands.refresh_typesense import Command as RefreshTypesense
 
 '''
     Care these tests will delete neodb data
@@ -1620,3 +1620,10 @@ def do_setup_test_data(max_date,fill_blanks):
     r.run_all_in_order()
     apply_latest_org_embeddings(force_recreate=False)
     refresh_geo_data(max_date=max_date,fill_blanks=fill_blanks)
+
+def reload_typesense():
+    opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False, "limit": 0, "sleep": 0}
+    org_opts = opts | {"model_class": "topics.models.Organization"}
+    ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
+    RefreshTypesense().handle(**org_opts)
+    RefreshTypesense().handle(**ind_opts) 
