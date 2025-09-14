@@ -230,13 +230,15 @@ def re_merge_all_orgs_apoc(live_mode=False):
     process_batch_of_re_merge_candidates(live_mode=live_mode)
 
 def process_batch_of_re_merge_candidates(live_mode=False, limit=1000):
-    orgs, _ = db.cypher_query(f"MATCH (a) WHERE a.re_merge_candidate = true RETURN a ORDER BY a.internalId DESC LIMIT {limit}", resolve_objects=True)
+    logger.info(f"processing batch of re-merge candidates: live_mode {live_mode}, limit {limit}")
+    orgs, _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.re_merge_candidate = true AND a.internalDocId > 0 RETURN a ORDER BY a.internalDocId DESC LIMIT {limit}", 
+                              resolve_objects=True) 
     uris = []
     for org_row in orgs:
         org = org_row[0]
         uris.append(org.uri)
         recursively_re_merge_node_via_same_as(org,live_mode=live_mode)
     _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.uri in {uris} REMOVE a.re_merge_candidate")
-    logger.info(f"Processed {limit} records")
+    logger.info(f"Processed {len(orgs)} records")
     if len(orgs) > 0:
         process_batch_of_re_merge_candidates(live_mode=live_mode, limit=limit)
