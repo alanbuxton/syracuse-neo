@@ -1,15 +1,7 @@
 import typesense
 from django.conf import settings
 import logging
-from topics.management.commands.refresh_typesense import Command as RefreshTypesense
 logger = logging.getLogger(__name__)
-
-def reload_typesense():
-    opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False}
-    org_opts = opts | {"model_class": "topics.models.Organization"}
-    ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
-    RefreshTypesense().handle(**org_opts)
-    RefreshTypesense().handle(**ind_opts) 
 
 class TypesenseService:
     def __init__(self):

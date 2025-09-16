@@ -46,6 +46,7 @@ from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
 from topics.management.commands.refresh_typesense import Command as RefreshTypesense
+from topics.industry_geo.industry_typesense import IndustryTypeSenseSearch
 
 '''
     Care these tests will delete neodb data
@@ -121,7 +122,7 @@ class EndToEndTests20140205(TestCase):
         assert "See something unexpected or wrong about this item" in content
         assert "Submit Suggestion" in content
 
-    def test_submits_feedack_and_links_to_originating_page(self):
+    def test_submits_feedback_and_links_to_originating_page(self):
         client = self.client
         uri = "https://1145.am/db/2946625/Start_Fracking_At_Two"
         path = "https://example.com/resource/1145.am/db/2946625/Start_Fracking_At_Two?foo=bar&baz=qux"
@@ -283,7 +284,6 @@ class EndToEndTests20240602(TestCase):
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
         reload_typesense()
         
-
     def setUp(self):
         ts = time.time()
         self.user = get_user_model().objects.create(username=f"test-{ts}")
@@ -324,7 +324,7 @@ class EndToEndTests20240602(TestCase):
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
         self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
-
+        self.ts_search = IndustryTypeSenseSearch()
 
     def test_adds_model_classes_with_multiple_labels(self):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
@@ -1112,7 +1112,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_industry_geo_finder_prep_table(self):
         headers, ind_cluster_rows, text_row  = combined_industry_geo_results("hospital management, healthcare-dedicated investment firm", include_search_by_industry_text=True)
-        assert headers == [OrderedDict([('Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}),
+        self.assertEqual(headers , [OrderedDict([('Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}),
                                         ('Americas', {'colspan': 8, 'classes': 'col-US col-US-CA col-US-FL col-US-MA col-US-NY col-US-PA col-US-TX col-US-WA'}),
                                         ('Asia', {'colspan': 1, 'classes': 'col-SA'})]),
                             OrderedDict([('Sub-Saharan Africa', {'colspan': 2, 'classes': 'col-KE col-NG'}),
@@ -1146,8 +1146,9 @@ class EndToEndTests20240602(TestCase):
                                          ('US-CA', {'colspan': 1, 'classes': 'col-US-CA header_final'}),
                                          ('US-WA', {'colspan': 1, 'classes': 'col-US-WA header_final'}),
                                          ('REPEATED SA', {'colspan': 1, 'classes': 'col-SA header_final'})])]
+        )
 
-        assert ind_cluster_rows[:2] == [{'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487,
+        self.assertEqual(ind_cluster_rows[:2] , [{'uri': 'https://1145.am/db/industry/487_healthcare_investor_investments_investment', 'name': 'Healthcare-Dedicated Investment Firm', 'industry_id': 487,
                                          'vals': [{'value': 0, 'region_code': 'KE'}, {'value': 0, 'region_code': 'NG'},
                                                   {'value': 1, 'region_code': 'US'}, {'value': 0, 'region_code': 'US-NY'},
                                                   {'value': 0, 'region_code': 'US-PA'}, {'value': 0, 'region_code': 'US-MA'},
@@ -1161,14 +1162,16 @@ class EndToEndTests20240602(TestCase):
                                                   {'value': 1, 'region_code': 'US-FL'}, {'value': 1, 'region_code': 'US-TX'},
                                                   {'value': 3, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'},
                                                   {'value': 1, 'region_code': 'SA'}]}]
+        )
 
-        assert text_row == {'uri': '', 'name': 'hospital management, healthcare-dedicated investment firm',
+        self.assertEqual(text_row , {'uri': '', 'name': 'hospital management, healthcare-dedicated investment firm',
                             'vals': [{'value': 1, 'region_code': 'KE'}, {'value': 1, 'region_code': 'NG'},
                                      {'value': 27, 'region_code': 'US'}, {'value': 5, 'region_code': 'US-NY'},
                                      {'value': 3, 'region_code': 'US-PA'}, {'value': 2, 'region_code': 'US-MA'},
                                      {'value': 1, 'region_code': 'US-FL'}, {'value': 5, 'region_code': 'US-TX'},
                                      {'value': 7, 'region_code': 'US-CA'}, {'value': 1, 'region_code': 'US-WA'},
                                      {'value': 1, 'region_code': 'SA'}]}
+        )
 
     def test_remove_not_needed_admin1s_from_individual_cells(self):
         all_industry_ids = [109, 554, 280, 223, 55, 182, 473]
@@ -1191,10 +1194,10 @@ class EndToEndTests20240602(TestCase):
     def test_industry_geo_finder_selection_screen(self):
         client = self.client
         resp = client.get("/industry_geo_finder?industry=software&include_search_by_industry_text=1")
-        assert resp.status_code == status.HTTP_200_OK
+        self.assertEqual(resp.status_code , status.HTTP_200_OK)
         content = str(resp.content)
         table_headers = re.findall(r"\<th.+?\>",content)
-        assert table_headers == ['<th rowspan="6">',
+        self.assertEqual(table_headers , ['<th rowspan="6">',
                                     '<th colspan="13" class="isheader hascontent col-CA col-CA-08 col-US col-US-CA col-US-CT col-US-FL col-US-IL col-US-MN col-US-MS col-US-NY col-US-TN col-US-TX col-US-UT">',
                                     '<th colspan="2" class="isheader hascontent col-JP col-SG">',
                                     '<th colspan="2" class="isheader hascontent col-DE col-DK">',
@@ -1253,6 +1256,7 @@ class EndToEndTests20240602(TestCase):
                                     '<th colspan="1" class="isheader nocontent col-SG header_final">',
                                     '<th colspan="1" class="isheader nocontent col-DK header_final">',
                                     '<th colspan="1" class="isheader nocontent col-DE header_final">']
+        )
 
     def test_industry_geo_finder_preview(self):
         '''
@@ -1322,10 +1326,10 @@ class EndToEndTests20240602(TestCase):
         similar = similar_organizations(org,limit=0.85)
         similar_by_ind_cluster = [(x.uri,set([z.uri for z in y])) for x,y in sorted(similar["industry_cluster"].items())]
         similar_by_ind_text = [x.uri for x in similar["industry_text"]]
-        assert similar_by_ind_cluster == [('https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical',
+        self.assertEqual(similar_by_ind_cluster , [('https://1145.am/db/industry/26_biopharmaceutical_biopharmaceuticals_biopharma_bioceutical',
                                            {'https://1145.am/db/2364647/Mersana_Therapeutics', 'https://1145.am/db/2364624/Parexel_International_Corporation',
-                                            'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'})]
-        assert set(similar_by_ind_text) == set(['https://1145.am/db/2154356/Alector', 'https://1145.am/db/3469136/Aphria_Inc', 'https://1145.am/db/2154354/Apollomics',
+                                            'https://1145.am/db/3473030/Eusa_Pharma', 'https://1145.am/db/2543227/Celgene', 'https://1145.am/db/3473030/Sylvant'})])
+        self.assertEqual(set(similar_by_ind_text) , set(['https://1145.am/db/2154356/Alector', 'https://1145.am/db/3469136/Aphria_Inc', 'https://1145.am/db/2154354/Apollomics',
                                                 'https://1145.am/db/2543227/Bristol-Myers', 'https://1145.am/db/3029576/Bristol-Myers_Squibb',
                                                 'https://1145.am/db/3458145/Cannabics_Pharmaceuticals_Inc', 'https://1145.am/db/3469136/Cc_Pharma',
                                                 'https://1145.am/db/3444769/Control_Solutions_Inc', 'https://1145.am/db/11594/DSM', 'https://1145.am/db/3029576/Eli_Lilly',
@@ -1334,7 +1338,7 @@ class EndToEndTests20240602(TestCase):
                                                 'https://1145.am/db/3461286/Ohr_Pharmaceutical', 'https://1145.am/db/3445572/Professional_Medical_Insurance_Services',
                                                 'https://1145.am/db/3461395/Salvarx', 'https://1145.am/db/3467694/Science_Applications_International_Corp',
                                                 'https://1145.am/db/3029705/Shire', 'https://1145.am/db/2543228/Takeda'])
-
+        )
 
     def test_shows_org_and_activity_counts_by_industry_search_string(self):
         client = self.client
@@ -1591,14 +1595,28 @@ class EndToEndTests20240602(TestCase):
         assert vals[0][1] == 5
         assert vals[1][1] == 4 # ordered by number of connections desc
 
-    def test_typesense_ind_cluster_search(self):
-        vals = IndustryCluster.by_embeddings_typesense("print")
-        uris = [x.uri for x in vals]
-        assert uris == ['https://1145.am/db/industry/88_printing_print_printwear_printer', 
-                        'https://1145.am/db/industry/229_3d_printing_printers_manufacturing', 
-                        'https://1145.am/db/industry/332_labels_label_labeling_packaging', 
-                        'https://1145.am/db/industry/502_copier_document_digitization_scanning', 
-                        'https://1145.am/db/industry/663_stationery_supplies_office_supply']
+    def test_typesense_find_by_industry_1(self):
+        res = self.ts_search.uris_by_industry_text("sweets")
+        expected = [('https://1145.am/db/2947016/Black_Jacks', 2.384185791015625e-07), 
+                    ('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715), 
+                    ('https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets', 0.1603001356124878)]
+        self.assertEqual(res, expected)
+
+    def test_typesense_find_by_industry_2(self):
+        res = self.ts_search.objects_by_industry_text("pharma")
+        as_uris = [(x[0].uri,x[1]) for x in res]
+        expected = [('https://1145.am/db/2543227/Celgene', 1.1920928955078125e-07), 
+                    ('https://1145.am/db/3029576/Eli_Lilly', 1.1920928955078125e-07), 
+                    ('https://1145.am/db/3029576/Bristol-Myers_Squibb', 1.1920928955078125e-07), 
+                    ('https://1145.am/db/3469058/Napajen_Pharma', 1.1920928955078125e-07), 
+                    ('https://1145.am/db/2543227/Bristol-Myers', 1.1920928955078125e-07), 
+                    ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304), 
+                    ('https://1145.am/db/2543228/Takeda', 0.10775858163833618), 
+                    ('https://1145.am/db/3461286/Ohr_Pharmaceutical', 0.10775858163833618), 
+                    ('https://1145.am/db/3029705/Shire', 0.10775858163833618), 
+                    ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377),
+                    ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438)]
+        self.assertEqual(as_uris, expected)
 
 def set_weights():
     # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2
@@ -1625,5 +1643,8 @@ def reload_typesense():
     opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False, "limit": 0, "sleep": 0}
     org_opts = opts | {"model_class": "topics.models.Organization"}
     ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
+    about_us_opts = opts | {"model_class": "topics.models.AboutUs"}
     RefreshTypesense().handle(**org_opts)
     RefreshTypesense().handle(**ind_opts) 
+    RefreshTypesense().handle(**about_us_opts)
+    

@@ -247,8 +247,20 @@ class Resource(StructuredNode):
     def __hash__(self):
         return hash(self.uri)
 
-    def __eq__(self,other):
+    def __eq__(self, other):
         return self.uri == other.uri
+    
+    def __lt__(self, other):
+        # highest degree first, then name
+        self_degree, _ = db.cypher_query(f"MATCH (n: Resource) WHERE n.uri = '{self.uri}' RETURN apoc.node.degree(n)")
+        other_degree, _ = db.cypher_query(f"MATCH (n: Resource) WHERE n.uri = '{other.uri}' RETURN apoc.node.degree(n)")
+        self_degree = self_degree[0][0]
+        other_degree = other_degree[0][0]
+        if self_degree > other_degree:
+            return True
+        elif other_degree > self_degree:
+            return False
+        return self.best_name < other.best_name
 
     def serialize(self):
         self.ensure_connection()
@@ -489,7 +501,6 @@ class Article(Resource):
         vals, _ = db.cypher_query(query)
         return {k: v for k,v in vals}
         
-        
 
     @staticmethod
     def core_sources():
@@ -566,6 +577,7 @@ class IndustryCluster(Resource):
     orgsSecondary = RelationshipFrom("Organization","industryClusterSecondary", model=WeightedRel)
     peoplePrimary = RelationshipFrom("Person","industryClusterPrimary", model=WeightedRel)
     peopleSecondary = RelationshipFrom("Person","industryClusterSecondary", model=WeightedRel)
+    representative_doc_embedding_json = JSONProperty()
 
     @property
     def pk(self):
@@ -733,9 +745,8 @@ class IndustryCluster(Resource):
     @staticmethod
     def by_name(name, limit=10, request=None):
         if flag_enabled("FEATURE_TYPESENSE", request=request):
-            logger.info("Using FEATURE_TYPESENSE")
-            res = IndustryCluster.by_embeddings_typesense(name)
-            return res[:limit]
+            logger.warning("Using FEATURE_TYPESENSE - needs reimplementation")
+            die
         else:
             return IndustryCluster.by_representative_doc_words(name, limit=limit)
 
@@ -753,26 +764,25 @@ class IndustryCluster(Resource):
         flattened = [x[0] for x in res]
         return flattened[:limit]
     
-    @staticmethod
-    def by_embeddings_typesense(name, limit=10):
-        hits = do_vector_search_typesense(name, IndustryCluster.typesense_collection, limit=limit)
-        # returned_vals may have multiple matches per industry - if so then the entry with most matches wins
-        topic_ids = [x['document']['topic_id'] for x in hits]
-        c = Counter(topic_ids).most_common()
-        ordered_topic_ids = [x[0] for x in c]
-        query = f"""MATCH (n: Resource&IndustryCluster) WHERE n.topicId IN {ordered_topic_ids}
-                    RETURN n
-                    ORDER BY apoc.coll.indexOf({ordered_topic_ids}, n.topicId)"""
-        vals, _ = db.cypher_query(query, resolve_objects=True)
-        flattened = [x[0] for x in vals]
-        return flattened[:limit]
+    # @staticmethod
+    # def by_embeddings_typesense(name, limit=10):
+    #     hits = do_vector_search_typesense(name, IndustryCluster.typesense_collection, limit=limit)
+    #     # returned_vals may have multiple matches per industry - if so then the entry with most matches wins
+    #     topic_ids = [x['document']['topic_id'] for x in hits]
+    #     c = Counter(topic_ids).most_common()
+    #     ordered_topic_ids = [x[0] for x in c]
+    #     query = f"""MATCH (n: Resource&IndustryCluster) WHERE n.topicId IN {ordered_topic_ids}
+    #                 RETURN n
+    #                 ORDER BY apoc.coll.indexOf({ordered_topic_ids}, n.topicId)"""
+    #     vals, _ = db.cypher_query(query, resolve_objects=True)
+    #     flattened = [x[0] for x in vals]
+    #     return flattened[:limit]
     
     def to_typesense_doc(self):
         docs = []
         # Representative Docs
-        rep_docs = self.representativeDoc or []
-        rep_embeddings = create_embeddings_for_strings(rep_docs)
-        for idx, (text, embedding) in enumerate(zip(rep_docs, rep_embeddings)):
+        rep_embeddings = self.representative_doc_embedding_json or []
+        for idx, embedding in enumerate(rep_embeddings):
             docs.append({
                 "id": f"{self.internalId}_rep_{idx}",   # unique per embedding
                 "topic_id": self.topicId,
@@ -951,6 +961,7 @@ class Organization(Resource):
     internalCleanName = ArrayProperty(StringProperty())
     internalCleanShortName = ArrayProperty(StringProperty())
     mentionedIn = RelationshipTo('IndustrySectorUpdate', 'mentionedIn', model=WeightedRel)
+    industry_embedding_json = JSONProperty()
 
     @property
     def all_relationships(self):
@@ -1142,14 +1153,25 @@ class Organization(Resource):
         return list(res)
     
     def to_typesense_doc(self):
-        document = {
-            'id': str(self.internalId),
-            'internal_doc_id': self.internalDocId,
-            'uri': self.uri,
-            'name': self.name,
-            'industry': self.industry or [],
-        }
-        return document
+        docs = []
+        jsons = self.industry_embedding_json or []
+        for idx, embedding in enumerate(jsons):
+            docs.append({
+                'id': f"{self.internalId}_industry_{idx}",
+                'internal_id': self.internalId,
+                'uri': self.uri,
+                'name': None,
+                'embedding': embedding,
+            })
+        names = self.name or []
+        docs.append({
+                'id': f"{self.internalId}_names",
+                'internal_id': self.internalId,
+                'uri': self.uri,
+                'name': names,        
+                'embedding': None,
+            })
+        return docs
 
     typesense_collection = "organizations" 
     
@@ -1158,13 +1180,15 @@ class Organization(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
+                {'name': 'uri', 'type': 'string'},
                 {'name': 'name', 'type': 'string[]'},
-                {'name': 'industry', 'type': 'string[]'},
-                {'name': 'internal_doc_id', 'type': 'int64'},
+                {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'embedding', 'type': 'float[]', 'num_dim': 768, 'optional': True}, # industry embedding
             ],
-            'default_sorting_field': 'internal_doc_id'
+            'default_sorting_field': 'internal_id'
         }
         return schema
+
 
 class CorporateFinanceActivity(ActivityMixin, Resource):
     targetDetails = ArrayProperty(StringProperty())

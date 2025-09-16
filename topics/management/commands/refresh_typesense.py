@@ -28,11 +28,6 @@ class Command(BaseCommand):
             help='Number of entities to process in each batch (default: 40)'
         )
         parser.add_argument(
-            '--recreate-collection',
-            action='store_true',
-            help='Drop and recreate the Typesense collection'
-        )
-        parser.add_argument(
             '--dry-run',
             action='store_true',
             help='Show what would be refreshed without actually doing it'
@@ -59,7 +54,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         model_class_path = options['model_class']
         batch_size = options['batch_size']
-        recreate_collection = options['recreate_collection']
         dry_run = options['dry_run']
         force = options['force']
         limit = options['limit']
@@ -105,8 +99,7 @@ class Command(BaseCommand):
 
         # Confirmation prompt
         if not force and not dry_run:
-            action = "recreate and populate" if recreate_collection else "refresh"
-            confirm = input(f"Are you sure you want to {action} collection '{collection_name}' with {total_count} documents? (y/N): ")
+            confirm = input(f"Are you sure you want to recreate collection '{collection_name}' with {total_count} documents? (y/N): ")
             if confirm.lower() != 'y':
                 logger.info("Operation cancelled.")
                 return
@@ -123,7 +116,7 @@ class Command(BaseCommand):
         # Execute the refresh
         self.refresh_typesense_collection(
             client, model_class, collection_name, label, 
-            batch_size, max_items, recreate_collection,
+            batch_size, max_items,
             sleep_time
         )
 
@@ -135,30 +128,20 @@ class Command(BaseCommand):
 
 
     def refresh_typesense_collection(self, client, model_class, collection_name, 
-                                   label, batch_size, total_count, recreate_collection,
+                                   label, batch_size, total_count,
                                    sleep_time):
         """Main refresh logic"""
         
-        # Handle collection creation/recreation
-        if recreate_collection:
-            logger.info(f"Recreating collection '{collection_name}'...")
-            try:
-                client.collections[collection_name].delete()
-                logger.info(f"Deleted existing collection '{collection_name}'")
-            except Exception:
-                pass  # Collection might not exist
-            
-            schema = model_class.typesense_schema()
-            client.collections.create(schema)
-            logger.info(f"Created collection '{collection_name}'")
-        else:
-            # Clear existing documents
-            try:
-                client.collections[collection_name].documents.delete({'filter_by': '*'})
-                logger.info(f"Cleared existing documents from '{collection_name}'")
-            except Exception as e:
-                logger.error(f"Could not clear collection: {e}")
-                raise
+        logger.info(f"Recreating collection '{collection_name}'...")
+        try:
+            client.collections[collection_name].delete()
+            logger.info(f"Deleted existing collection '{collection_name}'")
+        except Exception:
+            pass  # Collection might not exist
+        
+        schema = model_class.typesense_schema()
+        client.collections.create(schema)
+        logger.info(f"Created collection '{collection_name}'")
 
         # Process in batches
         processed = 0
@@ -231,7 +214,7 @@ class Command(BaseCommand):
                 logger.error(f"Error processing batch: {e}")
                 raise
         
-        logger.info(f"Successfully refreshed {processed} documents in collection '{collection_name}'")
+        logger.info(f"Completed processing {processed} documents in collection '{collection_name}'")
 
         # Show collection stats
         try:
