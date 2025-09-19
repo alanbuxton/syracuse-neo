@@ -220,7 +220,10 @@ def re_merge_all_orgs_apoc(live_mode=False):
                         "MATCH (a: Resource&Organization)-[:sameAsHigh]-(b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri RETURN a, b",
                         "MATCH (a)-[r]-(other) 
                         WHERE type(r) <> 'sameAsHigh'
-                        AND NOT EXISTS {(b)-[r]-(other)}
+                        AND type(r) <> 'industryClusterSecondary'
+                        AND type(r) <> 'documentSource'
+                        AND other.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
+                        AND NOT EXISTS {MATCH (b)-[r2]-(other) WHERE type(r2) = type(r)}
                         SET a.re_merge_candidate = true",
                         {batchSize: 100, parallel: true}
                         )

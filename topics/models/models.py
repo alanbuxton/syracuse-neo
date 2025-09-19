@@ -397,25 +397,27 @@ class Resource(StructuredNode):
                     logger.debug("internal key, skipping")
                     continue
                 if hasattr(other_node, "internalMergedActivityWithSimilarRelationshipsToUri") and (other_node.internalMergedActivityWithSimilarRelationshipsToUri is not None):
-                    logger.debug(f"{other_node}.uri was already merged, ignoring")
+                    logger.debug(f"{other_node.uri} was already merged, ignoring")
                     continue
                 logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
+                    logger.debug(f"{target_node.uri} is already connected to {other_node.uri} via {rel_key}")
                     if run_as_re_merge is False: # if re-merging don't update existing nodes. This does mean we could have some nodes with lower weight than usual, but I'm assuming it's not material
-                        already_connected.weight += old_rel.weight
-                        already_connected.save()
                         was_changed = True
+                        already_connected.weight += old_rel.weight
+                        if live_mode is True:
+                            already_connected.save()
                 else:
-                    if run_as_re_merge is True:
-                        logger.info(f"{source_node.uri} -> {target_node.uri}: {rel_key} {other_node.uri}")
+                    logger.debug(f"{source_node.uri} -> {target_node.uri}: {rel_key} {other_node.uri}")
                     new_rel = target_node.dict_of_attribs[rel_key].connect(other_node)
                     if hasattr(old_rel, 'documentExtract'):
                         new_rel.documentExtract = old_rel.documentExtract
                     new_rel.weight = old_rel.weight
-                    new_rel.save()
                     was_changed = True
+                    if live_mode is True:
+                        new_rel.save()
         if was_changed is True and live_mode is True: 
             logger.debug(f"LIVE MODE - SAVING CHANGES")
             target_node.save()
