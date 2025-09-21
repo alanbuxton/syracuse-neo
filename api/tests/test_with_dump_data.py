@@ -1612,7 +1612,7 @@ class EndToEndTests20240602(TestCase):
                     ('https://1145.am/db/2543227/Bristol-Myers', 1.1920928955078125e-07), 
                     ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304), 
                     ('https://1145.am/db/2543228/Takeda', 0.10775858163833618), 
-                    # ('https://1145.am/db/3461286/Ohr_Pharmaceutical', 0.10775858163833618), 
+                    ('https://1145.am/db/3461286/Ohr_Pharmaceutical', 0.10775858163833618), 
                     ('https://1145.am/db/3029705/Shire', 0.10775858163833618), 
                     ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377),
                     ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438)]

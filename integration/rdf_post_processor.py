@@ -2,7 +2,8 @@ from topics.models import Resource
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 from neomodel import db
 import logging
-from integration.neo4j_utils import count_relationships, apoc_del_redundant_same_as, get_all_activities_to_merge
+from integration.neo4j_utils import (count_relationships, apoc_del_redundant_same_as, get_all_activities_to_merge,
+                                     rerun_all_redundant_same_as)
 from integration.vector_search_utils import create_new_embeddings
 import time
 logger = logging.getLogger(__name__)
@@ -55,6 +56,9 @@ class RDFPostProcessor(object):
         self.merge_equivalent_activities()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
+        write_log_header("Re-merge orgs")
+        re_merge_all_orgs_apoc(live_mode=True)
+        rerun_all_redundant_same_as()
         write_log_header("adding embeddings")
         create_new_embeddings()
         write_log_header("adding unique resource ids")
@@ -217,7 +221,7 @@ def recursively_re_merge_node_via_same_as(source_node,live_mode=False):
 def re_merge_all_orgs_apoc(live_mode=False):
     logger.info("Started re-merge")
     apoc_query = '''CALL apoc.periodic.iterate(
-                        "MATCH (a: Resource&Organization)-[:sameAsHigh]-(b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri RETURN a, b",
+                        "MATCH (a: Resource&Organization) MATCH (b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri RETURN a, b",
                         "MATCH (a)-[r]-(other) 
                         WHERE type(r) <> 'sameAsHigh'
                         AND type(r) <> 'industryClusterSecondary'
