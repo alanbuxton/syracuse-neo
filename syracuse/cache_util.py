@@ -1,8 +1,6 @@
 from django.core.cache import cache
 import hashlib
-import re
 import redis
-from topics.util import clean_punct
 from django_redis import get_redis_connection
 
 import logging
@@ -38,8 +36,6 @@ def get_versionable_cache(cache_key, version=None):
     return cache.get(key)
 
 def cache_friendly(key):
-    # no_punct = clean_punct(key,"_")
-    # cleaned = re.sub(r"_{2,}","_",no_punct)
     cleaned = key + ""
     if len(cleaned) > 230:
         cleaned = cleaned[:180] + str(cacheable_hash(cleaned[180:]))
@@ -65,7 +61,7 @@ def count_keys(pattern: str, cache_alias: str = "default", chunk_size: int = 100
     Uses SCAN to avoid blocking like KEYS would.
 
     Args:
-        pattern (str): Redis glob-style pattern, e.g. "myprefix:*"
+        pattern (str): Redis glob-style pattern, e.g. "*foo*" 
         cache_alias (str): Django cache alias (default: "default")
         chunk_size (int): Number of keys to fetch per scan step
 
@@ -83,3 +79,19 @@ def count_keys(pattern: str, cache_alias: str = "default", chunk_size: int = 100
             break
 
     return total
+
+def delete_keys_pattern_pipeline(pattern: str, cache_alias: str = "default", batch_size=1000):
+    '''
+        pattern can be e.g. "*foo_*"
+    '''
+    redis_client = get_redis_connection(cache_alias)
+    cursor = 0
+    while True:
+        cursor, keys = redis_client.scan(cursor=cursor, match=pattern, count=batch_size)
+        if keys:
+            pipe = redis_client.pipeline()
+            for key in keys:
+                pipe.delete(key)
+            pipe.execute()
+        if cursor == 0:
+            break

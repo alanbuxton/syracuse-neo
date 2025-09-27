@@ -137,6 +137,17 @@ class EndToEndTests20140205(TestCase):
         feedback_new_cnt = Feedback.objects.count()
         assert feedback_new_cnt == feedback_cnt + 1
 
+    def test_industry_names(self):
+        uri = 'https://1145.am/db/2166549/Play_Sports_Group'
+        r = Resource.get_by_uri(uri)
+        assert r.internalMergedSameAsHighToUri is None
+        assert r.top_industry_names() == ['digital sports media']
+
+        uri = "https://1145.am/db/2543227/Celgene"
+        r = Resource.get_by_uri(uri)
+        assert r.internalMergedSameAsHighToUri is None
+        ns = r.top_industry_names() 
+        assert set(ns) == {'biopharmaceutical', 'pharma'}
 
 class EndToEndTests20190110(TestCase):
 
@@ -1597,9 +1608,9 @@ class EndToEndTests20240602(TestCase):
 
     def test_typesense_find_by_industry_1(self):
         res = self.ts_search.uris_by_industry_text("sweets")
-        expected = [('https://1145.am/db/2947016/Black_Jacks', 2.384185791015625e-07), 
-                    ('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715), 
-                    ('https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets', 0.1603001356124878)]
+        expected = [('https://1145.am/db/2947016/Black_Jacks', 2.384185791015625e-07, 'organizations'), 
+                    ('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715, 'industry_clusters'), 
+                    ('https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets', 0.1603001356124878, 'about_us')]
         self.assertEqual(res, expected)
 
     def test_typesense_find_by_industry_2(self):
@@ -1640,7 +1651,7 @@ def do_setup_test_data(max_date,fill_blanks):
     refresh_geo_data(max_date=max_date,fill_blanks=fill_blanks)
 
 def reload_typesense():
-    opts = {"force":True, "recreate_collection": True, "batch_size": 100, "dry_run": False, "limit": 0, "sleep": 0}
+    opts = {"batch_size":40,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True}
     org_opts = opts | {"model_class": "topics.models.Organization"}
     ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
     about_us_opts = opts | {"model_class": "topics.models.AboutUs"}

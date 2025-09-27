@@ -2052,6 +2052,9 @@
     ns1:foundName "Celgene Corporation" ;
     ns1:internalDocId 3461322 ;
     ns1:name "Celgene" ;
+    ns1:industry "biopharmaceutical" ,
+            "pharmaceuticals",
+            "pharma" ;
     ns1:internalCleanName "celgene" ;
     ns1:sameAsHigh <https://1145.am/db/2152096/Celgene>,
         <https://1145.am/db/2197183/Celgene>,

@@ -4,7 +4,7 @@ from neomodel import db
 import logging
 from integration.neo4j_utils import (count_relationships, apoc_del_redundant_same_as, get_all_activities_to_merge,
                                      rerun_all_redundant_same_as)
-from integration.vector_search_utils import create_new_embeddings
+from integration.embedding_utils import create_new_embeddings
 import time
 logger = logging.getLogger(__name__)
 

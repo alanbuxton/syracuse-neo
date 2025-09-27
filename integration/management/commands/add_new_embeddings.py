@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from integration.vector_search_utils import create_new_embeddings
+from integration.embedding_utils import create_new_embeddings
 import logging
 logger = logging.getLogger(__name__)
 

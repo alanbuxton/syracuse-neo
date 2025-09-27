@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY",'django-insecure-=vq-#5ghwtp7_()k7xi$goljno#*4^)-yaim=q*ql%7nl^r*5#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG",'True').lower() == 'true'
+DEBUG = os.environ.get("DJANGO_DEBUG",'True').lower() in ('t', 'true', '1', 'yes', 'on')
 MOTD = os.environ.get("SYRACUSE_MOTD","")
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","localhost,127.0.0.1").split(",")
@@ -251,10 +251,10 @@ RDF_SLEEP_TIME=int(os.environ.get("RDF_SLEEP_TIME","0"))
 RDF_DUMP_DIR=os.environ.get("RDF_DUMP_DIR","tmp/dump")
 RDF_ARCHIVE_DIR=os.environ.get("RDF_ARCHIVE_DIR","tmp/archive")
 
-USE_GOOGLE_ANALYTICS=os.environ.get("USE_GOOGLE_ANALYTICS","False").lower() == 'true'
+USE_GOOGLE_ANALYTICS=os.environ.get("USE_GOOGLE_ANALYTICS","False").lower() in ('t', 'true', '1', 'yes', 'on')
 
 EMBEDDINGS_MODEL=os.environ.get("EMBEDDINGS_MODEL")
-CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() == 'true' # If false then won't create embeddings for new nodes
+CREATE_NEW_EMBEDDINGS=os.environ.get("CREATE_NEW_EMBEDDINGS","False").lower() in ('t', 'true', '1', 'yes', 'on') # If false then won't create embeddings for new nodes
 GEO_LOCATION_MIN_WEIGHT_PROPORTION=float(os.environ.get("GEO_LOCATION_MIN_WEIGHT_PROPORTION","0.2"))
 INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION=float(os.environ.get("INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION","0.2"))
 
@@ -306,4 +306,4 @@ FLAGS = {
     'FEATURE_TYPESENSE': [],
 }
 
-INDEX_IN_TYPESENSE_ON_SAVE=os.environ.get('INDEX_IN_TYPESENSE_ON_SAVE', 'True').lower() in ('t', 'true', '1', 'yes', 'on')
+INDEX_IN_TYPESENSE_ON_SAVE=os.environ.get('INDEX_IN_TYPESENSE_ON_SAVE', 'False').lower() in ('t', 'true', '1', 'yes', 'on')

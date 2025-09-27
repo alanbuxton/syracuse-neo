@@ -12,6 +12,12 @@ def min_and_max_date_based_on_days_ago(days_ago):
         days_ago = 90
     return min_and_max_date({}, days_diff=days_ago)
 
+def min_date_from_date(max_date=None, days_diff=90, cache_version=None):
+    params = {}
+    if max_date:
+        params["max_date"]=max_date
+    return min_and_max_date(params, days_diff, cache_version)
+
 def min_and_max_date(get_params, days_diff=7, cache_version=None):
     min_date = get_params.get("min_date")
     if isinstance(min_date, str):

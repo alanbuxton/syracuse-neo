@@ -1,21 +1,20 @@
-from neomodel import (StructuredNode, StringProperty,
+from neomodel import (StringProperty, StructuredNode,
     RelationshipTo, Relationship, RelationshipFrom, db, ArrayProperty,
-    IntegerProperty, StructuredRel, JSONProperty)
+    IntegerProperty, JSONProperty, StructuredRel)
 from urllib.parse import urlparse
 from syracuse.neomodel_utils import NativeDateTimeProperty
 from collections import Counter
 from neomodel.cardinality import OneOrMore, One, ZeroOrOne
-from typing import List, Union
+from typing import Union, List
 import cleanco
 from django.conf import settings
 from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in_high_geo_names_locations_for_org
-import typesense
 import logging
-from integration.vector_search_utils import create_embeddings_for_strings, do_vector_search_typesense
 from flags.state import flag_enabled 
+import typesense
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +36,16 @@ def shortest(arr):
     elif isinstance(arr, str):
         return arr # Don't sort if it's just a string
     return sorted(arr,key=len)[0]
+
+def print_friendly(vals, limit = 2):
+    if vals is None:
+        return None
+    first_n = vals[:limit]
+    val = ", ".join(first_n)
+    extras = len(vals[limit:])
+    if extras > 0:
+        val = f"{val} and {extras} more"
+    return val
 
 class WeightedRel(StructuredRel):
     weight = IntegerProperty(default=1)
@@ -465,6 +474,7 @@ class Resource(StructuredNode):
         return self
 
 
+
 class Article(Resource):
     headline = StringProperty(required=True)
     url = Relationship("Resource","url", cardinality=One, model=WeightedRel)
@@ -667,11 +677,7 @@ class IndustryCluster(Resource):
             longest_doc = sorted(ind.representativeDoc,key=len)[-1]
             docs_to_industry_uri.append( (ind.topicId, longest_doc))
         return docs_to_industry_uri
-
-    @property
-    def parents(self):
-        return self.parentsLeft.all() + self.parentsRight.all()
-
+    
     @staticmethod
     def leaf_keywords(ignore_cache=False):
         cache_key = "industry_leaf_keywords"
@@ -779,6 +785,10 @@ class IndustryCluster(Resource):
     #     vals, _ = db.cypher_query(query, resolve_objects=True)
     #     flattened = [x[0] for x in vals]
     #     return flattened[:limit]
+
+    @staticmethod
+    def embedding_field_name():
+        return ""
     
     def to_typesense_doc(self):
         docs = []
@@ -1154,7 +1164,32 @@ class Organization(Resource):
         set_versionable_cache(cache_key, res)
         return list(res)
     
+    def industry_names_from_merged_nodes(self, industry_names):
+        if self.industry:
+            industry_names.extend(self.industry)
+            logger.debug(f"Adding industry names {self.industry} from {self.uri}")
+
+        merged_nodes = Resource.nodes.filter(internalMergedSameAsHighToUri=self.uri)
+        for node in merged_nodes:
+            industry_names = node.industry_names_from_merged_nodes(industry_names)
+
+        return industry_names
+    
+    def top_industry_names(self):
+        cache_key = f"top_ind_names_{self.uri}"
+        res = get_versionable_cache(cache_key)
+        if res:
+            return res
+        inds = self.industry_names_from_merged_nodes([])
+        inds_c = Counter( [x.lower() for x in inds] )
+        over1 = [x for x,y in inds_c.items() if y > 1]
+        set_versionable_cache(cache_key, over1)
+        return over1
+
     def to_typesense_doc(self):
+        '''
+        Collect industry descriptions from any orgs merged into me
+        '''
         docs = []
         jsons = self.industry_embedding_json or []
         for idx, embedding in enumerate(jsons):
@@ -1522,15 +1557,6 @@ class RegulatoryActivity(ActivityMixin, Resource):
         return self.uniquify({"organization": self.regulatory,
                 })
 
-def print_friendly(vals, limit = 2):
-    if vals is None:
-        return None
-    first_n = vals[:limit]
-    val = ", ".join(first_n)
-    extras = len(vals[limit:])
-    if extras > 0:
-        val = f"{val} and {extras} more"
-    return val
 
 class IndustrySectorUpdate(Resource):
     mentionedIn = RelationshipFrom('Organization', 'mentionedIn', model=WeightedRel)

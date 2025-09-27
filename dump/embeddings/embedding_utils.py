@@ -1,5 +1,5 @@
 import pickle
-from integration.vector_search_utils import setup, import_batch_json, create_new_embeddings, import_batch_vector
+from integration.embedding_utils import setup, import_batch_json, create_new_embeddings, import_batch_vector
 from neomodel import db
 import os
 import json

@@ -1,9 +1,10 @@
 import typesense
 from django.conf import settings
+import typing
 import logging
 logger = logging.getLogger(__name__)
 
-class TypesenseService:
+class TypesenseService(object):
     def __init__(self):
         self.client = typesense.Client(settings.TYPESENSE_CONFIG)
     
@@ -57,7 +58,10 @@ class TypesenseService:
         matches = []
         for val in res['results']:
             if val['found'] > 0:
-                matches.extend(val['hits'])
+                for hit in val['hits']:
+                    hit_d = dict(hit)
+                    hit_d['collection_name'] = val['request_params']['collection_name']
+                    matches.append(hit_d)
         return matches
 
     def search_by_uri(self, uri):
@@ -76,3 +80,13 @@ class TypesenseService:
     def all_collection_names(self):
         colls = self.client.collections.retrieve()
         return [x['name'] for x in colls]
+    
+def log_stats(client):
+    metrics = client.metrics.retrieve()
+    logger.info(metrics)
+    stats = client.api_call.get("/stats.json",entity_type=StatsResponse,as_json=True)
+    logger.info(stats)
+    return metrics, stats
+
+class StatsResponse(typing.TypedDict):
+    pass

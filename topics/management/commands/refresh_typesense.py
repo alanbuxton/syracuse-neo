@@ -5,12 +5,23 @@ import importlib
 import logging
 from neomodel import db
 import time
+from topics.services.typesense_service import log_stats
+from topics.neo4j_utils import date_to_cypher_friendly
+from syracuse.date_util import min_date_from_date
+from datetime import date
 
 logger = logging.getLogger(__name__)
 
+
+def refresh_all():
+    base_opts = {"batch_size":100,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True}
+    Command().handle( ** (base_opts | {"model_class":"topics.models.Organization"}) )
+    Command().handle( ** (base_opts | {"model_class":"topics.models.AboutUs"}))
+    Command().handle( ** (base_opts | {"model_class":"topics.models.IndustryCluster"}))
+    Command().handle( ** (base_opts | {"model_class":"topics.models.IndustrySectorUpdate"}))
+
 class ImportError(Exception):
     pass
-
 
 class Command(BaseCommand):
     help = 'Refresh all entities of a specified type in Typesense from neomodel database'
@@ -28,16 +39,6 @@ class Command(BaseCommand):
             help='Number of entities to process in each batch (default: 40)'
         )
         parser.add_argument(
-            '--dry-run',
-            action='store_true',
-            help='Show what would be refreshed without actually doing it'
-        )
-        parser.add_argument(
-            '--force',
-            action='store_true',
-            help='Skip confirmation prompt'
-        )
-        parser.add_argument(
             '--limit',
             type=int,
             default=0,
@@ -49,15 +50,28 @@ class Command(BaseCommand):
             default=0,
             help="Sleep time between batches"
         )
+        parser.add_argument(
+            '--id-starts-after',
+            type=int,
+            default=0,
+            help="Will look for nodes with internalId higher than this"
+        )
+        parser.add_argument(
+            '--save-metrics',
+            default=False,
+            action='store_true'
+        )
 
 
     def handle(self, *args, **options):
         model_class_path = options['model_class']
         batch_size = options['batch_size']
-        dry_run = options['dry_run']
-        force = options['force']
         limit = options['limit']
         sleep_time = options['sleep']
+        max_id = options['id_starts_after']
+        save_metrics = options['save_metrics']
+
+        min_date, _ = min_date_from_date(date.today())
 
         # Import the model class
         try:
@@ -80,16 +94,13 @@ class Command(BaseCommand):
         except Exception as e:
             raise CommandError(f"Could not connect to Typesense: {e}")
 
-        if dry_run:
-            logger.info(f"DRY RUN: Would refresh collection '{collection_name}' with '{label}' nodes")
-
         # Get total count from Neo4j
-        try:
-            count_query = f"MATCH (n:{label}) RETURN count(n) as total"
-            result, _ = db.cypher_query(count_query)
-            total_count = result[0][0] if result else 0
-        except Exception as e:
-            raise CommandError(f"Error counting nodes: {e}")
+        count_query =f'''MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
+                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                AND n.internalMergedSameAsHighToUri IS NULL RETURN COUNT(DISTINCT(n))'''
+
+        result, _ = db.cypher_query(count_query)
+        total_count = result[0][0] if result else 0
 
         if total_count == 0:
             logger.warning(f"No nodes found with label '{label}'")
@@ -97,93 +108,98 @@ class Command(BaseCommand):
 
         logger.info(f"Found {total_count} nodes to refresh in Typesense")
 
-        # Confirmation prompt
-        if not force and not dry_run:
-            confirm = input(f"Are you sure you want to recreate collection '{collection_name}' with {total_count} documents? (y/N): ")
-            if confirm.lower() != 'y':
-                logger.info("Operation cancelled.")
-                return
-
-        if dry_run:
-            logger.info(f"DRY RUN complete. Would have refreshed {total_count} documents.")
-            return
-
         if limit == 0:
             max_items = total_count
         else:
             max_items = limit if total_count > limit else total_count
 
         # Execute the refresh
-        self.refresh_typesense_collection(
+        res = self.refresh_typesense_collection(
             client, model_class, collection_name, label, 
             batch_size, max_items,
-            sleep_time
+            sleep_time, max_id, min_date, save_metrics=save_metrics
         )
 
+        return res
+
     def get_typesense_client(self):
-        """Initialize Typesense client from Django settings"""
-        # Adjust these settings based on your configuration
         typesense_config = settings.TYPESENSE_CONFIG | {'connection_timeout_seconds':60}
         return typesense.Client(typesense_config)
 
 
     def refresh_typesense_collection(self, client, model_class, collection_name, 
                                    label, batch_size, total_count,
-                                   sleep_time):
-        """Main refresh logic"""
+                                   sleep_time, max_id, min_date,
+                                   save_metrics = False):
         
-        logger.info(f"Recreating collection '{collection_name}'...")
-        try:
-            client.collections[collection_name].delete()
-            logger.info(f"Deleted existing collection '{collection_name}'")
-        except Exception:
-            pass  # Collection might not exist
-        
-        schema = model_class.typesense_schema()
-        client.collections.create(schema)
-        logger.info(f"Created collection '{collection_name}'")
+
+        if max_id == 0: # i.e. we want to load everything
+            logger.info(f"Recreating collection '{collection_name}'...")
+            try:
+                client.collections[collection_name].delete()
+                logger.info(f"Deleted existing collection '{collection_name}'")
+            except Exception:
+                pass  # Collection might not exist
+            
+            schema = model_class.typesense_schema()
+            client.collections.create(schema)
+            logger.info(f"Created collection '{collection_name}'")
 
         # Process in batches
         processed = 0
+        all_metrics = []
+        all_stats = []
         
         while processed < total_count:
+            if save_metrics:
+                metrics, stats = log_stats(client)
+                all_metrics.append(metrics)
+                all_stats.append(stats)
+                with open("stats.pickle", "wb") as f:
+                    import pickle
+                    vals = {"metrics":all_metrics, "stats": all_stats}
+                    pickle.dump(vals, f)
+
             batch_num = processed // batch_size + 1
             logger.info(f"Processing batch {batch_num}...")
             
-            skip = processed
             limit = min(batch_size, total_count - processed)
-            
+
             try:
                 # Fetch batch from Neo4j
                 query = f"""
-                MATCH (n:{label})
-                RETURN n
-                SKIP {skip}
+                MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
+                WHERE n.internalId > {max_id}
+                AND art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                AND n.internalMergedSameAsHighToUri IS NULL
+                RETURN DISTINCT(n)
+                ORDER BY n.internalId
                 LIMIT {limit}
                 """
                 
                 results, _ = db.cypher_query(query)
                 
                 if not results:
+                    logger.info("Didn't get any results, quitting")
                     break
-                
+
                 # Convert to Typesense documents
                 documents = []
                 batch_processed = 0
                 
                 for row in results:
-                    try:
-                        node_data = row[0]
-                        node_instance = model_class.inflate(node_data)
-                        doc_or_docs = node_instance.to_typesense_doc()
-                        if isinstance(doc_or_docs, dict):
-                            documents.append(doc_or_docs)
-                        else:
-                            documents.extend(doc_or_docs)
-                        batch_processed += 1
-                    except Exception as e:
-                        logger.error(f"Error converting node to document: {e}")
-                        continue
+                    node_data = row[0]
+                    node_instance = model_class.inflate(node_data)
+                    logger.info(node_instance.uri)
+                    assert node_instance.internalId > max_id, f"{node_instance.internalId} should be higher than {max_id}"
+                    max_id = node_instance.internalId
+                    doc_or_docs = node_instance.to_typesense_doc()
+                    if isinstance(doc_or_docs, dict):
+                        doc_or_docs = [doc_or_docs]
+                    for doc in doc_or_docs:
+                        if doc:
+                            documents.append(doc)
+                    batch_processed += 1
                 
                 # Batch import to Typesense
                 if documents:
@@ -207,14 +223,14 @@ class Command(BaseCommand):
                         raise
                 
                 processed += batch_processed
-                logger.info(f"Processed {processed}/{total_count} documents")
+                logger.info(f"Processed {processed}/{total_count} nodes ({len(documents)} docs). Max id {max_id}")
                 time.sleep(sleep_time)
                 
             except Exception as e:
                 logger.error(f"Error processing batch: {e}")
                 raise
         
-        logger.info(f"Completed processing {processed} documents in collection '{collection_name}'")
+        logger.info(f"Completed processing {processed} nodes in collection '{collection_name}'")
 
         # Show collection stats
         try:

@@ -22,10 +22,8 @@ from topics.industry_geo import geo_to_country_admin1
 
 logger = logging.getLogger(__name__)
 
-
 def cached_activity_stats_last_updated_date():
     return get_versionable_cache("activity_stats_last_updated")
-
 
 def org_uris_by_industry_id_and_or_geo_code(industry_topic_id,geo_code,return_orgs_only=False,
                                 combine_same_as_name_only=True):
