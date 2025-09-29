@@ -9,12 +9,13 @@ from topics.services.typesense_service import log_stats
 from topics.neo4j_utils import date_to_cypher_friendly
 from syracuse.date_util import min_date_from_date
 from datetime import date
+from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 
 logger = logging.getLogger(__name__)
 
 
-def refresh_all():
-    base_opts = {"batch_size":100,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True}
+def refresh_all(limit=0):
+    base_opts = {"batch_size":40,"limit":limit,"sleep":0,"id_starts_after":0,"save_metrics":True}
     Command().handle( ** (base_opts | {"model_class":"topics.models.Organization"}) )
     Command().handle( ** (base_opts | {"model_class":"topics.models.AboutUs"}))
     Command().handle( ** (base_opts | {"model_class":"topics.models.IndustryCluster"}))
@@ -64,6 +65,7 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
+        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
         model_class_path = options['model_class']
         batch_size = options['batch_size']
         limit = options['limit']
@@ -107,16 +109,9 @@ class Command(BaseCommand):
             return
 
         logger.info(f"Found {total_count} nodes to refresh in Typesense")
-
-        if limit == 0:
-            max_items = total_count
-        else:
-            max_items = limit if total_count > limit else total_count
-
-        # Execute the refresh
         res = self.refresh_typesense_collection(
             client, model_class, collection_name, label, 
-            batch_size, max_items,
+            batch_size, limit,
             sleep_time, max_id, min_date, save_metrics=save_metrics
         )
 
@@ -128,7 +123,7 @@ class Command(BaseCommand):
 
 
     def refresh_typesense_collection(self, client, model_class, collection_name, 
-                                   label, batch_size, total_count,
+                                   label, batch_size, limit,
                                    sleep_time, max_id, min_date,
                                    save_metrics = False):
         
@@ -145,12 +140,12 @@ class Command(BaseCommand):
             client.collections.create(schema)
             logger.info(f"Created collection '{collection_name}'")
 
-        # Process in batches
-        processed = 0
+        nodes_processed = 0
+        total_docs = 0
         all_metrics = []
         all_stats = []
-        
-        while processed < total_count:
+
+        while (limit == 0 or nodes_processed < limit):
             if save_metrics:
                 metrics, stats = log_stats(client)
                 all_metrics.append(metrics)
@@ -160,10 +155,15 @@ class Command(BaseCommand):
                     vals = {"metrics":all_metrics, "stats": all_stats}
                     pickle.dump(vals, f)
 
-            batch_num = processed // batch_size + 1
+                import_70p = stats.get("import_70Percentile_latency_ms",0)
+                import_70p = float(import_70p)
+                if import_70p > 30:
+                    logger.info(f"latency too high at {import_70p}, backing off")
+                    time.sleep(5)
+                    continue
+                
+            batch_num = nodes_processed // batch_size + 1
             logger.info(f"Processing batch {batch_num}...")
-            
-            limit = min(batch_size, total_count - processed)
 
             try:
                 # Fetch batch from Neo4j
@@ -174,7 +174,7 @@ class Command(BaseCommand):
                 AND n.internalMergedSameAsHighToUri IS NULL
                 RETURN DISTINCT(n)
                 ORDER BY n.internalId
-                LIMIT {limit}
+                LIMIT {batch_size}
                 """
                 
                 results, _ = db.cypher_query(query)
@@ -222,15 +222,18 @@ class Command(BaseCommand):
                         logger.error(f"Error importing batch to Typesense: {e}")
                         raise
                 
-                processed += batch_processed
-                logger.info(f"Processed {processed}/{total_count} nodes ({len(documents)} docs). Max id {max_id}")
+                nodes_processed += batch_processed
+                total_docs += len(documents)
+                av_docs_per_node = total_docs / nodes_processed
+                logger.info(f"Processed {nodes_processed} nodes ({len(documents)} docs). Max id {max_id} "
+                            f"Total docs created {total_docs}, average per node: {av_docs_per_node}")
                 time.sleep(sleep_time)
                 
             except Exception as e:
                 logger.error(f"Error processing batch: {e}")
                 raise
         
-        logger.info(f"Completed processing {processed} nodes in collection '{collection_name}'")
+        logger.info(f"Completed processing {nodes_processed} nodes in collection '{collection_name}'")
 
         # Show collection stats
         try:

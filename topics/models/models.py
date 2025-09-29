@@ -47,6 +47,16 @@ def print_friendly(vals, limit = 2):
         val = f"{val} and {extras} more"
     return val
 
+def regions_from_geonames(geos):
+    regions = set()
+    for geo in geos:
+        admin1 = geo.admin1Code
+        admin1_str = ""
+        if admin1 and admin1 != '00':
+            admin1_str = f"-{admin1}"
+        regions.add( f"{geo.countryCode}{admin1_str}")
+    return regions
+
 class WeightedRel(StructuredRel):
     weight = IntegerProperty(default=1)
 
@@ -973,7 +983,7 @@ class Organization(Resource):
     internalCleanName = ArrayProperty(StringProperty())
     internalCleanShortName = ArrayProperty(StringProperty())
     mentionedIn = RelationshipTo('IndustrySectorUpdate', 'mentionedIn', model=WeightedRel)
-    industry_embedding_json = JSONProperty()
+    top_industry_names_embedding_json = JSONProperty()
 
     @property
     def all_relationships(self):
@@ -1185,29 +1195,43 @@ class Organization(Resource):
         over1 = [x for x,y in inds_c.items() if y > 1]
         set_versionable_cache(cache_key, over1)
         return over1
+    
+    @property
+    def regions(self):
+        return list(regions_from_geonames(self.basedInHighGeoNamesLocation))
 
     def to_typesense_doc(self):
         '''
         Collect industry descriptions from any orgs merged into me
         '''
         docs = []
-        jsons = self.industry_embedding_json or []
+        jsons = self.top_industry_names_embedding_json or []
+        names = self.name or []
+        if len(names) == 0:
+            name0 = None
+            names1plus = []
+        else:
+            name0 = names[0]
+            names1plus = names[1:]
+        regions = self.regions
         for idx, embedding in enumerate(jsons):
             docs.append({
                 'id': f"{self.internalId}_industry_{idx}",
                 'internal_id': self.internalId,
                 'uri': self.uri,
-                'name': None,
+                'name': name0,
+                'region_list': regions,
                 'embedding': embedding,
             })
-        names = self.name or []
-        docs.append({
-                'id': f"{self.internalId}_names",
-                'internal_id': self.internalId,
-                'uri': self.uri,
-                'name': names,        
-                'embedding': None,
-            })
+        for name in names1plus:
+            docs.append({
+                    'id': f"{self.internalId}_names",
+                    'internal_id': self.internalId,
+                    'uri': self.uri,
+                    'name': name,    
+                    'region_list': regions,    
+                    'embedding': None,
+                })
         return docs
 
     typesense_collection = "organizations" 
@@ -1217,9 +1241,9 @@ class Organization(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
-                {'name': 'uri', 'type': 'string'},
-                {'name': 'name', 'type': 'string[]'},
+                {'name': 'name', 'type': 'string'},
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'region_list', 'type': 'string[]'},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768, 'optional': True}, # industry embedding
             ],
             'default_sorting_field': 'internal_id'
@@ -1459,12 +1483,19 @@ class AboutUs(Resource):
     
     def to_typesense_doc(self) -> Union[list,dict]:
         docs = []
+        related_orgs = self.aboutUs.filter(internalMergedSameAsHighToUri__isnull=True)
+        if len(related_orgs) == 0:
+            return docs
+        related_org = related_orgs[0]
+        related_org_locs = related_org.regions
         jsons = self.name_embedding_json or []
         for idx, embedding in enumerate(jsons):
             docs.append({
                 "id": f"{self.internalId}_about_{idx}",
                 "internal_id": self.internalId,
                 "uri": self.uri,
+                "org_uri": related_org.uri,
+                "region_list": related_org_locs,
                 "embedding": embedding,
             })
         return docs
@@ -1476,8 +1507,8 @@ class AboutUs(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
-                {'name': 'uri', 'type': 'string'},
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'region_list', 'type': 'string[]'},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
             'default_sorting_field': 'internal_id',
@@ -1565,15 +1596,21 @@ class IndustrySectorUpdate(Resource):
     industry = ArrayProperty(StringProperty())
     industrySubsector = ArrayProperty(StringProperty())
     industry_embedding_json = JSONProperty()
+    whereHighRaw = ArrayProperty(StringProperty())
+    whereHighClean = ArrayProperty(StringProperty())
+    whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation', model=WeightedRel)
+
     
     def to_typesense_doc(self) -> Union[list,dict]:
         docs = []
         jsons = self.industry_embedding_json or []
+        regions = regions_from_geonames(self.whereHighGeoNamesLocation)
         for idx, embedding in enumerate(jsons):
             docs.append({
-                "id": f"{self.internalId}_about_{idx}",
+                "id": f"{self.internalId}_ind_upd_{idx}",
                 "uri": self.uri,
                 "internal_id": self.internalId,
+                "region_list": list(regions),
                 "embedding": embedding,
             })
         return docs
@@ -1585,8 +1622,8 @@ class IndustrySectorUpdate(Resource):
         schema = {
             'name': cls.typesense_collection,
             'fields': [
-                {'name': 'uri', 'type': 'string'},
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'region_list', 'type': 'string[]'},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
             'default_sorting_field': 'internal_id',

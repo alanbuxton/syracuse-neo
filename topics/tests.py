@@ -28,6 +28,7 @@ from syracuse.date_util import min_and_max_date
 import copy
 from rest_framework import status
 from topics.industry_geo.industry_geo_cypher import INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION, GEO_LOCATION_MIN_WEIGHT_PROPORTION
+from unittest.mock import patch
 
 '''
     Care these tests will delete neodb data
@@ -365,17 +366,13 @@ class TestFamilyTree(TestCase):
 
 class TestDynamicClasses(TestCase):
 
-    @classmethod
-    def setUpTestData(cls):
-        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
-
     def test_can_pickle_dynamic_class(self):
         # Needed for caching in redis
         ts = time.time()
         uri = f"https://example.org/foo/bar/{ts}"
         query = f"CREATE (n: Resource&Person&Organization {{uri:'{uri}'}})"
         db.cypher_query(query)
-        class_factory("OrganizationPerson",(Organization, Person, Resource))
+        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
         obj = Resource.nodes.get_or_none(uri=uri)
         res = pickle.dumps(obj)
         unpickled = pickle.loads(res)
@@ -1008,3 +1005,106 @@ class TestDisentanglingMergedCells(TestCase):
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'), 
             ('https://1145.am/db/9997/orgd',  3, 'https://1145.am/db/article_orgd')
         }
+
+
+class TestTypesenseDocs(TestCase):
+
+    fake_geonames = [
+        GeoNamesLocation(geoNamesId=12345, countryCode="XY", admin1Code=None),
+        GeoNamesLocation(geoNamesId=12346, countryCode="LM", admin1Code="00"),
+        GeoNamesLocation(geoNamesId=12347, countryCode="LM", admin1Code=""),
+        GeoNamesLocation(geoNamesId=12348, countryCode="LM", admin1Code="KK"),
+        GeoNamesLocation(geoNamesId=12349, countryCode="LM", admin1Code="KK"),
+        GeoNamesLocation(geoNamesId=12350, countryCode="LM", admin1Code="LL"),
+    ]
+
+    resource_fields = {
+        "uri":"https://example.org/foo/bar",
+        "internalId":123,
+        "internalMergedSameAsHighToUri": None,
+    }
+
+    embedding1 = [0.1] * 768
+    embedding2 = [0.2] * 768
+ 
+    @patch.object(Organization, "basedInHighGeoNamesLocation")
+    def test_converts_org_object_to_typesense(self, mock_geo):
+        mock_geo.__iter__.return_value = iter(self.fake_geonames)
+        org = Organization( ** (self.resource_fields | 
+                                {"industry":["bar","baz"],
+                                 "name":["foo","qux","qua"], 
+                                 "basedInHighGeoNamesLocation": mock_geo,
+                                 "top_industry_names_embedding_json": [self.embedding1, self.embedding2],
+                                 })
+        )
+        as_ts_doc = org.to_typesense_doc()
+        self.assertEqual( len(as_ts_doc), 4 )
+        self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
+        self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
+        self.assertEqual( as_ts_doc[2]["embedding"], None) # Name info
+        self.assertEqual( as_ts_doc[3]["embedding"], None) # Name info
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'} )
+        self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]))
+        self.assertEqual( set(as_ts_doc[2]["region_list"]), set(as_ts_doc[0]["region_list"]))
+        self.assertEqual( set(as_ts_doc[3]["region_list"]), set(as_ts_doc[0]["region_list"]))
+        self.assertEqual( as_ts_doc[0]["name"], "foo")
+        self.assertEqual( as_ts_doc[1]["name"], "foo")
+        self.assertEqual( as_ts_doc[2]["name"], "qux")
+        self.assertEqual( as_ts_doc[3]["name"], "qua")
+
+
+    @patch.object(IndustrySectorUpdate, "whereHighGeoNamesLocation")
+    def test_converts_ind_sector_update_object_to_typesense(self, mock_geo):
+        mock_geo.__iter__.return_value = iter(self.fake_geonames)
+        ind = IndustrySectorUpdate( ** (self.resource_fields |
+                                   {"whereHighGeoNamesLocation": mock_geo,
+                                   "industry_embedding_json": [self.embedding1, self.embedding2]
+                                   }))
+        as_ts_doc = ind.to_typesense_doc()
+        self.assertEqual( len(as_ts_doc), 2)
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'})
+        self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]) )
+        self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
+        self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
+        self.assertEqual( as_ts_doc[0]["id"], '123_ind_upd_0')
+    
+    @patch.object(Organization, "basedInHighGeoNamesLocation")
+    @patch.object(AboutUs, "aboutUs")
+    def test_converts_about_us_object_to_typesense(self, mock_org_rel, mock_geo):
+        mock_geo.__iter__.return_value = iter(self.fake_geonames)
+        org_uri = "http://example.org/bar/baz"
+        org = Organization( ** (self.resource_fields | 
+                                {"uri": org_uri,
+                                 "industry":["bar","baz"],
+                                 "name":["foo","qux","qua"], 
+                                 "basedInHighGeoNamesLocation": mock_geo,
+                                 "top_industry_names_embedding_json": [self.embedding1, self.embedding2],
+                                 })
+        )
+        
+        mock_org_rel.filter.return_value = [org]
+        about = AboutUs( ** (self.resource_fields) |
+                        {"name_embedding_json": [self.embedding1, self.embedding2],
+                         "aboutUs": mock_org_rel})
+        as_ts_doc = about.to_typesense_doc()
+        self.assertEqual( len(as_ts_doc), 2)
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'})
+        self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]) )
+        self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
+        self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
+        self.assertEqual( as_ts_doc[0]["org_uri"], org_uri)
+        self.assertEqual( as_ts_doc[1]["org_uri"], org_uri)
+        self.assertEqual( as_ts_doc[0]["uri"], "https://example.org/foo/bar")
+        self.assertEqual( as_ts_doc[1]["uri"], "https://example.org/foo/bar")
+
+    def test_converts_ind_cluster_object_to_typesense(self):
+        ind = IndustryCluster( ** (self.resource_fields |
+                                   {"topicId": 99,
+                                    "representative_doc_embedding_json": [self.embedding1, self.embedding2]}
+                                 ))
+        as_ts_doc = ind.to_typesense_doc()
+        self.assertEqual( len(as_ts_doc), 2)
+        self.assertEqual( as_ts_doc[0]["topic_id"], 99)
+        self.assertEqual( as_ts_doc[1]["topic_id"], 99)
+        self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
+        self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
