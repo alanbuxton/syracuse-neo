@@ -218,10 +218,9 @@ def recursively_re_merge_node_via_same_as(source_node,live_mode=False):
     if res is True:
         recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode)
 
-def re_merge_all_orgs_apoc(live_mode=False):
-    logger.info("Started re-merge")
+def mark_re_merge_candidates():
     apoc_query = '''CALL apoc.periodic.iterate(
-                        "MATCH (a: Resource&Organization) MATCH (b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri RETURN a, b",
+                        "MATCH (a: Resource&Organization) MATCH (b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri AND LABELS(a) = LABELS(b) RETURN a, b",
                         "MATCH (a)-[r]-(other) 
                         WHERE type(r) <> 'sameAsHigh'
                         AND type(r) <> 'industryClusterSecondary'
@@ -234,6 +233,10 @@ def re_merge_all_orgs_apoc(live_mode=False):
                         '''   
     _ = db.cypher_query(apoc_query)
     logger.info("Finished apoc query")
+
+def re_merge_all_orgs_apoc(live_mode=False):
+    logger.info("Started re-merge")
+    mark_re_merge_candidates()
     process_batch_of_re_merge_candidates(live_mode=live_mode)
 
 def process_batch_of_re_merge_candidates(live_mode=False, limit=1000):

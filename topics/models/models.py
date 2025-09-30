@@ -12,6 +12,7 @@ from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in_high_geo_names_locations_for_org
+from topics.industry_geo.region_hierarchies import COUNTRIES_WITH_STATE_PROVINCE
 import logging
 from flags.state import flag_enabled 
 import typesense
@@ -47,14 +48,14 @@ def print_friendly(vals, limit = 2):
         val = f"{val} and {extras} more"
     return val
 
-def regions_from_geonames(geos):
+def regions_from_geonames(geos, countries_with_admin1=COUNTRIES_WITH_STATE_PROVINCE):
     regions = set()
     for geo in geos:
+        country_code = geo.countryCode
+        regions.add(country_code)
         admin1 = geo.admin1Code
-        admin1_str = ""
-        if admin1 and admin1 != '00':
-            admin1_str = f"-{admin1}"
-        regions.add( f"{geo.countryCode}{admin1_str}")
+        if country_code in countries_with_admin1 and admin1 and admin1 != '00':
+            regions.add( f"{country_code}-{admin1}")
     return regions
 
 class WeightedRel(StructuredRel):
@@ -405,6 +406,7 @@ class Resource(StructuredNode):
 
             re-merge is needed if we've reloaded an existing node A that was already merged into node B
             This will copy any new relationships, but won't increment weight for existing ones
+
         '''
         was_changed = False
         for rel_key,_ in source_node.all_raw_relationships:
@@ -420,6 +422,9 @@ class Resource(StructuredNode):
                     continue
                 logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
+                if not rel_key in target_node.dict_of_attribs:
+                    logger.debug(f"source: {source_node.uri} target {target_node.uri} rel {rel_key} doesnt exist while trying to connect {other_node.uri}" )
+                    continue
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
                     logger.debug(f"{target_node.uri} is already connected to {other_node.uri} via {rel_key}")
@@ -1483,18 +1488,18 @@ class AboutUs(Resource):
     
     def to_typesense_doc(self) -> Union[list,dict]:
         docs = []
-        related_orgs = self.aboutUs.filter(internalMergedSameAsHighToUri__isnull=True)
-        if len(related_orgs) == 0:
-            return docs
-        related_org = related_orgs[0]
-        related_org_locs = related_org.regions
+        related_org_locs = []
+        related_org_internal_ids = []
+        for related_org in self.aboutUs.filter(internalMergedSameAsHighToUri__isnull=True):
+            related_org_locs.extend(related_org.regions)
+            related_org_internal_ids.append(related_org.internalId)
         jsons = self.name_embedding_json or []
         for idx, embedding in enumerate(jsons):
             docs.append({
                 "id": f"{self.internalId}_about_{idx}",
                 "internal_id": self.internalId,
                 "uri": self.uri,
-                "org_uri": related_org.uri,
+                "org_internal_ids": related_org_internal_ids,
                 "region_list": related_org_locs,
                 "embedding": embedding,
             })
@@ -1605,17 +1610,19 @@ class IndustrySectorUpdate(Resource):
         docs = []
         jsons = self.industry_embedding_json or []
         regions = regions_from_geonames(self.whereHighGeoNamesLocation)
+        org_ids = [x.internalId for x in self.mentionedIn]
         for idx, embedding in enumerate(jsons):
             docs.append({
                 "id": f"{self.internalId}_ind_upd_{idx}",
                 "uri": self.uri,
                 "internal_id": self.internalId,
+                "org_internal_ids": org_ids, 
                 "region_list": list(regions),
                 "embedding": embedding,
             })
         return docs
     
-    typesense_collection = "industry_sector_update"
+    typesense_collection = "industry_sector_updates"
 
     @classmethod
     def typesense_schema(cls):
