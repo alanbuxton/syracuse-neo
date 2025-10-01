@@ -44,8 +44,8 @@ def create_new_embeddings(uri=URI, auth=AUTH, model=MODEL, really_run_me=CREATE_
         logger.info("Not running embeddings - check env var CREATE_NEW_EMBEDDINGS")
         return None
     driver = setup(uri, auth)
-    # create_industry_cluster_representative_doc_embeddings(driver,model)
-    # create_organization_industry_embeddings(driver,model)
+    create_industry_cluster_representative_doc_embeddings(driver,model)
+    create_organization_industry_embeddings(driver,model)
     create_entity_embeddings(driver, model, NEW_INDUSTRY_REPRESENTATIVE_DOCS_QUERY, 'representative_doc')
     create_entity_embeddings(driver, model, NEW_ORGANIZATION_INDUSTRY_QUERY, 'top_industry_names', field_is_method=True, 
                              min_words=1, limit_per_query=1000)

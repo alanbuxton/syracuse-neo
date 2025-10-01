@@ -420,11 +420,11 @@ class Resource(StructuredNode):
                 if hasattr(other_node, "internalMergedActivityWithSimilarRelationshipsToUri") and (other_node.internalMergedActivityWithSimilarRelationshipsToUri is not None):
                     logger.debug(f"{other_node.uri} was already merged, ignoring")
                     continue
-                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 old_rel = source_node.dict_of_raw_attribs[rel_key].relationship(other_node)
                 if not rel_key in target_node.dict_of_attribs:
                     logger.debug(f"source: {source_node.uri} target {target_node.uri} rel {rel_key} doesnt exist while trying to connect {other_node.uri}" )
                     continue
+                logger.info(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
                     logger.debug(f"{target_node.uri} is already connected to {other_node.uri} via {rel_key}")
@@ -1248,7 +1248,7 @@ class Organization(Resource):
             'fields': [
                 {'name': 'name', 'type': 'string'},
                 {'name': 'internal_id', 'type': 'int64'},
-                {'name': 'region_list', 'type': 'string[]'},
+                {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768, 'optional': True}, # industry embedding
             ],
             'default_sorting_field': 'internal_id'
@@ -1513,7 +1513,7 @@ class AboutUs(Resource):
             'name': cls.typesense_collection,
             'fields': [
                 {'name': 'internal_id', 'type': 'int64'},
-                {'name': 'region_list', 'type': 'string[]'},
+                {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
             'default_sorting_field': 'internal_id',
@@ -1630,7 +1630,7 @@ class IndustrySectorUpdate(Resource):
             'name': cls.typesense_collection,
             'fields': [
                 {'name': 'internal_id', 'type': 'int64'},
-                {'name': 'region_list', 'type': 'string[]'},
+                {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
             'default_sorting_field': 'internal_id',

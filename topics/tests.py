@@ -28,7 +28,7 @@ from syracuse.date_util import min_and_max_date
 import copy
 from rest_framework import status
 from topics.industry_geo.industry_geo_cypher import INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION, GEO_LOCATION_MIN_WEIGHT_PROPORTION
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 '''
     Care these tests will delete neodb data
@@ -1011,10 +1011,10 @@ class TestTypesenseDocs(TestCase):
 
     fake_geonames = [
         GeoNamesLocation(geoNamesId=12345, countryCode="XY", admin1Code=None),
-        GeoNamesLocation(geoNamesId=12346, countryCode="LM", admin1Code="00"),
-        GeoNamesLocation(geoNamesId=12347, countryCode="LM", admin1Code=""),
-        GeoNamesLocation(geoNamesId=12348, countryCode="LM", admin1Code="KK"),
-        GeoNamesLocation(geoNamesId=12349, countryCode="LM", admin1Code="KK"),
+        GeoNamesLocation(geoNamesId=12346, countryCode="US", admin1Code="00"),
+        GeoNamesLocation(geoNamesId=12347, countryCode="US", admin1Code="AB"),
+        GeoNamesLocation(geoNamesId=12348, countryCode="US", admin1Code="CA"),
+        GeoNamesLocation(geoNamesId=12349, countryCode="US", admin1Code="CA"),
         GeoNamesLocation(geoNamesId=12350, countryCode="LM", admin1Code="LL"),
     ]
 
@@ -1043,7 +1043,7 @@ class TestTypesenseDocs(TestCase):
         self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
         self.assertEqual( as_ts_doc[2]["embedding"], None) # Name info
         self.assertEqual( as_ts_doc[3]["embedding"], None) # Name info
-        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'} )
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'US', 'US-AB', 'US-CA', 'XY'} )
         self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]))
         self.assertEqual( set(as_ts_doc[2]["region_list"]), set(as_ts_doc[0]["region_list"]))
         self.assertEqual( set(as_ts_doc[3]["region_list"]), set(as_ts_doc[0]["region_list"]))
@@ -1056,13 +1056,19 @@ class TestTypesenseDocs(TestCase):
     @patch.object(IndustrySectorUpdate, "whereHighGeoNamesLocation")
     def test_converts_ind_sector_update_object_to_typesense(self, mock_geo):
         mock_geo.__iter__.return_value = iter(self.fake_geonames)
+
+        mock_rel = MagicMock()
+        mock_rel.all.return_value = []
+        mock_rel._new_traversal = []
+
         ind = IndustrySectorUpdate( ** (self.resource_fields |
                                    {"whereHighGeoNamesLocation": mock_geo,
-                                   "industry_embedding_json": [self.embedding1, self.embedding2]
+                                   "industry_embedding_json": [self.embedding1, self.embedding2],
+                                   "mentionedIn": mock_rel,
                                    }))
         as_ts_doc = ind.to_typesense_doc()
         self.assertEqual( len(as_ts_doc), 2)
-        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'})
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'US', 'US-AB', 'US-CA', 'XY'} )
         self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]) )
         self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
         self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
@@ -1078,6 +1084,7 @@ class TestTypesenseDocs(TestCase):
                                  "industry":["bar","baz"],
                                  "name":["foo","qux","qua"], 
                                  "basedInHighGeoNamesLocation": mock_geo,
+                                 "internalId": 12345,
                                  "top_industry_names_embedding_json": [self.embedding1, self.embedding2],
                                  })
         )
@@ -1088,12 +1095,12 @@ class TestTypesenseDocs(TestCase):
                          "aboutUs": mock_org_rel})
         as_ts_doc = about.to_typesense_doc()
         self.assertEqual( len(as_ts_doc), 2)
-        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'LM-KK', 'LM-LL', 'XY'})
+        self.assertEqual( set(as_ts_doc[0]["region_list"]), {'LM', 'US', 'US-AB', 'US-CA', 'XY'})
         self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]) )
         self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
         self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
-        self.assertEqual( as_ts_doc[0]["org_uri"], org_uri)
-        self.assertEqual( as_ts_doc[1]["org_uri"], org_uri)
+        self.assertEqual( as_ts_doc[0]["org_internal_ids"], [12345])
+        self.assertEqual( as_ts_doc[1]["org_internal_ids"], [12345])
         self.assertEqual( as_ts_doc[0]["uri"], "https://example.org/foo/bar")
         self.assertEqual( as_ts_doc[1]["uri"], "https://example.org/foo/bar")
 

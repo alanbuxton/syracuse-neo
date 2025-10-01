@@ -13,14 +13,6 @@ from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 
 logger = logging.getLogger(__name__)
 
-
-def refresh_all(limit=0):
-    base_opts = {"batch_size":40,"limit":limit,"sleep":0,"id_starts_after":0,"save_metrics":True}
-    Command().handle( ** (base_opts | {"model_class":"topics.models.Organization"}) )
-    Command().handle( ** (base_opts | {"model_class":"topics.models.AboutUs"}))
-    Command().handle( ** (base_opts | {"model_class":"topics.models.IndustryCluster"}))
-    Command().handle( ** (base_opts | {"model_class":"topics.models.IndustrySectorUpdate"}))
-
 class ImportError(Exception):
     pass
 
@@ -62,6 +54,18 @@ class Command(BaseCommand):
             default=False,
             action='store_true'
         )
+        parser.add_argument(
+            '--load_all',
+            default=False,
+            action='store_true',
+            help="Load all data. If not set will load data related to last 90 days docs"
+        )
+        parser.add_argument(
+            '--has-article',
+            default=False,
+            action='store_true',
+            help="If true, then make sure there is a matching Article."
+        )
 
 
     def handle(self, *args, **options):
@@ -72,8 +76,13 @@ class Command(BaseCommand):
         sleep_time = options['sleep']
         max_id = options['id_starts_after']
         save_metrics = options['save_metrics']
+        load_all = options['load_all']
+        has_article = options['has_article']
 
-        min_date, _ = min_date_from_date(date.today())
+        if load_all:
+            min_date = date(2000,1,1)
+        else:
+            min_date, _ = min_date_from_date(date.today())
 
         # Import the model class
         try:
@@ -96,10 +105,12 @@ class Command(BaseCommand):
         except Exception as e:
             raise CommandError(f"Could not connect to Typesense: {e}")
 
-        # Get total count from Neo4j
-        count_query =f'''MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
-                WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                AND n.internalMergedSameAsHighToUri IS NULL RETURN COUNT(DISTINCT(n))'''
+        if has_article:
+            count_query =f'''MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
+                    WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    AND n.internalMergedSameAsHighToUri IS NULL RETURN COUNT(DISTINCT(n))'''
+        else:
+            count_query = f'''MATCH (n:Resource&{label}) RETURN COUNT(n)'''
 
         result, _ = db.cypher_query(count_query)
         total_count = result[0][0] if result else 0
@@ -112,7 +123,7 @@ class Command(BaseCommand):
         res = self.refresh_typesense_collection(
             client, model_class, collection_name, label, 
             batch_size, limit,
-            sleep_time, max_id, min_date, save_metrics=save_metrics
+            sleep_time, max_id, min_date, has_article, save_metrics=save_metrics
         )
 
         return res
@@ -124,7 +135,7 @@ class Command(BaseCommand):
 
     def refresh_typesense_collection(self, client, model_class, collection_name, 
                                    label, batch_size, limit,
-                                   sleep_time, max_id, min_date,
+                                   sleep_time, max_id, min_date, has_article,
                                    save_metrics = False):
         
 
@@ -166,16 +177,20 @@ class Command(BaseCommand):
             logger.info(f"Processing batch {batch_num}...")
 
             try:
-                # Fetch batch from Neo4j
-                query = f"""
-                MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
-                WHERE n.internalId > {max_id}
-                AND art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                AND n.internalMergedSameAsHighToUri IS NULL
-                RETURN DISTINCT(n)
-                ORDER BY n.internalId
-                LIMIT {batch_size}
-                """
+                if has_article:
+                    query = f"""
+                    MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
+                    WHERE n.internalId > {max_id}
+                    AND art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    AND n.internalMergedSameAsHighToUri IS NULL
+                    """
+                else:
+                    query = f"""
+                    MATCH (n:Resource&{label})
+                    WHERE n.internalId > {max_id}
+                    """
+
+                query = query + f" RETURN DISTINCT(n) ORDER BY n.internalId LIMIT {batch_size}"
                 
                 results, _ = db.cypher_query(query)
                 

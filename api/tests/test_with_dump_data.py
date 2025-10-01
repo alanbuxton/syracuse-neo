@@ -33,7 +33,7 @@ from topics.industry_geo import geo_codes_for_region, geo_parent_children
 from topics.industry_geo.orgs_by_industry_geo import org_uris_by_industry_id_and_or_geo_code
 from topics.views import remove_not_needed_admin1s_from_individual_cells
 from topics.models.model_helpers import similar_organizations
-from dump.embeddings.embedding_utils import apply_latest_org_embeddings
+from dump.embeddings.embedding_for_dump import apply_latest_org_embeddings
 from trackeditems.notification_helpers import (
     prepare_recent_changes_email_notification_by_max_date,
     make_email_notif_from_orgs,
@@ -45,7 +45,8 @@ from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
-from topics.management.commands.refresh_typesense import Command as RefreshTypesense
+from topics.management.commands.refresh_typesense_by_model import Command as RefreshTypesense
+from topics.management.commands.setup_typesense import Command as SetupTypesense
 from topics.industry_geo.industry_typesense import IndustryTypeSenseSearch
 
 '''
@@ -1597,37 +1598,57 @@ class EndToEndTests20240602(TestCase):
         acts2, _ = tracked_items_between(tis, min_date_for_activities, max_date)
         assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
+        
+    def creates_typesense_doc_for_industry_cluster(self):
+        uri = "https://1145.am/db/industry/412_midstream_upstream_downstream_industry"
+        ind_clus = Resource.get_by_uri(uri)
+        as_ts_doc = ind_clus.to_typesense_doc()
+        self.assertEqual(len(as_ts_doc), 2)
+        self.assertEqual(set(as_ts_doc[0].keys()), {'id', 'topic_id', 'uri', 'embedding'})
+        self.assertEqual(len(as_ts_doc[0]['embedding']), 768)
+        self.assertEqual(as_ts_doc[1]['uri'], uri)
 
     def test_typesense_org_search_1(self):
-        vals = search_by_name_typesense("Hub")
-        assert len(vals) == 2
-        assert vals[0][0].uri == 'https://1145.am/db/3472922/Hub_International_Limited'
-        assert vals[1][0].uri == 'https://1145.am/db/3454498/Hub'
-        assert vals[0][1] == 5
-        assert vals[1][1] == 4 # ordered by number of connections desc
+        vals = search_by_name_typesense("Group")
+        assert len(vals) == 4
+        assert vals[0][0].uri == 'https://1145.am/db/3458127/The_Hilb_Group'
+        assert vals[1][0].uri == 'https://1145.am/db/2166549/Play_Sports_Group'
+        assert vals[0][1] == 9
+        assert vals[1][1] == 6 # ordered by number of connections desc
+        assert vals[2][1] == 5
+        assert vals[3][1] == 4
 
     def test_typesense_find_by_industry_1(self):
         res = self.ts_search.uris_by_industry_text("sweets")
-        expected = [('https://1145.am/db/2947016/Black_Jacks', 2.384185791015625e-07, 'organizations'), 
-                    ('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715, 'industry_clusters'), 
+        vals = [(x[0],x[1],x[2]['collection']) for x in res]
+        expected = [('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715, 'industry_clusters'), 
                     ('https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets', 0.1603001356124878, 'about_us')]
-        self.assertEqual(res, expected)
+        self.assertEqual(vals, expected)
+
+        related_org_ids = res[1][2]['org_internal_ids']
+        self.assertEqual(len(related_org_ids), 1)
+        related_org = Resource.nodes.get_or_none(internalId=related_org_ids[0])
+        self.assertEqual(related_org.uri, 'https://1145.am/db/2947016/Black_Jacks')
 
     def test_typesense_find_by_industry_2(self):
         res = self.ts_search.objects_by_industry_text("pharma")
         as_uris = [(x[0].uri,x[1]) for x in res]
         expected = [('https://1145.am/db/2543227/Celgene', 1.1920928955078125e-07), 
-                    ('https://1145.am/db/3029576/Eli_Lilly', 1.1920928955078125e-07), 
-                    ('https://1145.am/db/3029576/Bristol-Myers_Squibb', 1.1920928955078125e-07), 
-                    ('https://1145.am/db/3469058/Napajen_Pharma', 1.1920928955078125e-07), 
-                    ('https://1145.am/db/2543227/Bristol-Myers', 1.1920928955078125e-07), 
                     ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304), 
                     ('https://1145.am/db/2543228/Takeda', 0.10775858163833618), 
-                    ('https://1145.am/db/3461286/Ohr_Pharmaceutical', 0.10775858163833618), 
-                    ('https://1145.am/db/3029705/Shire', 0.10775858163833618), 
                     ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377),
                     ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438)]
         self.assertEqual(as_uris, expected)
+
+    def test_typesense_find_by_industry_and_region(self):
+        res = self.ts_search.uris_by_industry_text("pharma",["JP"]) # Excludes Celgene
+        expected = [
+            ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304, {'collection': 'industry_clusters'}), 
+             ('https://1145.am/db/2543228/Takeda', 0.10775858163833618, {'collection': 'organizations'}), 
+             ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377, {'collection': 'industry_clusters'}), 
+             ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438, {'collection': 'industry_clusters'})
+        ]
+        self.assertEqual(res, expected)
 
 def set_weights():
     # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2
@@ -1651,11 +1672,14 @@ def do_setup_test_data(max_date,fill_blanks):
     refresh_geo_data(max_date=max_date,fill_blanks=fill_blanks)
 
 def reload_typesense():
-    opts = {"batch_size":40,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True}
+    SetupTypesense().handle()
+    opts = {"batch_size":40,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True,"load_all":True,"has_article":True}
     org_opts = opts | {"model_class": "topics.models.Organization"}
-    ind_opts = opts | {"model_class": "topics.models.IndustryCluster"}
+    ind_opts = opts | {"model_class": "topics.models.IndustryCluster", "has_article": False}
     about_us_opts = opts | {"model_class": "topics.models.AboutUs"}
+    ind_sector_update_opts = opts | {"model_class": "topics.models.IndustrySectorUpdate"}
     RefreshTypesense().handle(**org_opts)
     RefreshTypesense().handle(**ind_opts) 
     RefreshTypesense().handle(**about_us_opts)
+    RefreshTypesense().handle(**ind_sector_update_opts)
     
