@@ -1099,8 +1099,8 @@ class TestTypesenseDocs(TestCase):
         self.assertEqual( set(as_ts_doc[1]["region_list"]), set(as_ts_doc[0]["region_list"]) )
         self.assertEqual( as_ts_doc[0]["embedding"], self.embedding1)
         self.assertEqual( as_ts_doc[1]["embedding"], self.embedding2)
-        self.assertEqual( as_ts_doc[0]["org_internal_ids"], [12345])
-        self.assertEqual( as_ts_doc[1]["org_internal_ids"], [12345])
+        self.assertEqual( as_ts_doc[0]["related_org_uris"], [org_uri])
+        self.assertEqual( as_ts_doc[1]["related_org_uris"], [org_uri])
         self.assertEqual( as_ts_doc[0]["uri"], "https://example.org/foo/bar")
         self.assertEqual( as_ts_doc[1]["uri"], "https://example.org/foo/bar")
 

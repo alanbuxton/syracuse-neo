@@ -75,7 +75,6 @@ class TypesenseService(object):
             logger.debug(val)
             foundval = val.get('found')
             if foundval is None:
-                breakpoint()
                 raise ValueError(f"Error {val} when parsing {multi_search_queries}")
             if foundval > 0:
                 for hit in val['hits']:

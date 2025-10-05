@@ -106,9 +106,13 @@ class Command(BaseCommand):
             raise CommandError(f"Could not connect to Typesense: {e}")
 
         if has_article:
-            count_query =f'''MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
-                    WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
-                    AND n.internalMergedSameAsHighToUri IS NULL RETURN COUNT(DISTINCT(n))'''
+            count_query =f'''MATCH (n:Resource&{label})
+                    WHERE n.internalMergedSameAsHighToUri IS NULL
+                    AND EXISTS {{
+                        MATCH (n)-[:documentSource]->(art: Resource&Article)
+                        WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    }}
+                    RETURN COUNT(n)'''
         else:
             count_query = f'''MATCH (n:Resource&{label}) RETURN COUNT(n)'''
 
@@ -159,6 +163,13 @@ class Command(BaseCommand):
         while (limit == 0 or nodes_processed < limit):
             if save_metrics:
                 metrics, stats = log_stats(client)
+                import_70p = stats.get("import_70Percentile_latency_ms",0)
+                import_70p = float(import_70p)
+                if import_70p > 50:
+                    logger.info(f"latency too high at {import_70p}, backing off")
+                    time.sleep(5)
+                    continue
+
                 all_metrics.append(metrics)
                 all_stats.append(stats)
                 with open("stats.pickle", "wb") as f:
@@ -166,23 +177,19 @@ class Command(BaseCommand):
                     vals = {"metrics":all_metrics, "stats": all_stats}
                     pickle.dump(vals, f)
 
-                import_70p = stats.get("import_70Percentile_latency_ms",0)
-                import_70p = float(import_70p)
-                if import_70p > 30:
-                    logger.info(f"latency too high at {import_70p}, backing off")
-                    time.sleep(5)
-                    continue
-                
             batch_num = nodes_processed // batch_size + 1
             logger.info(f"Processing batch {batch_num}...")
 
             try:
                 if has_article:
                     query = f"""
-                    MATCH (n:Resource&{label})-[:documentSource]->(art: Resource&Article)
+                    MATCH (n:Resource&{label})
                     WHERE n.internalId > {max_id}
-                    AND art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
                     AND n.internalMergedSameAsHighToUri IS NULL
+                    AND EXISTS {{
+                        MATCH (n)-[:documentSource]->(art:Article)
+                        WHERE art.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+                    }}
                     """
                 else:
                     query = f"""
@@ -190,7 +197,7 @@ class Command(BaseCommand):
                     WHERE n.internalId > {max_id}
                     """
 
-                query = query + f" RETURN DISTINCT(n) ORDER BY n.internalId LIMIT {batch_size}"
+                query = query + f" RETURN n ORDER BY n.internalId LIMIT {batch_size}"
                 
                 results, _ = db.cypher_query(query)
                 
@@ -205,7 +212,7 @@ class Command(BaseCommand):
                 for row in results:
                     node_data = row[0]
                     node_instance = model_class.inflate(node_data)
-                    logger.info(node_instance.uri)
+                    logger.debug(node_instance.uri)
                     assert node_instance.internalId > max_id, f"{node_instance.internalId} should be higher than {max_id}"
                     max_id = node_instance.internalId
                     doc_or_docs = node_instance.to_typesense_doc()
@@ -240,8 +247,8 @@ class Command(BaseCommand):
                 nodes_processed += batch_processed
                 total_docs += len(documents)
                 av_docs_per_node = total_docs / nodes_processed
-                logger.info(f"Processed {nodes_processed} nodes ({len(documents)} docs). Max id {max_id} "
-                            f"Total docs created {total_docs}, average per node: {av_docs_per_node}")
+                logger.info(f"Processed {batch_processed} nodes ({len(documents)} docs). Max id {max_id} "
+                            f"Total nodes processed {nodes_processed} with {total_docs} docs created, average per node: {av_docs_per_node}")
                 time.sleep(sleep_time)
                 
             except Exception as e:

@@ -6,13 +6,14 @@ import api.serializers as serializers
 import logging 
 from topics.util import geo_to_country_admin1
 from rest_framework import status
-from topics.activity_helpers import (get_activities_by_industry_country_admin1_and_date_range,
+from topics.activity_helpers import (get_activities_by_industry_geo_and_date_range,
                                      get_activities_by_org_with_fixed_or_expanding_date_range)
 from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from syracuse.authentication import FlexibleTokenAuthentication
 from topics.industry_geo import geo_parent_children, geo_codes_for_region
+from topics.industry_geo.typesense_search import activities_by_industry_text_and_or_geo_typesense
 from topics.organization_search_helpers import search_organizations_by_name 
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from drf_spectacular.types import OpenApiTypes
@@ -27,6 +28,7 @@ from neomodel import DoesNotExist
 from api.docstrings import activity_docstring_raw
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
 from syracuse.date_util import min_and_max_date_based_on_days_ago
+from flags.state import flag_enabled
 
 logger = logging.getLogger(__name__)
 
@@ -237,30 +239,35 @@ class ActivitiesViewSet(NeomodelViewSet):
             logger.debug(f"Uris: {uris}")
             activities, days_ago, min_date, max_date = get_activities_by_org_with_fixed_or_expanding_date_range(uris,days_ago,combine_same_as_name_only=True,limit=100)
         else:
-            if len(industry_search_str) > 0:
-                industry_ids = set()
-                for search_str in industry_search_str:
-                    inds = [x.topicId for x in IndustryCluster.by_name(search_str,limit=3,request=self.request)]
-                    industry_ids.update(inds)
             geo_codes = set()
-            for loc in locations:
-                geo_codes.update(geo_codes_for_region(loc))
-            if len(geo_codes) == 0:
-                geo_codes = [None]
             if days_ago is None:
                 days_ago = 30
-            min_date, max_date = min_and_max_date_based_on_days_ago(days_ago)
-            logger.debug(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
-            activities = []
-            for industry_id_str in industry_ids:
-                if industry_id_str is not None:
-                    industry_id = int(industry_id_str)
-                else:
-                    industry_id = industry_id_str
-                for geo_code in geo_codes:
-                    country_code, admin1 = geo_to_country_admin1(geo_code)
-                    acts = get_activities_by_industry_country_admin1_and_date_range(industry_id, country_code, admin1, min_date, max_date)
+            min_date, max_date = min_and_max_date_based_on_days_ago(days_ago)            
+            for loc in locations:
+                geo_codes.update(geo_codes_for_region(loc))    
+            activities = []        
+            if flag_enabled("FEATURE_TYPESENSE",request=self.request):
+                logger.info("Using FEATURE_TYPESENSE")
+                for search_str in industry_search_str:
+                    acts = activities_by_industry_text_and_or_geo_typesense(search_str, geo_codes, min_date, max_date)
                     activities.extend(acts)
+            else:
+                if len(industry_search_str) > 0:
+                    industry_ids = set()
+                    for search_str in industry_search_str:
+                        inds = [x.topicId for x in IndustryCluster.by_name(search_str,limit=3,request=self.request)]
+                        industry_ids.update(inds)
+                if len(geo_codes) == 0:
+                    geo_codes = [None]
+                logger.debug(f"Industry ids: {industry_ids}, geo: {geo_codes}, {min_date} - {max_date}")
+                for industry_id_str in industry_ids:
+                    if industry_id_str is not None:
+                        industry_id = int(industry_id_str)
+                    else:
+                        industry_id = industry_id_str
+                    for geo_code in geo_codes:
+                        acts = get_activities_by_industry_geo_and_date_range(industry_id, geo_code, min_date, max_date)
+                        activities.extend(acts)
         if len(types_to_keep) > 0:
             activities = filter_activity_types(activities, types_to_keep)
         acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
@@ -349,7 +356,7 @@ class ActivitiesViewSet(NeomodelViewSet):
             return resp
         page = self.paginate_queryset(activities)
         if page is not None:
-            serializer = serializers.ActivitySerializer(
+            serializer = serializers.ActivityOrIndustrySectorUpdateSerializer(
                 page,
                 context=self.get_serializer_context(),
                 many=True,
@@ -357,7 +364,7 @@ class ActivitiesViewSet(NeomodelViewSet):
             resp = self.get_paginated_response(serializer.data)
             return resp
         
-        serializer = serializers.ActivitySerializer(
+        serializer = serializers.ActivityOrIndustrySectorUpdateSerializer(
                 activities,
                 context=self.get_serializer_context(),
                 many=True,
@@ -371,7 +378,7 @@ class ActivitiesViewSet(NeomodelViewSet):
         ],   
         responses={
                200: OpenApiResponse(
-                response=serializers.ActivitySerializer,
+                response=serializers.ActivityOrIndustrySectorUpdateSerializer,
                 description='Activity details'
             )
         }

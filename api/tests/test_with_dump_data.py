@@ -47,7 +47,7 @@ from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
 from topics.management.commands.refresh_typesense_by_model import Command as RefreshTypesense
 from topics.management.commands.setup_typesense import Command as SetupTypesense
-from topics.industry_geo.industry_typesense import IndustryTypeSenseSearch
+from topics.industry_geo.typesense_search import IndustryGeoTypesenseSearch
 
 '''
     Care these tests will delete neodb data
@@ -336,7 +336,7 @@ class EndToEndTests20240602(TestCase):
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
         self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
-        self.ts_search = IndustryTypeSenseSearch()
+        self.ts_search = IndustryGeoTypesenseSearch()
 
     def test_adds_model_classes_with_multiple_labels(self):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"
@@ -1599,7 +1599,7 @@ class EndToEndTests20240602(TestCase):
         assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
         
-    def creates_typesense_doc_for_industry_cluster(self):
+    def test_creates_typesense_doc_for_industry_cluster(self):
         uri = "https://1145.am/db/industry/412_midstream_upstream_downstream_industry"
         ind_clus = Resource.get_by_uri(uri)
         as_ts_doc = ind_clus.to_typesense_doc()
@@ -1624,11 +1624,8 @@ class EndToEndTests20240602(TestCase):
         expected = [('https://1145.am/db/industry/391_chocolate_confectionery_confections_confectionary', 0.13584113121032715, 'industry_clusters'), 
                     ('https://1145.am/db/2947016/Produces_A_Host_Of_Iconic_British_Sweets', 0.1603001356124878, 'about_us')]
         self.assertEqual(vals, expected)
-
-        related_org_ids = res[1][2]['org_internal_ids']
-        self.assertEqual(len(related_org_ids), 1)
-        related_org = Resource.nodes.get_or_none(internalId=related_org_ids[0])
-        self.assertEqual(related_org.uri, 'https://1145.am/db/2947016/Black_Jacks')
+        related_org_uris = res[1][2]['related_org_uris']
+        self.assertEqual(related_org_uris, ['https://1145.am/db/2947016/Black_Jacks'])
 
     def test_typesense_find_by_industry_2(self):
         res = self.ts_search.objects_by_industry_text("pharma")
@@ -1642,13 +1639,14 @@ class EndToEndTests20240602(TestCase):
 
     def test_typesense_find_by_industry_and_region(self):
         res = self.ts_search.uris_by_industry_text("pharma",["JP"]) # Excludes Celgene
+        vals = [(x[0],x[1],x[2]['collection']) for x in res]
         expected = [
-            ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304, {'collection': 'industry_clusters'}), 
-             ('https://1145.am/db/2543228/Takeda', 0.10775858163833618, {'collection': 'organizations'}), 
-             ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377, {'collection': 'industry_clusters'}), 
-             ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438, {'collection': 'industry_clusters'})
+            ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304, 'industry_clusters'), 
+             ('https://1145.am/db/2543228/Takeda', 0.10775858163833618, 'organizations'), 
+             ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377, 'industry_clusters'), 
+             ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438, 'industry_clusters'),
         ]
-        self.assertEqual(res, expected)
+        self.assertEqual(vals, expected)
 
 def set_weights():
     # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2

@@ -89,10 +89,13 @@ def get_activities_by_org_uris_and_date_range(uri_list,min_date,max_date,cache_v
 def activities_by_org_uris_incl_same_as(uri_list,min_date,max_date,cache_version=None,combine_same_as_name_only=True,limit=None):
     uris_to_check = set(uri_list)
     if combine_same_as_name_only is True:
+        if not isinstance(uri_list, list):
+            uri_list = list(uri_list)
         orgs = Resource.nodes.filter(uri__in=uri_list)
         for org in orgs:
             new_uris = [x.uri for x in get_same_as_name_onlies(org)]
             uris_to_check.update(new_uris)
+    
     logger.debug(f"same-as-name-only updated. going to kick off query")
     activity_article_uris = activities_by_org_uris(uris_to_check,min_date,max_date,cache_version=cache_version,limit=limit)
     logger.debug(f"query done")
@@ -156,6 +159,28 @@ def query_and_cache(query, cache_key, cache_version):
     vals = neo4j_date_converter(vals)
     set_versionable_cache(cache_key, vals, cache_version)
     return vals
+
+
+def industry_sector_update_to_api_results(uri):
+    isu = Resource.get_by_uri(uri)
+    article = isu.documentSource[0]
+    api_row = {}
+    api_row["source_organization"] = article.sourceOrganization
+    api_row["date_published"] = article.datePublished
+    api_row["headline"] = article.headline
+    api_row["document_extract"] = isu.documentExtract
+    api_row["document_url"] = article.documentURL
+    api_row["archive_org_page_url"] = article.archiveOrgPageURL
+    api_row["archive_org_list_url"] = article.archiveOrgListURL
+    api_row["entity_uri"] = isu.uri
+    api_row["highlight"] = isu.best_highlight
+    api_row["industry_sector"] = isu.best_industry
+    api_row["industry_subsector"] = isu.best_industrySubsector
+    api_row["metric"] = isu.best_metric
+    api_row["activity_class"] = isu.__class__.__name__
+    api_row["source_is_core"] = article.is_core    
+    api_row["analyst_organization"] = isu.analystOrganization.get_or_none()
+    return api_row
 
 
 def activity_articles_to_api_results(activity_article_uris, limit=None):

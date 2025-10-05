@@ -408,6 +408,7 @@ class Resource(StructuredNode):
             This will copy any new relationships, but won't increment weight for existing ones
 
         '''
+        logger.info(f"Merging {source_node.uri} into {target_node.uri}. Re-merge? {run_as_re_merge}")
         was_changed = False
         for rel_key,_ in source_node.all_raw_relationships:
             if rel_key.startswith("sameAs"):
@@ -424,7 +425,7 @@ class Resource(StructuredNode):
                 if not rel_key in target_node.dict_of_attribs:
                     logger.debug(f"source: {source_node.uri} target {target_node.uri} rel {rel_key} doesnt exist while trying to connect {other_node.uri}" )
                     continue
-                logger.info(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
+                logger.debug(f"connecting {other_node.uri} to {target_node.uri} via {rel_key} from {source_node.uri}")                    
                 already_connected = target_node.dict_of_attribs[rel_key].relationship(other_node)
                 if already_connected is not None:
                     logger.debug(f"{target_node.uri} is already connected to {other_node.uri} via {rel_key}")
@@ -1489,17 +1490,17 @@ class AboutUs(Resource):
     def to_typesense_doc(self) -> Union[list,dict]:
         docs = []
         related_org_locs = []
-        related_org_internal_ids = []
+        related_org_uris = []
         for related_org in self.aboutUs.filter(internalMergedSameAsHighToUri__isnull=True):
             related_org_locs.extend(related_org.regions)
-            related_org_internal_ids.append(related_org.internalId)
+            related_org_uris.append(related_org.uri)
         jsons = self.name_embedding_json or []
         for idx, embedding in enumerate(jsons):
             docs.append({
                 "id": f"{self.internalId}_about_{idx}",
                 "internal_id": self.internalId,
                 "uri": self.uri,
-                "org_internal_ids": related_org_internal_ids,
+                "related_org_uris": related_org_uris,
                 "region_list": related_org_locs,
                 "embedding": embedding,
             })
@@ -1596,27 +1597,44 @@ class RegulatoryActivity(ActivityMixin, Resource):
 
 class IndustrySectorUpdate(Resource):
     mentionedIn = RelationshipFrom('Organization', 'mentionedIn', model=WeightedRel)
+    analystOrganization = RelationshipTo('Organization', 'analystOrganization', model=WeightedRel)
     highlight = ArrayProperty(StringProperty())
     documentExtract = StringProperty()
     industry = ArrayProperty(StringProperty())
     industrySubsector = ArrayProperty(StringProperty())
     industry_embedding_json = JSONProperty()
+    metric = ArrayProperty(StringProperty())
     whereHighRaw = ArrayProperty(StringProperty())
     whereHighClean = ArrayProperty(StringProperty())
     whereHighGeoNamesLocation = RelationshipTo('GeoNamesLocation','whereHighGeoNamesLocation', model=WeightedRel)
 
+    @property
+    def best_highlight(self):
+        return longest(self.highlight)
+    
+    @property
+    def best_metric(self):
+        return longest(self.metric)
+    
+    @property
+    def best_industry(self):
+        return longest(self.industry)
+    
+    @property
+    def best_industrySubsector(self):
+        return longest(self.industrySubsector)
     
     def to_typesense_doc(self) -> Union[list,dict]:
         docs = []
         jsons = self.industry_embedding_json or []
         regions = regions_from_geonames(self.whereHighGeoNamesLocation)
-        org_ids = [x.internalId for x in self.mentionedIn]
+        org_uris = [x.uri for x in self.mentionedIn]
         for idx, embedding in enumerate(jsons):
             docs.append({
                 "id": f"{self.internalId}_ind_upd_{idx}",
                 "uri": self.uri,
                 "internal_id": self.internalId,
-                "org_internal_ids": org_ids, 
+                "related_org_uris": org_uris, 
                 "region_list": list(regions),
                 "embedding": embedding,
             })

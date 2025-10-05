@@ -171,13 +171,46 @@ class ActorRolesSerializer(serializers.Serializer):
     target = ActivityActorSerializer(many=True, required=False, help_text="The entity that is being bought or sold or invested in. Used in **CorporateFinanceActivity**")
     vendor = ActivityActorSerializer(many=True, required=False, help_text="Seller of all or part of another organization. Used in **CorporateFinanceActivity**")
 
-class ActivitySerializer(serializers.Serializer):
+
+class ActivityOrIndustrySectorUpdateSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        if instance['activity_class'] == 'IndustrySectorUpdate':
+            serializer = IndustrySectorUpdateSerializer(instance, context=self.context)
+        else:
+            serializer = ActivitySerializer(instance, context=self.context)
+        return serializer.data
+   
+class ActivityIndustrySectorUpdateBaseSerializer(serializers.Serializer):
     activity_class = serializers.CharField(help_text=activity_docstring_markdown)
     headline = serializers.CharField(help_text="Source document headline")
     date_published = serializers.DateTimeField(help_text="Date of publication")
     source_organization = serializers.CharField(help_text="Organization that produced or published the source document (e.g. news provider, analyst firm)")
     document_extract = serializers.CharField(help_text="Extract from the source document")
     document_url = serializers.URLField(help_text="Source document URL")
+    archive_org_page_url = serializers.URLField(help_text="Link to the source document on archive.org (will only work if archive.org has crawled this page)")
+    archive_org_list_url = serializers.URLField(help_text="archive.org listing page around the time of this document (will only work if archive.org has crawled this page)")
+    uri = serializers.SerializerMethodField(help_text="Unique URI for this entity within the 1145 namespace (alias for activity_uri or industry_sector_update_uri)")
+
+    @extend_schema_field(serializers.URLField())
+    def get_uri(self, obj):
+        return self.uri_alias(obj)
+    
+    def uri_alias(self, obj):
+        pass
+    
+class IndustrySectorUpdateSerializer(ActivityIndustrySectorUpdateBaseSerializer):
+    industry_sector_update_uri = serializers.URLField(help_text="Unique URI for this industry sector update within the 1145 namespace")
+    highlight = serializers.CharField(help_text="highlight text")
+    industry_sector = serializers.CharField(help_text="Industry Sector name")
+    industry_subsector= serializers.CharField(help_text="Industry Subsector name")
+    metric = serializers.CharField(help_text="Any metric reported in this industry sector update")
+    analyst_organization = ActivityActorSerializer(help_text="Organization that produced this report")
+
+    def uri_alias(self, obj):
+        return obj['industry_sector_update_uri']
+
+class ActivitySerializer(ActivityIndustrySectorUpdateBaseSerializer):
     activity_uri = serializers.URLField(help_text="Unique URI for this activity within the 1145 namespace")
     activity_locations = GeoNamesSerializer(many=True, help_text="Geographic locations")
     actors = ActorRolesSerializer(
@@ -208,4 +241,6 @@ class ActivitySerializer(serializers.Serializer):
                     " - **organization**: An organization that this activity relates to\n"
         )
     )
-    archive_org_list_url = serializers.URLField(help_text="Link to the source document on archive.org (will only work if archive.org has crawled this page)")
+
+    def uri_alias(self, obj):
+        return obj['activity_uri']

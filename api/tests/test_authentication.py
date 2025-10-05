@@ -245,7 +245,9 @@ class ActivitiesViewSetTests(BaseAuthenticatedAPITestCase):
             {"date_published": "2025-01-01", "activity_class": "Event",
              "headline": "foo", "source_organization": "bar", "document_extract": "baz",
              "document_url": "http://example.org/1", "activity_uri": "http://example.org/2",
-             "activity_locations": [], "actors": {}, "archive_org_list_url": "http://example.org/3"}
+             "activity_locations": [], "actors": {}, "archive_org_list_url": "http://example.org/3",
+             "archive_org_page_url": "http://example.org/4",
+            }
         ],
              None, None, None
         )
