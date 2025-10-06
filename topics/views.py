@@ -210,7 +210,7 @@ class OrganizationTimeline(APIView):
         org_serializer = OrganizationTimelineSerializer(o, context={"combine_same_as_name_only":combine_same_as_name_only,
                                                                     "source_str":source_str,
                                                                     "min_date_str":min_date_str})
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}, **o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"] = org_serializer_data.pop("document_sources")
@@ -240,7 +240,7 @@ class OrganizationByUri(APIView):
                                      "min_date_str":min_date_str,
                                      "max_nodes": max_nodes,
                                      })
-        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name}}
+        org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
         org_serializer_data = org_serializer.data
         request_state["document_sources"]=org_serializer_data.pop("document_sources")
@@ -468,7 +468,7 @@ class OrgActivitiesView(APIView):
                                                                                                                limit=100)
         serializer = ActivitySerializer(matching_activity_orgs, many=True)
         uri_parts = elements_from_uri(org.uri)
-        org_data = {**kwargs, **{"uri":org.uri,"source_node_name":org.best_name}}
+        org_data = {**kwargs, **{"uri":org.uri,"source_node_name":org.best_name}, **org.serialize_no_none()}
         resp_dict = {"activities":serializer.data,"min_date":min_date,"max_date":max_date,
                             "days_ago": int(days_ago),
                             "uri_parts": uri_parts,

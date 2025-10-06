@@ -38,6 +38,7 @@
   <p><b>Showing timeline for:</b><a href="{{ timeline_serializer.org_node }}?{{ request_state.qs_params|dict_to_query_string }}">{{ timeline_serializer.org_node }}</a>
      {% include 'layouts/nav-org.html' %}
   </p>
+    {% include 'layouts/org-info.html' %}
     {% include "track_org_snippet.html" %}
   <p><em>Shown by document published date</em></p>
   <div id="main_container">

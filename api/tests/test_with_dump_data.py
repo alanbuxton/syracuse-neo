@@ -363,7 +363,7 @@ class EndToEndTests20240602(TestCase):
         assert set([x['label'] for x in clean_node_data]) == set(
             ['Acquisition (Business Insider: Jan 2019)',
             'Buying furniture from the internet has become normal - and trucking companies are investing millions in the e-commerce boom',
-            'Cory 1st Choice Home Delivery', 'J.B. Hunt', 'United States',
+            'Cory 1st Choice Home Delivery', 'J.B. Hunt', 'United States (US)',
             'Truckload Freight Services']
         )
         assert len(clean_edge_data) == 7
@@ -614,18 +614,18 @@ class EndToEndTests20240602(TestCase):
         resp = client.get("/?name=eli&combine_same_as_name_only=1&min_date=-1")
         content = str(resp.content)
         assert "Eli Lilly" in content
-        assert "https://1145.am/db/3029576/Eli_Lilly" in content
+        assert "1145.am/db/3029576/Eli_Lilly" in content
         assert "Eli Lilly and Company" not in content
-        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" not in content
+        assert "db/3448439/Eli_Lilly_And_Company" not in content
 
     def test_company_search_without_combine_same_as_name_only(self):
         client = self.client
         resp = client.get("/?name=eli&combine_same_as_name_only=0&min_date=-1")
         content = str(resp.content)
         assert "Eli Lilly" in content
-        assert "https://1145.am/db/3029576/Eli_Lilly" in content
+        assert "db/3029576/Eli_Lilly" in content
         assert "Eli Lilly and Company" in content
-        assert "https://1145.am/db/3448439/Eli_Lilly_And_Company" in content
+        assert "3448439/Eli_Lilly_And_Company" in content
 
     def test_same_as_search_with_two_words(self):
         uri = "https://1145.am/db/3029576/Eli_Lilly"

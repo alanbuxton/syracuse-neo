@@ -1,0 +1,14 @@
+<p>
+  {% if org_data.about_us %}
+    <b>About Us: </b>{{ org_data.about_us }}<br/>
+  {% endif %}
+  {% if org_data.line_of_business %}
+    <b>Line of Business: </b>{{org_data.line_of_business}}
+    {% if org_data.locations %}
+        -
+    {% endif %}
+  {% endif %}
+  {% if org_data.locations %} 
+    <b>Locations: </b>{{ org_data.locations }}
+  {% endif %}
+</p>

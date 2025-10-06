@@ -41,6 +41,7 @@
     <a href="{{ org_data.uri }}?{{ request_state.qs_params|dict_to_query_string }}">{{ org_data.uri }}</a>
     {% include 'layouts/nav-org.html' %}
   </p>
+  {% include 'layouts/org-info.html' %}
   <p><strong>Family tree relationships:</strong>
     {{ relationship_link_data.selected_name }} 
     {% for rel_data in relationship_link_data.next_vals %}

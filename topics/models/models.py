@@ -11,6 +11,7 @@ from django.conf import settings
 from topics.util import geo_to_country_admin1
 from integration.vector_search_utils import do_vector_search
 from syracuse.cache_util import get_versionable_cache, set_versionable_cache
+from syracuse.string_util import deduplicate_and_sort_by_frequency
 from topics.industry_geo.industry_geo_cypher import industries_for_org, based_in_high_geo_names_locations_for_org
 from topics.industry_geo.region_hierarchies import COUNTRIES_WITH_STATE_PROVINCE
 import logging
@@ -490,7 +491,6 @@ class Resource(StructuredNode):
         return self
 
 
-
 class Article(Resource):
     headline = StringProperty(required=True)
     url = Relationship("Resource","url", cardinality=One, model=WeightedRel)
@@ -528,7 +528,6 @@ class Article(Resource):
                     RETURN source_org, count_of_org ORDER BY count_of_org DESC"""
         vals, _ = db.cypher_query(query)
         return {k: v for k,v in vals}
-        
 
     @staticmethod
     def core_sources():
@@ -917,6 +916,15 @@ class GeoNamesLocation(Resource):
     whereHighGeoNamesLocation = RelationshipFrom('Resource','whereHighGeoNamesLocation',model=WeightedRel)
 
     @property
+    def best_name(self):
+        loc_name = longest(self.name)
+        admin1_str = ""
+        if self.admin1Code and self.admin1Code != '00' and self.countryCode in COUNTRIES_WITH_STATE_PROVINCE:
+            admin1_str = f"-{self.admin1Code}"
+        name = f"{loc_name} ({self.countryCode}{admin1_str})"
+        return name
+
+    @property
     def pk(self):
         return self.geoNamesId
     
@@ -1121,11 +1129,15 @@ class Organization(Resource):
 
     def serialize(self):
         vals = super().serialize()
+        locs = [x.best_name for x in self.basedInHighGeoNamesLocation]
         org_vals = {"best_name": self.best_name,
                     "description": self.description,
                     "industry": self.industry_as_string,
                     "based_in_high_raw": self.basedInHighRaw,
                     "based_in_high_clean": self.basedInHighClean,
+                    "line_of_business": "; ".join(self.top_industry_names(with_caps=True)),
+                    "locations": "; ".join(locs),
+                    "about_us": "; ".join(self.top_about_us(with_caps=True)),
                     }
         return {**vals,**org_vals}
     
@@ -1191,17 +1203,34 @@ class Organization(Resource):
 
         return industry_names
     
-    def top_industry_names(self):
-        cache_key = f"top_ind_names_{self.uri}"
+    def top_industry_names(self,with_caps=False):
+        cache_key = f"top_ind_names_{self.uri}_{with_caps}"
         res = get_versionable_cache(cache_key)
         if res:
             return res
         inds = self.industry_names_from_merged_nodes([])
-        inds_c = Counter( [x.lower() for x in inds] )
-        over1 = [x for x,y in inds_c.items() if y > 1]
+        if with_caps is True:
+            over1 = deduplicate_and_sort_by_frequency(inds, min_count=2)
+        else:
+            inds_c = Counter( [x.lower() for x in inds] )
+            over1 = [x for x,y in inds_c.items() if y > 1]
         set_versionable_cache(cache_key, over1)
         return over1
     
+    def top_about_us(self,with_caps=False):
+        cache_key = f"top_about_us_{self.uri}_{with_caps}"
+        res = get_versionable_cache(cache_key)
+        if res:
+            return res
+        abouts = [x.best_name for x in self.aboutUs]
+        if with_caps is True:
+            over1 = deduplicate_and_sort_by_frequency(abouts, min_count=2)
+        else:
+            c = Counter( [x.lower() for x in abouts] )
+            over1 = [x for x,y in c.items() if y > 1]
+        set_versionable_cache(cache_key, over1)
+        return over1
+
     @property
     def regions(self):
         return list(regions_from_geonames(self.basedInHighGeoNamesLocation))
