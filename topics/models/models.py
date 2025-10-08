@@ -401,7 +401,8 @@ class Resource(StructuredNode):
 
     @staticmethod
     def merge_node_connections(source_node, target_node, field_to_update="internalMergedSameAsHighToUri",
-                               run_as_re_merge:bool =False,live_mode: bool=True):
+                               run_as_re_merge:bool =False,live_mode: bool=True,
+                               use_these_weights={}):
         '''
             Copy/Merge relationships from source_node to target_node
 
@@ -432,7 +433,8 @@ class Resource(StructuredNode):
                     logger.debug(f"{target_node.uri} is already connected to {other_node.uri} via {rel_key}")
                     if run_as_re_merge is False: # if re-merging don't update existing nodes. This does mean we could have some nodes with lower weight than usual, but I'm assuming it's not material
                         was_changed = True
-                        already_connected.weight += old_rel.weight
+                        weight_delta = use_these_weights.get(other_node.uri, old_rel.weight)
+                        already_connected.weight += weight_delta
                         if live_mode is True:
                             already_connected.save()
                 else:

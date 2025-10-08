@@ -206,17 +206,74 @@ def update_duplicated_resource_ids():
             uri = row[0]
             query = f"MATCH (n: Resource {{uri:'{uri}'}}) SET n.internalId = {current_max_id}"
             db.cypher_query(query)
+
+
+def mark_possible_missed_merge_candidates():
+    apoc_query = '''CALL apoc.periodic.iterate(
+        "MATCH (m: Resource&Organization)-[r:sameAsHigh]-(n: Resource&Organization)
+            WHERE m.internalMergedSameAsHighToUri IS NULL
+            AND n.internalMergedSameAsHighToUri IS NOT NULL
+            AND n.internalMergedSameAsHighToUri <> m.uri
+            AND m.possibleMissedMergeCandidateTo IS NULL
+            AND LABELS(m) = LABELS(n)
+            RETURN m, n",
+        "SET m.possibleMissedMergeCandidateTo = n.uri",
+        {batchSize: 100, parallel: true}
+        )'''
+    _ = db.cypher_query(apoc_query)
+    cnts_query = "MATCH (m: Resource&Organization) WHERE m.internalMergedSameAsHighToUri IS NULL and m.possibleMissedMergeCandidateTo IS NOT NULL RETURN COUNT(m)"
+    res, _ = db.cypher_query(cnts_query)
+    logger.info(f"Marked possible missed merge candidates: {res[0][0]} entries")
+
+def merge_potentially_missed_merges(live_mode=False):
+    # merge logic looks for NULL internalMergedSameAsHighToUri in both nodes.
+    # But what if a node is created and is sameAsHigh an already-merged node?
+    mark_possible_missed_merge_candidates()
+    cnt = 0
+    while True:
+        logger.info("Querying for entries to merge")
+        vals, _ = db.cypher_query("""MATCH (n: Resource&Organization)
+                                  WHERE n.internalMergedSameAsHighToUri IS NULL 
+                                  AND n.internalDocId > 0
+                                  AND n.possibleMissedMergeCandidateTo IS NOT NULL
+                                  RETURN n, n.possibleMissedMergeCandidateTo
+                                  ORDER BY n.internalDocId
+                                  LIMIT 500""", resolve_objects=True)
+        if len(vals) == 0:
+            break
+        for source_node, target_uri in vals:
+            target_node = Resource.get_by_uri(target_uri)
+            recursively_merge_nodes(source_node, target_node, live_mode=live_mode)
+            # mark as done
+            db.cypher_query(f"MATCH (n: Resource) WHERE n.uri = '{source_node.uri}' REMOVE n.possibleMissedMergeCandidateTo ")
+            cnt += 1
+            if cnt % 1000 == 0:
+                log_count_relationships(f"After merge_potentially_missed_merges {cnt} records")
+            if cnt % 100 == 0:
+                logger.info(f"Merged merge_potentially_missed_merges {cnt} records")
+
+
+def recursively_merge_nodes(source_node, target_node, live_mode):
+    if target_node is None:
+        return None
+    source_weights = weights_for_relationships(source_node.uri)
+    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=False, live_mode=live_mode)
+    if res is True:
+        recursively_re_merge_node_via_same_as(target_node, run_as_re_merge=False, live_mode=live_mode, use_these_weights=source_weights)
     
-def recursively_re_merge_node_via_same_as(source_node,live_mode=False):
+        
+def recursively_re_merge_node_via_same_as(source_node, live_mode=False, run_as_re_merge=True, use_these_weights={}):
     target_uri = source_node.internalMergedSameAsHighToUri
     if target_uri is None:
         return
     target_node = Resource.get_by_uri(target_uri)
     if target_node is None:
+        logger.warning(f"{source_node.uri} expected to merge to {target_uri} but node doesn't exist")
         return None
-    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=True, live_mode=live_mode)
+    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=run_as_re_merge, 
+                                          use_these_weights=use_these_weights, live_mode=live_mode)
     if res is True:
-        recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode)
+        recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode,use_these_weights=use_these_weights)
 
 def mark_re_merge_candidates():
     apoc_query = '''CALL apoc.periodic.iterate(
@@ -234,6 +291,13 @@ def mark_re_merge_candidates():
     _ = db.cypher_query(apoc_query)
     logger.info("Finished apoc query")
 
+def weights_for_relationships(node_uri):
+    query = f"""MATCH (n: Resource)-[r]-(o: Resource) WHERE n.uri ='{node_uri}' 
+                RETURN o.uri, r.weight"""
+    vals, _ = db.cypher_query(query)
+    source_weights = {x:y for x,y in vals}
+    return source_weights
+
 def re_merge_all_orgs_apoc(live_mode=False):
     logger.info("Started re-merge")
     mark_re_merge_candidates()
@@ -247,7 +311,8 @@ def process_batch_of_re_merge_candidates(live_mode=False, limit=1000):
     for org_row in orgs:
         org = org_row[0]
         uris.append(org.uri)
-        recursively_re_merge_node_via_same_as(org,live_mode=live_mode)
+        source_weights=weights_for_relationships(org.uri)
+        recursively_re_merge_node_via_same_as(org, live_mode=live_mode, use_these_weights=source_weights)
     _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.uri in {uris} REMOVE a.re_merge_candidate")
     logger.info(f"Processed {len(orgs)} records")
     if len(orgs) > 0:
