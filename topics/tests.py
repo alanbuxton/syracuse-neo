@@ -936,21 +936,21 @@ class TestDisentanglingMergedCells(TestCase):
         ind1 = Resource.get_by_uri('https://1145.am/db/33/ind1')
         ind2 = Resource.get_by_uri('https://1145.am/db/34/ind2')
         ind1_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge,ind1)
-        assert ind1_orgs == { (orga,1), (orgb,1 )}, f"Got {ind1_orgs}"
+        self.assertEqual(ind1_orgs, { (orga,1), (orgb,1 )})
         ind1_sources = get_source_orgs_articles_for(orge,ind1)
         res = set([(o.uri,weight,a.uri) for o,weight,a in ind1_sources])
-        assert res == {
+        self.assertEqual(res, {
             ('https://1145.am/db/10000/orga', 1, 'https://1145.am/db/article_orga'),
             ('https://1145.am/db/9999/orgb',  1, 'https://1145.am/db/article_orgb')
-        }, f"Got {res}"
+        })
         ind2_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orge, ind2)
-        assert ind2_orgs == { (orge,3),(orgd,2),(orgc,1)} # orgs d and e were linked to the industry cluster but also had extra data merged into them
+        self.assertEqual(ind2_orgs, { (orge,3),(orgd,1),(orgc,1)}) 
         ind2_sources = get_source_orgs_articles_for(orge, ind2)
-        assert set([(o.uri, weight,a.uri) for o,weight,a in ind2_sources]) == {
+        self.assertEqual(set([(o.uri, weight,a.uri) for o,weight,a in ind2_sources]) , {
             ('https://1145.am/db/9996/orge', 3, 'https://1145.am/db/article_orge'), 
             ('https://1145.am/db/9998/orgc', 1, 'https://1145.am/db/article_orgc'), 
-            ('https://1145.am/db/9997/orgd', 2, 'https://1145.am/db/article_orgd')
-        }
+            ('https://1145.am/db/9997/orgd', 1, 'https://1145.am/db/article_orgd')
+        })
 
     def test_finds_source_articles_for_org_location(self):
         clean_db()

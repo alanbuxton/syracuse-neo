@@ -1,4 +1,4 @@
-from topics.models import Resource
+from topics.models import Resource, Organization
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 from neomodel import db
 import logging
@@ -6,33 +6,27 @@ from integration.neo4j_utils import (count_relationships, apoc_del_redundant_sam
                                      rerun_all_redundant_same_as)
 from integration.embedding_utils import create_new_embeddings
 import time
+from typing import Tuple, Union
 logger = logging.getLogger(__name__)
 
 class RDFPostProcessor(object):
 
-    # m is target (that we are going to merge to), n is source (that we are copying relationships from)
-    QUERY_SAME_AS_HIGH_FOR_MERGE = f"""
-        MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
-        WHERE m.internalDocId <= n.internalDocId
-        AND m.internalMergedSameAsHighToUri IS NULL
-        AND n.internalMergedSameAsHighToUri IS NULL
-        AND LABELS(m) = LABELS(n)
-        AND "Organization" IN LABELS(m)
-        RETURN m.uri,n.uri
-        ORDER BY m.internalDocId
-        LIMIT 500
-    """
-
-    QUERY_SAME_AS_HIGH_FOR_MERGE_COUNT = f"""
-        MATCH (m: Resource)-[x:sameAsHigh]-(n: Resource)
-        WHERE m.internalDocId <= n.internalDocId
-        AND m.internalMergedSameAsHighToUri IS NULL
-        AND n.internalMergedSameAsHighToUri IS NULL
-        AND LABELS(m) = LABELS(n)
-        AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
-        RETURN count(*)
-    """
-
+    GCC_CREATE_SAME_AS="""CALL gds.graph.project(
+        'sameAsGraph',
+        'Organization',
+        {
+            SAME_AS: {
+                type: 'sameAsHigh',
+                orientation: 'UNDIRECTED'
+            }
+        })"""
+    
+    GCC_WRITE_SAME_AS_COMPONENTS="""
+        CALL gds.wcc.write('sameAsGraph', {
+            writeProperty: 'componentId'
+        })
+        """
+    
     QUERY_SELF_RELATIONSHIP = f"""
         MATCH (n: Resource)-[r]-(n)
         DELETE r
@@ -56,14 +50,12 @@ class RDFPostProcessor(object):
         self.merge_equivalent_activities()
         write_log_header("merge_same_as_high_connections")
         self.merge_same_as_high_connections()
-        write_log_header("Re-merge orgs")
-        re_merge_all_orgs_apoc(live_mode=True)
+        write_log_header("redundant same_as")
         rerun_all_redundant_same_as()
         write_log_header("adding embeddings")
         create_new_embeddings()
         write_log_header("adding unique resource ids")
         add_resource_ids()
-
 
     def merge_equivalent_activities(self, seen_doc_ids=set()):
         acts_to_merge_dict, keep_going, seen_doc_ids = get_all_activities_to_merge(seen_doc_ids)
@@ -97,29 +89,29 @@ class RDFPostProcessor(object):
         logger.info(f"Deleted {len(res)} self-relationships")
 
     def merge_same_as_high_connections(self):
-        cnt = 0
-        log_count_relationships("Before merge_same_as_high_connections")
-        while True:
-            logger.info("Querying for entries to merge")
-            vals,_ = db.cypher_query(self.QUERY_SAME_AS_HIGH_FOR_MERGE,
-                                        resolve_objects=True)
-            if len(vals) == 0:
-                break
-            for target_node_tmp_uri, source_node_tmp_uri in vals:
-                res = self.merge_nodes(source_node_tmp_uri, target_node_tmp_uri)
-                if res is False:
-                    break
-                cnt += 1
-                if cnt % 1000 == 0:
-                    log_count_relationships(f"After merge_same_as_high_connections {cnt} records")
-                if cnt % 100 == 0:
-                    logger.info(f"Merged merge_same_as_high_connections {cnt} records")
+        _ = db.cypher_query("CALL gds.graph.drop('sameAsGraph', false)") # just in case it's still there
+        _ = db.cypher_query(self.GCC_CREATE_SAME_AS)
+        _ = db.cypher_query(self.GCC_WRITE_SAME_AS_COMPONENTS)
+        components, _ = db.cypher_query("MATCH (n: Organization) WHERE n.componentId IS NOT NULL RETURN DISTINCT(n.componentId)")
+        logger.info(f"Found {len(components)} components for merging")
+        for row in components:
+            component = row[0]
+            self.merge_component(component)
+        _ = db.cypher_query("CALL gds.graph.drop('sameAsGraph')")
 
-        log_count_relationships("After merge_same_as_high_connections")
+    def merge_component(self, component_id):
+        source_nodes, target_node = get_nodes_for_component(component_id)
+        if target_node is None: # nothing new to merge
+            return None
+        logger.info(f"Component {component_id}: Found {len(source_nodes)} to merge into {target_node.uri}")
+        for source_node in source_nodes:
+            self.merge_nodes(source_node, target_node)
 
-    def merge_nodes(self,source_node_tmp_uri, target_node_tmp_uri, field_to_update="internalMergedSameAsHighToUri"):
-        source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp_uri)
-        target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp_uri)
+    def merge_nodes(self,source_node_tmp, target_node_tmp, field_to_update="internalMergedSameAsHighToUri"):        
+        source_node2 = Resource.self_or_ultimate_target_node(source_node_tmp) if not isinstance(source_node_tmp, Resource) else source_node_tmp
+        source_node_tmp_uri = source_node_tmp.uri if isinstance(source_node_tmp, Resource) else source_node_tmp
+        target_node2 = Resource.self_or_ultimate_target_node(target_node_tmp) if not isinstance(target_node_tmp, Resource) else target_node_tmp
+        target_node_tmp_uri = target_node_tmp.uri if isinstance(target_node_tmp, Resource) else target_node_tmp
         if source_node2 is None or target_node2 is None:
             raise ValueError(f"source: {source_node2} or target: {target_node2} is None")
         logger.debug(f"Merging {source_node_tmp_uri} ({source_node2.uri}) into {target_node_tmp_uri} ({target_node2.uri})")
@@ -136,7 +128,7 @@ class RDFPostProcessor(object):
         if source_node.uri == target_node.uri:
             logger.debug("Nodes are already merged to the same target, skipping")
             return False
-        Resource.merge_node_connections(source_node,target_node,field_to_update=field_to_update)
+        recursively_merge_nodes(source_node, target_node, live_mode=True, field_to_update=field_to_update)
         return True
         
     def add_document_extract_to_relationship(self):
@@ -165,6 +157,22 @@ class RDFPostProcessor(object):
         """
         db.cypher_query(apoc_query)
 
+def get_nodes_for_component(component_id: int) -> Tuple[list[Organization], Union[None,Organization]]:
+    query = f"""MATCH (n: Organization) 
+                WHERE n.internalMergedSameAsHighToUri IS NULL 
+                AND n.componentId = {component_id}
+                AND NOT ANY(x in LABELS(n) WHERE x =~ ".+Activity")
+                RETURN n
+                ORDER BY n.internalDocId
+                """
+    org_rows, _ = db.cypher_query(query, resolve_objects=True)
+    if len(org_rows) == 0:
+        logger.info(f"Nothing new to merge for component {component_id}")
+        return [], None
+    target_org = org_rows[0][0]
+    source_orgs = [x[0] for x in org_rows[1:]]
+    return source_orgs, target_org
+
 def write_log_header(message):
     for row in ["*" * 50, message, "*" * 50]:
         logger.info(row)
@@ -172,7 +180,6 @@ def write_log_header(message):
 def log_count_relationships(text):
     cnt = count_relationships()
     logger.info(f"{text}: {cnt} relationships")
-
 
 def add_resource_ids():
     '''
@@ -207,65 +214,22 @@ def update_duplicated_resource_ids():
             query = f"MATCH (n: Resource {{uri:'{uri}'}}) SET n.internalId = {current_max_id}"
             db.cypher_query(query)
 
-
-def mark_possible_missed_merge_candidates():
-    apoc_query = '''CALL apoc.periodic.iterate(
-        "MATCH (m: Resource&Organization)-[r:sameAsHigh]-(n: Resource&Organization)
-            WHERE m.internalMergedSameAsHighToUri IS NULL
-            AND n.internalMergedSameAsHighToUri IS NOT NULL
-            AND n.internalMergedSameAsHighToUri <> m.uri
-            AND m.possibleMissedMergeCandidateTo IS NULL
-            AND LABELS(m) = LABELS(n)
-            RETURN m, n",
-        "SET m.possibleMissedMergeCandidateTo = n.uri",
-        {batchSize: 100, parallel: true}
-        )'''
-    _ = db.cypher_query(apoc_query)
-    cnts_query = "MATCH (m: Resource&Organization) WHERE m.internalMergedSameAsHighToUri IS NULL and m.possibleMissedMergeCandidateTo IS NOT NULL RETURN COUNT(m)"
-    res, _ = db.cypher_query(cnts_query)
-    logger.info(f"Marked possible missed merge candidates: {res[0][0]} entries")
-
-def merge_potentially_missed_merges(live_mode=False):
-    # merge logic looks for NULL internalMergedSameAsHighToUri in both nodes.
-    # But what if a node is created and is sameAsHigh an already-merged node?
-    mark_possible_missed_merge_candidates()
-    cnt = 0
-    while True:
-        logger.info("Querying for entries to merge")
-        vals, _ = db.cypher_query("""MATCH (n: Resource&Organization)
-                                  WHERE n.internalMergedSameAsHighToUri IS NULL 
-                                  AND n.internalDocId > 0
-                                  AND n.possibleMissedMergeCandidateTo IS NOT NULL
-                                  RETURN n, n.possibleMissedMergeCandidateTo
-                                  ORDER BY n.internalDocId
-                                  LIMIT 500""", resolve_objects=True)
-        if len(vals) == 0:
-            break
-        for source_node, target_uri in vals:
-            target_node = Resource.get_by_uri(target_uri)
-            recursively_merge_nodes(source_node, target_node, live_mode=live_mode)
-            # mark as done
-            db.cypher_query(f"MATCH (n: Resource) WHERE n.uri = '{source_node.uri}' REMOVE n.possibleMissedMergeCandidateTo ")
-            cnt += 1
-            if cnt % 1000 == 0:
-                log_count_relationships(f"After merge_potentially_missed_merges {cnt} records")
-            if cnt % 100 == 0:
-                logger.info(f"Merged merge_potentially_missed_merges {cnt} records")
-
-
-def recursively_merge_nodes(source_node, target_node, live_mode):
+def recursively_merge_nodes(source_node, target_node, live_mode, field_to_update="internalMergedSameAsHighToUri"):
     if target_node is None:
         return None
-    source_weights = weights_for_relationships(source_node.uri)
-    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=False, live_mode=live_mode)
+    if target_node.internalMergedSameAsHighToUri is not None:
+        # target node is already merged so don't keep collecting weights
+        source_weights = weights_for_relationships(source_node.uri)
+    else:
+        source_weights = {}
+    res = Resource.merge_node_connections(source_node, target_node, run_as_re_merge=False, live_mode=live_mode, field_to_update=field_to_update)
     if res is True:
         recursively_re_merge_node_via_same_as(target_node, run_as_re_merge=False, live_mode=live_mode, use_these_weights=source_weights)
     
-        
 def recursively_re_merge_node_via_same_as(source_node, live_mode=False, run_as_re_merge=True, use_these_weights={}):
     target_uri = source_node.internalMergedSameAsHighToUri
     if target_uri is None:
-        return
+        return None
     target_node = Resource.get_by_uri(target_uri)
     if target_node is None:
         logger.warning(f"{source_node.uri} expected to merge to {target_uri} but node doesn't exist")
@@ -275,45 +239,9 @@ def recursively_re_merge_node_via_same_as(source_node, live_mode=False, run_as_r
     if res is True:
         recursively_re_merge_node_via_same_as(target_node,live_mode=live_mode,use_these_weights=use_these_weights)
 
-def mark_re_merge_candidates():
-    apoc_query = '''CALL apoc.periodic.iterate(
-                        "MATCH (a: Resource&Organization) MATCH (b: Resource&Organization) WHERE a.internalMergedSameAsHighToUri = b.uri AND LABELS(a) = LABELS(b) RETURN a, b",
-                        "MATCH (a)-[r]-(other) 
-                        WHERE type(r) <> 'sameAsHigh'
-                        AND type(r) <> 'industryClusterSecondary'
-                        AND type(r) <> 'documentSource'
-                        AND other.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-                        AND NOT EXISTS {MATCH (b)-[r2]-(other) WHERE type(r2) = type(r)}
-                        SET a.re_merge_candidate = true",
-                        {batchSize: 100, parallel: true}
-                        )
-                        '''   
-    _ = db.cypher_query(apoc_query)
-    logger.info("Finished apoc query")
-
 def weights_for_relationships(node_uri):
     query = f"""MATCH (n: Resource)-[r]-(o: Resource) WHERE n.uri ='{node_uri}' 
                 RETURN o.uri, r.weight"""
     vals, _ = db.cypher_query(query)
     source_weights = {x:y for x,y in vals}
     return source_weights
-
-def re_merge_all_orgs_apoc(live_mode=False):
-    logger.info("Started re-merge")
-    mark_re_merge_candidates()
-    process_batch_of_re_merge_candidates(live_mode=live_mode)
-
-def process_batch_of_re_merge_candidates(live_mode=False, limit=1000):
-    logger.info(f"processing batch of re-merge candidates: live_mode {live_mode}, limit {limit}")
-    orgs, _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.re_merge_candidate = true AND a.internalDocId > 0 RETURN a ORDER BY a.internalDocId DESC LIMIT {limit}", 
-                              resolve_objects=True) 
-    uris = []
-    for org_row in orgs:
-        org = org_row[0]
-        uris.append(org.uri)
-        source_weights=weights_for_relationships(org.uri)
-        recursively_re_merge_node_via_same_as(org, live_mode=live_mode, use_these_weights=source_weights)
-    _ = db.cypher_query(f"MATCH (a: Resource) WHERE a.uri in {uris} REMOVE a.re_merge_candidate")
-    logger.info(f"Processed {len(orgs)} records")
-    if len(orgs) > 0:
-        process_batch_of_re_merge_candidates(live_mode=live_mode, limit=limit)

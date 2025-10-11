@@ -23,6 +23,7 @@ def setup_db_if_necessary():
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
     db.cypher_query("CREATE INDEX resource_internal_id IF NOT EXISTS FOR (n:Resource) on (n.internalId)")
     db.cypher_query("CREATE INDEX node_merged_same_as_high_to_uri IF NOT EXISTS FOR (n:Resource) on (n.internalMergedSameAsHighToUri)")
+    db.cypher_query("CREATE INDEX component_id IF NOT EXISTS FOR (n: Organization) on (n.componentId)")
     db.cypher_query("CREATE FULLTEXT INDEX resource_names IF NOT EXISTS FOR (r:Resource) ON EACH [r.name]")
     db.cypher_query("CREATE FULLTEXT INDEX organization_clean_name IF NOT EXISTS FOR (r:Organization) ON EACH [r.internalCleanName]")
     db.cypher_query("CREATE FULLTEXT INDEX organization_clean_short_name IF NOT EXISTS FOR (r:Organization) ON EACH [r.internalCleanShortName]")
@@ -113,13 +114,16 @@ def delete_and_clean_up_nodes_by_doc_id(doc_id):
         node.delete_node_and_related()
 
 def count_relationships():
-    vals, _ = db.cypher_query("MATCH ()-[x]-() RETURN COUNT(x);")
-    cnt = vals[0][0]
+    vals, cols = db.cypher_query("CALL apoc.meta.stats()")
+    col_id = cols.index("relCount")
+    cnt = vals[0][col_id]
     return cnt
 
 def count_nodes():
-    val, _ = db.cypher_query("MATCH (n) RETURN COUNT(n)")
-    return val[0][0]
+    vals, cols = db.cypher_query("CALL apoc.meta.stats()")
+    col_id = cols.index("nodeCount")
+    cnt = vals[0][col_id]
+    return cnt
 
 def get_potential_duplicate_activities():
     query = f"""MATCH (a: Resource)-[:documentSource]->(d: Resource&Article)<-[:documentSource]-(b: Resource) 

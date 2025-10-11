@@ -13,8 +13,7 @@ from integration.neo4j_utils import (
     delete_and_clean_up_nodes_by_doc_id,
 )
 from integration.rdf_post_processor import (RDFPostProcessor, 
-    update_duplicated_resource_ids, recursively_re_merge_node_via_same_as,
-    merge_potentially_missed_merges, mark_re_merge_candidates
+    update_duplicated_resource_ids, recursively_re_merge_node_via_same_as
 )                
 from syracuse.cache_util import nuke_cache
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
@@ -467,13 +466,6 @@ class ReMergeOrgWithActivityTestCase(TestCase):
                 db.cypher_query(q)
         add_dynamic_classes_for_multiple_labels(ignore_cache=True)
 
-    def test_does_not_mark_re_merge_if_labels_are_different(self):
-        cnt, _ = db.cypher_query("MATCH (n) WHERE n.re_merge_candidate = true RETURN COUNT(*)")
-        self.assertEqual(cnt, [[0]])
-        mark_re_merge_candidates()
-        cnt, _ = db.cypher_query("MATCH (n) WHERE n.re_merge_candidate = true RETURN COUNT(*)")
-        self.assertEqual(cnt, [[0]])
-
     def test_handles_re_merge_with_different_attributes(self):
         source_node = Resource.nodes.get(uri="https://1145.am/db/10217121/Gripple")
         target_node = Resource.nodes.get(uri="https://1145.am/db/9156027/Gripple")
@@ -499,107 +491,6 @@ class ReMergeOrgWithActivityTestCase(TestCase):
         self.assertEqual(merged_after, [[2]]) # other 2 were merged into this one
         processed_docs, _ = db.cypher_query("MATCH (a) WHERE a.internalMergedActivityWithSimilarRelationshipsAt IS NOT NULL RETURN COUNT(*)")
         self.assertEqual(processed_docs, [[3]])
-
-class MergePotentiallyUnmergedOrgsTestCase(TestCase):
-
-    '''
-    Query created with:
-
-    1. Remove not-needed embeddings
-        MATCH (n:Resource)-[x]-(y)
-        WHERE n.uri in ['https://1145.am/db/2416772/Nsi_Corp','https://1145.am/db/2417959/Nsi','https://1145.am/db/2410633/Nsi']
-        REMOVE n.industry_embedding
-        REMOVE y.industry_embedding
-        REMOVE n.possibleMissedMergeCandidateTo
-        REMOVE y.representative_doc_embedding
-        REMOVE y.representative_doc_embedding_json
-        REMOVE n.name_embedding_json
-        REMOVE y.name_embedding_json
-
-    2. Export with
-    CALL apoc.export.cypher.query("MATCH (n:Resource)-[x]-(y)
-        WHERE n.uri in ['https://1145.am/db/2416772/Nsi_Corp','https://1145.am/db/2417959/Nsi','https://1145.am/db/2410633/Nsi']
-        RETURN *", null, {format:"plain", stream:true})
-
-    '''
-    cypher_queries = """CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS  FOR (node:Resource) REQUIRE (node.uri) IS UNIQUE;
-        UNWIND [{uri:"https://1145.am/db/geonames_location/1799397", properties:{internalId:162963, featureCode:"PPLA2", deletedRedundantSameAsAt:1.7597115672602062E9, countryCode:"CN", name:["Ningbo"], geoNamesId:1799397, admin1Code:"02"}}, {uri:"https://1145.am/db/geonames_location/5757506", properties:{internalId:2025, featureCode:"PPL", deletedRedundantSameAsAt:1.7597115672602062E9, countryCode:"US", name:["Tualatin"], geoNamesId:5757506, admin1Code:"OR"}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:GeoNamesLocation;
-        UNWIND [{uri:"https://1145.am/db/industry/312_consumer_gadgets_technology_tech", properties:{internalId:1463, topicId:312, uniqueName:"312_consumer_gadgets_technology_tech", deletedRedundantSameAsAt:1.7597115672602062E9, representativeDoc:["Consumer Technology", "Consumer Software", "Consumer-Technology"], representation:["digital", "tech", "appliance", "electronics", "devices", "appliances", "technology", "device", "consumer", "gadgets"]}}, {uri:"https://1145.am/db/industry/104_electronics_electronic_manufacturing_components", properties:{internalId:193, topicId:104, uniqueName:"104_electronics_electronic_manufacturing_components", representativeDoc:["Electronics Manufacturing Services", "Electronics Components", "Electronics Manufacturing"], deletedRedundantSameAsAt:1.7597115672602062E9, representation:["components", "electronics", "circuit", "manufacturers", "industries", "electronic", "manufacturing", "electrical", "lcd", "pcb"]}}, {uri:"https://1145.am/db/industry/46_semiconductor_semiconductors_microelectronics_microelectronic", properties:{internalId:209, topicId:46, uniqueName:"46_semiconductor_semiconductors_microelectronics_microelectronic", representativeDoc:["Semiconductor", "Semiconductor Technology", "Technology And Semiconductor"], deletedRedundantSameAsAt:1.7597115672602062E9, representation:["tech", "technologies", "electronics", "silicon", "semiconductor", "microelectronics", "microelectronic", "nanoelectronics", "polysilicon", "semiconductors"]}}, {uri:"https://1145.am/db/industry/292_royalties_music_licensing_royalty", properties:{internalId:585, topicId:292, uniqueName:"292_royalties_music_licensing_royalty", representativeDoc:["Music Royalties Fund", "Music Royalties Investment", "Music Royalties Investment Firm"], deletedRedundantSameAsAt:1.7597115672602062E9, representation:["", "copyright", "music", "fund", "royalties", "investment", "royalty", "publishing", "licensing"]}}, {uri:"https://1145.am/db/industry/8_lighting_light_led_skylights", properties:{internalId:913, topicId:8, uniqueName:"8_lighting_light_led_skylights", deletedRedundantSameAsAt:1.7597115672602062E9, representativeDoc:["Lighting", "Lighting Solutions", "Lighting Technology"], representation:["fixture", "dimming", "light", "bulb", "electrical", "led", "skylight", "lighting", "headlight", "skylights"]}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:IndustryCluster;
-        UNWIND [{uri:"https://1145.am/db/2416772/Nsi_Corp", properties:{internalId:1724, basedInHighClean:["Tualatin"], internalDocId:2416772, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["NSI Corp. NSI"], name:["NSI Corp"], description:["music industry"], industry:["Lighting control"], internalCleanName:["nsi"], basedInHighRaw:["Tualatin, OR"]}}, {uri:"https://1145.am/db/2418099/Nsi", properties:{internalId:2089, basedInHighClean:["Tualatin"], internalDocId:2418099, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["NSI Corporation"], name:["NSI"], description:["music industry"], industry:["music industry"], internalCleanName:["nsi"], internalMergedSameAsHighToUri:"https://1145.am/db/2416772/Nsi_Corp", basedInHighRaw:["Tualatin, OR"]}}, {uri:"https://1145.am/db/5860629/Nsi", properties:{internalId:8123514, basedInHighClean:["Ningbo"], internalDocId:5860629, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["NSI"], name:["NSI"], description:["Integrated Circuit Industry Investment Fund"], industry:["Microelectronics"], internalCleanName:["nsi"], internalMergedSameAsHighToUri:"https://1145.am/db/2410633/Nsi", basedInHighRaw:["Ningbo, eastern Zhejiang province"]}}, {uri:"https://1145.am/db/2417959/Nsi", properties:{internalId:9047352, basedInHighClean:["Tualatin"], internalDocId:2417959, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["NSI"], name:["NSI"], description:["making control and dimming products"], industry:["electronics"], internalCleanName:["nsi"], internalMergedSameAsHighToUri:"https://1145.am/db/2410633/Nsi", basedInHighRaw:["Tualatin, OR"]}}, {uri:"https://1145.am/db/2410633/Nsi", properties:{internalId:9047434, basedInHighClean:["Tualatin"], internalDocId:2410633, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["NSI"], name:["NSI"], industry:["electronics"], internalCleanName:["nsi"], basedInHighRaw:["Tualatin, OR"]}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Organization;
-        UNWIND [{uri:"https://1145.am/db/2418099/Nsi-Acquisition", properties:{documentDate:datetime('1999-10-01T12:00:00Z'), targetName:["NSI"], deletedRedundantSameAsAt:1.7597115672602062E9, whereHighRaw:["Tualatin, OR"], internalId:1655, whereHighClean:["Tualatin"], internalDocId:2418099, documentExtract:"Leviton Manufacturing Co., headquartered in Little Neck, NY, has acquired the Tualatin, OR - based NSI Corporation.", foundName:["acquired"], name:["acquired"], activityType:["acquisition"], status:["completed"]}}, {uri:"https://1145.am/db/2416772/Nsi_Corp-Acquisition", properties:{documentDate:datetime('1999-09-01T12:00:00Z'), targetName:["NSI Corp"], deletedRedundantSameAsAt:1.7597115672602062E9, whereHighRaw:["Tualatin, OR"], internalId:1698, whereHighClean:["Tualatin"], internalDocId:2416772, documentExtract:"Leviton Manufacturing Co., headquartered in Little Neck, NY, has acquired Tualatin, OR - based NSI Corp. NSI, which manufactures portable lighting control and dimmer systems through the music industry for live entertainment applications, and its Colortran division are now part of the Leviton Lighting Control Division, which is based in Atlanta.", foundName:["acquired"], name:["acquired"], activityType:["acquisition"], status:["completed"]}}, {uri:"https://1145.am/db/5860629/Nsi-Investment-Shares", properties:{documentDate:datetime('2025-06-06T13:00:18Z'), targetName:["NSI"], deletedRedundantSameAsAt:1.7597115672602062E9, whereHighRaw:["Ningbo, eastern Zhejiang province", "China"], internalId:8123650, whereHighClean:["Ningbo", "People’s Republic of China"], internalDocId:5860629, documentExtract:"A separate filing on Friday by Shenzhen -listed Goke Microelectronics revealed the firm's plan to buy more shares in NSI - headquartered in Ningbo, eastern Zhejiang province - from 10 other stakeholders to raise its stake to 94.37 per cent, using a combination of cash and shares.", foundName:["buy"], name:["buy"], internalMergedActivityWithSimilarRelationshipsAt:1.749336942199902E9, activityType:["investment"], targetDetails:["shares"], status:["not happened at date of document"]}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:CorporateFinanceActivity;
-        UNWIND [{uri:"https://1145.am/db/2410633/Makes_Portable_Control_And_Dimming_Products-About-Us", properties:{documentDate:datetime('2002-01-08T12:00:00Z'), internalId:9047354, internalDocId:2410633, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["makes portable control and dimming products"], documentExtract:"Most of those years were at NSI in Tualatin, OR, which makes portable control and dimming products. While there he worked his way up from production test technician to service manager to worldwide sales manager. Carpenter says his years of experience and his electronics engineering degree will help him in his sales efforts at High End Systems.  I 've been involved in electronics repair and diagnostics for as long as I can remember, including my years in the Navy , Carpenter says, so I have an intimate understanding of electronics and circuitry, which helps in this business. Also, I have a passion for customer service.", name:["makes portable control and dimming products"]}}, {uri:"https://1145.am/db/2416772/Manufactures_Portable_Lighting_Control_And_Dimmer_Systems_Through_The-About-Us", properties:{documentDate:datetime('1999-09-01T12:00:00Z'), internalId:9047863, internalDocId:2416772, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["manufactures portable lighting control and dimmer systems through the"], documentExtract:"Leviton Manufacturing Co., headquartered in Little Neck, NY, has acquired Tualatin, OR - based NSI Corp. NSI, which manufactures portable lighting control and dimmer systems through the music industry for live entertainment applications, and its Colortran division are now part of the Leviton Lighting Control Division, which is based in Atlanta. Terms were not disclosed, but bothparties expressed satisfaction with the deal.  It was always in our long-range plan to do something creative with the business , says Terry White, NSI Corp.'s senior vice president of marketing, who in 1986 founded NSI with president/CEO Larry Lynn and senior vice president of engineering Robert Hick.  Over the years, we 've been contacted by different investors, offering to help us run NSI, but we simply were n't interested. We got a friendly phone call from Leviton late last summer, saying they were looking to do something different with their controls division, and that we appeared to fit their profile.", name:["manufactures portable lighting control and dimmer systems through the"]}}, {uri:"https://1145.am/db/2417959/Makes_Portable_Control_And_Dimming_Products-About-Us", properties:{documentDate:datetime('2002-02-01T12:00:00Z'), internalId:9048027, internalDocId:2417959, deletedRedundantSameAsAt:1.7597115672602062E9, foundName:["makes portable control and dimming products", "portable control and dimming products"], documentExtract:"Most of those years were at NSI in Tualatin, OR, which makes portable control and dimming products. While there, he worked his way up from production test technician to service manager to worldwide sales manager. Carpenter says his years of experience and his electronics engineering degree will help him in his sales efforts at High End Systems.  I 've been involved in electronics repair and diagnostics for as long as I can remember, including my years in the Navy , Carpenter says, so I have an intimate understanding of electronics and circuitry, which helps in this business. Also, I have a passion for customer service.", name:["makes portable control and dimming products"]}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:AboutUs;
-        UNWIND [{uri:"https://1145.am/db/2410633/wwwlivedesignonlinecom_business-people-news_carpenter-joins-high-end-west-coast", properties:{datePublished:datetime('2002-01-08T12:00:00Z'), internalId:103448, internalDocId:2410633, deletedRedundantSameAsAt:1.7597115672602062E9, sourceOrganization:"Live Design Online", headline:"Carpenter joins High End West Coast"}}, {uri:"https://1145.am/db/2417959/wwwlivedesignonlinecom_carpenter-joins-high-end-s-west-coast-operation", properties:{datePublished:datetime('2002-02-01T12:00:00Z'), internalId:106533, internalDocId:2417959, deletedRedundantSameAsAt:1.7597115672602062E9, sourceOrganization:"Live Design Online", headline:"Carpenter joins High End's West Coast operation"}}, {uri:"https://1145.am/db/2416772/wwwlivedesignonlinecom_leviton-acquires-nsi-corp", properties:{datePublished:datetime('1999-09-01T12:00:00Z'), internalId:1997, internalDocId:2416772, deletedRedundantSameAsAt:1.7597115672602062E9, sourceOrganization:"Live Design Online", headline:"Leviton acquires NSI Corp."}}, {uri:"https://1145.am/db/2418099/wwwlivedesignonlinecom_leviton-acquires-nsi", properties:{datePublished:datetime('1999-10-01T12:00:00Z'), internalId:1999, internalDocId:2418099, deletedRedundantSameAsAt:1.7597115672602062E9, sourceOrganization:"Live Design Online", headline:"Leviton Acquires NSI"}}, {uri:"https://1145.am/db/5860629/wwwscmpcom_tech_big-tech_article_3313425_chinas-top-chipmaker-smic-offloads-stake-ningbo-affiliate-focus-core-operations", properties:{datePublished:datetime('2025-06-06T13:00:18Z'), internalId:8123573, internalDocId:5860629, deletedRedundantSameAsAt:1.7597115672602062E9, dateRetrieved:datetime('2025-06-07T05:11:30Z'), sourceOrganization:"South China Morning Post", headline:"China's top chipmaker SMIC offloads stake in Ningbo affiliate to focus on core operations"}}] AS row
-        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Article;
-        UNWIND [{start: {uri:"https://1145.am/db/2416772/Nsi_Corp-Acquisition"}, end: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/5860629/Nsi-Investment-Shares"}, end: {uri:"https://1145.am/db/2410633/Nsi"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2418099/Nsi-Acquisition"}, end: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:target]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/industry/312_consumer_gadgets_technology_tech"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/industry/312_consumer_gadgets_technology_tech"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:industryClusterSecondary]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/industry/8_lighting_light_led_skylights"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/industry/104_electronics_electronic_manufacturing_components"}, properties:{weight:2}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/industry/104_electronics_electronic_manufacturing_components"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/industry/46_semiconductor_semiconductors_microelectronics_microelectronic"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/industry/292_royalties_music_licensing_royalty"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:industryClusterPrimary]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/2410633/Makes_Portable_Control_And_Dimming_Products-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/2416772/Manufactures_Portable_Lighting_Control_And_Dimmer_Systems_Through_The-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/2417959/Makes_Portable_Control_And_Dimming_Products-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/2417959/Makes_Portable_Control_And_Dimming_Products-About-Us"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:hasAboutUs]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/2416772/wwwlivedesignonlinecom_leviton-acquires-nsi-corp"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/2410633/wwwlivedesignonlinecom_business-people-news_carpenter-joins-high-end-west-coast"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/2417959/wwwlivedesignonlinecom_carpenter-joins-high-end-s-west-coast-operation"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/2417959/wwwlivedesignonlinecom_carpenter-joins-high-end-s-west-coast-operation"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/5860629/wwwscmpcom_tech_big-tech_article_3313425_chinas-top-chipmaker-smic-offloads-stake-ningbo-affiliate-focus-core-operations"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/2418099/wwwlivedesignonlinecom_leviton-acquires-nsi"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:documentSource]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/geonames_location/5757506"}, properties:{weight:2}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/geonames_location/5757506"}, properties:{weight:2}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/geonames_location/5757506"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/geonames_location/1799397"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:basedInHighGeoNamesLocation]->(end) SET r += row.properties;
-        UNWIND [{start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/2418099/Nsi"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2410633/Nsi"}, end: {uri:"https://1145.am/db/5860629/Nsi"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2416772/Nsi_Corp"}, end: {uri:"https://1145.am/db/2417959/Nsi"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/5860629/Nsi"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2417959/Nsi"}, end: {uri:"https://1145.am/db/2410633/Nsi"}, properties:{weight:1}}] AS row
-        MATCH (start:Resource{uri: row.start.uri})
-        MATCH (end:Resource{uri: row.end.uri})
-        CREATE (start)-[r:sameAsHigh]->(end) SET r += row.properties;"""
-    
-    def setUp(self):
-        clean_db()
-        nuke_cache()
-        for query in self.cypher_queries.split(";"):
-            q = query.strip()
-            if q != '':
-                db.cypher_query(q)
-        add_dynamic_classes_for_multiple_labels(ignore_cache=True)
-
-    def test_merges_potentially_unmerged(self):
-        uri = "https://1145.am/db/2416772/Nsi_Corp" # This was skipped for merging because it is linked to another node that was already merged
-        source = Resource.get_by_uri(uri)
-        target1_uri = 'https://1145.am/db/2417959/Nsi'
-        target2_uri = 'https://1145.am/db/2410633/Nsi'
-        self.assertIsNone(source.internalMergedSameAsHighToUri)
-        self.assertEqual(self.loc_weight(uri), 2)
-        self.assertEqual(self.loc_weight(target1_uri), 1)
-        self.assertEqual(self.loc_weight(target2_uri), 2)
-
-        merge_potentially_missed_merges(live_mode=True)
-        source_after = Resource.get_by_uri(uri)
-        self.assertEqual(source_after.internalMergedSameAsHighToUri, target1_uri)
-        self.assertEqual(self.loc_weight(uri), 2)
-        self.assertEqual(self.loc_weight(target1_uri), 3)
-        self.assertEqual(self.loc_weight(target2_uri), 4)
-
-        res, _ = db.cypher_query("MATCH (n) WHERE n.possibleMissedMergeCandidateTo IS NOT NULL RETURN *")
-        self.assertEqual(len(res), 0)
-
-    def loc_weight(self, source_uri):
-        query = f"""MATCH (n: Resource&Organization)-[r:basedInHighGeoNamesLocation]-(l: GeoNamesLocation)
-            WHERE n.uri = '{source_uri}'
-            AND l.uri = 'https://1145.am/db/geonames_location/5757506'
-            RETURN r.weight"""
-        res, _ = db.cypher_query(query)
-        return int(res[0][0])
 
 class MergeSubsetActivitiesTestCase(TestCase):
 
