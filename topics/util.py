@@ -52,4 +52,20 @@ def camel_case_to_snake_case(text):
     text = re.sub(r'\s+','_', text)
     return text.lower()
 
+def filter_unique_records_and_allowed_activity_types(activities, activity_types_to_keep=[]):
+    activities_to_keep = []
+    seen_uris = set()
+    for act in activities:
+        uri = act.get("activity_uri",act.get("industry_sector_update_uri"))
+        assert uri is not None, f"Couldn't find URI for {act}"
+        if uri in seen_uris:
+            continue
+        if len(activity_types_to_keep) == 0: # keep all activities
+            activities_to_keep.append(act)
+        elif any( [ re.match(
+                        x.lower(),act["activity_class"].lower()) 
+                        for x in activity_types_to_keep ] ):
+                activities_to_keep.append(act)
+        seen_uris.add(uri)
+    return activities_to_keep
 

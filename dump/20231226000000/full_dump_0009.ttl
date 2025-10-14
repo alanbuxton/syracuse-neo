@@ -286,10 +286,12 @@
 
 <https://1145.am/db/4290421/Pascale_St-Onge> a org:Organization ;
     ns1:basedInLowRaw "Canada" ;
+    ns1:basedInHighGeoNamesLocation <https://1145.am/db/geonames_location/5128581> ;
     ns1:description "Heritage Minister" ;
     ns1:documentSource <https://1145.am/db/4290421/wwwtheglobeandmailcom_politics_article-national-gallerys-new-board-chair-meant-to-calm-the-waters-at-a-museum_> ;
     ns1:foundName "Pascale St-Onge" ;
     ns1:hasRole <https://1145.am/db/4290421/Pascale_St-Onge-Board_Chair> ;
+    ns1:industryClusterPrimary <https://1145.am/db/industry/321_property_properties_redevelopment_estate> ;
     ns1:internalDocId 4290421 ;
     ns1:internalCleanName "pascal st onge" ;
     ns1:name "Pascale St-Onge" .

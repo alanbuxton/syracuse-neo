@@ -476,8 +476,8 @@ class TestFindResultsWithNodeDegreeCount(TestCase):
 
     def test_search_by_industry_counts_same_as_name_only_false(self):
         res = org_uris_by_industry_id_and_or_geo_code(23, None, combine_same_as_name_only=False)
-        assert res == [('https://1145.am/db/100/foo_newone', 3, 100, [[None, None, None]]), 
-                       ('https://1145.am/db/101/foo_oldone', 2, 101, [[None, None, None]])], f"Got {res}"
+        assert res == [('https://1145.am/db/100/foo_newone', 3, 100, [[None, None, None], [None, None, None]]), 
+                       ('https://1145.am/db/101/foo_oldone', 2, 101, [[None, None, None], [None, None, None]])], f"Got {res}"
 
     def test_search_by_industry_counts_same_as_name_only_true(self):
         res = org_uris_by_industry_id_and_or_geo_code(23, None, combine_same_as_name_only=True)

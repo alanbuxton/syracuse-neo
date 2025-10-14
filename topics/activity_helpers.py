@@ -124,7 +124,7 @@ def activities_by_org_uris(org_uris, min_date, max_date, cache_version=None, lim
         {where_etc}
         {limit_str}
         UNION
-        MATCH (art: Article)<-[:documentSource]-(act:RoleActivity)-[:withRole]->(Role)<-[:hasRole]-(o: Resource&Organization)
+        MATCH (art: Article)<-[:documentSource]-(act:RoleActivity)-[:role]->(Role)<-[:hasRole]-(o: Resource&Organization)
         {where_etc}
         {limit_str}
     """

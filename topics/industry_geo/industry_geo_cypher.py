@@ -7,7 +7,6 @@ from topics.industry_geo.geoname_mappings import COUNTRIES_WITH_STATE_PROVINCE
 
 logger = logging.getLogger(__name__)
 
-
 def build_and_run_query(min_date, max_date, include_industry=True, include_geo=True, include_admin1=False):
     query = build_query(min_date, max_date, include_industry, include_geo, include_admin1)
     logger.debug(query)
@@ -33,18 +32,30 @@ def build_query(min_date, max_date, include_industry, include_geo, include_admin
 
 def build_return_stmt(include_industry, include_geo, include_admin1):
     to_return = []
+    withs = ["o", "articles1 + articles2 as allArticleData"]
+    unwinds = []
     if include_industry:
         to_return.append("ic.topicId")
+        withs.append("ics")
+        unwinds.append("unwind ics as ic")
     if include_geo:
         to_return.append("loc.countryCode")
+        withs.append("locs")
+        unwinds.append("unwind locs as loc")
     if include_admin1:
         to_return.append("loc.admin1Code")
     assert len(to_return) > 0, f"{to_return} has to have at least one item to return"
-    stmt = f"RETURN {', '.join(to_return)} , collect(distinct([o.uri, apoc.node.degree(o), o.internalDocId, articleData]))"
-    return stmt
+    with_stmt = "with " + ",".join(withs)
+    unwind_stmt = " ".join(unwinds)
+    return_stmt = f"RETURN {', '.join(to_return)} , collect([o.uri, apoc.node.degree(o), o.internalDocId, allArticleData])"
+    return f"{with_stmt} {unwind_stmt} {return_stmt}"
 
 
-def build_industry_section():
+def build_industry_section(return_as_collect=True):
+    if return_as_collect:   
+        return_section = "RETURN COLLECT(ic) AS ics" 
+    else: 
+        return_section = "RETURN ic ORDER BY weight DESCENDING"
     return f"""CALL {{
         WITH o
         MATCH (o)-[r:industryClusterPrimary]->(ic:IndustryCluster)
@@ -53,13 +64,16 @@ def build_industry_section():
         WITH o, ic, weight, SUM(rAll.weight) AS totalWeight
         WHERE weight >= {INDUSTRY_CLUSTER_MIN_WEIGHT_PROPORTION} * totalWeight
         AND weight > 1
-        RETURN ic
-        ORDER BY weight DESCENDING
-    }}
+        {return_section}
+        }}
     """
 
-def build_geo_section(include_admin1=False):
+def build_geo_section(include_admin1=False, return_as_collect=True):
     admin1_section = build_admin1_section() if include_admin1 else ""
+    if return_as_collect:   
+        return_section = "RETURN COLLECT(loc) AS locs" 
+    else: 
+        return_section = "RETURN loc ORDER BY weight DESCENDING"
     return f"""CALL {{
         WITH o
         MATCH (o)-[r:basedInHighGeoNamesLocation]->(loc:GeoNamesLocation)
@@ -69,8 +83,7 @@ def build_geo_section(include_admin1=False):
         WITH o, loc, weight, SUM(rAll.weight) AS totalWeight
         WHERE weight >= {GEO_LOCATION_MIN_WEIGHT_PROPORTION} * totalWeight
         AND weight > 1
-        RETURN loc
-        ORDER BY weight DESCENDING
+        {return_section}
     }}
     """
         
@@ -91,7 +104,17 @@ def build_article_section(min_date, max_date):
     AND art.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
     AND TYPE(rel) <> 'participant'
     AND act.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
-    RETURN collect([act.uri, art.uri, art.datePublished]) AS articleData
+    RETURN collect([act.uri, art.uri, art.datePublished]) AS articles1
+
+    }}
+    CALL {{
+    WITH o
+    OPTIONAL MATCH (act2: RoleActivity)--(:Role)--(o)-[:documentSource]->(art2: Article)<-[:documentSource]-(act2)
+    WHERE art2.datePublished >= datetime('{date_to_cypher_friendly(min_date)}')
+    AND art2.datePublished <= datetime('{date_to_cypher_friendly(max_date)}')
+    AND act2.internalMergedActivityWithSimilarRelationshipsToUri IS NULL
+    RETURN collect([act2.uri, art2.uri, art2.datePublished]) AS articles2
+   
     }}
     """
 
@@ -99,7 +122,7 @@ def industries_for_org(org_uri):
     query = f"""
     MATCH (o: Resource&Organization)
     WHERE o.uri = '{org_uri}'
-    {build_industry_section()}
+    {build_industry_section(return_as_collect=False)}
     RETURN ic
     """
     vals, _ = db.cypher_query(query, resolve_objects=True)
@@ -109,7 +132,7 @@ def based_in_high_geo_names_locations_for_org(org_uri):
     query = f"""
     MATCH (o: Resource&Organization)
     WHERE o.uri = '{org_uri}'
-    {build_geo_section()}
+    {build_geo_section(return_as_collect=False)}
     RETURN loc
     """
     vals, _ = db.cypher_query(query, resolve_objects=True)

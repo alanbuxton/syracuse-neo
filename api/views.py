@@ -4,7 +4,7 @@ from auth_extensions.anon_user_utils import IsAuthenticatedNotAnon
 from topics.models import IndustryCluster, GeoNamesLocation, Resource
 import api.serializers as serializers
 import logging 
-from topics.util import geo_to_country_admin1
+from topics.util import filter_unique_records_and_allowed_activity_types
 from rest_framework import status
 from topics.activity_helpers import (get_activities_by_industry_geo_and_date_range,
                                      get_activities_by_org_with_fixed_or_expanding_date_range)
@@ -268,8 +268,7 @@ class ActivitiesViewSet(NeomodelViewSet):
                     for geo_code in geo_codes:
                         acts = get_activities_by_industry_geo_and_date_range(industry_id, geo_code, min_date, max_date)
                         activities.extend(acts)
-        if len(types_to_keep) > 0:
-            activities = filter_activity_types(activities, types_to_keep)
+        activities = filter_unique_records_and_allowed_activity_types(activities, types_to_keep)
         acts = sorted(activities, key = lambda x: x['date_published'], reverse=True)
         set_versionable_cache(cache_key, acts, timeout=3600)
         return acts
@@ -438,13 +437,3 @@ class APITokenView(APIView):
         return Response({'token': token_key}, status=status.HTTP_200_OK)
 
  
-def filter_activity_types(activities, activity_types_to_keep):
-    if not isinstance(activity_types_to_keep, list) and len(activity_types_to_keep) == 0:
-        return activities
-    activities_to_keep = []
-    for act in activities:
-        if any( [ re.match(
-                        x.lower(),act["activity_class"].lower()) 
-                        for x in activity_types_to_keep ] ):
-                activities_to_keep.append(act)
-    return activities_to_keep

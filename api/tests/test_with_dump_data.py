@@ -479,7 +479,7 @@ class EndToEndTests20240602(TestCase):
                                             ('EG', 'Egypt', 0, 0, 1), ('ES', 'Spain', 1, 1, 1),
                                             ('GB', 'United Kingdom of Great Britain and Northern Ireland', 1, 1, 1), ('IL', 'Israel', 1, 1, 1),
                                             ('JP', 'Japan', 0, 0, 1), ('KE', 'Kenya', 1, 1, 1), ('UG', 'Uganda', 1, 1, 1),
-                                            ('US', 'United States of America', 14, 14, 33)])
+                                            ('US', 'United States of America', 15, 15, 34)])
         self.assertEqual(recents_by_source, [ ('PR Newswire', 20, 20, 33), ('Associated Press', 3, 3, 3), ('MarketWatch', 3, 3, 3), 
                                                 ('Business Insider', 2, 2, 2),
                                                 ('CityAM', 1, 1, 4), 
@@ -511,14 +511,14 @@ class EndToEndTests20240602(TestCase):
         _, max_date = min_and_max_date({"max_date":max_date})
         sample_ind = IndustryCluster.nodes.get_or_none(topicId=32)
         res = activities_by_industry(sample_ind,date_minus(max_date,90),max_date)
-        assert len(res) == 6, f"got {res}"
-        assert res == [('https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 'https://1145.am/db/3475299/wwwprnewswirecom_news-releases_correction----napajen-pharma-inc-300775556html', datetime(2024, 5, 29, 13, 52, tzinfo=timezone.utc)),
+        self.assertEqual(res, [
+            ('https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C', 'https://1145.am/db/3475299/wwwprnewswirecom_news-releases_correction----napajen-pharma-inc-300775556html', datetime(2024, 5, 29, 13, 52, tzinfo=timezone.utc)),
                         ('https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)),
                         ('https://1145.am/db/3029576/Loxo_Oncology-Acquisition', 'https://1145.am/db/3029576/wwwcityamcom_el-lilly-buys-cancer-drug-specialist-loxo-oncology-8bn_', datetime(2024, 3, 7, 18, 6, tzinfo=timezone.utc)),
                         ('https://1145.am/db/2543228/Takeda-Acquisition-Business', 'https://1145.am/db/2543228/wwwfiercepharmacom_pharma-asia_takeda-debt-after-shire-buyout-but-don-t-expect-otc-unit-selloff-ceo', datetime(2024, 3, 7, 17, 12, 27, tzinfo=timezone.utc)),
                         ('https://1145.am/db/2543227/Bristol-Myers-Merger', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc)),
                         ('https://1145.am/db/2543227/Celgene-Acquisition', 'https://1145.am/db/2543227/wwwfiercepharmacom_pharma_bristol-celgene-ceos-explain-rationale-behind-74b-megadeal-at-jpm', datetime(2024, 3, 7, 17, 5, tzinfo=timezone.utc))
-        ]
+        ])
 
     def test_recent_activities_by_country(self):
         max_date = date.fromisoformat("2024-06-02")
@@ -526,13 +526,15 @@ class EndToEndTests20240602(TestCase):
         min_date, max_date = min_and_max_date({"min_date":min_date,"max_date":max_date})
         country_code = 'US-NY'
         matching_activity_orgs = get_activities_by_country_and_date_range(country_code,min_date,max_date,limit=20)
-        assert len(matching_activity_orgs) == 8, f"got {matching_activity_orgs}"
+        self.assertEqual(len(matching_activity_orgs), 9)
         sorted_actors = [tuple(sorted(x['actors'].keys())) for x in matching_activity_orgs]
-        assert set(sorted_actors) == {('buyer', 'target'), ('vendor',), ('buyer', 'target', 'vendor'), ('investor', 'target')}
+        assert set(sorted_actors) == {('organization', 'person', 'role'), ('investor', 'target'), ('investor', 'target'), 
+                                      ('investor', 'target'), ('vendor',), ('buyer', 'target', 'vendor'), ('buyer', 'target', 'vendor'), 
+                                      ('buyer', 'target'), ('buyer', 'target')}
         activity_classes = sorted([x['activity_class'] for x in matching_activity_orgs])
-        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 8)]
+        assert Counter(activity_classes).most_common() == [('CorporateFinanceActivity', 8), ('RoleActivity', 1)]
         uris = [x['activity_uri'] for x in matching_activity_orgs]
-        assert uris == ['https://1145.am/db/3475220/Novel_Bellevue-Investment', 'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B',
+        assert uris == ['https://1145.am/db/4290421/Paul_Genest-Starting-Board_Chair', 'https://1145.am/db/3475220/Novel_Bellevue-Investment', 'https://1145.am/db/3474027/Aquiline_Technology_Growth-Gan-Investment-Series_B',
                         'https://1145.am/db/3472994/Ethos_Veterinary_Health_Llc-Investment', 'https://1145.am/db/3448296/Urban_One-Ipo-Senior_Subordinated_Notes',
                         'https://1145.am/db/3447359/Us_Zinc-Acquisition', 'https://1145.am/db/3446501/Pure_Fishing-Acquisition',
                         'https://1145.am/db/3029576/Celgene-Acquisition', 'https://1145.am/db/2543227/Celgene-Acquisition']
@@ -1551,18 +1553,21 @@ class EndToEndTests20240602(TestCase):
         client = self.client
         path = "/api/v1/activities/?industry_name=legal&industry_name=risk&industry_name=real estate&location_id=US&days_ago=7"
         # No legal results because matching legal firms are only participants, not buyers etc
+        # Industry ID's matching: {321, 675, 452, 5, 647, 137, 498, 312}
         client.force_login(self.user)
         resp = client.get(path)
         j = json.loads(resp.content)
-        assert j['count'] == 5, f"Got {j['count']}"
+        self.assertEqual(j['count'], 6)
         res = [x['activity_uri'] for x in j['results']]
-        assert res == [
+        self.assertEqual(res, [
+            "https://1145.am/db/4290421/Paul_Genest-Starting-Board_Chair",
             "https://1145.am/db/3475312/Rental_History_Reports_And_Trusted_Employees-Acquisition",
             "https://1145.am/db/3475220/Novel_Bellevue-Investment",
             "https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition",
             "https://1145.am/db/3471595/Housefaxcom-Acquisition",
-            "https://1145.am/db/3476441/Dcamera_Group-Acquisition"], f"Got {res}"
-
+            "https://1145.am/db/3476441/Dcamera_Group-Acquisition",
+            ])
+        
     def test_api_finds_by_org_name(self):
         path = "/api/v1/activities/?org_name=Postmedia"
         client = self.client
@@ -1592,12 +1597,14 @@ class EndToEndTests20240602(TestCase):
             TrackedItem(industry_id=647)
         ]
         acts, _ = tracked_items_between(tis, min_date, max_date)
-        assert [x['activity_uri'] for x in acts] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
-                                                        'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition',
-                                                        'https://1145.am/db/3476441/Dcamera_Group-Acquisition']
+        self.assertEqual([x['activity_uri'] for x in acts],
+                          ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
+                            'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition',
+                            'https://1145.am/db/3476441/Dcamera_Group-Acquisition'])
         acts2, _ = tracked_items_between(tis, min_date_for_activities, max_date)
-        assert [x['activity_uri'] for x in acts2] == ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
-                                                       'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition']
+        self.assertEqual([x['activity_uri'] for x in acts2],
+                          ['https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C',
+                           'https://1145.am/db/3475254/Eldercare_Insurance_Services-Acquisition'])
         
     def test_creates_typesense_doc_for_industry_cluster(self):
         uri = "https://1145.am/db/industry/412_midstream_upstream_downstream_industry"

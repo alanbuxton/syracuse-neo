@@ -769,9 +769,8 @@ class IndustryCluster(Resource):
     
     @staticmethod
     def by_name(name, limit=10, request=None):
-        if flag_enabled("FEATURE_TYPESENSE", request=request):
+        if request and flag_enabled("FEATURE_TYPESENSE", request=request):
             logger.warning("Using FEATURE_TYPESENSE - needs reimplementation")
-            die
         else:
             return IndustryCluster.by_representative_doc_words(name, limit=limit)
 
