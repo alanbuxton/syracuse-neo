@@ -311,7 +311,7 @@ class Resource(StructuredNode):
         logger.info(f"delete_node_and_related {self.uri}")
         related_nodes_with_weights, _ = db.cypher_query(f"MATCH (n: Resource {{uri:'{self.uri}'}})-[rel]-(other: Resource) RETURN n.uri, type(rel), rel.weight, other.uri")
         extra_rels_to_delete = []
-        for source_uri, rel_type, weight, other_uri in related_nodes_with_weights:
+        for _, rel_type, weight, other_uri in related_nodes_with_weights:
             if rel_type != "sameAsHigh":
                 extra_rels_to_delete.append( (rel_type, weight, other_uri))
         merged_nodes = Resource.nodes.filter(internalMergedSameAsHighToUri=self.uri)

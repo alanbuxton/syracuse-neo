@@ -109,9 +109,28 @@ def get_node_name_from_rdf_row(row):
         return None
 
 def delete_and_clean_up_nodes_by_doc_id(doc_id):
-    nodes_to_delete = Resource.nodes.filter(internalDocId=doc_id).order_by('internalMergedSameAsHighToUri') # Null is at end
+    nodes_to_delete = Resource.nodes.filter(internalDocId=doc_id)
+    nodes_to_delete = dependency_sort(nodes_to_delete)
     for node in nodes_to_delete:
         node.delete_node_and_related()
+
+def dependency_sort(orgs):
+    """Process items in waves: first no deps, then their dependents, etc."""
+    remaining = list(orgs)
+    sorted_result = []
+    processed_uris = set()
+    while remaining:
+        # Find items whose dependencies are already processed (or have no deps)
+        ready = [t for t in remaining 
+                 if t.internalMergedSameAsHighToUri is None or t.internalMergedSameAsHighToUri in processed_uris]
+        if not ready:
+            # Circular dependency or external dependency never resolved
+            sorted_result.extend(remaining)
+            break
+        sorted_result.extend(ready)
+        processed_uris.update(t.uri for t in ready)
+        remaining = [t for t in remaining if t not in ready]
+    return sorted_result[::-1]  # Reverse the list
 
 def count_relationships():
     vals, cols = db.cypher_query("CALL apoc.meta.stats()")
