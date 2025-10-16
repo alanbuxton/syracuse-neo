@@ -119,18 +119,29 @@ def dependency_sort(orgs):
     remaining = list(orgs)
     sorted_result = []
     processed_uris = set()
+    
+    # Add all URIs that exist in the tuples as "my uri"
+    all_my_uris = {t.uri for t in orgs}
+    
     while remaining:
-        # Find items whose dependencies are already processed (or have no deps)
-        ready = [t for t in remaining 
-                 if t.internalMergedSameAsHighToUri is None or t.internalMergedSameAsHighToUri in processed_uris]
+        # Find items whose dependencies are already processed, have no deps, 
+        # OR depend on external URIs (not in our tuple set)
+        ready = [t for t in remaining if 
+                 t.internalMergedSameAsHighToUri is None or 
+                 t.internalMergedSameAsHighToUri in processed_uris or
+                 t.internalMergedSameAsHighToUri not in all_my_uris]  # External dependency
+        
         if not ready:
-            # Circular dependency or external dependency never resolved
+            # Circular dependency
             sorted_result.extend(remaining)
             break
+        
         sorted_result.extend(ready)
         processed_uris.update(t.uri for t in ready)
         remaining = [t for t in remaining if t not in ready]
-    return sorted_result[::-1]  # Reverse the list
+    
+    return sorted_result[::-1]
+
 
 def count_relationships():
     vals, cols = db.cypher_query("CALL apoc.meta.stats()")

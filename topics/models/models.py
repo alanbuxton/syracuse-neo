@@ -335,8 +335,9 @@ class Resource(StructuredNode):
             assert (len(existing_weight_rels) == 1), f"Found {existing_weight_rels} for {self.uri}, {rel_type}, {weight}, {other_uri}. Query was {core_query}"
             existing_weight = existing_weight_rels[0][0]
             new_weight = existing_weight - weight
-            assert new_weight >= 0, f"new weight is {new_weight} for {self.uri}, {rel_type}, {weight}, {other_uri}"
-            if new_weight == 0:
+            if new_weight < 0:
+                logger.warning(f"new weight is {new_weight} for {self.uri}, {rel_type}, {weight}, {other_uri}")
+            if new_weight <= 0:
                 delete_query = f"{core_query} DELETE rel"
             else:
                 delete_query = f"{core_query} SET rel.weight = {new_weight}"
