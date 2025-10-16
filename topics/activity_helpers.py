@@ -172,7 +172,7 @@ def industry_sector_update_to_api_results(uri):
     api_row["document_url"] = article.documentURL
     api_row["archive_org_page_url"] = article.archiveOrgPageURL
     api_row["archive_org_list_url"] = article.archiveOrgListURL
-    api_row["entity_uri"] = isu.uri
+    api_row["industry_sector_update_uri"] = isu.uri
     api_row["highlight"] = isu.best_highlight
     api_row["industry_sector"] = isu.best_industry
     api_row["industry_subsector"] = isu.best_industrySubsector
