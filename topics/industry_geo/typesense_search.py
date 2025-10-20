@@ -21,19 +21,32 @@ class IndustryGeoTypesenseSearch(object):
         ]
         self.model = SentenceTransformer(settings.EMBEDDINGS_MODEL)
 
-    def uris_by_industry_text(self, text, regions: Union[set, list] = [], max_distance=0.18):
-        res = self.do_query(text, regions)
-        vals = self.matching_vals(res, max_distance, include_objects=False)
+    def distance_based_on_words(self, text):
+        if len(text.split()) > 1:
+            max_distance = 0.22
+        else:
+            max_distance = 0.18
+        return max_distance
+    
+    def query_and_filter(self, text, regions, max_distance, collections, include_objects):
+        res = self.do_query(text, regions, collections=collections)
+        max_distance = max_distance if max_distance else self.distance_based_on_words(text)
+        vals = self.matching_vals(res, max_distance, include_objects=include_objects)
         return vals
 
-    def objects_by_industry_text(self, text, regions: Union[set, list] = [], max_distance=0.18):
-        res = self.do_query(text, regions)
-        vals = self.matching_vals(res, max_distance)
-        return vals
+    def uris_by_industry_text(self, text, regions: Union[set, list] = [], 
+                              max_distance=None, collections=None):
+        return self.query_and_filter(text, regions, max_distance, collections, include_objects=False)
+
+    def objects_by_industry_text(self, text, regions: Union[set, list] = [], 
+                                 max_distance=None, collections=None):
+        return self.query_and_filter(text, regions, max_distance, collections, include_objects=True)
     
-    def do_query(self, text, regions):
+    def do_query(self, text, regions, collections=None):
+        if collections is None:
+            collections = self.collections
         query_vector = self.model.encode(text)
-        res = self.ts.vector_search_multi(query_vector, self.collections, regions=regions)
+        res = self.ts.vector_search_multi(query_vector, collections, regions=regions)
         return res
     
     def do_query_by_collection(self, text, collection_name, regions=None):
@@ -60,12 +73,6 @@ class IndustryGeoTypesenseSearch(object):
             if vector_distance < current_score:
                 collection = row["collection_name"]
                 attribs = {"collection":collection} | doc_data
-                # if doc_data.get("org_internal_ids"):
-                #     attribs["org_internal_ids"] = doc_data.get("org_internal_ids",[])
-                # if doc_data.get("internal_id"):
-                #     attribs["internal_id"] = doc_data["internal_id"]
-                # if doc_data.get("topic_id"):
-                #     attribs["topic_id"] = doc_data["topic_id"]
                 uri_to_vector_distance[uri] = (vector_distance, attribs )
                 uri_to_object[uri] = obj
 
