@@ -90,7 +90,7 @@ def load_deletion_file(filepath):
     for doc_id in doc_ids:
         delete_and_clean_up_nodes_by_doc_id(doc_id)
     cnt2, _ = db.cypher_query(count_query)
-    logger.info(f"Before deleting {cnt[0][0]} nodes. After delete {cnt2[0][0]} nodes")
+    logger.info(f"Before deleting {cnt[0][0]} nodes. After delete {filepath} {cnt2[0][0]} nodes")
     return cnt2[0][0] - cnt[0][0]
 
 def load_file(filepath,RDF_SLEEP_TIME, raise_on_error=True):
