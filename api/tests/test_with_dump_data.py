@@ -63,14 +63,12 @@ class EndToEndTests20140205(TestCase):
     @classmethod
     def setUpTestData(cls):
         do_setup_test_data(date(2014,2,5),fill_blanks=True)
-
-    def setUp(self):
         ts = time.time()
-        self.user = get_user_model().objects.create(username=f"test-{ts}")
+        cls.user = get_user_model().objects.create(username=f"test-{ts}")
         # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
 
     def test_populates_activity_articles_for_marketing_activity(self):
         min_date, max_date = min_and_max_date({"max_date":"2014-02-05"})
@@ -155,18 +153,16 @@ class EndToEndTests20190110(TestCase):
     @classmethod
     def setUpTestData(cls):
         do_setup_test_data(date(2019,1,10),fill_blanks=False)
-
-    def setUp(self):
-        self.anon, _ = create_anon_user()
+        cls.anon, _ = create_anon_user()
         ts = time.time()
-        self.user = get_user_model().objects.create(username=f"test-{ts}")
+        cls.user = get_user_model().objects.create(username=f"test-{ts}")
         # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
-        self.ts2 = time.time()
-        self.user2 = get_user_model().objects.create(username=f"test2-{self.ts2}")
-        _ = TrackedItem.objects.create(user=self.user2,
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+        cls.ts2 = time.time()
+        cls.user2 = get_user_model().objects.create(username=f"test2-{cls.ts2}")
+        _ = TrackedItem.objects.create(user=cls.user2,
                                         industry_id=146,
                                         region="US-TX")
 
@@ -297,22 +293,21 @@ class EndToEndTests20240602(TestCase):
         reset_typesense()
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
         add_industry_clusters_to_typesense()
+
         RDFPostProcessor().run_typesense_update()
-        
-    def setUp(self):
         ts = time.time()
-        self.user = get_user_model().objects.create(username=f"test-{ts}")
-        self.anon, _ = create_anon_user()
+        cls.user = get_user_model().objects.create(username=f"test-{ts}")
+        cls.anon, _ = create_anon_user()
         # NB dates in TTL files changed to make the tests work more usefully - it's expected that the published date is later than the retrieved date
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
-        _ = TrackedItem.objects.create(user=self.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
-        self.ts2 = time.time()
-        self.user2 = get_user_model().objects.create(username=f"test2-{self.ts2}")
-        _ = TrackedItem.objects.create(user=self.user2,
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3029576/Celgene") # "2024-03-07T18:06:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3475299/Napajen_Pharma") # "2024-05-29T13:52:00Z"
+        _ = TrackedItem.objects.create(user=cls.user, organization_uri="https://1145.am/db/3458127/The_Hilb_Group") # merged from uri: https://1145.am/db/3476441/The_Hilb_Group with date datePublished: ""2024-05-27T14:05:00+00:00""
+        cls.ts2 = time.time()
+        cls.user2 = get_user_model().objects.create(username=f"test2-{cls.ts2}")
+        _ = TrackedItem.objects.create(user=cls.user2,
                                         industry_id=146,
                                         region="US-TX")
-        tracked_orgs = TrackedItem.trackable_by_user(self.user)
+        tracked_orgs = TrackedItem.trackable_by_user(cls.user)
         org_uris = [x.organization_uri for x in tracked_orgs]
         assert set(org_uris) == {'https://1145.am/db/3029576/Celgene',
                                     'https://1145.am/db/3475299/Napajen_Pharma',
@@ -321,25 +316,25 @@ class EndToEndTests20240602(TestCase):
         assert set(org_or_merged_uris) == {'https://1145.am/db/2543227/Celgene',
                                     'https://1145.am/db/3469058/Napajen_Pharma',
                                     'https://1145.am/db/3458127/The_Hilb_Group'}
-        self.ts3 = time.time()
-        self.user3 = get_user_model().objects.create(username=f"test3-{self.ts3}")
-        _ = TrackedItem.objects.create(user=self.user3,
+        cls.ts3 = time.time()
+        cls.user3 = get_user_model().objects.create(username=f"test3-{cls.ts3}")
+        _ = TrackedItem.objects.create(user=cls.user3,
                                         industry_search_str="software")
-        _ = TrackedItem.objects.create(user=self.user3,
+        _ = TrackedItem.objects.create(user=cls.user3,
                                         region = "AU")
-        self.anon, _ = create_anon_user()
-        self.ts4 = time.time()
-        self.user4 = get_user_model().objects.create(username=f"test4-{self.ts4}")
-        _ = TrackedItem.objects.create(user=self.user4,
+        cls.anon, _ = create_anon_user()
+        cls.ts4 = time.time()
+        cls.user4 = get_user_model().objects.create(username=f"test4-{cls.ts4}")
+        _ = TrackedItem.objects.create(user=cls.user4,
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=False)
-        self.ts5 = time.time()
-        self.user5 = get_user_model().objects.create(username=f"test5-{self.ts5}")
-        _ = TrackedItem.objects.create(user=self.user5,
+        cls.ts5 = time.time()
+        cls.user5 = get_user_model().objects.create(username=f"test5-{cls.ts5}")
+        _ = TrackedItem.objects.create(user=cls.user5,
                                        organization_uri="https://1145.am/db/3029576/Celgene",
                                        and_similar_orgs=True)
-        self.min_date, self.max_date = min_and_max_date({})  # max date will be latest cache date
-        self.ts_search = IndustryGeoTypesenseSearch()
+        cls.min_date, cls.max_date = min_and_max_date({})  # max date will be latest cache date
+        cls.ts_search = IndustryGeoTypesenseSearch()
 
     def test_adds_model_classes_with_multiple_labels(self):
         uri = "https://1145.am/db/2858242/Search_For_New_Chief"

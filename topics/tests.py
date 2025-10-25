@@ -43,10 +43,8 @@ class TestRegionHierarchy(TestCase):
     @classmethod
     def setUpTestData(cls):
         nuke_cache()
-
-    def setUp(self):
-        self.countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
-        self.admin1s = {"US":["IL","OK","IA","NY"],"CA":["12","13"],"CN":["11","04"]}
+        cls.countries = ["GB","CN","CA","US","ZA","AE","SG","NA","SZ"]
+        cls.admin1s = {"US":["IL","OK","IA","NY"],"CA":["12","13"],"CN":["11","04"]}
 
     def test_builds_region_hierarchy(self):
 
@@ -234,10 +232,8 @@ class TestFamilyTree(TestCase):
         """
         db.cypher_query(query)
         nuke_cache()
-
-    def setUp(self):
         ts = time.time()
-        self.user = get_user_model().objects.create(username=f"test-{ts}")
+        cls.user = get_user_model().objects.create(username=f"test-{ts}")
 
     def test_gets_parent_orgs_without_same_as_name_only(self):
         uri = "https://1145.am/db/111/l"

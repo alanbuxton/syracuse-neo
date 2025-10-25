@@ -742,54 +742,55 @@ class MergeSubsetActivitiesTestCase(TestCase):
             CREATE (start)-[r:locationAdded]->(end) SET r += row.properties;
         """
     
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         clean_db()
         nuke_cache()
-        for query in self.cypher_queries.split(";"):
+        for query in cls.cypher_queries.split(";"):
             q = query.strip()
             if q != '':
                 db.cypher_query(q)
         add_dynamic_classes_for_multiple_labels(ignore_cache=True)
 
-        self.a1_source_uri = "https://1145.am/db/5302672/Ryuichi_Isaka-None-Chief_Executive"
-        self.a1_target_uri = "https://1145.am/db/5302672/Stephen_Dacus-Starting-Chief_Executive"
-        a1_s = Resource.get_by_uri(self.a1_source_uri)
-        a1_t = Resource.get_by_uri(self.a1_target_uri)
+        cls.a1_source_uri = "https://1145.am/db/5302672/Ryuichi_Isaka-None-Chief_Executive"
+        cls.a1_target_uri = "https://1145.am/db/5302672/Stephen_Dacus-Starting-Chief_Executive"
+        a1_s = Resource.get_by_uri(cls.a1_source_uri)
+        a1_t = Resource.get_by_uri(cls.a1_target_uri)
         assert a1_s.internalMergedActivityWithSimilarRelationshipsToUri is None
         assert a1_t.withRole.relationship(a1_t.withRole[0]).weight == 1
 
-        self.a2_source_uri = "https://1145.am/db/5302873/Seven_I_Holdings-Investment"
-        self.a2_target_uri = "https://1145.am/db/5302873/York_Holdings-Acquisition"
-        a2_s = Resource.get_by_uri(self.a2_source_uri)
-        a2_t = Resource.get_by_uri(self.a2_target_uri)
+        cls.a2_source_uri = "https://1145.am/db/5302873/Seven_I_Holdings-Investment"
+        cls.a2_target_uri = "https://1145.am/db/5302873/York_Holdings-Acquisition"
+        a2_s = Resource.get_by_uri(cls.a2_source_uri)
+        a2_t = Resource.get_by_uri(cls.a2_target_uri)
         assert a2_s.internalMergedActivityWithSimilarRelationshipsToUri is None
         assert a2_t.investor.relationship(Resource.get_by_uri("https://1145.am/db/331244/Seven_I_Holdings")).weight == 1
 
-        self.a3_source_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Wilmington"
-        self.a3_target_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Lumina_Commons"
-        a3_s = Resource.get_by_uri(self.a3_source_uri)
-        a3_t = Resource.get_by_uri(self.a3_target_uri)
+        cls.a3_source_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Wilmington"
+        cls.a3_target_uri = "https://1145.am/db/5293762/Harris_Teeter-Added-Lumina_Commons"
+        a3_s = Resource.get_by_uri(cls.a3_source_uri)
+        a3_t = Resource.get_by_uri(cls.a3_target_uri)
         a3_t_target = a3_t.locationAdded.filter(internalMergedSameAsHighToUri__isnull=True)[0]
         assert a3_s.internalMergedActivityWithSimilarRelationshipsToUri is None
         assert a3_t.locationAdded.relationship(a3_t_target).weight == 1
         assert a3_t.documentSource.relationship(Resource.get_by_uri("https://1145.am/db/5293762/wwwprwebcom_releases_harris-teeter-celebrates-virginia-beach-va-fuel-center-grand-opening-with-0-40-off-per-gallon-fuel-discount-302391894html")).weight == 1
 
-        self.a4_uri_1 = "https://1145.am/db/4782968/Better-for-You_Restaurant"
-        self.a4_uri_2 = "https://1145.am/db/4782968/Local_Frutta_Bowls" # Both of these are Organization *and* CorporateFinanceActivity
-        a4_1 = Resource.get_by_uri(self.a4_uri_1)
-        a4_2 = Resource.get_by_uri(self.a4_uri_2)
+        cls.a4_uri_1 = "https://1145.am/db/4782968/Better-for-You_Restaurant"
+        cls.a4_uri_2 = "https://1145.am/db/4782968/Local_Frutta_Bowls" # Both of these are Organization *and* CorporateFinanceActivity
+        a4_1 = Resource.get_by_uri(cls.a4_uri_1)
+        a4_2 = Resource.get_by_uri(cls.a4_uri_2)
         assert len(a4_1.target.all()) == 1
         assert len(a4_2.target.all()) == 1
 
-        self.ra_2427985_uri_a = "https://1145.am/db/2427985/Kent_Mathieu-Finishing-Art_Director"
-        self.ra_2427985_uri_b = "https://1145.am/db/2427985/Kent_Mathieu-Starting-Creative_Director"
-        ra_2427985_a = Resource.get_by_uri(self.ra_2427985_uri_a)
-        ra_2427985_b = Resource.get_by_uri(self.ra_2427985_uri_b)
+        cls.ra_2427985_uri_a = "https://1145.am/db/2427985/Kent_Mathieu-Finishing-Art_Director"
+        cls.ra_2427985_uri_b = "https://1145.am/db/2427985/Kent_Mathieu-Starting-Creative_Director"
+        ra_2427985_a = Resource.get_by_uri(cls.ra_2427985_uri_a)
+        ra_2427985_b = Resource.get_by_uri(cls.ra_2427985_uri_b)
         assert len(ra_2427985_a.withRole.filter(internalMergedSameAsHighToUri__isnull=True).all()) == 2
         assert len(ra_2427985_b.withRole.filter(internalMergedSameAsHighToUri__isnull=True).all()) == 2
 
-        self.ra_2421653_bobby_uri = "https://1145.am/db/2421653/Bobby_Klimuszko"
-        ra_2421653_bobby = Resource.get_by_uri(self.ra_2421653_bobby_uri)
+        cls.ra_2421653_bobby_uri = "https://1145.am/db/2421653/Bobby_Klimuszko"
+        ra_2421653_bobby = Resource.get_by_uri(cls.ra_2421653_bobby_uri)
         ra_2421653_bobby_activities = ra_2421653_bobby.roleActivity.filter(internalMergedActivityWithSimilarRelationshipsToUri__isnull=True)
         assert len(ra_2421653_bobby_activities) == 3
         roles = [x.withRole.all() for x in ra_2421653_bobby_activities]
@@ -1141,6 +1142,7 @@ class TypesenseAddDeleteTestCase(CypherQueryBaseTestCase):
     
     @classmethod
     def setUpTestData(cls):
+        super()
         cls.ts = TypesenseService()
         cls.ts.recreate_collection(AboutUs)
         cls.ts.recreate_collection(Organization)
@@ -1307,7 +1309,8 @@ class MergeUnmergedIntegrationTestCase(TestCase):
 
 class RecursivelyReMergeNodesTestCase(TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         clean_db()
         node_data = [
             {"doc_id":10000, "identifier":"orga","node_type":"Organization"},
@@ -1339,17 +1342,17 @@ class RecursivelyReMergeNodesTestCase(TestCase):
         SET orgo.internalMergedSameAsHighToUri = 'https://1145.am/db/20003/orgp'
         """
         db.cypher_query(query)
-        self.orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
-        self.orgb = Resource.get_by_uri('https://1145.am/db/10001/orgb')
-        self.orgc = Resource.get_by_uri('https://1145.am/db/10002/orgc')
-        self.orgm = Resource.get_by_uri('https://1145.am/db/20000/orgm')
-        self.orgn = Resource.get_by_uri('https://1145.am/db/20001/orgn')
-        self.orgo = Resource.get_by_uri('https://1145.am/db/20002/orgo')
-        self.orgp = Resource.get_by_uri('https://1145.am/db/20003/orgp')
+        cls.orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
+        cls.orgb = Resource.get_by_uri('https://1145.am/db/10001/orgb')
+        cls.orgc = Resource.get_by_uri('https://1145.am/db/10002/orgc')
+        cls.orgm = Resource.get_by_uri('https://1145.am/db/20000/orgm')
+        cls.orgn = Resource.get_by_uri('https://1145.am/db/20001/orgn')
+        cls.orgo = Resource.get_by_uri('https://1145.am/db/20002/orgo')
+        cls.orgp = Resource.get_by_uri('https://1145.am/db/20003/orgp')
         artm = Resource.get_by_uri('https://1145.am/db/article_orgm')
         artn = Resource.get_by_uri('https://1145.am/db/article_orgn')
-        self.orgo.documentSource.connect(artm)
-        self.orgo.documentSource.connect(artn)
+        cls.orgo.documentSource.connect(artm)
+        cls.orgo.documentSource.connect(artn)
 
         
     def test_recursively_re_merges(self):

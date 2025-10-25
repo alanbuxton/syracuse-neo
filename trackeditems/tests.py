@@ -76,11 +76,12 @@ class TrackedOrgIndustryGeoTestCase(TestCase):
 
 
 class ToggleTrackedItemAPITest(APITestCase):
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         ts = time.time()
-        self.user = get_user_model().objects.create_user(username=f"test-{ts}", password="testpass")
-        self.item = TrackedItem.objects.create(user=self.user,organization_uri=f"https://www.example.org/foo/{ts}")
-        self.url = f"/toggle_similar_organizations/{self.item.id}/"
+        cls.user = get_user_model().objects.create_user(username=f"test-{ts}", password="testpass")
+        cls.item = TrackedItem.objects.create(user=cls.user,organization_uri=f"https://www.example.org/foo/{ts}")
+        cls.url = f"/toggle_similar_organizations/{cls.item.id}/"
 
     def test_authenticated_user_can_toggle_item(self):
         self.item.refresh_from_db()
