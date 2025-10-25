@@ -105,7 +105,14 @@ class RDFPostProcessor(object):
         _ = db.cypher_query("CALL gds.graph.drop('sameAsGraph', false)") # just in case it's still there
         _ = db.cypher_query(self.GCC_CREATE_SAME_AS)
         _ = db.cypher_query(self.GCC_WRITE_SAME_AS_COMPONENTS)
-        components, _ = db.cypher_query("MATCH (n: Organization) WHERE n.componentId IS NOT NULL RETURN DISTINCT(n.componentId)")
+        component_id_query = """
+            MATCH (n:Resource&Organization) 
+            WHERE n.componentId IS NOT NULL
+            AND n.internalMergedSameAsHighToUri IS NULL
+            WITH n.componentId AS componentId, COUNT(n) AS orgCount
+            WHERE orgCount >= 2
+            RETURN componentId"""
+        components, _ = db.cypher_query(component_id_query)
         logger.info(f"Found {len(components)} components for merging")
         for row in components:
             component = row[0]
