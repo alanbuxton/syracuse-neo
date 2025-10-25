@@ -304,7 +304,7 @@ class TestFamilyTree(TestCase):
 
     def test_shows_nodes_in_name_order(self):
         client = self.client
-        path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&min_date=-1"
+        path = "/organization/family-tree/uri/1145.am/db/101/b?rels=buyer,vendor,investor&min_date=-1&combine_same_as_name_only=1"
         response = client.get(path)
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
         client.force_login(self.user)
@@ -334,7 +334,7 @@ class TestFamilyTree(TestCase):
         '''
         client = self.client
         client.force_login(self.user)
-        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1")
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1&combine_same_as_name_only=1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)
@@ -342,7 +342,7 @@ class TestFamilyTree(TestCase):
     def test_switches_sibling_if_different_parent_has_same_as_name_only_child(self):
         client = self.client
         client.force_login(self.user)
-        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1")
+        response = client.get("/organization/family-tree/uri/1145.am/db/203/s2?min_date=-1&combine_same_as_name_only=1")
         content = str(response.content)
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/202/s1" not in content # link from p1 to s1
         assert "https://1145.am/db/200/p1-buyer-https://1145.am/db/203/s2" in content # link from s1 to c1 (but it was s2 who bought c1)

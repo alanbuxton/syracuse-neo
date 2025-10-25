@@ -979,7 +979,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_family_tree_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?&min_date=-1"
+        uri_filtered = "/organization/family-tree/uri/1145.am/db/3029576/Eli_Lilly?&min_date=-1&combine_same_as_name_only=1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)
@@ -1003,7 +1003,7 @@ class EndToEndTests20240602(TestCase):
 
     def test_timeline_filters_by_document_source_defaults(self):
         client = self.client
-        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1"
+        uri_filtered = "/organization/timeline/uri/1145.am/db/3029576/Eli_Lilly?min_date=-1&combine_same_as_name_only=1"
         client.force_login(self.user)
         resp_filtered = client.get(uri_filtered)
         content_filtered = str(resp_filtered.content)

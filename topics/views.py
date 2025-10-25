@@ -56,6 +56,8 @@ class Index(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'index.html'
 
+    max_orgs = 50
+
     def get(self,request):
         params = request.query_params
         org_name = params.get("name")
@@ -66,8 +68,8 @@ class Index(APIView):
                                             limit=500,request=request)
             orgs = sorted(orgs, key=lambda x: x[1], reverse=True)
             num_hits = len(orgs)
-            if len(orgs) > 20:
-                orgs = islice(orgs,20)
+            if len(orgs) > self.max_orgs:
+                orgs = islice(orgs,self.max_orgs)
             org_list = OrganizationWithCountsSerializer(orgs, many=True)
             org_search = NameSearchSerializer({"name":org_name})
             search_type = 'org_name'
@@ -92,6 +94,7 @@ class Index(APIView):
                         "motd": MOTD,
                         "last_updated": last_updated,
                         "request_state": request_state,
+                        "max_orgs": self.max_orgs,
                         }, status=status.HTTP_200_OK)
         return resp
 
@@ -131,7 +134,7 @@ class OrganizationIndustryGeoSources(APIView):
 
     def get(self, request, **kwargs):
         uri = f"https://{kwargs['domain']}/{kwargs['path']}/{kwargs['doc_id']}/{kwargs['name']}"
-        request_state, combine_same_as_name_only = prepare_request_state(request)
+        request_state, _ = prepare_request_state(request)
         o = Organization.self_or_ultimate_target_node(uri)
         org_data = {**kwargs, **{"uri":o.uri,"source_node_name":o.best_name},**o.serialize_no_none()}
         uri_parts = elements_from_uri(o.uri)
@@ -489,7 +492,7 @@ def industry_geo_search_str(industry, geo):
 
 
 def prepare_request_state(request):
-    combine_same_as_name_only = bool(int(request.GET.get("combine_same_as_name_only","1")))
+    combine_same_as_name_only = bool(int(request.GET.get("combine_same_as_name_only","0")))
     qs_params = request.GET.dict()
     toggle_combine_as_same_name_only = int(not combine_same_as_name_only)
     toggle_params = {**qs_params,**{"combine_same_as_name_only":toggle_combine_as_same_name_only}}

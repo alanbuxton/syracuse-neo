@@ -90,8 +90,8 @@ Last updated {{ last_updated | localize }}</h5>
     <div class="result_list">
       <p>Searched for &quot;{{ search_term | safe }}&quot;.
          Found {{ num_hits }}
-        {% if num_hits > 20 %}
-         organizations (Max 20 shown for web users):
+        {% if num_hits > max_orgs %}
+         organizations (Max {{max_orgs}} shown for web users):
         {% else %}
          organizations:
         {% endif %}
