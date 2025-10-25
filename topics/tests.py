@@ -844,7 +844,7 @@ class TestDisentanglingMergedCells(TestCase):
             {"doc_id":9998, "identifier":"actc","node_type":"OperationsActivity"},
             {"doc_id":9997, "identifier":"actd","node_type":"OperationsActivity"},
             {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},
-            {"doc_id":340,   "identifier":"loc2","node_type":"GeoNamesLocation"},
+            {"doc_id":340,  "identifier":"loc2","node_type":"GeoNamesLocation"},
         ]
 
         nodes = [make_node(**x) for x in node_data]
@@ -959,8 +959,8 @@ class TestDisentanglingMergedCells(TestCase):
             {"doc_id":9999, "identifier":"orgb","node_type":"Organization"},
             {"doc_id":9998, "identifier":"orgc","node_type":"Organization"},
             {"doc_id":9997, "identifier":"orgd","node_type":"Organization"},
-            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"},  # US-PA
-            {"doc_id":340,   "identifier":"loc2","node_type":"GeoNamesLocation"}, # US-NY
+            {"doc_id":33,   "identifier":"loc1","node_type":"GeoNamesLocation"}, # US-PA
+            {"doc_id":340,  "identifier":"loc2","node_type":"GeoNamesLocation"}, # US-NY
         ]
         nodes = [make_node(**x) for x in node_data]
         node_list = ", ".join(nodes)
@@ -979,8 +979,6 @@ class TestDisentanglingMergedCells(TestCase):
         orga = Resource.get_by_uri('https://1145.am/db/10000/orga')
         orgc = Resource.get_by_uri('https://1145.am/db/9998/orgc')
         orgd = Resource.get_by_uri('https://1145.am/db/9997/orgd')
-        loc1 = Resource.get_by_uri('https://1145.am/db/33/loc1')
-        loc2 = Resource.get_by_uri('https://1145.am/db/340/loc2')
 
         uspa_orgs = get_source_orgs_for_ind_cluster_or_geo_code(orgd, 'US-PA')
         assert uspa_orgs == { (orga,1) }, f"Got {uspa_orgs}"
@@ -1019,8 +1017,9 @@ class TestTypesenseDocs(TestCase):
     ]
 
     resource_fields = {
-        "uri":"https://example.org/foo/bar",
-        "internalId":123,
+        "uri": "https://example.org/foo/bar",
+        "internalId": 123,
+        "internalDocId": 456,
         "internalMergedSameAsHighToUri": None,
     }
 

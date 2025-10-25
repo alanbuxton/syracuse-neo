@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from integration.neo4j_utils import (
     setup_db_if_necessary, get_node_name_from_rdf_row,
     get_internal_doc_ids_from_rdf_row, count_nodes,
-    delete_and_clean_up_nodes_by_doc_id,
+    flag_doc_ids_for_adding_to_typesense,
+    flag_doc_ids_for_removal_from_typesense,
 )
 import time
 import logging
@@ -17,10 +18,10 @@ from pathlib import Path
 from topics.cache_helpers import refresh_geo_data
 from integration.rdf_post_processor import RDFPostProcessor
 from auth_extensions.anon_user_utils import create_anon_user
+from integration.neo4j_utils import delete_and_clean_up_nodes_by_doc_id 
 
 logger = logging.getLogger(__name__)
 PIDFILE="/tmp/syracuse-import-ttl.pid"
-
 
 def is_running(pidfile):
     if os.path.exists(pidfile):
@@ -74,7 +75,7 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,
     logger.info(f"Found {len(all_files)} ttl files to process")
     if len(all_files) == 0:
         logger.info("No insertion files to load, quitting")
-        return count_of_deletions, 0
+        return 0, count_of_deletions
     for filename in all_files:
         creations = load_file(f"{dir_name}/{filename}",RDF_SLEEP_TIME,raise_on_error)
         count_of_creations += creations
@@ -83,32 +84,48 @@ def load_ttl_files(dir_name,RDF_SLEEP_TIME,
 
 def load_deletion_file(filepath):
     filepath = os.path.abspath(filepath)
-    count_query = f"MATCH (n: Resource) RETURN COUNT(n)"
-    cnt, _ = db.cypher_query(count_query)
+    cnt = count_nodes()
+    doc_ids = set()
     with open(filepath) as f:
-        doc_ids = set([get_internal_doc_ids_from_rdf_row(x) for x in f.readlines() if get_internal_doc_ids_from_rdf_row(x) is not None])
-    for doc_id in doc_ids:
-        delete_and_clean_up_nodes_by_doc_id(doc_id)
-    cnt2, _ = db.cypher_query(count_query)
-    logger.info(f"Before deleting {cnt[0][0]} nodes. After delete {filepath} {cnt2[0][0]} nodes")
-    return cnt2[0][0] - cnt[0][0]
+        for row in f.readlines():
+            doc_id = get_internal_doc_ids_from_rdf_row(row)
+            if doc_id is None:
+                continue
+            doc_ids.add(doc_id)
+            delete_and_clean_up_nodes_by_doc_id(doc_id)
+    flag_doc_ids_for_removal_from_typesense(doc_ids)
+    cnt2 = count_nodes()
+    logger.info(f"Before deleting {cnt} nodes. After delete {filepath} {cnt2} nodes")
+    return cnt2 - cnt
 
 def load_file(filepath,RDF_SLEEP_TIME, raise_on_error=True):
+    cnt = count_nodes()
     filepath = os.path.abspath(filepath)
     command = f"""CALL n10s.rdf.import.fetch("file://{filepath}","Turtle",
                 {{ predicateExclusionList : [ "https://1145.am/db/geoNamesRDF" ] }} );"""
     logger.info(f"Loading: {command}")
-    results,columns = db.cypher_query(command)
+    results,_ = db.cypher_query(command)
     res = results[0] # row like ['KO', 0, 5025, None, 'Unexpected character U+FFFC at index 57: https://1145.am/db/techcrunchcom_2011_12_02_doo-net-gets-￼6-8m-to-reinvent-office-paperwork-oh-yes-2_ [line 5121]', {'singleTx': False}]
     if res[0] != 'OK':
         logger.error(f"{command}: {res}")
         if raise_on_error is True:
             raise ValueError(f"{command} failed with {res}")
+    doc_ids = set()
+    uris = set()
     with open(filepath) as f:
-        uris = [get_node_name_from_rdf_row(x) for x in f.readlines() if get_node_name_from_rdf_row(x) is not None]
+        for row in f.readlines():
+            doc_id = get_internal_doc_ids_from_rdf_row(row)
+            uri = get_node_name_from_rdf_row(row)
+            if doc_id is not None:
+                doc_ids.add(doc_id)
+            if uri is not None:
+                uris.add(uri)
+    flag_doc_ids_for_adding_to_typesense(doc_ids)
+    cnt2 = count_nodes()
     time.sleep(RDF_SLEEP_TIME)
+    logger.info(f"Before importing {cnt} nodes. After importing {filepath} {cnt2} nodes")
     return len(uris)
-
+   
 
 class Command(BaseCommand):
 
@@ -165,6 +182,7 @@ def do_import_ttl(**options):
     if options.get("only_post_processing",False) is True:
         logger.info("Only doing post processing")
         R.run_all_in_order()
+        R.run_typesense_update()
         cleanup(pidfile)
         return None
     export_dirs = new_exports_to_import(dump_dir)
@@ -195,6 +213,7 @@ def do_import_ttl(**options):
     if do_post_processing is True:
         R.run_all_in_order()
         _ = refresh_geo_data()
+        R.run_typesense_update()
     if send_notifications is True and total_creations > 0:
         do_send_recent_activities_email()
     else:

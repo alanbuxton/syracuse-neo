@@ -307,3 +307,4 @@ FLAGS = {
 }
 
 INDEX_IN_TYPESENSE_ON_SAVE=os.environ.get('INDEX_IN_TYPESENSE_ON_SAVE', 'False').lower() in ('t', 'true', '1', 'yes', 'on')
+INDEX_IN_TYPESENSE_AFTER_IMPORT=os.environ.get('INDEX_IN_TYPESENSE_AFTER_IMPORT', 'False').lower() in ('t', 'true', '1', 'yes', 'on')

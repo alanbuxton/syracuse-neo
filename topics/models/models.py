@@ -53,10 +53,11 @@ def regions_from_geonames(geos, countries_with_admin1=COUNTRIES_WITH_STATE_PROVI
     regions = set()
     for geo in geos:
         country_code = geo.countryCode
-        regions.add(country_code)
-        admin1 = geo.admin1Code
-        if country_code in countries_with_admin1 and admin1 and admin1 != '00':
-            regions.add( f"{country_code}-{admin1}")
+        if country_code is not None:
+            regions.add(country_code)
+            admin1 = geo.admin1Code
+            if country_code in countries_with_admin1 and admin1 and admin1 != '00':
+                regions.add( f"{country_code}-{admin1}")
     return regions
 
 class WeightedRel(StructuredRel):
@@ -322,6 +323,7 @@ class Resource(StructuredNode):
             next_node = Resource.get_by_uri(self.internalMergedSameAsHighToUri)
             next_node.recursively_remove_weighted_relationships(extra_rels_to_delete)
         self.delete()
+        
         
     def recursively_remove_weighted_relationships(self, extra_rels_to_delete):
         logger.debug(f"recursively_remove_weighted_relationships for {self.uri} - {extra_rels_to_delete}")
@@ -1255,15 +1257,21 @@ class Organization(Resource):
             docs.append({
                 'id': f"{self.internalId}_industry_{idx}",
                 'internal_id': self.internalId,
+                'internal_doc_id': self.internalDocId,
                 'uri': self.uri,
                 'name': name0,
                 'region_list': regions,
                 'embedding': embedding,
             })
-        for name in names1plus:
+        if len(docs) > 0:
+            names_to_use = names1plus
+        else:
+            names_to_use = names
+        for name in names_to_use:
             docs.append({
                     'id': f"{self.internalId}_names",
                     'internal_id': self.internalId,
+                    'internal_doc_id': self.internalDocId,
                     'uri': self.uri,
                     'name': name,    
                     'region_list': regions,    
@@ -1280,6 +1288,7 @@ class Organization(Resource):
             'fields': [
                 {'name': 'name', 'type': 'string'},
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'internal_doc_id', 'type': 'int64'},
                 {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768, 'optional': True}, # industry embedding
             ],
@@ -1530,6 +1539,7 @@ class AboutUs(Resource):
             docs.append({
                 "id": f"{self.internalId}_about_{idx}",
                 "internal_id": self.internalId,
+                'internal_doc_id': self.internalDocId,
                 "uri": self.uri,
                 "related_org_uris": related_org_uris,
                 "region_list": related_org_locs,
@@ -1545,6 +1555,7 @@ class AboutUs(Resource):
             'name': cls.typesense_collection,
             'fields': [
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'internal_doc_id', 'type': 'int64'},
                 {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],
@@ -1665,6 +1676,7 @@ class IndustrySectorUpdate(Resource):
                 "id": f"{self.internalId}_ind_upd_{idx}",
                 "uri": self.uri,
                 "internal_id": self.internalId,
+                'internal_doc_id': self.internalDocId,
                 "related_org_uris": org_uris, 
                 "region_list": list(regions),
                 "embedding": embedding,
@@ -1679,6 +1691,7 @@ class IndustrySectorUpdate(Resource):
             'name': cls.typesense_collection,
             'fields': [
                 {'name': 'internal_id', 'type': 'int64'},
+                {'name': 'internal_doc_id', 'type': 'int64'},
                 {'name': 'region_list', 'type': 'string[]', 'facet': True},
                 {'name': 'embedding', 'type': 'float[]', 'num_dim': 768},
             ],

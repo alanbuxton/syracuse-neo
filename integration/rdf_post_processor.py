@@ -1,12 +1,16 @@
-from topics.models import Resource, Organization
+from topics.models import Resource, Organization, AboutUs, IndustryCluster, IndustrySectorUpdate
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
 from neomodel import db
 import logging
 from integration.neo4j_utils import (count_relationships, apoc_del_redundant_same_as, get_all_activities_to_merge,
-                                     rerun_all_redundant_same_as)
+        rerun_all_redundant_same_as
+)
 from integration.embedding_utils import create_new_embeddings
 import time
 from typing import Tuple, Union
+from topics.services.typesense_service import add_by_internal_doc_ids, delete_by_internal_doc_ids
+from django.conf import settings
+
 logger = logging.getLogger(__name__)
 
 class RDFPostProcessor(object):
@@ -56,6 +60,15 @@ class RDFPostProcessor(object):
         create_new_embeddings()
         write_log_header("adding unique resource ids")
         add_resource_ids()
+
+    def run_typesense_update(self):
+        # Has to run after geonames data is updated
+        if settings.INDEX_IN_TYPESENSE_AFTER_IMPORT is True:
+            write_log_header("Updating Typesense")
+            self.delete_nodes_from_typesense()
+            self.add_new_nodes_to_typesense()
+        else:
+            write_log_header("Skipping Typesense update")
 
     def merge_equivalent_activities(self, seen_doc_ids=set()):
         acts_to_merge_dict, keep_going, seen_doc_ids = get_all_activities_to_merge(seen_doc_ids)
@@ -157,6 +170,61 @@ class RDFPostProcessor(object):
         """
         db.cypher_query(apoc_query)
 
+    def add_new_nodes_to_typesense(self):
+        cnt = 0
+        total_nodes_rows, _ = db.cypher_query("CALL apoc.meta.stats() yield labels")
+        total_nodes = total_nodes_rows[0][0].get("TmpDocIdForLoadToTypesense")
+        if total_nodes is None:
+            logger.info("No new nodes to add")
+            return None
+        while True:
+            res = add_batch_of_new_nodes_to_typesense()
+            if res is None:
+                logger.info("No new nodes found, quitting")
+                break
+            cnt += res
+            logger.info(f"Processed {cnt} of {total_nodes}")
+
+    def delete_nodes_from_typesense(self):
+        total_nodes_rows, _ = db.cypher_query("CALL apoc.meta.stats() yield labels")
+        total_nodes = total_nodes_rows[0][0].get("TmpDocIdForDeleteFromTypesense")
+        if total_nodes is None:
+            logger.info("No new nodes to remove")
+            return None
+        while True:
+            res = delete_batch_of_nodes_from_typesense()
+            if res is None:
+                logger.info("No new nodes found, quitting")
+                break
+            cnt += res
+            logger.info(f"Processed {cnt} of {total_nodes}")
+    
+def add_batch_of_new_nodes_to_typesense(limit=1000):
+    query = f"MATCH (n: TmpDocIdForLoadToTypesense) WITH n LIMIT {limit} WITH n, n.internalDocId AS internalDocId DELETE n RETURN internalDocId"
+    rows, _ = db.cypher_query(query)
+    doc_ids = [x[0] for x in rows]
+    if len(doc_ids) == 0:
+        return None
+    try:
+        add_to_typesense_by_doc_ids(doc_ids)
+    except:
+        logger.error(f"Failed to add to typesense with ids {doc_ids}")
+        raise
+    return len(doc_ids)
+        
+def delete_batch_of_nodes_from_typesense(limit=1000):
+    query = f"MATCH (n: TmpDocIdForDeleteFromTypesense) WITH n LIMIT {limit} WITH n, n.internalDocId AS internalDocId DELETE n RETURN internalDocId"
+    rows, _ = db.cypher_query(query)
+    doc_ids = [x[0] for x in rows]
+    if len(doc_ids) == 0:
+        return None
+    try:
+        delete_from_typesense_by_doc_ids(doc_ids)
+    except:
+        logger.error(f"Failed to delete from typesense with ids {doc_ids}")
+        raise
+    return len(doc_ids)
+
 def get_nodes_for_component(component_id: int) -> Tuple[list[Organization], Union[None,Organization]]:
     query = f"""MATCH (n: Organization) 
                 WHERE n.internalMergedSameAsHighToUri IS NULL 
@@ -245,3 +313,14 @@ def weights_for_relationships(node_uri):
     vals, _ = db.cypher_query(query)
     source_weights = {x:y for x,y in vals}
     return source_weights
+
+
+def add_to_typesense_by_doc_ids(doc_ids):
+    add_by_internal_doc_ids(
+        [(Organization, True), (AboutUs, True), (IndustrySectorUpdate, True), (IndustryCluster, False)],
+        doc_ids, max_date=None
+    )
+
+def delete_from_typesense_by_doc_ids(doc_ids):
+    for klass in [Organization, AboutUs, IndustrySectorUpdate]:
+        delete_by_internal_doc_ids(klass.typesense_collection, doc_ids)

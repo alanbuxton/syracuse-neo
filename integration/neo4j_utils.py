@@ -7,17 +7,6 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
-def delete_and_clean_up_nodes_from_doc_id_file(doc_id_file):
-    with open(doc_id_file, "r") as f:
-        doc_ids = f.readlines()
-    for row in doc_ids:
-        try:
-            doc_id = int(row.strip())
-            logger.info(f"Deleting internalDocId {doc_id}")
-            delete_and_clean_up_nodes_by_doc_id(doc_id)
-        except:
-            logger.info(f"Couldn't do anything with internalDocID {row}")
-
 def setup_db_if_necessary():
     db.cypher_query("CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (r:Resource) REQUIRE r.uri IS UNIQUE;")
     db.cypher_query("CREATE INDEX node_internal_doc_id_index IF NOT EXISTS FOR (n:Resource) on (n.internalDocId)")
@@ -119,8 +108,6 @@ def dependency_sort(orgs):
     remaining = list(orgs)
     sorted_result = []
     processed_uris = set()
-    
-    # Add all URIs that exist in the tuples as "my uri"
     all_my_uris = {t.uri for t in orgs}
     
     while remaining:
@@ -144,16 +131,13 @@ def dependency_sort(orgs):
 
 
 def count_relationships():
-    vals, cols = db.cypher_query("CALL apoc.meta.stats()")
-    col_id = cols.index("relCount")
-    cnt = vals[0][col_id]
+    vals, _ = db.cypher_query("CALL apoc.meta.stats() yield relCount")
+    cnt = vals[0][0]
     return cnt
 
 def count_nodes():
-    vals, cols = db.cypher_query("CALL apoc.meta.stats()")
-    col_id = cols.index("nodeCount")
-    cnt = vals[0][col_id]
-    return cnt
+    vals, _ = db.cypher_query("CALL apoc.meta.stats() yield nodeCount")
+    return vals[0][0]
 
 def get_potential_duplicate_activities():
     query = f"""MATCH (a: Resource)-[:documentSource]->(d: Resource&Article)<-[:documentSource]-(b: Resource) 
@@ -240,3 +224,21 @@ def get_all_activities_to_merge(seen_doc_ids):
         if cnt % 1000 == 0:
             logger.info(f"Processed {cnt} rows")
     return activities_to_merge, keep_going, seen_doc_ids
+
+def flag_doc_ids_for_adding_to_typesense(doc_ids):
+    query = """UNWIND $doc_ids AS docid
+        CALL {
+            WITH docid
+            MERGE (:TmpDocIdForLoadToTypesense {internalDocId: docid})
+        } IN TRANSACTIONS OF 1000 ROWS
+    """
+    _ = db.cypher_query(query, {'doc_ids':list(doc_ids)})
+
+def flag_doc_ids_for_removal_from_typesense(doc_ids):
+    query = """UNWIND $doc_ids AS docid
+        CALL {
+            WITH docid
+            MERGE (:TmpDocIdForDeleteFromTypesense {internalDocId: docid})
+        } IN TRANSACTIONS OF 1000 ROWS
+    """
+    _ = db.cypher_query(query, {'doc_ids':list(doc_ids)})

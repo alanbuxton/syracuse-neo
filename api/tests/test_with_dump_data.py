@@ -45,8 +45,8 @@ from topics.activity_helpers import activity_articles_to_api_results
 from feedbacks.models import Feedback
 from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
+from topics.services.typesense_service import TypesenseService
 from topics.management.commands.refresh_typesense_by_model import Command as RefreshTypesense
-from topics.management.commands.setup_typesense import Command as SetupTypesense
 from topics.industry_geo.typesense_search import IndustryGeoTypesenseSearch
 
 '''
@@ -289,12 +289,15 @@ class EndToEndTests20190110(TestCase):
         assert res[0][0].uri == 'https://1145.am/db/3454434/Tao_Capital_Partners'
 
 @override_settings(MIN_DOC_COUNT_FOR_ARTICLE_STATS=2)
+@override_settings(INDEX_IN_TYPESENSE_AFTER_IMPORT=True)
 class EndToEndTests20240602(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        reset_typesense()
         do_setup_test_data(date(2024,6,2),fill_blanks=True)
-        reload_typesense()
+        add_industry_clusters_to_typesense()
+        RDFPostProcessor().run_typesense_update()
         
     def setUp(self):
         ts = time.time()
@@ -1617,13 +1620,13 @@ class EndToEndTests20240602(TestCase):
 
     def test_typesense_org_search_1(self):
         vals = search_by_name_typesense("Group")
-        assert len(vals) == 4
-        assert vals[0][0].uri == 'https://1145.am/db/3458127/The_Hilb_Group'
-        assert vals[1][0].uri == 'https://1145.am/db/2166549/Play_Sports_Group'
-        assert vals[0][1] == 9
-        assert vals[1][1] == 6 # ordered by number of connections desc
-        assert vals[2][1] == 5
-        assert vals[3][1] == 4
+        self.assertEqual(vals[0][0].uri, 'https://1145.am/db/3458127/The_Hilb_Group')
+        self.assertEqual(vals[1][0].uri, 'https://1145.am/db/2166549/Play_Sports_Group')
+        self.assertEqual(vals[0][1], 9)
+        self.assertEqual(vals[1][1], 6)# ordered by number of connections desc
+        self.assertEqual(vals[2][1], 5)
+        self.assertEqual(vals[-1][1], 2)
+        self.assertEqual(len(vals), 31)
 
     def test_typesense_find_by_industry_1(self):
         res = self.ts_search.uris_by_industry_text("sweets")
@@ -1671,20 +1674,18 @@ def do_setup_test_data(max_date,fill_blanks):
     do_import_ttl(dirname="dump",force=True,do_archiving=False,do_post_processing=False)
     delete_all_not_needed_resources()
     set_weights()
+    apply_latest_org_embeddings(force_recreate=False)
     r = RDFPostProcessor()
     r.run_all_in_order()
-    apply_latest_org_embeddings(force_recreate=False)
     refresh_geo_data(max_date=max_date,fill_blanks=fill_blanks)
 
-def reload_typesense():
-    SetupTypesense().handle()
+def reset_typesense():
+    ts = TypesenseService()
+    for x in [Organization, AboutUs, IndustryCluster, IndustrySectorUpdate]:
+        ts.recreate_collection(x) 
+
+def add_industry_clusters_to_typesense():
     opts = {"batch_size":40,"limit":0,"sleep":0,"id_starts_after":0,"save_metrics":True,"load_all":True,"has_article":True}
-    org_opts = opts | {"model_class": "topics.models.Organization"}
     ind_opts = opts | {"model_class": "topics.models.IndustryCluster", "has_article": False}
-    about_us_opts = opts | {"model_class": "topics.models.AboutUs"}
-    ind_sector_update_opts = opts | {"model_class": "topics.models.IndustrySectorUpdate"}
-    RefreshTypesense().handle(**org_opts)
     RefreshTypesense().handle(**ind_opts) 
-    RefreshTypesense().handle(**about_us_opts)
-    RefreshTypesense().handle(**ind_sector_update_opts)
     

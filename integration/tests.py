@@ -4,19 +4,23 @@ import os
 from datetime import datetime, timezone
 from integration.models import DataImport
 from integration.management.commands.import_ttl import ( do_import_ttl,
-    load_deletion_file, load_file
+    load_deletion_file, load_file,
 )
-from topics.models import Organization, Resource
+from topics.models import Organization, Resource, AboutUs, IndustrySectorUpdate
+from topics.services.typesense_service import TypesenseService
 from integration.neo4j_utils import (
     delete_all_not_needed_resources,
     apoc_del_redundant_same_as,
     delete_and_clean_up_nodes_by_doc_id,
 )
 from integration.rdf_post_processor import (RDFPostProcessor, 
-    update_duplicated_resource_ids, recursively_re_merge_node_via_same_as
+    update_duplicated_resource_ids, recursively_re_merge_node_via_same_as,
+    add_to_typesense_by_doc_ids, delete_from_typesense_by_doc_ids
 )                
 from syracuse.cache_util import nuke_cache
 from topics.models.models_extras import add_dynamic_classes_for_multiple_labels
+import json
+from api.tests.test_with_dump_data import reset_typesense
 
 import logging
 logger = logging.getLogger(__name__)
@@ -47,6 +51,7 @@ def clean_db_and_load_files(dirname,do_post_processing=False):
     do_import_ttl(dirname=dirname,force=True,do_archiving=False,do_post_processing=do_post_processing)
     delete_all_not_needed_resources() # Lots of "sameAs" entries that aren't available in any test data
     apoc_del_redundant_same_as()
+    reset_typesense()
 
 class TurtleLoadingTestCase(TestCase):
 
@@ -91,8 +96,8 @@ class TurtleLoadingTestCase(TestCase):
         node_count = count_relevant_nodes()
         assert node_count == 1765
         latest_import = DataImport.objects.all()[0]
-        assert latest_import.deletions == 0
-        assert latest_import.creations > 0 and latest_import.creations <= node_count
+        self.assertEqual(latest_import.deletions, 0)
+        assert latest_import.creations > 0 and latest_import.creations <= node_count, f"creations: {latest_import.creations} - node_count: {node_count}"
 
         # 4001762 is the one that will be recreated
         assert Organization.self_or_ultimate_target_node("https://1145.am/db/4290155/Royal_Mail").uri == "https://1145.am/db/4001762/Royal_Mail"
@@ -1120,6 +1125,50 @@ class DeleteMergedNodesTestCase2(CypherQueryBaseTestCase):
         self.assertEqual( len(all_nodes_after), len(all_nodes_before) - len(resources_before) )
 
 
+class TypesenseAddDeleteTestCase(CypherQueryBaseTestCase):
+
+    cypher_queries = """
+        CREATE CONSTRAINT n10s_unique_uri IF NOT EXISTS FOR (node:Resource) REQUIRE (node.uri) IS UNIQUE;
+        UNWIND [{uri:"https://1145.am/db/200581/Coherent", properties:{internalId:1020463, internalDocId:200581, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Coherent Inc"], name:["Coherent"], description:["laser and photonics market"], industry:["laser and photonics market"], internalCleanName:["coherent"], basedInLowRaw:["California"]}}, {uri:"https://1145.am/db/5783771/Guest_Ranch_Dream_Vacations", properties:{internalId:1598346, internalDocId:5783771, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Guest Ranch Dream Vacations"], name:["Guest Ranch Dream Vacations"], description:["vacations"], internalCleanName:["guest ranch dream vacations"], basedInLowRaw:["United States"]}}, {uri:"https://1145.am/db/5782877/Novavax", properties:{internalId:2111125, basedInHighClean:["Gaithersburg"], internalDocId:5782877, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Novavax, Inc."], name:["Novavax"], description:["developing innovative vaccines to prevent serious infectious diseases"], industry:["biotechnology"], internalCleanName:["novavax"], internalMergedSameAsHighToUri:"https://1145.am/db/2285649/Novavax", basedInHighRaw:["Gaithersburg"]}}, {uri:"https://1145.am/db/5783059/Coherent_Corp", properties:{internalId:2386755, internalDocId:5783059, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Coherent Corp."], name:["Coherent Corp."], description:["development and manufacturing of engineered materials, networking products, optoelectronic components, and"], internalCleanName:["coherent"], internalMergedSameAsHighToUri:"https://1145.am/db/200581/Coherent", basedInLowRaw:["United States"]}}, {uri:"https://1145.am/db/2285649/Novavax", properties:{internalId:688101, internalDocId:2285649, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Novavax"], name:["Novavax"], description:["COVID-19 vaccine regulatory submissions"], internalCleanName:["novavax"], internalMergedSameAsHighToUri:"https://1145.am/db/597794/Novavax", basedInLowRaw:["U.S."]}}, {uri:"https://1145.am/db/597794/Novavax", properties:{internalId:8983117, internalDocId:597794, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Novavax, Inc"], name:["Novavax"], description:["developing and commercializing next-generation vaccines for serious infectious diseases"], industry:["biotechnology"], internalCleanName:["novavax"]}}] AS row
+        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:Organization;
+        UNWIND [{uri:"https://1145.am/db/5783771/Finding_A_Place_To_Soothe_Your_Inner_Cowgirl-About-Us", properties:{documentDate:datetime('2025-05-25T00:00:00Z'), internalId:1594716, internalDocId:5783771, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["Finding A Place To Soothe Your Inner Cowgirl ."], documentExtract:"Guest Ranch Dream Vacations: Finding A Place To Soothe Your Inner Cowgirl.", name:["Finding A Place To Soothe Your Inner Cowgirl."]}}, {uri:"https://1145.am/db/5782877/Developing_Innovative_Vaccines_To_Prevent_Serious_Infectious_Diseases-About-Us", properties:{documentDate:datetime('2025-05-26T13:50:07Z'), internalId:2157692, internalDocId:5782877, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["developing innovative vaccines to prevent serious infectious diseases"], documentExtract:"Gaithersburg, MD - based Novavax, Inc. is a biotechnology company engaged in developing innovative vaccines to prevent serious infectious diseases. The company has also developed proprietary immune-stimulating saponin - based adjuvants, namely Matrix-M, added to the company's vaccines to enhance immune response. NVAX sits at a Zacks Rank # 3 (Hold) , holds a Momentum Style Score of A, and has a VGM Score of B. The stock is up 7.7 % and up 8.7 % over the past one-week and four-week period, respectively, and Novavax has lost 53.2 % in the last one-year period as well.", name:["developing innovative vaccines to prevent serious infectious diseases"]}}, {uri:"https://1145.am/db/5783059/And_Manufacturing_Of_Engineered_Materials_Networking_Products_Optoelectronic_Components_And_Optical_And_Laser_Systems-About-Us", properties:{documentDate:datetime('2025-05-26T18:19:23Z'), internalId:2264260, internalDocId:5783059, deletedRedundantSameAsAt:1.7602485398459773E9, foundName:["and manufacturing of engineered materials , networking products , optoelectronic components , and optical and laser systems", "the development and manufacturing of engineered materials , networking products , optoelectronic components , and optical and laser systems for"], documentExtract:"Coherent Corp. (NYSE: COHR) specializes in the development and manufacturing of engineered materials, networking products, optoelectronic components, and optical and laser systems for various industries, including industrial, communications, electronics, and instrumentation. The company maintains a strong foothold in the optical communications market, particularly with its advanced solutions for data centers, such as datacom optical transceivers. While we acknowledge the potential of COHR as an investment, our conviction lies in the belief that some AI stocks hold greater promise for delivering higher returns and have limited downside risk. If you are looking for an AI stock that is more promising than COHR and that has 100x upside potential, check out our report about the cheapest AI stock. READ NEXT: The Best and Worst Dow Stocks for the Next 12 Months and 10 Unstoppable Stocks That Could Double Your Money.", name:["the development and manufacturing of engineered materials, networking products, optoelectronic components, and optical and laser systems for"]}}] AS row
+        CREATE (n:Resource{uri: row.uri}) SET n += row.properties SET n:AboutUs;
+        UNWIND [{start: {uri:"https://1145.am/db/5783771/Guest_Ranch_Dream_Vacations"}, end: {uri:"https://1145.am/db/5783771/Finding_A_Place_To_Soothe_Your_Inner_Cowgirl-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/5782877/Novavax"}, end: {uri:"https://1145.am/db/5782877/Developing_Innovative_Vaccines_To_Prevent_Serious_Infectious_Diseases-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/5783059/Coherent_Corp"}, end: {uri:"https://1145.am/db/5783059/And_Manufacturing_Of_Engineered_Materials_Networking_Products_Optoelectronic_Components_And_Optical_And_Laser_Systems-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/200581/Coherent"}, end: {uri:"https://1145.am/db/5783059/And_Manufacturing_Of_Engineered_Materials_Networking_Products_Optoelectronic_Components_And_Optical_And_Laser_Systems-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/2285649/Novavax"}, end: {uri:"https://1145.am/db/5782877/Developing_Innovative_Vaccines_To_Prevent_Serious_Infectious_Diseases-About-Us"}, properties:{weight:1}}, {start: {uri:"https://1145.am/db/597794/Novavax"}, end: {uri:"https://1145.am/db/5782877/Developing_Innovative_Vaccines_To_Prevent_Serious_Infectious_Diseases-About-Us"}, properties:{weight:1}}] AS row
+        MATCH (start:Resource{uri: row.start.uri})
+        MATCH (end:Resource{uri: row.end.uri})
+        CREATE (start)-[r:hasAboutUs]->(end) SET r += row.properties;
+        """
+    
+    @classmethod
+    def setUpTestData(cls):
+        cls.ts = TypesenseService()
+        cls.ts.recreate_collection(AboutUs)
+        cls.ts.recreate_collection(Organization)
+        cls.ts.recreate_collection(IndustrySectorUpdate)
+        super().setUpTestData()
+        res, _ = db.cypher_query("MATCH (n) RETURN DISTINCT n.internalDocId")
+        embed = [0.123] * 768
+        embed_json = json.dumps([embed])
+        db.cypher_query(f"MATCH (n: AboutUs) SET n.name_embedding_json = '{embed_json}' ")
+        cls.internal_doc_ids = [x[0] for x in res]
+        add_to_typesense_by_doc_ids(cls.internal_doc_ids)
+        cnt_orgs = cls.ts.doc_counts_by_collection(Organization.typesense_collection)
+        cnt_about_us = cls.ts.doc_counts_by_collection(AboutUs.typesense_collection)
+        assert cnt_orgs == 3
+        assert cnt_about_us == 3
+        
+
+    def test_deletes_from_typesense(self):
+        cnt_orgs_before = self.ts.doc_counts_by_collection(Organization.typesense_collection)
+        cnt_about_us_before = self.ts.doc_counts_by_collection(AboutUs.typesense_collection)
+        doc_ids_to_delete = [597794, 5783059, 5782877]
+        delete_from_typesense_by_doc_ids(doc_ids_to_delete)
+        cnt_orgs = self.ts.doc_counts_by_collection(Organization.typesense_collection)
+        cnt_about_us = self.ts.doc_counts_by_collection(AboutUs.typesense_collection)
+        self.assertEqual(cnt_orgs_before - 1, cnt_orgs)
+        self.assertEqual(cnt_about_us_before - 2, cnt_about_us) # removed 2 about us
+    
+
 class MergeUnmergedIntegrationTestCase(TestCase):
 
     @classmethod
@@ -1238,7 +1287,6 @@ class MergeUnmergedIntegrationTestCase(TestCase):
                 continue
             logger.info(f"row {idx}... {query[:100]}")
             _ = db.cypher_query(query)
-
 
     def test_re_merge_entity_adds_missing_relationship(self):
         uri = "https://1145.am/db/9022045/Simfoni"
@@ -1435,5 +1483,4 @@ def all_related_uris(resource):
         rel_lens = [x.uri for x in resource.__dict__[k]]
         vals[k] = set(rel_lens)
     return vals
-
 

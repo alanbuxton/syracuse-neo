@@ -118,8 +118,3 @@ def activities_by_industry_text_and_or_geo_typesense(industry_text: str, geo_cod
     all_activities = all_activities + org_acts
     sorted_activities = sorted(all_activities, key=lambda x: x["date_published"], reverse=True)
     return sorted_activities
-
-
-            
-
-
