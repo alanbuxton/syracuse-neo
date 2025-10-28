@@ -47,7 +47,7 @@ from syracuse.date_util import min_and_max_date, date_minus
 from rest_framework import status
 from topics.services.typesense_service import TypesenseService
 from topics.management.commands.refresh_typesense_by_model import Command as RefreshTypesense
-from topics.industry_geo.typesense_search import IndustryGeoTypesenseSearch
+from topics.industry_geo.typesense_search import IndustryGeoTypesenseSearch, activities_by_industry_text_and_or_geo_typesense
 
 '''
     Care these tests will delete neodb data
@@ -1652,6 +1652,12 @@ class EndToEndTests20240602(TestCase):
              ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438, 'industry_clusters'),
         ]
         self.assertEqual(vals, expected)
+
+    def test_typesense_search_with_multiple_hits(self):
+        res = activities_by_industry_text_and_or_geo_typesense("pharma",["US","JP"],self.min_date,self.max_date)
+        self.assertEqual(res[0]['activity_uri'], "https://1145.am/db/3475299/Global_Investment-Incj-Mitsui_Co-Napajen_Pharma-P_E_Directions_Inc-Investment-Series_C")
+        self.assertEqual(len(res), 1)
+        
 
 def set_weights():
     # Connections with weight of 1 will be ignored, so cheating here to make all starting weights 2

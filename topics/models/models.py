@@ -934,6 +934,7 @@ class GeoNamesLocation(Resource):
     
     @property
     def geoNamesURL(self):
+        self.ensure_connection()
         return uri_from_related(self.geoNames)
 
     @property

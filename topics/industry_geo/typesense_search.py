@@ -94,9 +94,8 @@ def activities_by_industry_text_and_or_geo_typesense(industry_text: str, geo_cod
         ts_search = IndustryGeoTypesenseSearch()
     
     res = ts_search.uris_by_industry_text(industry_text, geo_codes_plus_country_only)
-
     all_activities = []
-
+    seen_uris = set()
     relevant_org_uris = set()
     for uri, _, extra_data in res:
         collection = extra_data['collection']
@@ -105,16 +104,24 @@ def activities_by_industry_text_and_or_geo_typesense(industry_text: str, geo_cod
         elif collection == 'industry_clusters':
             industry_id = extra_data["topic_id"]
             for geo_code in geo_codes:
-                logger.info("Adding by industry for topic_id {industry_id} in {geo_code}")
+                logger.info(f"Adding by industry for topic_id {industry_id} in {geo_code}")
                 activities= get_activities_by_industry_geo_and_date_range(industry_id, geo_code, min_date, max_date) # Already all cached
-                all_activities.append(activities)
+                for act in activities:
+                    if act['activity_uri'] not in seen_uris:
+                        seen_uris.add(act['activity_uri'])
+                        all_activities.append(act)
         elif collection == 'industry_sector_updates':
-            ind_sector_update = industry_sector_update_to_api_results(uri)
-            all_activities.append(ind_sector_update)
+            ind_sector_updates = industry_sector_update_to_api_results(uri)
+            for ent in ind_sector_updates:
+                if ent['industry_sector_update_uri'] not in seen_uris:
+                        seen_uris.add(ent['industry_sector_update_uri'])
+                        all_activities.append(ent)
         relevant_org_uris.update(extra_data.get('related_org_uris',[]))
     
     org_acts = get_activities_by_org_uris_and_date_range(relevant_org_uris,min_date, max_date)
-
-    all_activities = all_activities + org_acts
+    for act in org_acts:
+        if act['activity_uri'] not in seen_uris:
+            seen_uris.add(act['activity_uri'])
+            all_activities.append(act)
     sorted_activities = sorted(all_activities, key=lambda x: x["date_published"], reverse=True)
     return sorted_activities
