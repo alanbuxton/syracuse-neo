@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 def refresh_all(limit=0):
     base_opts = {"batch_size":200,"limit":limit,"sleep":0,"id_starts_after":0,"save_metrics":True,"has_article":True,"load_all":False}
     model_opts = [
-        {"model_class": "topics.models.IndustrySectorUpdate" },
+        {"model_class": "topics.models.IndustrySectorUpdate", "load_all": True }, # Need all of these as they have related orgs
         {"model_class": "topics.models.Organization"},
         {"model_class": "topics.models.AboutUs"},
         {"model_class": "topics.models.IndustryCluster", "has_article": False},

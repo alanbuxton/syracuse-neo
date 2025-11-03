@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.conf import settings
 import importlib
 import logging
 from neomodel import db
@@ -53,7 +52,7 @@ class Command(BaseCommand):
             action='store_true'
         )
         parser.add_argument(
-            '--load_all',
+            '--load-all',
             default=False,
             action='store_true',
             help="Load all data. If not set will load data related to last 90 days docs"

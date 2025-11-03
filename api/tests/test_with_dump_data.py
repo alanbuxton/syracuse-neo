@@ -139,14 +139,13 @@ class EndToEndTests20140205(TestCase):
     def test_industry_names(self):
         uri = 'https://1145.am/db/2166549/Play_Sports_Group'
         r = Resource.get_by_uri(uri)
-        assert r.internalMergedSameAsHighToUri is None
-        assert r.top_industry_names() == ['digital sports media']
-
+        self.assertIsNone(r.internalMergedSameAsHighToUri)
+        self.assertListEqual(r.top_industry_names(),['digital sports media'])
         uri = "https://1145.am/db/2543227/Celgene"
         r = Resource.get_by_uri(uri)
-        assert r.internalMergedSameAsHighToUri is None
+        self.assertIsNone(r.internalMergedSameAsHighToUri)
         ns = r.top_industry_names() 
-        assert set(ns) == {'biopharmaceutical', 'pharma'}
+        self.assertListEqual(ns, ['pharma'])
 
 class EndToEndTests20190110(TestCase):
 
@@ -1633,14 +1632,14 @@ class EndToEndTests20240602(TestCase):
         self.assertEqual(related_org_uris, ['https://1145.am/db/2947016/Black_Jacks'])
 
     def test_typesense_find_by_industry_2(self):
-        res = self.ts_search.objects_by_industry_text("pharma")
-        as_uris = [(x[0].uri,x[1]) for x in res]
+        res = self.ts_search.uris_by_industry_text("pharma")
+        vals = [(x[0],x[1]) for x in res]
         expected = [('https://1145.am/db/2543227/Celgene', 1.1920928955078125e-07), 
                     ('https://1145.am/db/industry/32_pharma_pharmas_pharmaceuticals_pharmaceutical', 0.10360902547836304), 
                     ('https://1145.am/db/2543228/Takeda', 0.10775858163833618), 
                     ('https://1145.am/db/industry/432_drugmaking_pharmaceutical_manufacturing_pharma', 0.1603691577911377),
                     ('https://1145.am/db/industry/266_generics_generic_drugmakers_pharma', 0.17309188842773438)]
-        self.assertEqual(as_uris, expected)
+        self.assertEqual(vals, expected)
 
     def test_typesense_find_by_industry_and_region(self):
         res = self.ts_search.uris_by_industry_text("pharma",["JP"]) # Excludes Celgene

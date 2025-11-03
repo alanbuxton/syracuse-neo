@@ -1,11 +1,8 @@
 
-from sentence_transformers import SentenceTransformer
-from syracuse.settings import EMBEDDINGS_MODEL
 import logging
 from topics.services.typesense_service import TypesenseService
 from neomodel import db
-
-MODEL=SentenceTransformer(EMBEDDINGS_MODEL)
+from integration.embeddings_model import MODEL
 
 logger = logging.getLogger(__name__)
 

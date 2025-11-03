@@ -1,14 +1,14 @@
 # Based on https://neo4j.com/docs/genai/tutorials/embeddings-vector-indexes/embeddings/sentence-transformers/
 
 import neo4j
-from sentence_transformers import SentenceTransformer
 from syracuse.settings import (NEOMODEL_NEO4J_SCHEME,
     NEOMODEL_NEO4J_USERNAME,NEOMODEL_NEO4J_PASSWORD,
     NEOMODEL_NEO4J_HOSTNAME,NEOMODEL_NEO4J_PORT,
-    EMBEDDINGS_MODEL, CREATE_NEW_EMBEDDINGS)
+    CREATE_NEW_EMBEDDINGS)
 import logging
 import re
 from topics.models import Resource
+from integration.embeddings_model import MODEL
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +37,6 @@ URI=f"{NEOMODEL_NEO4J_SCHEME}://{NEOMODEL_NEO4J_HOSTNAME}:{NEOMODEL_NEO4J_PORT}"
 AUTH=(NEOMODEL_NEO4J_USERNAME,NEOMODEL_NEO4J_PASSWORD)
 DB_NAME="neo4j"
 
-MODEL=SentenceTransformer(EMBEDDINGS_MODEL)
 
 def create_new_embeddings(uri=URI, auth=AUTH, model=MODEL, really_run_me=CREATE_NEW_EMBEDDINGS):
     if really_run_me is not True:
@@ -57,7 +56,7 @@ def setup(uri=URI, auth=AUTH):
     driver.verify_connectivity()
     return driver
 
-def create_entity_embeddings(driver, model, query, fieldname, field_is_method=False, limit_per_query=10000, min_words=2):
+def create_entity_embeddings(driver, model, query, fieldname, field_is_method=False, limit_per_query=20000, min_words=2):
     batch_size = 100
     batch_n = 1
     batch_for_update = []
@@ -69,6 +68,7 @@ def create_entity_embeddings(driver, model, query, fieldname, field_is_method=Fa
         result = session.run(query_with_limit)
         for record in result:
             uri = record['uri']
+            logger.info(uri)
             got_records = True
             if field_is_method is True:
                 obj = Resource.get_by_uri(uri)
@@ -92,6 +92,9 @@ def create_entity_embeddings(driver, model, query, fieldname, field_is_method=Fa
     
 
 def import_batch_json(driver, nodes_with_embeddings, batch_n, field):
+    if len(nodes_with_embeddings) == 0:
+        logger.debug("No embeddings to process")
+        return
     logger.info(f"Importing {len(nodes_with_embeddings)} records into {field}")
     driver.execute_query(f'''
     UNWIND $nodes AS node
@@ -162,3 +165,4 @@ def import_batch_vector(driver, nodes_with_embeddings, batch_n, field):
     ''', nodes=nodes_with_embeddings)
     logger.info(f'Processed batch {batch_n}.')
     return batch_n + 1
+

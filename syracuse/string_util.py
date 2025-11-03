@@ -1,4 +1,5 @@
 from collections import defaultdict
+import re
 
 def deduplicate_and_sort_by_frequency(strings, min_count=2):
     """
@@ -9,7 +10,7 @@ def deduplicate_and_sort_by_frequency(strings, min_count=2):
     
     # Group by lowercase version
     for s in strings:
-        groups[s.lower()].append(s)
+        groups[clean_group_name(s)].append(s)
     
     # Get the canonical version and count for each group
     results = []
@@ -21,3 +22,8 @@ def deduplicate_and_sort_by_frequency(strings, min_count=2):
     # Sort by count (descending) and return just the strings
     results.sort(key=lambda x: x[1], reverse=True)
     return [canonical for canonical, count in results if count >= min_count]
+
+def clean_group_name(s):
+    s = s.lower()
+    s = s.replace("-"," ")
+    return re.sub(r"\s+"," ",s)

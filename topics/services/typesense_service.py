@@ -8,6 +8,7 @@ from topics.neo4j_utils import date_to_cypher_friendly
 from syracuse.date_util import min_date_from_date
 from neomodel import db
 from requests.exceptions import ConnectionError
+from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
@@ -40,16 +41,17 @@ class TypesenseService(object):
         collection_names = [x['name'] for x in colls]
         return collection_names
 
-    def search(self, name, collection_name, query_by="name",limit=100): 
+    def search(self, name, collection_name, query_by="name",limit=250, per_page=100): 
         search_result = self.client.collections[collection_name].documents.search({
             'q': name,
             'query_by': query_by,
             'limit': limit,
+            'per_page': per_page,
         })
         results = search_result['hits']
         return results
 
-    def vector_search_multi(self, query_vector, collection_names, query_field="embedding", regions=None, limit=100):
+    def vector_search_multi(self, query_vector, collection_names, query_field="embedding", regions=None, limit=250, per_page=250):
         if regions:
             filter_fields = {"name": "region_list", "vals": regions}
         else:
@@ -57,38 +59,41 @@ class TypesenseService(object):
         multi_search_queries = {
             'union': True, # Currently not used see https://github.com/typesense/typesense-python/pull/96#event-19083778984
             'searches': [
-                self.build_query(query_vector, x, query_field, filter_fields, limit) for x in collection_names
+                self.build_query(query_vector, x, query_field, filter_fields, limit, per_page) for x in collection_names
             ]
         }
         return self.perform_multi_search(multi_search_queries)
 
-    def build_query(self, query_vector, collection_name, query_field, filter_fields, limit):
+    def build_query(self, query_vector, collection_name, query_field, filter_fields, limit, per_page):
         '''
             filter_fields: {"name": <field_name>, "vals": [list of vals]}
         '''
         query =  {
                     'collection': collection_name,
                     'q': '*',
-                    'vector_query': f'{query_field}:([{",".join(map(str, query_vector))}], k:{limit})',
+                    'vector_query': f'{query_field}:([{",".join(map(str, query_vector))}], k:{limit}, distance_threshold:0.25)',
+                    'per_page': per_page,
                     'exclude_fields': 'embedding'  # Don't return the vector in results
                 }
         if filter_fields and self.has_field(collection_name, filter_fields['name']):
             filter_fields = f'{filter_fields["name"]}:=[{",".join(filter_fields["vals"])}]' 
             query['filter_by'] = filter_fields
-        logger.debug(query)
+        logger.info(query)
         return query
 
-    def vector_search(self, query_vector, collection_name, query_field="embedding", filter_fields = {}, limit=100):
+    def vector_search(self, query_vector, collection_name, query_field="embedding", filter_fields = {}, limit=250, per_page=250):
         # Use multi-search for vector-only queries
         multi_search_queries = {
             'searches': [
-                self.build_query(query_vector, collection_name, query_field, filter_fields, limit)
+                self.build_query(query_vector, collection_name, query_field, filter_fields, limit, per_page)
             ]
         }
-        return self.perform_multi_search(multi_search_queries)
+        vals, _ = self.perform_multi_search(multi_search_queries)
+        return vals
 
     def perform_multi_search(self, multi_search_queries):
         res = self.client.multi_search.perform(multi_search_queries)
+        min_scores = defaultdict(lambda: 99)
         matches = []
         for val in res['results']:
             logger.debug(val)
@@ -98,9 +103,12 @@ class TypesenseService(object):
             if foundval > 0:
                 for hit in val['hits']:
                     hit_d = dict(hit)
-                    hit_d['collection_name'] = val['request_params']['collection_name']
+                    collection_name = val['request_params']['collection_name']
+                    hit_d['collection_name'] = collection_name
                     matches.append(hit_d)
-        return matches
+                    if hit_d['vector_distance'] < min_scores[collection_name]:
+                        min_scores[collection_name] = hit_d['vector_distance']
+        return matches, min_scores
 
     def search_by_uri(self, uri):
         searches = [
@@ -113,7 +121,8 @@ class TypesenseService(object):
             'union': True,
             'searches': searches
         }
-        return self.perform_multi_search(multi_search_queries)
+        res, _ = self.perform_multi_search(multi_search_queries)
+        return res
 
     def all_collection_names(self):
         colls = self.client.collections.retrieve()
@@ -329,4 +338,3 @@ def do_save_metrics(all_metrics, all_stats, metrics, stats):
         import pickle
         vals = {"metrics":all_metrics, "stats": all_stats}
         pickle.dump(vals, f)
-

@@ -17,6 +17,7 @@ from topics.industry_geo.region_hierarchies import COUNTRIES_WITH_STATE_PROVINCE
 import logging
 from flags.state import flag_enabled 
 import typesense
+from integration.cluster_utils import top_central_sentences_from_clusters
 
 logger = logging.getLogger(__name__)
 
@@ -790,20 +791,6 @@ class IndustryCluster(Resource):
         res = do_vector_search(name, query)
         flattened = [x[0] for x in res]
         return flattened[:limit]
-    
-    # @staticmethod
-    # def by_embeddings_typesense(name, limit=10):
-    #     hits = do_vector_search_typesense(name, IndustryCluster.typesense_collection, limit=limit)
-    #     # returned_vals may have multiple matches per industry - if so then the entry with most matches wins
-    #     topic_ids = [x['document']['topic_id'] for x in hits]
-    #     c = Counter(topic_ids).most_common()
-    #     ordered_topic_ids = [x[0] for x in c]
-    #     query = f"""MATCH (n: Resource&IndustryCluster) WHERE n.topicId IN {ordered_topic_ids}
-    #                 RETURN n
-    #                 ORDER BY apoc.coll.indexOf({ordered_topic_ids}, n.topicId)"""
-    #     vals, _ = db.cypher_query(query, resolve_objects=True)
-    #     flattened = [x[0] for x in vals]
-    #     return flattened[:limit]
 
     @staticmethod
     def embedding_field_name():
@@ -1140,7 +1127,7 @@ class Organization(Resource):
                     "industry": self.industry_as_string,
                     "based_in_high_raw": self.basedInHighRaw,
                     "based_in_high_clean": self.basedInHighClean,
-                    "line_of_business": "; ".join(self.top_industry_names(with_caps=True)),
+                    "line_of_business": "; ".join(self.top_industry_names()),
                     "locations": "; ".join(locs),
                     "about_us": "; ".join(self.top_about_us(with_caps=True)),
                     }
@@ -1208,19 +1195,18 @@ class Organization(Resource):
 
         return industry_names
     
-    def top_industry_names(self,with_caps=False):
-        cache_key = f"top_ind_names_{self.uri}_{with_caps}"
+    def top_industry_names(self):
+        cache_key = f"top_ind_names_{self.uri}"
         res = get_versionable_cache(cache_key)
         if res:
             return res
         inds = self.industry_names_from_merged_nodes([])
-        if with_caps is True:
-            over1 = deduplicate_and_sort_by_frequency(inds, min_count=2)
+        if len(inds) <= 1:
+            res = []
         else:
-            inds_c = Counter( [x.lower() for x in inds] )
-            over1 = [x for x,y in inds_c.items() if y > 1]
-        set_versionable_cache(cache_key, over1)
-        return over1
+            res = top_central_sentences_from_clusters(inds, distance_threshold=0.9, keep=0.8)
+        set_versionable_cache(cache_key, res)
+        return res
     
     def top_about_us(self,with_caps=False):
         cache_key = f"top_about_us_{self.uri}_{with_caps}"
