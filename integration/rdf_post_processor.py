@@ -198,6 +198,7 @@ class RDFPostProcessor(object):
         if total_nodes is None:
             logger.info("No new nodes to remove")
             return None
+        cnt = 0
         while True:
             res = delete_batch_of_nodes_from_typesense()
             if res is None:
